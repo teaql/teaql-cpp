@@ -1,0 +1,1166 @@
+{
+  "commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Module responsibility map. Targets are planned paths, not implementation claims. partial is not a parity verdict; each listed declaration and public item inherits its source module contract.",
+  "groups": [
+    {
+      "sources": [
+        "teaql-core/src/value.rs",
+        "teaql-core/src/time.rs"
+      ],
+      "cpp_target": "include/teaql/core/value.hpp; include/teaql/core/decimal.hpp; include/teaql/core/json.hpp; include/teaql/core/time.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "All Value variants, conversions, JSON projection, and recursive explicit-domain copies have implementations and fixed Rust comparisons. Timestamp transparent integer serialization is present; Value has no derived serde protocol. Decimal provides five checked arithmetic operations, saturation, ordering, truncation/integral operations/normalization, and all rounding modes, with 963 comparisons. Scale/significant-digit operations, binary encoding, and errors have 1,148. Remaining parsing/conversion reexports, extended-scale arithmetic combinations, and provider codecs need acceptance. SQLite decoding adds structured Decimal errors, JSON reasons/locations, Unicode timestamp offset signs, and boundary leap seconds. Audit comparisons include Rust Debug text for every Value variant, Unicode escaping, float exponent boundaries, and JSON Debug.",
+      "evidence": [
+        "include/teaql/core/value.hpp",
+        "src/core/value.cpp",
+        "tests/core_tests.cpp",
+        "tests/core_collection_tests.cpp",
+        "include/teaql/core/decimal.hpp",
+        "include/teaql/core/json.hpp",
+        "include/teaql/core/time.hpp",
+        "src/core/decimal.cpp",
+        "src/core/json.cpp",
+        "src/core/time.cpp",
+        "tests/value_model_tests.cpp",
+        "tests/parity/value_cases.json",
+        "tests/parity/compare_values.py",
+        "tests/parity/rust-values/src/main.rs",
+        "src/core/number_text.cpp",
+        "tests/parity/format_cases.json",
+        "tests/parity/compare_formats.py",
+        "src/core/decimal_arithmetic.cpp",
+        "tests/decimal_tests.cpp",
+        "tests/parity/decimal_cases.json",
+        "tests/parity/compare_decimal.py",
+        "tests/parity/rust-values/src/bin/decimal_oracle.rs",
+        "include/teaql/core/decimal_error.hpp",
+        "tests/parity/decimal_scale_cases.json",
+        "tests/parity/compare_decimal_scale.py",
+        "tests/provider_sqlite_decoding_tests.cpp",
+        "tests/parity/sqlite_decoding_cases.json",
+        "include/teaql/core/detail/debug.hpp",
+        "src/core/debug.cpp",
+        "tests/parity/audit_event_cases.json"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/meta.rs",
+        "teaql-core/src/naming.rs"
+      ],
+      "cpp_target": "include/teaql/core/meta.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Preserve fields, defaults, relation strategies, naming rules, optional lookup, and writable_properties. Consumers explicitly require mandatory lookups.",
+      "evidence": [
+        "include/teaql/core/meta.hpp",
+        "tests/core_model_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/expr.rs",
+        "teaql-core/src/safe_expression.rs"
+      ],
+      "cpp_target": "include/teaql/core/expr.hpp; include/teaql/core/safe_expression.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Preserve every Expr variant and composition. SafeExpression optional evaluation, short-circuiting, callbacks, and entity/list adapters are implemented. Roots/callbacks belong to Context; same-domain copies share borrows. Cross-domain copies explicitly relocate state and reject non-relocatable captures.",
+      "evidence": [
+        "include/teaql/core/expr.hpp",
+        "tests/core_tests.cpp",
+        "src/core/expr.cpp",
+        "tests/query_model_tests.cpp",
+        "include/teaql/core/safe_expression.hpp",
+        "include/teaql/memory/function.hpp",
+        "tests/entity_expression_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/query.rs"
+      ],
+      "cpp_target": "include/teaql/core/query.hpp; include/teaql/core/row.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Query fields, defaults, and construction behavior are restored, with recursive list-limit and cross-domain-copy tests. CompactRow preserves shared columns/layout semantics. Advanced execution and JSON conversion remain pending.",
+      "evidence": [
+        "include/teaql/core/query.hpp",
+        "include/teaql/core/row.hpp",
+        "tests/core_collection_tests.cpp",
+        "src/core/query.cpp",
+        "tests/query_model_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/list.rs"
+      ],
+      "cpp_target": "include/teaql/core/list.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Preserve loaded state, entity changes, aggregates/summary/facets, and list conversion; unloaded empty differs from loaded empty. SmartList entity conversion, mapping, grouping, keyed merging, and ID/version adapters preserve all result metadata in the original Context. Same-domain moves need no Entity assignment; cross-domain moves retain the destination allocator, and entity lists support explicit Global copies.",
+      "evidence": [
+        "include/teaql/core/list.hpp",
+        "tests/core_collection_tests.cpp",
+        "src/core/list.cpp",
+        "tests/entity_expression_tests.cpp",
+        "tests/entity_service_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/mutation.rs",
+        "teaql-core/src/trace.rs"
+      ],
+      "cpp_target": "include/teaql/core/mutation.hpp; include/teaql/core/trace.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Keep commands and mutation/snapshot/generated-value domains distinct. Accept each command's fields, trace, and version semantics separately.",
+      "evidence": [
+        "include/teaql/core/mutation.hpp",
+        "include/teaql/core/trace.hpp",
+        "tests/core_model_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/entity.rs"
+      ],
+      "cpp_target": "include/teaql/core/entity.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Entity concepts/defaults, BaseEntityData, EntityError, Audited, descriptor registration, and boxed relations are present; loaded/dirty/snapshot interfaces remain distinct. Runtime save gates and complete error formatting still require acceptance.",
+      "evidence": [
+        "include/teaql/core/entity.hpp",
+        "src/core/entity.cpp",
+        "include/teaql/core/result.hpp",
+        "tests/entity_expression_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/entity_graph.rs"
+      ],
+      "cpp_target": "include/teaql/core/entity_graph.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Annotated input graphs, relation names, Save/Delete operations, and recursive cross-domain copies are implemented separately from runtime identity graphs. Save execution and complete trace integration belong to stage 5.",
+      "evidence": [
+        "include/teaql/core/entity_graph.hpp",
+        "tests/entity_expression_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/request.rs",
+        "teaql-core/src/dynamic_search.rs"
+      ],
+      "cpp_target": "include/teaql/core/request.hpp; include/teaql/core/dynamic_search.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Complete request builder fields, builder/runtime conversions, operator/JSON/facet helpers, and dynamic-search validation/warnings/trusted binding are implemented, with 491 comparisons. Entity-runtime execution of relation filters/aggregates/facets requires stage 4 acceptance.",
+      "evidence": [
+        "include/teaql/core/request.hpp",
+        "src/core/request.cpp",
+        "include/teaql/core/dynamic_search.hpp",
+        "src/core/dynamic_search.cpp",
+        "tests/request_search_tests.cpp",
+        "tests/parity/search_cases.json",
+        "tests/parity/compare_search.py",
+        "tests/parity/rust-values/src/bin/search_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/business_id.rs"
+      ],
+      "cpp_target": "include/teaql/core/business_id.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Core definitions, scopes, requests, plans, allocations, values, and seven error categories are implemented. Allocator/Profile interfaces and Slot remain distinct. 1,188 comparisons cover defaults, every u8 digit count, canonical keys, and range checks. Requests explicitly copy into Context; runtime profiles, encoding, services, and SQLite allocation belong to later stages.",
+      "evidence": [
+        "include/teaql/core/business_id.hpp",
+        "src/core/business_id.cpp",
+        "tests/business_id_tests.cpp",
+        "tests/parity/business_id_cases.json",
+        "tests/parity/compare_business_id.py",
+        "tests/parity/rust-values/src/bin/business_id_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/serde_utils.rs",
+        "teaql-core/src/web.rs",
+        "teaql-core/src/xls.rs"
+      ],
+      "cpp_target": "include/teaql/core/serde_utils.hpp; include/teaql/core/web.hpp; include/teaql/core/xls.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "String trimming, WebStyle/WebAction/WebResponse and XlsBlock/BuildContext/Page/Workbook fields, factories, binding, list projection, navigation, and object/array JSON decoding are implemented, with 785 comparisons. Recursive styles/payloads support explicit cross-domain copies. No web server or spreadsheet engine is added.",
+      "evidence": [
+        "include/teaql/core/serde_utils.hpp",
+        "tests/value_model_tests.cpp",
+        "include/teaql/core/model_decode.hpp",
+        "include/teaql/core/detail/model_json.hpp",
+        "include/teaql/core/web.hpp",
+        "include/teaql/core/xls.hpp",
+        "src/core/web.cpp",
+        "src/core/xls.cpp",
+        "tests/presentation_tests.cpp",
+        "tests/entity_expression_tests.cpp",
+        "tests/parity/presentation_cases.json",
+        "tests/parity/compare_presentation.py",
+        "tests/parity/rust-values/src/bin/presentation_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-core/src/eval.rs"
+      ],
+      "cpp_target": "tests/parity/reference_eval",
+      "stage": 6,
+      "status": "reference_only",
+      "contract": "lib.rs does not declare this module. Retain it as a source oracle/index without claiming a published API.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-core/src/lib.rs"
+      ],
+      "cpp_target": "include/teaql/core.hpp; tests/parity/core",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Audit every reexport, constant, and macro contract. Handwritten models reproduce semantics used through derive in Rust tests; the generator is unchanged.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-data-service/src/lib.rs"
+      ],
+      "cpp_target": "include/teaql/data_service/executor.hpp; include/teaql/data_service/types.hpp",
+      "stage": 3,
+      "status": "partial",
+      "contract": "Requests/results/metadata, separate query/mutation/guard/transaction/schema/ID/stream interfaces, typed asynchronous results, default observer forwarding, and no-I/O intent are restored. Transaction termination consumes access; active transactions cannot cross Contexts. Tests cover quiescence/native threads, atomic query/mutation/guard execution, observers, close cancellation, transaction cancellation, and stream stop/diagnostics/borrows. Production provider integration needs separate acceptance.",
+      "evidence": [
+        "include/teaql/data_service/types.hpp",
+        "tests/data_service_tests.cpp",
+        "CMakeLists.txt",
+        "include/teaql/data_service/executor.hpp",
+        "include/teaql/async/operation.hpp",
+        "include/teaql/async/stream.hpp",
+        "tests/executor_tests.cpp",
+        "tests/async_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-data-service/src/sql_log.rs"
+      ],
+      "cpp_target": "include/teaql/data_service/sql_log.hpp",
+      "stage": 3,
+      "status": "partial",
+      "contract": "Parameter provenance policies, execution outcomes, Context-owned opaque projection state, intent redaction, credential classification, and no-I/O query-intent collection are restored, with 1,008 policy/nested-value comparisons. Runtime safe reprojection, sinks, and cancellation diagnostics require their execution-layer integration.",
+      "evidence": [
+        "include/teaql/data_service/sql_log.hpp",
+        "src/data_service/sql_log.cpp",
+        "tests/data_service_tests.cpp",
+        "tests/parity/sql_log_cases.json",
+        "tests/parity/compare_sql_log.py",
+        "tests/parity/rust-values/src/bin/sql_log_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-sql/src/bindings.rs",
+        "teaql-sql/src/types.rs"
+      ],
+      "cpp_target": "include/teaql/sql/bindings.hpp; include/teaql/sql/types.hpp",
+      "stage": 3,
+      "status": "partial",
+      "contract": "CompiledQuery, SqlBindings, and every SqlCompileError are separate. Parameter/provenance positions stay aligned on allocation failure. SQLite diagnostic rendering handles binding, quoting/comments, non-finite numbers, and independent comments, with 1,538 comparisons. Other dialect execution/rendering is out of scope.",
+      "evidence": [
+        "include/teaql/sql/types.hpp",
+        "include/teaql/sql/bindings.hpp",
+        "src/sql/types.cpp",
+        "src/sql/bindings.cpp",
+        "tests/sql_model_tests.cpp",
+        "tests/parity/sql_types_cases.json",
+        "tests/parity/compare_sql_types.py",
+        "tests/parity/rust-values/src/bin/sql_types_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-sql/src/dialect.rs"
+      ],
+      "cpp_target": "include/teaql/sql/dialect.hpp; src/sql/dialect.cpp",
+      "stage": 3,
+      "status": "partial",
+      "contract": "SqlDialect restores expressions/functions/subqueries, ordinary/aggregate projections, partition pagination, SELECT/basic schema compilation, and extension points. Preserve parameter order, subquery privacy scope, recovery after errors, and raw-SQL provenance, with 2,206 comparisons. Insert/update batches, guarded update/delete/recover, soft delete/restore have 2,505; typed nulls, field/version selection, and error order match. Real SQLite execution, virtual extensions, target-domain and nested-copy tests are present. Index specs, FK naming, physical identifier byte validation, and Unicode uppercase have 1,305 comparisons. All 43 source trait methods have corresponding entries. The legacy runtime compiler remains a regression baseline; complete runtime execution integration is pending.",
+      "evidence": [
+        "include/teaql/runtime/legacy_sqlite_compiler.hpp",
+        "src/runtime/legacy_sqlite_compiler.cpp",
+        "tests/sql_model_tests.cpp",
+        "tests/sqlite_tests.cpp",
+        "include/teaql/sql/dialect.hpp",
+        "src/sql/dialect.cpp",
+        "tests/sql_dialect_tests.cpp",
+        "tests/parity/sql_dialect_probe.cpp",
+        "tests/parity/sql_dialect_cases.json",
+        "tests/parity/compare_sql_dialect.py",
+        "tests/parity/rust-values/src/bin/sql_dialect_oracle.rs",
+        "src/sql/mutation.cpp",
+        "tests/sql_mutation_tests.cpp",
+        "tests/parity/sql_mutation_probe.cpp",
+        "tests/parity/sql_mutation_cases.json",
+        "tests/parity/compare_sql_mutation.py",
+        "tests/parity/rust-values/src/bin/sql_mutation_oracle.rs",
+        "src/sql/schema.cpp",
+        "tests/parity/sql_schema_probe.cpp",
+        "tests/parity/sql_schema_cases.json",
+        "tests/parity/compare_sql_schema.py",
+        "tests/parity/rust-values/src/bin/sql_schema_oracle.rs",
+        "include/teaql/core/detail/uppercase_tables.hpp",
+        "tests/parity/rust-values/src/bin/unicode_uppercase_table.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-sql/src/executor.rs",
+        "teaql-sql/src/mutation_execution.rs"
+      ],
+      "cpp_target": "include/teaql/sql/executor.hpp; include/teaql/sql/transport.hpp; src/sql/query_plan.cpp; include/teaql/sql/detail/mutation_execution.hpp; src/sql/mutation_execution.cpp; include/teaql/sql/transaction.hpp; include/teaql/sql/detail/query_execution.hpp; include/teaql/sql/detail/stream_execution.hpp",
+      "stage": 3,
+      "status": "partial",
+      "contract": "Independent transport/transaction interfaces and errors have 344 comparisons. SqlDataServiceExecutor query execution provides descriptor caching, a 256-entry FIFO shape cache, parameter/provenance recollection, per-value partition probes, intent, and statement metadata, with 381 comparisons. Context caches, cross-domain copies, and close cancellation are tested. Mutation/guard execution provides nested batches, metadata, failure journals, target/intent redaction, atomic guarded writes, and guarded rereads, with 1,012 comparisons and real SQLite tests. Transaction adaptation preserves shared caches, bypasses probe shortcuts, rereads ordinary mutations, blocks termination while borrowed, and consumes handles on termination failure; another 1,012 comparisons cover transaction mutations. Native and buffered transaction streams have 880 comparisons for compile timing, chunks/order, failure/cancellation/exception, and final diagnostics. Production provider queries/writes/streams/transactions have integration tests; complete runtime integration remains pending.",
+      "evidence": [
+        "include/teaql/sql/transport.hpp",
+        "include/teaql/sql/error.hpp",
+        "include/teaql/async/operation.hpp",
+        "include/teaql/async/pending.hpp",
+        "tests/sql_transport_tests.cpp",
+        "tests/parity/sql_transport_cases.json",
+        "tests/parity/compare_sql_transport.py",
+        "tests/parity/rust-values/src/bin/sql_transport_oracle.rs",
+        "include/teaql/sql/executor.hpp",
+        "include/teaql/sql/detail/query_plan.hpp",
+        "src/sql/query_plan.cpp",
+        "tests/sql_query_tests.cpp",
+        "tests/parity/sql_query_probe.cpp",
+        "tests/parity/sql_query_cases.json",
+        "tests/parity/compare_sql_query.py",
+        "tests/parity/rust-values/src/bin/sql_query_oracle.rs",
+        "include/teaql/sql/detail/mutation_execution.hpp",
+        "src/sql/mutation_execution.cpp",
+        "tests/sql_execution_tests.cpp",
+        "tests/parity/sql_execution_probe.cpp",
+        "tests/parity/sql_execution_cases.json",
+        "tests/parity/compare_sql_execution.py",
+        "tests/parity/rust-values/src/bin/sql_execution_oracle.rs",
+        "include/teaql/sql/transaction.hpp",
+        "include/teaql/sql/detail/query_execution.hpp",
+        "tests/sql_transaction_tests.cpp",
+        "tests/sqlite_execution_fixture.hpp",
+        "tests/parity/sql_transaction_cases.json",
+        "tests/parity/compare_sql_transaction.py",
+        "include/teaql/sql/detail/stream_execution.hpp",
+        "tests/sql_stream_tests.cpp",
+        "tests/sql_transaction_fixture.hpp",
+        "tests/parity/sql_stream_probe.cpp",
+        "tests/parity/sql_stream_cases.json",
+        "tests/parity/compare_sql_stream.py",
+        "tests/parity/rust-values/src/bin/sql_stream_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-sql/src/diagnostic_execution.rs",
+        "teaql-sql/src/diagnostic_stream.rs"
+      ],
+      "cpp_target": "include/teaql/sql/detail/diagnostic.hpp; src/sql/diagnostic.cpp; include/teaql/sql/detail/stream_execution.hpp",
+      "stage": 3,
+      "status": "partial",
+      "contract": "StatementDiagnostic and FailureJournal are independent. Success metadata accompanies results; failure/cancellation observers receive one notification; journals flush/disarm in order and sink failures do not replace execution errors. Quiescence stops native work before notification and destruction. Query/mutation/guard paths preserve prior successful writes and failed reread diagnostics, discarding fallback journals on success. DiagnosticStream counts delivered rows and releases cursors before one final notification at final chunk/EOF/error. Cancellation and exception outcomes remain distinct; provider errors survive sink failures and absent compiled SQL produces no invented diagnostics. 880 stream comparisons plus thread/Context tests are present; complete provider/runtime log integration requires acceptance.",
+      "evidence": [
+        "include/teaql/sql/detail/diagnostic.hpp",
+        "src/sql/diagnostic.cpp",
+        "tests/sql_query_tests.cpp",
+        "tests/parity/sql_query_cases.json",
+        "tests/sql_execution_tests.cpp",
+        "tests/parity/sql_execution_cases.json",
+        "include/teaql/sql/detail/stream_execution.hpp",
+        "tests/sql_stream_tests.cpp",
+        "tests/parity/sql_stream_cases.json"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-sql/src/lib.rs"
+      ],
+      "cpp_target": "include/teaql/sql.hpp",
+      "stage": 3,
+      "status": "missing",
+      "contract": "Audit public exports individually. The generic layer can use test transports without linking SQLite.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-provider-sqlite/src/lib.rs"
+      ],
+      "cpp_target": "include/teaql/provider_sqlite/{dialect,error,provider,id,business_id,schema}.hpp; include/teaql/provider_sqlite/detail/{bindings,decoding,schema}.hpp; src/provider_sqlite/",
+      "stage": 3,
+      "status": "partial",
+      "contract": "The independent provider target and SqliteDialect implement six provider error categories, every Value-to-SQLite-storage binding, and native parameter binding. Nested text/errors belong to explicit Contexts; SQLite copies bound text. 1,084 public execute comparisons pass; two engine-version REAL-to-TEXT differences are documented separately. Row decoding distinguishes declared/storage types, validates UTF-8 and Date/Timestamp/Decimal/JSON reasons/locations, with 6,029 Release observations; source Debug overflow on invalid timestamps is documented. Tests cover cursor-release retention, shared layouts, and cross-domain copies. Production fetch/mutation/repeated fetch/native streams/two-level caches have 796 comparisons. Typed contention errors avoid blocking the owner thread; cache eviction does not free borrowed arena layouts. Native/asynchronous transaction carriers have 366 comparisons, including cancel/close rollback, failed commit cleanup, and stale-handle isolation. ID-space ensure_table/next_id/ensure_floor has 261 cross-engine and 263 same-engine observations; two diagnostics differ by engine. Four-connection CAS, rollback, and scoped configuration/errors are tested. Business-ID allocation has 198 observations for ranges/version/native errors/failed commit/triggers plus independent transactions, close, and concurrency. BusinessIdSchemaContributor, passive Context installation, real service generation, runtime ID floor/canonical space/error conversion, and runtime schema orchestration are present. The physical schema provider has 735 public-entry comparisons for DDL/column compatibility/indexes/FKs/soundex/Unicode/transaction events/post-commit legacy-graph rejection. Complete Unicode scalars and sigma contexts match Rust 1.97.1 / Unicode 17 digests. Tests cover failed commits/cache clearing/sink failures/queued cancellation/cross-domain retention. The legacy session remains a baseline and does not suppress UnsupportedValue.",
+      "evidence": [
+        "src/runtime/sqlite.cpp",
+        "src/runtime/legacy_sqlite_compiler.cpp",
+        "tests/sqlite_tests.cpp",
+        "include/teaql/provider_sqlite/dialect.hpp",
+        "src/provider_sqlite/dialect.cpp",
+        "tests/provider_sqlite_tests.cpp",
+        "tests/sql_mutation_tests.cpp",
+        "include/teaql/provider_sqlite/error.hpp",
+        "src/provider_sqlite/bindings.cpp",
+        "tests/provider_sqlite_bindings_tests.cpp",
+        "tests/parity/sqlite_bindings_cases.json",
+        "tests/parity/sqlite_bindings_engine_differences.json",
+        "tests/parity/rust-values/src/bin/sqlite_bindings_oracle.rs",
+        "include/teaql/provider_sqlite/detail/decoding.hpp",
+        "src/provider_sqlite/decoding.cpp",
+        "tests/provider_sqlite_decoding_tests.cpp",
+        "tests/parity/sqlite_decoding_cases.json",
+        "tests/parity/rust-values/src/bin/sqlite_decoding_oracle.rs",
+        "include/teaql/provider_sqlite/provider.hpp",
+        "src/provider_sqlite/provider.cpp",
+        "tests/provider_sqlite_transport_tests.cpp",
+        "tests/parity/sqlite_transport_cases.json",
+        "tests/parity/compare_sqlite_transport.py",
+        "tests/parity/rust-values/src/bin/sqlite_transport_oracle.rs",
+        "tests/parity/sqlite_transaction_cases.json",
+        "tests/parity/compare_sqlite_transaction.py",
+        "include/teaql/provider_sqlite/id.hpp",
+        "include/teaql/runtime/id_space.hpp",
+        "tests/provider_sqlite_id_tests.cpp",
+        "tests/parity/sqlite_id_cases.json",
+        "tests/parity/sqlite_id_engine_differences.json",
+        "tests/parity/compare_sqlite_id.py",
+        "include/teaql/provider_sqlite/business_id.hpp",
+        "tests/provider_sqlite_business_id_tests.cpp",
+        "tests/parity/sqlite_business_id_cases.json",
+        "tests/parity/compare_sqlite_business_id.py",
+        "include/teaql/runtime/id.hpp",
+        "tests/internal_id_tests.cpp",
+        "include/teaql/provider_sqlite/schema.hpp",
+        "include/teaql/provider_sqlite/detail/schema.hpp",
+        "src/provider_sqlite/schema.cpp",
+        "src/provider_sqlite/schema_model.cpp",
+        "src/provider_sqlite/schema_unicode.cpp",
+        "src/provider_sqlite/unicode_lower_data.inc",
+        "tests/provider_sqlite_schema_tests.cpp",
+        "tests/provider_sqlite_unicode_tests.cpp",
+        "tests/parity/sqlite_schema_probe.cpp",
+        "tests/parity/sqlite_schema_cases.json",
+        "tests/parity/observe_sqlite_schema.py",
+        "tests/parity/compare_sqlite_schema.py",
+        "tests/parity/rust-values/src/bin/sqlite_schema_oracle.rs",
+        "tests/parity/rust_unicode_lower.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/context.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/context.hpp; include/teaql/runtime/resources.hpp; include/teaql/runtime/schema.hpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "Typed/named resource registration/lookup/require and locals access/removal have 410 comparisons. Registrations borrow from explicit origin domains; replacement does not destroy arena objects early, and required borrows validate owner on copying. Lookups remain readable during quiescence and reject closed Contexts. Metadata/entity registry access has 321 comparisons. Clocks/date override/business-ID service/key/infrastructure installation have 859. Internal-ID registration/optional generation/Global fallback and reserve-floor-before-mark_as_new bootstrap have 171. Private SchemaInvocation, separate runtime SchemaProvider, and lazy provider/business-schema/bootstrap orchestration have 384; dynamic modes restore after each poll/cancel, pending borrows block configuration changes, and const Contexts can explicitly allocate results. Default diagnostic user identity and None/Some/empty setters/builders use User strings; Linux native thread IDs differ from Rust private ThreadId numbering. Log options/snapshots/recording/buffering have 315; business call sites remain pending. Telemetry registration/default Noop/start operations preserve failure isolation and propagation. send_event snapshot/bootstrap attachment, raw/safe/LogManager routing, and telemetry completion have 1,088 source comparisons. Root/policy/other services still need integration. Initial/root graphs have independent read-only storage and deep-copy replacement. Four decoder delegations, behavior registration/lookup, and RequestPolicy install/clear exist; automatic query/save invocation remains pending.",
+      "evidence": [
+        "include/teaql/runtime/context.hpp",
+        "tests/context_memory_tests.cpp",
+        "include/teaql/runtime/resources.hpp",
+        "tests/runtime_context_tests.cpp",
+        "tests/parity/runtime_context_cases.json",
+        "tests/parity/runtime_context_probe.cpp",
+        "tests/parity/rust-values/src/bin/runtime_context_oracle.rs",
+        "include/teaql/runtime/registry.hpp",
+        "src/runtime/registry.cpp",
+        "tests/runtime_registry_tests.cpp",
+        "tests/parity/runtime_registry_cases.json",
+        "tests/parity/runtime_registry_probe.cpp",
+        "tests/parity/rust-values/src/bin/runtime_registry_oracle.rs",
+        "include/teaql/runtime/business_clock.hpp",
+        "src/runtime/business_clock.cpp",
+        "src/runtime/business_service.cpp",
+        "tests/business_service_tests.cpp",
+        "tests/parity/business_service_cases.json",
+        "tests/parity/business_service_probe.cpp",
+        "tests/parity/rust-values/src/bin/business_service_oracle.rs",
+        "include/teaql/runtime/id.hpp",
+        "src/runtime/id.cpp",
+        "tests/internal_id_tests.cpp",
+        "tests/internal_id_fixture.hpp",
+        "tests/parity/internal_id_cases.json",
+        "tests/parity/internal_id_probe.cpp",
+        "tests/parity/compare_internal_id.py",
+        "tests/parity/rust-values/src/bin/internal_id_oracle.rs",
+        "include/teaql/runtime/schema.hpp",
+        "include/teaql/runtime/module.hpp",
+        "src/runtime/schema.cpp",
+        "tests/schema_runtime_tests.cpp",
+        "tests/parity/schema_runtime_cases.json",
+        "tests/parity/schema_runtime_probe.cpp",
+        "tests/parity/compare_schema_runtime.py",
+        "tests/parity/rust-values/src/bin/schema_runtime_oracle.rs",
+        "src/runtime/context_logging.cpp",
+        "include/teaql/runtime/detail/context_identity.hpp",
+        "tests/context_logging_tests.cpp",
+        "include/teaql/runtime/telemetry.hpp",
+        "src/runtime/telemetry.cpp",
+        "tests/telemetry_tests.cpp",
+        "include/teaql/runtime/detail/governance_scope.hpp",
+        "src/runtime/context_event.cpp",
+        "tests/context_event_tests.cpp",
+        "tests/parity/context_event_probe.cpp",
+        "tests/parity/context_event_cases.json",
+        "tests/parity/compare_context_event.py",
+        "tests/parity/rust-values/build.rs",
+        "tests/parity/rust-values/src/bin/context_event_oracle.rs",
+        "src/runtime/context_graph.cpp",
+        "tests/runtime_graph_tests.cpp",
+        "src/runtime/context_entity.cpp",
+        "include/teaql/runtime/detail/context_entity.hpp",
+        "tests/entity_decoder_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/registry.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/registry.hpp; include/teaql/runtime/module.hpp; include/teaql/runtime/behavior.hpp; include/teaql/runtime/entity_graph_decoder.hpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "MetadataStore/EntityRegistry implementations preserve ordering/replacement/missing values, independent descriptor snapshots, and default observers, with 321 comparisons. Explicit copies and callback/result borrows pass close tests. RuntimeModule descriptor/generated-bootstrap/apply_to/into_context functionality explicitly copies metadata/registry/callbacks into the target Context, with 384 schema-order observations and close/replacement tests. Sink and initial/root graph registration/install preserve domain-checked borrows and complete GraphNode copies. Four decoder forms, behavior/registry and RequestPolicy interfaces, and entity/entity_with_behavior/behavior registration have 182 public comparisons for errors/replacement/partial installation/weak-root ledger grouping/order. Native tests cover domain rejection, installation atomicity, resource close, cyclic graph copies, and SQLite identity decoding. Checker/language registration and automatic entity-service invocation remain pending; this is not complete module/query acceptance.",
+      "evidence": [
+        "include/teaql/runtime/registry.hpp",
+        "src/runtime/registry.cpp",
+        "tests/runtime_registry_tests.cpp",
+        "tests/parity/runtime_registry_cases.json",
+        "tests/parity/runtime_registry_probe.cpp",
+        "tests/parity/rust-values/src/bin/runtime_registry_oracle.rs",
+        "include/teaql/runtime/schema.hpp",
+        "include/teaql/runtime/module.hpp",
+        "src/runtime/schema.cpp",
+        "tests/schema_runtime_tests.cpp",
+        "tests/parity/schema_runtime_cases.json",
+        "tests/parity/schema_runtime_probe.cpp",
+        "tests/parity/compare_schema_runtime.py",
+        "tests/parity/rust-values/src/bin/schema_runtime_oracle.rs",
+        "tests/context_event_tests.cpp",
+        "tests/runtime_graph_tests.cpp",
+        "include/teaql/runtime/behavior.hpp",
+        "include/teaql/runtime/entity_graph_decoder.hpp",
+        "src/runtime/entity_graph_decoder.cpp",
+        "src/runtime/context_entity.cpp",
+        "include/teaql/runtime/detail/context_entity.hpp",
+        "tests/entity_decoder_fixture.hpp",
+        "tests/entity_decoder_tests.cpp",
+        "tests/parity/entity_decoder_probe.cpp",
+        "tests/parity/entity_decoder_cases.json",
+        "tests/parity/compare_entity_decoder.py",
+        "tests/parity/observe_entity_decoder.py",
+        "tests/parity/rust-values/src/bin/entity_decoder_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/data_service/base.rs",
+        "teaql-runtime/src/data_service/context.rs",
+        "teaql-runtime/src/data_service/mod.rs",
+        "teaql-runtime/src/data_service/types.rs",
+        "teaql-runtime/src/data_service/resolved.rs",
+        "teaql-runtime/src/data_service/helpers.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/data_service.hpp; include/teaql/runtime/detail/data_service.hpp; src/runtime/data_service.cpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "Keep EntityDataService/ContextDataService/RuntimeDataService/UserContextMetadata separate. Context binding, command factories, behavior/policy/bootstrap preparation, and private query intent exist. Basic adapters have 256 source comparisons and SQLite/asynchronous lifetime tests. Context query observation preserves two scope layers, Noop, and lazy comment resolution, with 468 original-method observations and native wake/stop/close tests. Complete entity queries/pagination/cache, insert checkers, and mutations remain pending; basic entity decoding is not relation hydration. Aggregate defaults and grouped/scalar attachment helpers have 266 enhancement comparisons; other helpers remain unproven.",
+      "evidence": [
+        "include/teaql/runtime/data_service.hpp",
+        "include/teaql/runtime/detail/data_service.hpp",
+        "include/teaql/runtime/detail/base_query.hpp",
+        "src/runtime/data_service.cpp",
+        "src/runtime/relation.cpp",
+        "tests/entity_service_tests.cpp",
+        "tests/parity/runtime_base_cases.json",
+        "tests/parity/runtime_base_probe.cpp",
+        "tests/parity/rust-values/src/bin/runtime_base_oracle.rs",
+        "tests/parity/compare_runtime_base.py",
+        "include/teaql/runtime/detail/context_query.hpp",
+        "tests/context_query_tests.cpp",
+        "tests/context_query_fixture.hpp",
+        "tests/parity/context_query_probe.cpp",
+        "tests/parity/context_query_cases.json",
+        "tests/parity/rust-values/src/bin/context_query_oracle.rs",
+        "src/runtime/relation_enhancement.cpp",
+        "tests/parity/relation_enhancement_cases.json"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/data_service/relation.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/relation.hpp; src/runtime/relation.cpp; include/teaql/runtime/detail/relation_hydration.hpp; src/runtime/relation_installation.cpp; include/teaql/runtime/detail/relation_enhancement.hpp; src/runtime/relation_enhancement.cpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "RelationLoadPlan, behavior-path/explicit-load planning, identity deduplication, ordinary/compact query construction, projection/partition/stable ID order, and decoder eligibility have 112 observations. Equal bucket identities do not impose an unspecified Rust unstable-sort representative order. Top-N strategy/telemetry and callback-composed window/per-parent probes have 432 observations and real SQLite pagination/order/close tests. Recursive embedded/ordinary/compact hydration and four registry installations have 356 original-method observations and native lifetime tests. Relation aggregates/object-group/child-query kernels have 266 comparisons and SQLite/thread tests. Complete fetch orchestration and attach/detach writes remain pending; examples must use the runtime rather than local assembly.",
+      "evidence": [
+        "include/teaql/runtime/relation.hpp",
+        "src/runtime/relation.cpp",
+        "include/teaql/runtime/data_service.hpp",
+        "tests/entity_service_tests.cpp",
+        "tests/parity/entity_service_cases.json",
+        "tests/parity/entity_service_probe.cpp",
+        "tests/parity/rust-values/src/bin/entity_service_oracle.rs",
+        "tests/parity/compare_entity_service.py",
+        "include/teaql/runtime/detail/relation_execution.hpp",
+        "tests/relation_execution_tests.cpp",
+        "tests/parity/relation_execution_probe.cpp",
+        "tests/parity/relation_execution_cases.json",
+        "tests/parity/rust-values/src/bin/relation_execution_oracle.rs",
+        "include/teaql/runtime/detail/relation_installation.hpp",
+        "src/runtime/relation_installation.cpp",
+        "include/teaql/runtime/detail/relation_hydration.hpp",
+        "tests/relation_hydration_tests.cpp",
+        "tests/relation_hydration_fixture.hpp",
+        "tests/parity/relation_hydration_probe.cpp",
+        "tests/parity/relation_hydration_cases.json",
+        "tests/parity/rust-values/src/bin/relation_hydration_oracle.rs",
+        "tests/parity/compare_relation_hydration.py",
+        "include/teaql/runtime/detail/relation_enhancement.hpp",
+        "src/runtime/relation_enhancement.cpp",
+        "tests/relation_enhancement_tests.cpp",
+        "tests/parity/relation_enhancement_probe.cpp",
+        "tests/parity/relation_enhancement_cases.json",
+        "tests/parity/rust-values/src/bin/relation_enhancement_oracle.rs",
+        "tests/parity/compare_relation_enhancement.py"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/data_service/cache.rs",
+        "teaql-runtime/src/context/pagination.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/cache.hpp; include/teaql/runtime/pagination.hpp; include/teaql/runtime/system_time.hpp; src/runtime/query_stores.cpp; src/runtime/context_pagination.cpp; include/teaql/runtime/detail/id_set_build_lock.hpp; src/runtime/id_set_build_lock.cpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "Independent aggregation-cache/cursor/ID-set interfaces, in-memory stores, complete cursor/retained-ID models, and Context registration/observation have 259 source comparisons and native asynchronous/domain tests for age/expiry/capacity/bytes/replacement/invalidation/cancellation. Data explicitly copies into store/result domains; SystemTime retains signed seconds/nanoseconds. Owner-thread rules do not establish Rust Mutex cross-thread/poisoning equivalence; equal-deadline HashMap ties remain unspecified. Explicit Global directories and User leases/guards provide same-key coordination, with 144 original-registry/actual-mutex comparisons for identity/waiting/wake/cancellation transfer/non-FIFO slot reuse; native close joins work before guard release. Connect these primitives to miss/recheck/build, canonical keys, and complete entity cache/pagination execution. No external cache component is added.",
+      "evidence": [
+        "include/teaql/runtime/cache.hpp",
+        "include/teaql/runtime/pagination.hpp",
+        "include/teaql/runtime/system_time.hpp",
+        "include/teaql/runtime/detail/context_pagination.hpp",
+        "src/runtime/query_stores.cpp",
+        "src/runtime/context_pagination.cpp",
+        "tests/query_store_tests.cpp",
+        "tests/query_store_fixture.hpp",
+        "tests/parity/query_store_cases.json",
+        "tests/parity/query_store_probe.cpp",
+        "tests/parity/rust-values/src/bin/query_store_oracle.rs",
+        "tests/parity/compare_query_store.py",
+        "include/teaql/runtime/detail/id_set_build_lock.hpp",
+        "src/runtime/id_set_build_lock.cpp",
+        "tests/id_set_build_fixture.hpp",
+        "tests/id_set_build_tests.cpp",
+        "tests/parity/id_set_build_probe.cpp",
+        "tests/parity/id_set_build_cases.json",
+        "tests/parity/compare_id_set_build.py",
+        "tests/parity/rust-values/src/bin/id_set_build_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/context/locking.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/locking.hpp",
+      "stage": 4,
+      "status": "missing",
+      "contract": "Preserve the core RemoteLockProvider interface without implementing a cloud lock service.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/entity_runtime.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/entity_runtime.hpp; include/teaql/runtime/entity_key.hpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "EntityKey cached identities, positive-integer normalization, float bit ordering, and JSON/list/object identity are present. Separate graph builder/frozen graph/reference, loaded relation/handle, change sets/stack, lazy ledger/original versions, runtime state, composition errors, and LedgerEntity defaults have 241 complete-source observations. Preserve original snapshots/versions, stack overlays/deletion, atomic conflict handling, same-domain sharing, weak publication authority, and null/unloaded/type-mismatch relations. Same-domain copies borrow one Context-owned slot; explicit cross-domain copies preserve graph cycles and ledger aliases without reference-counted Context lifetime extension. Tests cover PMR nesting, retained copies, native payload replacement/cleanup, and rejection of move-only cross-domain copies. Four decoder forms have separate registry acceptance. Entity service/ledger save call sites and thread-sharing semantics still need runtime acceptance; this module alone does not prove query/save completion.",
+      "evidence": [
+        "include/teaql/runtime/entity_key.hpp",
+        "src/runtime/entity_key.cpp",
+        "tests/audit_event_tests.cpp",
+        "tests/parity/audit_event_cases.json",
+        "tests/parity/compare_audit_event.py",
+        "tests/parity/rust-values/src/bin/audit_event_oracle.rs",
+        "include/teaql/runtime/entity_runtime.hpp",
+        "src/runtime/entity_runtime.cpp",
+        "include/teaql/runtime/resources.hpp",
+        "tests/entity_runtime_tests.cpp",
+        "tests/parity/entity_runtime_probe.cpp",
+        "tests/parity/entity_runtime_cases.json",
+        "tests/parity/compare_entity_runtime.py",
+        "tests/parity/observe_entity_runtime.py",
+        "tests/parity/rust-values/src/bin/entity_runtime_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/entity_status.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/entity_status.hpp",
+      "stage": 2,
+      "status": "partial",
+      "contract": "Preserve the complete status table and invalid transitions, then connect it to the real entity runtime.",
+      "evidence": [
+        "include/teaql/runtime/entity_status.hpp",
+        "tests/core_model_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/error.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/context_error.hpp; include/teaql/runtime/error.hpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "Three ContextError categories, all 14 RuntimeError structured variants/displays, and runtime/entity/concrete-executor DataServiceError classification/forwarding exist. Check lists, SQL errors, optional fields, and nested Value/JSON explicitly copy into destination scopes. 1,134 comparisons and close tests pass. C++ automatic type names follow its compiler; complete entity-runtime propagation remains pending.",
+      "evidence": [
+        "include/teaql/runtime/context_error.hpp",
+        "tests/runtime_context_tests.cpp",
+        "tests/parity/runtime_context_cases.json",
+        "include/teaql/runtime/check_result.hpp",
+        "src/runtime/check_result.cpp",
+        "include/teaql/runtime/error.hpp",
+        "src/runtime/error.cpp",
+        "tests/runtime_check_tests.cpp",
+        "tests/parity/runtime_check_cases.json",
+        "tests/parity/runtime_check_probe.cpp",
+        "tests/parity/rust-values/src/bin/runtime_check_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/inmemory_engine.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/inmemory_engine.hpp",
+      "stage": 4,
+      "status": "missing",
+      "contract": "The in-memory query/expression evaluator is a public core capability; SQLite-only scope must not remove it.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/generated_support.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/model_support.hpp",
+      "stage": 4,
+      "status": "missing",
+      "contract": "Handwritten models still use entity/query services and PurposedQuery/PurposedSelectQuery/AuditedSave. Preserve runtime support without developing the generator.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/business_id.rs",
+        "teaql-runtime/src/id.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/business_id.hpp; include/teaql/runtime/business_clock.hpp; include/teaql/runtime/id.hpp; include/teaql/runtime/id_space.hpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "Preserve time/scope/sequence/encoding/schema contribution/allocation; clocks are injectable and no hidden C++ global owns data. Canonical ID-space naming has SQLite observations. Legacy/V1 strategies, versioned 32-byte keys, key-provider/static implementation, and V1 HMAC-SHA256/eight-round permutation have 2,150 comparisons and close/copy tests. BusinessIdSchemaContributor and SQLite implementation exist. BusinessClock/nanosecond UTC/BusinessDate/in-memory allocation/service/passive Context installation have 859 time/allocation/order observations and explicit-borrow/retention/poisoning/SQLite tests. The in-memory allocator is owner-thread-bound, not proven cross-thread-equivalent. InternalIdGenerator/AtomicCounter/Snowflake/Context registration/generate_id/next_id/bootstrap have 171 observations; the Global fallback is shared by its Users. Tests cover pure-counter thread safety, clock rollback/sequence exhaustion, and SQLite error adaptation. Schema contribution has 384 order/mode comparisons; physical SQLite schema and transactional audit have 735. Business save/audit call sites remain pending.",
+      "evidence": [
+        "include/teaql/runtime/id_space.hpp",
+        "tests/provider_sqlite_id_tests.cpp",
+        "tests/parity/sqlite_id_cases.json",
+        "include/teaql/runtime/business_id.hpp",
+        "src/runtime/business_id.cpp",
+        "tests/runtime_business_id_tests.cpp",
+        "tests/parity/runtime_business_id_cases.json",
+        "tests/parity/runtime_business_id_probe.cpp",
+        "tests/parity/rust-values/src/bin/runtime_business_id_oracle.rs",
+        "include/teaql/runtime/business_clock.hpp",
+        "src/runtime/business_clock.cpp",
+        "src/runtime/business_service.cpp",
+        "tests/business_service_tests.cpp",
+        "tests/parity/business_service_cases.json",
+        "tests/parity/business_service_probe.cpp",
+        "tests/parity/rust-values/src/bin/business_service_oracle.rs",
+        "include/teaql/runtime/id.hpp",
+        "src/runtime/id.cpp",
+        "tests/internal_id_tests.cpp",
+        "tests/internal_id_fixture.hpp",
+        "tests/parity/internal_id_cases.json",
+        "tests/parity/internal_id_probe.cpp",
+        "tests/parity/compare_internal_id.py",
+        "tests/parity/rust-values/src/bin/internal_id_oracle.rs",
+        "src/runtime/schema.cpp",
+        "tests/parity/schema_runtime_cases.json"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/entity_reference.rs",
+        "teaql-runtime/src/round_trip_reference.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/entity_reference.hpp; include/teaql/runtime/round_trip_reference.hpp",
+      "stage": 4,
+      "status": "missing",
+      "contract": "Distinguish request references from trusted runtime claims. Preserve document scope, principal, authorization, encoding, and fallback rules; justify cryptographic dependencies separately.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/i18n.rs",
+        "teaql-runtime/src/language.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/i18n.hpp; include/teaql/runtime/language.hpp",
+      "stage": 4,
+      "status": "missing",
+      "contract": "Preserve language, locale, catalogs, locations, checker-message translation, and parameter semantics.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/telemetry.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/telemetry.hpp",
+      "stage": 4,
+      "status": "partial",
+      "contract": "RuntimeAttributeValue/Operation, exact attribute filtering/error classification, telemetry/scope/propagation/Noop/FailOpen exist. Context services borrow explicit domains; default Noop belongs to User. 1,032 actual API observations cover failures/callback timing/poisoned scopes/propagation/destruction order. Native tests cover Global copies, one destruction, domain rejection, thread wake/stop/reclamation. ContextBox payloads can be destroyed early while arena blocks remain until close. No exporter or hidden shared owner is introduced. Event delivery and Context query observation are connected; complete entity/save business call sites remain pending.",
+      "evidence": [
+        "include/teaql/runtime/telemetry.hpp",
+        "src/runtime/telemetry.cpp",
+        "include/teaql/memory/context_box.hpp",
+        "tests/telemetry_tests.cpp",
+        "tests/parity/telemetry_probe.cpp",
+        "tests/parity/telemetry_cases.json",
+        "tests/parity/compare_telemetry.py",
+        "tests/parity/rust-values/src/bin/telemetry_oracle.rs",
+        "include/teaql/runtime/detail/context_query.hpp",
+        "tests/context_query_tests.cpp"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/graph.rs",
+        "teaql-runtime/src/data_service/graph.rs",
+        "teaql-runtime/src/data_service/executor.rs",
+        "teaql-runtime/src/entity_save.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/graph.hpp; include/teaql/runtime/entity_save.hpp; src/runtime/data_service/graph.cpp",
+      "stage": 5,
+      "status": "partial",
+      "contract": "EntityValues, GraphNode/Operation, GraphMutationKind, plan item/batch/plan, TraceScopeToken, and ScopedCommentNode preserve dirty/original/planned_root/visited/adjacent batching and batch-based counts, with 432 public observations. Graph/trace copies and initial/root registration have lifetime tests. Input normalization, planning, graph/ledger saving remain pending. Approval precedes transaction creation; authoritative rereads precede commit.",
+      "evidence": [
+        "include/teaql/runtime/graph.hpp",
+        "src/runtime/graph.cpp",
+        "src/runtime/context_graph.cpp",
+        "tests/runtime_graph_tests.cpp",
+        "tests/parity/runtime_graph_probe.cpp",
+        "tests/parity/runtime_graph_cases.json",
+        "tests/parity/compare_runtime_graph.py",
+        "tests/parity/rust-values/src/bin/runtime_graph_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/checker.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/check_result.hpp; include/teaql/runtime/checker.hpp (execution pending)",
+      "stage": 5,
+      "status": "partial",
+      "contract": "CheckRule, object locations/segments, field naming profiles, check results, and separate wire models exist. 1,134 check/error observations cover paths/Unicode/all Value projections/optionals/errors. CheckObjectStatus, typed checker execution, loaded/dirty boundaries, and required-field gates remain pending; repairs must not widen update fields.",
+      "evidence": [
+        "include/teaql/runtime/check_result.hpp",
+        "src/runtime/check_result.cpp",
+        "include/teaql/runtime/error.hpp",
+        "src/runtime/error.cpp",
+        "tests/runtime_check_tests.cpp",
+        "tests/parity/runtime_check_cases.json",
+        "tests/parity/runtime_check_probe.cpp",
+        "tests/parity/rust-values/src/bin/runtime_check_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/mutation_policy.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/mutation_policy.hpp; include/teaql/runtime/mutation_governance.hpp",
+      "stage": 5,
+      "status": "partial",
+      "contract": "MutationPolicyIdentity/OperationSummary and full GovernanceSnapshot preserve source/policy/approval/warnings/operations/complete EntityKey. Asynchronous scopes activate/restore on each poll/cancel. Native tests cover nesting/suspension/failure/close; audit attachment has 1,088 comparisons. Activation slots belong to explicit GlobalContext and snapshots to operation Users, without TLS. Policy registration, immutable-plan review, approval fingerprints, governance execution/events remain pending.",
+      "evidence": [
+        "include/teaql/runtime/mutation_governance.hpp",
+        "tests/audit_event_tests.cpp",
+        "tests/parity/audit_event_cases.json",
+        "tests/parity/compare_audit_event.py",
+        "tests/parity/rust-values/src/bin/audit_event_oracle.rs",
+        "include/teaql/runtime/detail/governance_scope.hpp",
+        "src/runtime/context_event.cpp",
+        "tests/context_event_tests.cpp",
+        "tests/parity/context_event_probe.cpp",
+        "tests/parity/context_event_cases.json",
+        "tests/parity/compare_context_event.py",
+        "tests/parity/rust-values/build.rs",
+        "tests/parity/rust-values/src/bin/context_event_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/context/transaction.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/transaction.hpp",
+      "stage": 5,
+      "status": "missing",
+      "contract": "Transactions own executors and clear the ledger after commit. Failure preserves intent; rollback failure preserves the combined error.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/event.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/event.hpp",
+      "stage": 5,
+      "status": "partial",
+      "contract": "Every RawAuditEvent constructor, property change, bootstrap identity, safe field/event, and separate sink interface exists. InMemoryRawAuditEventSink preserves registration order and stops on first failure. Comparisons cover missing/Null/field order/nested credentials/Unicode masks/trace clearing/governance copying. Context event snapshot override, constrained bootstrap identity, raw/safe/LogManager order, first-error stop, and telemetry have 1,088 private-source comparisons. Business save call sites remain pending; do not assume uniform post-commit publication.",
+      "evidence": [
+        "include/teaql/runtime/event.hpp",
+        "src/runtime/event.cpp",
+        "src/runtime/audit_privacy.cpp",
+        "tests/audit_event_tests.cpp",
+        "tests/parity/audit_event_cases.json",
+        "tests/parity/compare_audit_event.py",
+        "tests/parity/rust-values/src/bin/audit_event_oracle.rs",
+        "include/teaql/runtime/detail/governance_scope.hpp",
+        "src/runtime/context_event.cpp",
+        "tests/context_event_tests.cpp",
+        "tests/parity/context_event_probe.cpp",
+        "tests/parity/context_event_cases.json",
+        "tests/parity/compare_context_event.py",
+        "tests/parity/rust-values/build.rs",
+        "tests/parity/rust-values/src/bin/context_event_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/context/logging.rs",
+        "teaql-runtime/src/log_privacy.rs",
+        "teaql-runtime/src/log_formatter.rs"
+      ],
+      "cpp_target": "include/teaql/runtime/logging.hpp; include/teaql/runtime/log_privacy.hpp; include/teaql/runtime/log_formatter.hpp; include/teaql/runtime/log_manager.hpp",
+      "stage": 5,
+      "status": "partial",
+      "contract": "Complete SQL log/options/info/unified/buffer models and privacy reprojection have 425 comparisons for provenance/trust/slots/failure cleanup/intent/trace/SHA256 fingerprints/private safe copies/tampering or missing-state fallback/domain copies. SQLite is the rendering dialect; ExecutionMetadata uses system_clock and Rust's wider time range still needs audit. Raw/safe audit projection and exact plaintext gating have separate evidence. Formatters, lazy Global factory, configuration filtering, and sensitive-log byte truncation have 927 observations. LogManager ordinary/sensitive output, independent endpoints/headers/application warnings have 94 isolated-process observations plus stop/reclamation tests. Context metadata/options/snapshots/buffering/identity have 315 observations and domain/close/output-failure-order tests. Business log/governance call sites remain pending; services are explicitly Global-owned, never singletons.",
+      "evidence": [
+        "src/runtime/sqlite.cpp",
+        "tests/sqlite_tests.cpp",
+        "include/teaql/runtime/detail/audit_privacy.hpp",
+        "src/runtime/audit_privacy.cpp",
+        "tests/audit_event_tests.cpp",
+        "tests/parity/audit_event_cases.json",
+        "tests/parity/compare_audit_event.py",
+        "tests/parity/rust-values/src/bin/audit_event_oracle.rs",
+        "include/teaql/runtime/logging.hpp",
+        "src/runtime/logging.cpp",
+        "include/teaql/core/detail/sha256.hpp",
+        "tests/runtime_log_tests.cpp",
+        "tests/parity/runtime_log_cases.json",
+        "tests/parity/compare_runtime_log.py",
+        "tests/parity/rust-values/src/bin/runtime_log_oracle.rs",
+        "include/teaql/runtime/log_formatter.hpp",
+        "src/runtime/log_formatter.cpp",
+        "tests/log_formatter_tests.cpp",
+        "tests/parity/log_formatter_cases.json",
+        "tests/parity/compare_log_formatter.py",
+        "tests/parity/rust-values/src/formatter_fixture.rs",
+        "tests/parity/rust-values/src/bin/log_formatter_oracle.rs",
+        "include/teaql/runtime/log_manager.hpp",
+        "src/runtime/log_manager.cpp",
+        "src/runtime/log_header.hpp",
+        "tests/log_manager_tests.cpp",
+        "tests/parity/log_manager_cases.json",
+        "tests/parity/compare_log_manager.py",
+        "tests/parity/log_manager_probe.cpp",
+        "tests/parity/rust-values/src/bin/log_manager_oracle.rs",
+        "src/runtime/context_logging.cpp",
+        "include/teaql/runtime/detail/context_identity.hpp",
+        "tests/context_logging_tests.cpp",
+        "tests/parity/context_logging_probe.cpp",
+        "tests/parity/context_logging_cases.json",
+        "tests/parity/compare_context_logging.py",
+        "tests/parity/rust-values/src/bin/context_logging_oracle.rs"
+      ]
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/memory.rs"
+      ],
+      "cpp_target": "tests/parity/memory_data_service.hpp",
+      "stage": 6,
+      "status": "reference_only",
+      "contract": "cfg(test)-only oracle for differential testing/failure injection; not a production data-service replacement.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/telemetry_opentelemetry.rs"
+      ],
+      "cpp_target": "none (external adapter)",
+      "stage": 6,
+      "status": "excluded_external",
+      "contract": "Exclude only the concrete external OpenTelemetry adapter; preserve core telemetry interfaces.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/lib.rs"
+      ],
+      "cpp_target": "include/teaql/runtime.hpp; tests/parity/runtime",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Audit public exports, checker reexports, constants, and defaults individually. Do not stop API review at the first cfg(test) section.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-core/tests/dynamic_search.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-core/dynamic_search.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-provider-sqlite/tests/dynamic_search.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-provider-sqlite/dynamic_search.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-provider-sqlite/tests/guarded_mutation.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-provider-sqlite/guarded_mutation.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/src/masking_contract_tests.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-runtime/masking_contract_tests.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/tests/business_clock.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-runtime/business_clock.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/tests/business_id_permutation.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-runtime/business_id_permutation.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/tests/flat_identity_graph.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-runtime/flat_identity_graph.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/tests/otlp_smoke.rs"
+      ],
+      "cpp_target": "none (external exporter test)",
+      "stage": 6,
+      "status": "excluded_external",
+      "contract": "Only the excluded external OTLP exporter is out of scope; retain core observation tests.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-runtime/tests/test_incremental_ledger.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-runtime/test_incremental_ledger.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-sql/src/binding_tests.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-sql/binding_tests.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-sql/src/execution_tests.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-sql/execution_tests.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-sql/src/log_rendering_tests.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-sql/log_rendering_tests.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    },
+    {
+      "sources": [
+        "teaql-sql/src/mutation_execution_tests.rs"
+      ],
+      "cpp_target": "tests/parity/teaql-sql/mutation_execution_tests.cpp",
+      "stage": 6,
+      "status": "missing",
+      "contract": "Migrate each test contract and fixture using SQLite and handwritten models. Cover failure paths as well as success; do not merely mirror implementation logic.",
+      "evidence": []
+    }
+  ]
+}

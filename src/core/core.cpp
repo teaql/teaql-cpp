@@ -4,11 +4,13 @@
 
 namespace teaql {
 std::optional<std::int64_t> Value::try_i64() const {
+    if (auto v = std::get_if<Decimal>(&data)) return v->to_i64();
     if (auto v = std::get_if<std::int64_t>(&data)) return *v;
     if (auto v = std::get_if<std::uint64_t>(&data); v && *v <= std::uint64_t(INT64_MAX)) return std::int64_t(*v);
     return {};
 }
 std::optional<std::uint64_t> Value::try_u64() const {
+    if (auto v = std::get_if<Decimal>(&data)) return v->to_u64();
     if (auto v = std::get_if<std::uint64_t>(&data)) return *v;
     if (auto v = std::get_if<std::int64_t>(&data); v && *v >= 0) return std::uint64_t(*v);
     return {};
@@ -22,54 +24,41 @@ String default_table_name(Memory r, std::string_view name) {
     }
     out += "_data"; return out;
 }
-const PropertyDescriptor& EntityDescriptor::property_by_name(std::string_view field) const {
-    for (const auto& p : properties) if (p.name == field) return p;
+Record clone_record(Memory r, const Record& source) {
+    Record result(r);
+    for (const auto& [key, value] : source) result.emplace(String(key, r), Value(r, value));
+    return result;
+}
+const PropertyDescriptor* EntityDescriptor::find_property(std::string_view field) const noexcept {
+    for (const auto& p : properties) if (p.name == field) return &p;
+    return nullptr;
+}
+const RelationDescriptor* EntityDescriptor::find_relation(std::string_view name) const noexcept {
+    for (const auto& relation : relations) if (relation.name == name) return &relation;
+    return nullptr;
+}
+const PropertyDescriptor& EntityDescriptor::require_property(std::string_view field) const {
+    if (const auto* p = find_property(field)) return *p;
     throw std::invalid_argument("UnknownField");
 }
-const PropertyDescriptor& EntityDescriptor::id_property() const {
-    for (const auto& p : properties) if (p.is_id) return p;
+const RelationDescriptor& EntityDescriptor::require_relation(std::string_view name) const {
+    if (const auto* relation = find_relation(name)) return *relation;
+    throw std::invalid_argument("UnknownRelation");
+}
+const PropertyDescriptor* EntityDescriptor::id_property() const noexcept {
+    for (const auto& p : properties) if (p.is_id) return &p;
+    return nullptr;
+}
+const PropertyDescriptor* EntityDescriptor::version_property() const noexcept {
+    for (const auto& p : properties) if (p.is_version) return &p;
+    return nullptr;
+}
+const PropertyDescriptor& EntityDescriptor::require_id_property() const {
+    if (const auto* p = id_property()) return *p;
     throw std::invalid_argument("MissingIdProperty");
 }
-const PropertyDescriptor& EntityDescriptor::version_property() const {
-    for (const auto& p : properties) if (p.is_version) return p;
+const PropertyDescriptor& EntityDescriptor::require_version_property() const {
+    if (const auto* p = version_property()) return *p;
     throw std::invalid_argument("MissingVersionProperty");
-}
-Expr Expr::clone(Memory r) const {
-    Expr copy(r, kind); copy.name = name; copy.literal = Value(r, literal); copy.op = op;
-    for (const auto& arg : args) copy.args.push_back(arg.clone(r));
-    for (const auto& value : values) copy.values.emplace_back(value);
-    return copy;
-}
-Expr Expr::column(Memory r, std::string_view name) { Expr e(r, Kind::Column); e.name = name; return e; }
-Expr Expr::binary(Expr left, BinaryOp op, Expr right) {
-    Expr e(left.memory_resource(), Kind::Binary); e.op = op;
-    e.args.push_back(std::move(left)); e.args.push_back(right.clone(e.memory_resource())); return e;
-}
-Expr Expr::in_list(Memory r, std::string_view field, Vector<teaql::Value> values, bool negate) {
-    Expr e(r, Kind::Binary); e.args.push_back(column(r, field));
-    const bool large = values.size() > LARGE_IN_THRESHOLD;
-    e.op = negate ? (large ? BinaryOp::NotInLarge : BinaryOp::NotIn) : (large ? BinaryOp::InLarge : BinaryOp::In);
-    for (const auto& v : values) e.values.emplace_back(v);
-    return e;
-}
-Expr Expr::between(Memory r, std::string_view field, const teaql::Value& lower, const teaql::Value& upper) {
-    Expr e(r, Kind::Between); e.args.push_back(column(r, field)); e.args.push_back(value(r, lower)); e.args.push_back(value(r, upper)); return e;
-}
-Expr Expr::is_null(Memory r, std::string_view field) { Expr e(r, Kind::IsNull); e.args.push_back(column(r, field)); return e; }
-Expr Expr::is_not_null(Memory r, std::string_view field) { auto e = is_null(r, field); e.kind = Kind::IsNotNull; return e; }
-Expr Expr::and_expr(const Expr& other) const {
-    if (*this == other) return clone(memory_resource());
-    Expr e(memory_resource(), Kind::And);
-    if (kind == Kind::And) for (const auto& part : args) e.args.push_back(part.clone(memory_resource()));
-    else e.args.push_back(clone(memory_resource()));
-    if (std::find(e.args.begin(), e.args.end(), other) == e.args.end()) e.args.push_back(other.clone(memory_resource()));
-    return e;
-}
-bool Expr::operator==(const Expr& other) const { return kind == other.kind && name == other.name && literal == other.literal && op == other.op && args == other.args && values == other.values; }
-Slice SelectQuery::prepare_for_list() const {
-    auto result = slice.value_or(Slice{});
-    if (result.limit && *result.limit > hard_limit_value) throw std::invalid_argument("QUERY_HARD_LIMIT_EXCEEDED");
-    if (!result.limit) result.limit = hard_limit_value;
-    return result;
 }
 }

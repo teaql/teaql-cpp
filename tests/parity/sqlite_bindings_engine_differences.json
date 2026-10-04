@@ -1,0 +1,59 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Native SQLite REAL-to-TEXT formatting differs with engine version. These observations are not included in portable binding parity counts. Both bindings pass the same f64 to SQLite.",
+  "cases": [
+    {
+      "input": {
+        "affinity": "TEXT",
+        "params": [
+          {
+            "kind": "f64",
+            "value": "2.2250738585072014e-308"
+          }
+        ]
+      },
+      "rust_bundled": {
+        "affected": 1,
+        "stored": {
+          "type": "text",
+          "value": "2.2250738585072014e-308"
+        }
+      },
+      "cpp_system_sqlite_3_37_2": {
+        "affected": 1,
+        "stored": {
+          "type": "text",
+          "value": "2.2250738585072e-308"
+        }
+      }
+    },
+    {
+      "input": {
+        "affinity": "TEXT",
+        "params": [
+          {
+            "kind": "f64",
+            "value": "1.7976931348623157e308"
+          }
+        ]
+      },
+      "rust_bundled": {
+        "affected": 1,
+        "stored": {
+          "type": "text",
+          "value": "1.7976931348623157e+308"
+        }
+      },
+      "cpp_system_sqlite_3_37_2": {
+        "affected": 1,
+        "stored": {
+          "type": "text",
+          "value": "1.79769313486232e+308"
+        }
+      }
+    }
+  ],
+  "rust_sqlite_version": "3.53.2",
+  "cpp_system_sqlite_version": "3.37.2",
+  "same_engine_control": "All 1086 cases match when C++ is linked to the oracle SQLite 3.53.2 archive; no source or binder change."
+}

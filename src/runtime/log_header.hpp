@@ -1,0 +1,32 @@
+#pragma once
+#include <string_view>
+namespace teaql::detail {
+// Pinned upstream header; correct its JSON claim to match the actual formatter.
+inline constexpr std::string_view log_header=R"teaql(================================================================================
+🚀 TEAQL Holographic Trace Log
+
+[Architecture Manifesto]
+In the era of AI-assisted programming and microservices, the cost of locating data issues far exceeds the I/O cost of writing logs.
+This ordinary log is enabled by default for SQL execution traces and Audit data mutations. SQL parameters are expanded after privacy projection: known ordinary values remain visible, protected values are marked masked, and unknown values remain hidden. MASKED SQL is diagnostic only, NOT REPLAYABLE; unsafe statements show an explicit omission reason.
+
+[Prevent Token Exhaustion: Zero-Code Focused Debugging]
+When debugging with AI, massive amounts of irrelevant logs can consume expensive tokens and cause context truncation.
+Please use the following zero-code environment variables to filter the noise and feed your AI only the core traces:
+👉 Focus on specific tables:  Set TEAQL_SQL_LOG_TABLES=orders,users (Only emits related SQL)
+👉 Focus on specific modules: Set TEAQL_TOOL_LOG_FOCUS=http,file (Only emits specific tool traces)
+👉 Adjust output levels:      Set TEAQL_AUDIT_LOG=_summary or TEAQL_SQL_LOG=_silent to reduce noise
+
+[Production Best Practices (Observability)]
+When deploying to production, do NOT turn off tracing. Instead, "route" your logs to a professional collector:
+👉 Route to stdout (for K8s):   Set TEAQL_LOG_ENDPOINT=stdout
+👉 Sensitive SQL debugging in a protected sink: Set TEAQL_SQL_DEBUG_ENDPOINT=/protected/path/sql-debug.log and TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS=I_UNDERSTAND_SENSITIVE_DATA_MAY_BE_WRITTEN_TO_DISK. Each record is labeled DEBUG PLAINTEXT / EXPLICIT OPT-IN; credentials and unknown bindings remain hidden.
+👉 Raw audit values only with dual opt-in: Set TEAQL_AUDIT_LOG=_full_with_payload and TEAQL_AUDIT_DEBUG_ENDPOINT=/protected/path/audit-debug.log
+👉 Debug text output:           Set TEAQL_LOG_FORMAT=debug or json (both select DebugReaderFormatter)
+
+[Extreme Performance Testing: Disable Logs]
+If you are strictly conducting extreme performance testing, you must explicitly sign the following declaration in your environment variables to bypass tracing:
+👉 Set TEAQL_TRACE_MODE=off
+👉 Set TEAQL_TRACE_OFF_ACK=__i_agree_to_disable_runtime_trace_only_for_extreme_performance_testing
+================================================================================
+)teaql";
+}

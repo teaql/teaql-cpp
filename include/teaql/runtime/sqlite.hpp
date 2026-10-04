@@ -1,5 +1,6 @@
 #pragma once
-#include <teaql/sql/sqlite_dialect.hpp>
+#include <teaql/runtime/legacy_sqlite_compiler.hpp>
+#include <teaql/runtime/context.hpp>
 #include <chrono>
 #include <span>
 #include <stdexcept>
@@ -7,16 +8,15 @@
 struct sqlite3;
 namespace teaql {
 using Rows = Vector<Record>;
-enum class SqlLogOperation { Schema, Select, Insert, Update, Delete, Recover };
-enum class SqlExecutionOutcome { Success, Failure };
-struct SqlLogEntry {
+enum class LegacySqlLogOperation { Schema, Select, Insert, Update, Delete, Recover };
+struct LegacySqlLogEntry {
     String sql, purpose, comment, audit_reason;
     Vector<Value> params; // Safe log projection only; never execution bindings.
-    SqlLogOperation operation;
+    LegacySqlLogOperation operation;
     SqlExecutionOutcome outcome;
     std::uint64_t count;
     std::chrono::nanoseconds elapsed;
-    SqlLogEntry(Memory r, SqlLogOperation op, SqlExecutionOutcome outcome, std::uint64_t count,
+    LegacySqlLogEntry(Memory r, LegacySqlLogOperation op, SqlExecutionOutcome outcome, std::uint64_t count,
                 std::chrono::nanoseconds elapsed)
         : sql(r), purpose(r), comment(r), audit_reason(r), params(r), operation(op), outcome(outcome), count(count), elapsed(elapsed) {}
 };
@@ -38,11 +38,11 @@ public:
     SqliteSession& operator=(const SqliteSession&) = delete;
     void ensure_schema();
     Rows& query(const SelectQuery&);
-    std::uint64_t execute(const InsertCommand& c) { return mutate(MutationKind::Insert, c); }
-    std::uint64_t execute(const UpdateCommand& c) { return mutate(MutationKind::Update, c); }
-    std::uint64_t execute(const DeleteCommand& c) { return mutate(MutationKind::Delete, c); }
-    std::uint64_t execute(const RecoverCommand& c) { return mutate(MutationKind::Recover, c); }
-    const Vector<SqlLogEntry>& sql_logs() const noexcept { return logs_; }
+    std::uint64_t execute(const InsertCommand&);
+    std::uint64_t execute(const UpdateCommand&);
+    std::uint64_t execute(const DeleteCommand&);
+    std::uint64_t execute(const RecoverCommand&);
+    const Vector<LegacySqlLogEntry>& sql_logs() const noexcept { return logs_; }
     void enable_sql_log(bool value) noexcept { logging_ = value; }
     // Transaction covers DB changes; statement logs still describe statement outcomes.
     template<class F> void transaction(F&& body) {
@@ -54,11 +54,11 @@ private:
     UserContext& context_;
     sqlite3* db_ = nullptr;
     Vector<const EntityDescriptor*> descriptors_;
-    Vector<SqlLogEntry> logs_;
+    Vector<LegacySqlLogEntry> logs_;
     bool logging_ = true, in_transaction_ = false;
     const EntityDescriptor& descriptor(std::string_view) const;
-    std::uint64_t mutate(MutationKind, const MutationCommand&);
-    void log(const CompiledQuery&, SqlLogOperation, SqlExecutionOutcome, std::uint64_t,
+    std::uint64_t execute_compiled(const CompiledQuery&, LegacySqlLogOperation, const TraceChain&, bool check_version);
+    void log(const CompiledQuery&, LegacySqlLogOperation, SqlExecutionOutcome, std::uint64_t,
              std::chrono::steady_clock::time_point, std::string_view purpose = {},
              std::string_view comment = {}, std::string_view audit = {});
     void begin();

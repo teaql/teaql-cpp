@@ -1,0 +1,125 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "reason": "SQLite 3.37 does not provide sqlite3_error_offset; rusqlite on SQLite 3.53.2 returns SqlInputError with SQL and offset, while 3.37 returns SqliteFailure. These observations are excluded from the portable parity count.",
+  "cases": [
+    {
+      "input": {
+        "mode": "id_space",
+        "table": "teaql_id_space",
+        "actions": [
+          {
+            "op": "sql",
+            "sql": "CREATE TABLE teaql_id_space(wrong INTEGER)"
+          },
+          {
+            "op": "floor",
+            "entity": "Record",
+            "floor": 18446744073709551615
+          }
+        ],
+        "count": 0,
+        "sql": "",
+        "params": []
+      },
+      "rust_sqlite_3_53_2": {
+        "outcome": {
+          "space": {
+            "code": 0,
+            "error": "no such column: type_name in SELECT type_name,current_level,typeof(current_level) AS storage_type FROM teaql_id_space ORDER BY type_name at offset 7",
+            "kind": "Sqlite"
+          },
+          "steps": [
+            {
+              "affected": 0
+            },
+            {
+              "code": 0,
+              "error": "rusqlite bind error: SQLite ID provider floor 18446744073709551615 for ID space record in table teaql_id_space exceeds i64",
+              "kind": "Bind"
+            }
+          ]
+        },
+        "saved": []
+      },
+      "cpp_sqlite_3_37_2": {
+        "outcome": {
+          "space": {
+            "code": 1,
+            "error": "no such column: type_name",
+            "kind": "Sqlite"
+          },
+          "steps": [
+            {
+              "affected": 0
+            },
+            {
+              "code": 0,
+              "error": "rusqlite bind error: SQLite ID provider floor 18446744073709551615 for ID space record in table teaql_id_space exceeds i64",
+              "kind": "Bind"
+            }
+          ]
+        },
+        "saved": []
+      }
+    },
+    {
+      "input": {
+        "mode": "id_space",
+        "table": "teaql_id_space",
+        "actions": [
+          {
+            "op": "sql",
+            "sql": "CREATE TABLE teaql_id_space(wrong INTEGER)"
+          },
+          {
+            "op": "next",
+            "entity": "Record"
+          }
+        ],
+        "count": 0,
+        "sql": "",
+        "params": []
+      },
+      "rust_sqlite_3_53_2": {
+        "outcome": {
+          "space": {
+            "code": 0,
+            "error": "no such column: type_name in SELECT type_name,current_level,typeof(current_level) AS storage_type FROM teaql_id_space ORDER BY type_name at offset 7",
+            "kind": "Sqlite"
+          },
+          "steps": [
+            {
+              "affected": 0
+            },
+            {
+              "code": 0,
+              "error": "no such column: current_level in SELECT current_level FROM teaql_id_space WHERE type_name = ? at offset 7",
+              "kind": "Sqlite"
+            }
+          ]
+        },
+        "saved": []
+      },
+      "cpp_sqlite_3_37_2": {
+        "outcome": {
+          "space": {
+            "code": 1,
+            "error": "no such column: type_name",
+            "kind": "Sqlite"
+          },
+          "steps": [
+            {
+              "affected": 0
+            },
+            {
+              "code": 1,
+              "error": "no such column: current_level",
+              "kind": "Sqlite"
+            }
+          ]
+        },
+        "saved": []
+      }
+    }
+  ]
+}

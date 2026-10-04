@@ -1,0 +1,7740 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "setup": {
+    "entity": "School",
+    "maxClauses": 100,
+    "models": {
+      "School": {
+        "fields": {
+          "name": "string",
+          "id": "integer",
+          "active": "boolean",
+          "amount": "decimal",
+          "established_date": "date",
+          "create_time": "timestamp",
+          "capacity": "number",
+          "opaque": "unrecognized"
+        },
+        "relations": {
+          "platform": "Platform",
+          "self": "School"
+        }
+      },
+      "Platform": {
+        "fields": {
+          "name": "string"
+        },
+        "relations": {}
+      }
+    }
+  },
+  "cases": [
+    {
+      "input": {
+        "source": "{}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "[]"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Expected search object"
+      }
+    },
+    {
+      "input": {
+        "source": "{} {}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Dynamic search requires valid JSON"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"tenant\":2}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search control"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":null}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search filter"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":null}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search ordering"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":1e999}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Dynamic search requires valid JSON"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":1e-999}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 0.0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"School\",\"old_name\":\"secret\",\"platform.old_name\":\"secret\",\"missing.name\":\"secret\",\"platform.name\":\"Campus\"},\"orderBy\":[{\"field\":\"gone\",\"direction\":\"asc\"},{\"field\":\"id\",\"direction\":\"desc\"}]}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "missing.name"
+          },
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "old_name"
+          },
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "platform.old_name"
+          },
+          {
+            "clause": "ORDER_BY",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "gone"
+          }
+        ],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "School"
+            },
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "Campus"
+            }
+          ],
+          "orders": [
+            {
+              "descending": true,
+              "fieldPath": "id"
+            }
+          ],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "missing.name"
+            },
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "old_name"
+            },
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "platform.old_name"
+            },
+            {
+              "clause": "ORDER_BY",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "gone"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "bad JSON",
+        "maxClauses": 0
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid trusted search setup"
+      }
+    },
+    {
+      "input": {
+        "source": "bad JSON",
+        "entity": "Unknown"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid trusted search setup"
+      }
+    },
+    {
+      "input": {
+        "source": "{}",
+        "models": {}
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid trusted search setup"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": 0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": -1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": 1.0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": 9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": -9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "active",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "active",
+              "operator": "$eq",
+              "value": true
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "active",
+              "operator": "$eq",
+              "value": false
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": 0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": -1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": 1.0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": 1.2
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": 9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": 9007199254740992
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": -9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": 18446744073709551615
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": "+001.200"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "amount",
+              "operator": "$eq",
+              "value": "123456789012345678901234567890.12345678901234567890"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "established_date",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "established_date",
+              "operator": "$eq",
+              "value": "2024-02-29"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": 0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": -1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": 1.0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": 9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": -9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": -1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 1.0
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 1.2
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 9007199254740992
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": -9007199254740991
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "capacity",
+              "operator": "$eq",
+              "value": 18446744073709551615
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": ""
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "2024-02-29"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "2026-02-30"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "0000-01-01"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "2024-2-03"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "+001.200"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "-.5"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "1."
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "1e5"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "123456789012345678901234567890.12345678901234567890"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "opaque",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":null}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":true}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":false}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":0}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":1}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":-1}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":1.0}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":1.2}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":[]}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": null
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":false}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": ""
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"x\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "2024-02-29"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "2026-02-30"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "0000-01-01"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"2024-2-03\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "2024-2-03"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "+001.200"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"-.5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "-.5"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "1."
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "1e5"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"123456789012345678901234567890.12345678901234567890\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "platform.name",
+              "operator": "$eq",
+              "value": "123456789012345678901234567890.12345678901234567890"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":[]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":[1,2]}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":{\"id\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"$root\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"$root\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"constructor\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"constructor\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"__proto__\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"__proto__\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"prototype\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"prototype\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform..name\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"platform..name\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"missing.name\":1}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "missing.name"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "missing.name"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"missing.name\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "ORDER_BY",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "missing.name"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "ORDER_BY",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "missing.name"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\".id\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\".id\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id.\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"id.\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.$name\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"platform.$name\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.id\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.id",
+              "operator": "$eq",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.id\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [],
+          "orders": [
+            {
+              "descending": false,
+              "fieldPath": "self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.id"
+            }
+          ],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.id\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.self.id\",\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search field path"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$eq\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$eq\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$eq\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$eq\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$eq\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$eq\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$eq\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$eq",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$eq\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$eq\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$eq\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$eq\":1}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$eq\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$eq\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$eq\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$eq\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$ne\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$ne",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$ne\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$ne\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$ne\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$ne\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$ne\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$ne\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$ne",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$ne\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$ne\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$ne\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$ne\":1}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$ne\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$ne\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$ne\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$ne\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gt\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$gt",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gt\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gt\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gt\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gt\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gt\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gt\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$gt",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gt\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gt\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gt\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gt\":1}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gt\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gt\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gt\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gt\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gte\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$gte",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gte\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gte\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gte\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$gte\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gte\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gte\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$gte",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gte\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gte\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$gte\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gte\":1}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gte\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gte\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gte\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$gte\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lt\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$lt",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lt\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lt\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lt\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lt\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lt\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lt\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$lt",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lt\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lt\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lt\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lt\":1}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lt\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lt\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lt\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lt\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lte\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$lte",
+              "value": 1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lte\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lte\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lte\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$lte\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lte\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lte\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$lte",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lte\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lte\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$lte\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lte\":1}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lte\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lte\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lte\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$lte\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$in\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$in\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$in\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$in",
+              "value": []
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$in\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$in",
+              "value": [
+                1,
+                2
+              ]
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$in\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$in\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$in\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$in\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$in",
+              "value": []
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$in\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$in\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$in",
+              "value": [
+                null,
+                "x"
+              ]
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$in\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$in\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$in\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$in\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$in\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$notIn\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$notIn\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$notIn\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$notIn",
+              "value": []
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$notIn\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$notIn",
+              "value": [
+                1,
+                2
+              ]
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$notIn\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$notIn\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$notIn\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$notIn\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$notIn",
+              "value": []
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$notIn\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$notIn\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$notIn",
+              "value": [
+                null,
+                "x"
+              ]
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$notIn\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$notIn\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$notIn\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$notIn\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$notIn\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$contains\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "String operator requires a string field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$contains\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "String operator requires a string field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$contains\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "String operator requires a string field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$contains\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "String operator requires a string field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$contains\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "String operator requires a string field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$contains\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$contains\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "name",
+              "operator": "$contains",
+              "value": "x"
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$contains\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$contains\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$contains\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unexpected search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$contains\":1}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$contains\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$contains\":[]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$contains\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$contains\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$wat\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$wat\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$wat\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$wat\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$wat\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$wat\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$wat\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$wat\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$wat\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":{\"$wat\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$wat\":1}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$wat\":\"x\"}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$wat\":[]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$wat\":[1,2]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$wat\":[null,\"x\"]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Unsupported dynamic search operator"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$in\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "id",
+              "operator": "$in",
+              "value": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$notIn\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}}}"
+      },
+      "expected": {
+        "emitted": [
+          {
+            "clause": "FILTER",
+            "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+            "entity": "School",
+            "fieldPath": "unknown"
+          }
+        ],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": [
+            {
+              "clause": "FILTER",
+              "code": "DYNAMIC_SEARCH_UNKNOWN_FIELD",
+              "entity": "School",
+              "fieldPath": "unknown"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":{\"$in\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":{\"$notIn\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid or oversized search value list"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[]}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[1]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid search ordering"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid ordering field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"id\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid ordering direction"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid ordering field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"id\",\"direction\":\"ASC\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid dynamic search ordering"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"id\",\"direction\":\"asc\",\"extra\":1}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid dynamic search ordering"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":1,\"direction\":\"asc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid ordering field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"orderBy\":[{\"field\":\"id\",\"direction\":\"desc\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [],
+          "orders": [
+            {
+              "descending": true,
+              "fieldPath": "id"
+            }
+          ],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":1,\"id\":\"bad\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"x\",\"unknown\":1}}",
+        "maxClauses": 1
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Dynamic search exceeds clause limit"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"platform.name\":\"x\"}}",
+        "models": {
+          "School": {
+            "fields": {
+              "name": "string",
+              "id": "integer",
+              "active": "boolean",
+              "amount": "decimal",
+              "established_date": "date",
+              "create_time": "timestamp",
+              "capacity": "number",
+              "opaque": "unrecognized"
+            },
+            "relations": {
+              "platform": "Platform",
+              "self": "School"
+            }
+          }
+        }
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid trusted search relation metadata"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"unknown\":1},\"orderBy\":[{\"field\":\"id\",\"direction\":\"bad\"}]}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid dynamic search ordering"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":9007199254740992,\"capacity\":9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"2024-2-03\",\"active\":\"1.\",\"established_date\":18446744073709551615}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"2024-02-29\",\"create_time\":1.2,\"active\":0,\"established_date\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":0,\"id\":\"x\",\"capacity\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":9007199254740992,\"amount\":9007199254740992,\"active\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"active\":\"\",\"established_date\":\"123456789012345678901234567890.12345678901234567890\",\"name\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":-1,\"active\":-1,\"opaque\":\"-.5\",\"name\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"0000-01-01\",\"create_time\":\"-.5\",\"name\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"2024-2-03\",\"active\":\"0000-01-01\",\"amount\":\"+001.200\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":\"2024-2-03\",\"active\":\"2024-2-03\",\"amount\":1,\"id\":\"1.\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"\",\"create_time\":null,\"active\":-1,\"established_date\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":\"2026-02-30\",\"active\":false,\"opaque\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":-1,\"name\":\"123456789012345678901234567890.12345678901234567890\",\"established_date\":0,\"opaque\":true}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"name\":-9007199254740991,\"capacity\":null,\"amount\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":null,\"amount\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"2024-2-03\",\"name\":\"2024-02-29\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":-1,\"create_time\":1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "result": {
+          "filters": [
+            {
+              "fieldPath": "create_time",
+              "operator": "$eq",
+              "value": 1
+            },
+            {
+              "fieldPath": "id",
+              "operator": "$eq",
+              "value": -1
+            }
+          ],
+          "orders": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":1.2,\"id\":\"1e5\",\"established_date\":true,\"opaque\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":\"2024-02-29\",\"id\":null,\"name\":-1,\"create_time\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":\"2024-2-03\",\"active\":false,\"capacity\":0,\"amount\":-1}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"amount\":-9007199254740991,\"create_time\":1,\"opaque\":9007199254740992}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"1e5\",\"active\":1,\"amount\":null,\"name\":\"1e5\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"id\":\"2024-2-03\",\"capacity\":1.0}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"opaque\":1.2,\"id\":1.2}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":0,\"name\":-9007199254740991,\"opaque\":\"0000-01-01\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"established_date\":false,\"opaque\":false,\"capacity\":null}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"capacity\":\"x\",\"established_date\":\"2026-02-30\"}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    },
+    {
+      "input": {
+        "source": "{\"filter\":{\"create_time\":9007199254740991,\"opaque\":-9007199254740991}}"
+      },
+      "expected": {
+        "emitted": [],
+        "error": "Invalid value for known search field"
+      }
+    }
+  ]
+}

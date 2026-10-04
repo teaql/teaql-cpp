@@ -1,11 +1,20 @@
 # TEAQL C++ development constraints
 
+- Write project documentation, plans, design contracts, and explanatory material
+  in English. Non-English Unicode fixtures remain data for semantic tests.
+
 - Baseline: Rust v5.0.5 at the exact commit in `upstream.lock.json`. The source
   repository's active branch is not the reference. Use `scripts/verify-upstream.py`.
 - Edge runtime, kernel first. SQLite only. Do not add PostgreSQL/MySQL, cloud,
   web, cache, or unrelated Rust ecosystem integrations to the migration scope.
 - Keep the implementation compact. Prefer C++20 standard facilities. SQLite is
   the planned database dependency; justify any additional dependency before adding it.
+- Preserve every Rust 5.0.5 core concept, responsibility, and abstraction. Compact
+  means few dependencies, not fewer design elements. Follow docs/design-parity.md
+  and the six-stage docs/migration-plan.md; the source inventory is not proof of parity.
+- Do not merge data-service, SQL executor, transport, provider, or runtime layers.
+  Examples must eventually use the entity/query/graph runtime rather than implement
+  its behavior locally. C++ ownership/arena optimization must not alter core semantics.
 - Two explicit lifetimes: application-owned `GlobalContext` and `UserContext`.
   Allocate managed objects through `global.make<T>()` or `user_context.make<T>()`.
   External RAII wrappers use the correspondingly scoped `make_resource<T>()`.

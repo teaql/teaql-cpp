@@ -26,10 +26,10 @@ struct Statement {
                     else if constexpr (std::same_as<T, double>) {
                         if (!std::isfinite(value)) throw std::invalid_argument("Non-finite SQL value");
                         rc = sqlite3_bind_double(stmt, slot, value);
-                    } else {
+                    } else if constexpr (std::integral<T>) {
                         if constexpr (std::same_as<T, std::uint64_t>) if (value > std::uint64_t(INT64_MAX)) throw std::overflow_error("SQLite integer out of range");
                         rc = sqlite3_bind_int64(stmt, slot, sqlite3_int64(value));
-                    }
+                    } else throw std::invalid_argument("Unsupported SQLite value binding");
                 }, query.params[i].data);
                 if (rc != SQLITE_OK) throw SqliteError(rc);
             }
@@ -55,8 +55,58 @@ String scalar_text(Memory r, const Value& value) {
         if constexpr (std::same_as<T, String>) return String(v, r);
         else if constexpr (std::same_as<T, std::monostate> || std::same_as<T, TypedNull>) return String(r);
         else if constexpr (std::same_as<T, bool>) return String(v ? "true" : "false", r);
-        else { char buffer[64]; auto [end, error] = std::to_chars(buffer, buffer + sizeof(buffer), v); if (error != std::errc{}) throw std::runtime_error("Cannot format scalar"); return String(buffer, end, r); }
+        else if constexpr (std::same_as<T, Decimal> || std::same_as<T, Date>) return v.to_string(r);
+        else if constexpr (std::same_as<T, Timestamp>) return scalar_text(r, Value(r, v.as_millis()));
+        else if constexpr (std::same_as<T, Json>) return v.dump(r);
+        else if constexpr (std::is_arithmetic_v<T>) { char buffer[64]; auto [end, error] = std::to_chars(buffer, buffer + sizeof(buffer), v); if (error != std::errc{}) throw std::runtime_error("Cannot format scalar"); return String(buffer, end, r); }
+        else return String(r);
     }, value.data);
+}
+bool credential_key(Memory r, std::string_view name) {
+    String normalized(r);
+    for (char c : name) {
+        if (c >= 'A' && c <= 'Z') c = char(c - 'A' + 'a');
+        if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) normalized += c;
+    }
+    for (auto word : {"password", "passwd", "passphrase", "privatekey", "secret", "accesstoken", "refreshtoken", "idtoken", "apikey", "authorization", "credential", "sessiontoken", "magiclinktoken"})
+        if (normalized.find(word) != String::npos) return true;
+    return false;
+}
+bool has_credentials(Memory r, const Value& value) {
+    if (const auto* object = value.as_object()) {
+        for (const auto& [key, item] : *object)
+            if (credential_key(r, key) || has_credentials(r, item)) return true;
+    } else if (const auto* list = value.as_list()) {
+        for (const auto& item : *list) if (has_credentials(r, item)) return true;
+    } else if (const auto* json = std::get_if<Json>(&value.data)) {
+        const auto walk = [&](const auto& self, const Json& node) -> bool {
+            if (const auto* o = std::get_if<Json::Object>(&node.data)) {
+                for (const auto& [k, v] : *o) if (credential_key(r, k) || self(self, v)) return true;
+            } else if (const auto* a = std::get_if<Json::Array>(&node.data)) {
+                for (const auto& v : *a) if (self(self, v)) return true;
+            }
+            return false;
+        };
+        return walk(walk, *json);
+    }
+    return false;
+}
+void collect_secrets(Memory r, const Value& value, Vector<String>& secrets) {
+    if (const auto* object = value.as_object()) {
+        for (const auto& [key, item] : *object) { (void)key; collect_secrets(r, item, secrets); }
+    } else if (const auto* list = value.as_list()) {
+        for (const auto& item : *list) collect_secrets(r, item, secrets);
+    } else if (const auto* json = std::get_if<Json>(&value.data)) {
+        const auto walk = [&](const auto& self, const Json& node) -> void {
+            if (const auto* o = std::get_if<Json::Object>(&node.data)) {
+                for (const auto& [k, v] : *o) { (void)k; self(self, v); }
+            } else if (const auto* a = std::get_if<Json::Array>(&node.data)) {
+                for (const auto& v : *a) self(self, v);
+            } else if (const auto* s = std::get_if<String>(&node.data)) secrets.emplace_back(*s);
+            else if (!std::holds_alternative<std::monostate>(node.data)) secrets.push_back(node.dump(r));
+        };
+        walk(walk, *json);
+    } else if (!value.is_null()) secrets.push_back(scalar_text(r, value));
 }
 void exec_control(sqlite3* db, const char* sql) {
     int rc = sqlite3_exec(db, sql, nullptr, nullptr, nullptr);
@@ -75,7 +125,7 @@ const EntityDescriptor& SqliteSession::descriptor(std::string_view name) const {
     for (const auto* entity : descriptors_) if (entity->name == name) return *entity;
     throw std::invalid_argument("Unknown entity");
 }
-void SqliteSession::log(const CompiledQuery& query, SqlLogOperation operation, SqlExecutionOutcome outcome,
+void SqliteSession::log(const CompiledQuery& query, LegacySqlLogOperation operation, SqlExecutionOutcome outcome,
                        std::uint64_t count, Clock::time_point start, std::string_view purpose,
                        std::string_view comment, std::string_view audit) {
     if (!logging_) return;
@@ -84,10 +134,10 @@ void SqliteSession::log(const CompiledQuery& query, SqlLogOperation operation, S
     auto& entry = logs_.back(); entry.sql = query.sql; entry.purpose = purpose; entry.comment = comment; entry.audit_reason = audit;
     Vector<String> secrets(r);
     for (std::size_t i = 0; i < query.params.size(); ++i) {
-        auto p = query.parameter_policies.size() == query.params.size() ? query.parameter_policies[i] : SqlParameterLogPolicy::Unknown;
-        if (p == SqlParameterLogPolicy::Plain || query.params[i].is_null()) entry.params.emplace_back(query.params[i]);
+        auto p = query.log_context.parameter_policies.size() == query.params.size() ? query.log_context.parameter_policies[i] : SqlParameterLogPolicy::Unknown;
+        if ((p == SqlParameterLogPolicy::Plain && !has_credentials(r, query.params[i])) || query.params[i].is_null()) entry.params.emplace_back(query.params[i]);
         else {
-            secrets.push_back(scalar_text(r, query.params[i]));
+            collect_secrets(r, query.params[i], secrets);
             entry.params.emplace_back("[REDACTED]");
         }
     }
@@ -96,19 +146,20 @@ void SqliteSession::log(const CompiledQuery& query, SqlLogOperation operation, S
 }
 void SqliteSession::ensure_schema() {
     for (const auto* entity : descriptors_) {
-        const auto& compiled = SqliteDialect::create_table(context_, *entity); const auto start = Clock::now();
+        const auto& compiled = LegacySqliteCompiler::create_table(context_.memory_resource(), *entity); const auto start = Clock::now();
         try { Statement statement(db_, compiled); int rc = sqlite3_step(statement.stmt); if (rc != SQLITE_DONE) throw SqliteError(rc); }
-        catch (...) { log(compiled, SqlLogOperation::Schema, SqlExecutionOutcome::Failure, 0, start); throw; }
-        log(compiled, SqlLogOperation::Schema, SqlExecutionOutcome::Success, 0, start);
+        catch (...) { log(compiled, LegacySqlLogOperation::Schema, SqlExecutionOutcome::Failure, 0, start); throw; }
+        log(compiled, LegacySqlLogOperation::Schema, SqlExecutionOutcome::Success, 0, start);
     }
 }
 Rows& SqliteSession::query(const SelectQuery& query) {
     auto purpose = intent(query.trace_chain, TraceKind::Purpose);
-    if (blank(purpose) || blank(query.comment_text)) throw std::invalid_argument("Query requires purpose and comment");
+    if (blank(purpose) || (!query.comment_text || blank(*query.comment_text))) throw std::invalid_argument("Query requires purpose and comment");
     auto& entity = descriptor(query.entity);
-    auto slice = query.prepare_for_list();
+    auto prepared = query.prepare_for_list();
+    const auto& slice = *prepared.slice;
     if (*slice.limit > std::uint64_t(INT64_MAX) || slice.offset > std::uint64_t(INT64_MAX)) throw std::overflow_error("SQLite pagination out of range");
-    const auto& compiled = SqliteDialect::select(context_, entity, query, slice);
+    const auto& compiled = LegacySqliteCompiler::select(context_.memory_resource(), entity, prepared);
     auto& rows = context_.make<Rows>(); const auto start = Clock::now();
     try {
         Statement statement(db_, compiled); int rc;
@@ -116,7 +167,7 @@ Rows& SqliteSession::query(const SelectQuery& query) {
             rows.emplace_back(); auto& row = rows.back(); auto r = context_.memory_resource();
             for (int i = 0; i < sqlite3_column_count(statement.stmt); ++i) {
                 auto name = std::string_view(sqlite3_column_name(statement.stmt, i));
-                const auto& property = entity.property_by_name(name); Value value(r);
+                const auto& property = entity.require_property(name); Value value(r);
                 switch (sqlite3_column_type(statement.stmt, i)) {
                 case SQLITE_NULL: break;
                 case SQLITE_INTEGER: {
@@ -134,24 +185,37 @@ Rows& SqliteSession::query(const SelectQuery& query) {
             }
         }
         if (rc != SQLITE_DONE) throw SqliteError(rc);
-    } catch (...) { log(compiled, SqlLogOperation::Select, SqlExecutionOutcome::Failure, rows.size(), start, purpose, query.comment_text); throw; }
-    log(compiled, SqlLogOperation::Select, SqlExecutionOutcome::Success, rows.size(), start, purpose, query.comment_text);
+    } catch (...) { log(compiled, LegacySqlLogOperation::Select, SqlExecutionOutcome::Failure, rows.size(), start, purpose, *query.comment_text); throw; }
+    log(compiled, LegacySqlLogOperation::Select, SqlExecutionOutcome::Success, rows.size(), start, purpose, *query.comment_text);
     return rows;
 }
-std::uint64_t SqliteSession::mutate(MutationKind kind, const MutationCommand& cmd) {
-    auto audit = intent(cmd.trace_chain, TraceKind::AuditReason);
+std::uint64_t SqliteSession::execute(const InsertCommand& command) {
+    return execute_compiled(LegacySqliteCompiler::compile_insert(context_.memory_resource(), descriptor(command.entity), command),
+                            LegacySqlLogOperation::Insert, command.trace_chain, false);
+}
+std::uint64_t SqliteSession::execute(const UpdateCommand& command) {
+    return execute_compiled(LegacySqliteCompiler::compile_update(context_.memory_resource(), descriptor(command.entity), command),
+                            LegacySqlLogOperation::Update, command.trace_chain, command.expected_version_value.has_value());
+}
+std::uint64_t SqliteSession::execute(const DeleteCommand& command) {
+    return execute_compiled(LegacySqliteCompiler::compile_delete(context_.memory_resource(), descriptor(command.entity), command),
+                            LegacySqlLogOperation::Delete, command.trace_chain, command.expected_version_value.has_value());
+}
+std::uint64_t SqliteSession::execute(const RecoverCommand& command) {
+    return execute_compiled(LegacySqliteCompiler::compile_recover(context_.memory_resource(), descriptor(command.entity), command),
+                            LegacySqlLogOperation::Recover, command.trace_chain, true);
+}
+std::uint64_t SqliteSession::execute_compiled(const CompiledQuery& compiled, LegacySqlLogOperation operation,
+                                            const TraceChain& trace, bool check_version) {
+    auto audit = intent(trace, TraceKind::AuditReason);
     if (blank(audit)) throw std::invalid_argument("Mutation requires audit_as");
-    const auto& compiled = SqliteDialect::mutation(context_, descriptor(cmd.entity), kind, cmd);
-    SqlLogOperation operation = SqlLogOperation::Insert;
-    switch (kind) { case MutationKind::Insert: break; case MutationKind::Update: operation = SqlLogOperation::Update; break;
-        case MutationKind::Delete: operation = SqlLogOperation::Delete; break; case MutationKind::Recover: operation = SqlLogOperation::Recover; break; }
     const auto start = Clock::now(); std::uint64_t affected;
     try {
         Statement statement(db_, compiled); int rc = sqlite3_step(statement.stmt); if (rc != SQLITE_DONE) throw SqliteError(rc);
         affected = std::uint64_t(sqlite3_changes64(db_));
     } catch (...) { log(compiled, operation, SqlExecutionOutcome::Failure, 0, start, {}, {}, audit); throw; }
     log(compiled, operation, SqlExecutionOutcome::Success, affected, start, {}, {}, audit);
-    if (kind != MutationKind::Insert && cmd.expected_version_value && affected == 0) throw OptimisticLockError();
+    if (check_version && affected == 0) throw OptimisticLockError();
     return affected;
 }
 void SqliteSession::begin() {

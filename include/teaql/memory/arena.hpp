@@ -15,10 +15,28 @@ struct AllocationStats {
 };
 
 // Owns the complete allocation region. Thread-confined, stable address, no shared ownership.
-class Arena final : public std::pmr::memory_resource {
+class Arena : public std::pmr::memory_resource {
 public:
+    // Intrusive registration: the record and callback target must outlive the
+    // registration. Context-owned operations embed this record. No heap owner.
+    class Quiescence {
+    public:
+        Quiescence() = default;
+        ~Quiescence() { reset(); }
+        Quiescence(const Quiescence&) = delete;
+        Quiescence& operator=(const Quiescence&) = delete;
+        void attach(Arena&, void* object, void (*stop_and_wait)(void*) noexcept);
+        void reset() noexcept;
+    private:
+        friend class Arena;
+        Arena* arena_ = nullptr;
+        Quiescence* previous_ = nullptr;
+        Quiescence* next_ = nullptr;
+        void* object_ = nullptr;
+        void (*stop_and_wait_)(void*) noexcept = nullptr;
+    };
     explicit Arena(std::size_t initial_block_size,
-                   std::pmr::memory_resource* upstream);
+                   std::pmr::memory_resource* upstream, const Arena* parent = nullptr);
     ~Arena() override;
     Arena(const Arena&) = delete;
     Arena& operator=(const Arena&) = delete;
@@ -48,9 +66,18 @@ public:
         return *object;
     }
 
-    // Terminal and idempotent: run all destructors, then return every arena block upstream.
+    // Explicit resource entry for lower-level provider code that receives a
+    // Context arena rather than the application-facing Context wrapper.
+    template<class T, class... Args> T& make_resource(Args&&... args) {
+        return make<T>(std::forward<Args>(args)...);
+    }
+
+    // Terminal and idempotent: quiesce work, run destructors, return every block.
     void close() noexcept;
     bool closed() const noexcept { return closed_; }
+    bool closing() const noexcept { return closing_; }
+    // The explicit child is destroyed before its parent; no shared ownership.
+    bool can_lend_to(const Arena& destination) const noexcept { return this == &destination || destination.parent_ == this; }
     AllocationStats stats() const noexcept { return upstream_.stats; }
 
 private:
@@ -68,7 +95,10 @@ private:
     TrackingResource upstream_;
     std::pmr::monotonic_buffer_resource arena_;
     Cleanup* cleanup_head_ = nullptr;
+    Quiescence* quiescence_head_ = nullptr;
+    bool closing_ = false;
     bool closed_ = false;
+    const Arena* parent_;
     void* do_allocate(std::size_t bytes, std::size_t alignment) override;
     void do_deallocate(void*, std::size_t, std::size_t) override {} // Region reclamation only.
     bool do_is_equal(const std::pmr::memory_resource& other) const noexcept override { return this == &other; }

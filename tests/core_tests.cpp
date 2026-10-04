@@ -23,7 +23,7 @@ int main() {
         entity.property("id", DataType::U64).id();
         entity.property("version", DataType::I64).version();
         entity.property("name", DataType::Text, "display_name");
-        check(entity.property_by_name("name").column_name == "display_name", "column mapping");
+        check(entity.property_by_name("name")->column_name == "display_name", "column mapping");
         check(!entity.audit_mask_fields_declared, "5.0.5 unknown provenance by default");
         entity.mask_fields({}); check(entity.audit_mask_fields_declared, "explicit empty mask declaration");
         check(!Value(r, std::numeric_limits<std::uint64_t>::max()).try_i64(), "u64 overflow");
@@ -45,13 +45,16 @@ int main() {
         check(copied != joined, "AST copy isolation");
         check(copied.args.front().name.get_allocator().resource() == global.memory_resource(), "AST clone allocator");
         auto& query = context->make<SelectQuery>("Order");
-        check(query.prepare_for_list().limit == 10'000, "default hard limit");
+        check(query.prepare_for_list().slice->limit == 10'000, "default hard limit");
         check(!query.slice, "prepare does not mutate source");
         bool rejected = false;
         try { (void)query.limit(10'001).prepare_for_list(); } catch (const std::invalid_argument&) { rejected = true; }
         check(rejected, "hard limit violation");
-        check(query.hard_limit(20'000).prepare_for_list().limit == 10'001, "explicit ceiling");
-        check(query.limit(0).prepare_for_list().limit == 0, "zero limit preserved");
+        check(query.hard_limit(20'000).prepare_for_list().slice->limit == 10'001, "explicit ceiling");
+        check(query.limit(0).prepare_for_list().slice->limit == 0, "zero limit preserved");
+        rejected = false;
+        try { query.hard_limit(0); } catch (const std::invalid_argument&) { rejected = true; }
+        check(rejected && query.hard_limit_value == 20'000, "hard ceiling must be positive without changing previous ceiling");
         auto& update = context->make<UpdateCommand>("Order", 1u);
         update.expected_version(3).value("name", "new").audit_as("correct name");
         check(update.expected_version_value == 3, "expected version");

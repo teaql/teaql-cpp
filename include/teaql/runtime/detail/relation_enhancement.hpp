@@ -1,0 +1,98 @@
+#pragma once
+#include <teaql/runtime/detail/relation_hydration.hpp>
+namespace teaql::detail {
+Value default_aggregate_value(Memory,bool single);
+void attach_empty_relation_aggregate(std::span<CompactRow>,std::string_view alias,bool single);
+void attach_relation_aggregate_rows(std::span<CompactRow>,const RelationLoadPlan&,const RelationAggregate&,Vector<CompactRow>);
+void attach_object_group_rows(std::span<CompactRow>,const ObjectGroupBy&,std::span<const CompactRow>);
+void attach_child_query_rows(std::span<CompactRow>,std::span<const CompactRow>);
+
+// Parent rows are stable, same-Context borrows, as in relation hydration. Query
+// inputs are snapshots; the fetch callback keeps the entity-runtime boundary.
+template<class E> class RelationAggregateOperation {
+    using R=RelationHydrationResult<E>;
+public:
+    using allocator_type=Allocator;
+    RelationAggregateOperation(std::allocator_arg_t,Allocator a,const EntityDataService<E>& service,
+        std::span<CompactRow> parents,std::span<const RelationAggregate> aggregates,std::optional<AggregationCacheOptions> cache,
+        std::span<const TraceNode> trace,const EntityRelationFetch<E>& fetch)
+        :service_(std::allocator_arg,a,service),parents_(parents),aggregates_(aggregates.begin(),aggregates.end(),a.resource()),cache_(cache),trace_(trace.begin(),trace.end(),a.resource()),fetch_(std::allocator_arg,a,fetch){validate_relation_domain(context(),parents);}
+    std::optional<R> poll(WakeSignal& wake){
+        auto r=service_.memory_resource();while(index_<aggregates_.size()){
+            const auto& aggregate=aggregates_[index_];
+            if(!child_){
+                RelationLoad load(std::allocator_arg,Allocator(r),aggregate.relation_name,aggregate.query);
+                auto plans=build_relation_plans_from_loads(context(),service_.entity(),std::span<const RelationLoad>(&load,1));
+                if(!plans)return R::err(r,DataServiceError<typename E::Error>::runtime(r,std::move(plans).error()));
+                if(plans.value().empty())return R::err(r,DataServiceError<typename E::Error>::runtime(r,RuntimeError::missing_relation(r,service_.entity(),aggregate.relation_name)));
+                plan_.emplace(std::move(plans.value().front()));
+                Vector<Value> ids(r);for(const auto& parent:parents_)if(auto* id=parent.get(plan_->local_key))ids.emplace_back(*id);
+                if(ids.empty()){attach_empty_relation_aggregate(parents_,aggregate.alias,aggregate.single_result);plan_.reset();++index_;continue;}
+                auto query=clone_in(r,aggregate.query);query.entity=plan_->target_entity;
+                if(!query.aggregation_cache && cache_ && cache_->propagate)query.aggregation_cache=AggregationCacheOptions{.cache_expired_millis=cache_->propagate_cache_expired_millis};
+                query.projection.clear();query.expr_projection.clear();query.order_by.clear();query.slice.reset();query.relations.clear();
+                if(query.aggregates.empty())query.aggregates.emplace_back(Aggregate::count(r,aggregate.single_result?std::string_view(aggregate.alias):"count"));
+                if(std::find(query.group_by_fields.begin(),query.group_by_fields.end(),plan_->foreign_key)==query.group_by_fields.end())query.group_by(plan_->foreign_key);
+                query.and_filter(Expr::in_list(r,plan_->foreign_key,ids));
+                auto& repo=context().template make<EntityDataService<E>>(EntityDataServiceAccess::relation_child(service_,*plan_));
+                TraceChain trace(trace_,r);trace.emplace_back(TraceKind::Relation,query.entity,aggregate.alias);repo.with_trace_context(trace);
+                auto& child=fetch_(repo,std::move(query));if(child.memory_resource()!=r)throw std::invalid_argument("Relation aggregate result must belong to its query Context");child_=&child;
+            }
+            forwarding_.attach(child_->wake_signal(),wake);auto* result=child_->poll();if(!result)return {};
+            if(!*result)return R::err(r,clone_in(r,result->error()));
+            Vector<CompactRow> rows(result->value(),r);
+            // Metadata is resolved after the asynchronous fetch, like the source.
+            if(auto* entity=context().entity(plan_->target_entity))if(auto* property=entity->property_by_name(plan_->foreign_key);property && property->column_name!=plan_->foreign_key)
+                for(auto& row:rows)if(!row.contains_key(plan_->foreign_key))if(auto value=row.remove(property->column_name))row.insert(plan_->foreign_key,*value);
+            attach_relation_aggregate_rows(parents_,*plan_,aggregate,std::move(rows));forwarding_.reset();child_=nullptr;plan_.reset();++index_;
+        }return R::ok(r,{});
+    }
+    void finish_and_wait()noexcept{forwarding_.reset();child_=nullptr;}
+    void cancel_and_wait()noexcept{forwarding_.reset();if(child_){child_->cancel();child_=nullptr;}}
+private:
+    const UserContext& context()const{return EntityDataServiceAccess::context_service(service_).metadata.context();}
+    EntityDataService<E> service_;std::span<CompactRow> parents_;Vector<RelationAggregate> aggregates_;std::optional<AggregationCacheOptions> cache_;TraceChain trace_;EntityRelationFetch<E> fetch_;
+    std::optional<RelationLoadPlan> plan_;std::size_t index_=0;AsyncOperation<RelationRowsResult<E>>* child_=nullptr;WakeSignal::Forward forwarding_;
+};
+
+template<class E,class Enhancement> class RowQueryEnhancementOperation {
+    using R=RelationHydrationResult<E>;
+    static constexpr bool ObjectGroup=std::same_as<Enhancement,ObjectGroupBy>;
+public:
+    using allocator_type=Allocator;
+    RowQueryEnhancementOperation(std::allocator_arg_t,Allocator a,const EntityDataService<E>& service,std::span<CompactRow> parents,
+        std::span<const Enhancement> enhancements,std::span<const TraceNode> trace,const EntityRelationFetch<E>& fetch)
+        :service_(std::allocator_arg,a,service),parents_(parents),enhancements_(enhancements.begin(),enhancements.end(),a.resource()),trace_(trace.begin(),trace.end(),a.resource()),fetch_(std::allocator_arg,a,fetch){validate_relation_domain(EntityDataServiceAccess::context_service(service_).metadata.context(),parents);}
+    std::optional<R> poll(WakeSignal& wake){
+        auto r=service_.memory_resource();while(index_<enhancements_.size()){
+            const auto& enhancement=enhancements_[index_];
+            if(!child_){
+                std::string_view field="id";if constexpr(ObjectGroup)field=enhancement.storage_field;
+                Vector<Value> ids(r);for(const auto& row:parents_)if(auto* value=row.get(field))ids.emplace_back(*value);
+                if(ids.empty()){++index_;continue;}
+                auto query=[&]{if constexpr(ObjectGroup)return clone_in(r,enhancement.query);else return clone_in(r,enhancement);}();
+                if(!query.projection.empty() && std::find(query.projection.begin(),query.projection.end(),"id")==query.projection.end())query.project("id");
+                query.and_filter(Expr::in_list(r,"id",ids));
+                auto& context=EntityDataServiceAccess::context_service(service_).metadata.context();
+                auto& repo=context.template make<EntityDataService<E>>(EntityDataServiceAccess::scoped(service_,query.entity));repo.with_trace_context(trace_);
+                auto& child=fetch_(repo,std::move(query));if(child.memory_resource()!=r)throw std::invalid_argument("Row enhancement result must belong to its query Context");child_=&child;
+            }
+            forwarding_.attach(child_->wake_signal(),wake);auto* result=child_->poll();if(!result)return {};
+            if(!*result)return R::err(r,clone_in(r,result->error()));
+            if constexpr(ObjectGroup)attach_object_group_rows(parents_,enhancement,result->value());else attach_child_query_rows(parents_,result->value());
+            forwarding_.reset();child_=nullptr;++index_;
+        }return R::ok(r,{});
+    }
+    void finish_and_wait()noexcept{forwarding_.reset();child_=nullptr;}
+    void cancel_and_wait()noexcept{forwarding_.reset();if(child_){child_->cancel();child_=nullptr;}}
+private:
+    EntityDataService<E> service_;std::span<CompactRow> parents_;Vector<Enhancement> enhancements_;TraceChain trace_;EntityRelationFetch<E> fetch_;
+    std::size_t index_=0;AsyncOperation<RelationRowsResult<E>>* child_=nullptr;WakeSignal::Forward forwarding_;
+};
+template<class E> auto& enhance_relation_aggregates(const EntityDataService<E>& service,std::span<CompactRow> rows,std::span<const RelationAggregate> aggregates,
+    std::optional<AggregationCacheOptions> cache,std::span<const TraceNode> trace,const EntityRelationFetch<E>& fetch){return make_operation<RelationHydrationResult<E>,RelationAggregateOperation<E>>(service.memory_resource(),service,rows,aggregates,cache,trace,fetch);}
+template<class E> auto& enhance_object_group_bys(const EntityDataService<E>& service,std::span<CompactRow> rows,std::span<const ObjectGroupBy> groups,
+    std::span<const TraceNode> trace,const EntityRelationFetch<E>& fetch){return make_operation<RelationHydrationResult<E>,RowQueryEnhancementOperation<E,ObjectGroupBy>>(service.memory_resource(),service,rows,groups,trace,fetch);}
+template<class E> auto& enhance_child_queries(const EntityDataService<E>& service,std::span<CompactRow> rows,std::span<const SelectQuery> queries,
+    std::span<const TraceNode> trace,const EntityRelationFetch<E>& fetch){return make_operation<RelationHydrationResult<E>,RowQueryEnhancementOperation<E,SelectQuery>>(service.memory_resource(),service,rows,queries,trace,fetch);}
+}
