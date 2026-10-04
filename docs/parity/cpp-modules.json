@@ -582,10 +582,10 @@
         "teaql-runtime/src/data_service/resolved.rs",
         "teaql-runtime/src/data_service/helpers.rs"
       ],
-      "cpp_target": "include/teaql/runtime/data_service.hpp; include/teaql/runtime/detail/data_service.hpp; src/runtime/data_service.cpp",
+      "cpp_target": "include/teaql/runtime/data_service.hpp; include/teaql/runtime/detail/data_service.hpp; src/runtime/data_service.cpp; include/teaql/runtime/detail/query_keys.hpp; src/runtime/query_keys.cpp",
       "stage": 4,
       "status": "partial",
-      "contract": "Keep EntityDataService/ContextDataService/RuntimeDataService/UserContextMetadata separate. Context binding, command factories, behavior/policy/bootstrap preparation, and private query intent exist. Basic adapters have 256 source comparisons and SQLite/asynchronous lifetime tests. Context query observation preserves two scope layers, Noop, and lazy comment resolution, with 468 original-method observations and native wake/stop/close tests. Complete entity queries/pagination/cache, insert checkers, and mutations remain pending; basic entity decoding is not relation hydration. Aggregate defaults and grouped/scalar attachment helpers have 266 enhancement comparisons; other helpers remain unproven.",
+      "contract": "Keep EntityDataService/ContextDataService/RuntimeDataService/UserContextMetadata separate. Context binding, command factories, behavior/policy/bootstrap preparation, and private query intent exist. Basic adapters have 256 source comparisons and SQLite/asynchronous lifetime tests. Context query observation preserves two scope layers, Noop, and lazy comment resolution, with 468 original-method observations and native wake/stop/close tests. Complete entity queries/pagination/cache, insert checkers, and mutations remain pending; basic entity decoding is not relation hydration. Aggregate defaults and grouped/scalar attachment helpers have 266 enhancement comparisons; other helpers remain unproven. Canonical aggregation keys and continuous/ID-set pagination keys have 451 original-method observations, including recursive Debug shapes, stable predicate/list deduplication, distinct normalization, and identity hashing. Inputs remain unchanged and explicit Global copies survive User close. These pure helpers do not yet establish full cache/pagination orchestration or active-root integration.",
       "evidence": [
         "include/teaql/runtime/data_service.hpp",
         "include/teaql/runtime/detail/data_service.hpp",
@@ -604,7 +604,17 @@
         "tests/parity/context_query_cases.json",
         "tests/parity/rust-values/src/bin/context_query_oracle.rs",
         "src/runtime/relation_enhancement.cpp",
-        "tests/parity/relation_enhancement_cases.json"
+        "tests/parity/relation_enhancement_cases.json",
+        "include/teaql/core/detail/query_debug.hpp",
+        "src/core/query_debug.cpp",
+        "include/teaql/runtime/detail/query_keys.hpp",
+        "src/runtime/query_keys.cpp",
+        "tests/query_keys_tests.cpp",
+        "tests/parity/query_keys_probe.cpp",
+        "tests/parity/query_keys_cases.json",
+        "tests/parity/compare_query_keys.py",
+        "tests/parity/observe_query_keys.py",
+        "tests/parity/rust-values/src/bin/query_keys_oracle.rs"
       ]
     },
     {
@@ -655,7 +665,7 @@
       "cpp_target": "include/teaql/runtime/cache.hpp; include/teaql/runtime/pagination.hpp; include/teaql/runtime/system_time.hpp; src/runtime/query_stores.cpp; src/runtime/context_pagination.cpp; include/teaql/runtime/detail/id_set_build_lock.hpp; src/runtime/id_set_build_lock.cpp",
       "stage": 4,
       "status": "partial",
-      "contract": "Independent aggregation-cache/cursor/ID-set interfaces, in-memory stores, complete cursor/retained-ID models, and Context registration/observation have 259 source comparisons and native asynchronous/domain tests for age/expiry/capacity/bytes/replacement/invalidation/cancellation. Data explicitly copies into store/result domains; SystemTime retains signed seconds/nanoseconds. Owner-thread rules do not establish Rust Mutex cross-thread/poisoning equivalence; equal-deadline HashMap ties remain unspecified. Explicit Global directories and User leases/guards provide same-key coordination, with 144 original-registry/actual-mutex comparisons for identity/waiting/wake/cancellation transfer/non-FIFO slot reuse; native close joins work before guard release. Connect these primitives to miss/recheck/build, canonical keys, and complete entity cache/pagination execution. No external cache component is added.",
+      "contract": "Independent aggregation-cache/cursor/ID-set interfaces, in-memory stores, complete cursor/retained-ID models, and Context registration/observation have 259 source comparisons and native asynchronous/domain tests for age/expiry/capacity/bytes/replacement/invalidation/cancellation. Data explicitly copies into store/result domains; SystemTime retains signed seconds/nanoseconds. Owner-thread rules do not establish Rust Mutex cross-thread/poisoning equivalence; equal-deadline HashMap ties remain unspecified. Explicit Global directories and User leases/guards provide same-key coordination, with 144 original-registry/actual-mutex comparisons for identity/waiting/wake/cancellation transfer/non-FIFO slot reuse; native close joins work before guard release. Pure canonical/pagination keys have separate differential evidence; connect these primitives to miss/recheck/build and complete entity cache/pagination execution. No external cache component is added.",
       "evidence": [
         "include/teaql/runtime/cache.hpp",
         "include/teaql/runtime/pagination.hpp",

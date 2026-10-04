@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(teaql_cpp VERSION 0.1.0 LANGUAGES CXX)
 
-add_library(teaql_core src/core/debug.cpp src/core/core.cpp src/core/business_id.cpp src/core/web.cpp src/core/xls.cpp src/core/entity.cpp src/core/list.cpp src/core/number_text.cpp src/core/request.cpp src/core/dynamic_search.cpp src/core/value.cpp src/core/decimal.cpp src/core/decimal_arithmetic.cpp src/core/json.cpp src/core/time.cpp src/core/row.cpp src/core/expr.cpp src/core/query.cpp)
+add_library(teaql_core src/core/query_debug.cpp src/core/debug.cpp src/core/core.cpp src/core/business_id.cpp src/core/web.cpp src/core/xls.cpp src/core/entity.cpp src/core/list.cpp src/core/number_text.cpp src/core/request.cpp src/core/dynamic_search.cpp src/core/value.cpp src/core/decimal.cpp src/core/decimal_arithmetic.cpp src/core/json.cpp src/core/time.cpp src/core/row.cpp src/core/expr.cpp src/core/query.cpp)
 add_library(teaql::core ALIAS teaql_core)
 target_compile_features(teaql_core PUBLIC cxx_std_20)
 target_include_directories(teaql_core PUBLIC
@@ -43,7 +43,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(teaql_provider_sqlite PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
-add_library(teaql_runtime src/runtime/id_set_build_lock.cpp src/runtime/query_stores.cpp src/runtime/context_pagination.cpp src/runtime/relation_enhancement.cpp src/runtime/relation_installation.cpp src/runtime/relation.cpp src/runtime/data_service.cpp src/runtime/entity_graph_decoder.cpp src/runtime/context_entity.cpp src/runtime/entity_runtime.cpp src/runtime/graph.cpp src/runtime/context_graph.cpp src/runtime/context_event.cpp src/runtime/telemetry.cpp src/runtime/context_logging.cpp src/runtime/log_manager.cpp src/runtime/log_formatter.cpp src/runtime/logging.cpp src/runtime/entity_key.cpp src/runtime/event.cpp src/runtime/audit_privacy.cpp src/runtime/schema.cpp src/runtime/id.cpp src/runtime/business_clock.cpp src/runtime/business_service.cpp src/runtime/business_id.cpp src/runtime/registry.cpp src/runtime/check_result.cpp src/runtime/error.cpp src/runtime/sqlite.cpp src/runtime/legacy_sqlite_compiler.cpp)
+add_library(teaql_runtime src/runtime/query_keys.cpp src/runtime/id_set_build_lock.cpp src/runtime/query_stores.cpp src/runtime/context_pagination.cpp src/runtime/relation_enhancement.cpp src/runtime/relation_installation.cpp src/runtime/relation.cpp src/runtime/data_service.cpp src/runtime/entity_graph_decoder.cpp src/runtime/context_entity.cpp src/runtime/entity_runtime.cpp src/runtime/graph.cpp src/runtime/context_graph.cpp src/runtime/context_event.cpp src/runtime/telemetry.cpp src/runtime/context_logging.cpp src/runtime/log_manager.cpp src/runtime/log_formatter.cpp src/runtime/logging.cpp src/runtime/entity_key.cpp src/runtime/event.cpp src/runtime/audit_privacy.cpp src/runtime/schema.cpp src/runtime/id.cpp src/runtime/business_clock.cpp src/runtime/business_service.cpp src/runtime/business_id.cpp src/runtime/registry.cpp src/runtime/check_result.cpp src/runtime/error.cpp src/runtime/sqlite.cpp src/runtime/legacy_sqlite_compiler.cpp)
 add_library(teaql::runtime ALIAS teaql_runtime)
 target_link_libraries(teaql_runtime PUBLIC teaql::sql PRIVATE SQLite::SQLite3)
 # Provider implements runtime ID/schema SPIs, as in the pinned Rust provider.
@@ -82,6 +82,11 @@ if(BUILD_TESTING)
     target_link_libraries(teaql_context_query_probe PRIVATE teaql::runtime)
     add_executable(teaql_relation_execution_probe tests/parity/relation_execution_probe.cpp)
     target_link_libraries(teaql_relation_execution_probe PRIVATE teaql::runtime)
+    add_executable(teaql_query_keys_probe tests/parity/query_keys_probe.cpp)
+    target_link_libraries(teaql_query_keys_probe PRIVATE teaql::runtime)
+    add_executable(teaql_query_keys_tests tests/query_keys_tests.cpp)
+    target_link_libraries(teaql_query_keys_tests PRIVATE teaql::runtime)
+    add_test(NAME query_keys_contracts COMMAND teaql_query_keys_tests)
     add_executable(teaql_id_set_build_probe tests/parity/id_set_build_probe.cpp)
     target_link_libraries(teaql_id_set_build_probe PRIVATE teaql::runtime)
     add_executable(teaql_id_set_build_tests tests/id_set_build_tests.cpp)
@@ -324,6 +329,8 @@ if(BUILD_TESTING)
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_context_query.py --cpp $<TARGET_FILE:teaql_context_query_probe>)
     add_test(NAME relation_execution_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_relation_execution.py --cpp $<TARGET_FILE:teaql_relation_execution_probe>)
+    add_test(NAME query_keys_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_query_keys.py --cpp $<TARGET_FILE:teaql_query_keys_probe>)
     add_test(NAME id_set_build_rust_parity COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_id_set_build.py --cpp $<TARGET_FILE:teaql_id_set_build_probe>)
     add_test(NAME query_store_rust_parity COMMAND ${Python3_EXECUTABLE}

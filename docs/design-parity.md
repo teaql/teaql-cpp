@@ -292,4 +292,38 @@ Memory stores return lazy operations; unpolled canceled writes have no effect. R
 
 259 comparisons compile original storage/observation code with private capacity/age bridges. Native tests cover domains/default isolation/replacement/outstanding work/finish-cancel-close/full deadlines. Same-key Registry/Lock/Guard primitives reuse application mutex identity and prune zero-lease entries on the next lookup. Unlock wakes one waiter; cancellation of a notified waiter transfers wake. Slots mirror source reuse without FIFO fairness; new pollers may overtake. 144 scripts compare the original registry/actual locked mutex's identity/readiness/wakes/guard/cancel. Native tests disable default PMR and join work before unlocking/reclamation.
 
-Explicit Global ownership replaces process-static Weak/Arc directories. Separate applications isolate directories. User leases/guards/waits do not own directory memory or escape to longer domains. Reset requires prior cancellation/guard release; Context close handles dependency-order cleanup. These primitives still need miss→lock→recheck→build integration. Canonical keys, cache hits/write invalidation, and continuous/ID-set query strategies remain pending; stores/locks alone are not complete entity-query acceptance.
+Explicit Global ownership replaces process-static Weak/Arc directories. Separate applications isolate directories. User leases/guards/waits do not own directory memory or escape to longer domains. Reset requires prior cancellation/guard release; Context close handles dependency-order cleanup. These primitives still need miss→lock→recheck→build integration. Canonical key helpers now have separate evidence below. Cache hits/write invalidation and continuous/ID-set query strategies remain pending; stores/locks alone are not complete entity-query acceptance.
+
+
+## Canonical aggregation and pagination query keys
+
+The pinned aggregation key copies and recursively canonicalizes filter/having,
+expression projections, expression order, relation child queries, object groups,
+child enhancements, and subqueries. AND/OR flatten only the same operator, sort
+stably by Rust Debug, and deduplicate adjacent structurally equal expressions.
+IN/NOT IN and their large-set forms sort/deduplicate literal lists by Value Debug.
+NaN remains unequal to itself; equal signed zeros keep the first sorted
+representation. Empty and singleton AND/OR retain their variant. Canonical queries
+remove aggregation cache, comments, trace, stream configuration, and continuous-page
+configuration, while retaining result-affecting fields and ID-set configuration.
+
+Continuous-page keys remove comment/trace and zero only slice offset. ID-set keys
+remove the whole slice, projection/expression projection, relations, child
+and object enhancements, comments/trace, and both pagination options. They retain
+other fields, including stream and aggregation-cache options. Neither path sorts
+predicates. Both hash namespace, exact normalized query Debug, and optional user
+identity; ID-set additionally hashes active root entity and ID when supplied.
+
+451 observations compile the original helper/key methods without rewriting the
+algorithms. They compare complete Debug/canonical text and all three keys, covering
+nested metadata/query fields, every expression/function/aggregate, Value kinds,
+duplicates, NaN, signed zero, Unicode/NUL, hash block boundaries, None/empty identity,
+and root variants. Pagination hashing matches DefaultHasher's SipHash-1-3 and Hash
+framing on the pinned 64-bit little-endian Rust test toolchain; this is a local
+compatibility key, not a portable serialized protocol or cryptographic API.
+
+Inputs are unchanged. Temporary queries, sort keys/indexes, and outputs allocate
+in explicit destination Memory; native tests disable default PMR and read retained
+Global queries/keys after User close. Internal Debug contains query values and is
+not a public log projection. The helpers do not yet integrate entity-level
+cache hit/miss/invalidation, active Context roots, or complete pagination execution.

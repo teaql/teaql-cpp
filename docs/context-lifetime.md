@@ -556,3 +556,20 @@ then can another Context acquire. Guards cannot escape to Global. After release
 and lease reset, the next registry lookup prunes zero-lease entries. Global blocks
 are finally returned together at Global close. This validates coordination;
 cache-miss rereads, ID construction, and fallback query orchestration remain pending.
+
+
+## Query-key temporary and retained data
+
+Canonical query/key helpers take explicit destination Memory. They copy the input
+before normalization; sorting uses domain-owned cached strings and index vectors,
+without a fallback allocation from stable_sort. Every nested subquery, descriptor,
+relation, object group, and child enhancement follows the destination allocator.
+A User source can be closed after an explicit Global result copy. Root/user identity
+views are used only during the synchronous call and are not retained.
+
+Key building does not extend an input's lifetime or create a hidden registry/cache.
+Temporary bytes remain in their selected arena until close, just like other
+monotonic allocations. Query Debug contains values and must remain internal to key
+construction rather than bypassing log privacy projection. Native contracts use
+null default PMR and verify source immutability, recursive Global retention, and
+complete User reclamation.

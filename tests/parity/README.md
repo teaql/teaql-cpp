@@ -1110,3 +1110,35 @@ registry reuse, and all-block reclamation. A suspended native worker holds a gua
 reads User input, and verifies the lock before join; release follows join.
 These contracts accept the coordination primitive only. Cache-miss rereads, ID
 building, and fallback orchestration still need implementation and differential gates.
+
+
+## Canonical aggregation and pagination query keys
+
+`query_keys_cases.json` records 451 actual observations. build.rs extracts the
+original aggregation namespace/key/canonicalization helpers and both pagination
+key methods unchanged. A thin field wrapper supplies optional user/root identity;
+it does not implement the key algorithm. The oracle uses the real core query,
+metadata, Expr, and Value Debug implementations and standard DefaultHasher.
+
+Compare complete query Debug, canonical Debug, aggregation keys, continuous-page
+keys, ID-set keys, and entity namespaces. Cases cover all expression/function/
+aggregate kinds, every Value branch, recursive descriptors/relations/enhancements,
+metadata normalization, stable deduplication including NaN and signed zero,
+Unicode/NUL, hash block boundaries, identity absence/empty strings, and root values.
+Hash framing follows the observed 64-bit little-endian Rust test toolchain;
+process-local pagination keys are not a portable wire protocol.
+
+```sh
+CARGO_TARGET_DIR=/home/philip/shared-cargo-target cargo build --locked --offline \
+  --manifest-path tests/parity/rust-values/Cargo.toml --bin query_keys_oracle
+python3 tests/parity/observe_query_keys.py \
+  --rust /home/philip/shared-cargo-target/debug/query_keys_oracle
+python3 tests/parity/compare_query_keys.py --cpp build/teaql_query_keys_probe \
+  --rust /home/philip/shared-cargo-target/debug/query_keys_oracle
+```
+
+`query_keys_contracts` disables default PMR and checks input immutability, retained
+semantic distinctions, pagination identity boundaries, stable zero/NaN behavior,
+and recursive Global copies after User close. Internal Debug contains values and
+is not a safe logging interface. Pure helper acceptance does not establish
+cache/pagination orchestration or Context active-root integration.

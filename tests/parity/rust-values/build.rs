@@ -67,6 +67,10 @@ fn main(){
     }
     enhancement.push_str("}\n");fs::write(out.join("relation_enhancement.rs"),enhancement).unwrap();
 
+    let helpers=fs::read_to_string(root.join("data_service/helpers.rs")).unwrap();let mut keys=String::new();
+    for (start,end) in [("pub(super) fn aggregation_cache_namespace(","pub(super) fn invalidate_aggregation_cache_namespace("),("pub(super) fn aggregation_cache_key(","pub(super) fn ensure_projection(")]{let start=helpers.find(start).unwrap();let end=start+helpers[start..].find(end).unwrap();keys.push_str(&helpers[start..end]);}
+    let path=root.join("data_service/resolved.rs");println!("cargo:rerun-if-changed={}",path.display());let resolved=fs::read_to_string(path).unwrap();let start=resolved.find("    fn continuous_page_query_key(").unwrap();let end=start+resolved[start..].find("    async fn prepare_id_set_page(").unwrap();keys.push_str("impl KeyRepo {\n");keys.push_str(&resolved[start..end]);keys.push_str("}\n");fs::write(out.join("query_keys.rs"),keys).unwrap();
+
     let path=root.join("context/pagination.rs");println!("cargo:rerun-if-changed={}",path.display());let pagination=fs::read_to_string(path).unwrap();
     let end=pagination.find("pub(super) fn id_set_build_lock(").unwrap();fs::write(out.join("query_stores.rs"),&pagination[..end]).unwrap();
     let start=end;let end=start+pagination[start..].find("\nimpl UserContext {").unwrap();
