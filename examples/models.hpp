@@ -4,7 +4,10 @@
 #include <iostream>
 
 namespace example {
-struct Models { std::array<const teaql::EntityDescriptor*, 3> all; };
+struct Models {
+    std::array<const teaql::EntityDescriptor*, 3> all;
+};
+
 inline Models& models(teaql::GlobalContext& global) {
     using namespace teaql;
     auto& order = global.make<EntityDescriptor>("Order");
@@ -26,18 +29,30 @@ inline Models& models(teaql::GlobalContext& global) {
     result.all = {&order, &line, &product};
     return result;
 }
+
 inline const teaql::Value& field(const teaql::Record& row, std::string_view name) {
     auto it = row.find(name);
-    if (it == row.end()) throw std::runtime_error("Missing result field");
+    if (it == row.end())
+        throw std::runtime_error("Missing result field");
     return it->second;
 }
-inline const teaql::String& text(const teaql::Record& row, std::string_view name) { return std::get<teaql::String>(field(row, name).data); }
-inline void require(bool condition, const char* message) { if (!condition) throw std::runtime_error(message); }
+
+inline const teaql::String& text(const teaql::Record& row, std::string_view name) {
+    return std::get<teaql::String>(field(row, name).data);
+}
+
+inline void require(bool condition, const char* message) {
+    if (!condition)
+        throw std::runtime_error(message);
+}
+
 inline void print_logs(const teaql::SqliteSession& session) {
     for (const auto& log : session.sql_logs()) {
         std::cout << "SQL " << log.sql << " | count=" << log.count;
-        if (!log.audit_reason.empty()) std::cout << " | audit=" << log.audit_reason;
-        if (!log.purpose.empty()) std::cout << " | purpose=" << log.purpose;
+        if (!log.audit_reason.empty())
+            std::cout << " | audit=" << log.audit_reason;
+        if (!log.purpose.empty())
+            std::cout << " | purpose=" << log.purpose;
         std::cout << '\n';
     }
 }

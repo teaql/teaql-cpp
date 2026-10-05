@@ -11,8 +11,10 @@ namespace teaql {
 class LegacySqliteCompiler {
 public:
     static CompiledQuery create_table(Memory, const EntityDescriptor&);
-    static CompiledQuery select(Memory, const EntityDescriptor&, const SelectQuery&,
-                                 std::optional<Slice> bounded_slice = {});
+    static CompiledQuery select(Memory,
+                                const EntityDescriptor&,
+                                const SelectQuery&,
+                                std::optional<Slice> bounded_slice = {});
     static CompiledQuery compile_insert(Memory, const EntityDescriptor&, const InsertCommand&);
     static CompiledQuery compile_update(Memory, const EntityDescriptor&, const UpdateCommand&);
     static CompiledQuery compile_delete(Memory, const EntityDescriptor&, const DeleteCommand&);

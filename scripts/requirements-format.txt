@@ -1,0 +1,2 @@
+# Development-only LLVM formatter; never linked into the runtime.
+clang-format==18.1.8

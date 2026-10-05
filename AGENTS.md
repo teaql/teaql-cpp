@@ -2,6 +2,11 @@
 
 - Write project documentation, plans, design contracts, and explanatory material
   in English. Non-English Unicode fixtures remain data for semantic tests.
+- Format handwritten C++ with the pinned clang-format configuration before finishing
+  changes: `python3 scripts/format-cpp.py`, then `python3 scripts/format-cpp.py --check`.
+  Use four-space indentation, readable statement/function blocks, and the repository
+  column limit. Do not hand-compress code. Preserve generated tables excluded by
+  `.clang-format-ignore`; formatting is a development tool, not a runtime dependency.
 
 - Baseline: Rust v5.0.5 at the exact commit in `upstream.lock.json`. The source
   repository's active branch is not the reference. Use `scripts/verify-upstream.py`.

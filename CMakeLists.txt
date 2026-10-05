@@ -66,6 +66,20 @@ if(TEAQL_BUILD_EXAMPLES)
 endif()
 
 include(CTest)
+# Development-only formatting; the runtime does not depend on Python or LLVM.
+find_package(Python3 COMPONENTS Interpreter QUIET)
+if(Python3_Interpreter_FOUND)
+    add_custom_target(format
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/format-cpp.py
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMENT "Format handwritten C++ with pinned clang-format"
+        VERBATIM)
+    add_custom_target(format-check
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/format-cpp.py --check
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMENT "Check handwritten C++ formatting"
+        VERBATIM)
+endif()
 if(BUILD_TESTING)
     add_executable(teaql_sqlite_schema_probe tests/parity/sqlite_schema_probe.cpp)
     target_link_libraries(teaql_sqlite_schema_probe PRIVATE teaql::provider_sqlite SQLite::SQLite3)

@@ -1,39 +1,309 @@
 #include <teaql/sql/executor.hpp>
 #include "fixture_sql.hpp"
 #include <iostream>
-static bool flag(const Json& j,std::string_view k,bool fallback=false){auto p=optional(j,k);return p?std::get<bool>(p->data):fallback;}
-static Json metadata(Memory r,const ExecutionMetadata& m){auto out=detail::model_json(r);detail::model_put(out,"count",m.result_count?Json(r,*m.result_count):Json(r));detail::model_put(out,"outcome",m.sql_log.execution_outcome?Json(r,unsigned(*m.sql_log.execution_outcome)):Json(r));detail::model_put(out,"sql",m.parameterized_query?Json(r,*m.parameterized_query):Json(r));detail::model_put(out,"comment",m.comment?Json(r,*m.comment):Json(r));detail::model_put(out,"debug",m.debug_query?Json(r,*m.debug_query):Json(r));Json::Array params(r),policies(r);for(const auto& v:m.params)params.emplace_back(v.to_json_value(r));for(auto p:m.sql_log.parameter_policies)policies.emplace_back(unsigned(p));detail::model_put(out,"params",params);detail::model_put(out,"policies",policies);return out;}
-struct Schema:SchemaProvider{const EntityDescriptor& e;unsigned mutable lookups=0;explicit Schema(const EntityDescriptor& e):e(e){}const EntityDescriptor* get_entity(std::string_view n) const override{++lookups;return n==e.name?&e:nullptr;}};
-struct Dialect:FixtureDialect{unsigned mutable compiles=0;CompiledQuery compile_select(Memory r,const EntityDescriptor& e,const SelectQuery& q) const override{++compiles;return FixtureDialect::compile_select(r,e,q);}};
-struct Transport:StreamingSqlTransport<String>,SqlTransactionTransport<String>{
-    using allocator_type=Allocator;Memory resource;const Json& input;unsigned streams=0,fetches=0,closed=0;std::size_t size=999;
-    Transport(std::allocator_arg_t,Allocator a,const Json& input):resource(a.resource()),input(input){}
-    static void rows(Memory r,Vector<CompactRow>& rows,std::size_t n){for(std::size_t i=0;i<n;++i){rows.emplace_back();rows.back().insert("id",Value(r,std::uint64_t(i)));}}
-    struct Cursor{using allocator_type=Allocator;Memory r;Transport& owner;std::size_t index=0;bool closed=false;
-        Cursor(std::allocator_arg_t,Allocator a,Transport& owner):r(a.resource()),owner(owner){}
-        std::optional<std::optional<Result<StreamChunk,String>>> poll_next(WakeSignal&){using Item=Result<StreamChunk,String>;auto entries=items(owner.input,"entries");if(index>=entries.size())return std::optional<Item>{};const auto& entry=entries[index++];auto mode=text(field(entry,"mode"));if(mode=="pending")return {};if(mode=="panic")throw std::runtime_error("stream panic");if(mode=="end")return std::optional<Item>{};if(mode=="error")return std::optional<Item>(Item::err(r,String("provider failed",r)));StreamChunk chunk(std::allocator_arg,Allocator(r),integer(field(entry,"index")),flag(entry,"last"));rows(r,chunk.rows,integer(field(entry,"count")));return std::optional<Item>(Item::ok(r,std::move(chunk)));}
-        void finish_and_wait() noexcept{close();}void cancel_and_wait() noexcept{close();}void close() noexcept{if(!closed){closed=true;++owner.closed;}}
-    };
-    struct Fetch{using allocator_type=Allocator;Memory r;Transport& owner;bool counted=false;
-        Fetch(std::allocator_arg_t,Allocator a,Transport& owner):r(a.resource()),owner(owner){}
-        std::optional<Result<Rows,String>> poll(WakeSignal&){if(!counted){++owner.fetches;counted=true;}auto mode=optional(owner.input,"fetch_mode")?text(field(owner.input,"fetch_mode")):"success";if(mode=="pending")return {};if(mode=="panic")throw std::runtime_error("fetch panic");if(mode=="error")return Result<Rows,String>::err(r,String("provider failed",r));Rows out(r);rows(r,out,integer(field(owner.input,"rows")));return Result<Rows,String>::ok(r,std::move(out));}
-        void finish_and_wait() noexcept{}void cancel_and_wait() noexcept{}
-    };
-    template<class T>struct Ready{using allocator_type=Allocator;T result;Ready(std::allocator_arg_t,Allocator a,T result):result(detail::move_in(a.resource(),std::move(result))){}std::optional<T> poll(WakeSignal&){return std::move(result);}void finish_and_wait() noexcept{}void cancel_and_wait() noexcept{}};
-    struct Tx:SqlTransportTransaction<String>{using allocator_type=Allocator;Transport& owner;Tx(std::allocator_arg_t,Allocator a,Transport& owner):SqlTransportTransaction<String>(a.resource()),owner(owner){}
-        DataServiceOperationResult<Rows,String>& fetch_all_compact_sql_transaction(Memory r,const CompiledQuery& q) override{return owner.fetch_all_compact_sql(r,q);}DataServiceOperationResult<std::uint64_t,String>& execute_sql_transaction(Memory r,const CompiledQuery& q) override{return owner.execute_sql(r,q);}
-        DataServiceOperationResult<std::monostate,String>& commit_sql_transaction(Memory r) override{using R=Result<std::monostate,String>;return make_operation<R,Ready<R>>(r,R::ok(r,std::monostate{}));}DataServiceOperationResult<std::monostate,String>& rollback_sql_transaction(Memory r) override{return commit_sql_transaction(r);}
-    };
-    QueryStream<String>& stream_sql(Memory r,CompiledQuery,std::size_t chunk_size) override{++streams;size=chunk_size;return make_stream<Result<StreamChunk,String>,Cursor>(r,*this);}
-    DataServiceOperationResult<Rows,String>& fetch_all_compact_sql(Memory r,const CompiledQuery&) override{return make_operation<Result<Rows,String>,Fetch>(r,*this);}
-    DataServiceOperationResult<std::uint64_t,String>& execute_sql(Memory,const CompiledQuery&) override{throw std::logic_error("unused stream fixture");}
-    DataServiceOperationResult<SqlTransactionHandle<String>,String>& begin_sql(Memory r) override{auto& tx=detail::async_arena(r).make<Tx>(*this);using R=Result<SqlTransactionHandle<String>,String>;return make_operation<R,Ready<R>>(r,R::ok(r,SqlTransactionHandle<String>(std::allocator_arg,Allocator(r),tx)));}
-};
-static Json evaluate(UserContext& user,const Json& j){auto r=user.memory_resource();auto e=entity(r,field(j,"entity"));auto& d=user.make_resource<Dialect>();auto& schema=user.make_resource<Schema>(e);auto& t=user.make<Transport>(j);auto& cache=user.make<SqlExecutorState>();auto& executor=user.make<SqlDataServiceExecutor<String,Transport>>(d,t,schema,cache);StreamQueryExecutor<SqlExecutorError<String>>* active=&executor;if(flag(j,"transaction"))active=&dynamic_cast<StreamQueryExecutor<SqlExecutorError<String>>&>(executor.begin(r).wait().value().get());
-    auto q=query(r,field(j,"query"));q.entity=optional(j,"query_entity")?text(field(j,"query_entity")):std::string_view(e.name);QueryRequest req(std::allocator_arg,Allocator(r),q,true,flag(j,"metadata",true));req.comment.emplace("request comment",r);auto& events=user.make<Json::Array>();auto observer=ExecutionObserver(std::allocator_arg,Allocator(r),[&](ExecutionMetadata m){auto out=metadata(r,m);detail::model_put(out,"closed",t.closed);events.emplace_back(std::move(out));if(flag(j,"sink_panic"))throw 1;});
-    auto& stream=flag(j,"observe",true)?active->query_stream_observed(r,std::move(req),integer(field(j,"size")),observer):active->query_stream(r,std::move(req),integer(field(j,"size")));
-    auto out=detail::model_json(r);detail::model_put(out,"compiles_before",d.compiles);detail::model_put(out,"lookups_before",schema.lookups);detail::model_put(out,"streams_before",t.streams);Json::Array polls(r);
-    for(std::size_t i=0;i<integer(field(j,"polls"));++i){try{auto next=stream.poll_next();auto item=detail::model_json(r);using Kind=StreamPoll<Result<StreamChunk,SqlExecutorError<String>>>::Kind;if(next.kind==Kind::Pending)detail::model_put(item,"pending",true);else if(next.kind==Kind::End){detail::model_put(item,"end",true);polls.emplace_back(std::move(item));break;}else if(!*next.item)detail::model_put(item,"error",next.item->error().to_string(r));else{const auto& chunk=next.item->value();detail::model_put(item,"count",chunk.rows.size());detail::model_put(item,"index",chunk.chunk_index);detail::model_put(item,"last",chunk.is_last);Json::Array rows(r);for(const auto& row:chunk.rows)rows.emplace_back(compact_row_to_json_value(r,row));detail::model_put(item,"rows",rows);}polls.emplace_back(std::move(item));}catch(const std::exception&){auto item=detail::model_json(r);detail::model_put(item,"panic",true);polls.emplace_back(std::move(item));break;}}
-    detail::model_put(out,"events_before_drop",events.size());stream.cancel();detail::model_put(out,"events",events);detail::model_put(out,"polls",polls);detail::model_put(out,"compiles",d.compiles);detail::model_put(out,"lookups",schema.lookups);detail::model_put(out,"fetches",t.fetches);detail::model_put(out,"streams",t.streams);detail::model_put(out,"closed",t.closed);detail::model_put(out,"size",t.size);return out;
+
+static bool flag(const Json& j, std::string_view k, bool fallback = false) {
+    auto p = optional(j, k);
+    return p ? std::get<bool>(p->data) : fallback;
 }
-int main(){GlobalContext global;std::string line;while(std::getline(std::cin,line)){auto user=global.make_user_context();auto j=Json::parse(user->memory_resource(),line);if(!j)throw std::runtime_error("bad input");std::cout<<evaluate(*user,*j).dump(user->memory_resource())<<'\n';}}
+
+static Json metadata(Memory r, const ExecutionMetadata& m) {
+    auto out = detail::model_json(r);
+    detail::model_put(out, "count", m.result_count ? Json(r, *m.result_count) : Json(r));
+    detail::model_put(out,
+                      "outcome",
+                      m.sql_log.execution_outcome ? Json(r, unsigned(*m.sql_log.execution_outcome))
+                                                  : Json(r));
+    detail::model_put(
+        out, "sql", m.parameterized_query ? Json(r, *m.parameterized_query) : Json(r));
+    detail::model_put(out, "comment", m.comment ? Json(r, *m.comment) : Json(r));
+    detail::model_put(out, "debug", m.debug_query ? Json(r, *m.debug_query) : Json(r));
+    Json::Array params(r), policies(r);
+    for (const auto& v : m.params)
+        params.emplace_back(v.to_json_value(r));
+    for (auto p : m.sql_log.parameter_policies)
+        policies.emplace_back(unsigned(p));
+    detail::model_put(out, "params", params);
+    detail::model_put(out, "policies", policies);
+    return out;
+}
+
+struct Schema : SchemaProvider {
+    const EntityDescriptor& e;
+    unsigned mutable lookups = 0;
+
+    explicit Schema(const EntityDescriptor& e) : e(e) {}
+
+    const EntityDescriptor* get_entity(std::string_view n) const override {
+        ++lookups;
+        return n == e.name ? &e : nullptr;
+    }
+};
+
+struct Dialect : FixtureDialect {
+    unsigned mutable compiles = 0;
+
+    CompiledQuery
+    compile_select(Memory r, const EntityDescriptor& e, const SelectQuery& q) const override {
+        ++compiles;
+        return FixtureDialect::compile_select(r, e, q);
+    }
+};
+
+struct Transport : StreamingSqlTransport<String>, SqlTransactionTransport<String> {
+    using allocator_type = Allocator;
+    Memory resource;
+    const Json& input;
+    unsigned streams = 0, fetches = 0, closed = 0;
+    std::size_t size = 999;
+
+    Transport(std::allocator_arg_t, Allocator a, const Json& input)
+        : resource(a.resource()), input(input) {}
+
+    static void rows(Memory r, Vector<CompactRow>& rows, std::size_t n) {
+        for (std::size_t i = 0; i < n; ++i) {
+            rows.emplace_back();
+            rows.back().insert("id", Value(r, std::uint64_t(i)));
+        }
+    }
+
+    struct Cursor {
+        using allocator_type = Allocator;
+        Memory r;
+        Transport& owner;
+        std::size_t index = 0;
+        bool closed = false;
+
+        Cursor(std::allocator_arg_t, Allocator a, Transport& owner)
+            : r(a.resource()), owner(owner) {}
+
+        std::optional<std::optional<Result<StreamChunk, String>>> poll_next(WakeSignal&) {
+            using Item = Result<StreamChunk, String>;
+            auto entries = items(owner.input, "entries");
+            if (index >= entries.size())
+                return std::optional<Item>{};
+            const auto& entry = entries[index++];
+            auto mode = text(field(entry, "mode"));
+            if (mode == "pending")
+                return {};
+            if (mode == "panic")
+                throw std::runtime_error("stream panic");
+            if (mode == "end")
+                return std::optional<Item>{};
+            if (mode == "error")
+                return std::optional<Item>(Item::err(r, String("provider failed", r)));
+            StreamChunk chunk(std::allocator_arg,
+                              Allocator(r),
+                              integer(field(entry, "index")),
+                              flag(entry, "last"));
+            rows(r, chunk.rows, integer(field(entry, "count")));
+            return std::optional<Item>(Item::ok(r, std::move(chunk)));
+        }
+
+        void finish_and_wait() noexcept {
+            close();
+        }
+
+        void cancel_and_wait() noexcept {
+            close();
+        }
+
+        void close() noexcept {
+            if (!closed) {
+                closed = true;
+                ++owner.closed;
+            }
+        }
+    };
+
+    struct Fetch {
+        using allocator_type = Allocator;
+        Memory r;
+        Transport& owner;
+        bool counted = false;
+
+        Fetch(std::allocator_arg_t, Allocator a, Transport& owner)
+            : r(a.resource()), owner(owner) {}
+
+        std::optional<Result<Rows, String>> poll(WakeSignal&) {
+            if (!counted) {
+                ++owner.fetches;
+                counted = true;
+            }
+            auto mode = optional(owner.input, "fetch_mode") ? text(field(owner.input, "fetch_mode"))
+                                                            : "success";
+            if (mode == "pending")
+                return {};
+            if (mode == "panic")
+                throw std::runtime_error("fetch panic");
+            if (mode == "error")
+                return Result<Rows, String>::err(r, String("provider failed", r));
+            Rows out(r);
+            rows(r, out, integer(field(owner.input, "rows")));
+            return Result<Rows, String>::ok(r, std::move(out));
+        }
+
+        void finish_and_wait() noexcept {}
+
+        void cancel_and_wait() noexcept {}
+    };
+
+    template <class T>
+    struct Ready {
+        using allocator_type = Allocator;
+        T result;
+
+        Ready(std::allocator_arg_t, Allocator a, T result)
+            : result(detail::move_in(a.resource(), std::move(result))) {}
+
+        std::optional<T> poll(WakeSignal&) {
+            return std::move(result);
+        }
+
+        void finish_and_wait() noexcept {}
+
+        void cancel_and_wait() noexcept {}
+    };
+
+    struct Tx : SqlTransportTransaction<String> {
+        using allocator_type = Allocator;
+        Transport& owner;
+
+        Tx(std::allocator_arg_t, Allocator a, Transport& owner)
+            : SqlTransportTransaction<String>(a.resource()), owner(owner) {}
+
+        DataServiceOperationResult<Rows, String>&
+        fetch_all_compact_sql_transaction(Memory r, const CompiledQuery& q) override {
+            return owner.fetch_all_compact_sql(r, q);
+        }
+
+        DataServiceOperationResult<std::uint64_t, String>&
+        execute_sql_transaction(Memory r, const CompiledQuery& q) override {
+            return owner.execute_sql(r, q);
+        }
+
+        DataServiceOperationResult<std::monostate, String>&
+        commit_sql_transaction(Memory r) override {
+            using R = Result<std::monostate, String>;
+            return make_operation<R, Ready<R>>(r, R::ok(r, std::monostate{}));
+        }
+
+        DataServiceOperationResult<std::monostate, String>&
+        rollback_sql_transaction(Memory r) override {
+            return commit_sql_transaction(r);
+        }
+    };
+
+    QueryStream<String>& stream_sql(Memory r, CompiledQuery, std::size_t chunk_size) override {
+        ++streams;
+        size = chunk_size;
+        return make_stream<Result<StreamChunk, String>, Cursor>(r, *this);
+    }
+
+    DataServiceOperationResult<Rows, String>& fetch_all_compact_sql(Memory r,
+                                                                    const CompiledQuery&) override {
+        return make_operation<Result<Rows, String>, Fetch>(r, *this);
+    }
+
+    DataServiceOperationResult<std::uint64_t, String>& execute_sql(Memory,
+                                                                   const CompiledQuery&) override {
+        throw std::logic_error("unused stream fixture");
+    }
+
+    DataServiceOperationResult<SqlTransactionHandle<String>, String>& begin_sql(Memory r) override {
+        auto& tx = detail::async_arena(r).make<Tx>(*this);
+        using R = Result<SqlTransactionHandle<String>, String>;
+        return make_operation<R, Ready<R>>(
+            r, R::ok(r, SqlTransactionHandle<String>(std::allocator_arg, Allocator(r), tx)));
+    }
+};
+
+static Json evaluate(UserContext& user, const Json& j) {
+    auto r = user.memory_resource();
+    auto e = entity(r, field(j, "entity"));
+    auto& d = user.make_resource<Dialect>();
+    auto& schema = user.make_resource<Schema>(e);
+    auto& t = user.make<Transport>(j);
+    auto& cache = user.make<SqlExecutorState>();
+    auto& executor = user.make<SqlDataServiceExecutor<String, Transport>>(d, t, schema, cache);
+    StreamQueryExecutor<SqlExecutorError<String>>* active = &executor;
+    if (flag(j, "transaction"))
+        active = &dynamic_cast<StreamQueryExecutor<SqlExecutorError<String>>&>(
+            executor.begin(r).wait().value().get());
+    auto q = query(r, field(j, "query"));
+    q.entity =
+        optional(j, "query_entity") ? text(field(j, "query_entity")) : std::string_view(e.name);
+    QueryRequest req(std::allocator_arg, Allocator(r), q, true, flag(j, "metadata", true));
+    req.comment.emplace("request comment", r);
+    auto& events = user.make<Json::Array>();
+    auto observer = ExecutionObserver(std::allocator_arg, Allocator(r), [&](ExecutionMetadata m) {
+        auto out = metadata(r, m);
+        detail::model_put(out, "closed", t.closed);
+        events.emplace_back(std::move(out));
+        if (flag(j, "sink_panic"))
+            throw 1;
+    });
+    auto& stream =
+        flag(j, "observe", true)
+            ? active->query_stream_observed(r, std::move(req), integer(field(j, "size")), observer)
+            : active->query_stream(r, std::move(req), integer(field(j, "size")));
+    auto out = detail::model_json(r);
+    detail::model_put(out, "compiles_before", d.compiles);
+    detail::model_put(out, "lookups_before", schema.lookups);
+    detail::model_put(out, "streams_before", t.streams);
+    Json::Array polls(r);
+    for (std::size_t i = 0; i < integer(field(j, "polls")); ++i) {
+        try {
+            auto next = stream.poll_next();
+            auto item = detail::model_json(r);
+            using Kind = StreamPoll<Result<StreamChunk, SqlExecutorError<String>>>::Kind;
+            if (next.kind == Kind::Pending)
+                detail::model_put(item, "pending", true);
+            else if (next.kind == Kind::End) {
+                detail::model_put(item, "end", true);
+                polls.emplace_back(std::move(item));
+                break;
+            } else if (!*next.item)
+                detail::model_put(item, "error", next.item->error().to_string(r));
+            else {
+                const auto& chunk = next.item->value();
+                detail::model_put(item, "count", chunk.rows.size());
+                detail::model_put(item, "index", chunk.chunk_index);
+                detail::model_put(item, "last", chunk.is_last);
+                Json::Array rows(r);
+                for (const auto& row : chunk.rows)
+                    rows.emplace_back(compact_row_to_json_value(r, row));
+                detail::model_put(item, "rows", rows);
+            }
+            polls.emplace_back(std::move(item));
+        } catch (const std::exception&) {
+            auto item = detail::model_json(r);
+            detail::model_put(item, "panic", true);
+            polls.emplace_back(std::move(item));
+            break;
+        }
+    }
+    detail::model_put(out, "events_before_drop", events.size());
+    stream.cancel();
+    detail::model_put(out, "events", events);
+    detail::model_put(out, "polls", polls);
+    detail::model_put(out, "compiles", d.compiles);
+    detail::model_put(out, "lookups", schema.lookups);
+    detail::model_put(out, "fetches", t.fetches);
+    detail::model_put(out, "streams", t.streams);
+    detail::model_put(out, "closed", t.closed);
+    detail::model_put(out, "size", t.size);
+    return out;
+}
+
+int main() {
+    GlobalContext global;
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        auto user = global.make_user_context();
+        auto j = Json::parse(user->memory_resource(), line);
+        if (!j)
+            throw std::runtime_error("bad input");
+        std::cout << evaluate(*user, *j).dump(user->memory_resource()) << '\n';
+    }
+}

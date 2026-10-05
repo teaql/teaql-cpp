@@ -1,8 +1,10 @@
 #pragma once
 #include <string_view>
+
 namespace teaql::detail {
 // Pinned upstream header; correct its JSON claim to match the actual formatter.
-inline constexpr std::string_view log_header=R"teaql(================================================================================
+inline constexpr std::string_view log_header =
+    R"teaql(================================================================================
 🚀 TEAQL Holographic Trace Log
 
 [Architecture Manifesto]

@@ -1,0 +1,4 @@
+# Generated Unicode facts are reproduced byte for byte by their extraction tools.
+include/teaql/core/detail/debug_escape_ranges.hpp
+include/teaql/core/detail/uppercase_tables.hpp
+src/provider_sqlite/unicode_lower_data.inc

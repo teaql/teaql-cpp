@@ -62,6 +62,30 @@ ctest --test-dir build --output-on-failure
 ./build/teaql_sqlite_relations_graph
 ```
 
+## C++ formatting
+
+Use the repository's clang-format **18.1.8** configuration for handwritten headers,
+sources, examples, and tests. The style uses four spaces, a 100-column target, and
+expanded function/control-flow blocks. Formatting preserves include order, string
+literals, and comments. Long literals may exceed the column target. Generated
+Unicode fact tables are excluded through `.clang-format-ignore`.
+
+Install the development tool in an ignored repository-local virtual environment:
+
+```sh
+python3 scripts/format-cpp.py --install
+python3 scripts/format-cpp.py
+python3 scripts/format-cpp.py --check
+```
+
+The CMake targets `format` and `format-check` run the same commands. An existing
+clang-format 18.1.8 can be supplied with `--clang-format PATH`; mismatched versions
+are rejected. Editors can read `.clang-format` and `.editorconfig` directly.
+Git selects tracked and new, nonignored files, keeping build artifacts out of the
+formatting scope. Run the check before submitting C++ changes. Python/LLVM formatting
+tools are development-only and add no runtime dependency. The available options are documented
+in the [LLVM 18.1.8 style reference](https://releases.llvm.org/18.1.8/tools/clang/docs/ClangFormatStyleOptions.html).
+
 ## Obtain the pinned reference
 
 Reference sources support development comparisons and are not part of the C++ build.

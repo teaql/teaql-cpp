@@ -4,37 +4,87 @@
 #include <teaql/memory/clone.hpp>
 
 namespace teaql::request {
-inline constexpr std::string_view COUNT_ALIAS = "count", TYPE_FIELD = "internal_type", TYPE_GROUP_FIELD = "type_group";
-enum class FieldOperator { Equal, NotEqual, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, Between, In, NotIn, Contain, NotContain, BeginWith, NotBeginWith, EndWith, NotEndWith, SoundsLike, IsNull, IsNotNull };
-template<class T> struct DateRange {
+inline constexpr std::string_view COUNT_ALIAS = "count", TYPE_FIELD = "internal_type",
+                                  TYPE_GROUP_FIELD = "type_group";
+enum class FieldOperator {
+    Equal,
+    NotEqual,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    Between,
+    In,
+    NotIn,
+    Contain,
+    NotContain,
+    BeginWith,
+    NotBeginWith,
+    EndWith,
+    NotEndWith,
+    SoundsLike,
+    IsNull,
+    IsNotNull
+};
+
+template <class T>
+struct DateRange {
     using allocator_type = Allocator;
     T start, end;
+
     DateRange(std::allocator_arg_t, Allocator a, const T& start, const T& end)
-        : start(detail::clone_in(a.resource(),start)), end(detail::clone_in(a.resource(),end)) {}
-    DateRange(std::allocator_arg_t, Allocator a, const DateRange& other) : DateRange(std::allocator_arg,a,other.start,other.end) {}
+        : start(detail::clone_in(a.resource(), start)), end(detail::clone_in(a.resource(), end)) {}
+
+    DateRange(std::allocator_arg_t, Allocator a, const DateRange& other)
+        : DateRange(std::allocator_arg, a, other.start, other.end) {}
+
     DateRange(const DateRange&) = delete;
     DateRange(DateRange&&) noexcept = default;
     bool operator==(const DateRange&) const = default;
 };
-template<class T> concept EntityReference = std::same_as<std::remove_cvref_t<T>,Value>
-    || std::same_as<std::remove_cvref_t<T>,std::uint64_t>
-    || requires(T&& value) { { std::move(value).entity_id_value() } -> std::same_as<Value>; };
-template<EntityReference T> Value entity_id_value(Memory r,T&& value) {
-    if constexpr(std::same_as<std::remove_cvref_t<T>,Value> || std::same_as<std::remove_cvref_t<T>,std::uint64_t>) return Value(r,std::forward<T>(value));
-    else return Value(r,std::forward<T>(value).entity_id_value());
+template <class T>
+concept EntityReference =
+    std::same_as<std::remove_cvref_t<T>, Value> ||
+    std::same_as<std::remove_cvref_t<T>, std::uint64_t> || requires(T&& value) {
+        { std::move(value).entity_id_value() } -> std::same_as<Value>;
+    };
+
+template <EntityReference T>
+Value entity_id_value(Memory r, T&& value) {
+    if constexpr (std::same_as<std::remove_cvref_t<T>, Value> ||
+                  std::same_as<std::remove_cvref_t<T>, std::uint64_t>)
+        return Value(r, std::forward<T>(value));
+    else
+        return Value(r, std::forward<T>(value).entity_id_value());
 }
+
 class UnsafeRawSqlSegment {
 public:
     using allocator_type = Allocator;
-    static UnsafeRawSqlSegment trusted(Memory r,std::string_view sql) { return UnsafeRawSqlSegment(r,sql); }
-    UnsafeRawSqlSegment(std::allocator_arg_t,Allocator a,const UnsafeRawSqlSegment& other) : sql_(other.sql_,a.resource()) {}
+
+    static UnsafeRawSqlSegment trusted(Memory r, std::string_view sql) {
+        return UnsafeRawSqlSegment(r, sql);
+    }
+
+    UnsafeRawSqlSegment(std::allocator_arg_t, Allocator a, const UnsafeRawSqlSegment& other)
+        : sql_(other.sql_, a.resource()) {}
+
     UnsafeRawSqlSegment(const UnsafeRawSqlSegment&) = delete;
     UnsafeRawSqlSegment(UnsafeRawSqlSegment&&) noexcept = default;
-    String into_sql() && { return std::move(sql_); }
-    Memory memory_resource() const { return sql_.get_allocator().resource(); }
+
+    String into_sql() && {
+        return std::move(sql_);
+    }
+
+    Memory memory_resource() const {
+        return sql_.get_allocator().resource();
+    }
+
     bool operator==(const UnsafeRawSqlSegment&) const = default;
+
 private:
-    UnsafeRawSqlSegment(Memory r,std::string_view sql) : sql_(sql,r) {}
+    UnsafeRawSqlSegment(Memory r, std::string_view sql) : sql_(sql, r) {}
+
     String sql_;
 };
 struct QuerySelection;
@@ -45,6 +95,7 @@ struct RawProjection;
 struct RelationAggregate;
 struct FacetRequest;
 struct ObjectGroupBy;
+
 struct QueryOptions {
     using allocator_type = Allocator;
     std::optional<String> comment, raw_sql;
@@ -61,10 +112,14 @@ struct QueryOptions {
     QueryOptions(QueryOptions&&) noexcept;
     QueryOptions& operator=(QueryOptions&&);
     ~QueryOptions();
-    Memory memory_resource() const { return raw_sql_search_criteria.get_allocator().resource(); }
-    bool operator==(const QueryOptions&) const;
 
+    Memory memory_resource() const {
+        return raw_sql_search_criteria.get_allocator().resource();
+    }
+
+    bool operator==(const QueryOptions&) const;
 };
+
 struct QuerySelection {
     using allocator_type = Allocator;
     SelectQuery query;
@@ -79,10 +134,15 @@ struct QuerySelection {
     QuerySelection(QuerySelection&&) noexcept;
     QuerySelection& operator=(QuerySelection&&);
     ~QuerySelection();
-    Memory memory_resource() const { return query.memory_resource(); }
+
+    Memory memory_resource() const {
+        return query.memory_resource();
+    }
+
     bool operator==(const QuerySelection&) const;
     SelectQuery into_query() &&;
 };
+
 struct RelationSelection {
     using allocator_type = Allocator;
     String name;
@@ -99,10 +159,15 @@ struct RelationSelection {
     RelationSelection(RelationSelection&&) noexcept;
     RelationSelection& operator=(RelationSelection&&);
     ~RelationSelection();
-    Memory memory_resource() const { return name.get_allocator().resource(); }
+
+    Memory memory_resource() const {
+        return name.get_allocator().resource();
+    }
+
     bool operator==(const RelationSelection&) const;
     SelectQuery into_query() &&;
 };
+
 struct RelationFilter {
     using allocator_type = Allocator;
     String name;
@@ -119,10 +184,14 @@ struct RelationFilter {
     RelationFilter(RelationFilter&&) noexcept;
     RelationFilter& operator=(RelationFilter&&);
     ~RelationFilter();
-    Memory memory_resource() const { return name.get_allocator().resource(); }
-    bool operator==(const RelationFilter&) const;
 
+    Memory memory_resource() const {
+        return name.get_allocator().resource();
+    }
+
+    bool operator==(const RelationFilter&) const;
 };
+
 struct RawDynamicProperty {
     using allocator_type = Allocator;
     String property_name, raw_sql_segment;
@@ -133,10 +202,14 @@ struct RawDynamicProperty {
     RawDynamicProperty(RawDynamicProperty&&) noexcept;
     RawDynamicProperty& operator=(RawDynamicProperty&&);
     ~RawDynamicProperty();
-    Memory memory_resource() const { return property_name.get_allocator().resource(); }
-    bool operator==(const RawDynamicProperty&) const;
 
+    Memory memory_resource() const {
+        return property_name.get_allocator().resource();
+    }
+
+    bool operator==(const RawDynamicProperty&) const;
 };
+
 struct RawProjection {
     using allocator_type = Allocator;
     String property_name, raw_sql_segment;
@@ -147,76 +220,120 @@ struct RawProjection {
     RawProjection(RawProjection&&) noexcept;
     RawProjection& operator=(RawProjection&&);
     ~RawProjection();
-    Memory memory_resource() const { return property_name.get_allocator().resource(); }
-    bool operator==(const RawProjection&) const;
 
+    Memory memory_resource() const {
+        return property_name.get_allocator().resource();
+    }
+
+    bool operator==(const RawProjection&) const;
 };
+
 struct RelationAggregate {
     using allocator_type = Allocator;
     String relation_name, alias;
     QuerySelection query;
     bool single_result;
-    RelationAggregate(std::allocator_arg_t, Allocator, std::string_view, std::string_view, const QuerySelection&, bool);
-    RelationAggregate(std::allocator_arg_t, Allocator, std::string_view, std::string_view, const SelectQuery&, bool);
+    RelationAggregate(std::allocator_arg_t,
+                      Allocator,
+                      std::string_view,
+                      std::string_view,
+                      const QuerySelection&,
+                      bool);
+    RelationAggregate(std::allocator_arg_t,
+                      Allocator,
+                      std::string_view,
+                      std::string_view,
+                      const SelectQuery&,
+                      bool);
     RelationAggregate(std::allocator_arg_t, Allocator, const RelationAggregate&);
     RelationAggregate(std::allocator_arg_t, Allocator, RelationAggregate&&);
     RelationAggregate(const RelationAggregate&) = delete;
     RelationAggregate(RelationAggregate&&) noexcept;
     RelationAggregate& operator=(RelationAggregate&&);
     ~RelationAggregate();
-    Memory memory_resource() const { return relation_name.get_allocator().resource(); }
-    bool operator==(const RelationAggregate&) const;
 
+    Memory memory_resource() const {
+        return relation_name.get_allocator().resource();
+    }
+
+    bool operator==(const RelationAggregate&) const;
 };
+
 struct FacetRequest {
     using allocator_type = Allocator;
     String facet_name, relation_name;
     QuerySelection query;
     bool include_all_facets;
-    FacetRequest(std::allocator_arg_t, Allocator, std::string_view, std::string_view, const QuerySelection&, bool);
-    FacetRequest(std::allocator_arg_t, Allocator, std::string_view, std::string_view, const SelectQuery&, bool);
+    FacetRequest(std::allocator_arg_t,
+                 Allocator,
+                 std::string_view,
+                 std::string_view,
+                 const QuerySelection&,
+                 bool);
+    FacetRequest(std::allocator_arg_t,
+                 Allocator,
+                 std::string_view,
+                 std::string_view,
+                 const SelectQuery&,
+                 bool);
     FacetRequest(std::allocator_arg_t, Allocator, const FacetRequest&);
     FacetRequest(std::allocator_arg_t, Allocator, FacetRequest&&);
     FacetRequest(const FacetRequest&) = delete;
     FacetRequest(FacetRequest&&) noexcept;
     FacetRequest& operator=(FacetRequest&&);
     ~FacetRequest();
-    Memory memory_resource() const { return facet_name.get_allocator().resource(); }
-    bool operator==(const FacetRequest&) const;
 
+    Memory memory_resource() const {
+        return facet_name.get_allocator().resource();
+    }
+
+    bool operator==(const FacetRequest&) const;
 };
+
 struct ObjectGroupBy {
     using allocator_type = Allocator;
     String property_name, storage_field;
     QuerySelection query;
-    ObjectGroupBy(std::allocator_arg_t, Allocator, std::string_view, std::string_view, const QuerySelection&);
-    ObjectGroupBy(std::allocator_arg_t, Allocator, std::string_view, std::string_view, const SelectQuery&);
+    ObjectGroupBy(
+        std::allocator_arg_t, Allocator, std::string_view, std::string_view, const QuerySelection&);
+    ObjectGroupBy(
+        std::allocator_arg_t, Allocator, std::string_view, std::string_view, const SelectQuery&);
     ObjectGroupBy(std::allocator_arg_t, Allocator, const ObjectGroupBy&);
     ObjectGroupBy(std::allocator_arg_t, Allocator, ObjectGroupBy&&);
     ObjectGroupBy(const ObjectGroupBy&) = delete;
     ObjectGroupBy(ObjectGroupBy&&) noexcept;
     ObjectGroupBy& operator=(ObjectGroupBy&&);
     ~ObjectGroupBy();
-    Memory memory_resource() const { return property_name.get_allocator().resource(); }
-    bool operator==(const ObjectGroupBy&) const;
 
+    Memory memory_resource() const {
+        return property_name.get_allocator().resource();
+    }
+
+    bool operator==(const ObjectGroupBy&) const;
 };
+
 SelectQuery apply_relation_selections(SelectQuery, std::span<const RelationSelection>);
-SelectQuery apply_runtime_metadata(SelectQuery, const QueryOptions&, std::span<const QuerySelection>);
+SelectQuery
+apply_runtime_metadata(SelectQuery, const QueryOptions&, std::span<const QuerySelection>);
 Vector<teaql::RelationAggregate> runtime_relation_aggregates(Memory, const QueryOptions&);
 void merge_outer_filter_into_facet_aggregates(QuerySelection&, const SelectQuery&);
-template<class T> void attach_facets(SmartList<T>& rows,const std::pmr::map<String,SmartList<CompactRow>,std::less<>>& facets) {
-    for(const auto& [name,facet]:facets) rows.with_facet(name,facet);
+
+template <class T>
+void attach_facets(SmartList<T>& rows,
+                   const std::pmr::map<String, SmartList<CompactRow>, std::less<>>& facets) {
+    for (const auto& [name, facet] : facets)
+        rows.with_facet(name, facet);
 }
+
 Expr field_operator_expr(Memory, std::string_view, FieldOperator, std::span<const Value>);
 Expr field_operator_column_expr(Memory, std::string_view, FieldOperator, std::string_view);
 Value required_value(Memory, FieldOperator, std::span<const Value>, std::size_t);
 String required_text(Memory, FieldOperator, std::span<const Value>, std::size_t);
-std::optional<Expr> remove_default_live_filter(Memory,const std::optional<Expr>&);
-std::optional<Expr> remove_filter_expr(Memory,const Expr&,const Expr&);
-Value dynamic_json_value_to_teaql_value(Memory,const Json&);
-Vector<Value> dynamic_json_values(Memory,const Json&);
+std::optional<Expr> remove_default_live_filter(Memory, const std::optional<Expr>&);
+std::optional<Expr> remove_filter_expr(Memory, const Expr&, const Expr&);
+Value dynamic_json_value_to_teaql_value(Memory, const Json&);
+Vector<Value> dynamic_json_values(Memory, const Json&);
 FieldOperator dynamic_json_operator(const Json&);
-Expr dynamic_json_filter_expr(Memory,std::string_view,const Json&);
-std::optional<std::uint64_t> dynamic_json_u64_field(const Json::Object&,std::string_view);
+Expr dynamic_json_filter_expr(Memory, std::string_view, const Json&);
+std::optional<std::uint64_t> dynamic_json_u64_field(const Json::Object&, std::string_view);
 }
