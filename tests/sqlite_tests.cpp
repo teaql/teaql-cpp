@@ -6,8 +6,9 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class E, class F>

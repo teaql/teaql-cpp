@@ -6,8 +6,9 @@
 namespace teaql {
 namespace {
 std::int32_t checked(std::int64_t n) {
-    if (n < INT32_MIN || n > INT32_MAX)
+    if (n < INT32_MIN || n > INT32_MAX) {
         throw std::overflow_error("Xls coordinate arithmetic overflow");
+    }
     return std::int32_t(n);
 }
 }
@@ -28,8 +29,9 @@ XlsBlock::XlsBlock(std::allocator_arg_t, Allocator a, const XlsBlock& other)
                             ? detail::make_box<XlsBlock>(a.resource(), *other.style_refer_block)
                             : nullptr),
       value(a.resource(), other.value), properties(a.resource()) {
-    for (const auto& [key, item] : other.properties)
+    for (const auto& [key, item] : other.properties) {
         properties.emplace(String(key, a.resource()), Json(a.resource(), item));
+    }
 }
 
 XlsBlock XlsBlock::from_context(const XlsBlockBuildContext& context, const Json& value) {
@@ -88,12 +90,15 @@ Json XlsBlock::to_json_value(Memory r) const {
     detail::model_put(result, "bottom", bottom);
     detail::model_put(result, "left", left);
     detail::model_put(result, "right", right);
-    if (style_refer_block)
+    if (style_refer_block) {
         detail::model_put(result, "styleReferBlock", style_refer_block->to_json_value(r));
-    if (!std::holds_alternative<std::monostate>(value.data))
+    }
+    if (!std::holds_alternative<std::monostate>(value.data)) {
         detail::model_put(result, "value", value);
-    if (!properties.empty())
+    }
+    if (!properties.empty()) {
         detail::model_put(result, "properties", properties);
+    }
     return result;
 }
 
@@ -110,12 +115,15 @@ ModelResult<XlsBlock> XlsBlock::from_json_value(Memory r, const Json& input) {
             std::allocator_arg, Allocator(r), page, left, top, *reader.field("value", 6));
         result.right = right;
         result.bottom = bottom;
-        if (style && !std::holds_alternative<std::monostate>(style->data))
+        if (style && !std::holds_alternative<std::monostate>(style->data)) {
             result.style_refer_block =
                 detail::make_box<XlsBlock>(r, detail::decoded(from_json_value(r, *style)));
-        if (auto properties = reader.field("properties", 7, false, true))
-            for (const auto& [key, item] : detail::model_object(*properties, "properties"))
+        }
+        if (auto properties = reader.field("properties", 7, false, true)) {
+            for (const auto& [key, item] : detail::model_object(*properties, "properties")) {
                 result.properties.emplace(String(key, r), Json(r, item));
+            }
+        }
         return result;
     });
 }
@@ -174,14 +182,17 @@ ModelResult<XlsBlockBuildContext> XlsBlockBuildContext::from_json_value(Memory r
 
 XlsPage::XlsPage(std::allocator_arg_t, Allocator a, const XlsPage& other)
     : XlsPage(std::allocator_arg, a, other.name) {
-    for (const auto& b : other.blocks)
+    for (const auto& b : other.blocks) {
         blocks.emplace_back(b);
+    }
 }
 
 const XlsBlock* XlsPage::block_at(std::int32_t x, std::int32_t y) const {
-    for (const auto& block : blocks)
-        if (block.contains(x, y))
+    for (const auto& block : blocks) {
+        if (block.contains(x, y)) {
             return &block;
+        }
+    }
     return nullptr;
 }
 
@@ -189,8 +200,9 @@ Json XlsPage::to_json_value(Memory r) const {
     auto result = detail::model_json(r);
     detail::model_put(result, "name", name);
     Json::Array items(r);
-    for (const auto& block : blocks)
+    for (const auto& block : blocks) {
         items.emplace_back(block.to_json_value(r));
+    }
     detail::model_put(result, "blocks", items);
     return result;
 }
@@ -201,30 +213,35 @@ ModelResult<XlsPage> XlsPage::from_json_value(Memory r, const Json& input) {
         XlsPage result(std::allocator_arg,
                        Allocator(r),
                        detail::model_string(*reader.field("name", 0), "name"));
-        for (const auto& item : detail::model_array(*reader.field("blocks", 1), "blocks"))
+        for (const auto& item : detail::model_array(*reader.field("blocks", 1), "blocks")) {
             result.blocks.emplace_back(detail::decoded(XlsBlock::from_json_value(r, item)));
+        }
         return result;
     });
 }
 
 XlsWorkbook::XlsWorkbook(std::allocator_arg_t, Allocator a, const XlsWorkbook& other)
     : XlsWorkbook(std::allocator_arg, a) {
-    for (const auto& page : other.pages)
+    for (const auto& page : other.pages) {
         pages.emplace_back(page);
+    }
 }
 
 const XlsPage* XlsWorkbook::page(std::string_view name) const {
-    for (const auto& page : pages)
-        if (page.name == name)
+    for (const auto& page : pages) {
+        if (page.name == name) {
             return &page;
+        }
+    }
     return nullptr;
 }
 
 Json XlsWorkbook::to_json_value(Memory r) const {
     auto result = detail::model_json(r);
     Json::Array items(r);
-    for (const auto& page : pages)
+    for (const auto& page : pages) {
         items.emplace_back(page.to_json_value(r));
+    }
     detail::model_put(result, "pages", items);
     return result;
 }
@@ -233,8 +250,9 @@ ModelResult<XlsWorkbook> XlsWorkbook::from_json_value(Memory r, const Json& inpu
     return detail::decode_model<XlsWorkbook>(r, [&] {
         detail::ModelReader reader(input, 1);
         XlsWorkbook result(std::allocator_arg, Allocator(r));
-        for (const auto& item : detail::model_array(*reader.field("pages", 0), "pages"))
+        for (const auto& item : detail::model_array(*reader.field("pages", 0), "pages")) {
             result.pages.emplace_back(detail::decoded(XlsPage::from_json_value(r, item)));
+        }
         return result;
     });
 }

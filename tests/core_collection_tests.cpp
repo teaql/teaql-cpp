@@ -5,8 +5,9 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 struct NoDefaultAllocator {
@@ -19,12 +20,14 @@ struct NoDefaultAllocator {
 
 static void check_domain(const Value& value, Memory expected) {
     check(value.memory_resource() == expected, "Value allocation domain");
-    if (const auto* text = std::get_if<String>(&value.data))
+    if (const auto* text = std::get_if<String>(&value.data)) {
         check(text->get_allocator().resource() == expected, "nested text allocator");
+    }
     if (const auto* list = value.as_list()) {
         check(list->get_allocator().resource() == expected, "nested list allocator");
-        for (const auto& item : *list)
+        for (const auto& item : *list) {
             check_domain(item, expected);
+        }
     }
     if (const auto* object = value.as_object()) {
         check(object->get_allocator().resource() == expected, "nested object allocator");
@@ -130,11 +133,13 @@ static void compact_rows() {
     source.reset();
     for (auto* kept : {&retained, &from_layout, &assigned}) {
         check(kept->get("id")->try_i64() == 5, "retained row survives source destruction");
-        for (const auto& key : kept->keys())
+        for (const auto& key : kept->keys()) {
             check(key.get_allocator().resource() == global.memory_resource(),
                   "retained column allocator");
-        for (const auto& value : kept->values())
+        }
+        for (const auto& value : kept->values()) {
             check_domain(value, global.memory_resource());
+        }
     }
 }
 
@@ -206,8 +211,9 @@ struct FailingResource : std::pmr::memory_resource {
     bool fail = false;
 
     void* do_allocate(std::size_t n, std::size_t alignment) override {
-        if (fail)
+        if (fail) {
             throw std::bad_alloc();
+        }
         return std::pmr::new_delete_resource()->allocate(n, alignment);
     }
 

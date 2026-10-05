@@ -19,8 +19,9 @@ public:
         static_assert(std::is_nothrow_destructible_v<D>,
                       "Context resources must destruct without throwing");
         auto* arena = dynamic_cast<Arena*>(resource_);
-        if (!arena || arena->closed())
+        if (!arena || arena->closed()) {
             throw std::invalid_argument("ContextBox requires a live Context arena");
+        }
         auto* p = static_cast<D*>(resource_->allocate(sizeof(D), alignof(D)));
         std::uninitialized_construct_using_allocator(p, a, std::forward<Args>(args)...);
         object_ = p;
@@ -52,8 +53,9 @@ public:
     }
 
     void claim() {
-        if (claimed_ || !object_)
+        if (claimed_ || !object_) {
             throw std::logic_error("ContextBox payload was already consumed");
+        }
         claimed_ = true;
     }
 

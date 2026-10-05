@@ -45,21 +45,25 @@ public:
                     std::allocator_arg, Allocator(r), aggregate.relation_name, aggregate.query);
                 auto plans = build_relation_plans_from_loads(
                     context(), service_.entity(), std::span<const RelationLoad>(&load, 1));
-                if (!plans)
+                if (!plans) {
                     return R::err(
                         r,
                         DataServiceError<typename E::Error>::runtime(r, std::move(plans).error()));
-                if (plans.value().empty())
+                }
+                if (plans.value().empty()) {
                     return R::err(r,
                                   DataServiceError<typename E::Error>::runtime(
                                       r,
                                       RuntimeError::missing_relation(
                                           r, service_.entity(), aggregate.relation_name)));
+                }
                 plan_.emplace(std::move(plans.value().front()));
                 Vector<Value> ids(r);
-                for (const auto& parent : parents_)
-                    if (auto* id = parent.get(plan_->local_key))
+                for (const auto& parent : parents_) {
+                    if (auto* id = parent.get(plan_->local_key)) {
                         ids.emplace_back(*id);
+                    }
+                }
                 if (ids.empty()) {
                     attach_empty_relation_aggregate(
                         parents_, aggregate.alias, aggregate.single_result);
@@ -69,21 +73,24 @@ public:
                 }
                 auto query = clone_in(r, aggregate.query);
                 query.entity = plan_->target_entity;
-                if (!query.aggregation_cache && cache_ && cache_->propagate)
+                if (!query.aggregation_cache && cache_ && cache_->propagate) {
                     query.aggregation_cache = AggregationCacheOptions{
                         .cache_expired_millis = cache_->propagate_cache_expired_millis};
+                }
                 query.projection.clear();
                 query.expr_projection.clear();
                 query.order_by.clear();
                 query.slice.reset();
                 query.relations.clear();
-                if (query.aggregates.empty())
+                if (query.aggregates.empty()) {
                     query.aggregates.emplace_back(Aggregate::count(
                         r, aggregate.single_result ? std::string_view(aggregate.alias) : "count"));
+                }
                 if (std::find(query.group_by_fields.begin(),
                               query.group_by_fields.end(),
-                              plan_->foreign_key) == query.group_by_fields.end())
+                              plan_->foreign_key) == query.group_by_fields.end()) {
                     query.group_by(plan_->foreign_key);
+                }
                 query.and_filter(Expr::in_list(r, plan_->foreign_key, ids));
                 auto& repo = context().template make<EntityDataService<E>>(
                     EntityDataServiceAccess::relation_child(service_, *plan_));
@@ -91,26 +98,34 @@ public:
                 trace.emplace_back(TraceKind::Relation, query.entity, aggregate.alias);
                 repo.with_trace_context(trace);
                 auto& child = fetch_(repo, std::move(query));
-                if (child.memory_resource() != r)
+                if (child.memory_resource() != r) {
                     throw std::invalid_argument(
                         "Relation aggregate result must belong to its query Context");
+                }
                 child_ = &child;
             }
             forwarding_.attach(child_->wake_signal(), wake);
             auto* result = child_->poll();
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return R::err(r, clone_in(r, result->error()));
+            }
             Vector<CompactRow> rows(result->value(), r);
             // Metadata is resolved after the asynchronous fetch, like the source.
-            if (auto* entity = context().entity(plan_->target_entity))
+            if (auto* entity = context().entity(plan_->target_entity)) {
                 if (auto* property = entity->property_by_name(plan_->foreign_key);
-                    property && property->column_name != plan_->foreign_key)
-                    for (auto& row : rows)
-                        if (!row.contains_key(plan_->foreign_key))
-                            if (auto value = row.remove(property->column_name))
+                    property && property->column_name != plan_->foreign_key) {
+                    for (auto& row : rows) {
+                        if (!row.contains_key(plan_->foreign_key)) {
+                            if (auto value = row.remove(property->column_name)) {
                                 row.insert(plan_->foreign_key, *value);
+                            }
+                        }
+                    }
+                }
+            }
             attach_relation_aggregate_rows(parents_, *plan_, aggregate, std::move(rows));
             forwarding_.reset();
             child_ = nullptr;
@@ -178,26 +193,31 @@ public:
             const auto& enhancement = enhancements_[index_];
             if (!child_) {
                 std::string_view field = "id";
-                if constexpr (ObjectGroup)
+                if constexpr (ObjectGroup) {
                     field = enhancement.storage_field;
+                }
                 Vector<Value> ids(r);
-                for (const auto& row : parents_)
-                    if (auto* value = row.get(field))
+                for (const auto& row : parents_) {
+                    if (auto* value = row.get(field)) {
                         ids.emplace_back(*value);
+                    }
+                }
                 if (ids.empty()) {
                     ++index_;
                     continue;
                 }
                 auto query = [&] {
-                    if constexpr (ObjectGroup)
+                    if constexpr (ObjectGroup) {
                         return clone_in(r, enhancement.query);
-                    else
+                    } else {
                         return clone_in(r, enhancement);
+                    }
                 }();
                 if (!query.projection.empty() &&
                     std::find(query.projection.begin(), query.projection.end(), "id") ==
-                        query.projection.end())
+                        query.projection.end()) {
                     query.project("id");
+                }
                 query.and_filter(Expr::in_list(r, "id", ids));
                 auto& context =
                     EntityDataServiceAccess::context_service(service_).metadata.context();
@@ -205,21 +225,25 @@ public:
                     EntityDataServiceAccess::scoped(service_, query.entity));
                 repo.with_trace_context(trace_);
                 auto& child = fetch_(repo, std::move(query));
-                if (child.memory_resource() != r)
+                if (child.memory_resource() != r) {
                     throw std::invalid_argument(
                         "Row enhancement result must belong to its query Context");
+                }
                 child_ = &child;
             }
             forwarding_.attach(child_->wake_signal(), wake);
             auto* result = child_->poll();
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return R::err(r, clone_in(r, result->error()));
-            if constexpr (ObjectGroup)
+            }
+            if constexpr (ObjectGroup) {
                 attach_object_group_rows(parents_, enhancement, result->value());
-            else
+            } else {
                 attach_child_query_rows(parents_, result->value());
+            }
             forwarding_.reset();
             child_ = nullptr;
             ++index_;

@@ -19,10 +19,11 @@ struct SqliteBoundValue {
         std::visit(
             [&](const auto& value) {
                 using T = std::decay_t<decltype(value)>;
-                if constexpr (std::is_same_v<T, String>)
+                if constexpr (std::is_same_v<T, String>) {
                     data.emplace<String>(value, resource_);
-                else
+                } else {
                     data = value;
+                }
             },
             other.data);
     }

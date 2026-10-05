@@ -7,8 +7,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -60,14 +61,16 @@ struct Scope final : RuntimeTelemetryScope {
 
     void success(const RuntimeAttributes&) override {
         ++c.successes;
-        if (c.fail_finish)
+        if (c.fail_finish) {
             throw std::runtime_error("adapter finish failed");
+        }
     }
 
     void failure(std::string_view) override {
         ++c.failures;
-        if (c.fail_finish)
+        if (c.fail_finish) {
             throw std::runtime_error("adapter finish failed");
+        }
     }
 };
 
@@ -86,8 +89,9 @@ struct Adapter final : RuntimeTelemetry {
     ContextBox<RuntimeTelemetryScope>& start(Memory target,
                                              const RuntimeOperation& op) const override {
         ++c.starts;
-        if (c.fail_start)
+        if (c.fail_start) {
             throw std::runtime_error("adapter start failed");
+        }
         const_cast<Adapter*>(this)->seen.emplace_back(op);
         return detail::resource_arena(target).make<ContextBox<RuntimeTelemetryScope>>(
             std::in_place_type<Scope>, c);
@@ -241,8 +245,9 @@ struct NativeWork {
     NativeWork(Memory r, Counts& c) : r(r), c(c), payload(32768, 'x', r) {}
 
     ~NativeWork() {
-        if (worker.joinable())
+        if (worker.joinable()) {
             std::terminate();
+        }
     }
 
     std::optional<String> poll(WakeSignal& wake) {
@@ -256,8 +261,9 @@ struct NativeWork {
             });
             return {};
         }
-        if (!done.load())
+        if (!done.load()) {
             return {};
+        }
         return String("scoped native result", r);
     }
 
@@ -270,8 +276,9 @@ struct NativeWork {
 
     void join() noexcept {
         release();
-        if (worker.joinable())
+        if (worker.joinable()) {
             worker.join();
+        }
     }
 
     void finish_and_wait() noexcept {

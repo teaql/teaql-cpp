@@ -5,21 +5,24 @@
 namespace teaql {
 Result<BusinessIdAllocation, BusinessIdError>
 InMemoryBusinessIdAllocator::allocate(Memory r, const BusinessIdPlan& plan) const {
-    if (std::this_thread::get_id() != owner_)
+    if (std::this_thread::get_id() != owner_) {
         throw std::logic_error(
             "In-memory business ID allocator must run on its Context owner thread");
+    }
     using R = Result<BusinessIdAllocation, BusinessIdError>;
     auto valid = plan.validate_allocation_range();
-    if (!valid)
+    if (!valid) {
         return R::err(r, detail::clone_in(r, valid.error()));
+    }
     auto key = plan.scope.canonical_key(r);
     std::lock_guard guard(mutex_);
-    if (poisoned_)
+    if (poisoned_) {
         return R::err(r,
                       BusinessIdError(std::allocator_arg,
                                       Allocator(r),
                                       BusinessIdErrorCode::Allocation,
                                       "in-memory business ID allocator lock is poisoned"));
+    }
     try {
         auto found = levels_.find(std::string_view(key));
         auto current = found == levels_.end() ? plan.initial_sequence : found->second;
@@ -31,16 +34,18 @@ InMemoryBusinessIdAllocator::allocate(Memory r, const BusinessIdPlan& plan) cons
                 BusinessIdError(
                     std::allocator_arg, Allocator(r), BusinessIdErrorCode::Exhausted, message));
         }
-        if (current == std::numeric_limits<std::uint64_t>::max())
+        if (current == std::numeric_limits<std::uint64_t>::max()) {
             return R::err(r,
                           BusinessIdError(std::allocator_arg,
                                           Allocator(r),
                                           BusinessIdErrorCode::Exhausted,
                                           "business ID sequence overflow"));
-        if (found == levels_.end())
+        }
+        if (found == levels_.end()) {
             levels_.emplace(String(key, resource_), current + 1);
-        else
+        } else {
             found->second = current + 1;
+        }
         return R::ok(r,
                      BusinessIdAllocation(std::allocator_arg, Allocator(r), plan.scope, current));
     } catch (...) {
@@ -63,21 +68,23 @@ BusinessIdService::ensure_value(Memory r,
     std::optional<PermutedDailyBusinessIdProfile> permuted;
     const BusinessIdProfile* profile = nullptr;
     if (definition.profile == DEFAULT_BUSINESS_ID_PROFILE) {
-        if (!key_provider_)
+        if (!key_provider_) {
             return R::err(
                 r,
                 BusinessIdError(std::allocator_arg,
                                 Allocator(r),
                                 BusinessIdErrorCode::KeyNotFound,
                                 "BusinessIdKeyProvider is not registered for daily-permuted-v1"));
+        }
         auto key = key_provider_->get().current_key(r, context, definition);
-        if (!key)
+        if (!key) {
             return R::err(r, detail::clone_in(r, key.error()));
+        }
         permuted.emplace(key.value());
         profile = &*permuted;
-    } else if (definition.profile == LEGACY_DAILY_SEQUENCE_PROFILE)
+    } else if (definition.profile == LEGACY_DAILY_SEQUENCE_PROFILE) {
         profile = &legacy;
-    else {
+    } else {
         String message("unsupported business ID profile ", r);
         message += definition.profile;
         return R::err(
@@ -85,8 +92,9 @@ BusinessIdService::ensure_value(Memory r,
             BusinessIdError(
                 std::allocator_arg, Allocator(r), BusinessIdErrorCode::InvalidDefinition, message));
     }
-    if (auto value = current(); value && !value->empty())
+    if (auto value = current(); value && !value->empty()) {
         return profile->validate(r, definition, *value);
+    }
     if (!fresh()) {
         String message(definition.field_name, r);
         message += " is immutable after the aggregate is persisted";
@@ -98,14 +106,17 @@ BusinessIdService::ensure_value(Memory r,
     BusinessIdGenerationRequest request(
         std::allocator_arg, Allocator(r), definition, root, aggregate, context.business_date());
     auto plan = profile->plan(r, request);
-    if (!plan)
+    if (!plan) {
         return R::err(r, detail::clone_in(r, plan.error()));
+    }
     auto allocation = allocator_.get().allocate(r, plan.value());
-    if (!allocation)
+    if (!allocation) {
         return R::err(r, detail::clone_in(r, allocation.error()));
+    }
     auto value = profile->format(r, plan.value(), allocation.value());
-    if (!value)
+    if (!value) {
         return value;
+    }
     assign(detail::clone_in(r, value.value()));
     return value;
 }

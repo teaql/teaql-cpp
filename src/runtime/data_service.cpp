@@ -20,23 +20,26 @@ struct ContextObserver {
 }
 
 Vector<const EntityDescriptor*> UserContextMetadata::all_entities(Memory r) const {
-    if (!resource_arena(context().memory_resource()).can_lend_to(resource_arena(r)))
+    if (!resource_arena(context().memory_resource()).can_lend_to(resource_arena(r))) {
         throw std::invalid_argument("Context metadata view cannot escape its owning Context");
+    }
     auto entities = context().all_entities();
     return Vector<const EntityDescriptor*>(entities.begin(), entities.end(), r);
 }
 
 std::optional<ExecutionObserver> UserContextMetadata::query_diagnostic_observer(Memory r) const {
-    if (!capture_execution_metadata())
+    if (!capture_execution_metadata()) {
         return {};
+    }
     return ExecutionObserver(std::allocator_arg,
                              Allocator(r),
                              ContextObserver(std::allocator_arg, Allocator(r), context()));
 }
 
 std::optional<ExecutionObserver> UserContextMetadata::mutation_diagnostic_observer(Memory r) const {
-    if (!context().sql_log_options().mutation)
+    if (!context().sql_log_options().mutation) {
         return {};
+    }
     return ExecutionObserver(std::allocator_arg,
                              Allocator(r),
                              ContextObserver(std::allocator_arg, Allocator(r), context()));
@@ -47,23 +50,26 @@ std::optional<String> resolve_final_comment(const UserContext& context,
                                             std::optional<std::string_view> comment) {
     auto r = context.memory_resource();
     String business(r);
-    if (!trace.empty())
+    if (!trace.empty()) {
         for (const auto& node : trace) {
-            if (!business.empty())
+            if (!business.empty()) {
                 business += " -> ";
+            }
             business += node.entity_type;
             business += '(';
             if (node.entity_id) {
                 char buffer[32];
                 auto result = std::to_chars(buffer, buffer + sizeof(buffer), *node.entity_id);
                 business.append(buffer, result.ptr);
-            } else
+            } else {
                 business += "pending";
+            }
             business += "): ";
             business += node.comment;
         }
-    else if (comment)
+    } else if (comment) {
         business = *comment;
+    }
     auto user = context.user_identifier();
     String out(r);
     if (user && !user->empty()) {
@@ -74,10 +80,12 @@ std::optional<String> resolve_final_comment(const UserContext& context,
             out += ' ';
             out += business;
         }
-    } else
+    } else {
         out = std::move(business);
-    if (out.empty())
+    }
+    if (out.empty()) {
         return {};
+    }
     return out;
 }
 }
@@ -94,8 +102,9 @@ void record_query_metadata(const UserContext& context,
     auto metadata = clone_in(r, value);
     auto inherit = [&](auto&& self, ExecutionMetadata& item) -> void {
         if (!item.statements.empty()) {
-            for (auto& child : item.statements)
+            for (auto& child : item.statements) {
                 self(self, child);
+            }
             return;
         }
         item.sql_log.intent_redactions.extend(*intent);

@@ -20,8 +20,9 @@ static Json model(Memory r, const Decimal& value) {
     detail::model_put(result, "scale", value.scale());
     detail::model_put(result, "negative", value.is_sign_negative());
     Json::Array limbs(r);
-    for (auto n : value.coefficient())
+    for (auto n : value.coefficient()) {
         limbs.emplace_back(n);
+    }
     detail::model_put(result, "coefficient", limbs);
     return result;
 }
@@ -30,21 +31,24 @@ static Json evaluate(Memory r, const Json& input) {
     if (std::get<String>(field(input, "kind").data) == "codec") {
         const auto& bytes = std::get<Json::Array>(field(input, "bytes").data);
         std::array<std::uint8_t, 16> raw{};
-        for (unsigned i = 0; i < 16; ++i)
+        for (unsigned i = 0; i < 16; ++i) {
             raw[i] = std::uint8_t(std::get<std::uint64_t>(bytes[i].data));
+        }
         auto value = Decimal::deserialize(raw);
         auto result = detail::model_json(r);
         detail::model_put(result, "value", model(r, value));
         Json::Array output(r);
-        for (auto byte : value.serialize())
+        for (auto byte : value.serialize()) {
             output.emplace_back(byte);
+        }
         detail::model_put(result, "bytes", output);
         return result;
     }
     auto a = *Decimal::parse(std::get<String>(field(input, "a").data));
     auto zero = std::get<Json::Object>(input.data).find("negative_zero");
-    if (zero != std::get<Json::Object>(input.data).end() && std::get<bool>(zero->second.data))
+    if (zero != std::get<Json::Object>(input.data).end() && std::get<bool>(zero->second.data)) {
         a.set_sign_negative(true);
+    }
     auto result = detail::model_json(r);
     auto put = [&](std::string_view name, const Decimal& value) {
         detail::model_put(result, name, model(r, value));
@@ -67,8 +71,9 @@ static Json evaluate(Memory r, const Json& input) {
             detail::model_put(result, "f64_panic", true);
         }
         Json::Array bytes(r);
-        for (auto byte : a.serialize())
+        for (auto byte : a.serialize()) {
             bytes.emplace_back(byte);
+        }
         detail::model_put(result, "bytes", bytes);
         return result;
     }
@@ -111,8 +116,9 @@ static Json evaluate(Memory r, const Json& input) {
     put("round", a.round());
     put("round_dp", a.round_dp(dp));
     Json::Array strategies(r);
-    for (unsigned i = 0; i < 12; ++i)
+    for (unsigned i = 0; i < 12; ++i) {
         strategies.emplace_back(model(r, a.round_dp_with_strategy(dp, RoundingStrategy(i))));
+    }
     detail::model_put(result, "strategies", strategies);
     return result;
 }
@@ -124,8 +130,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("Invalid decimal fixture JSON");
+        }
         std::cout << evaluate(r, *input).dump(r) << '\n';
     }
 }

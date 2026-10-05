@@ -153,14 +153,18 @@ struct EntityDescriptor {
     EntityDescriptor(std::allocator_arg_t, Allocator a, const EntityDescriptor& other)
         : EntityDescriptor(std::allocator_arg, a, other.name) {
         table_name = other.table_name;
-        if (other.data_service)
+        if (other.data_service) {
             data_service.emplace(*other.data_service, a.resource());
-        for (const auto& property : other.properties)
+        }
+        for (const auto& property : other.properties) {
             properties.emplace_back(property);
-        for (const auto& relation : other.relations)
+        }
+        for (const auto& relation : other.relations) {
             relations.emplace_back(relation);
-        for (const auto& field : other.audit_mask_fields)
+        }
+        for (const auto& field : other.audit_mask_fields) {
             audit_mask_fields.emplace_back(field);
+        }
         audit_mask_fields_declared = other.audit_mask_fields_declared;
         audit_value_max_len = other.audit_value_max_len;
     }
@@ -204,8 +208,9 @@ struct EntityDescriptor {
 
     EntityDescriptor& mask_fields(std::initializer_list<std::string_view> names) {
         Vector<String> copy(memory_resource());
-        for (auto name : names)
+        for (auto name : names) {
             copy.emplace_back(name);
+        }
         audit_mask_fields = std::move(copy);
         audit_mask_fields_declared = true;
         return *this;

@@ -6,8 +6,9 @@
 using namespace teaql;
 
 static void check(bool v, const char* message) {
-    if (!v)
+    if (!v) {
         throw std::runtime_error(message);
+    }
 }
 
 static EntityDescriptor
@@ -35,11 +36,13 @@ struct Sink final : RawAuditEventSink {
         self.events.emplace_back(e);
         self.before_commit &= sqlite3_get_autocommit(db) == 0;
         self.normal &= !detail::is_generated_schema_bootstrap(context);
-        if (panic)
+        if (panic) {
             throw std::runtime_error("sink panic");
-        if (fail)
+        }
+        if (fail) {
             return Result<std::monostate, RuntimeError>::err(
                 r, RuntimeError::event(r, "ignored schema audit sink error"));
+        }
         return Result<std::monostate, RuntimeError>::ok(r, {});
     }
 };
@@ -58,8 +61,9 @@ struct Fixture {
 
     void metadata(std::span<const EntityDescriptor> descriptors) {
         auto& store = user->make<InMemoryMetadataStore>();
-        for (const auto& e : descriptors)
+        for (const auto& e : descriptors) {
             store.register_entity(detail::clone_in(user->memory_resource(), e));
+        }
         user->set_metadata(*user, store);
     }
 
@@ -71,9 +75,10 @@ struct Fixture {
         CompiledQuery q(std::allocator_arg, Allocator(user->memory_resource()));
         q.sql = sql;
         auto result = executor.execute(user->memory_resource(), q);
-        if (!result)
+        if (!result) {
             throw std::runtime_error(
                 std::string(result.error().to_string(user->memory_resource())));
+        }
     }
 
     void prime() {

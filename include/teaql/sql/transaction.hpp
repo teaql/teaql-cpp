@@ -26,14 +26,16 @@ public:
     std::optional<Output> poll(WakeSignal& wake) {
         forwarding_.attach(pending_->wake_signal(), wake);
         auto* result = pending_->poll();
-        if (!result)
+        if (!result) {
             return {};
+        }
         forwarding_.reset();
         pending_ = nullptr;
-        if (!*result)
+        if (!*result) {
             return Output::err(
                 resource_,
                 SqlExecutorError<E>::transport(resource_, clone_in(resource_, result->error())));
+        }
         return Output::ok(resource_, std::monostate{});
     }
 
@@ -42,8 +44,9 @@ public:
     }
 
     void cancel_and_wait() noexcept {
-        if (pending_)
+        if (pending_) {
             pending_->cancel();
+        }
         forwarding_.reset();
         pending_ = nullptr;
     }
@@ -77,8 +80,9 @@ public:
                               detail::SqlExecutorState& state)
         : DataServiceTransaction<Error>(a.resource()), dialect(dialect), transport(transport),
           schema_provider(schema), state(state) {
-        if (a.resource() != transport.memory_resource())
+        if (a.resource() != transport.memory_resource()) {
             throw std::invalid_argument("SQL transaction and adapter must share a Context");
+        }
     }
 
     DataServiceCapabilities capabilities() const override {
@@ -94,12 +98,13 @@ public:
         this->require_active();
         // Pure diagnostic values can be explicitly copied to another domain.
         // Only native transaction operations must stay in the owning Context.
-        if (auto* entity = state.entity_descriptor(schema_provider, query.entity))
+        if (auto* entity = state.entity_descriptor(schema_provider, query.entity)) {
             try {
                 auto q = state.compile_select_cached(r, dialect, *entity, query);
                 return SqlIntentRedactions::from_bindings(r, q.log_context, q.params, q.sql);
             } catch (const SqlCompileError&) {
             }
+        }
         return SqlIntentRedactions::from_unclassified_query(r, query);
     }
 
@@ -225,18 +230,21 @@ public:
     std::optional<Output> poll(WakeSignal& wake) {
         if (!pending_) {
             pending_ = &transport_.begin_sql(resource_);
-            if (pending_->memory_resource() != resource_)
+            if (pending_->memory_resource() != resource_) {
                 throw std::invalid_argument("SQL begin operation belongs to a different Context");
+            }
         }
         forwarding_.attach(pending_->wake_signal(), wake);
         auto* result = pending_->poll();
-        if (!result)
+        if (!result) {
             return {};
+        }
         forwarding_.reset();
         pending_ = nullptr;
-        if (!*result)
+        if (!*result) {
             return Output::err(resource_,
                                Error::transport(resource_, clone_in(resource_, result->error())));
+        }
         auto& transaction = async_arena(resource_).template make<SqlDataServiceTransaction<E>>(
             dialect_, result->value().get(), schema_, cache_);
         return Output::ok(
@@ -249,8 +257,9 @@ public:
     }
 
     void cancel_and_wait() noexcept {
-        if (pending_)
+        if (pending_) {
             pending_->cancel();
+        }
         forwarding_.reset();
         pending_ = nullptr;
     }

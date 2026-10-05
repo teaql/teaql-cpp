@@ -15,8 +15,9 @@ public:
     SystemTime() = default;
 
     static SystemTime from_unix_seconds(std::int64_t seconds, std::uint32_t nanos = 0) {
-        if (nanos >= 1'000'000'000)
+        if (nanos >= 1'000'000'000) {
             throw std::invalid_argument("SystemTime nanoseconds must be below one second");
+        }
         return SystemTime(seconds, nanos);
     }
 
@@ -39,8 +40,9 @@ public:
     std::optional<SystemTime> checked_add_seconds(std::uint64_t n) const noexcept {
         auto room =
             std::uint64_t(std::numeric_limits<std::int64_t>::max()) - std::uint64_t(seconds_);
-        if (n > room)
+        if (n > room) {
             return {};
+        }
         return SystemTime(std::bit_cast<std::int64_t>(std::uint64_t(seconds_) + n), nanos_);
     }
 

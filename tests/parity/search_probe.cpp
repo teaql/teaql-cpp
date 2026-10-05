@@ -17,10 +17,13 @@ Json evaluate(Memory r, const Json& input) {
     for (const auto& [name, model] : std::get<Json::Object>(get(input, "models").data)) {
         auto [entry, inserted] = models.try_emplace(name);
         (void)inserted;
-        for (const auto& [field, kind] : std::get<Json::Object>(get(model, "fields").data))
+        for (const auto& [field, kind] : std::get<Json::Object>(get(model, "fields").data)) {
             entry->second.fields.emplace(field, text(kind));
-        for (const auto& [relation, target] : std::get<Json::Object>(get(model, "relations").data))
+        }
+        for (const auto& [relation, target] :
+             std::get<Json::Object>(get(model, "relations").data)) {
             entry->second.relations.emplace(relation, text(target));
+        }
     }
     Json emitted(r);
     emitted.data = Json::Array(r);
@@ -37,9 +40,9 @@ Json evaluate(Memory r, const Json& input) {
     Json output(r);
     Json::Object object(r);
     object.emplace("emitted", std::move(emitted));
-    if (!result)
+    if (!result) {
         object.emplace("error", Json(r, result.error().message));
-    else {
+    } else {
         Json body(r);
         Json::Object fields(r);
         Json filters(r), orders(r), warnings(r);
@@ -63,8 +66,9 @@ Json evaluate(Memory r, const Json& input) {
             j.data = std::move(o);
             std::get<Json::Array>(orders.data).emplace_back(std::move(j));
         }
-        for (const auto& warning : result.value().warnings)
+        for (const auto& warning : result.value().warnings) {
             std::get<Json::Array>(warnings.data).emplace_back(warning.to_json(r));
+        }
         fields.emplace("filters", std::move(filters));
         fields.emplace("orders", std::move(orders));
         fields.emplace("warnings", std::move(warnings));
@@ -82,8 +86,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("Invalid search fixture");
+        }
         std::cout << evaluate(r, *input).dump(r) << '\n';
     }
 }

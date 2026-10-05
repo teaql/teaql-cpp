@@ -22,14 +22,16 @@ struct DomainCopy {
 template <class T>
 struct DomainCopy<std::optional<T>> {
     static std::optional<T> copy(Memory r, const std::optional<T>& value) {
-        if (!value)
+        if (!value) {
             return {};
+        }
         return DomainCopy<T>::copy(r, *value);
     }
 
     static std::optional<T> move(Memory r, std::optional<T>&& value) {
-        if (!value)
+        if (!value) {
             return {};
+        }
         return DomainCopy<T>::move(r, std::move(*value));
     }
 };

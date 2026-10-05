@@ -18,12 +18,15 @@ struct MutationPolicyIdentity {
         detail::trim(id);
         detail::trim(version);
         detail::trim(fingerprint);
-        if (id.empty())
+        if (id.empty()) {
             throw std::invalid_argument("policy id must not be blank");
-        if (version.empty())
+        }
+        if (version.empty()) {
             throw std::invalid_argument("policy version must not be blank");
-        if (fingerprint.empty())
+        }
+        if (fingerprint.empty()) {
             throw std::invalid_argument("policy fingerprint must not be blank");
+        }
     }
 
     MutationPolicyIdentity(std::allocator_arg_t, Allocator a, const MutationPolicyIdentity& other)

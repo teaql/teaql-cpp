@@ -9,8 +9,9 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 // Tracks real upstream calls, including exact size/alignment returned on deallocation.
@@ -29,8 +30,9 @@ private:
 
     void do_deallocate(void* ptr, std::size_t bytes, std::size_t alignment) override {
         auto it = allocations.find(ptr);
-        if (it == allocations.end() || it->second != std::make_pair(bytes, alignment))
+        if (it == allocations.end() || it->second != std::make_pair(bytes, alignment)) {
             std::terminate();
+        }
         allocations.erase(it);
         std::pmr::new_delete_resource()->deallocate(ptr, bytes, alignment);
     }
@@ -49,8 +51,9 @@ struct Resource {
         : id(id), order(order), upstream(upstream) {}
 
     ~Resource() noexcept {
-        if (upstream.allocations.empty())
+        if (upstream.allocations.empty()) {
             std::terminate(); // Destruction precedes arena release.
+        }
         order.push_back(id);
     }
 };
@@ -79,8 +82,9 @@ static void growth_and_cleanup() {
     UserContext context(global, 128);
     auto& text = context.make<std::pmr::string>(2048, 'x');
     auto& rows = context.make<std::pmr::vector<std::pmr::string>>();
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < 100; ++i) {
         rows.emplace_back(128, 'a');
+    }
     check(text.get_allocator().resource() == context.memory_resource(),
           "string uses context allocator");
     check(rows.get_allocator().resource() == context.memory_resource(),

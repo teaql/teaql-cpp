@@ -39,12 +39,13 @@ struct Item : EntityDefaults<Item<Kind>> {
 
     static Result<Item, EntityError> from_compact_row(Memory r, CompactRow row) {
         using R = Result<Item, EntityError>;
-        if (auto* v = row.get("fail"); v && v->try_bool().value_or(false))
+        if (auto* v = row.get("fail"); v && v->try_bool().value_or(false)) {
             return R::err(r,
                           EntityError(std::allocator_arg,
                                       Allocator(r),
                                       ENTITY_NAME,
                                       "handwritten model decode failed"));
+        }
         return R::ok(r, Item(std::allocator_arg, Allocator(r), std::move(row)));
     }
 

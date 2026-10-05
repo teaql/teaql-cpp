@@ -6,8 +6,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -126,8 +127,9 @@ static void formats() {
         gmtime_r(&stamp, &tm);
         char buf[32];
         std::strftime(buf, sizeof(buf), "[%Y-%m-%d %H:%M:%S", &tm);
-        if (text.starts_with(buf))
+        if (text.starts_with(buf)) {
             utc = true;
+        }
     }
     check(utc && text.size() > 24 && text[20] == '.' && text[24] == ']',
           "human wall-clock prefix is UTC with exactly three fractional digits");

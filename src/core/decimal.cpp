@@ -12,9 +12,11 @@ using Bits = std::array<std::uint32_t, 3>;
 
 template <std::size_t N>
 bool zero(const std::array<std::uint32_t, N>& b) {
-    for (auto n : b)
-        if (n)
+    for (auto n : b) {
+        if (n) {
             return false;
+        }
+    }
     return true;
 }
 
@@ -27,8 +29,9 @@ bool mul(std::array<std::uint32_t, N>& b, unsigned n, unsigned add = 0) {
         limb = std::uint32_t(carry);
         carry >>= 32;
     }
-    if (carry)
+    if (carry) {
         return false;
+    }
     b = copy;
     return true;
 }
@@ -45,8 +48,9 @@ unsigned div(std::array<std::uint32_t, N>& b, unsigned n) {
 }
 
 Bits truncated(Bits b, unsigned scale) {
-    while (scale--)
+    while (scale--) {
         div(b, 10);
+    }
     return b;
 }
 
@@ -54,9 +58,11 @@ Bits truncated(Bits b, unsigned scale) {
 template <std::size_t N>
 double as_double(std::array<std::uint32_t, N> b) {
     int width = 0;
-    for (unsigned i = 0; i < N; ++i)
-        if (b[i])
+    for (unsigned i = 0; i < N; ++i) {
+        if (b[i]) {
             width = int(i * 32 + std::bit_width(b[i]));
+        }
+    }
     int shift = width > 53 ? width - 53 : 0;
     bool sticky = false, last = false;
     for (int i = 0; i < shift; ++i) {
@@ -64,8 +70,9 @@ double as_double(std::array<std::uint32_t, N> b) {
         last = div(b, 2) != 0;
     }
     std::uint64_t n = (std::uint64_t(b[1]) << 32) | b[0];
-    if (last && (sticky || (n & 1)))
+    if (last && (sticky || (n & 1))) {
         ++n;
+    }
     return std::ldexp(double(n), shift);
 }
 
@@ -74,8 +81,9 @@ std::optional<Decimal> plain(std::string_view s, std::string_view& error) {
         error = message;
         return {};
     };
-    if (s.empty())
+    if (s.empty()) {
         return fail("Invalid decimal: empty");
+    }
     bool negative = false, point = false, digit = false, wide = false;
     unsigned scale = 0;
     Bits b{};
@@ -87,49 +95,59 @@ std::optional<Decimal> plain(std::string_view s, std::string_view& error) {
         if (c == '_' && digit) {
             // rust_decimal's 64-bit parser consumes '_' as a zero rounding
             // digit at scale 28; its wide parser skips separators instead.
-            if (scale == 28 && !wide)
+            if (scale == 28 && !wide) {
                 return Decimal::from_parts(b, negative, scale);
+            }
             continue;
         }
         if (c == '.' && !point) {
             point = true;
             continue;
         }
-        if (c < '0' || c > '9')
+        if (c < '0' || c > '9') {
             return fail(c == '.'   ? "Invalid decimal: two decimal points"
                         : c == '_' ? "Invalid decimal: must start lead with a number"
                                    : "Invalid decimal: unknown character");
+        }
         digit = true;
         auto next = b;
         if ((point && scale == 28) || !mul(next, 10, unsigned(c - '0'))) {
-            if (!point)
+            if (!point) {
                 return fail("Invalid decimal: overflow from too many digits");
+            }
             if (c >= '5' && !mul(b, 1, 1)) {
-                if (!scale)
+                if (!scale) {
                     return fail("Invalid decimal: overflow from mantissa after rounding");
+                }
                 // The rounded coefficient needs one less fractional digit.
                 const auto remainder = div(b, 10);
-                if (remainder >= 4)
+                if (remainder >= 4) {
                     mul(b, 1, 1);
+                }
                 --scale;
             }
             return Decimal::from_parts(b, negative, scale);
         }
         b = next;
-        if (point)
+        if (point) {
             ++scale;
-        if (scale != 28 && (b[2] || ((std::uint64_t(b[1]) << 32) | b[0]) >= UINT64_MAX / 10 - 255))
+        }
+        if (scale != 28 &&
+            (b[2] || ((std::uint64_t(b[1]) << 32) | b[0]) >= UINT64_MAX / 10 - 255)) {
             wide = true;
+        }
     }
-    if (!digit)
+    if (!digit) {
         return fail("Invalid decimal: no digits found");
+    }
     return Decimal::from_parts(b, negative, scale);
 }
 }
 
 std::optional<Decimal> Decimal::from_parts(Bits b, bool negative, unsigned scale) {
-    if (scale > 28)
+    if (scale > 28) {
         return {};
+    }
     Decimal d;
     d.coefficient_ = b;
     d.scale_ = static_cast<unsigned char>(scale);
@@ -159,8 +177,9 @@ Result<Decimal, DecimalError> Decimal::parse_result(Memory r, std::string_view s
     std::string_view message;
     std::uint32_t scale = 0;
     auto result = parse_detail(s, code, message, scale);
-    if (result)
+    if (result) {
         return Result<Decimal, DecimalError>::ok(r, *result);
+    }
     return Result<Decimal, DecimalError>::err(
         r, DecimalError(std::allocator_arg, Allocator(r), code, message, scale));
 }
@@ -170,22 +189,26 @@ std::optional<Decimal> Decimal::parse_detail(std::string_view s,
                                              std::string_view& message,
                                              std::uint32_t& error_scale) {
     code = DecimalError::Code::ErrorString;
-    if (auto d = plain(s, message))
+    if (auto d = plain(s, message)) {
         return d;
+    }
     const auto pos = s.find_first_of("eE");
-    if (pos == s.npos)
+    if (pos == s.npos) {
         return {};
+    }
     auto base = plain(s.substr(0, pos), message);
-    if (!base)
+    if (!base) {
         return {};
+    }
     s.remove_prefix(pos + 1);
     bool negative = false;
     if (!s.empty() && s.front() == '-') {
         negative = true;
         s.remove_prefix(1);
     }
-    if (!s.empty() && s.front() == '+')
+    if (!s.empty() && s.front() == '+') {
         s.remove_prefix(1);
+    }
     unsigned exp = 0;
     auto [end, ec] = std::from_chars(s.data(), s.data() + s.size(), exp);
     if (s.empty() || ec != std::errc{} || end != s.data() + s.size()) {
@@ -204,35 +227,40 @@ std::optional<Decimal> Decimal::parse_detail(std::string_view s,
             remainder = div(b, 10);
             --next_scale;
         }
-        if (base->scale_ + exp > 28 && remainder >= 5)
+        if (base->scale_ + exp > 28 && remainder >= 5) {
             mul(b, 1, 1);
+        }
         base->scale_ = static_cast<unsigned char>(next_scale);
-    } else if (exp <= base->scale_)
+    } else if (exp <= base->scale_) {
         base->scale_ -= static_cast<unsigned char>(exp);
-    else {
-        for (unsigned i = base->scale_; i < exp; ++i)
+    } else {
+        for (unsigned i = base->scale_; i < exp; ++i) {
             if (!mul(b, 10)) {
                 code = DecimalError::Code::ExceedsMaximumPossibleValue;
                 return {};
             }
+        }
         base->scale_ = 0;
     }
-    if (zero(b))
+    if (zero(b)) {
         base->negative_ = false;
+    }
     return base;
 }
 
 // Binary conversion adapted from rust_decimal 1.42.1 (Paul Mason, MIT).
 // The license is retained in LICENSES/rust_decimal-MIT.txt. No library linkage.
 std::optional<Decimal> Decimal::from_f64(double n) {
-    if (!std::isfinite(n))
+    if (!std::isfinite(n)) {
         return {};
+    }
     const auto raw = std::bit_cast<std::uint64_t>(n);
     const bool negative = (raw >> 63) != 0;
     const auto exponent = int((raw >> 52) & 0x7ff);
     auto mantissa = raw & 0x000fffffffffffffULL;
-    if (exponent)
+    if (exponent) {
         mantissa |= 0x0010000000000000ULL;
+    }
     Bits b{std::uint32_t(mantissa), std::uint32_t(mantissa >> 32), 0};
     int e10 = exponent - 1023 - 52 + (exponent == 0), e5 = -e10;
     if (zero(b)) {
@@ -255,34 +283,39 @@ std::optional<Decimal> Decimal::from_f64(double n) {
         if (!(b[2] & 0x80000000)) {
             mul(b, 2);
             --e10;
-        } else if (e10 * 2 > -(e5 - 1))
+        } else if (e10 * 2 > -(e5 - 1)) {
             return {};
-        else
+        } else {
             div(b, 5);
+        }
     }
     while (e10 > 0) {
-        if (!mul(b, 10))
+        if (!mul(b, 10)) {
             return {};
+        }
         --e10;
     }
     while (e10 < -28) {
         const auto rem = div(b, 10);
         ++e10;
-        if (zero(b))
+        if (zero(b)) {
             e10 = 0;
-        else if (rem >= 5)
+        } else if (rem >= 5) {
             mul(b, 1, 1);
+        }
     }
     while (e10 < 0 && (b[2] || (b[1] & 0xfff00000))) {
         const auto rem = div(b, 10);
         ++e10;
-        if (rem >= 5)
+        if (rem >= 5) {
             mul(b, 1, 1);
+        }
     }
     while (e10 < 0) {
         auto copy = b;
-        if (div(copy, 10))
+        if (div(copy, 10)) {
             break;
+        }
         b = copy;
         ++e10;
     }
@@ -292,43 +325,52 @@ std::optional<Decimal> Decimal::from_f64(double n) {
 }
 
 std::optional<std::uint64_t> Decimal::to_u64() const {
-    if (negative_)
+    if (negative_) {
         return {};
+    }
     const auto b = truncated(coefficient_, scale_);
-    if (b[2])
+    if (b[2]) {
         return {};
+    }
     return (std::uint64_t(b[1]) << 32) | b[0];
 }
 
 std::optional<std::int64_t> Decimal::to_i64() const {
     const auto b = truncated(coefficient_, scale_);
-    if (b[2])
+    if (b[2]) {
         return {};
+    }
     auto n = (std::uint64_t(b[1]) << 32) | b[0];
     constexpr auto max = std::uint64_t(INT64_MAX);
-    if (n > max + unsigned(negative_))
+    if (n > max + unsigned(negative_)) {
         return {};
-    if (negative_ && n == max + 1)
+    }
+    if (negative_ && n == max + 1) {
         return INT64_MIN;
+    }
     return negative_ ? -std::int64_t(n) : std::int64_t(n);
 }
 
 double Decimal::to_f64() const {
-    if (scale_ > 38)
+    if (scale_ > 38) {
         throw std::overflow_error("Decimal floating conversion precision overflow");
+    }
     if (scale_ > 28) {
         std::array<std::uint32_t, 4> power{1, 0, 0, 0};
-        for (unsigned i = 0; i < scale_; ++i)
+        for (unsigned i = 0; i < scale_; ++i) {
             mul(power, 10);
+        }
         auto fraction = as_double(coefficient_) / as_double(power);
         double round_to = 1, factor = 10;
         unsigned e = scale_;
         while (e) {
-            if (e & 1)
+            if (e & 1) {
                 round_to *= factor;
+            }
             e >>= 1;
-            if (e)
+            if (e) {
                 factor *= factor;
+            }
         }
         auto result = std::round(fraction * round_to) / round_to;
         return negative_ ? -result : result;
@@ -356,11 +398,13 @@ double Decimal::to_f64() const {
         double round_to = 1, factor = 10;
         unsigned e = scale_;
         while (e) {
-            if (e & 1)
+            if (e & 1) {
                 round_to *= factor;
+            }
             e >>= 1;
-            if (e)
+            if (e) {
                 factor *= factor;
+            }
         }
         n = std::round(n * round_to) / round_to;
     }
@@ -368,8 +412,9 @@ double Decimal::to_f64() const {
 }
 
 String Decimal::to_string(Memory r) const {
-    if (scale_ > 30)
+    if (scale_ > 30) {
         throw std::length_error("Decimal display exceeds the locked Rust formatter capacity");
+    }
     char buffer[32];
     auto end = buffer + sizeof(buffer), start = end;
     auto b = coefficient_;
@@ -377,12 +422,13 @@ String Decimal::to_string(Memory r) const {
         *--start = char('0' + div(b, 10));
     } while (!zero(b));
     String out(r);
-    if (negative_)
+    if (negative_) {
         out += '-';
+    }
     auto size = unsigned(end - start);
-    if (!scale_)
+    if (!scale_) {
         out.append(start, end);
-    else if (size > scale_) {
+    } else if (size > scale_) {
         out.append(start, end - scale_);
         out += '.';
         out.append(end - scale_, end);
@@ -395,20 +441,24 @@ String Decimal::to_string(Memory r) const {
 }
 
 bool Decimal::operator==(const Decimal& other) const {
-    if (zero(coefficient_) && zero(other.coefficient_))
+    if (zero(coefficient_) && zero(other.coefficient_)) {
         return true;
-    if (negative_ != other.negative_)
+    }
+    if (negative_ != other.negative_) {
         return false;
+    }
     auto a = coefficient_, b = other.coefficient_;
     auto sa = scale_, sb = other.scale_;
     while (sa > sb) {
-        if (div(a, 10))
+        if (div(a, 10)) {
             return false;
+        }
         --sa;
     }
     while (sb > sa) {
-        if (div(b, 10))
+        if (div(b, 10)) {
             return false;
+        }
         --sb;
     }
     return a == b;
@@ -444,20 +494,22 @@ String DecimalError::to_string(Memory r) const {
 
 Result<std::monostate, DecimalError> Decimal::set_scale(Memory r, unsigned scale) {
     using Outcome = Result<std::monostate, DecimalError>;
-    if (scale > MAX_SCALE)
+    if (scale > MAX_SCALE) {
         return Outcome::err(r,
                             DecimalError(std::allocator_arg,
                                          Allocator(r),
                                          DecimalError::Code::ScaleExceedsMaximumPrecision,
                                          {},
                                          scale));
+    }
     scale_ = static_cast<unsigned char>(scale);
     return Outcome::ok(r, {});
 }
 
 void Decimal::adjust_scale(unsigned target, bool round) {
-    if (scale_ == target)
+    if (scale_ == target) {
         return;
+    }
     if (is_zero()) {
         scale_ = static_cast<unsigned char>(std::min(target, MAX_SCALE));
         return;
@@ -471,13 +523,15 @@ void Decimal::adjust_scale(unsigned target, bool round) {
             }
             last = div(coefficient_, 10);
         }
-        if (round && last >= 5)
+        if (round && last >= 5) {
             mul(coefficient_, 1, 1);
+        }
         scale_ = static_cast<unsigned char>(target);
     } else {
         while (scale_ < target) {
-            if (!mul(coefficient_, 10))
+            if (!mul(coefficient_, 10)) {
                 break;
+            }
             ++scale_;
         }
     }
@@ -485,9 +539,11 @@ void Decimal::adjust_scale(unsigned target, bool round) {
 
 bool Decimal::is_integer() const {
     auto value = coefficient_;
-    for (unsigned i = 0; i < scale_; ++i)
-        if (div(value, 10))
+    for (unsigned i = 0; i < scale_; ++i) {
+        if (div(value, 10)) {
             return false;
+        }
+    }
     return true;
 }
 
@@ -498,29 +554,35 @@ std::array<std::uint8_t, 16> Decimal::serialize() const {
                                              coefficient_[0],
                                              coefficient_[1],
                                              coefficient_[2]};
-    for (unsigned i = 0; i < 4; ++i)
-        for (unsigned j = 0; j < 4; ++j)
+    for (unsigned i = 0; i < 4; ++i) {
+        for (unsigned j = 0; j < 4; ++j) {
             result[4 * i + j] = std::uint8_t(words[i] >> (8 * j));
+        }
+    }
     return result;
 }
 
 Decimal Decimal::deserialize(const std::array<std::uint8_t, 16>& bytes) {
     std::array<std::uint32_t, 4> words{};
-    for (unsigned i = 0; i < 4; ++i)
-        for (unsigned j = 0; j < 4; ++j)
+    for (unsigned i = 0; i < 4; ++i) {
+        for (unsigned j = 0; j < 4; ++j) {
             words[i] |= std::uint32_t(bytes[4 * i + j]) << (8 * j);
+        }
+    }
     Decimal result;
     result.coefficient_ = {words[1], words[2], words[3]};
     result.negative_ = (words[0] >> 31) != 0;
     result.scale_ = (words[0] >> 16) & 31;
     if (result.scale_ > MAX_SCALE) {
         unsigned power = 1;
-        for (unsigned i = MAX_SCALE; i < result.scale_; ++i)
+        for (unsigned i = MAX_SCALE; i < result.scale_; ++i) {
             power *= 10;
+        }
         // The upstream decoder compares the entire remainder to 5, including
         // scale 30/31. Do not replace this with generic decimal rounding.
-        if (div(result.coefficient_, power) >= 5)
+        if (div(result.coefficient_, power) >= 5) {
             mul(result.coefficient_, 1, 1);
+        }
         result.scale_ = MAX_SCALE;
     }
     return result;
@@ -528,8 +590,9 @@ Decimal Decimal::deserialize(const std::array<std::uint8_t, 16>& bytes) {
 
 std::optional<Decimal> Decimal::round_sf_with_strategy(unsigned digits,
                                                        RoundingStrategy strategy) const {
-    if (is_zero() || !digits)
+    if (is_zero() || !digits) {
         return Decimal{};
+    }
     auto working = coefficient_;
     unsigned count = 0;
     do {
@@ -537,27 +600,32 @@ std::optional<Decimal> Decimal::round_sf_with_strategy(unsigned digits,
         ++count;
     } while (!zero(working));
     if (digits > count) {
-        if (std::uint64_t(scale_) + digits > UINT32_MAX)
+        if (std::uint64_t(scale_) + digits > UINT32_MAX) {
             throw std::overflow_error("Decimal significant-figure scale overflow");
+        }
         auto result = *this;
         result.rescale(unsigned(scale_) + digits - count);
         return result;
     }
-    if (digits == count)
+    if (digits == count) {
         return *this;
+    }
     auto difference = count - digits;
-    if (difference <= scale_)
+    if (difference <= scale_) {
         return round_dp_with_strategy(scale_ - difference, strategy);
+    }
     unsigned exponent = difference - scale_;
     auto result = *this;
     for (unsigned remaining = exponent; remaining;) {
         auto chunk = std::min(remaining, 19u);
         std::uint64_t power = 1;
-        for (unsigned i = 0; i < chunk; ++i)
+        for (unsigned i = 0; i < chunk; ++i) {
             power *= 10;
+        }
         auto value = result.checked_div(from_u64(power));
-        if (!value)
+        if (!value) {
             return {};
+        }
         result = *value;
         remaining -= chunk;
     }
@@ -565,11 +633,13 @@ std::optional<Decimal> Decimal::round_sf_with_strategy(unsigned digits,
     for (unsigned remaining = exponent; remaining;) {
         auto chunk = std::min(remaining, 19u);
         std::uint64_t power = 1;
-        for (unsigned i = 0; i < chunk; ++i)
+        for (unsigned i = 0; i < chunk; ++i) {
             power *= 10;
+        }
         auto value = result.checked_mul(from_u64(power));
-        if (!value)
+        if (!value) {
             return {};
+        }
         result = *value;
         remaining -= chunk;
     }

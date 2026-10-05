@@ -8,8 +8,9 @@ Value default_aggregate_value(Memory r, bool single) {
 void attach_empty_relation_aggregate(std::span<CompactRow> rows,
                                      std::string_view alias,
                                      bool single) {
-    for (auto& row : rows)
+    for (auto& row : rows) {
         row.insert(alias, default_aggregate_value(row.memory_resource(), single));
+    }
 }
 
 void attach_relation_aggregate_rows(std::span<CompactRow> parents,
@@ -18,13 +19,15 @@ void attach_relation_aggregate_rows(std::span<CompactRow> parents,
                                     Vector<CompactRow> rows) {
     auto r = plan.memory_resource();
     std::pmr::map<String, Vector<CompactRow>, std::less<>> buckets(r);
-    for (auto& row : rows)
-        if (auto key = row.remove(plan.foreign_key))
+    for (auto& row : rows) {
+        if (auto key = row.remove(plan.foreign_key)) {
             buckets.try_emplace(graph_identity_key(r, *key))
                 .first->second.emplace_back(std::move(row));
+        }
+    }
     for (auto& parent : parents) {
         auto value = default_aggregate_value(r, aggregate.single_result);
-        if (auto* key = parent.get(plan.local_key))
+        if (auto* key = parent.get(plan.local_key)) {
             if (auto it = buckets.find(graph_identity_key(r, *key)); it != buckets.end()) {
                 if (aggregate.single_result) {
                     const auto& row = it->second.front();
@@ -32,11 +35,13 @@ void attach_relation_aggregate_rows(std::span<CompactRow> parents,
                                            : Value(r, row.into_map(r));
                 } else {
                     Value::List list(r);
-                    for (const auto& row : it->second)
+                    for (const auto& row : it->second) {
                         list.emplace_back(row.into_map(r));
+                    }
                     value = Value(r, list);
                 }
             }
+        }
         parent.insert(aggregate.alias, value);
     }
 }
@@ -44,9 +49,11 @@ void attach_relation_aggregate_rows(std::span<CompactRow> parents,
 namespace {
 auto index_rows(Memory r, std::span<const CompactRow> rows) {
     std::pmr::map<String, CompactRow, std::less<>> index(r);
-    for (const auto& row : rows)
-        if (auto* id = row.get("id"))
+    for (const auto& row : rows) {
+        if (auto* id = row.get("id")) {
             index.insert_or_assign(graph_identity_key(r, *id), clone_in(r, row));
+        }
+    }
     return index;
 }
 }
@@ -56,22 +63,27 @@ void attach_object_group_rows(std::span<CompactRow> parents,
                               std::span<const CompactRow> rows) {
     auto r = group.memory_resource();
     auto index = index_rows(r, rows);
-    for (auto& parent : parents)
+    for (auto& parent : parents) {
         if (auto* key = parent.get(group.storage_field)) {
             auto it = index.find(graph_identity_key(r, *key));
             parent.insert(group.property_name,
                           it == index.end() ? Value(r) : Value(r, it->second.into_map(r)));
         }
+    }
 }
 
 void attach_child_query_rows(std::span<CompactRow> parents, std::span<const CompactRow> rows) {
-    if (parents.empty())
+    if (parents.empty()) {
         return;
+    }
     auto r = parents.front().memory_resource();
     auto index = index_rows(r, rows);
-    for (auto& parent : parents)
-        if (auto* key = parent.get("id"))
-            if (auto it = index.find(graph_identity_key(r, *key)); it != index.end())
+    for (auto& parent : parents) {
+        if (auto* key = parent.get("id")) {
+            if (auto it = index.find(graph_identity_key(r, *key)); it != index.end()) {
                 parent.extend(it->second);
+            }
+        }
+    }
 }
 }

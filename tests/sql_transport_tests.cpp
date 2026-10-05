@@ -7,8 +7,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 enum class Error { Fetch, Execute, Begin, Commit, Rollback };
 using Rows = Vector<CompactRow>;
@@ -56,8 +57,9 @@ struct PendingRows {
         if (!worker.joinable()) {
             ++stats.starts;
             worker = std::thread([this, &wake] {
-                while (!stats.gate.load())
+                while (!stats.gate.load()) {
                     stats.gate.wait(false);
+                }
                 if (!stop.load()) {
                     id = *query.params.at(1).try_i64();
                     ++stats.reads;
@@ -66,10 +68,12 @@ struct PendingRows {
                 wake.notify();
             });
         }
-        if (!done.load())
+        if (!done.load()) {
             return {};
-        if (fail)
+        }
+        if (fail) {
             return Result<Rows, Error>::err(resource, Error::Fetch);
+        }
         Rows rows(resource);
         rows.emplace_back();
         rows.back().insert("id", Value(resource, id));
@@ -77,8 +81,9 @@ struct PendingRows {
     }
 
     void finish_and_wait() noexcept {
-        if (worker.joinable())
+        if (worker.joinable()) {
             worker.join();
+        }
         ++stats.finishes;
     }
 
@@ -86,8 +91,9 @@ struct PendingRows {
         stop.store(true);
         stats.gate.store(true);
         stats.gate.notify_all();
-        if (worker.joinable())
+        if (worker.joinable()) {
             worker.join();
+        }
         ++stats.cancels;
     }
 };
@@ -125,8 +131,9 @@ struct Chunks {
     Chunks(std::allocator_arg_t, Allocator a) : resource(a.resource()) {}
 
     std::optional<std::optional<Result<StreamChunk, Error>>> poll_next(WakeSignal&) {
-        if (emitted)
+        if (emitted) {
             return std::optional<Result<StreamChunk, Error>>{};
+        }
         emitted = true;
         StreamChunk chunk(std::allocator_arg, Allocator(resource), 0, true);
         return std::optional<Result<StreamChunk, Error>>(
@@ -152,11 +159,13 @@ struct Transport final : StreamingSqlTransport<Error>, SqlTransactionTransport<E
     fetch_all_compact_sql(Memory r, const CompiledQuery& query) override {
         seen.emplace_back(query);
         bool fail = fail_at && int(seen.size()) == fail_at;
-        if (delayed)
+        if (delayed) {
             return make_resource_operation<Result<Rows, Error>, PendingRows>(
                 r, r, query, stats, fail);
-        if (fail)
+        }
+        if (fail) {
             return ready(r, Result<Rows, Error>::err(r, Error::Fetch));
+        }
         Rows rows(r);
         rows.emplace_back();
         rows.back().insert("id", query.params.at(1));
@@ -201,8 +210,9 @@ static void repeated() {
     auto& transport = global.make<Transport>(stats);
     auto& q = template_query(*user);
     Vector<Value> ids(r);
-    for (int n : {3, 1, 3})
+    for (int n : {3, 1, 3}) {
         ids.emplace_back(n);
+    }
     auto& operation = transport.fetch_repeated_compact_sql(r, q, 1, ids);
     check(transport.seen.empty(), "default repeated fetch is lazy");
     auto& result = operation.wait();
@@ -375,8 +385,9 @@ static void forwarding_contract() {
             source.notify();
             started.store(true);
             started.notify_all();
-            while (!stop.load())
+            while (!stop.load()) {
                 source.notify();
+            }
         });
         started.wait(false);
         link.reset();

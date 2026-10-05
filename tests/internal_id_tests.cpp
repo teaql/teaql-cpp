@@ -7,8 +7,9 @@
 using namespace teaql;
 
 static void check(bool b, const char* message) {
-    if (!b)
+    if (!b) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -92,24 +93,30 @@ static void counters_and_threads() {
     auto& counter = owner.make<AtomicCounterIdGenerator>(0);
     std::array<std::array<std::uint64_t, 128>, 4> values{};
     std::array<std::thread, 4> threads;
-    for (std::size_t t = 0; t < threads.size(); ++t)
+    for (std::size_t t = 0; t < threads.size(); ++t) {
         threads[t] = std::thread([&, t] {
             GlobalContext output;
             auto r = output.memory_resource();
-            for (auto& value : values[t])
+            for (auto& value : values[t]) {
                 value = counter.generate_id(r, "Order").value();
+            }
         });
-    for (auto& thread : threads)
+    }
+    for (auto& thread : threads) {
         thread.join();
+    }
     std::array<std::uint64_t, 512> all{};
     std::size_t i = 0;
-    for (auto& batch : values)
-        for (auto value : batch)
+    for (auto& batch : values) {
+        for (auto value : batch) {
             all[i++] = value;
+        }
+    }
     std::sort(all.begin(), all.end());
-    for (i = 0; i < all.size(); ++i)
+    for (i = 0; i < all.size(); ++i) {
         check(all[i] == i + 1,
               "atomic generator supports concurrent calls with caller-owned result arenas");
+    }
     auto r = owner.memory_resource();
     check(bool(counter.ensure_floor(r, "x", UINT64_MAX)), "full u64 floor is accepted");
 #ifndef NDEBUG
@@ -139,8 +146,9 @@ static void snowflake_transitions() {
     };
     auto wait = [&](std::uint64_t last) {
         waited = last;
-        if (fail_wait)
+        if (fail_wait) {
             return detail::IdMillis::err(r, RuntimeError::id_generation(r, "clock error"));
+        }
         return detail::IdMillis::ok(r, last + 1);
     };
     auto next = [&] {

@@ -30,8 +30,9 @@ inline Json serialize(Memory destination, std::optional<std::string_view> value)
 
 inline Result<std::optional<String>, Error> deserialize(Memory destination, const Json& value) {
     using Outcome = Result<std::optional<String>, Error>;
-    if (std::holds_alternative<std::monostate>(value.data))
+    if (std::holds_alternative<std::monostate>(value.data)) {
         return Outcome::ok(destination, std::optional<String>{});
+    }
     if (const auto* text = std::get_if<String>(&value.data)) {
         std::string_view view(*text);
         detail::trim(view);

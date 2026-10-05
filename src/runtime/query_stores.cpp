@@ -6,14 +6,16 @@ namespace teaql {
 std::optional<Vector<CompactRow>>
 InMemoryAggregationCache::get(Memory r, std::string_view key, std::uint64_t age) const {
     auto it = entries_.find(key);
-    if (it == entries_.end())
+    if (it == entries_.end()) {
         return {};
+    }
     auto elapsed = std::chrono::steady_clock::now() - it->second.stored_at;
     auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed);
     if (age && elapsed > decltype(elapsed)::zero() &&
         (std::uint64_t(millis.count()) > age ||
-         (std::uint64_t(millis.count()) == age && elapsed > millis)))
+         (std::uint64_t(millis.count()) == age && elapsed > millis))) {
         return {};
+    }
     return Vector<CompactRow>(it->second.rows, r);
 }
 
@@ -24,9 +26,10 @@ void InMemoryAggregationCache::put(std::string_view key, std::span<const Compact
         Entry entry(std::allocator_arg, Allocator(r), rows);
         it->second.rows.swap(entry.rows);
         it->second.stored_at = entry.stored_at;
-    } else
+    } else {
         entries_.emplace(
             std::piecewise_construct, std::forward_as_tuple(key), std::forward_as_tuple(rows));
+    }
 }
 
 void InMemoryAggregationCache::invalidate_namespace(std::string_view name) {
@@ -51,8 +54,9 @@ void evict_earliest(Map& map) {
     auto oldest = std::min_element(map.begin(), map.end(), [](const auto& a, const auto& b) {
         return a.second.expires_at < b.second.expires_at;
     });
-    if (oldest != map.end())
+    if (oldest != map.end()) {
         map.erase(oldest);
+    }
 }
 
 std::size_t saturating_add(std::size_t a, std::size_t b) {
@@ -71,8 +75,9 @@ std::optional<ContinuousPageCursor>
 InMemoryContinuousPageCursorStore::get_now(Memory r, std::string_view query, std::uint64_t offset) {
     auto key = cursor_key(r, query, offset);
     auto it = cursors_.find(key);
-    if (it == cursors_.end())
+    if (it == cursors_.end()) {
         return {};
+    }
     if (it->second.expires_at <= SystemTime::now()) {
         cursors_.erase(it);
         return {};
@@ -84,8 +89,9 @@ void InMemoryContinuousPageCursorStore::put_now(const ContinuousPageCursor& curs
     auto r = memory_resource();
     auto key = cursor_key(r, cursor.query_key, cursor.next_offset);
     auto copy = detail::clone_in(r, cursor);
-    if (cursors_.size() >= max_entries_)
+    if (cursors_.size() >= max_entries_) {
         evict_earliest(cursors_);
+    }
     cursors_.insert_or_assign(std::move(key), std::move(copy));
 }
 
@@ -98,8 +104,9 @@ void InMemoryContinuousPageCursorStore::invalidate_now(std::string_view key) {
 
 std::optional<RetainedIdSet> InMemoryIdSetStore::get_now(Memory r, std::string_view key) {
     auto it = sets_.find(key);
-    if (it == sets_.end())
+    if (it == sets_.end()) {
         return {};
+    }
     if (it->second.expires_at <= SystemTime::now()) {
         sets_.erase(it);
         return {};
@@ -118,16 +125,18 @@ std::size_t InMemoryIdSetStore::retained_bytes() const {
 
 PaginationWriteResult InMemoryIdSetStore::put_now(Memory result, const RetainedIdSet& input) {
     auto incoming = id_bytes(input.ids.size());
-    if (incoming > max_bytes_)
+    if (incoming > max_bytes_) {
         return PaginationWriteResult::err(
             result, String("ID set exceeds the process-local store memory ceiling", result));
+    }
     std::erase_if(sets_, [](const auto& entry) {
         return entry.second.expires_at <= SystemTime::now();
     });
     while (sets_.size() >= max_entries_ ||
            saturating_add(retained_bytes(), incoming) > max_bytes_) {
-        if (sets_.empty())
+        if (sets_.empty()) {
             break;
+        }
         evict_earliest(sets_);
     }
     sets_.insert_or_assign(String(input.query_key, memory_resource()),
@@ -137,8 +146,9 @@ PaginationWriteResult InMemoryIdSetStore::put_now(Memory result, const RetainedI
 
 void InMemoryIdSetStore::invalidate_now(std::string_view key) {
     auto it = sets_.find(key);
-    if (it != sets_.end())
+    if (it != sets_.end()) {
         sets_.erase(it);
+    }
 }
 
 namespace detail {
@@ -159,8 +169,9 @@ struct CursorStoreOperation {
                          const ContinuousPageCursor* cursor)
         : store(std::allocator_arg, a, store, resource_arena(store.memory_resource())),
           key(key, a.resource()), offset(offset) {
-        if (cursor)
+        if (cursor) {
             this->cursor.emplace(std::allocator_arg, a, *cursor);
+        }
     }
 
     auto read() {
@@ -170,10 +181,11 @@ struct CursorStoreOperation {
     }
 
     auto write() {
-        if (cursor)
+        if (cursor) {
             store.get().put_now(*cursor);
-        else
+        } else {
             store.get().invalidate_now(key);
+        }
         return PaginationWriteResult::ok(key.get_allocator().resource(), {});
     }
 };
@@ -191,8 +203,9 @@ struct IdSetStoreOperation {
                         const RetainedIdSet* ids)
         : store(std::allocator_arg, a, store, resource_arena(store.memory_resource())),
           key(key, a.resource()) {
-        if (ids)
+        if (ids) {
             this->ids.emplace(std::allocator_arg, a, *ids);
+        }
     }
 
     auto read() {
@@ -202,8 +215,9 @@ struct IdSetStoreOperation {
     }
 
     auto write() {
-        if (ids)
+        if (ids) {
             return store.get().put_now(key.get_allocator().resource(), *ids);
+        }
         store.get().invalidate_now(key);
         return PaginationWriteResult::ok(key.get_allocator().resource(), {});
     }
@@ -213,17 +227,19 @@ template <class Operation, bool Read>
 struct StoreOperation : Operation {
     using Operation::Operation;
     using R = decltype([](Operation& op) {
-        if constexpr (Read)
+        if constexpr (Read) {
             return op.read();
-        else
+        } else {
             return op.write();
+        }
     }(std::declval<Operation&>()));
 
     std::optional<R> poll(WakeSignal&) {
-        if constexpr (Read)
+        if constexpr (Read) {
             return this->read();
-        else
+        } else {
             return this->write();
+        }
     }
 
     void finish_and_wait() noexcept {}

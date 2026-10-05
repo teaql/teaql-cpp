@@ -11,8 +11,9 @@ void append_float(String& out, double value, bool json) {
         out += json ? "null" : std::isnan(value) ? "NaN" : std::signbit(value) ? "-inf" : "inf";
         return;
     }
-    if (std::signbit(value))
+    if (std::signbit(value)) {
         out += '-';
+    }
     if (value == 0) {
         out += json ? "0.0" : "0";
         return;
@@ -20,22 +21,27 @@ void append_float(String& out, double value, bool json) {
     char text[32];
     auto [end, error] =
         std::to_chars(text, text + sizeof(text), std::abs(value), std::chars_format::scientific);
-    if (error != std::errc{})
+    if (error != std::errc{}) {
         throw std::runtime_error("float formatting failed");
+    }
     char digits[20];
     int count = 0;
     const char* p = text;
-    for (; p != end && *p != 'e'; ++p)
-        if (*p != '.')
+    for (; p != end && *p != 'e'; ++p) {
+        if (*p != '.') {
             digits[count++] = *p;
+        }
+    }
     ++p;
     bool negative = *p == '-';
     ++p;
     int exponent = 0;
-    for (; p != end; ++p)
+    for (; p != end; ++p) {
         exponent = exponent * 10 + (*p - '0');
-    if (negative)
+    }
+    if (negative) {
         exponent = -exponent;
+    }
     if (!json) {
         // Rust Display breaks shortest-decimal ties away from zero; to_chars
         // and serde_json use ties-to-even. Detect the exact binary midpoint,
@@ -43,8 +49,9 @@ void append_float(String& out, double value, bool json) {
         const auto bits = std::bit_cast<std::uint64_t>(std::abs(value));
         const int binary_exponent = int(bits >> 52);
         auto significand = bits & ((std::uint64_t(1) << 52) - 1);
-        if (binary_exponent)
+        if (binary_exponent) {
             significand |= std::uint64_t(1) << 52;
+        }
         const int trailing = std::countr_zero(significand);
         significand >>= trailing;
         const int power = exponent - count + 1;
@@ -57,8 +64,9 @@ void append_float(String& out, double value, bool json) {
             }
             significand /= 5;
         }
-        if (divisible && binary_power - power == -1 && (significand & 3) == 1)
+        if (divisible && binary_power - power == -1 && (significand & 3) == 1) {
             ++digits[count - 1];
+        }
     }
     if (json && (exponent < -5 || exponent > 15)) {
         out += digits[0];
@@ -78,8 +86,9 @@ void append_float(String& out, double value, bool json) {
     } else if (exponent + 1 >= count) {
         out.append(digits, digits + count);
         out.append(exponent + 1 - count, '0');
-        if (json)
+        if (json) {
             out += ".0";
+        }
     } else {
         out.append(digits, digits + exponent + 1);
         out += '.';

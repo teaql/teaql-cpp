@@ -7,8 +7,9 @@ using namespace teaql;
 using namespace teaql::detail;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -105,15 +106,17 @@ static void waiting_and_cancellation(bool close_waiter) {
         w1->close();
         check(w1->allocation_stats().live_blocks == 0,
               "woken waiter close reclaims every arena block");
-    } else
+    } else {
         first.cancel();
+    }
     check(second.wake_signal().ticket() == t2 + 1,
           "cancel or close after wake transfers notification to another waiter");
     auto& guard = second.wait().get();
     check(guard.owns_lock(), "notified waiter can acquire");
     guard.release();
-    if (!close_waiter)
+    if (!close_waiter) {
         b.reset();
+    }
     c.reset();
     a.reset();
     auto& reuse = ContextPaginationAccess::build_lock(*owner, "q");
@@ -170,8 +173,9 @@ struct NativeState {
           stopped(stopped), read(read) {}
 
     ~NativeState() {
-        if (worker.joinable())
+        if (worker.joinable()) {
             std::terminate();
+        }
     }
 
     std::optional<std::uint64_t> poll(WakeSignal& wake) {
@@ -184,15 +188,17 @@ struct NativeState {
             });
             return {};
         }
-        if (done.load())
+        if (done.load()) {
             return 1;
+        }
         return {};
     }
 
     void stop() noexcept {
         go.release();
-        if (worker.joinable())
+        if (worker.joinable()) {
             worker.join();
+        }
         stopped = true;
     }
 

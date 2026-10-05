@@ -23,18 +23,21 @@ Vector<std::size_t> boundaries(Memory r, std::string_view text) {
         char32_t code = b;
         unsigned n = b < 0x80 ? 0 : b < 0xE0 ? 1 : b < 0xF0 ? 2 : 3;
         if (n) {
-            if (b < 0xC2 || b > 0xF4 || i + n > text.size())
+            if (b < 0xC2 || b > 0xF4 || i + n > text.size()) {
                 throw std::invalid_argument("Invalid UTF-8 in audit value");
+            }
             code = b & ((1u << (6 - n)) - 1);
             for (unsigned k = 0; k < n; ++k) {
                 auto c = static_cast<unsigned char>(text[i++]);
-                if ((c & 0xC0) != 0x80)
+                if ((c & 0xC0) != 0x80) {
                     throw std::invalid_argument("Invalid UTF-8 in audit value");
+                }
                 code = (code << 6) | (c & 63);
             }
             if ((n == 1 && code < 0x80) || (n == 2 && code < 0x800) || (n == 3 && code < 0x10000) ||
-                code > 0x10FFFF || (code >= 0xD800 && code <= 0xDFFF))
+                code > 0x10FFFF || (code >= 0xD800 && code <= 0xDFFF)) {
                 throw std::invalid_argument("Invalid UTF-8 in audit value");
+            }
         }
         out.push_back(i);
     }
@@ -46,8 +49,9 @@ String mask(Memory r, std::string_view text) {
     auto count = b.size() - 1;
     if (count < 8 || std::all_of(text.begin(), text.end(), [](char c) {
             return c >= '0' && c <= '9';
-        }))
+        })) {
         return String(count, '*', r);
+    }
     String out(text.substr(0, b[2]), r);
     out.append(count - 4, '*');
     out += text.substr(b[count - 2]);
@@ -56,44 +60,57 @@ String mask(Memory r, std::string_view text) {
 
 bool credentials(const Json& value) {
     if (auto* fields = std::get_if<Json::Object>(&value.data)) {
-        for (const auto& [key, v] : *fields)
-            if (is_credential_log_name(key) || credentials(v))
+        for (const auto& [key, v] : *fields) {
+            if (is_credential_log_name(key) || credentials(v)) {
                 return true;
+            }
+        }
     } else if (auto* values = std::get_if<Json::Array>(&value.data)) {
-        for (const auto& v : *values)
-            if (credentials(v))
+        for (const auto& v : *values) {
+            if (credentials(v)) {
                 return true;
+            }
+        }
     }
     return false;
 }
 
 bool credentials(const Value& value) {
     if (auto* fields = value.as_object()) {
-        for (const auto& [key, v] : *fields)
-            if (is_credential_log_name(key) || credentials(v))
+        for (const auto& [key, v] : *fields) {
+            if (is_credential_log_name(key) || credentials(v)) {
                 return true;
+            }
+        }
     } else if (auto* values = value.as_list()) {
-        for (const auto& v : *values)
-            if (credentials(v))
+        for (const auto& v : *values) {
+            if (credentials(v)) {
                 return true;
-    } else if (auto* json = std::get_if<Json>(&value.data))
+            }
+        }
+    } else if (auto* json = std::get_if<Json>(&value.data)) {
         return credentials(*json);
+    }
     return false;
 }
 
 void collect(const Json& value, Vector<String>& out) {
     auto r = out.get_allocator().resource();
     if (auto* s = std::get_if<String>(&value.data)) {
-        if (!s->empty())
+        if (!s->empty()) {
             out.emplace_back(*s);
+        }
     } else if (auto* values = std::get_if<Json::Array>(&value.data)) {
-        for (const auto& v : *values)
+        for (const auto& v : *values) {
             collect(v, out);
+        }
     } else if (auto* fields = std::get_if<Json::Object>(&value.data)) {
-        for (const auto& [_, v] : *fields)
+        for (const auto& [_, v] : *fields) {
             collect(v, out);
-    } else if (!std::holds_alternative<std::monostate>(value.data))
+        }
+    } else if (!std::holds_alternative<std::monostate>(value.data)) {
         out.emplace_back(value.dump(r));
+    }
 }
 
 template <class T>
@@ -109,28 +126,32 @@ void collect(const Value& value, Vector<String>& out) {
         [&](const auto& v) {
             using T = std::decay_t<decltype(v)>;
             if constexpr (std::same_as<T, String>) {
-                if (!v.empty())
+                if (!v.empty()) {
                     out.emplace_back(v);
+                }
             } else if constexpr (std::same_as<T, Value::Object>) {
-                for (const auto& [_, x] : v)
+                for (const auto& [_, x] : v) {
                     collect(x, out);
+                }
             } else if constexpr (std::same_as<T, Value::List>) {
-                for (const auto& x : v)
+                for (const auto& x : v) {
                     collect(x, out);
-            } else if constexpr (std::same_as<T, Json>)
+                }
+            } else if constexpr (std::same_as<T, Json>) {
                 collect(v, out);
-            else if constexpr (std::same_as<T, bool>)
+            } else if constexpr (std::same_as<T, bool>) {
                 out.emplace_back(v ? "true" : "false");
-            else if constexpr (std::same_as<T, std::int64_t> || std::same_as<T, std::uint64_t>)
+            } else if constexpr (std::same_as<T, std::int64_t> || std::same_as<T, std::uint64_t>) {
                 out.emplace_back(number(r, v));
-            else if constexpr (std::same_as<T, double>) {
+            } else if constexpr (std::same_as<T, double>) {
                 String text(r);
                 detail::append_float(text, v, false);
                 out.emplace_back(std::move(text));
-            } else if constexpr (std::same_as<T, Decimal> || std::same_as<T, Date>)
+            } else if constexpr (std::same_as<T, Decimal> || std::same_as<T, Date>) {
                 out.emplace_back(v.to_string(r));
-            else if constexpr (std::same_as<T, Timestamp>)
+            } else if constexpr (std::same_as<T, Timestamp>) {
                 out.emplace_back(number(r, v.as_millis()));
+            }
         },
         value.data);
 }
@@ -145,15 +166,17 @@ void sort_secrets(Vector<String>& secrets) {
     });
     Vector<String> sorted(r);
     sorted.reserve(secrets.size());
-    for (auto i : order)
+    for (auto i : order) {
         sorted.emplace_back(std::move(secrets[i]));
+    }
     secrets = std::move(sorted);
 }
 
 void scrub(String& value, const Vector<String>& secrets) {
     for (const auto& secret : secrets) {
-        if (secret.empty())
+        if (secret.empty()) {
             continue;
+        }
         std::size_t at = 0;
         while ((at = value.find(secret, at)) != value.npos) {
             value.replace(at, secret.size(), "[REDACTED]");
@@ -193,27 +216,34 @@ RawAuditEvent audit_event_projection(Memory r, const RawAuditEvent& source, bool
         if (is_credential_log_name(field) || credentials(value) ||
             (!allow && field != "id" && field != "version")) {
             collect(value, secrets);
-            if (!value.is_null())
+            if (!value.is_null()) {
                 value = Value(r, "[REDACTED]");
+            }
         }
     };
     auto record = [&](Record& values) {
-        for (auto& [field, value] : values)
+        for (auto& [field, value] : values) {
             redact(field, value);
+        }
     };
     record(result.values);
-    if (result.old_values)
+    if (result.old_values) {
         record(*result.old_values);
-    if (result.new_values)
-        record(*result.new_values);
-    for (auto& change : result.changes) {
-        if (change.old_value)
-            redact(change.field, *change.old_value);
-        if (change.new_value)
-            redact(change.field, *change.new_value);
     }
-    if (auto id = source.values.find("id"); id != source.values.end())
+    if (result.new_values) {
+        record(*result.new_values);
+    }
+    for (auto& change : result.changes) {
+        if (change.old_value) {
+            redact(change.field, *change.old_value);
+        }
+        if (change.new_value) {
+            redact(change.field, *change.new_value);
+        }
+    }
+    if (auto id = source.values.find("id"); id != source.values.end()) {
         collect(id->second, secrets);
+    }
     sort_secrets(secrets);
     scrub_trace(result.trace_chain, secrets);
     if (result.bootstrap_audit) {
@@ -227,10 +257,12 @@ RawAuditEvent audit_event_projection(Memory r, const RawAuditEvent& source, bool
 std::pair<String, bool> limit_audit_value(Memory r, std::string_view value, std::size_t maximum) {
     auto b = boundaries(r, value);
     auto count = b.size() - 1;
-    if (count <= maximum)
+    if (count <= maximum) {
         return {String(value, r), false};
-    if (maximum <= 3)
+    }
+    if (maximum <= 3) {
         return {String(maximum, '*', r), true};
+    }
     auto keep = maximum - 3, head = keep / 2, tail = keep - head;
     String out(value.substr(0, b[head]), r);
     out += "...";
@@ -244,8 +276,9 @@ SafeAuditField build_safe_audit_field(Memory r,
                                       std::span<const String> masks,
                                       std::optional<std::size_t> maximum) {
     SafeAuditField out(std::allocator_arg, Allocator(r), field);
-    if (!raw)
+    if (!raw) {
         return out;
+    }
     out.raw_length = boundaries(r, *raw).size() - 1;
     bool credential = is_credential_log_name(field);
     out.masked = credential || (marked(masks, field) && !detail::audit_plaintext_enabled(r));
@@ -258,10 +291,12 @@ SafeAuditField build_safe_audit_field(Memory r,
         out.truncated = limited.second;
     }
     out.output_length = boundaries(r, *out.value).size() - 1;
-    if (out.masked)
+    if (out.masked) {
         out.mask_reason.emplace("_audit_mask_fields", r);
-    if (out.truncated)
+    }
+    if (out.truncated) {
         out.truncate_reason.emplace("_audit_value_max_len", r);
+    }
     return out;
 }
 
@@ -271,29 +306,34 @@ SafeAuditEvent RawAuditEvent::build_safe_event(Memory r,
     SafeAuditEvent out(std::allocator_arg, Allocator(r), kind, entity);
     auto allow = detail::audit_plaintext_enabled(r);
     Vector<String> secrets(r);
-    for (const auto& change : changes)
+    for (const auto& change : changes) {
         if (is_credential_log_name(change.field) || (!allow && marked(masks, change.field)) ||
             nested_credentials(change)) {
-            if (change.old_value)
+            if (change.old_value) {
                 collect(*change.old_value, secrets);
-            if (change.new_value)
+            }
+            if (change.new_value) {
                 collect(*change.new_value, secrets);
+            }
         }
+    }
     sort_secrets(secrets);
     for (const auto& change : changes) {
-        if (change.field.starts_with('_'))
+        if (change.field.starts_with('_')) {
             continue;
+        }
         std::optional<String> raw;
         if (change.new_value) {
             auto& value = *change.new_value;
-            if (auto* text = std::get_if<String>(&value.data))
+            if (auto* text = std::get_if<String>(&value.data)) {
                 raw.emplace(*text, r);
-            else if (auto* n = std::get_if<std::int64_t>(&value.data))
+            } else if (auto* n = std::get_if<std::int64_t>(&value.data)) {
                 raw.emplace(number(r, *n));
-            else if (auto* n = std::get_if<std::uint64_t>(&value.data))
+            } else if (auto* n = std::get_if<std::uint64_t>(&value.data)) {
                 raw.emplace(number(r, *n));
-            else
+            } else {
                 raw.emplace(detail::debug_value(r, value));
+            }
         }
         auto field =
             build_safe_audit_field(r,
@@ -312,10 +352,12 @@ SafeAuditEvent RawAuditEvent::build_safe_event(Memory r,
         }
         out.fields.emplace_back(std::move(field));
     }
-    for (const auto& node : trace_chain)
+    for (const auto& node : trace_chain) {
         out.trace_chain.emplace_back(node);
-    if (auto id = values.find("id"); id != values.end())
+    }
+    if (auto id = values.find("id"); id != values.end()) {
         collect(id->second, secrets);
+    }
     sort_secrets(secrets);
     scrub_trace(out.trace_chain, secrets);
     out.mutation_governance = detail::clone_in(r, mutation_governance);
@@ -326,21 +368,25 @@ SafeAuditEvent RawAuditEvent::build_safe_event(Memory r,
 namespace teaql {
 namespace {
 Value mask_business_value(Memory r, const Value& value) {
-    if (value.is_null())
+    if (value.is_null()) {
         return Value(r, value);
+    }
     if (auto* list = value.as_list()) {
         Value::List result(r);
-        for (const auto& v : *list)
+        for (const auto& v : *list) {
             result.emplace_back(mask_business_value(r, v));
+        }
         return Value(r, result);
     }
-    if (value.as_object() || std::holds_alternative<Json>(value.data))
+    if (value.as_object() || std::holds_alternative<Json>(value.data)) {
         return Value(r, "[REDACTED]");
+    }
     Vector<String> texts(r);
     collect(value, texts);
     String text(r);
-    for (const auto& t : texts)
+    for (const auto& t : texts) {
         text += t;
+    }
     return Value(r, mask(r, text));
 }
 
@@ -367,9 +413,11 @@ struct SafeSqlProjection {
 };
 
 void scrub_intent(SqlLogEntry& entry, const Vector<String>& secrets) {
-    for (auto* text : {&entry.comment, &entry.purpose, &entry.audit_reason, &entry.result_type})
-        if (*text)
+    for (auto* text : {&entry.comment, &entry.purpose, &entry.audit_reason, &entry.result_type}) {
+        if (*text) {
             scrub(**text, secrets);
+        }
+    }
     scrub(entry.result_summary, secrets);
     scrub_trace(entry.trace_path, secrets);
 }
@@ -417,34 +465,41 @@ SqlLogEntry sql_entry_inner(Memory r, const SqlLogEntry& entry, bool allow, bool
         auto fail = [&](std::string_view reason) {
             return SqlRenderResult::err(r, reason);
         };
-        if (entry.log_context.omission_reason)
+        if (entry.log_context.omission_reason) {
             return fail("previously omitted SQL");
-        if (!sqlite)
+        }
+        if (!sqlite) {
             return fail("unknown database dialect");
-        if (invalid_policies)
+        }
+        if (invalid_policies) {
             return fail("parameter policy count mismatch");
-        if (invalid_masks)
+        }
+        if (invalid_masks) {
             return fail("parameter mask count mismatch");
+        }
         if (!entry.log_context.generated_sql) {
             auto placeholder = [&](std::size_t) {
                 return SqlRenderResult::ok(r, String(r));
             };
             auto text = render_sql_with(
                 r, entry.sql, DatabaseKind::Sqlite, entry.params.size(), placeholder);
-            if (!text)
+            if (!text) {
                 return text;
+            }
             if (text.value().find_first_of("'\"`") != String::npos ||
                 text.value().find("--") != String::npos ||
                 text.value().find("/*") != String::npos ||
                 std::any_of(text.value().begin(), text.value().end(), [](char c) {
                     return c >= '0' && c <= '9';
-                }))
+                })) {
                 return fail("untrusted SQL literals or comments");
+            }
         }
         auto literal = [&](std::size_t i) {
             auto text = render_sql_value(r, result.params[i], DatabaseKind::Sqlite);
-            if (text && result.log_context.masked_parameters[i])
+            if (text && result.log_context.masked_parameters[i]) {
                 text.value() += " /* masked */";
+            }
             return text;
         };
         return render_sql_with(r, entry.sql, DatabaseKind::Sqlite, result.params.size(), literal);
@@ -460,13 +515,15 @@ SqlLogEntry sql_entry_inner(Memory r, const SqlLogEntry& entry, bool allow, bool
     result.debug_sql += mode;
     if (rendered) {
         result.log_context.omission_reason.reset();
-        if (has_masked)
+        if (has_masked) {
             result.debug_sql += "; MASKED; NOT REPLAYABLE";
+        }
         result.debug_sql += '\n';
         result.debug_sql += rendered.value();
     } else {
-        for (const auto& value : entry.params)
+        for (const auto& value : entry.params) {
             collect(value, secrets);
+        }
         sort_secrets(secrets);
         scrub_intent(result, secrets);
         auto reason = rendered.error();
@@ -497,8 +554,9 @@ SqlLogEntry sql_entry_inner(Memory r, const SqlLogEntry& entry, bool allow, bool
         }
         result.log_context.omission_reason.emplace(reason, r);
         result.sql = "[REDACTED SQL; NOT REPLAYABLE]";
-        for (auto& value : result.params)
+        for (auto& value : result.params) {
             value = Value(r);
+        }
         result.debug_sql += "; MASKED; NOT REPLAYABLE\n[SQL omitted: ";
         result.debug_sql += reason;
         result.debug_sql += ']';
@@ -506,9 +564,11 @@ SqlLogEntry sql_entry_inner(Memory r, const SqlLogEntry& entry, bool allow, bool
     result.pretty_sql = result.debug_sql;
     if (hide_intent) {
         for (auto* text :
-             {&result.comment, &result.purpose, &result.audit_reason, &result.result_type})
-            if (*text)
+             {&result.comment, &result.purpose, &result.audit_reason, &result.result_type}) {
+            if (*text) {
                 **text = "[REDACTED]";
+            }
+        }
         result.result_summary = "[REDACTED]";
         for (auto& node : result.trace_path) {
             node.comment = "[REDACTED]";
@@ -531,10 +591,11 @@ SqlLogEntry sql_entry_inner(Memory r, const SqlLogEntry& entry, bool allow, bool
         auto plural = number(r, *count);
         plural += " rows ";
         plural += verb;
-        if (entry.result_summary == singular || entry.result_summary == plural)
+        if (entry.result_summary == singular || entry.result_summary == plural) {
             result.result_summary = entry.result_summary;
-        else if (hide_intent)
+        } else if (hide_intent) {
             result.result_summary = plural;
+        }
     }
     return result;
 }
@@ -546,12 +607,15 @@ SqlLogEntry sql_entry_projection(Memory r, const SqlLogEntry& entry, bool allow)
     bool was_debug = entry.log_context.mode == "debug_plaintext" ||
                      entry.debug_sql.starts_with("-- TeaQL DEBUG PLAINTEXT; EXPLICIT OPT-IN");
     const SqlLogEntry* alternative = nullptr;
-    if (was_debug)
+    if (was_debug) {
         if (auto* state = entry.log_context.projection_state.get<SafeSqlProjection>();
-            state && state->fingerprint == sql_fingerprint(r, entry))
+            state && state->fingerprint == sql_fingerprint(r, entry)) {
             alternative = &state->safe;
-    if (!allow && alternative)
+        }
+    }
+    if (!allow && alternative) {
         return clone_in(r, *alternative);
+    }
     auto result = sql_entry_inner(r, entry, allow, was_debug && !allow);
     if (allow) {
         auto safe =

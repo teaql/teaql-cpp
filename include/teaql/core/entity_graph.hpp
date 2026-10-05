@@ -40,11 +40,13 @@ inline EntityGraphNode::EntityGraphNode(std::allocator_arg_t,
                                         Allocator a,
                                         const EntityGraphNode& other)
     : EntityGraphNode(std::allocator_arg, a, other.entity_type, other.values) {
-    if (other.comment)
+    if (other.comment) {
         comment.emplace(*other.comment, a.resource());
+    }
     operation = other.operation;
-    for (const auto& [relation, node] : other.children)
+    for (const auto& [relation, node] : other.children) {
         children.emplace_back(relation, node);
+    }
 }
 class EntityGraphBuilder;
 

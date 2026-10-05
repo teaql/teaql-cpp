@@ -5,8 +5,9 @@
 using namespace teaql;
 
 static void check(bool b, const char* text) {
-    if (!b)
+    if (!b) {
         throw std::runtime_error(text);
+    }
 }
 
 template <class F>
@@ -58,13 +59,16 @@ struct Step {
 
     std::optional<RuntimeSchemaResult> poll(WakeSignal&) {
         control.note(bootstrap ? "callback.poll" : "provider.poll", context);
-        if (!control.ready)
+        if (!control.ready) {
             return {};
-        if (bootstrap && control.throw_bootstrap)
+        }
+        if (bootstrap && control.throw_bootstrap) {
             throw std::runtime_error("fixture panic");
-        if (bootstrap ? control.fail_bootstrap : control.fail_provider)
+        }
+        if (bootstrap ? control.fail_bootstrap : control.fail_provider) {
             return RuntimeSchemaResult::err(
                 r, RuntimeError::schema(r, bootstrap ? "bootstrap failed" : "provider failed"));
+        }
         return RuntimeSchemaResult::ok(r, {});
     }
 
@@ -108,13 +112,14 @@ struct Business : BusinessIdAllocator, BusinessIdSchemaContributor {
     Result<std::monostate, BusinessIdError>
     ensure_schema(Memory r, const UserContext& context) const override {
         control.note("business", context);
-        if (control.fail_business)
+        if (control.fail_business) {
             return Result<std::monostate, BusinessIdError>::err(
                 r,
                 BusinessIdError(std::allocator_arg,
                                 Allocator(r),
                                 BusinessIdErrorCode::Allocation,
                                 "business failed"));
+        }
         return Result<std::monostate, BusinessIdError>::ok(r, {});
     }
 };
@@ -124,12 +129,14 @@ static GeneratedSchemaBootstrapFuture& bootstrap(const UserContext& context) {
         context.require_resource<Control>().value().get(); // tracked state is a test resource
     auto& mutable_control = const_cast<Control&>(control);
     mutable_control.note("callback.create", context);
-    if (control.sibling)
+    if (control.sibling) {
         check(detail::is_generated_schema_bootstrap(*control.sibling),
               "same Global context observes inherited callback scope");
-    if (control.isolated)
+    }
+    if (control.isolated) {
         check(!detail::is_generated_schema_bootstrap(*control.isolated),
               "different Global does not inherit bootstrap mode");
+    }
     auto r = context.memory_resource();
     auto& operation = make_operation<RuntimeSchemaResult, Step>(r, context, mutable_control, true);
     mutable_control.child = &operation;
@@ -185,8 +192,9 @@ static void pipeline() {
                       "second:bootstrap",
                       "callback.create:bootstrap",
                       "callback.poll:bootstrap",
-                      "callback.finish:bootstrap"})
+                      "callback.finish:bootstrap"}) {
         expected.emplace_back(text);
+    }
     check(f.control.calls == expected,
           "provider then business contributor then sequential bootstraps");
     check(!detail::is_generated_schema_bootstrap(*f.user), "ready resets dynamic mode");
@@ -198,15 +206,18 @@ static void pipeline() {
         f.control.fail_bootstrap = failure == 2;
         auto& result = f.user->ensure_schema().wait();
         check(!result, "errors short circuit");
-        if (failure == 0)
+        if (failure == 0) {
             check(f.control.calls.size() == 3, "provider failure skips contributor and callbacks");
-        if (failure == 1)
+        }
+        if (failure == 1) {
             check(f.control.calls.size() == 4 &&
                       result.error().kind() == RuntimeError::Kind::Schema &&
                       result.error().message() == "Allocation: business failed",
                   "business display maps to Schema error before callbacks");
-        if (failure == 2)
+        }
+        if (failure == 2) {
             check(f.control.calls.size() == 7, "first callback failure skips second");
+        }
         check(!detail::is_generated_schema_bootstrap(*f.user), "failure resets mode");
     }
 }

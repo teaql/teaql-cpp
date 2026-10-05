@@ -34,7 +34,7 @@ MutationExecutorError native_error(Memory r, sqlite3* db, int code) {
 
 MutationExecutorError prepare_error(Memory r, sqlite3* db, int code, std::string_view sql) {
 #if SQLITE_VERSION_NUMBER >= 3038000
-    if ((code & 0xff) == SQLITE_ERROR)
+    if ((code & 0xff) == SQLITE_ERROR) {
         if (auto offset = sqlite3_error_offset(db); offset >= 0) {
             String message(sqlite3_errmsg(db), r);
             message += " in ";
@@ -43,6 +43,7 @@ MutationExecutorError prepare_error(Memory r, sqlite3* db, int code, std::string
             append_number(message, offset);
             return MutationExecutorError::sqlite(r, 0, message);
         }
+    }
 #else
     (void)sql;
 #endif
@@ -97,14 +98,16 @@ struct SqliteConnectionState {
     SqliteConnectionState(std::allocator_arg_t, Allocator a, std::string_view filename)
         : resource(a.resource()), statements(resource), recency(resource) {
         statements.reserve(cache_capacity);
-        for (std::size_t i = 0; i < cache_capacity; ++i)
+        for (std::size_t i = 0; i < cache_capacity; ++i) {
             statements.emplace_back();
+        }
         recency.reserve(cache_capacity);
         // Resource construction failures are native C++ exceptions, as opposed
         // to Context-borrowed provider results. They must survive stack unwinding
         // that destroys the Context which attempted to create the connection.
-        if (filename.find('\0') != filename.npos)
+        if (filename.find('\0') != filename.npos) {
             throw std::invalid_argument("SQLite filename contains a NUL byte");
+        }
         String path(filename, resource);
         auto code = sqlite3_open_v2(path.c_str(),
                                     &db,
@@ -127,23 +130,27 @@ struct SqliteConnectionState {
     }
 
     ~SqliteConnectionState() {
-        if (active || first)
+        if (active || first) {
             std::terminate();
+        }
         flush();
-        if (db && sqlite3_close(db) != SQLITE_OK)
+        if (db && sqlite3_close(db) != SQLITE_OK) {
             std::terminate();
+        }
     }
 
     void require_owner() const {
-        if (owner != std::this_thread::get_id())
+        if (owner != std::this_thread::get_id()) {
             throw std::logic_error("SQLite Context resources are owner-thread confined");
+        }
     }
 
     void require_borrow(Memory destination) const {
         require_owner();
-        if (!async_arena(resource).can_lend_to(async_arena(destination)))
+        if (!async_arena(resource).can_lend_to(async_arena(destination))) {
             throw std::invalid_argument(
                 "SQLite work cannot retain a connection from a shorter or unrelated Context");
+        }
     }
 
     void flush() noexcept {
@@ -160,18 +167,22 @@ struct SqliteConnectionState {
                  sqlite3_stmt*& statement,
                  StatementEntry*& entry) {
         require_owner();
-        if (cached)
+        if (cached) {
             trim(sql);
-        if (cached)
-            for (auto p = recency.begin(); p != recency.end(); ++p)
+        }
+        if (cached) {
+            for (auto p = recency.begin(); p != recency.end(); ++p) {
                 if (statements[*p].key == sql) {
                     entry = &statements[*p];
                     statement = std::exchange(entry->statement, nullptr);
                     recency.erase(p);
                     return;
                 }
-        if (sql.size() > INT32_MAX)
+            }
+        }
+        if (sql.size() > INT32_MAX) {
             throw MutationExecutorError::sqlite(r, SQLITE_TOOBIG, "string or blob too big");
+        }
         const char* tail = nullptr;
         auto code = sqlite3_prepare_v3(db,
                                        sql.data(),
@@ -179,8 +190,9 @@ struct SqliteConnectionState {
                                        cached ? SQLITE_PREPARE_PERSISTENT : 0,
                                        &statement,
                                        &tail);
-        if (code != SQLITE_OK)
+        if (code != SQLITE_OK) {
             throw prepare_error(r, db, code, sql);
+        }
         // rusqlite prepares trailing SQL before reporting MultipleStatement;
         // trailing syntax/schema errors therefore take precedence.
         try {
@@ -190,13 +202,15 @@ struct SqliteConnectionState {
                 rest.remove_prefix(std::size_t(tail - rest.data()));
                 sqlite3_stmt* next = nullptr;
                 code = sqlite3_prepare_v3(db, rest.data(), int(rest.size()), 0, &next, &tail);
-                if (code != SQLITE_OK)
+                if (code != SQLITE_OK) {
                     throw prepare_error(r, db, code, rest);
+                }
                 extra |= next != nullptr;
                 sqlite3_finalize(next);
             }
-            if (extra)
+            if (extra) {
                 throw MutationExecutorError::sqlite(r, 0, "Multiple statements provided");
+            }
             if (cached && statement) {
                 auto slot = std::find_if(statements.begin(), statements.end(), [](const auto& e) {
                     return !e.statement;
@@ -219,16 +233,18 @@ struct SqliteConnectionState {
     }
 
     void release_statement(sqlite3_stmt*& statement, StatementEntry*& entry) noexcept {
-        if (!statement)
+        if (!statement) {
             return;
+        }
         sqlite3_reset(statement);
         sqlite3_clear_bindings(statement);
         if (entry) {
             entry->statement = statement;
             recency.insert(recency.begin(), std::size_t(entry - statements.data()));
             entry = nullptr;
-        } else
+        } else {
             sqlite3_finalize(statement);
+        }
         statement = nullptr;
     }
 };
@@ -251,24 +267,28 @@ struct SqliteLease {
     }
 
     void unlink() noexcept {
-        if (!queued)
+        if (!queued) {
             return;
-        if (previous)
+        }
+        if (previous) {
             previous->next = next;
-        else
+        } else {
             connection.first = next;
-        if (next)
+        }
+        if (next) {
             next->previous = previous;
-        else
+        } else {
             connection.last = previous;
+        }
         previous = next = nullptr;
         queued = false;
     }
 
     bool acquire(WakeSignal& signal) {
         connection.require_owner();
-        if (owned)
+        if (owned) {
             return true;
+        }
         wake = &signal;
         if (connection.poisoned) {
             release();
@@ -283,10 +303,11 @@ struct SqliteLease {
         }
         if (!queued) {
             previous = connection.last;
-            if (previous)
+            if (previous) {
                 previous->next = this;
-            else
+            } else {
                 connection.first = this;
+            }
             connection.last = this;
             queued = true;
         }
@@ -294,16 +315,18 @@ struct SqliteLease {
     }
 
     void release() noexcept {
-        if (!owned && !queued)
+        if (!owned && !queued) {
             return;
+        }
         unlink();
         if (owned) {
             connection.active = nullptr;
             owned = false;
         }
         wake = nullptr;
-        if (!connection.active && connection.first)
+        if (!connection.active && connection.first) {
             connection.first->wake->notify();
+        }
     }
 };
 
@@ -316,35 +339,40 @@ struct SqliteProviderState {
 
     SqliteProviderState(std::allocator_arg_t, Allocator a, SqliteConnectionState& connection)
         : resource(a.resource()), connection(connection), layouts(resource) {
-        if (resource != connection.resource)
+        if (resource != connection.resource) {
             throw std::invalid_argument(
                 "SQLite provider and connection must share their owning Context");
+        }
         layouts.reserve(cache_capacity);
-        for (std::size_t i = 0; i < cache_capacity; ++i)
+        for (std::size_t i = 0; i < cache_capacity; ++i) {
             layouts.emplace_back();
+        }
     }
 
     const SqliteRowLayout&
     layout(Memory destination, std::string_view sql, sqlite3_stmt* statement) {
         const SqliteRowLayout* found = nullptr;
-        for (std::size_t i = 0; i < count; ++i)
+        for (std::size_t i = 0; i < count; ++i) {
             if (layouts[i].key == sql) {
                 found = layouts[i].layout;
                 break;
             }
+        }
         if (!found) {
             auto& arena = async_arena(resource);
             found = statement ? &arena.make<SqliteRowLayout>(*statement)
                               : &arena.make<SqliteRowLayout>();
-            if (count == cache_capacity)
+            if (count == cache_capacity) {
                 count = 0;
+            }
             auto& entry = layouts[count];
             entry.key = sql;
             entry.layout = found;
             ++count;
         }
-        if (destination == resource)
+        if (destination == resource) {
             return *found;
+        }
         return async_arena(destination).make<SqliteRowLayout>(*found);
     }
 };
@@ -365,36 +393,41 @@ struct SqliteSchemaCall {
         try {
             if (!lease) {
                 dialect = context.get_resource<SqliteDialect>();
-                if (!dialect)
+                if (!dialect) {
                     throw MutationExecutorError::bind(resource,
                                                       "missing typed resource: SqliteDialect");
+                }
                 auto* executor = context.get_resource<SqliteMutationExecutor>();
-                if (!executor)
+                if (!executor) {
                     throw MutationExecutorError::bind(
                         resource, "missing typed resource: SqliteMutationExecutor");
+                }
                 entities = context.all_entities();
                 state = &executor->state_;
                 state->connection.require_borrow(resource);
                 lease.emplace(resource, state->connection);
             }
-            if (!lease->acquire(wake))
+            if (!lease->acquire(wake)) {
                 return {};
+            }
             ensure_sqlite_physical_schema(
                 resource, *state->connection.db, *dialect, entities, context);
             lease->release();
             state->connection.flush();
             state->count = 0;
-            if (!context.initial_graphs().empty() || !context.root_graphs().empty())
+            if (!context.initial_graphs().empty() || !context.root_graphs().empty()) {
                 throw MutationExecutorError::bind(
                     resource,
                     "generated root/constant bootstrap must use the typed RuntimeModule callback");
+            }
             return RuntimeSchemaResult::ok(resource, {});
         } catch (MutationExecutorError& e) {
             return RuntimeSchemaResult::err(resource,
                                             RuntimeError::schema(resource, e.to_string(resource)));
         } catch (...) {
-            if (lease && lease->owned)
+            if (lease && lease->owned) {
                 state->connection.poisoned = true;
+            }
             throw;
         }
     }
@@ -431,44 +464,52 @@ struct SqliteCursor {
     void prepare(const CompiledQuery& query, bool cached) {
         auto sql = query.sql_with_comment(resource);
         provider.connection.prepare(resource, sql, cached, statement, entry);
-        if (cached)
+        if (cached) {
             layout = &provider.layout(resource, query.sql, statement);
+        }
     }
 
     void bind(std::span<const SqliteBoundValue> values) {
         if (!statement) {
-            if (!values.empty())
+            if (!values.empty()) {
                 throw MutationExecutorError::sqlite(
                     resource, 0, "Wrong number of parameters passed to query. Got 1, needed 0");
+            }
             return;
         }
         auto result = bind_statement(resource, *statement, values);
-        if (!result)
+        if (!result) {
             throw std::move(result).error();
+        }
     }
 
     bool next() {
         auto code = sqlite3_step(statement);
-        if (sqlite3_get_autocommit(provider.connection.db))
+        if (sqlite3_get_autocommit(provider.connection.db)) {
             provider.connection.transaction_owner = nullptr;
-        if (code == SQLITE_ROW)
+        }
+        if (code == SQLITE_ROW) {
             return true;
-        if (code == SQLITE_DONE)
+        }
+        if (code == SQLITE_DONE) {
             return false;
+        }
         throw native_error(resource, provider.connection.db, code);
     }
 
     CompactRow row() {
         auto result = decode_sqlite_row(resource, *statement, *layout);
-        if (!result)
+        if (!result) {
             throw std::move(result).error();
+        }
         return std::move(result).value();
     }
 
     void reset() {
         auto code = sqlite3_reset(statement);
-        if (code != SQLITE_OK)
+        if (code != SQLITE_OK) {
             throw native_error(resource, provider.connection.db, code);
+        }
         sqlite3_clear_bindings(statement);
     }
 };
@@ -481,21 +522,24 @@ struct SqliteIdAccess {
     WakeSignal wake;
 
     SqliteIdAccess(Memory r, SqliteProviderState& state) : resource(r), cursor(r, state) {
-        if (!cursor.lease.acquire(wake))
+        if (!cursor.lease.acquire(wake)) {
             throw MutationExecutorError::lock(
                 r, "connection is borrowed by an open SQLite stream; use the pollable transport");
+        }
     }
 
     void prepare(std::string_view sql, std::span<const Value> values) {
         cursor.provider.connection.release_statement(cursor.statement, cursor.entry);
         CompiledQuery query(std::allocator_arg, Allocator(resource));
         query.sql = sql;
-        for (const auto& value : values)
+        for (const auto& value : values) {
             query.params.emplace_back(value);
+        }
         cursor.prepare(query, false);
         auto bound = bind_values(resource, query.params);
-        if (!bound)
+        if (!bound) {
             throw std::move(bound).error();
+        }
         cursor.bind(bound.value());
     }
 
@@ -518,16 +562,18 @@ struct SqliteIdAccess {
 
     std::optional<std::int64_t> current(std::string_view sql, std::span<const Value> values) {
         prepare(sql, values);
-        if (!cursor.next())
+        if (!cursor.next()) {
             return {};
+        }
         return integer(0);
     }
 
     std::optional<std::pair<std::int64_t, std::int64_t>>
     current_business(std::string_view sql, std::span<const Value> values) {
         prepare(sql, values);
-        if (!cursor.next())
+        if (!cursor.next()) {
             return {};
+        }
         auto level = integer(0);
         auto version = integer(1);
         return std::pair(level, version);
@@ -535,9 +581,10 @@ struct SqliteIdAccess {
 
     std::uint64_t execute(std::string_view sql, std::span<const Value> values) {
         prepare(sql, values);
-        if (cursor.next())
+        if (cursor.next()) {
             throw MutationExecutorError::sqlite(
                 resource, 0, "Execute returned results - did you mean to call query?");
+        }
         cursor.reset();
         return std::uint64_t(sqlite3_changes64(cursor.provider.connection.db));
     }
@@ -562,34 +609,39 @@ struct SqliteCall {
         try {
             if (!bindings) {
                 auto result = bind_values(resource, query.params);
-                if (!result)
+                if (!result) {
                     return Output::err(resource, std::move(result).error());
+                }
                 bindings.emplace(std::move(result).value());
             }
-            if (!cursor.lease.acquire(wake))
+            if (!cursor.lease.acquire(wake)) {
                 return {};
+            }
             cursor.prepare(query, !std::is_same_v<T, std::uint64_t>);
             cursor.bind(*bindings);
             if constexpr (std::is_same_v<T, std::uint64_t>) {
-                if (cursor.next())
+                if (cursor.next()) {
                     return Output::err(
                         resource,
                         MutationExecutorError::sqlite(
                             resource, 0, "Execute returned results - did you mean to call query?"));
+                }
                 cursor.reset();
                 return Output::ok(resource,
                                   std::uint64_t(sqlite3_changes64(cursor.provider.connection.db)));
             } else {
                 T rows(resource);
-                while (cursor.next())
+                while (cursor.next()) {
                     rows.push_back(cursor.row());
+                }
                 return Output::ok(resource, std::move(rows));
             }
         } catch (MutationExecutorError& error) {
             return Output::err(resource, std::move(error));
         } catch (...) {
-            if (cursor.lease.owned)
+            if (cursor.lease.owned) {
                 cursor.provider.connection.poisoned = true;
+            }
             throw;
         }
     }
@@ -624,26 +676,30 @@ struct SqliteRepeatedCall {
 
     std::optional<Output> poll(WakeSignal& wake) {
         try {
-            if (!cursor.lease.acquire(wake))
+            if (!cursor.lease.acquire(wake)) {
                 return {};
+            }
             cursor.prepare(query, true);
             Rows rows(resource);
             for (const auto& value : values) {
                 query.params.at(index) = Value(resource, value);
                 auto bindings = bind_values(resource, query.params);
-                if (!bindings)
+                if (!bindings) {
                     return Output::err(resource, std::move(bindings).error());
+                }
                 cursor.bind(bindings.value());
-                while (cursor.next())
+                while (cursor.next()) {
                     rows.push_back(cursor.row());
+                }
                 cursor.reset();
             }
             return Output::ok(resource, std::move(rows));
         } catch (MutationExecutorError& error) {
             return Output::err(resource, std::move(error));
         } catch (...) {
-            if (cursor.lease.owned)
+            if (cursor.lease.owned) {
                 cursor.provider.connection.poisoned = true;
+            }
             throw;
         }
     }
@@ -688,15 +744,17 @@ struct SqliteNativeTransaction final : SqlTransportTransaction<MutationExecutorE
     void abandon() noexcept {
         quiescence.reset();
         auto& connection = provider.connection;
-        if (connection.transaction_owner != this)
+        if (connection.transaction_owner != this) {
             return;
+        }
         // Context teardown cannot wait for another owner-thread cursor. Modern
         // SQLite allows ROLLBACK with outstanding statements; they retain their
         // own host memory and will report any resulting native abort themselves.
         auto code = sqlite3_exec(connection.db, "ROLLBACK", nullptr, nullptr, nullptr);
         connection.transaction_owner = nullptr;
-        if (code != SQLITE_OK && !sqlite3_get_autocommit(connection.db))
+        if (code != SQLITE_OK && !sqlite3_get_autocommit(connection.db)) {
             connection.poisoned = true;
+        }
     }
 
     struct Terminal {
@@ -715,10 +773,12 @@ struct SqliteNativeTransaction final : SqlTransportTransaction<MutationExecutorE
 
         std::optional<Output> poll(WakeSignal& wake) {
             auto result = call.poll(wake);
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return Output::err(resource, std::move(*result).error());
+            }
             return Output::ok(resource, std::monostate{});
         }
 
@@ -783,10 +843,12 @@ struct SqliteBegin {
 
     std::optional<Output> poll(WakeSignal& wake) {
         auto result = call.poll(wake);
-        if (!result)
+        if (!result) {
             return {};
-        if (!*result)
+        }
+        if (!*result) {
             return Output::err(resource, std::move(*result).error());
+        }
         transaction.activate();
         return Output::ok(resource,
                           SqlTransactionHandle<MutationExecutorError>(
@@ -837,8 +899,9 @@ struct SqliteStream {
                     }
                     bindings.emplace(std::move(result).value());
                 }
-                if (!cursor.lease.acquire(wake))
+                if (!cursor.lease.acquire(wake)) {
                     return {};
+                }
                 cursor.prepare(query, true);
                 cursor.bind(*bindings);
                 started = true;
@@ -862,8 +925,9 @@ struct SqliteStream {
             terminal = true;
             return std::optional<Item>(Item::err(resource, std::move(error)));
         } catch (...) {
-            if (cursor.lease.owned)
+            if (cursor.lease.owned) {
                 cursor.provider.connection.poisoned = true;
+            }
             throw;
         }
     }
@@ -887,8 +951,9 @@ struct SqliteErrorStream {
         : resource(a.resource()), error(move_in(resource, std::move(error))) {}
 
     std::optional<std::optional<Item>> poll_next(WakeSignal&) {
-        if (!error)
+        if (!error) {
             return std::optional<Item>{};
+        }
         auto item = Item::err(resource, std::move(*error));
         error.reset();
         return std::optional<Item>(std::move(item));
@@ -907,11 +972,12 @@ synchronous(Memory r, SqliteProviderState& state, const CompiledQuery& query) {
     WakeSignal wake;
     auto result = call.poll(wake);
     call.finish_and_wait();
-    if (!result)
+    if (!result) {
         return Result<T, MutationExecutorError>::err(
             r,
             MutationExecutorError::lock(
                 r, "connection is borrowed by an open SQLite stream; use the pollable transport"));
+    }
     return std::move(*result);
 }
 }
@@ -952,8 +1018,9 @@ SqliteMutationExecutor::SqliteMutationExecutor(std::allocator_arg_t,
                                                Allocator a,
                                                const SqliteMutationExecutor& other)
     : connection_(other.connection_), state_(other.state_) {
-    if (a.resource() != state_.resource)
+    if (a.resource() != state_.resource) {
         throw std::invalid_argument("SQLite provider clones must remain in their owning Context");
+    }
 }
 
 Memory SqliteMutationExecutor::memory_resource() const noexcept {
@@ -982,8 +1049,9 @@ Result<Vector<StreamChunk>, MutationExecutorError>
 SqliteMutationExecutor::fetch_stream(Memory r, const CompiledQuery& query, std::size_t size) {
     using Output = Result<Vector<StreamChunk>, MutationExecutorError>;
     auto fetched = fetch_all_compact(r, query);
-    if (!fetched)
+    if (!fetched) {
         return Output::err(r, std::move(fetched).error());
+    }
     Vector<StreamChunk> chunks(r);
     StreamChunk current(std::allocator_arg, Allocator(r), 0, false);
     for (auto& row : fetched.value()) {
@@ -1003,8 +1071,9 @@ Result<std::monostate, MutationExecutorError>
 transaction_command(Memory r, detail::SqliteProviderState& state, std::string_view sql) {
     state.connection.require_owner();
     auto result = detail::synchronous<std::uint64_t>(r, state, detail::transaction_query(r, sql));
-    if (!result)
+    if (!result) {
         return Result<std::monostate, MutationExecutorError>::err(r, std::move(result).error());
+    }
     return Result<std::monostate, MutationExecutorError>::ok(r, std::monostate{});
 }
 }
@@ -1120,10 +1189,12 @@ Result<std::monostate, MutationExecutorError> SqliteIdSpaceGenerator::ensure_tab
     using Output = Result<std::monostate, MutationExecutorError>;
     for (unsigned attempt = 0; attempt < 100; ++attempt) {
         auto result = executor_.ensure_id_space_table(r, table_name_);
-        if (result)
+        if (result) {
             return result;
-        if (!retryable_id_lock(result.error()))
+        }
+        if (!retryable_id_lock(result.error())) {
             return result;
+        }
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     String message("SQLite ID provider was unable to ensure ID-space table ", r);
@@ -1138,8 +1209,9 @@ SqliteIdSpaceGenerator::next_id(Memory r, std::string_view name) const {
     executor_.state_.connection.require_owner();
     auto entity = canonical_id_space_entity(r, name);
     auto ensured = ensure_table(r);
-    if (!ensured)
+    if (!ensured) {
         return Output::err(r, std::move(ensured).error());
+    }
     auto table = quote_identifier_if_needed(r, table_name_, '"');
     String select("SELECT current_level FROM ", r);
     select += table;
@@ -1185,8 +1257,9 @@ SqliteIdSpaceGenerator::next_id(Memory r, std::string_view name) const {
             } else {
                 try {
                     auto changed = access.execute(insert, key);
-                    if (changed == 1)
+                    if (changed == 1) {
                         return Output::ok(r, std::uint64_t(1));
+                    }
                     auto message = id_message(
                         r, "SQLite ID provider insert for ID space ", entity, table_name_);
                     message += " changed ";
@@ -1196,13 +1269,15 @@ SqliteIdSpaceGenerator::next_id(Memory r, std::string_view name) const {
                     return Output::err(r, MutationExecutorError::bind(r, message));
                 } catch (MutationExecutorError& error) {
                     if (error.kind() != MutationExecutorError::Kind::Sqlite ||
-                        (error.sqlite_extended_code() & 0xff) != SQLITE_CONSTRAINT)
+                        (error.sqlite_extended_code() & 0xff) != SQLITE_CONSTRAINT) {
                         throw;
+                    }
                 }
             }
         } catch (MutationExecutorError& error) {
-            if (!retryable_id_lock(error))
+            if (!retryable_id_lock(error)) {
                 return Output::err(r, std::move(error));
+            }
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
@@ -1218,8 +1293,9 @@ SqliteIdSpaceGenerator::ensure_floor(Memory r, std::string_view name, std::uint6
     executor_.state_.connection.require_owner();
     auto entity = canonical_id_space_entity(r, name);
     auto ensured = ensure_table(r);
-    if (!ensured)
+    if (!ensured) {
         return ensured;
+    }
     if (floor > std::uint64_t(INT64_MAX)) {
         String message("SQLite ID provider floor ", r);
         detail::append_number(message, floor);
@@ -1248,23 +1324,27 @@ SqliteIdSpaceGenerator::ensure_floor(Memory r, std::string_view name, std::uint6
             auto current = access.current(select, key);
             Vector<Value> params(r);
             if (current) {
-                if (*current >= std::int64_t(floor))
+                if (*current >= std::int64_t(floor)) {
                     return Output::ok(r, std::monostate{});
+                }
                 params.emplace_back(std::int64_t(floor));
                 params.emplace_back(entity);
                 params.emplace_back(*current);
-                if (access.execute(update, params) == 1)
+                if (access.execute(update, params) == 1) {
                     return Output::ok(r, std::monostate{});
+                }
             } else {
                 params.emplace_back(entity);
                 params.emplace_back(std::int64_t(floor));
                 try {
-                    if (access.execute(insert, params) == 1)
+                    if (access.execute(insert, params) == 1) {
                         return Output::ok(r, std::monostate{});
+                    }
                 } catch (MutationExecutorError& error) {
                     if (error.kind() != MutationExecutorError::Kind::Sqlite ||
-                        (error.sqlite_extended_code() & 0xff) != SQLITE_CONSTRAINT)
+                        (error.sqlite_extended_code() & 0xff) != SQLITE_CONSTRAINT) {
                         throw;
+                    }
                 }
             }
         }
@@ -1315,8 +1395,9 @@ Result<std::monostate, BusinessIdError> SqliteBusinessIdAllocator::ensure_schema
     sql +=
         " (scope_key VARCHAR(512) PRIMARY KEY, current_level INTEGER NOT NULL, version INTEGER NOT NULL)";
     auto result = transaction_command(r, executor_.state_, sql);
-    if (!result)
+    if (!result) {
         return Output::err(r, business_sqlite_error(r, result.error()));
+    }
     return Output::ok(r, std::monostate{});
 }
 
@@ -1325,8 +1406,9 @@ SqliteBusinessIdAllocator::allocate(Memory r, const BusinessIdPlan& plan) const 
     using Output = Result<BusinessIdAllocation, BusinessIdError>;
     executor_.state_.connection.require_borrow(r);
     auto valid = plan.validate_allocation_range();
-    if (!valid)
+    if (!valid) {
         return Output::err(r, detail::clone_in(r, valid.error()));
+    }
     auto table = quote_identifier_if_needed(r, table_name_, '"');
     auto scope = plan.scope.canonical_key(r);
     String select("SELECT current_level, version FROM ", r);
@@ -1356,42 +1438,47 @@ SqliteBusinessIdAllocator::allocate(Memory r, const BusinessIdPlan& plan) const 
                     auto current = access.current_business(select, key);
                     std::uint64_t next;
                     if (current) {
-                        if (current->first == INT64_MAX)
+                        if (current->first == INT64_MAX) {
                             throw business_error(r,
                                                  BusinessIdErrorCode::Exhausted,
                                                  "business ID sequence overflow for scope ",
                                                  scope);
+                        }
                         auto candidate = current->first + 1;
                         Vector<Value> params(r);
                         params.emplace_back(candidate);
                         params.emplace_back(scope);
                         params.emplace_back(current->second);
-                        if (access.execute(update, params) != 1)
+                        if (access.execute(update, params) != 1) {
                             return {};
-                        if (candidate < 0)
+                        }
+                        if (candidate < 0) {
                             throw business_error(r,
                                                  BusinessIdErrorCode::Allocation,
                                                  "negative business ID sequence stored by SQLite",
                                                  {});
+                        }
                         next = std::uint64_t(candidate);
                     } else {
-                        if (plan.initial_sequence > std::uint64_t(INT64_MAX))
+                        if (plan.initial_sequence > std::uint64_t(INT64_MAX)) {
                             throw business_error(
                                 r,
                                 BusinessIdErrorCode::InvalidDefinition,
                                 "business ID initial sequence exceeds SQLite INTEGER",
                                 {});
+                        }
                         Vector<Value> params(r);
                         params.emplace_back(scope);
                         params.emplace_back(std::int64_t(plan.initial_sequence));
                         access.execute(insert, params);
                         next = plan.initial_sequence;
                     }
-                    if (next > plan.max_sequence)
+                    if (next > plan.max_sequence) {
                         throw business_error(r,
                                              BusinessIdErrorCode::Exhausted,
                                              "business ID sequence exhausted for scope ",
                                              scope);
+                    }
                     return next;
                 }();
             } catch (...) {
@@ -1404,18 +1491,20 @@ SqliteBusinessIdAllocator::allocate(Memory r, const BusinessIdPlan& plan) const 
             // Source commit failures preserve SQLite's transaction state. The
             // Context cleanup above reclaims it if the caller cannot recover.
             access.execute("COMMIT", {});
-            if (sequence)
+            if (sequence) {
                 return Output::ok(
                     r,
                     BusinessIdAllocation(std::allocator_arg, Allocator(r), plan.scope, *sequence));
+            }
         } catch (BusinessIdError& error) {
             failure.emplace(std::move(error));
         } catch (MutationExecutorError& error) {
             failure.emplace(business_sqlite_error(r, error));
         }
         if (failure && failure->message.find("locked") == String::npos &&
-            failure->message.find("busy") == String::npos)
+            failure->message.find("busy") == String::npos) {
             return Output::err(r, std::move(*failure));
+        }
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     String message("unable to allocate business ID scope ", r);
@@ -1429,8 +1518,9 @@ SqliteBusinessIdAllocator::allocate(Memory r, const BusinessIdPlan& plan) const 
 
 void SqliteMutationExecutor::clear_query_caches() {
     state_.connection.require_owner();
-    if (state_.connection.active)
+    if (state_.connection.active) {
         throw std::logic_error("Cannot clear SQLite caches with an open cursor");
+    }
     state_.connection.flush();
     state_.count = 0;
 }

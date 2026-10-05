@@ -17,8 +17,9 @@ String join(Memory r, const Vector<String>& parts, std::string_view separator) {
     String out(r);
     bool first = true;
     for (const auto& part : parts) {
-        if (!first)
+        if (!first) {
             out += separator;
+        }
         first = false;
         out += part;
     }
@@ -30,8 +31,9 @@ String join(Memory r, const Vector<String>& parts, std::string_view separator) {
 }
 
 void add_unique(Vector<String>& parts, String value) {
-    if (std::find(parts.begin(), parts.end(), value) == parts.end())
+    if (std::find(parts.begin(), parts.end(), value) == parts.end()) {
         parts.emplace_back(std::move(value));
+    }
 }
 
 std::string_view type_name(DataType t) {
@@ -50,8 +52,9 @@ void validate_schema_shape(Memory r, const PropertyDescriptor& property) {
         throw error;
     };
     if (property.data_type == DataType::Text) {
-        if (property.max_length == 0)
+        if (property.max_length == 0) {
             invalid("max_length must be greater than zero");
+        }
     } else if (property.max_length) {
         String reason("max_length is only valid for Text, not ", r);
         reason += type_name(property.data_type);
@@ -59,13 +62,16 @@ void validate_schema_shape(Memory r, const PropertyDescriptor& property) {
     }
     if (property.data_type == DataType::Decimal) {
         auto p = property.numeric_precision, s = property.numeric_scale;
-        if (!p && !s)
+        if (!p && !s) {
             return;
-        if (p == 0)
+        }
+        if (p == 0) {
             invalid("numeric_precision must be greater than zero");
+        }
         if (p && s) {
-            if (*s <= *p)
+            if (*s <= *p) {
                 return;
+            }
             String reason("numeric_scale (", r);
             number(reason, *s);
             reason += ") must not exceed numeric_precision (";
@@ -85,8 +91,9 @@ void validate_schema_shape(Memory r, const PropertyDescriptor& property) {
 String quote_identifier_if_needed(Memory r, std::string_view ident, char quote) {
     if (!ident.empty() && ((ident.front() == '"' && ident.back() == '"') ||
                            (ident.front() == '`' && ident.back() == '`') ||
-                           (ident.front() == '[' && ident.back() == ']')))
+                           (ident.front() == '[' && ident.back() == ']'))) {
         return String(ident, r);
+    }
     constexpr std::string_view keywords[] = {
         "all",    "alter",  "and",  "as",       "asc",   "between", "by",     "case",
         "create", "delete", "desc", "distinct", "drop",  "exists",  "false",  "from",
@@ -104,35 +111,42 @@ String quote_identifier_if_needed(Memory r, std::string_view ident, char quote) 
         lower += char(c >= 'A' && c <= 'Z' ? c + 32 : c);
     }
     needs |= std::binary_search(std::begin(keywords), std::end(keywords), std::string_view(lower));
-    if (!needs)
+    if (!needs) {
         return String(ident, r);
+    }
     String out(r);
     out += quote;
     for (char c : ident) {
         out += c;
-        if (c == quote)
+        if (c == quote) {
             out += quote;
+        }
     }
     out += quote;
     return out;
 }
 
 String bounded_sql_identifier(Memory r, std::string_view full, std::size_t max) {
-    if (full.size() <= max)
+    if (full.size() <= max) {
         return String(full, r);
-    if (max < 17)
+    }
+    if (max < 17) {
         throw std::invalid_argument("SQL identifier byte limit is too small");
+    }
     std::uint64_t hash = 0xcbf29ce484222325ULL;
-    for (unsigned char c : full)
+    for (unsigned char c : full) {
         hash = (hash ^ c) * 0x100000001b3ULL;
+    }
     auto end = max - 17;
-    while (end && (static_cast<unsigned char>(full[end]) & 0xC0) == 0x80)
+    while (end && (static_cast<unsigned char>(full[end]) & 0xC0) == 0x80) {
         --end;
+    }
     String out(full.substr(0, end), r);
     out += '_';
     constexpr char hex[] = "0123456789ABCDEF";
-    for (int shift = 60; shift >= 0; shift -= 4)
+    for (int shift = 60; shift >= 0; shift -= 4) {
         out += hex[(hash >> shift) & 15];
+    }
     return out;
 }
 
@@ -144,10 +158,12 @@ bool storage_numeric_covers(std::uint32_t ep,
                             std::uint32_t es,
                             std::optional<std::uint32_t> ap,
                             std::optional<std::uint32_t> as) {
-    if (!ap && !as)
+    if (!ap && !as) {
         return true;
-    if (!ap || !as)
+    }
+    if (!ap || !as) {
         return false;
+    }
     return *as >= es && (*ap > *as ? *ap - *as : 0) >= (ep > es ? ep - es : 0);
 }
 
@@ -188,17 +204,20 @@ String SqlDialect::column_definition_sql(Memory r, const PropertyDescriptor& pro
     auto out = quote_ident(r, property.column_name);
     out += ' ';
     out += schema_type_sql(r, property.data_type, property);
-    if (property.is_id)
+    if (property.is_id) {
         out += " PRIMARY KEY";
-    if (property.is_id || !property.nullable)
+    }
+    if (property.is_id || !property.nullable) {
         out += " NOT NULL";
+    }
     return out;
 }
 
 String SqlDialect::compile_create_table(Memory r, const EntityDescriptor& entity) const {
     Vector<String> columns(r);
-    for (const auto& property : entity.properties)
+    for (const auto& property : entity.properties) {
         columns.emplace_back(column_definition_sql(r, property));
+    }
     String out("CREATE TABLE IF NOT EXISTS ", r);
     out += quote_ident(r, entity.table_name);
     out += " (";
@@ -261,10 +280,12 @@ String SqlDialect::compile_select_sql(Memory r,
                                       const SelectQuery& query,
                                       SqlBindings& params) const {
     if (query.raw_sql_text || !query.raw_sql_search_criteria.empty() ||
-        !query.raw_projections.empty() || !query.dynamic_properties.empty())
+        !query.raw_projections.empty() || !query.dynamic_properties.empty()) {
         params.mark_untrusted_sql();
-    if (query.raw_sql_text)
+    }
+    if (query.raw_sql_text) {
         return String(*query.raw_sql_text, r);
+    }
     auto projection = compile_projection(r, entity, query, params);
     bool partitioned = query.partition_field.has_value() && query.slice.has_value();
     if (partitioned) {
@@ -272,8 +293,9 @@ String SqlDialect::compile_select_sql(Memory r,
         String order(r);
         if (!query.order_by.empty()) {
             Vector<String> parts(r);
-            for (const auto& item : query.order_by)
+            for (const auto& item : query.order_by) {
                 parts.emplace_back(order_by_sql(r, entity, item, params));
+            }
             order = " ORDER BY ";
             order += join(r, parts, ", ");
         }
@@ -288,14 +310,15 @@ String SqlDialect::compile_select_sql(Memory r,
     sql += " FROM ";
     sql += quote_ident(r, entity.table_name);
     Vector<String> where(r);
-    if (query.predicate)
+    if (query.predicate) {
         where.emplace_back(compile_expr(r, entity, *query.predicate, params));
+    }
     if (query.search_text) {
         Vector<String> parts(r);
         String pattern("%", r);
         pattern += *query.search_text;
         pattern += '%';
-        for (const auto& property : entity.properties)
+        for (const auto& property : entity.properties) {
             if (property.data_type == DataType::Text || property.data_type == DataType::LargeText) {
                 params.push_field(entity, property.name, Value(r, pattern));
                 auto part = quote_ident(r, property.column_name);
@@ -303,6 +326,7 @@ String SqlDialect::compile_select_sql(Memory r,
                 part += placeholder(r, params.size());
                 parts.emplace_back(std::move(part));
             }
+        }
         if (!parts.empty()) {
             String part("(", r);
             part += join(r, parts, " OR ");
@@ -310,8 +334,9 @@ String SqlDialect::compile_select_sql(Memory r,
             where.emplace_back(std::move(part));
         }
     }
-    for (const auto& raw : query.raw_sql_search_criteria)
+    for (const auto& raw : query.raw_sql_search_criteria) {
         where.emplace_back(raw);
+    }
     if (!where.empty()) {
         sql += " WHERE ";
         sql += join(r, where, " AND ");
@@ -339,8 +364,9 @@ String SqlDialect::compile_select_sql(Memory r,
     }
     if (!query.group_by_fields.empty()) {
         Vector<String> parts(r);
-        for (const auto& field : query.group_by_fields)
+        for (const auto& field : query.group_by_fields) {
             parts.emplace_back(column_sql(r, entity, field));
+        }
         sql += " GROUP BY ";
         sql += join(r, parts, ", ");
     }
@@ -351,8 +377,9 @@ String SqlDialect::compile_select_sql(Memory r,
     }
     if (!query.order_by.empty()) {
         Vector<String> parts(r);
-        for (const auto& order : query.order_by)
+        for (const auto& order : query.order_by) {
             parts.emplace_back(order_by_sql(r, entity, order, params));
+        }
         sql += " ORDER BY ";
         sql += join(r, parts, ", ");
     }
@@ -372,8 +399,9 @@ String SqlDialect::compile_select_sql(Memory r,
 String
 SqlDialect::column_sql(Memory r, const EntityDescriptor& entity, std::string_view field) const {
     auto* p = entity.property_by_name(field);
-    if (!p)
+    if (!p) {
         fail(r, SqlCompileError::Code::UnknownField, field);
+    }
     return quote_ident(r, p->column_name);
 }
 
@@ -410,18 +438,21 @@ String SqlDialect::select_projection(Memory r,
     Vector<String> parts(r);
     if (query.projection.empty() && query.expr_projection.empty() &&
         query.raw_projections.empty() && query.dynamic_properties.empty()) {
-        for (const auto& p : entity.properties)
+        for (const auto& p : entity.properties) {
             parts.emplace_back(column_with_alias(r, p));
+        }
         return join(r, parts, ", ");
     }
     for (std::size_t i = 0; i < query.projection.size(); ++i) {
         const auto& field = query.projection[i];
         if (std::find(query.projection.begin(), query.projection.begin() + i, field) !=
-            query.projection.begin() + i)
+            query.projection.begin() + i) {
             continue;
+        }
         auto* p = entity.property_by_name(field);
-        if (!p)
+        if (!p) {
             fail(r, SqlCompileError::Code::UnknownField, field);
+        }
         parts.emplace_back(column_with_alias(r, *p));
     }
     for (const auto& p : query.expr_projection) {
@@ -430,13 +461,14 @@ String SqlDialect::select_projection(Memory r,
         part += quote_ident(r, p.alias);
         parts.emplace_back(std::move(part));
     }
-    for (const auto* projections : {&query.raw_projections, &query.dynamic_properties})
+    for (const auto* projections : {&query.raw_projections, &query.dynamic_properties}) {
         for (const auto& p : *projections) {
             String part(p.raw_sql_segment, r);
             part += " AS ";
             part += quote_ident(r, p.property_name);
             parts.emplace_back(std::move(part));
         }
+    }
     return join(r, parts, ", ");
 }
 
@@ -445,21 +477,23 @@ String SqlDialect::aggregate_projection(Memory r,
                                         const SelectQuery& query,
                                         SqlBindings& params) const {
     Vector<String> parts(r);
-    for (const auto& field : query.group_by_fields)
+    for (const auto& field : query.group_by_fields) {
         add_unique(parts, column_sql(r, entity, field));
+    }
     for (const auto& p : query.expr_projection) {
         auto part = compile_expr(r, entity, p.expr, params);
         part += " AS ";
         part += quote_ident(r, p.alias);
         add_unique(parts, std::move(part));
     }
-    for (const auto* projections : {&query.raw_projections, &query.dynamic_properties})
+    for (const auto* projections : {&query.raw_projections, &query.dynamic_properties}) {
         for (const auto& p : *projections) {
             String part(p.raw_sql_segment, r);
             part += " AS ";
             part += quote_ident(r, p.property_name);
             add_unique(parts, std::move(part));
         }
+    }
     for (const auto& aggregate : query.aggregates) {
         auto field = resolve_aggregate_field(r, entity, aggregate);
         auto part = aggregate_call_sql(r, aggregate.function, field);
@@ -538,8 +572,9 @@ String SqlDialect::compile_expr(Memory r,
                                 params);
     case K::Binary: {
         if (expr.op == BinaryOp::In || expr.op == BinaryOp::NotIn || expr.op == BinaryOp::InLarge ||
-            expr.op == BinaryOp::NotInLarge)
+            expr.op == BinaryOp::NotInLarge) {
             return compile_in(r, entity, expr.args.at(0), expr.op, expr.args.at(1), params);
+        }
         auto left = arg(0), right = arg(1);
         constexpr std::string_view ops[] = {"=", "!=", ">", ">=", "<", "<=", "LIKE", "NOT LIKE"};
         String out("(", r);
@@ -593,20 +628,23 @@ String SqlDialect::compile_function(Memory r,
     // SOUNDEX has its own branch in the source trait; overriding the generic
     // single-argument helper must not intercept this extension point.
     if (function == ExprFunction::Soundex) {
-        if (args.size() != 1)
+        if (args.size() != 1) {
             fail(r,
                  SqlCompileError::Code::InvalidFunctionArguments,
                  "SOUNDEX expects exactly one argument");
+        }
         auto arg = compile_expr(r, entity, args[0], params);
         String out("SOUNDEX(", r);
         out += arg;
         out += ')';
         return out;
     }
-    if (function == ExprFunction::Gbk)
+    if (function == ExprFunction::Gbk) {
         return compile_gbk_function(r, entity, args, params);
-    if (function == ExprFunction::Count && args.empty())
+    }
+    if (function == ExprFunction::Count && args.empty()) {
         return String("COUNT(*)", r);
+    }
     constexpr std::string_view names[] = {"SOUNDEX",
                                           "GBK",
                                           "COUNT",
@@ -646,9 +684,10 @@ String SqlDialect::compile_gbk_function(Memory r,
                                         const EntityDescriptor& entity,
                                         std::span<const Expr> args,
                                         SqlBindings& params) const {
-    if (args.size() != 1)
+    if (args.size() != 1) {
         fail(
             r, SqlCompileError::Code::InvalidFunctionArguments, "GBK expects exactly one argument");
+    }
     return compile_expr(r, entity, args[0], params);
 }
 
@@ -661,11 +700,11 @@ String SqlDialect::compile_subquery(Memory r,
                                     SqlBindings& params) const {
     auto lhs = compile_expr(r, entity, left, params);
     std::string_view sql_op;
-    if (op == BinaryOp::In || op == BinaryOp::InLarge)
+    if (op == BinaryOp::In || op == BinaryOp::InLarge) {
         sql_op = "IN";
-    else if (op == BinaryOp::NotIn || op == BinaryOp::NotInLarge)
+    } else if (op == BinaryOp::NotIn || op == BinaryOp::NotInLarge) {
         sql_op = "NOT IN";
-    else {
+    } else {
         constexpr std::string_view names[] = {
             "Eq", "Ne", "Gt", "Gte", "Lt", "Lte", "Like", "NotLike"};
         fail(r, SqlCompileError::Code::InvalidSubQueryOperator, names[unsigned(op)]);
@@ -688,8 +727,9 @@ String SqlDialect::compile_joined(Memory r,
                                   std::string_view joiner,
                                   SqlBindings& params) const {
     Vector<String> compiled(r);
-    for (const auto& part : parts)
+    for (const auto& part : parts) {
         compiled.emplace_back(compile_expr(r, entity, part, params));
+    }
     String sep(" ", r);
     sep += joiner;
     sep += ' ';
@@ -711,18 +751,21 @@ String SqlDialect::compile_in(Memory r,
     out += op == BinaryOp::In || op == BinaryOp::InLarge ? " IN (" : " NOT IN (";
     auto* list = right.kind == Expr::Kind::Value ? right.literal.as_list() : nullptr;
     if (list) {
-        if (list->empty())
+        if (list->empty()) {
             fail(r, SqlCompileError::Code::EmptyInList);
+        }
         bool first = true;
         for (const auto& value : *list) {
-            if (!first)
+            if (!first) {
                 out += ", ";
+            }
             first = false;
             params.push(value);
             out += placeholder(r, params.size());
         }
-    } else
+    } else {
         out += compile_expr(r, entity, right, params);
+    }
     out += "))";
     return out;
 }

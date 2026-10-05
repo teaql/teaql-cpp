@@ -61,8 +61,9 @@ struct Fetch {
                 wake.notify();
                 return {};
             }
-            if (index == fetch.fail_at)
+            if (index == fetch.fail_at) {
                 return R::err(r, DataServiceError<String>::executor(r, String("child failed", r)));
+            }
             Vector<CompactRow> rows(r);
             Record record(r);
             record.emplace(String("probe", r), Value(r, std::uint64_t(index)));
@@ -92,8 +93,9 @@ static Json expr_out(Memory r, const Expr& e) {
     detail::model_put(out, "name", e.name);
     detail::model_put(out, "value", detail::debug_value(r, e.literal));
     Json::Array args(r);
-    for (const auto& a : e.args)
+    for (const auto& a : e.args) {
         args.emplace_back(expr_out(r, a));
+    }
     detail::model_put(out, "args", args);
     return out;
 }
@@ -104,10 +106,12 @@ static Json query_out(Memory r, const SelectQuery& q) {
     detail::model_put(out, "filter", q.predicate ? expr_out(r, *q.predicate) : Json(r));
     detail::model_put(out, "partition", q.partition_field ? Json(r, *q.partition_field) : Json(r));
     Json::Array projection(r), relations(r), order(r);
-    for (const auto& s : q.projection)
+    for (const auto& s : q.projection) {
         projection.emplace_back(s);
-    for (const auto& l : q.relations)
+    }
+    for (const auto& l : q.relations) {
         relations.emplace_back(l.name);
+    }
     for (const auto& o : q.order_by) {
         auto item = detail::model_json(r);
         detail::model_put(item, "field", o.field);
@@ -123,8 +127,9 @@ static Json query_out(Memory r, const SelectQuery& q) {
 static Json evaluate(UserContext& c, const Json& j) {
     auto r = c.memory_resource();
     c.disable_sql_log();
-    if (flag(j, "capture"))
+    if (flag(j, "capture")) {
         c.enable_select_sql_log();
+    }
     auto& metadata = c.make<InMemoryMetadataStore>();
     EntityDescriptor target(std::allocator_arg, Allocator(r), "Child");
     target.property("child_id", DataType::U64).is_id = true;
@@ -142,15 +147,17 @@ static Json evaluate(UserContext& c, const Json& j) {
         q.partition_field.emplace("existing", r);
         q.relations.emplace_back("nested");
         auto slice = text(field(j, "slice"));
-        if (slice == "limit")
+        if (slice == "limit") {
             q.limit(2);
-        else if (slice == "offset")
+        } else if (slice == "offset") {
             q.offset(3);
-        else if (slice == "zero")
+        } else if (slice == "zero") {
             q.limit(0);
+        }
         if (auto* t = optional(j, "threshold");
-            t && !std::holds_alternative<std::monostate>(t->data))
+            t && !std::holds_alternative<std::monostate>(t->data)) {
             q.top_n_probe_parent_threshold_value = integer(*t);
+        }
         plan.query.emplace(std::move(q));
     }
     RelationDescriptor nested(std::allocator_arg, Allocator(r), "nested", "Leaf");
@@ -182,36 +189,40 @@ static Json evaluate(UserContext& c, const Json& j) {
         detail::relation_top_n_operation(r, plan, selected, integer(field(j, "parents")));
     Json out = detail::model_json(r);
     bool ready = false;
-    for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i)
+    for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i) {
         if (auto* result = operation.poll()) {
             ready = true;
-            if (!*result)
+            if (!*result) {
                 detail::model_put(out, "error", result->error().to_string(r));
-            else {
+            } else {
                 Json::Array values(r);
-                for (const auto& row : result->value())
+                for (const auto& row : result->value()) {
                     values.emplace_back(*row.get("probe")->try_u64());
+                }
                 detail::model_put(out, "rows", values);
             }
             break;
         }
+    }
     if (!ready) {
         operation.cancel();
         detail::model_put(out, "cancelled", true);
     }
     Json::Array queries(r);
-    for (const auto& q : fetch.seen)
+    for (const auto& q : fetch.seen) {
         queries.emplace_back(query_out(r, q));
+    }
     detail::model_put(out, "queries", queries);
     detail::model_put(out, "capabilities_calls", mock.capabilities_calls);
     detail::model_put(out, "drops", fetch.drops);
     auto attrs = detail::model_json(r);
-    for (const auto& [key, v] : telemetry.attributes)
+    for (const auto& [key, v] : telemetry.attributes) {
         std::visit(
             [&](const auto& value) {
                 detail::model_put(attrs, key, value);
             },
             v.data);
+    }
     detail::model_put(out, "telemetry", attrs);
     return out;
 }

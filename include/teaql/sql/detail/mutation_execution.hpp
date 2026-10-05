@@ -37,9 +37,10 @@ public:
         try {
             if (!pending_) {
                 if (owner_.observer) {
-                    if constexpr (std::same_as<T, std::uint64_t>)
+                    if constexpr (std::same_as<T, std::uint64_t>) {
                         owner_.intent = SqlIntentRedactions::from_bindings(
                             resource_, query_.log_context, query_.params, query_.sql);
+                    }
                     diagnostic_.emplace(std::allocator_arg,
                                         Allocator(resource_),
                                         owner_.metadata(query_,
@@ -48,39 +49,46 @@ public:
                                                             : DataServiceOperation::Query),
                                         owner_.observer);
                 }
-                if constexpr (std::same_as<T, std::uint64_t>)
+                if constexpr (std::same_as<T, std::uint64_t>) {
                     pending_ = &owner_.inner.execute_sql(resource_, query_);
-                else
+                } else {
                     pending_ = &owner_.inner.fetch_all_compact_sql(resource_, query_);
-                if (pending_->memory_resource() != resource_)
+                }
+                if (pending_->memory_resource() != resource_) {
                     throw std::invalid_argument(
                         "SQL transport returned work in a different Context");
+                }
             }
             forwarding_.attach(pending_->wake_signal(), wake);
             auto* result = pending_->poll();
-            if (!result)
+            if (!result) {
                 return {};
+            }
             forwarding_.reset();
             pending_ = nullptr;
             if (!*result) {
-                if (diagnostic_)
+                if (diagnostic_) {
                     diagnostic_->fail();
+                }
                 return Output::err(resource_, clone_in(resource_, result->error()));
             }
             auto value = clone_in(resource_, result->value());
-            if (diagnostic_)
+            if (diagnostic_) {
                 if (auto metadata = diagnostic_->success()) {
-                    if constexpr (std::same_as<T, std::uint64_t>)
+                    if constexpr (std::same_as<T, std::uint64_t>) {
                         metadata->affected_rows = value;
-                    else
+                    } else {
                         metadata->result_count = value.size();
+                    }
                     (*owner_.observer)(std::move(*metadata));
                 }
+            }
             return Output::ok(resource_, std::move(value));
         } catch (...) {
             stop();
-            if (diagnostic_)
+            if (diagnostic_) {
                 diagnostic_->fail();
+            }
             throw;
         }
     }
@@ -91,14 +99,16 @@ public:
 
     void cancel_and_wait() noexcept {
         stop();
-        if (diagnostic_)
+        if (diagnostic_) {
             diagnostic_->cancel();
+        }
     }
 
 private:
     void stop() noexcept {
-        if (pending_)
+        if (pending_) {
             pending_->cancel();
+        }
         forwarding_.reset();
         pending_ = nullptr;
     }
@@ -136,10 +146,12 @@ public:
     ExecutionMetadata metadata(const CompiledQuery& query, DataServiceOperation op) const {
         auto r = intent.memory_resource();
         auto m = mutation_metadata(r, dialect, query, request, op);
-        if (op == DataServiceOperation::Query)
+        if (op == DataServiceOperation::Query) {
             m.sql_log.intent_redactions = clone_in(r, intent);
-        if (auto* id = mutation_target_id(request))
+        }
+        if (auto* id = mutation_target_id(request)) {
             m.sql_log.intent_redactions.capture_target_id(*id);
+        }
         return m;
     }
 
@@ -184,23 +196,26 @@ public:
                 initialize();
                 initialized_ = true;
             }
-            if (auto* batch = std::get_if<MutationRequest::Batch>(&request_.data))
+            if (auto* batch = std::get_if<MutationRequest::Batch>(&request_.data)) {
                 return poll_batch(wake, *batch);
+            }
             if (write_) {
                 forwarding_.attach(write_->wake_signal(), wake);
                 auto* result = write_->poll();
-                if (!result)
+                if (!result) {
                     return {};
+                }
                 forwarding_.reset();
                 write_ = nullptr;
-                if (!*result)
+                if (!*result) {
                     return Output::err(
                         resource_,
                         Error::transport(resource_, clone_in(resource_, result->error())));
+                }
                 metadata_->ended_at = ExecutionMetadata::SystemTime::clock::now();
                 metadata_->affected_rows = result->value();
                 metadata_->sql_log.execution_outcome = SqlExecutionOutcome::Success;
-                if (readback_ && result->value() == 1)
+                if (readback_ && result->value() == 1) {
                     if (auto* id = mutation_persisted_id(request_)) {
                         SelectQuery query(std::allocator_arg,
                                           Allocator(resource_),
@@ -211,25 +226,29 @@ public:
                             both.args.emplace_back(std::move(filter));
                             both.args.emplace_back(*guard_);
                             query.filter(std::move(both));
-                        } else
+                        } else {
                             query.filter(std::move(filter));
+                        }
                         compiled_.emplace(
                             cache_.compile_select_cached(resource_, dialect_, *entity_, query));
                         read_ = &observed_->fetch_all_compact_sql(resource_, *compiled_);
                     }
+                }
             }
             std::optional<EntitySnapshot> snapshot;
             if (read_) {
                 forwarding_.attach(read_->wake_signal(), wake);
                 auto* result = read_->poll();
-                if (!result)
+                if (!result) {
                     return {};
+                }
                 forwarding_.reset();
                 read_ = nullptr;
-                if (!*result)
+                if (!*result) {
                     return Output::err(
                         resource_,
                         Error::transport(resource_, clone_in(resource_, result->error())));
+                }
                 if (result->value().size() != 1) {
                     String error("persisted ", resource_);
                     error += mutation_entity_name(request_);
@@ -266,12 +285,15 @@ public:
 
 private:
     void stop() noexcept {
-        if (child_)
+        if (child_) {
             child_->cancel();
-        if (write_)
+        }
+        if (write_) {
             write_->cancel();
-        if (read_)
+        }
+        if (read_) {
             read_->cancel();
+        }
         forwarding_.reset();
         child_ = nullptr;
         write_ = nullptr;
@@ -280,11 +302,12 @@ private:
 
     void initialize() {
         if (std::holds_alternative<MutationRequest::Batch>(request_.data)) {
-            if (guard_)
+            if (guard_) {
                 throw SqlCompileError(std::allocator_arg,
                                       Allocator(resource_),
                                       SqlCompileError::Code::InvalidFunctionArguments,
                                       "guarded mutation supports update, delete, and recover only");
+            }
             auto now = ExecutionMetadata::SystemTime::clock::now();
             metadata_.emplace(
                 std::allocator_arg, Allocator(resource_), DataServiceOperation::Batch, now, now);
@@ -292,18 +315,20 @@ private:
             metadata_->affected_rows = 0;
             return;
         }
-        if (guard_ && std::holds_alternative<InsertCommand>(request_.data))
+        if (guard_ && std::holds_alternative<InsertCommand>(request_.data)) {
             throw SqlCompileError(std::allocator_arg,
                                   Allocator(resource_),
                                   SqlCompileError::Code::InvalidFunctionArguments,
                                   "guarded mutation supports update, delete, and recover only");
+        }
         auto name = mutation_entity_name(request_);
         entity_ = cache_.entity_descriptor(schema_, name);
-        if (!entity_)
+        if (!entity_) {
             throw SqlCompileError(std::allocator_arg,
                                   Allocator(resource_),
                                   SqlCompileError::Code::UnknownEntity,
                                   name);
+        }
         compiled_.emplace(compile_mutation(resource_, dialect_, *entity_, request_, guard_));
         observed_ = &async_arena(resource_).template make<ObservedSqlTransport<E>>(
             transport_, dialect_, request_, observer_);
@@ -328,7 +353,7 @@ private:
 
     std::optional<Output> poll_batch(WakeSignal& wake, const MutationRequest::Batch& batch) {
         while (index_ < batch.size()) {
-            if (!child_)
+            if (!child_) {
                 child_ = &make_operation<Output, MutationTreeOperation>(
                     resource_,
                     dialect_,
@@ -338,28 +363,34 @@ private:
                     clone_in(resource_, batch[index_]),
                     readback_,
                     observer_);
+            }
             forwarding_.attach(child_->wake_signal(), wake);
             auto* result = child_->poll();
-            if (!result)
+            if (!result) {
                 return {};
+            }
             forwarding_.reset();
             child_ = nullptr;
-            if (!*result)
+            if (!*result) {
                 return Output::err(resource_, clone_in(resource_, result->error()));
+            }
             const auto& value = result->value();
             if (value.affected_rows >
-                std::numeric_limits<std::uint64_t>::max() - *metadata_->affected_rows)
+                std::numeric_limits<std::uint64_t>::max() - *metadata_->affected_rows) {
                 throw std::overflow_error("batch affected row count overflow");
+            }
             *metadata_->affected_rows += value.affected_rows;
             if (value.metadata.parameterized_query) {
-                if (!metadata_->parameterized_query)
+                if (!metadata_->parameterized_query) {
                     metadata_->parameterized_query.emplace(resource_);
-                else
+                } else {
                     *metadata_->parameterized_query += "; ";
+                }
                 *metadata_->parameterized_query += *value.metadata.parameterized_query;
             }
-            for (const auto& param : value.metadata.params)
+            for (const auto& param : value.metadata.params) {
                 metadata_->params.emplace_back(param);
+            }
             metadata_->statements.emplace_back(value.metadata);
             ++index_;
         }
@@ -427,20 +458,23 @@ public:
             }
             forwarding_.attach(pending_->wake_signal(), wake);
             auto* result = pending_->poll();
-            if (!result)
+            if (!result) {
                 return {};
+            }
             forwarding_.reset();
             pending_ = nullptr;
             auto output = clone_in(resource_, *result);
-            if (output)
+            if (output) {
                 journal_->disarm();
-            else
+            } else {
                 journal_->flush();
+            }
             return output;
         } catch (...) {
             stop();
-            if (journal_)
+            if (journal_) {
                 journal_->flush();
+            }
             throw;
         }
     }
@@ -451,14 +485,16 @@ public:
 
     void cancel_and_wait() noexcept {
         stop();
-        if (journal_)
+        if (journal_) {
             journal_->flush();
+        }
     }
 
 private:
     void stop() noexcept {
-        if (pending_)
+        if (pending_) {
             pending_->cancel();
+        }
         forwarding_.reset();
         pending_ = nullptr;
     }

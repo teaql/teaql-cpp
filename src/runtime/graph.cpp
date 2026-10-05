@@ -5,8 +5,9 @@
 namespace teaql {
 namespace detail {
 const TraceScopeToken* clone_trace_scope(Memory r, const TraceScopeToken* token) {
-    if (!token || token->memory_resource() == r)
+    if (!token || token->memory_resource() == r) {
         return token;
+    }
     return &resource_arena(r).make<TraceScopeToken>(*token);
 }
 }
@@ -18,8 +19,9 @@ TraceScopeToken::TraceScopeToken(std::allocator_arg_t,
                                  std::uint64_t index)
     : track(std::allocator_arg, a, track), node_index(index), parent_(parent) {
     auto& arena = detail::resource_arena(a.resource());
-    if (parent && !detail::resource_arena(parent->memory_resource()).can_lend_to(arena))
+    if (parent && !detail::resource_arena(parent->memory_resource()).can_lend_to(arena)) {
         throw std::invalid_argument("Trace parent belongs to a shorter or unrelated Context");
+    }
 }
 
 TraceScopeToken::TraceScopeToken(std::allocator_arg_t, Allocator a, const TraceScopeToken& other)
@@ -28,12 +30,15 @@ TraceScopeToken::TraceScopeToken(std::allocator_arg_t, Allocator a, const TraceS
 
 TraceChain TraceScopeToken::recover_trace_chain(Memory r) const {
     Vector<const TraceNode*> reversed(r);
-    for (auto* token = this; token; token = token->parent_)
-        if (!token->track.comment.empty())
+    for (auto* token = this; token; token = token->parent_) {
+        if (!token->track.comment.empty()) {
             reversed.push_back(&token->track);
+        }
+    }
     TraceChain result(r);
-    for (auto i = reversed.rbegin(); i != reversed.rend(); ++i)
+    for (auto i = reversed.rbegin(); i != reversed.rend(); ++i) {
         result.emplace_back(**i);
+    }
     return result;
 }
 
@@ -87,8 +92,9 @@ void GraphMutationPlan::push(std::string_view entity,
                              const std::optional<EntitySnapshot>& old) {
     // Match Rust's checked Debug arithmetic and wrapping Release arithmetic.
 #ifndef NDEBUG
-    if (next_item_index == std::numeric_limits<std::uint64_t>::max())
+    if (next_item_index == std::numeric_limits<std::uint64_t>::max()) {
         throw std::overflow_error("attempt to add with overflow");
+    }
 #endif
     const auto index = next_item_index++;
     items.emplace_back(entity, kind, values, fields, index, scope, old);
@@ -115,28 +121,34 @@ void GraphMutationPlan::rebuild_batches() {
 
 GraphMutationPlan::Counts GraphMutationPlan::grouped_counts(Memory r) const {
     Counts result(r);
-    for (const auto& batch : batches)
+    for (const auto& batch : batches) {
         result[{String(batch.entity, r), batch.kind}] += batch.items.size();
+    }
     return result;
 }
 
 Vector<String>
 sorted_update_fields(Memory r, const EntityValues& values, std::span<const String> excluded) {
     Vector<String> result(r);
-    for (const auto& [field, value] : values)
-        if (std::find(excluded.begin(), excluded.end(), field) == excluded.end())
+    for (const auto& [field, value] : values) {
+        if (std::find(excluded.begin(), excluded.end(), field) == excluded.end()) {
             result.emplace_back(field);
+        }
+    }
     return result;
 }
 
 TraceChain ScopedCommentNode::to_trace_chain(Memory r) const {
     Vector<const TraceNode*> reversed(r);
-    for (auto* node = this; node; node = node->parent)
-        if (!node->track.comment.empty())
+    for (auto* node = this; node; node = node->parent) {
+        if (!node->track.comment.empty()) {
             reversed.push_back(&node->track);
+        }
+    }
     TraceChain result(r);
-    for (auto i = reversed.rbegin(); i != reversed.rend(); ++i)
+    for (auto i = reversed.rbegin(); i != reversed.rend(); ++i) {
         result.emplace_back(**i);
+    }
     return result;
 }
 }

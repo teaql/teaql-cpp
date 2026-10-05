@@ -7,17 +7,20 @@ static MutationRequest mutation(Memory r, const Json& j, std::string_view fallba
     auto name = optional(j, "entity") ? text(field(j, "entity")) : fallback;
     if (mode == "batch") {
         MutationRequest::Batch batch(r);
-        for (const auto& child : items(j, "children"))
+        for (const auto& child : items(j, "children")) {
             batch.emplace_back(mutation(r, child, fallback));
+        }
         return MutationRequest(std::allocator_arg, Allocator(r), std::move(batch));
     }
     auto decorate = [&](auto& c) {
-        if (auto p = optional(j, "trace"))
+        if (auto p = optional(j, "trace")) {
             c.audit_as(text(*p));
+        }
     };
     auto fields = [&](MutationValues& v) {
-        for (const auto& [k, x] : std::get<Json::Object>(field(j, "values").data))
+        for (const auto& [k, x] : std::get<Json::Object>(field(j, "values").data)) {
             v.fields.emplace(String(k, r), value(r, x));
+        }
     };
     auto version = [&]() -> std::optional<std::int64_t> {
         auto p = optional(j, "version");
@@ -52,8 +55,9 @@ static MutationRequest mutation(Memory r, const Json& j, std::string_view fallba
 
 static Json values_json(Memory r, std::span<const Value> v) {
     Json::Array out(r);
-    for (const auto& x : v)
+    for (const auto& x : v) {
         out.emplace_back(x.to_json_value(r));
+    }
     return Json(r, std::move(out));
 }
 
@@ -75,18 +79,21 @@ static Json metadata_json(Memory r, const ExecutionMetadata& m) {
     detail::model_put(out, "trace", m.trace_chain.size());
     detail::model_put(out, "generated", m.sql_log.generated_sql);
     Json::Array policies(r), statements(r);
-    for (auto p : m.sql_log.parameter_policies)
+    for (auto p : m.sql_log.parameter_policies) {
         policies.emplace_back(unsigned(p));
-    for (const auto& s : m.statements)
+    }
+    for (const auto& s : m.statements) {
         statements.emplace_back(metadata_json(r, s));
+    }
     detail::model_put(out, "policies", policies);
     detail::model_put(out, "statements", statements);
     for (bool debug : {false, true}) {
         Vector<String> secrets(r);
         m.sql_log.intent_redactions.extend_secrets(debug, secrets);
         Json::Array v(r);
-        for (const auto& s : secrets)
+        for (const auto& s : secrets) {
             v.emplace_back(s);
+        }
         detail::model_put(out, debug ? "secrets_debug" : "secrets", v);
     }
     return out;
@@ -122,15 +129,18 @@ struct Transport : SqlTransactionTransport<String> {
             : resource(a.resource()), mode(mode, a.resource()), count(count) {}
 
         std::optional<Result<T, String>> poll(WakeSignal&) {
-            if (mode == "pending")
+            if (mode == "pending") {
                 return {};
-            if (mode == "panic")
+            }
+            if (mode == "panic") {
                 throw std::runtime_error("provider panic");
-            if (mode == "error")
+            }
+            if (mode == "error") {
                 return Result<T, String>::err(resource, String("provider failed", resource));
-            if constexpr (std::same_as<T, std::uint64_t>)
+            }
+            if constexpr (std::same_as<T, std::uint64_t>) {
                 return Result<T, String>::ok(resource, count);
-            else {
+            } else {
                 T rows(resource);
                 for (std::uint64_t i = 0; i < count; ++i) {
                     rows.emplace_back();
@@ -238,14 +248,16 @@ static Json evaluate(UserContext& user, const Json& j) {
         user.make<SqlDataServiceExecutor<String, Transport>>(d, transport, schema, state);
     auto& events = user.make<Json::Array>();
     std::optional<ExecutionObserver> observer;
-    if (!optional(j, "observe") || std::get<bool>(field(j, "observe").data))
+    if (!optional(j, "observe") || std::get<bool>(field(j, "observe").data)) {
         observer.emplace(std::allocator_arg, Allocator(r), [r, &events](ExecutionMetadata m) {
             events.emplace_back(metadata_json(r, m));
         });
+    }
     GuardedMutationExecutor<SqlExecutorError<String>>* active = &executor;
-    if (auto p = optional(j, "transaction"); p && std::get<bool>(p->data))
+    if (auto p = optional(j, "transaction"); p && std::get<bool>(p->data)) {
         active = &dynamic_cast<GuardedMutationExecutor<SqlExecutorError<String>>&>(
             executor.begin(r).wait().value().get());
+    }
     auto req = mutation(r, field(j, "request"), e.name);
     auto& op =
         optional(j, "guard")
@@ -262,17 +274,18 @@ static Json evaluate(UserContext& user, const Json& j) {
         if (!result) {
             op.cancel();
             detail::model_put(out, "pending", true);
-        } else if (!*result)
+        } else if (!*result) {
             detail::model_put(out, "error", result->error().to_string(r));
-        else {
+        } else {
             const auto& v = result->value();
             detail::model_put(out, "affected", v.affected_rows);
             detail::model_put(out, "metadata", metadata_json(r, v.metadata));
             auto snapshot = Json(r);
             if (v.persisted_snapshot) {
                 snapshot = detail::model_json(r);
-                for (const auto& [k, x] : v.persisted_snapshot->fields)
+                for (const auto& [k, x] : v.persisted_snapshot->fields) {
                     detail::model_put(snapshot, k, x.to_json_value(r));
+                }
             }
             detail::model_put(out, "snapshot", snapshot);
             detail::model_put(out, "generated", v.generated_values.fields.size());
@@ -292,8 +305,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto j = Json::parse(r, line);
-        if (!j)
+        if (!j) {
             throw std::runtime_error("invalid fixture");
+        }
         std::cout << evaluate(*user, *j).dump(r) << '\n';
     }
 }

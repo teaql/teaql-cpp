@@ -11,10 +11,12 @@ namespace teaql {
 namespace detail {
 inline Arena& async_arena(Memory r) {
     auto* arena = dynamic_cast<Arena*>(r);
-    if (!arena)
+    if (!arena) {
         throw std::invalid_argument("Async work requires a Context arena");
-    if (arena->closed() || arena->closing())
+    }
+    if (arena->closed() || arena->closing()) {
         throw std::logic_error("Cannot start work in a closing Context");
+    }
     return *arena;
 }
 }
@@ -35,8 +37,9 @@ public:
         {
             std::lock_guard lock(mutex_);
             ++generation_;
-            if (parent_)
+            if (parent_) {
                 parent_->notify();
+            }
         }
         changed_.notify_all();
     }
@@ -72,25 +75,30 @@ public:
     }
 
     void attach(WakeSignal& source, WakeSignal& parent) {
-        if (source_ == &source && parent_ == &parent)
+        if (source_ == &source && parent_ == &parent) {
             return;
+        }
         reset();
         // Only the owner changes graph links; worker notifications cannot race
         // with these reads. Reject cycles before installing a locking edge.
-        for (auto* node = &parent; node; node = node->parent_)
-            if (node == &source)
+        for (auto* node = &parent; node; node = node->parent_) {
+            if (node == &source) {
                 throw std::logic_error("Cyclic operation wake forwarding");
+            }
+        }
         std::lock_guard lock(source.mutex_);
-        if (source.parent_)
+        if (source.parent_) {
             throw std::logic_error("Operation already has an awaiting parent");
+        }
         source.parent_ = &parent;
         source_ = &source;
         parent_ = &parent;
     }
 
     void reset() noexcept {
-        if (!source_)
+        if (!source_) {
             return;
+        }
         {
             std::lock_guard lock(source_->mutex_);
             source_->parent_ = nullptr;
@@ -139,14 +147,18 @@ public:
     }
 
     const T* poll() {
-        if (status_ == AsyncStatus::Cancelled)
+        if (status_ == AsyncStatus::Cancelled) {
             throw OperationCancelled{};
-        if (status_ == AsyncStatus::Failed)
+        }
+        if (status_ == AsyncStatus::Failed) {
             std::rethrow_exception(failure_);
-        if (status_ == AsyncStatus::Ready)
+        }
+        if (status_ == AsyncStatus::Ready) {
             return &*result_;
-        if (polling_)
+        }
+        if (polling_) {
             throw std::logic_error("Recursive poll of the same operation");
+        }
         polling_ = true;
         try {
             auto value = table_->poll(state_, wake_);
@@ -171,8 +183,9 @@ public:
     const T& wait() {
         for (;;) {
             auto observed = wake_.ticket();
-            if (auto* value = poll())
+            if (auto* value = poll()) {
                 return *value;
+            }
             wake_.wait(observed);
         }
     }
@@ -180,10 +193,12 @@ public:
     void cancel() noexcept {
         // Poll/cancel/Context close are owner-thread operations. Reentrant close
         // from an active provider callback would free its own stack and is invalid.
-        if (polling_)
+        if (polling_) {
             std::terminate();
-        if (status_ != AsyncStatus::Pending)
+        }
+        if (status_ != AsyncStatus::Pending) {
             return;
+        }
         polling_ = true;
         status_ = AsyncStatus::Cancelled;
         table_->cancel(state_);

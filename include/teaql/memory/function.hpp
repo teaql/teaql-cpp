@@ -12,16 +12,18 @@ inline constexpr bool relocatable_callable =
 
 template <class F>
 F copy_callable(Memory r, Memory source, const F& function) {
-    if (r != source && !relocatable_callable<F>)
+    if (r != source && !relocatable_callable<F>) {
         throw std::invalid_argument(
             "Cross-context callback captures require allocator-aware state");
+    }
     return std::make_obj_using_allocator<F>(Allocator(r), function);
 }
 
 inline Arena& context_arena(Memory r) {
     auto* arena = dynamic_cast<Arena*>(r);
-    if (!arena)
+    if (!arena) {
         throw std::invalid_argument("Context function requires GlobalContext or UserContext arena");
+    }
     return *arena;
 }
 }
@@ -53,8 +55,9 @@ public:
 
     ContextFunction(std::allocator_arg_t, Allocator a, const ContextFunction& other)
         : resource_(a.resource()), state_(other.state_), table_(other.table_) {
-        if (resource_ != other.resource_)
+        if (resource_ != other.resource_) {
             state_ = table_->clone(detail::context_arena(resource_), state_);
+        }
     }
 
     ContextFunction(std::allocator_arg_t, Allocator a, ContextFunction&& other)
@@ -82,11 +85,12 @@ private:
             return std::invoke(*static_cast<const F*>(state), std::forward<Args>(args)...);
         },
         [](Arena& arena, const void* state) -> const void* {
-            if constexpr (!detail::relocatable_callable<F>)
+            if constexpr (!detail::relocatable_callable<F>) {
                 throw std::invalid_argument(
                     "Cross-context callback captures require allocator-aware state");
-            else
+            } else {
                 return &arena.make<F>(*static_cast<const F*>(state));
+            }
         }};
     Memory resource_;
     const void* state_;

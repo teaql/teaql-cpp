@@ -30,10 +30,11 @@ struct Json {
 
     template <std::signed_integral T>
     Json(Memory r, T v) : resource_(r) {
-        if (v < 0)
+        if (v < 0) {
             data = std::int64_t(v);
-        else
+        } else {
             data = std::uint64_t(v);
+        }
     }
 
     template <std::unsigned_integral T>

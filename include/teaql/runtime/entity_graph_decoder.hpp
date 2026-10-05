@@ -79,9 +79,10 @@ private:
     std::pmr::map<String, RelationDecoder, std::less<>> list_, option_;
 
     static void validate_domain(const EntityRuntimeState& root, const EntityGraphBuilder& graph) {
-        if (root.memory_resource() != graph.memory_resource())
+        if (root.memory_resource() != graph.memory_resource()) {
             throw std::invalid_argument(
                 "Identity graph decoder root and builder must share their owning Context");
+        }
     }
 
     template <IdentifiableEntity T>
@@ -90,16 +91,18 @@ private:
         auto r = graph.memory_resource();
         auto graph_root = detail::EntityRuntimeAccess::fresh_with_weak_graph(r, root);
         auto entity = T::from_compact_row_with_context(r, std::move(row), AnyRef(graph_root));
-        if (!entity)
+        if (!entity) {
             return EntityGraphDecodeResult::err(r, std::move(entity).error());
+        }
         auto id = entity.value().id_value().try_u64();
-        if (!id)
+        if (!id) {
             return EntityGraphDecodeResult::err(
                 r,
                 EntityError(std::allocator_arg,
                             Allocator(r),
                             T::ENTITY_NAME,
                             "identity graph requires a u64 entity id"));
+        }
         graph.install(*id, std::move(entity).value());
         return EntityGraphDecodeResult::ok(r, {});
     }
@@ -111,16 +114,18 @@ private:
         auto graph_root = detail::EntityRuntimeAccess::fresh_with_weak_graph(r, root);
         for (auto& row : rows) {
             auto entity = T::from_compact_row_with_context(r, std::move(row), AnyRef(graph_root));
-            if (!entity)
+            if (!entity) {
                 return EntityGraphDecodeResult::err(r, std::move(entity).error());
+            }
             auto id = entity.value().id_value().try_u64();
-            if (!id)
+            if (!id) {
                 return EntityGraphDecodeResult::err(
                     r,
                     EntityError(std::allocator_arg,
                                 Allocator(r),
                                 T::ENTITY_NAME,
                                 "identity graph requires a u64 entity id"));
+            }
             graph.install(*id, std::move(entity).value());
         }
         return EntityGraphDecodeResult::ok(r, {});
@@ -139,8 +144,9 @@ private:
         entities.data.reserve(rows.size());
         for (auto& row : rows) {
             auto entity = T::from_compact_row_with_context(r, std::move(row), AnyRef(graph_root));
-            if (!entity)
+            if (!entity) {
                 return EntityGraphDecodeResult::err(r, std::move(entity).error());
+            }
             entities.data.emplace_back(std::move(entity).value());
         }
         entities.loaded();
@@ -161,8 +167,9 @@ private:
         if (!rows.empty()) {
             auto entity =
                 T::from_compact_row_with_context(r, std::move(rows.front()), AnyRef(graph_root));
-            if (!entity)
+            if (!entity) {
                 return EntityGraphDecodeResult::err(r, std::move(entity).error());
+            }
             value.emplace(std::move(entity).value());
         }
         graph.install_relation_option(owner, id, relation, std::move(value));

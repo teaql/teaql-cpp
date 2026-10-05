@@ -94,13 +94,14 @@ struct Key : BusinessIdKeyProvider {
     Result<BusinessIdEncodingKey, BusinessIdError>
     current_key(Memory r, const UserContext&, const BusinessIdDefinition&) const override {
         log.emplace_back("key");
-        if (mode == "error")
+        if (mode == "error") {
             return Result<BusinessIdEncodingKey, BusinessIdError>::err(
                 r,
                 BusinessIdError(std::allocator_arg,
                                 Allocator(r),
                                 BusinessIdErrorCode::KeyNotFound,
                                 "key unavailable"));
+        }
         std::array<std::uint8_t, 32> bytes{};
         bytes.fill(7);
         return BusinessIdEncodingKey::create(r, mode == "rotated" ? 2 : 1, bytes);
@@ -127,19 +128,22 @@ struct AllocatorProbe : BusinessIdAllocator, BusinessIdSchemaContributor {
     Result<BusinessIdAllocation, BusinessIdError> allocate(Memory r,
                                                            const BusinessIdPlan& p) const override {
         log.emplace_back("allocate");
-        if (mode == "error")
+        if (mode == "error") {
             return Result<BusinessIdAllocation, BusinessIdError>::err(
                 r,
                 BusinessIdError(std::allocator_arg,
                                 teaql::Allocator(r),
                                 BusinessIdErrorCode::Allocation,
                                 "allocator unavailable"));
+        }
         auto result = inner.allocate(r, p);
         if (result) {
-            if (mode == "mismatch")
+            if (mode == "mismatch") {
                 result.value().scope.period_key += '!';
-            if (mode == "outside")
+            }
+            if (mode == "outside") {
                 result.value().sequence = UINT64_MAX;
+            }
         }
         return result;
     }
@@ -181,9 +185,9 @@ static Json evaluate(UserContext& context, const Json& j) {
         Json::Array out(r);
         for (const auto& p : std::get<Json::Array>(field(j, "plans").data)) {
             auto result = allocator.allocate(r, plan(r, p));
-            if (!result)
+            if (!result) {
                 out.emplace_back(error(r, result.error()));
-            else {
+            } else {
                 auto item = detail::model_json(r);
                 detail::model_put(item, "sequence", unsigned_numeric(r, result.value().sequence));
                 detail::model_put(item, "scope", result.value().scope.canonical_key(r));
@@ -226,12 +230,14 @@ static Json evaluate(UserContext& context, const Json& j) {
     for (const auto& step : std::get<Json::Array>(field(j, "steps").data)) {
         if (auto* s = std::get_if<String>(&field(step, "key").data); s && *s != "missing") {
             auto& provider = context.make<Key>(*s, log);
-            if (!context.set_business_id_key_provider(context, provider))
+            if (!context.set_business_id_key_provider(context, provider)) {
                 throw std::runtime_error("missing fixture service");
+            }
         }
         Slot slot{r, {}, std::get<bool>(field(step, "new").data), log};
-        if (auto* s = std::get_if<String>(&field(step, "existing").data))
+        if (auto* s = std::get_if<String>(&field(step, "existing").data)) {
             slot.value.emplace(*s, r);
+        }
         auto result =
             context.business_ids().value().get().ensure(r,
                                                         context,
@@ -240,16 +246,18 @@ static Json evaluate(UserContext& context, const Json& j) {
                                                         text(field(step, "aggregate")),
                                                         slot);
         auto observed = detail::model_json(r);
-        if (result)
+        if (result) {
             detail::model_put(observed, "ok", result.value().value);
-        else
+        } else {
             observed = error(r, result.error());
+        }
         auto item = detail::model_json(r);
         detail::model_put(item, "result", observed);
         detail::model_put(item, "slot", slot.value ? Json(r, *slot.value) : Json(r));
         Json::Array calls(r);
-        for (const auto& call : log)
+        for (const auto& call : log) {
             calls.emplace_back(call);
+        }
         log.clear();
         detail::model_put(item, "calls", calls);
         out.emplace_back(std::move(item));
@@ -264,8 +272,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("invalid input");
+        }
         std::cout << evaluate(*user, *input).dump(r) << '\n';
     }
 }

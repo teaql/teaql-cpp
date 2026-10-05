@@ -9,8 +9,9 @@ inline RelationTopNExecutionPlan
 relation_top_n_execution_plan(const DataServiceCapabilities& capabilities,
                               const RelationLoadPlan& plan,
                               std::size_t parent_count) {
-    if (!plan.query || !plan.many || !plan.query->slice)
+    if (!plan.query || !plan.many || !plan.query->slice) {
         return RelationTopNExecutionPlan::Window;
+    }
     const auto threshold = plan.query->top_n_probe_parent_threshold_value;
     const bool probes = threshold ? *threshold != 0 && parent_count <= *threshold
                                   : capabilities.small_parent_relation_probes;
@@ -82,16 +83,18 @@ public:
         if (!started_) {
             started_ = true;
             ids_ = unique_relation_values(r, parents_, plan_.local_key);
-            if (ids_.empty())
+            if (ids_.empty()) {
                 return R::ok(r, std::move(rows_));
+            }
             auto capabilities = service_.executor.get().capabilities();
             probes_ = relation_top_n_execution_plan(capabilities, plan_, ids_.size()) ==
                       RelationTopNExecutionPlan::BoundedProbes;
             const bool provider_batch =
                 capabilities.small_parent_relation_probes &&
                 (!plan_.query || !plan_.query->top_n_probe_parent_threshold_value);
-            if (provider_batch && !service_.metadata.capture_execution_metadata())
+            if (provider_batch && !service_.metadata.capture_execution_metadata()) {
                 probes_ = false;
+            }
         }
         for (;;) {
             if (!child_) {
@@ -102,23 +105,28 @@ public:
                     query.partition_field.reset();
                 }
                 auto& child = fetch_(std::move(query));
-                if (child.memory_resource() != r)
+                if (child.memory_resource() != r) {
                     throw std::invalid_argument(
                         "Relation fetch result must belong to its query Context");
+                }
                 child_ = &child;
             }
             forwarding_.attach(child_->wake_signal(), wake);
             auto* result = child_->poll();
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return R::err(r, clone_in(r, result->error()));
-            for (const auto& row : result->value())
+            }
+            for (const auto& row : result->value()) {
                 rows_.emplace_back(row);
+            }
             forwarding_.reset();
             child_ = nullptr;
-            if (!probes_ || ++index_ == ids_.size())
+            if (!probes_ || ++index_ == ids_.size()) {
                 return R::ok(r, std::move(rows_));
+            }
         }
     }
 

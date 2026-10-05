@@ -22,8 +22,9 @@ public:
 
     SqlProjectionState(std::allocator_arg_t, Allocator a, const SqlProjectionState& other)
         : resource_(a.resource()), state_(other.state_), table_(other.table_) {
-        if (state_ && resource_ != other.resource_)
+        if (state_ && resource_ != other.resource_) {
             state_ = table_->clone(detail::context_arena(resource_), state_);
+        }
     }
 
     SqlProjectionState(std::allocator_arg_t, Allocator a, SqlProjectionState&& other)
@@ -72,11 +73,12 @@ private:
     static inline const Table table{
         &typeid(T), [](Arena& arena, const void* source) -> const void* {
             if constexpr (std::uses_allocator_v<T, Allocator> || std::is_arithmetic_v<T> ||
-                          std::is_enum_v<T> || std::is_empty_v<T>)
+                          std::is_enum_v<T> || std::is_empty_v<T>) {
                 return &arena.make<T>(*static_cast<const T*>(source));
-            else
+            } else {
                 throw std::invalid_argument(
                     "Cross-context projection state requires allocator-aware data");
+            }
         }};
     Memory resource_;
     const void* state_ = nullptr;

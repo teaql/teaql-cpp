@@ -18,38 +18,49 @@ enum class EntityStatus {
 constexpr EntityStatus next_status(EntityStatus status, EntityAction action) {
     switch (status) {
     case EntityStatus::New:
-        if (action == EntityAction::Update)
+        if (action == EntityAction::Update) {
             return EntityStatus::New;
-        if (action == EntityAction::Persist)
+        }
+        if (action == EntityAction::Persist) {
             return EntityStatus::Persisted;
+        }
         break;
     case EntityStatus::Persisted:
-        if (action == EntityAction::Update)
+        if (action == EntityAction::Update) {
             return EntityStatus::Updated;
-        if (action == EntityAction::Delete)
+        }
+        if (action == EntityAction::Delete) {
             return EntityStatus::UpdatedDeleted;
+        }
         break;
     case EntityStatus::PersistedDeleted:
-        if (action == EntityAction::Recover)
+        if (action == EntityAction::Recover) {
             return EntityStatus::UpdatedRecover;
+        }
         break;
     case EntityStatus::Updated:
-        if (action == EntityAction::Update)
+        if (action == EntityAction::Update) {
             return EntityStatus::Updated;
-        if (action == EntityAction::Persist)
+        }
+        if (action == EntityAction::Persist) {
             return EntityStatus::Persisted;
+        }
         break;
     case EntityStatus::UpdatedDeleted:
-        if (action == EntityAction::Delete)
+        if (action == EntityAction::Delete) {
             return EntityStatus::UpdatedDeleted;
-        if (action == EntityAction::Persist)
+        }
+        if (action == EntityAction::Persist) {
             return EntityStatus::PersistedDeleted;
+        }
         break;
     case EntityStatus::UpdatedRecover:
-        if (action == EntityAction::Recover)
+        if (action == EntityAction::Recover) {
             return EntityStatus::UpdatedRecover;
-        if (action == EntityAction::Persist)
+        }
+        if (action == EntityAction::Persist) {
             return EntityStatus::Persisted;
+        }
         break;
     case EntityStatus::Refer:
         break;

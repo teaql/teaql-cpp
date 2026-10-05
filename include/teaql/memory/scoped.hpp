@@ -26,8 +26,9 @@ ScopedBox<T> make_box(std::pmr::memory_resource* resource, Args&&... args) {
 
 template <class T>
 T move_to(std::pmr::memory_resource* target, T&& source) {
-    if (target == source.memory_resource())
+    if (target == source.memory_resource()) {
         return std::move(source);
+    }
     return std::make_obj_using_allocator<T>(std::pmr::polymorphic_allocator<T>(target),
                                             std::as_const(source));
 }

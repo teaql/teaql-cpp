@@ -9,10 +9,11 @@ using namespace teaql;
 
 static void environment(const Json& values) {
     for (const auto& [key, v] : std::get<Json::Object>(values.data)) {
-        if (auto* s = std::get_if<String>(&v.data))
+        if (auto* s = std::get_if<String>(&v.data)) {
             setenv(key.c_str(), s->c_str(), 1);
-        else
+        } else {
             unsetenv(key.c_str());
+        }
     }
 }
 
@@ -20,8 +21,9 @@ static String business_value(Memory r, const Json& step) {
     String out("private-school-name", r);
     if (auto* size = optional(step, "large")) {
         out.clear();
-        for (std::uint64_t i = 0; i < number<std::uint64_t>(*size); ++i)
+        for (std::uint64_t i = 0; i < number<std::uint64_t>(*size); ++i) {
             out += "密";
+        }
     }
     return out;
 }
@@ -47,10 +49,12 @@ static SqlLogEntry sql_entry(Memory r, const Json& step) {
     e.elapsed = {0, 1500};
     e.affected_rows = 1;
     e.result_summary = "1 rows affected";
-    if (auto* invalid = optional(step, "invalid"); invalid && std::get<bool>(invalid->data))
+    if (auto* invalid = optional(step, "invalid"); invalid && std::get<bool>(invalid->data)) {
         e.sql = "SELECT ?4";
-    if (auto* safe = optional(step, "safe"); safe && std::get<bool>(safe->data))
+    }
+    if (auto* safe = optional(step, "safe"); safe && std::get<bool>(safe->data)) {
         return detail::sql_entry_projection(r, e, false);
+    }
     return e;
 }
 
@@ -59,12 +63,14 @@ int main() {
     std::string line;
     std::getline(std::cin, line);
     auto input = Json::parse(global.memory_resource(), line);
-    if (!input)
+    if (!input) {
         throw std::runtime_error("invalid input");
+    }
     environment(field(*input, "env"));
     for (const auto& step : std::get<Json::Array>(field(*input, "steps").data)) {
-        if (auto* delta = optional(step, "env"))
+        if (auto* delta = optional(step, "env")) {
             environment(*delta);
+        }
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto op = text(field(step, "op"));
@@ -96,12 +102,14 @@ int main() {
         if (op == "sql" || op == "sensitive_sql") {
             auto e = sql_entry(r, step);
             auto before = detail::debug_sql_log(r, e);
-            if (op == "sql")
+            if (op == "sql") {
                 manager.write_sql_log(r, e.trace_path, e);
-            else
+            } else {
                 manager.write_sensitive_sql_log(r, e.trace_path, e);
-            if (detail::debug_sql_log(r, e) != before)
+            }
+            if (detail::debug_sql_log(r, e) != before) {
                 throw std::runtime_error("manager mutated SQL source");
+            }
             continue;
         }
         Record values(r);
@@ -112,11 +120,13 @@ int main() {
         e.trace_chain.emplace_back(
             TraceKind::AuditReason, "Order", "change private-school-name secret-token 7", 7);
         auto before = detail::debug_audit_event(r, e);
-        if (op == "event_projection")
+        if (op == "event_projection") {
             (void)e.build_safe_event(r, {}, {});
-        else
+        } else {
             manager.write_audit_log(r, e);
-        if (detail::debug_audit_event(r, e) != before)
+        }
+        if (detail::debug_audit_event(r, e) != before) {
             throw std::runtime_error("manager mutated event source");
+        }
     }
 }

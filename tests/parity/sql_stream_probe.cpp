@@ -19,10 +19,12 @@ static Json metadata(Memory r, const ExecutionMetadata& m) {
     detail::model_put(out, "comment", m.comment ? Json(r, *m.comment) : Json(r));
     detail::model_put(out, "debug", m.debug_query ? Json(r, *m.debug_query) : Json(r));
     Json::Array params(r), policies(r);
-    for (const auto& v : m.params)
+    for (const auto& v : m.params) {
         params.emplace_back(v.to_json_value(r));
-    for (auto p : m.sql_log.parameter_policies)
+    }
+    for (auto p : m.sql_log.parameter_policies) {
         policies.emplace_back(unsigned(p));
+    }
     detail::model_put(out, "params", params);
     detail::model_put(out, "policies", policies);
     return out;
@@ -80,18 +82,23 @@ struct Transport : StreamingSqlTransport<String>, SqlTransactionTransport<String
         std::optional<std::optional<Result<StreamChunk, String>>> poll_next(WakeSignal&) {
             using Item = Result<StreamChunk, String>;
             auto entries = items(owner.input, "entries");
-            if (index >= entries.size())
+            if (index >= entries.size()) {
                 return std::optional<Item>{};
+            }
             const auto& entry = entries[index++];
             auto mode = text(field(entry, "mode"));
-            if (mode == "pending")
+            if (mode == "pending") {
                 return {};
-            if (mode == "panic")
+            }
+            if (mode == "panic") {
                 throw std::runtime_error("stream panic");
-            if (mode == "end")
+            }
+            if (mode == "end") {
                 return std::optional<Item>{};
-            if (mode == "error")
+            }
+            if (mode == "error") {
                 return std::optional<Item>(Item::err(r, String("provider failed", r)));
+            }
             StreamChunk chunk(std::allocator_arg,
                               Allocator(r),
                               integer(field(entry, "index")),
@@ -132,12 +139,15 @@ struct Transport : StreamingSqlTransport<String>, SqlTransactionTransport<String
             }
             auto mode = optional(owner.input, "fetch_mode") ? text(field(owner.input, "fetch_mode"))
                                                             : "success";
-            if (mode == "pending")
+            if (mode == "pending") {
                 return {};
-            if (mode == "panic")
+            }
+            if (mode == "panic") {
                 throw std::runtime_error("fetch panic");
-            if (mode == "error")
+            }
+            if (mode == "error") {
                 return Result<Rows, String>::err(r, String("provider failed", r));
+            }
             Rows out(r);
             rows(r, out, integer(field(owner.input, "rows")));
             return Result<Rows, String>::ok(r, std::move(out));
@@ -227,9 +237,10 @@ static Json evaluate(UserContext& user, const Json& j) {
     auto& cache = user.make<SqlExecutorState>();
     auto& executor = user.make<SqlDataServiceExecutor<String, Transport>>(d, t, schema, cache);
     StreamQueryExecutor<SqlExecutorError<String>>* active = &executor;
-    if (flag(j, "transaction"))
+    if (flag(j, "transaction")) {
         active = &dynamic_cast<StreamQueryExecutor<SqlExecutorError<String>>&>(
             executor.begin(r).wait().value().get());
+    }
     auto q = query(r, field(j, "query"));
     q.entity =
         optional(j, "query_entity") ? text(field(j, "query_entity")) : std::string_view(e.name);
@@ -240,8 +251,9 @@ static Json evaluate(UserContext& user, const Json& j) {
         auto out = metadata(r, m);
         detail::model_put(out, "closed", t.closed);
         events.emplace_back(std::move(out));
-        if (flag(j, "sink_panic"))
+        if (flag(j, "sink_panic")) {
             throw 1;
+        }
     });
     auto& stream =
         flag(j, "observe", true)
@@ -257,22 +269,23 @@ static Json evaluate(UserContext& user, const Json& j) {
             auto next = stream.poll_next();
             auto item = detail::model_json(r);
             using Kind = StreamPoll<Result<StreamChunk, SqlExecutorError<String>>>::Kind;
-            if (next.kind == Kind::Pending)
+            if (next.kind == Kind::Pending) {
                 detail::model_put(item, "pending", true);
-            else if (next.kind == Kind::End) {
+            } else if (next.kind == Kind::End) {
                 detail::model_put(item, "end", true);
                 polls.emplace_back(std::move(item));
                 break;
-            } else if (!*next.item)
+            } else if (!*next.item) {
                 detail::model_put(item, "error", next.item->error().to_string(r));
-            else {
+            } else {
                 const auto& chunk = next.item->value();
                 detail::model_put(item, "count", chunk.rows.size());
                 detail::model_put(item, "index", chunk.chunk_index);
                 detail::model_put(item, "last", chunk.is_last);
                 Json::Array rows(r);
-                for (const auto& row : chunk.rows)
+                for (const auto& row : chunk.rows) {
                     rows.emplace_back(compact_row_to_json_value(r, row));
+                }
                 detail::model_put(item, "rows", rows);
             }
             polls.emplace_back(std::move(item));
@@ -302,8 +315,9 @@ int main() {
     while (std::getline(std::cin, line)) {
         auto user = global.make_user_context();
         auto j = Json::parse(user->memory_resource(), line);
-        if (!j)
+        if (!j) {
             throw std::runtime_error("bad input");
+        }
         std::cout << evaluate(*user, *j).dump(user->memory_resource()) << '\n';
     }
 }

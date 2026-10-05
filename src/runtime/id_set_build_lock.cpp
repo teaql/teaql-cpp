@@ -33,8 +33,9 @@ struct IdSetBuildWait {
         }
         wake = &signal;
         woken = false;
-        if (slot == IdSetBuildRegistry::none)
+        if (slot == IdSetBuildRegistry::none) {
             slot = entry.insert(*this);
+        }
         return {};
     }
 
@@ -48,8 +49,9 @@ struct IdSetBuildWait {
 
 private:
     void stop(bool another) noexcept {
-        if (finished)
+        if (finished) {
             return;
+        }
         auto& lock = owner.get();
         static_cast<IdSetBuildRegistry::Entry*>(lock.entry_)->remove(slot, another);
         slot = IdSetBuildRegistry::none;
@@ -71,7 +73,7 @@ std::size_t IdSetBuildRegistry::Entry::insert(IdSetBuildWait& waiter) {
 }
 
 void IdSetBuildRegistry::Entry::wake_first() noexcept {
-    for (auto& slot : slots)
+    for (auto& slot : slots) {
         if (slot.waiter) {
             auto& waiter = *slot.waiter;
             if (!waiter.woken) {
@@ -80,30 +82,35 @@ void IdSetBuildRegistry::Entry::wake_first() noexcept {
             }
             break;
         }
+    }
 }
 
 void IdSetBuildRegistry::Entry::remove(std::size_t index, bool another) noexcept {
-    if (index == none)
+    if (index == none) {
         return;
+    }
     bool was_woken = slots[index].waiter->woken;
     slots[index] = {nullptr, free_slot};
     free_slot = index;
-    if (another && was_woken)
+    if (another && was_woken) {
         wake_first();
+    }
 }
 
 IdSetBuildLock& IdSetBuildRegistry::borrow(Memory r, std::string_view key) {
     auto& owner = resource_arena(memory_resource());
     auto& result = async_arena(r);
-    if (owner.closing() || !owner.can_lend_to(result))
+    if (owner.closing() || !owner.can_lend_to(result)) {
         throw std::invalid_argument("ID set build registry belongs to an unrelated Context");
+    }
     // As with the source Weak registry, prune only on the next lookup.
     std::erase_if(entries_, [](const auto& entry) {
         return entry.second.leases == 0;
     });
     auto it = entries_.find(key);
-    if (it == entries_.end())
+    if (it == entries_.end()) {
         it = entries_.try_emplace(String(key, memory_resource())).first;
+    }
     return result.make<IdSetBuildLock>(*this, &it->second);
 }
 
@@ -124,24 +131,28 @@ IdSetBuildLock::~IdSetBuildLock() {
 }
 
 void IdSetBuildLock::require_active() const {
-    if (!entry_)
+    if (!entry_) {
         throw std::logic_error("ID set build lock lease was released");
+    }
     (void)async_arena(memory_resource());
 }
 
 void IdSetBuildLock::release_lease() noexcept {
-    if (!entry_)
+    if (!entry_) {
         return;
-    if (children_)
+    }
+    if (children_) {
         std::terminate();
+    }
     --static_cast<IdSetBuildRegistry::Entry*>(entry_)->leases;
     entry_ = nullptr;
     quiescence_.reset();
 }
 
 void IdSetBuildLock::reset() {
-    if (children_)
+    if (children_) {
         throw std::logic_error("ID set build lock still has pending work or a held guard");
+    }
     release_lease();
 }
 
@@ -155,8 +166,9 @@ IdSetBuildGuard::IdSetBuildGuard(std::allocator_arg_t, Allocator a, IdSetBuildLo
     : lock_(std::allocator_arg, a, lock, resource_arena(lock.memory_resource())) {
     lock.require_active();
     auto& entry = *static_cast<IdSetBuildRegistry::Entry*>(lock.entry_);
-    if (entry.held)
+    if (entry.held) {
         throw std::logic_error("ID set build mutex is already held");
+    }
     quiescence_.attach(async_arena(a.resource()), this, [](void* p) noexcept {
         static_cast<IdSetBuildGuard*>(p)->release();
     });
@@ -166,8 +178,9 @@ IdSetBuildGuard::IdSetBuildGuard(std::allocator_arg_t, Allocator a, IdSetBuildLo
 }
 
 void IdSetBuildGuard::release() noexcept {
-    if (!held_)
+    if (!held_) {
         return;
+    }
     auto& lock = lock_.get();
     auto& entry = *static_cast<IdSetBuildRegistry::Entry*>(lock.entry_);
     entry.held = false;
@@ -180,8 +193,9 @@ void IdSetBuildGuard::release() noexcept {
 IdSetBuildLock& ContextPaginationAccess::build_lock(const UserContext& c, std::string_view key) {
     c.ensure_open();
     auto& global = c.global_;
-    if (!global.id_set_build_registry_)
+    if (!global.id_set_build_registry_) {
         global.id_set_build_registry_ = &global.make<IdSetBuildRegistry>();
+    }
     return global.id_set_build_registry_->borrow(c.memory_resource(), key);
 }
 }

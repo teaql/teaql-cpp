@@ -36,8 +36,9 @@ private:
 
 inline GlobalContext& application_context(Memory r) {
     auto* arena = dynamic_cast<ContextArena*>(r);
-    if (!arena || arena->closed())
+    if (!arena || arena->closed()) {
         throw std::logic_error("Runtime logging requires a live application Context");
+    }
     return arena->global();
 }
 
@@ -51,8 +52,9 @@ constexpr std::string_view resource_type_name() {
     std::string_view text = __PRETTY_FUNCTION__;
     auto start = text.find("T = ") + 4;
     auto end = text.find(';', start);
-    if (end == text.npos)
+    if (end == text.npos) {
         end = text.rfind(']');
+    }
     return text.substr(start, end - start);
 #else
     return typeid(T).name();
@@ -61,8 +63,9 @@ constexpr std::string_view resource_type_name() {
 
 inline Arena& resource_arena(Memory r) {
     auto* arena = dynamic_cast<Arena*>(r);
-    if (!arena || arena->closed())
+    if (!arena || arena->closed()) {
         throw std::logic_error("Resource scope is not a live Context");
+    }
     return *arena;
 }
 }
@@ -76,8 +79,9 @@ public:
 
     ResourceBorrow(std::allocator_arg_t, Allocator a, T& object, Arena& owner)
         : resource_(a.resource()), object_(&object), owner_(&owner) {
-        if (!owner.can_lend_to(detail::resource_arena(resource_)))
+        if (!owner.can_lend_to(detail::resource_arena(resource_))) {
             throw std::invalid_argument("Resource borrow cannot outlive its owning Context");
+        }
     }
 
     ResourceBorrow(std::allocator_arg_t, Allocator a, const ResourceBorrow& other)
@@ -123,17 +127,20 @@ public:
         static_assert(!std::is_const_v<T>,
                       "Register the owning mutable resource; const lookups remain available");
         auto& owner = resource_arena(origin);
-        if (owner.closing() || !owner.can_lend_to(destination))
+        if (owner.closing() || !owner.can_lend_to(destination)) {
             throw std::invalid_argument(
                 "Registered resource belongs to a shorter or unrelated Context");
+        }
         if constexpr (requires { object.memory_resource(); }) {
-            if (object.memory_resource() != origin)
+            if (object.memory_resource() != origin) {
                 throw std::invalid_argument(
                     "Registered resource does not belong to the declared Context");
+            }
         } else if constexpr (requires { object.get_allocator().resource(); }) {
-            if (object.get_allocator().resource() != origin)
+            if (object.get_allocator().resource() != origin) {
                 throw std::invalid_argument(
                     "Registered resource allocator differs from the declared Context");
+            }
         }
         return {&object, &owner, &typeid(T)};
     }
@@ -162,10 +169,11 @@ public:
 
     void put_local(std::string_view key, const Value& value) {
         auto found = locals.find(key);
-        if (found == locals.end())
+        if (found == locals.end()) {
             locals.emplace(String(key, resource), Value(resource, value));
-        else
+        } else {
             found->second = Value(resource, value);
+        }
     }
 
     const Value* local(std::string_view key) const {
@@ -175,8 +183,9 @@ public:
 
     std::optional<Value> remove_local(std::string_view key) {
         auto found = locals.find(key);
-        if (found == locals.end())
+        if (found == locals.end()) {
             return {};
+        }
         Value value(std::move(found->second));
         locals.erase(found);
         return value;

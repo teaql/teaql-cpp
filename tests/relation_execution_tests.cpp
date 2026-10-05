@@ -6,8 +6,9 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 static void sqlite_relation_queries(bool capture) {
@@ -17,8 +18,9 @@ static void sqlite_relation_queries(bool capture) {
         auto c = g.make_user_context();
         auto r = c->memory_resource();
         c->disable_sql_log();
-        if (capture)
+        if (capture) {
             c->enable_select_sql_log();
+        }
         auto& connection = c->make_resource<SqliteConnection>();
         auto& provider = c->make<SqliteMutationExecutor>(connection);
         auto& sql = c->make<CompiledQuery>();
@@ -71,15 +73,17 @@ static void sqlite_relation_queries(bool capture) {
         check(result.wait() && result.wait().value().size() == 2,
               "relation execution retains its own parent and plan snapshots");
         std::pmr::map<std::uint64_t, std::uint64_t> selected(r);
-        for (const auto& row : result.wait().value())
+        for (const auto& row : result.wait().value()) {
             selected.emplace(*row.get("owner_id")->try_u64(), *row.get("child_id")->try_u64());
+        }
         check(selected.at(1) == 12 && selected.at(2) == 22,
               "real SQLite per-parent offset, limit and ID tie-breaker");
         check(seen.size() == (capture ? 2 : 1),
               "provider batches semantic partition query only with metadata disabled");
-        for (const auto& query : seen)
+        for (const auto& query : seen) {
             check(query.partition_field.has_value() != capture,
                   "partition survives batch route and is cleared for one-parent probes");
+        }
         retained = &g.make<Vector<CompactRow>>(result.wait().value());
     }
     check(retained->size() == 2 && retained->front().memory_resource() == g.memory_resource(),

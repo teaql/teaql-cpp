@@ -22,12 +22,12 @@ PointerAlignment: Left
 ReferenceAlignment: Left
 DerivePointerAlignment: false
 SeparateDefinitionBlocks: Always
-# Keep formatting separate from changes to includes, tokens, and comments.
+# Add control-flow braces; preserve includes, qualifiers, literals, and comments.
 SortIncludes: Never
 SortUsingDeclarations: Never
 FixNamespaceComments: false
 ReflowComments: false
 BreakStringLiterals: false
-InsertBraces: false
+InsertBraces: true
 RemoveBracesLLVM: false
 QualifierAlignment: Leave

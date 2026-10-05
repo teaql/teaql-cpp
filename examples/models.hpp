@@ -32,8 +32,9 @@ inline Models& models(teaql::GlobalContext& global) {
 
 inline const teaql::Value& field(const teaql::Record& row, std::string_view name) {
     auto it = row.find(name);
-    if (it == row.end())
+    if (it == row.end()) {
         throw std::runtime_error("Missing result field");
+    }
     return it->second;
 }
 
@@ -42,17 +43,20 @@ inline const teaql::String& text(const teaql::Record& row, std::string_view name
 }
 
 inline void require(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 inline void print_logs(const teaql::SqliteSession& session) {
     for (const auto& log : session.sql_logs()) {
         std::cout << "SQL " << log.sql << " | count=" << log.count;
-        if (!log.audit_reason.empty())
+        if (!log.audit_reason.empty()) {
             std::cout << " | audit=" << log.audit_reason;
-        if (!log.purpose.empty())
+        }
+        if (!log.purpose.empty()) {
             std::cout << " | purpose=" << log.purpose;
+        }
         std::cout << '\n';
     }
 }

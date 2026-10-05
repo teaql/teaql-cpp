@@ -28,8 +28,9 @@ struct StreamingTransport : StreamingSqlTransport<String> {
 
         std::optional<std::optional<Result<StreamChunk, String>>> poll_next(WakeSignal& wake) {
             using Item = Result<StreamChunk, String>;
-            if (owner.pending)
+            if (owner.pending) {
                 return {};
+            }
             if (owner.async && !spawned) {
                 worker = std::thread([this, &wake] {
                     ready.store(true);
@@ -38,16 +39,19 @@ struct StreamingTransport : StreamingSqlTransport<String> {
                 spawned = true;
                 return {};
             }
-            if (owner.async && !ready.load())
+            if (owner.async && !ready.load()) {
                 return {};
-            if (owner.panic)
+            }
+            if (owner.panic) {
                 throw std::runtime_error("cursor panic");
+            }
             if (int(index) == owner.error_at) {
                 ++index;
                 return std::optional<Item>(Item::err(resource, String("cursor failure", resource)));
             }
-            if (index >= owner.chunks)
+            if (index >= owner.chunks) {
                 return std::optional<Item>{};
+            }
             StreamChunk chunk(std::allocator_arg,
                               Allocator(resource),
                               index,
@@ -69,8 +73,9 @@ struct StreamingTransport : StreamingSqlTransport<String> {
         }
 
         void close() noexcept {
-            if (worker.joinable())
+            if (worker.joinable()) {
                 worker.join();
+            }
             if (!closed) {
                 closed = true;
                 ++owner.closed;
@@ -117,8 +122,9 @@ static void native_lifecycle() {
         auto& observer = user->make<ExecutionObserver>([&](ExecutionMetadata m) {
             check(transport.closed == transport.created, "cursor closes and joins before sink");
             events.emplace_back(std::move(m));
-            if (sink_throws)
+            if (sink_throws) {
                 throw 1;
+            }
         });
         auto& stream = executor.query_stream_observed(r, request(r, capture), 0, observer);
         check(transport.requested_size == 0, "native provider receives chunk size unchanged");

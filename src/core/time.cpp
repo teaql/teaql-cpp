@@ -11,11 +11,14 @@ Json Timestamp::to_json_value(Memory destination) const {
 }
 
 std::optional<Timestamp> Timestamp::from_json_value(const Json& value) {
-    if (const auto* signed_value = std::get_if<std::int64_t>(&value.data))
+    if (const auto* signed_value = std::get_if<std::int64_t>(&value.data)) {
         return Timestamp(*signed_value);
-    if (const auto* unsigned_value = std::get_if<std::uint64_t>(&value.data))
-        if (*unsigned_value <= std::uint64_t(INT64_MAX))
+    }
+    if (const auto* unsigned_value = std::get_if<std::uint64_t>(&value.data)) {
+        if (*unsigned_value <= std::uint64_t(INT64_MAX)) {
             return Timestamp(std::int64_t(*unsigned_value));
+        }
+    }
     return {};
 }
 
@@ -42,45 +45,53 @@ struct Parser {
     }
 
     bool take(char c) {
-        if (pos == s.size() || s[pos] != c)
+        if (pos == s.size() || s[pos] != c) {
             return false;
+        }
         ++pos;
         return true;
     }
 
     std::optional<unsigned> number(unsigned min, std::size_t max, bool skip = true) {
-        if (skip)
+        if (skip) {
             whitespace();
+        }
         auto start = pos;
         unsigned value = 0;
         while (pos < s.size() && pos - start < max && s[pos] >= '0' && s[pos] <= '9') {
             auto digit = unsigned(s[pos++] - '0');
-            if (value > (UINT32_MAX - digit) / 10)
+            if (value > (UINT32_MAX - digit) / 10) {
                 return {};
+            }
             value = value * 10 + digit;
         }
-        if (pos - start < min)
+        if (pos - start < min) {
             return {};
+        }
         return value;
     }
 
     std::optional<Date> date(bool strict) {
-        if (!strict)
+        if (!strict) {
             whitespace();
+        }
         bool negative = false, sign = false;
         if (!strict && pos < s.size() && (s[pos] == '-' || s[pos] == '+')) {
             sign = true;
             negative = s[pos++] == '-';
         }
         auto y = number(strict ? 4 : 1, sign ? s.size() : 4, false);
-        if (!y || *y > 262143 || !take('-'))
+        if (!y || *y > 262143 || !take('-')) {
             return {};
+        }
         auto m = number(strict ? 2 : 1, 2, !strict);
-        if (!m || !take('-'))
+        if (!m || !take('-')) {
             return {};
+        }
         auto d = number(strict ? 2 : 1, 2, !strict);
-        if (!d)
+        if (!d) {
             return {};
+        }
         return Date::from_ymd(negative ? -std::int32_t(*y) : std::int32_t(*y), *m, *d);
     }
 };
@@ -88,35 +99,44 @@ struct Parser {
 std::optional<Timestamp> parse_timestamp(std::string_view s, bool rfc) {
     Parser p{s};
     auto date = p.date(rfc);
-    if (!date)
+    if (!date) {
         return {};
+    }
     if (rfc) {
-        if (!(p.take('T') || p.take('t') || p.take(' ')))
+        if (!(p.take('T') || p.take('t') || p.take(' '))) {
             return {};
-    } else
+        }
+    } else {
         p.whitespace();
+    }
     auto h = p.number(rfc ? 2 : 1, 2, !rfc);
-    if (!h || *h > 23 || !p.take(':'))
+    if (!h || *h > 23 || !p.take(':')) {
         return {};
+    }
     auto m = p.number(rfc ? 2 : 1, 2, !rfc);
-    if (!m || *m > 59 || !p.take(':'))
+    if (!m || *m > 59 || !p.take(':')) {
         return {};
+    }
     auto sec = p.number(rfc ? 2 : 1, 2, !rfc);
-    if (!sec || *sec > 60)
+    if (!sec || *sec > 60) {
         return {};
+    }
     unsigned ms = 0;
     if (rfc && p.take('.')) {
         auto start = p.pos;
         while (p.pos < s.size() && s[p.pos] >= '0' && s[p.pos] <= '9') {
-            if (p.pos - start < 3)
+            if (p.pos - start < 3) {
                 ms = ms * 10 + unsigned(s[p.pos] - '0');
+            }
             ++p.pos;
         }
         auto digits = p.pos - start;
-        if (!digits)
+        if (!digits) {
             return {};
-        while (digits++ < 3)
+        }
+        while (digits++ < 3) {
             ms *= 10;
+        }
     }
     int offset = 0;
     if (rfc && !(p.take('Z') || p.take('z'))) {
@@ -125,24 +145,29 @@ std::optional<Timestamp> parse_timestamp(std::string_view s, bool rfc) {
             minus = true;
             p.pos += 3;
         }
-        if (!minus && !p.take('+'))
+        if (!minus && !p.take('+')) {
             return {};
+        }
         auto oh = p.number(2, 2, false);
-        if (!oh || *oh > 23 || !p.take(':'))
+        if (!oh || *oh > 23 || !p.take(':')) {
             return {};
+        }
         auto om = p.number(2, 2, false);
-        if (!om || *om > 59)
+        if (!om || *om > 59) {
             return {};
+        }
         offset = int(*oh * 60 + *om) * (minus ? -1 : 1);
     }
-    if (p.pos != s.size())
+    if (p.pos != s.size()) {
         return {};
+    }
     auto millis = date->epoch_days() * day_ms + std::int64_t(*h * 3600 + *m * 60 + *sec) * 1000 +
                   ms - std::int64_t(offset) * 60000;
     // Chrono represents a leap second as second 59 plus >= 1e9 nanoseconds;
     // its last representable date therefore still admits the final leap second.
-    if (!Date::from_epoch_days(floor_div(millis - (*sec == 60 ? 1000 : 0), day_ms)))
+    if (!Date::from_epoch_days(floor_div(millis - (*sec == 60 ? 1000 : 0), day_ms))) {
         return {};
+    }
     return Timestamp(millis);
 }
 }
@@ -150,8 +175,9 @@ std::optional<Timestamp> parse_timestamp(std::string_view s, bool rfc) {
 std::optional<Date> Date::from_ymd(std::int32_t y, unsigned m, unsigned d) {
     constexpr unsigned days[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     if (y < -262143 || y > 262142 || m < 1 || m > 12 || d < 1 ||
-        d > days[m - 1] + unsigned(m == 2 && leap(y)))
+        d > days[m - 1] + unsigned(m == 2 && leap(y))) {
         return {};
+    }
     Date date;
     date.year_ = y;
     date.month_ = static_cast<unsigned char>(m);
@@ -167,8 +193,9 @@ std::int64_t Date::epoch_days() const {
 
 std::optional<Date> Date::from_epoch_days(std::int64_t days) {
     // Check before arithmetic so arbitrary Timestamp values cannot overflow.
-    if (days < -96465292 || days > 95026236)
+    if (days < -96465292 || days > 95026236) {
         return {};
+    }
     auto z = days + 719468, era = floor_div(z, 146097), doe = z - era * 146097;
     auto yo = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
     auto y = yo + era * 400, doy = doe - (yo * 365 + yo / 4 - yo / 100), mp = (5 * doy + 2) / 153;
@@ -186,15 +213,17 @@ std::optional<Date> Date::parse(std::string_view s) {
 String Date::to_string(Memory r) const {
     String out(r);
     char buffer[16];
-    if (year_ < 0)
+    if (year_ < 0) {
         out += '-';
-    else if (year_ > 9999)
+    } else if (year_ > 9999) {
         out += '+';
+    }
     auto [end, ec] = std::to_chars(buffer, buffer + sizeof(buffer), year_ < 0 ? -year_ : year_);
     (void)ec;
     auto size = std::size_t(end - buffer);
-    if (size < 4)
+    if (size < 4) {
         out.append(4 - size, '0');
+    }
     out.append(buffer, end);
     out += '-';
     out += char('0' + month_ / 10);
@@ -216,20 +245,24 @@ Timestamp Timestamp::now() {
 }
 
 std::optional<Timestamp> Timestamp::parse(std::string_view s) {
-    if (auto t = parse_timestamp(s, true))
+    if (auto t = parse_timestamp(s, true)) {
         return t;
-    if (auto t = parse_timestamp(s, false))
+    }
+    if (auto t = parse_timestamp(s, false)) {
         return t;
-    if (auto d = Date::parse(s))
+    }
+    if (auto d = Date::parse(s)) {
         return Timestamp(d->epoch_days() * day_ms);
+    }
     return {};
 }
 
 DateTime Timestamp::to_datetime() const {
     auto days = floor_div(millis_, day_ms);
     auto d = Date::from_epoch_days(days);
-    if (!d)
+    if (!d) {
         return {};
+    }
     auto rest = millis_ - days * day_ms;
     return {*d,
             unsigned(rest / 3600000),

@@ -7,6 +7,10 @@
   Use four-space indentation, readable statement/function blocks, and the repository
   column limit. Do not hand-compress code. Preserve generated tables excluded by
   `.clang-format-ignore`; formatting is a development tool, not a runtime dependency.
+- Always brace control-flow bodies, including single-statement `if`/`else`, `for`,
+  `while`, and `do` bodies. Keep `InsertBraces: true` and `RemoveBracesLLVM: false`.
+  Add braces explicitly in macros and around preprocessor-dependent bodies, which
+  clang-format cannot always rewrite. Review brace insertion and run relevant tests.
 
 - Baseline: Rust v5.0.5 at the exact commit in `upstream.lock.json`. The source
   repository's active branch is not the reference. Use `scripts/verify-upstream.py`.

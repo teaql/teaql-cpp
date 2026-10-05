@@ -295,8 +295,9 @@ struct BatchUpdateCommand {
         : entity(name, a.resource()), batch_ids(a.resource()),
           batch_expected_versions(a.resource()), batch_values(a.resource()),
           update_fields(a.resource()), trace_chains(a.resource()), batch_old_values(a.resource()) {
-        for (auto field : fields)
+        for (auto field : fields) {
             update_fields.emplace_back(field);
+        }
     }
 };
 }

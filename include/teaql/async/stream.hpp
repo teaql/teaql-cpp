@@ -36,21 +36,25 @@ public:
 
     StreamPoll<T> poll_next() {
         using Kind = typename StreamPoll<T>::Kind;
-        if (status_ == StreamStatus::Cancelled)
+        if (status_ == StreamStatus::Cancelled) {
             throw OperationCancelled{};
-        if (status_ == StreamStatus::Failed)
+        }
+        if (status_ == StreamStatus::Failed) {
             std::rethrow_exception(failure_);
-        if (status_ == StreamStatus::Ended)
+        }
+        if (status_ == StreamStatus::Ended) {
             return {Kind::End};
-        if (polling_)
+        }
+        if (polling_) {
             throw std::logic_error("Recursive poll of the same stream");
+        }
         polling_ = true;
         try {
             auto next = table_->poll(state_, wake_);
             const T* item = nullptr;
-            if (next && *next)
+            if (next && *next) {
                 item = &static_cast<Arena*>(resource_)->template make<T>(std::move(**next));
-            else if (next) {
+            } else if (next) {
                 table_->finish(state_);
                 status_ = StreamStatus::Ended;
                 quiescence_.reset();
@@ -73,17 +77,20 @@ public:
         for (;;) {
             auto observed = wake_.ticket();
             auto next = poll_next();
-            if (next.kind != Kind::Pending)
+            if (next.kind != Kind::Pending) {
                 return next.item;
+            }
             wake_.wait(observed);
         }
     }
 
     void cancel() noexcept {
-        if (polling_)
+        if (polling_) {
             std::terminate();
-        if (status_ != StreamStatus::Open)
+        }
+        if (status_ != StreamStatus::Open) {
             return;
+        }
         polling_ = true;
         status_ = StreamStatus::Cancelled;
         table_->cancel(state_);

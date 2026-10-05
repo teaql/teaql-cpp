@@ -93,8 +93,9 @@ public:
     static Result<Derived, EntityError>
     from_compact_row_with_context(Memory r, CompactRow row, AnyRef context) {
         auto result = Derived::from_compact_row(r, std::move(row));
-        if (result)
+        if (result) {
             result.value().on_loaded(context);
+        }
         return result;
     }
 
@@ -221,8 +222,9 @@ private:
     static String validate(Memory r, std::string_view text) {
         auto trimmed = text;
         detail::trim_start(trimmed);
-        if (trimmed.empty())
+        if (trimmed.empty()) {
             throw std::invalid_argument("audit comment must not be empty");
+        }
         return String(text, r);
     }
 
@@ -322,8 +324,9 @@ struct BaseEntityData {
 
     std::optional<Value> remove_dynamic(std::string_view key) {
         auto it = dynamic_values.find(key);
-        if (it == dynamic_values.end())
+        if (it == dynamic_values.end()) {
             return {};
+        }
         auto previous = std::move(it->second);
         dynamic_values.erase(it);
         return previous;
@@ -460,8 +463,9 @@ public:
                                                                    const CompactRow& row) {
         using Outcome = Result<BoxedRelations, EntityError>;
         auto result = T::extract_from_values(r, row);
-        if (!result)
+        if (!result) {
             return Outcome::err(r, std::move(result).error());
+        }
         return Outcome::ok(
             r, BoxedRelations(std::allocator_arg, Allocator(r), std::move(result).value()));
     }

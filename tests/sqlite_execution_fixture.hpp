@@ -6,16 +6,18 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 struct Database {
     sqlite3* handle = nullptr;
 
     Database() {
-        if (sqlite3_open(":memory:", &handle) != SQLITE_OK)
+        if (sqlite3_open(":memory:", &handle) != SQLITE_OK) {
             throw std::runtime_error("open fixture database");
+        }
         exec(
             "CREATE TABLE records(id INTEGER PRIMARY KEY, version INTEGER, name TEXT, tenant INTEGER DEFAULT 2); INSERT INTO records VALUES(7,1,'old',2)");
     }
@@ -25,8 +27,9 @@ struct Database {
     }
 
     void exec(const char* sql) {
-        if (sqlite3_exec(handle, sql, nullptr, nullptr, nullptr) != SQLITE_OK)
+        if (sqlite3_exec(handle, sql, nullptr, nullptr, nullptr) != SQLITE_OK) {
             throw std::runtime_error(sqlite3_errmsg(handle));
+        }
     }
 };
 
@@ -34,8 +37,9 @@ struct Statement {
     sqlite3_stmt* handle = nullptr;
 
     Statement(Database& db, const CompiledQuery& query) {
-        if (sqlite3_prepare_v2(db.handle, query.sql.c_str(), -1, &handle, nullptr) != SQLITE_OK)
+        if (sqlite3_prepare_v2(db.handle, query.sql.c_str(), -1, &handle, nullptr) != SQLITE_OK) {
             throw std::runtime_error(sqlite3_errmsg(db.handle));
+        }
         try {
             for (std::size_t i = 0; i < query.params.size(); ++i) {
                 const auto& v = query.params[i];
@@ -43,19 +47,20 @@ struct Statement {
                     [&](const auto& x) -> int {
                         using T = std::decay_t<decltype(x)>;
                         if constexpr (std::same_as<T, std::uint64_t> ||
-                                      std::same_as<T, std::int64_t>)
+                                      std::same_as<T, std::int64_t>) {
                             return sqlite3_bind_int64(handle, i + 1, static_cast<sqlite3_int64>(x));
-                        else if constexpr (std::same_as<T, String>)
+                        } else if constexpr (std::same_as<T, String>) {
                             return sqlite3_bind_text(handle,
                                                      i + 1,
                                                      x.c_str(),
                                                      static_cast<int>(x.size()),
                                                      SQLITE_TRANSIENT);
-                        else if constexpr (std::same_as<T, std::monostate> ||
-                                           std::same_as<T, TypedNull>)
+                        } else if constexpr (std::same_as<T, std::monostate> ||
+                                             std::same_as<T, TypedNull>) {
                             return sqlite3_bind_null(handle, i + 1);
-                        else
+                        } else {
                             throw std::logic_error("fixture binder only needs integer/text/null");
+                        }
                     },
                     v.data);
                 check(rc == SQLITE_OK, "fixture bind");
@@ -93,16 +98,19 @@ struct Transport : SqlTransport<String> {
         std::optional<Result<T, String>> poll(WakeSignal&) {
             if (!entered) {
                 entered = true;
-                if constexpr (std::same_as<T, std::uint64_t>)
+                if constexpr (std::same_as<T, std::uint64_t>) {
                     ++transport.writes;
-                else
+                } else {
                     ++transport.reads;
+                }
             }
             if constexpr (!std::same_as<T, std::uint64_t>) {
-                if (transport.pause_read)
+                if (transport.pause_read) {
                     return {};
-                if (transport.fail_read)
+                }
+                if (transport.fail_read) {
                     return Result<T, String>::err(resource, String("read failed", resource));
+                }
             }
             Statement statement(transport.db, query);
             if constexpr (std::same_as<T, std::uint64_t>) {
@@ -116,19 +124,20 @@ struct Transport : SqlTransport<String> {
                     rows.emplace_back();
                     for (int i = 0; i < sqlite3_column_count(statement.handle); ++i) {
                         auto name = sqlite3_column_name(statement.handle, i);
-                        if (sqlite3_column_type(statement.handle, i) == SQLITE_INTEGER)
+                        if (sqlite3_column_type(statement.handle, i) == SQLITE_INTEGER) {
                             rows.back().insert(
                                 name,
                                 Value(resource,
                                       std::int64_t(sqlite3_column_int64(statement.handle, i))));
-                        else if (sqlite3_column_type(statement.handle, i) == SQLITE_NULL)
+                        } else if (sqlite3_column_type(statement.handle, i) == SQLITE_NULL) {
                             rows.back().insert(name, Value(resource));
-                        else
+                        } else {
                             rows.back().insert(
                                 name,
                                 Value(resource,
                                       std::string_view(reinterpret_cast<const char*>(
                                           sqlite3_column_text(statement.handle, i)))));
+                        }
                     }
                 }
                 check(rc == SQLITE_DONE, "fixture read");

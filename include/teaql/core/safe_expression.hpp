@@ -32,27 +32,29 @@ inline bool teaql_is_empty(const Value& value) {
     return std::visit(
         [](const auto& item) -> bool {
             using T = std::decay_t<decltype(item)>;
-            if constexpr (std::same_as<T, std::monostate>)
+            if constexpr (std::same_as<T, std::monostate>) {
                 return true;
-            else if constexpr (std::same_as<T, String> || std::same_as<T, Value::List> ||
-                               std::same_as<T, Value::Object>)
+            } else if constexpr (std::same_as<T, String> || std::same_as<T, Value::List> ||
+                                 std::same_as<T, Value::Object>) {
                 return item.empty();
-            else if constexpr (std::same_as<T, Json>)
+            } else if constexpr (std::same_as<T, Json>) {
                 return std::visit(
                     [](const auto& v) -> bool {
                         using J = std::decay_t<decltype(v)>;
-                        if constexpr (std::same_as<J, std::monostate>)
+                        if constexpr (std::same_as<J, std::monostate>) {
                             return true;
-                        else if constexpr (std::same_as<J, String> ||
-                                           std::same_as<J, Json::Array> ||
-                                           std::same_as<J, Json::Object>)
+                        } else if constexpr (std::same_as<J, String> ||
+                                             std::same_as<J, Json::Array> ||
+                                             std::same_as<J, Json::Object>) {
                             return v.empty();
-                        else
+                        } else {
                             return false;
+                        }
                     },
                     item.data);
-            else
+            } else {
                 return false; // In particular TypedNull is NOT empty in Rust 5.0.5.
+            }
         },
         value.data);
 }
@@ -73,10 +75,11 @@ struct ExpressionRoot {
 
 template <class F, class... Args>
 decltype(auto) invoke_in(const F& function, Memory r, Args&&... args) {
-    if constexpr (std::is_invocable_v<const F&, Args..., Memory>)
+    if constexpr (std::is_invocable_v<const F&, Args..., Memory>) {
         return std::invoke(function, std::forward<Args>(args)..., r);
-    else
+    } else {
         return std::invoke(function, std::forward<Args>(args)...);
+    }
 }
 template <class F, class... Args>
 using InvokeResult =
@@ -142,12 +145,14 @@ struct ExpressionMapper {
 
     std::optional<U> operator()(const R& root, Memory r) const {
         auto input = previous(root, r);
-        if (!input)
+        if (!input) {
             return {};
-        if constexpr (Optional)
+        }
+        if constexpr (Optional) {
             return clone_in(r, invoke_in(mapper, r, std::move(*input)));
-        else
+        } else {
             return clone_in(r, invoke_in(mapper, r, std::move(*input)));
+        }
     }
 };
 
@@ -177,8 +182,9 @@ struct ListGetMapper {
         : index(other.index) {}
 
     std::optional<typename ListValue<T>::type> operator()(T list, Memory r) const {
-        if (const auto* value = list.get(index))
+        if (const auto* value = list.get(index)) {
             return clone_in(r, *value);
+        }
         return {};
     }
 };
@@ -275,8 +281,9 @@ public:
         using E = std::remove_cvref_t<std::invoke_result_t<F>>;
         using Outcome = Result<T, E>;
         auto result = eval();
-        if (result)
+        if (result) {
             return Outcome::ok(resource_, std::move(*result));
+        }
         return Outcome::err(resource_, std::invoke(std::forward<F>(error)));
     }
 
@@ -303,30 +310,34 @@ public:
 
     template <class F>
     void when_is_null(F&& function) const {
-        if (is_null())
+        if (is_null()) {
             std::invoke(std::forward<F>(function));
+        }
     }
 
     template <class F>
     void when_is_not_null(F&& consumer) const {
-        if (auto v = eval())
+        if (auto v = eval()) {
             std::invoke(std::forward<F>(consumer), std::move(*v));
+        }
     }
 
     template <class F>
     void when_is_empty(F&& function) const
         requires TeaqlEmpty<T>
     {
-        if (is_empty())
+        if (is_empty()) {
             std::invoke(std::forward<F>(function));
+        }
     }
 
     template <class F>
     void when_not_empty(F&& consumer) const
         requires TeaqlEmpty<T>
     {
-        if (auto v = eval(); v && !teaql_is_empty(*v))
+        if (auto v = eval(); v && !teaql_is_empty(*v)) {
             std::invoke(std::forward<F>(consumer), std::move(*v));
+        }
     }
 
     auto entity_id() const

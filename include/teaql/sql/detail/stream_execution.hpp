@@ -13,8 +13,9 @@ public:
         : resource_(a.resource()), error_(std::allocator_arg, a, std::move(error)) {}
 
     std::optional<std::optional<Item>> poll_next(WakeSignal&) {
-        if (delivered_)
+        if (delivered_) {
             return std::optional<Item>{};
+        }
         delivered_ = true;
         return std::optional<Item>(
             Item::err(resource_, SqlExecutorError<E>::compile(resource_, std::move(error_))));
@@ -51,23 +52,26 @@ public:
     }
 
     std::optional<std::optional<Item>> poll_next(WakeSignal& wake) {
-        if (!source_)
+        if (!source_) {
             return std::optional<Item>{};
+        }
         forwarding_.attach(source_->wake_signal(), wake);
         auto next = source_->poll_next();
         using Kind = typename StreamPoll<Result<StreamChunk, E>>::Kind;
-        if (next.kind == Kind::Pending)
+        if (next.kind == Kind::Pending) {
             return {};
+        }
         forwarding_.reset();
         if (next.kind == Kind::End) {
             source_ = nullptr;
             return std::optional<Item>{};
         }
-        if (!*next.item)
+        if (!*next.item) {
             return std::optional<Item>(
                 Item::err(resource_,
                           SqlExecutorError<E>::transport(resource_,
                                                          clone_in(resource_, next.item->error()))));
+        }
         return std::optional<Item>(Item::ok(resource_, clone_in(resource_, next.item->value())));
     }
 
@@ -81,8 +85,9 @@ public:
 
 private:
     void stop() noexcept {
-        if (source_)
+        if (source_) {
             source_->cancel();
+        }
         forwarding_.reset();
         source_ = nullptr;
     }
@@ -108,19 +113,22 @@ public:
         : resource_(a.resource()), source_(&source),
           metadata_(move_in(a.resource(), std::move(metadata))),
           observer_(std::allocator_arg, a, std::move(observer)) {
-        if (source.memory_resource() != resource_)
+        if (source.memory_resource() != resource_) {
             throw std::invalid_argument("Diagnostic cursor belongs to a different Context");
+        }
     }
 
     std::optional<std::optional<Item>> poll_next(WakeSignal& wake) {
-        if (!source_)
+        if (!source_) {
             return std::optional<Item>{};
+        }
         try {
             forwarding_.attach(source_->wake_signal(), wake);
             auto next = source_->poll_next();
             using Kind = typename StreamPoll<Item>::Kind;
-            if (next.kind == Kind::Pending)
+            if (next.kind == Kind::Pending) {
                 return {};
+            }
             forwarding_.reset();
             if (next.kind == Kind::End) {
                 finish(SqlExecutionOutcome::Success);
@@ -128,13 +136,17 @@ public:
             }
             auto item = clone_in(resource_, *next.item);
             if (item) {
-                if (item.value().rows.size() > std::numeric_limits<std::size_t>::max() - delivered_)
+                if (item.value().rows.size() >
+                    std::numeric_limits<std::size_t>::max() - delivered_) {
                     throw std::overflow_error("delivered row count overflow");
+                }
                 delivered_ += item.value().rows.size();
-                if (item.value().is_last)
+                if (item.value().is_last) {
                     finish(SqlExecutionOutcome::Success);
-            } else
+                }
+            } else {
                 finish(SqlExecutionOutcome::Failure);
+            }
             return std::optional<Item>(std::move(item));
         } catch (...) {
             finish(SqlExecutionOutcome::Failure);
@@ -153,14 +165,16 @@ public:
 
 private:
     void finish(SqlExecutionOutcome outcome) noexcept {
-        if (source_)
+        if (source_) {
             source_->cancel();
+        }
         forwarding_.reset();
         source_ = nullptr;
         auto metadata = std::move(metadata_);
         metadata_.reset();
-        if (!metadata)
+        if (!metadata) {
             return;
+        }
         metadata->ended_at = ExecutionMetadata::SystemTime::clock::now();
         metadata->result_count = delivered_;
         metadata->sql_log.execution_outcome = outcome;
@@ -204,18 +218,20 @@ QueryStream<SqlExecutorError<E>>& native_sql_stream(Memory r,
     std::optional<CompiledQuery> compiled;
     try {
         auto* entity = cache.entity_descriptor(schema, request.query.entity);
-        if (!entity)
+        if (!entity) {
             throw SqlCompileError(std::allocator_arg,
                                   Allocator(r),
                                   SqlCompileError::Code::UnknownEntity,
                                   request.query.entity);
+        }
         compiled.emplace(cache.compile_select_cached(r, dialect, *entity, request.query));
     } catch (const SqlCompileError& error) {
         return sql_error_stream<E>(r, clone_in(r, error));
     }
     std::optional<ExecutionMetadata> metadata;
-    if (observer && request.capture_execution_metadata)
+    if (observer && request.capture_execution_metadata) {
         metadata.emplace(query_diagnostic_metadata(r, dialect, *compiled, request));
+    }
     auto& source = transport.stream_sql(r, std::move(*compiled), chunk_size);
     QueryStream<SqlExecutorError<E>>* mapped;
     try {
@@ -225,8 +241,9 @@ QueryStream<SqlExecutorError<E>>& native_sql_stream(Memory r,
         source.cancel();
         throw;
     }
-    if (metadata)
+    if (metadata) {
         return diagnostic_stream(r, *mapped, std::move(*metadata), std::move(*observer));
+    }
     return *mapped;
 }
 
@@ -250,8 +267,9 @@ public:
           size_(std::max<std::size_t>(1, size)) {}
 
     std::optional<std::optional<Item>> poll_next(WakeSignal& wake) {
-        if (done_)
+        if (done_) {
             return std::optional<Item>{};
+        }
         if (!started_) {
             using State = SqlQueryOperation<E>;
             pending_ =
@@ -268,8 +286,9 @@ public:
         if (pending_) {
             forwarding_.attach(pending_->wake_signal(), wake);
             auto* result = pending_->poll();
-            if (!result)
+            if (!result) {
                 return {};
+            }
             forwarding_.reset();
             pending_ = nullptr;
             if (!*result) {
@@ -286,8 +305,9 @@ public:
         auto take = std::min(size_, rows_->size() - offset_);
         StreamChunk chunk(
             std::allocator_arg, Allocator(resource_), index_++, offset_ + take == rows_->size());
-        for (std::size_t i = 0; i < take; ++i)
+        for (std::size_t i = 0; i < take; ++i) {
             chunk.rows.emplace_back((*rows_)[offset_ + i]);
+        }
         offset_ += take;
         return std::optional<Item>(Item::ok(resource_, std::move(chunk)));
     }
@@ -302,8 +322,9 @@ public:
 
 private:
     void stop() noexcept {
-        if (pending_)
+        if (pending_) {
             pending_->cancel();
+        }
         forwarding_.reset();
         pending_ = nullptr;
         rows_ = nullptr;
@@ -337,11 +358,12 @@ buffered_transaction_stream(Memory r,
     if (observer && request.capture_execution_metadata) {
         try {
             auto* entity = cache.entity_descriptor(schema, request.query.entity);
-            if (!entity)
+            if (!entity) {
                 throw SqlCompileError(std::allocator_arg,
                                       Allocator(r),
                                       SqlCompileError::Code::UnknownEntity,
                                       request.query.entity);
+            }
             auto compiled = cache.compile_select_cached(r, dialect, *entity, request.query);
             metadata.emplace(query_diagnostic_metadata(r, dialect, compiled, request));
         } catch (const SqlCompileError& error) {
@@ -352,8 +374,9 @@ buffered_transaction_stream(Memory r,
     auto& source =
         make_stream<Result<StreamChunk, SqlExecutorError<E>>, BufferedTransactionStream<E>>(
             r, dialect, transport, schema, cache, std::move(request), chunk_size);
-    if (metadata)
+    if (metadata) {
         return diagnostic_stream(r, source, std::move(*metadata), std::move(*observer));
+    }
     return source;
 }
 

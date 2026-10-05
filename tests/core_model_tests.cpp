@@ -8,8 +8,9 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 struct NoDefaultAllocator {
@@ -106,8 +107,9 @@ static void metadata_and_batches() {
     batch.batch_expected_versions.emplace_back(4);
     batch.batch_values.emplace_back(update.values);
     batch.trace_chains.emplace_back();
-    for (const auto& node : update.trace_chain)
+    for (const auto& node : update.trace_chain) {
         batch.trace_chains.back().emplace_back(node);
+    }
     batch.batch_old_values.emplace_back(std::in_place, r, snapshot);
     check(batch.batch_values.front().fields.get_allocator().resource() == r,
           "nested mutation allocator");
@@ -139,7 +141,7 @@ static void status_table() {
                                       Row{none, S::UpdatedDeleted, S::PersistedDeleted, none},
                                       Row{none, none, S::Persisted, S::UpdatedRecover},
                                       Row{none, none, none, none}};
-    for (int s = 0; s < 7; ++s)
+    for (int s = 0; s < 7; ++s) {
         for (int a = 0; a < 4; ++a) {
             bool failed = false;
             try {
@@ -150,12 +152,15 @@ static void status_table() {
             }
             check(failed == !expected[s][a].has_value(), "invalid transitions must reject");
         }
+    }
     const std::array<bool, 7> dirty{true, false, false, true, true, true, false};
-    for (int s = 0; s < 7; ++s)
+    for (int s = 0; s < 7; ++s) {
         check(need_persist(static_cast<S>(s)) == dirty[s], "persist flags");
+    }
     auto state = S::New;
-    for (auto action : {A::Persist, A::Update, A::Persist, A::Delete, A::Persist})
+    for (auto action : {A::Persist, A::Update, A::Persist, A::Delete, A::Persist}) {
         state = next_status(state, action);
+    }
     check(is_deleted(state), "deleted lifecycle");
     state = next_status(state, A::Recover);
     check(is_recover(state), "recover pending");

@@ -4,8 +4,9 @@
 
 namespace sqlite_fixture {
 inline void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 struct Connection {
@@ -16,8 +17,9 @@ struct Connection {
     }
 
     ~Connection() {
-        if (sqlite3_close(handle) != SQLITE_OK)
+        if (sqlite3_close(handle) != SQLITE_OK) {
             std::terminate();
+        }
     }
 
     Connection(const Connection&) = delete;

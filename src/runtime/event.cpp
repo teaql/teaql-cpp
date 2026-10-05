@@ -5,11 +5,13 @@
 namespace teaql {
 namespace {
 std::optional<Value> lookup(Memory r, const Record* values, std::string_view field) {
-    if (!values)
+    if (!values) {
         return {};
+    }
     auto it = values->find(field);
-    if (it == values->end())
+    if (it == values->end()) {
         return {};
+    }
     return Value(r, it->second);
 }
 
@@ -17,20 +19,22 @@ void changes_for_fields(RawAuditEvent& event,
                         const Record* old_values,
                         const Record* new_values,
                         std::span<const String> fields) {
-    for (const auto& field : fields)
+    for (const auto& field : fields) {
         event.changes.emplace_back(field,
                                    lookup(event.memory_resource(), old_values, field),
                                    lookup(event.memory_resource(), new_values, field));
+    }
 }
 
 void all_changes(RawAuditEvent& event, const Record& values, bool old) {
     for (const auto& [field, value] : values) {
         std::optional<Value> copy(Value(event.memory_resource(), value));
         std::optional<Value> absent;
-        if (old)
+        if (old) {
             event.changes.emplace_back(field, copy, absent);
-        else
+        } else {
             event.changes.emplace_back(field, absent, copy);
+        }
     }
 }
 
@@ -54,8 +58,9 @@ RawAuditEvent RawAuditEvent::updated(Memory r, std::string_view entity, const Re
     RawAuditEvent out(std::allocator_arg, Allocator(r), RawAuditEventKind::Updated, entity);
     out.values = clone_record(r, values);
     out.new_values.emplace(clone_record(r, values));
-    for (const auto& [field, _] : values)
+    for (const auto& [field, _] : values) {
         out.updated_fields.emplace_back(field);
+    }
     changes_for_fields(out, nullptr, &values, out.updated_fields);
     return out;
 }
@@ -70,8 +75,9 @@ RawAuditEvent RawAuditEvent::updated_with_old_values(Memory r,
     out.values = clone_record(r, values);
     out.old_values = detail::clone_in(r, old_values);
     out.new_values.emplace(clone_record(r, new_values));
-    for (const auto& field : fields)
+    for (const auto& field : fields) {
         out.updated_fields.emplace_back(field);
+    }
     changes_for_fields(out, old_values ? &*old_values : nullptr, &new_values, fields);
     return out;
 }
@@ -82,8 +88,9 @@ RawAuditEvent RawAuditEvent::deleted(Memory r,
                                      std::optional<std::int64_t> version) {
     RawAuditEvent out(std::allocator_arg, Allocator(r), RawAuditEventKind::Deleted, entity);
     out.values.emplace("id", Value(r, id));
-    if (version)
+    if (version) {
         out.values.emplace("version", Value(r, *version));
+    }
     return out;
 }
 
@@ -94,8 +101,9 @@ RawAuditEvent RawAuditEvent::deleted_with_old_values(Memory r,
                                                      const std::optional<Record>& old_values) {
     auto out = deleted(r, entity, id, version);
     out.old_values = detail::clone_in(r, old_values);
-    if (old_values)
+    if (old_values) {
         all_changes(out, *old_values, true);
+    }
     return out;
 }
 
@@ -112,8 +120,9 @@ RawAuditEvent RawAuditEvent::recovered_with_old_values(Memory r,
                                                        std::int64_t version,
                                                        const std::optional<Record>& old_values) {
 #ifndef NDEBUG
-    if (version <= std::numeric_limits<std::int64_t>::min() + 1)
+    if (version <= std::numeric_limits<std::int64_t>::min() + 1) {
         throw std::overflow_error("attempt to recover version with overflow");
+    }
 #endif
     auto recovered_version = std::bit_cast<std::int64_t>(std::uint64_t(1) - std::uint64_t(version));
     auto out = recovered(r, entity, id, version);
@@ -172,8 +181,9 @@ Result<std::monostate, RuntimeError> InMemoryRawAuditEventSink::on_event(
     Memory r, const UserContext& context, const RawAuditEvent& event) const {
     for (const auto& sink : sinks_) {
         auto result = sink.get().on_event(r, context, event);
-        if (!result)
+        if (!result) {
             return result;
+        }
     }
     return Result<std::monostate, RuntimeError>::ok(r, {});
 }

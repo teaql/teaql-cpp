@@ -58,8 +58,9 @@ public:
 
     ~GlobalContext() {
         // Detect lifetime inversion before freeing global metadata still borrowed by a context.
-        if (live_contexts_ != 0)
+        if (live_contexts_ != 0) {
             std::terminate();
+        }
         memory_.close();
     }
 
@@ -105,8 +106,9 @@ private:
     detail::IdSetBuildRegistry* id_set_build_registry_ = nullptr;
 
     AtomicCounterIdGenerator& local_id_generator() {
-        if (!local_id_generator_)
+        if (!local_id_generator_) {
             local_id_generator_ = &make<AtomicCounterIdGenerator>();
+        }
         return *local_id_generator_;
     }
 };
@@ -116,8 +118,9 @@ class UserContext final {
 public:
     explicit UserContext(GlobalContext& global, std::size_t initial_block_size = 4096)
         : global_(global), memory_(initial_block_size, global.upstream_, &global.memory_, global) {
-        if (global.memory_.closed() || global.memory_.closing())
+        if (global.memory_.closed() || global.memory_.closing()) {
             throw std::logic_error("GlobalContext is closing");
+        }
         user_identifier_ = &memory_.make<String>(detail::default_user_identifier(&memory_));
         ++global_.live_contexts_;
     }
@@ -302,10 +305,11 @@ public:
 
     void set_user_identifier_option(std::optional<std::string_view> value) {
         ensure_mutable();
-        if (value)
+        if (value) {
             user_identifier_ = &make<String>(*value);
-        else
+        } else {
             user_identifier_ = nullptr;
+        }
     }
 
     UserContext& with_user_identifier(std::string_view value) {
@@ -467,8 +471,9 @@ public:
     }
 
     Date business_date() const {
-        if (auto* date = get_resource<BusinessDate>())
+        if (auto* date = get_resource<BusinessDate>()) {
             return date->value;
+        }
         return business_clock_ ? business_clock_->business_date()
                                : SystemBusinessClock{}.business_date();
     }
@@ -494,8 +499,9 @@ public:
         ensure_mutable();
         auto service = business_ids();
         using R = Result<std::monostate, ContextError>;
-        if (!service)
+        if (!service) {
             return R::err(&memory_, detail::clone_in(&memory_, service.error()));
+        }
         auto& replacement = make<BusinessIdService>(service.value().get());
         replacement.with_key_provider(origin, provider);
         insert_resource(*this, replacement);
@@ -559,8 +565,9 @@ public:
         using R = Result<ResourceBorrow<const EntityDescriptor>, RuntimeError>;
         auto* found = entity(name);
         auto r = const_cast<detail::ContextArena*>(&memory_);
-        if (!found)
+        if (!found) {
             return R::err(r, RuntimeError::missing_entity(r, name));
+        }
         return R::ok(r,
                      ResourceBorrow<const EntityDescriptor>(
                          std::allocator_arg,
@@ -610,11 +617,13 @@ public:
         ensure_open();
         auto r = const_cast<detail::ContextArena*>(&memory_);
         using R = Result<std::optional<std::uint64_t>, RuntimeError>;
-        if (!internal_id_generator_)
+        if (!internal_id_generator_) {
             return R::ok(r, {});
+        }
         auto id = internal_id_generator_->generate_id(r, entity);
-        if (!id)
+        if (!id) {
             return R::err(r, std::move(id).error());
+        }
         return R::ok(r, id.value());
     }
 
@@ -622,10 +631,12 @@ public:
         auto generated = generate_id(entity);
         auto r = const_cast<detail::ContextArena*>(&memory_);
         using R = Result<std::uint64_t, RuntimeError>;
-        if (!generated)
+        if (!generated) {
             return R::err(r, std::move(generated).error());
-        if (generated.value())
+        }
+        if (generated.value()) {
             return R::ok(r, *generated.value());
+        }
         return global_.local_id_generator().generate_id(r, entity);
     }
 
@@ -635,11 +646,13 @@ public:
         ensure_open();
         auto r = const_cast<detail::ContextArena*>(&memory_);
         using R = Result<std::monostate, RuntimeError>;
-        if (!internal_id_generator_)
+        if (!internal_id_generator_) {
             return R::err(r, RuntimeError::id_generation(r, "missing internal ID generator"));
+        }
         auto reserved = internal_id_generator_->ensure_floor(r, entity_name, fixed_id);
-        if (!reserved)
+        if (!reserved) {
             return reserved;
+        }
         entity.mark_as_new();
         return R::ok(r, {});
     }
@@ -659,10 +672,12 @@ private:
 
     void ensure_mutable() const {
         ensure_open();
-        if (memory_.closing())
+        if (memory_.closing()) {
             throw std::logic_error("Context is closing");
-        if (pending_schema_operations_)
+        }
+        if (pending_schema_operations_) {
             throw std::logic_error("Context is borrowed by schema initialization");
+        }
     }
 
     BusinessClock* business_clock_ = nullptr;
@@ -673,14 +688,16 @@ private:
     detail::ContextArena memory_;
 
     void ensure_open() const {
-        if (memory_.closed())
+        if (memory_.closed()) {
             throw std::logic_error("Context is closed");
+        }
     }
 
     detail::ContextResources& resources() {
         ensure_mutable();
-        if (!resources_)
+        if (!resources_) {
             resources_ = &memory_.make<detail::ContextResources>();
+        }
         return *resources_;
     }
 
@@ -690,8 +707,9 @@ private:
                                                      std::string_view name) const {
         auto* r = const_cast<detail::ContextArena*>(&memory_);
         using Output = Result<ResourceBorrow<T>, ContextError>;
-        if (!entry)
+        if (!entry) {
             return Output::err(r, ContextError(std::allocator_arg, Allocator(r), missing, name));
+        }
         return Output::ok(
             r,
             ResourceBorrow<T>(

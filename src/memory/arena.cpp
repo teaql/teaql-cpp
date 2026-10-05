@@ -4,8 +4,9 @@
 namespace teaql {
 Arena::TrackingResource::TrackingResource(std::pmr::memory_resource* upstream)
     : upstream_(upstream) {
-    if (!upstream_)
+    if (!upstream_) {
         throw std::invalid_argument("Arena requires an upstream resource");
+    }
 }
 
 void* Arena::TrackingResource::do_allocate(std::size_t bytes, std::size_t alignment) {
@@ -33,43 +34,51 @@ Arena::~Arena() {
 }
 
 void Arena::Quiescence::attach(Arena& arena, void* object, void (*stop_and_wait)(void*) noexcept) {
-    if (arena.closed_ || arena.closing_)
+    if (arena.closed_ || arena.closing_) {
         throw std::logic_error("Cannot start work in a closing Context");
-    if (!stop_and_wait)
+    }
+    if (!stop_and_wait) {
         throw std::invalid_argument("Quiescence callback is required");
+    }
     reset();
     arena_ = &arena;
     object_ = object;
     stop_and_wait_ = stop_and_wait;
     next_ = arena.quiescence_head_;
-    if (next_)
+    if (next_) {
         next_->previous_ = this;
+    }
     arena.quiescence_head_ = this;
 }
 
 void Arena::Quiescence::reset() noexcept {
-    if (!arena_)
+    if (!arena_) {
         return;
-    if (previous_)
+    }
+    if (previous_) {
         previous_->next_ = next_;
-    else
+    } else {
         arena_->quiescence_head_ = next_;
-    if (next_)
+    }
+    if (next_) {
         next_->previous_ = previous_;
+    }
     arena_ = nullptr;
     previous_ = nullptr;
     next_ = nullptr;
 }
 
 void* Arena::do_allocate(std::size_t bytes, std::size_t alignment) {
-    if (closed_)
+    if (closed_) {
         throw std::logic_error("Allocation scope is closed");
+    }
     return arena_.allocate(bytes, alignment);
 }
 
 void Arena::close() noexcept {
-    if (closed_ || closing_)
+    if (closed_ || closing_) {
         return;
+    }
     closing_ = true;
     // Diagnostics may allocate while quiescing. New asynchronous work may not
     // register. All ordinary objects stay alive until every callback returns.

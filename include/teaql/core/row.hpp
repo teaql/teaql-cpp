@@ -13,14 +13,16 @@ public:
 
     ColumnLayout(std::allocator_arg_t, Allocator a, std::initializer_list<std::string_view> names)
         : names_(a.resource()) {
-        for (auto name : names)
+        for (auto name : names) {
             names_.emplace_back(name);
+        }
     }
 
     ColumnLayout(std::allocator_arg_t, Allocator a, const ColumnLayout& other)
         : names_(a.resource()) {
-        for (const auto& name : other.names_)
+        for (const auto& name : other.names_) {
             names_.emplace_back(name);
+        }
     }
 
     ColumnLayout(std::allocator_arg_t, Allocator a, Vector<String> names)
@@ -60,15 +62,19 @@ public:
                const ColumnLayout& columns,
                std::span<const Value> values)
         : CompactRow(std::allocator_arg, a) {
-        if (columns.names().size() != values.size())
+        if (columns.names().size() != values.size()) {
             throw std::invalid_argument("CompactRow column/value count mismatch");
-        if (columns.memory_resource() == a.resource())
+        }
+        if (columns.memory_resource() == a.resource()) {
             shared_ = &columns;
-        else
-            for (const auto& name : columns.names())
+        } else {
+            for (const auto& name : columns.names()) {
                 columns_.emplace_back(name);
-        for (const auto& value : values)
+            }
+        }
+        for (const auto& value : values) {
             values_.emplace_back(value);
+        }
     }
 
     CompactRow(std::allocator_arg_t,
@@ -76,13 +82,16 @@ public:
                const ColumnLayout& columns,
                Vector<Value>&& values)
         : CompactRow(std::allocator_arg, a) {
-        if (columns.names().size() != values.size())
+        if (columns.names().size() != values.size()) {
             throw std::invalid_argument("CompactRow column/value count mismatch");
-        if (columns.memory_resource() == a.resource())
+        }
+        if (columns.memory_resource() == a.resource()) {
             shared_ = &columns;
-        else
-            for (const auto& name : columns.names())
+        } else {
+            for (const auto& name : columns.names()) {
                 columns_.emplace_back(name);
+            }
+        }
         // Same-domain decoding transfers the values without duplicating nested
         // strings/JSON in a monotonic arena. Other domains still deep-copy.
         values_ = Vector<Value>(std::move(values), a.resource());
@@ -90,10 +99,12 @@ public:
 
     CompactRow(std::allocator_arg_t, Allocator a, const CompactRow& other)
         : CompactRow(std::allocator_arg, a) {
-        for (const auto& key : other.keys())
+        for (const auto& key : other.keys()) {
             columns_.emplace_back(key);
-        for (const auto& value : other.values_)
+        }
+        for (const auto& value : other.values_) {
             values_.emplace_back(value);
+        }
     }
 
     CompactRow(const CompactRow&) = delete;

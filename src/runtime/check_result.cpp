@@ -9,31 +9,35 @@ namespace {
 char32_t next_codepoint(std::string_view text, std::size_t& i) {
     auto byte = static_cast<unsigned char>(text[i++]);
     char32_t code = byte;
-    if (byte < 0x80)
+    if (byte < 0x80) {
         return code;
+    }
     unsigned count = byte >= 0xF0 && byte <= 0xF4   ? 3
                      : byte >= 0xE0 && byte <= 0xEF ? 2
                      : byte >= 0xC2 && byte <= 0xDF ? 1
                                                     : 0;
-    if (!count || i + count > text.size())
+    if (!count || i + count > text.size()) {
         throw std::invalid_argument("Invalid UTF-8 in object location");
+    }
     code &= (1u << (6 - count)) - 1;
     for (unsigned j = 0; j < count; ++j) {
         auto next = static_cast<unsigned char>(text[i++]);
-        if ((next & 0xC0) != 0x80)
+        if ((next & 0xC0) != 0x80) {
             throw std::invalid_argument("Invalid UTF-8 in object location");
+        }
         code = (code << 6) | (next & 63);
     }
     if ((count == 1 && code < 0x80) || (count == 2 && code < 0x800) ||
-        (count == 3 && code < 0x10000) || code > 0x10FFFF || (code >= 0xD800 && code <= 0xDFFF))
+        (count == 3 && code < 0x10000) || code > 0x10FFFF || (code >= 0xD800 && code <= 0xDFFF)) {
         throw std::invalid_argument("Invalid UTF-8 in object location");
+    }
     return code;
 }
 
 void append_codepoint(String& out, char32_t c) {
-    if (c < 0x80)
+    if (c < 0x80) {
         out += char(c);
-    else if (c < 0x800) {
+    } else if (c < 0x800) {
         out += char(0xC0 | (c >> 6));
         out += char(0x80 | (c & 63));
     } else if (c < 0x10000) {
@@ -61,9 +65,11 @@ String uppercase_initial(Memory r, std::string_view text) {
                                              return e.from < c;
                                          });
         if (expanded != detail::uppercase_expansions.end() && expanded->from == code) {
-            for (auto c : expanded->to)
-                if (c)
+            for (auto c : expanded->to) {
+                if (c) {
                     append_codepoint(out, c);
+                }
+            }
             out += text.substr(i);
             return out;
         }
@@ -74,8 +80,9 @@ String uppercase_initial(Memory r, std::string_view text) {
                                           return e.last < c;
                                       });
         if (range != detail::uppercase_ranges.end() && code >= range->first &&
-            (code - range->first) % range->step == 0)
+            (code - range->first) % range->step == 0) {
             code = char32_t(std::int64_t(code) + range->delta);
+        }
         append_codepoint(out, code);
     }
     out += text.substr(i);
@@ -89,21 +96,24 @@ void append_index(String& out, std::size_t value) {
 }
 
 String render_name(Memory r, std::string_view name, JsonFieldNamingProfile profile) {
-    if (profile == JsonFieldNamingProfile::SnakeCase)
+    if (profile == JsonFieldNamingProfile::SnakeCase) {
         return String(name, r);
+    }
     String result(r);
     std::size_t start = 0;
     bool first = true;
     for (;;) {
         auto end = name.find('_', start);
         auto part = name.substr(start, end == name.npos ? name.size() - start : end - start);
-        if (first)
+        if (first) {
             result += part;
-        else
+        } else {
             result += uppercase_initial(r, part);
+        }
         first = false;
-        if (end == name.npos)
+        if (end == name.npos) {
             break;
+        }
         start = end + 1;
     }
     return profile == JsonFieldNamingProfile::PascalCase ? uppercase_initial(r, result)
@@ -112,10 +122,11 @@ String render_name(Memory r, std::string_view name, JsonFieldNamingProfile profi
 
 template <class T>
 void nullable(Json& out, std::string_view key, const std::optional<T>& value) {
-    if (value)
+    if (value) {
         detail::model_put(out, key, *value);
-    else
+    } else {
         detail::model_put(out, key, Json(out.memory_resource()));
+    }
 }
 }
 
@@ -166,12 +177,15 @@ std::string_view debug_name(CheckRule rule) {
 Result<JsonFieldNamingProfile, String> json_field_naming_from_model_value(Memory r,
                                                                           std::string_view value) {
     using R = Result<JsonFieldNamingProfile, String>;
-    if (value.empty() || value == "camelCase")
+    if (value.empty() || value == "camelCase") {
         return R::ok(r, JsonFieldNamingProfile::CamelCase);
-    if (value == "snake_case")
+    }
+    if (value == "snake_case") {
         return R::ok(r, JsonFieldNamingProfile::SnakeCase);
-    if (value == "PascalCase")
+    }
+    if (value == "PascalCase") {
         return R::ok(r, JsonFieldNamingProfile::PascalCase);
+    }
     String message("unsupported json_field_naming: ", r);
     message += value;
     return R::err(r, std::move(message));
@@ -181,8 +195,9 @@ String ObjectLocation::model_path(Memory r) const {
     String out(r);
     for (const auto& segment : segments_) {
         if (auto* name = std::get_if<String>(&segment.data)) {
-            if (!out.empty())
+            if (!out.empty()) {
                 out += '.';
+            }
             out += *name;
         } else {
             out += '[';
@@ -194,14 +209,16 @@ String ObjectLocation::model_path(Memory r) const {
 }
 
 String ObjectLocation::to_string(Memory r) const {
-    if (is_root())
+    if (is_root()) {
         return String("$", r);
+    }
     String out(r);
     bool first = true;
     for (const auto& segment : segments_) {
         if (auto* name = std::get_if<String>(&segment.data)) {
-            if (!first)
+            if (!first) {
                 out += '.';
+            }
             out += *name;
         } else {
             out += '[';
@@ -219,15 +236,17 @@ String ObjectLocation::instance_path_with(Memory r, JsonFieldNamingProfile profi
         out += '/';
         if (auto* name = std::get_if<String>(&segment.data)) {
             for (auto c : render_name(r, *name, profile)) {
-                if (c == '~')
+                if (c == '~') {
                     out += "~0";
-                else if (c == '/')
+                } else if (c == '/') {
                     out += "~1";
-                else
+                } else {
                     out += c;
+                }
             }
-        } else
+        } else {
             append_index(out, std::get<std::size_t>(segment.data));
+        }
     }
     return out;
 }
@@ -241,8 +260,9 @@ CheckResult::CheckResult(std::allocator_arg_t, Allocator a, const CheckResult& o
       source_instance_path(detail::clone_in(a.resource(), other.source_instance_path)) {}
 
 String CheckResult::to_string(Memory r) const {
-    if (message)
+    if (message) {
         return String(*message, r);
+    }
     auto out = location.to_string(r);
     out += ": ";
     out += debug_name(rule);
@@ -256,16 +276,19 @@ WireCheckResult CheckResult::to_wire(Memory r, JsonFieldNamingProfile profile) c
     out.source_instance_path = detail::clone_in(r, source_instance_path);
     out.message = detail::clone_in(r, message);
     for (const auto& segment : location.segments()) {
-        if (auto* name = std::get_if<String>(&segment.data))
+        if (auto* name = std::get_if<String>(&segment.data)) {
             out.location.emplace_back(std::string_view(*name));
-        else
+        } else {
             out.location.emplace_back(std::get<std::size_t>(segment.data));
+        }
     }
     out.instance_path = location.instance_path_with(r, profile);
-    if (input_value)
+    if (input_value) {
         out.input_value = input_value->to_json_value(r);
-    if (system_value)
+    }
+    if (system_value) {
         out.system_value = system_value->to_json_value(r);
+    }
     return out;
 }
 
@@ -295,8 +318,9 @@ Json WireCheckResult::to_json(Memory r) const {
     detail::model_put(out, "ruleId", rule_id);
     nullable(out, "entityType", entity_type);
     Json::Array segments(r);
-    for (const auto& segment : location)
+    for (const auto& segment : location) {
         segments.emplace_back(segment.to_json(r));
+    }
     detail::model_put(out, "location", segments);
     detail::model_put(out, "instancePath", instance_path);
     nullable(out, "sourceInstancePath", source_instance_path);

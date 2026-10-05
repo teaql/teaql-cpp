@@ -26,12 +26,14 @@ struct State {
     String path() const {
         String result(r);
         for (const auto& s : active) {
-            if (!result.empty())
+            if (!result.empty()) {
                 result += '/';
+            }
             result += s;
         }
-        if (result.empty())
+        if (result.empty()) {
             result = "outside";
+        }
         return result;
     }
 
@@ -69,10 +71,12 @@ struct Scope final : RuntimeTelemetryScope {
         } leave{state, family};
 
         auto behavior = state.config.activation;
-        if (behavior == "before")
+        if (behavior == "before") {
             throw std::runtime_error("telemetry before");
-        if (behavior == "skip")
+        }
+        if (behavior == "skip") {
             return;
+        }
         if (behavior == "swallow") {
             try {
                 callback();
@@ -81,18 +85,22 @@ struct Scope final : RuntimeTelemetryScope {
             return;
         }
         callback();
-        if (behavior == "twice")
+        if (behavior == "twice") {
             callback();
-        if (behavior == "after")
+        }
+        if (behavior == "after") {
             throw std::runtime_error("telemetry after");
+        }
     }
 
     void success(const RuntimeAttributes& attrs) override {
-        if (!attrs.empty())
+        if (!attrs.empty()) {
             throw std::logic_error("unexpected success attributes");
+        }
         state.note("success:", family);
-        if (state.config.finish_fail)
+        if (state.config.finish_fail) {
             throw std::runtime_error("finish");
+        }
     }
 
     void failure(std::string_view error) override {
@@ -100,8 +108,9 @@ struct Scope final : RuntimeTelemetryScope {
         value += ':';
         value += error;
         state.note("failure:", value);
-        if (state.config.finish_fail)
+        if (state.config.finish_fail) {
             throw std::runtime_error("finish");
+        }
     }
 };
 
@@ -127,8 +136,9 @@ struct Telemetry final : RuntimeTelemetry {
         value += state.path();
         state.note("start:", value);
         state.operations.emplace_back(operation);
-        if (state.config.start_fail)
+        if (state.config.start_fail) {
             throw std::runtime_error("start");
+        }
         return detail::resource_arena(target).make<ContextBox<RuntimeTelemetryScope>>(
             std::in_place_type<Scope>, state, operation.family);
     }
@@ -171,8 +181,9 @@ struct Mock final : QueryExecutor<String>, MutationExecutor<String> {
                 started = true;
                 state.request = &detail::resource_arena(state.r).make<QueryRequest>(query);
                 state.note("request:", state.path());
-                if (state.config.event && observer)
+                if (state.config.event && observer) {
                     (*observer)(ExecutionMetadata::unrecorded_query(r, 99));
+                }
             }
             state.note("poll:", state.path());
             if (pending) {
@@ -181,8 +192,9 @@ struct Mock final : QueryExecutor<String>, MutationExecutor<String> {
                 return {};
             }
             using R = Result<QueryResult, String>;
-            if (state.config.failure)
+            if (state.config.failure) {
                 return R::err(r, String("fetch failed", r));
+            }
             QueryResult result(
                 std::allocator_arg, Allocator(r), ExecutionMetadata::unrecorded_query(r, 1));
             Record values(r);

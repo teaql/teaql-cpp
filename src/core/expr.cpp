@@ -11,10 +11,12 @@ Expr::Expr(std::allocator_arg_t, Allocator a, const Expr& other) : Expr(a.resour
     literal = Value(a.resource(), other.literal);
     op = other.op;
     function_kind = other.function_kind;
-    for (const auto& arg : other.args)
+    for (const auto& arg : other.args) {
         args.emplace_back(arg);
-    if (other.subquery_data)
+    }
+    if (other.subquery_data) {
         subquery_data = detail::make_box<SubQueryExpr>(a.resource(), *other.subquery_data);
+    }
 }
 
 Expr::Expr(std::allocator_arg_t, Allocator a, Expr&& other)
@@ -41,8 +43,9 @@ Expr Expr::column(Memory r, std::string_view name) {
 Expr Expr::function(Memory r, ExprFunction fn, std::span<const Expr> parts) {
     Expr result(r, Kind::Function);
     result.function_kind = fn;
-    for (const auto& part : parts)
+    for (const auto& part : parts) {
         result.args.emplace_back(part);
+    }
     return result;
 }
 
@@ -65,8 +68,9 @@ Expr Expr::compare_columns(Memory r, std::string_view left, BinaryOp op, std::st
 namespace {
 Expr list_comparison(Memory r, std::string_view field, std::span<const Value> values, BinaryOp op) {
     Value::List copy(r);
-    for (const auto& v : values)
+    for (const auto& v : values) {
         copy.emplace_back(v);
+    }
     return Expr::binary(Expr::column(r, field), op, Expr::value(r, copy));
 }
 
@@ -77,11 +81,13 @@ Expr string_match(Memory r,
                   bool suffix,
                   bool negative) {
     String pattern(r);
-    if (prefix)
+    if (prefix) {
         pattern += '%';
+    }
     pattern += text;
-    if (suffix)
+    if (suffix) {
         pattern += '%';
+    }
     return Expr::binary(Expr::column(r, field),
                         negative ? BinaryOp::NotLike : BinaryOp::Like,
                         Expr::value(r, pattern));
@@ -89,23 +95,29 @@ Expr string_match(Memory r,
 
 Expr logical(Memory r, Expr::Kind kind, std::span<const Expr> parts) {
     Expr result(r, kind);
-    for (const auto& part : parts)
-        if (std::find(result.args.begin(), result.args.end(), part) == result.args.end())
+    for (const auto& part : parts) {
+        if (std::find(result.args.begin(), result.args.end(), part) == result.args.end()) {
             result.args.emplace_back(part);
+        }
+    }
     return result;
 }
 
 Expr join(const Expr& left, const Expr& right, Expr::Kind kind) {
-    if (left == right)
+    if (left == right) {
         return left.clone(left.memory_resource());
+    }
     Expr result(left.memory_resource(), kind);
-    if (left.kind == kind)
-        for (const auto& arg : left.args)
+    if (left.kind == kind) {
+        for (const auto& arg : left.args) {
             result.args.emplace_back(arg);
-    else
+        }
+    } else {
         result.args.emplace_back(left);
-    if (std::find(result.args.begin(), result.args.end(), right) == result.args.end())
+    }
+    if (std::find(result.args.begin(), result.args.end(), right) == result.args.end()) {
         result.args.emplace_back(right);
+    }
     return result;
 }
 }
@@ -141,8 +153,9 @@ Expr Expr::subquery(Expr left,
     result.args.emplace_back(std::move(left));
     result.subquery_data = detail::make_box<SubQueryExpr>(r, entity, query);
     auto& inner = result.subquery_data->query;
-    if (op == BinaryOp::NotIn || op == BinaryOp::NotInLarge)
+    if (op == BinaryOp::NotIn || op == BinaryOp::NotInLarge) {
         inner.and_filter(is_not_null(r, field));
+    }
     inner.projection.clear();
     inner.project(field);
     return result;
@@ -210,8 +223,9 @@ Expr Expr::or_expr(const Expr& other) const {
 }
 
 bool Expr::operator==(const Expr& other) const {
-    if (kind != other.kind)
+    if (kind != other.kind) {
         return false;
+    }
     switch (kind) {
     case Kind::Column:
         return name == other.name;

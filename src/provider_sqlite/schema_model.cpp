@@ -30,72 +30,91 @@ void option(String& out, std::optional<std::uint32_t> n) {
         out += "Some(";
         number(out, *n);
         out += ')';
-    } else
+    } else {
         out += "None";
+    }
 }
 }
 
 std::string_view strip_sqlite_identifier_quotes(std::string_view value) {
     if (value.size() >= 2 && ((value.front() == '"' && value.back() == '"') ||
                               (value.front() == '`' && value.back() == '`') ||
-                              (value.front() == '[' && value.back() == ']')))
+                              (value.front() == '[' && value.back() == ']'))) {
         return value.substr(1, value.size() - 2);
+    }
     return value;
 }
 
 String sqlite_type_family(Memory r, std::string_view type) {
     trim(type);
     String normalized(type, r);
-    for (auto& c : normalized)
-        if (c >= 'a' && c <= 'z')
+    for (auto& c : normalized) {
+        if (c >= 'a' && c <= 'z') {
             c -= 32;
+        }
+    }
     auto has = [&](std::string_view s) {
         return normalized.find(s) != normalized.npos;
     };
-    if (has("INT"))
+    if (has("INT")) {
         return String("integer", r);
-    if (has("CHAR") || has("CLOB") || has("TEXT"))
+    }
+    if (has("CHAR") || has("CLOB") || has("TEXT")) {
         return String("text", r);
-    if (has("REAL") || has("FLOA") || has("DOUB"))
+    }
+    if (has("REAL") || has("FLOA") || has("DOUB")) {
         return String("real", r);
-    if (has("NUM") || has("DEC"))
+    }
+    if (has("NUM") || has("DEC")) {
         return String("numeric", r);
-    if (has("BOOL"))
+    }
+    if (has("BOOL")) {
         return String("boolean", r);
-    if (has("JSON"))
+    }
+    if (has("JSON")) {
         return String("json", r);
-    if (has("TIMESTAMP") || has("DATETIME"))
+    }
+    if (has("TIMESTAMP") || has("DATETIME")) {
         return String("timestamp", r);
-    if (has("DATE"))
+    }
+    if (has("DATE")) {
         return String("date", r);
-    for (auto& c : normalized)
-        if (c >= 'A' && c <= 'Z')
+    }
+    for (auto& c : normalized) {
+        if (c >= 'A' && c <= 'Z') {
             c += 32;
+        }
+    }
     return normalized;
 }
 
 Vector<std::uint32_t> sqlite_declared_type_args(Memory r, std::string_view type) {
     Vector<std::uint32_t> out(r);
     auto start = type.find('(');
-    if (start == type.npos)
+    if (start == type.npos) {
         return out;
+    }
     type.remove_prefix(start + 1);
     auto end = type.find(')');
-    if (end == type.npos)
+    if (end == type.npos) {
         return out;
+    }
     type = type.substr(0, end);
     for (;;) {
         auto split = type.find(',');
         auto part = type.substr(0, split);
         trim(part);
-        if (part.starts_with('+'))
+        if (part.starts_with('+')) {
             part.remove_prefix(1);
+        }
         std::uint32_t n = 0;
         auto [stop, ec] = std::from_chars(part.data(), part.data() + part.size(), n);
-        if (ec == std::errc{} && stop == part.data() + part.size())
+        if (ec == std::errc{} && stop == part.data() + part.size()) {
             out.push_back(n);
-        if (split == type.npos)
+        }
+        if (split == type.npos) {
             break;
+        }
         type.remove_prefix(split + 1);
     }
     return out;
@@ -194,8 +213,9 @@ void ensure_sqlite_column_compatibility(Memory r,
 
 std::array<char, 4> sqlite_compatible_soundex(std::optional<std::string_view> input) {
     std::array<char, 4> out{'?', '0', '0', '0'};
-    if (!input)
+    if (!input) {
         return out;
+    }
     auto upper = [](unsigned char c) {
         return c >= 'a' && c <= 'z' ? static_cast<unsigned char>(c - 32) : c;
     };
@@ -233,8 +253,9 @@ std::array<char, 4> sqlite_compatible_soundex(std::optional<std::string_view> in
     unsigned previous = 0;
     for (unsigned char raw : *input) {
         auto c = upper(raw);
-        if (c < 'A' || c > 'Z')
+        if (c < 'A' || c > 'Z') {
             continue;
+        }
         if (!n) {
             out[n++] = char(c);
             previous = code(c);
@@ -243,8 +264,9 @@ std::array<char, 4> sqlite_compatible_soundex(std::optional<std::string_view> in
         auto current = code(c);
         if (current && unsigned(current) != previous) {
             out[n++] = char('0' + current);
-            if (n == out.size())
+            if (n == out.size()) {
                 break;
+            }
         }
         previous = unsigned(current);
     }
@@ -256,22 +278,25 @@ sqlite_foreign_keys_for(Memory r,
                         const EntityDescriptor& source_entity,
                         std::span<const EntityDescriptor* const> entities) {
     std::pmr::set<SqliteForeignKey> keys(r);
-    for (auto* entity : entities)
+    for (auto* entity : entities) {
         for (const auto& relation : entity->relations) {
             const EntityDescriptor* target = nullptr;
-            for (auto* candidate : entities)
+            for (auto* candidate : entities) {
                 if (candidate->name == relation.target_entity) {
                     target = candidate;
                     break;
                 }
-            if (!target || entity->data_service != target->data_service)
+            }
+            if (!target || entity->data_service != target->data_service) {
                 continue;
+            }
             auto* source = relation.many ? target : entity;
             auto* referenced = relation.many ? entity : target;
             const auto& source_key = relation.many ? relation.foreign_key : relation.local_key;
             const auto& referenced_key = relation.many ? relation.local_key : relation.foreign_key;
-            if (source->name != source_entity.name)
+            if (source->name != source_entity.name) {
                 continue;
+            }
             auto* source_property = source->property_by_name(source_key);
             auto* referenced_property = referenced->property_by_name(referenced_key);
             if (!source_property || !referenced_property) {
@@ -290,9 +315,11 @@ sqlite_foreign_keys_for(Memory r,
                          referenced->table_name,
                          referenced_property->column_name);
         }
+    }
     Vector<SqliteForeignKey> result(r);
-    for (const auto& key : keys)
+    for (const auto& key : keys) {
         result.emplace_back(key);
+    }
     return result;
 }
 
@@ -305,8 +332,9 @@ String compile_sqlite_create_table(Memory r,
     sql += " (";
     bool first = true;
     auto separator = [&] {
-        if (!first)
+        if (!first) {
             sql += ", ";
+        }
         first = false;
     };
     try {

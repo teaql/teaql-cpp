@@ -98,12 +98,13 @@ struct Business : BusinessIdAllocator, BusinessIdSchemaContributor {
         auto& shared = state(context);
         shared.note(context, "business");
         using R = Result<std::monostate, BusinessIdError>;
-        if (text(field(shared.config, "fail")) == "business")
+        if (text(field(shared.config, "fail")) == "business") {
             return R::err(r,
                           BusinessIdError(std::allocator_arg,
                                           Allocator(r),
                                           BusinessIdErrorCode::Allocation,
                                           "business failed"));
+        }
         return R::ok(r, {});
     }
 };
@@ -144,8 +145,9 @@ static Json evaluate(UserContext& context, const Json& j) {
     context.insert_resource(context, shared);
     auto& module = context.make<RuntimeModule>();
     GeneratedSchemaBootstrap callbacks[]{first, second, third};
-    for (std::size_t i = 0; i < std::get<Json::Array>(field(j, "delays").data).size(); ++i)
+    for (std::size_t i = 0; i < std::get<Json::Array>(field(j, "delays").data).size(); ++i) {
         module.generated_schema_bootstrap(callbacks[i]);
+    }
     module.apply_to(context);
     if (std::get<bool>(field(j, "provider").data)) {
         auto& provider = context.make_resource<Provider>();
@@ -166,9 +168,9 @@ static Json evaluate(UserContext& context, const Json& j) {
             continue;
         }
         outcome = detail::model_json(r);
-        if (*result)
+        if (*result) {
             detail::model_put(outcome, "ok", true);
-        else {
+        } else {
             detail::model_put(outcome, "message", result->error().message());
             detail::model_put(outcome, "display", result->error().to_string(r));
         }
@@ -178,8 +180,9 @@ static Json evaluate(UserContext& context, const Json& j) {
     shared.note(context, "after");
     auto out = detail::model_json(r);
     Json::Array calls(r);
-    for (const auto& call : shared.calls)
+    for (const auto& call : shared.calls) {
         calls.emplace_back(call);
+    }
     detail::model_put(out, "calls", calls);
     detail::model_put(out, "result", outcome);
     return out;
@@ -192,8 +195,9 @@ int main() {
         auto context = global.make_user_context();
         auto r = context->memory_resource();
         auto j = Json::parse(r, line);
-        if (!j)
+        if (!j) {
             throw std::runtime_error("invalid fixture JSON");
+        }
         std::cout << evaluate(*context, *j).dump(r) << '\n';
     }
 }

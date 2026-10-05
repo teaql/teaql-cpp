@@ -5,14 +5,16 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 static Decimal d(std::string_view value) {
     auto result = Decimal::parse(value);
-    if (!result)
+    if (!result) {
         throw std::runtime_error("Invalid test decimal");
+    }
     return *result;
 }
 

@@ -165,10 +165,11 @@ struct WebAction {
     }
 
     WebAction& optional_warning_message(std::optional<std::string_view> value) {
-        if (value)
+        if (value) {
             warning_message = String(*value, resource_);
-        else
+        } else {
             warning_message.reset();
+        }
         return *this;
     }
 
@@ -251,8 +252,9 @@ struct WebResponse {
         for (const auto& [key, facet] : source_facets) {
             Json items(r);
             items.data.emplace<Json::Array>(r);
-            for (const auto& row : facet.data)
+            for (const auto& row : facet.data) {
                 std::get<Json::Array>(items.data).emplace_back(compact_row_to_json_value(r, row));
+            }
             facets.emplace(String(key, r), std::move(items));
         }
         auto result = from_entities(r, std::move(list).into_vec());

@@ -4,8 +4,9 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 struct NoDefaultAllocator {
@@ -67,8 +68,9 @@ static void intent() {
                       "SUBQUERY-SECRET",
                       "PROJECTION-SECRET",
                       "HAVING-SECRET",
-                      "SEARCH-SECRET"})
+                      "SEARCH-SECRET"}) {
         check(contains(debug, text), "fallback visits statement expressions and SQL subqueries");
+    }
     check(!contains(debug, "UNRELATED-SIBLING") &&
               collected.debug(r).find("SECRET") == String::npos,
           "fallback excludes separately executed relations and debug hides raw values");

@@ -55,12 +55,14 @@ static Json evaluate(UserContext& context, const Json& j) {
     auto r = context.memory_resource();
     std::array<std::uint8_t, 32> bytes{};
     const auto& input = std::get<Json::Array>(field(j, "key").data);
-    for (std::size_t i = 0; i < 32; ++i)
+    for (std::size_t i = 0; i < 32; ++i) {
         bytes[i] = std::uint8_t(std::get<std::uint64_t>(input[i].data));
+    }
     auto key = BusinessIdEncodingKey::create(
         r, std::uint32_t(std::get<std::uint64_t>(field(j, "version").data)), bytes);
-    if (!key)
+    if (!key) {
         return error(r, key.error());
+    }
     auto op = text(field(j, "op"));
     auto out = detail::model_json(r);
     if (op == "key") {
@@ -76,8 +78,9 @@ static Json evaluate(UserContext& context, const Json& j) {
                                                       number<std::uint64_t>(field(j, "sequence")),
                                                       scope(r, field(j, "scope")),
                                                       key.value());
-        if (!result)
+        if (!result) {
             return error(r, result.error());
+        }
         detail::model_put(out, "ok", result.value());
         return out;
     }
@@ -95,15 +98,17 @@ static Json evaluate(UserContext& context, const Json& j) {
                                             text(field(j, "aggregate")),
                                             *Date::parse(text(field(j, "date"))));
         auto result = profile.plan(r, request);
-        if (!result)
+        if (!result) {
             return error(r, result.error());
+        }
         auto& p = result.value();
         Json::Array fields(r);
         for (std::string_view f : {p.scope.domain_root_key,
                                    p.scope.aggregate_type,
                                    p.scope.namespace_name,
-                                   p.scope.period_key})
+                                   p.scope.period_key}) {
             fields.emplace_back(f);
+        }
         detail::model_put(out, "scope", fields);
         detail::model_put(out, "prefix", p.prefix);
         detail::model_put(out, "date", p.date_text ? Json(r, *p.date_text) : Json(r));
@@ -120,16 +125,18 @@ static Json evaluate(UserContext& context, const Json& j) {
                                         scope(r, field(j, "allocation_scope")),
                                         number<std::uint64_t>(field(j, "sequence")));
         auto result = profile.format(r, p, allocation);
-        if (!result)
+        if (!result) {
             return error(r, result.error());
+        }
         detail::model_put(out, "ok", result.value().value);
         return out;
     }
     if (op == "validate") {
         auto result =
             profile.validate(r, definition(r, field(j, "definition")), text(field(j, "value")));
-        if (!result)
+        if (!result) {
             return error(r, result.error());
+        }
         detail::model_put(out, "ok", result.value().value);
         return out;
     }
@@ -143,8 +150,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("invalid input");
+        }
         std::cout << evaluate(*user, *input).dump(r) << '\n';
     }
 }

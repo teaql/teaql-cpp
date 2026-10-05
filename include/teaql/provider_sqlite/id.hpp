@@ -32,8 +32,9 @@ public:
                                                     std::string_view entity) const override {
         auto result = next_id(r, entity);
         using R = Result<std::uint64_t, RuntimeError>;
-        if (!result)
+        if (!result) {
             return R::err(r, RuntimeError::id_generation(r, result.error().to_string(r)));
+        }
         return R::ok(r, result.value());
     }
 
@@ -42,8 +43,9 @@ protected:
     do_ensure_floor(Memory r, std::string_view entity, std::uint64_t floor) const override {
         auto result = ensure_floor(r, entity, floor);
         using R = Result<std::monostate, RuntimeError>;
-        if (!result)
+        if (!result) {
             return R::err(r, RuntimeError::id_generation(r, result.error().to_string(r)));
+        }
         return R::ok(r, {});
     }
 

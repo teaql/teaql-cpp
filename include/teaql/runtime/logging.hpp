@@ -48,8 +48,9 @@ struct LogDuration {
     LogDuration(std::uint64_t seconds = 0, std::uint32_t nanos = 0)
         : seconds(seconds), nanos(nanos % 1000000000) {
         auto carry = nanos / 1000000000;
-        if (seconds > std::numeric_limits<std::uint64_t>::max() - carry)
+        if (seconds > std::numeric_limits<std::uint64_t>::max() - carry) {
             throw std::overflow_error("overflow in log duration");
+        }
         this->seconds += carry;
     }
 

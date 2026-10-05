@@ -8,8 +8,9 @@ EntityKey::EntityKey(std::allocator_arg_t, Allocator a, std::string_view name, c
     : entity(name, a.resource()), id(a.resource(), value), kind_(Kind::Null),
       identity_(a.resource()) {
     auto r = a.resource();
-    if (value.is_null())
+    if (value.is_null()) {
         return;
+    }
     std::visit(
         [&](const auto& v) {
             using T = std::decay_t<decltype(v)>;
@@ -63,10 +64,12 @@ EntityKey::EntityKey(std::allocator_arg_t, Allocator a, const EntityKey& other)
       identity_(a.resource(), other.identity_) {}
 
 std::strong_ordering EntityKey::operator<=>(const EntityKey& other) const {
-    if (auto order = entity <=> other.entity; order != 0)
+    if (auto order = entity <=> other.entity; order != 0) {
         return order;
-    if (auto order = kind_ <=> other.kind_; order != 0)
+    }
+    if (auto order = kind_ <=> other.kind_; order != 0) {
         return order;
+    }
     switch (kind_) {
     case Kind::Null:
         return std::strong_ordering::equal;
@@ -123,8 +126,9 @@ String EntityKey::debug(Memory r) const {
                        .ptr;
         out.append(buffer, end);
         out += ')';
-    } else
+    } else {
         out += detail::debug_value(r, identity_);
+    }
     out += " }";
     return out;
 }

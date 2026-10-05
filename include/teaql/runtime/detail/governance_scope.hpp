@@ -23,8 +23,9 @@ public:
     static std::optional<MutationGovernanceSnapshot> current(const UserContext& context) {
         context.ensure_open();
         auto* value = context.global_.active_mutation_governance_;
-        if (value)
+        if (value) {
             return clone_in(context.memory_resource(), *value);
+        }
         return {};
     }
 
@@ -49,15 +50,17 @@ public:
                       const MutationGovernanceSnapshot& snapshot,
                       AsyncOperation<T>& child)
         : context_(context), snapshot_(std::allocator_arg, a, snapshot), child_(&child) {
-        if (a.resource() != context.memory_resource() || child.memory_resource() != a.resource())
+        if (a.resource() != context.memory_resource() || child.memory_resource() != a.resource()) {
             throw std::invalid_argument("Governed operation must belong to its UserContext");
+        }
     }
 
     std::optional<T> poll(WakeSignal& wake) {
         GovernanceActivation active(context_, snapshot_);
         forwarding_.attach(child_->wake_signal(), wake);
-        if (auto* value = child_->poll())
+        if (auto* value = child_->poll()) {
             return clone_in(context_.memory_resource(), *value);
+        }
         // Lazily created descendants must be cancelled under this snapshot
         // before the arena walks their independently registered stop records.
         closing_.attach(resource_arena(context_.memory_resource()), this, [](void* p) noexcept {

@@ -84,18 +84,20 @@ struct MutationRequest {
     std::span<const TraceNode> trace_chain() const {
         return std::visit(
             [](const auto& value) -> std::span<const TraceNode> {
-                if constexpr (std::same_as<std::decay_t<decltype(value)>, Batch>)
+                if constexpr (std::same_as<std::decay_t<decltype(value)>, Batch>) {
                     return {};
-                else
+                } else {
                     return value.trace_chain;
+                }
             },
             data);
     }
 
     std::optional<std::string_view> comment() const {
         auto chain = trace_chain();
-        if (chain.empty())
+        if (chain.empty()) {
             return {};
+        }
         return chain.back().comment;
     }
 

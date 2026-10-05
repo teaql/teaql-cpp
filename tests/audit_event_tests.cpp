@@ -9,8 +9,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -26,33 +27,43 @@ static void rejected(F&& f, const char* message) {
 
 static void value_domain(const Value& v, Memory r) {
     check(v.memory_resource() == r, "Value declares destination arena");
-    if (auto* s = std::get_if<String>(&v.data))
+    if (auto* s = std::get_if<String>(&v.data)) {
         check(s->get_allocator().resource() == r, "text belongs to destination");
-    if (auto* list = v.as_list())
-        for (const auto& item : *list)
+    }
+    if (auto* list = v.as_list()) {
+        for (const auto& item : *list) {
             value_domain(item, r);
-    if (auto* map = v.as_object())
+        }
+    }
+    if (auto* map = v.as_object()) {
         for (const auto& [key, item] : *map) {
             check(key.get_allocator().resource() == r, "record key belongs to destination");
             value_domain(item, r);
         }
+    }
 }
 
 static void event_domain(const RawAuditEvent& e, Memory r) {
     check(e.memory_resource() == r && e.changes.get_allocator().resource() == r,
           "event containers belong to destination");
-    for (const auto& [_, v] : e.values)
+    for (const auto& [_, v] : e.values) {
         value_domain(v, r);
-    for (const auto* snapshot : {&e.old_values, &e.new_values})
-        if (*snapshot)
-            for (const auto& [_, v] : **snapshot)
+    }
+    for (const auto* snapshot : {&e.old_values, &e.new_values}) {
+        if (*snapshot) {
+            for (const auto& [_, v] : **snapshot) {
                 value_domain(v, r);
+            }
+        }
+    }
     for (const auto& c : e.changes) {
         check(c.memory_resource() == r, "change belongs to destination");
-        if (c.old_value)
+        if (c.old_value) {
             value_domain(*c.old_value, r);
-        if (c.new_value)
+        }
+        if (c.new_value) {
             value_domain(*c.new_value, r);
+        }
     }
     check(e.bootstrap_audit->reason.get_allocator().resource() == r &&
               e.trace_chain[0].comment.get_allocator().resource() == r,
@@ -160,9 +171,10 @@ struct Sink final : RawAuditEventSink {
     Result<std::monostate, RuntimeError>
     on_event(Memory result, const UserContext&, const RawAuditEvent&) const override {
         calls.push_back(id);
-        if (fail)
+        if (fail) {
             return Result<std::monostate, RuntimeError>::err(
                 result, RuntimeError::event(result, "sink rejected event"));
+        }
         return Result<std::monostate, RuntimeError>::ok(result, {});
     }
 };

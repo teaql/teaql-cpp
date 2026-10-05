@@ -8,8 +8,9 @@
 using namespace teaql;
 
 static void check(bool b, const char* message) {
-    if (!b)
+    if (!b) {
         throw std::runtime_error(message);
+    }
 }
 
 static String aggregation(Memory r, const SelectQuery& q) {

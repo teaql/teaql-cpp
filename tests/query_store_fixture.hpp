@@ -15,9 +15,10 @@ struct QueryStoreAccess {
     }
 
     static void age(InMemoryAggregationCache& store, std::string_view key, std::int64_t millis) {
-        if (auto it = store.entries_.find(key); it != store.entries_.end())
+        if (auto it = store.entries_.find(key); it != store.entries_.end()) {
             it->second.stored_at =
                 std::chrono::steady_clock::now() - std::chrono::milliseconds(millis);
+        }
     }
 
     static auto timestamp(const InMemoryAggregationCache& store, std::string_view key) {

@@ -3,8 +3,9 @@
 
 static MutationValues mutation_values(Memory r, const Json& j) {
     MutationValues out(r);
-    for (const auto& [key, v] : std::get<Json::Object>(j.data))
+    for (const auto& [key, v] : std::get<Json::Object>(j.data)) {
         out.fields.emplace(String(key, r), value(r, v));
+    }
     return out;
 }
 
@@ -18,8 +19,9 @@ static CompiledQuery
 compile(Memory r, const FixtureDialect& d, const EntityDescriptor& e, const Json& j) {
     auto mode = text(field(j, "mode"));
     std::optional<Expr> guard;
-    if (auto p = optional(j, "guard"))
+    if (auto p = optional(j, "guard")) {
         guard.emplace(expression(r, *p));
+    }
     if (mode == "insert") {
         InsertCommand c(std::allocator_arg, Allocator(r), "IgnoredCommandEntity");
         c.values = mutation_values(r, field(j, "values"));
@@ -27,8 +29,9 @@ compile(Memory r, const FixtureDialect& d, const EntityDescriptor& e, const Json
     }
     if (mode == "batch_insert") {
         BatchInsertCommand c(std::allocator_arg, Allocator(r), "IgnoredCommandEntity");
-        for (const auto& row : items(j, "rows"))
+        for (const auto& row : items(j, "rows")) {
             c.batch_values.emplace_back(mutation_values(r, row));
+        }
         return d.compile_batch_insert(r, e, c);
     }
     if (mode == "update") {
@@ -55,16 +58,20 @@ compile(Memory r, const FixtureDialect& d, const EntityDescriptor& e, const Json
     }
     if (mode == "batch_update") {
         BatchUpdateCommand c(std::allocator_arg, Allocator(r), "IgnoredCommandEntity");
-        for (const auto& v : items(j, "fields"))
+        for (const auto& v : items(j, "fields")) {
             c.update_fields.emplace_back(text(v));
-        for (const auto& v : items(j, "ids"))
+        }
+        for (const auto& v : items(j, "ids")) {
             c.batch_ids.emplace_back(value(r, v));
-        for (const auto& v : items(j, "versions"))
+        }
+        for (const auto& v : items(j, "versions")) {
             c.batch_expected_versions.emplace_back(std::holds_alternative<String>(v.data)
                                                        ? std::optional(number<std::int64_t>(v))
                                                        : std::nullopt);
-        for (const auto& v : items(j, "rows"))
+        }
+        for (const auto& v : items(j, "rows")) {
             c.batch_values.emplace_back(mutation_values(r, v));
+        }
         return d.compile_batch_update(r, e, c);
     }
     throw std::runtime_error("unknown mutation");
@@ -72,8 +79,9 @@ compile(Memory r, const FixtureDialect& d, const EntityDescriptor& e, const Json
 
 static Json evaluate(Memory r, const Json& j) {
     FixtureDialect d;
-    if (auto p = optional(j, "numbered"))
+    if (auto p = optional(j, "numbered")) {
         d.numbered = std::get<bool>(p->data);
+    }
     auto e = entity(r, field(j, "entity"));
     auto out = detail::model_json(r);
     try {
@@ -85,13 +93,15 @@ static Json evaluate(Memory r, const Json& j) {
         for (const auto& v : q.params) {
             values.emplace_back(v.to_json_value(r));
             kinds.emplace_back(unsigned(v.data.index()));
-            if (auto n = std::get_if<TypedNull>(&v.data))
+            if (auto n = std::get_if<TypedNull>(&v.data)) {
                 null_types.emplace_back(unsigned(n->type));
-            else
+            } else {
                 null_types.emplace_back();
+            }
         }
-        for (auto p : q.log_context.parameter_policies)
+        for (auto p : q.log_context.parameter_policies) {
             policies.emplace_back(unsigned(p));
+        }
         detail::model_put(out, "values", values);
         detail::model_put(out, "kinds", kinds);
         detail::model_put(out, "null_types", null_types);
@@ -113,8 +123,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("invalid fixture");
+        }
         std::cout << evaluate(r, *input).dump(r) << '\n';
     }
 }

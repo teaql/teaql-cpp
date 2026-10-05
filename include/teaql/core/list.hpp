@@ -28,23 +28,26 @@ public:
 
     SmartList(std::allocator_arg_t, Allocator a, std::span<const T> items)
         : SmartList(std::allocator_arg, a) {
-        for (const auto& item : items)
+        for (const auto& item : items) {
             data.emplace_back(item);
+        }
         is_loaded = true;
     }
 
     SmartList(std::allocator_arg_t, Allocator a, const SmartList& other)
         : SmartList(std::allocator_arg, a) {
-        for (const auto& item : other.data)
+        for (const auto& item : other.data) {
             data.emplace_back(item);
+        }
         total_count = other.total_count;
         is_loaded = other.is_loaded;
         aggregations = clone_record(a.resource(), other.aggregations);
         summary = clone_record(a.resource(), other.summary);
-        for (const auto& [name, facet] : other.facets)
+        for (const auto& [name, facet] : other.facets) {
             facets.emplace(std::piecewise_construct,
                            std::forward_as_tuple(name),
                            std::forward_as_tuple(facet));
+        }
     }
 
     SmartList(const SmartList&) = delete;
@@ -89,12 +92,13 @@ public:
         // Clone before replacing, so source and destination may refer to the same facet.
         auto replacement =
             SmartList<CompactRow>(std::allocator_arg, Allocator(memory_resource()), facet);
-        if (auto it = facets.find(name); it != facets.end())
+        if (auto it = facets.find(name); it != facets.end()) {
             it->second = std::move(replacement);
-        else
+        } else {
             facets.emplace(std::piecewise_construct,
                            std::forward_as_tuple(name),
                            std::forward_as_tuple(std::move(replacement)));
+        }
         return *this;
     }
 
@@ -110,8 +114,9 @@ public:
 
     std::optional<SmartList<CompactRow>> remove_facet(std::string_view name) {
         auto it = facets.find(name);
-        if (it == facets.end())
+        if (it == facets.end()) {
             return {};
+        }
         auto value = std::move(it->second);
         facets.erase(it);
         return value;
@@ -148,16 +153,19 @@ public:
         // A temporary also handles self-extension and propagates the target allocator.
         Vector<T> incoming(memory_resource());
         incoming.reserve(values.size());
-        for (const auto& value : values)
+        for (const auto& value : values) {
             incoming.emplace_back(value);
+        }
         data.reserve(data.size() + incoming.size());
-        for (auto& value : incoming)
+        for (auto& value : incoming) {
             data.emplace_back(std::move(value));
+        }
     }
 
     std::optional<T> set(std::size_t index, const T& value) {
-        if (index >= data.size())
+        if (index >= data.size()) {
             return {};
+        }
         auto a = std::pmr::polymorphic_allocator<T>(memory_resource());
         T incoming = std::make_obj_using_allocator<T>(a, value);
         T previous = std::make_obj_using_allocator<T>(a, data[index]);
@@ -229,9 +237,10 @@ public:
         using U = std::remove_cvref_t<std::invoke_result_t<Mapper&, T&&>>;
         SmartList<U> result(std::allocator_arg, Allocator(memory_resource()));
         result.data.reserve(data.size());
-        for (auto& item : data)
+        for (auto& item : data) {
             result.data.push_back(
                 detail::move_in(memory_resource(), std::invoke(mapper, std::move(item))));
+        }
         result.total_count = total_count;
         result.is_loaded = is_loaded;
         result.aggregations = std::move(aggregations);
@@ -246,8 +255,9 @@ public:
         using U = std::remove_cvref_t<std::invoke_result_t<Mapper&, const T&>>;
         Vector<U> result(memory_resource());
         result.reserve(data.size());
-        for (const auto& item : data)
+        for (const auto& item : data) {
             result.push_back(detail::clone_in(memory_resource(), std::invoke(mapper, item)));
+        }
         return result;
     }
 
@@ -255,8 +265,9 @@ public:
     auto to_set(Mapper&& mapper) const {
         using U = std::remove_cvref_t<std::invoke_result_t<Mapper&, const T&>>;
         std::pmr::set<U> result(memory_resource());
-        for (const auto& item : data)
+        for (const auto& item : data) {
             result.insert(detail::clone_in(memory_resource(), std::invoke(mapper, item)));
+        }
         return result;
     }
 
@@ -290,20 +301,22 @@ public:
     void merge_by(std::span<const T> incoming, Key&& key) {
         using K = std::remove_cvref_t<std::invoke_result_t<Key&, const T&>>;
         std::pmr::unordered_map<K, std::size_t> positions(memory_resource());
-        for (std::size_t i = 0; i < data.size(); ++i)
+        for (std::size_t i = 0; i < data.size(); ++i) {
             positions.insert_or_assign(
                 detail::clone_in(memory_resource(), std::invoke(key, std::as_const(data[i]))), i);
+        }
         // Snapshot first: incoming may be a subspan of this list or another domain.
         Vector<T> items(memory_resource());
         items.reserve(incoming.size());
-        for (const auto& item : incoming)
+        for (const auto& item : incoming) {
             items.push_back(detail::clone_in(memory_resource(), item));
+        }
         for (auto& item : items) {
             auto k = detail::clone_in(memory_resource(), std::invoke(key, std::as_const(item)));
             auto it = positions.find(k);
-            if (it != positions.end())
+            if (it != positions.end()) {
                 data[it->second] = std::move(item);
-            else {
+            } else {
                 positions.emplace(std::move(k), data.size());
                 data.push_back(std::move(item));
             }
@@ -318,14 +331,16 @@ public:
         items.reserve(data.size());
         for (auto& entity : data) {
             if (entity.is_new() || entity.dirty_fields().has_value() ||
-                entity.is_marked_as_delete())
+                entity.is_marked_as_delete()) {
                 changes = true;
+            }
             auto values = std::move(entity).into_values();
             items.emplace_back(values.fields);
         }
         data.clear();
-        if (!is_loaded && !changes)
+        if (!is_loaded && !changes) {
             return {};
+        }
         return Value(memory_resource(), items);
     }
 

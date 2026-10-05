@@ -8,50 +8,61 @@ using namespace teaql;
 static CheckResult make_check(Memory r, const Json& input) {
     auto location = ObjectLocation::root(r);
     for (const auto& part : std::get<Json::Array>(field(input, "path").data)) {
-        if (auto* name = std::get_if<String>(&part.data))
+        if (auto* name = std::get_if<String>(&part.data)) {
             location.member(*name);
-        else
+        } else {
             location.element(std::get<std::uint64_t>(part.data));
+        }
     }
     auto constructor =
         optional(input, "constructor") ? text(field(input, "constructor")) : std::string_view{};
     auto create = [&]() {
         auto rule = CheckRule(std::get<std::uint64_t>(field(input, "rule").data));
-        if (constructor == "required")
+        if (constructor == "required") {
             return CheckResult::required(r, std::move(location));
-        if (constructor == "min")
+        }
+        if (constructor == "min") {
             return CheckResult::min(r,
                                     std::move(location),
                                     value(r, field(input, "system")),
                                     value(r, field(input, "input")));
-        if (constructor == "max")
+        }
+        if (constructor == "max") {
             return CheckResult::max(r,
                                     std::move(location),
                                     value(r, field(input, "system")),
                                     value(r, field(input, "input")));
-        if (constructor == "min_str")
+        }
+        if (constructor == "min_str") {
             return CheckResult::min_str(r,
                                         std::move(location),
                                         std::get<std::uint64_t>(field(input, "length").data),
                                         value(r, field(input, "input")));
-        if (constructor == "max_str")
+        }
+        if (constructor == "max_str") {
             return CheckResult::max_str(r,
                                         std::move(location),
                                         std::get<std::uint64_t>(field(input, "length").data),
                                         value(r, field(input, "input")));
+        }
         return CheckResult(std::allocator_arg, Allocator(r), rule, std::move(location));
     };
     auto result = create();
-    if (auto* v = optional(input, "input"))
+    if (auto* v = optional(input, "input")) {
         result.with_input_value(value(r, *v));
-    if (auto* v = optional(input, "system"))
+    }
+    if (auto* v = optional(input, "system")) {
         result.with_system_value(value(r, *v));
-    if (auto* v = optional(input, "message"))
+    }
+    if (auto* v = optional(input, "message")) {
         result.with_message(text(*v));
-    if (auto* v = optional(input, "entity"))
+    }
+    if (auto* v = optional(input, "entity")) {
         result.with_entity_type(text(*v));
-    if (auto* v = optional(input, "source"))
+    }
+    if (auto* v = optional(input, "source")) {
         result.with_source_instance_path(text(*v));
+    }
     return result;
 }
 
@@ -81,8 +92,9 @@ static RuntimeError make_error(Memory r, const Json& input) {
         return RuntimeError::policy(r, message);
     case 5: {
         CheckResults checks(r);
-        for (const auto& item : std::get<Json::Array>(field(input, "checks").data))
+        for (const auto& item : std::get<Json::Array>(field(input, "checks").data)) {
             checks.emplace_back(make_check(r, item));
+        }
         return RuntimeError::check(r, std::move(checks));
     }
     case 6:
@@ -131,14 +143,16 @@ static Json evaluate(Memory r, const Json& input) {
         detail::model_put(out, "display", error.to_string(r));
         if (error.kind() == RuntimeError::Kind::Check) {
             Json::Array checks(r);
-            for (const auto& c : error.check_results())
+            for (const auto& c : error.check_results()) {
                 checks.emplace_back(c.to_wire(r, JsonFieldNamingProfile::CamelCase).to_json(r));
+            }
             detail::model_put(out, "checks", checks);
-        } else
+        } else {
             detail::model_put(out, "checks", Json(r));
+        }
         detail::model_put(
             out, "wrapped", DataServiceError<String>::runtime(r, std::move(error)).to_string(r));
-    } else if (op == "entity_error")
+    } else if (op == "entity_error") {
         detail::model_put(out,
                           "display",
                           DataServiceError<String>::entity(r,
@@ -147,14 +161,15 @@ static Json evaluate(Memory r, const Json& input) {
                                                                        text(field(input, "entity")),
                                                                        text(field(input, "text"))))
                               .to_string(r));
-    else if (op == "executor_error")
+    } else if (op == "executor_error") {
         detail::model_put(
             out,
             "display",
             DataServiceError<String>::executor(r, String(text(field(input, "text")), r))
                 .to_string(r));
-    else
+    } else {
         throw std::runtime_error("unknown operation");
+    }
     return out;
 }
 
@@ -165,8 +180,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("invalid input");
+        }
         std::cout << evaluate(r, *input).dump(r) << '\n';
     }
 }

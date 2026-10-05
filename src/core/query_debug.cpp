@@ -25,8 +25,9 @@ struct Debug {
     void number(T v) {
         char b[32];
         auto [end, ec] = std::to_chars(b, b + sizeof(b), v);
-        if (ec != std::errc{})
+        if (ec != std::errc{}) {
             throw std::overflow_error("query Debug number");
+        }
         out.append(b, end);
     }
 
@@ -36,8 +37,9 @@ struct Debug {
             out += "Some(";
             f(*v);
             out += ')';
-        } else
+        } else {
             out += "None";
+        }
     }
 
     template <class T>
@@ -59,8 +61,9 @@ struct Debug {
         out += '[';
         bool first = true;
         for (const auto& item : v) {
-            if (!first)
+            if (!first) {
                 out += ", ";
+            }
             first = false;
             f(item);
         }

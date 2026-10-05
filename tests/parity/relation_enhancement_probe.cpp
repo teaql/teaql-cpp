@@ -7,8 +7,9 @@ using E = hydration_fixture::UnusedExecutor;
 
 static Json strings_out(Memory r, std::span<const String> values) {
     Json::Array array(r);
-    for (const auto& s : values)
+    for (const auto& s : values) {
         array.emplace_back(s);
+    }
     return Json(r, array);
 }
 
@@ -16,8 +17,9 @@ static Vector<CompactRow> rows_in(Memory r, std::span<const Json> input) {
     Vector<CompactRow> rows(r);
     for (const auto& item : input) {
         Record record(r);
-        for (const auto& [key, v] : std::get<Json::Object>(item.data))
+        for (const auto& [key, v] : std::get<Json::Object>(item.data)) {
             record.emplace(String(key, r), value(r, v));
+        }
         rows.emplace_back(record);
     }
     return rows;
@@ -27,8 +29,9 @@ static Json rows_out(Memory r, std::span<const CompactRow> rows) {
     Json::Array out(r);
     for (const auto& row : rows) {
         auto j = detail::model_json(r);
-        for (const auto& key : row.keys())
+        for (const auto& key : row.keys()) {
             detail::model_put(j, key, detail::debug_value(r, *row.get(key)));
+        }
         out.emplace_back(std::move(j));
     }
     return Json(r, out);
@@ -36,8 +39,9 @@ static Json rows_out(Memory r, std::span<const CompactRow> rows) {
 
 static std::optional<AggregationCacheOptions> cache_in(const Json& j) {
     auto* c = optional(j, "cache");
-    if (!c || std::holds_alternative<std::monostate>(c->data))
+    if (!c || std::holds_alternative<std::monostate>(c->data)) {
         return {};
+    }
     return AggregationCacheOptions{std::get<bool>(field(*c, "enabled").data),
                                    integer(field(*c, "ttl")),
                                    std::get<bool>(field(*c, "propagate").data),
@@ -49,10 +53,11 @@ static SelectQuery query_in(Memory r, const Json& j) {
     q.entity = text(field(j, "entity"));
     q.aggregation_cache = cache_in(j);
     for (const auto& l : items(j, "relations")) {
-        if (auto* child = optional(l, "query"))
+        if (auto* child = optional(l, "query")) {
             q.relations.emplace_back(text(field(l, "name")), query_in(r, *child));
-        else
+        } else {
             q.relations.emplace_back(text(field(l, "name")));
+        }
     }
     q.trace_chain.emplace_back(TraceKind::Request, q.entity, "query trace");
     return q;
@@ -65,8 +70,9 @@ static Json expr_out(Memory r, const Expr& e) {
     detail::model_put(out, "name", e.name);
     detail::model_put(out, "value", detail::debug_value(r, e.literal));
     Json::Array args(r);
-    for (const auto& a : e.args)
+    for (const auto& a : e.args) {
         args.emplace_back(expr_out(r, a));
+    }
     detail::model_put(out, "args", args);
     return out;
 }
@@ -183,8 +189,9 @@ struct Fetch {
                 wake.notify();
                 return {};
             }
-            if (index == integer(field(fetch.input, "fail_at")))
+            if (index == integer(field(fetch.input, "fail_at"))) {
                 return R::err(r, DataServiceError<String>::executor(r, String("fetch failed", r)));
+            }
             auto replies = items(fetch.input, "responses");
             return R::ok(r,
                          index <= replies.size()
@@ -245,15 +252,16 @@ static Json evaluate(UserContext& c, const Json& j) {
     auto mode = text(field(j, "mode"));
     for (const auto& item : items(j, "enhancements")) {
         auto q = query_in(r, field(item, "query"));
-        if (mode == "aggregate")
+        if (mode == "aggregate") {
             aggregates.emplace_back(text(field(item, "relation")),
                                     text(field(item, "alias")),
                                     q,
                                     std::get<bool>(field(item, "single").data));
-        else if (mode == "group")
+        } else if (mode == "group") {
             groups.emplace_back(text(field(item, "property")), text(field(item, "storage")), q);
-        else
+        } else {
             children.emplace_back(std::move(q));
+        }
     }
     auto& work = mode == "aggregate"
                      ? detail::enhance_relation_aggregates(
@@ -263,13 +271,15 @@ static Json evaluate(UserContext& c, const Json& j) {
                      : detail::enhance_child_queries(service, parents, children, trace, callback);
     auto out = detail::model_json(r);
     bool ready = false;
-    for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i)
+    for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i) {
         if (auto* result = work.poll()) {
             ready = true;
-            if (!*result)
+            if (!*result) {
                 detail::model_put(out, "error", result->error().to_string(r));
+            }
             break;
         }
+    }
     if (!ready) {
         work.cancel();
         detail::model_put(out, "cancelled", true);

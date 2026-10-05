@@ -11,15 +11,16 @@ String list_id_key(Memory r, const Value& value) {
             auto integer = [&](auto n) {
                 char buffer[32];
                 auto [end, error] = std::to_chars(buffer, buffer + sizeof(buffer), n);
-                if (error != std::errc{})
+                if (error != std::errc{}) {
                     throw std::runtime_error("ID formatting failed");
+                }
                 result.append(buffer, end);
             };
-            if constexpr (std::same_as<T, std::monostate> || std::same_as<T, TypedNull>)
+            if constexpr (std::same_as<T, std::monostate> || std::same_as<T, TypedNull>) {
                 result = "null";
-            else if constexpr (std::same_as<T, bool>)
+            } else if constexpr (std::same_as<T, bool>) {
                 result = item ? "b:true" : "b:false";
-            else if constexpr (std::same_as<T, std::int64_t>) {
+            } else if constexpr (std::same_as<T, std::int64_t>) {
                 result = "i:";
                 integer(item);
             } else if constexpr (std::same_as<T, std::uint64_t>) {
@@ -43,10 +44,11 @@ String list_id_key(Memory r, const Value& value) {
             } else if constexpr (std::same_as<T, Timestamp>) {
                 result = "ts:";
                 integer(item.as_millis());
-            } else if constexpr (std::same_as<T, Value::Object>)
+            } else if constexpr (std::same_as<T, Value::Object>) {
                 result = "object";
-            else if constexpr (std::same_as<T, Value::List>)
+            } else if constexpr (std::same_as<T, Value::List>) {
                 result = "list";
+            }
             return result;
         },
         value.data);

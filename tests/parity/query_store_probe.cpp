@@ -21,8 +21,9 @@ static std::span<const Json> items(const Json& j, std::string_view key) {
 
 static Json strings(Memory r, const Vector<String>& names) {
     Json::Array out(r);
-    for (const auto& name : names)
+    for (const auto& name : names) {
         out.emplace_back(name);
+    }
     return Json(r, out);
 }
 
@@ -30,8 +31,9 @@ static Vector<CompactRow> rows_in(Memory r, const Json& j) {
     Vector<CompactRow> rows(r);
     for (const auto& input : std::get<Json::Array>(j.data)) {
         Record row(r);
-        for (const auto& [key, v] : std::get<Json::Object>(input.data))
+        for (const auto& [key, v] : std::get<Json::Object>(input.data)) {
             row.emplace(String(key, r), value(r, v));
+        }
         rows.emplace_back(row);
     }
     return rows;
@@ -41,8 +43,9 @@ static Json rows_out(Memory r, const Vector<CompactRow>& rows) {
     Json::Array out(r);
     for (const auto& row : rows) {
         auto j = detail::model_json(r);
-        for (const auto& key : row.keys())
+        for (const auto& key : row.keys()) {
             detail::model_put(j, key, detail::debug_value(r, *row.get(key)));
+        }
         out.emplace_back(std::move(j));
     }
     return Json(r, out);
@@ -83,8 +86,9 @@ static Json cursor_out(Memory r, const ContinuousPageCursor& c) {
 static RetainedIdSet ids_in(Memory r, const Json& j) {
     RetainedIdSet ids(std::allocator_arg, Allocator(r));
     ids.query_key = text(field(j, "key"));
-    for (const auto& n : items(j, "ids"))
+    for (const auto& n : items(j, "ids")) {
         ids.ids.push_back(number(n));
+    }
     ids.expires_at = expiry(j);
     return ids;
 }
@@ -93,8 +97,9 @@ static Json ids_out(Memory r, const RetainedIdSet& ids) {
     auto out = detail::model_json(r);
     detail::model_put(out, "key", ids.query_key);
     Json::Array values(r);
-    for (auto n : ids.ids)
+    for (auto n : ids.ids) {
         values.emplace_back(n);
+    }
     detail::model_put(out, "ids", values);
     detail::model_put(out, "expires", ids.expires_at.unix_seconds());
     detail::model_put(out, "nanos", ids.expires_at.subsec_nanos());
@@ -134,22 +139,24 @@ static Json evaluate(UserContext& c, const Json& j) {
             } else if (op == "get") {
                 auto rows = cache.get(r, key, number(field(step, "age")));
                 detail::model_put(out, "value", rows ? rows_out(r, *rows) : Json(r));
-            } else if (op == "age")
+            } else if (op == "age") {
                 detail::QueryStoreAccess::age(cache, key, signed_number(field(step, "millis")));
-            else if (op == "clear")
+            } else if (op == "clear") {
                 cache.clear();
-            else
+            } else {
                 cache.invalidate_namespace(key);
+            }
             detail::model_put(out, "keys", strings(r, detail::QueryStoreAccess::keys(r, cache)));
             detail::model_put(out, "namespace", cache.name_space());
         } else if (mode == "cursor") {
             if (op == "get") {
                 auto& result = cursors.get(r, key, number(field(step, "offset"))).wait();
-                if (!result)
+                if (!result) {
                     detail::model_put(out, "error", result.error());
-                else
+                } else {
                     detail::model_put(
                         out, "value", result.value() ? cursor_out(r, *result.value()) : Json(r));
+                }
             } else {
                 auto* work =
                     op == "put" ? &cursors.put(r, cursor_in(r, step)) : &cursors.invalidate(r, key);
@@ -157,26 +164,29 @@ static Json evaluate(UserContext& c, const Json& j) {
                     cancel && std::get<bool>(cancel->data)) {
                     work->cancel();
                     detail::model_put(out, "cancelled", true);
-                } else if (auto& result = work->wait(); !result)
+                } else if (auto& result = work->wait(); !result) {
                     detail::model_put(out, "error", result.error());
+                }
             }
             detail::model_put(out, "keys", strings(r, detail::QueryStoreAccess::keys(r, cursors)));
         } else if (mode == "ids") {
             if (op == "get") {
                 auto& result = ids.get(r, key).wait();
-                if (!result)
+                if (!result) {
                     detail::model_put(out, "error", result.error());
-                else
+                } else {
                     detail::model_put(
                         out, "value", result.value() ? ids_out(r, *result.value()) : Json(r));
+                }
             } else {
                 auto* work = op == "put" ? &ids.put(r, ids_in(r, step)) : &ids.invalidate(r, key);
                 if (auto* cancel = optional(step, "cancel");
                     cancel && std::get<bool>(cancel->data)) {
                     work->cancel();
                     detail::model_put(out, "cancelled", true);
-                } else if (auto& result = work->wait(); !result)
+                } else if (auto& result = work->wait(); !result) {
                     detail::model_put(out, "error", result.error());
+                }
             }
             detail::model_put(out, "keys", strings(r, detail::QueryStoreAccess::keys(r, ids)));
             detail::model_put(out, "bytes", detail::QueryStoreAccess::bytes(ids));

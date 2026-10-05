@@ -31,10 +31,12 @@ static Json evaluate(Memory r, const Json& input) {
             legacy != object.end() && std::get<bool>(legacy->second.data)
                 ? BusinessIdDefinition::legacy_daily_sequence(r, "business_id", "订单", "orders")
                 : BusinessIdDefinition::daily_sequence(r, "business_id", "订单", "orders");
-        if (auto profile = object.find("profile"); profile != object.end())
+        if (auto profile = object.find("profile"); profile != object.end()) {
             definition.profile = text(profile->second);
-        if (auto digits = object.find("digits"); digits != object.end())
+        }
+        if (auto digits = object.find("digits"); digits != object.end()) {
             definition.preserve_digits = std::uint8_t(std::get<std::uint64_t>(digits->second.data));
+        }
         detail::model_put(result, "field_name", definition.field_name);
         detail::model_put(result, "profile", definition.profile);
         detail::model_put(result, "prefix", definition.prefix);
@@ -49,8 +51,9 @@ static Json evaluate(Memory r, const Json& input) {
             auto [end, ec] = std::to_chars(buffer, buffer + sizeof(buffer), range.value());
             (void)ec;
             detail::model_put(value, "ok", std::string_view(buffer, end));
-        } else
+        } else {
             value = error(r, range.error());
+        }
         detail::model_put(result, "range", value);
         return result;
     }
@@ -70,8 +73,9 @@ static Json evaluate(Memory r, const Json& input) {
             auto s = text(field(input, name));
             std::uint64_t n = 0;
             auto [end, ec] = std::from_chars(s.data(), s.data() + s.size(), n);
-            if (ec != std::errc{} || end != s.data() + s.size())
+            if (ec != std::errc{} || end != s.data() + s.size()) {
                 throw std::runtime_error("Invalid fixture number");
+            }
             return n;
         };
         BusinessIdScope scope(std::allocator_arg, Allocator(r), "", "", "", "");
@@ -85,8 +89,9 @@ static Json evaluate(Memory r, const Json& input) {
                             number("initial"),
                             number("maximum"));
         auto valid = plan.validate_allocation_range();
-        if (!valid)
+        if (!valid) {
             return error(r, valid.error());
+        }
         detail::model_put(result, "ok", true);
         return result;
     }
@@ -107,8 +112,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("Invalid fixture JSON");
+        }
         std::cout << evaluate(r, *input).dump(r) << '\n';
     }
 }

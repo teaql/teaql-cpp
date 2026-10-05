@@ -91,12 +91,14 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
         detail::model_put(seen, "capture", q.capture_execution_metadata);
         detail::model_put(seen, "debug", q.capture_debug_query);
         detail::model_put(seen, "observer", observer.has_value());
-        if (event && observer)
+        if (event && observer) {
             (*observer)(ExecutionMetadata::unrecorded_query(target, 99));
+        }
         using R = Result<QueryResult, String>;
-        if (failure)
+        if (failure) {
             return make_operation<R, Return>(target,
                                              R::err(target, String("fetch failed", target)));
+        }
         QueryResult result(
             std::allocator_arg, Allocator(target), ExecutionMetadata::unrecorded_query(target, 1));
         Record values(target);
@@ -120,8 +122,9 @@ static Json evaluate(UserContext& c, const Json& j) {
     auto& base = c.make<detail::RuntimeDataService<Spy, Mock>>(spy, executor);
     auto& q = c.make<SelectQuery>("Item");
     q.comment_text.emplace("comment", r);
-    if (flag(j, "trace"))
+    if (flag(j, "trace")) {
         q.trace_chain.emplace_back(TraceKind::Request, "Item", "trace");
+    }
     Json output = detail::model_json(r);
     auto collect = [&](const auto& result, bool loaded) {
         if (!result) {
@@ -130,26 +133,29 @@ static Json evaluate(UserContext& c, const Json& j) {
         }
         Json::Array rows(r);
         for (const auto& item : result.value()) {
-            if constexpr (std::same_as<std::decay_t<decltype(item)>, CompactRow>)
+            if constexpr (std::same_as<std::decay_t<decltype(item)>, CompactRow>) {
                 rows.emplace_back(detail::debug_value(r, *item.get("id")));
-            else
+            } else {
                 rows.emplace_back(detail::debug_value(r, item.id_value()));
+            }
         }
         detail::model_put(output, "rows", rows);
         detail::model_put(output, "loaded", loaded);
     };
     auto mode = text(field(j, "mode"));
-    if (mode == "all")
+    if (mode == "all") {
         collect(base.fetch_all(q).wait(), false);
-    else if (mode == "list")
+    } else if (mode == "list") {
         collect(base.fetch_smart_list(q).wait(), true);
-    else if (mode == "entities")
+    } else if (mode == "entities") {
         collect(base.fetch_entities<decoder_fixture::Item<>>(q).wait(), true);
-    else
+    } else {
         collect(base.fetch_enhanced_entities<decoder_fixture::Item<>>(q).wait(), true);
+    }
     Json::Array logs(r);
-    for (auto n : spy.logs)
+    for (auto n : spy.logs) {
         logs.emplace_back(n);
+    }
     detail::model_put(output, "logs", logs);
     detail::model_put(output, "request", mock.seen);
     return output;

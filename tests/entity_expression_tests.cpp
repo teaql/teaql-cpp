@@ -7,8 +7,9 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 struct NoDefaultAllocator {
@@ -54,8 +55,9 @@ struct HandModel : BaseEntityDefaults<T> {
     static Result<T, EntityError> from_compact_row(Memory r, CompactRow row) {
         using Outcome = Result<T, EntityError>;
         auto base = BaseEntityData::from_values_map(r, row.into_map(r));
-        if (!base)
+        if (!base) {
             return Outcome::err(r, std::move(base).error());
+        }
         T entity(std::allocator_arg, Allocator(r));
         entity.data = std::move(base).value();
         return Outcome::ok(r, std::move(entity));
@@ -116,8 +118,9 @@ struct Tracked : HandModel<Tracked> {
     }
 
     void on_loaded(AnyRef context) {
-        if (auto* value = context.get<LoadMarker>())
+        if (auto* value = context.get<LoadMarker>()) {
             marker = value->value;
+        }
     }
 
     bool is_field_loaded(std::string_view field) const {
@@ -342,11 +345,13 @@ static void empty_and_adapters() {
           "missing option, Value Null and TypedNull remain distinct");
     check(teaql_is_empty(std::optional<int>{}) && !teaql_is_empty(std::optional<String>(String(r))),
           "Some(empty) is not empty for Option");
-    for (auto text : {"null", "\"\"", "[]", "{}"})
+    for (auto text : {"null", "\"\"", "[]", "{}"}) {
         check(teaql_is_empty(Value(r, *Json::parse(r, text))), "empty JSON cases");
-    for (auto text : {"0", "false", "[null]", "{\"a\":null}"})
+    }
+    for (auto text : {"0", "false", "[null]", "{\"a\":null}"}) {
         check(!teaql_is_empty(Value(r, *Json::parse(r, text))),
               "nonempty JSON scalars and collections");
+    }
     auto text = SafeExpression<String, String>::value(r, String("teaql", r));
     int empties = 0, nonempty = 0;
     text.when_is_empty([&] {
@@ -400,8 +405,9 @@ struct Append {
         : suffix(std::move(other.suffix)), alive(std::exchange(other.alive, nullptr)) {}
 
     ~Append() {
-        if (alive)
+        if (alive) {
             --*alive;
+        }
     }
 
     String operator()(String input, Memory r) const {
@@ -418,8 +424,9 @@ struct LimitedResource : std::pmr::memory_resource {
     explicit LimitedResource(std::size_t count) : remaining(count) {}
 
     void* do_allocate(std::size_t n, std::size_t a) override {
-        if (!remaining)
+        if (!remaining) {
             throw std::bad_alloc();
+        }
         auto* p = std::pmr::new_delete_resource()->allocate(n, a);
         --remaining;
         ++live;
@@ -506,8 +513,9 @@ struct Relations {
 
     static Result<Relations, EntityError> extract_from_values(Memory r, const CompactRow& row) {
         using Outcome = Result<Relations, EntityError>;
-        if (auto value = row.get("parent"))
+        if (auto value = row.get("parent")) {
             return Outcome::ok(r, Relations(std::allocator_arg, Allocator(r), *value));
+        }
         return Outcome::err(
             r, EntityError(std::allocator_arg, Allocator(r), "Example", "missing parent"));
     }

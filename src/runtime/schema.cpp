@@ -20,26 +20,30 @@ public:
     std::optional<RuntimeSchemaResult> poll(WakeSignal& wake) {
         if (phase_ == Phase::Provider) {
             if (!child_) {
-                if (!context_.schema_provider_)
+                if (!context_.schema_provider_) {
                     return RuntimeSchemaResult::err(
                         resource_, RuntimeError::schema(resource_, "missing schema provider"));
+                }
                 child_ = &context_.schema_provider_->ensure_schema(context_, invocation_);
                 check_child();
             }
             auto result = poll_child(wake);
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return result;
+            }
             phase_ = Phase::Business;
         }
         if (phase_ == Phase::Business) {
             if (auto* service = context_.get_resource<BusinessIdSchemaService>()) {
                 auto result = service->ensure_schema(resource_, context_);
-                if (!result)
+                if (!result) {
                     return RuntimeSchemaResult::err(
                         resource_,
                         RuntimeError::schema(resource_, result.error().to_string(resource_)));
+                }
             }
             phase_ = Phase::Bootstrap;
         }
@@ -60,8 +64,9 @@ public:
                 });
                 return {};
             }
-            if (!*result)
+            if (!*result) {
                 return result;
+            }
             ++index_;
         }
         return RuntimeSchemaResult::ok(resource_, {});
@@ -81,8 +86,9 @@ public:
             if (phase_ == Phase::Bootstrap) {
                 Scope scope(context_.global_.generated_schema_bootstrap_);
                 child_->cancel();
-            } else
+            } else {
                 child_->cancel();
+            }
             child_ = nullptr;
         }
         release_borrow();
@@ -113,8 +119,9 @@ private:
     std::optional<RuntimeSchemaResult> poll_child(WakeSignal& wake) {
         forwarding_.attach(child_->wake_signal(), wake);
         auto* result = child_->poll();
-        if (!result)
+        if (!result) {
             return {};
+        }
         auto copy = clone_in(resource_, *result);
         forwarding_.reset();
         child_ = nullptr;

@@ -4,8 +4,9 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 struct NoDefaultAllocator {
@@ -208,8 +209,9 @@ struct FailingResource : std::pmr::memory_resource {
     std::size_t bytes = 0;
 
     void* do_allocate(std::size_t n, std::size_t align) override {
-        if (fail)
+        if (fail) {
             throw std::bad_alloc();
+        }
         auto p = std::pmr::new_delete_resource()->allocate(n, align);
         bytes += n;
         return p;

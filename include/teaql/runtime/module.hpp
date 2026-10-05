@@ -69,8 +69,9 @@ public:
     }
 
     RuntimeModule& generated_schema_bootstrap(GeneratedSchemaBootstrap callback) & {
-        if (!callback)
+        if (!callback) {
             throw std::invalid_argument("Schema bootstrap callback is required");
+        }
         bootstraps_.push_back(callback);
         return *this;
     }
@@ -88,8 +89,9 @@ public:
     }
 
     RuntimeModule& initial_graphs(std::span<const GraphNode> graphs) & {
-        for (const auto& graph : graphs)
+        for (const auto& graph : graphs) {
             initial_graphs_.emplace_back(graph);
+        }
         return *this;
     }
 
@@ -99,8 +101,9 @@ public:
     }
 
     RuntimeModule& root_graphs(std::span<const GraphNode> graphs) & {
-        for (const auto& graph : graphs)
+        for (const auto& graph : graphs) {
             root_graphs_.emplace_back(graph);
+        }
         return *this;
     }
 

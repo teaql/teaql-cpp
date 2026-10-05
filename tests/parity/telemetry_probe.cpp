@@ -53,29 +53,32 @@ static Json model(Memory r, const Json& j) {
     for (const auto& a : std::get<Json::Array>(field(j, "attributes").data)) {
         auto kind = text(field(a, "kind")), key = text(field(a, "key"));
         const auto& v = field(a, "value");
-        if (kind == "string")
+        if (kind == "string") {
             op.attribute(key, text(v));
-        else if (kind == "bool")
+        } else if (kind == "bool") {
             op.attribute(key, std::get<bool>(v.data));
-        else if (kind == "u64")
+        } else if (kind == "u64") {
             op.attribute(key, number<std::uint64_t>(v));
-        else if (kind == "float") {
+        } else if (kind == "float") {
             std::uint64_t bits = 0;
             auto s = text(v);
             std::from_chars(s.data(), s.data() + s.size(), bits, 16);
             op.attribute(key, std::bit_cast<double>(bits));
-        } else
+        } else {
             op.attribute(key, number<std::int64_t>(v));
+        }
     }
     auto out = detail::model_json(r), attrs = detail::model_json(r);
-    for (const auto& [k, v] : op.attributes)
+    for (const auto& [k, v] : op.attributes) {
         detail::model_put(attrs, k, attribute_json(r, v));
+    }
     detail::model_put(out, "family", op.family);
     detail::model_put(out, "name", op.name);
     detail::model_put(out, "attributes", attrs);
     Json::Array categories(r);
-    for (const auto& e : std::get<Json::Array>(field(j, "errors").data))
+    for (const auto& e : std::get<Json::Array>(field(j, "errors").data)) {
         categories.emplace_back(runtime_error_category(text(e)));
+    }
     detail::model_put(out, "categories", categories);
     return out;
 }
@@ -93,24 +96,29 @@ static void activate(Shared& state, std::string_view behavior, FunctionRef<void(
         }
     } guard{state};
 
-    if (behavior == "before")
+    if (behavior == "before") {
         throw std::runtime_error("adapter");
-    if (behavior == "skip")
+    }
+    if (behavior == "skip") {
         return;
+    }
     if (behavior == "swallow" || behavior == "swallow_after") {
         try {
             callback();
         } catch (...) {
         }
-        if (behavior == "swallow_after")
+        if (behavior == "swallow_after") {
             throw std::runtime_error("adapter");
+        }
         return;
     }
     callback();
-    if (behavior == "twice")
+    if (behavior == "twice") {
         callback();
-    if (behavior == "after")
+    }
+    if (behavior == "after") {
         throw std::runtime_error("adapter");
+    }
 }
 
 struct Scope final : RuntimeTelemetryScope {
@@ -130,14 +138,16 @@ struct Scope final : RuntimeTelemetryScope {
 
     void success(const RuntimeAttributes& attrs) override {
         state.note("success");
-        if (fail)
+        if (fail) {
             throw std::runtime_error("finish");
+        }
     }
 
     void failure(std::string_view type) override {
         state.note(type);
-        if (fail)
+        if (fail) {
             throw std::runtime_error("finish");
+        }
     }
 };
 
@@ -172,8 +182,9 @@ struct Adapter final : RuntimeTelemetry {
 
     ContextBox<RuntimeTelemetryScope>& start(Memory r, const RuntimeOperation&) const override {
         state.note("start");
-        if (create_fail)
+        if (create_fail) {
             throw std::runtime_error("create");
+        }
         return detail::resource_arena(r).make_resource<ContextBox<RuntimeTelemetryScope>>(
             std::in_place_type<Scope>, state, behavior, finish_fail);
     }
@@ -181,8 +192,9 @@ struct Adapter final : RuntimeTelemetry {
     ContextBox<RuntimeTelemetryPropagationContext>&
     extract_context(Memory r, const RuntimeContextCarrier&) const override {
         state.note("extract");
-        if (create_fail)
+        if (create_fail) {
             throw std::runtime_error("create");
+        }
         return detail::resource_arena(r)
             .make_resource<ContextBox<RuntimeTelemetryPropagationContext>>(
                 std::in_place_type<Prop>, state, behavior);
@@ -201,10 +213,12 @@ static Json runs(Memory r, S& scope, Shared& state, const Json& action) {
         note += state.active ? ":inside" : ":outside";
         state.note(note);
         auto value = text(sequence[std::min<std::size_t>(index, sequence.size() - 1)]);
-        if (value == "panic")
+        if (value == "panic") {
             throw std::runtime_error("business");
-        if (value == "pending")
+        }
+        if (value == "pending") {
             return {};
+        }
         return count;
     };
     for (unsigned i = 0; i < number<unsigned>(field(action, "polls")); ++i) {
@@ -248,28 +262,32 @@ static Json flow(GlobalContext& global, const Json& input) {
     if (prop) {
         RuntimeContextCarrier carrier(r);
         auto& scope = extract_runtime_context(r, user->runtime_telemetry(), carrier);
-        for (const auto& action : std::get<Json::Array>(field(input, "actions").data))
-            if (text(field(action, "op")) == "run")
+        for (const auto& action : std::get<Json::Array>(field(input, "actions").data)) {
+            if (text(field(action, "op")) == "run") {
                 results.emplace_back(runs(g, scope, state, action));
+            }
+        }
     } else {
         RuntimeOperation operation(std::allocator_arg, Allocator(r), "query", "Order.list");
         auto& scope = user->start_runtime_operation(operation);
         for (const auto& action : std::get<Json::Array>(field(input, "actions").data)) {
             auto op = text(field(action, "op"));
-            if (op == "run")
+            if (op == "run") {
                 results.emplace_back(runs(g, scope, state, action));
-            else if (op == "success") {
+            } else if (op == "success") {
                 RuntimeAttributes attrs(r);
                 scope.success(attrs);
-            } else
+            } else {
                 scope.failure("native_error");
+            }
         }
     }
     user.reset();
     auto out = detail::model_json(g);
     Json::Array notes(g);
-    for (const auto& n : state.notes)
+    for (const auto& n : state.notes) {
         notes.emplace_back(n);
+    }
     detail::model_put(out, "notes", notes);
     detail::model_put(out, "results", results);
     detail::model_put(out, "noop", is_noop);

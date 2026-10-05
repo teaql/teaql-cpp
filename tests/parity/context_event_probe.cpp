@@ -39,10 +39,12 @@ struct Raw final : RawAuditEventSink {
         s.note("raw");
         s.raw = detail::clone_in(s.r, e);
         auto behavior = text(field(s.input, "raw"));
-        if (behavior == "throw")
+        if (behavior == "throw") {
             throw std::runtime_error("sink panic");
-        if (behavior == "error")
+        }
+        if (behavior == "error") {
             return Outcome::err(r, RuntimeError::event(r, "raw failed"));
+        }
         return Outcome::ok(r, {});
     }
 };
@@ -56,10 +58,12 @@ struct Safe final : SafeAuditEventSink {
         s.note("safe");
         s.safe = detail::clone_in(s.r, e);
         auto behavior = text(field(s.input, "safe"));
-        if (behavior == "throw")
+        if (behavior == "throw") {
             throw std::runtime_error("sink panic");
-        if (behavior == "error")
+        }
+        if (behavior == "error") {
             return Outcome::err(r, RuntimeError::event(r, "safe failed"));
+        }
         return Outcome::ok(r, {});
     }
 };
@@ -95,8 +99,9 @@ struct Adapter final : RuntimeTelemetry {
 
     ContextBox<RuntimeTelemetryScope>& start(Memory target,
                                              const RuntimeOperation& op) const override {
-        if (op.family != "audit" || op.name != "Order.event")
+        if (op.family != "audit" || op.name != "Order.event") {
             throw std::logic_error("operation labels");
+        }
         s.note("start");
         return detail::resource_arena(target).make_resource<ContextBox<RuntimeTelemetryScope>>(
             std::in_place_type<Scope>, s);
@@ -128,20 +133,23 @@ struct Send {
         auto e = RawAuditEvent::created(r, "Order", values);
         e.kind = static_cast<RawAuditEventKind>(std::get<std::uint64_t>(field(j, "kind").data));
         auto version = text(field(j, "version"));
-        if (version == "missing")
+        if (version == "missing") {
             e.new_values.reset();
-        else if (version == "empty")
+        } else if (version == "empty") {
             e.new_values->clear();
-        else if (version == "null")
+        } else if (version == "null") {
             e.new_values->insert_or_assign(String("version", r), Value(r));
-        else if (version == "text")
+        } else if (version == "text") {
             e.new_values->insert_or_assign(String("version", r), Value(r, "bad"));
-        if (!std::holds_alternative<std::monostate>(field(j, "comment").data))
+        }
+        if (!std::holds_alternative<std::monostate>(field(j, "comment").data)) {
             e.trace_chain.emplace_back(TraceKind::Comment, "Order", text(field(j, "comment")));
+        }
         e.mutation_governance = snapshot(r, "forged");
-        if (flag(j, "identity"))
+        if (flag(j, "identity")) {
             e.bootstrap_audit.emplace(
                 std::allocator_arg, Allocator(r), "caller", "caller", "caller", 99, 1);
+        }
         auto result = c.send_event(e);
         s.unchanged = e.mutation_governance->execution_id == "forged";
         return result;
@@ -231,8 +239,9 @@ static Json evaluate(GlobalContext& global, const Json& j) {
     auto after = std::chrono::system_clock::now();
     auto out = detail::model_json(r);
     Json::Array notes(r);
-    for (auto& n : s.notes)
+    for (auto& n : s.notes) {
         notes.emplace_back(n);
+    }
     detail::model_put(out, "notes", notes);
     detail::model_put(out, "outcome", s.outcome);
     detail::model_put(out, "outside", !detail::current_mutation_governance(*user));
@@ -240,10 +249,11 @@ static Json evaluate(GlobalContext& global, const Json& j) {
     Json raw(r);
     if (s.raw) {
         raw = detail::model_json(r);
-        if (s.raw->mutation_governance)
+        if (s.raw->mutation_governance) {
             detail::model_put(raw, "governance", s.raw->mutation_governance->execution_id);
-        else
+        } else {
             detail::model_put(raw, "governance", Json(r));
+        }
         Json b(r);
         if (s.raw->bootstrap_audit) {
             const auto& v = *s.raw->bootstrap_audit;
@@ -271,10 +281,11 @@ static Json evaluate(GlobalContext& global, const Json& j) {
     Json safe(r);
     if (s.safe) {
         safe = detail::model_json(r);
-        if (s.safe->mutation_governance)
+        if (s.safe->mutation_governance) {
             detail::model_put(safe, "governance", s.safe->mutation_governance->execution_id);
-        else
+        } else {
             detail::model_put(safe, "governance", Json(r));
+        }
         Json::Array fields(r);
         for (const auto& f : s.safe->fields) {
             auto item = detail::model_json(r);

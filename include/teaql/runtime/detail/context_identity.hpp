@@ -25,15 +25,18 @@ inline bool identity_utf8(std::string_view s) {
                      : b >= 0xe0 && b <= 0xef ? 3
                      : b >= 0xf0 && b <= 0xf4 ? 4
                                               : 0;
-        if (!n || n > s.size() - i)
+        if (!n || n > s.size() - i) {
             return false;
+        }
         for (unsigned k = 1; k < n; ++k) {
             auto c = static_cast<unsigned char>(s[i + k]);
-            if ((c & 0xc0) != 0x80)
+            if ((c & 0xc0) != 0x80) {
                 return false;
+            }
             if (k == 1 && ((b == 0xe0 && c < 0xa0) || (b == 0xed && c >= 0xa0) ||
-                           (b == 0xf0 && c < 0x90) || (b == 0xf4 && c >= 0x90)))
+                           (b == 0xf0 && c < 0x90) || (b == 0xf4 && c >= 0x90))) {
                 return false;
+            }
         }
         i += n;
     }
@@ -46,8 +49,9 @@ inline String default_user_identifier(Memory r) {
         return v && identity_utf8(v) ? v : nullptr;
     };
     auto* user = valid("USER");
-    if (!user)
+    if (!user) {
         user = valid("USERNAME");
+    }
     String result(user ? user : "main", r);
     auto append = [&](auto n) {
         char b[32];

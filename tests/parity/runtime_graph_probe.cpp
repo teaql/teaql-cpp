@@ -12,35 +12,40 @@ static unsigned integer(const Json& j) {
 
 static Vector<String> strings(Memory r, const Json& j) {
     Vector<String> out(r);
-    for (const auto& s : std::get<Json::Array>(j.data))
+    for (const auto& s : std::get<Json::Array>(j.data)) {
         out.emplace_back(text(s));
+    }
     return out;
 }
 
 static Record record(Memory r, const Json& j) {
     Record out(r);
-    for (const auto& [k, v] : std::get<Json::Object>(j.data))
+    for (const auto& [k, v] : std::get<Json::Object>(j.data)) {
         out.emplace(String(k, r), value(r, v));
+    }
     return out;
 }
 
 static Json record_out(Memory r, const Record& values) {
     auto out = detail::model_json(r);
-    for (const auto& [k, v] : values)
+    for (const auto& [k, v] : values) {
         detail::model_put(out, k, detail::debug_value(r, v));
+    }
     return out;
 }
 
 static Json fields_out(Memory r, std::span<const String> fields) {
     Json::Array result(r);
-    for (const auto& f : fields)
+    for (const auto& f : fields) {
         result.emplace_back(f);
+    }
     return Json(r, result);
 }
 
 static std::optional<EntitySnapshot> old_values(Memory r, const Json& j) {
-    if (std::holds_alternative<std::monostate>(j.data))
+    if (std::holds_alternative<std::monostate>(j.data)) {
         return {};
+    }
     EntitySnapshot snapshot(r);
     snapshot.fields = record(r, j);
     return snapshot;
@@ -50,18 +55,21 @@ static GraphNode node(Memory r, const Json& j) {
     GraphNode n(std::allocator_arg, Allocator(r), text(field(j, "entity")));
     n.operation = static_cast<GraphOperation>(integer(field(j, "operation")));
     n.values.fields = record(r, field(j, "values"));
-    if (!std::holds_alternative<std::monostate>(field(j, "comment").data))
+    if (!std::holds_alternative<std::monostate>(field(j, "comment").data)) {
         n.set_comment(text(field(j, "comment")));
+    }
     if (!std::holds_alternative<std::monostate>(field(j, "dirty").data)) {
         n.dirty_fields.emplace(r);
-        for (const auto& v : std::get<Json::Array>(field(j, "dirty").data))
+        for (const auto& v : std::get<Json::Array>(field(j, "dirty").data)) {
             n.dirty_fields->emplace(text(v));
+        }
     }
     n.original_values = old_values(r, field(j, "old"));
     for (const auto& [name, children] : std::get<Json::Object>(field(j, "relations").data)) {
         n.with_relations(name, {});
-        for (const auto& child : std::get<Json::Array>(children.data))
+        for (const auto& child : std::get<Json::Array>(children.data)) {
             n.relation(name, node(r, child));
+        }
     }
     return n;
 }
@@ -76,8 +84,9 @@ static Json node_out(Memory r, const GraphNode& n) {
     Json dirty(r);
     if (n.dirty_fields) {
         Json::Array entries(r);
-        for (const auto& f : *n.dirty_fields)
+        for (const auto& f : *n.dirty_fields) {
             entries.emplace_back(f);
+        }
         dirty = Json(r, entries);
     }
     detail::model_put(out, "dirty", dirty);
@@ -87,8 +96,9 @@ static Json node_out(Memory r, const GraphNode& n) {
     auto relations = detail::model_json(r);
     for (const auto& [name, children] : n.relations) {
         Json::Array list(r);
-        for (const auto& child : children)
+        for (const auto& child : children) {
             list.emplace_back(node_out(r, child));
+        }
         detail::model_put(relations, name, list);
     }
     detail::model_put(out, "relations", relations);
@@ -101,8 +111,9 @@ static std::string_view kind(GraphMutationKind k) {
 }
 
 static Json trace_out(Memory r, const TraceScopeToken* t) {
-    if (!t)
+    if (!t) {
         return Json(r);
+    }
     auto out = detail::model_json(r);
     detail::model_put(out, "index", std::to_string(t->node_index));
     Json::Array chain(r);
@@ -132,16 +143,18 @@ static Json item_out(Memory r, const GraphMutationPlanItem& i) {
 static Json plan_out(Memory r, const GraphMutationPlan& p) {
     auto out = detail::model_json(r);
     Json::Array items(r), batches(r), counts(r);
-    for (const auto& i : p.items)
+    for (const auto& i : p.items) {
         items.emplace_back(item_out(r, i));
+    }
     for (const auto& b : p.batches) {
         auto j = detail::model_json(r);
         detail::model_put(j, "entity", b.entity);
         detail::model_put(j, "kind", kind(b.kind));
         detail::model_put(j, "fields", fields_out(r, b.update_fields));
         Json::Array entries(r);
-        for (const auto& i : b.items)
+        for (const auto& i : b.items) {
             entries.emplace_back(item_out(r, i));
+        }
         detail::model_put(j, "items", entries);
         batches.emplace_back(std::move(j));
     }
@@ -179,8 +192,9 @@ static Json evaluate(UserContext& c, const Json& j) {
     }
     GraphMutationPlan p(std::allocator_arg, Allocator(r));
     p.next_item_index = number<std::uint64_t>(field(j, "start"));
-    if (!std::holds_alternative<std::monostate>(field(j, "root").data))
+    if (!std::holds_alternative<std::monostate>(field(j, "root").data)) {
         p.planned_root = node(r, field(j, "root"));
+    }
     const TraceScopeToken* trace = nullptr;
     std::uint64_t index = 0;
     for (const auto& t : std::get<Json::Array>(field(j, "trace").data)) {
@@ -211,12 +225,13 @@ static Json evaluate(UserContext& c, const Json& j) {
             } catch (const std::overflow_error&) {
                 overflow = true;
             }
-        } else if (op == "rebuild")
+        } else if (op == "rebuild") {
             p.rebuild_batches();
-        else if (op == "clear_items")
+        } else if (op == "clear_items") {
             p.items.clear();
-        else if (op == "clear_batches")
+        } else if (op == "clear_batches") {
             p.batches.clear();
+        }
         auto snapshot = detail::clone_in(r, p);
         auto state = detail::model_json(r);
         detail::model_put(state, "plan", plan_out(r, snapshot));

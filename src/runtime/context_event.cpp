@@ -16,13 +16,15 @@ Result<std::monostate, RuntimeError> UserContext::send_event(const RawAuditEvent
         const Value* version = nullptr;
         if (event.new_values) {
             auto found = event.new_values->find(std::string_view("version"));
-            if (found != event.new_values->end())
+            if (found != event.new_values->end()) {
                 version = &found->second;
+            }
         }
         if (!version) {
             auto found = event.values.find(std::string_view("version"));
-            if (found != event.values.end())
+            if (found != event.values.end()) {
                 version = &found->second;
+            }
         }
         auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(
                           std::chrono::system_clock::now().time_since_epoch())
@@ -54,8 +56,9 @@ Result<std::monostate, RuntimeError> UserContext::send_event(const RawAuditEvent
     auto send = [&]() -> R {
         if (event_sink_) {
             auto result = event_sink_->on_event(r, *this, event);
-            if (!result)
+            if (!result) {
                 return R::err(r, std::move(result).error());
+            }
         }
         if (custom_event_sink_) {
             auto* descriptor = entity(event.entity);
@@ -65,17 +68,19 @@ Result<std::monostate, RuntimeError> UserContext::send_event(const RawAuditEvent
                            : std::span<const String>{},
                 descriptor ? descriptor->audit_value_max_len : std::nullopt);
             auto result = custom_event_sink_->on_safe_event(r, *this, safe);
-            if (!result)
+            if (!result) {
                 return R::err(r, std::move(result).error());
+            }
         }
         global_.log_manager().write_audit_log(r, event);
         return R::ok(r, {});
     };
     auto result = send();
-    if (result)
+    if (result) {
         scope.success(RuntimeAttributes(r));
-    else
+    } else {
         scope.failure("audit_error");
+    }
     return result;
 }
 }

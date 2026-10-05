@@ -93,13 +93,15 @@ public:
         auto command = detail::clone_in(r, source);
         if (auto b = behavior()) {
             auto result = b->get().before_update(r, context(), command);
-            if (!result)
+            if (!result) {
                 return R::err(r, std::move(result).error());
+            }
         }
         if (auto* policy = detail::ContextEntityAccess::request_policy(context())) {
             auto result = policy->enforce_update(r, context(), command);
-            if (!result)
+            if (!result) {
                 return R::err(r, std::move(result).error());
+            }
         }
         return R::ok(r, std::move(command));
     }
@@ -119,11 +121,14 @@ public:
         auto r = memory_resource();
         using R = Result<SelectQuery, RuntimeError>;
         auto plans = relation_plans();
-        if (!plans)
+        if (!plans) {
             return R::err(r, std::move(plans).error());
-        for (const auto& plan : plans.value())
-            if (plan.relation_name == relation)
+        }
+        for (const auto& plan : plans.value()) {
+            if (plan.relation_name == relation) {
                 return R::ok(r, detail::query_for_relation_plan(context(), plan, parents, false));
+            }
+        }
         return R::err(r, RuntimeError::missing_relation(r, entity_, relation));
     }
 
@@ -140,8 +145,9 @@ private:
     }
 
     std::optional<EntityBehaviorBorrow> behavior() const {
-        if (detail::is_generated_schema_bootstrap(context()))
+        if (detail::is_generated_schema_bootstrap(context())) {
             return {};
+        }
         return context().entity_data_service_behavior(entity_);
     }
 
@@ -153,9 +159,10 @@ private:
         auto r = memory_resource();
         EntityDataService scoped(
             std::allocator_arg, Allocator(r), context(), entity, data_service_.executor);
-        if (query_log_intent_)
+        if (query_log_intent_) {
             scoped.query_log_intent_ =
                 &context().template make<SqlIntentRedactions>(*query_log_intent_);
+        }
         return scoped;
     }
 
@@ -163,8 +170,9 @@ private:
         auto scoped = scoped_data_service(entity_);
         TraceChain trace(trace_context_, memory_resource());
         scoped.trace_context_.swap(trace);
-        if (!scoped.query_log_intent_)
+        if (!scoped.query_log_intent_) {
             scoped.query_log_intent_ = &context().template make<SqlIntentRedactions>();
+        }
         return scoped;
     }
 
@@ -173,8 +181,9 @@ private:
     }
 
     std::optional<ExecutionObserver> query_diagnostic_observer() const {
-        if (!data_service_.metadata.capture_execution_metadata())
+        if (!data_service_.metadata.capture_execution_metadata()) {
             return {};
+        }
         const UserContext* owner = &context();
         auto* intent = query_log_intent_;
         return ExecutionObserver(std::allocator_arg,
@@ -190,20 +199,23 @@ Result<ResourceBorrow<EntityDataService<E>>, ContextError>
 UserContext::entity_data_service(std::string_view entity) const {
     auto r = memory_resource();
     using R = Result<ResourceBorrow<EntityDataService<E>>, ContextError>;
-    if (!has_entity_data_service(entity))
+    if (!has_entity_data_service(entity)) {
         return R::err(r,
                       ContextError(std::allocator_arg,
                                    Allocator(r),
                                    ContextError::Kind::MissingEntityDataService,
                                    entity));
-    if (!detail::ContextEntityAccess::has_metadata(*this))
+    }
+    if (!detail::ContextEntityAccess::has_metadata(*this)) {
         return R::err(
             r,
             ContextError(
                 std::allocator_arg, Allocator(r), ContextError::Kind::MissingResource, "metadata"));
+    }
     auto executor = detail::ContextEntityAccess::require_executor<E>(*this);
-    if (!executor)
+    if (!executor) {
         return R::err(r, std::move(executor).error());
+    }
     auto& service = make<EntityDataService<E>>(*this, entity, executor.value());
     return R::ok(r,
                  ResourceBorrow<EntityDataService<E>>(
@@ -277,26 +289,35 @@ struct EntityDataServiceAccess {
         auto r = service.memory_resource();
         auto requested =
             build_relation_plans_from_loads(service.context(), query.entity, query.relations);
-        if (!requested)
+        if (!requested) {
             return R::err(r, std::move(requested).error());
+        }
         auto behaviors = service.relation_plans();
-        if (!behaviors)
+        if (!behaviors) {
             return R::err(r, std::move(behaviors).error());
+        }
         auto supported = [&](auto&& self, const RelationLoadPlan& plan) -> bool {
             if (!ContextEntityAccess::has_entity_graph_decoder(service.context(),
-                                                               plan.target_entity))
+                                                               plan.target_entity)) {
                 return false;
-            for (const auto& child : plan.children)
-                if (!self(self, child))
+            }
+            for (const auto& child : plan.children) {
+                if (!self(self, child)) {
                     return false;
+                }
+            }
             return true;
         };
-        for (const auto& plan : requested.value())
-            if (!supported(supported, plan))
+        for (const auto& plan : requested.value()) {
+            if (!supported(supported, plan)) {
                 return R::ok(r, {});
-        for (const auto& plan : behaviors.value())
-            if (!supported(supported, plan))
+            }
+        }
+        for (const auto& plan : behaviors.value()) {
+            if (!supported(supported, plan)) {
                 return R::ok(r, {});
+            }
+        }
         return R::ok(r,
                      Plans(std::allocator_arg,
                            Allocator(r),

@@ -28,14 +28,16 @@ static Value input_value(Memory r, const Json& j) {
     }
     if (kind == "object") {
         Record values(r);
-        for (const auto& [k, v] : std::get<Json::Object>(field(j, "value").data))
+        for (const auto& [k, v] : std::get<Json::Object>(field(j, "value").data)) {
             values.emplace(k, input_value(r, v));
+        }
         return Value(r, values);
     }
     if (kind == "list") {
         Value::List values(r);
-        for (const auto& v : std::get<Json::Array>(field(j, "value").data))
+        for (const auto& v : std::get<Json::Array>(field(j, "value").data)) {
             values.emplace_back(input_value(r, v));
+        }
         return Value(r, values);
     }
     return value(r, j);
@@ -43,21 +45,24 @@ static Value input_value(Memory r, const Json& j) {
 
 static Record record(Memory r, const Json& j) {
     Record values(r);
-    for (const auto& [k, v] : std::get<Json::Object>(j.data))
+    for (const auto& [k, v] : std::get<Json::Object>(j.data)) {
         values.emplace(k, input_value(r, v));
+    }
     return values;
 }
 
 static Vector<String> strings(Memory r, const Json& j) {
     Vector<String> out(r);
-    for (const auto& s : std::get<Json::Array>(j.data))
+    for (const auto& s : std::get<Json::Array>(j.data)) {
         out.emplace_back(text(s));
+    }
     return out;
 }
 
 static std::optional<Record> old_record(Memory r, const Json& j) {
-    if (std::holds_alternative<std::monostate>(j.data))
+    if (std::holds_alternative<std::monostate>(j.data)) {
         return {};
+    }
     return record(r, j);
 }
 
@@ -81,8 +86,9 @@ static std::string_view kind(RawAuditEventKind k) {
 
 static Json record_out(Memory r, const Record& values) {
     auto out = detail::model_json(r);
-    for (const auto& [k, v] : values)
+    for (const auto& [k, v] : values) {
         detail::model_put(out, k, detail::debug_value(r, v));
+    }
     return out;
 }
 
@@ -106,14 +112,16 @@ static Json trace_out(Memory r, const TraceChain& trace) {
 
 static Json string_array(Memory r, const Vector<String>& strings) {
     Json::Array out(r);
-    for (const auto& s : strings)
+    for (const auto& s : strings) {
         out.emplace_back(s);
+    }
     return Json(r, out);
 }
 
 static Json governance(Memory r, const std::optional<MutationGovernanceSnapshot>& g) {
-    if (!g)
+    if (!g) {
         return Json(r);
+    }
     auto out = detail::model_json(r);
     detail::model_put(out, "execution", g->execution_id);
     detail::model_put(out, "request", g->request_key);
@@ -155,43 +163,55 @@ static RawAuditEvent raw(Memory r, const Json& j) {
     auto id = input_value(r, field(j, "id"));
     auto old = old_record(r, field(j, "old"));
     std::optional<std::int64_t> version;
-    if (std::holds_alternative<String>(field(j, "version").data))
+    if (std::holds_alternative<String>(field(j, "version").data)) {
         version = number<std::int64_t>(field(j, "version"));
+    }
     auto e = [&] {
-        if (k == "created")
+        if (k == "created") {
             return RawAuditEvent::created(r, entity, values);
-        if (k == "updated")
+        }
+        if (k == "updated") {
             return RawAuditEvent::updated(r, entity, values);
-        if (k == "updated_old")
+        }
+        if (k == "updated_old") {
             return RawAuditEvent::updated_with_old_values(
                 r, entity, values, old, record(r, field(j, "new")), strings(r, field(j, "fields")));
-        if (k == "deleted")
+        }
+        if (k == "deleted") {
             return RawAuditEvent::deleted(r, entity, id, version);
-        if (k == "deleted_old")
+        }
+        if (k == "deleted_old") {
             return RawAuditEvent::deleted_with_old_values(r, entity, id, version, old);
-        if (k == "recovered")
+        }
+        if (k == "recovered") {
             return RawAuditEvent::recovered(r, entity, id, *version);
-        if (k == "recovered_old")
+        }
+        if (k == "recovered_old") {
             return RawAuditEvent::recovered_with_old_values(r, entity, id, *version, old);
-        if (k == "schema_created")
+        }
+        if (k == "schema_created") {
             return RawAuditEvent::schema_created(
                 r, entity, text(field(j, "table")), number<std::size_t>(field(j, "count")));
-        if (k == "schema_verified")
+        }
+        if (k == "schema_verified") {
             return RawAuditEvent::schema_verified(
                 r, entity, text(field(j, "table")), number<std::size_t>(field(j, "count")));
-        if (k == "field_added")
+        }
+        if (k == "field_added") {
             return RawAuditEvent::field_added(
                 r, entity, text(field(j, "table")), text(field(j, "field")));
+        }
         return RawAuditEvent::data_seeded(r,
                                           entity,
                                           text(field(j, "table")),
                                           number<std::size_t>(field(j, "count")),
                                           number<std::size_t>(field(j, "updated")));
     }();
-    for (const auto& t : std::get<Json::Array>(field(j, "trace").data))
+    for (const auto& t : std::get<Json::Array>(field(j, "trace").data)) {
         e.trace_chain.emplace_back(
             TraceKind::AuditReason, text(field(t, "entity")), text(field(t, "comment")), 1001);
-    if (std::get<bool>(field(j, "bootstrap").data))
+    }
+    if (std::get<bool>(field(j, "bootstrap").data)) {
         e.bootstrap_audit.emplace(std::allocator_arg,
                                   Allocator(r),
                                   "actor secret 1001",
@@ -199,6 +219,7 @@ static RawAuditEvent raw(Memory r, const Json& j) {
                                   "reason secret 1001",
                                   -3,
                                   1234);
+    }
     if (std::get<bool>(field(j, "governance").data)) {
         e.mutation_governance.emplace(std::allocator_arg,
                                       Allocator(r),
@@ -268,13 +289,15 @@ static Json field_out(Memory r, const SafeAuditField& f) {
 
 static Json evaluate(Memory r, const Json& j) {
     auto* ack = optional(j, "ack");
-    if (ack && std::holds_alternative<String>(ack->data))
+    if (ack && std::holds_alternative<String>(ack->data)) {
         setenv("TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS", std::get<String>(ack->data).c_str(), 1);
-    else
+    } else {
         unsetenv("TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS");
+    }
     auto op = text(field(j, "op"));
-    if (op == "debug")
+    if (op == "debug") {
         return Json(r, detail::debug_value(r, input_value(r, field(j, "value"))));
+    }
     if (op == "key") {
         EntityKey a(std::allocator_arg,
                     Allocator(r),
@@ -284,8 +307,9 @@ static Json evaluate(Memory r, const Json& j) {
               Allocator(r),
               text(field(j, "b_entity")),
               input_value(r, field(j, "b")));
-        if (auto* v = optional(j, "mutated"))
+        if (auto* v = optional(j, "mutated")) {
             a.id = input_value(r, *v);
+        }
         EntityKey copy(std::allocator_arg, Allocator(r), a);
         auto out = detail::model_json(r);
         detail::model_put(out, "eq", copy == b);
@@ -321,8 +345,9 @@ static Json evaluate(Memory r, const Json& j) {
     auto max = maximum(field(j, "max"));
     if (op == "field") {
         std::optional<std::string_view> raw;
-        if (std::holds_alternative<String>(field(j, "raw").data))
+        if (std::holds_alternative<String>(field(j, "raw").data)) {
             raw = text(field(j, "raw"));
+        }
         return field_out(r, build_safe_audit_field(r, text(field(j, "name")), raw, masks, max));
     }
     auto e = raw(r, j);
@@ -346,8 +371,9 @@ static Json evaluate(Memory r, const Json& j) {
     detail::model_put(safe_out, "kind", kind(safe.kind));
     detail::model_put(safe_out, "entity", safe.entity);
     Json::Array fields(r);
-    for (const auto& f : safe.fields)
+    for (const auto& f : safe.fields) {
         fields.emplace_back(field_out(r, f));
+    }
     detail::model_put(safe_out, "fields", fields);
     detail::model_put(safe_out, "trace", trace_out(r, safe.trace_chain));
     detail::model_put(safe_out, "governance", governance(r, safe.mutation_governance));
@@ -369,8 +395,9 @@ int main() {
         auto context = global.make_user_context();
         auto r = context->memory_resource();
         auto j = Json::parse(r, line);
-        if (!j)
+        if (!j) {
             throw std::runtime_error("invalid input");
+        }
         std::cout << evaluate(r, *j).dump(r) << '\n';
     }
 }

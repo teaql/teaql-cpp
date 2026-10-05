@@ -27,34 +27,38 @@ static Json evaluate(UserContext& c, const Json& j) {
         auto row = model_json(r);
         auto op = text(field(step, "op"));
         auto h = n(step, "handle"), t = n(step, "task");
-        if (op == "borrow")
+        if (op == "borrow") {
             handles.insert_or_assign(
                 h, &ContextPaginationAccess::build_lock(c, text(field(step, "key"))));
-        else if (op == "same")
+        } else if (op == "same") {
             model_put(
                 row, "same", IdSetBuildAccess::same(*handles.at(h), *handles.at(n(step, "other"))));
-        else if (op == "lock")
+        } else if (op == "lock") {
             tasks.emplace(t, Task{&handles.at(h)->lock()});
-        else if (op == "poll") {
+        } else if (op == "poll") {
             auto& task = tasks.at(t);
             auto* value = task.work->poll();
-            if (value)
+            if (value) {
                 task.guard = &value->get();
+            }
             model_put(row, "ready", value != nullptr);
         } else if (op == "cancel") {
             auto& task = tasks.at(t);
-            if (task.work->status() == AsyncStatus::Pending)
+            if (task.work->status() == AsyncStatus::Pending) {
                 task.cancel_notification = true;
+            }
             task.work->cancel();
         } else if (op == "release") {
             auto& task = tasks.at(t);
-            if (task.guard)
+            if (task.guard) {
                 task.guard->release();
+            }
         } else if (op == "reset") {
             handles.at(h)->reset();
             handles.erase(h);
-        } else
+        } else {
             throw std::logic_error("unknown build lock operation");
+        }
         auto states = model_json(r);
         for (const auto& [id, task] : tasks) {
             auto state = model_json(r);

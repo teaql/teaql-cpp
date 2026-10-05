@@ -8,28 +8,32 @@ namespace {
 }
 
 const PropertyDescriptor& require_id(Memory r, const EntityDescriptor& entity) {
-    if (auto* p = entity.id_property())
+    if (auto* p = entity.id_property()) {
         return *p;
+    }
     fail(r, SqlCompileError::Code::MissingIdProperty, entity.name);
 }
 
 const PropertyDescriptor& require_version(Memory r, const EntityDescriptor& entity) {
-    if (auto* p = entity.version_property())
+    if (auto* p = entity.version_property()) {
         return *p;
+    }
     fail(r, SqlCompileError::Code::MissingVersionProperty, entity.name);
 }
 
 std::int64_t next_version(std::int64_t value) {
     // Rust's checked builds panic here. Never invoke C++ signed-overflow UB or
     // invent a SqlCompileError variant for this arithmetic precondition.
-    if (value == std::numeric_limits<std::int64_t>::max())
+    if (value == std::numeric_limits<std::int64_t>::max()) {
         throw std::overflow_error("mutation version increment overflow");
+    }
     return value + 1;
 }
 
 std::int64_t negate_version(std::int64_t value) {
-    if (value == std::numeric_limits<std::int64_t>::min())
+    if (value == std::numeric_limits<std::int64_t>::min()) {
         throw std::overflow_error("mutation version negation overflow");
+    }
     return -value;
 }
 
@@ -37,8 +41,9 @@ String join(Memory r, const Vector<String>& parts, std::string_view separator) {
     String out(r);
     bool first = true;
     for (const auto& part : parts) {
-        if (!first)
+        if (!first) {
             out += separator;
+        }
         first = false;
         out += part;
     }
@@ -51,11 +56,12 @@ void push_typed(SqlBindings& params,
                 const Value* value) {
     // An explicitly TypedNull retains its own type. Only bare/missing Null
     // acquires the destination property's type, as in the source compiler.
-    if (!value || std::holds_alternative<std::monostate>(value->data))
+    if (!value || std::holds_alternative<std::monostate>(value->data)) {
         params.push_field(
             entity, property.name, Value(params.memory_resource(), TypedNull{property.data_type}));
-    else
+    } else {
         params.push_field(entity, property.name, *value);
+    }
 }
 
 const Value* lookup(const MutationValues& values, std::string_view name) {
@@ -101,14 +107,16 @@ CompiledQuery SqlDialect::compile_insert(Memory r,
                                          const InsertCommand& command) const {
     Vector<String> columns(r), placeholders(r);
     SqlBindings params(r);
-    for (const auto& property : entity.properties)
+    for (const auto& property : entity.properties) {
         if (auto* value = lookup(command.values, property.name)) {
             columns.emplace_back(quote_ident(r, property.column_name));
             push_typed(params, entity, property, value);
             placeholders.emplace_back(placeholder(r, params.size()));
         }
-    if (columns.empty())
+    }
+    if (columns.empty()) {
         fail(r, SqlCompileError::Code::EmptyMutation, "insert");
+    }
     String sql("INSERT INTO ", r);
     sql += quote_ident(r, entity.table_name);
     sql += " (";
@@ -122,20 +130,25 @@ CompiledQuery SqlDialect::compile_insert(Memory r,
 CompiledQuery SqlDialect::compile_batch_insert(Memory r,
                                                const EntityDescriptor& entity,
                                                const BatchInsertCommand& command) const {
-    if (command.batch_values.empty())
+    if (command.batch_values.empty()) {
         fail(r, SqlCompileError::Code::EmptyMutation, "batch_insert");
+    }
     Vector<const PropertyDescriptor*> columns(r);
     Vector<String> names(r), rows(r);
     SqlBindings params(r);
     // The first record alone determines the batch shape; later absent fields
     // become typed nulls and later extra fields do not extend that shape.
-    for (const auto& property : entity.properties)
-        if (lookup(command.batch_values.front(), property.name))
+    for (const auto& property : entity.properties) {
+        if (lookup(command.batch_values.front(), property.name)) {
             columns.push_back(&property);
-    if (columns.empty())
+        }
+    }
+    if (columns.empty()) {
         fail(r, SqlCompileError::Code::EmptyMutation, "batch_insert");
-    for (auto* property : columns)
+    }
+    for (auto* property : columns) {
         names.emplace_back(quote_ident(r, property->column_name));
+    }
     for (const auto& record : command.batch_values) {
         Vector<String> placeholders(r);
         for (auto* property : columns) {
@@ -177,8 +190,9 @@ CompiledQuery SqlDialect::compile_update_with_guard(Memory r,
     Vector<String> assignments(r), predicates(r);
     SqlBindings params(r);
     for (const auto& property : entity.properties) {
-        if (property.is_id || (property.is_version && command.expected_version_value))
+        if (property.is_id || (property.is_version && command.expected_version_value)) {
             continue;
+        }
         if (auto* value = lookup(command.values, property.name)) {
             push_typed(params, entity, property, value);
             assignments.emplace_back(equal_binding(*this, r, property, params.size()));
@@ -189,8 +203,9 @@ CompiledQuery SqlDialect::compile_update_with_guard(Memory r,
         params.push_field(entity, version.name, Value(r, next_version(*expected)));
         assignments.emplace_back(equal_binding(*this, r, version, params.size()));
     }
-    if (assignments.empty())
+    if (assignments.empty()) {
         fail(r, SqlCompileError::Code::EmptyMutation, "update");
+    }
     params.push_field(entity, id.name, command.id);
     predicates.emplace_back(equal_binding(*this, r, id, params.size()));
     if (auto expected = command.expected_version_value) {
@@ -198,16 +213,18 @@ CompiledQuery SqlDialect::compile_update_with_guard(Memory r,
         params.push_field(entity, version.name, Value(r, *expected));
         predicates.emplace_back(equal_binding(*this, r, version, params.size()));
     }
-    if (guard)
+    if (guard) {
         predicates.emplace_back(compile_expr(r, entity, *guard, params));
+    }
     return compiled(r, *this, update_sql(*this, r, entity, assignments, predicates), params);
 }
 
 CompiledQuery SqlDialect::compile_batch_update(Memory r,
                                                const EntityDescriptor& entity,
                                                const BatchUpdateCommand& command) const {
-    if (command.batch_values.empty())
+    if (command.batch_values.empty()) {
         fail(r, SqlCompileError::Code::EmptyMutation, "batch_update");
+    }
     const auto& id = require_id(r, entity);
     SqlBindings params(r);
     Vector<String> assignments(r), predicates(r);
@@ -223,10 +240,11 @@ CompiledQuery SqlDialect::compile_batch_update(Memory r,
                         bool typed) {
         params.push_field(entity, id.name, key);
         auto id_placeholder = placeholder(r, params.size());
-        if (typed)
+        if (typed) {
             push_typed(params, entity, property, value);
-        else
+        } else {
             params.push_field(entity, property.name, *value);
+        }
         auto value_placeholder = placeholder(r, params.size());
         sql += " WHEN ";
         sql += id_placeholder;
@@ -246,22 +264,24 @@ CompiledQuery SqlDialect::compile_batch_update(Memory r,
     };
     for (const auto& field : command.update_fields) {
         auto* property = entity.property_by_name(field);
-        if (!property)
+        if (!property) {
             fail(r, SqlCompileError::Code::UnknownField, field);
+        }
         auto body = case_start();
-        for (std::size_t i = 0; i < command.batch_values.size(); ++i)
+        for (std::size_t i = 0; i < command.batch_values.size(); ++i) {
             case_arm(body,
                      command.batch_ids.at(i),
                      *property,
                      lookup(command.batch_values[i], field),
                      true);
+        }
         case_end(body, *property);
         assignments.emplace_back(assignment(*property, std::move(body)));
     }
     bool has_versions = false;
     if (auto* version = entity.version_property()) {
         auto body = case_start();
-        for (std::size_t i = 0; i < command.batch_expected_versions.size(); ++i)
+        for (std::size_t i = 0; i < command.batch_expected_versions.size(); ++i) {
             if (auto expected = command.batch_expected_versions[i]) {
                 has_versions = true;
                 // Preserve the source's order: bind ID before incrementing version.
@@ -275,13 +295,15 @@ CompiledQuery SqlDialect::compile_batch_update(Memory r,
                 body += " THEN ";
                 body += value_placeholder;
             }
+        }
         if (has_versions) {
             case_end(body, *version);
             assignments.emplace_back(assignment(*version, std::move(body)));
         }
     }
-    if (assignments.empty())
+    if (assignments.empty()) {
         fail(r, SqlCompileError::Code::EmptyMutation, "batch_update");
+    }
     Vector<String> placeholders(r);
     for (const auto& key : command.batch_ids) {
         params.push_field(entity, id.name, key);
@@ -295,11 +317,12 @@ CompiledQuery SqlDialect::compile_batch_update(Memory r,
     if (has_versions) {
         const auto& version = *entity.version_property();
         auto body = case_start();
-        for (std::size_t i = 0; i < command.batch_expected_versions.size(); ++i)
+        for (std::size_t i = 0; i < command.batch_expected_versions.size(); ++i) {
             if (auto expected = command.batch_expected_versions[i]) {
                 Value value(r, *expected);
                 case_arm(body, command.batch_ids.at(i), version, &value, false);
             }
+        }
         case_end(body, version);
         predicates.emplace_back(assignment(version, std::move(body)));
     }
@@ -338,8 +361,9 @@ CompiledQuery SqlDialect::compile_delete_with_guard(Memory r,
             params.push_field(entity, version.name, Value(r, *expected));
             predicates.emplace_back(equal_binding(*this, r, version, params.size()));
         }
-        if (guard)
+        if (guard) {
             predicates.emplace_back(compile_expr(r, entity, *guard, params));
+        }
         Vector<String> assignments(r);
         assignments.emplace_back(equal_binding(*this, r, version, 1));
         return compiled(r, *this, update_sql(*this, r, entity, assignments, predicates), params);
@@ -351,8 +375,9 @@ CompiledQuery SqlDialect::compile_delete_with_guard(Memory r,
         params.push_field(entity, version.name, Value(r, *expected));
         predicates.emplace_back(equal_binding(*this, r, version, params.size()));
     }
-    if (guard)
+    if (guard) {
         predicates.emplace_back(compile_expr(r, entity, *guard, params));
+    }
     String sql("DELETE FROM ", r);
     sql += quote_ident(r, entity.table_name);
     sql += " WHERE ";
@@ -393,8 +418,9 @@ CompiledQuery SqlDialect::compile_recover_with_guard(Memory r,
     Vector<String> predicates(r);
     predicates.emplace_back(equal_binding(*this, r, id, 2));
     predicates.emplace_back(equal_binding(*this, r, version, 3));
-    if (guard)
+    if (guard) {
         predicates.emplace_back(compile_expr(r, entity, *guard, params));
+    }
     Vector<String> assignments(r);
     assignments.emplace_back(equal_binding(*this, r, version, 1));
     return compiled(r, *this, update_sql(*this, r, entity, assignments, predicates), params);

@@ -74,15 +74,18 @@ struct GraphPayload {
 
     static T move(Memory r, T&& value) {
         if constexpr (requires { value.memory_resource(); }) {
-            if (r == value.memory_resource())
+            if (r == value.memory_resource()) {
                 return std::move(value);
-            if constexpr (copyable)
+            }
+            if constexpr (copyable) {
                 return clone_in(r, value);
-            else
+            } else {
                 throw std::invalid_argument(
                     "Non-copyable graph payload belongs to another Context");
-        } else
+            }
+        } else {
             return move_in(r, std::move(value));
+        }
     }
 };
 
@@ -91,8 +94,9 @@ struct GraphPayload<std::optional<T>> {
     static constexpr bool copyable = GraphPayload<T>::copyable;
 
     static std::optional<T> move(Memory r, std::optional<T>&& value) {
-        if (!value)
+        if (!value) {
             return {};
+        }
         return GraphPayload<T>::move(r, std::move(*value));
     }
 };
@@ -102,12 +106,14 @@ struct GraphPayload<SmartList<T>> {
     static constexpr bool copyable = GraphPayload<T>::copyable;
 
     static SmartList<T> move(Memory r, SmartList<T>&& value) {
-        if (r == value.memory_resource())
+        if (r == value.memory_resource()) {
             return std::move(value);
-        if constexpr (copyable)
+        }
+        if constexpr (copyable) {
             return clone_in(r, value);
-        else
+        } else {
             throw std::invalid_argument("Non-copyable graph list belongs to another Context");
+        }
     }
 };
 
@@ -133,7 +139,7 @@ public:
             std::destroy_at(static_cast<T*>(object));
             r->deallocate(object, sizeof(T), alignof(T));
         };
-        if constexpr (GraphPayload<T>::copyable)
+        if constexpr (GraphPayload<T>::copyable) {
             clone_ = [](Memory r, const void* object) -> void* {
                 auto* result = static_cast<T*>(r->allocate(sizeof(T), alignof(T)));
                 try {
@@ -144,14 +150,16 @@ public:
                 }
                 return result;
             };
+        }
     }
 
     EntityGraphValue(std::allocator_arg_t, Allocator a, const EntityGraphValue& other)
         : resource_(a.resource()), type_(other.type_), destroy_(other.destroy_),
           clone_(other.clone_) {
-        if (!clone_)
+        if (!clone_) {
             throw std::invalid_argument(
                 "Graph payload requires an explicit allocator-aware copy for cross-domain retention");
+        }
         object_ = clone_(resource_, other.object_);
     }
 
@@ -170,8 +178,9 @@ public:
     }
 
     ~EntityGraphValue() {
-        if (object_)
+        if (object_) {
             destroy_(resource_, object_);
+        }
     }
 
     Memory memory_resource() const noexcept {
@@ -368,8 +377,9 @@ public:
     }
 
     EntityChangeSet& current_mut() {
-        if (stack_.empty())
+        if (stack_.empty()) {
             push();
+        }
         return stack_.back();
     }
 
@@ -391,8 +401,9 @@ public:
     void clear_current();
 
     void clear_entity(const EntityKey& key) {
-        for (auto& set : stack_)
+        for (auto& set : stack_) {
             set.clear_entity(key);
+        }
     }
 
     FieldSet changed_field_names(const EntityKey&) const;
@@ -477,11 +488,13 @@ public:
     template <class T>
     const T* resolve_entity(std::uint64_t id) const {
         auto* graph = frozen();
-        if (!graph)
+        if (!graph) {
             return nullptr;
+        }
         auto table = graph->tables_.find(typeid(T));
-        if (table == graph->tables_.end())
+        if (table == graph->tables_.end()) {
             return nullptr;
+        }
         auto found = table->second.find(id);
         return found == table->second.end() ? nullptr : found->second.template get<T>();
     }
@@ -506,11 +519,13 @@ public:
     RelationHandle<SmartList<T>>
     relation_list(std::string_view owner, std::uint64_t id, std::string_view relation) const {
         auto* stored = relation_value(owner, id, relation);
-        if (!stored)
+        if (!stored) {
             return {LoadedRelation::NotLoaded, nullptr};
+        }
         auto* list = stored->template get<SmartList<T>>();
-        if (!list)
+        if (!list) {
             relation_type_mismatch(owner, id, relation);
+        }
         return {list->is_empty() ? LoadedRelation::Empty : LoadedRelation::Loaded, list};
     }
 
@@ -518,11 +533,13 @@ public:
     RelationHandle<T>
     relation_option(std::string_view owner, std::uint64_t id, std::string_view relation) const {
         auto* stored = relation_value(owner, id, relation);
-        if (!stored)
+        if (!stored) {
             return {LoadedRelation::NotLoaded, nullptr};
+        }
         auto* value = stored->template get<std::optional<T>>();
-        if (!value)
+        if (!value) {
             relation_type_mismatch(owner, id, relation);
+        }
         return {*value ? LoadedRelation::Loaded : LoadedRelation::Empty,
                 *value ? &**value : nullptr};
     }
@@ -620,19 +637,21 @@ public:
         const auto& self = static_cast<const Derived&>(*this);
         auto r = self.memory_resource();
         auto target = self.entity_runtime_state();
-        if (!target)
+        if (!target) {
             return LedgerCompositionResult::err(
                 r,
                 LedgerCompositionError(std::allocator_arg,
                                        Allocator(r),
                                        LedgerCompositionError::Kind::MissingTargetState));
+        }
         auto from = source.entity_runtime_state();
-        if (!from)
+        if (!from) {
             return LedgerCompositionResult::err(
                 r,
                 LedgerCompositionError(std::allocator_arg,
                                        Allocator(r),
                                        LedgerCompositionError::Kind::MissingSourceState));
+        }
         return detail::EntityRuntimeAccess::compose(*target, *from);
     }
 };

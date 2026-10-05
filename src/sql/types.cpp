@@ -19,18 +19,21 @@ String quote(Memory r, std::string_view text) {
     String out("'", r);
     for (char c : text) {
         out += c;
-        if (c == '\'')
+        if (c == '\'') {
             out += '\'';
+        }
     }
     out += '\'';
     return out;
 }
 
 bool finite(const Value& value) {
-    if (auto* n = std::get_if<double>(&value.data))
+    if (auto* n = std::get_if<double>(&value.data)) {
         return std::isfinite(*n);
-    if (auto* values = value.as_list())
+    }
+    if (auto* values = value.as_list()) {
         return std::all_of(values->begin(), values->end(), finite);
+    }
     return true;
 }
 
@@ -39,32 +42,33 @@ String literal(Memory r, const Value& value) {
         [&](const auto& v) -> String {
             using T = std::decay_t<decltype(v)>;
             String out(r);
-            if constexpr (std::same_as<T, std::monostate> || std::same_as<T, TypedNull>)
+            if constexpr (std::same_as<T, std::monostate> || std::same_as<T, TypedNull>) {
                 out = "NULL";
-            else if constexpr (std::same_as<T, bool>)
+            } else if constexpr (std::same_as<T, bool>) {
                 out = v ? "TRUE" : "FALSE";
-            else if constexpr (std::same_as<T, std::int64_t> || std::same_as<T, std::uint64_t>)
+            } else if constexpr (std::same_as<T, std::int64_t> || std::same_as<T, std::uint64_t>) {
                 number(out, v);
-            else if constexpr (std::same_as<T, double>)
+            } else if constexpr (std::same_as<T, double>) {
                 detail::append_float(out, v, false);
-            else if constexpr (std::same_as<T, Decimal>)
+            } else if constexpr (std::same_as<T, Decimal>) {
                 out = v.to_string(r);
-            else if constexpr (std::same_as<T, String>)
+            } else if constexpr (std::same_as<T, String>) {
                 out = quote(r, v);
-            else if constexpr (std::same_as<T, Json>)
+            } else if constexpr (std::same_as<T, Json>) {
                 out = quote(r, v.dump(r));
-            else if constexpr (std::same_as<T, Date>)
+            } else if constexpr (std::same_as<T, Date>) {
                 out = quote(r, v.to_string(r));
-            else if constexpr (std::same_as<T, Timestamp>)
+            } else if constexpr (std::same_as<T, Timestamp>) {
                 number(out, v.as_millis());
-            else if constexpr (std::same_as<T, Value::Object>)
+            } else if constexpr (std::same_as<T, Value::Object>) {
                 out = quote(r, value.to_json_value(r).dump(r));
-            else if constexpr (std::same_as<T, Value::List>) {
+            } else if constexpr (std::same_as<T, Value::List>) {
                 out += '(';
                 bool first = true;
                 for (const auto& item : v) {
-                    if (!first)
+                    if (!first) {
                         out += ", ";
+                    }
                     first = false;
                     out += literal(r, item);
                 }
@@ -78,10 +82,12 @@ String literal(Memory r, const Value& value) {
 }
 
 SqlRenderResult render_sql_value(Memory r, const Value& value, DatabaseKind kind) {
-    if (kind != DatabaseKind::Sqlite)
+    if (kind != DatabaseKind::Sqlite) {
         return SqlRenderResult::err(r, "unsupported database kind");
-    if (!finite(value))
+    }
+    if (!finite(value)) {
         return SqlRenderResult::err(r, "non-finite SQL number");
+    }
     return SqlRenderResult::ok(r, literal(r, value));
 }
 
@@ -93,8 +99,9 @@ SqlRenderResult render_sql_with(Memory r,
     auto error = [&](std::string_view reason) {
         return SqlRenderResult::err(r, reason);
     };
-    if (kind != DatabaseKind::Sqlite)
+    if (kind != DatabaseKind::Sqlite) {
         return error("unsupported database kind");
+    }
     String out(r);
     out.reserve(sql.size());
     std::size_t i = 0, positional = 0;
@@ -105,20 +112,23 @@ SqlRenderResult render_sql_with(Memory r,
             char close = c == '[' ? ']' : c;
             ++i;
             for (;;) {
-                if (i >= sql.size())
+                if (i >= sql.size()) {
                     return error("unterminated quoted SQL");
+                }
                 if (sql[i++] == close) {
-                    if (i < sql.size() && sql[i] == close && c != '[')
+                    if (i < sql.size() && sql[i] == close && c != '[') {
                         ++i;
-                    else
+                    } else {
                         break;
+                    }
                 }
             }
             out.append(sql.substr(start, i - start));
         } else if (sql.substr(i).starts_with("--")) {
             i += 2;
-            while (i < sql.size() && sql[i] != '\n' && sql[i] != '\r')
+            while (i < sql.size() && sql[i] != '\n' && sql[i] != '\r') {
                 ++i;
+            }
             out.append(sql.substr(start, i - start));
         } else if (sql.substr(i).starts_with("/*")) {
             i += 2;
@@ -130,44 +140,52 @@ SqlRenderResult render_sql_with(Memory r,
                 } else if (sql.substr(i).starts_with("*/")) {
                     --depth;
                     i += 2;
-                } else
+                } else {
                     ++i;
+                }
             }
-            if (depth)
+            if (depth) {
                 return error("unterminated SQL comment");
+            }
             out.append(sql.substr(start, i - start));
         } else if (c == '?') {
-            if (i + 1 < sql.size() && sql[i + 1] >= '0' && sql[i + 1] <= '9')
+            if (i + 1 < sql.size() && sql[i + 1] >= '0' && sql[i + 1] <= '9') {
                 return error("unsupported numbered positional binding");
-            if (positional >= count)
+            }
+            if (positional >= count) {
                 return error("missing binding");
+            }
             auto rendered = render(positional++);
-            if (!rendered)
+            if (!rendered) {
                 return error(rendered.error());
+            }
             out += rendered.value();
             ++i;
-        } else if (c == ':' || c == '@' || c == '$')
+        } else if (c == ':' || c == '@' || c == '$') {
             return error("unsupported named binding");
-        else {
+        } else {
             out += c;
             ++i;
         }
     }
-    if (positional != count)
+    if (positional != count) {
         return error("unused binding");
+    }
     return SqlRenderResult::ok(r, std::move(out));
 }
 
 String CompiledQuery::sql_with_comment(Memory r) const {
-    if (!comment || comment->empty())
+    if (!comment || comment->empty()) {
         return String(sql, r);
+    }
     String out("/* ", r);
     for (std::size_t i = 0; i < comment->size(); ++i) {
         if ((*comment)[i] == '*' && i + 1 < comment->size() && (*comment)[i + 1] == '/') {
             out += "* /";
             ++i;
-        } else
+        } else {
             out += (*comment)[i];
+        }
     }
     out += " */ ";
     out += sql;
@@ -179,8 +197,9 @@ String CompiledQuery::debug_sql(Memory r, DatabaseKind kind) const {
         return render_sql_value(r, params[i], kind);
     };
     auto rendered = render_sql_with(r, sql_with_comment(r), kind, params.size(), render);
-    if (rendered)
+    if (rendered) {
         return std::move(rendered).value();
+    }
     String out("[SQL omitted: ", r);
     out += rendered.error();
     out += "; NOT REPLAYABLE]";

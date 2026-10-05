@@ -4,8 +4,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 static void profiles_and_domains() {
@@ -14,8 +15,9 @@ static void profiles_and_domains() {
     auto r = user->memory_resource();
     auto g = global.memory_resource();
     std::array<std::uint8_t, 32> bytes{};
-    for (unsigned i = 0; i < 32; ++i)
+    for (unsigned i = 0; i < 32; ++i) {
         bytes[i] = std::uint8_t(i);
+    }
     auto& key =
         user->make<BusinessIdEncodingKey>(BusinessIdEncodingKey::create(r, 1, bytes).value());
     auto& provider = user->make<StaticBusinessIdKeyProvider>(key);

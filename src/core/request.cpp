@@ -5,8 +5,9 @@ namespace teaql::request {
 namespace {
 template <class T>
 void copy_items(Vector<T>& dst, const Vector<T>& src) {
-    for (const auto& value : src)
+    for (const auto& value : src) {
         dst.emplace_back(value);
+    }
 }
 }
 
@@ -127,10 +128,12 @@ QueryOptions::QueryOptions(std::allocator_arg_t, Allocator a)
 
 QueryOptions::QueryOptions(std::allocator_arg_t, Allocator a, const QueryOptions& other)
     : QueryOptions(std::allocator_arg, a) {
-    if (other.comment)
+    if (other.comment) {
         comment.emplace(*other.comment, a.resource());
-    if (other.raw_sql)
+    }
+    if (other.raw_sql) {
         raw_sql.emplace(*other.raw_sql, a.resource());
+    }
     copy_items(raw_sql_search_criteria, other.raw_sql_search_criteria);
     copy_items(dynamic_properties, other.dynamic_properties);
     copy_items(raw_projections, other.raw_projections);
@@ -341,19 +344,23 @@ SelectQuery apply_runtime_metadata(SelectQuery query,
                                    std::span<const QuerySelection> children) {
     auto r = query.memory_resource();
     auto a = Allocator(r);
-    if (options.comment)
+    if (options.comment) {
         query.comment(*options.comment);
+    }
     query.raw_sql_text.reset();
-    if (options.raw_sql)
+    if (options.raw_sql) {
         query.raw_sql_text.emplace(*options.raw_sql, r);
+    }
     query.raw_sql_search_criteria.clear();
     copy_items(query.raw_sql_search_criteria, options.raw_sql_search_criteria);
     query.dynamic_properties.clear();
-    for (const auto& p : options.dynamic_properties)
+    for (const auto& p : options.dynamic_properties) {
         query.dynamic_properties.emplace_back(p.property_name, p.raw_sql_segment);
+    }
     query.raw_projections.clear();
-    for (const auto& p : options.raw_projections)
+    for (const auto& p : options.raw_projections) {
         query.raw_projections.emplace_back(p.property_name, p.raw_sql_segment);
+    }
     query.object_group_bys.clear();
     for (const auto& group : options.object_group_bys) {
         auto copy = QuerySelection(std::allocator_arg, a, group.query);
@@ -382,23 +389,28 @@ Vector<teaql::RelationAggregate> runtime_relation_aggregates(Memory r,
 }
 
 void merge_outer_filter_into_facet_aggregates(QuerySelection& selection, const SelectQuery& outer) {
-    if (!outer.predicate)
+    if (!outer.predicate) {
         return;
-    for (auto& aggregate : selection.query_options.relation_aggregates)
-        if (aggregate.query.query.entity == outer.entity)
+    }
+    for (auto& aggregate : selection.query_options.relation_aggregates) {
+        if (aggregate.query.query.entity == outer.entity) {
             aggregate.query.query.and_filter(*outer.predicate);
+        }
+    }
 }
 
 Value required_value(Memory r, FieldOperator, std::span<const Value> values, std::size_t index) {
-    if (index >= values.size())
+    if (index >= values.size()) {
         throw std::invalid_argument("Field operator requires value at requested index");
+    }
     return Value(r, values[index]);
 }
 
 String required_text(Memory r, FieldOperator op, std::span<const Value> values, std::size_t index) {
     auto value = required_value(r, op, values, index);
-    if (auto text = value.try_text())
+    if (auto text = value.try_text()) {
         return String(*text, r);
+    }
     throw std::invalid_argument("Field operator requires text value");
 }
 
@@ -489,24 +501,31 @@ Expr field_operator_column_expr(Memory r,
 }
 
 std::optional<Expr> remove_filter_expr(Memory r, const Expr& filter, const Expr& target) {
-    if (filter == target)
+    if (filter == target) {
         return {};
-    if (filter.kind != Expr::Kind::And)
+    }
+    if (filter.kind != Expr::Kind::And) {
         return filter.clone(r);
+    }
     Expr retained(r, Expr::Kind::And);
-    for (const auto& part : filter.args)
-        if (auto value = remove_filter_expr(r, part, target))
+    for (const auto& part : filter.args) {
+        if (auto value = remove_filter_expr(r, part, target)) {
             retained.args.emplace_back(std::move(*value));
-    if (retained.args.empty())
+        }
+    }
+    if (retained.args.empty()) {
         return {};
-    if (retained.args.size() == 1)
+    }
+    if (retained.args.size() == 1) {
         return std::move(retained.args.front());
+    }
     return retained;
 }
 
 std::optional<Expr> remove_default_live_filter(Memory r, const std::optional<Expr>& filter) {
-    if (!filter)
+    if (!filter) {
         return {};
+    }
     return remove_filter_expr(r, *filter, Expr::gt(r, "version", std::int64_t(0)));
 }
 
@@ -514,66 +533,77 @@ Value dynamic_json_value_to_teaql_value(Memory r, const Json& input) {
     return std::visit(
         [&](const auto& item) -> Value {
             using T = std::decay_t<decltype(item)>;
-            if constexpr (std::same_as<T, std::monostate>)
+            if constexpr (std::same_as<T, std::monostate>) {
                 return Value(r);
-            else if constexpr (std::same_as<T, std::uint64_t>)
+            } else if constexpr (std::same_as<T, std::uint64_t>) {
                 return item <= std::uint64_t(INT64_MAX) ? Value(r, std::int64_t(item))
                                                         : Value(r, item);
-            else if constexpr (std::same_as<T, String>) {
+            } else if constexpr (std::same_as<T, String>) {
                 auto view = std::string_view(item);
                 detail::trim(view);
                 return Value(r, view);
             } else if constexpr (std::same_as<T, Json::Array>) {
                 Value::List values(r);
-                for (const auto& v : item)
+                for (const auto& v : item) {
                     values.emplace_back(dynamic_json_value_to_teaql_value(r, v));
+                }
                 return Value(r, values);
             } else if constexpr (std::same_as<T, Json::Object>) {
                 auto it = item.find("id");
                 return it == item.end() ? Value(r)
                                         : dynamic_json_value_to_teaql_value(r, it->second);
-            } else
+            } else {
                 return Value(r, item);
+            }
         },
         input.data);
 }
 
 Vector<Value> dynamic_json_values(Memory r, const Json& value) {
     Vector<Value> values(r);
-    if (auto items = std::get_if<Json::Array>(&value.data))
-        for (const auto& v : *items)
+    if (auto items = std::get_if<Json::Array>(&value.data)) {
+        for (const auto& v : *items) {
             values.emplace_back(dynamic_json_value_to_teaql_value(r, v));
-    else
+        }
+    } else {
         values.emplace_back(dynamic_json_value_to_teaql_value(r, value));
+    }
     return values;
 }
 
 FieldOperator dynamic_json_operator(const Json& value) {
     if (auto text = std::get_if<String>(&value.data)) {
         auto equals = [&](std::string_view expected) {
-            if (text->size() != expected.size())
+            if (text->size() != expected.size()) {
                 return false;
+            }
             for (std::size_t i = 0; i < expected.size(); ++i) {
                 auto c = (*text)[i];
-                if (c >= 'A' && c <= 'Z')
+                if (c >= 'A' && c <= 'Z') {
                     c = char(c - 'A' + 'a');
-                if (c != expected[i])
+                }
+                if (c != expected[i]) {
                     return false;
+                }
             }
             return true;
         };
-        if (equals("__is_null__"))
+        if (equals("__is_null__")) {
             return FieldOperator::IsNull;
-        if (equals("__is_not_null__"))
+        }
+        if (equals("__is_not_null__")) {
             return FieldOperator::IsNotNull;
+        }
         return FieldOperator::Contain;
     }
     if (auto values = std::get_if<Json::Array>(&value.data)) {
         if (!values->empty() && (std::holds_alternative<String>(values->front().data) ||
-                                 std::holds_alternative<Json::Object>(values->front().data)))
+                                 std::holds_alternative<Json::Object>(values->front().data))) {
             return FieldOperator::In;
-        if (values->size() == 2)
+        }
+        if (values->size() == 2) {
             return FieldOperator::Between;
+        }
     }
     return FieldOperator::Equal;
 }
@@ -586,12 +616,15 @@ Expr dynamic_json_filter_expr(Memory r, std::string_view field, const Json& valu
 std::optional<std::uint64_t> dynamic_json_u64_field(const Json::Object& object,
                                                     std::string_view name) {
     auto it = object.find(name);
-    if (it == object.end())
+    if (it == object.end()) {
         return {};
-    if (auto n = std::get_if<std::uint64_t>(&it->second.data))
+    }
+    if (auto n = std::get_if<std::uint64_t>(&it->second.data)) {
         return *n;
-    if (auto n = std::get_if<std::int64_t>(&it->second.data); n && *n >= 0)
+    }
+    if (auto n = std::get_if<std::int64_t>(&it->second.data); n && *n >= 0) {
         return std::uint64_t(*n);
+    }
     return {};
 }
 }

@@ -10,8 +10,9 @@ static_assert(!std::is_copy_constructible_v<InMemoryAggregationCache> &&
               !std::is_copy_constructible_v<InMemoryIdSetStore>);
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -290,8 +291,9 @@ public:
               key(key, r) {}
 
         ~Work() {
-            if (worker.joinable())
+            if (worker.joinable()) {
                 std::terminate();
+            }
         }
 
         std::optional<PaginationResult<std::optional<RetainedIdSet>>> poll(WakeSignal& wake) {
@@ -306,8 +308,9 @@ public:
                 });
                 return {};
             }
-            if (!done.load())
+            if (!done.load()) {
                 return {};
+            }
             using R = PaginationResult<std::optional<RetainedIdSet>>;
             auto result = ids(r, key);
             return R::ok(r, std::move(result));
@@ -322,8 +325,9 @@ public:
 
         void stop() noexcept {
             release();
-            if (worker.joinable())
+            if (worker.joinable()) {
                 worker.join();
+            }
             ++store.get().counts.stops;
         }
 
@@ -370,16 +374,18 @@ static void native_lifetime(unsigned action) {
         check(result && result.value() && result.value()->ids[0] == 9,
               "native store wakes owner and constructs scoped result");
         retained = &g.make<RetainedIdSet>(*result.value());
-    } else if (action == 1)
+    } else if (action == 1) {
         operation.cancel();
+    }
     c->close();
     check(counts.read && counts.stops == 1 && counts.destroyed_after_stop &&
               c->allocation_stats().live_blocks == 0,
           "native store access finishes before store destructor and arena reclamation");
-    if (retained)
+    if (retained) {
         check(retained->ids[0] == 9 &&
                   retained->ids.get_allocator().resource() == g.memory_resource(),
               "native result retained only through explicit Global copy");
+    }
 }
 
 int main() {
@@ -388,8 +394,9 @@ int main() {
         cache_copy_precedes_retention_age();
         retention_and_defaults();
         expiration_and_models();
-        for (unsigned i = 0; i < 3; ++i)
+        for (unsigned i = 0; i < 3; ++i) {
             native_lifetime(i);
+        }
         std::pmr::set_default_resource(old);
         std::cout << "Query stores, deadlines and Context lifetime contracts passed\n";
     } catch (const std::exception& e) {

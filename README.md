@@ -66,8 +66,12 @@ ctest --test-dir build --output-on-failure
 
 Use the repository's clang-format **18.1.8** configuration for handwritten headers,
 sources, examples, and tests. The style uses four spaces, a 100-column target, and
-expanded function/control-flow blocks. Formatting preserves include order, string
-literals, and comments. Long literals may exceed the column target. Generated
+expanded function/control-flow blocks. `InsertBraces: true` automatically adds braces
+to `if`/`else`, `for`, `while`, and `do` bodies, including single statements.
+Macro definitions and bodies spanning preprocessor directives require explicit
+braces in the source because clang-format skips automatic insertion there.
+Formatting preserves include order, string literals, and comments. Long literals
+may exceed the column target. Generated
 Unicode fact tables are excluded through `.clang-format-ignore`.
 
 Install the development tool in an ignored repository-local virtual environment:

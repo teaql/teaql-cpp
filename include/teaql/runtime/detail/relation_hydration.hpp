@@ -37,8 +37,9 @@ public:
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
-        if (mode_ != RelationHydrationMode::Embedded)
+        if (mode_ != RelationHydrationMode::Embedded) {
             return poll_body(wake);
+        }
         if (!scope_) {
             const auto& cs = EntityDataServiceAccess::context_service(service_);
             auto capabilities = cs.executor.get().capabilities();
@@ -57,8 +58,9 @@ public:
                               std::make_obj_using_allocator<RuntimeAttributeValue>(
                                   Allocator(r), std::uint64_t(parents_.size())));
                 scope_->success(attrs);
-            } else
+            } else {
                 scope_->failure("relation_load_error");
+            }
             scope_->close();
         }
         return result;
@@ -68,8 +70,9 @@ public:
         forwarding_.reset();
         rows_operation_ = nullptr;
         descendant_ = nullptr;
-        if (scope_)
+        if (scope_) {
             scope_->close();
+        }
     }
 
     void cancel_and_wait() noexcept {
@@ -82,8 +85,9 @@ public:
             rows_operation_->cancel();
             rows_operation_ = nullptr;
         }
-        if (scope_)
+        if (scope_) {
             scope_->close();
+        }
     }
 
 private:
@@ -112,29 +116,39 @@ private:
         if (phase_ == Phase::Fetch) {
             forwarding_.attach(rows_operation_->wake_signal(), wake);
             auto* result = rows_operation_->poll();
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return R::err(r, clone_in(r, result->error()));
-            for (const auto& row : result->value())
+            }
+            for (const auto& row : result->value()) {
                 children_.emplace_back(row);
+            }
             forwarding_.reset();
             rows_operation_ = nullptr;
-            if (mode_ != RelationHydrationMode::CompactFlat)
-                for (auto& child : children_)
+            if (mode_ != RelationHydrationMode::CompactFlat) {
+                for (auto& child : children_) {
                     child.remove(PARTITION_RANK_PROPERTY);
+                }
+            }
             if (mode_ == RelationHydrationMode::Embedded) {
                 attach_relation_rows(context(), mutable_parents_, *plan_, std::move(children_));
-                if (!plan_->children.empty())
-                    for (auto& parent : mutable_parents_)
+                if (!plan_->children.empty()) {
+                    for (auto& parent : mutable_parents_) {
                         if (auto* relation = parent.get_mut(plan_->relation_name)) {
-                            if (auto* record = std::get_if<Value::Object>(&relation->data))
+                            if (auto* record = std::get_if<Value::Object>(&relation->data)) {
                                 records_.push_back(record);
-                            else if (auto* list = std::get_if<Value::List>(&relation->data))
-                                for (auto& value : *list)
-                                    if (auto* record = std::get_if<Value::Object>(&value.data))
+                            } else if (auto* list = std::get_if<Value::List>(&relation->data)) {
+                                for (auto& value : *list) {
+                                    if (auto* record = std::get_if<Value::Object>(&value.data)) {
                                         records_.push_back(record);
+                                    }
+                                }
+                            }
                         }
+                    }
+                }
             }
             phase_ = Phase::Descendants;
         }
@@ -160,8 +174,9 @@ private:
                     scratch_.emplace_back(taken);
                     rows = scratch_;
                     mutable_rows = scratch_;
-                } else if (mode_ == RelationHydrationMode::CompactFlat)
+                } else if (mode_ == RelationHydrationMode::CompactFlat) {
                     mutable_rows = {};
+                }
                 descendant_ =
                     &make_operation<R, RelationHydrationNode>(r,
                                                               *child_service_,
@@ -175,10 +190,12 @@ private:
             }
             forwarding_.attach(descendant_->wake_signal(), wake);
             auto* result = descendant_->poll();
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return R::err(r, clone_in(r, result->error()));
+            }
             forwarding_.reset();
             descendant_ = nullptr;
             ++plan_index_;
@@ -192,17 +209,19 @@ private:
                 }
             }
         }
-        if (mode_ == RelationHydrationMode::Embedded)
+        if (mode_ == RelationHydrationMode::Embedded) {
             return R::ok(r, {});
+        }
         auto result =
             mode_ == RelationHydrationMode::CompactFlat
                 ? install_compact_flat_relation(
                       context(), parents_, *plan_, std::move(children_), *root_, *graph_)
                 : install_flat_relation(
                       context(), mutable_parents_, *plan_, std::move(children_), *root_, *graph_);
-        if (!result)
+        if (!result) {
             return R::err(
                 r, DataServiceError<typename E::Error>::entity(r, std::move(result).error()));
+        }
         return R::ok(r, {});
     }
 
@@ -251,16 +270,19 @@ public:
             parents,
             root,
             graph);
-        if (mode != RelationHydrationMode::Embedded && (!root || !graph))
+        if (mode != RelationHydrationMode::Embedded && (!root || !graph)) {
             throw std::invalid_argument("Identity graph hydration requires a root and graph");
-        if (mode != RelationHydrationMode::CompactFlat && parents.size() != mutable_parents.size())
+        }
+        if (mode != RelationHydrationMode::CompactFlat &&
+            parents.size() != mutable_parents.size()) {
             throw std::invalid_argument("This relation path requires mutable rows");
+        }
     }
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
         while (index_ < plans_.size()) {
-            if (!child_)
+            if (!child_) {
                 child_ = &make_operation<R, RelationHydrationNode<E>>(r,
                                                                       service_,
                                                                       parents_,
@@ -270,12 +292,15 @@ public:
                                                                       root_,
                                                                       graph_,
                                                                       fetch_);
+            }
             forwarding_.attach(child_->wake_signal(), wake);
             auto* result = child_->poll();
-            if (!result)
+            if (!result) {
                 return {};
-            if (!*result)
+            }
+            if (!*result) {
                 return R::err(r, clone_in(r, result->error()));
+            }
             forwarding_.reset();
             child_ = nullptr;
             ++index_;

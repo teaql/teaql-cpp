@@ -9,8 +9,9 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 struct Counters {
@@ -23,8 +24,9 @@ struct Pulse {
 
     std::optional<int> poll(WakeSignal& signal) {
         ++counts->polls;
-        if (fail)
+        if (fail) {
             throw std::runtime_error("provider poll failure");
+        }
         if (counts->polls == 1) {
             signal.notify();
             return {};
@@ -53,8 +55,9 @@ struct Chunks {
             wake.notify();
             return {};
         }
-        if (index == 2)
+        if (index == 2) {
             return std::optional<int>{};
+        }
         pending = true;
         return std::optional<int>{++index};
     }
@@ -88,8 +91,9 @@ struct ClosingProbe {
             rejected = true;
         }
         auto& diagnostic = context.make<String>("quiescence can retain its final diagnostic");
-        if (diagnostic.empty())
+        if (diagnostic.empty()) {
             std::terminate();
+        }
     }
 };
 
@@ -121,8 +125,9 @@ struct Worker {
         : context(context), counts(counts), payload_destroyed(destroyed) {}
 
     ~Worker() {
-        if (thread.joinable())
+        if (thread.joinable()) {
             std::terminate();
+        }
         ++counts.destroyed;
     }
 
@@ -143,8 +148,9 @@ struct Worker {
             started.wait();
             return {};
         }
-        if (!done.load(std::memory_order_acquire))
+        if (!done.load(std::memory_order_acquire)) {
             return {};
+        }
         return 99;
     }
 
@@ -173,8 +179,9 @@ struct Worker {
         // Cancellation diagnostics remain allocatable during quiescence.
         auto& message =
             context.make<String>("cancelled after all native host-memory access stopped");
-        if (message.empty() || (payload && !read_before_destroy))
+        if (message.empty() || (payload && !read_before_destroy)) {
             std::terminate();
+        }
     }
 };
 
@@ -278,8 +285,9 @@ struct FailingResource : std::pmr::memory_resource {
     bool fail = false;
 
     void* do_allocate(std::size_t n, std::size_t a) override {
-        if (fail)
+        if (fail) {
             throw std::bad_alloc{};
+        }
         return std::pmr::new_delete_resource()->allocate(n, a);
     }
 

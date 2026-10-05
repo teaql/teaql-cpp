@@ -6,8 +6,9 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -38,13 +39,15 @@ static void expr_domain(const Expr& expr, Memory r) {
     check(expr.memory_resource() == r && expr.literal.memory_resource() == r &&
               expr.args.get_allocator().resource() == r,
           "recursive Expr allocator");
-    for (const auto& arg : expr.args)
+    for (const auto& arg : expr.args) {
         expr_domain(arg, r);
+    }
     if (expr.subquery_data) {
         check(expr.subquery_data.get_deleter().resource == r, "subquery owner allocator");
         check(expr.subquery_data->entity.memory_resource() == r, "subquery metadata allocator");
-        for (const auto& property : expr.subquery_data->entity.properties)
+        for (const auto& property : expr.subquery_data->entity.properties) {
             check(property.name.get_allocator().resource() == r, "nested metadata strings");
+        }
         query_domain(expr.subquery_data->query, r);
     }
 }
@@ -52,31 +55,38 @@ static void expr_domain(const Expr& expr, Memory r) {
 static void query_domain(const SelectQuery& query, Memory r) {
     check(query.memory_resource() == r, "query allocation domain");
     for (auto* text :
-         {&query.search_text, &query.partition_field, &query.comment_text, &query.raw_sql_text})
-        if (*text)
+         {&query.search_text, &query.partition_field, &query.comment_text, &query.raw_sql_text}) {
+        if (*text) {
             check((*text)->get_allocator().resource() == r, "optional query string allocator");
+        }
+    }
     for (auto* strings :
          {&query.projection, &query.group_by_fields, &query.raw_sql_search_criteria}) {
         check(strings->get_allocator().resource() == r, "query string vector allocator");
-        for (const auto& text : *strings)
+        for (const auto& text : *strings) {
             check(text.get_allocator().resource() == r, "query string element allocator");
+        }
     }
-    for (auto* expr : {&query.predicate, &query.having_predicate})
-        if (*expr)
+    for (auto* expr : {&query.predicate, &query.having_predicate}) {
+        if (*expr) {
             expr_domain(**expr, r);
+        }
+    }
     for (const auto& named : query.expr_projection) {
         check(named.memory_resource() == r, "named expression allocator");
         expr_domain(named.expr, r);
     }
     for (const auto& order : query.order_by) {
         check(order.memory_resource() == r, "order allocator");
-        if (order.expr)
+        if (order.expr) {
             expr_domain(*order.expr, r);
+        }
     }
-    for (const auto& aggregate : query.aggregates)
+    for (const auto& aggregate : query.aggregates) {
         check(aggregate.field.get_allocator().resource() == r &&
                   aggregate.alias.get_allocator().resource() == r,
               "aggregate allocator");
+    }
     for (const auto& relation : query.relations) {
         check(relation.memory_resource() == r, "relation allocator");
         if (relation.query) {
@@ -84,27 +94,33 @@ static void query_domain(const SelectQuery& query, Memory r) {
             query_domain(*relation.query, r);
         }
     }
-    for (const auto& trace : query.trace_chain)
+    for (const auto& trace : query.trace_chain) {
         check(trace.entity_type.get_allocator().resource() == r &&
                   trace.comment.get_allocator().resource() == r,
               "trace allocator");
-    for (auto* projections : {&query.dynamic_properties, &query.raw_projections})
-        for (const auto& projection : *projections)
+    }
+    for (auto* projections : {&query.dynamic_properties, &query.raw_projections}) {
+        for (const auto& projection : *projections) {
             check(projection.property_name.get_allocator().resource() == r &&
                       projection.raw_sql_segment.get_allocator().resource() == r,
                   "raw projection allocator");
+        }
+    }
     for (const auto& object : query.object_group_bys) {
         check(object.property_name.get_allocator().resource() == r &&
                   object.storage_field.get_allocator().resource() == r,
               "object grouping allocator");
         query_domain(object.query, r);
     }
-    for (const auto& child : query.child_enhancements)
+    for (const auto& child : query.child_enhancements) {
         query_domain(child, r);
-    if (query.continuous_page_fetch)
+    }
+    if (query.continuous_page_fetch) {
         check(query.continuous_page_fetch->memory_resource() == r, "cursor allocator");
-    if (query.id_set_pagination)
+    }
+    if (query.id_set_pagination) {
         check(query.id_set_pagination->memory_resource() == r, "ID set allocator");
+    }
 }
 
 static void expression_contracts() {
@@ -166,8 +182,9 @@ static void expression_contracts() {
     check(compare.args[1].kind == Expr::Kind::Column && compare.args[1].name == "created_at",
           "column-to-column comparison");
     auto& values = context->make<Vector<Value>>();
-    for (int i = 0; i < 20; ++i)
+    for (int i = 0; i < 20; ++i) {
         values.emplace_back(i);
+    }
     auto in = Expr::in_list(r, "id", values);
     check(in.op == BinaryOp::In && in.args.size() == 2 &&
               in.args[1].literal.as_list()->size() == 20,
@@ -330,12 +347,13 @@ static void pagination_contracts() {
     check(query.id_set_pagination->max_ids == 3'000'000 &&
               query.id_set_pagination->ttl_seconds == 600,
           "ID-set defaults");
-    for (std::string_view blank : {"", " \t\r\n", "\xc2\xa0", "\xe3\x80\x80"})
+    for (std::string_view blank : {"", " \t\r\n", "\xc2\xa0", "\xe3\x80\x80"}) {
         rejects(
             [&] {
                 query.optimize_for_continuous_page_fetch_with(blank, 30);
             },
             "Unicode whitespace namespace rejected");
+    }
     rejects(
         [&] {
             query.optimize_for_continuous_page_fetch_with("valid", 0);
@@ -367,8 +385,9 @@ struct FailingResource : std::pmr::memory_resource {
     std::size_t live_blocks = 0;
 
     void* do_allocate(std::size_t bytes, std::size_t alignment) override {
-        if (fail)
+        if (fail) {
             throw std::bad_alloc();
+        }
         auto* block = std::pmr::new_delete_resource()->allocate(bytes, alignment);
         ++live_blocks;
         return block;

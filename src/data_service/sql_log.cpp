@@ -35,19 +35,23 @@ bool is_credential_log_name(std::string_view name) {
     char tail[16]{};
     std::size_t size = 0;
     for (unsigned char c : name) {
-        if (c >= 'A' && c <= 'Z')
+        if (c >= 'A' && c <= 'Z') {
             c += 32;
-        if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')))
+        }
+        if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))) {
             continue;
+        }
         if (size == sizeof(tail)) {
             std::move(tail + 1, tail + size, tail);
             --size;
         }
         tail[size++] = char(c);
-        for (auto word : words)
+        for (auto word : words) {
             if (size >= word.size() &&
-                std::string_view(tail + size - word.size(), word.size()) == word)
+                std::string_view(tail + size - word.size(), word.size()) == word) {
                 return true;
+            }
+        }
     }
     return false;
 }
@@ -77,22 +81,23 @@ String scalar_text(Memory r, const Value& value) {
     return std::visit(
         [&](const auto& item) -> String {
             using T = std::decay_t<decltype(item)>;
-            if constexpr (std::same_as<T, String>)
+            if constexpr (std::same_as<T, String>) {
                 return String(item, r);
-            else if constexpr (std::same_as<T, bool>)
+            } else if constexpr (std::same_as<T, bool>) {
                 return String(item ? "true" : "false", r);
-            else if constexpr (std::same_as<T, std::int64_t> || std::same_as<T, std::uint64_t>)
+            } else if constexpr (std::same_as<T, std::int64_t> || std::same_as<T, std::uint64_t>) {
                 return integer_text(r, item);
-            else if constexpr (std::same_as<T, double>) {
+            } else if constexpr (std::same_as<T, double>) {
                 String out(r);
                 detail::append_float(out, item, false);
                 return out;
-            } else if constexpr (std::same_as<T, Decimal> || std::same_as<T, Date>)
+            } else if constexpr (std::same_as<T, Decimal> || std::same_as<T, Date>) {
                 return item.to_string(r);
-            else if constexpr (std::same_as<T, Timestamp>)
+            } else if constexpr (std::same_as<T, Timestamp>) {
                 return integer_text(r, item.as_millis());
-            else
+            } else {
                 return String(r);
+            }
         },
         value.data);
 }
@@ -111,13 +116,15 @@ SqlIntentRedactions SqlIntentRedactions::from_bindings(Memory r,
         const auto& value = params[index];
         bool container =
             value.as_object() || value.as_list() || std::holds_alternative<Json>(value.data);
-        if (!statement_credential && policy == SqlParameterLogPolicy::Plain && !container)
+        if (!statement_credential && policy == SqlParameterLogPolicy::Plain && !container) {
             continue;
+        }
         bool forced = statement_credential || policy == SqlParameterLogPolicy::Unknown ||
                       policy == SqlParameterLogPolicy::Credential;
         if (auto text = value.try_text()) {
-            if (!text->empty())
+            if (!text->empty()) {
                 output.values_.emplace_back(*text, forced);
+            }
             continue;
         }
         Vector<const Value*> pending(r);
@@ -127,8 +134,9 @@ SqlIntentRedactions SqlIntentRedactions::from_bindings(Memory r,
         while (!pending.empty()) {
             auto* item = pending.back();
             pending.pop_back();
-            if (item->is_null())
+            if (item->is_null()) {
                 continue;
+            }
             if (auto* object = item->as_object()) {
                 for (const auto& [key, child] : *object) {
                     credential |= is_credential_log_name(key);
@@ -137,8 +145,9 @@ SqlIntentRedactions SqlIntentRedactions::from_bindings(Memory r,
                 continue;
             }
             if (auto* list = item->as_list()) {
-                for (const auto& child : *list)
+                for (const auto& child : *list) {
                     pending.push_back(&child);
+                }
                 continue;
             }
             if (auto* json = std::get_if<Json>(&item->data)) {
@@ -153,25 +162,30 @@ SqlIntentRedactions SqlIntentRedactions::from_bindings(Memory r,
                             json_pending.push_back(&nested);
                         }
                     } else if (auto* array = std::get_if<Json::Array>(&child->data)) {
-                        for (const auto& nested : *array)
+                        for (const auto& nested : *array) {
                             json_pending.push_back(&nested);
+                        }
                     } else if (!std::holds_alternative<std::monostate>(child->data)) {
                         auto* text = std::get_if<String>(&child->data);
                         auto rendered = text ? String(*text, r) : child->dump(r);
-                        if (!rendered.empty())
+                        if (!rendered.empty()) {
                             strings.emplace_back(std::move(rendered));
+                        }
                     }
                 }
                 continue;
             }
             auto text = scalar_text(r, *item);
-            if (!text.empty())
+            if (!text.empty()) {
                 strings.emplace_back(std::move(text));
+            }
         }
         forced = credential || policy == SqlParameterLogPolicy::Unknown;
-        if (forced || policy == SqlParameterLogPolicy::Masked)
-            for (const auto& text : strings)
+        if (forced || policy == SqlParameterLogPolicy::Masked) {
+            for (const auto& text : strings) {
                 output.values_.emplace_back(text, forced);
+            }
+        }
     }
     return output;
 }
@@ -187,26 +201,34 @@ SqlIntentRedactions SqlIntentRedactions::from_unclassified_query(Memory r,
         pending.pop_back();
         if (auto p = std::get_if<const SelectQuery*>(&node)) {
             const auto& q = **p;
-            if (q.predicate)
+            if (q.predicate) {
                 pending.emplace_back(&*q.predicate);
-            if (q.having_predicate)
+            }
+            if (q.having_predicate) {
                 pending.emplace_back(&*q.having_predicate);
-            for (const auto& field : q.expr_projection)
+            }
+            for (const auto& field : q.expr_projection) {
                 pending.emplace_back(&field.expr);
-            for (const auto& order : q.order_by)
-                if (order.expr)
+            }
+            for (const auto& order : q.order_by) {
+                if (order.expr) {
                     pending.emplace_back(&*order.expr);
-            if (q.search_text)
+                }
+            }
+            if (q.search_text) {
                 values.emplace_back(*q.search_text);
+            }
         } else {
             const auto& expr = **std::get_if<const Expr*>(&node);
-            if (expr.kind == Expr::Kind::Value)
+            if (expr.kind == Expr::Kind::Value) {
                 values.emplace_back(expr.literal);
-            else if (expr.kind != Expr::Kind::Column) {
-                for (const auto& arg : expr.args)
+            } else if (expr.kind != Expr::Kind::Column) {
+                for (const auto& arg : expr.args) {
                     pending.emplace_back(&arg);
-                if (expr.kind == Expr::Kind::SubQuery && expr.subquery_data)
+                }
+                if (expr.kind == Expr::Kind::SubQuery && expr.subquery_data) {
                     pending.emplace_back(&expr.subquery_data->query);
+                }
             }
         }
     }
@@ -214,11 +236,14 @@ SqlIntentRedactions SqlIntentRedactions::from_unclassified_query(Memory r,
 }
 
 void SqlIntentRedactions::extend(const SqlIntentRedactions& other) {
-    if (this == &other)
+    if (this == &other) {
         return;
-    for (const auto& value : other.values_)
-        if (std::find(values_.begin(), values_.end(), value) == values_.end())
+    }
+    for (const auto& value : other.values_) {
+        if (std::find(values_.begin(), values_.end(), value) == values_.end()) {
             values_.emplace_back(value);
+        }
+    }
 }
 
 void SqlIntentRedactions::capture_target_id(const Value& id) {
@@ -231,15 +256,18 @@ void SqlIntentRedactions::capture_target_id(const Value& id) {
         bool exists = std::any_of(values_.begin(), values_.end(), [&](const auto& entry) {
             return entry.text == value.text && entry.forced;
         });
-        if (!exists)
+        if (!exists) {
             values_.emplace_back(value.text, true);
+        }
     }
 }
 
 void SqlIntentRedactions::extend_secrets(bool allow_plaintext, Vector<String>& secrets) const {
-    for (const auto& entry : values_)
-        if (entry.forced || !allow_plaintext)
+    for (const auto& entry : values_) {
+        if (entry.forced || !allow_plaintext) {
             secrets.emplace_back(entry.text);
+        }
+    }
 }
 
 String SqlIntentRedactions::debug(Memory r) const {

@@ -37,8 +37,9 @@ inline void trim_start(std::string_view& value) {
                 break;
             }
         }
-        if (!matched)
+        if (!matched) {
             return;
+        }
     }
 }
 
@@ -46,12 +47,14 @@ inline void trim(std::string_view& value) {
     trim_start(value);
     while (!value.empty()) {
         auto start = value.size() - 1;
-        while (start && (static_cast<unsigned char>(value[start]) & 0xc0) == 0x80)
+        while (start && (static_cast<unsigned char>(value[start]) & 0xc0) == 0x80) {
             --start;
+        }
         auto tail = value.substr(start);
         trim_start(tail);
-        if (!tail.empty())
+        if (!tail.empty()) {
             break;
+        }
         value = value.substr(0, start);
     }
 }

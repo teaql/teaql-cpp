@@ -5,8 +5,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 class TestDialect : public SqlDialect {
@@ -59,15 +60,16 @@ struct Database {
         for (std::size_t i = 0; i < query.params.size(); ++i) {
             const auto& v = query.params[i];
             int result = SQLITE_ERROR;
-            if (v.is_null())
+            if (v.is_null()) {
                 result = sqlite3_bind_null(stmt, int(i + 1));
-            else if (auto p = std::get_if<std::int64_t>(&v.data))
+            } else if (auto p = std::get_if<std::int64_t>(&v.data)) {
                 result = sqlite3_bind_int64(stmt, int(i + 1), *p);
-            else if (auto p = std::get_if<std::uint64_t>(&v.data))
+            } else if (auto p = std::get_if<std::uint64_t>(&v.data)) {
                 result = sqlite3_bind_int64(stmt, int(i + 1), static_cast<sqlite3_int64>(*p));
-            else if (auto p = std::get_if<String>(&v.data))
+            } else if (auto p = std::get_if<String>(&v.data)) {
                 result = sqlite3_bind_text(
                     stmt, int(i + 1), p->data(), int(p->size()), SQLITE_TRANSIENT);
+            }
             check(result == SQLITE_OK, "bind supported test fixture value");
         }
         check(sqlite3_step(stmt) == SQLITE_DONE, "execute compiled mutation");
@@ -106,8 +108,9 @@ static void sqlite_execution() {
     model.mask_fields({"name"});
     auto ddl = dialect.compile_create_table(r, model);
     db.sql(ddl.c_str());
-    for (const auto& sql : dialect.schema_indexes_sqls(r, model))
+    for (const auto& sql : dialect.schema_indexes_sqls(r, model)) {
         db.sql(sql.c_str());
+    }
     check(
         db.scalar(
             "SELECT count(*) FROM sqlite_master WHERE type='index' AND name='PK_RECORDS_ID_VERSION'") ==

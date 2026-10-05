@@ -9,8 +9,9 @@ namespace rq = teaql::request;
 namespace ds = teaql::dynamic_search;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 struct NoDefaultAllocator {
@@ -35,8 +36,9 @@ static void selection_domain(const rq::QuerySelection& selection, Memory r) {
               selection.relation_filters.get_allocator().resource() == r,
           "selection domain");
     options_domain(selection.query_options, r);
-    for (const auto& child : selection.child_enhancements)
+    for (const auto& child : selection.child_enhancements) {
         selection_domain(child, r);
+    }
     for (const auto& relation : selection.relation_selections) {
         check(relation.name.get_allocator().resource() == r &&
                   relation.query.memory_resource() == r,
@@ -52,23 +54,28 @@ static void selection_domain(const rq::QuerySelection& selection, Memory r) {
 
 static void options_domain(const rq::QueryOptions& options, Memory r) {
     check(options.memory_resource() == r, "query options domain");
-    for (const auto* s : {&options.comment, &options.raw_sql})
-        if (*s)
+    for (const auto* s : {&options.comment, &options.raw_sql}) {
+        if (*s) {
             check((*s)->get_allocator().resource() == r, "optional option text domain");
-    for (const auto& p : options.dynamic_properties)
+        }
+    }
+    for (const auto& p : options.dynamic_properties) {
         check(p.property_name.get_allocator().resource() == r &&
                   p.raw_sql_segment.get_allocator().resource() == r,
               "dynamic property domain");
-    for (const auto& p : options.raw_projections)
+    }
+    for (const auto& p : options.raw_projections) {
         check(p.property_name.get_allocator().resource() == r &&
                   p.raw_sql_segment.get_allocator().resource() == r,
               "raw projection domain");
+    }
     for (const auto& a : options.relation_aggregates) {
         check(a.relation_name.get_allocator().resource() == r, "aggregate name domain");
         selection_domain(a.query, r);
     }
-    for (const auto& g : options.object_group_bys)
+    for (const auto& g : options.object_group_bys) {
         selection_domain(g.query, r);
+    }
     for (const auto& f : options.facets) {
         check(f.facet_name.get_allocator().resource() == r, "facet name domain");
         selection_domain(f.query, r);
@@ -367,8 +374,9 @@ struct FailingResource : std::pmr::memory_resource {
     std::size_t live = 0;
 
     void* do_allocate(std::size_t n, std::size_t a) override {
-        if (fail)
+        if (fail) {
             throw std::bad_alloc();
+        }
         auto p = std::pmr::new_delete_resource()->allocate(n, a);
         ++live;
         return p;

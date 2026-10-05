@@ -22,8 +22,9 @@ struct Loads : EntityDataServiceBehavior {
     Vector<String> values;
 
     Loads(std::allocator_arg_t, Allocator a, const Json& j) : values(a.resource()) {
-        for (const auto& v : items(j, "loads"))
+        for (const auto& v : items(j, "loads")) {
             values.emplace_back(text(v));
+        }
     }
 
     Vector<String> relation_loads(Memory r, const UserContext&) const override {
@@ -33,8 +34,9 @@ struct Loads : EntityDataServiceBehavior {
 
 static Json strings(Memory r, std::span<const String> values) {
     Json::Array out(r);
-    for (const auto& value : values)
+    for (const auto& value : values) {
         out.emplace_back(value);
+    }
     return Json(r, out);
 }
 
@@ -45,8 +47,9 @@ static Json expr_out(Memory r, const Expr& e) {
     detail::model_put(out, "name", e.name);
     detail::model_put(out, "value", detail::debug_value(r, e.literal));
     Json::Array args(r);
-    for (const auto& a : e.args)
+    for (const auto& a : e.args) {
         args.emplace_back(expr_out(r, a));
+    }
     detail::model_put(out, "args", args);
     return out;
 }
@@ -56,19 +59,22 @@ static SelectQuery query_in(Memory r, const Json& j) {
     {
         std::size_t i = 0;
         for (const auto& input : items(j, "order")) {
-            if (auto* name = optional(input, "field"))
+            if (auto* name = optional(input, "field")) {
                 q.order_by[i].field = text(*name);
+            }
             ++i;
         }
     }
     q.entity = optional(j, "entity") ? text(field(j, "entity")) : "Root";
-    if (auto* t = optional(j, "threshold"))
+    if (auto* t = optional(j, "threshold")) {
         q.top_n_probe_parent_threshold_value = integer(*t);
+    }
     for (const auto& load : items(j, "relations")) {
-        if (auto* nested = optional(load, "query"))
+        if (auto* nested = optional(load, "query")) {
             q.relations.emplace_back(text(field(load, "name")), query_in(r, *nested));
-        else
+        } else {
             q.relations.emplace_back(text(field(load, "name")));
+        }
     }
     return q;
 }
@@ -122,8 +128,9 @@ static Json plan_out(Memory r, const RelationLoadPlan& p) {
     detail::model_put(out, "many", p.many);
     detail::model_put(out, "query", p.query ? query_out(r, *p.query) : Json(r));
     Json::Array children(r);
-    for (const auto& child : p.children)
+    for (const auto& child : p.children) {
         children.emplace_back(plan_out(r, child));
+    }
     detail::model_put(out, "children", children);
     return out;
 }
@@ -151,8 +158,9 @@ static Json evaluate(UserContext& c, const Json& j) {
     Vector<CompactRow> rows(r);
     for (const auto& input : items(j, "rows")) {
         Record record(r);
-        for (const auto& [k, v] : std::get<Json::Object>(input.data))
+        for (const auto& [k, v] : std::get<Json::Object>(input.data)) {
             record.emplace(String(k, r), value(r, v));
+        }
         rows.emplace_back(record);
     }
     auto explicit_loads = optional(j, "query");

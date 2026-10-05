@@ -15,14 +15,16 @@ void number(String& out, std::int64_t value) {
 }
 
 bool ascii_equal(std::string_view a, std::string_view b) {
-    if (a.size() != b.size())
+    if (a.size() != b.size()) {
         return false;
+    }
     for (std::size_t i = 0; i < a.size(); ++i) {
         auto lower = [](char c) {
             return c >= 'A' && c <= 'Z' ? char(c + 32) : c;
         };
-        if (lower(a[i]) != lower(b[i]))
+        if (lower(a[i]) != lower(b[i])) {
             return false;
+        }
     }
     return true;
 }
@@ -54,12 +56,14 @@ struct Statement {
     sqlite3_stmt* stmt = nullptr;
 
     Statement(Memory r, sqlite3& db, std::string_view sql) : r(r), db(db) {
-        if (sql.size() > INT32_MAX)
+        if (sql.size() > INT32_MAX) {
             throw MutationExecutorError::sqlite(r, SQLITE_TOOBIG, "string or blob too big");
+        }
         const char* tail = nullptr;
         auto code = sqlite3_prepare_v2(&db, sql.data(), int(sql.size()), &stmt, &tail);
-        if (code != SQLITE_OK)
+        if (code != SQLITE_OK) {
             throw prepare_error(r, db, code, sql);
+        }
         try {
             bool extra = false;
             auto rest = sql;
@@ -67,13 +71,15 @@ struct Statement {
                 rest.remove_prefix(std::size_t(tail - rest.data()));
                 sqlite3_stmt* next = nullptr;
                 code = sqlite3_prepare_v2(&db, rest.data(), int(rest.size()), &next, &tail);
-                if (code != SQLITE_OK)
+                if (code != SQLITE_OK) {
                     throw prepare_error(r, db, code, rest);
+                }
                 extra |= next != nullptr;
                 sqlite3_finalize(next);
             }
-            if (extra)
+            if (extra) {
                 throw MutationExecutorError::sqlite(r, 0, "Multiple statements provided");
+            }
         } catch (...) {
             sqlite3_finalize(stmt);
             stmt = nullptr;
@@ -90,29 +96,34 @@ struct Statement {
     void bind(std::string_view text) {
         auto code =
             sqlite3_bind_text64(stmt, 1, text.data(), text.size(), SQLITE_TRANSIENT, SQLITE_UTF8);
-        if (code != SQLITE_OK)
+        if (code != SQLITE_OK) {
             throw error(r, db, code);
+        }
     }
 
     bool next() {
         auto code = sqlite3_step(stmt);
-        if (code == SQLITE_ROW)
+        if (code == SQLITE_ROW) {
             return true;
-        if (code == SQLITE_DONE)
+        }
+        if (code == SQLITE_DONE) {
             return false;
+        }
         throw error(r, db, code);
     }
 
     void exec() {
-        if (next())
+        if (next()) {
             throw MutationExecutorError::sqlite(
                 r, 0, "Execute returned results - did you mean to call query?");
+        }
     }
 
     void require_type(int index, int expected) {
         auto type = sqlite3_column_type(stmt, index);
-        if (type == expected)
+        if (type == expected) {
             return;
+        }
         String message("Invalid column type ", r);
         message += type == SQLITE_INTEGER ? "Integer"
                    : type == SQLITE_FLOAT ? "Real"
@@ -134,8 +145,9 @@ struct Statement {
     String text(int index) {
         require_type(index, SQLITE_TEXT);
         auto* data = reinterpret_cast<const char*>(sqlite3_column_text(stmt, index));
-        if (!data)
+        if (!data) {
             throw MutationExecutorError::sqlite(r, SQLITE_NOMEM, "out of memory");
+        }
         std::string_view value(data, std::size_t(sqlite3_column_bytes(stmt, index)));
         if (auto invalid = sqlite_utf8_error(r, value)) {
             *invalid += " at index ";
@@ -146,8 +158,9 @@ struct Statement {
     }
 
     std::optional<String> optional_text(int index) {
-        if (sqlite3_column_type(stmt, index) == SQLITE_NULL)
+        if (sqlite3_column_type(stmt, index) == SQLITE_NULL) {
             return {};
+        }
         return text(index);
     }
 };
@@ -192,15 +205,17 @@ void required_column(Memory r,
                      sqlite3& db,
                      const EntityDescriptor& e,
                      const PropertyDescriptor& p) {
-    if (p.nullable)
+    if (p.nullable) {
         return;
+    }
     String sql("SELECT EXISTS(SELECT 1 FROM ", r);
     sql += quote_identifier_if_needed(r, e.table_name, '"');
     sql += " LIMIT 1)";
     Statement s(r, db, sql);
     s.next();
-    if (!s.integer(0))
+    if (!s.integer(0)) {
         return;
+    }
     String message(
         "ensure schema cannot add required column without a deterministic backfill: entity=", r);
     message += e.name;
@@ -236,26 +251,32 @@ struct ForeignKeyRow {
 void foreign_keys(Memory r, sqlite3& db, std::span<const EntityDescriptor* const> entities) {
     for (auto* e : entities) {
         auto expected = sqlite_foreign_keys_for(r, *e, entities);
-        if (expected.empty())
+        if (expected.empty()) {
             continue;
+        }
         Vector<ForeignKeyRow> actual(r);
         {
             Statement s(r, db, pragma(r, "foreign_key_list", e->table_name));
-            while (s.next())
+            while (s.next()) {
                 actual.emplace_back(s);
+            }
         }
         for (const auto& key : expected) {
             bool found = false;
             std::optional<String> incompatible;
             for (const auto& candidate : actual) {
                 if (!ascii_equal(candidate.column, key[0]) ||
-                    !ascii_equal(candidate.table, key[1]) || !ascii_equal(candidate.target, key[2]))
+                    !ascii_equal(candidate.table, key[1]) ||
+                    !ascii_equal(candidate.target, key[2])) {
                     continue;
+                }
                 found = true;
                 std::size_t count = 0;
-                for (const auto& row : actual)
-                    if (row.id == candidate.id)
+                for (const auto& row : actual) {
+                    if (row.id == candidate.id) {
                         ++count;
+                    }
+                }
                 auto restricts = [](std::string_view action) {
                     return ascii_equal(action, "NO ACTION") || ascii_equal(action, "RESTRICT");
                 };
@@ -302,8 +323,9 @@ void foreign_keys(Memory r, sqlite3& db, std::span<const EntityDescriptor* const
                 message += "; rebuild/migrate the table explicitly before retrying";
                 throw MutationExecutorError::bind(r, message);
             }
-            if (incompatible)
+            if (incompatible) {
                 throw MutationExecutorError::bind(r, *incompatible);
+            }
         }
     }
 }
@@ -315,8 +337,9 @@ void index_shapes(Memory r, sqlite3& db, const EntityDescriptor& e) {
         {
             Statement s(r, db, "SELECT tbl_name FROM sqlite_master WHERE type='index' AND name=?1");
             s.bind(spec.name);
-            if (s.next())
+            if (s.next()) {
                 installed = s.text(0);
+            }
         }
         if (!installed) {
             String message("SQLite declared index missing: table=", r);
@@ -332,8 +355,9 @@ void index_shapes(Memory r, sqlite3& db, const EntityDescriptor& e) {
             while (s.next()) {
                 auto name = s.text(1);
                 auto unique = s.integer(2), partial = s.integer(4);
-                if (name != spec.name || flags != "None")
+                if (name != spec.name || flags != "None") {
                     continue;
+                }
                 flags = "Some((";
                 flags += debug_text(r, name);
                 flags += ", ";
@@ -355,10 +379,12 @@ void index_shapes(Memory r, sqlite3& db, const EntityDescriptor& e) {
                 auto desc = s.integer(3);
                 auto collation = s.text(4);
                 auto key = s.integer(5);
-                if (key != 1)
+                if (key != 1) {
                     continue;
-                if (count)
+                }
+                if (count) {
                     keys += ", ";
+                }
                 keys += '(';
                 number(keys, seq);
                 keys += ", ";
@@ -368,8 +394,9 @@ void index_shapes(Memory r, sqlite3& db, const EntityDescriptor& e) {
                     keys += "Some(";
                     keys += debug_text(r, *name);
                     keys += ')';
-                } else
+                } else {
                     keys += "None";
+                }
                 keys += ", ";
                 number(keys, desc);
                 keys += ", ";
@@ -396,8 +423,9 @@ void index_shapes(Memory r, sqlite3& db, const EntityDescriptor& e) {
             message += " on (";
             bool first = true;
             for (const auto& column : spec.columns) {
-                if (!first)
+                if (!first) {
                     message += ", ";
+                }
                 first = false;
                 message += column;
             }
@@ -419,8 +447,9 @@ void soundex_callback(sqlite3_context* context, int, sqlite3_value** values) noe
         auto* text = reinterpret_cast<const char*>(sqlite3_value_text(values[0]));
         if (text) {
             std::string_view value(text, std::size_t(sqlite3_value_bytes(values[0])));
-            if (sqlite_schema_utf8_valid(value))
+            if (sqlite_schema_utf8_valid(value)) {
                 input = value;
+            }
         }
     }
     auto result = sqlite_compatible_soundex(input);
@@ -457,8 +486,9 @@ void ensure_sqlite_physical_schema(Memory r,
                                            nullptr,
                                            nullptr,
                                            nullptr);
-    if (code != SQLITE_OK)
+    if (code != SQLITE_OK) {
         throw error(r, db, code);
+    }
     execute(r, db, "PRAGMA foreign_keys = true");
     execute(r, db, "BEGIN IMMEDIATE");
     try {
@@ -488,8 +518,9 @@ void ensure_sqlite_physical_schema(Memory r,
                         r, entity->name, entity->table_name, property.column_name));
                 }
             }
-            for (const auto& sql : dialect.schema_indexes_sqls(r, *entity))
+            for (const auto& sql : dialect.schema_indexes_sqls(r, *entity)) {
                 execute(r, db, sql);
+            }
             index_shapes(r, db, *entity);
             (void)context.send_event(RawAuditEvent::schema_verified(
                 r, entity->name, entity->table_name, entity->properties.size()));

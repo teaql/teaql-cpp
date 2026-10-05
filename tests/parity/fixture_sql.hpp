@@ -47,22 +47,29 @@ public:
 
 static EntityDescriptor entity(Memory r, const Json& input) {
     EntityDescriptor e(std::allocator_arg, Allocator(r), text(field(input, "name")));
-    if (auto p = optional(input, "table"))
+    if (auto p = optional(input, "table")) {
         e.table(text(*p));
-    if (auto p = optional(input, "declared"))
+    }
+    if (auto p = optional(input, "declared")) {
         e.audit_mask_fields_declared = std::get<bool>(p->data);
-    for (const auto& mask : items(input, "masked"))
+    }
+    for (const auto& mask : items(input, "masked")) {
         e.audit_mask_fields.emplace_back(text(mask));
+    }
     for (const auto& item : items(input, "properties")) {
         auto& p = e.property(text(field(item, "name")), DataType(integer(field(item, "type"))));
-        if (auto v = optional(item, "column"))
+        if (auto v = optional(item, "column")) {
             p.column(text(*v));
-        if (auto v = optional(item, "nullable"))
+        }
+        if (auto v = optional(item, "nullable")) {
             p.nullable = std::get<bool>(v->data);
-        if (auto v = optional(item, "id"))
+        }
+        if (auto v = optional(item, "id")) {
             p.is_id = std::get<bool>(v->data);
-        if (auto v = optional(item, "version"))
+        }
+        if (auto v = optional(item, "version")) {
             p.is_version = std::get<bool>(v->data);
+        }
         p.max_length = uint_option(item, "length");
         p.numeric_precision = uint_option(item, "precision");
         p.numeric_scale = uint_option(item, "scale");
@@ -74,14 +81,17 @@ static SelectQuery query(Memory, const Json&);
 
 static Expr expression(Memory r, const Json& input) {
     auto kind = text(field(input, "kind"));
-    if (kind == "column")
+    if (kind == "column") {
         return Expr::column(r, text(field(input, "name")));
-    if (kind == "value")
+    }
+    if (kind == "value") {
         return Expr::value(r, value(r, field(input, "value")));
-    if (kind == "binary")
+    }
+    if (kind == "binary") {
         return Expr::binary(expression(r, field(input, "left")),
                             BinaryOp(integer(field(input, "op"))),
                             expression(r, field(input, "right")));
+    }
     Expr out(r,
              kind == "function"   ? Expr::Kind::Function
              : kind == "subquery" ? Expr::Kind::SubQuery
@@ -91,62 +101,80 @@ static Expr expression(Memory r, const Json& input) {
              : kind == "not"      ? Expr::Kind::Not
              : kind == "and"      ? Expr::Kind::And
                                   : Expr::Kind::Or);
-    if (kind == "function")
+    if (kind == "function") {
         out.function_kind = ExprFunction(integer(field(input, "function")));
+    }
     if (kind == "subquery") {
         out.op = BinaryOp(integer(field(input, "op")));
         out.args.emplace_back(expression(r, field(input, "left")));
         auto e = entity(r, field(input, "entity"));
         auto q = query(r, field(input, "query"));
         out.subquery_data = detail::make_box<SubQueryExpr>(r, e, q);
-    } else
-        for (const auto& arg : items(input, "args"))
+    } else {
+        for (const auto& arg : items(input, "args")) {
             out.args.emplace_back(expression(r, arg));
+        }
+    }
     return out;
 }
 
 static SelectQuery query(Memory r, const Json& input) {
     SelectQuery q(std::allocator_arg, Allocator(r), "FixtureQuery");
-    for (const auto& name : items(input, "projection"))
+    for (const auto& name : items(input, "projection")) {
         q.project(text(name));
-    for (const auto& p : items(input, "expr_projection"))
+    }
+    for (const auto& p : items(input, "expr_projection")) {
         q.project_expr(text(field(p, "alias")), expression(r, field(p, "expr")));
-    for (const auto& name : items(input, "group"))
+    }
+    for (const auto& name : items(input, "group")) {
         q.group_by(text(name));
-    for (const auto& p : items(input, "raw_projection"))
+    }
+    for (const auto& p : items(input, "raw_projection")) {
         q.project_raw(text(field(p, "alias")), text(field(p, "sql")));
-    for (const auto& p : items(input, "dynamic"))
+    }
+    for (const auto& p : items(input, "dynamic")) {
         q.dynamic_property_raw(text(field(p, "alias")), text(field(p, "sql")));
-    for (const auto& p : items(input, "raw_criteria"))
+    }
+    for (const auto& p : items(input, "raw_criteria")) {
         q.raw_sql_search_criteria.emplace_back(text(p));
-    for (const auto& a : items(input, "aggregates"))
+    }
+    for (const auto& a : items(input, "aggregates")) {
         q.aggregates.emplace_back(AggregateFunction(integer(field(a, "function"))),
                                   text(field(a, "field")),
                                   text(field(a, "alias")));
+    }
     for (const auto& order : items(input, "order")) {
         auto d = SortDirection(integer(field(order, "direction")));
-        if (auto p = optional(order, "expr"))
+        if (auto p = optional(order, "expr")) {
             q.order_by.emplace_back(expression(r, *p), d);
-        else
+        } else {
             q.order_by.emplace_back(text(field(order, "field")), d);
+        }
     }
-    if (auto p = optional(input, "filter"))
+    if (auto p = optional(input, "filter")) {
         q.predicate.emplace(expression(r, *p));
-    if (auto p = optional(input, "having"))
+    }
+    if (auto p = optional(input, "having")) {
         q.having_predicate.emplace(expression(r, *p));
-    if (auto p = optional(input, "search"))
+    }
+    if (auto p = optional(input, "search")) {
         q.search_text.emplace(text(*p), r);
-    if (auto p = optional(input, "partition"))
+    }
+    if (auto p = optional(input, "partition")) {
         q.partition_field.emplace(text(*p), r);
-    if (auto p = optional(input, "raw_sql"))
+    }
+    if (auto p = optional(input, "raw_sql")) {
         q.raw_sql_text.emplace(text(*p), r);
-    if (auto p = optional(input, "comment"))
+    }
+    if (auto p = optional(input, "comment")) {
         q.comment_text.emplace(text(*p), r);
+    }
     if (auto p = optional(input, "slice")) {
         q.slice.emplace();
         q.slice->offset = integer(field(*p, "offset"));
-        if (auto v = optional(*p, "limit"))
+        if (auto v = optional(*p, "limit")) {
             q.slice->limit = integer(*v);
+        }
     }
     return q;
 }

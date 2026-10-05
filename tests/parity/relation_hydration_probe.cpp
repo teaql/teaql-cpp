@@ -6,8 +6,9 @@ using namespace hydration_fixture;
 
 static Json row_out(Memory r, const CompactRow& row) {
     auto j = detail::model_json(r);
-    for (const auto& key : row.keys())
+    for (const auto& key : row.keys()) {
         detail::model_put(j, key, detail::debug_value(r, *row.get(key)));
+    }
     return j;
 }
 
@@ -15,8 +16,9 @@ static Vector<CompactRow> rows_in(Memory r, const Json::Array& values) {
     Vector<CompactRow> rows(r);
     for (const auto& row : values) {
         Record fields(r);
-        for (const auto& [key, v] : std::get<Json::Object>(row.data))
+        for (const auto& [key, v] : std::get<Json::Object>(row.data)) {
             fields.emplace(String(key, r), value(r, v));
+        }
         rows.emplace_back(fields);
     }
     return rows;
@@ -31,13 +33,16 @@ static RelationLoadPlan plan_in(Memory r, const Json& j, std::string_view parent
     RelationLoadPlan p(std::allocator_arg, Allocator(r), parent, relation);
     if (auto* q = optional(j, "query")) {
         p.query.emplace(query(r, *q));
-        if (auto* threshold = optional(*q, "threshold"))
+        if (auto* threshold = optional(*q, "threshold")) {
             p.query->top_n_probe_parent_threshold_value = integer(*threshold);
-        for (const auto& name : items(*q, "relations"))
+        }
+        for (const auto& name : items(*q, "relations")) {
             p.query->relations.emplace_back(text(name));
+        }
     }
-    for (const auto& child : items(j, "children"))
+    for (const auto& child : items(j, "children")) {
         p.children.emplace_back(plan_in(r, child, p.target_entity));
+    }
     return p;
 }
 
@@ -149,8 +154,9 @@ struct Fetch {
                 wake.notify();
                 return {};
             }
-            if (index == integer(field(fetch.input, "fail_at")))
+            if (index == integer(field(fetch.input, "fail_at"))) {
                 return R::err(r, DataServiceError<String>::executor(r, String("fetch failed", r)));
+            }
             auto replies = items(fetch.input, "responses");
             return R::ok(r,
                          index <= replies.size()
@@ -178,8 +184,9 @@ struct Fetch {
             detail::model_put(node, "comment", n.comment);
             lineage.emplace_back(std::move(node));
         }
-        for (const auto& rel : q.relations)
+        for (const auto& rel : q.relations) {
             relations.emplace_back(rel.name);
+        }
         detail::model_put(call, "trace", lineage);
         detail::model_put(call, "relations", relations);
         calls.emplace_back(std::move(call));
@@ -191,8 +198,9 @@ struct Fetch {
 template <unsigned K>
 static Json model_out(Memory r, const Model<K>& m, Vector<EntityRuntimeState>& states) {
     auto j = row_out(r, m.row);
-    if (m.state)
+    if (m.state) {
         states.emplace_back(*m.state);
+    }
     return j;
 }
 
@@ -202,7 +210,7 @@ static Json evaluate(UserContext& c, const Json& j) {
     for (auto name : {"Parent", "Child", "Leaf"}) {
         EntityDescriptor e(std::allocator_arg, Allocator(r), name);
         e.property("id", DataType::U64).is_id = true;
-        for (const auto& relation : items(j, "metadata"))
+        for (const auto& relation : items(j, "metadata")) {
             if (text(field(relation, "entity")) == name) {
                 auto& p =
                     e.relation(text(field(relation, "name")), text(field(relation, "target")));
@@ -210,17 +218,19 @@ static Json evaluate(UserContext& c, const Json& j) {
                 p.foreign_key = text(field(relation, "foreign"));
                 p.many = std::get<bool>(field(relation, "many").data);
             }
+        }
         store.register_entity(std::move(e));
     }
     c.set_metadata(c, store);
     auto& decoders = c.make<InMemoryEntityGraphDecoderRegistry>();
     for (const auto& name : items(j, "register")) {
-        if (text(name) == "Parent")
+        if (text(name) == "Parent") {
             decoders.register_entity<Model<0>>();
-        else if (text(name) == "Child")
+        } else if (text(name) == "Child") {
             decoders.register_entity<Model<1>>();
-        else
+        } else {
             decoders.register_entity<Model<2>>();
+        }
     }
     c.set_entity_graph_decoder_registry(decoders);
     auto& telemetry_state = c.make<TelemetryState>();
@@ -240,8 +250,9 @@ static Json evaluate(UserContext& c, const Json& j) {
     auto& parents =
         c.make<Vector<CompactRow>>(rows_in(r, std::get<Json::Array>(field(j, "parents").data)));
     auto& plans = c.make<Vector<RelationLoadPlan>>();
-    for (const auto& p : items(j, "plans"))
+    for (const auto& p : items(j, "plans")) {
         plans.emplace_back(plan_in(r, p, "Parent"));
+    }
     auto& root = c.make<EntityRuntimeState>();
     auto& graph = c.make<EntityGraphBuilder>();
     auto out = detail::model_json(r);
@@ -250,56 +261,66 @@ static Json evaluate(UserContext& c, const Json& j) {
         auto replies = items(j, "responses");
         auto children = replies.empty() ? Vector<CompactRow>(r)
                                         : rows_in(r, std::get<Json::Array>(replies[0].data));
-        if (mode == "attach")
+        if (mode == "attach") {
             detail::attach_relation_rows(c, parents, plans[0], std::move(children));
-        else {
+        } else {
             auto result = detail::install_compact_flat_relation(
                 c, parents, plans[0], std::move(children), root, graph);
-            if (!result)
+            if (!result) {
                 detail::model_put(out, "error", result.error().to_string(r));
+            }
         }
     } else {
         auto& operation =
             [&]() -> AsyncOperation<detail::RelationHydrationResult<UnusedExecutor>>& {
-            if (mode == "embedded")
+            if (mode == "embedded") {
                 return detail::enhance_relation_plans(service, parents, plans, call);
-            if (mode == "flat")
+            }
+            if (mode == "flat") {
                 return detail::hydrate_flat_plans(service, parents, plans, root, graph, call);
+            }
             return detail::hydrate_compact_flat_plans(service, parents, plans, root, graph, call);
         }();
         bool ready = false;
-        for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i)
+        for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i) {
             if (auto* result = operation.poll()) {
                 ready = true;
-                if (!*result)
+                if (!*result) {
                     detail::model_put(out, "error", result->error().to_string(r));
+                }
                 break;
             }
+        }
         if (!ready) {
             operation.cancel();
             detail::model_put(out, "cancelled", true);
         }
     }
     Json::Array parent_rows(r);
-    for (const auto& row : parents)
+    for (const auto& row : parents) {
         parent_rows.emplace_back(row_out(r, row));
+    }
     detail::model_put(out, "parents", parent_rows);
     detail::model_put(out, "entity_count", graph.entity_count());
     detail::model_put(out, "relation_count", graph.relation_list_count());
-    if (!root.freeze_graph(std::move(graph)))
+    if (!root.freeze_graph(std::move(graph))) {
         throw std::logic_error("freeze failed");
+    }
     Vector<EntityRuntimeState> states(r);
     Json::Array entities(r), relations(r);
     std::pmr::set<String, std::less<>> names(r);
     auto collect = [&](auto&& self, const RelationLoadPlan& p) -> void {
         names.emplace(p.relation_name);
-        for (const auto& child : p.children)
+        for (const auto& child : p.children) {
             self(self, child);
+        }
     };
-    for (const auto& p : plans)
+    for (const auto& p : plans) {
         collect(collect, p);
-    for (const auto& m : items(j, "metadata"))
+    }
+    for (const auto& m : items(j, "metadata")) {
         names.emplace(text(field(m, "name")));
+    }
     auto inspect = [&]<unsigned K>() {
         for (unsigned id = 0; id <= 32; ++id) {
             if (auto* m = root.resolve_entity<Model<K>>(id)) {
@@ -309,12 +330,13 @@ static Json evaluate(UserContext& c, const Json& j) {
                 detail::model_put(item, "row", model_out(r, *m, states));
                 entities.emplace_back(std::move(item));
             }
-            for (auto owner : {"Parent", "Child", "Leaf"})
+            for (auto owner : {"Parent", "Child", "Leaf"}) {
                 for (const auto& name : names) {
                     auto* list = root.resolve_relation_list<Model<K>>(owner, id, name);
                     auto* optional = root.resolve_relation_option<Model<K>>(owner, id, name);
-                    if (!list && !optional)
+                    if (!list && !optional) {
                         continue;
+                    }
                     auto item = detail::model_json(r);
                     detail::model_put(item, "kind", K);
                     detail::model_put(item, "owner", owner);
@@ -324,15 +346,18 @@ static Json evaluate(UserContext& c, const Json& j) {
                     Json rows(r);
                     if (list) {
                         Json::Array values(r);
-                        for (const auto& m : *list)
+                        for (const auto& m : *list) {
                             values.emplace_back(model_out(r, m, states));
+                        }
                         rows = Json(r, values);
                         detail::model_put(item, "loaded", list->is_loaded);
-                    } else if (*optional)
+                    } else if (*optional) {
                         rows = model_out(r, **optional, states);
+                    }
                     detail::model_put(item, "rows", rows);
                     relations.emplace_back(std::move(item));
                 }
+            }
         }
     };
     inspect.template operator()<0>();
@@ -343,8 +368,9 @@ static Json evaluate(UserContext& c, const Json& j) {
     Json::Array ledger(r);
     for (std::size_t i = 0; i < states.size(); ++i) {
         std::size_t k = 0;
-        while (k < i && !(states[k] == states[i]))
+        while (k < i && !(states[k] == states[i])) {
             ++k;
+        }
         ledger.emplace_back(k);
     }
     detail::model_put(out, "ledger", ledger);
@@ -352,8 +378,9 @@ static Json evaluate(UserContext& c, const Json& j) {
     detail::model_put(out, "drops", fetch.drops);
     detail::model_put(out, "capabilities", executor.capability_calls);
     Json::Array events(r);
-    for (const auto& event : telemetry_state.events)
+    for (const auto& event : telemetry_state.events) {
         events.emplace_back(event);
+    }
     detail::model_put(out, "events", events);
     detail::model_put(out, "depth", telemetry_state.depth);
     return out;

@@ -8,8 +8,9 @@ using namespace decoder_fixture;
 using Access = detail::ContextEntityAccess;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>

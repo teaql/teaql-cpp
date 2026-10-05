@@ -11,8 +11,9 @@ static Json evaluate(Memory r, const Json& j) {
     if (op == "key") {
         EntityKey k(
             std::allocator_arg, Allocator(r), text(field(j, "entity")), value(r, field(j, "id")));
-        if (auto* mutation = optional(j, "mutated"))
+        if (auto* mutation = optional(j, "mutated")) {
             k.id = value(r, *mutation);
+        }
         return Json(r, k.debug(r));
     }
     if (op == "bound") {
@@ -35,10 +36,11 @@ static Json evaluate(Memory r, const Json& j) {
                                        "TEAQL_TOOL_LOG_FOCUS"};
     for (auto n : names) {
         auto* v = optional(field(j, "env"), n);
-        if (v && std::holds_alternative<String>(v->data))
+        if (v && std::holds_alternative<String>(v->data)) {
             setenv(n.data(), std::get<String>(v->data).c_str(), 1);
-        else
+        } else {
             unsetenv(n.data());
+        }
     }
     auto config = LogConfig::load(r);
     auto out = detail::model_json(r);
@@ -49,11 +51,13 @@ static Json evaluate(Memory r, const Json& j) {
                                    Json(r, unsigned(config.tool_level))},
                                   r));
     auto list = [&](const std::optional<Vector<String>>& v) {
-        if (!v)
+        if (!v) {
             return Json(r);
+        }
         Json::Array a(r);
-        for (const auto& s : *v)
+        for (const auto& s : *v) {
             a.emplace_back(s);
+        }
         return Json(r, a);
     };
     detail::model_put(out, "entities", list(config.audit_entities));
@@ -74,8 +78,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto j = Json::parse(r, line);
-        if (!j)
+        if (!j) {
             throw std::runtime_error("invalid JSON");
+        }
         std::cout << evaluate(r, *j).dump(r) << '\n';
     }
 }

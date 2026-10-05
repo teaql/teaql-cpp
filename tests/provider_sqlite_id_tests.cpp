@@ -10,8 +10,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 static void sql(SqliteConnection& connection, const char* text) {
@@ -110,7 +111,7 @@ static void concurrent_connections() {
     std::array<std::array<std::uint64_t, count>, workers> ids{};
     std::array<std::thread, workers> threads;
     std::atomic<bool> failed = false;
-    for (std::size_t index = 0; index < workers; ++index)
+    for (std::size_t index = 0; index < workers; ++index) {
         threads[index] = std::thread([&, index] {
             try {
                 GlobalContext owned;
@@ -131,16 +132,20 @@ static void concurrent_connections() {
                 failed = true;
             }
         });
-    for (auto& thread : threads)
+    }
+    for (auto& thread : threads) {
         thread.join();
+    }
     check(!failed, "native busy/locked contention recovers within retry budget");
     std::array<std::uint64_t, workers * count> sorted{};
-    for (std::size_t index = 0; index < workers; ++index)
+    for (std::size_t index = 0; index < workers; ++index) {
         std::copy(ids[index].begin(), ids[index].end(), sorted.begin() + index * count);
+    }
     std::sort(sorted.begin(), sorted.end());
-    for (std::size_t n = 0; n < sorted.size(); ++n)
+    for (std::size_t n = 0; n < sorted.size(); ++n) {
         check(sorted[n] == n + 1,
               "CAS IDs across real SQLite connections are unique and contiguous");
+    }
 }
 
 int main() {

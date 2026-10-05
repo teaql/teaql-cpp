@@ -12,8 +12,9 @@ public:
     template <class T>
     AsyncOperation<T>& track(AsyncOperation<T>& operation) {
         try {
-            if (operation.memory_resource() != entries_.get_allocator().resource())
+            if (operation.memory_resource() != entries_.get_allocator().resource()) {
                 throw std::invalid_argument("Transaction operation belongs to a different Context");
+            }
             entries_.push_back({&operation, [](const void* p) {
                                     return static_cast<const AsyncOperation<T>*>(p)->status() ==
                                            AsyncStatus::Pending;
@@ -28,8 +29,9 @@ public:
     template <class T>
     AsyncStream<T>& track(AsyncStream<T>& stream) {
         try {
-            if (stream.memory_resource() != entries_.get_allocator().resource())
+            if (stream.memory_resource() != entries_.get_allocator().resource()) {
                 throw std::invalid_argument("Transaction stream belongs to a different Context");
+            }
             entries_.push_back({&stream, [](const void* p) {
                                     return static_cast<const AsyncStream<T>*>(p)->status() ==
                                            StreamStatus::Open;
@@ -42,9 +44,11 @@ public:
     }
 
     bool any() const {
-        for (const auto& entry : entries_)
-            if (entry.pending(entry.operation))
+        for (const auto& entry : entries_) {
+            if (entry.pending(entry.operation)) {
                 return true;
+            }
+        }
         return false;
     }
 

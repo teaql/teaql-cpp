@@ -9,10 +9,12 @@ public:
     ModelReader(const Json& input, std::size_t count)
         : object_(std::get_if<Json::Object>(&input.data)),
           array_(std::get_if<Json::Array>(&input.data)) {
-        if (!object_ && !array_)
+        if (!object_ && !array_) {
             throw ModelDecodeError{ModelDecodeError::Code::ExpectedStruct, {}};
-        if (array_ && array_->size() > count)
+        }
+        if (array_ && array_->size() > count) {
             throw ModelDecodeError{ModelDecodeError::Code::ExtraElements, {}};
+        }
     }
 
     const Json* field(std::string_view name,
@@ -21,15 +23,19 @@ public:
                       bool defaulted = false) const {
         if (object_) {
             auto it = object_->find(name);
-            if (it != object_->end())
+            if (it != object_->end()) {
                 return &it->second;
-            if (optional || defaulted)
+            }
+            if (optional || defaulted) {
                 return nullptr;
+            }
         } else {
-            if (index < array_->size())
+            if (index < array_->size()) {
                 return &(*array_)[index];
-            if (defaulted)
+            }
+            if (defaulted) {
                 return nullptr;
+            }
         }
         throw ModelDecodeError{ModelDecodeError::Code::MissingField, name};
     }
@@ -40,15 +46,17 @@ private:
 };
 
 inline const String& model_string(const Json& value, std::string_view field) {
-    if (auto* s = std::get_if<String>(&value.data))
+    if (auto* s = std::get_if<String>(&value.data)) {
         return *s;
+    }
     throw ModelDecodeError{ModelDecodeError::Code::ExpectedString, field};
 }
 
 inline std::optional<String>
 model_optional_string(Memory r, const Json* value, std::string_view field) {
-    if (!value || std::holds_alternative<std::monostate>(value->data))
+    if (!value || std::holds_alternative<std::monostate>(value->data)) {
         return {};
+    }
     return String(model_string(*value, field), r);
 }
 
@@ -56,33 +64,40 @@ template <class T>
 T model_integer(const Json& value, std::string_view field) {
     if (auto* n = std::get_if<std::int64_t>(&value.data)) {
         if constexpr (std::is_signed_v<T>) {
-            if (*n >= std::numeric_limits<T>::min() && *n <= std::numeric_limits<T>::max())
+            if (*n >= std::numeric_limits<T>::min() && *n <= std::numeric_limits<T>::max()) {
                 return T(*n);
-        } else if (*n >= 0 && std::uint64_t(*n) <= std::numeric_limits<T>::max())
+            }
+        } else if (*n >= 0 && std::uint64_t(*n) <= std::numeric_limits<T>::max()) {
             return T(*n);
+        }
     }
-    if (auto* n = std::get_if<std::uint64_t>(&value.data))
-        if (*n <= std::uint64_t(std::numeric_limits<T>::max()))
+    if (auto* n = std::get_if<std::uint64_t>(&value.data)) {
+        if (*n <= std::uint64_t(std::numeric_limits<T>::max())) {
             return T(*n);
+        }
+    }
     throw ModelDecodeError{ModelDecodeError::Code::ExpectedInteger, field};
 }
 
 inline const Json::Array& model_array(const Json& value, std::string_view field) {
-    if (auto* a = std::get_if<Json::Array>(&value.data))
+    if (auto* a = std::get_if<Json::Array>(&value.data)) {
         return *a;
+    }
     throw ModelDecodeError{ModelDecodeError::Code::ExpectedArray, field};
 }
 
 inline const Json::Object& model_object(const Json& value, std::string_view field) {
-    if (auto* o = std::get_if<Json::Object>(&value.data))
+    if (auto* o = std::get_if<Json::Object>(&value.data)) {
         return *o;
+    }
     throw ModelDecodeError{ModelDecodeError::Code::ExpectedObject, field};
 }
 
 template <class T>
 T decoded(ModelResult<T> result) {
-    if (!result)
+    if (!result) {
         throw result.error();
+    }
     return std::move(result).value();
 }
 
@@ -109,7 +124,8 @@ void model_put(Json& object, std::string_view field, T&& value) {
 
 inline void
 model_optional(Json& object, std::string_view field, const std::optional<String>& value) {
-    if (value)
+    if (value) {
         model_put(object, field, *value);
+    }
 }
 }

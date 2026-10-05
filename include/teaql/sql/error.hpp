@@ -60,13 +60,13 @@ public:
     // Custom error enums can use the explicit formatter overload.
     String to_string(Memory r) const {
         auto format = [&](const E& e) -> String {
-            if constexpr (requires { e.to_string(r); })
+            if constexpr (requires { e.to_string(r); }) {
                 return String(e.to_string(r), r);
-            else if constexpr (requires { e.what(); })
+            } else if constexpr (requires { e.what(); }) {
                 return String(e.what(), r);
-            else if constexpr (std::is_convertible_v<const E&, std::string_view>)
+            } else if constexpr (std::is_convertible_v<const E&, std::string_view>) {
                 return String(std::string_view(e), r);
-            else {
+            } else {
                 static_assert(sizeof(E) == 0, "Transport error needs a display formatter");
             }
         };

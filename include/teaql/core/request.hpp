@@ -52,10 +52,11 @@ concept EntityReference =
 template <EntityReference T>
 Value entity_id_value(Memory r, T&& value) {
     if constexpr (std::same_as<std::remove_cvref_t<T>, Value> ||
-                  std::same_as<std::remove_cvref_t<T>, std::uint64_t>)
+                  std::same_as<std::remove_cvref_t<T>, std::uint64_t>) {
         return Value(r, std::forward<T>(value));
-    else
+    } else {
         return Value(r, std::forward<T>(value).entity_id_value());
+    }
 }
 
 class UnsafeRawSqlSegment {
@@ -321,8 +322,9 @@ void merge_outer_filter_into_facet_aggregates(QuerySelection&, const SelectQuery
 template <class T>
 void attach_facets(SmartList<T>& rows,
                    const std::pmr::map<String, SmartList<CompactRow>, std::less<>>& facets) {
-    for (const auto& [name, facet] : facets)
+    for (const auto& [name, facet] : facets) {
         rows.with_facet(name, facet);
+    }
 }
 
 Expr field_operator_expr(Memory, std::string_view, FieldOperator, std::span<const Value>);

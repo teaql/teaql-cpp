@@ -5,8 +5,9 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 static void rendering() {
@@ -109,10 +110,12 @@ public:
 
 private:
     void* do_allocate(std::size_t n, std::size_t a) override {
-        if (remaining == 0)
+        if (remaining == 0) {
             throw std::bad_alloc{};
-        if (remaining > 0)
+        }
+        if (remaining > 0) {
             --remaining;
+        }
         return std::pmr::new_delete_resource()->allocate(n, a);
     }
 

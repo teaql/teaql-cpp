@@ -99,10 +99,11 @@ public:
             detail::resource_arena(r), owner.memory_resource(), behavior);
         EntityBehaviorBorrow value(std::allocator_arg, Allocator(r), behavior, *entry.owner);
         auto found = behaviors_.find(entity);
-        if (found == behaviors_.end())
+        if (found == behaviors_.end()) {
             behaviors_.emplace(String(entity, r), std::move(value));
-        else
+        } else {
             detail::assign_scoped(found->second, std::move(value));
+        }
     }
 
     template <class Owner, class T>
@@ -115,8 +116,9 @@ public:
 
     std::optional<EntityBehaviorBorrow> behavior(Memory r, std::string_view entity) const override {
         auto found = behaviors_.find(entity);
-        if (found == behaviors_.end())
+        if (found == behaviors_.end()) {
             return {};
+        }
         return detail::clone_in(r, found->second);
     }
 

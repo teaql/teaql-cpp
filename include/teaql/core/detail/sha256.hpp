@@ -24,16 +24,20 @@ public:
         std::uint8_t byte = 0x80;
         update({&byte, 1});
         byte = 0;
-        while (used_ != 56)
+        while (used_ != 56) {
             update({&byte, 1});
+        }
         std::array<std::uint8_t, 8> length{};
-        for (unsigned i = 0; i < 8; ++i)
+        for (unsigned i = 0; i < 8; ++i) {
             length[7 - i] = std::uint8_t(bits >> (i * 8));
+        }
         update(length);
         std::array<std::uint8_t, 32> digest{};
-        for (unsigned i = 0; i < 8; ++i)
-            for (unsigned j = 0; j < 4; ++j)
+        for (unsigned i = 0; i < 8; ++i) {
+            for (unsigned j = 0; j < 4; ++j) {
                 digest[i * 4 + j] = std::uint8_t(state_[i] >> (24 - j * 8));
+            }
+        }
         return digest;
     }
 
@@ -51,9 +55,11 @@ private:
             0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7,
             0xc67178f2};
         std::array<std::uint32_t, 64> w{};
-        for (unsigned i = 0; i < 16; ++i)
-            for (unsigned j = 0; j < 4; ++j)
+        for (unsigned i = 0; i < 16; ++i) {
+            for (unsigned j = 0; j < 4; ++j) {
                 w[i] = (w[i] << 8) | buffer_[4 * i + j];
+            }
+        }
         for (unsigned i = 16; i < 64; ++i) {
             auto a = w[i - 15], b = w[i - 2];
             w[i] = w[i - 16] + (std::rotr(a, 7) ^ std::rotr(a, 18) ^ (a >> 3)) + w[i - 7] +

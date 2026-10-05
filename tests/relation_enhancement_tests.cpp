@@ -11,8 +11,9 @@ using namespace teaql;
 using Access = detail::EntityDataServiceAccess;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -29,8 +30,9 @@ static void rejected(F&& fn, const char* message) {
 static CompactRow row(Memory r,
                       std::initializer_list<std::pair<std::string_view, std::uint64_t>> fields) {
     Record values(r);
-    for (auto [name, value] : fields)
+    for (auto [name, value] : fields) {
         values.emplace(String(name, r), Value(r, value));
+    }
     return CompactRow(std::allocator_arg, Allocator(r), values);
 }
 
@@ -189,8 +191,9 @@ struct NativeWork {
         : r(a.resource()), repo(repo), query(std::allocator_arg, a, std::move(q)), counts(counts) {}
 
     ~NativeWork() {
-        if (worker.joinable())
+        if (worker.joinable()) {
             std::terminate();
+        }
     }
 
     std::optional<Rows> poll(WakeSignal& wake) {
@@ -205,8 +208,9 @@ struct NativeWork {
             });
             return {};
         }
-        if (!done.load())
+        if (!done.load()) {
             return {};
+        }
         Vector<CompactRow> rows(r);
         rows.emplace_back(row(r, {{"id", 1}, {"parent_id", 1}, {"count", 5}}));
         return Rows::ok(r, std::move(rows));
@@ -221,8 +225,9 @@ struct NativeWork {
 
     void stop() noexcept {
         release();
-        if (worker.joinable())
+        if (worker.joinable()) {
             worker.join();
+        }
         ++counts.stops;
     }
 
@@ -367,9 +372,11 @@ int main() {
         setenv("TEAQL_LOG_ENDPOINT", "off", 1);
         auto* old = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         sqlite_enhancements();
-        for (unsigned mode = 0; mode < 3; ++mode)
-            for (unsigned action = 0; action < 3; ++action)
+        for (unsigned mode = 0; mode < 3; ++mode) {
+            for (unsigned action = 0; action < 3; ++action) {
                 native_lifetime(mode, action);
+            }
+        }
         domains_and_aliases();
         std::pmr::set_default_resource(old);
         std::cout << "Relation enhancement, SQLite and lifetime contracts passed\n";

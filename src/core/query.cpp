@@ -6,8 +6,9 @@ namespace {
 template <class T>
 void copy_items(Vector<T>& target, const Vector<T>& source) {
     target.reserve(source.size());
-    for (const auto& item : source)
+    for (const auto& item : source) {
         target.emplace_back(item);
+    }
 }
 
 void set_text(std::optional<String>& target, Memory r, std::string_view text) {
@@ -16,14 +17,16 @@ void set_text(std::optional<String>& target, Memory r, std::string_view text) {
 }
 
 void clone_optional(std::optional<String>& target, Memory r, const std::optional<String>& source) {
-    if (source)
+    if (source) {
         target.emplace(*source, r);
+    }
 }
 
 template <class T>
 void clone_optional(std::optional<T>& target, Memory r, const std::optional<T>& source) {
-    if (source)
+    if (source) {
         target.emplace(std::allocator_arg, Allocator(r), *source);
+    }
 }
 
 bool blank_namespace(std::string_view value) {
@@ -100,8 +103,9 @@ RelationLoad::RelationLoad(std::allocator_arg_t,
 
 RelationLoad::RelationLoad(std::allocator_arg_t, Allocator a, const RelationLoad& other)
     : RelationLoad(std::allocator_arg, a, other.name) {
-    if (other.query)
+    if (other.query) {
         query = detail::make_box<SelectQuery>(a.resource(), *other.query);
+    }
 }
 
 RelationLoad::RelationLoad(std::allocator_arg_t, Allocator a, RelationLoad&& other)
@@ -134,10 +138,12 @@ ContinuousPageFetchOptions::ContinuousPageFetchOptions(std::allocator_arg_t,
                                                        std::string_view name,
                                                        std::uint64_t ttl)
     : namespace_name(name, a.resource()), ttl_seconds(ttl) {
-    if (blank_namespace(name))
+    if (blank_namespace(name)) {
         throw std::invalid_argument("continuous page namespace must not be empty");
-    if (!ttl)
+    }
+    if (!ttl) {
         throw std::invalid_argument("continuous page ttl_seconds must be positive");
+    }
 }
 
 ContinuousPageFetchOptions::ContinuousPageFetchOptions(std::allocator_arg_t,
@@ -151,12 +157,15 @@ IdSetPaginationOptions::IdSetPaginationOptions(std::allocator_arg_t,
                                                std::uint64_t ttl,
                                                std::uint64_t maximum)
     : namespace_name(name, a.resource()), ttl_seconds(ttl), max_ids(maximum) {
-    if (blank_namespace(name))
+    if (blank_namespace(name)) {
         throw std::invalid_argument("ID set pagination namespace must not be empty");
-    if (!ttl)
+    }
+    if (!ttl) {
         throw std::invalid_argument("ID set pagination ttl_seconds must be positive");
-    if (!maximum)
+    }
+    if (!maximum) {
         throw std::invalid_argument("ID set pagination max_ids must be positive");
+    }
 }
 
 IdSetPaginationOptions::IdSetPaginationOptions(std::allocator_arg_t,
@@ -218,8 +227,9 @@ SelectQuery SelectQuery::clone(Memory r) const {
 }
 
 SelectQuery& SelectQuery::projects(std::initializer_list<std::string_view> names) {
-    for (auto name : names)
+    for (auto name : names) {
         project(name);
+    }
     return *this;
 }
 
@@ -303,8 +313,9 @@ SelectQuery& SelectQuery::enable_aggregation_cache_for(std::uint64_t millis) {
 }
 
 SelectQuery& SelectQuery::propagate_aggregation_cache(std::uint64_t millis) {
-    if (!aggregation_cache)
+    if (!aggregation_cache) {
         enable_aggregation_cache();
+    }
     aggregation_cache->propagate = true;
     aggregation_cache->propagate_cache_expired_millis = millis;
     return *this;
@@ -355,22 +366,25 @@ SelectQuery& SelectQuery::relation_query(std::string_view name, const SelectQuer
 }
 
 SelectQuery& SelectQuery::limit(std::uint64_t value) {
-    if (!slice)
+    if (!slice) {
         slice = Slice{};
+    }
     slice->limit = value;
     return *this;
 }
 
 SelectQuery& SelectQuery::offset(std::uint64_t value) {
-    if (!slice)
+    if (!slice) {
         slice = Slice{};
+    }
     slice->offset = value;
     return *this;
 }
 
 SelectQuery& SelectQuery::hard_limit(std::uint64_t value) {
-    if (!value)
+    if (!value) {
         throw std::invalid_argument("hard_limit must be positive");
+    }
     hard_limit_value = value;
     return *this;
 }
@@ -380,17 +394,23 @@ SelectQuery& SelectQuery::page(std::uint64_t offset_value, std::uint64_t limit_v
 }
 
 void SelectQuery::apply_list_limit(std::uint64_t ceiling) {
-    if (!slice)
+    if (!slice) {
         slice = Slice{};
-    if (slice->limit && *slice->limit > ceiling)
+    }
+    if (slice->limit && *slice->limit > ceiling) {
         throw std::invalid_argument("QUERY_HARD_LIMIT_EXCEEDED");
-    if (!slice->limit)
+    }
+    if (!slice->limit) {
         slice->limit = ceiling;
-    for (auto& relation : relations)
-        if (relation.query)
+    }
+    for (auto& relation : relations) {
+        if (relation.query) {
             relation.query->apply_list_limit(10'000);
-    for (auto& child : child_enhancements)
+        }
+    }
+    for (auto& child : child_enhancements) {
         child.apply_list_limit(10'000);
+    }
 }
 
 SelectQuery SelectQuery::prepare_for_list() const {

@@ -21,9 +21,9 @@ Result<SqliteBoundValue, MutationExecutorError> bind_sqlite_value(Memory r, cons
         [&](const auto& value) -> Output {
             using T = std::decay_t<decltype(value)>;
             if constexpr (std::is_same_v<T, std::monostate> || std::is_same_v<T, TypedNull>) {
-            } else if constexpr (std::is_same_v<T, bool> || std::is_same_v<T, std::int64_t>)
+            } else if constexpr (std::is_same_v<T, bool> || std::is_same_v<T, std::int64_t>) {
                 bound.data = std::int64_t(value);
-            else if constexpr (std::is_same_v<T, std::uint64_t>) {
+            } else if constexpr (std::is_same_v<T, std::uint64_t>) {
                 if (value > std::uint64_t(INT64_MAX)) {
                     String message("u64 value ", r);
                     append_number(message, value);
@@ -31,20 +31,21 @@ Result<SqliteBoundValue, MutationExecutorError> bind_sqlite_value(Memory r, cons
                     return Output::err(r, MutationExecutorError::bind(r, message));
                 }
                 bound.data = std::int64_t(value);
-            } else if constexpr (std::is_same_v<T, double>)
+            } else if constexpr (std::is_same_v<T, double>) {
                 bound.data = value;
-            else if constexpr (std::is_same_v<T, String>)
+            } else if constexpr (std::is_same_v<T, String>) {
                 bound.data.emplace<String>(value, r);
-            else if constexpr (std::is_same_v<T, Decimal> || std::is_same_v<T, Date>)
+            } else if constexpr (std::is_same_v<T, Decimal> || std::is_same_v<T, Date>) {
                 bound.data = value.to_string(r);
-            else if constexpr (std::is_same_v<T, Json>)
+            } else if constexpr (std::is_same_v<T, Json>) {
                 bound.data = value.dump(r);
-            else if constexpr (std::is_same_v<T, Timestamp>)
+            } else if constexpr (std::is_same_v<T, Timestamp>) {
                 bound.data = value.as_millis();
-            else if constexpr (std::is_same_v<T, Value::Object>)
+            } else if constexpr (std::is_same_v<T, Value::Object>) {
                 return Output::err(r, MutationExecutorError::unsupported_value(r, "object"));
-            else if constexpr (std::is_same_v<T, Value::List>)
+            } else if constexpr (std::is_same_v<T, Value::List>) {
                 return Output::err(r, MutationExecutorError::unsupported_value(r, "list"));
+            }
             return Output::ok(r, std::move(bound));
         },
         input.data);
@@ -56,8 +57,9 @@ Result<SqliteBindings, MutationExecutorError> bind_values(Memory r, std::span<co
     bindings.reserve(values.size());
     for (const auto& value : values) {
         auto bound = bind_sqlite_value(r, value);
-        if (!bound)
+        if (!bound) {
             return Output::err(r, std::move(bound).error());
+        }
         bindings.push_back(std::move(bound).value());
     }
     return Output::ok(r, std::move(bindings));
@@ -72,25 +74,27 @@ bind_statement(Memory r, sqlite3_stmt& statement, std::span<const SqliteBoundVal
         const int code = std::visit(
             [&](const auto& value) {
                 using T = std::decay_t<decltype(value)>;
-                if constexpr (std::is_same_v<T, std::monostate>)
+                if constexpr (std::is_same_v<T, std::monostate>) {
                     return sqlite3_bind_null(&statement, index);
-                else if constexpr (std::is_same_v<T, std::int64_t>)
+                } else if constexpr (std::is_same_v<T, std::int64_t>) {
                     return sqlite3_bind_int64(&statement, index, value);
-                else if constexpr (std::is_same_v<T, double>)
+                } else if constexpr (std::is_same_v<T, double>) {
                     return sqlite3_bind_double(&statement, index, value);
-                else
+                } else {
                     return sqlite3_bind_text64(&statement,
                                                index,
                                                value.data(),
                                                value.size(),
                                                SQLITE_TRANSIENT,
                                                SQLITE_UTF8);
+                }
             },
             values[i].data);
-        if (code != SQLITE_OK)
+        if (code != SQLITE_OK) {
             return Output::err(r,
                                MutationExecutorError::sqlite(
                                    r, code, sqlite3_errmsg(sqlite3_db_handle(&statement))));
+        }
     }
     if (values.size() != expected) {
         // rusqlite's iterator stops at the first excess parameter.

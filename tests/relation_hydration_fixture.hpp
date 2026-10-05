@@ -36,10 +36,11 @@ struct Model : EntityDefaults<Model<K>> {
 
     static Result<Model, EntityError> from_compact_row(Memory r, CompactRow row) {
         using R = Result<Model, EntityError>;
-        if (auto* fail = row.get("fail"); fail && fail->try_bool().value_or(false))
+        if (auto* fail = row.get("fail"); fail && fail->try_bool().value_or(false)) {
             return R::err(
                 r,
                 EntityError(std::allocator_arg, Allocator(r), ENTITY_NAME, "model decode failed"));
+        }
         return R::ok(r, Model(std::allocator_arg, Allocator(r), std::move(row)));
     }
 

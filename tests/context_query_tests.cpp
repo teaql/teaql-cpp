@@ -7,8 +7,9 @@ using namespace teaql;
 using namespace context_query_fixture;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -156,8 +157,9 @@ struct NativeExecutor : QueryExecutor<String>, MutationExecutor<String> {
             : r(a.resource()), state(state), counts(counts), payload(32768, 'h', r) {}
 
         ~Work() {
-            if (worker.joinable())
+            if (worker.joinable()) {
                 std::terminate();
+            }
         }
 
         std::optional<Result<QueryResult, String>> poll(WakeSignal& wake) {
@@ -171,8 +173,9 @@ struct NativeExecutor : QueryExecutor<String>, MutationExecutor<String> {
                 });
                 return {};
             }
-            if (!done.load())
+            if (!done.load()) {
                 return {};
+            }
             QueryResult result(
                 std::allocator_arg, Allocator(r), ExecutionMetadata::unrecorded_query(r, 0));
             return Result<QueryResult, String>::ok(r, std::move(result));
@@ -187,8 +190,9 @@ struct NativeExecutor : QueryExecutor<String>, MutationExecutor<String> {
 
         void stop() noexcept {
             release();
-            if (worker.joinable())
+            if (worker.joinable()) {
                 worker.join();
+            }
             ++counts.stopped;
             state.note("native.stop");
         }
@@ -231,9 +235,9 @@ static void native_lifetime(bool cancel, bool close) {
     auto& result = repo.fetch_smart_list(query);
     check(!result.poll() && state.active.empty(),
           "pending native query leaves no active telemetry scope");
-    if (close)
+    if (close) {
         c->close();
-    else if (cancel) {
+    } else if (cancel) {
         result.cancel();
         c->close();
     } else {
@@ -248,13 +252,14 @@ static void native_lifetime(bool cancel, bool close) {
           "native host access stops before provider scope destruction");
     check(c->allocation_stats().live_blocks == 0,
           "Context reclaims all query/telemetry/native memory blocks");
-    if (cancel || close)
+    if (cancel || close) {
         check(std::none_of(state.notes.begin(),
                            state.notes.end(),
                            [](const auto& n) {
                                return n.starts_with("success:") || n.starts_with("failure:");
                            }),
               "cancellation does not invent a terminal business outcome");
+    }
 }
 
 int main() {

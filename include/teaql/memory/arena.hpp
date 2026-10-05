@@ -57,8 +57,9 @@ public:
     T& make(Args&&... args) {
         static_assert(std::is_nothrow_destructible_v<T>,
                       "Context cleanup requires noexcept destruction");
-        if (closed_)
+        if (closed_) {
             throw std::logic_error("Allocation scope is closed");
+        }
         Cleanup* cleanup = nullptr;
         if constexpr (!std::is_trivially_destructible_v<T>) {
             cleanup = static_cast<Cleanup*>(allocate(sizeof(Cleanup), alignof(Cleanup)));

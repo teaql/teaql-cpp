@@ -19,8 +19,9 @@ struct MetadataObserver {
 }
 
 std::optional<ExecutionObserver> MetadataStore::query_diagnostic_observer(Memory r) const {
-    if (!capture_execution_metadata())
+    if (!capture_execution_metadata()) {
         return {};
+    }
     return ExecutionObserver(std::allocator_arg,
                              Allocator(r),
                              MetadataObserver(std::allocator_arg, Allocator(r), *this));
@@ -40,20 +41,23 @@ void InMemoryMetadataStore::register_entity(EntityDescriptor descriptor) {
         // must not make the map key depend on a moved-from name.
         String key(descriptor.name, r);
         entities_.emplace(std::move(key), std::move(descriptor));
-    } else
+    } else {
         detail::assign_scoped(found->second, std::move(descriptor));
+    }
 }
 
 Vector<const EntityDescriptor*> InMemoryMetadataStore::all_entities(Memory r) const {
     // The array owns only borrowed pointers. Its allocation cannot extend the
     // lifetime of the descriptors it enumerates.
     auto& owner = detail::resource_arena(memory_resource());
-    if (!owner.can_lend_to(detail::resource_arena(r)))
+    if (!owner.can_lend_to(detail::resource_arena(r))) {
         throw std::invalid_argument("Metadata enumeration cannot outlive its owning Context");
+    }
     Vector<const EntityDescriptor*> out(r);
     out.reserve(entities_.size());
-    for (const auto& [name, entity] : entities_)
+    for (const auto& [name, entity] : entities_) {
         out.push_back(&entity);
+    }
     return out;
 }
 }

@@ -10,8 +10,9 @@ private:
     template <class F>
     static EntityGraphDecodeResult with_decoders(const UserContext& context, F&& call) {
         context.ensure_open();
-        if (context.graph_decoders_)
+        if (context.graph_decoders_) {
             return call(*context.graph_decoders_);
+        }
         InMemoryEntityGraphDecoderRegistry empty(std::allocator_arg,
                                                  Allocator(context.memory_resource()));
         return call(empty);

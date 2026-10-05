@@ -69,13 +69,15 @@ static Json evaluate(UserContext& context, const Json& j) {
         }
     }
     InternalIdGenerator* generator = nullptr;
-    if (kind == "atomic")
+    if (kind == "atomic") {
         generator =
             &context.make<AtomicCounterIdGenerator>(number<std::uint64_t>(field(j, "start")));
-    else if (kind == "fixed" || kind == "error")
+    } else if (kind == "fixed" || kind == "error") {
         generator = &context.make_resource<Fixed>(kind == "error");
-    if (generator)
+    }
+    if (generator) {
         context.set_internal_id_generator(context, *generator);
+    }
     auto& model = context.make<Model>();
     Json::Array out(r);
     for (const auto& step : std::get<Json::Array>(field(j, "steps").data)) {
@@ -122,8 +124,9 @@ int main() {
         auto context = global.make_user_context();
         auto r = context->memory_resource();
         auto j = Json::parse(r, line);
-        if (!j)
+        if (!j) {
             throw std::runtime_error("bad fixture JSON");
+        }
         std::cout << evaluate(*context, *j).dump(r) << '\n';
     }
 }

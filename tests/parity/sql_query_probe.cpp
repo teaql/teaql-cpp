@@ -9,8 +9,9 @@ static bool flag(const Json& j, std::string_view key, bool fallback = false) {
 
 static Json values_json(Memory r, std::span<const Value> values) {
     Json::Array out(r);
-    for (const auto& v : values)
+    for (const auto& v : values) {
         out.emplace_back(v.to_json_value(r));
+    }
     return Json(r, std::move(out));
 }
 
@@ -29,8 +30,9 @@ static Json metadata_json(Memory r, const ExecutionMetadata& m) {
     detail::model_put(out, "debug", m.debug_query ? Json(r, *m.debug_query) : Json(r));
     detail::model_put(out, "params", values_json(r, m.params));
     Json::Array policies(r);
-    for (auto p : m.sql_log.parameter_policies)
+    for (auto p : m.sql_log.parameter_policies) {
         policies.emplace_back(unsigned(p));
+    }
     detail::model_put(out, "policies", policies);
     detail::model_put(out, "generated", m.sql_log.generated_sql);
     detail::model_put(out,
@@ -88,12 +90,15 @@ struct Transport : SqlTransport<String> {
             : resource(a.resource()), mode(mode, a.resource()) {}
 
         std::optional<Result<Rows, String>> poll(WakeSignal&) {
-            if (mode == "pending")
+            if (mode == "pending") {
                 return {};
-            if (mode == "panic")
+            }
+            if (mode == "panic") {
                 throw std::runtime_error("provider panic");
-            if (mode == "error")
+            }
+            if (mode == "error") {
                 return Result<Rows, String>::err(resource, String("fetch failed", resource));
+            }
             return Result<Rows, String>::ok(resource, Rows(resource));
         }
 
@@ -151,20 +156,25 @@ static Json evaluate(UserContext& user, const Json& j) {
         auto q = query(r, field(item, "query"));
         q.entity =
             optional(item, "entity") ? text(field(item, "entity")) : std::string_view(e.name);
-        if (auto p = optional(item, "threshold"))
+        if (auto p = optional(item, "threshold")) {
             q.top_n_probe_parent_threshold_value = integer(*p);
-        if (auto p = optional(item, "hard_limit"))
+        }
+        if (auto p = optional(item, "hard_limit")) {
             q.hard_limit_value = integer(*p);
+        }
         transport.mode = optional(item, "mode") ? text(field(item, "mode")) : "success";
         auto& active = results.size() % 2 ? clone : executor;
-        if (flag(item, "intent"))
+        if (flag(item, "intent")) {
             (void)active.query_log_intent(r, q);
+        }
         QueryRequest request(
             std::allocator_arg, Allocator(r), q, flag(item, "debug"), flag(item, "metadata", true));
-        if (auto p = optional(item, "comment"))
+        if (auto p = optional(item, "comment")) {
             request.comment.emplace(text(*p), r);
-        if (flag(item, "trace"))
+        }
+        if (flag(item, "trace")) {
             request.trace_chain.emplace_back(TraceKind::Request, "Fixture", "request trace");
+        }
         auto out = detail::model_json(r);
         auto& op = active.query_observed(r, std::move(request), observer);
         try {
@@ -172,10 +182,11 @@ static Json evaluate(UserContext& user, const Json& j) {
             if (!result) {
                 op.cancel();
                 detail::model_put(out, "pending", true);
-            } else if (*result)
+            } else if (*result) {
                 detail::model_put(out, "metadata", metadata_json(r, result->value().metadata));
-            else
+            } else {
                 detail::model_put(out, "error", result->error().to_string(r));
+            }
         } catch (const std::runtime_error&) {
             detail::model_put(out, "panic", true);
         }
@@ -197,8 +208,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto j = Json::parse(r, line);
-        if (!j)
+        if (!j) {
             throw std::runtime_error("invalid fixture");
+        }
         std::cout << evaluate(*user, *j).dump(r) << '\n';
     }
 }

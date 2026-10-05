@@ -29,22 +29,25 @@ static Json describe(Memory r, const Value& v) {
             if constexpr (std::is_same_v<T, std::int64_t> || std::is_same_v<T, Timestamp>) {
                 char buffer[32];
                 std::int64_t n;
-                if constexpr (std::is_same_v<T, Timestamp>)
+                if constexpr (std::is_same_v<T, Timestamp>) {
                     n = item.as_millis();
-                else
+                } else {
                     n = item;
+                }
                 auto end = std::to_chars(buffer, buffer + sizeof(buffer), n).ptr;
                 detail::model_put(out, "value", std::string_view(buffer, end));
-            } else if constexpr (std::is_same_v<T, Decimal> || std::is_same_v<T, Date>)
+            } else if constexpr (std::is_same_v<T, Decimal> || std::is_same_v<T, Date>) {
                 detail::model_put(out, "value", item.to_string(r));
-            else if constexpr (std::is_same_v<T, double>) {
-                if (std::isinf(item))
+            } else if constexpr (std::is_same_v<T, double>) {
+                if (std::isinf(item)) {
                     detail::model_put(out, "value", item < 0 ? "-inf" : "inf");
-                else
+                } else {
                     detail::model_put(out, "value", item);
+                }
             } else if constexpr (std::is_same_v<T, Json> || std::is_same_v<T, String> ||
-                                 std::is_same_v<T, bool>)
+                                 std::is_same_v<T, bool>) {
                 detail::model_put(out, "value", item);
+            }
         },
         v.data);
     return out;
@@ -54,16 +57,18 @@ static Json evaluate(UserContext& user, const Json& input) {
     auto r = user.memory_resource();
     sqlite_fixture::Connection connection;
     String create("CREATE TABLE data(v ", r);
-    if (auto* declaration = optional(input, "decl"))
+    if (auto* declaration = optional(input, "decl")) {
         if (std::holds_alternative<String>(declaration->data)) {
             create += '"';
             for (char c : text(*declaration)) {
                 create += c;
-                if (c == '"')
+                if (c == '"') {
                     create += '"';
+                }
             }
             create += '"';
         }
+    }
     create += "); INSERT INTO data VALUES(";
     create += text(field(input, "sql_value"));
     create += ");";
@@ -89,10 +94,12 @@ static Json evaluate(UserContext& user, const Json& input) {
             return out;
         }
         Json::Array keys(r), values(r);
-        for (const auto& key : decoded.value().keys())
+        for (const auto& key : decoded.value().keys()) {
             keys.emplace_back(key);
-        for (const auto& v : decoded.value().values())
+        }
+        for (const auto& v : decoded.value().values()) {
             values.emplace_back(describe(r, v));
+        }
         auto row = detail::model_json(r);
         detail::model_put(row, "keys", keys);
         detail::model_put(row, "values", values);
@@ -110,8 +117,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("invalid fixture JSON");
+        }
         std::cout << evaluate(*user, *input).dump(r) << '\n';
     }
 }

@@ -31,10 +31,11 @@ struct LocationSegment {
 
     LocationSegment(std::allocator_arg_t, Allocator a, const LocationSegment& other)
         : data(std::in_place_index<1>, 0), resource_(a.resource()) {
-        if (other.kind() == Kind::Member)
+        if (other.kind() == Kind::Member) {
             data.emplace<0>(std::get<0>(other.data), a.resource());
-        else
+        } else {
             data.emplace<1>(std::get<1>(other.data));
+        }
     }
 
     LocationSegment(std::allocator_arg_t, Allocator a, LocationSegment&& other)
@@ -76,10 +77,11 @@ struct WireLocationSegment {
 
     WireLocationSegment(std::allocator_arg_t, Allocator a, const WireLocationSegment& other)
         : data(std::in_place_index<1>, 0), resource_(a.resource()) {
-        if (other.kind() == Kind::Property)
+        if (other.kind() == Kind::Property) {
             data.emplace<0>(std::get<0>(other.data), a.resource());
-        else
+        } else {
             data.emplace<1>(std::get<1>(other.data));
+        }
     }
 
     WireLocationSegment(std::allocator_arg_t, Allocator a, WireLocationSegment&& other)

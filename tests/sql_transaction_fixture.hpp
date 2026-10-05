@@ -45,17 +45,20 @@ struct NativeTransaction final : SqlTransportTransaction<String> {
             : resource(a.resource()), owner(owner), commit(commit) {}
 
         std::optional<Result<std::monostate, String>> poll(WakeSignal&) {
-            if (owner.controls.pending_terminal)
+            if (owner.controls.pending_terminal) {
                 return {};
-            if (owner.controls.fail_terminal)
+            }
+            if (owner.controls.fail_terminal) {
                 return Result<std::monostate, String>::err(resource,
                                                            String("terminal failure", resource));
+            }
             owner.db.exec(commit ? "COMMIT" : "ROLLBACK");
             owner.active = false;
-            if (commit)
+            if (commit) {
                 ++owner.controls.commits;
-            else
+            } else {
                 ++owner.controls.rollbacks;
+            }
             return Result<std::monostate, String>::ok(resource, std::monostate{});
         }
 
@@ -106,12 +109,14 @@ struct TransactionTransport final : SqlTransactionTransport<String> {
             : resource(a.resource()), owner(owner) {}
 
         std::optional<Result<SqlTransactionHandle<String>, String>> poll(WakeSignal&) {
-            if (owner.controls.pending_begin)
+            if (owner.controls.pending_begin) {
                 return {};
+            }
             ++owner.controls.begins;
-            if (owner.controls.fail_begin)
+            if (owner.controls.fail_begin) {
                 return Result<SqlTransactionHandle<String>, String>::err(
                     resource, String("begin failure", resource));
+            }
             auto& tx = detail::async_arena(resource).make_resource<NativeTransaction>(
                 resource, owner.db, owner.inner, owner.controls);
             return Result<SqlTransactionHandle<String>, String>::ok(

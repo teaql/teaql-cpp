@@ -43,8 +43,9 @@ std::string_view trace_kind(TraceKind kind) {
 
 template <class T, class F>
 String optional_debug(Memory r, const std::optional<T>& value, F&& render) {
-    if (!value)
+    if (!value) {
         return String("None", r);
+    }
     String out("Some(", r);
     out += render(*value);
     out += ')';
@@ -67,8 +68,9 @@ String optional_number(Memory r, std::optional<T> value) {
 String strings_debug(Memory r, const Vector<String>& values) {
     String out("[", r);
     for (std::size_t i = 0; i < values.size(); ++i) {
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += detail::debug_text(r, values[i]);
     }
     out += ']';
@@ -79,8 +81,9 @@ String record_debug(Memory r, const Record& values) {
     String out("{", r);
     bool first = true;
     for (const auto& [key, value] : values) {
-        if (!first)
+        if (!first) {
             out += ", ";
+        }
         first = false;
         out += detail::debug_text(r, key);
         out += ": ";
@@ -94,8 +97,9 @@ String trace_debug(Memory r, std::span<const TraceNode> trace) {
     String out("[", r);
     for (std::size_t i = 0; i < trace.size(); ++i) {
         const auto& n = trace[i];
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += "TraceNode { kind: ";
         out += trace_kind(n.kind);
         out += ", entity_type: ";
@@ -137,8 +141,9 @@ String governance_debug(Memory r, const MutationGovernanceSnapshot& g) {
     constexpr std::string_view kinds[]{"Create", "Update", "Delete", "Recover"};
     for (std::size_t i = 0; i < g.operations.size(); ++i) {
         auto& op = g.operations[i];
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += "MutationOperationSummary { kind: ";
         out += kinds[unsigned(op.kind)];
         out += ", entity: ";
@@ -154,8 +159,9 @@ String governance_debug(Memory r, const MutationGovernanceSnapshot& g) {
 String trace_text(Memory r, std::span<const TraceNode> trace) {
     String out(r);
     for (std::size_t i = 0; i < trace.size(); ++i) {
-        if (i)
+        if (i) {
             out += " -> ";
+        }
         out += number(r, i);
         out += ':';
         out += trace_kind(trace[i].kind);
@@ -168,8 +174,9 @@ String trace_text(Memory r, std::span<const TraceNode> trace) {
 }
 
 String debug_trace_text(Memory r, std::span<const TraceNode> trace) {
-    if (trace.empty())
+    if (trace.empty()) {
         return String("(Trace: None)", r);
+    }
     String out("(Trace: ", r);
     out += trace_text(r, trace);
     out += ')';
@@ -180,13 +187,15 @@ String entity_id(Memory r, const RawAuditEvent& e) {
     const Value* id = nullptr;
     if (e.new_values) {
         auto it = e.new_values->find("id");
-        if (it != e.new_values->end())
+        if (it != e.new_values->end()) {
             id = &it->second;
+        }
     }
     if (!id) {
         auto it = e.values.find("id");
-        if (it != e.values.end())
+        if (it != e.values.end()) {
             id = &it->second;
+        }
     }
     return id ? detail::debug_value(r, *id) : String("Unknown", r);
 }
@@ -198,8 +207,9 @@ String timestamp(Memory r) {
     out += ' ';
     auto part = [&](unsigned n, unsigned width) {
         auto text = number(r, n);
-        if (text.size() < width)
+        if (text.size() < width) {
             out.append(width - text.size(), '0');
+        }
         out += text;
     };
     part(t.hour, 2);
@@ -228,28 +238,32 @@ String human_audit(Memory r, const RawAuditEvent& e, bool values) {
     }
     bool first = true;
     for (const auto& change : e.changes) {
-        if (change.field.starts_with('_'))
+        if (change.field.starts_with('_')) {
             continue;
+        }
         if (first) {
             out += values ? " {" : " fields=[";
             first = false;
-        } else
+        } else {
             out += ", ";
+        }
         out += change.field;
         if (values) {
             out += ": ";
             out += change.new_value ? detail::debug_value(r, *change.new_value) : String("null", r);
         }
     }
-    if (!first)
+    if (!first) {
         out += values ? '}' : ']';
+    }
     return out;
 }
 
 std::optional<std::string_view> env(Memory r, const char* name) {
     auto* value = std::getenv(name);
-    if (!value)
+    if (!value) {
         return {};
+    }
     try {
         (void)detail::debug_text(r, value);
     } catch (const std::invalid_argument&) {
@@ -286,8 +300,9 @@ String HumanReaderFormatter::format_sql_log(Memory r,
                      ? std::numeric_limits<std::uint64_t>::max()
                      : std::uint64_t(micros);
     auto text = number(r, count);
-    if (text.size() < 5)
+    if (text.size() < 5) {
         out.append(5 - text.size(), ' ');
+    }
     out += text;
     out += "µs]-[DEBUG]-SqlLogEntry";
     if (!trace.empty()) {
@@ -343,10 +358,12 @@ String DebugReaderFormatter::format_audit_log(Memory r, const RawAuditEvent& e) 
     out += " fields=[";
     bool first = true;
     for (const auto& change : e.changes) {
-        if (change.field.starts_with('_'))
+        if (change.field.starts_with('_')) {
             continue;
-        if (!first)
+        }
+        if (!first) {
             out += ',';
+        }
         first = false;
         out += change.field;
     }
@@ -363,37 +380,44 @@ String DebugReaderFormatter::format_sensitive_audit_log(Memory r, const RawAudit
 }
 
 LogFormatterFactory& GlobalContext::log_formatter_factory() {
-    if (!log_formatter_factory_)
+    if (!log_formatter_factory_) {
         log_formatter_factory_ = &make<LogFormatterFactory>(*this);
+    }
     return *log_formatter_factory_;
 }
 
 LogFormatterFactory::LogFormatterFactory(std::allocator_arg_t, Allocator a, GlobalContext& global)
     : resource_(a.resource()), global_(global) {
-    if (resource_ != global.memory_resource())
+    if (resource_ != global.memory_resource()) {
         throw std::invalid_argument("LogFormatterFactory must belong to its GlobalContext");
+    }
 }
 
 const LogFormatter& LogFormatterFactory::get_formatter() {
     if (!formatter_) {
         auto format = env(resource_, "TEAQL_LOG_FORMAT");
-        if (format == "json" || format == "debug")
+        if (format == "json" || format == "debug") {
             formatter_ = &global_.make<DebugReaderFormatter>();
-        else
+        } else {
             formatter_ = &global_.make<HumanReaderFormatter>();
+        }
     }
     return *formatter_;
 }
 
 LogLevel parse_log_level(std::string_view value, LogLevel default_level) {
-    if (value == "_silent")
+    if (value == "_silent") {
         return LogLevel::Silent;
-    if (value == "_summary")
+    }
+    if (value == "_summary") {
         return LogLevel::Summary;
-    if (value == "_full")
+    }
+    if (value == "_full") {
         return LogLevel::Full;
-    if (value == "_full_with_payload")
+    }
+    if (value == "_full_with_payload") {
         return LogLevel::FullWithPayload;
+    }
     return default_level;
 }
 
@@ -404,16 +428,18 @@ LogConfig LogConfig::load(Memory r) {
     c.tool_level = parse_log_level(env(r, "TEAQL_TOOL_LOG").value_or(""), LogLevel::Full);
     auto list = [&](const char* name) -> std::optional<Vector<String>> {
         auto value = env(r, name);
-        if (!value)
+        if (!value) {
             return {};
+        }
         Vector<String> out(r);
         for (;;) {
             auto end = value->find(',');
             auto part = value->substr(0, end);
             detail::trim(part);
             out.emplace_back(part);
-            if (end == value->npos)
+            if (end == value->npos) {
                 break;
+            }
             value->remove_prefix(end + 1);
         }
         return out;
@@ -433,10 +459,12 @@ bool LogConfig::should_log_tool(std::string_view module) const {
 }
 
 bool LogConfig::should_log_sql(std::string_view sql) const {
-    if (sql_level == LogLevel::Silent)
+    if (sql_level == LogLevel::Silent) {
         return false;
-    if (!sql_tables)
+    }
+    if (!sql_tables) {
         return true;
+    }
     return std::any_of(sql_tables->begin(), sql_tables->end(), [&](const auto& t) {
         return t.empty() ||
                std::search(sql.begin(), sql.end(), t.begin(), t.end(), [](char a, char b) {
@@ -466,8 +494,9 @@ String debug_audit_event(Memory r, const RawAuditEvent& e) {
     out += ", changes: [";
     for (std::size_t i = 0; i < e.changes.size(); ++i) {
         const auto& c = e.changes[i];
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += "EntityPropertyChange { field: ";
         out += debug_text(r, c.field);
         out += ", old_value: ";
@@ -507,11 +536,13 @@ String debug_audit_event(Memory r, const RawAuditEvent& e) {
 
 namespace {
 String truncate_log(Memory r, std::string_view content, std::size_t maximum, bool sql) {
-    if (content.size() <= maximum)
+    if (content.size() <= maximum) {
         return String(content, r);
+    }
     auto end = maximum;
-    while (end && (static_cast<unsigned char>(content[end]) & 0xc0) == 0x80)
+    while (end && (static_cast<unsigned char>(content[end]) & 0xc0) == 0x80) {
         --end;
+    }
     String out(content.substr(0, end), r);
     out += sql ? "\n[TRUNCATED; NOT EXECUTABLE: diagnostic SQL exceeded "
                : "\n[TRUNCATED: sensitive audit event exceeded ";

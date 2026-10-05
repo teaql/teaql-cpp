@@ -12,28 +12,33 @@ bool forbidden(std::string_view key) {
                    "teaql.audit.reason",
                    "db.query.parameter_values",
                    "http.request.body",
-                   "url.full"})
-        if (key == v)
+                   "url.full"}) {
+        if (key == v) {
             return true;
+        }
+    }
     return false;
 }
 
 bool contains_ascii_lower(std::string_view value, std::string_view term) {
-    if (term.size() > value.size())
+    if (term.size() > value.size()) {
         return false;
+    }
     for (std::size_t p = 0; p <= value.size() - term.size(); ++p) {
         bool matches = true;
         for (std::size_t i = 0; i < term.size(); ++i) {
             auto c = value[p + i];
-            if (c >= 'A' && c <= 'Z')
+            if (c >= 'A' && c <= 'Z') {
                 c += 32;
+            }
             if (c != term[i]) {
                 matches = false;
                 break;
             }
         }
-        if (matches)
+        if (matches) {
             return true;
+        }
     }
     return false;
 }
@@ -49,8 +54,9 @@ class NoopPropagation final : public RuntimeTelemetryPropagationContext {};
 template <class T>
 void require_delegate(Memory r, ContextBox<T>* box) {
     if (box) {
-        if (box->memory_resource() != r)
+        if (box->memory_resource() != r) {
             throw std::invalid_argument("Telemetry delegate must belong to its output Context");
+        }
         box->claim();
     }
 }
@@ -58,20 +64,23 @@ void require_delegate(Memory r, ContextBox<T>* box) {
 template <class Wrapper, class Delegate, class Create>
 Wrapper& create_fail_open(Memory r, const RuntimeTelemetry& telemetry, Create&& create) {
     auto& arena = detail::resource_arena(r);
-    if (!detail::resource_arena(telemetry.memory_resource()).can_lend_to(arena))
+    if (!detail::resource_arena(telemetry.memory_resource()).can_lend_to(arena)) {
         throw std::invalid_argument("Telemetry belongs to a shorter or unrelated Context");
+    }
     ContextBox<Delegate>* delegate = nullptr;
     try {
         auto& box = create();
-        if (box.memory_resource() == r && box.available())
+        if (box.memory_resource() == r && box.available()) {
             delegate = &box;
+        }
     } catch (...) {
     }
     try {
         return arena.make<Wrapper>(delegate);
     } catch (...) {
-        if (delegate)
+        if (delegate) {
             delegate->reset();
+        }
         throw;
     }
 }
@@ -89,9 +98,10 @@ RuntimeOperation::RuntimeOperation(std::allocator_arg_t,
 
 RuntimeOperation& RuntimeOperation::attribute(std::string_view key,
                                               const RuntimeAttributeValue& value) {
-    if (!forbidden(key))
+    if (!forbidden(key)) {
         attributes.insert_or_assign(String(key, memory_resource()),
                                     detail::clone_in(memory_resource(), value));
+    }
     return *this;
 }
 
@@ -108,10 +118,13 @@ std::string_view runtime_error_category(std::string_view error) noexcept {
           Group{"validation", {"validation", "invalidargument", "valueerror", "parse", "format"}},
           Group{"conflict", {"conflict", "optimistic", "version", "duplicate", "alreadyexists"}},
           Group{"transport", {"transport", "network", "connection", "socket", "http", "ioerror"}},
-          Group{"provider", {"provider", "sql", "database", "jdbc"}}})
-        for (auto term : g.terms)
-            if (contains_ascii_lower(error, term))
+          Group{"provider", {"provider", "sql", "database", "jdbc"}}}) {
+        for (auto term : g.terms) {
+            if (contains_ascii_lower(error, term)) {
                 return g.category;
+            }
+        }
+    }
     return "internal";
 }
 
@@ -140,28 +153,34 @@ FailOpenRuntimeTelemetryPropagationContext::FailOpenRuntimeTelemetryPropagationC
 }
 
 void FailOpenRuntimeTelemetryScope::success(const RuntimeAttributes& attributes) {
-    if (polling_)
+    if (polling_) {
         throw std::logic_error("Cannot finish telemetry scope while activating it");
-    if (poisoned_ || !delegate_)
+    }
+    if (poisoned_ || !delegate_) {
         return;
+    }
     auto* owner = std::exchange(delegate_, nullptr);
     try {
-        if (auto* scope = owner->get())
+        if (auto* scope = owner->get()) {
             scope->success(attributes);
+        }
     } catch (...) {
     }
     owner->reset();
 }
 
 void FailOpenRuntimeTelemetryScope::failure(std::string_view error) {
-    if (polling_)
+    if (polling_) {
         throw std::logic_error("Cannot finish telemetry scope while activating it");
-    if (poisoned_ || !delegate_)
+    }
+    if (poisoned_ || !delegate_) {
         return;
+    }
     auto* owner = std::exchange(delegate_, nullptr);
     try {
-        if (auto* scope = owner->get())
+        if (auto* scope = owner->get()) {
             scope->failure(error);
+        }
     } catch (...) {
     }
     owner->reset();
@@ -185,8 +204,9 @@ extract_runtime_context(Memory r, const RuntimeTelemetry& t, const RuntimeContex
 
 const RuntimeTelemetry& UserContext::runtime_telemetry() const {
     ensure_open();
-    if (!runtime_telemetry_)
+    if (!runtime_telemetry_) {
         runtime_telemetry_ = &make<NoopRuntimeTelemetry>();
+    }
     return *runtime_telemetry_;
 }
 

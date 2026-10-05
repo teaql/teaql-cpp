@@ -22,8 +22,9 @@ public:
         : context_(std::allocator_arg, a, context, resource_arena(context.memory_resource())),
           family_(family, a.resource()), name_(std::allocator_arg, a, name),
           entity_(entity, a.resource()), work_(&work) {
-        if (work.memory_resource() != a.resource())
+        if (work.memory_resource() != a.resource()) {
             throw std::invalid_argument("Observed work must belong to its result Context");
+        }
     }
 
     std::optional<R> poll(WakeSignal& wake) {
@@ -39,12 +40,14 @@ public:
         }
         forwarding_.attach(work_->wake_signal(), wake);
         auto work = [&]() -> std::optional<R> {
-            if (auto* result = work_->poll())
+            if (auto* result = work_->poll()) {
                 return clone_in(r, *result);
+            }
             return {};
         };
-        if (!scope_)
+        if (!scope_) {
             return work();
+        }
         auto result = scope_->poll_with_context([&]() -> std::optional<R> {
             if (!provider_scope_) {
                 auto kind = resource_type_name<E>();
@@ -57,12 +60,14 @@ public:
                 provider_scope_ = &context.start_runtime_operation(operation);
             }
             auto result = provider_scope_->poll_with_context(work);
-            if (result)
+            if (result) {
                 complete(*provider_scope_, bool(*result), r);
+            }
             return result;
         });
-        if (result)
+        if (result) {
             complete(*scope_, bool(*result), r);
+        }
         return result;
     }
 
@@ -83,18 +88,21 @@ public:
 
 private:
     static void complete(FailOpenRuntimeTelemetryScope& scope, bool success, Memory r) {
-        if (success)
+        if (success) {
             scope.success(RuntimeAttributes(r));
-        else
+        } else {
             scope.failure("data_service_error");
+        }
         scope.close();
     }
 
     void close_scopes() noexcept {
-        if (provider_scope_)
+        if (provider_scope_) {
             provider_scope_->close();
-        if (scope_)
+        }
+        if (scope_) {
             scope_->close();
+        }
     }
 
     ResourceBorrow<const UserContext> context_;
@@ -144,19 +152,21 @@ public:
         if (!child_) {
             // Source fetch_all owns and resolves its comment when first polled;
             // the list/entity compatibility entry points retain the input comment.
-            if constexpr (!List)
+            if constexpr (!List) {
                 query_.comment_text = service_.resolve_final_comment(
                     query_.trace_chain,
                     query_.comment_text ? std::optional<std::string_view>(*query_.comment_text)
                                         : std::nullopt);
+            }
             auto base = service_.data_service();
             auto& work = [&]() -> AsyncOperation<R>& {
-                if constexpr (!List)
+                if constexpr (!List) {
                     return base.fetch_all(query_);
-                else if constexpr (std::same_as<T, CompactRow>)
+                } else if constexpr (std::same_as<T, CompactRow>) {
                     return base.fetch_smart_list(query_);
-                else
+                } else {
                     return base.template fetch_entities<T>(query_);
+                }
             }();
             child_ = &service_.observe(
                 "query",
@@ -165,8 +175,9 @@ public:
                 work);
         }
         forwarding_.attach(child_->wake_signal(), wake);
-        if (auto* result = child_->poll())
+        if (auto* result = child_->poll()) {
             return clone_in(r, *result);
+        }
         return {};
     }
 

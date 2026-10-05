@@ -9,8 +9,9 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 static_assert(!std::is_convertible_v<EntitySnapshot, MutationValues>);
@@ -46,12 +47,14 @@ int main() {
         auto joined = filter.and_expr(Expr::gt(r, "version", 0)).and_expr(filter);
         check(joined.args.size() == 2, "joined deduplication");
         Vector<Value> twenty(r);
-        for (int i = 0; i < 20; ++i)
+        for (int i = 0; i < 20; ++i) {
             twenty.emplace_back(i);
+        }
         check(Expr::in_list(r, "id", std::move(twenty)).op == BinaryOp::In, "small IN");
         Vector<Value> twenty_one(r);
-        for (int i = 0; i < 21; ++i)
+        for (int i = 0; i < 21; ++i) {
             twenty_one.emplace_back(i);
+        }
         check(Expr::in_list(r, "id", std::move(twenty_one)).op == BinaryOp::InLarge, "large IN");
         // Cross-domain clone is explicit, recursive and independent of the source.
         auto copied = joined.clone(global.memory_resource());

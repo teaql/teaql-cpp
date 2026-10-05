@@ -5,8 +5,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -182,8 +183,9 @@ struct FailingResource : std::pmr::memory_resource {
     bool fail = false;
 
     void* do_allocate(std::size_t n, std::size_t a) override {
-        if (fail)
+        if (fail) {
             throw std::bad_alloc{};
+        }
         return std::pmr::new_delete_resource()->allocate(n, a);
     }
 

@@ -12,9 +12,11 @@ String number(Memory r, std::uint64_t value) {
 }
 
 std::optional<String> trace_value(Memory r, const TraceChain& trace, TraceKind kind) {
-    for (auto i = trace.rbegin(); i != trace.rend(); ++i)
-        if (i->kind == kind)
+    for (auto i = trace.rbegin(); i != trace.rend(); ++i) {
+        if (i->kind == kind) {
             return String(i->comment, r);
+        }
+    }
     return {};
 }
 
@@ -34,30 +36,37 @@ TraceChain canonical_trace(Memory r,
         });
     };
     if (has(TraceKind::Operation) && has(TraceKind::Provider) && has(TraceKind::Sql)) {
-        for (const auto& n : source)
+        for (const auto& n : source) {
             if (n.kind != TraceKind::Comment && n.kind != TraceKind::Purpose &&
-                n.kind != TraceKind::AuditReason)
+                n.kind != TraceKind::AuditReason) {
                 out.emplace_back(n);
+            }
+        }
         return out;
     }
     std::string_view entity = "unknown";
-    for (const auto& n : source)
+    for (const auto& n : source) {
         if (nonblank(n.entity_type)) {
             entity = n.entity_type;
             break;
         }
+    }
     std::string_view statement = entity;
-    if (!is_select(operation))
-        for (auto i = source.rbegin(); i != source.rend(); ++i)
+    if (!is_select(operation)) {
+        for (auto i = source.rbegin(); i != source.rend(); ++i) {
             if (i->kind == TraceKind::Entity && nonblank(i->entity_type)) {
                 statement = i->entity_type;
                 break;
             }
+        }
+    }
     out.emplace_back(TraceKind::Operation, entity, is_select(operation) ? "query" : "mutation");
     out.emplace_back(is_select(operation) ? TraceKind::Request : TraceKind::Entity, statement, "");
-    for (const auto& n : source)
-        if (n.kind == TraceKind::Relation)
+    for (const auto& n : source) {
+        if (n.kind == TraceKind::Relation) {
             out.emplace_back(n);
+        }
+    }
     out.emplace_back(TraceKind::Provider, nonblank(backend) ? backend : "unknown", "");
     constexpr std::string_view names[]{"select", "insert", "update", "delete", "recover"};
     out.emplace_back(TraceKind::Sql, names[unsigned(operation)], "");
@@ -90,8 +99,9 @@ String pretty(Memory r, std::string_view sql) {
 }
 
 LogDuration elapsed(ExecutionMetadata::SystemTime start, ExecutionMetadata::SystemTime end) {
-    if (end < start)
+    if (end < start) {
         return {};
+    }
     // The full signed clock interval fits an unsigned counter even when signed
     // duration subtraction would overflow (min -> max).
     using D = ExecutionMetadata::SystemTime::duration;
@@ -110,15 +120,17 @@ Vector<SqlLogEntry> UserContext::sql_logs() const {
 
 void UserContext::clear_sql_logs() const {
     ensure_open();
-    if (sql_log_entries_)
+    if (sql_log_entries_) {
         sql_log_entries_->clear();
+    }
 }
 
 void UserContext::record_metadata_log(const ExecutionMetadata& metadata) const {
     ensure_open();
     if (!metadata.statements.empty()) {
-        for (const auto& child : metadata.statements)
+        for (const auto& child : metadata.statements) {
             record_metadata_log(child);
+        }
         return;
     }
     auto op = SqlLogOperation::Update;
@@ -135,25 +147,30 @@ void UserContext::record_metadata_log(const ExecutionMetadata& metadata) const {
     default:
         break;
     }
-    if (!sql_log_options_.enabled_for(op))
+    if (!sql_log_options_.enabled_for(op)) {
         return;
+    }
     auto r = memory_resource();
     SqlLogEntry sensitive(std::allocator_arg, Allocator(r), op);
     sensitive.log_context = detail::clone_in(r, metadata.sql_log);
-    if (!sensitive.log_context.database_kind)
+    if (!sensitive.log_context.database_kind) {
         sensitive.log_context.database_kind.emplace(metadata.backend, r);
+    }
     sensitive.comment = trace_value(r, metadata.trace_chain, TraceKind::Comment);
-    if (!sensitive.comment)
+    if (!sensitive.comment) {
         sensitive.comment = detail::clone_in(r, metadata.comment);
+    }
     sensitive.purpose = trace_value(r, metadata.trace_chain, TraceKind::Purpose);
     sensitive.audit_reason = trace_value(r, metadata.trace_chain, TraceKind::AuditReason);
     auto trace = canonical_trace(r, op, metadata.backend, metadata.trace_chain);
     sensitive.trace_path.swap(trace);
-    if (metadata.parameterized_query)
+    if (metadata.parameterized_query) {
         sensitive.sql = *metadata.parameterized_query;
+    }
     sensitive.params = Vector<Value>(metadata.params, r);
-    if (metadata.debug_query)
+    if (metadata.debug_query) {
         sensitive.debug_sql = *metadata.debug_query;
+    }
     sensitive.pretty_sql = pretty(r, sensitive.debug_sql);
     sensitive.started_at = metadata.started_at;
     sensitive.ended_at = metadata.ended_at;
@@ -168,18 +185,21 @@ void UserContext::record_metadata_log(const ExecutionMetadata& metadata) const {
         sensitive.result_summary += " rows affected";
     }
     auto safe = detail::sql_entry_projection(r, sensitive, false);
-    if (!sql_log_entries_)
+    if (!sql_log_entries_) {
         sql_log_entries_ = &make<Vector<SqlLogEntry>>();
+    }
     sql_log_entries_->emplace_back(safe);
     if (auto* entry = resources_ ? resources_->find<UnifiedLogBuffer>() : nullptr) {
         auto& buffer = *static_cast<UnifiedLogBuffer*>(entry->object);
         auto target = buffer.memory_resource();
         LogPayload payload = detail::clone_in(r, safe);
         UnifiedLogEntry item(std::allocator_arg, Allocator(target), metadata.started_at, payload);
-        if (auto id = user_identifier())
+        if (auto id = user_identifier()) {
             item.user_identifier.emplace(*id, target);
-        for (const auto& n : safe.trace_path)
+        }
+        for (const auto& n : safe.trace_path) {
             item.trace_chain.emplace_back(n);
+        }
         buffer.entries.emplace_back(std::move(item));
     }
     auto& manager = global_.log_manager();

@@ -8,8 +8,9 @@
 using namespace teaql;
 
 static void check(bool condition, const char* message) {
-    if (!condition)
+    if (!condition) {
         throw std::runtime_error(message);
+    }
 }
 
 static CompiledQuery query(Memory r, std::string_view sql) {
@@ -184,9 +185,11 @@ static void streams_and_waiters() {
 
 static bool cached(SqliteConnection& connection, std::string_view sql) {
     for (auto* s = sqlite3_next_stmt(connection.native_handle(), nullptr); s;
-         s = sqlite3_next_stmt(connection.native_handle(), s))
-        if (sqlite3_sql(s) == sql)
+         s = sqlite3_next_stmt(connection.native_handle(), s)) {
+        if (sqlite3_sql(s) == sql) {
             return true;
+        }
+    }
     return false;
 }
 

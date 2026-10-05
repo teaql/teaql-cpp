@@ -6,8 +6,9 @@ Record BaseEntityData::to_values_map(Memory r) const {
     values.emplace("id", Value(r, id));
     values.emplace("version", Value(r, version));
     // Dynamic fields deliberately win on collision, just as the Rust map insertion does.
-    for (const auto& [key, value] : dynamic_values)
+    for (const auto& [key, value] : dynamic_values) {
         values.insert_or_assign(String(key, r), Value(r, value));
+    }
     return values;
 }
 
@@ -25,23 +26,27 @@ Result<BaseEntityData, EntityError> BaseEntityData::from_values_map(Memory r,
     };
     if (auto it = values.find("id"); it != values.end()) {
         const auto& v = it->second;
-        if (auto n = std::get_if<std::uint64_t>(&v.data))
+        if (auto n = std::get_if<std::uint64_t>(&v.data)) {
             data.id = *n;
-        else if (auto n = std::get_if<std::int64_t>(&v.data); n && *n >= 0)
+        } else if (auto n = std::get_if<std::int64_t>(&v.data); n && *n >= 0) {
             data.id = std::uint64_t(*n);
-        else if (!std::holds_alternative<std::monostate>(v.data))
+        } else if (!std::holds_alternative<std::monostate>(v.data)) {
             return invalid("id", v);
+        }
     }
     if (auto it = values.find("version"); it != values.end()) {
         const auto& v = it->second;
-        if (auto n = std::get_if<std::int64_t>(&v.data))
+        if (auto n = std::get_if<std::int64_t>(&v.data)) {
             data.version = *n;
-        else if (!std::holds_alternative<std::monostate>(v.data))
+        } else if (!std::holds_alternative<std::monostate>(v.data)) {
             return invalid("version", v);
+        }
     }
-    for (const auto& [key, value] : values)
-        if (key != "id" && key != "version")
+    for (const auto& [key, value] : values) {
+        if (key != "id" && key != "version") {
             data.dynamic_values.emplace(key, value);
+        }
+    }
     return Outcome::ok(r, std::move(data));
 }
 }

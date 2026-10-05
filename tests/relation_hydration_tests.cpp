@@ -11,8 +11,9 @@ using Access = detail::ContextEntityAccess;
 using ServiceAccess = detail::EntityDataServiceAccess;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -29,8 +30,9 @@ static void rejected(F&& f, const char* message) {
 static CompactRow row(Memory r,
                       std::initializer_list<std::pair<std::string_view, std::uint64_t>> fields) {
     Record values(r);
-    for (auto [key, value] : fields)
+    for (auto [key, value] : fields) {
         values.emplace(String(key, r), Value(r, value));
+    }
     return CompactRow(std::allocator_arg, Allocator(r), values);
 }
 
@@ -110,10 +112,11 @@ static void check_graph(const EntityRuntimeState& root, Memory r, bool compact) 
     auto inverse = root.relation_option<Model<0>>("Child", 10, "parent");
     check(inverse.state() == (compact ? LoadedRelation::NotLoaded : LoadedRelation::Loaded),
           "ordinary and compact inverse rules remain separate");
-    if (!compact)
+    if (!compact) {
         check(inverse.value()->state->relation_list<Model<1>>("Parent", 1, "children").value() ==
                   children.value(),
               "inverse model follows frozen graph back to same relation view");
+    }
 }
 
 static void sqlite_hydration(detail::RelationHydrationMode mode) {
@@ -197,10 +200,11 @@ static void sqlite_hydration(detail::RelationHydrationMode mode) {
             retained_graph = &g.make<EntityRuntimeState>(root);
         }
     }
-    if (retained_graph)
+    if (retained_graph) {
         check_graph(*retained_graph,
                     g.memory_resource(),
                     mode == detail::RelationHydrationMode::CompactFlat);
+    }
     if (retained_rows) {
         auto& first = std::get<Value::List>(retained_rows->front().get("children")->data).front();
         check(first.memory_resource() == g.memory_resource() &&
@@ -244,8 +248,9 @@ struct NativeScope : RuntimeTelemetryScope {
 
     ~NativeScope() {
         ++counts.drops;
-        if (!counts.stopped)
+        if (!counts.stopped) {
             counts.dropped_before_stop = true;
+        }
     }
 
     void with_context(FunctionRef<void()> cb) const override {
@@ -300,8 +305,9 @@ struct NativeWork {
           counts(counts), payload(32768, 'h', r) {}
 
     ~NativeWork() {
-        if (worker.joinable())
+        if (worker.joinable()) {
             std::terminate();
+        }
     }
 
     std::optional<Rows> poll(WakeSignal& wake) {
@@ -317,8 +323,9 @@ struct NativeWork {
             });
             return {};
         }
-        if (!done.load())
+        if (!done.load()) {
             return {};
+        }
         Vector<CompactRow> rows(r);
         rows.emplace_back(row(r, {{"id", 20}}));
         return Rows::ok(r, std::move(rows));
@@ -333,8 +340,9 @@ struct NativeWork {
 
     void stop() noexcept {
         release();
-        if (worker.joinable())
+        if (worker.joinable()) {
             worker.join();
+        }
         ++counts.stopped;
     }
 
@@ -475,8 +483,9 @@ int main() {
                           detail::RelationHydrationMode::Flat,
                           detail::RelationHydrationMode::CompactFlat}) {
             sqlite_hydration(mode);
-            for (unsigned action = 0; action < 3; ++action)
+            for (unsigned action = 0; action < 3; ++action) {
                 native_lifetime(mode, action);
+            }
         }
         domain_contracts();
         std::pmr::set_default_resource(old);

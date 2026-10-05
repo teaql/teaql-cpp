@@ -10,11 +10,13 @@ inline String canonical_id_space_entity(Memory destination, std::string_view ent
     for (std::size_t index = 0; index < entity.size(); ++index) {
         auto c = entity[index];
         if (c >= 'A' && c <= 'Z') {
-            if (index)
+            if (index) {
                 result += '_';
+            }
             result += char(c + ('a' - 'A'));
-        } else
+        } else {
             result += c;
+        }
     }
     return result;
 }

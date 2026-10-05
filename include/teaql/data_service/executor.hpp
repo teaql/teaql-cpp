@@ -118,13 +118,15 @@ protected:
     }
 
     void require_active() const {
-        if (consumed_)
+        if (consumed_) {
             throw std::logic_error("Transaction has been consumed");
+        }
     }
 
     void require_domain(Memory r) const {
-        if (r != resource_)
+        if (r != resource_) {
             throw std::invalid_argument("Transaction work must remain in its owning Context");
+        }
     }
 
     virtual DataServiceOperationResult<std::monostate, E>& commit_transaction(Memory) = 0;
@@ -133,8 +135,9 @@ protected:
 private:
     void consume() {
         require_active();
-        if (pending_.any())
+        if (pending_.any()) {
             throw std::logic_error("Transaction still has pending operations");
+        }
         consumed_ = true;
     }
 
@@ -201,8 +204,9 @@ public:
 
     TransactionHandle(std::allocator_arg_t, Allocator a, DataServiceTransaction<E>& transaction)
         : transaction_(&transaction) {
-        if (a.resource() != transaction.memory_resource())
+        if (a.resource() != transaction.memory_resource()) {
             throw std::invalid_argument("Transaction borrow must belong to its owning Context");
+        }
     }
 
     TransactionHandle(std::allocator_arg_t, Allocator a, const TransactionHandle& other)

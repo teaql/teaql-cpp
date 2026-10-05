@@ -19,43 +19,51 @@ void sort_unique(Vector<T>& values, Render render) {
     keys.reserve(values.size());
     order.resize(values.size());
     std::iota(order.begin(), order.end(), 0);
-    for (const auto& v : values)
+    for (const auto& v : values) {
         keys.emplace_back(render(v));
+    }
     std::sort(order.begin(), order.end(), [&](auto a, auto b) {
         return keys[a] == keys[b] ? a < b : keys[a] < keys[b];
     });
     Vector<T> sorted(r);
     sorted.reserve(values.size());
     for (auto i : order) {
-        if (sorted.empty() || !(sorted.back() == values[i]))
+        if (sorted.empty() || !(sorted.back() == values[i])) {
             sorted.emplace_back(std::move(values[i]));
+        }
     }
     values.swap(sorted);
 }
 
 void canonical_expr(Expr& e) {
-    for (auto& child : e.args)
+    for (auto& child : e.args) {
         canonical_expr(child);
-    if (e.kind == Expr::Kind::SubQuery)
+    }
+    if (e.kind == Expr::Kind::SubQuery) {
         canonical_query(e.subquery_data->query);
+    }
     if (e.kind == Expr::Kind::Binary &&
         (e.op == BinaryOp::In || e.op == BinaryOp::NotIn || e.op == BinaryOp::InLarge ||
          e.op == BinaryOp::NotInLarge)) {
         auto& right = e.args.at(1);
-        if (right.kind == Expr::Kind::Value)
-            if (auto* list = std::get_if<Value::List>(&right.literal.data))
+        if (right.kind == Expr::Kind::Value) {
+            if (auto* list = std::get_if<Value::List>(&right.literal.data)) {
                 sort_unique(*list, [&](auto& v) {
                     return debug_value(e.memory_resource(), v);
                 });
+            }
+        }
     }
     if (e.kind == Expr::Kind::And || e.kind == Expr::Kind::Or) {
         Vector<Expr> flat(e.memory_resource());
         for (auto& child : e.args) {
             if (child.kind == e.kind) {
-                for (auto& part : child.args)
+                for (auto& part : child.args) {
                     flat.emplace_back(std::move(part));
-            } else
+                }
+            } else {
                 flat.emplace_back(std::move(child));
+            }
         }
         sort_unique(flat, [&](auto& v) {
             return debug_expr(e.memory_resource(), v);
@@ -65,22 +73,31 @@ void canonical_expr(Expr& e) {
 }
 
 void canonical_query(SelectQuery& q) {
-    if (q.predicate)
+    if (q.predicate) {
         canonical_expr(*q.predicate);
-    if (q.having_predicate)
+    }
+    if (q.having_predicate) {
         canonical_expr(*q.having_predicate);
-    for (auto& p : q.expr_projection)
+    }
+    for (auto& p : q.expr_projection) {
         canonical_expr(p.expr);
-    for (auto& o : q.order_by)
-        if (o.expr)
+    }
+    for (auto& o : q.order_by) {
+        if (o.expr) {
             canonical_expr(*o.expr);
-    for (auto& relation : q.relations)
-        if (relation.query)
+        }
+    }
+    for (auto& relation : q.relations) {
+        if (relation.query) {
             canonical_query(*relation.query);
-    for (auto& group : q.object_group_bys)
+        }
+    }
+    for (auto& group : q.object_group_bys) {
         canonical_query(group.query);
-    for (auto& child : q.child_enhancements)
+    }
+    for (auto& child : q.child_enhancements) {
         canonical_query(child);
+    }
     q.aggregation_cache.reset();
     q.comment_text.reset();
     q.trace_chain.clear();
@@ -131,20 +148,23 @@ public:
     }
 
     void string(std::string_view s) {
-        for (unsigned char b : s)
+        for (unsigned char b : s) {
             byte(b);
+        }
         byte(0xff);
     }
 
     void u64(std::uint64_t n) {
-        for (unsigned i = 0; i < 8; ++i)
+        for (unsigned i = 0; i < 8; ++i) {
             byte(static_cast<unsigned char>(n >> (8 * i)));
+        }
     }
 
     void user(std::optional<std::string_view> u) {
         u64(u ? 1 : 0);
-        if (u)
+        if (u) {
             string(*u);
+        }
     }
 
     std::uint64_t finish() {
@@ -174,8 +194,9 @@ String hashed_key(Memory r,
     auto n = h.finish();
     constexpr char hex[] = "0123456789abcdef";
     char suffix[16];
-    for (unsigned i = 0; i < 16; ++i)
+    for (unsigned i = 0; i < 16; ++i) {
         suffix[i] = hex[(n >> (4 * (15 - i))) & 15];
+    }
     String out(prefix, r);
     out.append(suffix, sizeof(suffix));
     return out;
@@ -211,8 +232,9 @@ String continuous_page_query_key(Memory r,
                                  std::string_view ns,
                                  std::optional<std::string_view> user) {
     auto q = source.clone(r);
-    if (q.slice)
+    if (q.slice) {
         q.slice->offset = 0;
+    }
     q.comment_text.reset();
     q.trace_chain.clear();
     return hashed_key(r, "teaql:continuous-page:v1:", ns, q, user, {});

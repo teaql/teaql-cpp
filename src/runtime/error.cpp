@@ -50,8 +50,9 @@ String RuntimeError::to_string(Memory r) const {
         out = "check failed: ";
         bool first = true;
         for (const auto& error : check_results()) {
-            if (!first)
+            if (!first) {
                 out += "; ";
+            }
             out += error.to_string(r);
             first = false;
         }

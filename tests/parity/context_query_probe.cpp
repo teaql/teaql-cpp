@@ -15,8 +15,9 @@ static std::uint64_t number(const Json& j, std::string_view k) {
     return v ? std::visit(
                    [](const auto& value) -> std::uint64_t {
                        using T = std::decay_t<decltype(value)>;
-                       if constexpr (std::integral<T>)
+                       if constexpr (std::integral<T>) {
                            return value;
+                       }
                        return 0;
                    },
                    v->data)
@@ -38,17 +39,20 @@ static Json evaluate(UserContext& c, const Json& j) {
     c.set_runtime_telemetry(c, telemetry);
     c.disable_sql_log();
     c.set_user_identifier_option({});
-    if (flag(j, "capture"))
+    if (flag(j, "capture")) {
         c.enable_select_sql_log();
+    }
     if (auto* user = optional(j, "user");
-        user && !std::holds_alternative<std::monostate>(user->data))
+        user && !std::holds_alternative<std::monostate>(user->data)) {
         c.set_user_identifier(text(*user));
+    }
     auto& mock = c.make<Mock>(state);
     auto& repo = service(c, mock);
     auto& query = c.make<SelectQuery>("Item");
     if (auto* comment = optional(j, "comment");
-        comment && !std::holds_alternative<std::monostate>(comment->data))
+        comment && !std::holds_alternative<std::monostate>(comment->data)) {
         query.comment_text.emplace(text(*comment), r);
+    }
     if (flag(j, "trace")) {
         query.trace_chain.emplace_back(TraceKind::Request, "Item", "reason");
         query.trace_chain.emplace_back(TraceKind::Relation, "Child", "nested");
@@ -60,9 +64,9 @@ static Json evaluate(UserContext& c, const Json& j) {
         for (std::uint64_t i = 0; i < number(j, "polls"); ++i) {
             if (auto* result = op.poll()) {
                 ready = true;
-                if (!*result)
+                if (!*result) {
                     detail::model_put(out, "error", result->error().to_string(r));
-                else {
+                } else {
                     detail::model_put(out,
                                       "size",
                                       std::uint64_t(std::distance(result->value().begin(),
@@ -78,17 +82,19 @@ static Json evaluate(UserContext& c, const Json& j) {
         }
     };
     auto mode = text(field(j, "mode"));
-    if (mode == "all")
+    if (mode == "all") {
         drive(repo.fetch_all(query), false);
-    else if (mode == "list")
+    } else if (mode == "list") {
         drive(repo.fetch_smart_list(query), true);
-    else if (mode == "entities")
+    } else if (mode == "entities") {
         drive(repo.fetch_entities<decoder_fixture::Item<>>(query), true);
-    else
+    } else {
         drive(repo.fetch_enhanced_entities<decoder_fixture::Item<>>(query), true);
+    }
     Json::Array notes(r);
-    for (const auto& note : state.notes)
+    for (const auto& note : state.notes) {
         notes.emplace_back(note);
+    }
     detail::model_put(out, "notes", notes);
     Json::Array ops(r);
     for (const auto& operation : state.operations) {
@@ -100,16 +106,17 @@ static Json evaluate(UserContext& c, const Json& j) {
                                                          : std::string_view(operation.name));
         auto attrs = detail::model_json(r);
         for (const auto& [key, value] : operation.attributes) {
-            if (key == "teaql.provider.kind")
+            if (key == "teaql.provider.kind") {
                 detail::model_put(attrs, key, "Mock");
-            else if (key == "teaql.operation.name" && operation.family == "provider")
+            } else if (key == "teaql.operation.name" && operation.family == "provider") {
                 detail::model_put(attrs, key, "Mock.query");
-            else
+            } else {
                 std::visit(
                     [&](const auto& item) {
                         detail::model_put(attrs, key, item);
                     },
                     value.data);
+            }
         }
         detail::model_put(v, "attributes", attrs);
         ops.emplace_back(std::move(v));
@@ -126,8 +133,9 @@ static Json evaluate(UserContext& c, const Json& j) {
     }
     detail::model_put(out, "request", request);
     Json::Array logs(r);
-    for (const auto& log : c.sql_logs())
+    for (const auto& log : c.sql_logs()) {
         logs.emplace_back(log.result_count.value_or(0));
+    }
     detail::model_put(out, "logs", logs);
     return out;
 }

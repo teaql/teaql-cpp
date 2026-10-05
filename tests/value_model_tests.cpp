@@ -8,8 +8,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* why) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(why);
+    }
 }
 
 struct NoDefaultAllocator {
@@ -29,12 +30,13 @@ static void json_domain(const Json& json, Memory r) {
     std::visit(
         [&](const auto& item) {
             using T = std::decay_t<decltype(item)>;
-            if constexpr (std::same_as<T, String>)
+            if constexpr (std::same_as<T, String>) {
                 check(item.get_allocator().resource() == r, "JSON string domain");
-            else if constexpr (std::same_as<T, Json::Array>) {
+            } else if constexpr (std::same_as<T, Json::Array>) {
                 check(item.get_allocator().resource() == r, "JSON array domain");
-                for (const auto& v : item)
+                for (const auto& v : item) {
                     json_domain(v, r);
+                }
             } else if constexpr (std::same_as<T, Json::Object>) {
                 check(item.get_allocator().resource() == r, "JSON object domain");
                 for (const auto& [key, value] : item) {
@@ -56,8 +58,9 @@ static void lifetime() {
     json = *Json::parse(
         r,
         R"({"long object key requiring dynamic allocation":{"items":["long text requiring dynamic allocation",null,true,2.5]}})");
-    for (unsigned i = 0; i < 60; ++i)
+    for (unsigned i = 0; i < 60; ++i) {
         context->make<Json>(json);
+    }
     auto& value = context->make<Value>(json);
     auto& retained = global.make<Value>(value);
     auto& moved = global.make<Value>();
@@ -73,8 +76,9 @@ static void lifetime() {
     auto& nested = global.make<Vector<Json>>();
     nested.emplace_back(json);
     nested.emplace_back(std::move(json));
-    for (const auto& item : nested)
+    for (const auto& item : nested) {
         json_domain(item, g);
+    }
     json_domain(copied_json, g);
     json_domain(projected, g);
     check(std::holds_alternative<Json>(retained.data) && !retained.as_object(),
@@ -149,8 +153,9 @@ static void json_contracts() {
                      "\"\\ud800\\u0000\"",
                      "1e999",
                      "\"\xc0\xaf\"",
-                     "\"\xf4\x90\x80\x80\""})
+                     "\"\xf4\x90\x80\x80\""}) {
         check(!Json::parse(r, bad), "invalid JSON rejects");
+    }
     auto& valid =
         global.make<Json>(*Json::parse(r, R"({"a":"\u0000\ud83d\ude80雪","same":1,"same":2})"));
     check(Json::parse(r, valid.dump(r)) == std::optional<Json>(Json(r, valid)),
@@ -174,8 +179,9 @@ struct FailingResource : std::pmr::memory_resource {
     std::size_t live = 0;
 
     void* do_allocate(std::size_t size, std::size_t alignment) override {
-        if (fail)
+        if (fail) {
             throw std::bad_alloc();
+        }
         ++live;
         return std::pmr::new_delete_resource()->allocate(size, alignment);
     }

@@ -20,8 +20,9 @@ static unsigned kind(const Json& j) {
 
 static CompactRow row(Memory r, const Json& j) {
     Record data(r);
-    for (const auto& [k, v] : std::get<Json::Object>(j.data))
+    for (const auto& [k, v] : std::get<Json::Object>(j.data)) {
         data.emplace(String(k, r), value(r, v));
+    }
     return CompactRow(std::allocator_arg, Allocator(r), data);
 }
 
@@ -35,33 +36,36 @@ static Json decode(UserContext& c, const Json& input) {
         auto op = text(field(step, "op"));
         Json result(r);
         if (op == "register") {
-            if (kind(step) == 1)
+            if (kind(step) == 1) {
                 registry.register_entity<Item<1>>();
-            else
+            } else {
                 registry.register_entity<Item<0>>();
+            }
         } else if (op == "copy") {
             auto& copy = c.make<InMemoryEntityGraphDecoderRegistry>(registry);
             registry.register_entity<Item<1>>();
             c.set_entity_graph_decoder_registry(
                 copy); /* Copy remains independent of subsequent registration. */
             auto rows = Vector<CompactRow>(r);
-            for (const auto& item : items(step, "rows"))
+            for (const auto& item : items(step, "rows")) {
                 rows.emplace_back(row(r, item));
+            }
             auto v = copy.decode_compact_batch("Item", std::move(rows), root, graph);
             result = v ? Json(r) : Json(r, v.error().to_string(r));
         } else {
             auto name =
                 optional(step, "entity") ? text(field(step, "entity")) : std::string_view("Item");
             EntityGraphDecodeResult outcome = EntityGraphDecodeResult::ok(r, {});
-            if (op == "compact")
+            if (op == "compact") {
                 outcome = registry.decode_compact(name, row(r, field(step, "row")), root, graph);
-            else {
+            } else {
                 Vector<CompactRow> rows(r);
-                for (const auto& item : items(step, "rows"))
+                for (const auto& item : items(step, "rows")) {
                     rows.emplace_back(row(r, item));
-                if (op == "batch")
+                }
+                if (op == "batch") {
                     outcome = registry.decode_compact_batch(name, std::move(rows), root, graph);
-                else if (op == "list")
+                } else if (op == "list") {
                     outcome = registry.decode_compact_list(name,
                                                            std::move(rows),
                                                            root,
@@ -69,7 +73,7 @@ static Json decode(UserContext& c, const Json& input) {
                                                            "PurchaseOrder",
                                                            9,
                                                            text(field(step, "relation")));
-                else if (op == "option")
+                } else if (op == "option") {
                     outcome = registry.decode_compact_option(name,
                                                              std::move(rows),
                                                              root,
@@ -77,8 +81,9 @@ static Json decode(UserContext& c, const Json& input) {
                                                              "PurchaseOrder",
                                                              9,
                                                              text(field(step, "relation")));
-                else
+                } else {
                     throw std::runtime_error("decode fixture op");
+                }
             }
             result = outcome ? Json(r) : Json(r, outcome.error().to_string(r));
         }
@@ -90,13 +95,15 @@ static Json decode(UserContext& c, const Json& input) {
         steps.emplace_back(std::move(state));
     }
     auto frozen = root.freeze_graph(std::move(graph));
-    if (!frozen)
+    if (!frozen) {
         throw std::runtime_error("first freeze");
+    }
     Vector<const EntityRuntimeState*> states(r);
     Json::Array entities(r), relations(r);
     auto describe = [&]<unsigned K>(const Item<K>* v) -> Json {
-        if (!v)
+        if (!v) {
             return Json(r);
+        }
         auto out = detail::model_json(r);
         detail::model_put(out, "id", detail::debug_value(r, v->id_value()));
         auto* label = v->row.get("label");
@@ -123,15 +130,17 @@ static Json decode(UserContext& c, const Json& input) {
             Json list(r), option(r);
             if (auto* l = root.resolve_relation_list<Item<K>>("purchase_order", 9, name)) {
                 Json::Array values(r);
-                for (const auto& v : l->data)
+                for (const auto& v : l->data) {
                     values.emplace_back(describe(&v));
+                }
                 list = detail::model_json(r);
                 detail::model_put(list, "loaded", l->is_loaded);
                 detail::model_put(list, "data", values);
             }
             auto* v = root.resolve_relation_option<Item<K>>("purchase_order", 9, name);
-            if (v && *v)
+            if (v && *v) {
                 option = describe(&**v);
+            }
             detail::model_put(out, "list", list);
             detail::model_put(out, "option_present", v != nullptr);
             detail::model_put(out, "option", option);
@@ -145,8 +154,9 @@ static Json decode(UserContext& c, const Json& input) {
     Json::Array equality(r), root_equal(r);
     for (auto* a : states) {
         root_equal.emplace_back(*a == root);
-        for (auto* b : states)
+        for (auto* b : states) {
             equality.emplace_back(*a == *b);
+        }
     }
     auto out = detail::model_json(r);
     detail::model_put(out, "steps", steps);
@@ -165,26 +175,29 @@ static Json module(UserContext& c, const Json& input) {
         auto op = text(field(step, "op"));
         auto k = kind(step);
         if (op == "entity") {
-            if (k == 2)
+            if (k == 2) {
                 m.entity<Item<2>>();
-            else if (k == 1)
+            } else if (k == 1) {
                 m.entity<Item<1>>();
-            else
+            } else {
                 m.entity<Item<0>>();
-        } else if (op == "descriptor")
+            }
+        } else if (op == "descriptor") {
             m.descriptor(
                 EntityDescriptor(std::allocator_arg, Allocator(r), text(field(step, "name"))));
-        else if (op == "behavior") {
+        } else if (op == "behavior") {
             auto& b = c.make<NamedBehavior>(text(field(step, "value")));
             m.behavior(text(field(step, "name")), c, b);
         } else if (op == "entity_behavior") {
             auto& b = c.make<NamedBehavior>(text(field(step, "value")));
-            if (k == 2)
+            if (k == 2) {
                 m.entity_with_behavior<Item<2>>(c, b);
-            else
+            } else {
                 m.entity_with_behavior<Item<0>>(c, b);
-        } else
+            }
+        } else {
             throw std::runtime_error("module fixture op");
+        }
         m.apply_to(c);
         Json::Array snapshot(r);
         for (auto name : {"Item", "Alias", "OnlyBehavior"}) {
@@ -197,8 +210,9 @@ static Json module(UserContext& c, const Json& input) {
             Json behavior(r);
             if (b) {
                 Json::Array names(r);
-                for (const auto& name : b->get().relation_loads(r, c))
+                for (const auto& name : b->get().relation_loads(r, c)) {
                     names.emplace_back(name);
+                }
                 behavior = Json(r, names);
             }
             detail::model_put(one, "behavior", behavior);

@@ -10,8 +10,9 @@ using namespace teaql;
 using Outcome = Result<std::monostate, RuntimeError>;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -38,8 +39,9 @@ static MutationGovernanceSnapshot snapshot(Memory r, std::string_view id) {
 
 static std::string_view active(const UserContext& c) {
     auto s = detail::current_mutation_governance(c);
-    if (!s)
+    if (!s) {
         return "none"; // return a Context-owned clone, not this temporary's string
+    }
     return c.make<String>(s->execution_id);
 }
 
@@ -72,15 +74,18 @@ struct Raw final : RawAuditEventSink {
     explicit Raw(State& state) : state(state) {}
 
     Outcome on_event(Memory r, const UserContext&, const RawAuditEvent& e) const override {
-        if (state.path)
+        if (state.path) {
             check(file_text(state.path).size() == state.previous_size,
                   "raw sink precedes log output");
+        }
         state.note("raw");
         state.raw.emplace_back(e);
-        if (state.raw_throw)
+        if (state.raw_throw) {
             throw std::runtime_error("sink panic");
-        if (state.raw_error)
+        }
+        if (state.raw_error) {
             return Outcome::err(r, RuntimeError::event(r, "raw failed"));
+        }
         return Outcome::ok(r, {});
     }
 };
@@ -91,13 +96,15 @@ struct Safe final : SafeAuditEventSink {
     explicit Safe(State& state) : state(state) {}
 
     Outcome on_safe_event(Memory r, const UserContext&, const SafeAuditEvent& e) const override {
-        if (state.path)
+        if (state.path) {
             check(file_text(state.path).size() == state.previous_size,
                   "safe sink precedes log output");
+        }
         state.note("safe");
         state.safe.emplace_back(e);
-        if (state.safe_error)
+        if (state.safe_error) {
             return Outcome::err(r, RuntimeError::event(r, "safe failed"));
+        }
         return Outcome::ok(r, {});
     }
 };
@@ -114,9 +121,10 @@ struct Scope final : RuntimeTelemetryScope {
 
     void success(const RuntimeAttributes& attrs) override {
         check(attrs.empty(), "audit success attributes empty");
-        if (state.path)
+        if (state.path) {
             check(file_text(state.path).size() > state.previous_size,
                   "log output precedes telemetry completion");
+        }
         state.note("success");
     }
 
@@ -248,10 +256,12 @@ struct Pending {
 
     std::optional<int> poll(WakeSignal&) {
         state.note(active(context));
-        if (panic)
+        if (panic) {
             throw std::runtime_error("poll panic");
-        if (ready)
+        }
+        if (ready) {
             return 7;
+        }
         return {};
     }
 
@@ -377,20 +387,24 @@ struct Provider final : runtime::SchemaProvider {
 
 static GeneratedSchemaBootstrapFuture& bootstrap(const UserContext& c) {
     auto r = c.memory_resource();
-    for (int kind = 0; kind < 8; ++kind)
+    for (int kind = 0; kind < 8; ++kind) {
         for (int variant = 0; variant < 4; ++variant) {
             auto e = event(r);
             e.kind = static_cast<RawAuditEventKind>(kind);
             e.bootstrap_audit.emplace(
                 std::allocator_arg, Allocator(r), "caller", "caller", "caller", 99, 1);
-            if (variant == 1)
+            if (variant == 1) {
                 e.new_values->insert_or_assign(String("version", r), Value(r));
-            if (variant == 2)
+            }
+            if (variant == 2) {
                 e.new_values->clear();
-            if (variant == 3)
+            }
+            if (variant == 3) {
                 e.trace_chain.emplace_back(TraceKind::Comment, "Order", "");
+            }
             check(bool(c.send_event(e)), "bootstrap audit send");
         }
+    }
     return make_operation<Outcome, Ready>(r, Ready{r});
 }
 
@@ -424,9 +438,10 @@ static void bootstrap_identity() {
                                                   after.time_since_epoch())
                                                   .count(),
                   "bootstrap timestamp taken during send");
-        } else
+        } else {
             check(b.actor == "caller" && b.occurred_at_millis == 1,
                   "non-create/update identity retained");
+        }
     }
 }
 

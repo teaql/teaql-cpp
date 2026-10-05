@@ -4,8 +4,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 enum class Error { Fetch };
 
@@ -77,22 +78,27 @@ struct Transport final : SqlTransport<Error> {
               values(values.begin(), values.end(), a.resource()), mode(owner.mode) {}
 
         std::optional<Result<Rows, Error>> poll(WakeSignal&) {
-            if (mode == Pending)
+            if (mode == Pending) {
                 return {};
-            if (mode == Panic)
+            }
+            if (mode == Panic) {
                 throw std::runtime_error("PRIVATE-PROVIDER-ERROR");
-            if (mode == Failure)
+            }
+            if (mode == Failure) {
                 return Result<Rows, Error>::err(resource, Error::Fetch);
+            }
             Rows rows(resource);
             if (values.empty()) {
                 rows.emplace_back();
-                if (!query.params.empty())
+                if (!query.params.empty()) {
                     rows.back().insert("value", query.params[0]);
-            } else
+                }
+            } else {
                 for (const auto& v : values) {
                     rows.emplace_back();
                     rows.back().insert("value", v);
                 }
+            }
             return Result<Rows, Error>::ok(resource, std::move(rows));
         }
 

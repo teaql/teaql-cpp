@@ -4,8 +4,9 @@
 using namespace teaql;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 enum class Error { Query, Mutation, Guard, Schema, Id, Begin, Commit, Rollback };
 
@@ -78,8 +79,9 @@ struct Chunks {
     Chunks(std::allocator_arg_t, Allocator a) : resource(a.resource()) {}
 
     std::optional<std::optional<Result<StreamChunk, Error>>> poll_next(WakeSignal&) {
-        if (next == 2)
+        if (next == 2) {
             return std::optional<Result<StreamChunk, Error>>{};
+        }
         StreamChunk chunk(std::allocator_arg, Allocator(resource), next, next == 1);
         ++next;
         return std::optional<Result<StreamChunk, Error>>(

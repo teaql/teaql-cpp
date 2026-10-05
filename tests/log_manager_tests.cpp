@@ -10,8 +10,9 @@
 using namespace teaql;
 
 static void check(bool ok, const char* message) {
-    if (!ok)
+    if (!ok) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -33,11 +34,13 @@ struct Redirect {
     explicit Redirect(std::FILE* stream, const char* path = nullptr)
         : stream(stream), saved(::dup(::fileno(stream))),
           target(path ? std::fopen(path, "wb+") : std::tmpfile()) {
-        if (saved < 0 || !target)
+        if (saved < 0 || !target) {
             throw std::runtime_error("capture setup failed");
+        }
         std::fflush(stream);
-        if (::dup2(::fileno(target), ::fileno(stream)) < 0)
+        if (::dup2(::fileno(target), ::fileno(stream)) < 0) {
             throw std::runtime_error("redirect failed");
+        }
         std::clearerr(stream);
     }
 
@@ -57,8 +60,9 @@ struct Redirect {
         for (;;) {
             auto n = std::fread(buf, 1, sizeof(buf), target);
             out.append(buf, n);
-            if (n < sizeof(buf))
+            if (n < sizeof(buf)) {
                 break;
+            }
         }
         return out;
     }
@@ -87,8 +91,9 @@ static void reset_env() {
                             "TEAQL_TOOL_LOG_FOCUS",
                             "TEAQL_SQL_DEBUG_ENDPOINT",
                             "TEAQL_AUDIT_DEBUG_ENDPOINT",
-                            "TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS"})
+                            "TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS"}) {
         unsetenv(key);
+    }
     setenv("TEAQL_LOG_ENDPOINT", "/dev/null", 1);
     setenv("TEAQL_LOG_FORMAT", "debug", 1);
 }

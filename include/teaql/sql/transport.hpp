@@ -65,13 +65,15 @@ protected:
     }
 
     void require_active() const {
-        if (consumed_)
+        if (consumed_) {
             throw std::logic_error("SQL transaction has been consumed");
+        }
     }
 
     void require_domain(Memory r) const {
-        if (r != resource_)
+        if (r != resource_) {
             throw std::invalid_argument("SQL transaction work must remain in its owning Context");
+        }
     }
 
     virtual DataServiceOperationResult<std::monostate, E>& commit_sql_transaction(Memory) = 0;
@@ -80,8 +82,9 @@ protected:
 private:
     void consume() {
         require_active();
-        if (pending_.any())
+        if (pending_.any()) {
             throw std::logic_error("SQL transaction still has pending operations");
+        }
         consumed_ = true;
     }
 
@@ -143,8 +146,9 @@ public:
 
     SqlTransactionHandle(std::allocator_arg_t, Allocator a, SqlTransportTransaction<E>& transaction)
         : transaction_(&transaction) {
-        if (a.resource() != transaction.memory_resource())
+        if (a.resource() != transaction.memory_resource()) {
             throw std::invalid_argument("SQL transaction borrow must belong to its owning Context");
+        }
     }
 
     SqlTransactionHandle(std::allocator_arg_t, Allocator a, const SqlTransactionHandle& other)
@@ -197,20 +201,24 @@ public:
                 query_.emplace(std::allocator_arg, Allocator(resource_), template_);
                 query_->params.at(index_) = Value(resource_, values_[next_]);
                 pending_ = &transport_.fetch_all_compact_sql(resource_, *query_);
-                if (pending_->memory_resource() != resource_)
+                if (pending_->memory_resource() != resource_) {
                     throw std::invalid_argument(
                         "SQL transport returned an operation in a different Context");
+                }
             }
             forwarding_.attach(pending_->wake_signal(), wake);
             auto* result = pending_->poll();
-            if (!result)
+            if (!result) {
                 return {};
+            }
             forwarding_.reset();
             pending_ = nullptr;
-            if (!*result)
+            if (!*result) {
                 return Output::err(resource_, detail::clone_in(resource_, result->error()));
-            for (const auto& row : result->value())
+            }
+            for (const auto& row : result->value()) {
                 rows_.emplace_back(row);
+            }
             query_.reset();
             ++next_;
         }
@@ -224,8 +232,9 @@ public:
 
     void cancel_and_wait() noexcept {
         // Keep the query and parent wake alive through native cancellation.
-        if (pending_)
+        if (pending_) {
             pending_->cancel();
+        }
         forwarding_.reset();
         pending_ = nullptr;
         query_.reset();

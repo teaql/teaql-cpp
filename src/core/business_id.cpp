@@ -76,24 +76,27 @@ Result<std::uint64_t, BusinessIdError> BusinessIdDefinition::max_sequence() cons
     using Outcome = Result<std::uint64_t, BusinessIdError>;
     auto r = memory_resource();
     if (profile == DEFAULT_BUSINESS_ID_PROFILE) {
-        if (preserve_digits != DEFAULT_BUSINESS_ID_DIGITS)
+        if (preserve_digits != DEFAULT_BUSINESS_ID_DIGITS) {
             return Outcome::err(
                 r,
                 BusinessIdError(std::allocator_arg,
                                 Allocator(r),
                                 BusinessIdErrorCode::InvalidDefinition,
                                 "daily-permuted-v1 requires exactly 6 preserve_digits"));
+        }
         return Outcome::ok(r, BUSINESS_ID_V1_DOMAIN_SIZE - 1);
     }
-    if (preserve_digits == 0 || preserve_digits > 19)
+    if (preserve_digits == 0 || preserve_digits > 19) {
         return Outcome::err(r,
                             BusinessIdError(std::allocator_arg,
                                             Allocator(r),
                                             BusinessIdErrorCode::InvalidDefinition,
                                             "preserve_digits must be between 1 and 19"));
+    }
     std::uint64_t power = 1;
-    for (std::uint8_t i = 0; i < preserve_digits; ++i)
+    for (std::uint8_t i = 0; i < preserve_digits; ++i) {
         power *= 10;
+    }
     return Outcome::ok(r, power - 1);
 }
 
@@ -125,16 +128,18 @@ String BusinessIdScope::canonical_key(Memory r) const {
     bool first = true;
     for (std::string_view field : std::array<std::string_view, 4>{
              domain_root_key, aggregate_type, namespace_name, period_key}) {
-        if (!first)
+        if (!first) {
             result += '|';
+        }
         first = false;
         for (char c : field) {
-            if (c == '%')
+            if (c == '%') {
                 result += "%25";
-            else if (c == '|')
+            } else if (c == '|') {
                 result += "%7C";
-            else
+            } else {
                 result += c;
+            }
         }
     }
     return result;
@@ -175,8 +180,9 @@ BusinessIdPlan::BusinessIdPlan(std::allocator_arg_t,
                                std::uint64_t maximum)
     : scope(std::allocator_arg, a, s), prefix(p, a.resource()), preserve_digits(digits),
       separator(sep, a.resource()), initial_sequence(initial), max_sequence(maximum) {
-    if (date)
+    if (date) {
         date_text.emplace(*date, a.resource());
+    }
 }
 
 BusinessIdPlan::BusinessIdPlan(std::allocator_arg_t, Allocator a, const BusinessIdPlan& other)
@@ -188,7 +194,7 @@ BusinessIdPlan::BusinessIdPlan(std::allocator_arg_t, Allocator a, const Business
 Result<std::monostate, BusinessIdError> BusinessIdPlan::validate_allocation_range() const {
     using Outcome = Result<std::monostate, BusinessIdError>;
     auto r = memory_resource();
-    if (initial_sequence > max_sequence)
+    if (initial_sequence > max_sequence) {
         return Outcome::err(
             r,
             BusinessIdError(
@@ -196,6 +202,7 @@ Result<std::monostate, BusinessIdError> BusinessIdPlan::validate_allocation_rang
                 Allocator(r),
                 BusinessIdErrorCode::InvalidDefinition,
                 "business ID allocation range requires initial_sequence <= max_sequence"));
+    }
     return Outcome::ok(r, {});
 }
 

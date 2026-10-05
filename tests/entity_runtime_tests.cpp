@@ -6,8 +6,9 @@ static_assert(std::is_copy_constructible_v<RelationHandle<int>>);
 static_assert(!std::is_constructible_v<RelationHandle<int>, LoadedRelation, const int*>);
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 static EntityKey key(Memory r, std::string_view name = "Child", std::uint64_t id = 7) {
@@ -185,8 +186,9 @@ struct Resource {
 
     Resource(std::allocator_arg_t, Allocator a, Resource&& other)
         : r(a.resource()), destroyed(other.destroyed), active(std::exchange(other.active, false)) {
-        if (r != other.r)
+        if (r != other.r) {
             throw std::invalid_argument("resource cannot migrate");
+        }
     }
 
     Resource(Resource&& other) noexcept
@@ -195,8 +197,9 @@ struct Resource {
     Resource(const Resource&) = delete;
 
     ~Resource() {
-        if (active)
+        if (active) {
             ++*destroyed;
+        }
     }
 };
 
@@ -211,8 +214,9 @@ struct LedgerModel : EntityDefaults<LedgerModel>, LedgerEntityDefaults<LedgerMod
 
     LedgerModel(std::allocator_arg_t, Allocator a, const LedgerModel& other)
         : r(a.resource()), state(other.state) {
-        if (state && r != other.r)
+        if (state && r != other.r) {
             state = &detail::resource_arena(r).make<EntityRuntimeState>(*state);
+        }
     }
 
     Memory memory_resource() const {
@@ -233,8 +237,9 @@ struct LedgerModel : EntityDefaults<LedgerModel>, LedgerEntityDefaults<LedgerMod
     }
 
     std::optional<EntityRuntimeState> entity_runtime_state() const {
-        if (!state)
+        if (!state) {
             return {};
+        }
         return detail::clone_in(r, *state);
     }
 };

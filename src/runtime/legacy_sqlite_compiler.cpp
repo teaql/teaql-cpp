@@ -7,13 +7,15 @@
 namespace teaql {
 namespace {
 String quote(Memory r, std::string_view value) {
-    if (value.find('\0') != std::string_view::npos)
+    if (value.find('\0') != std::string_view::npos) {
         throw std::invalid_argument("NUL in identifier");
+    }
     String out("\"", r);
     for (char c : value) {
         out += c;
-        if (c == '"')
+        if (c == '"') {
             out += c;
+        }
     }
     out += '"';
     return out;
@@ -22,8 +24,9 @@ String quote(Memory r, std::string_view value) {
 void number(String& out, std::uint64_t value) {
     char buffer[32];
     auto [end, error] = std::to_chars(buffer, buffer + sizeof(buffer), value);
-    if (error != std::errc{})
+    if (error != std::errc{}) {
         throw std::invalid_argument("integer conversion failed");
+    }
     out.append(buffer, end);
 }
 
@@ -58,8 +61,9 @@ void expression(CompiledQuery& out,
     auto r = out.sql.get_allocator().resource();
     auto p = detail::combine_sql_policy(inherited, expr_policy(r, entity, e));
     using K = Expr::Kind;
-    if (e.kind == K::Function || e.kind == K::SubQuery)
+    if (e.kind == K::Function || e.kind == K::SubQuery) {
         throw std::invalid_argument("UnsupportedQueryFeature: expression compilation pending");
+    }
     if (e.kind == K::Column) {
         out.sql += quote(r, entity.require_property(e.name).column_name);
         return;
@@ -79,15 +83,18 @@ void expression(CompiledQuery& out,
         if (in) {
             const auto& right = e.args.at(1);
             const auto* values = right.kind == K::Value ? right.literal.as_list() : nullptr;
-            if (!values)
+            if (!values) {
                 throw std::invalid_argument("IN requires a list value");
-            if (values->empty())
+            }
+            if (values->empty()) {
                 throw std::invalid_argument("EmptyInList");
+            }
             out.sql +=
                 (e.op == BinaryOp::NotIn || e.op == BinaryOp::NotInLarge) ? " NOT IN (" : " IN (";
             for (std::size_t i = 0; i < values->size(); ++i) {
-                if (i)
+                if (i) {
                     out.sql += ", ";
+                }
                 bind(out, values->at(i), p.value_or(SqlParameterLogPolicy::Unknown));
             }
             out.sql += ')';
@@ -135,11 +142,13 @@ void expression(CompiledQuery& out,
         out.sql += "NOT ";
         arg(0);
     } else {
-        if (e.args.empty())
+        if (e.args.empty()) {
             throw std::invalid_argument("Empty logical expression");
+        }
         for (std::size_t i = 0; i < e.args.size(); ++i) {
-            if (i)
+            if (i) {
                 out.sql += e.kind == K::And ? " AND " : " OR ";
+            }
             // Logical siblings do not inherit each other's field policies.
             expression(out, entity, e.args[i]);
         }
@@ -148,13 +157,15 @@ void expression(CompiledQuery& out,
 }
 
 void require_entity(const EntityDescriptor& entity, std::string_view name) {
-    if (entity.name != name)
+    if (entity.name != name) {
         throw std::invalid_argument("Entity mismatch");
+    }
 }
 
 std::int64_t next_version(std::int64_t value) {
-    if (value == INT64_MAX)
+    if (value == INT64_MAX) {
         throw std::overflow_error("Version overflow");
+    }
     return value + 1;
 }
 }
@@ -163,14 +174,16 @@ CompiledQuery LegacySqliteCompiler::create_table(Memory r, const EntityDescripto
     CompiledQuery out(std::allocator_arg, Allocator(r));
     out.log_context.database_kind.emplace("sqlite", r);
     out.log_context.generated_sql = true;
-    if (entity.properties.empty())
+    if (entity.properties.empty()) {
         throw std::invalid_argument("Empty entity");
+    }
     out.sql = "CREATE TABLE IF NOT EXISTS ";
     out.sql += quote(r, entity.table_name);
     out.sql += " (";
     for (std::size_t i = 0; i < entity.properties.size(); ++i) {
-        if (i)
+        if (i) {
             out.sql += ", ";
+        }
         const auto& p = entity.properties[i];
         out.sql += quote(r, p.column_name);
         switch (p.data_type) {
@@ -191,10 +204,12 @@ CompiledQuery LegacySqliteCompiler::create_table(Memory r, const EntityDescripto
         default:
             throw std::invalid_argument("Unsupported data type in initial SQLite kernel");
         }
-        if (p.is_id)
+        if (p.is_id) {
             out.sql += " PRIMARY KEY";
-        if (p.is_id || !p.nullable)
+        }
+        if (p.is_id || !p.nullable) {
             out.sql += " NOT NULL";
+        }
     }
     out.sql += ')';
     return out;
@@ -213,11 +228,14 @@ CompiledQuery LegacySqliteCompiler::select(Memory r,
         query.aggregation_cache || query.raw_sql_text || !query.raw_sql_search_criteria.empty() ||
         !query.dynamic_properties.empty() || !query.raw_projections.empty() ||
         !query.object_group_bys.empty() || !query.child_enhancements.empty() ||
-        query.stream_config || query.continuous_page_fetch || query.id_set_pagination)
+        query.stream_config || query.continuous_page_fetch || query.id_set_pagination) {
         throw std::invalid_argument("UnsupportedQueryFeature: layered query execution pending");
-    for (const auto& order : query.order_by)
-        if (order.expr)
+    }
+    for (const auto& order : query.order_by) {
+        if (order.expr) {
             throw std::invalid_argument("UnsupportedQueryFeature: expression ordering pending");
+        }
+    }
     CompiledQuery out(std::allocator_arg, Allocator(r));
     out.log_context.database_kind.emplace("sqlite", r);
     out.log_context.generated_sql = true;
@@ -235,18 +253,22 @@ CompiledQuery LegacySqliteCompiler::select(Memory r,
             out.sql += quote(r, p.name);
         }
     };
-    if (query.projection.empty())
-        for (const auto& p : entity.properties)
+    if (query.projection.empty()) {
+        for (const auto& p : entity.properties) {
             project(p);
-    else
+        }
+    } else {
         for (std::size_t i = 0; i < query.projection.size(); ++i) {
             if (std::find(query.projection.begin(),
                           query.projection.begin() + i,
-                          query.projection[i]) == query.projection.begin() + i)
+                          query.projection[i]) == query.projection.begin() + i) {
                 project(entity.require_property(query.projection[i]));
+            }
         }
-    if (first)
+    }
+    if (first) {
         throw std::invalid_argument("Empty projection");
+    }
     out.sql += " FROM ";
     out.sql += quote(r, entity.table_name);
     if (query.predicate) {
@@ -269,10 +291,11 @@ CompiledQuery LegacySqliteCompiler::select(Memory r,
     const auto slice = bounded_slice ? bounded_slice : query.slice;
     if (slice) {
         out.sql += " LIMIT ";
-        if (slice->limit)
+        if (slice->limit) {
             number(out.sql, *slice->limit);
-        else
+        } else {
             out.sql += "-1";
+        }
         if (slice->offset) {
             out.sql += " OFFSET ";
             number(out.sql, slice->offset);
@@ -300,13 +323,14 @@ CompiledQuery compile_mutation(Memory r,
     out.log_context.database_kind.emplace("sqlite", r);
     out.log_context.generated_sql = true;
     if (kind == MutationKind::Insert) {
-        if (cmd.values->fields.empty())
+        if (cmd.values->fields.empty()) {
             throw std::invalid_argument("EmptyMutation");
+        }
         out.sql = "INSERT INTO ";
         out.sql += quote(r, entity.table_name);
         out.sql += " (";
         bool first = true;
-        for (const auto& p : entity.properties)
+        for (const auto& p : entity.properties) {
             if (cmd.values->fields.contains(p.name)) {
                 if (!first) {
                     out.sql += ", ";
@@ -314,11 +338,13 @@ CompiledQuery compile_mutation(Memory r,
                 first = false;
                 out.sql += quote(r, p.column_name);
             }
-        if (first)
+        }
+        if (first) {
             throw std::invalid_argument("EmptyMutation");
+        }
         out.sql += ") VALUES (";
         first = true;
-        for (const auto& p : entity.properties)
+        for (const auto& p : entity.properties) {
             if (auto it = cmd.values->fields.find(p.name); it != cmd.values->fields.end()) {
                 if (!first) {
                     out.sql += ", ";
@@ -326,6 +352,7 @@ CompiledQuery compile_mutation(Memory r,
                 first = false;
                 field_bind(out, entity, p, it->second);
             }
+        }
         out.sql += ')';
         return out;
     }
@@ -339,10 +366,11 @@ CompiledQuery compile_mutation(Memory r,
         out.sql += quote(r, entity.table_name);
         out.sql += " SET ";
         bool first = true;
-        if (kind == MutationKind::Update)
+        if (kind == MutationKind::Update) {
             for (const auto& p : entity.properties) {
-                if (p.is_id || (p.is_version && cmd.expected_version_value))
+                if (p.is_id || (p.is_version && cmd.expected_version_value)) {
                     continue;
+                }
                 if (auto it = cmd.values->fields.find(p.name); it != cmd.values->fields.end()) {
                     if (!first) {
                         out.sql += ", ";
@@ -353,19 +381,23 @@ CompiledQuery compile_mutation(Memory r,
                     field_bind(out, entity, p, it->second);
                 }
             }
+        }
         if (cmd.expected_version_value || kind != MutationKind::Update) {
             const auto& version = entity.require_version_property();
             std::int64_t next = 0;
             if (kind == MutationKind::Recover) {
-                if (!cmd.expected_version_value || *cmd.expected_version_value >= 0)
+                if (!cmd.expected_version_value || *cmd.expected_version_value >= 0) {
                     throw std::invalid_argument("InvalidRecoverVersion");
-                if (*cmd.expected_version_value <= -INT64_MAX)
+                }
+                if (*cmd.expected_version_value <= -INT64_MAX) {
                     throw std::overflow_error("Version overflow");
+                }
                 next = -*cmd.expected_version_value + 1;
-            } else if (kind == MutationKind::Delete)
+            } else if (kind == MutationKind::Delete) {
                 next = cmd.expected_version_value ? -next_version(*cmd.expected_version_value) : -1;
-            else
+            } else {
                 next = next_version(*cmd.expected_version_value);
+            }
             if (!first) {
                 out.sql += ", ";
             }
@@ -374,8 +406,9 @@ CompiledQuery compile_mutation(Memory r,
             out.sql += " = ";
             field_bind(out, entity, version, Value(r, next));
         }
-        if (first)
+        if (first) {
             throw std::invalid_argument("EmptyMutation");
+        }
     }
     out.sql += " WHERE ";
     out.sql += quote(r, id.column_name);

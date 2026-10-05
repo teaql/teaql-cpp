@@ -110,17 +110,19 @@ void WebAction::bind_record(Record& record) const {
     auto action = to_json_value(r);
     auto it = record.find(ACTION_LIST_KEY);
     if (it != record.end()) {
-        if (auto* json = std::get_if<Json>(&it->second.data))
+        if (auto* json = std::get_if<Json>(&it->second.data)) {
             if (auto* items = std::get_if<Json::Array>(&json->data)) {
                 items->emplace_back(std::move(action));
                 return;
             }
+        }
     }
     Json replacement(r);
     replacement.data.emplace<Json::Array>(r);
     auto& items = std::get<Json::Array>(replacement.data);
-    if (it != record.end())
+    if (it != record.end()) {
         items.emplace_back(it->second.to_json_value(r));
+    }
     items.emplace_back(std::move(action));
     record.insert_or_assign(String(ACTION_LIST_KEY, r), Value(r, std::move(replacement)));
 }
@@ -250,10 +252,12 @@ WebResponse::WebResponse(std::allocator_arg_t, Allocator a, const WebResponse& o
       status(detail::clone_in(a.resource(), other.status)),
       message(detail::clone_in(a.resource(), other.message)), record_count(other.record_count),
       version(other.version, a.resource()), facets(a.resource()) {
-    for (const auto& item : other.data)
+    for (const auto& item : other.data) {
         data.emplace_back(item);
-    for (const auto& [key, value] : other.facets)
+    }
+    for (const auto& [key, value] : other.facets) {
         facets.emplace(String(key, a.resource()), Json(a.resource(), value));
+    }
 }
 
 WebResponse WebResponse::fail(Memory r, std::string_view message) {
@@ -273,15 +277,17 @@ WebResponse WebResponse::empty_list(Memory r, std::string_view message) {
 
 WebResponse WebResponse::from_records(Memory r, std::span<const Record> records) {
     auto result = success(r);
-    for (const auto& record : records)
+    for (const auto& record : records) {
         result.push_json(record_to_json_value(r, record));
+    }
     return result;
 }
 
 WebResponse& WebResponse::with_data(const Json::Array& items) {
     Json::Array copy(memory_resource());
-    for (const auto& item : items)
+    for (const auto& item : items) {
         copy.emplace_back(item);
+    }
     data = std::move(copy);
     record_count = data.size();
     return *this;
@@ -290,15 +296,17 @@ WebResponse& WebResponse::with_data(const Json::Array& items) {
 WebResponse& WebResponse::with_facets(const Json::Object& items) {
     auto r = memory_resource();
     Json::Object copy(r);
-    for (const auto& [key, value] : items)
+    for (const auto& [key, value] : items) {
         copy.emplace(String(key, r), Json(r, value));
+    }
     facets = std::move(copy);
     return *this;
 }
 
 WebResponse& WebResponse::with_facets_option(const std::optional<Json::Object>& items) {
-    if (items)
+    if (items) {
         return with_facets(*items);
+    }
     facets.clear();
     return *this;
 }

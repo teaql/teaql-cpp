@@ -9,8 +9,9 @@ using namespace teaql;
 using Access = detail::EntityDataServiceAccess;
 
 static void check(bool value, const char* message) {
-    if (!value)
+    if (!value) {
         throw std::runtime_error(message);
+    }
 }
 
 template <class F>
@@ -71,10 +72,12 @@ struct Executor : QueryExecutor<String>, MutationExecutor<String> {
 
         std::optional<Result<QueryResult, String>> poll(WakeSignal& wake) {
             executor.child_wake = &wake;
-            if (executor.pending)
+            if (executor.pending) {
                 return {};
-            if (executor.fail)
+            }
+            if (executor.fail) {
                 return Result<QueryResult, String>::err(r, String("executor failed", r));
+            }
             QueryResult result(
                 std::allocator_arg, Allocator(r), ExecutionMetadata::unrecorded_query(r, 1));
             Record values(r);
@@ -90,8 +93,9 @@ struct Executor : QueryExecutor<String>, MutationExecutor<String> {
 
         void cancel_and_wait() noexcept {
             ++executor.cancelled;
-            if (executor.external_cancel)
+            if (executor.external_cancel) {
                 ++*executor.external_cancel;
+            }
             executor.child_wake = nullptr;
         }
     };
@@ -254,8 +258,9 @@ struct Behavior : EntityDataServiceBehavior {
     RuntimeHookResult
     before_select(Memory target, const UserContext&, SelectQuery& q) const override {
         calls.emplace_back("behavior");
-        if (fail)
+        if (fail) {
             return RuntimeHookResult::err(target, RuntimeError::behavior(target, "stop"));
+        }
         q.entity = "Intermediate";
         q.relations.emplace_back("child");
         q.trace_chain.emplace_back(TraceKind::Relation, "behavior", "hook");
@@ -464,8 +469,9 @@ static void plans_and_scopes() {
         auto inherited = [&](const auto& repo) {
             Vector<String> out(r);
             auto intent = Access::intent(repo);
-            if (intent)
+            if (intent) {
                 intent->extend_secrets(false, out);
+            }
             return out;
         };
         auto metadata = ExecutionMetadata::unrecorded_query(r, 0);

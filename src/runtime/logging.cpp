@@ -12,8 +12,9 @@ String number(Memory r, T n) {
 }
 
 String optional_text(Memory r, const std::optional<String>& value) {
-    if (!value)
+    if (!value) {
         return String("None", r);
+    }
     String out("Some(", r);
     out += debug_text(r, *value);
     out += ')';
@@ -22,8 +23,9 @@ String optional_text(Memory r, const std::optional<String>& value) {
 
 template <class T>
 String optional_number(Memory r, std::optional<T> n) {
-    if (!n)
+    if (!n) {
         return String("None", r);
+    }
     String out("Some(", r);
     out += number(r, *n);
     out += ')';
@@ -47,8 +49,9 @@ String system_time(Memory r, SqlLogEntry::SystemTime time) {
 }
 
 String duration(Memory r, LogDuration duration) {
-    if (duration.nanos >= 1000000000)
+    if (duration.nanos >= 1000000000) {
         throw std::invalid_argument("Invalid log duration nanoseconds");
+    }
     auto fraction = [&](std::uint64_t integral,
                         std::uint32_t fractional,
                         unsigned width,
@@ -59,18 +62,22 @@ String duration(Memory r, LogDuration duration) {
             out += '.';
             out.append(width - digits.size(), '0');
             out += digits;
-            while (out.back() == '0')
+            while (out.back() == '0') {
                 out.pop_back();
+            }
         }
         out += unit;
         return out;
     };
-    if (duration.seconds)
+    if (duration.seconds) {
         return fraction(duration.seconds, duration.nanos, 9, "s");
-    if (duration.nanos >= 1000000)
+    }
+    if (duration.nanos >= 1000000) {
         return fraction(duration.nanos / 1000000, duration.nanos % 1000000, 6, "ms");
-    if (duration.nanos >= 1000)
+    }
+    if (duration.nanos >= 1000) {
         return fraction(duration.nanos / 1000, duration.nanos % 1000, 3, "µs");
+    }
     auto out = number(r, duration.nanos);
     out += "ns";
     return out;
@@ -89,23 +96,26 @@ String debug_sql_log(Memory r, const SqlLogEntry& e) {
         out += "Some(";
         out += outcomes[unsigned(*c.execution_outcome)];
         out += ')';
-    } else
+    } else {
         out += "None";
+    }
     out += ", database_kind: ";
     out += optional_text(r, c.database_kind);
     out += ", parameter_policies: [";
     constexpr std::string_view policies[]{"Unknown", "Plain", "Masked", "Credential"};
     for (std::size_t i = 0; i < c.parameter_policies.size(); ++i) {
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += policies[unsigned(c.parameter_policies[i])];
     }
     out += "], generated_sql: ";
     out += c.generated_sql ? "true" : "false";
     out += ", masked_parameters: [";
     for (std::size_t i = 0; i < c.masked_parameters.size(); ++i) {
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += c.masked_parameters[i] ? "true" : "false";
     }
     out += "], mode: ";
@@ -133,8 +143,9 @@ String debug_sql_log(Memory r, const SqlLogEntry& e) {
                                        "AuditReason"};
     for (std::size_t i = 0; i < e.trace_path.size(); ++i) {
         const auto& n = e.trace_path[i];
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += "TraceNode { kind: ";
         out += kinds[unsigned(n.kind)];
         out += ", entity_type: ";
@@ -149,8 +160,9 @@ String debug_sql_log(Memory r, const SqlLogEntry& e) {
     out += debug_text(r, e.sql);
     out += ", params: [";
     for (std::size_t i = 0; i < e.params.size(); ++i) {
-        if (i)
+        if (i) {
             out += ", ";
+        }
         out += debug_value(r, e.params[i]);
     }
     out += "], debug_sql: ";

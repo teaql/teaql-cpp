@@ -33,31 +33,36 @@ struct OriginalVersions {
 
     OriginalVersions(std::allocator_arg_t, Allocator a, const OriginalVersions& other)
         : overflow(other.overflow, a.resource()) {
-        if (other.first)
+        if (other.first) {
             first.emplace(clone_in(a.resource(), other.first->first), other.first->second);
+        }
     }
 
     std::optional<std::int64_t> get(const EntityKey& key) const {
-        if (first && first->first == key)
+        if (first && first->first == key) {
             return first->second;
+        }
         auto it = overflow.find(key);
         return it == overflow.end() ? std::nullopt : std::optional(it->second);
     }
 
     void insert(const EntityKey& key, std::int64_t version) {
-        if (!first)
+        if (!first) {
             first.emplace(clone_in(overflow.get_allocator().resource(), key), version);
-        else if (first->first == key)
+        } else if (first->first == key) {
             first->second = version;
-        else
+        } else {
             overflow.insert_or_assign(key, version);
+        }
     }
 
     void merge_from(const OriginalVersions& other) {
-        if (other.first)
+        if (other.first) {
             insert(other.first->first, other.first->second);
-        for (const auto& [key, version] : other.overflow)
+        }
+        for (const auto& [key, version] : other.overflow) {
             insert(key, version);
+        }
     }
 
     void clear() {
@@ -72,8 +77,9 @@ using OriginalSnapshot = std::variant<EntitySnapshot, CompactRow>;
 
 std::optional<OriginalSnapshot> clone_snapshot(Memory r,
                                                const std::optional<OriginalSnapshot>& value) {
-    if (!value)
+    if (!value) {
         return {};
+    }
     return std::visit(
         [&](const auto& snapshot) -> OriginalSnapshot {
             return clone_in(r, snapshot);
@@ -144,22 +150,26 @@ struct EntityRuntimeClone {
     explicit EntityRuntimeClone(Memory r) : resource(r), ledgers(r), graphs(r) {}
 
     EntityLedgerSlot* ledger(const EntityLedgerSlot* source) {
-        if (auto it = ledgers.find(source); it != ledgers.end())
+        if (auto it = ledgers.find(source); it != ledgers.end()) {
             return it->second;
+        }
         auto* target = &resource_arena(resource).make<EntityLedgerSlot>();
         ledgers.emplace(source, target);
-        if (source->value)
+        if (source->value) {
             target->value = make_box<EntityMutationLedger>(resource, *source->value);
+        }
         return target;
     }
 
     EntityGraphSlot* graph(const EntityGraphSlot* source) {
-        if (auto it = graphs.find(source); it != graphs.end())
+        if (auto it = graphs.find(source); it != graphs.end()) {
             return it->second;
+        }
         auto* target = &resource_arena(resource).make<EntityGraphSlot>();
         graphs.emplace(source, target);
-        if (source->value)
+        if (source->value) {
             target->value = make_box<FrozenEntityGraph>(resource, *source->value);
+        }
         return target;
     }
 };
@@ -172,13 +182,15 @@ struct EntityCloneScope {
     explicit EntityCloneScope(Memory r)
         : local(r), arena(dynamic_cast<ContextArena&>(resource_arena(r))),
           owner(arena.entity_runtime_clone == nullptr) {
-        if (owner)
+        if (owner) {
             arena.entity_runtime_clone = &local;
+        }
     }
 
     ~EntityCloneScope() {
-        if (owner)
+        if (owner) {
             arena.entity_runtime_clone = nullptr;
+        }
     }
 
     EntityRuntimeClone& get() {
@@ -192,8 +204,9 @@ bool EntityRuntimeAccess::has_mutation_context(const EntityRuntimeState& state) 
 
 std::optional<LedgerCompositionError>
 EntityRuntimeAccess::first_composition_error(const EntityRuntimeState& state) {
-    if (!state.inner_->value || state.inner_->value->composition_errors.empty())
+    if (!state.inner_->value || state.inner_->value->composition_errors.empty()) {
         return {};
+    }
     return clone_in(state.resource_, state.inner_->value->composition_errors.front());
 }
 }
@@ -205,17 +218,20 @@ EntityGraphBuilder::EntityGraphBuilder(std::allocator_arg_t,
     detail::EntityCloneScope scope(a.resource());
     for (const auto& [type, table] : other.tables_) {
         auto [out, _] = tables_.try_emplace(type);
-        for (const auto& [id, value] : table)
+        for (const auto& [id, value] : table) {
             out->second.emplace(id, value);
+        }
     }
-    for (const auto& [key, value] : other.relations_)
+    for (const auto& [key, value] : other.relations_) {
         relations_.emplace(key, value);
+    }
 }
 
 std::size_t EntityGraphBuilder::entity_count() const noexcept {
     std::size_t count = 0;
-    for (const auto& [_, table] : tables_)
+    for (const auto& [_, table] : tables_) {
         count += table.size();
+    }
     return count;
 }
 
@@ -227,63 +243,77 @@ void EntityChangeSet::set(const EntityKey& key, std::string_view field, const Va
 
 const Value* EntityChangeSet::get(const EntityKey& key, std::string_view field) const {
     auto found = changes_.find(key);
-    if (found == changes_.end())
+    if (found == changes_.end()) {
         return nullptr;
+    }
     auto v = found->second.fields.find(field);
     return v == found->second.fields.end() ? nullptr : &v->second;
 }
 
 FieldSet EntityChangeSet::field_names(const EntityKey& key) const {
     FieldSet fields(memory_resource());
-    if (auto found = changes_.find(key); found != changes_.end())
-        for (const auto& [name, _] : found->second.fields)
+    if (auto found = changes_.find(key); found != changes_.end()) {
+        for (const auto& [name, _] : found->second.fields) {
             fields.emplace(name);
+        }
+    }
     return fields;
 }
 
 bool EntityChangeSet::operator==(const EntityChangeSet& other) const {
-    if (changes_.size() != other.changes_.size())
+    if (changes_.size() != other.changes_.size()) {
         return false;
+    }
     auto a = changes_.begin(), b = other.changes_.begin();
-    for (; a != changes_.end(); ++a, ++b)
-        if (a->first != b->first || a->second.fields != b->second.fields)
+    for (; a != changes_.end(); ++a, ++b) {
+        if (a->first != b->first || a->second.fields != b->second.fields) {
             return false;
+        }
+    }
     return true;
 }
 
 std::optional<EntityChangeSet> ChangeSetStack::pop() {
-    if (stack_.empty())
+    if (stack_.empty()) {
         return {};
+    }
     auto out = std::move(stack_.back());
     stack_.pop_back();
     return out;
 }
 
 std::optional<Value> ChangeSetStack::get(const EntityKey& key, std::string_view field) const {
-    for (auto i = stack_.rbegin(); i != stack_.rend(); ++i)
-        if (auto* v = i->get(key, field))
+    for (auto i = stack_.rbegin(); i != stack_.rend(); ++i) {
+        if (auto* v = i->get(key, field)) {
             return Value(memory_resource(), *v);
+        }
+    }
     return {};
 }
 
 void ChangeSetStack::clear_current() {
-    if (!stack_.empty())
+    if (!stack_.empty()) {
         stack_.back() = EntityChangeSet(std::allocator_arg, Allocator(memory_resource()));
+    }
 }
 
 FieldSet ChangeSetStack::changed_field_names(const EntityKey& key) const {
     FieldSet out(memory_resource());
-    for (const auto& set : stack_)
-        for (const auto& name : set.field_names(key))
+    for (const auto& set : stack_) {
+        for (const auto& name : set.field_names(key)) {
             out.emplace(name);
+        }
+    }
     return out;
 }
 
 String LedgerCompositionError::to_string(Memory r) const {
-    if (kind == Kind::MissingTargetState)
+    if (kind == Kind::MissingTargetState) {
         return String("target entity has no mutation ledger", r);
-    if (kind == Kind::MissingSourceState)
+    }
+    if (kind == Kind::MissingSourceState) {
         return String("source entity has no mutation ledger", r);
+    }
     String s("cannot compose ", r);
     s += entity;
     s += '#';
@@ -319,9 +349,9 @@ EntityRuntimeState EntityRuntimeState::fresh_with_shared_graph(Memory r,
                                                                const EntityRuntimeState& source) {
     EntityRuntimeState result(std::allocator_arg, Allocator(r));
     detail::resource_arena(source.resource_);
-    if (r == source.resource_)
+    if (r == source.resource_) {
         result.graph_ = source.graph_.preserve();
-    else {
+    } else {
         detail::EntityCloneScope scope(r);
         result.graph_.slot = scope.get().graph(source.graph_.slot);
     }
@@ -331,9 +361,9 @@ EntityRuntimeState EntityRuntimeState::fresh_with_shared_graph(Memory r,
 
 EntityRuntimeState EntityRuntimeState::with_shared_graph(const EntityRuntimeState& source) const {
     EntityRuntimeState result(std::allocator_arg, Allocator(resource_), *this);
-    if (resource_ == source.resource_)
+    if (resource_ == source.resource_) {
         result.graph_ = source.graph_.preserve();
-    else {
+    } else {
         detail::EntityCloneScope scope(resource_);
         result.graph_.slot = scope.get().graph(source.graph_.slot);
     }
@@ -343,8 +373,9 @@ EntityRuntimeState EntityRuntimeState::with_shared_graph(const EntityRuntimeStat
 
 detail::EntityMutationLedger& EntityRuntimeState::context() const {
     detail::resource_arena(resource_);
-    if (!inner_->value)
+    if (!inner_->value) {
         inner_->value = detail::make_box<detail::EntityMutationLedger>(resource_);
+    }
     return *inner_->value;
 }
 
@@ -357,8 +388,9 @@ Result<std::monostate, EntityGraphBuilder>
 EntityRuntimeState::freeze_graph(EntityGraphBuilder builder) const {
     using R = Result<std::monostate, EntityGraphBuilder>;
     detail::resource_arena(resource_);
-    if (graph_.is_weak || graph_.slot->value)
+    if (graph_.is_weak || graph_.slot->value) {
         return R::err(resource_, std::move(builder));
+    }
     graph_.slot->value = detail::make_box<detail::FrozenEntityGraph>(resource_, std::move(builder));
     return R::ok(resource_, {});
 }
@@ -366,8 +398,9 @@ EntityRuntimeState::freeze_graph(EntityGraphBuilder builder) const {
 const detail::EntityGraphValue* EntityRuntimeState::relation_value(
     std::string_view owner, std::uint64_t id, std::string_view relation) const {
     auto* graph = frozen();
-    if (!graph)
+    if (!graph) {
         return nullptr;
+    }
     detail::EntityRelationKey key(std::allocator_arg, Allocator(resource_), owner, id, relation);
     auto found = graph->relations_.find(key);
     return found == graph->relations_.end() ? nullptr : &found->second;
@@ -396,13 +429,15 @@ std::optional<EntityChangeSet> EntityRuntimeState::pop_change_set() const {
 }
 
 void EntityRuntimeState::clear_current_change_set() const {
-    if (inner_->value)
+    if (inner_->value) {
         context().change_sets.clear_current();
+    }
 }
 
 void EntityRuntimeState::clear_committed() const {
-    if (!inner_->value)
+    if (!inner_->value) {
         return;
+    }
     auto& c = context();
     c.change_sets = ChangeSetStack(std::allocator_arg, Allocator(resource_));
     c.deleted_keys.clear();
@@ -426,9 +461,11 @@ std::optional<Value> EntityRuntimeState::get(const EntityKey& key, std::string_v
 }
 
 EntityChangeSet EntityRuntimeState::current_change_set() const {
-    if (inner_->value)
-        if (auto* set = inner_->value->change_sets.current())
+    if (inner_->value) {
+        if (auto* set = inner_->value->change_sets.current()) {
             return detail::clone_in(resource_, *set);
+        }
+    }
     return EntityChangeSet(std::allocator_arg, Allocator(resource_));
 }
 
@@ -462,13 +499,14 @@ std::optional<EntitySnapshot> EntityRuntimeState::original_snapshot() const {
         out.fields = loaded_snapshot_->row.into_map(resource_);
         return out;
     }
-    if (!inner_->value || !inner_->value->original_snapshot)
+    if (!inner_->value || !inner_->value->original_snapshot) {
         return {};
+    }
     return std::visit(
         [&](const auto& value) -> EntitySnapshot {
-            if constexpr (std::same_as<std::decay_t<decltype(value)>, EntitySnapshot>)
+            if constexpr (std::same_as<std::decay_t<decltype(value)>, EntitySnapshot>) {
                 return detail::clone_in(resource_, value);
-            else {
+            } else {
                 EntitySnapshot out(resource_);
                 out.fields = value.into_map(resource_);
                 return out;
@@ -501,23 +539,28 @@ EntityRuntimeState::Keys EntityRuntimeState::new_keys() const {
 }
 
 std::optional<std::int64_t> EntityRuntimeState::get_original_version(const EntityKey& key) const {
-    if (inner_->value)
-        if (auto version = inner_->value->original_versions.get(key))
+    if (inner_->value) {
+        if (auto version = inner_->value->original_versions.get(key)) {
             return version;
-    if (!loaded_snapshot_ || loaded_snapshot_->entity != key.entity)
+        }
+    }
+    if (!loaded_snapshot_ || loaded_snapshot_->entity != key.entity) {
         return {};
+    }
     auto* id = loaded_snapshot_->row.get("id");
     auto* version = loaded_snapshot_->row.get("version");
-    if (!id || !version || !id->try_u64() || id->try_u64() != key.id.try_u64())
+    if (!id || !version || !id->try_u64() || id->try_u64() != key.id.try_u64()) {
         return {};
+    }
     return version->try_i64();
 }
 
 TraceChain EntityRuntimeState::get_trace_chain(const EntityKey& key) const {
     if (inner_->value) {
         auto found = inner_->value->trace_chains.find(key);
-        if (found != inner_->value->trace_chains.end())
+        if (found != inner_->value->trace_chains.end()) {
             return TraceChain(found->second, resource_);
+        }
     }
     return TraceChain(resource_);
 }
@@ -530,19 +573,22 @@ LedgerCompositionResult
 EntityRuntimeState::adopt_mutations_from_checked(const EntityRuntimeState& source) const {
     using R = LedgerCompositionResult;
     auto r = resource_;
-    if (!source.inner_->value || inner_ == source.inner_)
+    if (!source.inner_->value || inner_ == source.inner_) {
         return R::ok(r, {});
+    }
     detail::EntityMutationLedger snapshot(std::allocator_arg, Allocator(r), *source.inner_->value);
     std::optional<std::pair<EntityKey, std::int64_t>> loaded_version;
     if (source.loaded_snapshot_) {
         auto* id = source.loaded_snapshot_->row.get("id");
         auto* v = source.loaded_snapshot_->row.get("version");
-        if (id && v)
-            if (auto version = v->try_i64())
+        if (id && v) {
+            if (auto version = v->try_i64()) {
                 loaded_version.emplace(
                     EntityKey(
                         std::allocator_arg, Allocator(r), source.loaded_snapshot_->entity, *id),
                     *version);
+            }
+        }
     }
     auto& target = context();
     auto conflict = [&](const EntityKey& key,
@@ -553,10 +599,11 @@ EntityRuntimeState::adopt_mutations_from_checked(const EntityRuntimeState& sourc
         if (!expected && loaded_snapshot_ && loaded_snapshot_->entity == key.entity) {
             auto* id = loaded_snapshot_->row.get("id");
             auto* v = loaded_snapshot_->row.get("version");
-            if (id && v && id->try_u64() == key.id.try_u64())
+            if (id && v && id->try_u64() == key.id.try_u64()) {
                 expected = v->try_i64();
+            }
         }
-        if (expected && *expected != version)
+        if (expected && *expected != version) {
             return LedgerCompositionError(std::allocator_arg,
                                           Allocator(r),
                                           LedgerCompositionError::Kind::ConflictingOriginalVersion,
@@ -564,46 +611,62 @@ EntityRuntimeState::adopt_mutations_from_checked(const EntityRuntimeState& sourc
                                           conflict_id(r, key.id),
                                           *expected,
                                           version);
+        }
         return {};
     };
     if (snapshot.original_versions.first) {
         const auto& [key, v] = *snapshot.original_versions.first;
-        if (auto e = conflict(key, v))
+        if (auto e = conflict(key, v)) {
             return R::err(r, std::move(*e));
+        }
     }
-    for (const auto& [key, v] : snapshot.original_versions.overflow)
-        if (auto e = conflict(key, v))
+    for (const auto& [key, v] : snapshot.original_versions.overflow) {
+        if (auto e = conflict(key, v)) {
             return R::err(r, std::move(*e));
-    if (loaded_version)
-        if (auto e = conflict(loaded_version->first, loaded_version->second))
+        }
+    }
+    if (loaded_version) {
+        if (auto e = conflict(loaded_version->first, loaded_version->second)) {
             return R::err(r, std::move(*e));
-    for (const auto& set : snapshot.change_sets.stack_)
-        for (const auto& [key, values] : set.changes())
-            for (const auto& [field, value] : values.fields)
+        }
+    }
+    for (const auto& set : snapshot.change_sets.stack_) {
+        for (const auto& [key, values] : set.changes()) {
+            for (const auto& [field, value] : values.fields) {
                 target.change_sets.set(key, field, value);
-    for (const auto& key : snapshot.deleted_keys)
+            }
+        }
+    }
+    for (const auto& key : snapshot.deleted_keys) {
         target.deleted_keys.emplace(key);
-    for (const auto& key : snapshot.new_keys)
+    }
+    for (const auto& key : snapshot.new_keys) {
         target.new_keys.emplace(key);
+    }
     target.original_versions.merge_from(snapshot.original_versions);
-    if (loaded_version)
+    if (loaded_version) {
         target.original_versions.insert(loaded_version->first, loaded_version->second);
+    }
     for (const auto& [key, traces] : snapshot.trace_chains) {
         auto [entry, _] = target.trace_chains.try_emplace(key);
-        for (const auto& trace : traces)
+        for (const auto& trace : traces) {
             entry->second.emplace_back(trace);
+        }
     }
-    if (!target.original_snapshot)
+    if (!target.original_snapshot) {
         target.original_snapshot = detail::clone_snapshot(r, snapshot.original_snapshot);
-    if (!target.comment)
+    }
+    if (!target.comment) {
         target.comment = detail::clone_in(r, snapshot.comment);
+    }
     target.is_new |= snapshot.is_new;
     return R::ok(r, {});
 }
 
 void EntityRuntimeState::adopt_mutations_from(const EntityRuntimeState& source) const {
     auto result = adopt_mutations_from_checked(source);
-    if (!result)
+    if (!result) {
         context().composition_errors.emplace_back(result.error());
+    }
 }
 }

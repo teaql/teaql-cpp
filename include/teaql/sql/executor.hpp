@@ -34,8 +34,9 @@ public:
         : detail::SqlTransactionExecutorSupport<E, T>(dialect, transport, schema, state),
           detail::SqlStreamExecutorSupport<E, T>(dialect, transport, schema, state),
           dialect(dialect), transport(transport), schema_provider(schema), state(state) {
-        if (a.resource() != state.memory_resource())
+        if (a.resource() != state.memory_resource()) {
             throw std::invalid_argument("Executor and cache state must share an owning Context");
+        }
     }
 
     SqlDataServiceExecutor(std::allocator_arg_t, Allocator a, const SqlDataServiceExecutor& other)
@@ -60,13 +61,14 @@ public:
     }
 
     SqlIntentRedactions query_log_intent(Memory r, const SelectQuery& query) const override {
-        if (auto* entity = state.entity_descriptor(schema_provider, query.entity))
+        if (auto* entity = state.entity_descriptor(schema_provider, query.entity)) {
             try {
                 auto compiled = state.compile_select_cached(r, dialect, *entity, query);
                 return SqlIntentRedactions::from_bindings(
                     r, compiled.log_context, compiled.params, compiled.sql);
             } catch (const SqlCompileError&) {
             }
+        }
         return SqlIntentRedactions::from_unclassified_query(r, query);
     }
 

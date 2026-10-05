@@ -28,10 +28,12 @@ static Json rows(Memory r, std::span<const CompactRow> rows) {
     for (const auto& row : rows) {
         auto out = detail::model_json(r);
         Json::Array keys(r), values(r);
-        for (const auto& key : row.keys())
+        for (const auto& key : row.keys()) {
             keys.emplace_back(key);
-        for (const auto& v : row.values())
+        }
+        for (const auto& v : row.values()) {
             values.emplace_back(v.to_json_value(r));
+        }
         detail::model_put(out, "keys", keys);
         detail::model_put(out, "values", values);
         array.emplace_back(std::move(out));
@@ -61,46 +63,53 @@ static Json transaction_steps(Memory r, SqliteMutationExecutor& provider, const 
         auto result = detail::model_json(r);
         auto op = text(field(action, "op"));
         auto unit = [&](const auto& value) {
-            if (value)
+            if (value) {
                 detail::model_put(result, "ok", true);
-            else
+            } else {
                 result = error(r, value.error());
+            }
         };
         if (op == "begin") {
             if (asynchronous) {
                 const auto& value = provider.begin_sql(r).wait();
                 unit(value);
-                if (value)
+                if (value) {
                     tx = &value.value().get();
-            } else
+                }
+            } else {
                 unit(provider.begin_transaction(r));
+            }
         } else if (op == "commit" || op == "rollback") {
             if (asynchronous && tx) {
                 auto* previous = tx;
                 tx = nullptr;
                 unit((op == "commit" ? previous->commit_sql(r) : previous->rollback_sql(r)).wait());
-            } else
+            } else {
                 unit(op == "commit" ? provider.commit_transaction(r)
                                     : provider.rollback_transaction(r));
+            }
         } else {
             auto q = query(r, text(field(action, "sql")));
-            for (const auto& p : std::get<Json::Array>(field(action, "params").data))
+            for (const auto& p : std::get<Json::Array>(field(action, "params").data)) {
                 q.params.emplace_back(value(r, p));
+            }
             auto& transport = (asynchronous && tx && op != "outside_execute")
                                   ? static_cast<SqlTransport<MutationExecutorError>&>(*tx)
                                   : static_cast<SqlTransport<MutationExecutorError>&>(provider);
             if (op == "fetch") {
                 const auto& value = transport.fetch_all_compact_sql(r, q).wait();
-                if (value)
+                if (value) {
                     detail::model_put(result, "rows", rows(r, value.value()));
-                else
+                } else {
                     result = error(r, value.error());
+                }
             } else {
                 const auto& value = transport.execute_sql(r, q).wait();
-                if (value)
+                if (value) {
                     detail::model_put(result, "affected", value.value());
-                else
+                } else {
                     result = error(r, value.error());
+                }
             }
         }
         detail::model_put(result,
@@ -124,25 +133,28 @@ static Json id_steps(UserContext& context, SqliteMutationExecutor& provider, con
         auto op = text(field(action, "op"));
         if (op == "sql") {
             auto value = provider.execute(r, query(r, text(field(action, "sql"))));
-            if (value)
+            if (value) {
                 detail::model_put(result, "affected", value.value());
-            else
+            } else {
                 result = error(r, value.error());
+            }
         } else if (op == "next") {
             auto value = generator.next_id(r, text(field(action, "entity")));
-            if (value)
+            if (value) {
                 detail::model_put(result, "id", value.value());
-            else
+            } else {
                 result = error(r, value.error());
+            }
         } else {
             auto value = op == "ensure" ? generator.ensure_table(r)
                                         : generator.ensure_floor(r,
                                                                  text(field(action, "entity")),
                                                                  integer(action, "floor"));
-            if (value)
+            if (value) {
                 detail::model_put(result, "ok", true);
-            else
+            } else {
                 result = error(r, value.error());
+            }
         }
         results.emplace_back(std::move(result));
     }
@@ -175,16 +187,18 @@ static Json business_steps(UserContext& context, SqliteMutationExecutor& provide
         auto op = text(field(action, "op"));
         if (op == "sql") {
             auto value = provider.execute(r, query(r, text(field(action, "sql"))));
-            if (value)
+            if (value) {
                 detail::model_put(result, "affected", value.value());
-            else
+            } else {
                 result = error(r, value.error());
+            }
         } else if (op == "ensure") {
             auto value = allocator.ensure_schema(r);
-            if (value)
+            if (value) {
                 detail::model_put(result, "ok", true);
-            else
+            } else {
                 result = business_error_json(r, value.error());
+            }
         } else {
             const auto& parts = std::get<Json::Array>(field(action, "scope").data);
             BusinessIdScope scope(std::allocator_arg,
@@ -206,8 +220,9 @@ static Json business_steps(UserContext& context, SqliteMutationExecutor& provide
             if (value) {
                 detail::model_put(result, "sequence", value.value().sequence);
                 detail::model_put(result, "scope", value.value().scope.canonical_key(r));
-            } else
+            } else {
                 result = business_error_json(r, value.error());
+            }
         }
         detail::model_put(result,
                           "autocommit",
@@ -239,15 +254,19 @@ static Json evaluate(UserContext& context, const Json& j) {
         auto sql = "INSERT INTO records VALUES(" + std::to_string(i) + ",1,'name-" +
                    std::to_string(i) + "')";
         if (sqlite3_exec(connection.native_handle(), sql.c_str(), nullptr, nullptr, nullptr) !=
-            SQLITE_OK)
+            SQLITE_OK) {
             throw std::runtime_error("fixture insert");
+        }
     }
     auto q = query(r, text(field(j, "sql")));
-    for (const auto& p : std::get<Json::Array>(field(j, "params").data))
+    for (const auto& p : std::get<Json::Array>(field(j, "params").data)) {
         q.params.emplace_back(value(r, p));
-    if (auto* comment = optional(j, "comment"))
-        if (std::holds_alternative<String>(comment->data))
+    }
+    if (auto* comment = optional(j, "comment")) {
+        if (std::holds_alternative<String>(comment->data)) {
             q.comment.emplace(text(*comment), r);
+        }
+    }
     auto out = detail::model_json(r), outcome = detail::model_json(r);
     auto mode = text(field(j, "mode"));
     try {
@@ -259,32 +278,37 @@ static Json evaluate(UserContext& context, const Json& j) {
             outcome = transaction_steps(r, provider, j);
         } else if (mode == "execute") {
             const auto& result = provider.execute_sql(r, q).wait();
-            if (!result)
+            if (!result) {
                 outcome = error(r, result.error());
-            else
+            } else {
                 detail::model_put(outcome, "affected", result.value());
+            }
         } else if (mode == "fetch" || mode == "repeated") {
             Vector<Value> values(r);
-            if (mode == "repeated")
-                for (const auto& v : std::get<Json::Array>(field(j, "values").data))
+            if (mode == "repeated") {
+                for (const auto& v : std::get<Json::Array>(field(j, "values").data)) {
                     values.emplace_back(value(r, v));
+                }
+            }
             const auto& result =
                 (mode == "fetch"
                      ? provider.fetch_all_compact_sql(r, q)
                      : provider.fetch_repeated_compact_sql(r, q, integer(j, "index"), values))
                     .wait();
-            if (!result)
+            if (!result) {
                 outcome = error(r, result.error());
-            else
+            } else {
                 detail::model_put(outcome, "rows", rows(r, result.value()));
+            }
         } else if (mode == "buffered") {
             auto result = provider.fetch_stream(r, q, integer(j, "size"));
-            if (!result)
+            if (!result) {
                 outcome = error(r, result.error());
-            else {
+            } else {
                 Json::Array chunks(r);
-                for (const auto& c : result.value())
+                for (const auto& c : result.value()) {
                     chunks.emplace_back(chunk(r, c));
+                }
                 detail::model_put(outcome, "chunks", chunks);
             }
         } else if (mode == "stream") {
@@ -300,8 +324,9 @@ static Json evaluate(UserContext& context, const Json& j) {
                         polls.emplace_back(std::move(end));
                         break;
                     }
-                    if (!next.item)
+                    if (!next.item) {
                         throw std::runtime_error("unexpected pending fixture");
+                    }
                     polls.emplace_back(*next.item ? chunk(r, next.item->value())
                                                   : error(r, next.item->error()));
                 }
@@ -311,8 +336,9 @@ static Json evaluate(UserContext& context, const Json& j) {
             }
             stream.cancel();
             detail::model_put(outcome, "polls", polls);
-        } else
+        } else {
             throw std::runtime_error("unknown fixture mode");
+        }
     } catch (const std::out_of_range&) {
         detail::model_put(outcome, "panic", true);
     }
@@ -330,8 +356,9 @@ int main() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto input = Json::parse(r, line);
-        if (!input)
+        if (!input) {
             throw std::runtime_error("invalid fixture JSON");
+        }
         std::cout << evaluate(*user, *input).dump(r) << '\n';
     }
 }

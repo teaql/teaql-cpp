@@ -27,15 +27,17 @@ static EntityKey key(Memory r, const Json& j) {
 
 static Record record(Memory r, const Json& j) {
     Record out(r);
-    for (const auto& [k, v] : std::get<Json::Object>(j.data))
+    for (const auto& [k, v] : std::get<Json::Object>(j.data)) {
         out.emplace(String(k, r), value(r, v));
+    }
     return out;
 }
 
 static Json record_out(Memory r, const Record& values) {
     auto out = detail::model_json(r);
-    for (const auto& [k, v] : values)
+    for (const auto& [k, v] : values) {
         detail::model_put(out, k, detail::debug_value(r, v));
+    }
     return out;
 }
 
@@ -62,8 +64,9 @@ static Json snapshot(Memory r, const EntityRuntimeState& state, std::span<const 
                           "version",
                           version ? Json(r, std::string_view(std::to_string(*version))) : Json(r));
         Json::Array fields(r), values(r);
-        for (const auto& name : state.changed_field_names(key))
+        for (const auto& name : state.changed_field_names(key)) {
             fields.emplace_back(name);
+        }
         for (auto name : {"a", "b", "name", "id", "version"}) {
             auto v = state.get(key, name);
             values.emplace_back(v ? Json(r, detail::debug_value(r, *v)) : Json(r));
@@ -102,11 +105,13 @@ static Json snapshot(Memory r, const EntityRuntimeState& state, std::span<const 
 static Json ledger(UserContext& c, const Json& j) {
     auto r = c.memory_resource();
     Vector<EntityKey> keys(r);
-    for (const auto& v : items(j, "keys"))
+    for (const auto& v : items(j, "keys")) {
         keys.emplace_back(key(r, v));
+    }
     Vector<EntityRuntimeState> states(r);
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 3; ++i) {
         states.emplace_back();
+    }
     Json::Array out(r);
     for (const auto& step : items(j, "steps")) {
         auto index = [&](std::string_view name, std::size_t fallback) {
@@ -117,61 +122,67 @@ static Json ledger(UserContext& c, const Json& j) {
         const auto& k = keys.at(index("key", 0));
         auto op = text(field(step, "op"));
         Json result(r);
-        if (op == "clone")
+        if (op == "clone") {
             states[n] = detail::clone_in(r, states[other]);
-        else if (op == "fresh")
+        } else if (op == "fresh") {
             states[n] = EntityRuntimeState::fresh_with_shared_graph(r, states[other]);
-        else if (op == "share")
+        } else if (op == "share") {
             states[n] = states[n].with_shared_graph(states[other]);
-        else if (op == "weak")
+        } else if (op == "weak") {
             states[n] = detail::EntityRuntimeAccess::fresh_with_weak_graph(r, states[other]);
-        else if (op == "reset")
+        } else if (op == "reset") {
             states[n] = EntityRuntimeState(std::allocator_arg, Allocator(r));
-        else if (op == "load")
+        } else if (op == "load") {
             states[n].set_original_compact_row(
                 text(field(step, "entity")),
                 CompactRow(std::allocator_arg, Allocator(r), record(r, field(step, "values"))));
-        else if (op == "snapshot") {
+        } else if (op == "snapshot") {
             EntitySnapshot old(r);
             old.fields = record(r, field(step, "values"));
             states[n].set_original_snapshot(old);
-        } else if (op == "set")
+        } else if (op == "set") {
             states[n].set(k, text(field(step, "field")), value(r, field(step, "value")));
-        else if (op == "push")
+        } else if (op == "push") {
             states[n].push_change_set();
-        else if (op == "pop") {
+        } else if (op == "pop") {
             auto v = states[n].pop_change_set();
-            if (v)
+            if (v) {
                 result = changes(r, *v);
-        } else if (op == "clear")
+            }
+        } else if (op == "clear") {
             states[n].clear_current_change_set();
-        else if (op == "commit")
+        } else if (op == "commit") {
             states[n].clear_committed();
-        else if (op == "new")
+        } else if (op == "new") {
             states[n].mark_as_new(k);
-        else if (op == "delete")
+        } else if (op == "delete") {
             states[n].mark_as_delete(k);
-        else if (op == "version")
+        } else if (op == "version") {
             states[n].set_original_version(k, number<std::int64_t>(field(step, "value")));
-        else if (op == "comment")
+        } else if (op == "comment") {
             states[n].set_comment(text(field(step, "value")));
-        else if (op == "adopt")
+        } else if (op == "adopt") {
             states[n].adopt_mutations_from(states[other]);
-        else if (op == "compose") {
+        } else if (op == "compose") {
             auto v = detail::EntityRuntimeAccess::compose(states[n], states[other]);
             result = detail::model_json(r);
-            if (v)
+            if (v) {
                 detail::model_put(result, "ok", true);
-            else
+            } else {
                 detail::model_put(result, "error", v.error().to_string(r));
-        } else
+            }
+        } else {
             throw std::runtime_error("fixture operation");
+        }
         Json::Array snapshots(r), equal(r);
-        for (const auto& state : states)
+        for (const auto& state : states) {
             snapshots.emplace_back(snapshot(r, state, keys));
-        for (const auto& a : states)
-            for (const auto& b : states)
+        }
+        for (const auto& a : states) {
+            for (const auto& b : states) {
                 equal.emplace_back(a == b);
+            }
+        }
         auto entry = detail::model_json(r);
         detail::model_put(entry, "result", result);
         detail::model_put(entry, "states", snapshots);
@@ -187,10 +198,11 @@ static Json graph(UserContext& c, const Json& j) {
     EntityGraphBuilder builder(std::allocator_arg, Allocator(r));
     for (const auto& entry : items(j, "entries")) {
         auto id = integer(field(entry, "id"));
-        if (text(field(entry, "type")) == "text")
+        if (text(field(entry, "type")) == "text") {
             builder.install(id, String(text(field(entry, "value")), r));
-        else
+        } else {
             builder.install(id, number<std::uint64_t>(field(entry, "value")));
+        }
     }
     for (const auto& entry : items(j, "relations")) {
         auto owner = text(field(entry, "owner")), name = text(field(entry, "name")),
@@ -198,21 +210,26 @@ static Json graph(UserContext& c, const Json& j) {
         auto id = integer(field(entry, "id"));
         if (type == "list") {
             SmartList<std::uint64_t> list(std::allocator_arg, Allocator(r));
-            for (const auto& v : items(entry, "values"))
+            for (const auto& v : items(entry, "values")) {
                 list.emplace_back(integer(v));
+            }
             list.loaded();
             builder.install_relation_list(owner, id, name, std::move(list));
         } else if (type == "text") {
             std::optional<String> v;
-            if (auto* p = optional(entry, "value"))
-                if (std::holds_alternative<String>(p->data))
+            if (auto* p = optional(entry, "value")) {
+                if (std::holds_alternative<String>(p->data)) {
                     v.emplace(text(*p), r);
+                }
+            }
             builder.install_relation_option(owner, id, name, std::move(v));
         } else {
             std::optional<std::uint64_t> v;
-            if (auto* p = optional(entry, "value"))
-                if (std::holds_alternative<std::uint64_t>(p->data))
+            if (auto* p = optional(entry, "value")) {
+                if (std::holds_alternative<std::uint64_t>(p->data)) {
                     v = integer(*p);
+                }
+            }
             builder.install_relation_option(owner, id, name, v);
         }
     }
@@ -221,8 +238,9 @@ static Json graph(UserContext& c, const Json& j) {
     counts.emplace_back(builder.relation_list_count());
     auto view = boolean(j, "weak") ? detail::EntityRuntimeAccess::fresh_with_weak_graph(r, root)
                                    : detail::clone_in(r, root);
-    if (boolean(j, "clone"))
+    if (boolean(j, "clone")) {
         view = detail::clone_in(r, view);
+    }
     auto frozen = view.freeze_graph(std::move(builder));
     Json returned(r);
     if (!frozen) {
@@ -248,16 +266,20 @@ static Json graph(UserContext& c, const Json& j) {
         Json raw(r), handle = detail::model_json(r);
         auto array = [&](const SmartList<std::uint64_t>& l) {
             Json::Array out(r);
-            for (auto v : l.data)
+            for (auto v : l.data) {
                 out.emplace_back(v);
+            }
             return Json(r, out);
         };
         if (list) {
-            if (auto* v = root.resolve_relation_list<std::uint64_t>(owner, id, name))
+            if (auto* v = root.resolve_relation_list<std::uint64_t>(owner, id, name)) {
                 raw = array(*v);
-        } else if (auto* v = root.resolve_relation_option<std::uint64_t>(owner, id, name))
-            if (*v)
+            }
+        } else if (auto* v = root.resolve_relation_option<std::uint64_t>(owner, id, name)) {
+            if (*v) {
                 raw = Json(r, **v);
+            }
+        }
         try {
             constexpr std::string_view names[]{"Loaded", "Empty", "NotLoaded"};
             auto put = [&](const auto& h, Json value) {

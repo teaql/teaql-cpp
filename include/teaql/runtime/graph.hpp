@@ -135,8 +135,9 @@ struct GraphNode {
 
     GraphNode& with_relations(std::string_view name, std::span<const GraphNode> nodes) {
         auto& target = relations.try_emplace(String(name, memory_resource())).first->second;
-        for (const auto& node : nodes)
+        for (const auto& node : nodes) {
             target.emplace_back(node);
+        }
         return *this;
     }
 

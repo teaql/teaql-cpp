@@ -35,10 +35,11 @@ struct RuntimeAttributeValue {
         : data(std::visit(
               [&](const auto& v) -> Data {
                   using V = std::decay_t<decltype(v)>;
-                  if constexpr (std::same_as<V, String>)
+                  if constexpr (std::same_as<V, String>) {
                       return String(v, a.resource());
-                  else
+                  } else {
                       return v;
+                  }
               },
               other.data)),
           resource_(a.resource()) {}
@@ -174,8 +175,9 @@ namespace detail {
 template <class Delegate, class Poll>
 auto telemetry_poll(Delegate* delegate, Poll&& poll) {
     using R = decltype(poll());
-    if (!delegate)
+    if (!delegate) {
         return poll();
+    }
     std::optional<R> result;
     bool invoked = false;
     std::exception_ptr failure;
@@ -188,10 +190,12 @@ auto telemetry_poll(Delegate* delegate, Poll&& poll) {
     } catch (...) {
         failure = std::current_exception();
     }
-    if (result)
+    if (result) {
         return std::move(*result);
-    if (failure && invoked)
+    }
+    if (failure && invoked) {
         std::rethrow_exception(failure);
+    }
     return poll();
 }
 
@@ -207,15 +211,17 @@ struct TelemetryRun {
         : resource(a.resource()), scope(scope), future(future) {
         auto& destination = async_arena(resource);
         if (!resource_arena(scope.memory_resource()).can_lend_to(destination) ||
-            future.memory_resource() != resource)
+            future.memory_resource() != resource) {
             throw std::invalid_argument("Telemetry operation belongs to another Context");
+        }
     }
 
     std::optional<T> poll(WakeSignal& wake) {
         forward.attach(future.wake_signal(), wake);
         return scope.poll_with_context([&]() -> std::optional<T> {
-            if (auto* value = future.poll())
+            if (auto* value = future.poll()) {
                 return clone_in(resource, *value);
+            }
             return {};
         });
     }
@@ -244,10 +250,12 @@ public:
     }
 
     void close() noexcept {
-        if (polling_)
+        if (polling_) {
             std::terminate();
-        if (auto* owner = std::exchange(delegate_, nullptr))
+        }
+        if (auto* owner = std::exchange(delegate_, nullptr)) {
             owner->reset();
+        }
     }
 
     void success(const RuntimeAttributes&);
@@ -261,8 +269,9 @@ public:
     auto poll_with_context(Poll&& poll) const {
         // A business exception escaping the lock's lifetime poisons the source
         // scope. Telemetry exceptions caught inside that lifetime do not.
-        if (polling_)
+        if (polling_) {
             throw std::logic_error("Recursive telemetry scope activation");
+        }
         polling_ = true;
 
         struct Guard {
@@ -310,8 +319,9 @@ public:
     }
 
     void close() noexcept {
-        if (auto* owner = std::exchange(delegate_, nullptr))
+        if (auto* owner = std::exchange(delegate_, nullptr)) {
             owner->reset();
+        }
     }
 
     Memory memory_resource() const noexcept {
