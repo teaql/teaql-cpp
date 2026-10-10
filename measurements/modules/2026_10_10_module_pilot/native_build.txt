@@ -1,0 +1,17 @@
+[1/40] Generating CXX dyndep file modules/CMakeFiles/teaql_memory_module.dir/CXX.dd
+[2/38] Generating CXX dyndep file modules/CMakeFiles/teaql_core_module.dir/CXX.dd
+[3/36] Generating CXX dyndep file modules/CMakeFiles/teaql_async_module.dir/CXX.dd
+[4/34] Generating CXX dyndep file modules/CMakeFiles/teaql_context_qualification.dir/CXX.dd
+[5/32] Scanning /home/philip/githome/teaql-cpp/modules/tests/teaql_async_lookup.cpp for CXX dependencies
+[6/32] Scanning /home/philip/githome/teaql-cpp/modules/tests/teaql_core_lookup.cpp for CXX dependencies
+[7/32] Scanning /home/philip/githome/teaql-cpp/modules/tests/teaql_memory_lookup.cpp for CXX dependencies
+[8/32] Generating CXX dyndep file modules/CMakeFiles/teaql_module_core_aux_debug_tests.dir/CXX.dd
+[9/30] Generating CXX dyndep file modules/CMakeFiles/teaql_module_core_collection_tests.dir/CXX.dd
+[10/28] Generating CXX dyndep file modules/CMakeFiles/teaql_module_decimal_tests.dir/CXX.dd
+[11/26] Generating CXX dyndep file modules/CMakeFiles/teaql_module_query_model_tests.dir/CXX.dd
+[12/24] Generating CXX dyndep file modules/CMakeFiles/teaql_module_core_tests.dir/CXX.dd
+[13/22] Generating CXX dyndep file modules/CMakeFiles/teaql_module_contracts.dir/CXX.dd
+[14/17] Building CXX object modules/CMakeFiles/teaql_module_contracts.dir/tests/teaql_memory_lookup.cpp.o
+[15/17] Building CXX object modules/CMakeFiles/teaql_module_contracts.dir/tests/teaql_async_lookup.cpp.o
+[16/17] Building CXX object modules/CMakeFiles/teaql_module_contracts.dir/tests/teaql_core_lookup.cpp.o
+[17/17] Linking CXX executable modules/teaql_module_contracts

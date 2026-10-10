@@ -1,0 +1,1821 @@
+{
+  "backtraceGraph" : 
+  {
+    "commands" : 
+    [
+      "add_test"
+    ],
+    "files" : 
+    [
+      "/home/philip/githome/teaql-cpp/modules/CMakeLists.txt"
+    ],
+    "nodes" : 
+    [
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 46,
+        "parent" : 0
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 2
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 4
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 6
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 8
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 10
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 12
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 14
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 16
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 18
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 20
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 22
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 24
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 26
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 28
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 30
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 32
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 34
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 36
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 38
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 40
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 42
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 44
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 46
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 48
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 50
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 52
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 54
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 84,
+        "parent" : 56
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 58
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 60
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 62
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 64
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 66
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 68
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 70
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 72
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 74
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 76
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 78
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 80
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 82
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 84
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 86
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 88
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 90
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 92
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 94
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 96
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 98
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 100
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 102
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 104
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 106
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 108
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 110
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 112
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 114
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 116
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 118
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 120
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 122
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 124
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 126
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 128
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 130
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 103,
+        "parent" : 132
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 117,
+        "parent" : 134
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 125,
+        "parent" : 136
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 125,
+        "parent" : 138
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 128,
+        "parent" : 140
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 134,
+        "parent" : 142
+      }
+    ]
+  },
+  "kind" : "ctestInfo",
+  "tests" : 
+  [
+    {
+      "backtrace" : 1,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_contracts"
+      ],
+      "name" : "module_import_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 3,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_decimal_tests"
+      ],
+      "name" : "module_decimal_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 5,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_core_aux_debug_tests"
+      ],
+      "name" : "module_core_aux_debug_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 7,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_core_collection_tests"
+      ],
+      "name" : "module_core_collection_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 9,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_core_tests"
+      ],
+      "name" : "module_core_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 11,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_query_model_tests"
+      ],
+      "name" : "module_query_model_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 13,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_data_service_tests"
+      ],
+      "name" : "module_data_service_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 15,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_data_service_model_tests"
+      ],
+      "name" : "module_data_service_model_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 17,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_data_service_scope_tests"
+      ],
+      "name" : "module_data_service_scope_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 19,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_executor_tests"
+      ],
+      "name" : "module_executor_spi_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 21,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_projection_scope_tests"
+      ],
+      "name" : "module_sql_projection_scope_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 23,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_system_time_tests"
+      ],
+      "name" : "module_system_time_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 25,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_system_time_arithmetic_scope_tests"
+      ],
+      "name" : "module_system_time_arithmetic_scope_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 27,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_dialect_tests"
+      ],
+      "name" : "module_sql_dialect_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 29,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_model_api_tests"
+      ],
+      "name" : "module_sql_model_api_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 31,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_transport_tests"
+      ],
+      "name" : "module_sql_transport_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 33,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_query_tests"
+      ],
+      "name" : "module_sql_query_executor_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 35,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_execution_tests"
+      ],
+      "name" : "module_sql_mutation_execution_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 37,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_transaction_tests"
+      ],
+      "name" : "module_sql_transaction_execution_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 39,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_stream_tests"
+      ],
+      "name" : "module_sql_stream_execution_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 41,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_registration"
+      ],
+      "name" : "module_original_runtime_registration",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 43,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_service_boundaries"
+      ],
+      "name" : "module_original_runtime_service_boundaries",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 45,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_validation"
+      ],
+      "name" : "module_original_runtime_validation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 47,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_events_relations"
+      ],
+      "name" : "module_original_runtime_events_relations",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 49,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_typed_queries"
+      ],
+      "name" : "module_original_runtime_typed_queries",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 51,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_aggregates_cache"
+      ],
+      "name" : "module_original_runtime_aggregates_cache",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 53,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_pagination"
+      ],
+      "name" : "module_original_runtime_pagination",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 55,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_memory_service"
+      ],
+      "name" : "module_original_runtime_memory_service",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 57,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_context_tail"
+      ],
+      "name" : "module_original_runtime_context_tail",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 59,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_namespace_tests"
+      ],
+      "name" : "module_runtime_public_namespace_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 61,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_graph_tests"
+      ],
+      "name" : "module_runtime_graph_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 63,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_registry_tests"
+      ],
+      "name" : "module_runtime_registry_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 65,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_mutation_policy_tests"
+      ],
+      "name" : "module_mutation_policy_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 67,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_mutation_policy_tests",
+        "reentrant-close"
+      ],
+      "name" : "module_mutation_policy_reentrant_close",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 69,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_context_logging_tests"
+      ],
+      "name" : "module_context_logging_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 71,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_log_formatter_tests"
+      ],
+      "name" : "module_log_formatter_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 73,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_log_manager_tests"
+      ],
+      "name" : "module_log_manager_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 75,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests"
+      ],
+      "name" : "module_audit_event_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 77,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests",
+        "context-close"
+      ],
+      "name" : "module_audit_event_context_reentrant_close",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 79,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests",
+        "owner-close"
+      ],
+      "name" : "module_audit_event_owner_reentrant_close",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 81,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests",
+        "event-close"
+      ],
+      "name" : "module_audit_event_payload_reentrant_close",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 83,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests",
+        "result-close"
+      ],
+      "name" : "module_audit_event_result_reentrant_close",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 85,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_event_model_tests"
+      ],
+      "name" : "module_event_model_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 87,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_inmemory_tests"
+      ],
+      "name" : "module_inmemory_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 89,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_round_trip_reference_tests"
+      ],
+      "name" : "module_round_trip_reference_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 91,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_round_trip_reference_tests",
+        "reentrant-owner"
+      ],
+      "name" : "module_round_trip_reference_reentrant_owner",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 93,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_round_trip_reference_tests",
+        "reentrant-output"
+      ],
+      "name" : "module_round_trip_reference_reentrant_output",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 95,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_entity_reference_tests"
+      ],
+      "name" : "module_entity_reference_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 97,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_entity_reference_tests",
+        "reentrant-owner"
+      ],
+      "name" : "module_entity_reference_reentrant_owner",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 99,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_entity_reference_tests",
+        "reentrant-output"
+      ],
+      "name" : "module_entity_reference_reentrant_output",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 101,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_context_reference_tests"
+      ],
+      "name" : "module_context_reference_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 103,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_context_reference_tests",
+        "early-global-close"
+      ],
+      "name" : "module_context_early_global_close",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 105,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_graph_saver_tests"
+      ],
+      "name" : "module_graph_saver_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 107,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audited_auto_save_tests"
+      ],
+      "name" : "module_audited_auto_save_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 109,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audited_save_tests"
+      ],
+      "name" : "module_audited_save_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 111,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_mutation_tests"
+      ],
+      "name" : "module_runtime_mutation_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 113,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_mutation_tests",
+        "reentrant-prepare"
+      ],
+      "name" : "module_runtime_mutation_reentrant_prepare",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 115,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_mutation_tests",
+        "reentrant-event"
+      ],
+      "name" : "module_runtime_mutation_reentrant_event",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 117,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_ledger_execution_tests"
+      ],
+      "name" : "module_ledger_execution_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 119,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_ledger_move_only_tests"
+      ],
+      "name" : "module_ledger_move_only_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 121,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_relation_hydration_tests"
+      ],
+      "name" : "module_relation_hydration_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 123,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_relation_execution_tests"
+      ],
+      "name" : "module_relation_execution_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 125,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_tests"
+      ],
+      "name" : "module_provider_sqlite_dialect_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 127,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_schema_tests"
+      ],
+      "name" : "module_provider_sqlite_schema_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 129,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_bindings_tests"
+      ],
+      "name" : "module_provider_sqlite_binding_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 131,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_decoding_tests"
+      ],
+      "name" : "module_provider_sqlite_decoding_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 133,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_examples_tests",
+        "/home/philip/githome/teaql-cpp/tests/parity/runtime_examples_provenance.json"
+      ],
+      "name" : "module_runtime_examples_context_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 135,
+      "command" : 
+      [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/teaql_runtime/optimistic_conflict_output.py",
+        "--cpp",
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_memory_service"
+      ],
+      "name" : "module_original_runtime_optimistic_conflict_output_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 137,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_schema_crud"
+      ],
+      "name" : "module_example_sqlite_schema_crud",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 139,
+      "command" : 
+      [
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_relations_graph"
+      ],
+      "name" : "module_example_sqlite_relations_graph",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 141,
+      "command" : 
+      [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_examples.py",
+        "--schema-crud",
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_schema_crud",
+        "--relations-graph",
+        "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_relations_graph"
+      ],
+      "name" : "module_examples_rust_parity",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    },
+    {
+      "backtrace" : 143,
+      "command" : 
+      [
+        "/usr/bin/python3.10",
+        "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_examples.py",
+        "--schema-crud",
+        "/home/philip/githome/teaql-cpp/build_modules_native/teaql_sqlite_schema_crud",
+        "--relations-graph",
+        "/home/philip/githome/teaql-cpp/build_modules_native/teaql_sqlite_relations_graph"
+      ],
+      "name" : "module_canonical_examples_rust_parity",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/philip/githome/teaql-cpp/build_modules_native/modules"
+        }
+      ]
+    }
+  ],
+  "version" : 
+  {
+    "major" : 1,
+    "minor" : 0
+  }
+}

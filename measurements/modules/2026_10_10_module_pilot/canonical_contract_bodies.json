@@ -1,0 +1,27 @@
+[
+  {
+    "source": "teaql_core/tests/decimal_tests.cpp",
+    "body_sha256": "638e7483f192094302b17b33628e983d229d6a18823f841438625fbf88202ad2",
+    "consumer": "decimal_tests.cpp"
+  },
+  {
+    "source": "teaql_core/tests/core_aux_debug_tests.cpp",
+    "body_sha256": "e85c3981ab91c3f68d70e4cd849d7661153e800c97128ae66008e3c461a279e9",
+    "consumer": "core_aux_debug_tests.cpp"
+  },
+  {
+    "source": "teaql_core/tests/core_collection_tests.cpp",
+    "body_sha256": "bbad8a74056794ce51b287e8c24586b09e78d2dba2bbfdbdae0e28a15e209500",
+    "consumer": "core_collection_tests.cpp"
+  },
+  {
+    "source": "teaql_core/tests/core_tests.cpp",
+    "body_sha256": "987aa1149734f0ea83db1282c5e8d680ff2ee19d5ed56b120b09d572e81ca500",
+    "consumer": "core_tests.cpp"
+  },
+  {
+    "source": "teaql_core/tests/query_model_tests.cpp",
+    "body_sha256": "743b3ba7cf0fd532ab53f28f41c5832d78dd99a2d4f2f62c5dea44cc14dd601b",
+    "consumer": "query_model_tests.cpp"
+  }
+]

@@ -15,7 +15,8 @@
         "CMAKE_MAKE_PROGRAM": "${sourceDir}/.tools/toolchains/ninja-1.13.2/ninja",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_CXX_FLAGS_DEBUG": "-g1",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "TEAQL_ENABLE_MODULES": "OFF"
       }
     },
     {
@@ -43,6 +44,22 @@
       "environment": {
         "STAGING_DIR": "${sourceDir}/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl"
       }
+    },
+    {
+      "name": "modules_native",
+      "inherits": "native",
+      "binaryDir": "${sourceDir}/build_modules_native",
+      "cacheVariables": {
+        "TEAQL_ENABLE_MODULES": "ON"
+      }
+    },
+    {
+      "name": "modules_sanitize",
+      "inherits": "sanitize",
+      "binaryDir": "${sourceDir}/build_modules_sanitize",
+      "cacheVariables": {
+        "TEAQL_ENABLE_MODULES": "ON"
+      }
     }
   ],
   "buildPresets": [
@@ -59,6 +76,78 @@
     {
       "name": "mips",
       "configurePreset": "mips",
+      "jobs": 4
+    },
+    {
+      "name": "modules_native",
+      "configurePreset": "modules_native",
+      "jobs": 8,
+      "targets": [
+        "teaql_module_contracts",
+        "teaql_module_decimal_tests",
+        "teaql_module_core_aux_debug_tests",
+        "teaql_module_core_collection_tests",
+        "teaql_module_core_tests",
+        "teaql_module_query_model_tests",
+        "teaql_module_data_service_tests",
+        "teaql_module_data_service_model_tests",
+        "teaql_module_data_service_scope_tests",
+        "teaql_module_executor_tests",
+        "teaql_module_sql_projection_scope_tests",
+        "teaql_module_system_time_tests",
+        "teaql_module_system_time_arithmetic_scope_tests",
+        "teaql_module_sql_dialect_tests",
+        "teaql_module_sql_model_api_tests",
+        "teaql_module_sql_transport_tests",
+        "teaql_module_sql_query_tests",
+        "teaql_module_sql_execution_tests",
+        "teaql_module_sql_transaction_tests",
+        "teaql_module_sql_stream_tests",
+        "teaql_module_original_runtime_registration",
+        "teaql_module_original_runtime_service_boundaries",
+        "teaql_module_original_runtime_validation",
+        "teaql_module_original_runtime_events_relations",
+        "teaql_module_original_runtime_typed_queries",
+        "teaql_module_original_runtime_aggregates_cache",
+        "teaql_module_original_runtime_pagination",
+        "teaql_module_original_runtime_memory_service",
+        "teaql_module_original_runtime_context_tail",
+        "teaql_module_runtime_namespace_tests",
+        "teaql_module_runtime_graph_tests",
+        "teaql_module_runtime_registry_tests",
+        "teaql_module_mutation_policy_tests",
+        "teaql_module_context_logging_tests",
+        "teaql_module_log_formatter_tests",
+        "teaql_module_log_manager_tests",
+        "teaql_module_audit_event_tests",
+        "teaql_module_event_model_tests",
+        "teaql_module_inmemory_tests",
+        "teaql_module_round_trip_reference_tests",
+        "teaql_module_entity_reference_tests",
+        "teaql_module_context_reference_tests",
+        "teaql_module_graph_saver_tests",
+        "teaql_module_audited_auto_save_tests",
+        "teaql_module_audited_save_tests",
+        "teaql_module_runtime_mutation_tests",
+        "teaql_module_ledger_execution_tests",
+        "teaql_module_ledger_move_only_tests",
+        "teaql_module_relation_hydration_tests",
+        "teaql_module_relation_execution_tests",
+        "teaql_module_provider_sqlite_tests",
+        "teaql_module_provider_sqlite_schema_tests",
+        "teaql_module_provider_sqlite_bindings_tests",
+        "teaql_module_provider_sqlite_decoding_tests",
+        "teaql_module_runtime_examples_tests",
+        "teaql_module_sqlite_schema_crud",
+        "teaql_module_sqlite_relations_graph",
+        "teaql_sqlite_schema_crud",
+        "teaql_sqlite_relations_graph"
+      ]
+    },
+    {
+      "name": "modules_sanitize",
+      "inherits": "modules_native",
+      "configurePreset": "modules_sanitize",
       "jobs": 4
     }
   ],
@@ -95,6 +184,30 @@
       },
       "execution": {
         "jobs": 4
+      }
+    },
+    {
+      "name": "modules_native",
+      "configurePreset": "modules_native",
+      "output": {
+        "outputOnFailure": true
+      },
+      "filter": {
+        "include": {
+          "name": "^module_"
+        }
+      },
+      "execution": {
+        "jobs": 4
+      }
+    },
+    {
+      "name": "modules_sanitize",
+      "inherits": "modules_native",
+      "configurePreset": "modules_sanitize",
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=0",
+        "UBSAN_OPTIONS": "halt_on_error=1"
       }
     }
   ]

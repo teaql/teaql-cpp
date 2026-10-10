@@ -1,0 +1,22 @@
+In file included from /home/philip/githome/teaql-cpp/build_module_inventory/m4/base_query.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/data_service/base_query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_core/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/build_module_inventory/m4/base_query.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/data_service/base_query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.

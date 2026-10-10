@@ -1,0 +1,24 @@
+[1/3] Building CXX object CMakeFiles/teaql_external_consumer.dir/header_bridge.cpp.o
+[2/3] Building CXX object CMakeFiles/teaql_external_consumer.dir/main.cpp.o
+[3/3] Linking CXX executable teaql_external_consumer
+FAILED: [code=1] teaql_external_consumer 
+: && /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/bin/x86_64-conda-linux-gnu-g++ -g0 -Wl,-rpath,/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib CMakeFiles/teaql_external_consumer.dir/main.cpp.o CMakeFiles/teaql_external_consumer.dir/header_bridge.cpp.o -o teaql_external_consumer  -Wl,-rpath,/usr/lib/x86_64-linux-gnu  /tmp/teaql_m5_verified_headers_sdk/relocated_sdk/lib/libteaql_provider_sqlite.a  /tmp/teaql_m5_verified_headers_sdk/relocated_sdk/lib/libteaql_runtime.a  /tmp/teaql_m5_verified_headers_sdk/relocated_sdk/lib/libteaql_sql.a  /tmp/teaql_m5_verified_headers_sdk/relocated_sdk/lib/libteaql_data_service.a  /tmp/teaql_m5_verified_headers_sdk/relocated_sdk/lib/libteaql_core.a  /tmp/teaql_m5_verified_headers_sdk/relocated_sdk/lib/libteaql_memory.a  -lpthread  /usr/lib/x86_64-linux-gnu/libsqlite3.so && :
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `stat64@GLIBC_2.33'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `fstat64@GLIBC_2.33'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `fcntl64@GLIBC_2.28'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `dlclose@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `dlerror@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `pthread_mutexattr_init@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `pthread_join@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `pthread_mutex_trylock@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `log@GLIBC_2.29'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `lstat64@GLIBC_2.33'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `dlsym@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `dlopen@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `pthread_mutexattr_settype@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `exp@GLIBC_2.29'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `pthread_create@GLIBC_2.34'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `pow@GLIBC_2.29'
+/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libsqlite3.so: undefined reference to `pthread_mutexattr_destroy@GLIBC_2.34'
+collect2: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.

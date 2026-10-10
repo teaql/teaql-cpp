@@ -1,0 +1,137 @@
+{
+  "status": "Installed consumer contracts passed",
+  "modes": [
+    "modules",
+    "headers"
+  ],
+  "relocated_prefix": "/tmp/teaql_m5_verified_modules_sdk/relocated_sdk",
+  "original_prefix_exists": false,
+  "distributed_bmis": 0,
+  "consumer_bmi_flags": "Debug -g0; producer profile uses -g1",
+  "toolchain_lock_sha256": "cb872117610ef3606215c9ac92f40382fd21321aedf731249175b8f4ff53c102",
+  "fixture_sha256": {
+    "CMakeLists.txt": "d3cfac006e6d1f544e94ff2f8eae3e02ed5c09e4dfe71375f3b89c17c7c3cc6b",
+    "header_bridge.cpp": "ee510a59ac4296e46052530ad03b6123297d46ca8c05b43089d6320e1c4371a4",
+    "main.cpp": "af2448645db4ab05902e1acba4b44add9f7dd86c1027ab3026b23df086d8ceef"
+  },
+  "steps": [
+    {
+      "name": "install",
+      "command": [
+        "cmake",
+        "--install",
+        "/home/philip/githome/teaql-cpp/build_modules_native",
+        "--prefix",
+        "/tmp/teaql_m5_verified_modules_sdk/original_prefix"
+      ],
+      "exit_code": 0,
+      "seconds": 0.095
+    },
+    {
+      "name": "modules_configure",
+      "command": [
+        "cmake",
+        "-S",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_source",
+        "-B",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_modules",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_PREFIX_PATH=/tmp/teaql_m5_verified_modules_sdk/relocated_sdk",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_FLAGS_DEBUG=-g0",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DTEAQL_CONSUME_MODULES=ON"
+      ],
+      "exit_code": 0,
+      "seconds": 0.299
+    },
+    {
+      "name": "modules_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_modules",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "seconds": 53.274
+    },
+    {
+      "name": "modules_ctest",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_modules",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 0.005
+    },
+    {
+      "name": "modules_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_modules"
+      ],
+      "exit_code": 0,
+      "seconds": 0.007
+    },
+    {
+      "name": "headers_configure",
+      "command": [
+        "cmake",
+        "-S",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_source",
+        "-B",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_headers",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_PREFIX_PATH=/tmp/teaql_m5_verified_modules_sdk/relocated_sdk",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_FLAGS_DEBUG=-g0",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DTEAQL_CONSUME_MODULES=OFF"
+      ],
+      "exit_code": 0,
+      "seconds": 0.33
+    },
+    {
+      "name": "headers_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_headers",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "seconds": 10.287
+    },
+    {
+      "name": "headers_ctest",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_headers",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 0.005
+    },
+    {
+      "name": "headers_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_verified_modules_sdk/consumer_headers"
+      ],
+      "exit_code": 0,
+      "seconds": 0.006
+    }
+  ]
+}

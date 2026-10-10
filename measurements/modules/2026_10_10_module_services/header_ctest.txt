@@ -1,0 +1,45 @@
+Test project /home/philip/githome/teaql-cpp/build_native_current
+      Start   2: runtime_layer_boundaries
+      Start 239: core_aux_debug_contracts
+      Start 228: data_service_model_contracts
+      Start 215: sql_query_executor_contracts
+ 1/20 Test #215: sql_query_executor_contracts .............   Passed    0.06 sec
+      Start 223: sql_model_api_contracts
+ 2/20 Test #228: data_service_model_contracts .............   Passed    0.07 sec
+      Start 213: sql_transaction_execution_contracts
+ 3/20 Test #223: sql_model_api_contracts ..................   Passed    0.02 sec
+      Start 214: sql_mutation_execution_contracts
+ 4/20 Test #213: sql_transaction_execution_contracts ......   Passed    0.01 sec
+      Start 233: data_service_scope_contracts
+ 5/20 Test #214: sql_mutation_execution_contracts .........   Passed    0.00 sec
+      Start 212: sql_stream_execution_contracts
+ 6/20 Test #233: data_service_scope_contracts .............   Passed    0.00 sec
+      Start 373: query_model_contracts
+ 7/20 Test #212: sql_stream_execution_contracts ...........   Passed    0.00 sec
+      Start 225: executor_spi_contracts
+ 8/20 Test #373: query_model_contracts ....................   Passed    0.00 sec
+      Start 230: system_time_arithmetic_scope_contracts
+ 9/20 Test #225: executor_spi_contracts ...................   Passed    0.00 sec
+      Start 216: sql_transport_contracts
+10/20 Test #230: system_time_arithmetic_scope_contracts ...   Passed    0.00 sec
+      Start 237: decimal_contracts
+11/20 Test #216: sql_transport_contracts ..................   Passed    0.00 sec
+      Start 227: data_service_contracts
+12/20 Test #237: decimal_contracts ........................   Passed    0.00 sec
+      Start 354: core_contracts
+13/20 Test #227: data_service_contracts ...................   Passed    0.00 sec
+      Start 219: sql_dialect_contracts
+14/20 Test #354: core_contracts ...........................   Passed    0.00 sec
+      Start 229: system_time_contracts
+15/20 Test #219: sql_dialect_contracts ....................   Passed    0.00 sec
+      Start 370: core_collection_contracts
+16/20 Test #229: system_time_contracts ....................   Passed    0.00 sec
+      Start 235: sql_projection_scope_contracts
+17/20 Test #370: core_collection_contracts ................   Passed    0.00 sec
+18/20 Test #235: sql_projection_scope_contracts ...........   Passed    0.00 sec
+19/20 Test #239: core_aux_debug_contracts .................   Passed    0.12 sec
+20/20 Test   #2: runtime_layer_boundaries .................   Passed    0.19 sec
+
+100% tests passed out of 20
+
+Total Test time (real) =   0.20 sec

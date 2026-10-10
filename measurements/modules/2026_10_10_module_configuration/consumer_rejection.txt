@@ -1,0 +1,13 @@
+-- Configuring incomplete, errors occurred!
+CMake Error at CMakeLists.txt:6 (find_package):
+  Found package configuration file:
+
+    /tmp/teaql_m5_cross_guard/sdk/lib/cmake/teaql_cpp/teaql_cppConfig.cmake
+
+  but it set teaql_cpp_FOUND to FALSE so package "teaql_cpp" is considered to
+  be NOT FOUND.  Reason given by package:
+
+  TEAQL installed modules are qualified on native Clang23 with Ninja
+
+
+

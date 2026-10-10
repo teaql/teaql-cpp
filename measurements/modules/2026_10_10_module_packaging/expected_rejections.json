@@ -1,0 +1,36 @@
+[
+  {
+    "case": "missing_modules",
+    "exit_code": 1,
+    "expected_diagnostic": "without module interfaces",
+    "command": [
+      "cmake",
+      "-S",
+      "/tmp/teaql_m5_verified_modules_sdk/consumer_source",
+      "-B",
+      "/tmp/teaql_m5_reject_missing_modules",
+      "-G",
+      "Ninja",
+      "-DCMAKE_PREFIX_PATH=/tmp/teaql_m5_verified_headers_sdk/relocated_sdk",
+      "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+      "-DTEAQL_CONSUME_MODULES=ON"
+    ]
+  },
+  {
+    "case": "gcc_modules",
+    "exit_code": 1,
+    "expected_diagnostic": "qualified on native Clang23 with Ninja",
+    "command": [
+      "cmake",
+      "-S",
+      "/tmp/teaql_m5_verified_modules_sdk/consumer_source",
+      "-B",
+      "/tmp/teaql_m5_reject_gcc_modules",
+      "-G",
+      "Ninja",
+      "-DCMAKE_PREFIX_PATH=/tmp/teaql_m5_verified_modules_sdk/relocated_sdk",
+      "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/gcc_native.cmake",
+      "-DTEAQL_CONSUME_MODULES=ON"
+    ]
+  }
+]

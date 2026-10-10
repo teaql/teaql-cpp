@@ -55,7 +55,7 @@ def source_files():
         ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z", "--",
          "teaql_memory", "teaql_async", "teaql_core", "teaql_data_service",
          "teaql_sql", "teaql_runtime", "teaql_provider_sqlite", "compatibility",
-         "examples", "tests"],
+         "modules", "examples", "tests"],
         cwd=ROOT, capture_output=True, check=True,
     )
     files = []

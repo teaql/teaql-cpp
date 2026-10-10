@@ -1,0 +1,504 @@
+{
+  "status": "Sequential same-compiler build measurements completed",
+  "compiler": "Clang23.1.3/libstdc++16.2",
+  "profile": "Debug -g1",
+  "configuration": {
+    "headers": {
+      "CMAKE_BUILD_TYPE": "Debug",
+      "CMAKE_CXX_FLAGS": "--gcc-install-dir=/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0",
+      "CMAKE_CXX_FLAGS_DEBUG": "-g1",
+      "CMAKE_CXX_COMPILER": "/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++",
+      "CMAKE_CXX_COMPILER_ID": "Clang",
+      "CMAKE_CXX_COMPILER_VERSION": "23.1.3",
+      "CMAKE_CXX_PLATFORM_ID": "Linux",
+      "CMAKE_CXX_SIZEOF_DATA_PTR": "8"
+    },
+    "modules": {
+      "CMAKE_BUILD_TYPE": "Debug",
+      "CMAKE_CXX_FLAGS": "--gcc-install-dir=/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0",
+      "CMAKE_CXX_FLAGS_DEBUG": "-g1",
+      "CMAKE_CXX_COMPILER": "/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++",
+      "CMAKE_CXX_COMPILER_ID": "Clang",
+      "CMAKE_CXX_COMPILER_VERSION": "23.1.3",
+      "CMAKE_CXX_PLATFORM_ID": "Linux",
+      "CMAKE_CXX_SIZEOF_DATA_PTR": "8"
+    }
+  },
+  "jobs": 8,
+  "cpu_affinity_count": 12,
+  "cpu_quota": null,
+  "scope": "All seven production packages plus one identical consumer; textual coverage matches global fragments",
+  "limits": "One run per scenario; warm filesystem caches; maximum child RSS is not concurrent tree memory; host load recorded",
+  "bmi_bytes": {
+    "modules/CMakeFiles/teaql_runtime_module.dir/teaql_runtime.pcm": 107398120,
+    "modules/CMakeFiles/teaql_memory_module.dir/teaql_memory.pcm": 9462340,
+    "modules/CMakeFiles/teaql_provider_sqlite_module.dir/teaql_provider_sqlite.pcm": 79315124,
+    "modules/CMakeFiles/teaql_sql_module.dir/teaql_sql.pcm": 45103396,
+    "modules/CMakeFiles/teaql_data_service_module.dir/teaql_data_service.pcm": 43422332,
+    "modules/CMakeFiles/teaql_async_module.dir/teaql_async.pcm": 8523556,
+    "modules/CMakeFiles/teaql_core_module.dir/teaql_core.pcm": 50379864
+  },
+  "bmi_total_bytes": 343604732,
+  "steps": [
+    {
+      "name": "headers_clean",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "clean"
+      ],
+      "wall_seconds": 0.033,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        2.154296875,
+        4.498046875,
+        7.46826171875
+      ],
+      "load_after": [
+        2.154296875,
+        4.498046875,
+        7.46826171875
+      ]
+    },
+    {
+      "name": "headers_full_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 110.321,
+      "max_child_rss_kib": 825956,
+      "exit_code": 0,
+      "load_before": [
+        2.154296875,
+        4.498046875,
+        7.46826171875
+      ],
+      "load_after": [
+        6.2451171875,
+        5.4482421875,
+        7.4912109375
+      ]
+    },
+    {
+      "name": "headers_baseline",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "wall_seconds": 0.002,
+      "max_child_rss_kib": 4096,
+      "exit_code": 0,
+      "load_before": [
+        6.2451171875,
+        5.4482421875,
+        7.4912109375
+      ],
+      "load_after": [
+        6.2451171875,
+        5.4482421875,
+        7.4912109375
+      ]
+    },
+    {
+      "name": "headers_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "wall_seconds": 0.01,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        6.2451171875,
+        5.4482421875,
+        7.4912109375
+      ],
+      "load_after": [
+        6.2451171875,
+        5.4482421875,
+        7.4912109375
+      ]
+    },
+    {
+      "name": "headers_consumer_rebuild",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 9.375,
+      "max_child_rss_kib": 826116,
+      "exit_code": 0,
+      "load_before": [
+        6.2451171875,
+        5.4482421875,
+        7.4912109375
+      ],
+      "load_after": [
+        5.82470703125,
+        5.3740234375,
+        7.4560546875
+      ]
+    },
+    {
+      "name": "headers_consumer_result",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "wall_seconds": 0.002,
+      "max_child_rss_kib": 4096,
+      "exit_code": 0,
+      "load_before": [
+        5.82470703125,
+        5.3740234375,
+        7.4560546875
+      ],
+      "load_after": [
+        5.82470703125,
+        5.3740234375,
+        7.4560546875
+      ]
+    },
+    {
+      "name": "headers_consumer_restore",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 9.38,
+      "max_child_rss_kib": 826124,
+      "exit_code": 0,
+      "load_before": [
+        5.82470703125,
+        5.3740234375,
+        7.4560546875
+      ],
+      "load_after": [
+        5.08251953125,
+        5.2294921875,
+        7.38623046875
+      ]
+    },
+    {
+      "name": "headers_final_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "wall_seconds": 0.011,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        5.08251953125,
+        5.2294921875,
+        7.38623046875
+      ],
+      "load_after": [
+        5.08251953125,
+        5.2294921875,
+        7.38623046875
+      ]
+    },
+    {
+      "name": "modules_clean",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "clean"
+      ],
+      "wall_seconds": 0.085,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        5.08251953125,
+        5.2294921875,
+        7.38623046875
+      ],
+      "load_after": [
+        5.08251953125,
+        5.2294921875,
+        7.38623046875
+      ]
+    },
+    {
+      "name": "modules_full_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 138.311,
+      "max_child_rss_kib": 1434928,
+      "exit_code": 0,
+      "load_before": [
+        5.08251953125,
+        5.2294921875,
+        7.38623046875
+      ],
+      "load_after": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ]
+    },
+    {
+      "name": "modules_baseline",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "wall_seconds": 0.002,
+      "max_child_rss_kib": 3968,
+      "exit_code": 0,
+      "load_before": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ],
+      "load_after": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ]
+    },
+    {
+      "name": "modules_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "wall_seconds": 0.012,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ],
+      "load_after": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ]
+    },
+    {
+      "name": "modules_consumer_rebuild",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 0.605,
+      "max_child_rss_kib": 297984,
+      "exit_code": 0,
+      "load_before": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ],
+      "load_after": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ]
+    },
+    {
+      "name": "modules_consumer_result",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "wall_seconds": 0.002,
+      "max_child_rss_kib": 4096,
+      "exit_code": 0,
+      "load_before": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ],
+      "load_after": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ]
+    },
+    {
+      "name": "modules_consumer_restore",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 0.528,
+      "max_child_rss_kib": 297880,
+      "exit_code": 0,
+      "load_before": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ],
+      "load_after": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ]
+    },
+    {
+      "name": "modules_final_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "wall_seconds": 0.012,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ],
+      "load_after": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ]
+    },
+    {
+      "name": "headers_reconciled_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 9.346,
+      "max_child_rss_kib": 825972,
+      "exit_code": 0,
+      "load_before": [
+        5.3359375,
+        5.7158203125,
+        7.2939453125
+      ],
+      "load_after": [
+        4.66845703125,
+        5.56005859375,
+        7.22607421875
+      ]
+    },
+    {
+      "name": "headers_reconciled_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "wall_seconds": 0.009,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        4.66845703125,
+        5.56005859375,
+        7.22607421875
+      ],
+      "load_after": [
+        4.66845703125,
+        5.56005859375,
+        7.22607421875
+      ]
+    },
+    {
+      "name": "modules_reconciled_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "wall_seconds": 0.01,
+      "max_child_rss_kib": 10624,
+      "exit_code": 0,
+      "load_before": [
+        4.66845703125,
+        5.56005859375,
+        7.22607421875
+      ],
+      "load_after": [
+        4.66845703125,
+        5.56005859375,
+        7.22607421875
+      ]
+    },
+    {
+      "name": "modules_reconciled_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "wall_seconds": 0.011,
+      "max_child_rss_kib": 10496,
+      "exit_code": 0,
+      "load_before": [
+        4.66845703125,
+        5.56005859375,
+        7.22607421875
+      ],
+      "load_after": [
+        4.66845703125,
+        5.56005859375,
+        7.22607421875
+      ]
+    }
+  ]
+}

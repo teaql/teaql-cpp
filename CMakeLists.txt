@@ -4,16 +4,42 @@ project(teaql_cpp VERSION 0.1.0 LANGUAGES CXX)
 # Existing implementation files contain no imports. Module interface file sets
 # and importing consumers will enable scanning explicitly during migration.
 set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
+# Default only to the exact native configuration accepted in the release audit.
+# Explicit presets/overrides continue to select their frontend independently.
+set(TEAQL_MODULES_DEFAULT OFF)
+if(NOT CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Linux" AND
+   CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" AND CMAKE_GENERATOR STREQUAL "Ninja" AND
+   CMAKE_BUILD_TYPE STREQUAL "Debug" AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND
+   CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 23.1.3 AND
+   CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES MATCHES "/gcc/[^/]+/16[.]2[.]0/include/c[+][+]")
+    set(TEAQL_MODULES_DEFAULT ON)
+endif()
+option(TEAQL_ENABLE_MODULES "Build the qualified C++20 named-module frontend" ${TEAQL_MODULES_DEFAULT})
+if(TEAQL_ENABLE_MODULES)
+    if(CMAKE_CROSSCOMPILING)
+        message(FATAL_ERROR "Production TEAQL modules are qualified for native builds; use the header frontend for cross compilation")
+    endif()
+    if(NOT CMAKE_GENERATOR MATCHES "^Ninja")
+        message(FATAL_ERROR "TEAQL modules require the qualified Ninja generator")
+    endif()
+    if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR
+       CMAKE_CXX_COMPILER_VERSION VERSION_LESS 23 OR
+       NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 24)
+        message(FATAL_ERROR "The production module frontend is qualified on native Clang23")
+    endif()
+endif()
 
 find_package(Threads REQUIRED)
 find_package(SQLite3 3.37 REQUIRED)
+include(GNUInstallDirs)
 
 # Each package publishes its own declarations. Consumers receive lower-layer
 # includes through the existing target graph instead of a workspace-wide include.
 function(teaql_configure_package target)
     target_compile_features(${target} PUBLIC cxx_std_20)
     target_include_directories(${target} PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
     set_target_properties(${target} PROPERTIES CXX_EXTENSIONS OFF)
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
@@ -69,3 +95,7 @@ endif()
 if(BUILD_TESTING)
     include(tests/CMakeLists.txt)
 endif()
+if(TEAQL_ENABLE_MODULES)
+    add_subdirectory(modules)
+endif()
+include(cmake/install.cmake)

@@ -1,8 +1,12 @@
 #pragma once
+#if defined(TEAQL_USE_MODULES)
+#include "module_imports.hpp"
+#else
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/provider_sqlite/schema.hpp>
 #include <teaql/sql/executor.hpp>
 #include <teaql/core/detail/debug.hpp>
+#endif
 #include <iostream>
 
 namespace example {

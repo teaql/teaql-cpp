@@ -1,0 +1,24 @@
+{
+  "status": "M5 packaging checkpoint accepted; M5 release qualification remains open",
+  "producer_profile": "native Clang23.1.3/libstdc++16.2, Debug -g1",
+  "clang_installed_consumer_cases_passed": 3,
+  "gcc16_host_libc_header_consumer_cases_passed": 1,
+  "expected_module_component_rejections": 2,
+  "original_installation_prefixes_removed": true,
+  "distributed_bmis": 0,
+  "installed_metadata_producer_path_leaks": 0,
+  "interfaces_rebuilt_by_external_consumer": 7,
+  "module_integration_passed": 72,
+  "module_integration_total": 72,
+  "module_dependency_records": 177,
+  "unchanged_canonical_production_contents": 315,
+  "pending": [
+    "Incremental declaration/body/template/dependency changes",
+    "Parallel clean-build and performance/resource comparison",
+    "Module sanitizer release validation",
+    "Complete compiler/target release reconciliation",
+    "Qualified-profile default selection"
+  ],
+  "sanitizers_repeated": false,
+  "mips_repeated": false
+}

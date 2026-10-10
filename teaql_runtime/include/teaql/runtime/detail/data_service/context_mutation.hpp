@@ -1,5 +1,7 @@
 #pragma once
-#include <teaql/runtime/detail/data_service/data_service.hpp>
+#include <teaql/runtime/detail/data_service/declarations.hpp>
+#include <teaql/runtime/detail/data_service/base_mutation.hpp>
+#include <teaql/runtime/detail/data_service/context_query.hpp>
 #include <teaql/runtime/detail/query_keys.hpp>
 #include <teaql/runtime/cache.hpp>
 

@@ -1,0 +1,14 @@
+-- The CXX compiler identification is GNU 14.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/bin/mips-openwrt-linux-musl-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found SQLite3: /home/philip/githome/teaql-cpp/.tools/toolchains/sqlite-3.53.2/lib/libsqlite3.a (found suitable version "3.53.2", minimum required is "3.37")
+-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter
+-- Configuring done (3.0s)
+-- Generating done (1.9s)
+-- Build files have been written to: /home/philip/githome/teaql-cpp/build_mips_current

@@ -1,0 +1,1305 @@
+[1/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/business_id.cpp.o
+[2/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/debug.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/debug.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/detail/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[3/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/core.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/core.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/meta.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[4/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/entity.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/entity.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/meta.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[5/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/list.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/list.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[6/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/web.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/web.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/web.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[7/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/query_debug.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/query_debug.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query_debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[8/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/decimal_json.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/decimal_json.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[9/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/request.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/request.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/request_debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query_debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[10/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/value.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/value.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[11/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/dynamic_search.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/dynamic_search.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/dynamic_search.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[12/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/time.cpp.o
+[13/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/row.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/row.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[14/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/expr.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/expr.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[15/99] Building CXX object teaql_core/CMakeFiles/teaql_core.dir/src/query.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/src/query.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[16/99] Linking CXX static library teaql_core/libteaql_core.a
+[17/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/types.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/types.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[18/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/bindings.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/bindings.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[19/99] Building CXX object teaql_data_service/CMakeFiles/teaql_data_service.dir/src/sql_log.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/src/sql_log.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[20/99] Linking CXX static library teaql_data_service/libteaql_data_service.a
+[21/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/schema.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/schema.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[22/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/dialect.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/dialect.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[23/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/mutation.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/mutation.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[24/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/query_keys.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/query_keys.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/query_keys.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[25/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/diagnostic.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/diagnostic.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/detail/diagnostic.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/mutation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/diagnostic.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/detail/diagnostic.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[26/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/query_plan.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/query_plan.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/detail/query_plan.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/query_plan.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/detail/query_plan.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[27/99] Building CXX object teaql_sql/CMakeFiles/teaql_sql.dir/src/mutation_execution.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/mutation_execution.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/detail/mutation_execution.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/src/mutation_execution.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/detail/mutation_execution.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/transport.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[28/99] Linking CXX static library teaql_sql/libteaql_sql.a
+[29/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/query_stores.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/query_stores.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/cache.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[30/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/id_set_build_lock.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/id_set_build_lock.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/id_set_build_lock.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/id_set_build_lock.cpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/pagination.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[31/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/entity_graph_decoder.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/entity_graph_decoder.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_graph_decoder.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_runtime.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_key.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[32/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/pagination.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/pagination.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/pagination.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/pagination.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/pagination.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[33/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/relation_enhancement.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation_enhancement.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_enhancement.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation_enhancement.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_enhancement.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[34/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/mod.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/mod.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/mod.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[35/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/relation_installation.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation_installation.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_installation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation_installation.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_installation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[36/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/relation.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/relation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/check_result.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation.cpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[37/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/graph.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/graph.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/graph.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/mutation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[38/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/entity.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/entity.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/entity.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[39/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/entity_runtime.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/entity_runtime.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_runtime.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_key.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[40/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/graph.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/graph.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/graph.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[41/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/logging.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/logging.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/logging.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[42/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/logging.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/logging.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/logging.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/mutation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/logging.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/logging.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[43/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/entity_key.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/entity_key.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_key.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[44/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/log_manager.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/log_manager.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/log_manager.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/log_formatter.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/logging.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/mutation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/log_manager.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/log_manager.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/log_formatter.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/logging.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[45/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/event.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/event.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/governance_scope.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/event.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/governance_scope.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[46/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/telemetry.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/telemetry.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/telemetry.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/telemetry.cpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[47/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/business_clock.cpp.o
+[48/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/log_formatter.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/log_formatter.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/log_formatter.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/logging.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/mutation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/log_formatter.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/log_formatter.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/logging.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[49/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/business_id.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/business_id.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/business_id.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[50/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/id.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/id.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/id.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/check_result.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[51/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/check_result.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/check_result.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/check_result.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[52/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/registry.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/registry.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/meta.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/registry.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[53/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/event.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/event.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/event.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/trace.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/event.cpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[54/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/error.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/error.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/check_result.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[55/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/business_service.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/business_service.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/business_id.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/business_service.cpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[56/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_store.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_store.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/data_store.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[57/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/audit_privacy.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/audit_privacy.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/audit_privacy.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/event.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/trace.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/audit_privacy.cpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/logging.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[58/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/schema.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/schema.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/schema.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[59/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/round_trip_reference.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/round_trip_reference.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/round_trip_reference.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[60/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/reference_crypto.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/reference_crypto.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/reference_crypto.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[61/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/round_trip_reference_types.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/round_trip_reference_types.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/round_trip_reference.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[62/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/entity_reference.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/entity_reference.cpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/reference_crypto.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[63/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/data_store.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/data_store.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/data_store.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[64/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/round_trip_reference.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/round_trip_reference.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/round_trip_reference.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[65/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/inmemory_engine.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/inmemory_engine.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/inmemory_engine.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/inmemory_engine.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/inmemory_engine.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[66/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/entity_reference.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/entity_reference.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/entity_reference.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[67/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/generated_support.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/generated_support.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/generated_support.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/generated_support.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/generated_support.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[68/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/language.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/language.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/language.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/check_result.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[69/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/locking.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/locking.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/locking.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/locking.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/locking.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[70/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/root.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/root.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/root.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[71/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/i18n_debug.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/i18n_debug.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/i18n_debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[72/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/fix_evidence.cpp.o
+[73/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/i18n.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/i18n.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/i18n.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/language.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/check_result.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[74/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/checker.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/checker.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/checker.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/check_result.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[75/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/relation_graph.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation_graph.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_installation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/relation_graph.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/data_service/relation_installation.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[76/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/language.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/language.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/language.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[77/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/checker.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/checker.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/checker.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[78/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/mutation_policy.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/mutation_policy.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/mutation_policy.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/mutation_governance.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_key.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[79/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/fix.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/fix.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/graph_fix_scope.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/fix.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/detail/graph_fix_scope.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[80/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/data_service/ledger_plan.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/ledger_plan.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_save.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/data_service/ledger_plan.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_save.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[81/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/context/mutation_policy.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/mutation_policy.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/context/mutation_policy.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[82/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/schema_model.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/schema_model.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/detail/schema.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[83/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/schema_unicode.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/schema_unicode.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/detail/schema.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[84/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/mutation_policy_plan.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/mutation_policy_plan.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/mutation_policy_plan.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[85/99] Building CXX object teaql_runtime/CMakeFiles/teaql_runtime.dir/src/entity_save_preparation.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/entity_save_preparation.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_save.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:4:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/resources.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/src/entity_save_preparation.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/entity_save.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[86/99] Linking CXX static library teaql_runtime/libteaql_runtime.a
+[87/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/dialect.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/dialect.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[88/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/schema.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/schema.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/detail/schema.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/dialect.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/schema.cpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[89/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/error.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/error.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[90/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/native_diagnostics.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/native_diagnostics.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/native_diagnostics.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[91/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/bindings.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/bindings.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/detail/bindings.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[92/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/decoding.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/decoding.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/detail/decoding.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[93/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/driver_error.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/driver_error.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/driver_error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[94/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/simple_error.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/simple_error.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/simple_error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/native_diagnostics.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[95/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/from_sql_error.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/from_sql_error.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/from_sql_error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/boxed_error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/native_diagnostics.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/debug.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/list.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/row.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[96/99] Building CXX object teaql_provider_sqlite/CMakeFiles/teaql_provider_sqlite.dir/src/provider.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/provider.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/provider.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/error.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/types.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/sql_log.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/query.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/expr.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/value.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal.hpp:3:
+/tmp/teaql_m5_build_qualification/source/teaql_core/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/src/provider.cpp:1:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_provider_sqlite/include/teaql/provider_sqlite/provider.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_sql/include/teaql/sql/transport.hpp:3:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[97/99] Linking CXX static library teaql_provider_sqlite/libteaql_provider_sqlite.a
+[98/99] Building CXX object modules/tests/build_consumer/CMakeFiles/teaql_build_consumer.dir/main.cpp.o
+In file included from /tmp/teaql_m5_build_qualification/source/modules/tests/build_consumer/main.cpp:8:
+In file included from /tmp/teaql_m5_build_qualification/source/modules/tests/build_consumer/header_scope.hpp:22:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service.hpp:2:
+In file included from /tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/tmp/teaql_m5_build_qualification/source/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[99/99] Linking CXX executable modules/tests/build_consumer/teaql_build_consumer

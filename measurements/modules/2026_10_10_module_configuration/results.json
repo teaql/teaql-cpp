@@ -1,0 +1,44 @@
+{
+  "status": "Producer and installed SDK cross-module guards verified",
+  "rejections": [
+    {
+      "case": "producer",
+      "exit_code": 1,
+      "expected_diagnostic": "header frontend for cross compilation",
+      "command": [
+        "cmake",
+        "-S",
+        "/home/philip/githome/teaql-cpp",
+        "-B",
+        "/tmp/teaql_m5_cross_guard/producer",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_SYSTEM_NAME=Linux",
+        "-DCMAKE_SYSTEM_PROCESSOR=mips",
+        "-DTEAQL_ENABLE_MODULES=ON",
+        "-DBUILD_TESTING=OFF",
+        "-DTEAQL_BUILD_EXAMPLES=OFF"
+      ]
+    },
+    {
+      "case": "consumer",
+      "exit_code": 1,
+      "expected_diagnostic": "qualified on native Clang23 with Ninja",
+      "command": [
+        "cmake",
+        "-S",
+        "/home/philip/githome/teaql-cpp/modules/tests/external_consumer",
+        "-B",
+        "/tmp/teaql_m5_cross_guard/consumer",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_SYSTEM_NAME=Linux",
+        "-DCMAKE_SYSTEM_PROCESSOR=mips",
+        "-DCMAKE_PREFIX_PATH=/tmp/teaql_m5_cross_guard/sdk",
+        "-DTEAQL_CONSUME_MODULES=ON"
+      ]
+    }
+  ]
+}

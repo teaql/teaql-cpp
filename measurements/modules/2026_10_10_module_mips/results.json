@@ -1,0 +1,15 @@
+{
+  "status": "Current MIPS header release suite accepted",
+  "compiler": "OpenWrt25.12.5 GCC14.3.0/musl",
+  "target": "MIPS74K soft-float",
+  "sqlite": "3.53.2",
+  "execution": "QEMU74Kf",
+  "tests_passed": 387,
+  "tests_total": 387,
+  "seconds": 91.47,
+  "compiled_dependencies": 427,
+  "no_work": true,
+  "physical_router_tested": false,
+  "production_modules_adopted": false,
+  "raw_from_sql_debug": "Existing native64-only platform exclusion; structured errors remain covered"
+}

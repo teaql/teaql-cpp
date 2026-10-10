@@ -1,0 +1,80 @@
+{
+  "status": "Qualified native default and explicit/header fallback verified",
+  "cases": [
+    {
+      "case": "qualified_native",
+      "modules_enabled": true,
+      "exit_code": 0,
+      "command": [
+        "cmake",
+        "-S",
+        "/home/philip/githome/teaql-cpp",
+        "-B",
+        "/tmp/teaql_m5_default_configuration/qualified_native",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DBUILD_TESTING=OFF",
+        "-DTEAQL_BUILD_EXAMPLES=OFF"
+      ]
+    },
+    {
+      "case": "explicit_headers",
+      "modules_enabled": false,
+      "exit_code": 0,
+      "command": [
+        "cmake",
+        "-S",
+        "/home/philip/githome/teaql-cpp",
+        "-B",
+        "/tmp/teaql_m5_default_configuration/explicit_headers",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DBUILD_TESTING=OFF",
+        "-DTEAQL_BUILD_EXAMPLES=OFF",
+        "-DTEAQL_ENABLE_MODULES=OFF"
+      ]
+    },
+    {
+      "case": "gnu_headers",
+      "modules_enabled": false,
+      "exit_code": 0,
+      "command": [
+        "cmake",
+        "-S",
+        "/home/philip/githome/teaql-cpp",
+        "-B",
+        "/tmp/teaql_m5_default_configuration/gnu_headers",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/gcc_native.cmake",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DBUILD_TESTING=OFF",
+        "-DTEAQL_BUILD_EXAMPLES=OFF"
+      ]
+    },
+    {
+      "case": "cross_headers",
+      "modules_enabled": false,
+      "exit_code": 0,
+      "command": [
+        "cmake",
+        "-S",
+        "/home/philip/githome/teaql-cpp",
+        "-B",
+        "/tmp/teaql_m5_default_configuration/cross_headers",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DBUILD_TESTING=OFF",
+        "-DTEAQL_BUILD_EXAMPLES=OFF",
+        "-DCMAKE_SYSTEM_NAME=Linux",
+        "-DCMAKE_SYSTEM_PROCESSOR=mips"
+      ]
+    }
+  ]
+}

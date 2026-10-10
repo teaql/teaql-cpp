@@ -1,0 +1,42 @@
+{
+  "stage": "M2",
+  "status": "accepted on pinned native Clang23 profile",
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "production_modules": [
+    "teaql_memory",
+    "teaql_async",
+    "teaql_core",
+    "teaql_data_service",
+    "teaql_sql"
+  ],
+  "exports": {
+    "teaql_memory": 49,
+    "teaql_async": 17,
+    "teaql_core": 313,
+    "teaql_data_service": 67,
+    "teaql_sql": 90
+  },
+  "module_contracts": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 0.16
+  },
+  "header_selection": {
+    "passed": 20,
+    "total": 20
+  },
+  "canonical_consumers": 19,
+  "adapted_shared_fixtures": 2,
+  "adaptations": "include/import prologues and recorded ::request() fixture-call qualifiers only",
+  "production_non_include_contents": "all 315 existing files unchanged",
+  "active_compiled_dependency_records": 136,
+  "sqlite": "real native execution, transactions and streams; test-only dialect module",
+  "full_provider_module": "deferred until runtime facade in M3",
+  "sanitizer": "not repeated: unchanged ownership bodies",
+  "mips": "not repeated: unchanged target bodies; production module qualification still pending",
+  "remaining": [
+    "M3 runtime/provider/examples",
+    "M4 internal organization",
+    "M5 release qualification"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "scope": "M4 canonical declaration relocation; original M1a hashes remain authoritative",
+  "relocations": [
+    {
+      "source": "teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp",
+      "destination": "teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp",
+      "non_include_content_sha256": "c7d84fe98ee3b245e9d655df37de6271463908a408045ccd15a1b0640cd99229",
+      "non_include_tokens_sha256": "4dec8240f36a1dd71ae4470860d04e4b518fd651bf8b349c83dc9a5c8fdd5afd"
+    }
+  ]
+}

@@ -36,9 +36,17 @@ The workspace now uses Rust-shaped `teaql_core`, `teaql_data_service`, `teaql_sq
 headers and implementation; runtime implementations preserve `context/` and
 `data_service/` subtrees. Shared test fixtures live in `tests/support`, while the
 Rust comparison harness stays in `tests/parity`. Public `<teaql/...>` include
-spelling and C++ APIs remain stable. Production `lib.cppm` interfaces and import
-consumers remain the next milestone; directory moves alone do not establish
-named-module support. See [the workspace move](docs/workspace_move.md).
+spelling and C++ APIs remain stable. All seven packages have optional
+production `lib.cppm` interfaces, qualified on native Clang23 with import-only
+consumers. See [the workspace move](docs/workspace_move.md) and
+[the module pilot](docs/module_pilot.md), [M2 service/SQL modules](docs/module_services.md)
+and [M3 runtime/provider/examples](docs/module_runtime.md). Original example targets
+select imports in module mode. [M4 internal organization](docs/module_structure.md)
+is accepted; [M5 release qualification](measurements/modules/2026_10_10_module_release/README.md)
+is complete, including installed SDK consumption, incremental correctness,
+performance and native/sanitizer/MIPS-header validation. Modules default ON only
+for the exact qualified native Linux x86_64/Clang23.1.3/libstdc++16.2/Ninja/Debug
+configuration. Explicit header profiles and MIPS fallback remain available.
 
 Two runnable examples reproduce the business semantics of the corresponding Rust examples:
 

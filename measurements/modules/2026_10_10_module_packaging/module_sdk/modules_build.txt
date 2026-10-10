@@ -1,0 +1,27 @@
+[1/20] Scanning /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/share/teaql_cpp/modules/teaql_memory/lib.cppm for CXX dependencies
+[2/20] Generating CXX dyndep file 'CMakeFiles/teaql__memory_module@synth_0.dir/CXX.dd'
+[3/20] Scanning /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/share/teaql_cpp/modules/teaql_async/lib.cppm for CXX dependencies
+[4/20] Generating CXX dyndep file 'CMakeFiles/teaql__async_module@synth_0.dir/CXX.dd'
+[5/20] Scanning /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/share/teaql_cpp/modules/teaql_core/lib.cppm for CXX dependencies
+[6/20] Generating CXX dyndep file 'CMakeFiles/teaql__core_module@synth_0.dir/CXX.dd'
+[7/20] Scanning /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/share/teaql_cpp/modules/teaql_data_service/lib.cppm for CXX dependencies
+[8/20] Generating CXX dyndep file 'CMakeFiles/teaql__data_service_module@synth_0.dir/CXX.dd'
+[9/20] Scanning /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/share/teaql_cpp/modules/teaql_sql/lib.cppm for CXX dependencies
+[10/20] Generating CXX dyndep file 'CMakeFiles/teaql__sql_module@synth_0.dir/CXX.dd'
+[11/20] Scanning /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/share/teaql_cpp/modules/teaql_runtime/lib.cppm for CXX dependencies
+[12/20] Generating CXX dyndep file 'CMakeFiles/teaql__runtime_module@synth_0.dir/CXX.dd'
+[13/20] Scanning /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/share/teaql_cpp/modules/teaql_provider_sqlite/lib.cppm for CXX dependencies
+[14/20] Generating CXX dyndep file 'CMakeFiles/teaql__provider_sqlite_module@synth_0.dir/CXX.dd'
+[15/20] Scanning /tmp/teaql_m5_verified_modules_sdk/consumer_source/main.cpp for CXX dependencies
+[16/20] Scanning /tmp/teaql_m5_verified_modules_sdk/consumer_source/header_bridge.cpp for CXX dependencies
+[17/20] Generating CXX dyndep file CMakeFiles/teaql_external_consumer.dir/CXX.dd
+[18/27] Building CXX object CMakeFiles/teaql_external_consumer.dir/header_bridge.cpp.o
+[19/27] Building CXX object 'CMakeFiles/teaql__memory_module@synth_0.dir/e03fcd7f48f6.bmi'
+[20/27] Building CXX object 'CMakeFiles/teaql__async_module@synth_0.dir/3885d8be4b58.bmi'
+[21/27] Building CXX object 'CMakeFiles/teaql__core_module@synth_0.dir/2d9dad49985b.bmi'
+[22/27] Building CXX object 'CMakeFiles/teaql__data_service_module@synth_0.dir/aa8268d5ecaf.bmi'
+[23/27] Building CXX object 'CMakeFiles/teaql__sql_module@synth_0.dir/2b477a5fcc4d.bmi'
+[24/27] Building CXX object 'CMakeFiles/teaql__runtime_module@synth_0.dir/92971bf4b2e2.bmi'
+[25/27] Building CXX object 'CMakeFiles/teaql__provider_sqlite_module@synth_0.dir/11a37c0ea903.bmi'
+[26/27] Building CXX object CMakeFiles/teaql_external_consumer.dir/main.cpp.o
+[27/27] Linking CXX executable teaql_external_consumer

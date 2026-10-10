@@ -1,5 +1,5 @@
 #pragma once
-#include <teaql/runtime/detail/data_service/data_service.hpp>
+#include <teaql/runtime/detail/data_service/declarations.hpp>
 
 namespace teaql::detail {
 template <class M, class E, class T, bool List>

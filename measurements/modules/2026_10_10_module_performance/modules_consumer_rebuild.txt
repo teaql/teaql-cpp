@@ -1,0 +1,4 @@
+[1/4] Scanning /tmp/teaql_m5_build_qualification/source/modules/tests/build_consumer/main.cpp for CXX dependencies
+[2/4] Generating CXX dyndep file modules/tests/build_consumer/CMakeFiles/teaql_build_consumer.dir/CXX.dd
+[3/4] Building CXX object modules/tests/build_consumer/CMakeFiles/teaql_build_consumer.dir/main.cpp.o
+[4/4] Linking CXX executable modules/tests/build_consumer/teaql_build_consumer

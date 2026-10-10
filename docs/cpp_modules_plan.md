@@ -10,6 +10,12 @@ implementation remains header-based; the completed toolchain upgrade is separate
 from the structural migration planned here. An isolated
 feasibility probe is retained in [assessment evidence](../measurements/modules/2026-10-10-assessment/README.md).
 
+The assessment sections retain that original checkpoint. The current M0-M5
+migration is accepted; see [final release evidence](../measurements/modules/2026_10_10_module_release/README.md).
+Seven named interfaces publish the canonical global declarations and link the
+existing implementation. Module-owned type/ABI changes are outside this completed
+compatibility-preserving migration.
+
 ## Toolchain upgrade authorization
 
 The user has authorized upgrading the local toolchain and dropping old-version
@@ -118,8 +124,9 @@ keep query/mutation helper splits explicit instead of combining their types.
 Package-local internal headers should follow the same responsibility structure
 where feasible. A file that spans responsibilities must be recorded in the
 mapping before structural splitting; do not infer placement from its basename
-alone. The existing five-header service cycle stays within the coarse runtime
-boundary until its declarations and definitions can be separated safely.
+alone. M4 separates the former five-header service cycle into declarations and
+one-way definition dependencies within the coarse runtime boundary; see
+[the structural contract](module_structure.md).
 
 During facade adoption, package-local `include/` directories retain the existing
 `<teaql/...>` include spelling. CMake propagates the required include directories
@@ -187,8 +194,9 @@ The include scan identifies a five-header strongly connected component:
 
 The service header includes method-definition headers that include it again.
 Include guards permit this today. Mechanical conversion to mutually importing
-modules would create an invalid import cycle. Separate shared declarations from
-method definitions structurally, retaining classes, friend access and bodies.
+modules would create an invalid import cycle. M4 now separates shared declarations
+from method definitions structurally, retaining classes, friend access and bodies.
+The historical assessment above describes the pre-M1a paths and graph.
 
 | Profile | Observed configuration | Modules assessment |
 | --- | --- | --- |
@@ -304,17 +312,55 @@ transitive name visibility explicitly rather than losing it during splitting.
 | M5: release qualification | Test packaging, compiler matrix, incremental correctness and performance; enable modules by default only on qualified profiles. | Distribution/build defaults; no unrelated semantic refactor. | Full relevant native/module sanitizer suites, accepted MIPS header suite; separate MIPS module suite if adopting a qualified cross toolchain; external-consumer and clean/no-work evidence. |
 
 M0 tool installation and basic compiler/scanner qualification are complete
-under the upgraded profiles. Export/reachability inventory and deeper imported
-The M1a path/naming ledger is recorded in
+under the upgraded profiles. The M1a path/naming ledger is recorded in
 [module_path_migration.json](module_path_migration.json). Package directories,
 package-local CMake definitions, active underscore paths and the Rust-shaped
 runtime context/data-service subtrees have been moved. M1a is accepted after
 the successful native build, 388/388 CTest contracts, 427 active dependency
 records, unchanged production contents and source/export/format checks. See
 [workspace move evidence](../measurements/modules/2026_10_10_workspace_move/README.md).
-Deeper Context/template import qualification and
-production module interfaces remain M1b work. Directory organization does not
-prove a usable named-module surface.
+M1b is accepted for the pinned native Clang23 profile: memory, async and core
+production interfaces export 374 catalog names, with isolated/combined import
+lookup, imported Context/template/entity/hash/copy/ABI checks and five canonical
+core contract consumers. Module checks pass 6/6 and the original header/layer
+selection passes 6/6. See [the pilot contract](module_pilot.md). Production
+runtime/SQL/service/provider module surfaces and broader release qualification
+have their independent gates; the test-only Context interface does not close M3.
+M2 is now accepted on the same native profile: production data-service and SQL
+facades, 536 catalog entries across five modules, 20/20 imported contracts and
+20/20 corresponding header/layer checks, including real SQLite execution,
+transactions and streams. See [the M2 contract](module_services.md). Full runtime
+and provider imports retain independent acceptance; the M2 SQLite dialect
+fixture did not substitute for that production surface. M3 is now accepted
+on native Clang23: seven interfaces and their acyclic import graph, 1284 catalog
+entries, 72/72 module cases including all75 root contract ports and canonical
+import examples, plus final native header 388/388. Temporary qualification
+modules are removed. See [the M3 contract](module_runtime.md). M4 has now removed
+the service header cycle, verified the full header/import graphs, retained exact
+canonical production contents and passed all six standalone headers plus 72/72
+module cases with a runtime ABI bridge. Broad native header integration passes
+388/388, both profiles have complete dependency records and no-work rebuilds,
+and facade archives contain no duplicate out-of-line implementations. M4 is
+accepted on native Clang23; see [the M4 contract](module_structure.md).
+M5 is accepted. Installed module/header SDKs work for independent consumers
+after prefix relocation, without distributed BMIs or producer-path leaks. Three
+Clang consumers and one GCC16/host-libc header consumer pass; required component
+failures are explicit. See [the packaging checkpoint](module_packaging.md).
+The complete isolated incremental experiment is accepted: all 68 commands pass,
+all controlled edits/restorations are observed through both frontends, and all
+472 package files match the producer and restored snapshot hashes. Performance/
+resource measurement and compiler/target reconciliation are complete. The
+imported sanitizer selection passes 72/72; complete original/imported sanitizer
+integration passes 460/460 with 502 dependencies and a no-work rebuild. Leak
+scanning is disabled. MIPS header release passes 387/387 with 427 dependencies
+and no-work rebuild. Sequential same-compiler/profile measurement records clean
+builds at 110.321s headers/138.311s modules and consumer rebuilds at 9.375s/0.605s;
+single-run/RSS/host-load limits are explicit. Defaults enable modules only for
+the exact qualified native configuration, retaining explicit headers and MIPS
+fallback. All M0-M5 gates are accepted within the supported matrix. See
+[the method and evidence](module_build_validation.md),
+[the explicit release audit](module_release_audit.json) and
+[final release acceptance](../measurements/modules/2026_10_10_module_release/README.md).
 
 ## Verification, fallback and completion
 

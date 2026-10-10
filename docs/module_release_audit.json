@@ -1,0 +1,142 @@
+{
+  "scope": "M0-M5 module migration release gates; Rust v5.0.5 semantics and explicit C++ ownership remain authoritative",
+  "status": "M0-M5 module migration accepted within the supported compiler/target matrix",
+  "requirements": [
+    {
+      "id": "baseline_and_canonical_bodies",
+      "status": "verified",
+      "evidence": [
+        "upstream.lock.json",
+        "docs/module_path_migration.json",
+        "docs/module_structure_migration.json"
+      ],
+      "verification": [
+        "scripts/verify_upstream.py",
+        "scripts/verify_module_paths.py"
+      ]
+    },
+    {
+      "id": "all_packages_exports_and_layers",
+      "status": "verified",
+      "evidence": [
+        "docs/module_exports.json",
+        "measurements/modules/2026_10_10_module_structure/dependency_graph.json"
+      ],
+      "verification": [
+        "scripts/verify_module_exports.py",
+        "scripts/verify_module_dependencies.py"
+      ]
+    },
+    {
+      "id": "template_defaults_customization_and_abi",
+      "status": "verified_native",
+      "evidence": [
+        "docs/module_runtime.md",
+        "docs/module_structure.md",
+        "measurements/modules/2026_10_10_module_structure/module_ctest.txt"
+      ],
+      "verification": [
+        "scripts/verify_module_consumers.py",
+        "scripts/verify_module_symbols.py",
+        "scripts/verify_module_runtime_roots.py"
+      ]
+    },
+    {
+      "id": "installed_sources_and_external_consumers",
+      "status": "verified_native",
+      "evidence": [
+        "docs/module_packaging.md",
+        "measurements/modules/2026_10_10_module_packaging/results.json"
+      ],
+      "verification": [
+        "scripts/verify_installed_package.py"
+      ]
+    },
+    {
+      "id": "clean_and_incremental_correctness",
+      "status": "verified",
+      "evidence": [
+        "docs/module_build_validation.md",
+        "measurements/modules/2026_10_10_module_builds/results.json"
+      ],
+      "verification": [
+        "scripts/verify_module_builds.py"
+      ]
+    },
+    {
+      "id": "same_compiler_performance_and_resources",
+      "status": "verified",
+      "evidence": [
+        "measurements/modules/2026_10_10_module_performance/results.json"
+      ],
+      "verification": [
+        "scripts/measure_module_builds.py"
+      ],
+      "result": "Sequential same-compiler/profile clean, consumer and no-work measurements completed; scoped single-run evidence"
+    },
+    {
+      "id": "native_full_regression",
+      "status": "verified",
+      "evidence": [
+        "measurements/modules/2026_10_10_module_structure/native_header_ctest.txt",
+        "measurements/modules/2026_10_10_module_packaging/module_integration_ctest.txt"
+      ],
+      "result": "388 original checks and 72 imported checks pass"
+    },
+    {
+      "id": "module_sanitizer_selection",
+      "status": "verified",
+      "evidence": [
+        "measurements/modules/2026_10_10_module_sanitizer/results.json"
+      ],
+      "result": "72/72 pass; leak scanning disabled"
+    },
+    {
+      "id": "complete_original_and_module_sanitizer_release",
+      "status": "verified",
+      "expected_scope": "All original and imported contracts in modules_sanitize; ASan/UBSan; leak scanning disabled",
+      "evidence": [
+        "measurements/modules/2026_10_10_module_sanitizer/results.json",
+        "measurements/modules/2026_10_10_module_sanitizer/complete_ctest.txt"
+      ],
+      "result": "460/460 pass; 502 dependencies; no-work; leak scanning disabled"
+    },
+    {
+      "id": "current_mips_header_release",
+      "status": "verified",
+      "expected_scope": "OpenWrt GCC14.3/musl/MIPS74K soft-float, matched SQLite3.53.2, QEMU; physical router execution deferred",
+      "evidence": [
+        "measurements/modules/2026_10_10_module_mips/results.json",
+        "measurements/modules/2026_10_10_module_mips/ctest.txt"
+      ],
+      "result": "387/387; 427 dependencies; no-work; QEMU only"
+    },
+    {
+      "id": "compiler_target_matrix_and_defaults",
+      "status": "verified",
+      "expected_scope": "Native Clang23 modules, separate sanitizer profile, accepted MIPS header fallback; GCC16 installed-header evidence scoped separately; default modules only on fully qualified configurations",
+      "evidence": [
+        "docs/module_compiler_matrix.md",
+        "measurements/modules/2026_10_10_module_configuration/default_results.json",
+        "measurements/modules/2026_10_10_module_mips/results.json",
+        "measurements/modules/2026_10_10_module_sanitizer/results.json"
+      ],
+      "result": "Exact qualified native default ON; explicit headers and GNU/cross defaults OFF; unsupported cross modules rejected; GNU installed-header interoperability scoped separately"
+    },
+    {
+      "id": "style_source_dispositions_and_examples",
+      "status": "verified",
+      "evidence": [
+        "docs/module_runtime_root_contracts.json",
+        "docs/module_runtime.md",
+        "measurements/modules/2026_10_10_module_structure/results.json"
+      ],
+      "verification": [
+        "scripts/format_cpp.py",
+        "scripts/verify_module_runtime_roots.py",
+        "scripts/verify_module_consumers.py"
+      ],
+      "expected_scope": "English material, braces, unchanged generator, all451 source dispositions, all75 runtime roots, actual original example bodies and SQL provenance"
+    }
+  ]
+}

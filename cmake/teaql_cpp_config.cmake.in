@@ -1,0 +1,42 @@
+@PACKAGE_INIT@
+
+if(CMAKE_VERSION VERSION_LESS 4.4)
+    set(teaql_cpp_FOUND FALSE)
+    set(teaql_cpp_NOT_FOUND_MESSAGE "TEAQL packages require CMake4.4 or newer")
+    return()
+endif()
+
+include(CMakeFindDependencyMacro)
+find_dependency(Threads)
+find_dependency(SQLite3 3.37)
+include("${CMAKE_CURRENT_LIST_DIR}/teaql_cpp_targets.cmake")
+
+# With BMI installation suppressed, CMake4.4's generated per-config module
+# metadata retains build-tree source paths. Publish the documented imported
+# source property using the installed interfaces instead. Consumers build their
+# own matching BMIs; no prebuilt BMI is advertised or distributed.
+if(@TEAQL_ENABLE_MODULES@)
+    foreach(teaql_package IN ITEMS @teaql_packages@)
+        string(REGEX REPLACE "^teaql_" "" teaql_component ${teaql_package})
+        set(teaql_module_target teaql::${teaql_component}_module)
+        get_target_property(teaql_configs ${teaql_module_target} IMPORTED_CONFIGURATIONS)
+        foreach(teaql_config IN LISTS teaql_configs)
+            string(TOUPPER "${teaql_config}" teaql_config)
+            set_property(TARGET ${teaql_module_target} PROPERTY IMPORTED_CXX_MODULES_${teaql_config}
+                "${teaql_package}=@PACKAGE_CMAKE_INSTALL_DATADIR@/teaql_cpp/modules/${teaql_package}/lib.cppm")
+        endforeach()
+    endforeach()
+endif()
+set(teaql_cpp_modules_FOUND @TEAQL_ENABLE_MODULES@)
+if("modules" IN_LIST teaql_cpp_FIND_COMPONENTS)
+    if(CMAKE_CROSSCOMPILING OR NOT CMAKE_GENERATOR MATCHES "^Ninja" OR
+       NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR
+       CMAKE_CXX_COMPILER_VERSION VERSION_LESS 23 OR
+       NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 24)
+        set(teaql_cpp_modules_FOUND FALSE)
+        set(teaql_cpp_NOT_FOUND_MESSAGE "TEAQL installed modules are qualified on native Clang23 with Ninja")
+    elseif(NOT teaql_cpp_modules_FOUND)
+        set(teaql_cpp_NOT_FOUND_MESSAGE "This TEAQL package was installed without module interfaces")
+    endif()
+endif()
+check_required_components(teaql_cpp)

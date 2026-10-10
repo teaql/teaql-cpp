@@ -35,7 +35,22 @@ path. This keeps standalone compiler commands and preset builds on the same
 standard library. Compiler packages are development dependencies; the production
 library still uses only standard facilities and SQLite.
 
+The optional `scripts/toolchains/gcc_native.cmake` selects the same locked GNU
+compiler/libstdc++ with the host libc (`CMAKE_SYSROOT=/`), matching native SQLite
+and the Clang profile. Its installed-header consumer passes; this is not yet
+complete GNU producer/modules qualification. The bundled compiler sysroot has
+an older libc and must not be combined with the host SQLite shared library.
+See [the installed-package checkpoint](module_packaging.md).
+
 ## Install and use
+
+The native module frontend is qualified through the `modules_native`
+configure/build/test presets; see [the release matrix](module_compiler_matrix.md).
+The ordinary `native` preset explicitly selects the header frontend.
+The `modules_sanitize` presets select the same imported contract targets with
+the existing ASan/UBSan flags in `build_modules_sanitize`. Their complete
+460/460 acceptance is recorded independently in
+[the build-validation contract](module_build_validation.md).
 
 On Linux x86_64 with Python3, network access, tar, zstd and system libc development
 headers:

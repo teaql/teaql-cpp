@@ -1,0 +1,1373 @@
+{
+  "status": "Clean, no-work and controlled incremental builds verified",
+  "compiler": "Clang23.1.3/libstdc++16.2",
+  "profile": "Debug -g1",
+  "jobs": 8,
+  "scope": "All seven production packages plus one identical consumer; textual coverage matches global fragments",
+  "measurements": "One run per scenario; warm filesystem caches; max_child_rss is maximum child process RSS, not concurrent tree RSS",
+  "header_includes": [
+    "<teaql/memory/arena.hpp>",
+    "<teaql/memory/clone.hpp>",
+    "<teaql/memory/context_box.hpp>",
+    "<teaql/memory/function.hpp>",
+    "<teaql/memory/function_ref.hpp>",
+    "<teaql/memory/limits.hpp>",
+    "<teaql/memory/once_function.hpp>",
+    "<teaql/memory/reference.hpp>",
+    "<teaql/memory/scoped.hpp>",
+    "<teaql/memory/strings.hpp>",
+    "<teaql/memory/types.hpp>",
+    "<teaql/async/operation.hpp>",
+    "<teaql/async/pending.hpp>",
+    "<teaql/async/stream.hpp>",
+    "<teaql/core.hpp>",
+    "<teaql/core/detail/hmac_sha256.hpp>",
+    "<teaql/core/detail/aes_gcm.hpp>",
+    "<teaql/core/detail/query_debug.hpp>",
+    "<teaql/core/system_time.hpp>",
+    "<teaql/core/system_time_debug.hpp>",
+    "<teaql/data_service.hpp>",
+    "<teaql/sql.hpp>",
+    "<teaql/runtime.hpp>",
+    "<teaql/runtime/detail/reference_crypto.hpp>",
+    "<teaql/runtime/detail/audit_privacy.hpp>",
+    "<teaql/provider_sqlite/boxed_error.hpp>",
+    "<teaql/provider_sqlite/business_id.hpp>",
+    "<teaql/provider_sqlite/detail/bindings.hpp>",
+    "<teaql/provider_sqlite/detail/decoding.hpp>",
+    "<teaql/provider_sqlite/detail/schema.hpp>",
+    "<teaql/provider_sqlite/dialect.hpp>",
+    "<teaql/provider_sqlite/driver_error.hpp>",
+    "<teaql/provider_sqlite/error.hpp>",
+    "<teaql/provider_sqlite/error_debug.hpp>",
+    "<teaql/provider_sqlite/from_sql_error.hpp>",
+    "<teaql/provider_sqlite/id.hpp>",
+    "<teaql/provider_sqlite/model_debug.hpp>",
+    "<teaql/provider_sqlite/native_diagnostics.hpp>",
+    "<teaql/provider_sqlite/provider.hpp>",
+    "<teaql/provider_sqlite/schema.hpp>",
+    "<teaql/provider_sqlite/simple_error.hpp>"
+  ],
+  "source_snapshot_sha256": {
+    "teaql_memory/CMakeLists.txt": "43598af4c6c6c760adebdc4727c52965227e9dccf39a6966dc2c03cdaf05abb7",
+    "teaql_memory/src/lib.cppm": "db94afce08ba7282316a20114b09fbfa114b126c588e9ac277f23a6b68891fa1",
+    "teaql_memory/src/arena.cpp": "5e60dde5ea35946e85424f282103036ff9c2f1b4000e6eaf3cd56a0e089d5254",
+    "teaql_memory/include/teaql/memory/strings.hpp": "4e8b04e6adca0fed2bade6da17bab44bfea73e9e38cc9000f8b094b8de594e5e",
+    "teaql_memory/include/teaql/memory/arena.hpp": "52f892355b69f48870141c40394e06ab8e51c41317d343c87aa4c06049ece237",
+    "teaql_memory/include/teaql/memory/clone.hpp": "415b228bce37901f6433706eead720123dbca9a984567ffce4a1c77ce18625f6",
+    "teaql_memory/include/teaql/memory/function.hpp": "23394a22e424480adfc633c2036271a49879536eaba619b2d9977d0a3ff27436",
+    "teaql_memory/include/teaql/memory/types.hpp": "f9b4881e957c95db35361a3853b8b4acf42b5d933461f6758bffb6aa68f0a64c",
+    "teaql_memory/include/teaql/memory/scoped.hpp": "41926b13805fc2464b9939b10fd81ffd6ff136f64f77db828ac8d2315137efdd",
+    "teaql_memory/include/teaql/memory/reference.hpp": "18da9c6f6ec24ac7e3f56140acbdec5fe96e66f962348f45880cfe12d61e73db",
+    "teaql_memory/include/teaql/memory/once_function.hpp": "e1f7d7f4acb660580e6c81e6c913c40df7c42c4a1e576e3098bec7dc3885d9ed",
+    "teaql_memory/include/teaql/memory/limits.hpp": "eb74b867bc043187b871a2fe3313b34e129f0a8a3303bdede768429999d8e55b",
+    "teaql_memory/include/teaql/memory/function_ref.hpp": "ab7a6604a18ce04c43ca82ee36acbe053ff55ec2bea0a1d95a0a4a53176245ec",
+    "teaql_memory/include/teaql/memory/context_box.hpp": "30b0eea806558ef9287102c1e4ba93c4068fbbe0719c6ce0c088a24d0b43d1cf",
+    "teaql_async/CMakeLists.txt": "2dfed3c57263fd391d731b51a292b2343977b273edd1e37af2bc1b615e48ced6",
+    "teaql_async/tests/async_tests.cpp": "b1e9b4339d1a024d564b66e545c03a33da34c38eb22b2241c680b7d92979ed86",
+    "teaql_async/src/lib.cppm": "21fd2af346e0fd6b0fc85d7358710a5d3da12c6d406042ce67f4e2b532c76ccb",
+    "teaql_async/include/teaql/async/pending.hpp": "3352d49d8f65ec060336597ab2b06ee416c849f2c2237bc85ca431ad6fae3089",
+    "teaql_async/include/teaql/async/stream.hpp": "e4d28e40b75112fb603edcd920146aca1d0b318b6001f51fbed84fc234de43b1",
+    "teaql_async/include/teaql/async/operation.hpp": "c9d142465124dc8b72d2193a4b8ae93b7d56688281304ab977fad1d7d9b5e2d4",
+    "teaql_core/CMakeLists.txt": "7e233b07237d30ed48727a7e5f596045780c60302263caa27704366a8a924364",
+    "teaql_core/tests/mutation_debug_tests.cpp": "fc8fbb7878a5924dc66f8f5931a225f556e980a3dd7e0ac52507b723d343bdc4",
+    "teaql_core/tests/core_aux_debug_tests.cpp": "d492605d708feadf5ab2a11826c61644ef030bd84d255e10854ec2a40b5753a6",
+    "teaql_core/tests/query_model_tests.cpp": "ba820644755c03b65a4acf29ded7d1bb0dba01ede9edd4c49a9cea08dafb25e5",
+    "teaql_core/tests/query_debug_tests.cpp": "ebd44a165d161786b474d24aa7364329e953f9ef87492d8ebcd8e6482d9927fd",
+    "teaql_core/tests/decimal_tests.cpp": "3a5a5bcdea92ae86a1821fd8558ea40626645a0c3866090d8df0071ecbd1acbe",
+    "teaql_core/tests/chrono_value_tests.cpp": "8e917298f6d37eaf2ea36b0b590d12ec99c6c543c3b66e80a4881a5bbe450dbf",
+    "teaql_core/tests/mutation_model_api_tests.cpp": "a7229ae1573f5f042192fbcf8104f8225b5119c7a4b5447b42805e659f8d917b",
+    "teaql_core/tests/smart_list_api_tests.cpp": "447fc304cd8b9eda55d2da2523d1d0947c38197ba09daba50a1d483188b48cc8",
+    "teaql_core/tests/compact_row_api_tests.cpp": "c387fc0579c319d593292f209b7eca8ce6ac4e2836cc2520b073316d4232f4fb",
+    "teaql_core/tests/request_search_tests.cpp": "689f7accb529b6da085958f2887e7d601290dac08c328acc08fb93c61072663f",
+    "teaql_core/tests/core_collection_tests.cpp": "0b2471ea402450be47d3b41a78363a2fb07158b5ceb18a8b66000b1225d32d8b",
+    "teaql_core/tests/request_api_tests.cpp": "45be21e9f5dc63f4bc0080677baccab2c5bed5ec78342eae0384b323544d286c",
+    "teaql_core/tests/datatype_debug_tests.cpp": "d06cce15ce53fa8dc9d2a8b847c81f6331c0fa37d13542d1dca66576d7a4c1ee",
+    "teaql_core/tests/core_graph_api_tests.cpp": "4e530bb6aba51f9d2a1788d2d78766ca9906e9f50e52b37ed23f5e1b42f6dc42",
+    "teaql_core/tests/entity_expression_tests.cpp": "61ab40436d488141c8b5abcade641654780dd9f30dce15632d6ac6b64ae99f42",
+    "teaql_core/tests/base_entity_api_tests.cpp": "0841ec8c94f15b21a9a49fb61729a2bf833132dad621589647d2f02ecb105df8",
+    "teaql_core/tests/model_debug_tests.cpp": "f8512290d66fd241c8ce7669e4780aac3b372a7163d59ac7af6f3776ce01865f",
+    "teaql_core/tests/presentation_api_tests.cpp": "dcca51782d76668ee795c0148c486119d0f1f9e18f5a5776e118fbe5cdce9244",
+    "teaql_core/tests/business_id_tests.cpp": "96aaf05f583e2cb8b9d4d01481143aa242dc473ed16cc1f08b940d054a07d0fd",
+    "teaql_core/tests/value_model_tests.cpp": "8b8c2fe83cefc7c6be8427ab172e416264730502b194ad7b27155402e2c2887c",
+    "teaql_core/tests/core_tests.cpp": "736ecd69fda3af642e8493b704d456cc886ab9594bc5a4c7f567774bd6494601",
+    "teaql_core/tests/core_model_tests.cpp": "bd67dd8f0ecf05743e60be9c403070517996ae0904c3c59eabd48845dc714f23",
+    "teaql_core/tests/meta_api_tests.cpp": "3f72bcc40f71e4c6a9fe1e85217b95f47d9a3f4ee08683983251a9f8dfb94175",
+    "teaql_core/tests/entity_owned_api_tests.cpp": "00cb71cb5749d77016c4e96b16db31273789f14cc405480476123de9e484c86b",
+    "teaql_core/tests/eval_tests.cpp": "7f86bdeb8ed7a474f817d577c1efcf8b84d362ee7bf384ed8ac2cfea524da0fe",
+    "teaql_core/tests/entity_registration_api_tests.cpp": "b7514ceb48114d91b00a080020b59cab78a6e058b531da891ffee8ea8530be39",
+    "teaql_core/tests/request_helpers_tests.cpp": "93626894e2f8645047734c2f4192fe468cd6bb9951d2caae38550137953727b3",
+    "teaql_core/tests/query_api_tests.cpp": "d67346196f110a1b90331bc7e8884317ca8b69bb13200408fc5b881412b1c690",
+    "teaql_core/tests/presentation_tests.cpp": "e538c1668512aafd0d2ea39fc5556aa97dc987a9ce36cefc402f7e7427bf436d",
+    "teaql_core/tests/safe_expression_api_tests.cpp": "99b1b5f5a4528264f95616a8835d1e00f70439657e34fae91b388067955f3305",
+    "teaql_core/tests/decimal_inline_tests.cpp": "bd8f29b1586592aa1aaf4fcaaeaa63325062e792d5e8e1ad9bb27351367084c9",
+    "teaql_core/tests/timestamp_api_tests.cpp": "c810e6c2d202389c5e1e22223d1eee19950d64b3923b459a0d11945a574b7470",
+    "teaql_core/tests/entity_debug_tests.cpp": "04c0f75b82cfb63a9133ef1a773bd6787f2e01dab2f558bbb599a1857b50782f",
+    "teaql_core/tests/value_owned_api_tests.cpp": "eb03e4f21b7067791119f8b3cd48926893d127c1bfd7147fd8332b2a3fc78017",
+    "teaql_core/tests/core_api_tests.cpp": "22906126af4d02062d0773ea0cc66a7a58927ef667d42353f83f039e7cfe3fe9",
+    "teaql_core/src/query.cpp": "d3dd182c56c3e500c5e94596a916ac4694692948f52a52db09186830ad2714dd",
+    "teaql_core/src/request.cpp": "eaaf6f1436b22854c6f074e83fd7cb702a7d557538cc3cea55171142ceea4f1f",
+    "teaql_core/src/xls.cpp": "1b522bc951ba817c76f68fa9e9deadc38483a1de1f76e778d93f49ccf9510f49",
+    "teaql_core/src/expr.cpp": "1f50f1682a09dacb78b2d022d71426f0a9891426c8e54a346b11daee76d72410",
+    "teaql_core/src/core.cpp": "32e870b688c98e0e04df5bfd8c0919ac4343898ea1e589f95161712f9985cc57",
+    "teaql_core/src/debug.cpp": "6d4097bbf2246d0e71572cc72142d8ef8cadd70dd05b33c6d620583338600557",
+    "teaql_core/src/lib.cppm": "5c925b1f1f691e4b8aa8b118cf9116f06cb405048aa70622fcbcc806e8f45dbc",
+    "teaql_core/src/time.cpp": "511a3e356d348c9f66f48aac0bc0ebcf8b69556b52b7a02f0bef0354918aa9c0",
+    "teaql_core/src/query_debug.cpp": "987b14100950beaa99ec6345cd729223a02d3915263bfe0a28c1169bae5dd576",
+    "teaql_core/src/dynamic_search.cpp": "685b412936a8cb1c106a776734dfa9f16a3bb17a25b06a5c9cf51f3bea633cbb",
+    "teaql_core/src/business_id.cpp": "128492b2437195fb5244838d27b2bd8a333bc12534ba23e364c8853ce48ee0de",
+    "teaql_core/src/json.cpp": "15bf83102c29a27a142b90d9fe4b08fb43459cc46e813380476ee8d41fd65c0b",
+    "teaql_core/src/decimal_format.cpp": "df9e0a12dd9f077012d8cce0582d63c278757b232fc9b5f3477ca4fbbb972cb3",
+    "teaql_core/src/number_text.cpp": "1cbe40cb19a70040b16ffc024854a748f34f15992d2e77de7a0078fd74ce300a",
+    "teaql_core/src/row.cpp": "4b718f0e56712c28cc8c6549cb5fd954a0cc9608b69b586e601ff08a61fbe175",
+    "teaql_core/src/decimal_json.cpp": "b8f0536d595581b50957903f56b494f673e6618fad1cda3c96ea4c7593cad081",
+    "teaql_core/src/decimal_arithmetic.cpp": "36e6264eeca10e61060a67ea4d5558e288d54f01a8b066acbbd7925746fcd0d0",
+    "teaql_core/src/decimal.cpp": "71c6035d9351db8e795af35fc5c178b34c951430085693f38cf479ad4faa1f52",
+    "teaql_core/src/web.cpp": "df0044ccd0dce758c37b11d4ed89988e1104d99da151c963344f0f9d5c6dd5da",
+    "teaql_core/src/entity.cpp": "00cf4903d3eaac96e76d34f6937316444b3945b7481faedc762213ed16df76ad",
+    "teaql_core/src/aes_gcm.cpp": "9f8b0492871e30fad3d91ad8565eaea787034d5afc4b407358aed1432462c30a",
+    "teaql_core/src/value.cpp": "ad2f2b56b1dff4f03a356dabf2ab3b35e21069b51459a9f14b6d4030f208df71",
+    "teaql_core/src/list.cpp": "8222f6ffc6608ba70e6209dbb299e34689db45b9c50447c4eed9c15abc1bb4c0",
+    "teaql_core/include/teaql/core.hpp": "c16d5bca2a540d474f52295bfd39468110bd6d577df790ef304197d6c08db485",
+    "teaql_core/include/teaql/core/mutation_debug.hpp": "de55f402ab5fa1e7bb99d007e9f286fafc8287fcfecda4904c14dcf5ec67df1e",
+    "teaql_core/include/teaql/core/mutation.hpp": "8b2b502b5dfdaa9fbec9e0246e9a778263483866b9e0e3c715c29643bd5effef",
+    "teaql_core/include/teaql/core/web.hpp": "2ea9183dda64dd89eb3e1eee13fd7ddd1b486ef44e302b419d4513788d80ff6e",
+    "teaql_core/include/teaql/core/chrono_value.hpp": "c457a4e4dd91be5d4d4e356eb5a161c6f8526c3057f8720750d74995b531e81e",
+    "teaql_core/include/teaql/core/entity_graph.hpp": "93f11f25c1d4d18764106455357714a7aa18b7eecb7ff09849848d14f8decf30",
+    "teaql_core/include/teaql/core/decimal_json_error.hpp": "7666cf7932ffaeac5562079d722af744f2784615e64ecb93f154b9fec5abdb52",
+    "teaql_core/include/teaql/core/decimal_format.hpp": "72b837ce13a6c7dc6c09341bbee9a967ea6dc6d6823e2a640116d317c516c242",
+    "teaql_core/include/teaql/core/decimal_inline_string.hpp": "9320b55dc9fe0db1fc044533cb3f596b7770829930f6f36246fce13c24509b43",
+    "teaql_core/include/teaql/core/query_debug.hpp": "d260ff983ec557c973abd248547407ef38890091c9abaf5a42563e14d078b715",
+    "teaql_core/include/teaql/core/time.hpp": "388915bd6f1166671850b5f2f05f711d2203f8b075c1ef5c7d53719882661ed7",
+    "teaql_core/include/teaql/core/dynamic_search.hpp": "267ebcd756feb992d56a16f5208742106dd87a68169d46ab5eb21ad9cac168e1",
+    "teaql_core/include/teaql/core/business_id.hpp": "201bf6248a441e162963c8b26e24f2992fac9aa6f9f0ad11a6a115effe61453c",
+    "teaql_core/include/teaql/core/business_id_debug.hpp": "2425542d42b7d46db47b84aa26c31a8d273667bff3f6914de803485889341481",
+    "teaql_core/include/teaql/core/request_debug.hpp": "f05816ada7711ce6f590303fa9fa3f913bdecba8c2d1a61af66839eab20c49e9",
+    "teaql_core/include/teaql/core/decimal_error.hpp": "3dc7974a607626a54a34df80733d47583986e165fc2c95277f48da9ea2b70b8d",
+    "teaql_core/include/teaql/core/safe_expression.hpp": "d817867f54a080ba215fd8c9289613926482d50cf9a49b47268d950c4236e2c9",
+    "teaql_core/include/teaql/core/result.hpp": "e66af5fc4e28c1c2eac25b0ab26909cbb1e980118fd53fb78896e29299930ce1",
+    "teaql_core/include/teaql/core/decimal_debug.hpp": "545bfc8ca939d4e5b715298c1705580097d64fcf83a082cc681b668e96199e3b",
+    "teaql_core/include/teaql/core/debug.hpp": "9f949c01b20c037dab68f64d9c76f758ad9f5ea7e80269c9415e80997f822c46",
+    "teaql_core/include/teaql/core/list.hpp": "631a3ba6b1c1b7076d3d10cef94b714f0b81a9da50697b38da8ba9deb31b51e3",
+    "teaql_core/include/teaql/core/entity_graph_debug.hpp": "0d6c723675f99c7eea7337bf63dbc7a7e854ec9cf9be1482a6b2b926efdcbe66",
+    "teaql_core/include/teaql/core/query.hpp": "2d10ee85449ec3aaba444beca24af617b88bdeb6f2ea3cadee7e676dfe227d37",
+    "teaql_core/include/teaql/core/serde_utils.hpp": "32080fc65b92314477b7f087c28bebb3eefb27269ab54fe7821492b0763c66bd",
+    "teaql_core/include/teaql/core/request.hpp": "c05a74323cef90d816381c1c81daef6e5be705d05bd121652efa8c6cf4cc5e12",
+    "teaql_core/include/teaql/core/system_time_debug.hpp": "a5a236e7db4ab36959185cf84c5594fa81cc738198965eecc0f02325a8ddf2c5",
+    "teaql_core/include/teaql/core/dynamic_search_debug.hpp": "b1f61219b3e35fb413fc8af9fa06a83ea79eb4fa610a50dfdd47e97f063b0ce8",
+    "teaql_core/include/teaql/core/eval.hpp": "269b18118666106047d21cf09b98ee9c7fec17d18497d7ac290a26fc44dab80e",
+    "teaql_core/include/teaql/core/system_time.hpp": "e90df16cdfda9916d5a7404d4dd27fede9b6b7012c98f9ec32230c3463325562",
+    "teaql_core/include/teaql/core/value.hpp": "b3d217097df0b71facbefbbed21888bd07e473e9851572aa24a5f28154d43dc4",
+    "teaql_core/include/teaql/core/json.hpp": "8f8e08a0a45fd78674858e48944a28075b7d7860b7f601d75557d9ec07de6efe",
+    "teaql_core/include/teaql/core/row.hpp": "e43fc2161c19c7050f62d95b3b9b2251d82d1a0dfe767a651b72b2d0419512b9",
+    "teaql_core/include/teaql/core/meta.hpp": "91fe6aef8df6ee8974773ba40c999b357b255b44f9ddf830d4c11f3dd465d63a",
+    "teaql_core/include/teaql/core/xls.hpp": "d206e00dc8f8edcb7da1b9482bbf1657ed41bd3dd7af0b72d3d657761034f465",
+    "teaql_core/include/teaql/core/trace.hpp": "b56cceb572ddd6a7467e97386f754d9c8d55ee75a4f5e174ac5e54b2dbec971b",
+    "teaql_core/include/teaql/core/meta_debug.hpp": "d38332b239586541a0163b67480b437dfb2559de9396630179be5fc43e255f47",
+    "teaql_core/include/teaql/core/model_decode.hpp": "bfd5d7581ddddd6d5a2a32fb1a7bd7d3c9bdc6a968dbfc471bf117bc9a897255",
+    "teaql_core/include/teaql/core/presentation_debug.hpp": "214fba997ea01d5c0ee17949b0e9485b2438b83a6a9c552e03099d37079fc8fc",
+    "teaql_core/include/teaql/core/entity_debug.hpp": "c0b408e2dfe6ebb45b669d1b2afb3ebceaf9ad29c716339179e5510729630eb7",
+    "teaql_core/include/teaql/core/integer128.hpp": "7b750e916ba0a51f3c8f02ef89653331120989fd38d2b2b94ca899092aec6e66",
+    "teaql_core/include/teaql/core/entity.hpp": "9d33ee5d556dd0d0145d7a09d3c1dfceef842f797de5a3258a74717cf92c4a8b",
+    "teaql_core/include/teaql/core/decimal.hpp": "f6035b2f2aa1e48d1d411386b5ebbf12d506131ce508f9febe00379fa6789847",
+    "teaql_core/include/teaql/core/expr.hpp": "8c1e3bde2e57ac11376b2b4192c63f32942a3accf45f7dc0567e2526ea29b040",
+    "teaql_core/include/teaql/core/detail/model_json.hpp": "ea8b72e87c94d9ca87b91693a85b63f02733f5016186bb972c05e233b37e77b9",
+    "teaql_core/include/teaql/core/detail/sha256.hpp": "2fc1f54aa1a487899daf0c5c79c27548e40a919469342a27d9ae7f5c69c23c3e",
+    "teaql_core/include/teaql/core/detail/hmac_sha256.hpp": "6bf818be1711e119b50ba7a230979d8b3221061df844bd35bade5175aa0a41b5",
+    "teaql_core/include/teaql/core/detail/query_debug.hpp": "7971b70728aecd99d05e0228dab0b2d5887f9cd167b852a270f9c666e10eb09e",
+    "teaql_core/include/teaql/core/detail/uppercase_tables.hpp": "7d61c29711c454de5afc5d9513268826de1ec4023c3cb4d1d2f3caea61284cee",
+    "teaql_core/include/teaql/core/detail/language_case_tables.hpp": "6a85b62fc1ae9e38be7eb2c8d09d0a29d6691df4726b821d179fa6e6800f8333",
+    "teaql_core/include/teaql/core/detail/number_text.hpp": "e72959b9f2a4eb18c781f974ca6ae7fdb786aa39fc9455a66942d508e6b00800",
+    "teaql_core/include/teaql/core/detail/debug.hpp": "f0747789dc600a6911b25cdf5f5102e1cc23ef544b611ae6a31761e0eda79154",
+    "teaql_core/include/teaql/core/detail/bool_vector.hpp": "7dfc82a54618a38eb73020e274cad53c28550a0c3d7c14c0601b2e7161e918f4",
+    "teaql_core/include/teaql/core/detail/text.hpp": "234b2878d806da29166f95d9f925f05a5985e62488b6955824edc3d6b5c25f21",
+    "teaql_core/include/teaql/core/detail/aes_gcm.hpp": "631f4e65e3552a13ea461f76dc62d23573587d915b551659b6e3c80faabe88fb",
+    "teaql_core/include/teaql/core/detail/debug_escape_ranges.hpp": "89340d2505e2dea776cc7884b40f8527f4fb97f3fadd3334bba154ef333a6511",
+    "teaql_data_service/CMakeLists.txt": "d962bacef7bf6dc7714f4796edf56fed0380acbfb8d0fd08b6f15b8469cddc25",
+    "teaql_data_service/tests/system_time_arithmetic_scope_tests.cpp": "1947406fc9316456199a3c03eae6ac3d9d1833987ad824098aedea2fcf9494c8",
+    "teaql_data_service/tests/data_service_tests.cpp": "440844878c09df76767199d375df152b42b7b5c471c1592842ff7bbf3189ed3c",
+    "teaql_data_service/tests/data_service_model_tests.cpp": "3944283c77323678fb6714e04a74194da1ad214317330eebc84c5936217b60eb",
+    "teaql_data_service/tests/system_time_tests.cpp": "06831bfa7b3bfda70e87f247e9ced0ca7f902e9094d6e6bdad200bec34e56c40",
+    "teaql_data_service/tests/sql_projection_scope_tests.cpp": "33af7a5d7da87bb85d8acbdb4576cdf2e396fa91f2158f5cee4e95482d7fced5",
+    "teaql_data_service/tests/data_service_scope_tests.cpp": "b624f15327ba8d38318451db84b393edfa11f933a57b9fe32ac3c04a842f3a18",
+    "teaql_data_service/tests/executor_tests.cpp": "05795d73e07d4570586d3fd6c5876556946c8cb23a3710bbde1a5fe03f1b29f7",
+    "teaql_data_service/src/lib.cppm": "e637ad4feb4f873b85d84ec6ba103c0d2a71f87f5ea7d9df33835f792826076d",
+    "teaql_data_service/src/sql_log.cpp": "0b7e0311f698ca7118c417f3d82b46924a7ed73931e076afd170417813623835",
+    "teaql_data_service/include/teaql/data_service.hpp": "09440285110a0c7dc08cc45e1c7a1affbd709e855bce84c4b2d27bafc4b88999",
+    "teaql_data_service/include/teaql/data_service/types.hpp": "d31c4a9fabaa0ecd63de6c2ed9bf759a788eb21ceb2d8538f7e36bce60d2c624",
+    "teaql_data_service/include/teaql/data_service/sql_log_debug.hpp": "10ea99f839044178e9da428d90d6f59f8fe8460d4b229fece3a930e2b44c7e12",
+    "teaql_data_service/include/teaql/data_service/model_debug.hpp": "3f664c90e2fd5c0e3cc529b624658f134f5aecb0a76b02e710240c087a698084",
+    "teaql_data_service/include/teaql/data_service/sql_log.hpp": "58abb03b0cb4f0534cf7ae4a054d064370d5ecd8061941325b81d654e52e3252",
+    "teaql_data_service/include/teaql/data_service/executor.hpp": "4bf94d5ab7d9ac19b700bf9799beb9c1e2dd57aedf809ffc54f82813ca073ff3",
+    "teaql_sql/CMakeLists.txt": "b6803458b46300d74c7863b790f6f5675693e5c0b3518b3fb0471ff5c5cc04c2",
+    "teaql_sql/tests/sql_model_api_tests.cpp": "e753880ee5739e48ee3e45f6d74668de3da41e77ab7485f4ad3b0e98d61745cc",
+    "teaql_sql/tests/sql_dialect_tests.cpp": "36d38812fe3a6497023ccd15a1626e399e2cab1afb01ec732a36911cd9f7bd32",
+    "teaql_sql/tests/sql_transport_tests.cpp": "b5fc57d341397f93a52bd7b6860e165a11efaf1f46f98aee090d716bdb61a5cf",
+    "teaql_sql/tests/sql_query_tests.cpp": "17cd59e5b8ca7da5131c0fc87342a324ad64b32514a899904436eb312978817b",
+    "teaql_sql/src/mutation_execution.cpp": "4760d384fffbeee55e0d05cf57554ca05bd61f6eb9cc2be9fe6bcb7ae1e2e472",
+    "teaql_sql/src/types.cpp": "dab7c4e97a3d6d265f9a89d24f368738f0822f0a3a90be9090c8d943500bb83d",
+    "teaql_sql/src/lib.cppm": "c9538390b61368961a802dc9b7f67f8f32b0c150dc2cfef9e42b4ba3df163d44",
+    "teaql_sql/src/query_plan.cpp": "c0059b907dbc7799f21aac7b2f674731a0011bf56dd672bcfac27360e203d8fe",
+    "teaql_sql/src/schema.cpp": "01e97bd0f1f1c269cadb2de35c827ebb0a1f92984b67a8bb202be1db7edd68f0",
+    "teaql_sql/src/diagnostic.cpp": "11978729dac1fb05a1453ec3339544a86abd313d110aa7c71dbd444c2506ae27",
+    "teaql_sql/src/mutation.cpp": "76618ad312b7c45c81931965b436cadd3ca750bb715ce0f4713c3878af623c96",
+    "teaql_sql/src/bindings.cpp": "9bd5c02936a7116f5c829792fdaa1298f6d00a5a32e5af26d3d04f8454280e4c",
+    "teaql_sql/src/dialect.cpp": "0e8f1954f0c662e96c08578e8960e0836829369058707b294bba7b98c304355b",
+    "teaql_sql/include/teaql/sql.hpp": "fa3610fe59f1f108d8c4933c178c1973ebf5a646582010d1a277817b50885c20",
+    "teaql_sql/include/teaql/sql/transaction.hpp": "ea9eeecae1ae755054fcc83c04b0511b0db92e192e783ac8dd07e4b91021ad56",
+    "teaql_sql/include/teaql/sql/error_debug.hpp": "0245b2c5fa0bd7b65b1913f6f81fd756fe0f06a04ebcde7bd934a103e1b9e061",
+    "teaql_sql/include/teaql/sql/transport.hpp": "940ad14dbef511e20d64580874ec605a5a172bd4b6c4e2c9739faa57d666595d",
+    "teaql_sql/include/teaql/sql/types.hpp": "5435e230411dfd0fc3fe4f3ee5dba719149f4dbf870b595d1c8e3c92c6a045b7",
+    "teaql_sql/include/teaql/sql/model_debug.hpp": "3dcba1ef6e203dae546e57472d849bc7d59e95c09c502c31760244751f854cca",
+    "teaql_sql/include/teaql/sql/dialect.hpp": "5c59a29f3f45728faf537a3202189a5debd9a80ec5bb54fac4b62d866884ecc9",
+    "teaql_sql/include/teaql/sql/bindings.hpp": "ad5fad57f151c85f3888a4233c741ed653dd7bebdc21976ba2801fe310dada7a",
+    "teaql_sql/include/teaql/sql/error.hpp": "13375d7f6789a03360186913d2556f08f3451d455db70d7abc72f5bf596e89d4",
+    "teaql_sql/include/teaql/sql/executor.hpp": "9fed087316c5c53700e12032a1a7e958064e5f041161e67ab92edd9d9fa54517",
+    "teaql_sql/include/teaql/sql/detail/stream_execution.hpp": "9c399a24f0a5c6bb89b71f98139f96a376206abe70a4302689f986a66b608483",
+    "teaql_sql/include/teaql/sql/detail/diagnostic.hpp": "4dcbb498f20f8206ef0ac27487f9ce06364b2cba8f638ac543a6bf2a73bf9cce",
+    "teaql_sql/include/teaql/sql/detail/query_plan.hpp": "5833ece628a6edb7bafd165dec33e3545f0c17f64a71907e884c2bed2fbe5fff",
+    "teaql_sql/include/teaql/sql/detail/mutation_execution.hpp": "e997a98c3abb455462fbf006ba773f0d007bb2baecd21aa85af956fab56a9890",
+    "teaql_sql/include/teaql/sql/detail/query_execution.hpp": "370e9a18684a0fa97b0a49fbd8ffe85e0e1c2ee6b0035f38e81999057e40da0b",
+    "teaql_runtime/CMakeLists.txt": "a5c81a4e233f8baf2bb06d80ca92e1ff0c1090a2f7fa4cf1b112d859f8eaaed7",
+    "teaql_runtime/tests/locking_tests.cpp": "69165e3d2641d4fb63fa43a48b9750c35553c6defff5761e2e899012213cafea",
+    "teaql_runtime/tests/runtime_registry_tests.cpp": "a6895c9b14e5e486b25e9ff112d29d015e84f4716e099cfbe7d30c4f374064ed",
+    "teaql_runtime/tests/graph_fix_tests.cpp": "b3c0af775d2d3c0af818c21be50f21bb704483bd43fa76bd8ef5271f69acd9d0",
+    "teaql_runtime/tests/context_logging_tests.cpp": "3baba41a517965dfc32c47ecbcbdaca0108ec60aba57430ba165e3e7e3015920",
+    "teaql_runtime/tests/typed_aggregate_tests.cpp": "b6402da4f64e3c2a74f5a41b9c91db54b923da7b89ed38df8140d1d4bfd10b9d",
+    "teaql_runtime/tests/reference_model_tests.cpp": "a88619e867fe0fe8d68636e82f03fdb103136be00ebad0084f50704bce34cda9",
+    "teaql_runtime/tests/ledger_plan_tests.cpp": "8cde45d4395e6f73698530d3145781056cd6aca6d5fe87d4cabfc650c33578be",
+    "teaql_runtime/tests/runtime_namespace_tests.cpp": "cd3180e00225a81f03a1119ede6d3d1ba1ab438413947a258c44e0a77a7d92f5",
+    "teaql_runtime/tests/sql_move_only_tests.cpp": "65bc7f9a35b2ddd2628e846f1fe5d58f91942e37f3a03874e5d1db41beca760c",
+    "teaql_runtime/tests/context_defaults_tests.cpp": "9cdba99e449ee439995ca8bfabc3ab72dd91de056f553c3e8a998d91e3411557",
+    "teaql_runtime/tests/entity_runtime_model_tests.cpp": "2398a5c391d86610011c553a26b4c3279a029d4b84aacd5105108be9e9af1791",
+    "teaql_runtime/tests/transaction_move_only_tests.cpp": "b88daea18d1e11cf1a61bdaff87038cf964a5b9612b9534b07d00ca7e46c80fb",
+    "teaql_runtime/tests/runtime_completion_tests.cpp": "5f2e54037ec640efe23d09b67731433af8260cb36dfd18987f9b9421abff104a",
+    "teaql_runtime/tests/runtime_context_tests.cpp": "2ee0d929bcc7b9317da124a314c0311e74483a99792d6a9171ca9b57d45d8e02",
+    "teaql_runtime/tests/generated_support_tests.cpp": "8590b4528507ffcc4c88a22532a1083bb939002a16f8d9c5d902c795107b8267",
+    "teaql_runtime/tests/i18n_tests.cpp": "3de8f0ced0e1799a8dd087afaffa2631f2c023c79c1ace3eb4f8fea3e053c465",
+    "teaql_runtime/tests/check_model_tests.cpp": "e3b99df26a17b862cedeb3838f17c8eb31a8753b14c8a379523f31f68294ddef",
+    "teaql_runtime/tests/reference_crypto_tests.cpp": "d88213298fe8bd541905a75a6c1401f7925c485fbee83bd63d02625f45ee3e09",
+    "teaql_runtime/tests/runtime_callback_scope_tests.cpp": "34a43f701fd738b9040648e4feb76437eb97de12466f3d0c4aa496eeec2a0c26",
+    "teaql_runtime/tests/save_preparation_tests.cpp": "5a42ea2af8e9bb1169b7defb59cb0e1f450db2b72a0df6763071463ae80c2b6c",
+    "teaql_runtime/tests/context_provider_dispatch_tests.cpp": "56414df5917aad8b3f9c215c11206c2b2caffab18d1474f4cd96009378196c21",
+    "teaql_runtime/tests/graph_node_command_tests.cpp": "50ce07c67294d731d28adeb012721b823e35b593aa2c09be2d65df002919f500",
+    "teaql_runtime/tests/context_provider_borrow_tests.cpp": "cf88578de77a56fda1f9ef10a95516c4ac504ffc9ae8871634798207f74f71c0",
+    "teaql_runtime/tests/data_store_tests.cpp": "4e422ac067cefdc40b68729677b437ab9c543f711881b72352fd5cf3745a93f8",
+    "teaql_runtime/tests/round_trip_reference_tests.cpp": "fe10b31e20bd0240c597dcc5a7702b46e3b230dd30c38a9a736f500dc0ae86d0",
+    "teaql_runtime/tests/transaction_provider_error_tests.cpp": "304778b674fba0d70fee3e83e8a4947922928102328d0539377a7dd7e7caa5e9",
+    "teaql_runtime/tests/mutation_policy_tests.cpp": "bf26fd868faacde2b3bece4816495205ef56a7d52ad6315f91df1d0509ed9cb1",
+    "teaql_runtime/tests/runtime_foreign_work_tests.cpp": "a9b40e1277a134db1e66e29e5d9183aa1d67e8fcec8e2f816da2339b6ad6d7bd",
+    "teaql_runtime/tests/error_generic_tests.cpp": "6ba444e2b1b8dd48fe6d4f3fc029d4f7a6c473e9461ade66dd9f5380d92c50e8",
+    "teaql_runtime/tests/context_reference_tests.cpp": "6dbe77b7a3f7f6bf7361b5467a8d79870c05412b158513c7b7d7337f64de18ad",
+    "teaql_runtime/tests/telemetry_tests.cpp": "828a77a050f9bf86bc476449057259f8c14c7204ea00a78b7d2ddf7a97ae6910",
+    "teaql_runtime/tests/context_memory_tests.cpp": "27830b2dc1a4db1d2d6d61fdfbb09a51b647f2beb58e597202d165d312d84d2a",
+    "teaql_runtime/tests/event_model_tests.cpp": "6a79910005f9d44c16b1aa51c588e35749778fa0455811bf8a4b6dcb3f0f233f",
+    "teaql_runtime/tests/query_store_model_tests.cpp": "3693ae314bb14685c0614fb05b6587ea4767abdbd83513039df1777b86a25bbe",
+    "teaql_runtime/tests/runtime_move_only_tests.cpp": "557cc1123a04cdd06bd91f3272a6417fa28c018e41acb4d357327f53696d33f3",
+    "teaql_runtime/tests/runtime_graph_tests.cpp": "909c9382b14d3c5b8999a82ef4b833e54250cb0e1fdb97e2f8a1e438f113d01a",
+    "teaql_runtime/tests/log_formatter_tests.cpp": "68433caaf3f9ad8e81903ed0e32489641e758af6e4b0536bd637363305812c99",
+    "teaql_runtime/tests/entity_runtime_tests.cpp": "8a521ce71264f10585ec37d2038954dffebd3197738fb43c864d8d197b074c48",
+    "teaql_runtime/tests/runtime_graph_model_tests.cpp": "5326bfe00923aa5792dabb1b13085f09683d0cbc9d0bf4730fb7c8bef1cca422",
+    "teaql_runtime/tests/runtime_business_id_tests.cpp": "9135ad64aa209cf712cce63529b3106e8ea5746d0b8a79186ae6dbffd5cdca8b",
+    "teaql_runtime/tests/entity_reference_tests.cpp": "4a0b244b14bd82f0feb6938f3698e97f65e67e8eda966b54207d66364512dd09",
+    "teaql_runtime/tests/schema_runtime_tests.cpp": "6b9bb549ff354629374f70111d24cf9b14d99221e9dc7701ea519a5e2d024936",
+    "teaql_runtime/tests/log_manager_tests.cpp": "5589258ef13328b349d361b9b1a5c373ebdc47c19e599e0ec1c428e25e294afa",
+    "teaql_runtime/tests/id_set_build_tests.cpp": "49438b09ee3187717a2fe3024713082725b7d349f481efec21d11d73e83d793a",
+    "teaql_runtime/tests/unified_buffer_clone_tests.cpp": "6a887d76eedcf37b064dfd95256144f54860fe4269f8a68edd11ce6ccf377ff8",
+    "teaql_runtime/tests/query_store_tests.cpp": "fd6773ea754f5ef7b6567096170cb0ea6c34f529cd52a511669e4328f6e58946",
+    "teaql_runtime/tests/runtime_log_tests.cpp": "90519def1a21a0d1474b1b1aca11a236b8c15e5d0568f5c211ab550a352c46e6",
+    "teaql_runtime/tests/log_model_tests.cpp": "9ef9e26560b500f2af46c1f5b3ad36f563c816d76d3dcc68011a3caf4f015f5e",
+    "teaql_runtime/tests/checker_tests.cpp": "509150ede44a8eab5562526804dcbca9e52eaeab352e0019f0d14c51c6103e39",
+    "teaql_runtime/tests/context_event_tests.cpp": "f33f9b41f734f9d0312681cdf3ceefddb43ec68108ebbbf9dd10b848e049e8a2",
+    "teaql_runtime/tests/business_clock_scope_tests.cpp": "bccbb9ebbc8f4011514eaf8a0f177e2369080a9472e5d9c91af0d5629cd54dbb",
+    "teaql_runtime/tests/policy_model_tests.cpp": "94ec58f6c6140e84f3bfe53cd3bda0610bee85619abd097d99025443f83845c5",
+    "teaql_runtime/tests/audit_event_tests.cpp": "01064a8468776b4c24c7923f709c40ac706b9d170a90efe27c81e20de1ae3e5f",
+    "teaql_runtime/tests/runtime_id_model_tests.cpp": "c44aeaf78d110da8e2067eb617015de526a11e824cbbd425dfd4c8fc1baf2d9b",
+    "teaql_runtime/tests/runtime_check_tests.cpp": "115d6e29fcce29a8f98927b02d557ade28fad67b0f7eb8604880c449597724ff",
+    "teaql_runtime/tests/context_query_tests.cpp": "18decac2f317f062bbc03003691376eee01b3d90f47216cc4a9005427d8841f2",
+    "teaql_runtime/tests/context_model_tests.cpp": "715acc1f38a09c81634a0eed92077b7b18cb5ccdef5eb6b74f3fc84b69173aa3",
+    "teaql_runtime/tests/query_keys_tests.cpp": "f6746746f0a2d1030c16ce287b092b2b6e7f015ee9f5edcf10792445b4571df2",
+    "teaql_runtime/tests/inmemory_tests.cpp": "b495266fb83e538fc98823f522b5d5d1cc7839100e183d7f09edb6c2b44dd5cd",
+    "teaql_runtime/tests/graph_save_adapter_tests.cpp": "7dbd7bc941ea5da74d5f4ec7126ca37ac2cef476c26f4c0cdd857761c986168f",
+    "teaql_runtime/tests/relation_model_tests.cpp": "ef9edde091ec07ec8b16ff00ee1380a0754d89aadeb4a8cbad2df4806666f1ab",
+    "teaql_runtime/src/mutation_policy_plan.cpp": "1fc4e42ffb44f55fe419a2402f0ba745d8b8842b9d850c9d845c28e737b01a06",
+    "teaql_runtime/src/round_trip_reference_types.cpp": "b2266a63252abcdf400b4005924a9a6edda2d50ebe06e9e40177c27880953131",
+    "teaql_runtime/src/error.cpp": "ccd9ac8edbfc854da9278ddf078429a8c28dec39b5c9e349e0e88cac3f1acc08",
+    "teaql_runtime/src/telemetry.cpp": "0e1f85c9f8752edcc61d1a6e332f74cc7f2da8d6094bf3eeac6485042cbf579c",
+    "teaql_runtime/src/logging.cpp": "3328a9f87f183654d0aae40324fb115bec7bf2399c9999f8d986ef1c5a911c9e",
+    "teaql_runtime/src/audit_privacy.cpp": "e05124bd453d483b9bbf8a8fa3ea791f4e34fb2749567fe4316e7ed4d0862bf7",
+    "teaql_runtime/src/lib.cppm": "8b3d469d1069a428c41abf4e9537a5bc4e2fdf37f6c2609e2abb057b426a89e4",
+    "teaql_runtime/src/i18n.cpp": "d1577cb707c5e1248c3c6443c80483c695bda82bc1673840a6d575eff710eb87",
+    "teaql_runtime/src/log_header.hpp": "30b611dfddfbd6ad14aa55e8bcf152884480118c507debafdb5f71026404fbd4",
+    "teaql_runtime/src/log_manager.cpp": "3730f71cc369789c208cf65b58e534aa7083e0bed1884c7d6e9a95233172f458",
+    "teaql_runtime/src/business_clock.cpp": "90e23c19a3278add7226674d0e98992f37d67b80f55115571cda55ec6ea60fe8",
+    "teaql_runtime/src/event.cpp": "4a5104c8283c697ac5796c11f4a5a46377ec66d9ef732f7b93a1e2069b55cea5",
+    "teaql_runtime/src/data_store.cpp": "58f24f9be6cdef6eeca3aaf946e3ffce5f1d2d69726b5d22bdad959cd22c1a57",
+    "teaql_runtime/src/entity_reference.cpp": "1a403a7e92afc90ed11d591b5fbbfb2dd44ed5f75e28c2a4a324782ae450340d",
+    "teaql_runtime/src/schema.cpp": "0a51831ea53e50ec0c5427650224fbf97a9f3f545ad792272e9daac9b8fecb59",
+    "teaql_runtime/src/business_id.cpp": "48ee79089671cd3371af86712e9f0fd9a9394f0a0c62db1032e97434b3988025",
+    "teaql_runtime/src/checker.cpp": "3182a771d5b63e0d4066a7f0d5c0545171676fae90d59fee145127d41722760a",
+    "teaql_runtime/src/business_service.cpp": "1a68974b443c26d5446590ec960ce96d0074a5df93e7a873b5e79e20cf2b0ce8",
+    "teaql_runtime/src/language.cpp": "161d67f8cb74b0a6fe1520763f791df262e5b68efe7ef7b72a1a320af8c4a56a",
+    "teaql_runtime/src/registry.cpp": "e175869eb8a18fc90fe4b9e7bfbc30b91f86fd97963e6a5b9548ba8ce305c886",
+    "teaql_runtime/src/generated_support.cpp": "130c66aac8be81c2f9cf10db55cfa5a949267262c56b7d899e099ba15247ef9a",
+    "teaql_runtime/src/reference_crypto.cpp": "f6201cf6c793ff460c72e5a611e54809ae508653758b1a18d6432308db5799e7",
+    "teaql_runtime/src/fix_evidence.cpp": "7d819ff952f7b806d811fee06626c97390da4ebe07730fc22bbcb763b72bfdf3",
+    "teaql_runtime/src/inmemory_engine.cpp": "83bcf3737722537bec8a6d16efba3a8d85923deaaac772930860a705a2c366c7",
+    "teaql_runtime/src/graph.cpp": "a5038fd77300e5e7df3a0e11cb6bda6293856e26e0f2c652cf53b42c83362805",
+    "teaql_runtime/src/entity_runtime.cpp": "cf787e4514c3ae556419da5b85c210a0a21d48d059420246fb61365bc13782d6",
+    "teaql_runtime/src/entity_graph_decoder.cpp": "6c607d5ed9738ff68ea950ab5ec3dd6edebbf5c2a35b286fe47a8e40b360c6dd",
+    "teaql_runtime/src/id.cpp": "5a44ab567b02413e3fc1ff2ef697d5ea2758319fe01d749f8ba999e215f3d1cc",
+    "teaql_runtime/src/entity_save_preparation.cpp": "6385da396236099d570a7d09e63707491f16d248aaff48c6ccf8d3fe53747ab1",
+    "teaql_runtime/src/i18n_debug.cpp": "8ae9b67d3be631c121b415054577908414f4fedc1d0af9258110a89ae2a98256",
+    "teaql_runtime/src/round_trip_reference.cpp": "d779faad0c4d343d752210ba0b70f8c0509fcb4d8095ab29d8a20adfab3b9a26",
+    "teaql_runtime/src/mutation_policy.cpp": "c00dd6e522ddc79497f18f240f8854fc31748f65680260802b98a2100a709b5e",
+    "teaql_runtime/src/log_formatter.cpp": "ee6c5cd4cf0c02854d9793a2de7bab0c125514c7c9313c7fc696f0df8a0fcf52",
+    "teaql_runtime/src/check_result.cpp": "e6beca80ea929a171611793bc3d5a743dd30328568d9237639761cbf2759f6d8",
+    "teaql_runtime/src/entity_key.cpp": "5fd77decde105aa70e300f939c0828fb07130383c01c677b85261596aad19336",
+    "teaql_runtime/src/context/root.cpp": "b6c1a54e3e11fd2dd66affd11b61133d0cd8109b9a57167a011f983b3e956542",
+    "teaql_runtime/src/context/logging.cpp": "28c1c8615a8ba421dbf76acbd5bd4027752b9e1e39a06d1cbbb21a2b4ee1834d",
+    "teaql_runtime/src/context/fix.cpp": "4edda1f810f6c7c3e6f75781935c87f88374dafa6b7f2ac041fc898df345465f",
+    "teaql_runtime/src/context/locking.cpp": "bd49f0850d50d3cca6829236bce7296866b477025a2bc893acee23676930aefb",
+    "teaql_runtime/src/context/event.cpp": "a80561efce5ad39415a2fc76605c3113c6fe505d16419bba9493afa50acd1d39",
+    "teaql_runtime/src/context/data_store.cpp": "9c16fc46a480de3a0d7c8caf143a764c263f19d9683c3f056a5459168b0d9cac",
+    "teaql_runtime/src/context/entity_reference.cpp": "65a30d11a0b4299f6206445e247846e88a0f359075f6ad31dd5810543d0bedf6",
+    "teaql_runtime/src/context/checker.cpp": "0e4898634b3c2316bd002c58b6beb803eacdbcda1815fe0c6d4552ae98519150",
+    "teaql_runtime/src/context/language.cpp": "11e64fe089cf0f59375b8e5c2ce95640ad09ef2a1b5e62f37ab76790b76f3841",
+    "teaql_runtime/src/context/pagination.cpp": "9a95bce9994ee93fe44e015eebd8ac7de94e3a62939fb96956628f73be66d2f1",
+    "teaql_runtime/src/context/graph.cpp": "a57d650dde4b4dd185d0485e92d3ebf9b0d03bf8d91f35f65c0c166e4d9f3f4d",
+    "teaql_runtime/src/context/entity.cpp": "a82fc0c7fe8d7e335feefb7760eca63cd56758942b014eec41c27c46e26bff8a",
+    "teaql_runtime/src/context/round_trip_reference.cpp": "8aabb7be78eeb56d528d35c33ffe02774fef7ac52c5cff94983f34840e9c42a7",
+    "teaql_runtime/src/context/mutation_policy.cpp": "b73b77ec4ae0cfdb7a237d9e4bb99e2550e960f3dcd50ace0359e9757668b8d8",
+    "teaql_runtime/src/data_service/relation_enhancement.cpp": "118505002ba948c50a094f23c42d0e7365d6152105a55961e3d5786a7abe55cf",
+    "teaql_runtime/src/data_service/relation_installation.cpp": "48ac918333bd1ed4f6728035d0463f045750820f3262125afa933d67136b2e12",
+    "teaql_runtime/src/data_service/id_set_build_lock.cpp": "e6ac233d2fef30c3f65675471bb3e18e57ca13f1c2cc74876ef61f061549d923",
+    "teaql_runtime/src/data_service/query_keys.cpp": "7b44a607c89087400b02a5a50b67c56cf249e36bff68fcb396e4e9f22e58103e",
+    "teaql_runtime/src/data_service/query_stores.cpp": "fef3ced846f64e3d12311d5b8337780fe8a10825b166758abb5a550c40bd3ec8",
+    "teaql_runtime/src/data_service/relation.cpp": "022c69a7dabca62663efaaa41ccf8f1a69286fd7bb702ddfe3737050635736e5",
+    "teaql_runtime/src/data_service/ledger_plan.cpp": "06d52d4db9c371f07b893f4989b26e5f5c7f5b0f3ce21e5b8a399d07a732d409",
+    "teaql_runtime/src/data_service/mod.cpp": "25127f8b0be6836fc77295d9ec561ff6ca6e83d5c3fcf9ab1ec057d941a8e8f1",
+    "teaql_runtime/src/data_service/relation_graph.cpp": "a03b21a236e16664dca9e51256269fdea79bc4ffb7f6f4e058d4c6c14f8fbb3b",
+    "teaql_runtime/include/teaql/runtime.hpp": "d9e68867ad548193b594a20629d2481b7a57bc1770a644c07800df83ac509d2c",
+    "teaql_runtime/include/teaql/runtime/context_root.hpp": "3b69fb494435003e1d741b34ce5f1dbcba8e2e18a2b8b4a470d9c70f3c61ce4f",
+    "teaql_runtime/include/teaql/runtime/mutation_policy_debug.hpp": "1e24193662def1ed632e2795a5d7d9dc17bf23509dbf1ba46e4d33020d6c825e",
+    "teaql_runtime/include/teaql/runtime/log_manager.hpp": "4c261f20b943d60c036f7560137897da44b428d6bf8fc7af348b8da84e3e1449",
+    "teaql_runtime/include/teaql/runtime/mutation_governance.hpp": "71552256434ebdf7845b2f0d234feb1b55f60b07f273684eaeceff54fdf08f69",
+    "teaql_runtime/include/teaql/runtime/module.hpp": "b3b999161962c875ee285e085b5087c5549ee7d9172c05cf66e8652d1c6f8258",
+    "teaql_runtime/include/teaql/runtime/log_model_debug.hpp": "8372b6fb56044ec2d5b5504c8cc0aabdbaf6af3b71d3aa5fc2b15876025e27e0",
+    "teaql_runtime/include/teaql/runtime/behavior.hpp": "2cf6e730960678f1750c88837396b816baaca9a0967957de0b928e72ff1f16c4",
+    "teaql_runtime/include/teaql/runtime/transaction.hpp": "02fed8f1949f0cf3e4b8fec6c0d674e2a78bd57261f033a015909a9792caddcd",
+    "teaql_runtime/include/teaql/runtime/purposed_query.hpp": "670194b90312a7ef50bc637fb84246dd2fcb4a74fabf3e47e1c1fa4963ec3e23",
+    "teaql_runtime/include/teaql/runtime/error_debug.hpp": "4ef2b3bdf9a89c1bed34b43caca3bf31fbb575c09083a9e09a77fd0cad4835f8",
+    "teaql_runtime/include/teaql/runtime/i18n.hpp": "b5700abe6bab184ce20e234dcfd0dd749361382c44b95913286e9b41d9891f4d",
+    "teaql_runtime/include/teaql/runtime/entity_status_debug.hpp": "5a83c7686f78f81eee29f35454eb2b8c2a2d06dffe18a182b5e3f2116f8ba020",
+    "teaql_runtime/include/teaql/runtime/entity_key.hpp": "893f7b4771ced3112d8a7862f9648aad657ad3f0f1417cbe8a2466cb9b7415d4",
+    "teaql_runtime/include/teaql/runtime/data_store.hpp": "34b2cb1fdf9a1d16f64705c825b7d1fe8e84bb1b58c58b79260747ade9f4f375",
+    "teaql_runtime/include/teaql/runtime/entity_save.hpp": "5ebeda5307140cd1a9420ec7e863734ee8b98e462ecaa5ae0129c21ebdd3563e",
+    "teaql_runtime/include/teaql/runtime/entity_runtime.hpp": "8d1c95daefcf815aad197de461ae9113b1c8cbd7dac19a3c345f781c998a532f",
+    "teaql_runtime/include/teaql/runtime/schema.hpp": "7d15860affaf4d265db1688f49882ddf77cc1687e874bdf6b15d4662bf1d9b03",
+    "teaql_runtime/include/teaql/runtime/registry_debug.hpp": "5c11b07e23da69655f91176033a00c50aaa2362ca3b86908080fc28c616c0519",
+    "teaql_runtime/include/teaql/runtime/id.hpp": "41754c6f576d69fd433782a795dfe527061601d894275c95b4b38ad1c5009c61",
+    "teaql_runtime/include/teaql/runtime/checker.hpp": "3c4a956e0475ea018218afa49ab5602b490495b1ea256bdb598b43404542f83f",
+    "teaql_runtime/include/teaql/runtime/resources.hpp": "ebb2bc190fea700ec383425b48b4ca200b5b58e38bc1840ad2a7c2266abfd272",
+    "teaql_runtime/include/teaql/runtime/business_id.hpp": "6796e3c0011647bad1cc33eabcf7ecce5bc436922152942eb9fbdbd97da89893",
+    "teaql_runtime/include/teaql/runtime/telemetry_debug.hpp": "e841584a95405f1f0e53f7de6ad3e405cf159ddef924c97aeae0c18bf83c04a0",
+    "teaql_runtime/include/teaql/runtime/language.hpp": "54715ced274d8fe0fdcc2f724dbe8656f2b2edcd7c54b43fb3450baf7264ed83",
+    "teaql_runtime/include/teaql/runtime/check_result_debug.hpp": "b1b8ea9330497fcff356e823a05860a8461023a9469a700e934de7645e4e218e",
+    "teaql_runtime/include/teaql/runtime/context_error.hpp": "b85ba6a924c18281fe6842bcb5c39d9d04d440b4d15b589a0b270c0a3880f010",
+    "teaql_runtime/include/teaql/runtime/context_model_debug.hpp": "7bb57ac704f484df7d8c082bbb02271a0944f91fb420f512f3c66b04605cb8ce",
+    "teaql_runtime/include/teaql/runtime/check_result.hpp": "1523d7aa8bdf2248e7573bdff4b358651401ae40fe8ed2ffe053a89bab630a84",
+    "teaql_runtime/include/teaql/runtime/graph_debug.hpp": "3f17a7e11e9410a34529de4784e6a1fcbe41a7279c105a2748d3edf4c94007a3",
+    "teaql_runtime/include/teaql/runtime/round_trip_reference_types.hpp": "7c1204b3ad01b2d81d4ec196b3beeeedb91e892b29b59aee228511b9e92a14d4",
+    "teaql_runtime/include/teaql/runtime/relation_model_debug.hpp": "32ebd53a0b2e803fda5410850489b96d73ba0ea5372e1731c2fabeb3ce24650b",
+    "teaql_runtime/include/teaql/runtime/reference_model_debug.hpp": "3a9f6f08420ad75e8ec9ebead3718a9ef1ff4c66b744383c345c08bcb1e3b941",
+    "teaql_runtime/include/teaql/runtime/entity_status.hpp": "e72f2d8d88557891c8741fdef24c8f1efb1dd2b88c5f8e5a25c8b3625b7bba9f",
+    "teaql_runtime/include/teaql/runtime/round_trip_reference.hpp": "18ea5c199617f274dfd0bea3d9d9704d34714aac141a6c22cf5a18c14076277b",
+    "teaql_runtime/include/teaql/runtime/entity_reference.hpp": "f52ea0bb05c7e7efb35cd984dde94386995e6c82625f3c16ece7b1fd3cb43d2f",
+    "teaql_runtime/include/teaql/runtime/inmemory_engine.hpp": "10a1f220f6cbf2b8ef7a8a480b3b0e21062da423c802e6793adee031a7542f9f",
+    "teaql_runtime/include/teaql/runtime/mutation_policy.hpp": "e16630d879eeda8b73e055062b68f2d99bbccc82a2b84548e024b5aa12e94287",
+    "teaql_runtime/include/teaql/runtime/query_store_debug.hpp": "d37801ca7968fdfe25df0496cdc4ef293f658e51b6e48af27bd8dcab2254dfe3",
+    "teaql_runtime/include/teaql/runtime/logging.hpp": "df4dec50d345bd2e57d37ebd13625e58a96521d45bae52090bd5122e2bedbf28",
+    "teaql_runtime/include/teaql/runtime/data_service.hpp": "e51fd37b79ff4cf31d74b0798b32c9e4d3d6574b3fc1de59454e970c5c6c78fe",
+    "teaql_runtime/include/teaql/runtime/log_formatter.hpp": "489a137ee1b95389805feaa9f13f724aadfab7df69b073358e52c456bda30e22",
+    "teaql_runtime/include/teaql/runtime/graph.hpp": "12fb0fced1db8e143e5cf394003e64428d77fc7b7fffaadb4d614e3ff6f4d134",
+    "teaql_runtime/include/teaql/runtime/locking.hpp": "3f3040f7acc7b364536f7ba6e383bbed19c42255672e3aec552c9295bcfc15aa",
+    "teaql_runtime/include/teaql/runtime/system_time.hpp": "d968c59e2751aef5a1d1ecf5a0941fe0230d29d5993e5e8dde3f7e77fc684583",
+    "teaql_runtime/include/teaql/runtime/i18n_debug.hpp": "7a8163f698c62eb0c7ff2f74d864007e4c6c31a8336c0e1347292d9e52a8a485",
+    "teaql_runtime/include/teaql/runtime/entity_graph_decoder.hpp": "a818b5e051c0f471ceafa29c3aa07eaf5e9eca1658ade8a112788e48ad66836b",
+    "teaql_runtime/include/teaql/runtime/registry.hpp": "ef8da03e971b74b6916918fc5d59bb26b374e37a09acfbee43fb64454e68edb4",
+    "teaql_runtime/include/teaql/runtime/generated_support.hpp": "eb59268beab27aa3d2608e81196a59eb7432ab397e2e4b52314dc178aa72e5a8",
+    "teaql_runtime/include/teaql/runtime/entity_runtime_debug.hpp": "7846ac8f4f7705eab7620c7dfd1e3d2ad760614e365d1799bf89a39856985f78",
+    "teaql_runtime/include/teaql/runtime/purposed_query_debug.hpp": "5518ead00b37e7b668e950b546b0197f9aa1a2b691782ff33c999ce6ec8cfe92",
+    "teaql_runtime/include/teaql/runtime/fix_evidence.hpp": "e066e29fc73ddcaa0c9224e8a5d389ec97f320cbbdac9cb51381b8e462a1c5a5",
+    "teaql_runtime/include/teaql/runtime/runtime_id_debug.hpp": "0682cb3d0079e1b19e6aa7bae59431acbf87d2fefc00239b6e9e80d6f6bd34f9",
+    "teaql_runtime/include/teaql/runtime/business_clock.hpp": "f450bb8fdc1a167d8f98cdfee1fbb3573061f091a92d574305d1ebee65b24157",
+    "teaql_runtime/include/teaql/runtime/event_debug.hpp": "cd489f1efc3e3d3339f21779380064c078b78036a9af9ef135d764eb547e68d2",
+    "teaql_runtime/include/teaql/runtime/context.hpp": "44da2d5f26c3ae51f58da4d6eee71c0b45bec4e68f3ac749b3c5d528b411ee96",
+    "teaql_runtime/include/teaql/runtime/telemetry.hpp": "e74e6567357233a11f9477f9ec8b6cdd1198b30c77ba48ef5010a50092ce33ef",
+    "teaql_runtime/include/teaql/runtime/checker_model_debug.hpp": "7fad20607f711fa61723018eba013bde82967f7bed859649d88eb88043da95ac",
+    "teaql_runtime/include/teaql/runtime/relation.hpp": "9b29196f246065b0679d68dccc01db3c8447864b0866f6ef281f7fd9e77b828a",
+    "teaql_runtime/include/teaql/runtime/cache.hpp": "cb11e13f4d9e48ff6d7e425e6a0faa1b4863f8f390638b7fff8377fb025500c5",
+    "teaql_runtime/include/teaql/runtime/error.hpp": "b9adae0761ac45e70771a4b64dbe7e9311f87b0d79f85ac761572dc5d6b89565",
+    "teaql_runtime/include/teaql/runtime/pagination.hpp": "ea30ae642d2d57672c1432003f355f088305615a7b1636c12691677a16e73dfc",
+    "teaql_runtime/include/teaql/runtime/id_space.hpp": "e40099135f201e0662b156cc5feb134f0ed9a58fbc003513c4cba4c00b31db74",
+    "teaql_runtime/include/teaql/runtime/event.hpp": "84e46e49bd1c72d831e76b5eabde7122638bba7f85eba7ad70eaaaaa0fecdc7f",
+    "teaql_runtime/include/teaql/runtime/detail/audit_privacy.hpp": "5419f0e5975f928ecbdd72f68681db53bc1672f4a1413abe239d300999903032",
+    "teaql_runtime/include/teaql/runtime/detail/reference_crypto.hpp": "c196a7d1bd3dfcdc34ca0ec6d9572a04572234cbd002fc1e0ddd1ea407cfcb57",
+    "teaql_runtime/include/teaql/runtime/detail/builtin_i18n_data.hpp": "5d97d512eb54da42715e28517055f12b83f61402fdb5a74600bf34f3d02d0931",
+    "teaql_runtime/include/teaql/runtime/detail/query_keys.hpp": "edf309e6f7b34958b60fc4d79e6ef343aa444d86c63ff8b8f7cada03153637bd",
+    "teaql_runtime/include/teaql/runtime/detail/graph_fix_scope.hpp": "b703a5fe30d36b5a67fbdc38628095d8db74175c5edfd0c181b67c1a0ab024f3",
+    "teaql_runtime/include/teaql/runtime/detail/governance_scope.hpp": "b0bc31ee647e16184041e2ad76e7d1bb5d03495fd67d35e6821face5feff049f",
+    "teaql_runtime/include/teaql/runtime/detail/context/identity.hpp": "8e366653ac5fcca8c881d929823b5caa36cf0de0d064bdcd0c356e9c24c66313",
+    "teaql_runtime/include/teaql/runtime/detail/context/locking.hpp": "0d4a8f60d810d98245e333ce49b86c0141852d8032ecc31252e627307488f99d",
+    "teaql_runtime/include/teaql/runtime/detail/context/entity.hpp": "1cd60cf69cb6e4389ae65d09117b8e30a4c0c7d5831e96232f03bea9196245f0",
+    "teaql_runtime/include/teaql/runtime/detail/context/pagination.hpp": "ec029003fc8dd4ee328e506fdc7796d1b2ce9a7bdd3103ee0c608c0c320f8d4e",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp": "fd413c48542ea019888bf47e8f4ef89824c779a12b5a0ca280ce05bab94fc9ab",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp": "7e143874844e528983348777e569ae81b3ff98e6b87d0acfe19bd7677d977574",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/context_query.hpp": "9182e42d4698bebe8542732f4945acbed542ce29ebad4da78c1a81795a232bd3",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_execution.hpp": "8a6fc2e0f6a91eb72e737c1c63b3d2bf166711ad2a182402e0bbb8606da60abe",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/context_mutation.hpp": "d59db86e94fce4c263a2ebf6be47f41ad7a75042f2da91855cffa6537c6d2f04",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/base_mutation.hpp": "ebc0d4003083bb83da31cacdf6d318e73602322ac61d3fec7433e158236b2b4b",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/enhanced_entities.hpp": "bc4d4b2d5ef2aa2a55483e379fea2bd928595eb4ad8c5c1ecb35ca834e37322a",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp": "6cdb66a662d30f891aed675e89416110823a363b995791aa64f50c25688cad95",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/audited_save.hpp": "4e30e58a9d7a18c8437bb5d62dc2f973c73c455fc64809bf410eb8289027006c",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/recursive_graph_write.hpp": "4172df2e6d5dda66b091a6bf144b17626f41f87487564f6338c9cc4631e07f88",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/audited_auto_save.hpp": "12697fab61594da8d30756f45a8592366b3379a5f0e14ffb2326166261439b32",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/id_set_build_lock.hpp": "0020d68d45a01e89ad65dcb63b7081706e6be2088845a8a4b4233aa0e20128eb",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/ledger_plan.hpp": "cf294a1021b0f8d760b9a2c997ff7838f39d5e9f5766f48c5e9cbe7a7f733366",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/id_set_page.hpp": "95f490c4861939c0af63e15aba16249a3799d76a9dc8319b8c7873de002ed30f",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/relation_execution.hpp": "bac47d2f815953b9423d3d0e042ce5a6872839d265a6313bcddbc64b9c51c8e9",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/ledger_execution.hpp": "11c226cd5c58f11ba49ed18aae6efec50bbfd1bff24a44074faf47729b313d14",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/relation_enhancement.hpp": "082829897ae23938ca014340df3b6fa942e7b1f32c26f448c5cb7d29d5ca99a5",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_plan.hpp": "cd33380b2b6d9129a0ee1f07fce0a5e6e3fa7f92c874fe146620736e68b03e99",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/graph_node_commands.hpp": "85c267c9070f9afb3153bc7fd138ce45c2eb1e48468de2c2e21c362384d79bf7",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp": "168ce91b00816bf40d23aa4595a29b93c4eb70d23372af3d401cccffff6194a4",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/graph_saver.hpp": "2c92675a2da16f775f5e678775163531f08a03d2123f7eb80e49f36af567e432",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_save_adapters.hpp": "6ea63f001cf8e145aadcf47219cdd2a71bf00767a6279bc5c4d7d9b29d79ab4e",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_query.hpp": "d9e1f45283e1671115526ff36e10a824f7f82f44b575235efb422ca963483580",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/typed_aggregate.hpp": "878852e7f1643424531ad281b71134b13847cf6409d8df02420275d4889649bb",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/base_query.hpp": "3be536bfb8bf7922fb6a575dd491bdf304c17aaa136736ada54de596820ab99a",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_stream.hpp": "57e2a69e96bca0378fb97547beceb059553ac808e59ddc340a00b67e05f91eb5",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/relation_installation.hpp": "f61ad86350556005b96a7f07e4258f79b0f4936f9ca18c316277d4ec8d6804bd",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp": "cbb27ba81f8bae9c7f1f8bf01e2256815be9d07af4606019a1fb45f63ae8feb9",
+    "teaql_provider_sqlite/CMakeLists.txt": "c7cb482f409bf5c69923b940e3227c805bd327df79ac27acbc5484c39f8900f5",
+    "teaql_provider_sqlite/tests/recursive_graph_write_tests.cpp": "9dfadb8dfa8913701d3d40c0f44723d0b82f5af4442a2b3539aff200c990a6f0",
+    "teaql_provider_sqlite/tests/provider_sqlite_schema_tests.cpp": "1ff0e62cfeb4e99a85b6976a1437c0c5b6218231237ae2ea78f4fdcd11ed7052",
+    "teaql_provider_sqlite/tests/relation_hydration_tests.cpp": "58378bf220106ac107a19a5026c0d6359534c144b672a2837bdd9045a243f891",
+    "teaql_provider_sqlite/tests/enhanced_entities_tests.cpp": "fb39651b199fafc8f8adc388c8cb29af600963b77e2456d68cd6c7fde1f945d8",
+    "teaql_provider_sqlite/tests/entity_graph_execution_tests.cpp": "951ed665b79749b621fc101ab13d5c11c75751c2d1304c69e7494cca10359428",
+    "teaql_provider_sqlite/tests/entity_service_tests.cpp": "4b3ca2fa8f6cd2eaa0aac5117821ed7ec8c28efeb6f493c2508ffd3d7f89d8e2",
+    "teaql_provider_sqlite/tests/transaction_scope_tests.cpp": "f1db9126bb6bc9338c87a51498be292cc0ae19ee34268205ee4904d3d30ff1b6",
+    "teaql_provider_sqlite/tests/provider_sqlite_from_sql_error_tests.cpp": "c8daf664dec8583046e2b59ef8ce86cb1fb7b349b39fbf84c89484f7a6305c90",
+    "teaql_provider_sqlite/tests/entity_decoder_tests.cpp": "e7435167303c6f25188a25c76c14326b3edfd75ebfd7145d1c7c07b4d1ed5843",
+    "teaql_provider_sqlite/tests/ledger_execution_tests.cpp": "d11ed6dd013e3741eeff309529e17435e82b2d0ce77127b6678c3514d2bb2e19",
+    "teaql_provider_sqlite/tests/provider_sqlite_id_tests.cpp": "372b0346add4f5b88551daae44be8c123169146cfe0e70e5f6ec8d408bd989e8",
+    "teaql_provider_sqlite/tests/entity_graph_plan_tests.cpp": "6b5701982652acdae1ae246b8964d493968af9bdb14719bcba8bdd7442f9077a",
+    "teaql_provider_sqlite/tests/provider_sqlite_unicode_tests.cpp": "487c3b815fff657b30e6f9fd12fa5ae2dd4276ca5f692ea62cf56f0df9755256",
+    "teaql_provider_sqlite/tests/sql_execution_tests.cpp": "1fe5d7aa9534adc4ca948ff0a8420e9415240b193925a71ed30f63de9fd4aeea",
+    "teaql_provider_sqlite/tests/provider_sqlite_driver_error_tests.cpp": "64113c0c3173139e56ed34dc21350eb3687fbe7b2640cad8b8f72ebaf48bd0b7",
+    "teaql_provider_sqlite/tests/sql_stream_tests.cpp": "71ee591bac80b6f976aaa74c47130027afd9a501da4ca5e0de870edd7a1babd9",
+    "teaql_provider_sqlite/tests/runtime_examples_tests.cpp": "0905bbc5f5b452faf11066d8e40403d19ce3d788d5ea57f3901cb7c84678e750",
+    "teaql_provider_sqlite/tests/sql_mutation_tests.cpp": "9160f0d972a8e46038963dbea6e17383f1f8abb14a02efe0a6de70863438d068",
+    "teaql_provider_sqlite/tests/provider_sqlite_model_tests.cpp": "e974353ff005e3236471e9b63e3eacda0c1644e7979031e2724d5e49dd5fcad2",
+    "teaql_provider_sqlite/tests/audited_save_tests.cpp": "c9e88152e607c4b1fdcd82b6e28eb226efbba0314582f2badb4e13a0b0763f9f",
+    "teaql_provider_sqlite/tests/sql_transaction_tests.cpp": "bf3627fa46fb081dc402c9d637a5805aeb4f265f0367b2c48e21566834d7b713",
+    "teaql_provider_sqlite/tests/audited_auto_save_tests.cpp": "b4a67eb8443f9462e1506a98cc0b3902d069f613a0403f4414191603e72b6e86",
+    "teaql_provider_sqlite/tests/entity_stream_tests.cpp": "e14f0121b38386199004017410282d7fca638c23d98106c2187d70410862d68e",
+    "teaql_provider_sqlite/tests/ledger_move_only_tests.cpp": "b81629008b1d850ac4197d64ba69502a14a7d5c70bb1f54079d5cd48fbfbf545",
+    "teaql_provider_sqlite/tests/relation_execution_tests.cpp": "839cc25924d4215c2e7cbe3a6efc88339d64b1786dd1affb13ead8db84d696e9",
+    "teaql_provider_sqlite/tests/runtime_mutation_tests.cpp": "ffdc7d344169c311fd85f1fb713e9c788d6e45eb6312250b9ac4a68bd7a8041b",
+    "teaql_provider_sqlite/tests/provider_sqlite_decoding_tests.cpp": "3a2eb88ed0a2af824bd1682586aff7ca7d660d2598ab4a16f3bca2fdf3ee6797",
+    "teaql_provider_sqlite/tests/provider_sqlite_business_id_tests.cpp": "c0071015924906ed1fdea20c45eaf6a94e875c3829f800b9ce68c9192709487e",
+    "teaql_provider_sqlite/tests/provider_sqlite_simple_error_tests.cpp": "496ac5b247e58307d00c9426d675f127004b1f6bfc2937e4c6f8c1ba3b031131",
+    "teaql_provider_sqlite/tests/internal_id_tests.cpp": "5d0b3344b73e97f5ffc5abd69cbf0a134aab7baee8a29ee0e435462912814ba3",
+    "teaql_provider_sqlite/tests/id_set_page_tests.cpp": "dda387c615d564f5c651b37dd8d37fd5773a9a8061e49e4005d711498aa5b5ea",
+    "teaql_provider_sqlite/tests/business_service_tests.cpp": "055befabe802fc6d90ddab74ee27514bc6633a706c4c2ddd3ce0568dc8cdb36b",
+    "teaql_provider_sqlite/tests/provider_sqlite_boxed_error_tests.cpp": "7aa430370179c61a1b217689384dc2e3e390891946fde970d2b86252dc764431",
+    "teaql_provider_sqlite/tests/provider_sqlite_transport_tests.cpp": "0839f32d1e1882c87c796bef8c3f0215edb3afcaa8009825a424b0efffdf4b93",
+    "teaql_provider_sqlite/tests/relation_enhancement_tests.cpp": "2729f48cb6fedb2f719bb4b6eab5c560ae22fdf71de0824e569940e2a1369971",
+    "teaql_provider_sqlite/tests/provider_sqlite_error_tests.cpp": "48c694ee836a9a780c84988b6330ef6938b2c08fb4f083816c095e315ffdc3b5",
+    "teaql_provider_sqlite/tests/sql_model_tests.cpp": "6089400d286a55051ab7cb76691528c460317e64a8c6e12bf43e2c362e983484",
+    "teaql_provider_sqlite/tests/provider_sqlite_bindings_tests.cpp": "c3f95375fb3703882f910c6ca3c08c12be1bc340ec4974b2261e763a9eafea8f",
+    "teaql_provider_sqlite/tests/provider_sqlite_tests.cpp": "c3bf3c9e4556acfc3e038695feb5151b0db2497126253c93730ef54d8bfd02d3",
+    "teaql_provider_sqlite/tests/graph_saver_tests.cpp": "d8c12d679189c7ede0b281d31e573ee90629871c1d87f1a1f5040c80a8a9cae7",
+    "teaql_provider_sqlite/src/simple_error.cpp": "27ff36df01621db3de11aea377aadec25628f2f00ade1f26d6d908db31671935",
+    "teaql_provider_sqlite/src/from_sql_error.cpp": "fa25d7864f7e69fe661111036f693919b9e9e7b18ec20da9e027c460d4a63e48",
+    "teaql_provider_sqlite/src/error.cpp": "bf8986c74f06b2c1a210e331538e2457ec9b93263d6b944e4ac79c1987b52996",
+    "teaql_provider_sqlite/src/decoding.cpp": "6dc8a20fbe2a96483192199287fe62229d808dcda2c36007d7806b30c7e45271",
+    "teaql_provider_sqlite/src/lib.cppm": "99ff98045759ca45b3da7bfcdad370ac7a86f222d587a8a72f16972ebe73fc79",
+    "teaql_provider_sqlite/src/schema_unicode.cpp": "fbc5c495278b8137866974a8d6d0842e8928730266ab45dae34f63fccaf6a236",
+    "teaql_provider_sqlite/src/schema.cpp": "e12551ece771007161b1c1d1500bb3972f4b8b1acb17551410870a60e9204201",
+    "teaql_provider_sqlite/src/provider.cpp": "0bc091569d2249a424e08ccf85fc37a59eb4aca2b665c2a7203f000c9d609725",
+    "teaql_provider_sqlite/src/unicode_lower_data.inc": "5bdccc759484a7b3b8ca0e37641f3712e3a7f81caa45fab3e2476982a378c17f",
+    "teaql_provider_sqlite/src/driver_error.cpp": "09371cebe4ac92d1f5a9e4d4a4503c8f6e84e3c65724068abdfde6bfec656b58",
+    "teaql_provider_sqlite/src/bindings.cpp": "dba3d09c71e0961c0454d04e3c883dda5ef376db209938035512d815e5914d2d",
+    "teaql_provider_sqlite/src/dialect.cpp": "ff49dd515bc0bf782d05a5a52036d7cf271771c828350e1a0df8a293ced126e5",
+    "teaql_provider_sqlite/src/native_diagnostics.cpp": "1d30b935f7d692a85e4fa3dae8ac1b0a3ed681bfd646e00b3c79e279be10d0c0",
+    "teaql_provider_sqlite/src/schema_model.cpp": "5f50299d808b67dfea9d6f1af8f115552d689d2e91c71943785e84e99a851b71",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/driver_error.hpp": "a80450539d91e3affd92a0b9bf48a3a173d0cc47f423da5547ab3d6fb7acc104",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/error_debug.hpp": "d678e0b88356fdab01e9bd8f24aa5734082fa607a67e7b12f99a84e96708a29e",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/boxed_error.hpp": "6b82df9e99bd6bdd39192f78366303c2925dad03a9fd4951ea2009b21c0fa827",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/schema.hpp": "54c5f4a96a3ed91a4754dafafbbf99727b9b73f10b0e1e91aa1f95470a349d63",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/id.hpp": "445327a0081df10123acfb052735b0a1736d1e64964a09b2170e11718e06f0b8",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/provider.hpp": "a28c5238aea9f8519ef26af4382a507b5e3538c21d1e455970b493a4b41a9055",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/business_id.hpp": "b99fbf5924959cf0d45681461b8ebb468e11854ee57dfc97aad8e636e8916208",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/model_debug.hpp": "395ee7a6fc2de587476e208bbb18b40c4d163eef6ed3e415e7b9a16b603f656a",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/from_sql_error.hpp": "6f106735ffa18210e23602887fb2f1380813e7e75ca8ad7862437f1755431762",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/dialect.hpp": "c18cc563cb4b5146c1d5273e30eefaeb8d304ce201bc44d5f0b5dbc398b618c8",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/native_diagnostics.hpp": "61f30900c7017c00fef9dd0c21fd6522c24cbe7bbf6c8ea6fb01e5c9fcc6b220",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/error.hpp": "ca4c0f12f524ea975a0808e8235b65f36cd0ce2498786bbd01fe99373f5d0e15",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/simple_error.hpp": "05fed96d1f9b7b5fdb1788c62ab6a2b93e3aa7a8b671db073b190f6c52ec9e06",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/detail/schema.hpp": "8e75893db494ebf42b24b44a93c085947dc40f4281d30cc63fdfb0dff33327d5",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/detail/decoding.hpp": "00a233ce5c51d2c733e9e220ad131ce4c64f9a131ca86a5fc81cfbfc44464170",
+    "teaql_provider_sqlite/include/teaql/provider_sqlite/detail/bindings.hpp": "935eeff92336935b12a19fa6a065da0cae8a02395a1e7d567a1eeabf4b1772f8"
+  },
+  "toolchain_lock_sha256": "cb872117610ef3606215c9ac92f40382fd21321aedf731249175b8f4ff53c102",
+  "bmi_bytes": {
+    "modules/CMakeFiles/teaql_runtime_module.dir/teaql_runtime.pcm": 107398120,
+    "modules/CMakeFiles/teaql_memory_module.dir/teaql_memory.pcm": 9462340,
+    "modules/CMakeFiles/teaql_provider_sqlite_module.dir/teaql_provider_sqlite.pcm": 79315124,
+    "modules/CMakeFiles/teaql_sql_module.dir/teaql_sql.pcm": 45103396,
+    "modules/CMakeFiles/teaql_data_service_module.dir/teaql_data_service.pcm": 43422332,
+    "modules/CMakeFiles/teaql_async_module.dir/teaql_async.pcm": 8523556,
+    "modules/CMakeFiles/teaql_core_module.dir/teaql_core.pcm": 50379864
+  },
+  "bmi_total_bytes": 343604732,
+  "steps": [
+    {
+      "name": "headers_configure",
+      "command": [
+        "cmake",
+        "-S",
+        "/tmp/teaql_m5_build_qualification/source",
+        "-B",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_FLAGS_DEBUG=-g1",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DBUILD_TESTING=OFF",
+        "-DTEAQL_BUILD_EXAMPLES=OFF",
+        "-DTEAQL_ENABLE_MODULES=OFF"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.531
+    },
+    {
+      "name": "headers_clean_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 99.031,
+      "max_child_rss_kib": 825920
+    },
+    {
+      "name": "headers_clean_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.002
+    },
+    {
+      "name": "headers_clean_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.01,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_configure",
+      "command": [
+        "cmake",
+        "-S",
+        "/tmp/teaql_m5_build_qualification/source",
+        "-B",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_FLAGS_DEBUG=-g1",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DBUILD_TESTING=OFF",
+        "-DTEAQL_BUILD_EXAMPLES=OFF",
+        "-DTEAQL_ENABLE_MODULES=ON"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.569
+    },
+    {
+      "name": "modules_clean_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 172.838,
+      "max_child_rss_kib": 1434952
+    },
+    {
+      "name": "modules_clean_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.004
+    },
+    {
+      "name": "modules_clean_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.029,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_consumer_edit_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 17.087,
+      "max_child_rss_kib": 825932
+    },
+    {
+      "name": "headers_consumer_edit_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003
+    },
+    {
+      "name": "headers_consumer_edit_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.018,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_consumer_edit_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.058,
+      "max_child_rss_kib": 297892
+    },
+    {
+      "name": "modules_consumer_edit_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003
+    },
+    {
+      "name": "modules_consumer_edit_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.023,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_ordinary_body_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.426,
+      "max_child_rss_kib": 174008
+    },
+    {
+      "name": "headers_ordinary_body_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003
+    },
+    {
+      "name": "headers_ordinary_body_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.02,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_ordinary_body_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.39,
+      "max_child_rss_kib": 173836
+    },
+    {
+      "name": "modules_ordinary_body_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003
+    },
+    {
+      "name": "modules_ordinary_body_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.02,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_ordinary_body_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.161,
+      "max_child_rss_kib": 173836
+    },
+    {
+      "name": "headers_ordinary_body_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003
+    },
+    {
+      "name": "headers_ordinary_body_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.016,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_ordinary_body_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.508,
+      "max_child_rss_kib": 174072
+    },
+    {
+      "name": "modules_ordinary_body_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.002
+    },
+    {
+      "name": "modules_ordinary_body_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.016,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_declaration_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 139.357,
+      "max_child_rss_kib": 826120
+    },
+    {
+      "name": "headers_declaration_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.002
+    },
+    {
+      "name": "headers_declaration_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.012,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_declaration_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 199.612,
+      "max_child_rss_kib": 1435124
+    },
+    {
+      "name": "modules_declaration_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003
+    },
+    {
+      "name": "modules_declaration_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.022,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_declaration_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 163.435,
+      "max_child_rss_kib": 825852
+    },
+    {
+      "name": "headers_declaration_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.004
+    },
+    {
+      "name": "headers_declaration_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.023,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_declaration_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 196.743,
+      "max_child_rss_kib": 1435016
+    },
+    {
+      "name": "modules_declaration_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.002
+    },
+    {
+      "name": "modules_declaration_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.015,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_template_body_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 100.095,
+      "max_child_rss_kib": 825984
+    },
+    {
+      "name": "headers_template_body_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003
+    },
+    {
+      "name": "headers_template_body_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.021,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_template_body_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 263.667,
+      "max_child_rss_kib": 1434888
+    },
+    {
+      "name": "modules_template_body_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.004
+    },
+    {
+      "name": "modules_template_body_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.031,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_template_body_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 201.193,
+      "max_child_rss_kib": 825108
+    },
+    {
+      "name": "headers_template_body_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.004
+    },
+    {
+      "name": "headers_template_body_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.026,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_template_body_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 269.199,
+      "max_child_rss_kib": 1435148
+    },
+    {
+      "name": "modules_template_body_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.005
+    },
+    {
+      "name": "modules_template_body_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.046,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_dependency_added_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 228.305,
+      "max_child_rss_kib": 825440
+    },
+    {
+      "name": "headers_dependency_added_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.005
+    },
+    {
+      "name": "headers_dependency_added_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.039,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_dependency_added_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 283.178,
+      "max_child_rss_kib": 1434756
+    },
+    {
+      "name": "modules_dependency_added_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.004
+    },
+    {
+      "name": "modules_dependency_added_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.029,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_dependency_edit_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 232.321,
+      "max_child_rss_kib": 825512
+    },
+    {
+      "name": "headers_dependency_edit_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.005
+    },
+    {
+      "name": "headers_dependency_edit_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.038,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_dependency_edit_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 295.728,
+      "max_child_rss_kib": 1435148
+    },
+    {
+      "name": "modules_dependency_edit_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.005
+    },
+    {
+      "name": "modules_dependency_edit_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.046,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "headers_dependency_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 228.329,
+      "max_child_rss_kib": 825460
+    },
+    {
+      "name": "headers_dependency_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_headers/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.004
+    },
+    {
+      "name": "headers_dependency_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_headers",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.026,
+      "max_child_rss_kib": 10496
+    },
+    {
+      "name": "modules_dependency_restore_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 291.279,
+      "max_child_rss_kib": 1434916
+    },
+    {
+      "name": "modules_dependency_restore_run",
+      "command": [
+        "/tmp/teaql_m5_build_qualification/build_modules/modules/tests/build_consumer/teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.005
+    },
+    {
+      "name": "modules_dependency_restore_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_build_qualification/build_modules",
+        "--target",
+        "teaql_build_consumer"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.045,
+      "max_child_rss_kib": 10496
+    }
+  ],
+  "measurement_limits": "Concurrent release builds during this correctness run; isolated performance measurements are still pending"
+}

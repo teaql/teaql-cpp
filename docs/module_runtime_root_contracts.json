@@ -1,0 +1,606 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Root contract registration locators; acceptance also requires executed imports and body/semantic evidence.",
+  "tests": [
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "scalar_fk_column_named_like_relation_does_not_create_related_entity",
+      "line": 1223,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "detached_reverse_relation_remains_in_entity_metadata",
+      "line": 1266,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_store_registers_entities",
+      "line": 1279,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "runtime_module_registers_descriptor_into_context",
+      "line": 1285,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "runtime_module_registers_derived_entity_and_behavior",
+      "line": 1292,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "module_macro_registers_multiple_entities",
+      "line": 1306,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "module_macro_registers_entity_behavior_pairs",
+      "line": 1313,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "data_service_returns_optimistic_lock_conflict",
+      "line": 1325,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_indexes_resources_and_locals",
+      "line": 1349,
+      "module_checks": [
+        "module_original_runtime_registration"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_builds_context_data_service",
+      "line": 1369,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_resolves_entity_data_service_by_entity_type",
+      "line": 1400,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_applies_behavior_hooks",
+      "line": 1430,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_applies_request_policy_after_behavior_hooks",
+      "line": 1463,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "public_query_families_cannot_bypass_request_policy",
+      "line": 1498,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_prepares_insert_command_with_generated_id",
+      "line": 1554,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "custom_user_context_can_drive_insert_preparation",
+      "line": 1605,
+      "module_checks": [
+        "module_original_runtime_service_boundaries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "checker_registry_validates_and_fixes_insert_commands",
+      "line": 1637,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_not_null_constraints_are_checked_without_a_custom_checker",
+      "line": 1673,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "sparse_ledger_create_payload_reports_required_field_before_sql",
+      "line": 1704,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "nested_sparse_ledger_insert_plan_rejects_required_field_at_child_path",
+      "line": 1755,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_update_of_existing_versioned_row_requires_loaded_original_version",
+      "line": 1789,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_attachment_version_conflict_rejects_ledger_plan_before_sql",
+      "line": 1831,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_delete_of_existing_versioned_row_requires_loaded_original_version",
+      "line": 1871,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_validation_does_not_require_runtime_managed_version_on_create",
+      "line": 1901,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_preserves_values_and_reports_timestamp_type_error",
+      "line": 1928,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_not_null_constraints_allow_omitted_fields_on_partial_update",
+      "line": 1970,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_validates_and_fixes_derived_entities_without_record_access",
+      "line": 1996,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_preserves_sparse_update_boundary",
+      "line": 2042,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "checker_registry_reports_nested_create_locations_and_fixes_records",
+      "line": 2077,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "built_in_language_translators_cover_fifteen_languages",
+      "line": 2117,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_language_switch_translates_checker_errors",
+      "line": 2153,
+      "module_checks": [
+        "module_original_runtime_validation"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_event_sink_receives_data_service_mutation_events",
+      "line": 2211,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_places_foreign_key_parent_before_child",
+      "line": 2325,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_honors_reverse_many_and_forward_parents",
+      "line": 2360,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_reports_required_foreign_key_cycle_before_sql",
+      "line": 2402,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_builds_relation_plans",
+      "line": 2456,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_builds_relation_query_from_parent_rows",
+      "line": 2489,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_enhances_parent_rows_with_relations",
+      "line": 2532,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "topn_006_008_009_relation_is_stable_empty_safe_and_count_free",
+      "line": 2600,
+      "module_checks": [
+        "module_original_runtime_events_relations"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "relation_enhancement_wraps_inverse_many_relation_as_list",
+      "line": 2677,
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_to_one_getter_resolves_from_runtime_module_identity_graph",
+      "line": 2719,
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_to_many_getter_uses_adjacency_and_mutation_copies_on_write",
+      "line": 2755,
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_fetches_smart_list_of_entities",
+      "line": 2815,
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_entity_fetch_restores_id_and_version_to_reduced_projection",
+      "line": 2849,
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_fetches_smart_list_of_derived_entities",
+      "line": 2889,
+      "module_checks": [
+        "module_original_runtime_typed_queries"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_collects_dynamic_properties_for_aggregate_output",
+      "line": 2923,
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_executes_relation_aggregates_into_dynamic_properties",
+      "line": 2963,
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_maps_relation_aggregate_storage_key_to_property_key",
+      "line": 3026,
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_uses_aggregation_cache_when_resource_is_registered",
+      "line": 3087,
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "continuous_page_fetch_uses_id_seek_for_the_next_page",
+      "line": 3139,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_reuses_ordered_ids_and_returns_exact_count",
+      "line": 3199,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_limit_overflow_falls_back_without_false_count",
+      "line": 3287,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_coalesces_concurrent_cache_misses",
+      "line": 3330,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_rebuilds_after_ttl_expiry",
+      "line": 3380,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_isolates_principals_in_a_shared_store",
+      "line": 3412,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_retains_empty_exact_result",
+      "line": 3455,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_store_failure_falls_back_without_changing_rows",
+      "line": 3484,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_does_not_shift_page_when_an_entity_disappears",
+      "line": 3521,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_unsupported_shape_falls_back_visibly",
+      "line": 3560,
+      "module_checks": [
+        "module_original_runtime_pagination"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "aggregation_cache_is_namespaced_and_invalidated_after_write",
+      "line": 3595,
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "aggregation_cache_propagates_to_relation_aggregates",
+      "line": 3641,
+      "module_checks": [
+        "module_original_runtime_aggregates_cache"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_fetches_smart_list_entities_with_query_features",
+      "line": 3702,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_relation_aggregates",
+      "line": 3742,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_aggregates",
+      "line": 3811,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_grouped_aggregates_and_extended_filters",
+      "line": 3877,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_extended_aggregates_and_having",
+      "line": 3924,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_sound_like_filter",
+      "line": 3979,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_java_style_string_match_filters",
+      "line": 4016,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_property_to_property_filters",
+      "line": 4068,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_supports_mutations_and_optimistic_locking",
+      "line": 4099,
+      "module_checks": [
+        "module_original_runtime_memory_service"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "optimistic_conflict_does_not_print_outside_diagnostic_sink",
+      "line": 4164,
+      "module_checks": [
+        "module_original_runtime_optimistic_conflict_output_contracts"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_reports_missing_schema_provider",
+      "line": 4183,
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_stores_and_exposes_user_identifier",
+      "line": 4191,
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "local_lock_enforces_ownership_timeout_and_lease_expiry",
+      "line": 4222,
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ]
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "remote_lock_delegates_and_preserves_context_ownership",
+      "line": 4271,
+      "module_checks": [
+        "module_original_runtime_context_tail"
+      ]
+    }
+  ]
+}

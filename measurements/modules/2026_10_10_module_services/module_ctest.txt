@@ -1,0 +1,45 @@
+Test project /home/philip/githome/teaql-cpp/build_modules_native
+      Start 391: module_core_aux_debug_tests
+      Start 394: module_query_model_tests
+      Start 390: module_decimal_tests
+      Start 392: module_core_collection_tests
+ 1/20 Test #390: module_decimal_tests ........................   Passed    0.00 sec
+      Start 389: module_import_contracts
+ 2/20 Test #392: module_core_collection_tests ................   Passed    0.00 sec
+ 3/20 Test #394: module_query_model_tests ....................   Passed    0.00 sec
+      Start 393: module_core_tests
+      Start 395: module_data_service_tests
+ 4/20 Test #389: module_import_contracts .....................   Passed    0.00 sec
+      Start 396: module_data_service_model_tests
+ 5/20 Test #393: module_core_tests ...........................   Passed    0.00 sec
+      Start 397: module_data_service_scope_tests
+ 6/20 Test #395: module_data_service_tests ...................   Passed    0.00 sec
+      Start 398: module_executor_tests
+ 7/20 Test #398: module_executor_tests .......................   Passed    0.00 sec
+      Start 399: module_sql_projection_scope_tests
+ 8/20 Test #399: module_sql_projection_scope_tests ...........   Passed    0.00 sec
+      Start 400: module_system_time_tests
+ 9/20 Test #397: module_data_service_scope_tests .............   Passed    0.00 sec
+      Start 401: module_system_time_arithmetic_scope_tests
+10/20 Test #400: module_system_time_tests ....................   Passed    0.00 sec
+      Start 402: module_sql_dialect_tests
+11/20 Test #401: module_system_time_arithmetic_scope_tests ...   Passed    0.00 sec
+      Start 403: module_sql_model_api_tests
+12/20 Test #402: module_sql_dialect_tests ....................   Passed    0.00 sec
+      Start 404: module_sql_transport_tests
+13/20 Test #404: module_sql_transport_tests ..................   Passed    0.00 sec
+      Start 405: module_sql_query_tests
+14/20 Test #403: module_sql_model_api_tests ..................   Passed    0.02 sec
+      Start 406: module_sql_execution_tests
+15/20 Test #406: module_sql_execution_tests ..................   Passed    0.01 sec
+      Start 407: module_sql_transaction_tests
+16/20 Test #407: module_sql_transaction_tests ................   Passed    0.01 sec
+      Start 408: module_sql_stream_tests
+17/20 Test #408: module_sql_stream_tests .....................   Passed    0.00 sec
+18/20 Test #405: module_sql_query_tests ......................   Passed    0.09 sec
+19/20 Test #396: module_data_service_model_tests .............   Passed    0.10 sec
+20/20 Test #391: module_core_aux_debug_tests .................   Passed    0.16 sec
+
+100% tests passed out of 20
+
+Total Test time (real) =   0.16 sec

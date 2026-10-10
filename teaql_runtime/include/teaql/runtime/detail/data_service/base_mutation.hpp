@@ -1,5 +1,5 @@
 #pragma once
-#include <teaql/runtime/detail/data_service/data_service.hpp>
+#include <teaql/runtime/detail/data_service/declarations.hpp>
 #include <teaql/core/detail/debug.hpp>
 #include <charconv>
 

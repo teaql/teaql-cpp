@@ -1,0 +1,61 @@
+{
+  "scope": "Native Clang23/Itanium ABI facade archives; weak inline/template symbols are allowed",
+  "archives": [
+    {
+      "archive": "libteaql_memory_module.a",
+      "strong_definitions": [
+        "_ZGIW12teaql_memory"
+      ],
+      "module_initializer": "_ZGIW12teaql_memory",
+      "out_of_line_implementation_definitions": []
+    },
+    {
+      "archive": "libteaql_async_module.a",
+      "strong_definitions": [
+        "_ZGIW11teaql_async"
+      ],
+      "module_initializer": "_ZGIW11teaql_async",
+      "out_of_line_implementation_definitions": []
+    },
+    {
+      "archive": "libteaql_core_module.a",
+      "strong_definitions": [
+        "_ZGIW10teaql_core"
+      ],
+      "module_initializer": "_ZGIW10teaql_core",
+      "out_of_line_implementation_definitions": []
+    },
+    {
+      "archive": "libteaql_data_service_module.a",
+      "strong_definitions": [
+        "_ZGIW18teaql_data_service"
+      ],
+      "module_initializer": "_ZGIW18teaql_data_service",
+      "out_of_line_implementation_definitions": []
+    },
+    {
+      "archive": "libteaql_sql_module.a",
+      "strong_definitions": [
+        "_ZGIW9teaql_sql"
+      ],
+      "module_initializer": "_ZGIW9teaql_sql",
+      "out_of_line_implementation_definitions": []
+    },
+    {
+      "archive": "libteaql_runtime_module.a",
+      "strong_definitions": [
+        "_ZGIW13teaql_runtime"
+      ],
+      "module_initializer": "_ZGIW13teaql_runtime",
+      "out_of_line_implementation_definitions": []
+    },
+    {
+      "archive": "libteaql_provider_sqlite_module.a",
+      "strong_definitions": [
+        "_ZGIW21teaql_provider_sqlite"
+      ],
+      "module_initializer": "_ZGIW21teaql_provider_sqlite",
+      "out_of_line_implementation_definitions": []
+    }
+  ]
+}

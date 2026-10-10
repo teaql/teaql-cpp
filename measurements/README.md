@@ -7,6 +7,16 @@ latest source revision or every device in the same architecture family.
 
 | Target | Experiment | Recorded date | Evidence |
 | --- | --- | --- | --- |
+| Native Clang23, sanitizer and MIPS headers | M0-M5 final module release audit, qualified defaults and complete evidence | 2026-10-10 | [Final module release](modules/2026_10_10_module_release/README.md) |
+| Native Clang23, matched Debug profile | Sequential complete/consumer build timings, child RSS and BMI sizes | 2026-10-10 | [Isolated measurements](modules/2026_10_10_module_performance/README.md) |
+| OpenWrt GCC14.3/musl/MIPS74K under QEMU | Current header release 387/387, original examples, 427 dependencies | 2026-10-10 | [MIPS release](modules/2026_10_10_module_mips/README.md) |
+| Native Clang23 source snapshot | Complete header/module clean and controlled incremental edit/restoration contracts | 2026-10-10 | [Build qualification](modules/2026_10_10_module_builds/README.md) |
+| Native Clang23 ASan/UBSan | Complete imported selection, separate BMI configuration, leak scanning disabled | 2026-10-10 | [Module sanitizer checkpoint](modules/2026_10_10_module_sanitizer/README.md) |
+| Native Clang23 and GCC16 header consumer | M5 installed SDKs, prefix relocation and independent consumers | 2026-10-10 | [Packaging checkpoint](modules/2026_10_10_module_packaging/README.md) |
+| Local native Clang23 | M4 service cycle removal, canonical bodies, dependency graph and runtime ABI | 2026-10-10 | [Structural checkpoint](modules/2026_10_10_module_structure/README.md) |
+| Local native Clang23 | M3 runtime/SQLite imports, all75 root contracts and canonical import examples | 2026-10-10 | [Runtime/provider checkpoint](modules/2026_10_10_module_runtime/README.md) |
+| Local native Clang23 | M2 data-service/SQL interfaces, SPI and real SQLite import contracts | 2026-10-10 | [Service/SQL checkpoint](modules/2026_10_10_module_services/README.md) |
+| Local native Clang23 | M1b memory/async/core production interfaces and import-only contracts | 2026-10-10 | [Module pilot checkpoint](modules/2026_10_10_module_pilot/README.md) |
 | Local native workspace | Rust-shaped package moves, underscore names and unchanged production contents | 2026-10-10 | [M1a move checkpoint](modules/2026_10_10_workspace_move/README.md) |
 | Local native, sanitizer and MIPS tools | Locked toolchain upgrade and real named-module probes | 2026-10-10 | [Upgrade checkpoint](toolchains/2026-10-10-upgrade/README.md) |
 | Local Clang and repository inventory | C++20 modules risk assessment and isolated compatible time facade | 2026-10-10 | [Assessment and limited probe](modules/2026-10-10-assessment/README.md) |

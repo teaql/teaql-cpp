@@ -1,0 +1,6 @@
+-- Configuring incomplete, errors occurred!
+CMake Error at CMakeLists.txt:10 (message):
+  Production TEAQL modules are qualified for native builds; use the header
+  frontend for cross compilation
+
+

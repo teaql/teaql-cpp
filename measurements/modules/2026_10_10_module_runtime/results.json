@@ -1,0 +1,60 @@
+{
+  "stage": "M3",
+  "status": "accepted on pinned native Clang23 profile",
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "production_modules": [
+    "teaql_memory",
+    "teaql_async",
+    "teaql_core",
+    "teaql_data_service",
+    "teaql_sql",
+    "teaql_runtime",
+    "teaql_provider_sqlite"
+  ],
+  "exports": {
+    "teaql_memory": 49,
+    "teaql_async": 17,
+    "teaql_core": 328,
+    "teaql_data_service": 67,
+    "teaql_sql": 90,
+    "teaql_runtime": 679,
+    "teaql_provider_sqlite": 54
+  },
+  "exports_total": 1284,
+  "runtime_root_contracts": 75,
+  "registered_module_cases": 72,
+  "test_only_qualification_modules": "removed; consumers use production runtime/provider facades",
+  "canonical_examples": "original targets select import frontend through TEAQL_USE_MODULES; model/scenario/main business bodies unchanged",
+  "canonical_header_examples": {
+    "passed": 3,
+    "total": 3
+  },
+  "production_bodies": "315 exact non-include contents unchanged",
+  "sanitizer": "not repeated: no lifetime implementation changes",
+  "mips": "not repeated: no target implementation changes; complete module target profile still pending",
+  "remaining": [
+    "M4 internal organization",
+    "M5 compiler matrix/packaging/release qualification"
+  ],
+  "module_contracts": {
+    "passed": 72,
+    "total": 72,
+    "seconds": 1.2
+  },
+  "active_compiled_dependency_records": 177,
+  "formatting": {
+    "version": "18.1.8",
+    "files": 702,
+    "check": "passed"
+  },
+  "canonical_consumer_fixture_sources": 75,
+  "final_module_rebuild": "no work",
+  "native_header_integration": {
+    "passed": 388,
+    "total": 388,
+    "seconds": 62.83
+  },
+  "native_compiled_dependency_records": 427,
+  "native_final_rebuild": "no work",
+  "import_graph": "acyclic; verified against canonical interfaces"
+}

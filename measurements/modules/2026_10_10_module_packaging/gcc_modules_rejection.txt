@@ -1,0 +1,27 @@
+-- The CXX compiler identification is GNU 16.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/bin/x86_64-conda-linux-gnu-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE
+-- Found SQLite3: /usr/lib/x86_64-linux-gnu/libsqlite3.so (found suitable version "3.37.2", minimum required is "3.37")
+-- Configuring incomplete, errors occurred!
+CMake Error at CMakeLists.txt:6 (find_package):
+  Found package configuration file:
+
+    /tmp/teaql_m5_verified_modules_sdk/relocated_sdk/lib/cmake/teaql_cpp/teaql_cppConfig.cmake
+
+  but it set teaql_cpp_FOUND to FALSE so package "teaql_cpp" is considered to
+  be NOT FOUND.  Reason given by package:
+
+  TEAQL installed modules are qualified on native Clang23 with Ninja
+
+
+

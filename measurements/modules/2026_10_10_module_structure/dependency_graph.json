@@ -1,0 +1,1202 @@
+{
+  "scope": "All literal production header includes (all conditional branches) and named imports",
+  "headers": {
+    "teaql/memory/arena.hpp": [
+      "teaql/memory/reference.hpp"
+    ],
+    "teaql/memory/clone.hpp": [
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/memory/context_box.hpp": [
+      "teaql/memory/arena.hpp",
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/memory/function.hpp": [
+      "teaql/memory/arena.hpp",
+      "teaql/memory/clone.hpp",
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/memory/function_ref.hpp": [],
+    "teaql/memory/limits.hpp": [],
+    "teaql/memory/once_function.hpp": [
+      "teaql/memory/function.hpp"
+    ],
+    "teaql/memory/reference.hpp": [
+      "teaql/memory/limits.hpp"
+    ],
+    "teaql/memory/scoped.hpp": [
+      "teaql/memory/clone.hpp"
+    ],
+    "teaql/memory/strings.hpp": [
+      "teaql/memory/arena.hpp"
+    ],
+    "teaql/memory/types.hpp": [],
+    "teaql/async/operation.hpp": [
+      "teaql/memory/arena.hpp",
+      "teaql/memory/clone.hpp"
+    ],
+    "teaql/async/pending.hpp": [
+      "teaql/async/operation.hpp",
+      "teaql/async/stream.hpp"
+    ],
+    "teaql/async/stream.hpp": [
+      "teaql/async/operation.hpp"
+    ],
+    "teaql/core/business_id.hpp": [
+      "teaql/core/result.hpp",
+      "teaql/core/time.hpp"
+    ],
+    "teaql/core/business_id_debug.hpp": [
+      "teaql/core/business_id.hpp",
+      "teaql/core/debug.hpp"
+    ],
+    "teaql/core/chrono_value.hpp": [
+      "teaql/core/value.hpp"
+    ],
+    "teaql/core/debug.hpp": [
+      "teaql/core/decimal_format.hpp",
+      "teaql/core/detail/debug.hpp",
+      "teaql/core/list.hpp"
+    ],
+    "teaql/core/decimal.hpp": [
+      "teaql/core/decimal_error.hpp",
+      "teaql/core/decimal_format.hpp",
+      "teaql/core/decimal_inline_string.hpp",
+      "teaql/core/decimal_json_error.hpp",
+      "teaql/core/integer128.hpp",
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/core/decimal_debug.hpp": [
+      "teaql/core/debug.hpp"
+    ],
+    "teaql/core/decimal_error.hpp": [
+      "teaql/core/decimal_format.hpp",
+      "teaql/core/result.hpp"
+    ],
+    "teaql/core/decimal_format.hpp": [],
+    "teaql/core/decimal_inline_string.hpp": [],
+    "teaql/core/decimal_json_error.hpp": [
+      "teaql/memory/scoped.hpp",
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/core/detail/aes_gcm.hpp": [
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/core/detail/bool_vector.hpp": [
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/core/detail/debug.hpp": [
+      "teaql/core/value.hpp"
+    ],
+    "teaql/core/detail/debug_escape_ranges.hpp": [],
+    "teaql/core/detail/hmac_sha256.hpp": [
+      "teaql/core/detail/aes_gcm.hpp",
+      "teaql/core/detail/sha256.hpp"
+    ],
+    "teaql/core/detail/language_case_tables.hpp": [],
+    "teaql/core/detail/model_json.hpp": [
+      "teaql/core/json.hpp",
+      "teaql/core/model_decode.hpp"
+    ],
+    "teaql/core/detail/number_text.hpp": [
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/core/detail/query_debug.hpp": [
+      "teaql/core/query.hpp"
+    ],
+    "teaql/core/detail/sha256.hpp": [],
+    "teaql/core/detail/text.hpp": [],
+    "teaql/core/detail/uppercase_tables.hpp": [],
+    "teaql/core/dynamic_search.hpp": [
+      "teaql/core/query.hpp",
+      "teaql/core/result.hpp",
+      "teaql/memory/function_ref.hpp"
+    ],
+    "teaql/core/dynamic_search_debug.hpp": [
+      "teaql/core/dynamic_search.hpp",
+      "teaql/core/query_debug.hpp"
+    ],
+    "teaql/core/entity.hpp": [
+      "teaql/core/detail/text.hpp",
+      "teaql/core/meta.hpp",
+      "teaql/core/mutation.hpp",
+      "teaql/core/result.hpp",
+      "teaql/core/row.hpp"
+    ],
+    "teaql/core/entity_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/core/entity.hpp"
+    ],
+    "teaql/core/entity_graph.hpp": [
+      "teaql/core/entity.hpp"
+    ],
+    "teaql/core/entity_graph_debug.hpp": [
+      "teaql/core/entity_graph.hpp",
+      "teaql/core/mutation_debug.hpp"
+    ],
+    "teaql/core/eval.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/core/detail/model_json.hpp",
+      "teaql/memory/arena.hpp"
+    ],
+    "teaql/core/expr.hpp": [
+      "teaql/core/value.hpp",
+      "teaql/memory/scoped.hpp"
+    ],
+    "teaql/core/integer128.hpp": [],
+    "teaql/core/json.hpp": [
+      "teaql/core/result.hpp",
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/core/list.hpp": [
+      "teaql/core/detail/bool_vector.hpp",
+      "teaql/core/entity.hpp",
+      "teaql/core/row.hpp",
+      "teaql/memory/clone.hpp"
+    ],
+    "teaql/core/meta.hpp": [
+      "teaql/core/value.hpp"
+    ],
+    "teaql/core/meta_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/core/meta.hpp"
+    ],
+    "teaql/core/model_decode.hpp": [
+      "teaql/core/result.hpp"
+    ],
+    "teaql/core/mutation.hpp": [
+      "teaql/core/trace.hpp",
+      "teaql/core/value.hpp",
+      "teaql/memory/clone.hpp"
+    ],
+    "teaql/core/mutation_debug.hpp": [
+      "teaql/core/mutation.hpp",
+      "teaql/core/query_debug.hpp"
+    ],
+    "teaql/core/presentation_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/core/web.hpp",
+      "teaql/core/xls.hpp"
+    ],
+    "teaql/core/query.hpp": [
+      "teaql/core/expr.hpp",
+      "teaql/core/meta.hpp",
+      "teaql/core/row.hpp",
+      "teaql/core/trace.hpp"
+    ],
+    "teaql/core/query_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/core/meta_debug.hpp",
+      "teaql/core/query.hpp"
+    ],
+    "teaql/core/request.hpp": [
+      "teaql/core/list.hpp",
+      "teaql/core/query.hpp",
+      "teaql/memory/clone.hpp"
+    ],
+    "teaql/core/request_debug.hpp": [
+      "teaql/core/query_debug.hpp",
+      "teaql/core/request.hpp"
+    ],
+    "teaql/core/result.hpp": [
+      "teaql/memory/clone.hpp",
+      "teaql/memory/scoped.hpp"
+    ],
+    "teaql/core/row.hpp": [
+      "teaql/core/value.hpp",
+      "teaql/memory/scoped.hpp"
+    ],
+    "teaql/core/safe_expression.hpp": [
+      "teaql/core/entity.hpp",
+      "teaql/core/list.hpp",
+      "teaql/memory/function.hpp"
+    ],
+    "teaql/core/serde_utils.hpp": [
+      "teaql/core/detail/text.hpp",
+      "teaql/core/json.hpp",
+      "teaql/core/result.hpp"
+    ],
+    "teaql/core/system_time.hpp": [],
+    "teaql/core/system_time_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/core/system_time.hpp"
+    ],
+    "teaql/core/time.hpp": [
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/core/trace.hpp": [
+      "teaql/core/value.hpp"
+    ],
+    "teaql/core/value.hpp": [
+      "teaql/core/decimal.hpp",
+      "teaql/core/json.hpp",
+      "teaql/core/time.hpp"
+    ],
+    "teaql/core/web.hpp": [
+      "teaql/core/list.hpp",
+      "teaql/core/model_decode.hpp"
+    ],
+    "teaql/core/xls.hpp": [
+      "teaql/core/json.hpp",
+      "teaql/core/model_decode.hpp",
+      "teaql/memory/scoped.hpp"
+    ],
+    "teaql/core.hpp": [
+      "teaql/core/business_id.hpp",
+      "teaql/core/business_id_debug.hpp",
+      "teaql/core/chrono_value.hpp",
+      "teaql/core/debug.hpp",
+      "teaql/core/decimal_debug.hpp",
+      "teaql/core/decimal_format.hpp",
+      "teaql/core/dynamic_search.hpp",
+      "teaql/core/dynamic_search_debug.hpp",
+      "teaql/core/entity.hpp",
+      "teaql/core/entity_debug.hpp",
+      "teaql/core/entity_graph.hpp",
+      "teaql/core/entity_graph_debug.hpp",
+      "teaql/core/eval.hpp",
+      "teaql/core/expr.hpp",
+      "teaql/core/list.hpp",
+      "teaql/core/meta.hpp",
+      "teaql/core/meta_debug.hpp",
+      "teaql/core/mutation.hpp",
+      "teaql/core/mutation_debug.hpp",
+      "teaql/core/presentation_debug.hpp",
+      "teaql/core/query.hpp",
+      "teaql/core/query_debug.hpp",
+      "teaql/core/request.hpp",
+      "teaql/core/request_debug.hpp",
+      "teaql/core/safe_expression.hpp",
+      "teaql/core/serde_utils.hpp",
+      "teaql/core/time.hpp",
+      "teaql/core/trace.hpp",
+      "teaql/core/value.hpp",
+      "teaql/core/web.hpp",
+      "teaql/core/xls.hpp"
+    ],
+    "teaql/data_service/executor.hpp": [
+      "teaql/async/operation.hpp",
+      "teaql/async/pending.hpp",
+      "teaql/async/stream.hpp",
+      "teaql/core/result.hpp",
+      "teaql/data_service/types.hpp"
+    ],
+    "teaql/data_service/model_debug.hpp": [
+      "teaql/core/mutation_debug.hpp",
+      "teaql/core/system_time_debug.hpp",
+      "teaql/data_service/sql_log_debug.hpp",
+      "teaql/data_service/types.hpp"
+    ],
+    "teaql/data_service/sql_log.hpp": [
+      "teaql/core/query.hpp",
+      "teaql/memory/clone.hpp",
+      "teaql/memory/function.hpp"
+    ],
+    "teaql/data_service/sql_log_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/data_service/sql_log.hpp"
+    ],
+    "teaql/data_service/types.hpp": [
+      "teaql/core/mutation.hpp",
+      "teaql/core/system_time.hpp",
+      "teaql/data_service/sql_log.hpp"
+    ],
+    "teaql/data_service.hpp": [
+      "teaql/data_service/executor.hpp",
+      "teaql/data_service/model_debug.hpp"
+    ],
+    "teaql/sql/bindings.hpp": [
+      "teaql/sql/types.hpp"
+    ],
+    "teaql/sql/detail/diagnostic.hpp": [
+      "teaql/data_service/executor.hpp"
+    ],
+    "teaql/sql/detail/mutation_execution.hpp": [
+      "teaql/sql/detail/diagnostic.hpp",
+      "teaql/sql/detail/query_plan.hpp",
+      "teaql/sql/error.hpp",
+      "teaql/sql/transport.hpp"
+    ],
+    "teaql/sql/detail/query_execution.hpp": [
+      "teaql/sql/detail/diagnostic.hpp",
+      "teaql/sql/detail/query_plan.hpp",
+      "teaql/sql/error.hpp",
+      "teaql/sql/transport.hpp"
+    ],
+    "teaql/sql/detail/query_plan.hpp": [
+      "teaql/data_service/executor.hpp",
+      "teaql/sql/dialect.hpp"
+    ],
+    "teaql/sql/detail/stream_execution.hpp": [
+      "teaql/sql/detail/query_execution.hpp"
+    ],
+    "teaql/sql/dialect.hpp": [
+      "teaql/core/mutation.hpp",
+      "teaql/sql/bindings.hpp"
+    ],
+    "teaql/sql/error.hpp": [
+      "teaql/sql/types.hpp"
+    ],
+    "teaql/sql/error_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/sql/error.hpp",
+      "teaql/sql/types.hpp"
+    ],
+    "teaql/sql/executor.hpp": [
+      "teaql/sql/detail/diagnostic.hpp",
+      "teaql/sql/detail/mutation_execution.hpp",
+      "teaql/sql/detail/query_execution.hpp",
+      "teaql/sql/detail/query_plan.hpp",
+      "teaql/sql/error.hpp",
+      "teaql/sql/transaction.hpp",
+      "teaql/sql/transport.hpp"
+    ],
+    "teaql/sql/model_debug.hpp": [
+      "teaql/data_service/sql_log_debug.hpp",
+      "teaql/sql/bindings.hpp",
+      "teaql/sql/dialect.hpp",
+      "teaql/sql/error_debug.hpp"
+    ],
+    "teaql/sql/transaction.hpp": [
+      "teaql/sql/detail/mutation_execution.hpp",
+      "teaql/sql/detail/query_execution.hpp",
+      "teaql/sql/detail/stream_execution.hpp"
+    ],
+    "teaql/sql/transport.hpp": [
+      "teaql/data_service/executor.hpp",
+      "teaql/sql/types.hpp"
+    ],
+    "teaql/sql/types.hpp": [
+      "teaql/core/result.hpp",
+      "teaql/data_service/sql_log.hpp",
+      "teaql/memory/function_ref.hpp"
+    ],
+    "teaql/sql.hpp": [
+      "teaql/sql/bindings.hpp",
+      "teaql/sql/dialect.hpp",
+      "teaql/sql/error_debug.hpp",
+      "teaql/sql/executor.hpp",
+      "teaql/sql/model_debug.hpp",
+      "teaql/sql/transaction.hpp",
+      "teaql/sql/transport.hpp",
+      "teaql/sql/types.hpp"
+    ],
+    "teaql/runtime/behavior.hpp": [
+      "teaql/core/mutation.hpp",
+      "teaql/core/query.hpp",
+      "teaql/runtime/error.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/business_clock.hpp": [
+      "teaql/core/time.hpp"
+    ],
+    "teaql/runtime/business_id.hpp": [
+      "teaql/core/business_id.hpp",
+      "teaql/memory/function_ref.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/cache.hpp": [
+      "teaql/core/row.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/check_result.hpp": [
+      "teaql/core/value.hpp"
+    ],
+    "teaql/runtime/check_result_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/runtime/check_result.hpp"
+    ],
+    "teaql/runtime/checker.hpp": [
+      "teaql/core/entity.hpp",
+      "teaql/runtime/check_result.hpp",
+      "teaql/runtime/graph.hpp"
+    ],
+    "teaql/runtime/checker_model_debug.hpp": [
+      "teaql/runtime/check_result_debug.hpp",
+      "teaql/runtime/checker.hpp"
+    ],
+    "teaql/runtime/context.hpp": [
+      "teaql/memory/arena.hpp",
+      "teaql/memory/strings.hpp",
+      "teaql/runtime/behavior.hpp",
+      "teaql/runtime/business_clock.hpp",
+      "teaql/runtime/business_id.hpp",
+      "teaql/runtime/checker.hpp",
+      "teaql/runtime/context_root.hpp",
+      "teaql/runtime/detail/context/identity.hpp",
+      "teaql/runtime/entity_reference.hpp",
+      "teaql/runtime/error.hpp",
+      "teaql/runtime/fix_evidence.hpp",
+      "teaql/runtime/i18n.hpp",
+      "teaql/runtime/id.hpp",
+      "teaql/runtime/locking.hpp",
+      "teaql/runtime/logging.hpp",
+      "teaql/runtime/mutation_policy.hpp",
+      "teaql/runtime/registry.hpp",
+      "teaql/runtime/resources.hpp",
+      "teaql/runtime/round_trip_reference_types.hpp",
+      "teaql/runtime/schema.hpp"
+    ],
+    "teaql/runtime/context_error.hpp": [
+      "teaql/core/result.hpp"
+    ],
+    "teaql/runtime/context_model_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/runtime/context_root.hpp",
+      "teaql/runtime/fix_evidence.hpp"
+    ],
+    "teaql/runtime/context_root.hpp": [
+      "teaql/core/result.hpp"
+    ],
+    "teaql/runtime/data_service.hpp": [
+      "teaql/runtime/detail/data_service/audited_auto_save.hpp",
+      "teaql/runtime/detail/data_service/audited_save.hpp",
+      "teaql/runtime/detail/data_service/enhanced_entities.hpp",
+      "teaql/runtime/detail/data_service/entity_graph_execution.hpp",
+      "teaql/runtime/detail/data_service/entity_graph_plan.hpp",
+      "teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "teaql/runtime/detail/data_service/entity_query.hpp",
+      "teaql/runtime/detail/data_service/entity_save_adapters.hpp",
+      "teaql/runtime/detail/data_service/entity_service.hpp",
+      "teaql/runtime/detail/data_service/entity_stream.hpp",
+      "teaql/runtime/detail/data_service/graph_node_commands.hpp",
+      "teaql/runtime/detail/data_service/graph_saver.hpp",
+      "teaql/runtime/detail/data_service/ledger_execution.hpp",
+      "teaql/runtime/detail/data_service/ledger_plan.hpp",
+      "teaql/runtime/detail/data_service/recursive_graph_write.hpp",
+      "teaql/runtime/detail/data_service/typed_aggregate.hpp"
+    ],
+    "teaql/runtime/data_store.hpp": [
+      "teaql/async/operation.hpp",
+      "teaql/core/value.hpp",
+      "teaql/runtime/system_time.hpp"
+    ],
+    "teaql/runtime/detail/audit_privacy.hpp": [
+      "teaql/runtime/event.hpp"
+    ],
+    "teaql/runtime/detail/builtin_i18n_data.hpp": [],
+    "teaql/runtime/detail/context/entity.hpp": [
+      "teaql/runtime/context.hpp",
+      "teaql/runtime/entity_graph_decoder.hpp"
+    ],
+    "teaql/runtime/detail/context/identity.hpp": [
+      "teaql/core/integer128.hpp",
+      "teaql/memory/types.hpp",
+      "teaql/runtime/system_time.hpp"
+    ],
+    "teaql/runtime/detail/context/locking.hpp": [
+      "teaql/runtime/context.hpp"
+    ],
+    "teaql/runtime/detail/context/pagination.hpp": [
+      "teaql/runtime/context.hpp",
+      "teaql/runtime/pagination.hpp"
+    ],
+    "teaql/runtime/detail/data_service/audited_auto_save.hpp": [
+      "teaql/runtime/detail/data_service/audited_save.hpp"
+    ],
+    "teaql/runtime/detail/data_service/audited_save.hpp": [
+      "teaql/runtime/detail/data_service/graph_saver.hpp"
+    ],
+    "teaql/runtime/detail/data_service/base_mutation.hpp": [
+      "teaql/core/detail/debug.hpp",
+      "teaql/runtime/detail/data_service/declarations.hpp"
+    ],
+    "teaql/runtime/detail/data_service/base_query.hpp": [
+      "teaql/runtime/detail/data_service/declarations.hpp"
+    ],
+    "teaql/runtime/detail/data_service/context_mutation.hpp": [
+      "teaql/runtime/cache.hpp",
+      "teaql/runtime/detail/data_service/base_mutation.hpp",
+      "teaql/runtime/detail/data_service/context_query.hpp",
+      "teaql/runtime/detail/data_service/declarations.hpp",
+      "teaql/runtime/detail/query_keys.hpp"
+    ],
+    "teaql/runtime/detail/data_service/context_query.hpp": [
+      "teaql/runtime/detail/data_service/base_query.hpp",
+      "teaql/runtime/detail/data_service/declarations.hpp",
+      "teaql/runtime/telemetry.hpp"
+    ],
+    "teaql/runtime/detail/data_service/data_service.hpp": [
+      "teaql/runtime/detail/data_service/base_mutation.hpp",
+      "teaql/runtime/detail/data_service/base_query.hpp",
+      "teaql/runtime/detail/data_service/context_mutation.hpp",
+      "teaql/runtime/detail/data_service/context_query.hpp",
+      "teaql/runtime/detail/data_service/declarations.hpp"
+    ],
+    "teaql/runtime/detail/data_service/declarations.hpp": [
+      "teaql/core/list.hpp",
+      "teaql/runtime/detail/context/entity.hpp"
+    ],
+    "teaql/runtime/detail/data_service/enhanced_entities.hpp": [
+      "teaql/runtime/detail/data_service/id_set_page.hpp"
+    ],
+    "teaql/runtime/detail/data_service/entity_graph_execution.hpp": [
+      "teaql/runtime/detail/data_service/entity_mutation.hpp",
+      "teaql/runtime/detail/governance_scope.hpp"
+    ],
+    "teaql/runtime/detail/data_service/entity_graph_plan.hpp": [
+      "teaql/runtime/detail/data_service/entity_query.hpp"
+    ],
+    "teaql/runtime/detail/data_service/entity_mutation.hpp": [
+      "teaql/runtime/detail/data_service/entity_graph_plan.hpp",
+      "teaql/runtime/event.hpp"
+    ],
+    "teaql/runtime/detail/data_service/entity_query.hpp": [
+      "teaql/runtime/cache.hpp",
+      "teaql/runtime/detail/context/pagination.hpp",
+      "teaql/runtime/detail/data_service/entity_service.hpp",
+      "teaql/runtime/detail/data_service/relation_enhancement.hpp",
+      "teaql/runtime/detail/query_keys.hpp"
+    ],
+    "teaql/runtime/detail/data_service/entity_save_adapters.hpp": [
+      "teaql/core/entity_graph.hpp",
+      "teaql/runtime/detail/data_service/entity_graph_execution.hpp"
+    ],
+    "teaql/runtime/detail/data_service/entity_service.hpp": [
+      "teaql/runtime/detail/data_service/data_service.hpp",
+      "teaql/runtime/entity_status.hpp",
+      "teaql/runtime/purposed_query.hpp",
+      "teaql/runtime/relation.hpp"
+    ],
+    "teaql/runtime/detail/data_service/entity_stream.hpp": [
+      "teaql/runtime/detail/data_service/entity_service.hpp"
+    ],
+    "teaql/runtime/detail/data_service/graph_node_commands.hpp": [
+      "teaql/runtime/detail/data_service/entity_graph_execution.hpp"
+    ],
+    "teaql/runtime/detail/data_service/graph_saver.hpp": [
+      "teaql/runtime/detail/data_service/ledger_execution.hpp"
+    ],
+    "teaql/runtime/detail/data_service/id_set_build_lock.hpp": [
+      "teaql/async/operation.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/detail/data_service/id_set_page.hpp": [
+      "teaql/runtime/detail/data_service/entity_query.hpp",
+      "teaql/runtime/detail/data_service/id_set_build_lock.hpp"
+    ],
+    "teaql/runtime/detail/data_service/ledger_execution.hpp": [
+      "teaql/runtime/detail/data_service/entity_graph_execution.hpp",
+      "teaql/runtime/detail/data_service/ledger_plan.hpp",
+      "teaql/runtime/detail/graph_fix_scope.hpp"
+    ],
+    "teaql/runtime/detail/data_service/ledger_plan.hpp": [
+      "teaql/runtime/detail/data_service/entity_service.hpp",
+      "teaql/runtime/entity_save.hpp"
+    ],
+    "teaql/runtime/detail/data_service/recursive_graph_write.hpp": [
+      "teaql/runtime/detail/data_service/graph_node_commands.hpp"
+    ],
+    "teaql/runtime/detail/data_service/relation_enhancement.hpp": [
+      "teaql/runtime/detail/data_service/relation_hydration.hpp"
+    ],
+    "teaql/runtime/detail/data_service/relation_execution.hpp": [
+      "teaql/runtime/detail/data_service/data_service.hpp",
+      "teaql/runtime/relation.hpp"
+    ],
+    "teaql/runtime/detail/data_service/relation_hydration.hpp": [
+      "teaql/runtime/detail/data_service/entity_service.hpp",
+      "teaql/runtime/detail/data_service/relation_execution.hpp",
+      "teaql/runtime/detail/data_service/relation_installation.hpp"
+    ],
+    "teaql/runtime/detail/data_service/relation_installation.hpp": [
+      "teaql/runtime/detail/context/entity.hpp",
+      "teaql/runtime/relation.hpp"
+    ],
+    "teaql/runtime/detail/data_service/typed_aggregate.hpp": [
+      "teaql/runtime/detail/data_service/entity_query.hpp"
+    ],
+    "teaql/runtime/detail/governance_scope.hpp": [
+      "teaql/runtime/context.hpp",
+      "teaql/runtime/mutation_governance.hpp"
+    ],
+    "teaql/runtime/detail/graph_fix_scope.hpp": [
+      "teaql/runtime/context.hpp"
+    ],
+    "teaql/runtime/detail/query_keys.hpp": [
+      "teaql/core/query.hpp"
+    ],
+    "teaql/runtime/detail/reference_crypto.hpp": [
+      "teaql/runtime/entity_reference.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/entity_graph_decoder.hpp": [
+      "teaql/runtime/entity_runtime.hpp"
+    ],
+    "teaql/runtime/entity_key.hpp": [
+      "teaql/core/value.hpp",
+      "teaql/memory/scoped.hpp"
+    ],
+    "teaql/runtime/entity_reference.hpp": [
+      "teaql/core/detail/aes_gcm.hpp",
+      "teaql/core/result.hpp",
+      "teaql/memory/function.hpp",
+      "teaql/runtime/business_clock.hpp"
+    ],
+    "teaql/runtime/entity_runtime.hpp": [
+      "teaql/core/list.hpp",
+      "teaql/memory/arena.hpp",
+      "teaql/memory/function_ref.hpp",
+      "teaql/runtime/entity_key.hpp",
+      "teaql/runtime/id_space.hpp"
+    ],
+    "teaql/runtime/entity_runtime_debug.hpp": [
+      "teaql/core/mutation_debug.hpp",
+      "teaql/runtime/entity_runtime.hpp"
+    ],
+    "teaql/runtime/entity_save.hpp": [
+      "teaql/runtime/context.hpp",
+      "teaql/runtime/entity_runtime.hpp"
+    ],
+    "teaql/runtime/entity_status.hpp": [],
+    "teaql/runtime/entity_status_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/runtime/entity_status.hpp"
+    ],
+    "teaql/runtime/error.hpp": [
+      "teaql/core/entity.hpp",
+      "teaql/runtime/check_result.hpp",
+      "teaql/runtime/context_error.hpp",
+      "teaql/sql/types.hpp"
+    ],
+    "teaql/runtime/error_debug.hpp": [
+      "teaql/core/entity_debug.hpp",
+      "teaql/runtime/check_result_debug.hpp",
+      "teaql/runtime/error.hpp",
+      "teaql/sql/error_debug.hpp"
+    ],
+    "teaql/runtime/event.hpp": [
+      "teaql/core/trace.hpp",
+      "teaql/runtime/error.hpp",
+      "teaql/runtime/mutation_governance.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/event_debug.hpp": [
+      "teaql/core/mutation_debug.hpp",
+      "teaql/runtime/event.hpp",
+      "teaql/runtime/mutation_policy_debug.hpp"
+    ],
+    "teaql/runtime/fix_evidence.hpp": [
+      "teaql/core/time.hpp",
+      "teaql/memory/clone.hpp",
+      "teaql/memory/scoped.hpp"
+    ],
+    "teaql/runtime/generated_support.hpp": [
+      "teaql/core/request.hpp",
+      "teaql/runtime/data_service.hpp"
+    ],
+    "teaql/runtime/graph.hpp": [
+      "teaql/core/mutation.hpp",
+      "teaql/core/row.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/graph_debug.hpp": [
+      "teaql/core/mutation_debug.hpp",
+      "teaql/runtime/graph.hpp"
+    ],
+    "teaql/runtime/i18n.hpp": [
+      "teaql/runtime/error.hpp",
+      "teaql/runtime/language.hpp"
+    ],
+    "teaql/runtime/i18n_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/runtime/i18n.hpp"
+    ],
+    "teaql/runtime/id.hpp": [
+      "teaql/memory/function_ref.hpp",
+      "teaql/runtime/error.hpp",
+      "teaql/runtime/id_space.hpp"
+    ],
+    "teaql/runtime/id_space.hpp": [
+      "teaql/memory/types.hpp"
+    ],
+    "teaql/runtime/inmemory_engine.hpp": [
+      "teaql/core/query.hpp",
+      "teaql/data_service/types.hpp"
+    ],
+    "teaql/runtime/language.hpp": [
+      "teaql/runtime/check_result.hpp"
+    ],
+    "teaql/runtime/locking.hpp": [
+      "teaql/async/operation.hpp"
+    ],
+    "teaql/runtime/log_formatter.hpp": [
+      "teaql/runtime/event.hpp",
+      "teaql/runtime/logging.hpp"
+    ],
+    "teaql/runtime/log_manager.hpp": [
+      "teaql/runtime/log_formatter.hpp"
+    ],
+    "teaql/runtime/log_model_debug.hpp": [
+      "teaql/core/query_debug.hpp",
+      "teaql/core/system_time_debug.hpp",
+      "teaql/data_service/sql_log_debug.hpp",
+      "teaql/runtime/log_formatter.hpp"
+    ],
+    "teaql/runtime/logging.hpp": [
+      "teaql/data_service/types.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/module.hpp": [
+      "teaql/runtime/behavior.hpp",
+      "teaql/runtime/checker.hpp",
+      "teaql/runtime/entity_graph_decoder.hpp",
+      "teaql/runtime/event.hpp",
+      "teaql/runtime/graph.hpp",
+      "teaql/runtime/language.hpp",
+      "teaql/runtime/registry.hpp",
+      "teaql/runtime/schema.hpp"
+    ],
+    "teaql/runtime/mutation_governance.hpp": [
+      "teaql/core/detail/text.hpp",
+      "teaql/memory/clone.hpp",
+      "teaql/runtime/entity_key.hpp"
+    ],
+    "teaql/runtime/mutation_policy.hpp": [
+      "teaql/memory/function.hpp",
+      "teaql/runtime/error.hpp",
+      "teaql/runtime/mutation_governance.hpp",
+      "teaql/runtime/resources.hpp",
+      "teaql/runtime/system_time.hpp"
+    ],
+    "teaql/runtime/mutation_policy_debug.hpp": [
+      "teaql/core/system_time_debug.hpp",
+      "teaql/runtime/entity_runtime_debug.hpp",
+      "teaql/runtime/mutation_policy.hpp"
+    ],
+    "teaql/runtime/pagination.hpp": [
+      "teaql/async/operation.hpp",
+      "teaql/core/query.hpp",
+      "teaql/runtime/resources.hpp",
+      "teaql/runtime/system_time.hpp"
+    ],
+    "teaql/runtime/purposed_query.hpp": [
+      "teaql/core/detail/text.hpp",
+      "teaql/core/query.hpp"
+    ],
+    "teaql/runtime/purposed_query_debug.hpp": [
+      "teaql/core/query_debug.hpp",
+      "teaql/runtime/purposed_query.hpp"
+    ],
+    "teaql/runtime/query_store_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/core/query_debug.hpp",
+      "teaql/core/system_time_debug.hpp",
+      "teaql/runtime/cache.hpp",
+      "teaql/runtime/pagination.hpp"
+    ],
+    "teaql/runtime/reference_model_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/runtime/round_trip_reference.hpp"
+    ],
+    "teaql/runtime/registry.hpp": [
+      "teaql/core/entity.hpp",
+      "teaql/data_service/executor.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/registry_debug.hpp": [
+      "teaql/core/meta_debug.hpp",
+      "teaql/runtime/registry.hpp"
+    ],
+    "teaql/runtime/relation.hpp": [
+      "teaql/core/query.hpp",
+      "teaql/runtime/error.hpp"
+    ],
+    "teaql/runtime/relation_model_debug.hpp": [
+      "teaql/core/query_debug.hpp",
+      "teaql/runtime/relation.hpp"
+    ],
+    "teaql/runtime/resources.hpp": [
+      "teaql/core/value.hpp",
+      "teaql/memory/arena.hpp",
+      "teaql/runtime/context_error.hpp"
+    ],
+    "teaql/runtime/round_trip_reference.hpp": [
+      "teaql/runtime/entity_reference.hpp",
+      "teaql/runtime/resources.hpp",
+      "teaql/runtime/round_trip_reference_types.hpp"
+    ],
+    "teaql/runtime/round_trip_reference_types.hpp": [
+      "teaql/core/json.hpp",
+      "teaql/memory/scoped.hpp",
+      "teaql/runtime/business_clock.hpp"
+    ],
+    "teaql/runtime/runtime_id_debug.hpp": [
+      "teaql/runtime/business_id.hpp",
+      "teaql/runtime/id.hpp",
+      "teaql/runtime/reference_model_debug.hpp"
+    ],
+    "teaql/runtime/schema.hpp": [
+      "teaql/async/operation.hpp",
+      "teaql/runtime/error.hpp"
+    ],
+    "teaql/runtime/system_time.hpp": [
+      "teaql/core/system_time.hpp"
+    ],
+    "teaql/runtime/telemetry.hpp": [
+      "teaql/async/operation.hpp",
+      "teaql/memory/context_box.hpp",
+      "teaql/memory/function_ref.hpp",
+      "teaql/memory/scoped.hpp",
+      "teaql/runtime/resources.hpp"
+    ],
+    "teaql/runtime/telemetry_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/runtime/telemetry.hpp"
+    ],
+    "teaql/runtime/transaction.hpp": [
+      "teaql/memory/once_function.hpp",
+      "teaql/runtime/data_service.hpp"
+    ],
+    "teaql/runtime.hpp": [
+      "teaql/runtime/business_id.hpp",
+      "teaql/runtime/checker_model_debug.hpp",
+      "teaql/runtime/context.hpp",
+      "teaql/runtime/context_model_debug.hpp",
+      "teaql/runtime/data_service.hpp",
+      "teaql/runtime/data_store.hpp",
+      "teaql/runtime/entity_graph_decoder.hpp",
+      "teaql/runtime/entity_reference.hpp",
+      "teaql/runtime/entity_runtime.hpp",
+      "teaql/runtime/entity_runtime_debug.hpp",
+      "teaql/runtime/entity_save.hpp",
+      "teaql/runtime/entity_status.hpp",
+      "teaql/runtime/entity_status_debug.hpp",
+      "teaql/runtime/error_debug.hpp",
+      "teaql/runtime/event.hpp",
+      "teaql/runtime/event_debug.hpp",
+      "teaql/runtime/generated_support.hpp",
+      "teaql/runtime/graph_debug.hpp",
+      "teaql/runtime/i18n.hpp",
+      "teaql/runtime/i18n_debug.hpp",
+      "teaql/runtime/id.hpp",
+      "teaql/runtime/inmemory_engine.hpp",
+      "teaql/runtime/language.hpp",
+      "teaql/runtime/log_formatter.hpp",
+      "teaql/runtime/log_manager.hpp",
+      "teaql/runtime/log_model_debug.hpp",
+      "teaql/runtime/module.hpp",
+      "teaql/runtime/mutation_policy.hpp",
+      "teaql/runtime/mutation_policy_debug.hpp",
+      "teaql/runtime/purposed_query_debug.hpp",
+      "teaql/runtime/query_store_debug.hpp",
+      "teaql/runtime/reference_model_debug.hpp",
+      "teaql/runtime/registry_debug.hpp",
+      "teaql/runtime/relation_model_debug.hpp",
+      "teaql/runtime/round_trip_reference.hpp",
+      "teaql/runtime/runtime_id_debug.hpp",
+      "teaql/runtime/telemetry.hpp",
+      "teaql/runtime/telemetry_debug.hpp",
+      "teaql/runtime/transaction.hpp"
+    ],
+    "teaql/provider_sqlite/boxed_error.hpp": [
+      "teaql/memory/arena.hpp",
+      "teaql/provider_sqlite/native_diagnostics.hpp"
+    ],
+    "teaql/provider_sqlite/business_id.hpp": [
+      "teaql/provider_sqlite/provider.hpp",
+      "teaql/runtime/business_id.hpp"
+    ],
+    "teaql/provider_sqlite/detail/bindings.hpp": [
+      "teaql/provider_sqlite/error.hpp"
+    ],
+    "teaql/provider_sqlite/detail/decoding.hpp": [
+      "teaql/core/row.hpp",
+      "teaql/provider_sqlite/error.hpp"
+    ],
+    "teaql/provider_sqlite/detail/schema.hpp": [
+      "teaql/provider_sqlite/dialect.hpp",
+      "teaql/provider_sqlite/error.hpp"
+    ],
+    "teaql/provider_sqlite/dialect.hpp": [
+      "teaql/sql/dialect.hpp"
+    ],
+    "teaql/provider_sqlite/driver_error.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/memory/scoped.hpp",
+      "teaql/provider_sqlite/boxed_error.hpp",
+      "teaql/provider_sqlite/native_diagnostics.hpp",
+      "teaql/provider_sqlite/simple_error.hpp"
+    ],
+    "teaql/provider_sqlite/error.hpp": [
+      "teaql/provider_sqlite/driver_error.hpp",
+      "teaql/sql/types.hpp"
+    ],
+    "teaql/provider_sqlite/error_debug.hpp": [
+      "teaql/provider_sqlite/error.hpp",
+      "teaql/sql/error_debug.hpp"
+    ],
+    "teaql/provider_sqlite/from_sql_error.hpp": [
+      "teaql/provider_sqlite/boxed_error.hpp",
+      "teaql/provider_sqlite/simple_error.hpp"
+    ],
+    "teaql/provider_sqlite/id.hpp": [
+      "teaql/provider_sqlite/provider.hpp",
+      "teaql/runtime/id.hpp"
+    ],
+    "teaql/provider_sqlite/model_debug.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/provider_sqlite/dialect.hpp",
+      "teaql/provider_sqlite/schema.hpp"
+    ],
+    "teaql/provider_sqlite/native_diagnostics.hpp": [
+      "teaql/core/debug.hpp",
+      "teaql/memory/scoped.hpp"
+    ],
+    "teaql/provider_sqlite/provider.hpp": [
+      "teaql/provider_sqlite/error.hpp",
+      "teaql/sql/transport.hpp"
+    ],
+    "teaql/provider_sqlite/schema.hpp": [
+      "teaql/provider_sqlite/dialect.hpp",
+      "teaql/provider_sqlite/provider.hpp",
+      "teaql/runtime/context.hpp"
+    ],
+    "teaql/provider_sqlite/simple_error.hpp": [
+      "teaql/provider_sqlite/native_diagnostics.hpp"
+    ]
+  },
+  "header_topological_order": [
+    "teaql/memory/limits.hpp",
+    "teaql/memory/reference.hpp",
+    "teaql/memory/arena.hpp",
+    "teaql/memory/types.hpp",
+    "teaql/memory/clone.hpp",
+    "teaql/async/operation.hpp",
+    "teaql/async/stream.hpp",
+    "teaql/async/pending.hpp",
+    "teaql/memory/scoped.hpp",
+    "teaql/core/result.hpp",
+    "teaql/core/time.hpp",
+    "teaql/core/business_id.hpp",
+    "teaql/core/decimal_format.hpp",
+    "teaql/core/decimal_error.hpp",
+    "teaql/core/decimal_inline_string.hpp",
+    "teaql/core/decimal_json_error.hpp",
+    "teaql/core/integer128.hpp",
+    "teaql/core/decimal.hpp",
+    "teaql/core/json.hpp",
+    "teaql/core/value.hpp",
+    "teaql/core/detail/debug.hpp",
+    "teaql/core/detail/bool_vector.hpp",
+    "teaql/core/detail/text.hpp",
+    "teaql/core/meta.hpp",
+    "teaql/core/trace.hpp",
+    "teaql/core/mutation.hpp",
+    "teaql/core/row.hpp",
+    "teaql/core/entity.hpp",
+    "teaql/core/list.hpp",
+    "teaql/core/debug.hpp",
+    "teaql/core/business_id_debug.hpp",
+    "teaql/core/chrono_value.hpp",
+    "teaql/core/decimal_debug.hpp",
+    "teaql/core/expr.hpp",
+    "teaql/core/query.hpp",
+    "teaql/memory/function_ref.hpp",
+    "teaql/core/dynamic_search.hpp",
+    "teaql/core/meta_debug.hpp",
+    "teaql/core/query_debug.hpp",
+    "teaql/core/dynamic_search_debug.hpp",
+    "teaql/core/entity_debug.hpp",
+    "teaql/core/entity_graph.hpp",
+    "teaql/core/mutation_debug.hpp",
+    "teaql/core/entity_graph_debug.hpp",
+    "teaql/core/model_decode.hpp",
+    "teaql/core/detail/model_json.hpp",
+    "teaql/core/eval.hpp",
+    "teaql/core/web.hpp",
+    "teaql/core/xls.hpp",
+    "teaql/core/presentation_debug.hpp",
+    "teaql/core/request.hpp",
+    "teaql/core/request_debug.hpp",
+    "teaql/memory/function.hpp",
+    "teaql/core/safe_expression.hpp",
+    "teaql/core/serde_utils.hpp",
+    "teaql/core.hpp",
+    "teaql/core/detail/aes_gcm.hpp",
+    "teaql/core/detail/debug_escape_ranges.hpp",
+    "teaql/core/detail/sha256.hpp",
+    "teaql/core/detail/hmac_sha256.hpp",
+    "teaql/core/detail/language_case_tables.hpp",
+    "teaql/core/detail/number_text.hpp",
+    "teaql/core/detail/query_debug.hpp",
+    "teaql/core/detail/uppercase_tables.hpp",
+    "teaql/core/system_time.hpp",
+    "teaql/core/system_time_debug.hpp",
+    "teaql/data_service/sql_log.hpp",
+    "teaql/data_service/types.hpp",
+    "teaql/data_service/executor.hpp",
+    "teaql/data_service/sql_log_debug.hpp",
+    "teaql/data_service/model_debug.hpp",
+    "teaql/data_service.hpp",
+    "teaql/memory/context_box.hpp",
+    "teaql/memory/once_function.hpp",
+    "teaql/memory/strings.hpp",
+    "teaql/provider_sqlite/native_diagnostics.hpp",
+    "teaql/provider_sqlite/boxed_error.hpp",
+    "teaql/provider_sqlite/simple_error.hpp",
+    "teaql/provider_sqlite/driver_error.hpp",
+    "teaql/sql/types.hpp",
+    "teaql/provider_sqlite/error.hpp",
+    "teaql/sql/transport.hpp",
+    "teaql/provider_sqlite/provider.hpp",
+    "teaql/runtime/context_error.hpp",
+    "teaql/runtime/resources.hpp",
+    "teaql/runtime/business_id.hpp",
+    "teaql/provider_sqlite/business_id.hpp",
+    "teaql/provider_sqlite/detail/bindings.hpp",
+    "teaql/provider_sqlite/detail/decoding.hpp",
+    "teaql/sql/bindings.hpp",
+    "teaql/sql/dialect.hpp",
+    "teaql/provider_sqlite/dialect.hpp",
+    "teaql/provider_sqlite/detail/schema.hpp",
+    "teaql/sql/error.hpp",
+    "teaql/sql/error_debug.hpp",
+    "teaql/provider_sqlite/error_debug.hpp",
+    "teaql/provider_sqlite/from_sql_error.hpp",
+    "teaql/runtime/check_result.hpp",
+    "teaql/runtime/error.hpp",
+    "teaql/runtime/id_space.hpp",
+    "teaql/runtime/id.hpp",
+    "teaql/provider_sqlite/id.hpp",
+    "teaql/runtime/behavior.hpp",
+    "teaql/runtime/business_clock.hpp",
+    "teaql/runtime/graph.hpp",
+    "teaql/runtime/checker.hpp",
+    "teaql/runtime/context_root.hpp",
+    "teaql/runtime/system_time.hpp",
+    "teaql/runtime/detail/context/identity.hpp",
+    "teaql/runtime/entity_reference.hpp",
+    "teaql/runtime/fix_evidence.hpp",
+    "teaql/runtime/language.hpp",
+    "teaql/runtime/i18n.hpp",
+    "teaql/runtime/locking.hpp",
+    "teaql/runtime/logging.hpp",
+    "teaql/runtime/entity_key.hpp",
+    "teaql/runtime/mutation_governance.hpp",
+    "teaql/runtime/mutation_policy.hpp",
+    "teaql/runtime/registry.hpp",
+    "teaql/runtime/round_trip_reference_types.hpp",
+    "teaql/runtime/schema.hpp",
+    "teaql/runtime/context.hpp",
+    "teaql/provider_sqlite/schema.hpp",
+    "teaql/provider_sqlite/model_debug.hpp",
+    "teaql/runtime/check_result_debug.hpp",
+    "teaql/runtime/checker_model_debug.hpp",
+    "teaql/runtime/context_model_debug.hpp",
+    "teaql/runtime/cache.hpp",
+    "teaql/runtime/pagination.hpp",
+    "teaql/runtime/detail/context/pagination.hpp",
+    "teaql/runtime/entity_runtime.hpp",
+    "teaql/runtime/entity_graph_decoder.hpp",
+    "teaql/runtime/detail/context/entity.hpp",
+    "teaql/runtime/detail/data_service/declarations.hpp",
+    "teaql/runtime/detail/data_service/base_mutation.hpp",
+    "teaql/runtime/detail/data_service/base_query.hpp",
+    "teaql/runtime/telemetry.hpp",
+    "teaql/runtime/detail/data_service/context_query.hpp",
+    "teaql/runtime/detail/query_keys.hpp",
+    "teaql/runtime/detail/data_service/context_mutation.hpp",
+    "teaql/runtime/detail/data_service/data_service.hpp",
+    "teaql/runtime/entity_status.hpp",
+    "teaql/runtime/purposed_query.hpp",
+    "teaql/runtime/relation.hpp",
+    "teaql/runtime/detail/data_service/entity_service.hpp",
+    "teaql/runtime/detail/data_service/relation_execution.hpp",
+    "teaql/runtime/detail/data_service/relation_installation.hpp",
+    "teaql/runtime/detail/data_service/relation_hydration.hpp",
+    "teaql/runtime/detail/data_service/relation_enhancement.hpp",
+    "teaql/runtime/detail/data_service/entity_query.hpp",
+    "teaql/runtime/detail/data_service/entity_graph_plan.hpp",
+    "teaql/runtime/event.hpp",
+    "teaql/runtime/detail/data_service/entity_mutation.hpp",
+    "teaql/runtime/detail/governance_scope.hpp",
+    "teaql/runtime/detail/data_service/entity_graph_execution.hpp",
+    "teaql/runtime/entity_save.hpp",
+    "teaql/runtime/detail/data_service/ledger_plan.hpp",
+    "teaql/runtime/detail/graph_fix_scope.hpp",
+    "teaql/runtime/detail/data_service/ledger_execution.hpp",
+    "teaql/runtime/detail/data_service/graph_saver.hpp",
+    "teaql/runtime/detail/data_service/audited_save.hpp",
+    "teaql/runtime/detail/data_service/audited_auto_save.hpp",
+    "teaql/runtime/detail/data_service/id_set_build_lock.hpp",
+    "teaql/runtime/detail/data_service/id_set_page.hpp",
+    "teaql/runtime/detail/data_service/enhanced_entities.hpp",
+    "teaql/runtime/detail/data_service/entity_save_adapters.hpp",
+    "teaql/runtime/detail/data_service/entity_stream.hpp",
+    "teaql/runtime/detail/data_service/graph_node_commands.hpp",
+    "teaql/runtime/detail/data_service/recursive_graph_write.hpp",
+    "teaql/runtime/detail/data_service/typed_aggregate.hpp",
+    "teaql/runtime/data_service.hpp",
+    "teaql/runtime/data_store.hpp",
+    "teaql/runtime/entity_runtime_debug.hpp",
+    "teaql/runtime/entity_status_debug.hpp",
+    "teaql/runtime/error_debug.hpp",
+    "teaql/runtime/mutation_policy_debug.hpp",
+    "teaql/runtime/event_debug.hpp",
+    "teaql/runtime/generated_support.hpp",
+    "teaql/runtime/graph_debug.hpp",
+    "teaql/runtime/i18n_debug.hpp",
+    "teaql/runtime/inmemory_engine.hpp",
+    "teaql/runtime/log_formatter.hpp",
+    "teaql/runtime/log_manager.hpp",
+    "teaql/runtime/log_model_debug.hpp",
+    "teaql/runtime/module.hpp",
+    "teaql/runtime/purposed_query_debug.hpp",
+    "teaql/runtime/query_store_debug.hpp",
+    "teaql/runtime/round_trip_reference.hpp",
+    "teaql/runtime/reference_model_debug.hpp",
+    "teaql/runtime/registry_debug.hpp",
+    "teaql/runtime/relation_model_debug.hpp",
+    "teaql/runtime/runtime_id_debug.hpp",
+    "teaql/runtime/telemetry_debug.hpp",
+    "teaql/runtime/transaction.hpp",
+    "teaql/runtime.hpp",
+    "teaql/runtime/detail/audit_privacy.hpp",
+    "teaql/runtime/detail/builtin_i18n_data.hpp",
+    "teaql/runtime/detail/context/locking.hpp",
+    "teaql/runtime/detail/reference_crypto.hpp",
+    "teaql/sql/detail/diagnostic.hpp",
+    "teaql/sql/detail/query_plan.hpp",
+    "teaql/sql/detail/mutation_execution.hpp",
+    "teaql/sql/detail/query_execution.hpp",
+    "teaql/sql/detail/stream_execution.hpp",
+    "teaql/sql/transaction.hpp",
+    "teaql/sql/executor.hpp",
+    "teaql/sql/model_debug.hpp",
+    "teaql/sql.hpp"
+  ],
+  "modules": {
+    "teaql_memory": [],
+    "teaql_async": [
+      "teaql_memory"
+    ],
+    "teaql_core": [
+      "teaql_memory"
+    ],
+    "teaql_data_service": [
+      "teaql_core",
+      "teaql_async"
+    ],
+    "teaql_sql": [
+      "teaql_data_service"
+    ],
+    "teaql_runtime": [
+      "teaql_sql"
+    ],
+    "teaql_provider_sqlite": [
+      "teaql_runtime"
+    ]
+  },
+  "module_topological_order": [
+    "teaql_memory",
+    "teaql_async",
+    "teaql_core",
+    "teaql_data_service",
+    "teaql_sql",
+    "teaql_runtime",
+    "teaql_provider_sqlite"
+  ],
+  "header_count": 208,
+  "header_edge_count": 552
+}

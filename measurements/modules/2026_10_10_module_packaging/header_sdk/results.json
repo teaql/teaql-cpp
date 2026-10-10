@@ -1,0 +1,84 @@
+{
+  "status": "Installed consumer contracts passed",
+  "modes": [
+    "headers"
+  ],
+  "relocated_prefix": "/tmp/teaql_m5_verified_headers_sdk/relocated_sdk",
+  "original_prefix_exists": false,
+  "distributed_bmis": 0,
+  "consumer_debug_flags": "-g0",
+  "producer_debug_flags": "-g1",
+  "toolchain_lock_sha256": "cb872117610ef3606215c9ac92f40382fd21321aedf731249175b8f4ff53c102",
+  "fixture_sha256": {
+    "CMakeLists.txt": "d3cfac006e6d1f544e94ff2f8eae3e02ed5c09e4dfe71375f3b89c17c7c3cc6b",
+    "header_bridge.cpp": "ee510a59ac4296e46052530ad03b6123297d46ca8c05b43089d6320e1c4371a4",
+    "main.cpp": "af2448645db4ab05902e1acba4b44add9f7dd86c1027ab3026b23df086d8ceef"
+  },
+  "steps": [
+    {
+      "name": "install",
+      "command": [
+        "cmake",
+        "--install",
+        "/home/philip/githome/teaql-cpp/build_native_current",
+        "--prefix",
+        "/tmp/teaql_m5_verified_headers_sdk/original_prefix"
+      ],
+      "exit_code": 0,
+      "seconds": 0.084
+    },
+    {
+      "name": "headers_configure",
+      "command": [
+        "cmake",
+        "-S",
+        "/tmp/teaql_m5_verified_headers_sdk/consumer_source",
+        "-B",
+        "/tmp/teaql_m5_verified_headers_sdk/consumer_headers",
+        "-G",
+        "Ninja",
+        "-DCMAKE_TOOLCHAIN_FILE=/home/philip/githome/teaql-cpp/scripts/toolchains/clang_native.cmake",
+        "-DCMAKE_PREFIX_PATH=/tmp/teaql_m5_verified_headers_sdk/relocated_sdk",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_CXX_FLAGS_DEBUG=-g0",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DTEAQL_CONSUME_MODULES=OFF"
+      ],
+      "exit_code": 0,
+      "seconds": 0.296
+    },
+    {
+      "name": "headers_build",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_verified_headers_sdk/consumer_headers",
+        "-j",
+        "8"
+      ],
+      "exit_code": 0,
+      "seconds": 10.244
+    },
+    {
+      "name": "headers_ctest",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "/tmp/teaql_m5_verified_headers_sdk/consumer_headers",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "seconds": 0.005
+    },
+    {
+      "name": "headers_no_work",
+      "command": [
+        "cmake",
+        "--build",
+        "/tmp/teaql_m5_verified_headers_sdk/consumer_headers"
+      ],
+      "exit_code": 0,
+      "seconds": 0.006
+    }
+  ]
+}

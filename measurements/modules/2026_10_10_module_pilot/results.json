@@ -1,0 +1,43 @@
+{
+  "stage": "M1b",
+  "status": "accepted for pinned native Clang23 profile",
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "module_packages": [
+    "teaql_memory",
+    "teaql_async",
+    "teaql_core"
+  ],
+  "exports": {
+    "teaql_memory": 49,
+    "teaql_async": 17,
+    "teaql_core": 308
+  },
+  "module_contracts": {
+    "passed": 6,
+    "total": 6,
+    "seconds": 0.13
+  },
+  "header_contract_selection": {
+    "passed": 6,
+    "total": 6
+  },
+  "production_body_check": "315 canonical files retain exact non-include bytes",
+  "context_qualification": "test-only; not production runtime/M3 acceptance",
+  "generator": "unchanged; development test consumers adapt includes only",
+  "sanitizer": "not repeated: unchanged ownership bodies",
+  "mips": "not repeated: unchanged target bodies; production facades not yet qualified",
+  "remaining": [
+    "M2 service/SQL",
+    "M3 runtime/SQLite/examples",
+    "M4 internal organization",
+    "M5 release/packaging/compiler matrix"
+  ],
+  "active_compiled_dependency_records": 105,
+  "canonical_contract_bodies": "all five match exactly after include/import removal",
+  "formatting": {
+    "version": "18.1.8",
+    "files": 694,
+    "check": "passed"
+  },
+  "no_work_rebuild": "passed"
+}

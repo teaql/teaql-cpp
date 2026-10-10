@@ -1,5 +1,6 @@
 #pragma once
-#include <teaql/runtime/detail/data_service/data_service.hpp>
+#include <teaql/runtime/detail/data_service/declarations.hpp>
+#include <teaql/runtime/detail/data_service/base_query.hpp>
 #include <teaql/runtime/telemetry.hpp>
 
 namespace teaql::detail {
