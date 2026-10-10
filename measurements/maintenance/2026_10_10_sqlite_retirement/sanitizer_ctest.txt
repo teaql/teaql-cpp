@@ -1,0 +1,9 @@
+Test project /home/philip/githome/teaql-cpp/build_sanitize_current
+    Start 182: runtime_log_contracts
+    Start 384: sqlite_contracts
+1/2 Test #182: runtime_log_contracts ............   Passed    0.01 sec
+2/2 Test #384: sqlite_contracts .................   Passed    0.04 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   0.04 sec

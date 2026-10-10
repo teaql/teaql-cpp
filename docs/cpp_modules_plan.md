@@ -64,9 +64,9 @@ unchanged; they are distinct mechanisms, not alternative module names.
 | C++ lifetime adaptation | `teaql_memory` | `include/teaql/memory`, `src/memory` |
 | C++ asynchronous protocol adaptation | `teaql_async` | `include/teaql/async`; initially an interface target |
 
-The two C++ adaptation packages do not replace or remove Rust concepts. Keep
-the legacy SQLite adapter isolated under `compatibility/teaql_legacy_sqlite`;
-it is not a Rust crate or part of the production import surface. Do not add
+The two C++ adaptation packages do not replace or remove Rust concepts. The early
+SQLite compatibility adapter was not a Rust crate or part of the production
+import surface and has been retired; see [the review](sqlite_compatibility.md). Do not add
 workspace directories for excluded databases, cloud components, integrations
 or the deferred generator.
 
@@ -108,7 +108,6 @@ teaql_runtime/
 teaql_provider_sqlite/
 examples/
 tests/parity/                        # shared Rust oracle and comparison harness
-compatibility/teaql_legacy_sqlite/
 scripts/
 docs/
 measurements/                        # historical evidence retains original paths

@@ -7,6 +7,7 @@ latest source revision or every device in the same architecture family.
 
 | Target | Experiment | Recorded date | Evidence |
 | --- | --- | --- | --- |
+| Native Clang23 and targeted ASan/UBSan | Early SQLite adapter retirement, production regression coverage and active target graphs | 2026-10-10 | [Retirement evidence](maintenance/2026_10_10_sqlite_retirement/README.md) |
 | Native Clang23, sanitizer and MIPS headers | M0-M5 final module release audit, qualified defaults and complete evidence | 2026-10-10 | [Final module release](modules/2026_10_10_module_release/README.md) |
 | Native Clang23, matched Debug profile | Sequential complete/consumer build timings, child RSS and BMI sizes | 2026-10-10 | [Isolated measurements](modules/2026_10_10_module_performance/README.md) |
 | OpenWrt GCC14.3/musl/MIPS74K under QEMU | Current header release 387/387, original examples, 427 dependencies | 2026-10-10 | [MIPS release](modules/2026_10_10_module_mips/README.md) |

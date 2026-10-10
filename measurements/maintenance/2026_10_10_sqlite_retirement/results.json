@@ -1,0 +1,50 @@
+{
+  "status": "Early extra C++ SQLite adapter removed; production regressions and selective validation passed",
+  "baseline_commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "parent_cpp_commit": "63e4d50526e0525aa02d92e6367b49237b26796e",
+  "native": {
+    "passed": 388,
+    "total": 388,
+    "seconds": 91.01,
+    "evidence": "native_ctest.txt"
+  },
+  "modules": {
+    "passed": 72,
+    "total": 72,
+    "seconds": 1.2,
+    "evidence": "module_last_test.txt"
+  },
+  "sanitizers": {
+    "passed": 2,
+    "total": 2,
+    "seconds": 0.04,
+    "selection": [
+      "sqlite_contracts",
+      "runtime_log_contracts"
+    ],
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "UBSAN_OPTIONS": "halt_on_error=1",
+    "evidence": "sanitizer_ctest.txt"
+  },
+  "mips": "Not repeated; no production functions, ABI, architecture or toolchain changes",
+  "removed_package_files": 8,
+  "retired_move_records": 7,
+  "retained_canonical_production_checkpoints": 309,
+  "source_test_dispositions": {
+    "covered_in_scope": 441,
+    "excluded_backend": 5,
+    "excluded_external": 5
+  },
+  "formatter": {
+    "version": "18.1.8",
+    "handwritten_cpp_files": 700
+  },
+  "no_work_builds": [
+    "native_no_work.txt",
+    "module_no_work.txt",
+    "sanitizer_no_work.txt"
+  ],
+  "production_algorithms": "Unchanged",
+  "generator": "Unchanged",
+  "physical_device": "Not executed"
+}

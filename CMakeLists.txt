@@ -53,7 +53,6 @@ add_subdirectory(teaql_data_service)
 add_subdirectory(teaql_sql)
 add_subdirectory(teaql_runtime)
 add_subdirectory(teaql_provider_sqlite)
-add_subdirectory(compatibility/teaql_legacy_sqlite)
 
 set(TEAQL_LAYER_METADATA "")
 foreach(layer IN ITEMS teaql_core teaql_memory teaql_data_service teaql_sql teaql_runtime)

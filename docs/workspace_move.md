@@ -11,6 +11,12 @@ The retained SQLite compatibility adapter is isolated in
 `compatibility/teaql_legacy_sqlite` and does not enter the production dependency
 graph. Each package has its own CMake definition and include directory.
 
+This paragraph records the M1a checkpoint. After `0.0.2`, the extra compatibility
+adapter was removed; see [the retirement review](sqlite_compatibility.md). The
+original move ledger and hashes remain intact. `verify_module_paths.py` checks
+the seven retired destinations against the explicit retirement ledger and still
+checks every retained canonical production body against the original checkpoint.
+
 Runtime context methods reside in `teaql_runtime/src/context`; data-service
 implementation helpers reside in `teaql_runtime/src/data_service`. Corresponding
 private headers are grouped under runtime `detail/context` and

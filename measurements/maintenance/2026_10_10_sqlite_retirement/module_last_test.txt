@@ -1,0 +1,1169 @@
+Start testing: Oct 10 19:34 CST
+----------------------------------------------------------
+396/460 Testing: module_data_service_model_contracts
+396/460 Test: module_data_service_model_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_data_service_model_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_data_service_model_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Data-service model contracts passed
+<end of output>
+Test time =   0.10 sec
+----------------------------------------------------------
+Test Passed.
+"module_data_service_model_contracts" end time: Oct 10 19:34 CST
+"module_data_service_model_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+391/460 Testing: module_core_aux_debug_contracts
+391/460 Test: module_core_aux_debug_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_core_aux_debug_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_core_aux_debug_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.16 sec
+----------------------------------------------------------
+Test Passed.
+"module_core_aux_debug_contracts" end time: Oct 10 19:34 CST
+"module_core_aux_debug_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+405/460 Testing: module_sql_query_executor_contracts
+405/460 Test: module_sql_query_executor_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_query_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_query_executor_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL query executor contracts passed
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_query_executor_contracts" end time: Oct 10 19:34 CST
+"module_sql_query_executor_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+439/460 Testing: module_context_reference_contracts
+439/460 Test: module_context_reference_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_context_reference_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_context_reference_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Checked Context memory contracts passed
+<end of output>
+Test time =   0.22 sec
+----------------------------------------------------------
+Test Passed.
+"module_context_reference_contracts" end time: Oct 10 19:34 CST
+"module_context_reference_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+460/460 Testing: module_canonical_examples_rust_parity
+460/460 Test: module_canonical_examples_rust_parity
+Command: "/usr/bin/python3.10" "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_examples.py" "--schema-crud" "/home/philip/githome/teaql-cpp/build_modules_native/teaql_sqlite_schema_crud" "--relations-graph" "/home/philip/githome/teaql-cpp/build_modules_native/teaql_sqlite_relations_graph"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_canonical_examples_rust_parity" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Runtime examples parity: 2/2 original SQLite scenarios match
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"module_canonical_examples_rust_parity" end time: Oct 10 19:34 CST
+"module_canonical_examples_rust_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+459/460 Testing: module_examples_rust_parity
+459/460 Test: module_examples_rust_parity
+Command: "/usr/bin/python3.10" "/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_examples.py" "--schema-crud" "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_schema_crud" "--relations-graph" "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_relations_graph"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_examples_rust_parity" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Runtime examples parity: 2/2 original SQLite scenarios match
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"module_examples_rust_parity" end time: Oct 10 19:34 CST
+"module_examples_rust_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+455/460 Testing: module_runtime_examples_context_contracts
+455/460 Test: module_runtime_examples_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_examples_tests" "/home/philip/githome/teaql-cpp/tests/parity/runtime_examples_provenance.json"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_runtime_examples_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Product.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Product.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+Runtime example ownership and graph rollback contracts passed
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"module_runtime_examples_context_contracts" end time: Oct 10 19:34 CST
+"module_runtime_examples_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+403/460 Testing: module_sql_model_api_contracts
+403/460 Test: module_sql_model_api_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_model_api_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_model_api_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL model API contracts passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_model_api_contracts" end time: Oct 10 19:34 CST
+"module_sql_model_api_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+417/460 Testing: module_original_runtime_context_tail
+417/460 Test: module_original_runtime_context_tail
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_context_tail"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_context_tail" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Four original Context-tail contracts passed
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_context_tail" end time: Oct 10 19:34 CST
+"module_original_runtime_context_tail" time elapsed: 00:00:00
+----------------------------------------------------------
+
+456/460 Testing: module_original_runtime_optimistic_conflict_output_contracts
+456/460 Test: module_original_runtime_optimistic_conflict_output_contracts
+Command: "/usr/bin/python3.10" "/home/philip/githome/teaql-cpp/tests/parity/teaql_runtime/optimistic_conflict_output.py" "--cpp" "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_memory_service"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_optimistic_conflict_output_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Original isolated-process optimistic-conflict output contract passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_optimistic_conflict_output_contracts" end time: Oct 10 19:34 CST
+"module_original_runtime_optimistic_conflict_output_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+458/460 Testing: module_example_sqlite_relations_graph
+458/460 Test: module_example_sqlite_relations_graph
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_relations_graph"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_example_sqlite_relations_graph" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-001] request=Product.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+relation+graph example rows: [{"id":1,"lines":[{"id":10,"name":"first-line","order_id":1,"product":{"id":100,"name":"keyboard"},"product_id":100},{"id":11,"name":"second-line","order_id":1,"product":{"id":101,"name":"mouse"},"product_id":101}],"lines_loaded":true,"name":"graph-order","version":1}]
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"module_example_sqlite_relations_graph" end time: Oct 10 19:34 CST
+"module_example_sqlite_relations_graph" time elapsed: 00:00:00
+----------------------------------------------------------
+
+433/460 Testing: module_round_trip_reference_context_contracts
+433/460 Test: module_round_trip_reference_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_round_trip_reference_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_round_trip_reference_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Round-trip reference ownership and policy contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_round_trip_reference_context_contracts" end time: Oct 10 19:34 CST
+"module_round_trip_reference_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+436/460 Testing: module_entity_reference_context_contracts
+436/460 Test: module_entity_reference_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_entity_reference_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_entity_reference_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Entity reference ownership contracts passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"module_entity_reference_context_contracts" end time: Oct 10 19:34 CST
+"module_entity_reference_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+452/460 Testing: module_provider_sqlite_schema_contracts
+452/460 Test: module_provider_sqlite_schema_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_schema_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_provider_sqlite_schema_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQLite schema provider contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_provider_sqlite_schema_contracts" end time: Oct 10 19:34 CST
+"module_provider_sqlite_schema_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+425/460 Testing: module_log_manager_contracts
+425/460 Test: module_log_manager_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_log_manager_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_log_manager_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Log manager contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_log_manager_contracts" end time: Oct 10 19:34 CST
+"module_log_manager_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+449/460 Testing: module_relation_hydration_contracts
+449/460 Test: module_relation_hydration_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_relation_hydration_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_relation_hydration_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Recursive relation, SQLite and lifetime contracts passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"module_relation_hydration_contracts" end time: Oct 10 19:34 CST
+"module_relation_hydration_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+441/460 Testing: module_graph_saver_context_contracts
+441/460 Test: module_graph_saver_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_graph_saver_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_graph_saver_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+Transactional graph saver contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_graph_saver_context_contracts" end time: Oct 10 19:34 CST
+"module_graph_saver_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+448/460 Testing: module_ledger_move_only_contracts
+448/460 Test: module_ledger_move_only_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_ledger_move_only_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_ledger_move_only_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+Move-only audited SQLite transaction contracts pass
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_ledger_move_only_contracts" end time: Oct 10 19:34 CST
+"module_ledger_move_only_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+457/460 Testing: module_example_sqlite_schema_crud
+457/460 Test: module_example_sqlite_schema_crud
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sqlite_schema_crud"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_example_sqlite_schema_crud" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+schema+crud example rows: [{"id":1,"lines":[],"lines_loaded":false,"name":"submitted","version":-3}]
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_example_sqlite_schema_crud" end time: Oct 10 19:34 CST
+"module_example_sqlite_schema_crud" time elapsed: 00:00:00
+----------------------------------------------------------
+
+442/460 Testing: module_audited_auto_save_context_contracts
+442/460 Test: module_audited_auto_save_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audited_auto_save_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_audited_auto_save_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Parent.saveGraph source=GeneratedDefault approval=NotApplicable
+Automatic audited contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_audited_auto_save_context_contracts" end time: Oct 10 19:34 CST
+"module_audited_auto_save_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+447/460 Testing: module_ledger_execution_context_contracts
+447/460 Test: module_ledger_execution_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_ledger_execution_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_ledger_execution_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Ledger execution contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_ledger_execution_context_contracts" end time: Oct 10 19:34 CST
+"module_ledger_execution_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+414/460 Testing: module_original_runtime_aggregates_cache
+414/460 Test: module_original_runtime_aggregates_cache
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_aggregates_cache"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_aggregates_cache" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Six original runtime-root aggregate/cache contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_aggregates_cache" end time: Oct 10 19:34 CST
+"module_original_runtime_aggregates_cache" time elapsed: 00:00:00
+----------------------------------------------------------
+
+407/460 Testing: module_sql_transaction_execution_contracts
+407/460 Test: module_sql_transaction_execution_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_transaction_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_transaction_execution_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL transaction execution contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_transaction_execution_contracts" end time: Oct 10 19:34 CST
+"module_sql_transaction_execution_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+443/460 Testing: module_audited_save_context_contracts
+443/460 Test: module_audited_save_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audited_save_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_audited_save_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+Audited save contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_audited_save_context_contracts" end time: Oct 10 19:34 CST
+"module_audited_save_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+413/460 Testing: module_original_runtime_typed_queries
+413/460 Test: module_original_runtime_typed_queries
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_typed_queries"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_typed_queries" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Six original runtime-root typed-query contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_typed_queries" end time: Oct 10 19:34 CST
+"module_original_runtime_typed_queries" time elapsed: 00:00:00
+----------------------------------------------------------
+
+397/460 Testing: module_data_service_scope_contracts
+397/460 Test: module_data_service_scope_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_data_service_scope_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_data_service_scope_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Data-service scoped diagnostics passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_data_service_scope_contracts" end time: Oct 10 19:34 CST
+"module_data_service_scope_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+412/460 Testing: module_original_runtime_events_relations
+412/460 Test: module_original_runtime_events_relations
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_events_relations"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_events_relations" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Eight original runtime-root event/order/relation contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_events_relations" end time: Oct 10 19:34 CST
+"module_original_runtime_events_relations" time elapsed: 00:00:00
+----------------------------------------------------------
+
+432/460 Testing: module_inmemory_context_contracts
+432/460 Test: module_inmemory_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_inmemory_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_inmemory_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+In-memory query ownership contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_inmemory_context_contracts" end time: Oct 10 19:34 CST
+"module_inmemory_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+406/460 Testing: module_sql_mutation_execution_contracts
+406/460 Test: module_sql_mutation_execution_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_execution_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_mutation_execution_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL mutation execution contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_mutation_execution_contracts" end time: Oct 10 19:34 CST
+"module_sql_mutation_execution_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+444/460 Testing: module_runtime_mutation_context_contracts
+444/460 Test: module_runtime_mutation_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_mutation_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_runtime_mutation_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Runtime mutation contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_runtime_mutation_context_contracts" end time: Oct 10 19:34 CST
+"module_runtime_mutation_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+411/460 Testing: module_original_runtime_validation
+411/460 Test: module_original_runtime_validation
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_validation"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_validation" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Fifteen original runtime-root validation contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_validation" end time: Oct 10 19:34 CST
+"module_original_runtime_validation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+416/460 Testing: module_original_runtime_memory_service
+416/460 Test: module_original_runtime_memory_service
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_memory_service"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_memory_service" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Nine original cfg(test) memory-service contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_memory_service" end time: Oct 10 19:34 CST
+"module_original_runtime_memory_service" time elapsed: 00:00:00
+----------------------------------------------------------
+
+450/460 Testing: module_relation_execution_contracts
+450/460 Test: module_relation_execution_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_relation_execution_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_relation_execution_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Relation execution and SQLite contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_relation_execution_contracts" end time: Oct 10 19:34 CST
+"module_relation_execution_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+394/460 Testing: module_query_model_contracts
+394/460 Test: module_query_model_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_query_model_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_query_model_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Query model contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_query_model_contracts" end time: Oct 10 19:34 CST
+"module_query_model_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+408/460 Testing: module_sql_stream_execution_contracts
+408/460 Test: module_sql_stream_execution_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_stream_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_stream_execution_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL stream execution contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_stream_execution_contracts" end time: Oct 10 19:34 CST
+"module_sql_stream_execution_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+410/460 Testing: module_original_runtime_service_boundaries
+410/460 Test: module_original_runtime_service_boundaries
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_service_boundaries"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_service_boundaries" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Eight original runtime-root service-boundary contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_service_boundaries" end time: Oct 10 19:34 CST
+"module_original_runtime_service_boundaries" time elapsed: 00:00:00
+----------------------------------------------------------
+
+423/460 Testing: module_context_logging_contracts
+423/460 Test: module_context_logging_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_context_logging_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_context_logging_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+TeaQL WARNING: sensitive plaintext logging enabled; application data may be written to disk. Authentication secrets remain redacted.
+Context logging contracts passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"module_context_logging_contracts" end time: Oct 10 19:34 CST
+"module_context_logging_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+404/460 Testing: module_sql_transport_contracts
+404/460 Test: module_sql_transport_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_transport_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_transport_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL transport contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_transport_contracts" end time: Oct 10 19:34 CST
+"module_sql_transport_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+426/460 Testing: module_audit_event_contracts
+426/460 Test: module_audit_event_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_audit_event_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Audit event contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_audit_event_contracts" end time: Oct 10 19:34 CST
+"module_audit_event_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+421/460 Testing: module_mutation_policy_context_contracts
+421/460 Test: module_mutation_policy_context_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_mutation_policy_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_mutation_policy_context_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+[TeaQL][MUTATION-POLICY-SINK-FAILED] request=Order.saveGraph error=entity event error: delivery failed
+[TeaQL][MUTATION-POLICY-SINK-FAILED] request=Order.saveGraph error=entity event error: delivery failed
+Mutation policy Context contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_mutation_policy_context_contracts" end time: Oct 10 19:34 CST
+"module_mutation_policy_context_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+401/460 Testing: module_system_time_arithmetic_scope_contracts
+401/460 Test: module_system_time_arithmetic_scope_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_system_time_arithmetic_scope_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_system_time_arithmetic_scope_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+System-time arithmetic scope contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_system_time_arithmetic_scope_contracts" end time: Oct 10 19:34 CST
+"module_system_time_arithmetic_scope_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+409/460 Testing: module_original_runtime_registration
+409/460 Test: module_original_runtime_registration
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_registration"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_registration" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Eight original runtime-root registration contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_registration" end time: Oct 10 19:34 CST
+"module_original_runtime_registration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+399/460 Testing: module_sql_projection_scope_contracts
+399/460 Test: module_sql_projection_scope_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_projection_scope_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_projection_scope_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL projection ownership and identity contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_projection_scope_contracts" end time: Oct 10 19:34 CST
+"module_sql_projection_scope_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+390/460 Testing: module_decimal_contracts
+390/460 Test: module_decimal_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_decimal_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_decimal_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Decimal contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_decimal_contracts" end time: Oct 10 19:34 CST
+"module_decimal_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+392/460 Testing: module_core_collection_contracts
+392/460 Test: module_core_collection_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_core_collection_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_core_collection_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Core collection contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_core_collection_contracts" end time: Oct 10 19:34 CST
+"module_core_collection_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+431/460 Testing: module_event_model_contracts
+431/460 Test: module_event_model_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_event_model_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_event_model_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Raw/safe event model ownership and privacy contracts pass
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_event_model_contracts" end time: Oct 10 19:34 CST
+"module_event_model_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+395/460 Testing: module_data_service_contracts
+395/460 Test: module_data_service_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_data_service_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_data_service_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Data-service contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_data_service_contracts" end time: Oct 10 19:34 CST
+"module_data_service_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+402/460 Testing: module_sql_dialect_contracts
+402/460 Test: module_sql_dialect_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_sql_dialect_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_sql_dialect_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQL dialect contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_sql_dialect_contracts" end time: Oct 10 19:34 CST
+"module_sql_dialect_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+453/460 Testing: module_provider_sqlite_binding_contracts
+453/460 Test: module_provider_sqlite_binding_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_bindings_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_provider_sqlite_binding_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQLite binding contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_provider_sqlite_binding_contracts" end time: Oct 10 19:34 CST
+"module_provider_sqlite_binding_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+430/460 Testing: module_audit_event_result_reentrant_close
+430/460 Test: module_audit_event_result_reentrant_close
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests" "result-close"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_audit_event_result_reentrant_close" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_audit_event_result_reentrant_close" end time: Oct 10 19:34 CST
+"module_audit_event_result_reentrant_close" time elapsed: 00:00:00
+----------------------------------------------------------
+
+419/460 Testing: module_runtime_graph_contracts
+419/460 Test: module_runtime_graph_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_graph_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_runtime_graph_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Runtime graph contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_runtime_graph_contracts" end time: Oct 10 19:34 CST
+"module_runtime_graph_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+454/460 Testing: module_provider_sqlite_decoding_contracts
+454/460 Test: module_provider_sqlite_decoding_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_decoding_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_provider_sqlite_decoding_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQLite decoding contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_provider_sqlite_decoding_contracts" end time: Oct 10 19:34 CST
+"module_provider_sqlite_decoding_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+420/460 Testing: module_runtime_registry_contracts
+420/460 Test: module_runtime_registry_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_registry_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_runtime_registry_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Runtime registry contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_runtime_registry_contracts" end time: Oct 10 19:34 CST
+"module_runtime_registry_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+428/460 Testing: module_audit_event_owner_reentrant_close
+428/460 Test: module_audit_event_owner_reentrant_close
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests" "owner-close"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_audit_event_owner_reentrant_close" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_audit_event_owner_reentrant_close" end time: Oct 10 19:34 CST
+"module_audit_event_owner_reentrant_close" time elapsed: 00:00:00
+----------------------------------------------------------
+
+445/460 Testing: module_runtime_mutation_reentrant_prepare
+445/460 Test: module_runtime_mutation_reentrant_prepare
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_mutation_tests" "reentrant-prepare"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_runtime_mutation_reentrant_prepare" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_runtime_mutation_reentrant_prepare" end time: Oct 10 19:34 CST
+"module_runtime_mutation_reentrant_prepare" time elapsed: 00:00:00
+----------------------------------------------------------
+
+400/460 Testing: module_system_time_contracts
+400/460 Test: module_system_time_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_system_time_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_system_time_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SystemTime contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_system_time_contracts" end time: Oct 10 19:34 CST
+"module_system_time_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+424/460 Testing: module_log_formatter_contracts
+424/460 Test: module_log_formatter_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_log_formatter_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_log_formatter_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Log formatter contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_log_formatter_contracts" end time: Oct 10 19:34 CST
+"module_log_formatter_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+393/460 Testing: module_core_contracts
+393/460 Test: module_core_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_core_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_core_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Core contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_core_contracts" end time: Oct 10 19:34 CST
+"module_core_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+438/460 Testing: module_entity_reference_reentrant_output
+438/460 Test: module_entity_reference_reentrant_output
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_entity_reference_tests" "reentrant-output"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_entity_reference_reentrant_output" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_entity_reference_reentrant_output" end time: Oct 10 19:34 CST
+"module_entity_reference_reentrant_output" time elapsed: 00:00:00
+----------------------------------------------------------
+
+427/460 Testing: module_audit_event_context_reentrant_close
+427/460 Test: module_audit_event_context_reentrant_close
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests" "context-close"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_audit_event_context_reentrant_close" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_audit_event_context_reentrant_close" end time: Oct 10 19:34 CST
+"module_audit_event_context_reentrant_close" time elapsed: 00:00:00
+----------------------------------------------------------
+
+398/460 Testing: module_executor_spi_contracts
+398/460 Test: module_executor_spi_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_executor_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_executor_spi_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Executor SPI contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_executor_spi_contracts" end time: Oct 10 19:34 CST
+"module_executor_spi_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+446/460 Testing: module_runtime_mutation_reentrant_event
+446/460 Test: module_runtime_mutation_reentrant_event
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_mutation_tests" "reentrant-event"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_runtime_mutation_reentrant_event" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_runtime_mutation_reentrant_event" end time: Oct 10 19:34 CST
+"module_runtime_mutation_reentrant_event" time elapsed: 00:00:00
+----------------------------------------------------------
+
+434/460 Testing: module_round_trip_reference_reentrant_owner
+434/460 Test: module_round_trip_reference_reentrant_owner
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_round_trip_reference_tests" "reentrant-owner"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_round_trip_reference_reentrant_owner" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_round_trip_reference_reentrant_owner" end time: Oct 10 19:34 CST
+"module_round_trip_reference_reentrant_owner" time elapsed: 00:00:00
+----------------------------------------------------------
+
+422/460 Testing: module_mutation_policy_reentrant_close
+422/460 Test: module_mutation_policy_reentrant_close
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_mutation_policy_tests" "reentrant-close"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_mutation_policy_reentrant_close" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_mutation_policy_reentrant_close" end time: Oct 10 19:34 CST
+"module_mutation_policy_reentrant_close" time elapsed: 00:00:00
+----------------------------------------------------------
+
+435/460 Testing: module_round_trip_reference_reentrant_output
+435/460 Test: module_round_trip_reference_reentrant_output
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_round_trip_reference_tests" "reentrant-output"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_round_trip_reference_reentrant_output" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_round_trip_reference_reentrant_output" end time: Oct 10 19:34 CST
+"module_round_trip_reference_reentrant_output" time elapsed: 00:00:00
+----------------------------------------------------------
+
+451/460 Testing: module_provider_sqlite_dialect_contracts
+451/460 Test: module_provider_sqlite_dialect_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_provider_sqlite_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_provider_sqlite_dialect_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+SQLite provider dialect contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_provider_sqlite_dialect_contracts" end time: Oct 10 19:34 CST
+"module_provider_sqlite_dialect_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+429/460 Testing: module_audit_event_payload_reentrant_close
+429/460 Test: module_audit_event_payload_reentrant_close
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_audit_event_tests" "event-close"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_audit_event_payload_reentrant_close" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_audit_event_payload_reentrant_close" end time: Oct 10 19:34 CST
+"module_audit_event_payload_reentrant_close" time elapsed: 00:00:00
+----------------------------------------------------------
+
+440/460 Testing: module_context_early_global_close
+440/460 Test: module_context_early_global_close
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_context_reference_tests" "early-global-close"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_context_early_global_close" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_context_early_global_close" end time: Oct 10 19:34 CST
+"module_context_early_global_close" time elapsed: 00:00:00
+----------------------------------------------------------
+
+418/460 Testing: module_runtime_public_namespace_contracts
+418/460 Test: module_runtime_public_namespace_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_runtime_namespace_tests"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_runtime_public_namespace_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Runtime published module namespace contracts passed
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_runtime_public_namespace_contracts" end time: Oct 10 19:34 CST
+"module_runtime_public_namespace_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+437/460 Testing: module_entity_reference_reentrant_owner
+437/460 Test: module_entity_reference_reentrant_owner
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_entity_reference_tests" "reentrant-owner"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_entity_reference_reentrant_owner" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_entity_reference_reentrant_owner" end time: Oct 10 19:34 CST
+"module_entity_reference_reentrant_owner" time elapsed: 00:00:00
+----------------------------------------------------------
+
+389/460 Testing: module_import_contracts
+389/460 Test: module_import_contracts
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_contracts"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_import_contracts" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Imported Context, templates, ownership, core exports and ABI contracts pass
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"module_import_contracts" end time: Oct 10 19:34 CST
+"module_import_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+415/460 Testing: module_original_runtime_pagination
+415/460 Test: module_original_runtime_pagination
+Command: "/home/philip/githome/teaql-cpp/build_modules_native/modules/teaql_module_original_runtime_pagination"
+Directory: /home/philip/githome/teaql-cpp/build_modules_native/modules
+"module_original_runtime_pagination" start time: Oct 10 19:34 CST
+Output:
+----------------------------------------------------------
+Ten original runtime-root pagination contracts passed
+<end of output>
+Test time =   1.19 sec
+----------------------------------------------------------
+Test Passed.
+"module_original_runtime_pagination" end time: Oct 10 19:34 CST
+"module_original_runtime_pagination" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Oct 10 19:34 CST

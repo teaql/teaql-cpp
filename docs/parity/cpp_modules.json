@@ -954,12 +954,9 @@
       "cpp_target": "teaql_sql/include/teaql/sql/dialect.hpp; teaql_sql/src/dialect.cpp",
       "stage": 3,
       "status": "accepted",
-      "contract": "SqlDialect restores expressions/functions/subqueries, ordinary/aggregate projections, partition pagination, SELECT/basic schema compilation, and extension points. Preserve parameter order, subquery privacy scope, recovery after errors, and raw-SQL provenance, with 2,206 comparisons. Insert/update batches, guarded update/delete/recover, soft delete/restore have 2,505; typed nulls, field/version selection, and error order match. Real SQLite execution, virtual extensions, target-domain and nested-copy tests are present. Index specs, FK naming, physical identifier byte validation, and Unicode uppercase have 1,305 comparisons. All 43 source trait methods have corresponding entries. The opt-in legacy compatibility compiler remains a regression baseline; complete runtime execution integration is pending. Direct public-helper review reproduces the eight-bit delimiter API gap for Unicode Rust char values. The new char32_t overload preserves complete UTF-8 scalar escaping and existing ASCII/wrapped-identifier behavior. 262 direct original quote/storage observations are reproduced twice, preserving the initial 136 and all 1,305 schema outputs. The registered helper probe and User-proxied Global text retention contracts are undergoing native/sanitizer/MIPS builds; complete dialect/default/compiler-order and stage acceptance remains open. Fresh three-check native/sanitizer-with-leak-scanning-disabled/MIPS selections each pass 3/3; both native/MIPS match 262 helpers and 1,305 existing schema inputs against live original Rust. Complete consumer/dialect/default/override acceptance remains open. Every production line before the test module (1–1522) is reviewed, including trait defaults and private helpers. Direct mandatory provider hooks expose a 0/48 pre-repair mutation-order mismatch; the private builder now captures provenance before final SQL and preserves table-before-version rendering. Fresh two-check native/sanitizer-with-leak-scanning-disabled/MIPS selections pass with all 48 live original hook calls and 2,505 prior mutation outputs unchanged. Direct public compile_in calls further reproduce 120/216 pre-repair matches: non-IN operators silently became NOT IN. Validation after left evaluation now preserves early left errors and partial bindings while mapping the original panic precondition. Final combined selected builds and whole-project consumers remain running; no complete dialect or Stage 3 acceptance is inferred. Final combined six-check native/sanitizer-with-leak-scanning-disabled/MIPS selections pass 6/6 in 7.04/13.96/10.26 seconds. Both native/MIPS match the 216 direct-IN and 2,505 mutation inputs against live original Rust. Public/default/override composition and current whole-project acceptance still require completion. Accepted source contract after complete public/default/helper/ownership review, final current native 314/314 in 74.66 seconds, stable post-test no-work build, and the named current sanitizer/MIPS selections. Historical partial/pending paragraphs describe earlier checkpoints. This acceptance does not close the remaining executor/provider or runtime/privacy stages.",
+      "contract": "SqlDialect restores expressions/functions/subqueries, ordinary/aggregate projections, partition pagination, SELECT/basic schema compilation, and extension points. Preserve parameter order, subquery privacy scope, recovery after errors, and raw-SQL provenance, with 2,206 comparisons. Insert/update batches, guarded update/delete/recover, soft delete/restore have 2,505; typed nulls, field/version selection, and error order match. Real SQLite execution, virtual extensions, target-domain and nested-copy tests are present. Index specs, FK naming, physical identifier byte validation, and Unicode uppercase have 1,305 comparisons. All 43 source trait methods have corresponding entries. The opt-in legacy compatibility compiler remains a regression baseline; complete runtime execution integration is pending. Direct public-helper review reproduces the eight-bit delimiter API gap for Unicode Rust char values. The new char32_t overload preserves complete UTF-8 scalar escaping and existing ASCII/wrapped-identifier behavior. 262 direct original quote/storage observations are reproduced twice, preserving the initial 136 and all 1,305 schema outputs. The registered helper probe and User-proxied Global text retention contracts are undergoing native/sanitizer/MIPS builds; complete dialect/default/compiler-order and stage acceptance remains open. Fresh three-check native/sanitizer-with-leak-scanning-disabled/MIPS selections each pass 3/3; both native/MIPS match 262 helpers and 1,305 existing schema inputs against live original Rust. Complete consumer/dialect/default/override acceptance remains open. Every production line before the test module (1–1522) is reviewed, including trait defaults and private helpers. Direct mandatory provider hooks expose a 0/48 pre-repair mutation-order mismatch; the private builder now captures provenance before final SQL and preserves table-before-version rendering. Fresh two-check native/sanitizer-with-leak-scanning-disabled/MIPS selections pass with all 48 live original hook calls and 2,505 prior mutation outputs unchanged. Direct public compile_in calls further reproduce 120/216 pre-repair matches: non-IN operators silently became NOT IN. Validation after left evaluation now preserves early left errors and partial bindings while mapping the original panic precondition. Final combined selected builds and whole-project consumers remain running; no complete dialect or Stage 3 acceptance is inferred. Final combined six-check native/sanitizer-with-leak-scanning-disabled/MIPS selections pass 6/6 in 7.04/13.96/10.26 seconds. Both native/MIPS match the 216 direct-IN and 2,505 mutation inputs against live original Rust. Public/default/override composition and current whole-project acceptance still require completion. Accepted source contract after complete public/default/helper/ownership review, final current native 314/314 in 74.66 seconds, stable post-test no-work build, and the named current sanitizer/MIPS selections. Historical partial/pending paragraphs describe earlier checkpoints. This acceptance does not close the remaining executor/provider or runtime/privacy stages. Post-0.0.2 maintenance retires the extra early C++ SQLite adapter. Its historical observations above are unchanged; current locators use production-provider regression coverage and the explicit retirement review.",
       "evidence": [
-        "compatibility/teaql_legacy_sqlite/include/teaql/runtime/legacy_sqlite_compiler.hpp",
-        "compatibility/teaql_legacy_sqlite/src/legacy_sqlite_compiler.cpp",
         "teaql_provider_sqlite/tests/sql_model_tests.cpp",
-        "compatibility/teaql_legacy_sqlite/tests/sqlite_tests.cpp",
         "teaql_sql/include/teaql/sql/dialect.hpp",
         "teaql_sql/src/dialect.cpp",
         "teaql_sql/tests/sql_dialect_tests.cpp",
@@ -990,7 +987,9 @@
         "tests/parity/sql_dialect_hook_cases.json",
         "tests/parity/compare_sql_dialect_hooks.py",
         "tests/parity/sql_dialect_in_cases.json",
-        "tests/parity/compare_sql_dialect_in.py"
+        "tests/parity/compare_sql_dialect_in.py",
+        "docs/sqlite_compatibility.md",
+        "teaql_provider_sqlite/tests/provider_sqlite_regression_tests.cpp"
       ],
       "acceptance": {
         "commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
@@ -1189,11 +1188,8 @@
       "cpp_target": "teaql_provider_sqlite/include/teaql/provider_sqlite/{dialect,error,provider,id,business_id,schema}.hpp; teaql_provider_sqlite/include/teaql/provider_sqlite/detail/{bindings,decoding,schema}.hpp; teaql_provider_sqlite/src/",
       "stage": 3,
       "status": "accepted",
-      "contract": "Complete 1753-line production-body/public/default/trait/protocol/ownership review preserves all provider/dialect/schema/ID/business-ID/registration/transport/stream/transaction/cache/error responsibilities. All 42 root source tests have reviewed direct ports. Six outer errors and every one of the 25 locked enabled driver tags retain typed payloads, conversions and actual cause/diagnostic semantics. Native 315/315, final 32/32 sanitizer and same-engine SQLite 3.53.2 MIPS 31/31 selections, unchanged source fingerprints and stable consumer builds establish acceptance. Live native transport/schema/error/binding/release-decoding comparisons match; MIPS matches transport/errors and four previously engine-sensitive cases. Explicit scoped connection/clone/terminal/cancellation adaptations preserve resource cleanup without extending User lifetime. Old SQLite 3.40.1 target numeric failures remain separately recorded; this accepts the matched-engine provider contract, not identical engine behavior on every SQLite version or physical-router execution. Runtime save/governance/privacy and stages4–6 remain independent.",
+      "contract": "Complete 1753-line production-body/public/default/trait/protocol/ownership review preserves all provider/dialect/schema/ID/business-ID/registration/transport/stream/transaction/cache/error responsibilities. All 42 root source tests have reviewed direct ports. Six outer errors and every one of the 25 locked enabled driver tags retain typed payloads, conversions and actual cause/diagnostic semantics. Native 315/315, final 32/32 sanitizer and same-engine SQLite 3.53.2 MIPS 31/31 selections, unchanged source fingerprints and stable consumer builds establish acceptance. Live native transport/schema/error/binding/release-decoding comparisons match; MIPS matches transport/errors and four previously engine-sensitive cases. Explicit scoped connection/clone/terminal/cancellation adaptations preserve resource cleanup without extending User lifetime. Old SQLite 3.40.1 target numeric failures remain separately recorded; this accepts the matched-engine provider contract, not identical engine behavior on every SQLite version or physical-router execution. Runtime save/governance/privacy and stages4–6 remain independent. Post-0.0.2 maintenance retires the extra early C++ SQLite adapter. Its historical observations above are unchanged; current locators use production-provider regression coverage and the explicit retirement review.",
       "evidence": [
-        "compatibility/teaql_legacy_sqlite/src/sqlite.cpp",
-        "compatibility/teaql_legacy_sqlite/src/legacy_sqlite_compiler.cpp",
-        "compatibility/teaql_legacy_sqlite/tests/sqlite_tests.cpp",
         "teaql_provider_sqlite/include/teaql/provider_sqlite/dialect.hpp",
         "teaql_provider_sqlite/src/dialect.cpp",
         "teaql_provider_sqlite/tests/provider_sqlite_tests.cpp",
@@ -1245,8 +1241,6 @@
         "tests/parity/rust_unicode_lower.rs",
         "docs/sqlite_compatibility.md",
         "scripts/verify_layer_boundaries.py",
-        "compatibility/teaql_legacy_sqlite/include/teaql/compatibility/sqlite.hpp",
-        "compatibility/teaql_legacy_sqlite/include/teaql/compatibility/legacy_sqlite_compiler.hpp",
         "tests/parity/teaql_provider_sqlite/storage.cpp",
         "tests/parity/teaql_provider_sqlite/fixture.hpp",
         "docs/provider_sql_source_test_acceptance.md",
@@ -1300,7 +1294,8 @@
         "teaql_provider_sqlite/include/teaql/provider_sqlite/model_debug.hpp",
         "teaql_provider_sqlite/tests/provider_sqlite_model_tests.cpp",
         "measurements/parity/2026-10-08-sqlite-provider-acceptance/README.md",
-        "measurements/parity/2026-10-08-sqlite-provider-acceptance/results.json"
+        "measurements/parity/2026-10-08-sqlite-provider-acceptance/results.json",
+        "teaql_provider_sqlite/tests/provider_sqlite_regression_tests.cpp"
       ],
       "acceptance": {
         "commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
@@ -2957,10 +2952,8 @@
       "cpp_target": "teaql_runtime/include/teaql/runtime/logging.hpp; teaql_runtime/include/teaql/runtime/log_privacy.hpp; teaql_runtime/include/teaql/runtime/log_formatter.hpp; teaql_runtime/include/teaql/runtime/log_manager.hpp",
       "stage": 5,
       "status": "accepted",
-      "contract": "Complete pinned logging production responsibilities (Context391/privacy410/formatter-manager566 lines) are accepted after full public/default/trait/diagnostic/provenance/ownership and call-site review. Current native375/375 and native/ASan-UBSan/MIPS logging16/16 pass with completed builds/no-work. Fresh original privacy39 and formatter4 tests pass; ignored privacy child executes through its isolated parent. Live native model/buffer/projection/Context/formatter/manager comparisons match172/1/425/327/927/94 and MIPS172/1/425/327/921/94; six target-width counts explicitly reject against actual Rust u32 parsing. Same-domain buffer Clone shares registered storage; cross-domain copies retain all nested values independently. Global-owned lazy services/endpoints have no hidden Context owners. Exact privacy fingerprints, acknowledgement, fallback cleanup and publication ordering remain independent. Only volatile Human timestamps and a documented informational header correction normalize. Complete Context/service/graph/runtime-root and stage acceptance remain separate.",
+      "contract": "Complete pinned logging production responsibilities (Context391/privacy410/formatter-manager566 lines) are accepted after full public/default/trait/diagnostic/provenance/ownership and call-site review. Current native375/375 and native/ASan-UBSan/MIPS logging16/16 pass with completed builds/no-work. Fresh original privacy39 and formatter4 tests pass; ignored privacy child executes through its isolated parent. Live native model/buffer/projection/Context/formatter/manager comparisons match172/1/425/327/927/94 and MIPS172/1/425/327/921/94; six target-width counts explicitly reject against actual Rust u32 parsing. Same-domain buffer Clone shares registered storage; cross-domain copies retain all nested values independently. Global-owned lazy services/endpoints have no hidden Context owners. Exact privacy fingerprints, acknowledgement, fallback cleanup and publication ordering remain independent. Only volatile Human timestamps and a documented informational header correction normalize. Complete Context/service/graph/runtime-root and stage acceptance remain separate. Post-0.0.2 maintenance retires the extra early C++ SQLite adapter. Its historical observations above are unchanged; current locators use production-provider regression coverage and the explicit retirement review.",
       "evidence": [
-        "compatibility/teaql_legacy_sqlite/src/sqlite.cpp",
-        "compatibility/teaql_legacy_sqlite/tests/sqlite_tests.cpp",
         "teaql_runtime/include/teaql/runtime/detail/audit_privacy.hpp",
         "teaql_runtime/src/audit_privacy.cpp",
         "teaql_runtime/tests/audit_event_tests.cpp",
@@ -3010,7 +3003,9 @@
         "tests/parity/compare_unified_buffer_clone.py",
         "measurements/parity/2026-10-09-unified-buffer-clone-review/README.md",
         "measurements/parity/2026-10-09-log-source-acceptance/README.md",
-        "measurements/parity/2026-10-09-log-source-acceptance/results.json"
+        "measurements/parity/2026-10-09-log-source-acceptance/results.json",
+        "docs/sqlite_compatibility.md",
+        "teaql_provider_sqlite/tests/provider_sqlite_regression_tests.cpp"
       ],
       "acceptance": {
         "commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",

@@ -1,0 +1,88 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "retired_from_cpp_commit": "63e4d50526e0525aa02d92e6367b49237b26796e",
+  "scope": "Retirement of the extra early C++ SQLite adapter only; pinned Rust responsibilities remain in the production layers",
+  "review": "docs/sqlite_compatibility.md",
+  "files": [
+    {
+      "old": "include/teaql/compatibility/legacy_sqlite_compiler.hpp",
+      "new": "compatibility/teaql_legacy_sqlite/include/teaql/compatibility/legacy_sqlite_compiler.hpp",
+      "kind": "production",
+      "sha256_before": "e831532e539561abd2e62eff6d507f36cb3cc07268f4ae11d63ce2882c5797af",
+      "non_include_tokens_sha256": "9587665a0e809947e534921386924ffc332f921370044377d3d17f3a4812f487",
+      "rust_sources": [
+        "teaql-provider-sqlite/src/lib.rs"
+      ],
+      "adaptation": "Legacy compatibility",
+      "non_include_content_sha256": "0928af018f23873b992225966fe4f21601b01cf2c00e011d0cc5b9ba5997e1de"
+    },
+    {
+      "old": "include/teaql/compatibility/sqlite.hpp",
+      "new": "compatibility/teaql_legacy_sqlite/include/teaql/compatibility/sqlite.hpp",
+      "kind": "production",
+      "sha256_before": "8ca1b7ebbc6fe3dc7d571d7129537f6d5425958c216e7498bd504eb368d3c641",
+      "non_include_tokens_sha256": "7f19b50bb51a0744cb0a41045aef0c3315327b11fa22ec7c04e38a98ec1adf69",
+      "rust_sources": [
+        "teaql-provider-sqlite/src/lib.rs"
+      ],
+      "adaptation": "Legacy compatibility",
+      "non_include_content_sha256": "d4b4aa5556c07b552ca25eb9abf6665ecc9e3fe9e5c3f557f6f6b4ac2d12622c"
+    },
+    {
+      "old": "include/teaql/runtime/legacy_sqlite_compiler.hpp",
+      "new": "compatibility/teaql_legacy_sqlite/include/teaql/runtime/legacy_sqlite_compiler.hpp",
+      "kind": "production",
+      "sha256_before": "cb240d546ee42fdb0b74fa9df98754f82d50548f62a104ed45fab245296ad2b5",
+      "non_include_tokens_sha256": "0e959fa3bc7c35b72645a664ad6be8ea4946f0677f5e71b491ba8cc519e96d5b",
+      "rust_sources": [
+        "teaql-sql/src/dialect.rs"
+      ],
+      "adaptation": "Legacy compatibility",
+      "non_include_content_sha256": "c524fa27d8b57f3a7574a8bbedffe97b5580f2ef4c0ff95c84092bc27639f6a9"
+    },
+    {
+      "old": "include/teaql/runtime/sqlite.hpp",
+      "new": "compatibility/teaql_legacy_sqlite/include/teaql/runtime/sqlite.hpp",
+      "kind": "production",
+      "sha256_before": "f9c619d46c77df4086a00b126c1e057c951930bd410d7cbcd0b7f41d6fbe210e",
+      "non_include_tokens_sha256": "0e959fa3bc7c35b72645a664ad6be8ea4946f0677f5e71b491ba8cc519e96d5b",
+      "rust_sources": [],
+      "adaptation": "Legacy compatibility",
+      "non_include_content_sha256": "c524fa27d8b57f3a7574a8bbedffe97b5580f2ef4c0ff95c84092bc27639f6a9"
+    },
+    {
+      "old": "src/compatibility/legacy_sqlite_compiler.cpp",
+      "new": "compatibility/teaql_legacy_sqlite/src/legacy_sqlite_compiler.cpp",
+      "kind": "production",
+      "sha256_before": "83f66e62e5d21ea53435294eda914582f7b767c4ea846d9f3141b38cd34bebd9",
+      "non_include_tokens_sha256": "47b94e2c1fb4e2bbb4f22213cda6dbbfd0cd20c8ae083913502f48430ffb5991",
+      "rust_sources": [
+        "teaql-provider-sqlite/src/lib.rs",
+        "teaql-sql/src/dialect.rs"
+      ],
+      "adaptation": "Legacy compatibility",
+      "non_include_content_sha256": "d650eca9ea58aa710d7d92fae841ffdfe61b3ab294ae471c25564f098e873c60"
+    },
+    {
+      "old": "src/compatibility/sqlite.cpp",
+      "new": "compatibility/teaql_legacy_sqlite/src/sqlite.cpp",
+      "kind": "production",
+      "sha256_before": "8a4d989bce38f54b08f1c9dca3796f45105f00bf33c85ccc3456136473e15cd3",
+      "non_include_tokens_sha256": "857318cafd98b28a0c42e4c4564026c121a5a590207d287d86af6f3fdbba1eb9",
+      "rust_sources": [
+        "teaql-provider-sqlite/src/lib.rs",
+        "teaql-runtime/src/context/logging.rs",
+        "teaql-runtime/src/log_formatter.rs",
+        "teaql-runtime/src/log_privacy.rs"
+      ],
+      "adaptation": "Legacy compatibility",
+      "non_include_content_sha256": "698df50dccab7e7f67d1df6561f5ae988bfde610abfcb3d887aeb1ce7178c2ab"
+    },
+    {
+      "old": "tests/sqlite_tests.cpp",
+      "new": "compatibility/teaql_legacy_sqlite/tests/sqlite_tests.cpp",
+      "kind": "development_or_test",
+      "sha256_before": "491b1ceb7a14f568878b28a373100dfe1442a6a6b23809b9c0fcc966e7a4df1c"
+    }
+  ]
+}

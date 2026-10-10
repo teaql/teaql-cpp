@@ -61,8 +61,8 @@ The C++ kernel retains the Rust 5.0.5 core models, distinct mutation/snapshot/
 generated values, expression/query/request models, Entity/Audited contracts,
 annotated input graphs, identity graphs and mutation ledgers. Data-service, SQL
 executor, dialect, transport, SQLite provider and runtime remain independent
-layers. The opt-in legacy SQLite compatibility target does not supply the
-production runtime path.
+layers. SQLite uses the independent provider; the early combined C++ adapter
+has been removed. See [the retirement review](docs/sqlite_compatibility.md).
 
 Runtime responsibilities include entity decoding and relations, pagination/
 aggregation caches, schema/bootstrap, internal/business IDs, reference codecs,
@@ -166,7 +166,7 @@ python3 scripts/verify_upstream.py
 
 Both original Rust examples were run from the pinned reference to verify version transitions and order/item/product relationships. C++ examples include runtime assertions and CTest entries. Native tests cover core models, arena lifetimes, SQLite rollback/conflicts, privacy, and binding. Tests disable the default PMR resource to detect hidden allocation fallback.
 
-The Value corpus contains 722 recorded Rust cases for conversions, precision, overflow, date boundaries, and invalid JSON; dynamic search has 491 for validation, warnings, and type boundaries. Optional live runners are documented in [parity testing](tests/parity/README.md). Decimal/JSON/Date/Timestamp database binding and metadata decoding are implemented in the independent provider; the retained legacy SqliteSession compatibility path has separate type limitations.
+The Value corpus contains 722 recorded Rust cases for conversions, precision, overflow, date boundaries, and invalid JSON; dynamic search has 491 for validation, warnings, and type boundaries. Optional live runners are documented in [parity testing](tests/parity/README.md). Decimal/JSON/Date/Timestamp database binding and metadata decoding are implemented in the independent provider.
 
 ```sh
 python3 scripts/verify_upstream.py

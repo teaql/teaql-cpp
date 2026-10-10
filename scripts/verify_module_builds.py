@@ -26,7 +26,7 @@ def main():
         raise SystemExit("Use a new output directory outside the producer repository")
     source = output / "source"
     source.mkdir(parents=True)
-    for directory in (*PACKAGES, "compatibility", "modules", "cmake"):
+    for directory in (*PACKAGES, "modules", "cmake"):
         shutil.copytree(ROOT / directory, source / directory)
     shutil.copy2(ROOT / "CMakeLists.txt", source / "CMakeLists.txt")
     fixture = source / "modules/tests/incremental_consumer"

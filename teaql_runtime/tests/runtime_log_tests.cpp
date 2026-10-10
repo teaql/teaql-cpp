@@ -1,5 +1,4 @@
 #include <teaql/runtime/context.hpp>
-#include <teaql/runtime/sqlite.hpp>
 #include <teaql/runtime/logging.hpp>
 #include <teaql/core/detail/sha256.hpp>
 #include <iostream>
@@ -132,7 +131,6 @@ static void protection() {
 }
 
 static void models() {
-    static_assert(!std::same_as<SqlLogEntry, LegacySqlLogEntry>);
     for (auto op : {SqlLogOperation::Select,
                     SqlLogOperation::Insert,
                     SqlLogOperation::Update,

@@ -309,9 +309,10 @@ dependency. This matrix does not replace complete Decimal API acceptance.
 
 Remaining Decimal capabilities, complete query and save entry capabilities,
 transaction/stream cancellation authority, log provenance/privacy and native
-resource ownership remain acceptance gates. The retained legacy SQLite path
-now has an explicit opt-in compatibility disposition; the simple examples use
-the independent runtime/executor/provider layers. Backend/cloud/GPU implementations
+resource ownership remain acceptance gates at this historical checkpoint.
+The early SQLite adapter was subsequently retired after `0.0.2`; current
+regressions and simple examples use the independent runtime/executor/provider
+layers. See [the retirement review](../../docs/sqlite_compatibility.md). Backend/cloud/GPU implementations
 outside the agreed scope and the unchanged generator do not become new work.
 
 Module rows remain partial until their actual requirements are proven. Passing

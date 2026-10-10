@@ -18,6 +18,22 @@ def main():
     lock = json.loads((ROOT / "upstream.lock.json").read_text())
     if ledger["baseline"] != lock["commit"]:
         raise SystemExit("Workspace move ledger must use the pinned baseline")
+    # Keep the original move checkpoint intact. Only the specifically reviewed
+    # extra C++ adapter can retire checkpoint destinations; no Rust layer is exempt.
+    retirement = json.loads((ROOT / "docs/retired_compatibility.json").read_text())
+    allowed_retirements = {
+        "compatibility/teaql_legacy_sqlite/" + suffix for suffix in (
+            "include/teaql/compatibility/legacy_sqlite_compiler.hpp",
+            "include/teaql/compatibility/sqlite.hpp",
+            "include/teaql/runtime/legacy_sqlite_compiler.hpp",
+            "include/teaql/runtime/sqlite.hpp",
+            "src/legacy_sqlite_compiler.cpp", "src/sqlite.cpp", "tests/sqlite_tests.cpp")}
+    retired = {record["new"]: record for record in retirement["files"]}
+    if (retirement["baseline"] != lock["commit"] or set(retired) != allowed_retirements or
+            len(retired) != len(retirement["files"]) or
+            retirement["review"] != "docs/sqlite_compatibility.md" or
+            not (ROOT / retirement["review"]).is_file()):
+        raise SystemExit("Invalid compatibility retirement review")
     structure_path = ROOT / "docs/module_structure_migration.json"
     structure = json.loads(structure_path.read_text()) if structure_path.exists() else {
         "baseline": lock["commit"], "relocations": []}
@@ -32,12 +48,18 @@ def main():
     used_relocations = set()
     destinations = set()
     production = 0
+    used_retirements = set()
     for record in ledger["files"]:
         old, new = record["old"], record["new"]
         destination = (ROOT / new).resolve()
         if new in destinations or not destination.is_relative_to(ROOT):
             raise SystemExit(f"Duplicate or invalid destination: {new}")
         destinations.add(new)
+        if new in retired:
+            if record != retired[new] or destination.exists() or (ROOT / old).exists():
+                raise SystemExit(f"Retirement changed a checkpoint or retained a file: {new}")
+            used_retirements.add(new)
+            continue
         if (ROOT / old).exists() or not destination.is_file():
             raise SystemExit(f"Missing destination or retained original: {old} -> {new}")
         if any("-" in part for part in Path(new).parts):
@@ -74,8 +96,11 @@ def main():
                 raise SystemExit(f"Production non-include bytes differ from the checkpoint: {new}")
     if used_relocations != set(relocations):
         raise SystemExit("Structural relocation does not match a production checkpoint")
-    print(f"Verified {len(destinations)} moved files and {production} unchanged canonical production "
-          f"contents ({len(used_relocations)} structural relocations)")
+    if used_retirements != set(retired):
+        raise SystemExit("Retirement does not match the original move checkpoint")
+    print(f"Verified {len(destinations) - len(retired)} retained moved files and {production} "
+          f"unchanged canonical production contents ({len(used_relocations)} structural "
+          f"relocations, {len(retired)} explicitly retired compatibility files)")
 
 
 if __name__ == "__main__":

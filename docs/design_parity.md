@@ -80,9 +80,9 @@ flowchart TD
   Runtime --> Memory
 ```
 
-The composition root registers concrete SQLite services with runtime. Providers depend on runtime when implementing runtime interfaces; CMake propagates required error-model linkage. Runtime now links only the independent SQL layer and has no SQLite C API symbols. The earlier combined SqliteSession/compiler is retained in an explicit, opt-in compatibility target; neither runtime nor provider depends on it. See the [compatibility boundary](sqlite_compatibility.md) and its compiled-artifact/dependency check.
+The composition root registers concrete SQLite services with runtime. Providers depend on runtime when implementing runtime interfaces; CMake propagates required error-model linkage. Runtime links only the independent SQL layer and has no SQLite C API symbols. The early combined C++ SqliteSession/compiler has been removed; its useful regression coverage uses the production layers. See the [retirement review](sqlite_compatibility.md) and the compiled-artifact/dependency check.
 
-SqliteSession remains an extra C++ compatibility API and must not replace production compilation, provider I/O, runtime policy or source log projection. The examples use their separate source-aligned layers. Public layers obtain allocation-domain facilities from memory rather than including runtime/context.hpp. Data-service interfaces use provider-independent types and return ExecutionMetadata. Namespaces distinguish identically named concepts from different Rust crates.
+The examples use their separate source-aligned layers. Public layers obtain allocation-domain facilities from memory rather than including runtime/context.hpp. Data-service interfaces use provider-independent types and return ExecutionMetadata. Namespaces distinguish identically named concepts from different Rust crates.
 
 ## 3. Execution order
 

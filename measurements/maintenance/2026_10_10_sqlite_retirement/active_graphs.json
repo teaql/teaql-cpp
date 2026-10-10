@@ -1,0 +1,17 @@
+{
+  "build_native_current": {
+    "legacy_target_present": false,
+    "legacy_sources": [],
+    "compiled_source_count": 425
+  },
+  "build_modules_native": {
+    "legacy_target_present": false,
+    "legacy_sources": [],
+    "compiled_source_count": 500
+  },
+  "build_sanitize_current": {
+    "legacy_target_present": false,
+    "legacy_sources": [],
+    "compiled_source_count": 425
+  }
+}
