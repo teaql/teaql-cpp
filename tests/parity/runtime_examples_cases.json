@@ -1,0 +1,55 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Real SQLite through unchanged locked example models and public runtime calls. Only stable business fields are projected; these are not a new entity wire protocol. See originals under examples/src/bin.",
+  "cases": [
+    {
+      "input": {
+        "mode": "schema"
+      },
+      "expected": [
+        {
+          "id": 1,
+          "lines": [],
+          "lines_loaded": false,
+          "name": "submitted",
+          "version": -3
+        }
+      ]
+    },
+    {
+      "input": {
+        "mode": "relations"
+      },
+      "expected": [
+        {
+          "id": 1,
+          "lines": [
+            {
+              "id": 10,
+              "name": "first-line",
+              "order_id": 1,
+              "product": {
+                "id": 100,
+                "name": "keyboard"
+              },
+              "product_id": 100
+            },
+            {
+              "id": 11,
+              "name": "second-line",
+              "order_id": 1,
+              "product": {
+                "id": 101,
+                "name": "mouse"
+              },
+              "product_id": 101
+            }
+          ],
+          "lines_loaded": true,
+          "name": "graph-order",
+          "version": 1
+        }
+      ]
+    }
+  ]
+}

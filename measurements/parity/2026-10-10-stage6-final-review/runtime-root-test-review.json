@@ -1,0 +1,1168 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "tests": [
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "scalar_fk_column_named_like_relation_does_not_create_related_entity",
+      "line": 1223,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed original root body: PaymentOrder/payment_order scalar channel_id uses physical channel, independent channel->PaymentChannel relation, projection id/channel_id retains channel AS channel_id, CompactRow I64 id9/channel_id1002 hydrates scalars and absent typed channel, and exactly one matching column/relation. Handwritten private mappings replace derive; synthetic conditional-quoting dialect uses SQLite ?n instead of $n, without a PostgreSQL provider."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "detached_reverse_relation_remains_in_entity_metadata",
+      "line": 1266,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed original private reverse_relation fixture and every body assertion: DetachedProduct/detached_product has exactly two scalar properties and one many relation line_list->DetachedLine with local id and foreign product_id. Handwritten descriptor retains relation metadata independently of model members; this does not claim generator implementation."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_store_registers_entities",
+      "line": 1279,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed exact original entity(): Order/orders, U64 id required/id, I64 version required/version, Text name and many lines->OrderLine id/order_id. Actual InMemoryMetadataStore.with_entity then entity(Order) must find the descriptor."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "runtime_module_registers_descriptor_into_context",
+      "line": 1285,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed original descriptor-module input with complete Order descriptor. Actual RuntimeModule.descriptor.apply_to(UserContext) must install both entity metadata and entity-data-service availability; explicit Global/User bootstrap is the C++ lifetime adaptation."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "runtime_module_registers_derived_entity_and_behavior",
+      "line": 1292,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed original CatalogProductRow/catalog_product (required id and name) and OrderBehavior fixture (select version I64 1, default insert version I64 1, relation lines). Actual typed RuntimeModule.entity_with_behavior applies metadata/service/behavior registries; all three original presence assertions are retained. Handwritten model mapping does not migrate the generator."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "module_macro_registers_multiple_entities",
+      "line": 1306,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed actual original body and registry.rs module! expansion: despite its name the invocation has exactly one CatalogProductRow, expanding to RuntimeModule.entity<T>(). Both original entity presence and service availability assertions are retained through that actual C++ typed builder; no macro/generator implementation claim."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "module_macro_registers_entity_behavior_pairs",
+      "line": 1313,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed actual original CatalogProductRow=>OrderBehavior macro expansion into entity_with_behavior. User-owned explicit behavior registration applies the real module and retains both original entity and behavior presence assertions. The macro syntax itself is outside the handwritten migration."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "data_service_returns_optimistic_lock_conflict",
+      "line": 1325,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed original root body and StubExecutor: Order/orders metadata, U64 id1, expected version3, Text name next, affected0 with empty generated values/no persisted snapshot. Actual RuntimeDataService.update returns DataServiceError::Runtime(OptimisticLockConflict), preserving the original typed match rather than flattening to a string."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_indexes_resources_and_locals",
+      "line": 1349,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/registration.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_registration_contracts"
+      ],
+      "review_note": "Reviewed all original inputs/assertions: actual Order metadata, typed U64 42, named String tenant=acme, local trace_id=Value::Text(req-1). Real UserContext resource/local indexes independently resolve the exact values and Text variant; managed User allocation replaces source by-value ownership."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_builds_context_data_service",
+      "line": 1369,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed original Context/telemetry fixture: registered affected1 StubExecutor, empty rows, Order metadata, id1/version3/name next update. Checked Context executor lookup and managed ContextDataService construction are the C++ explicit-lifetime adaptation of the crate-private convenience factory. Actual Context and provider observation returns affected1 and the full ordered start:mutation/start:provider/success/success sequence; no local service implementation."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_resolves_entity_data_service_by_entity_type",
+      "line": 1400,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed original metadata+entity-registry and executor setup. Actual UserContext.entity_data_service(Order) returns entity Order and select.entity Order; real internal insert of U64 id1/I64 version1/Text name n returns affected1. The separate entity and Context service adapters are preserved."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_applies_behavior_hooks",
+      "line": 1430,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed complete Order/OrderLine/Product descriptors and OrderBehavior defaults. Actual internal insert U64 id1/Text n receives I64 version1 from the behavior and returns affected1; relation_loads equals the complete one-element lines vector. Commented-out original SQL assertions are not invented as executed source requirements."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_applies_request_policy_after_behavior_hooks",
+      "line": 1463,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed actual OrderBehavior and TenantRequestPolicy with named U64 tenant_id9. Actual prepare_insert_command(id1/name n) runs behavior before policy; the prepared version must be exact Value::I64(9), replacing behavior default I64(1). Source commented SQL assertions remain commentary, not evidence."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "public_query_families_cannot_bypass_request_policy",
+      "line": 1498,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed all ten actual source calls and assert_query_policy_probe: purposed Order query verify query policy coverage; lines/lineCount/OrderLine/single=true relation aggregate; borrowed and owned fetch_all, fetch_stream, both smart-list entries, typed Order fetch, enhanced fetch and borrowed/owned aggregate enhancement; aggregate count(orderCount) with verify aggregate query policy coverage. Every real public entry returns Runtime Policy with exact QUERY_POLICY_PROBE; added provider counters remain zero. Stream fixture is genuinely empty; no private query bypass substitutes for a public entry."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_prepares_insert_command_with_generated_id",
+      "line": 1554,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed source fixed generator42, OrderBehavior and three entity descriptors. Actual preparation of U64 id0/Text n returns exact U64 id42, I64 version1 and Text n. Separate U64 id0/I64 version0/Text zero-version input is normalized by runtime preparation to I64 version1; zero versions are not retained or treated as absent assertions."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "custom_user_context_can_drive_insert_preparation",
+      "line": 1605,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/service_boundaries.cpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/root_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_service_boundary_contracts"
+      ],
+      "review_note": "Reviewed ContextAwareOrderBehavior source and named resources String tenant acme/I64 initial_version7, Value::Text trace_id req-9, fixed generator99. Real prepare_insert_command(empty Order insert) returns exact Value U64 id99/I64 version7/Text acme:req-9. Behavior reads actual invoking UserContext resources/locals; no independent Memory parameter substitutes for its capabilities."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "checker_registry_validates_and_fixes_insert_commands",
+      "line": 1637,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed original OrderChecker and fixed generator77: name valid prepares exact U64 id77/I64 version1 without status marker; name no returns exactly one checker result at name. Actual checker registry and entity command preparation run source required/min-string helpers."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_not_null_constraints_are_checked_without_a_custom_checker",
+      "line": 1673,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed exact School descriptor (required U64 ID/contact_phone Text) and Create payload id1 with no custom checker. Actual Context check_and_fix returns exactly one Required result at contact_phone."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "sparse_ledger_create_payload_reports_required_field_before_sql",
+      "line": 1704,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed School id/address/version required metadata and exact U64 id1/I64 version1 payload. Actual private Context required-create helper returns one Required address error; supplied school_list[2] location yields model school_list[2].address and JSON /schoolList/2/address. Adding Text address 12 River Road makes the same helper succeed."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "nested_sparse_ledger_insert_plan_rejects_required_field_at_child_path",
+      "line": 1755,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed exact required OrderLine id/order_id/name descriptor, default empty/affected0 StubExecutor, new U64 child9 with order_id7, and line_items[0] location map. Actual internal ledger execution returns exactly one Required line_items[0].name with JSON /lineItems/0/name before mutation. No test-local planner substitutes for runtime."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_update_of_existing_versioned_row_requires_loaded_original_version",
+      "line": 1789,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed required School id/name/version and original StubExecutor row I64 id1, Text Old School, I64 version3. Root intent U64 School1 name New School has no original version; actual ledger execution returns Graph error containing cannot update School and without its loaded original version, with no mutation. Available provider row does not supply missing loaded original version implicitly."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_attachment_version_conflict_rejects_ledger_plan_before_sql",
+      "line": 1831,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed root School1 original version2/name Newer and stale original version1/name Stale. Actual adopt_mutations_from retains attachment failure; actual ledger execution returns Graph message containing all four original fragments: generated entity graph attachment failed before save, School#1, version 2, version 1. Added counters verify no query/mutation provider call."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_delete_of_existing_versioned_row_requires_loaded_original_version",
+      "line": 1871,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed required School id/version descriptor, default StubExecutor and delete intent for U64 School1 without loaded version. Actual ledger executor returns Graph error containing cannot delete School and without its loaded original version, before mutation."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_validation_does_not_require_runtime_managed_version_on_create",
+      "line": 1901,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed original descriptor order id/version/name and Create payload U64 id1/Text TeaQL School without version. Actual metadata validation succeeds and version remains absent; runtime-managed version is neither required nor synthesized by this checker entry."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_preserves_values_and_reports_timestamp_type_error",
+      "line": 1928,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed original TimestampedEntity id/version/happened_at mapping and no-op typed checker. Actual TypedEntityChecker receives U64 id7/I64 version1/Text happened_at 2026-08-25 and Update marker, returns one InvalidType diagnostic containing happened_at and 2026-08-25, and restores the original Text value. Handwritten private mapping preserves Timestamp/I64/U64 conversions and rejects Text; generator unchanged."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "metadata_not_null_constraints_allow_omitted_fields_on_partial_update",
+      "line": 1970,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed School id/contact_phone required metadata and Update payload U64 id1. Omitted contact_phone succeeds; explicitly inserting untyped Null returns structured Check error. The same Context path preserves omission versus explicit Null."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_validates_and_fixes_derived_entities_without_record_access",
+      "line": 1996,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed actual TypedOrderChecker (Create required-name, scalar-count minimum3, fix->fixed) and fixed generator79. Actual prepare of name fix yields exact Text fixed/U64 id79/I64 version1 and no status marker. Separate version1-only command returns a Required result at name. TypedEntityChecker, registry and Context metadata remain real kernel paths."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_checker_preserves_sparse_update_boundary",
+      "line": 2042,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed U64 id7/Text valid and Update marker against typed Order metadata/checker. Actual typed check preserves exact id/name and does not add version. Replacing name with Text fix yields Text fixed while version remains absent; defaulted typed version is not new update intent."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "checker_registry_reports_nested_create_locations_and_fixes_records",
+      "line": 2077,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed checker-only Context (no metadata), U64 child id10/Create marker and hash root lines[0]. Actual checking inserts I64 version1 while returning exactly one Required lines[0].name; adding Text valid child makes the same nested entry succeed."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "built_in_language_translators_cover_fifteen_languages",
+      "line": 2117,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed all original five CheckResults: required name, age min I64 18/12, age max I64 65/70, name min-str2/x and max-str8/too long name. Actual translators cover 15 languages/75 nonempty messages with no unexpanded brace; preserve required/Chinese required/French obligatoire witnesses and zh-CN/zh-TW aliases. Unicode literals remain semantic fixture data."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_language_switch_translates_checker_errors",
+      "line": 2153,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/validation.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_validation_contracts"
+      ],
+      "review_note": "Reviewed Chinese OrderChecker/fixed77 empty insert returning one translated required message; independent English Context switches es to Spanish and rejects invalid-code without changing language. Original teaql.i18n/v1 en/es EN/ES {location} catalog is parsed and explicitly User-owned; actual translation of hash-root name returns exact ES Name. No shared ownership extends catalog lifetime."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_event_sink_receives_data_service_mutation_events",
+      "line": 2211,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed every original raw/safe event assertion: Order mask name, fixed88, controlled U64 id88/I64 version1/Text old row; actual insert created, update name updated expected1, delete expected2, recover -3. Four raw kinds Created/Updated/Deleted/Recovered retain exact IDs/version2, one updated field name, absent blind-update old values, exact Text updated new value/change, no deletion snapshots, recovered I64 version4 and version change. Four application-safe events retain Created and a present masked name field whose projection is not created. Actual Context mutation/event delivery and safe projection are used, not test-local event construction."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_places_foreign_key_parent_before_child",
+      "line": 2325,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed complete original OrderLine/Product descriptors, U64 line10/product88 and changes line id10/product_id88, product id88. Actual EntityDataServiceAccess.order_new_ledger_keys receives original input [line,product] and returns the full exact [product,line] vector; no local topological-sort substitute."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_honors_reverse_many_and_forward_parents",
+      "line": 2360,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed complete Order/OrderLine/Product descriptors and U64 order77/line10/product88 changes with order_id77/product_id88. Actual kernel helper receives [line,product,order] and returns exact [order,product,line], preserving independent reverse-many and forward dependencies."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "ledger_insert_order_reports_required_foreign_key_cycle_before_sql",
+      "line": 2402,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed original Alpha(id,beta_id required)/beta->Beta and Beta(id,alpha_id required)/alpha->Alpha descriptors with U64 Alpha1/Beta2 and reciprocal FK changes. Actual kernel ordering returns Graph message containing both Alpha and Beta; added counters prove no query or mutation. No backend dialect is needed for this generic preflight."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_builds_relation_plans",
+      "line": 2456,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed OrderBehavior relation_loads=[lines] and complete Order/OrderLine/Product metadata. Actual service.relation_plans returns exactly one many lines->OrderLine plan with local id and foreign order_id; every original field assertion is retained."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_builds_relation_query_from_parent_rows",
+      "line": 2489,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed exact U64 parent IDs [11,12,11]. Actual relation_query(lines,rows) returns a Binary predicate with Value::List right operand exactly [U64(11),U64(12)], preserving deduplication order and type. Original commented compiler assertions remain commentary, not execution evidence."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_enhances_parent_rows_with_relations",
+      "line": 2532,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed exact controlled child rows U64 101/order11/Text l1, 102/order11/l2, 201/order12/l3 and parent IDs11/12/13. Actual kernel relation-plan forest plus actual entity fetch adapter attaches List cardinalities2/1 and emits start:relation_load through original recording telemetry. The C++ helper only connects private production components; it does not implement grouping or hydration locally."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "topn_006_008_009_relation_is_stable_empty_safe_and_count_free",
+      "line": 2600,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/events_relations.cpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_events_relations_contracts"
+      ],
+      "review_note": "Reviewed actual body: exactly two U64 parents11/12, six child rows first IDs101/201 and U64 partition ranks1..3, lines query OrderLine order name DESC limit3, controlled capturing executor. Actual relation plan building/hydration makes exactly one nonaggregate query, partition order_id, limit3, full order [name DESC,id ASC], two List payloads of three Object children and no internal rank property. Despite its name, original inputs do not include an empty third parent; this source port does not claim they prove that branch. Shared source fixtures/generator unchanged."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "relation_enhancement_wraps_inverse_many_relation_as_list",
+      "line": 2677,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/typed_queries.cpp",
+        "tests/parity/teaql-runtime/typed_models.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/queue_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "review_note": "Reviewed original OrderLineWithProduct/ProductWithLines/ProductLine private derive fixtures and exact queue batches: U64 line11/order7/product101/Text line, then U64 product101/Text sku. Actual EnhancedEntitiesOperation decodes the related product and its inverse-many SmartList containing exactly one ProductLine ID11. Handwritten field mapping parses the kernel-produced List/Object; it does not implement hydration/grouping. The private scalar models do not invent source runtime-state fields."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_to_one_getter_resolves_from_runtime_module_identity_graph",
+      "line": 2719,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/typed_queries.cpp",
+        "tests/parity/teaql-runtime/typed_models.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/queue_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "review_note": "Reviewed source FlatTrip/FlatVendor descriptors, skipped runtime-state fields and handwritten vendor() getter. Actual RuntimeModule typed registration/into_context installs the real graph decoders; original queue batches Trip U64 id11/vendor101 then Vendor U64 id101/Text Acme flow through actual enhanced query. Vendor member stays absent, while root.resolve_entity-backed getter returns name Acme. C++ vendor_value avoids a field/method naming collision; payload/metadata name remains vendor. Generator unchanged."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "generated_to_many_getter_uses_adjacency_and_mutation_copies_on_write",
+      "line": 2755,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/typed_queries.cpp",
+        "tests/parity/teaql-runtime/typed_models.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/queue_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "review_note": "Reviewed source FlatFleet/FlatFleetTrip descriptors, skipped root fields and both handwritten list getters. Actual module/decoders enhanced query uses Fleet U64 id7 and trips11/12 with fleet7/names first/second. Local trip_list remains unloaded; getter resolves two adjacency items with second name second. Explicit User-domain copy of the borrowed C++ result preserves the immutable graph; mutable getter clones its list before appending trip13/fleet7/name third with fresh root. Local list becomes loaded/size3 while actual root adjacency remains size2. Logical trip_list name is preserved despite C++ trip_list_value member adaptation."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_fetches_smart_list_of_entities",
+      "line": 2815,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/typed_queries.cpp",
+        "tests/parity/teaql-runtime/typed_models.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/queue_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "review_note": "Reviewed the distinct handwritten original OrderEntity codec: U64 or nonnegative I64 ID, strictly I64 version and Text name, with original option-debug error shape; this is not replaced by the looser derive fixture. Actual internal basic-list operation receives original StubExecutor row U64 id7/I64 version2/Text typed and returns exactly one model with all three original fields."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "typed_entity_fetch_restores_id_and_version_to_reduced_projection",
+      "line": 2849,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/typed_queries.cpp",
+        "tests/parity/teaql-runtime/typed_models.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/queue_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "review_note": "Reviewed original reusable CapturingQueryExecutor row U64 id7/I64 version2/Text typed and projection [name]. Actual private basic and enhanced operations each return one OrderEntity, make exactly two provider queries total and restore exact projection order [name,id,version] on both. Queue fixture repeat mode preserves reusable capturing semantics and metadata backend; no test-local projection completion."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_fetches_smart_list_of_derived_entities",
+      "line": 2889,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/typed_queries.cpp",
+        "tests/parity/teaql-runtime/typed_models.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md",
+        "tests/parity/teaql-runtime/queue_fixture.hpp"
+      ],
+      "checks": [
+        "original_runtime_typed_query_contracts"
+      ],
+      "review_note": "Reviewed original CatalogProduct/catalog_product required id/name descriptor and derive mapping, distinct from handwritten OrderEntity and rooted flat models. Actual Context service/basic-list operation decodes original U64 id9/Text derived row, returns exactly one model with both original field assertions. Scalar fixture has no runtime-state field; handwritten mapping does not claim generator implementation."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_collects_dynamic_properties_for_aggregate_output",
+      "line": 2923,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/aggregates_cache.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "review_note": "Reviewed original OrderAggregate/orders derive fixture: only U64 id is a scalar property and all other fields are dynamic. Actual Context/basic-list decoding of U64 id1/I64 lineCount3/F64 amount18.5 returns one model, exact field variants and full flattened JSON {id:1,lineCount:3,amount:18.5}. Handwritten private mapping preserves dynamic ownership/flattening; generator unchanged."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_executes_relation_aggregates_into_dynamic_properties",
+      "line": 2963,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/aggregates_cache.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "review_note": "Reviewed exact queued parents U64 IDs1/2, I64 version1/names first/second, then U64 order_id1/I64 lineCount3. Actual private EntityRowsOperation with lines/lineCount/OrderLine/single=true and projection id/version/name yields first I64(3) and unmatched second U64(0), exactly two queries and second entity OrderLine (the source mock SELECT string depends only on entity). No local aggregate/grouping implementation."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_maps_relation_aggregate_storage_key_to_property_key",
+      "line": 3026,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/aggregates_cache.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "review_note": "Reviewed logical order_id property mapped to physical order_ref, original U64 parent1/version1/name first and aggregate I64 order_ref1/I64 lineCount3. Actual runtime relation-aggregate rows map physical storage key to logical relation property, preserve exact I64(3) result and the second OrderLine query target. Mixed signed aggregate FK and unsigned parent ID are retained."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "entity_data_service_uses_aggregation_cache_when_resource_is_registered",
+      "line": 3087,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/aggregates_cache.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "review_note": "Reviewed registered concrete InMemoryAggregationCache, original queue one I64 count2 row and count(count) with 60000ms TTL. Two actual private fetches return fully equal rows, issue exactly one provider query and emit exactly two start:cache events/one start:provider. Recording telemetry and cache are explicit User-managed resources."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "continuous_page_fetch_uses_id_seek_for_the_next_page",
+      "line": 3139,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed exact tenant-1:user-1, reusable capturing rows U64 IDs100..91/version1/order-ID names, descending id pages(0,10)/(10,10), recent-orders namespace/TTL60. Actual private fetch reports OFFSET_FALLBACK:FIRST_PAGE then CURSOR_SEEK with cursor ID; second captured query has offset0 and debug predicate Lt/U64(91). No test-local cursor construction."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_reuses_ordered_ids_and_returns_exact_count",
+      "line": 3199,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed original ID queue1..100, typed batches21..30/51..60, principal id-set-test:tenant-1:user-1 and name-ascending pages(20,10)/(50,10), orders TTL60/max1000. Actual enhanced query gives total100/first IDs21 then51, BUILD thenHIT; exactly three queries, build projection[id]/limit1001/last order id and zero-offset retained slices containing exact U64(21)/U64(51)."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_limit_overflow_falls_back_without_false_count",
+      "line": 3287,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed principal id-set-overflow-test, queued IDs1..4 then complete Order1 row and overflow TTL60/max3/page(0,1). Actual enhanced query has absent total_count, exact ID_SET_FALLBACK_LIMIT_EXCEEDED and candidate count4. No overflow IDs are converted into a false exact count."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_coalesces_concurrent_cache_misses",
+      "line": 3330,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed two same-principal id-set-single-flight-user contexts sharing an ID store, single-flight TTL60/max100/page(0,1), ID-only rows1/2 and complete entity1. Both actual enhanced operations are polled pending before the builder finishes, then both return exact total2 with one SeqCst ID query. Original25ms async delay uses a native wake-only timer joined on finish/cancel; all Context work remains owner-thread. Explicit Global-owned store/counter replaces Arc lifetime sharing, not actual registry/lock/recheck behavior."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_rebuilds_after_ttl_expiry",
+      "line": 3380,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed id-set-ttl-user/ttl namespace, TTL1/max100/page(0,1), original25ms ID-only fixture and actual1050ms wait. Actual enhanced query builds twice (SeqCst counter2) and final plan is exactly ID_SET_BUILD. Real expiry is exercised, not forced test-store state."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_isolates_principals_in_a_shared_store",
+      "line": 3412,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed shared source store/executor counter, tenant-1:user-1 versus tenant-1:user-2, principal-isolation TTL60/max100/page(0,1). Actual enhanced queries against explicit Global store produce two ID-only builds, preserving principal separation; no per-user replacement store bypasses the shared-store requirement."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_retains_empty_exact_result",
+      "line": 3455,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed id-set-empty-user, original two empty ID-set queue batches, empty TTL60/max100/page(0,10). Actual enhanced result is empty with present exact total0 and ID_SET_BUILD, preserving optional presence rather than treating zero as no count."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_store_failure_falls_back_without_changing_rows",
+      "line": 3484,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed unavailable store get/put/invalidate each returning unavailable, id-set-store-failure-user and complete U64 Order7/version1/name order-7 row, unavailable TTL60/max100/page(0,10). Actual enhanced result keeps first ID7, total absent and exact ID_SET_FALLBACK_STORE_UNAVAILABLE. Store SPI and runtime fallback remain separate."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_does_not_shift_page_when_an_entity_disappears",
+      "line": 3521,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed id-set-delete-user, retained U64 IDs[1,2], only complete entity2 returned, delete TTL60/max100/page(0,2). Actual enhanced result retains total2 but contains one row/first ID2; the ID window is not rebuilt or reduced because one entity disappeared."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "id_set_pagination_unsupported_shape_falls_back_visibly",
+      "line": 3560,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/pagination.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_pagination_contracts"
+      ],
+      "review_note": "Reviewed id-set-unsupported-user, complete entity9 row, expression ordering Column(name), unsupported TTL60/max100/page(0,10). Actual enhanced query retains ID9 and exact ID_SET_FALLBACK_UNSUPPORTED_SHAPE; ordinary id ordering is removed before supplying the source expression shape."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "aggregation_cache_is_namespaced_and_invalidated_after_write",
+      "line": 3595,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/aggregates_cache.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "review_note": "Reviewed registered tenant-a AggregationCacheBackend interface, queued I64 count2/count3 and 60000ms count query. Actual first/cached full results compare equal; actual internal insert of U64 id9/I64 version1/Text new invalidates the namespace; refreshed rows differ and only two provider queries are issued. User-owned interface borrow replaces source Arc without extending storage lifetime."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "aggregation_cache_propagates_to_relation_aggregates",
+      "line": 3641,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/aggregates_cache.cpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_aggregate_cache_contracts"
+      ],
+      "review_note": "Reviewed original two parent rows IDs1/2/version1/names first/second and aggregate order_id1/lineCount3, concrete cache and parent projection id/version/name with both enable/propagate TTL60000. Two actual relation-aggregate entries return fully equal row vectors and make only two provider queries total, preserving root and child cache propagation rather than replaying test-local results."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_fetches_smart_list_entities_with_query_features",
+      "line": 3702,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed exact three U64 IDs 1/2/3, I64 version 1 and alpha/beta/gamma rows, Gte U64 2, descending ID and limit 1. Typed SmartList contains exactly ID 3/version 1/gamma. This is the pinned cfg(test) oracle, not a production database."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_relation_aggregates",
+      "line": 3742,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed parents 1/2 first/second and lines 10/11/12 with exact U64 order_id 1/1/2, version 1 and line1/2/3. id/name projection and single lines/lineCount aggregate return two parents with exact U64 2/1 counts. Selected cfg(test) helper replay; production engine types remain unchanged."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_aggregates",
+      "line": 3811,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed original alpha/beta IDs 1/2 and I64 versions 1/2; Count(id,count) and Sum(version,versionSum) return one row with exact U64 2/3. The cfg(test) oracle differs deliberately from published Count I64/Sum F64 semantics."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_grouped_aggregates_and_extended_filters",
+      "line": 3877,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed alpha/alpha/tmp-beta IDs 1/2/3 and versions 1/2/3; inclusive Between 1..3, NotLike tmp%, NotIn deleted, name grouping, count and sum return exactly alpha/U64 2/U64 3. Selected private oracle fixture, not full memory.rs API acceptance."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_extended_aggregates_and_having",
+      "line": 3924,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed alpha versions 1/3 and beta version 7, grouped count/stddev/var_pop/bit_or and HAVING total > I64 1. Exact outputs are alpha, U64 2, retained-f64 Decimal JSON 1.4142135623730951454746218583, Decimal ONE and I64 3. Extended aggregates remain test-only as in pinned cfg(test) helper."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_sound_like_filter",
+      "line": 3979,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed Robert/Rupert/Ashcraft IDs 1/2/3, version 1, SoundLike Robert and ascending ID. Exact two ordered names Robert/Rupert use the pinned private ASCII Soundex algorithm. Published InMemoryQueryEngine unsupported function behavior is unchanged."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_java_style_string_match_filters",
+      "line": 4016,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed tea-order/coffee-order/tea-archived rows and all six original contain/begin/end positive and negative predicates with ascending ID. Exactly one tea-order row remains; allocator-owned selected private oracle delegates ordinary predicates to production ExprEvaluator."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_runs_property_to_property_filters",
+      "line": 4068,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed ID1/version2/keep and ID2/version1/skip and version >= id column comparison. Exactly one keep row remains with original typed numeric inputs."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "memory_data_service_supports_mutations_and_optimistic_locking",
+      "line": 4099,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "tests/parity/memory_data_service.hpp",
+        "tests/parity/teaql-runtime/root_fixture.hpp",
+        "tests/parity/teaql-runtime/queue_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_memory_service_contracts"
+      ],
+      "review_note": "Reviewed insert Order U64 10/I64 1/draft, expected-version-1 update to submitted/I64 2, stale expected-version-1 typed Runtime OptimisticLockConflict, soft delete expected 2 to I64 -3 and recover -3 to I64 4. Deleted row remains queryable; these private-oracle operations do not claim graph save."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "optimistic_conflict_does_not_print_outside_diagnostic_sink",
+      "line": 4164,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/optimistic_conflict_output.py",
+        "tests/parity/teaql-runtime/memory_service.cpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_optimistic_conflict_output_contracts"
+      ],
+      "review_note": "Reviewed isolated-process invocation of only the mutation/optimistic-lock body, successful exit, running 1 test stdout marker and absence of OptimisticLockConflict in memory.rs from both stdout/stderr. Python subprocess capture preserves process/output scope and configured MIPS emulator; no in-process assertion substitutes for output capture."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_reports_missing_schema_provider",
+      "line": 4183,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/context_tail.cpp",
+        "tests/locking_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "review_note": "Reviewed actual lazy UserContext ensure_schema without a provider: exact RuntimeError Schema variant and missing schema provider message. Explicit Global bootstrap replaces source default implicit runtime ownership."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "user_context_stores_and_exposes_user_identifier",
+      "line": 4191,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/context_tail.cpp",
+        "tests/locking_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "review_note": "Reviewed default environment USER then USERNAME then main, process and thread identity shape, explicit user-123 setter, user-456 builder, optional user-789 then None and optional user-abc builder. Expected identity is independently constructed. C++ native thread ID explicitly adapts Rust process-local ThreadId; no literal cross-language thread-number equivalence is claimed."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "local_lock_enforces_ownership_timeout_and_lease_expiry",
+      "line": 4222,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/context_tail.cpp",
+        "tests/locking_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "review_note": "Reviewed exact seven acquire/reject/unlock decisions with two Users, zero timeout, 50ms lease and actual 60ms expiry wait. Both Users share one application-owned Global lock directory; isolated generated key replaces source wall-clock debug key without changing ownership/lease behavior."
+    },
+    {
+      "source": "teaql-runtime/src/lib.rs",
+      "name": "remote_lock_delegates_and_preserves_context_ownership",
+      "line": 4271,
+      "disposition": "covered_in_scope",
+      "evidence": [
+        "tests/parity/teaql-runtime/context_tail.cpp",
+        "tests/locking_fixture.hpp",
+        "docs/runtime-source-test-acceptance.md"
+      ],
+      "checks": [
+        "original_runtime_context_tail_contracts"
+      ],
+      "review_note": "Reviewed all seven provider acquisition/rejection/unlock outcomes and absent-provider optional success. Actual UserContext async delegation uses explicit Global test provider rebinding instead of Arc; owner-only test map mirrors source Mutex map on owner thread, timeout 0 and expiry 1000 preserved. No cloud provider is introduced."
+    }
+  ]
+}

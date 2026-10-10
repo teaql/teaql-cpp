@@ -1,0 +1,8 @@
+schema+crud example rows: [{id: 1, version: -3, name: submitted}]
+SQL CREATE TABLE IF NOT EXISTS "example_orders" ("id" INTEGER PRIMARY KEY NOT NULL, "version" INTEGER, "name" TEXT) | count=0
+SQL CREATE TABLE IF NOT EXISTS "example_orderline" ("id" INTEGER PRIMARY KEY NOT NULL, "order_id" INTEGER, "name" TEXT, "product_id" INTEGER) | count=0
+SQL CREATE TABLE IF NOT EXISTS "example_product" ("id" INTEGER PRIMARY KEY NOT NULL, "name" TEXT) | count=0
+SQL INSERT INTO "example_orders" ("id", "version", "name") VALUES (?, ?, ?) | count=1 | audit=Create the example order
+SQL UPDATE "example_orders" SET "name" = ?, "version" = ? WHERE "id" = ? AND "version" = ? | count=1 | audit=Submit the example order
+SQL UPDATE "example_orders" SET "version" = ? WHERE "id" = ? AND "version" = ? | count=1 | audit=Delete the example order
+SQL SELECT "id", "version", "name" FROM "example_orders" WHERE ("id" = ?) LIMIT 10000 | count=1 | purpose=Inspect the soft-deleted example order

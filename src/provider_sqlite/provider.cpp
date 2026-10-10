@@ -15,8 +15,6 @@
 
 namespace teaql::detail {
 namespace {
-constexpr std::size_t cache_capacity = 64;
-
 template <class T>
 void append_number(String& out, T value) {
     char buffer[32];
@@ -36,12 +34,8 @@ MutationExecutorError prepare_error(Memory r, sqlite3* db, int code, std::string
 #if SQLITE_VERSION_NUMBER >= 3038000
     if ((code & 0xff) == SQLITE_ERROR) {
         if (auto offset = sqlite3_error_offset(db); offset >= 0) {
-            String message(sqlite3_errmsg(db), r);
-            message += " in ";
-            message += sql;
-            message += " at offset ";
-            append_number(message, offset);
-            return MutationExecutorError::sqlite(r, 0, message);
+            return MutationExecutorError::sqlite(
+                r, SqliteDriverError::sql_input(r, code, sqlite3_errmsg(db), sql, offset));
         }
     }
 #else
@@ -97,11 +91,11 @@ struct SqliteConnectionState {
 
     SqliteConnectionState(std::allocator_arg_t, Allocator a, std::string_view filename)
         : resource(a.resource()), statements(resource), recency(resource) {
-        statements.reserve(cache_capacity);
-        for (std::size_t i = 0; i < cache_capacity; ++i) {
+        statements.reserve(DEFAULT_PREPARED_STATEMENT_CACHE_CAPACITY);
+        for (std::size_t i = 0; i < DEFAULT_PREPARED_STATEMENT_CACHE_CAPACITY; ++i) {
             statements.emplace_back();
         }
-        recency.reserve(cache_capacity);
+        recency.reserve(DEFAULT_PREPARED_STATEMENT_CACHE_CAPACITY);
         // Resource construction failures are native C++ exceptions, as opposed
         // to Context-borrowed provider results. They must survive stack unwinding
         // that destroys the Context which attempted to create the connection.
@@ -209,7 +203,7 @@ struct SqliteConnectionState {
                 sqlite3_finalize(next);
             }
             if (extra) {
-                throw MutationExecutorError::sqlite(r, 0, "Multiple statements provided");
+                throw MutationExecutorError::sqlite(r, SqliteDriverError::multiple_statement(r));
             }
             if (cached && statement) {
                 auto slot = std::find_if(statements.begin(), statements.end(), [](const auto& e) {
@@ -343,8 +337,8 @@ struct SqliteProviderState {
             throw std::invalid_argument(
                 "SQLite provider and connection must share their owning Context");
         }
-        layouts.reserve(cache_capacity);
-        for (std::size_t i = 0; i < cache_capacity; ++i) {
+        layouts.reserve(DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY);
+        for (std::size_t i = 0; i < DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY; ++i) {
             layouts.emplace_back();
         }
     }
@@ -362,7 +356,7 @@ struct SqliteProviderState {
             auto& arena = async_arena(resource);
             found = statement ? &arena.make<SqliteRowLayout>(*statement)
                               : &arena.make<SqliteRowLayout>();
-            if (count == cache_capacity) {
+            if (count == DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY) {
                 count = 0;
             }
             auto& entry = layouts[count];
@@ -473,7 +467,7 @@ struct SqliteCursor {
         if (!statement) {
             if (!values.empty()) {
                 throw MutationExecutorError::sqlite(
-                    resource, 0, "Wrong number of parameters passed to query. Got 1, needed 0");
+                    resource, SqliteDriverError::invalid_parameter_count(resource, 1, 0));
             }
             return;
         }
@@ -546,16 +540,16 @@ struct SqliteIdAccess {
     std::int64_t integer(int index) {
         auto type = sqlite3_column_type(cursor.statement, index);
         if (type != SQLITE_INTEGER) {
-            String message("Invalid column type ", resource);
-            message += type == SQLITE_FLOAT  ? "Real"
-                       : type == SQLITE_TEXT ? "Text"
-                       : type == SQLITE_BLOB ? "Blob"
-                                             : "Null";
-            message += " at index: ";
-            append_number(message, index);
-            message += ", name: ";
-            message += sqlite3_column_name(cursor.statement, index);
-            throw MutationExecutorError::sqlite(resource, 0, message);
+            auto native_type = type == SQLITE_FLOAT  ? SqliteValueType::Real
+                               : type == SQLITE_TEXT ? SqliteValueType::Text
+                               : type == SQLITE_BLOB ? SqliteValueType::Blob
+                                                     : SqliteValueType::Null;
+            throw MutationExecutorError::sqlite(
+                resource,
+                SqliteDriverError::invalid_column_type(resource,
+                                                       std::size_t(index),
+                                                       sqlite3_column_name(cursor.statement, index),
+                                                       native_type));
         }
         return sqlite3_column_int64(cursor.statement, index);
     }
@@ -583,7 +577,7 @@ struct SqliteIdAccess {
         prepare(sql, values);
         if (cursor.next()) {
             throw MutationExecutorError::sqlite(
-                resource, 0, "Execute returned results - did you mean to call query?");
+                resource, SqliteDriverError::execute_returned_results(resource));
         }
         cursor.reset();
         return std::uint64_t(sqlite3_changes64(cursor.provider.connection.db));
@@ -624,7 +618,7 @@ struct SqliteCall {
                     return Output::err(
                         resource,
                         MutationExecutorError::sqlite(
-                            resource, 0, "Execute returned results - did you mean to call query?"));
+                            resource, SqliteDriverError::execute_returned_results(resource)));
                 }
                 cursor.reset();
                 return Output::ok(resource,
@@ -793,6 +787,10 @@ struct SqliteNativeTransaction final : SqlTransportTransaction<MutationExecutorE
     };
 
 protected:
+    void cancel_sql_transaction() noexcept override {
+        abandon();
+    }
+
     DataServiceOperationResult<Rows, MutationExecutorError>&
     fetch_all_compact_sql_transaction(Memory r, const CompiledQuery& query) override {
         return make_resource_operation<Result<Rows, MutationExecutorError>, SqliteCall<Rows>>(
@@ -1032,6 +1030,8 @@ DataServiceCapabilities SqliteMutationExecutor::capabilities() const {
     result.query = true;
     result.mutation = true;
     result.transaction = true;
+    result.schema = true;
+    result.id_generation = true;
     return result;
 }
 

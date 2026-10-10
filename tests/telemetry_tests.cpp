@@ -1,7 +1,10 @@
 #include <teaql/runtime/context.hpp>
 #include <teaql/runtime/telemetry.hpp>
+#include <teaql/runtime/telemetry_debug.hpp>
+#include "move_only_error_fixture.hpp"
 #include <atomic>
 #include <iostream>
+#include <limits>
 #include <semaphore>
 #include <thread>
 using namespace teaql;
@@ -113,11 +116,19 @@ static void models_and_release() {
     auto& adapter = global.make<Adapter>(c);
     auto user = global.make_user_context();
     auto r = user->memory_resource();
+    auto count = std::make_obj_using_allocator<RuntimeAttributeValue>(
+        Allocator(r), std::numeric_limits<std::size_t>::max());
+    auto expected = std::bit_cast<std::int64_t>(
+        static_cast<std::uint64_t>(std::numeric_limits<std::size_t>::max()));
+    check(std::get<std::int64_t>(count.data) == expected,
+          "native usize conversion preserves the source cast on 32-bit and 64-bit targets");
+    Ref<RuntimeOperation> retained;
     user->with_runtime_telemetry(global, adapter);
     check(!user->runtime_telemetry_is_noop(), "adapter default is not noop");
     {
         auto op = operation(r);
         auto& copied = global.make<RuntimeOperation>(op);
+        retained = user->make_global<RuntimeOperation>(op);
         auto& scope = user->start_runtime_operation(op);
         RuntimeAttributes attrs(r);
         scope.success(attrs);
@@ -171,6 +182,16 @@ static void models_and_release() {
     check(adapter.seen.size() == 3 &&
               adapter.seen[0].family == "query with long name from user arena",
           "adapter explicitly copied operations to its Global domain");
+    user.reset();
+    auto next = global.make_user_context();
+    auto& saved = next->get(next->rebind_global(retained));
+    auto diagnostic = debug_string(next->memory_resource(), saved);
+    check(
+        diagnostic.find("LongEntityNameStoredInTheUserArena") != String::npos &&
+            diagnostic.find("Float(-0.0)") != String::npos &&
+            diagnostic.find("teaql.entity.id") == String::npos &&
+            diagnostic.get_allocator().resource() == next->memory_resource(),
+        "retained operation diagnostics survive source User deletion without forbidden identifiers");
 }
 
 static void poison_and_domains() {
@@ -428,11 +449,185 @@ static void propagation_lifecycle(bool cancel) {
     check(user->allocation_stats().live_blocks == 0, "propagation arena reclaimed");
 }
 
+struct ForeignBoxTelemetry final : RuntimeTelemetry {
+    GlobalContext& owner;
+    mutable unsigned dropped = 0;
+    mutable bool saw_live_name = false;
+    mutable ContextBox<RuntimeTelemetryScope>* scope_box = nullptr;
+    bool reuse_scope = false;
+    mutable ContextBox<RuntimeTelemetryPropagationContext>* propagation_box = nullptr;
+
+    explicit ForeignBoxTelemetry(GlobalContext& owner) : owner(owner) {}
+
+    Memory memory_resource() const noexcept override {
+        return owner.memory_resource();
+    }
+
+    struct Scope final : RuntimeTelemetryScope {
+        const ForeignBoxTelemetry& telemetry;
+        std::string_view name;
+
+        Scope(const ForeignBoxTelemetry& telemetry, std::string_view name)
+            : telemetry(telemetry), name(name) {}
+
+        ~Scope() {
+            ++telemetry.dropped;
+            telemetry.saw_live_name = name == "foreign-operation";
+        }
+
+        void success(const RuntimeAttributes&) override {}
+
+        void failure(std::string_view) override {}
+    };
+
+    struct Propagation final : RuntimeTelemetryPropagationContext {
+        const ForeignBoxTelemetry& telemetry;
+        std::string_view name;
+
+        Propagation(const ForeignBoxTelemetry& telemetry, std::string_view name)
+            : telemetry(telemetry), name(name) {}
+
+        ~Propagation() {
+            ++telemetry.dropped;
+            telemetry.saw_live_name = name == "foreign-operation";
+        }
+    };
+
+    ContextBox<RuntimeTelemetryScope>& start(Memory,
+                                             const RuntimeOperation& operation) const override {
+        if (reuse_scope && scope_box) {
+            return *scope_box;
+        }
+        scope_box = &owner.make<ContextBox<RuntimeTelemetryScope>>(
+            std::in_place_type<Scope>, *this, std::string_view(operation.name));
+        return *scope_box;
+    }
+
+    ContextBox<RuntimeTelemetryPropagationContext>&
+    extract_context(Memory, const RuntimeContextCarrier& carrier) const override {
+        propagation_box = &owner.make<ContextBox<RuntimeTelemetryPropagationContext>>(
+            std::in_place_type<Propagation>, *this, std::string_view(carrier.begin()->second));
+        return *propagation_box;
+    }
+};
+
+static void rejected_foreign_boxes_release_payloads() {
+    for (bool propagation : {false, true}) {
+        GlobalContext global;
+        auto& adapter = global.make_resource<ForeignBoxTelemetry>(global);
+        auto user = global.make_user_context();
+        auto owner = user->memory_resource();
+        if (propagation) {
+            auto& carrier = user->make<RuntimeContextCarrier>();
+            carrier.emplace(String("name", owner), String("foreign-operation", owner));
+            auto& scope = extract_runtime_context(owner, adapter, carrier);
+            check(scope.poll_with_context([] {
+                return 42;
+            }) == 42,
+                  "rejected propagation remains fail-open");
+        } else {
+            auto& op = user->make<RuntimeOperation>("query", "foreign-operation");
+            auto& scope = start_runtime_operation(owner, adapter, op);
+            check(scope.poll_with_context([] {
+                return 42;
+            }) == 42,
+                  "rejected telemetry scope remains fail-open");
+        }
+        const bool released = adapter.dropped == 1 && adapter.saw_live_name;
+        if (!released) {
+            if (propagation) {
+                adapter.propagation_box->reset();
+            } else {
+                adapter.scope_box->reset();
+            }
+        }
+        check(released, "fresh foreign telemetry payload releases before its borrowed User input");
+        user.reset();
+        check(adapter.dropped == 1 && global.live_user_bytes() == 0,
+              "rejected telemetry payload is destroyed once without deferred User access");
+    }
+}
+
+static void rejected_claimed_box_keeps_its_owner() {
+    GlobalContext global;
+    auto& adapter = global.make_resource<ForeignBoxTelemetry>(global);
+    auto& op = global.make<RuntimeOperation>("query", "foreign-operation");
+    auto& box = adapter.start(global.memory_resource(), op);
+    auto& existing = global.make<FailOpenRuntimeTelemetryScope>(&box);
+    adapter.reuse_scope = true;
+    auto user = global.make_user_context();
+    auto& rejected = start_runtime_operation(user->memory_resource(), adapter, op);
+    check(rejected.poll_with_context([] {
+        return 42;
+    }) == 42 &&
+              adapter.dropped == 0 && box.get(),
+          "fail-open rejection does not destroy a box already claimed by another scope");
+    user.reset();
+    existing.close();
+    check(adapter.dropped == 1 && adapter.saw_live_name,
+          "original box owner retains exactly-once cleanup authority");
+}
+
+struct MoveOnlyCompletion {
+    using allocator_type = Allocator;
+    Memory owner;
+    unsigned& destroyed;
+
+    MoveOnlyCompletion(std::allocator_arg_t, Allocator a, unsigned& destroyed)
+        : owner(a.resource()), destroyed(destroyed) {}
+
+    std::optional<MoveOnlyError> poll(WakeSignal&) {
+        return MoveOnlyError(std::allocator_arg, Allocator(owner), "noncopy completion", destroyed);
+    }
+
+    void finish_and_wait() noexcept {}
+
+    void cancel_and_wait() noexcept {}
+};
+
+static void move_only_telemetry_completions() {
+    for (bool propagation : {false, true}) {
+        unsigned destroyed = 0;
+        GlobalContext global;
+        auto user = global.make_user_context();
+        auto owner = user->memory_resource();
+        auto& telemetry = user->make<NoopRuntimeTelemetry>();
+        auto& child = make_operation<MoveOnlyError, MoveOnlyCompletion>(*user, destroyed);
+        AsyncOperation<MoveOnlyError>* wrapped;
+        if (propagation) {
+            auto& carrier = user->make<RuntimeContextCarrier>();
+            auto& scope = extract_runtime_context(owner, telemetry, carrier);
+            wrapped = &scope.run(owner, child);
+        } else {
+            auto& operation = user->make<RuntimeOperation>("query", "noncopy result");
+            auto& scope = start_runtime_operation(owner, telemetry, operation);
+            wrapped = &scope.run(owner, child);
+        }
+        check(wrapped->wait().message == "noncopy completion" && destroyed == 0,
+              "telemetry run preserves a source-unconstrained move-only completion");
+        bool consumed = false;
+        try {
+            (void)child.poll();
+        } catch (const std::logic_error&) {
+            consumed = true;
+        }
+        check(
+            consumed,
+            "noncopy child completion transfers ownership instead of retaining an invalid borrow");
+        user.reset();
+        check(destroyed == 1 && global.live_user_bytes() == 0,
+              "move-only telemetry result is destroyed once before arena reclamation");
+    }
+}
+
 int main() {
     try {
         auto* old = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         models_and_release();
+        move_only_telemetry_completions();
         poison_and_domains();
+        rejected_foreign_boxes_release_payloads();
+        rejected_claimed_box_keeps_its_owner();
         native_lifecycle(false);
         native_lifecycle(true);
         propagation_lifecycle(false);

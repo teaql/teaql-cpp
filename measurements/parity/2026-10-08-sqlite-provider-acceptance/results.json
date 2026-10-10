@@ -1,0 +1,136 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source_sha256": {
+    "include/teaql/provider_sqlite/provider.hpp": "a28c5238aea9f8519ef26af4382a507b5e3538c21d1e455970b493a4b41a9055",
+    "src/provider_sqlite/provider.cpp": "0bc091569d2249a424e08ccf85fc37a59eb4aca2b665c2a7203f000c9d609725",
+    "src/provider_sqlite/schema.cpp": "e12551ece771007161b1c1d1500bb3972f4b8b1acb17551410870a60e9204201",
+    "src/provider_sqlite/schema_model.cpp": "5f50299d808b67dfea9d6f1af8f115552d689d2e91c71943785e84e99a851b71",
+    "src/provider_sqlite/decoding.cpp": "6dc8a20fbe2a96483192199287fe62229d808dcda2c36007d7806b30c7e45271",
+    "src/provider_sqlite/driver_error.cpp": "09371cebe4ac92d1f5a9e4d4a4503c8f6e84e3c65724068abdfde6bfec656b58",
+    "tests/parity/sqlite_transport_cases.json": "fda966a22058ea711c28b9ff7f9b325105a0275cc92816fb94b8d325cedb632f",
+    "tests/parity/sqlite_decoding_cases.json": "deddcd599f9c6d1921e09420095d5e762fb900f522520b41278e06dd5e308b2b",
+    "tests/parity/sqlite_error_model_cases.json.gz": "048f6a4ba649e05fcb89a9030bd914e810e3c7db48a79e81d3725d1dd71631c3"
+  },
+  "native": {
+    "passed": 315,
+    "total": 315,
+    "seconds": 73.69
+  },
+  "mips_engine": {
+    "version": "3.53.2",
+    "pointer_bytes": 4,
+    "long_double_bytes": 8
+  },
+  "sanitizer": {
+    "checks": [
+      "provider_sqlite_schema_contracts",
+      "original_provider_storage_contracts",
+      "original_provider_schema_contracts",
+      "original_provider_query_contracts",
+      "original_provider_transaction_contracts",
+      "original_provider_dynamic_search_contracts",
+      "original_provider_guarded_mutation_contracts",
+      "provider_sqlite_unicode_contracts",
+      "provider_sqlite_business_id_contracts",
+      "provider_sqlite_id_contracts",
+      "provider_sqlite_transport_contracts",
+      "provider_sqlite_decoding_contracts",
+      "provider_sqlite_binding_contracts",
+      "provider_sqlite_model_contracts",
+      "provider_sqlite_error_contracts",
+      "provider_sqlite_driver_error_contracts",
+      "provider_sqlite_simple_error_contracts",
+      "provider_sqlite_boxed_error_contracts",
+      "provider_sqlite_from_sql_error_contracts",
+      "provider_sqlite_dialect_contracts",
+      "provider_sqlite_schema_rust_parity",
+      "sqlite_provider_business_id_rust_parity",
+      "sqlite_provider_id_rust_parity",
+      "sqlite_provider_transaction_rust_parity",
+      "sqlite_provider_transport_rust_parity",
+      "sqlite_decoding_rust_parity",
+      "sqlite_bindings_rust_parity",
+      "sqlite_error_model_rust_parity",
+      "sqlite_native_diagnostics_rust_parity",
+      "sqlite_simple_error_rust_parity",
+      "sqlite_from_sql_error_rust_parity",
+      "sqlite_from_sql_raw_debug_rust_parity"
+    ],
+    "passed": 32,
+    "total": 32,
+    "seconds": 32.73,
+    "leak_detection": false,
+    "compiled_dependency_records": 227
+  },
+  "mips": {
+    "checks": [
+      "provider_sqlite_schema_contracts",
+      "original_provider_storage_contracts",
+      "original_provider_schema_contracts",
+      "original_provider_query_contracts",
+      "original_provider_transaction_contracts",
+      "original_provider_dynamic_search_contracts",
+      "original_provider_guarded_mutation_contracts",
+      "provider_sqlite_unicode_contracts",
+      "provider_sqlite_business_id_contracts",
+      "provider_sqlite_id_contracts",
+      "provider_sqlite_transport_contracts",
+      "provider_sqlite_decoding_contracts",
+      "provider_sqlite_binding_contracts",
+      "provider_sqlite_model_contracts",
+      "provider_sqlite_error_contracts",
+      "provider_sqlite_driver_error_contracts",
+      "provider_sqlite_simple_error_contracts",
+      "provider_sqlite_boxed_error_contracts",
+      "provider_sqlite_from_sql_error_contracts",
+      "provider_sqlite_dialect_contracts",
+      "provider_sqlite_schema_rust_parity",
+      "sqlite_provider_business_id_rust_parity",
+      "sqlite_provider_id_rust_parity",
+      "sqlite_provider_transaction_rust_parity",
+      "sqlite_provider_transport_rust_parity",
+      "sqlite_decoding_rust_parity",
+      "sqlite_bindings_rust_parity",
+      "sqlite_error_model_rust_parity",
+      "sqlite_native_diagnostics_rust_parity",
+      "sqlite_simple_error_rust_parity",
+      "sqlite_from_sql_error_rust_parity"
+    ],
+    "passed": 31,
+    "total": 31,
+    "seconds": 147.93,
+    "compiled_dependency_records": 143,
+    "build_directory": "build-sql-model-review-mips",
+    "emulator": [
+      "/usr/bin/qemu-mips",
+      "-cpu",
+      "74Kf"
+    ],
+    "isa_flags": [
+      "-march=74kc",
+      "-msoft-float"
+    ],
+    "sqlite_engine": "3.53.2",
+    "physical_router_verified": false
+  },
+  "live_native": {
+    "transport": 798,
+    "schema": 735,
+    "driver_errors": 563,
+    "binding": 1084,
+    "decoding_release_profile": 6029
+  },
+  "live_mips": {
+    "transport": 798,
+    "driver_errors": 563,
+    "extra_id_engine_cases": 2,
+    "extra_real_to_text_engine_cases": 2
+  },
+  "binary_sha256": {
+    "build-sql-model-review-mips/teaql_sqlite_transport_probe": "760c7e1fbf72b1b8918a7e5f26f60361153c512279900a41c5091702541dd53e",
+    "build-sql-model-review-mips/teaql_sqlite_error_model_probe": "ce4a3f4ecacad791f9522b5e9274645d145da584580375e74ac8f87dd9a1b30a",
+    "build-sql-model-review-mips/teaql_sqlite_bindings_probe": "3e1dc93f1ef16e0fff4432ac40bec4803ebd50a9c71423eda35d4c6f1ce857d2",
+    "build-sql-model-review-mips/teaql_sqlite_decoding_probe": "f517dce3adfd61b0db57fd24e59b382ad8c5b7fe5cdff2d916882e007f19c435"
+  },
+  "post_verification_build": "No work to do in native and selected sanitizer/MIPS builds; source fingerprints unchanged."
+}

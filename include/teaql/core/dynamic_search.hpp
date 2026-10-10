@@ -2,6 +2,7 @@
 #include <teaql/core/query.hpp>
 #include <teaql/core/result.hpp>
 #include <teaql/memory/function_ref.hpp>
+#include <exception>
 
 namespace teaql::dynamic_search {
 struct SearchModel {
@@ -103,6 +104,10 @@ struct DynamicSearchError {
 
     std::string_view to_string() const {
         return message;
+    }
+
+    const std::exception* source() const noexcept {
+        return nullptr;
     }
 
     bool operator==(const DynamicSearchError&) const = default;

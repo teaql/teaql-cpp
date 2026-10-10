@@ -130,8 +130,9 @@ static void scope_and_models() {
     check(same == metadata.sql_log.projection_state && same.get<String>() && !same.get<int>(),
           "same-domain opaque clone preserves identity and concrete type");
     auto& retained_metadata = global.make<ExecutionMetadata>(metadata);
-    check(!(retained_metadata.sql_log.projection_state == same),
-          "cross-domain opaque clone has separate identity");
+    check(retained_metadata.sql_log.projection_state == same &&
+              retained_metadata.sql_log.projection_state.get<String>() != same.get<String>(),
+          "cross-domain opaque clone preserves origin identity with separate storage");
     auto& result = user->make<MutationResult>(1, metadata);
     result.generated_values.fields.emplace(String("id", u), Value(u, std::uint64_t(42)));
     result.persisted_snapshot.emplace(u);

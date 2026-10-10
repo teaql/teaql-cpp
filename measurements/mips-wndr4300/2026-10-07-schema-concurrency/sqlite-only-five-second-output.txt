@@ -1,0 +1,10 @@
+worker 4: begun=1 result=0 not an error
+worker 1: begun=1 result=0 not an error
+worker 5: begun=1 result=0 not an error
+worker 0: begun=1 result=0 not an error
+worker 2: begun=1 result=0 not an error
+worker 6: begun=0 result=5 database is locked
+worker 7: begun=0 result=5 database is locked
+worker 3: begun=1 result=0 not an error
+Command exited with non-zero status 1
+Elapsed: 5.09 seconds

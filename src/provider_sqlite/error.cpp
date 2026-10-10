@@ -5,11 +5,18 @@ MutationExecutorError::MutationExecutorError(std::allocator_arg_t,
                                              Allocator a,
                                              const MutationExecutorError& other)
     : kind_(other.kind_), message_(other.message_, a.resource()),
-      compile_(detail::clone_in(a.resource(), other.compile_)), sqlite_code_(other.sqlite_code_) {}
+      compile_(detail::clone_in(a.resource(), other.compile_)),
+      driver_(detail::clone_in(a.resource(), other.driver_)), sqlite_code_(other.sqlite_code_) {}
 
 MutationExecutorError MutationExecutorError::sqlite(Memory r, int code, std::string_view message) {
-    MutationExecutorError error(r, Kind::Sqlite, message);
-    error.sqlite_code_ = code;
+    return sqlite(r, SqliteDriverError::native_failure(r, code, message));
+}
+
+MutationExecutorError MutationExecutorError::sqlite(Memory r, SqliteDriverError driver) {
+    MutationExecutorError error(r, Kind::Sqlite, {});
+    error.driver_.emplace(detail::move_in(r, std::move(driver)));
+    error.message_ = error.driver_->to_string(r);
+    error.sqlite_code_ = error.driver_->sqlite_extended_error_code().value_or(0);
     return error;
 }
 
@@ -42,7 +49,7 @@ String MutationExecutorError::to_string(Memory r) const {
     case Kind::SqlCompile:
         return compile_error().to_string(r);
     case Kind::Sqlite:
-        break;
+        return driver_error().to_string(r);
     case Kind::UnsupportedValue:
         prefix = "unsupported rusqlite bind value for mutation executor: ";
         break;

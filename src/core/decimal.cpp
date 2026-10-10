@@ -11,7 +11,7 @@ namespace {
 using Bits = std::array<std::uint32_t, 3>;
 
 template <std::size_t N>
-bool zero(const std::array<std::uint32_t, N>& b) {
+bool bits_zero(const std::array<std::uint32_t, N>& b) {
     for (auto n : b) {
         if (n) {
             return false;
@@ -76,7 +76,8 @@ double as_double(std::array<std::uint32_t, N> b) {
     return std::ldexp(double(n), shift);
 }
 
-std::optional<Decimal> plain(std::string_view s, std::string_view& error) {
+std::optional<Decimal>
+plain(std::string_view s, std::string_view& error, DecimalError::Code* exact_error = nullptr) {
     auto fail = [&](std::string_view message) -> std::optional<Decimal> {
         error = message;
         return {};
@@ -91,7 +92,8 @@ std::optional<Decimal> plain(std::string_view s, std::string_view& error) {
         negative = s.front() == '-';
         s.remove_prefix(1);
     }
-    for (char c : s) {
+    for (std::size_t position = 0; position < s.size(); ++position) {
+        char c = s[position];
         if (c == '_' && digit) {
             // rust_decimal's 64-bit parser consumes '_' as a zero rounding
             // digit at scale 28; its wide parser skips separators instead.
@@ -115,6 +117,10 @@ std::optional<Decimal> plain(std::string_view s, std::string_view& error) {
             if (!point) {
                 return fail("Invalid decimal: overflow from too many digits");
             }
+            if (exact_error) {
+                *exact_error = DecimalError::Code::Underflow;
+                return {};
+            }
             if (c >= '5' && !mul(b, 1, 1)) {
                 if (!scale) {
                     return fail("Invalid decimal: overflow from mantissa after rounding");
@@ -131,6 +137,10 @@ std::optional<Decimal> plain(std::string_view s, std::string_view& error) {
         b = next;
         if (point) {
             ++scale;
+            if (exact_error && scale == 28 && position + 1 < s.size()) {
+                *exact_error = DecimalError::Code::Underflow;
+                return {};
+            }
         }
         if (scale != 28 &&
             (b[2] || ((std::uint64_t(b[1]) << 32) | b[0]) >= UINT64_MAX / 10 - 255)) {
@@ -142,17 +152,145 @@ std::optional<Decimal> plain(std::string_view s, std::string_view& error) {
     }
     return Decimal::from_parts(b, negative, scale);
 }
-}
 
-std::optional<Decimal> Decimal::from_parts(Bits b, bool negative, unsigned scale) {
-    if (scale > 28) {
+// Adapted from the locked rust_decimal 1.42.1 radix parser (MIT; see LICENSES).
+// Its coefficient radix and decimal scale are deliberately distinct, including
+// its observed carry/rounding rules. No heap storage or floating conversion.
+std::optional<Decimal> radix_value(std::string_view text, unsigned radix, std::string_view& error) {
+    auto fail = [&](std::string_view message) -> std::optional<Decimal> {
+        error = message;
         return {};
+    };
+    if (text.empty()) {
+        return fail("Invalid decimal: empty");
     }
-    Decimal d;
-    d.coefficient_ = b;
-    d.scale_ = static_cast<unsigned char>(scale);
-    d.negative_ = negative && !zero(b);
-    return d;
+    if (radix < 2) {
+        return fail("Unsupported radix < 2");
+    }
+    if (radix > 36) {
+        return fail("Unsupported radix > 36");
+    }
+    constexpr std::array<unsigned, 35> precision{96, 61, 48, 42, 38, 35, 32, 31, 28, 28, 27, 26,
+                                                 26, 25, 24, 24, 24, 23, 23, 22, 22, 22, 21, 21,
+                                                 21, 21, 20, 20, 20, 20, 20, 20, 19, 19, 19};
+    bool negative = text.front() == '-';
+    if (negative || text.front() == '+') {
+        text.remove_prefix(1);
+    }
+    std::array<unsigned, 96> digits{};
+    std::size_t count = 0, offset = 0;
+    int before_point = -1;
+    auto digit_value = [&](char c) -> std::optional<unsigned> {
+        unsigned value;
+        if (c >= '0' && c <= '9') {
+            value = unsigned(c - '0');
+        } else if (c >= 'a' && c <= 'z') {
+            value = unsigned(c - 'a') + 10;
+        } else if (c >= 'A' && c <= 'Z') {
+            value = unsigned(c - 'A') + 10;
+        } else {
+            error = "Invalid decimal: unknown character";
+            return {};
+        }
+        if (value >= radix) {
+            error = "Invalid decimal: invalid character";
+            return {};
+        }
+        return value;
+    };
+    bool round = false;
+    while (offset < text.size()) {
+        char c = text[offset++];
+        if (c == '.') {
+            if (before_point >= 0) {
+                return fail("Invalid decimal: two decimal points");
+            }
+            before_point = int(count);
+        } else if (c == '_') {
+            if (count == 0) {
+                return fail("Invalid decimal: must start lead with a number");
+            }
+        } else {
+            auto digit = digit_value(c);
+            if (!digit) {
+                return {};
+            }
+            if (count == digits.size()) {
+                throw std::length_error("Locked radix parser coefficient capacity exceeded");
+            }
+            digits[count++] = *digit;
+            if (count > precision[radix - 2]) {
+                round = true;
+                break;
+            }
+        }
+    }
+    if (round && offset < text.size()) {
+        char c = text[offset];
+        unsigned digit = 0;
+        if (c == '.') {
+            if (before_point >= 0) {
+                return fail("Invalid decimal: two decimal points");
+            }
+        } else if (c != '_') {
+            auto value = digit_value(c);
+            if (!value) {
+                return {};
+            }
+            digit = *value;
+        }
+        unsigned midpoint = radix % 2 ? radix / 2 : (radix + 1) / 2;
+        if (digit >= midpoint) {
+            for (std::size_t index = count; index != 0;) {
+                --index;
+                if (++digits[index] <= 9) {
+                    break;
+                }
+                digits[index] = 0;
+                if (index == 0) {
+                    if (count == digits.size()) {
+                        throw std::length_error(
+                            "Locked radix parser coefficient capacity exceeded");
+                    }
+                    std::move_backward(
+                        digits.begin(), digits.begin() + count - 1, digits.begin() + count);
+                    digits[0] = 1;
+                    ++before_point;
+                }
+            }
+        }
+    }
+    if (count == 0) {
+        return fail("Invalid decimal: no digits found");
+    }
+    unsigned scale = before_point >= 0 ? unsigned(count) - unsigned(before_point) : 0;
+    Bits data{};
+    for (std::size_t i = 0; i < count; ++i) {
+        auto next = data;
+        if (!mul(next, radix)) {
+            if (int(i) < before_point && i + 1 < count) {
+                return fail("Invalid decimal: overflow from too many digits");
+            }
+            if (digits[i] >= 5 && !mul(data, 1, 1)) {
+                return fail("Invalid decimal: overflow when rounding");
+            }
+            auto discarded = unsigned(count - i);
+            if (discarded > scale) {
+                return fail("Invalid decimal: overflow from scale mismatch");
+            }
+            scale -= discarded;
+            break;
+        }
+        data = next;
+        if (!mul(data, 1, digits[i])) {
+            return fail("Invalid decimal: overflow from carry");
+        }
+    }
+    if (scale > Decimal::MAX_SCALE) {
+        throw std::out_of_range("Locked radix parser scale exceeds maximum supported scale");
+    }
+    return Decimal::from_parts(data, negative, scale);
+}
 }
 
 Decimal Decimal::from_u64(std::uint64_t n) {
@@ -163,6 +301,77 @@ Decimal Decimal::from_i64(std::int64_t n) {
     auto d = from_u64(n < 0 ? std::uint64_t(0) - std::uint64_t(n) : std::uint64_t(n));
     d.negative_ = n < 0;
     return d;
+}
+
+std::optional<Decimal> Decimal::from_u128(UInt128 value) {
+    if (value.words[3]) {
+        return {};
+    }
+    return from_parts({value.words[0], value.words[1], value.words[2]}, false, 0);
+}
+
+std::optional<Decimal> Decimal::from_i128(Int128 value) {
+    auto result = from_u128(value.unsigned_abs());
+    if (result) {
+        result->negative_ = value.negative();
+    }
+    return result;
+}
+
+Decimal Decimal::from_i64_with_scale(std::int64_t value, unsigned scale) {
+    if (scale > MAX_SCALE) {
+        throw std::out_of_range("Decimal scale exceeds maximum supported scale");
+    }
+    auto result = from_i64(value);
+    result.scale_ = static_cast<unsigned char>(scale);
+    return result;
+}
+
+Result<Decimal, DecimalError> Decimal::try_new(Memory r, std::int64_t value, unsigned scale) {
+    if (scale > MAX_SCALE) {
+        return Result<Decimal, DecimalError>::err(
+            r,
+            DecimalError(std::allocator_arg,
+                         Allocator(r),
+                         DecimalError::Code::ScaleExceedsMaximumPrecision,
+                         {},
+                         scale));
+    }
+    return Result<Decimal, DecimalError>::ok(r, from_i64_with_scale(value, scale));
+}
+
+Decimal Decimal::from_i128_with_scale(Int128 value, unsigned scale) {
+    if (scale > MAX_SCALE) {
+        throw std::out_of_range("Decimal scale exceeds maximum supported scale");
+    }
+    auto result = from_i128(value);
+    if (!result) {
+        throw std::overflow_error("Decimal integer coefficient exceeds 96 bits");
+    }
+    result->scale_ = static_cast<unsigned char>(scale);
+    return *result;
+}
+
+Result<Decimal, DecimalError>
+Decimal::try_from_i128_with_scale(Memory r, Int128 value, unsigned scale) {
+    if (scale > MAX_SCALE) {
+        return Result<Decimal, DecimalError>::err(
+            r,
+            DecimalError(std::allocator_arg,
+                         Allocator(r),
+                         DecimalError::Code::ScaleExceedsMaximumPrecision,
+                         {},
+                         scale));
+    }
+    auto result = from_i128(value);
+    if (!result) {
+        auto code = value.negative() ? DecimalError::Code::LessThanMinimumPossibleValue
+                                     : DecimalError::Code::ExceedsMaximumPossibleValue;
+        return Result<Decimal, DecimalError>::err(
+            r, DecimalError(std::allocator_arg, Allocator(r), code));
+    }
+    result->scale_ = static_cast<unsigned char>(scale);
+    return Result<Decimal, DecimalError>::ok(r, *result);
 }
 
 std::optional<Decimal> Decimal::parse(std::string_view s) {
@@ -184,6 +393,28 @@ Result<Decimal, DecimalError> Decimal::parse_result(Memory r, std::string_view s
         r, DecimalError(std::allocator_arg, Allocator(r), code, message, scale));
 }
 
+Result<Decimal, DecimalError> Decimal::from_str_exact(Memory r, std::string_view s) {
+    auto code = DecimalError::Code::ErrorString;
+    std::string_view message;
+    if (auto result = plain(s, message, &code)) {
+        return Result<Decimal, DecimalError>::ok(r, *result);
+    }
+    return Result<Decimal, DecimalError>::err(
+        r, DecimalError(std::allocator_arg, Allocator(r), code, message));
+}
+
+Result<Decimal, DecimalError>
+Decimal::from_str_radix(Memory r, std::string_view s, unsigned radix) {
+    std::string_view message;
+    auto result = radix == 10 ? plain(s, message) : radix_value(s, radix, message);
+    if (result) {
+        return Result<Decimal, DecimalError>::ok(r, *result);
+    }
+    return Result<Decimal, DecimalError>::err(
+        r,
+        DecimalError(std::allocator_arg, Allocator(r), DecimalError::Code::ErrorString, message));
+}
+
 std::optional<Decimal> Decimal::parse_detail(std::string_view s,
                                              DecimalError::Code& code,
                                              std::string_view& message,
@@ -192,6 +423,41 @@ std::optional<Decimal> Decimal::parse_detail(std::string_view s,
     if (auto d = plain(s, message)) {
         return d;
     }
+    if (s.find_first_of("eE") != s.npos) {
+        return scientific_detail(s, true, code, message, error_scale);
+    }
+    return {};
+}
+
+Result<Decimal, DecimalError> Decimal::from_scientific(Memory r, std::string_view s) {
+    DecimalError::Code code{};
+    std::string_view message;
+    std::uint32_t scale = 0;
+    if (auto value = scientific_detail(s, false, code, message, scale)) {
+        return Result<Decimal, DecimalError>::ok(r, *value);
+    }
+    return Result<Decimal, DecimalError>::err(
+        r, DecimalError(std::allocator_arg, Allocator(r), code, message, scale));
+}
+
+Result<Decimal, DecimalError> Decimal::from_scientific_lossy(Memory r, std::string_view s) {
+    DecimalError::Code code{};
+    std::string_view message;
+    std::uint32_t scale = 0;
+    if (auto value = scientific_detail(s, true, code, message, scale)) {
+        return Result<Decimal, DecimalError>::ok(r, *value);
+    }
+    return Result<Decimal, DecimalError>::err(
+        r, DecimalError(std::allocator_arg, Allocator(r), code, message, scale));
+}
+
+std::optional<Decimal> Decimal::scientific_detail(std::string_view s,
+                                                  bool lossy,
+                                                  DecimalError::Code& code,
+                                                  std::string_view& message,
+                                                  std::uint32_t& error_scale) {
+    code = DecimalError::Code::ErrorString;
+    message = "Failed to parse";
     const auto pos = s.find_first_of("eE");
     if (pos == s.npos) {
         return {};
@@ -220,37 +486,103 @@ std::optional<Decimal> Decimal::parse_detail(std::string_view s,
         error_scale = exp;
         return {};
     }
-    auto& b = base->coefficient_;
     if (negative) {
-        unsigned next_scale = base->scale_ + exp, remainder = 0;
-        while (next_scale > 28) {
-            remainder = div(b, 10);
-            --next_scale;
+        auto scale = base->scale_ + exp;
+        if (scale > MAX_SCALE) {
+            if (!lossy) {
+                code = DecimalError::Code::ScaleExceedsMaximumPrecision;
+                error_scale = scale;
+                return {};
+            }
+            base->rescale(MAX_SCALE - exp);
+            scale = MAX_SCALE;
         }
-        if (base->scale_ + exp > 28 && remainder >= 5) {
-            mul(b, 1, 1);
-        }
-        base->scale_ = static_cast<unsigned char>(next_scale);
+        base->scale_ = static_cast<unsigned char>(scale);
     } else if (exp <= base->scale_) {
         base->scale_ -= static_cast<unsigned char>(exp);
     } else {
-        for (unsigned i = base->scale_; i < exp; ++i) {
-            if (!mul(b, 10)) {
+        // Preserve the source's at-most-two multiplication chunks (19 digits).
+        while (exp) {
+            unsigned digits = std::min(exp, 19u);
+            std::uint64_t power = 1;
+            for (unsigned i = 0; i < digits; ++i) {
+                power *= 10;
+            }
+            auto multiplied = base->checked_mul(from_u64(power));
+            if (!multiplied) {
                 code = DecimalError::Code::ExceedsMaximumPossibleValue;
                 return {};
             }
+            base = multiplied;
+            exp -= digits;
         }
-        base->scale_ = 0;
-    }
-    if (zero(b)) {
-        base->negative_ = false;
+        base->normalize_assign();
     }
     return base;
+}
+
+std::array<std::uint32_t, 4> Decimal::hash_words() const {
+    auto normalized = normalize();
+    return {normalized.coefficient_[0],
+            normalized.coefficient_[1],
+            normalized.coefficient_[2],
+            (std::uint32_t(normalized.scale_) << 16) | (normalized.negative_ ? 0x80000000u : 0u)};
 }
 
 // Binary conversion adapted from rust_decimal 1.42.1 (Paul Mason, MIT).
 // The license is retained in LICENSES/rust_decimal-MIT.txt. No library linkage.
 std::optional<Decimal> Decimal::from_f64(double n) {
+    return from_f64_detail(n, false);
+}
+
+std::optional<Decimal> Decimal::from_f64_retain(double n) {
+    return from_f64_detail(n, true);
+}
+
+std::optional<Decimal> Decimal::from_f32(float n) {
+    return from_f32_detail(n, false);
+}
+
+std::optional<Decimal> Decimal::from_f32_retain(float n) {
+    return from_f32_detail(n, true);
+}
+
+Result<Decimal, DecimalError> Decimal::try_from_f32(Memory r, float n) {
+    if (auto result = from_f32(n)) {
+        return Result<Decimal, DecimalError>::ok(r, *result);
+    }
+    return Result<Decimal, DecimalError>::err(
+        r,
+        DecimalError(
+            std::allocator_arg, Allocator(r), DecimalError::Code::ConversionTo, "Decimal"));
+}
+
+Result<Decimal, DecimalError> Decimal::try_from_f64(Memory r, double n) {
+    if (auto result = from_f64(n)) {
+        return Result<Decimal, DecimalError>::ok(r, *result);
+    }
+    return Result<Decimal, DecimalError>::err(
+        r,
+        DecimalError(
+            std::allocator_arg, Allocator(r), DecimalError::Code::ConversionTo, "Decimal"));
+}
+
+std::optional<Decimal> Decimal::from_f32_detail(float n, bool retain) {
+    if (!std::isfinite(n)) {
+        return {};
+    }
+    const auto raw = std::bit_cast<std::uint32_t>(n);
+    const bool negative = (raw >> 31) != 0;
+    const auto exponent = int((raw >> 23) & 0xff);
+    auto mantissa = raw & 0x007fffffu;
+    if (exponent) {
+        mantissa |= 0x00800000u;
+    }
+    return from_binary(
+        {mantissa, 0, 0}, exponent - 127 - 23 + (exponent == 0), negative, false, retain);
+}
+
+std::optional<Decimal> Decimal::from_f64_detail(double n, bool retain) {
     if (!std::isfinite(n)) {
         return {};
     }
@@ -262,8 +594,13 @@ std::optional<Decimal> Decimal::from_f64(double n) {
         mantissa |= 0x0010000000000000ULL;
     }
     Bits b{std::uint32_t(mantissa), std::uint32_t(mantissa >> 32), 0};
-    int e10 = exponent - 1023 - 52 + (exponent == 0), e5 = -e10;
-    if (zero(b)) {
+    return from_binary(b, exponent - 1023 - 52 + (exponent == 0), negative, true, retain);
+}
+
+std::optional<Decimal>
+Decimal::from_binary(Bits b, int e10, bool negative, bool binary64, bool retain) {
+    int e5 = -e10;
+    if (bits_zero(b)) {
         Decimal d;
         d.negative_ = negative;
         return d;
@@ -298,20 +635,24 @@ std::optional<Decimal> Decimal::from_f64(double n) {
     while (e10 < -28) {
         const auto rem = div(b, 10);
         ++e10;
-        if (zero(b)) {
+        if (bits_zero(b)) {
             e10 = 0;
         } else if (rem >= 5) {
             mul(b, 1, 1);
         }
     }
-    while (e10 < 0 && (b[2] || (b[1] & 0xfff00000))) {
+    auto excess_precision = [&] {
+        return binary64 ? bool(b[2] || (b[1] & 0xfff00000))
+                        : bool(b[2] || b[1] || (b[0] & 0xff000000));
+    };
+    while (!retain && e10 < 0 && excess_precision()) {
         const auto rem = div(b, 10);
         ++e10;
         if (rem >= 5) {
             mul(b, 1, 1);
         }
     }
-    while (e10 < 0) {
+    while (!retain && e10 < 0) {
         auto copy = b;
         if (div(copy, 10)) {
             break;
@@ -349,6 +690,32 @@ std::optional<std::int64_t> Decimal::to_i64() const {
         return INT64_MIN;
     }
     return negative_ ? -std::int64_t(n) : std::int64_t(n);
+}
+
+Int128 Decimal::to_i128() const {
+    auto value = truncated(coefficient_, scale_);
+    return Int128::from_magnitude({{value[0], value[1], value[2], 0}}, negative_);
+}
+
+std::optional<UInt128> Decimal::to_u128() const {
+    if (negative_) {
+        return {};
+    }
+    auto value = truncated(coefficient_, scale_);
+    return UInt128{{value[0], value[1], value[2], 0}};
+}
+
+Result<UInt128, DecimalError> Decimal::try_to_u128(Memory r) const {
+    if (auto result = to_u128()) {
+        return Result<UInt128, DecimalError>::ok(r, *result);
+    }
+    return Result<UInt128, DecimalError>::err(
+        r,
+        DecimalError(std::allocator_arg, Allocator(r), DecimalError::Code::ConversionTo, "u128"));
+}
+
+float Decimal::to_f32() const {
+    return static_cast<float>(to_f64());
 }
 
 double Decimal::to_f64() const {
@@ -393,7 +760,7 @@ double Decimal::to_f64() const {
         fraction[i] = std::uint32_t(std::uint64_t(fraction[i]) - sub);
     }
     double n = as_double(whole);
-    if (!zero(fraction)) {
+    if (!bits_zero(fraction)) {
         n += as_double(fraction) / as_double(power);
         double round_to = 1, factor = 10;
         unsigned e = scale_;
@@ -420,7 +787,7 @@ String Decimal::to_string(Memory r) const {
     auto b = coefficient_;
     do {
         *--start = char('0' + div(b, 10));
-    } while (!zero(b));
+    } while (!bits_zero(b));
     String out(r);
     if (negative_) {
         out += '-';
@@ -440,8 +807,41 @@ String Decimal::to_string(Memory r) const {
     return out;
 }
 
+DecimalInlineString Decimal::array_string() const {
+    if (scale_ > 30) {
+        throw std::length_error("Decimal inline string exceeds the locked Rust capacity");
+    }
+    std::array<char, 32> digits{};
+    auto working = coefficient_;
+    std::size_t count = 0;
+    do {
+        digits[count++] = char('0' + div(working, 10));
+    } while (!bits_zero(working));
+    while (count < scale_) {
+        digits[count++] = '0';
+    }
+    DecimalInlineString result;
+    auto append = [&](char character) {
+        if (result.size_ == result.data_.size()) {
+            throw std::length_error("Decimal inline string exceeds the locked Rust capacity");
+        }
+        result.data_[result.size_++] = character;
+    };
+    auto whole = count - scale_;
+    if (whole == 0) {
+        append('0');
+    }
+    for (std::size_t index = 0; index < count; ++index) {
+        if (scale_ && index == whole) {
+            append('.');
+        }
+        append(digits[count - index - 1]);
+    }
+    return result;
+}
+
 bool Decimal::operator==(const Decimal& other) const {
-    if (zero(coefficient_) && zero(other.coefficient_)) {
+    if (bits_zero(coefficient_) && bits_zero(other.coefficient_)) {
         return true;
     }
     if (negative_ != other.negative_) {
@@ -547,21 +947,6 @@ bool Decimal::is_integer() const {
     return true;
 }
 
-std::array<std::uint8_t, 16> Decimal::serialize() const {
-    std::array<std::uint8_t, 16> result{};
-    const std::array<std::uint32_t, 4> words{(std::uint32_t(scale_) << 16) |
-                                                 (std::uint32_t(negative_) << 31),
-                                             coefficient_[0],
-                                             coefficient_[1],
-                                             coefficient_[2]};
-    for (unsigned i = 0; i < 4; ++i) {
-        for (unsigned j = 0; j < 4; ++j) {
-            result[4 * i + j] = std::uint8_t(words[i] >> (8 * j));
-        }
-    }
-    return result;
-}
-
 Decimal Decimal::deserialize(const std::array<std::uint8_t, 16>& bytes) {
     std::array<std::uint32_t, 4> words{};
     for (unsigned i = 0; i < 4; ++i) {
@@ -598,7 +983,7 @@ std::optional<Decimal> Decimal::round_sf_with_strategy(unsigned digits,
     do {
         div(working, 10);
         ++count;
-    } while (!zero(working));
+    } while (!bits_zero(working));
     if (digits > count) {
         if (std::uint64_t(scale_) + digits > UINT32_MAX) {
             throw std::overflow_error("Decimal significant-figure scale overflow");

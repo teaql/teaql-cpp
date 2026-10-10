@@ -1,0 +1,90 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed full native343 and sanitizer20/MIPS20 selections pass; complete source/composition acceptance separate",
+  "original_inputs": 177,
+  "original_repeats_agree": true,
+  "formats_per_model": 9,
+  "missing_capabilities": "Thirteen source Debug derives and identity Hash",
+  "source_sha256": {
+    "include/teaql/runtime/mutation_governance.hpp": "93c1a8e65181ddf18e1c2bcd75d48a2bc9ec569f8c4fa6b4855d24aca1bb9841",
+    "include/teaql/runtime/mutation_policy.hpp": "e16630d879eeda8b73e055062b68f2d99bbccc82a2b84548e024b5aa12e94287",
+    "src/runtime/mutation_policy.cpp": "c00dd6e522ddc79497f18f240f8854fc31748f65680260802b98a2100a709b5e",
+    "src/runtime/context_mutation_policy.cpp": "b73b77ec4ae0cfdb7a237d9e4bb99e2550e960f3dcd50ace0359e9757668b8d8",
+    "src/runtime/mutation_policy_plan.cpp": "1fc4e42ffb44f55fe419a2402f0ba745d8b8842b9d850c9d845c28e737b01a06",
+    "tests/parity/rust-values/src/bin/policy_model_oracle.rs": "9983793b6a5e4332db8d3843322d7d9a29466f4aa52bfe7643d78b797557a86a",
+    "tests/parity/policy_model_cases.json.gz": "a557d9d424a866f368b44fa4f3a0207bd6b960f16a283fad96254b2525c780a9",
+    "tests/parity/generate_policy_models.py": "d2e9b20629e8717d299062d74c13c3e506a032a2899b031537b1317473d737c8",
+    "tests/parity/compare_policy_models.py": "099caf5a37a56d6c3cbf3783c5d2db7c6b630ad672e21eb1a8f926611fa5354b"
+  },
+  "staged_patch_sha256": "a133ae7f5186b063b014cf652d9ea9128ec5c47d09334b825202aa48d90667c0",
+  "staged_source_sha256": {
+    "include/teaql/runtime/mutation_governance.hpp": "71552256434ebdf7845b2f0d234feb1b55f60b07f273684eaeceff54fdf08f69",
+    "include/teaql/runtime/mutation_policy_debug.hpp": "1e24193662def1ed632e2795a5d7d9dc17bf23509dbf1ba46e4d33020d6c825e",
+    "include/teaql/runtime.hpp": "ca741c8e4e5188adf9a44a9790f6f35fa279868541edfb51af39993d6d79fdfe",
+    "tests/policy_model_tests.cpp": "94ec58f6c6140e84f3bfe53cd3bda0610bee85619abd097d99025443f83845c5",
+    "tests/parity/policy_model_probe.cpp": "da4e575d89a8228c3d45b696815e3dfbbae43e2cf73b7b263ba8a603c60f4fd1",
+    "CMakeLists.txt": "5b1f426f9c634e6b3ad73f0e24ab8085510e888fce5bf68157fcffc2f1d64221"
+  },
+  "targets": {
+    "native": {
+      "models_passed": 177,
+      "models_total": 177,
+      "live_original": true,
+      "ownership_hash_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "sanitizer": {
+      "models_passed": 177,
+      "models_total": 177,
+      "live_original": true,
+      "ownership_hash_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "mips": {
+      "models_passed": 177,
+      "models_total": 177,
+      "live_original": true,
+      "ownership_hash_contracts": "passed",
+      "default_pmr_disabled": true
+    }
+  },
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "UBSAN_OPTIONS": "halt_on_error=1"
+  },
+  "physical_router_verified": false,
+  "notes": "Hash equality/set behavior, not unstable hash bytes, is compared. Raw source diagnostics remain independent of safe privacy projections. Patch includes umbrella and two CMake tests; apply after native331 integration and preserve other staged registrations.",
+  "header_hygiene": "Explicit functional include added after passing target runs; standalone hash-header syntax check recorded separately. No logic/ABI change.",
+  "standalone_hash_header_compile": "passed",
+  "staged_cpp_formatting": "passed after formatting standalone header fixture",
+  "installed_in_worktree": true,
+  "installed_native_selection": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.44,
+    "full_native343_pending": true
+  },
+  "installed_mips_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 25.0,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_mips_live_original": "all six installed probes match1199/1199 live pinned Rust observations",
+  "installed_sanitizer_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 35.65,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1",
+    "refresh": "ninja: no work to do."
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  }
+}

@@ -1,6 +1,8 @@
 #pragma once
 #include <teaql/core/result.hpp>
+#include <teaql/core/decimal_format.hpp>
 #include <cstdint>
+#include <exception>
 #include <string_view>
 
 namespace teaql {
@@ -43,9 +45,24 @@ struct DecimalError {
     }
 
     String to_string(Memory destination) const;
+    String format(Memory destination,
+                  DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+
+    const std::exception* source() const noexcept {
+        return nullptr;
+    }
 
     bool operator==(const DecimalError& other) const {
-        return code == other.code && text == other.text && scale == other.scale;
+        if (code != other.code) {
+            return false;
+        }
+        if (code == Code::ErrorString || code == Code::ConversionTo) {
+            return text == other.text;
+        }
+        if (code == Code::ScaleExceedsMaximumPrecision) {
+            return scale == other.scale;
+        }
+        return true;
     }
 };
 }

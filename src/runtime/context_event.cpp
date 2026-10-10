@@ -8,6 +8,10 @@ namespace teaql {
 Result<std::monostate, RuntimeError> UserContext::send_event(const RawAuditEvent& input) const {
     ensure_open();
     auto r = memory_resource();
+    Arena::Quiescence active;
+    active.attach(detail::resource_arena(r), nullptr, [](void*) noexcept {
+        std::terminate();
+    });
     using R = Result<std::monostate, RuntimeError>;
     auto event = detail::clone_in(r, input);
     event.mutation_governance = detail::current_mutation_governance(*this);
@@ -55,12 +59,18 @@ Result<std::monostate, RuntimeError> UserContext::send_event(const RawAuditEvent
 
     auto send = [&]() -> R {
         if (event_sink_) {
+            if (event_sink_borrow_) {
+                (void)event_sink_borrow_->get();
+            }
             auto result = event_sink_->on_event(r, *this, event);
             if (!result) {
                 return R::err(r, std::move(result).error());
             }
         }
         if (custom_event_sink_) {
+            if (custom_event_sink_borrow_) {
+                (void)custom_event_sink_borrow_->get();
+            }
             auto* descriptor = entity(event.entity);
             auto safe = event.build_safe_event(
                 r,

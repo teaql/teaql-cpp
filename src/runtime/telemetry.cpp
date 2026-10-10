@@ -72,6 +72,8 @@ Wrapper& create_fail_open(Memory r, const RuntimeTelemetry& telemetry, Create&& 
         auto& box = create();
         if (box.memory_resource() == r && box.available()) {
             delegate = &box;
+        } else if (box.available()) {
+            box.reset();
         }
     } catch (...) {
     }
@@ -205,17 +207,35 @@ extract_runtime_context(Memory r, const RuntimeTelemetry& t, const RuntimeContex
 const RuntimeTelemetry& UserContext::runtime_telemetry() const {
     ensure_open();
     if (!runtime_telemetry_) {
-        runtime_telemetry_ = &make<NoopRuntimeTelemetry>();
+        auto& telemetry = make<NoopRuntimeTelemetry>();
+        auto registered = detail::ContextResources::entry(
+            detail::resource_arena(memory_resource()), memory_resource(), telemetry);
+        runtime_telemetry_.emplace(std::allocator_arg,
+                                   Allocator(memory_resource()),
+                                   static_cast<const RuntimeTelemetry&>(telemetry),
+                                   *registered.owner,
+                                   registered.slot);
     }
-    return *runtime_telemetry_;
+    return runtime_telemetry_->get();
 }
 
 bool UserContext::runtime_telemetry_is_noop() const {
+    ensure_open();
+    Arena::Quiescence active;
+    if (!memory_.closing()) {
+        active.attach(const_cast<detail::ContextArena&>(memory_), nullptr, [](void*) noexcept {
+            std::terminate();
+        });
+    }
     return runtime_telemetry().is_noop();
 }
 
 FailOpenRuntimeTelemetryScope&
 UserContext::start_runtime_operation(const RuntimeOperation& operation) const {
+    Arena::Quiescence active;
+    active.attach(detail::resource_arena(memory_resource()), nullptr, [](void*) noexcept {
+        std::terminate();
+    });
     return teaql::start_runtime_operation(memory_resource(), runtime_telemetry(), operation);
 }
 }

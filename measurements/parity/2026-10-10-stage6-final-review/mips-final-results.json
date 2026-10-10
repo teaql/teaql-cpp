@@ -1,0 +1,14 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "passed": 387,
+  "total": 387,
+  "seconds": 173.24,
+  "build_tasks": 351,
+  "compiled_objects": 427,
+  "pre_post": "no work",
+  "live_examples": "2/2",
+  "sqlite": "3.53.2",
+  "profile": "OpenWrt musl GCC13.3 MinSizeRel MIPS74K; QEMU74Kf",
+  "physical_router": "not tested; deferred by user",
+  "chain_exit": 0
+}

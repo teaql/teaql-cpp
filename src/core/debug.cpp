@@ -76,7 +76,8 @@ String number(Memory r, T n) {
     return String(buffer, end, r);
 }
 
-String debug_float(Memory r, double n) {
+template <class Float>
+String debug_float(Memory r, Float n) {
     String display(r);
     append_float(display, n, false);
     if (!std::isfinite(n)) {
@@ -173,6 +174,10 @@ String json_debug(Memory r, const Json& value) {
         },
         value.data);
 }
+}
+
+String debug_float32(Memory r, float value) {
+    return debug_float(r, value);
 }
 
 String debug_value(Memory r, const Value& value) {

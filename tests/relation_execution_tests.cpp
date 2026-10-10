@@ -186,7 +186,8 @@ static void empty_cancel_and_domains() {
     } catch (const std::invalid_argument&) {
         refused = true;
     }
-    check(refused && !cancelled, "foreign result is rejected without cancelling unrelated work");
+    check(refused && cancelled && foreign.status() == AsyncStatus::Cancelled && wake == nullptr,
+          "rejected callback result is cancelled before its parent discards it");
     foreign.cancel();
     cancelled = false;
     auto& closing = detail::fetch_relation_rows(service, plan, parents, false, fetch);

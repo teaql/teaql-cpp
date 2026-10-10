@@ -1,5 +1,6 @@
 #include <teaql/core/query.hpp>
 #include <teaql/core/detail/text.hpp>
+#include <charconv>
 
 namespace teaql {
 namespace {
@@ -308,7 +309,7 @@ SelectQuery& SelectQuery::enable_aggregation_cache() {
 }
 
 SelectQuery& SelectQuery::enable_aggregation_cache_for(std::uint64_t millis) {
-    aggregation_cache = AggregationCacheOptions{true, millis, false, 0};
+    aggregation_cache = AggregationCacheOptions::for_duration(millis);
     return *this;
 }
 
@@ -316,8 +317,7 @@ SelectQuery& SelectQuery::propagate_aggregation_cache(std::uint64_t millis) {
     if (!aggregation_cache) {
         enable_aggregation_cache();
     }
-    aggregation_cache->propagate = true;
-    aggregation_cache->propagate_cache_expired_millis = millis;
+    aggregation_cache->with_propagation(millis);
     return *this;
 }
 
@@ -398,7 +398,16 @@ void SelectQuery::apply_list_limit(std::uint64_t ceiling) {
         slice = Slice{};
     }
     if (slice->limit && *slice->limit > ceiling) {
-        throw std::invalid_argument("QUERY_HARD_LIMIT_EXCEEDED");
+        String message("QUERY_HARD_LIMIT_EXCEEDED: requested limit ", memory_resource());
+        auto append = [&](std::uint64_t value) {
+            char digits[20];
+            auto result = std::to_chars(digits, digits + sizeof(digits), value);
+            message.append(digits, result.ptr);
+        };
+        append(*slice->limit);
+        message += " exceeds hard limit ";
+        append(ceiling);
+        throw std::invalid_argument(message.c_str());
     }
     if (!slice->limit) {
         slice->limit = ceiling;

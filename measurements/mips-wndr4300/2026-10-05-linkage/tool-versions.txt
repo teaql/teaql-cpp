@@ -1,0 +1,13 @@
+cxx_compiler: mips-openwrt-linux-musl-g++.bin (OpenWrt GCC 13.3.0 r28959-29397011cc) 13.3.0
+
+binutils_strip: GNU strip (GNU Binutils) 2.42
+
+qemu: qemu-mips version 6.2.0 (Debian 1:6.2+dfsg-2ubuntu6.30)
+
+cmake: cmake version 3.22.1
+
+ninja: 1.10.1
+
+musl: musl libc (mips-sf)
+Version 1.2.5
+Dynamic Program Loader

@@ -1,0 +1,109 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "scope": "Independent native error payloads, provider declarations/defaults, actual transport/transaction consumers and FromSqlError conversions. Selected evidence only; whole provider and stages 3\u20136 remain partial.",
+  "configurations": {
+    "native": {
+      "checks_passed": 8,
+      "checks_failed": 0,
+      "test_seconds": 7.78,
+      "tests": [
+        "provider_sqlite_transport_contracts",
+        "provider_sqlite_driver_error_contracts",
+        "provider_sqlite_from_sql_error_contracts",
+        "sqlite_provider_transaction_rust_parity",
+        "sqlite_provider_transport_rust_parity",
+        "sqlite_error_model_rust_parity",
+        "sqlite_from_sql_error_rust_parity",
+        "sqlite_from_sql_raw_debug_rust_parity"
+      ],
+      "no_work": "ninja: no work to do.",
+      "dependency_check": "Checked nonempty compiler dependency records for 131 compiled objects",
+      "binary_sha256": {
+        "teaql_provider_sqlite_driver_error_tests": "4d03314536aa7ab356b0b31c4ff8e6ea520e80896dce7dbb7be48da4844e5a2b",
+        "teaql_sqlite_error_model_probe": "d7dced1b77bf67f3e185ce07d5b945ecc285da44630d50e4fd9ced72045f3a17",
+        "teaql_provider_sqlite_transport_tests": "7dc24c9886993819521bdce7068f3795eb2aeab313458a2f3b66227818a650fa",
+        "teaql_sqlite_transport_probe": "c7a2e17d9e0f164696debf6a8f94d1733abdad9183aef971e479f9f792b154e7",
+        "teaql_provider_sqlite_from_sql_error_tests": "fb1d6842bc26343ec1cd8cb050c36dfa0b79ac95d145e598dbf68c9410a41adf",
+        "teaql_sqlite_from_sql_error_probe": "6bca79a23eb6e9fe566d52a042c9dd77642b834bc80ceac0ee70cc92f34642ec"
+      }
+    },
+    "sanitize": {
+      "checks_passed": 8,
+      "checks_failed": 0,
+      "test_seconds": 17.91,
+      "tests": [
+        "provider_sqlite_transport_contracts",
+        "provider_sqlite_driver_error_contracts",
+        "provider_sqlite_from_sql_error_contracts",
+        "sqlite_provider_transaction_rust_parity",
+        "sqlite_provider_transport_rust_parity",
+        "sqlite_error_model_rust_parity",
+        "sqlite_from_sql_error_rust_parity",
+        "sqlite_from_sql_raw_debug_rust_parity"
+      ],
+      "no_work": "ninja: no work to do.",
+      "dependency_check": "Checked nonempty compiler dependency records for 131 compiled objects",
+      "binary_sha256": {
+        "teaql_provider_sqlite_driver_error_tests": "0270ee3eee44b960645b41c1bbd54cc26af919132ffdf74e3f5a2eb2da8b3319",
+        "teaql_sqlite_error_model_probe": "bcf2ebe5a77baae9d79b0d4417225e4c31554bb3e15a8dabf8b655f43204a9a4",
+        "teaql_provider_sqlite_transport_tests": "616bdf54837b0e3006af4e8bbc51cbbd82198f1fc6035bf13f5e644ce523b4d3",
+        "teaql_sqlite_transport_probe": "aed0d62bc851221a02e8838a12898e1cf5f8a87fa78513e2df743707145dfb9e",
+        "teaql_provider_sqlite_from_sql_error_tests": "43904a801a80837c649b1f64658bb4487f3a7e5e0997a1cd4d5bbbac1256b018",
+        "teaql_sqlite_from_sql_error_probe": "4ad2ab557d6408b567f6f26641fac0eb7809bb16fac1765b4d28e8bd01c36285"
+      }
+    },
+    "mips": {
+      "checks_passed": 7,
+      "checks_failed": 0,
+      "test_seconds": 78.67,
+      "tests": [
+        "provider_sqlite_transport_contracts",
+        "provider_sqlite_driver_error_contracts",
+        "provider_sqlite_from_sql_error_contracts",
+        "sqlite_provider_transaction_rust_parity",
+        "sqlite_provider_transport_rust_parity",
+        "sqlite_error_model_rust_parity",
+        "sqlite_from_sql_error_rust_parity"
+      ],
+      "no_work": "ninja: no work to do.",
+      "dependency_check": "Checked nonempty compiler dependency records for 131 compiled objects",
+      "binary_sha256": {
+        "teaql_provider_sqlite_driver_error_tests": "a91dcab46a289021823db44cd4ef18ece81ea9d2fe4a384791b8c81673526ceb",
+        "teaql_sqlite_error_model_probe": "3d55fd0e42682552bdba8b7bf3ff4278d27ac880c2232ed3845195a60dcc127d",
+        "teaql_provider_sqlite_transport_tests": "a84e6ecb69e713a358840acfc796966f69bf08d37b1152824cbd5ed6017da6e0",
+        "teaql_sqlite_transport_probe": "02833c427ed892b5006e6fce3f2067e1ec02d9b488f72aa5c1b818904d3dd903",
+        "teaql_provider_sqlite_from_sql_error_tests": "2f579ddd416930df506a06a08673164c66392ecb9e3f2c5191530080ec8d712d",
+        "teaql_sqlite_from_sql_error_probe": "367550126539a65accc55eda186b8da790f8d6515f40528ec2f33510441de058"
+      }
+    }
+  },
+  "sanitizer_environment": {
+    "ASAN_OPTIONS": "detect_leaks=1",
+    "UBSAN_OPTIONS": "halt_on_error=1"
+  },
+  "mips": {
+    "toolchain": "OpenWrt GCC 13.3.0, MIPS32r2/O32, -march=74kc, soft float",
+    "emulator": "qemu-mips -cpu 74Kf",
+    "sqlite": "3.53.2",
+    "physical_router_verified": false
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "1404df94d209a2c88a23ebc8ae7ab499b8f443d4f001c2d739def44280a5761e",
+    "include/teaql/memory/arena.hpp": "52f892355b69f48870141c40394e06ab8e51c41317d343c87aa4c06049ece237",
+    "src/memory/arena.cpp": "5e60dde5ea35946e85424f282103036ff9c2f1b4000e6eaf3cd56a0e089d5254",
+    "include/teaql/provider_sqlite/driver_error.hpp": "a80450539d91e3affd92a0b9bf48a3a173d0cc47f423da5547ab3d6fb7acc104",
+    "src/provider_sqlite/driver_error.cpp": "09371cebe4ac92d1f5a9e4d4a4503c8f6e84e3c65724068abdfde6bfec656b58",
+    "include/teaql/provider_sqlite/provider.hpp": "a28c5238aea9f8519ef26af4382a507b5e3538c21d1e455970b493a4b41a9055",
+    "src/provider_sqlite/provider.cpp": "0bc091569d2249a424e08ccf85fc37a59eb4aca2b665c2a7203f000c9d609725",
+    "tests/provider_sqlite_driver_error_tests.cpp": "64113c0c3173139e56ed34dc21350eb3687fbe7b2640cad8b8f72ebaf48bd0b7",
+    "tests/provider_sqlite_transport_tests.cpp": "0839f32d1e1882c87c796bef8c3f0215edb3afcaa8009825a424b0efffdf4b93",
+    "tests/parity/sqlite_error_model_probe.cpp": "0b20f097db20f7e6bd569720403a61f9df903310a0ccca1c25be09f24a45c70b",
+    "tests/parity/sqlite_transport_probe.cpp": "0944664d2872eb765f580fbdd9e606fa8296f10908d0248df95bae63cf8520f5",
+    "tests/parity/sqlite_error_model_cases.json.gz": "048f6a4ba649e05fcb89a9030bd914e810e3c7db48a79e81d3725d1dd71631c3",
+    "tests/parity/sqlite_transport_cases.json": "14e167a533329fa65167f858aedd5d94442fa851d2a285d5d8f3b0d90723aa20",
+    "tests/parity/sqlite_from_sql_error_cases.json.gz": "a575c1a8bf8e9d0ecad5a2ce36fb60b8e5279269ebdda3d4ab7c5fba5516b1d4",
+    "tests/parity/sqlite_from_sql_raw_debug_cases.json.gz": "52d3d732cfffec3d59deedf1130b39723efff7c49c739d1262341d0603ca55bd",
+    "tests/parity/rust-values/src/bin/sqlite_error_model_oracle.rs": "254a2123d36323c0663efc62c7b87990afa8f596aefcc10185766de4311a75eb",
+    "tests/parity/rust-values/src/bin/sqlite_transport_oracle.rs": "7ce6fd93083e0380bdbf0fd23c4c4a3df6818a84d4f29af166fda60dfbbbc489"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "observations": 792,
+  "original_runs": 2,
+  "native": {
+    "passed": 5,
+    "total": 5,
+    "seconds": 4.44,
+    "live_matches": 792
+  },
+  "asan_ubsan": {
+    "passed": 5,
+    "total": 5,
+    "seconds": 10.57,
+    "live_matches": 792,
+    "detect_leaks": false
+  },
+  "mips_qemu": {
+    "passed": 5,
+    "total": 5,
+    "seconds": 6.6,
+    "live_matches": 792
+  },
+  "post_test": "selected targets no work on all three profiles",
+  "fixture_correction": "ASan/MIPS expose unmanaged stack GraphNode destructors after User reset. Replace those nodes with User.make before revalidation; expectation/source bodies unchanged. Before logs retained.",
+  "remaining": "Full consumers and complete graph source composition/acceptance in progress",
+  "physical_device": "Deferred by explicit user request"
+}

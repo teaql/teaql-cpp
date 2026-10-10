@@ -1,0 +1,4 @@
+/tmp/teaql-graph-extraction-api-before.cpp: In function ‘void missing(teaql::EntityDataService<hydration_fixture::UnusedExecutor>&, hydration_fixture::Model<0>)’:
+/tmp/teaql-graph-extraction-api-before.cpp:5:19: error: ‘class teaql::EntityDataService<hydration_fixture::UnusedExecutor>’ has no member named ‘graph_node_from_entity’
+    5 |     (void)service.graph_node_from_entity(std::move(entity));
+      |                   ^~~~~~~~~~~~~~~~~~~~~~

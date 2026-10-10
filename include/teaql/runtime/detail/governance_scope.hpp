@@ -59,7 +59,7 @@ public:
         GovernanceActivation active(context_, snapshot_);
         forwarding_.attach(child_->wake_signal(), wake);
         if (auto* value = child_->poll()) {
-            return clone_in(context_.memory_resource(), *value);
+            return copy_or_take_completed(*child_, *value);
         }
         // Lazily created descendants must be cancelled under this snapshot
         // before the arena walks their independently registered stop records.

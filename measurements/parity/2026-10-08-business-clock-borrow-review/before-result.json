@@ -1,0 +1,7 @@
+{
+  "returncode": -6,
+  "stdout": "",
+  "stderr": "pure virtual method called\nterminate called without an active exception\n",
+  "expected": "ReferenceError::Dead before dispatch",
+  "actual": "unchecked dead virtual dispatch"
+}

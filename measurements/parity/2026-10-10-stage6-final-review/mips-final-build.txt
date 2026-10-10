@@ -1,0 +1,1058 @@
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philip/githome/teaql-cpp/build-wndr4300-memory
+[1/351] Building CXX object CMakeFiles/teaql_runtime_id_model_tests.dir/tests/runtime_id_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[2/351] Linking CXX executable teaql_runtime_id_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[3/351] Building CXX object CMakeFiles/teaql_entity_runtime_model_tests.dir/tests/entity_runtime_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[4/351] Building CXX object CMakeFiles/teaql_runtime_namespace_tests.dir/tests/runtime_namespace_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[5/351] Linking CXX executable teaql_entity_runtime_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[6/351] Linking CXX executable teaql_runtime_namespace_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[7/351] Building CXX object CMakeFiles/teaql_entity_runtime_model_probe.dir/tests/parity/entity_runtime_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[8/351] Linking CXX executable teaql_entity_runtime_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[9/351] Building CXX object CMakeFiles/teaql_context_defaults_tests.dir/tests/context_defaults_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[10/351] Linking CXX executable teaql_context_defaults_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[11/351] Building CXX object CMakeFiles/teaql_context_defaults_probe.dir/tests/parity/context_defaults_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[12/351] Linking CXX executable teaql_context_defaults_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[13/351] Building CXX object CMakeFiles/teaql_runtime_id_model_probe.dir/tests/parity/runtime_id_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[14/351] Linking CXX executable teaql_runtime_id_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[15/351] Building CXX object CMakeFiles/teaql_reference_model_tests.dir/tests/reference_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[16/351] Linking CXX executable teaql_reference_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[17/351] Building CXX object CMakeFiles/teaql_policy_model_tests.dir/tests/policy_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[18/351] Linking CXX executable teaql_policy_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[19/351] Building CXX object CMakeFiles/teaql_event_model_tests.dir/tests/event_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[20/351] Linking CXX executable teaql_event_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[21/351] Building CXX object CMakeFiles/teaql_policy_model_probe.dir/tests/parity/policy_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[22/351] Linking CXX executable teaql_policy_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[23/351] Building CXX object CMakeFiles/teaql_event_model_probe.dir/tests/parity/event_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[24/351] Linking CXX executable teaql_event_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[25/351] Building CXX object CMakeFiles/teaql_check_model_tests.dir/tests/check_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[26/351] Linking CXX executable teaql_check_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[27/351] Building CXX object CMakeFiles/teaql_relation_model_tests.dir/tests/relation_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[28/351] Linking CXX executable teaql_relation_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[29/351] Building CXX object CMakeFiles/teaql_check_model_probe.dir/tests/parity/check_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[30/351] Linking CXX executable teaql_check_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[31/351] Building CXX object CMakeFiles/teaql_relation_model_probe.dir/tests/parity/relation_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[32/351] Linking CXX executable teaql_relation_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[33/351] Building CXX object CMakeFiles/teaql_log_model_tests.dir/tests/log_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[34/351] Linking CXX executable teaql_log_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[35/351] Building CXX object CMakeFiles/teaql_query_store_model_tests.dir/tests/query_store_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[36/351] Building CXX object CMakeFiles/teaql_log_model_probe.dir/tests/parity/log_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/vector:62,
+                 from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:61,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/clone.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/result.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/business_id.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/runtime/business_id.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:506:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:533:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:540:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:633:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:916:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::SqlLogEntry entry(teaql::Memory, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:31:62,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:87:38:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:437:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  437 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:60:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:448:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:914:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::SqlLogEntry entry(teaql::Memory, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:31:62,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:87:38:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[37/351] Linking CXX executable teaql_log_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[38/351] Building CXX object CMakeFiles/teaql_query_store_model_probe.dir/tests/parity/query_store_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[39/351] Building CXX object CMakeFiles/teaql_sqlite_from_sql_error_probe.dir/tests/parity/sqlite_from_sql_error_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[40/351] Linking CXX executable teaql_sqlite_from_sql_error_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[41/351] Building CXX object CMakeFiles/teaql_sqlite_error_model_probe.dir/tests/parity/sqlite_error_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[42/351] Building CXX object CMakeFiles/teaql_sql_types_probe.dir/tests/parity/sql_types_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[43/351] Building CXX object CMakeFiles/teaql_meta_api_tests.dir/tests/meta_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[44/351] Building CXX object CMakeFiles/teaql_meta_api_probe.dir/tests/parity/meta_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[45/351] Linking CXX executable teaql_meta_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[46/351] Building CXX object CMakeFiles/teaql_core_aux_debug_tests.dir/tests/core_aux_debug_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[47/351] Building CXX object CMakeFiles/teaql_relation_hydration_tests.dir/tests/relation_hydration_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[48/351] Linking CXX executable teaql_query_store_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[49/351] Linking CXX executable teaql_query_store_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[50/351] Building CXX object CMakeFiles/teaql_business_id_probe.dir/tests/parity/business_id_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[51/351] Linking CXX executable teaql_business_id_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[52/351] Building CXX object CMakeFiles/teaql_base_entity_api_probe.dir/tests/parity/base_entity_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[53/351] Building CXX object CMakeFiles/teaql_presentation_probe.dir/tests/parity/presentation_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[54/351] Linking CXX executable teaql_presentation_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[55/351] Linking CXX executable teaql_relation_hydration_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[56/351] Building CXX object CMakeFiles/teaql_entity_defaults_api_probe.dir/tests/parity/entity_defaults_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[57/351] Linking CXX executable teaql_entity_defaults_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[58/351] Building CXX object CMakeFiles/teaql_compact_row_api_tests.dir/tests/compact_row_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[59/351] Linking CXX executable teaql_compact_row_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[60/351] Building CXX object CMakeFiles/teaql_request_api_probe.dir/tests/parity/request_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[61/351] Linking CXX executable teaql_request_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[62/351] Building CXX object CMakeFiles/teaql_enhanced_entities_tests.dir/tests/enhanced_entities_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[63/351] Linking CXX executable teaql_enhanced_entities_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[64/351] Building CXX object CMakeFiles/teaql_entity_service_tests.dir/tests/entity_service_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[65/351] Linking CXX executable teaql_entity_service_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[66/351] Building CXX object CMakeFiles/teaql_runtime_move_only_tests.dir/tests/runtime_move_only_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[67/351] Linking CXX executable teaql_runtime_move_only_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[68/351] Building CXX object CMakeFiles/teaql_runtime_completion_tests.dir/tests/runtime_completion_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[69/351] Linking CXX executable teaql_runtime_completion_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[70/351] Building CXX object CMakeFiles/teaql_id_set_page_tests.dir/tests/id_set_page_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[71/351] Linking CXX executable teaql_id_set_page_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[72/351] Building CXX object CMakeFiles/teaql_entity_stream_tests.dir/tests/entity_stream_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[73/351] Linking CXX executable teaql_entity_stream_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[74/351] Building CXX object CMakeFiles/teaql_enhanced_entities_probe.dir/tests/parity/enhanced_entities_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[75/351] Linking CXX executable teaql_enhanced_entities_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[76/351] Building CXX object CMakeFiles/teaql_id_set_page_probe.dir/tests/parity/id_set_page_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[77/351] Linking CXX executable teaql_id_set_page_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[78/351] Building CXX object CMakeFiles/teaql_entity_service_probe.dir/tests/parity/entity_service_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[79/351] Linking CXX executable teaql_entity_service_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[80/351] Building CXX object CMakeFiles/teaql_typed_aggregate_scope_probe.dir/tests/parity/typed_aggregate_scope_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[81/351] Linking CXX executable teaql_typed_aggregate_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[82/351] Building CXX object CMakeFiles/teaql_typed_aggregate_tests.dir/tests/typed_aggregate_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[83/351] Linking CXX executable teaql_typed_aggregate_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[84/351] Building CXX object CMakeFiles/teaql_entity_stream_probe.dir/tests/parity/entity_stream_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[85/351] Linking CXX executable teaql_entity_stream_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[86/351] Building CXX object CMakeFiles/teaql_entity_query_probe.dir/tests/parity/entity_query_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[87/351] Linking CXX executable teaql_entity_query_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[88/351] Building CXX object CMakeFiles/teaql_entity_decoder_tests.dir/tests/entity_decoder_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[89/351] Linking CXX executable teaql_entity_decoder_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[90/351] Linking CXX executable teaql_context_event_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[91/351] Linking CXX executable teaql_context_event_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[92/351] Linking CXX executable teaql_telemetry_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[93/351] Linking CXX executable teaql_telemetry_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[94/351] Linking CXX executable teaql_telemetry_model_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[95/351] Linking CXX executable teaql_context_logging_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[96/351] Linking CXX executable teaql_context_logging_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[97/351] Linking CXX executable teaql_log_manager_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[98/351] Linking CXX executable teaql_log_manager_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[99/351] Linking CXX executable teaql_log_formatter_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[100/351] Building CXX object CMakeFiles/teaql_entity_runtime_probe.dir/tests/parity/entity_runtime_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[101/351] Linking CXX executable teaql_log_formatter_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[102/351] Linking CXX executable teaql_entity_runtime_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[103/351] Linking CXX executable teaql_runtime_log_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[104/351] Linking CXX executable teaql_audit_event_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[105/351] Linking CXX executable teaql_runtime_log_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[106/351] Linking CXX executable teaql_audit_event_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[107/351] Linking CXX executable teaql_schema_runtime_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[108/351] Linking CXX executable teaql_schema_runtime_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[109/351] Linking CXX executable teaql_internal_id_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[110/351] Linking CXX executable teaql_internal_id_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[111/351] Linking CXX executable teaql_business_service_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[112/351] Linking CXX executable teaql_business_service_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[113/351] Building CXX object CMakeFiles/teaql_entity_decoder_probe.dir/tests/parity/entity_decoder_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[114/351] Linking CXX executable teaql_entity_decoder_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[115/351] Building CXX object CMakeFiles/teaql_entity_runtime_tests.dir/tests/entity_runtime_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[116/351] Linking CXX executable teaql_runtime_registry_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[117/351] Linking CXX executable teaql_entity_runtime_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[118/351] Linking CXX executable teaql_runtime_registry_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[119/351] Building CXX object CMakeFiles/teaql_runtime_business_id_tests.dir/tests/runtime_business_id_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[120/351] Linking CXX executable teaql_runtime_business_id_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[121/351] Building CXX object CMakeFiles/teaql_runtime_business_id_probe.dir/tests/parity/runtime_business_id_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[122/351] Linking CXX executable teaql_runtime_business_id_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[123/351] Building CXX object CMakeFiles/teaql_registry_debug_scope_probe.dir/tests/parity/registry_debug_scope_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[124/351] Linking CXX executable teaql_registry_debug_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[125/351] Building CXX object CMakeFiles/teaql_runtime_check_tests.dir/tests/runtime_check_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[126/351] Linking CXX executable teaql_runtime_check_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[127/351] Linking CXX executable teaql_runtime_context_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[128/351] Linking CXX executable teaql_context_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[129/351] Linking CXX executable teaql_context_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[130/351] Linking CXX executable teaql_runtime_context_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[131/351] Building CXX object CMakeFiles/teaql_error_generic_tests.dir/tests/error_generic_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[132/351] Linking CXX executable teaql_error_generic_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[133/351] Building CXX object CMakeFiles/teaql_runtime_check_probe.dir/tests/parity/runtime_check_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[134/351] Linking CXX executable teaql_runtime_check_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[135/351] Building CXX object CMakeFiles/teaql_provider_sqlite_id_tests.dir/tests/provider_sqlite_id_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[136/351] Linking CXX executable teaql_provider_sqlite_id_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[137/351] Building CXX object CMakeFiles/teaql_provider_sqlite_business_id_tests.dir/tests/provider_sqlite_business_id_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[138/351] Linking CXX executable teaql_provider_sqlite_business_id_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[139/351] Building CXX object CMakeFiles/teaql_sql_move_only_tests.dir/tests/sql_move_only_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[140/351] Linking CXX executable teaql_sql_move_only_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[141/351] Building CXX object CMakeFiles/teaql_provider_sqlite_decoding_tests.dir/tests/provider_sqlite_decoding_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[142/351] Linking CXX executable teaql_provider_sqlite_decoding_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[143/351] Building CXX object CMakeFiles/teaql_sqlite_transport_probe.dir/tests/parity/sqlite_transport_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[144/351] Linking CXX executable teaql_sqlite_transport_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[145/351] Building CXX object CMakeFiles/teaql_sqlite_decoding_probe.dir/tests/parity/sqlite_decoding_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[146/351] Linking CXX executable teaql_sqlite_decoding_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[147/351] Building CXX object CMakeFiles/teaql_sqlite_bindings_probe.dir/tests/parity/sqlite_bindings_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[148/351] Linking CXX executable teaql_sqlite_bindings_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[149/351] Building CXX object CMakeFiles/teaql_provider_sqlite_transport_tests.dir/tests/provider_sqlite_transport_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[150/351] Linking CXX executable teaql_provider_sqlite_transport_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[151/351] Building CXX object CMakeFiles/teaql_provider_sqlite_bindings_tests.dir/tests/provider_sqlite_bindings_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[152/351] Linking CXX executable teaql_provider_sqlite_bindings_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[153/351] Linking CXX executable teaql_sqlite_error_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[154/351] Linking CXX executable teaql_sqlite_native_diagnostics_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[155/351] Building CXX object CMakeFiles/teaql_provider_sqlite_driver_error_tests.dir/tests/provider_sqlite_driver_error_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[156/351] Linking CXX executable teaql_provider_sqlite_driver_error_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[157/351] Building CXX object CMakeFiles/teaql_provider_sqlite_model_tests.dir/tests/provider_sqlite_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[158/351] Linking CXX executable teaql_provider_sqlite_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[159/351] Building CXX object CMakeFiles/teaql_provider_sqlite_simple_error_tests.dir/tests/provider_sqlite_simple_error_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[160/351] Linking CXX executable teaql_provider_sqlite_simple_error_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[161/351] Linking CXX executable teaql_sql_stream_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[162/351] Building CXX object CMakeFiles/teaql_provider_sqlite_error_tests.dir/tests/provider_sqlite_error_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[163/351] Linking CXX executable teaql_provider_sqlite_error_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[164/351] Building CXX object CMakeFiles/teaql_provider_sqlite_boxed_error_tests.dir/tests/provider_sqlite_boxed_error_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[165/351] Linking CXX executable teaql_provider_sqlite_boxed_error_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[166/351] Building CXX object CMakeFiles/teaql_provider_sqlite_from_sql_error_tests.dir/tests/provider_sqlite_from_sql_error_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[167/351] Linking CXX executable teaql_provider_sqlite_from_sql_error_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[168/351] Building CXX object CMakeFiles/teaql_sql_stream_tests.dir/tests/sql_stream_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[169/351] Linking CXX executable teaql_sql_stream_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[170/351] Building CXX object CMakeFiles/teaql_sql_transaction_tests.dir/tests/sql_transaction_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[171/351] Linking CXX executable teaql_sql_transaction_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[172/351] Building CXX object CMakeFiles/teaql_sql_execution_tests.dir/tests/sql_execution_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[173/351] Linking CXX executable teaql_sql_execution_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[174/351] Building CXX object CMakeFiles/teaql_sql_transport_probe.dir/tests/parity/sql_transport_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[175/351] Linking CXX executable teaql_sql_transport_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[176/351] Building CXX object CMakeFiles/teaql_sql_execution_probe.dir/tests/parity/sql_execution_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[177/351] Linking CXX executable teaql_sql_execution_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[178/351] Building CXX object CMakeFiles/teaql_sql_query_tests.dir/tests/sql_query_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[179/351] Linking CXX executable teaql_sql_query_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[180/351] Building CXX object CMakeFiles/teaql_sql_query_probe.dir/tests/parity/sql_query_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[181/351] Linking CXX executable teaql_sql_query_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[182/351] Building CXX object CMakeFiles/teaql_provider_sqlite_tests.dir/tests/provider_sqlite_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[183/351] Linking CXX executable teaql_provider_sqlite_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[184/351] Building CXX object CMakeFiles/teaql_sql_executor_error_probe.dir/tests/parity/sql_executor_error_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[185/351] Linking CXX executable teaql_sql_executor_error_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[186/351] Building CXX object CMakeFiles/teaql_sql_transport_tests.dir/tests/sql_transport_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[187/351] Linking CXX executable teaql_sql_transport_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[188/351] Building CXX object CMakeFiles/teaql_sql_schema_probe.dir/tests/parity/sql_schema_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[189/351] Linking CXX executable teaql_sql_schema_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[190/351] Building CXX object CMakeFiles/teaql_sql_mutation_tests.dir/tests/sql_mutation_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[191/351] Linking CXX executable teaql_sql_mutation_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[192/351] Building CXX object CMakeFiles/teaql_sql_mutation_probe.dir/tests/parity/sql_mutation_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[193/351] Linking CXX executable teaql_sql_mutation_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[194/351] Building CXX object CMakeFiles/teaql_sql_dialect_tests.dir/tests/sql_dialect_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[195/351] Linking CXX executable teaql_sql_dialect_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[196/351] Building CXX object CMakeFiles/teaql_sql_dialect_helper_probe.dir/tests/parity/sql_dialect_helper_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[197/351] Linking CXX executable teaql_sql_dialect_helper_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[198/351] Building CXX object CMakeFiles/teaql_sql_model_tests.dir/tests/sql_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[199/351] Linking CXX executable teaql_sql_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[200/351] Linking CXX executable teaql_sql_types_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[201/351] Building CXX object CMakeFiles/teaql_sql_dialect_probe.dir/tests/parity/sql_dialect_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[202/351] Linking CXX executable teaql_sql_dialect_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[203/351] Linking CXX executable teaql_executor_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[204/351] Building CXX object CMakeFiles/teaql_sql_model_api_tests.dir/tests/sql_model_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[205/351] Linking CXX executable teaql_sql_model_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[206/351] Building CXX object CMakeFiles/teaql_async_tests.dir/tests/async_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[207/351] Linking CXX executable teaql_async_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[208/351] Building CXX object CMakeFiles/teaql_sql_model_api_probe.dir/tests/parity/sql_model_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[209/351] Linking CXX executable teaql_sql_model_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[210/351] Building CXX object CMakeFiles/teaql_executor_defaults_scope_probe.dir/tests/parity/executor_defaults_scope_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[211/351] Linking CXX executable teaql_executor_defaults_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[212/351] Building CXX object CMakeFiles/teaql_system_time_tests.dir/tests/system_time_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[213/351] Linking CXX executable teaql_system_time_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[214/351] Building CXX object CMakeFiles/teaql_data_service_tests.dir/tests/data_service_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/vector:62,
+                 from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:61,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/data_service_tests.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:506:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:533:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:540:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:633:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:916:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'void scope_and_models()' at /home/philip/githome/teaql-cpp/tests/data_service_tests.cpp:124:54:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:437:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  437 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:60:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:448:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:914:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'void scope_and_models()' at /home/philip/githome/teaql-cpp/tests/data_service_tests.cpp:124:54:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[215/351] Linking CXX executable teaql_data_service_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[216/351] Building CXX object CMakeFiles/teaql_data_service_model_tests.dir/tests/data_service_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[217/351] Linking CXX executable teaql_data_service_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[218/351] Building CXX object CMakeFiles/teaql_system_time_arithmetic_scope_tests.dir/tests/system_time_arithmetic_scope_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[219/351] Linking CXX executable teaql_system_time_arithmetic_scope_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[220/351] Building CXX object CMakeFiles/teaql_system_time_probe.dir/tests/parity/system_time_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[221/351] Building CXX object CMakeFiles/teaql_system_time_arithmetic_scope_probe.dir/tests/parity/system_time_arithmetic_scope_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[222/351] Linking CXX executable teaql_system_time_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[223/351] Linking CXX executable teaql_system_time_arithmetic_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[224/351] Building CXX object CMakeFiles/teaql_system_time_error_scope_probe.dir/tests/parity/system_time_error_scope_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[225/351] Linking CXX executable teaql_system_time_error_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[226/351] Building CXX object CMakeFiles/teaql_data_service_scope_tests.dir/tests/data_service_scope_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[227/351] Linking CXX executable teaql_data_service_scope_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[228/351] Building CXX object CMakeFiles/teaql_sql_log_probe.dir/tests/parity/sql_log_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[229/351] Linking CXX executable teaql_sql_log_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[230/351] Building CXX object CMakeFiles/teaql_data_service_model_scope_probe.dir/tests/parity/data_service_model_scope_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/vector:62,
+                 from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:61,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/model_debug.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/parity/data_service_model_scope_probe.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:506:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:533:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:540:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:633:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:916:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_scope_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:437:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  437 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:60:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:448:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:914:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_scope_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[231/351] Linking CXX executable teaql_data_service_model_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[232/351] Building CXX object CMakeFiles/teaql_sql_projection_scope_tests.dir/tests/sql_projection_scope_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[233/351] Linking CXX executable teaql_sql_projection_scope_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[234/351] Building CXX object CMakeFiles/teaql_data_service_model_probe.dir/tests/parity/data_service_model_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/vector:62,
+                 from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:61,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/model_debug.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/parity/data_service_model_probe.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:506:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:533:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:540:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:633:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:916:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_algobase.h:437:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  437 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/memory_resource:60:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:448:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/vector.tcc:914:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/mips-openwrt-linux-musl/include/c++/13.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[235/351] Building CXX object CMakeFiles/teaql_sql_projection_scope_probe.dir/tests/parity/sql_projection_scope_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[236/351] Linking CXX executable teaql_sql_projection_scope_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[237/351] Linking CXX executable teaql_data_service_model_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[238/351] Linking CXX executable teaql_core_aux_debug_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[239/351] Linking CXX executable teaql_core_aux_debug_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[240/351] Building CXX object CMakeFiles/teaql_decimal_inline_tests.dir/tests/decimal_inline_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[241/351] Linking CXX executable teaql_decimal_inline_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[242/351] Building CXX object CMakeFiles/teaql_decimal_tests.dir/tests/decimal_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[243/351] Linking CXX executable teaql_decimal_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[244/351] Linking CXX executable teaql_original_core_functional_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[245/351] Linking CXX executable teaql_original_core_mapping_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[246/351] Linking CXX executable teaql_original_core_composition_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[247/351] Building CXX object CMakeFiles/teaql_decimal_inline_probe.dir/tests/parity/decimal_inline_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[248/351] Linking CXX executable teaql_decimal_inline_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[249/351] Building CXX object CMakeFiles/teaql_original_core_value_tests.dir/tests/parity/teaql-core/value_contracts.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[250/351] Linking CXX executable teaql_original_core_value_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[251/351] Building CXX object CMakeFiles/teaql_decimal_probe.dir/tests/parity/decimal_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[252/351] Linking CXX executable teaql_decimal_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[253/351] Building CXX object CMakeFiles/teaql_business_id_tests.dir/tests/business_id_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[254/351] Linking CXX executable teaql_business_id_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[255/351] Linking CXX executable teaql_base_entity_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[256/351] Linking CXX executable teaql_entity_debug_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[257/351] Building CXX object CMakeFiles/teaql_entity_registration_api_probe.dir/tests/parity/entity_registration_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[258/351] Linking CXX executable teaql_entity_registration_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[259/351] Building CXX object CMakeFiles/teaql_base_entity_api_tests.dir/tests/base_entity_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[260/351] Linking CXX executable teaql_base_entity_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[261/351] Building CXX object CMakeFiles/teaql_entity_registration_api_tests.dir/tests/entity_registration_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[262/351] Linking CXX executable teaql_entity_registration_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[263/351] Building CXX object CMakeFiles/teaql_entity_debug_probe.dir/tests/parity/entity_debug_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[264/351] Linking CXX executable teaql_entity_debug_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[265/351] Building CXX object CMakeFiles/teaql_entity_owned_api_tests.dir/tests/entity_owned_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[266/351] Linking CXX executable teaql_entity_owned_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[267/351] Building CXX object CMakeFiles/teaql_chrono_value_probe.dir/tests/parity/chrono_value_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[268/351] Linking CXX executable teaql_chrono_value_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[269/351] Building CXX object CMakeFiles/teaql_search_probe.dir/tests/parity/search_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[270/351] Linking CXX executable teaql_search_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[271/351] Building CXX object CMakeFiles/teaql_value_probe.dir/tests/parity/value_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[272/351] Linking CXX executable teaql_value_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[273/351] Building CXX object CMakeFiles/teaql_value_owned_api_tests.dir/tests/value_owned_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[274/351] Linking CXX executable teaql_value_owned_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[275/351] Building CXX object CMakeFiles/teaql_value_model_tests.dir/tests/value_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[276/351] Linking CXX executable teaql_value_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[277/351] Linking CXX executable teaql_meta_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[278/351] Linking CXX executable teaql_query_debug_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[279/351] Building CXX object CMakeFiles/teaql_value_owned_api_probe.dir/tests/parity/value_owned_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[280/351] Linking CXX executable teaql_value_owned_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[281/351] Building CXX object CMakeFiles/teaql_entity_expression_tests.dir/tests/entity_expression_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[282/351] Linking CXX executable teaql_entity_expression_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[283/351] Building CXX object CMakeFiles/teaql_core_tests.dir/tests/core_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[284/351] Linking CXX executable teaql_core_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[285/351] Linking CXX executable teaql_presentation_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[286/351] Building CXX object CMakeFiles/teaql_request_api_tests.dir/tests/request_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[287/351] Building CXX object CMakeFiles/teaql_mutation_debug_tests.dir/tests/mutation_debug_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[288/351] Linking CXX executable teaql_request_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[289/351] Linking CXX executable teaql_mutation_debug_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[290/351] Building CXX object CMakeFiles/teaql_request_helpers_tests.dir/tests/request_helpers_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[291/351] Linking CXX executable teaql_request_helpers_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[292/351] Linking CXX executable teaql_timestamp_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[293/351] Building CXX object CMakeFiles/teaql_presentation_api_probe.dir/tests/parity/presentation_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[294/351] Linking CXX executable teaql_presentation_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[295/351] Building CXX object CMakeFiles/teaql_request_helpers_probe.dir/tests/parity/request_helpers_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[296/351] Linking CXX executable teaql_request_helpers_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[297/351] Building CXX object CMakeFiles/teaql_query_debug_probe.dir/tests/parity/query_debug_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[298/351] Linking CXX executable teaql_query_debug_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[299/351] Building CXX object CMakeFiles/teaql_value_api_probe.dir/tests/parity/value_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[300/351] Linking CXX executable teaql_value_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[301/351] Building CXX object CMakeFiles/teaql_eval_probe.dir/tests/parity/eval_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[302/351] Linking CXX executable teaql_eval_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[303/351] Building CXX object CMakeFiles/teaql_core_model_tests.dir/tests/core_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[304/351] Linking CXX executable teaql_core_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[305/351] Building CXX object CMakeFiles/teaql_eval_tests.dir/tests/eval_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[306/351] Linking CXX executable teaql_eval_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[307/351] Building CXX object CMakeFiles/teaql_mutation_model_api_tests.dir/tests/mutation_model_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[308/351] Linking CXX executable teaql_mutation_model_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[309/351] Building CXX object CMakeFiles/teaql_core_api_tests.dir/tests/core_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[310/351] Linking CXX executable teaql_core_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[311/351] Building CXX object CMakeFiles/teaql_core_api_probe.dir/tests/parity/core_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[312/351] Linking CXX executable teaql_core_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[313/351] Building CXX object CMakeFiles/teaql_mutation_model_api_probe.dir/tests/parity/mutation_model_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[314/351] Linking CXX executable teaql_mutation_model_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[315/351] Building CXX object CMakeFiles/teaql_core_collection_tests.dir/tests/core_collection_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[316/351] Linking CXX executable teaql_core_collection_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[317/351] Building CXX object CMakeFiles/teaql_datatype_debug_tests.dir/tests/datatype_debug_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[318/351] Linking CXX executable teaql_datatype_debug_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[319/351] Building CXX object CMakeFiles/teaql_model_debug_tests.dir/tests/model_debug_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[320/351] Building CXX object CMakeFiles/teaql_smart_list_api_tests.dir/tests/smart_list_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[321/351] Linking CXX executable teaql_model_debug_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[322/351] Linking CXX executable teaql_smart_list_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[323/351] Building CXX object CMakeFiles/teaql_datatype_debug_probe.dir/tests/parity/datatype_debug_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[324/351] Linking CXX executable teaql_datatype_debug_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[325/351] Building CXX object CMakeFiles/teaql_model_debug_probe.dir/tests/parity/model_debug_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[326/351] Linking CXX executable teaql_model_debug_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[327/351] Building CXX object CMakeFiles/teaql_query_model_tests.dir/tests/query_model_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[328/351] Linking CXX executable teaql_query_model_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[329/351] Building CXX object CMakeFiles/teaql_query_api_tests.dir/tests/query_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[330/351] Linking CXX executable teaql_query_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[331/351] Building CXX object CMakeFiles/teaql_smart_list_api_probe.dir/tests/parity/smart_list_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[332/351] Linking CXX executable teaql_smart_list_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[333/351] Building CXX object CMakeFiles/teaql_safe_expression_api_tests.dir/tests/safe_expression_api_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[334/351] Linking CXX executable teaql_safe_expression_api_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[335/351] Building CXX object CMakeFiles/teaql_query_api_probe.dir/tests/parity/query_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[336/351] Linking CXX executable teaql_query_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[337/351] Building CXX object CMakeFiles/teaql_context_memory_tests.dir/tests/context_memory_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[338/351] Linking CXX executable teaql_context_memory_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[339/351] Building CXX object CMakeFiles/teaql_safe_expression_api_probe.dir/tests/parity/safe_expression_api_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[340/351] Linking CXX executable teaql_safe_expression_api_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[341/351] Linking CXX executable teaql_data_store_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[342/351] Building CXX object CMakeFiles/teaql_context_reference_tests.dir/tests/context_reference_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[343/351] Linking CXX executable teaql_context_reference_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[344/351] Building CXX object CMakeFiles/teaql_data_store_tests.dir/tests/data_store_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[345/351] Linking CXX executable teaql_data_store_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[346/351] Building CXX object CMakeFiles/teaql_sqlite_tests.dir/tests/sqlite_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[347/351] Linking CXX executable teaql_sqlite_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[348/351] Building CXX object CMakeFiles/teaql_generated_support_tests.dir/tests/generated_support_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[349/351] Linking CXX executable teaql_generated_support_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[350/351] Building CXX object CMakeFiles/teaql_generated_support_probe.dir/tests/parity/generated_support_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[351/351] Linking CXX executable teaql_generated_support_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined

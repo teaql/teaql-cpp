@@ -1,0 +1,65 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "native": {
+    "passed": 318,
+    "total": 318,
+    "seconds": 133.86,
+    "dependency_records": 386,
+    "pending_build_work": false
+  },
+  "selected": {
+    "purpose_sanitizer": {
+      "passed": 3,
+      "total": 3,
+      "seconds": 11.24,
+      "leak_detection": false
+    },
+    "purpose_mips": {
+      "passed": 3,
+      "total": 3,
+      "seconds": 14.26
+    },
+    "inmemory_sanitizer": {
+      "passed": 3,
+      "total": 3,
+      "seconds": 4.63,
+      "leak_detection": false
+    },
+    "inmemory_mips": {
+      "passed": 3,
+      "total": 3,
+      "seconds": 2.75
+    },
+    "telemetry_composition_sanitizer": {
+      "passed": 6,
+      "total": 6,
+      "seconds": 1.51,
+      "leak_detection": false
+    },
+    "telemetry_composition_mips": {
+      "passed": 6,
+      "total": 6,
+      "seconds": 1.59
+    }
+  },
+  "live_original": {
+    "purpose_mips": 46,
+    "inmemory_mips": 6532,
+    "inmemory_target_width": "Host Rust normalizes only explicit usize pagination casts for 32-bit expectations."
+  },
+  "physical_router": "unverified",
+  "source_sha256": {
+    "include/teaql/runtime/purposed_query_debug.hpp": "5518ead00b37e7b668e950b546b0197f9aa1a2b691782ff33c999ce6ec8cfe92",
+    "include/teaql/runtime/purposed_query.hpp": "670194b90312a7ef50bc637fb84246dd2fcb4a74fabf3e47e1c1fa4963ec3e23",
+    "src/runtime/generated_support.cpp": "130c66aac8be81c2f9cf10db55cfa5a949267262c56b7d899e099ba15247ef9a",
+    "include/teaql/runtime/telemetry.hpp": "e74e6567357233a11f9477f9ec8b6cdd1198b30c77ba48ef5010a50092ce33ef",
+    "src/runtime/telemetry.cpp": "319497368c976c17c3305c880e99cb475a02cf6e232788d16a1850d323979177",
+    "include/teaql/runtime/inmemory_engine.hpp": "10a1f220f6cbf2b8ef7a8a480b3b0e21062da423c802e6793adee031a7542f9f",
+    "src/runtime/inmemory_engine.cpp": "83bcf3737722537bec8a6d16efba3a8d85923deaaac772930860a705a2c366c7",
+    "src/runtime/context_data_store.cpp": "9c16fc46a480de3a0d7c8caf143a764c263f19d9683c3f056a5459168b0d9cac",
+    "src/runtime/schema.cpp": "506db6e2174435aaf69213924bc85afb279c355e88f718a6c57fb324c72e1ad6",
+    "tests/generated_support_tests.cpp": "1737115ac443f14550068c71187990321db5ec7d941b3bebe0020f4251805ac2",
+    "tests/parity/purposed_query_debug_cases.json.gz": "d9cc946c47ef4bb0e0b29ada83a35700418802ba27e1da6d419ae59dc49c2750",
+    "tests/parity/inmemory_cases.json": "84ca192948cebfb32e31378614b050cbc729cad4b2778497cadd9f6b9bf2b533"
+  }
+}

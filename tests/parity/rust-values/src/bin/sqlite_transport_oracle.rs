@@ -59,12 +59,36 @@ fn business_steps(provider:&SqliteMutationExecutor,j:&J)->J{
     let query=CompiledQuery{log_context:Default::default(),sql:format!("SELECT scope_key,current_level,version,typeof(current_level) AS level_type,typeof(version) AS version_type FROM {} ORDER BY scope_key",teaql_sql::quote_identifier_if_needed(table,'"')),params:vec![],comment:None};
     json!({"steps":results,"space":match provider.fetch_all_compact(&query){Ok(value)=>rows(&value),Err(e)=>error(e)}})
 }
+fn formatted<T:std::fmt::Debug>(value:&T)->J {
+    json!({"compact":format!("{value:?}"),"pretty":format!("{value:#?}"),
+        "lower_hex":format!("{value:x?}"),"upper_hex":format!("{value:X?}"),
+        "pretty_lower_hex":format!("{value:#x?}"),"pretty_upper_hex":format!("{value:#X?}"),
+        "width_precision":format!("{value:>40.2?}"),"fancy":format!("{value:🧊^+18.3?}"),
+        "zero_pad":format!("{value:+012?}")})
+}
+fn unit_protocol<T:std::fmt::Debug+Default+Clone+Copy>(value:T)->J {
+    let copied=value;
+    json!({"direct":formatted(&value),"default":formatted(&T::default()),
+           "clone":formatted(&value.clone()),"copy":formatted(&copied)})
+}
 fn evaluate(j:J)->J{
     let connection=rusqlite::Connection::open_in_memory().unwrap();connection.execute_batch("CREATE TABLE records(id INTEGER PRIMARY KEY,version INTEGER,name TEXT)").unwrap();
     for i in 1..=j["count"].as_u64().unwrap(){connection.execute("INSERT INTO records VALUES(?,1,?)",rusqlite::params![i as i64,format!("name-{i}")]).unwrap();}
     let provider=SqliteMutationExecutor::from_connection(connection);
     let query=CompiledQuery{log_context:Default::default(),sql:j["sql"].as_str().unwrap().into(),params:j["params"].as_array().unwrap().iter().map(fixture_value::value).collect(),comment:j["comment"].as_str().map(str::to_owned)};
     let outcome=std::panic::catch_unwind(std::panic::AssertUnwindSafe(||match j["mode"].as_str().unwrap(){
+        "units"=>json!({"dialect":unit_protocol(teaql_provider_sqlite::SqliteDialect),
+                        "schema":unit_protocol(teaql_provider_sqlite::SqliteSchemaProvider)}),
+        "capabilities"=>{
+            let caps=teaql_data_service::DataServiceExecutor::capabilities(&provider);
+            json!({"query":caps.query,"mutation":caps.mutation,"transaction":caps.transaction,
+                "schema":caps.schema,"id_generation":caps.id_generation,"batch_mutation":caps.batch_mutation,
+                "returning":caps.returning,"small_parent_relation_probes":caps.small_parent_relation_probes,
+                "prepared_cache_capacity":teaql_provider_sqlite::DEFAULT_PREPARED_STATEMENT_CACHE_CAPACITY,
+                "column_cache_capacity":teaql_provider_sqlite::DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY,
+                "id_space_table":teaql_provider_sqlite::DEFAULT_ID_SPACE_TABLE,
+                "business_id_space_table":teaql_provider_sqlite::DEFAULT_BUSINESS_ID_SPACE_TABLE})
+        },
         "transaction"=>transaction_steps(&provider,&j),
         "id_space"=>id_steps(&provider,&j),
         "business_id"=>business_steps(&provider,&j),

@@ -1,0 +1,49 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-sql-model-review-mips
+Test project /home/philip/githome/teaql-cpp/build-sql-model-review-mips
+    Start 130: provider_sqlite_decoding_contracts
+1/5 Test #130: provider_sqlite_decoding_contracts ...***Exception: Illegal  1.35 sec
+qemu: uncaught target signal 4 (Illegal instruction) - core dumped
+
+    Start 131: provider_sqlite_binding_contracts
+2/5 Test #131: provider_sqlite_binding_contracts ....***Exception: Illegal  1.48 sec
+qemu: uncaught target signal 4 (Illegal instruction) - core dumped
+
+    Start 132: provider_sqlite_error_contracts
+3/5 Test #132: provider_sqlite_error_contracts ......   Passed    0.15 sec
+    Start 210: sqlite_decoding_rust_parity
+4/5 Test #210: sqlite_decoding_rust_parity ..........***Failed    2.04 sec
+Traceback (most recent call last):
+  File "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_decoding.py", line 5, in <module>
+    raise SystemExit(main("sqlite_decoding_cases.json", "SQLite row decoding"))
+  File "/home/philip/githome/teaql-cpp/tests/parity/compare_values.py", line 67, in main
+    actual = observe(args.cpp, inputs, emulator)
+  File "/home/philip/githome/teaql-cpp/tests/parity/compare_values.py", line 28, in observe
+    result = subprocess.run([*emulator, executable, *arguments], input="".join(json.dumps(v, ensure_ascii=True) + "\n" for v in inputs),
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/qemu-mips', '-cpu', '24Kc', '/home/philip/githome/teaql-cpp/build-sql-model-review-mips/teaql_sqlite_decoding_probe']' died with <Signals.SIGILL: 4>.
+
+    Start 211: sqlite_bindings_rust_parity
+5/5 Test #211: sqlite_bindings_rust_parity ..........***Failed    1.94 sec
+Traceback (most recent call last):
+  File "/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_bindings.py", line 5, in <module>
+    raise SystemExit(main("sqlite_bindings_cases.json", "SQLite bindings/storage"))
+  File "/home/philip/githome/teaql-cpp/tests/parity/compare_values.py", line 67, in main
+    actual = observe(args.cpp, inputs, emulator)
+  File "/home/philip/githome/teaql-cpp/tests/parity/compare_values.py", line 28, in observe
+    result = subprocess.run([*emulator, executable, *arguments], input="".join(json.dumps(v, ensure_ascii=True) + "\n" for v in inputs),
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/qemu-mips', '-cpu', '24Kc', '/home/philip/githome/teaql-cpp/build-sql-model-review-mips/teaql_sqlite_bindings_probe']' died with <Signals.SIGILL: 4>.
+
+
+20% tests passed, 4 tests failed out of 5
+
+Total Test time (real) =   6.98 sec
+
+The following tests FAILED:
+	130 - provider_sqlite_decoding_contracts (ILLEGAL)
+	131 - provider_sqlite_binding_contracts (ILLEGAL)
+	210 - sqlite_decoding_rust_parity (Failed)
+	211 - sqlite_bindings_rust_parity (Failed)
+Errors while running CTest

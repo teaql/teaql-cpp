@@ -3,6 +3,8 @@
 #include <teaql/runtime/relation.hpp>
 
 namespace teaql::detail {
+Result<EntityRuntimeState, EntityError>
+attach_flat_relation_graph(const UserContext&, std::string_view, std::span<CompactRow>);
 void validate_relation_domain(const UserContext&,
                               std::span<const CompactRow>,
                               const EntityRuntimeState* = nullptr,

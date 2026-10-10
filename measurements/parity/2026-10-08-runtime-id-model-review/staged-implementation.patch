@@ -1,0 +1,426 @@
+--- a/include/teaql/runtime/business_id.hpp
++++ b/include/teaql/runtime/business_id.hpp
+@@ -8,6 +8,7 @@
+ #include <unordered_map>
+ 
+ namespace teaql {
++class DebugWriter;
+ class UserContext;
+ inline constexpr std::string_view BUSINESS_ID_V1_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+ inline constexpr std::size_t BUSINESS_ID_V1_WIDTH = 6;
+@@ -141,6 +142,7 @@
+                                                            const BusinessIdPlan&) const override;
+ 
+ private:
++    friend void write_debug(DebugWriter&, const InMemoryBusinessIdAllocator&);
+     Memory resource_;
+ 
+     struct ScopeHash {
+--- a/include/teaql/runtime/id.hpp
++++ b/include/teaql/runtime/id.hpp
+@@ -7,6 +7,8 @@
+ #include <mutex>
+ 
+ namespace teaql {
++class DebugWriter;
++
+ class InternalIdGenerator {
+ public:
+     virtual ~InternalIdGenerator() = default;
+@@ -54,6 +56,7 @@
+         do_ensure_floor(Memory, std::string_view, std::uint64_t) const override;
+ 
+ private:
++    friend void write_debug(DebugWriter&, const AtomicCounterIdGenerator&);
+     Memory resource_;
+     mutable std::atomic<std::uint64_t> counter_;
+ };
+@@ -97,10 +100,11 @@
+     }
+ 
+ private:
++    friend void write_debug(DebugWriter&, const SnowflakeIdGenerator&);
+     Memory resource_;
+     std::uint64_t worker_, datacenter_;
+     mutable std::mutex mutex_;
+     mutable detail::SnowflakeState state_;
+-    mutable bool poisoned_ = false;
++    mutable std::atomic<bool> poisoned_{false};
+ };
+ }
+--- /dev/null
++++ b/include/teaql/runtime/runtime_id_debug.hpp
+@@ -0,0 +1,117 @@
++#pragma once
++#include <teaql/runtime/business_id.hpp>
++#include <teaql/runtime/id.hpp>
++#include <teaql/runtime/reference_model_debug.hpp>
++
++namespace teaql {
++inline void write_debug(DebugWriter& writer, const SystemBusinessClock&) {
++    writer.raw("SystemBusinessClock");
++}
++
++inline void write_debug(DebugWriter& writer, const FixedBusinessClock& value) {
++    writer.structure("FixedBusinessClock", [&](auto& fields) {
++        fields.field("value", [&](auto& out) {
++            write_debug(out, value.business_time());
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, BusinessDate value) {
++    writer.tuple("BusinessDate", [&](auto& out) {
++        write_debug(out, value.value);
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const DailySequenceBusinessIdProfile&) {
++    writer.raw("DailySequenceBusinessIdProfile");
++}
++
++namespace detail {
++// Like std::sync::Mutex Debug, diagnostics observe a lock without waiting for
++// another holder. All scratch/output storage belongs to the caller's Context.
++template <class WriteData>
++void write_id_mutex(DebugWriter& writer, bool locked, bool poisoned, WriteData write_data) {
++    String text(writer.memory_resource());
++    DebugWriter nested(text, writer.options());
++    nested.structure("Mutex", [&](auto& fields) {
++        fields.field("data", [&](auto& out) {
++            if (locked) {
++                out.raw("<locked>");
++            } else {
++                write_data(out);
++            }
++        });
++        fields.field("poisoned", [&](auto& out) {
++            out.boolean(poisoned);
++        });
++    });
++    if (writer.options().pretty) {
++        text.insert(text.size() - 1, "    ..\n");
++    } else {
++        text.insert(text.size() - 2, ", ..");
++    }
++    writer.raw(text);
++}
++}
++
++inline void write_debug(DebugWriter& writer, const AtomicCounterIdGenerator& value) {
++    writer.structure("AtomicCounterIdGenerator", [&](auto& fields) {
++        fields.field("counter", [&](auto& out) {
++            out.integer(value.counter_.load(std::memory_order_relaxed));
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const InMemoryBusinessIdAllocator& value) {
++    if (value.owner_ != std::this_thread::get_id()) {
++        throw std::logic_error(
++            "Context Business ID allocator diagnostics require its owner thread");
++    }
++    std::unique_lock lock(value.mutex_, std::try_to_lock);
++    writer.structure("InMemoryBusinessIdAllocator", [&](auto& fields) {
++        fields.field("levels", [&](auto& out) {
++            detail::write_id_mutex(out, !lock.owns_lock(), value.poisoned_, [&](auto& data) {
++                data.sequence(
++                    value.levels_,
++                    [](auto& inner, const auto& entry) {
++                        write_debug(inner, entry.first);
++                        inner.raw(": ");
++                        inner.integer(entry.second);
++                    },
++                    "{",
++                    "}");
++            });
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const SnowflakeIdGenerator& value) {
++    std::unique_lock lock(value.mutex_, std::try_to_lock);
++    writer.structure("SnowflakeIdGenerator", [&](auto& fields) {
++        fields.field("epoch_millis", [&](auto& out) {
++            out.integer(std::uint64_t(1288834974657));
++        });
++        fields.field("worker_id", [&](auto& out) {
++            out.integer(value.worker_);
++        });
++        fields.field("datacenter_id", [&](auto& out) {
++            out.integer(value.datacenter_);
++        });
++        fields.field("state", [&](auto& out) {
++            detail::write_id_mutex(out,
++                                   !lock.owns_lock(),
++                                   value.poisoned_.load(std::memory_order_relaxed),
++                                   [&](auto& data) {
++                                       data.structure("SnowflakeState", [&](auto& state) {
++                                           state.field("last_timestamp", [&](auto& inner) {
++                                               inner.integer(value.state_.last_timestamp);
++                                           });
++                                           state.field("sequence", [&](auto& inner) {
++                                               inner.integer(value.state_.sequence);
++                                           });
++                                       });
++                                   });
++        });
++    });
++}
++}
+--- a/include/teaql/runtime.hpp
++++ b/include/teaql/runtime.hpp
+@@ -17,6 +17,7 @@
+ #include <teaql/runtime/i18n.hpp>
+ #include <teaql/runtime/i18n_debug.hpp>
+ #include <teaql/runtime/id.hpp>
++#include <teaql/runtime/runtime_id_debug.hpp>
+ #include <teaql/runtime/inmemory_engine.hpp>
+ #include <teaql/runtime/language.hpp>
+ #include <teaql/runtime/log_formatter.hpp>
+--- /dev/null
++++ b/tests/parity/runtime_id_model_probe.cpp
+@@ -0,0 +1,159 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/runtime_id_debug.hpp>
++#include <teaql/core/detail/model_json.hpp>
++#include "fixture_value.hpp"
++#include "debug_modes.hpp"
++#include <iostream>
++
++static Json numeric(Memory owner, std::uint64_t value) {
++    char buffer[32];
++    auto end = std::to_chars(buffer, buffer + sizeof(buffer), value).ptr;
++    return Json(owner, std::string_view(buffer, end));
++}
++
++static Json evaluate(UserContext& user, const Json& input) {
++    auto owner = user.memory_resource();
++    auto output = detail::model_json(owner);
++    auto put = [&](std::string_view name, auto&& value) {
++        detail::model_put(output, name, std::forward<decltype(value)>(value));
++    };
++    auto kind = text(field(input, "kind"));
++    if (kind == "clock") {
++        auto time = UtcDateTime::from_timestamp(
++            number<std::int64_t>(field(input, "seconds")),
++            detail::model_integer<std::uint32_t>(field(input, "nanos"), "nanos"));
++        if (!time) {
++            throw std::invalid_argument("Invalid clock fixture");
++        }
++        SystemBusinessClock system;
++        FixedBusinessClock fixed(*time);
++        BusinessDate date{time->date_naive()};
++        DailySequenceBusinessIdProfile profile;
++        put("system", formatted_debug(owner, system));
++        put("system_clone", formatted_debug(owner, SystemBusinessClock(system)));
++        put("fixed", formatted_debug(owner, fixed));
++        put("fixed_clone", formatted_debug(owner, FixedBusinessClock(fixed)));
++        put("date", formatted_debug(owner, date));
++        put("date_clone", formatted_debug(owner, BusinessDate(date)));
++        put("date_equal", date == BusinessDate(date));
++        put("profile", formatted_debug(owner, profile));
++        put("profile_clone", formatted_debug(owner, DailySequenceBusinessIdProfile(profile)));
++        put("time", formatted_debug(owner, fixed.business_time()));
++        put("business_date", formatted_debug(owner, fixed.business_date()));
++    } else if (kind == "key") {
++        std::array<std::uint8_t, 32> bytes{}, other_bytes{};
++        bytes.fill(detail::model_integer<std::uint8_t>(field(input, "byte"), "byte"));
++        other_bytes.fill(
++            detail::model_integer<std::uint8_t>(field(input, "other_byte"), "other_byte"));
++        auto key = BusinessIdEncodingKey::create(
++            owner, detail::model_integer<std::uint32_t>(field(input, "version"), "version"), bytes);
++        if (!key) {
++            put("error", key.error().to_string(owner));
++        } else {
++            auto other =
++                BusinessIdEncodingKey::create(owner,
++                                              detail::model_integer<std::uint32_t>(
++                                                  field(input, "other_version"), "other_version"),
++                                              other_bytes);
++            put("version", key.value().version());
++            put("clone_equal", key.value() == BusinessIdEncodingKey(key.value()));
++            put("other_equal", key.value() == other.value());
++        }
++    } else if (kind == "snowflake") {
++        try {
++            auto& generator =
++                user.make<SnowflakeIdGenerator>(number<std::uint64_t>(field(input, "worker")),
++                                                number<std::uint64_t>(field(input, "datacenter")));
++            put("debug", formatted_debug(owner, generator));
++        } catch (const std::invalid_argument& error) {
++            put("panic", std::string_view(error.what()));
++        }
++    } else {
++        Json::Array observations(owner);
++        if (kind == "counter") {
++            auto start = std::get<bool>(field(input, "default").data)
++                             ? 1000
++                             : number<std::uint64_t>(field(input, "start"));
++            auto& generator = user.make<AtomicCounterIdGenerator>(start);
++            auto initial = detail::model_json(owner);
++            detail::model_put(initial, "debug", formatted_debug(owner, generator));
++            observations.emplace_back(std::move(initial));
++            for (const auto& action : detail::model_array(field(input, "steps"), "steps")) {
++                auto result = detail::model_json(owner);
++                try {
++                    if (text(field(action, "op")) == "floor") {
++                        auto reserved = generator.ensure_floor(
++                            owner, "Ignored", number<std::uint64_t>(field(action, "value")));
++                        if (reserved) {
++                            detail::model_put(result, "ok", Json(owner));
++                        } else {
++                            detail::model_put(result, "error", reserved.error().to_string(owner));
++                        }
++                    } else {
++                        auto generated = generator.generate_id(owner, "Ignored");
++                        if (generated) {
++                            detail::model_put(result, "ok", numeric(owner, generated.value()));
++                        } else {
++                            detail::model_put(result, "error", generated.error().to_string(owner));
++                        }
++                    }
++                } catch (const std::overflow_error& error) {
++                    detail::model_put(result, "panic", std::string_view(error.what()));
++                }
++                auto step = detail::model_json(owner);
++                detail::model_put(step, "result", result);
++                detail::model_put(step, "debug", formatted_debug(owner, generator));
++                observations.emplace_back(std::move(step));
++            }
++        } else if (kind == "allocator") {
++            auto& allocator = user.make<InMemoryBusinessIdAllocator>();
++            auto initial = detail::model_json(owner);
++            detail::model_put(initial, "debug", formatted_debug(owner, allocator));
++            observations.emplace_back(std::move(initial));
++            for (const auto& action : detail::model_array(field(input, "steps"), "steps")) {
++                BusinessIdScope scope(
++                    std::allocator_arg, Allocator(owner), "Root|%", "Item", "sequence", "20261008");
++                BusinessIdPlan plan(std::allocator_arg,
++                                    Allocator(owner),
++                                    scope,
++                                    "ORD",
++                                    {},
++                                    6,
++                                    "-",
++                                    number<std::uint64_t>(field(action, "initial")),
++                                    number<std::uint64_t>(field(action, "maximum")));
++                auto allocation = allocator.allocate(owner, plan);
++                auto result = detail::model_json(owner);
++                if (allocation) {
++                    detail::model_put(
++                        result, "sequence", numeric(owner, allocation.value().sequence));
++                    detail::model_put(
++                        result, "scope", allocation.value().scope.canonical_key(owner));
++                } else {
++                    detail::model_put(result, "error", allocation.error().to_string(owner));
++                }
++                auto step = detail::model_json(owner);
++                detail::model_put(step, "result", result);
++                detail::model_put(step, "debug", formatted_debug(owner, allocator));
++                observations.emplace_back(std::move(step));
++            }
++        } else {
++            throw std::invalid_argument("Unknown runtime ID fixture");
++        }
++        return Json(owner, std::move(observations));
++    }
++    return output;
++}
++
++int main() {
++    GlobalContext global;
++    std::string line;
++    while (std::getline(std::cin, line)) {
++        auto user = global.make_user_context();
++        auto input = Json::parse(user->memory_resource(), line);
++        if (!input) {
++            throw std::invalid_argument("Invalid runtime ID fixture");
++        }
++        std::cout << evaluate(*user, *input).dump(user->memory_resource()) << '\n';
++    }
++}
+--- /dev/null
++++ b/tests/runtime_id_model_tests.cpp
+@@ -0,0 +1,62 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/runtime_id_debug.hpp>
++#include <iostream>
++
++using namespace teaql;
++
++static void check(bool condition, const char* message) {
++    if (!condition) {
++        throw std::runtime_error(message);
++    }
++}
++
++int main() {
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto owner = user->memory_resource();
++    auto counter = user->make_ref<AtomicCounterIdGenerator>(41);
++    auto& generator = user->get(counter);
++    auto& allocator = user->make<InMemoryBusinessIdAllocator>();
++    auto& snowflake = user->make<SnowflakeIdGenerator>(31, 17);
++    auto& clock = user->make<FixedBusinessClock>(*UtcDateTime::from_timestamp(-1, 123000000));
++    {
++        auto before = debug_string(owner, generator);
++        check(before == "AtomicCounterIdGenerator { counter: 41 }",
++              "Debug reads the actual counter");
++        check(generator.generate_id(owner, "Item").value() == 42, "Debug never advances IDs");
++        auto state = debug_string(owner, snowflake);
++        check(state.find("worker_id: 31") != state.npos && state.find("sequence: 0") != state.npos,
++              "Debug reads worker, datacenter and private state without generation");
++        check(debug_string(owner, clock) ==
++                  "FixedBusinessClock { value: 1969-12-31T23:59:59.123Z }",
++              "Fixed clock diagnostics retain fractional UTC time");
++        BusinessIdScope scope(std::allocator_arg, Allocator(owner), "Root", "Item", "sequence", "");
++        BusinessIdPlan plan(std::allocator_arg, Allocator(owner), scope, "ORD", {}, 6, "-", 0, 2);
++        check(allocator.allocate(owner, plan).value().sequence == 0,
++              "Allocate stores initial scope level");
++        auto levels = debug_string(owner, allocator);
++        check(levels.find("poisoned: false") != levels.npos && levels.find(": 1") != levels.npos,
++              "Diagnostics expose the stored next level and poison flag");
++        check(allocator.allocate(owner, plan).value().sequence == 1,
++              "Diagnostics never allocate an ID");
++    }
++    // Retain only diagnostic text through the explicit User-to-Global proxy.
++    auto retained = [&] {
++        auto diagnostic = debug_string(owner, generator);
++        return user->make_global<String>(diagnostic);
++    }();
++    user.reset();
++    check(global.live_user_bytes() == 0, "Closing User returns every arena block");
++    auto next = global.make_user_context();
++    check(next->get(next->rebind_global(retained)) == "AtomicCounterIdGenerator { counter: 42 }",
++          "Explicit retained diagnostics survive by destination-domain copy");
++    bool rejected = false;
++    try {
++        (void)next->get(counter);
++    } catch (const ReferenceError&) {
++        rejected = true;
++    }
++    check(rejected, "Expired counter reference rejects before atomic access");
++    std::cout << "Runtime ID diagnostic lifetime contracts pass\n";
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -136,6 +136,16 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_entity_runtime_models.py
+         --cpp $<TARGET_FILE:teaql_entity_runtime_model_probe>
+         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
++    add_executable(teaql_runtime_id_model_tests tests/runtime_id_model_tests.cpp)
++    target_link_libraries(teaql_runtime_id_model_tests PRIVATE teaql::runtime)
++    add_test(NAME runtime_id_model_contracts COMMAND teaql_runtime_id_model_tests)
++    add_executable(teaql_runtime_id_model_probe tests/parity/runtime_id_model_probe.cpp)
++    target_link_libraries(teaql_runtime_id_model_probe PRIVATE teaql::runtime)
++    add_test(NAME runtime_id_model_rust_parity COMMAND ${Python3_EXECUTABLE}
++        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_runtime_id_models.py
++        --cpp $<TARGET_FILE:teaql_runtime_id_model_probe>
++        "--profile=$<IF:$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>,release,debug>"
++        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+     add_executable(teaql_context_defaults_tests tests/context_defaults_tests.cpp)
+     target_link_libraries(teaql_context_defaults_tests PRIVATE teaql::runtime)
+     add_test(NAME context_defaults_contracts COMMAND teaql_context_defaults_tests)

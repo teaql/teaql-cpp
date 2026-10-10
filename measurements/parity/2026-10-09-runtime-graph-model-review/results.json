@@ -1,0 +1,31 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source": "teaql-runtime/src/graph.rs",
+  "model_inputs": 128,
+  "independent_source_runs": 2,
+  "formatting_modes": 9,
+  "types": 10,
+  "native": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 9.05,
+    "build_tasks": 6
+  },
+  "asan_ubsan": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 13.52,
+    "build_tasks": 8,
+    "detect_leaks": false
+  },
+  "mips_qemu": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 8.41,
+    "build_tasks": 8
+  },
+  "pre_post_test": "post-test no work",
+  "unordered_debug": "Full model observations use empty/singleton HashSet; multi-member lifetime assertions preserve all members without imposing iteration order",
+  "physical_device": "Deferred by explicit user request",
+  "scope": "Graph model diagnostics focus; full graph/save source, whole-project consumers and stage acceptance remain independent"
+}

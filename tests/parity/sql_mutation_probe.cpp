@@ -1,4 +1,5 @@
 #include "fixture_sql.hpp"
+#include <charconv>
 #include <iostream>
 
 static MutationValues mutation_values(Memory r, const Json& j) {
@@ -16,7 +17,7 @@ static std::optional<std::int64_t> version(const Json& j, std::string_view key) 
 }
 
 static CompiledQuery
-compile(Memory r, const FixtureDialect& d, const EntityDescriptor& e, const Json& j) {
+compile(Memory r, const SqlDialect& d, const EntityDescriptor& e, const Json& j) {
     auto mode = text(field(j, "mode"));
     std::optional<Expr> guard;
     if (auto p = optional(j, "guard")) {
@@ -77,10 +78,64 @@ compile(Memory r, const FixtureDialect& d, const EntityDescriptor& e, const Json
     throw std::runtime_error("unknown mutation");
 }
 
+class RecordingDialect : public FixtureDialect {
+public:
+    Memory owner;
+    bool record;
+    std::optional<std::string_view> fail_quote;
+    mutable Vector<String> events;
+
+    RecordingDialect(Memory owner, bool record) : owner(owner), record(record), events(owner) {}
+
+    DatabaseKind kind() const override {
+        event("kind");
+        return FixtureDialect::kind();
+    }
+
+    String quote_ident(Memory r, std::string_view name) const override {
+        if (record) {
+            String item("quote:", owner);
+            item += name;
+            event(item);
+        }
+        if (fail_quote == name) {
+            throw std::runtime_error("fixture quote failure");
+        }
+        return FixtureDialect::quote_ident(r, name);
+    }
+
+    String placeholder(Memory r, std::size_t index) const override {
+        if (record) {
+            String item("placeholder:", owner);
+            char buffer[32];
+            auto [end, error] = std::to_chars(buffer, buffer + sizeof(buffer), index);
+            if (error != std::errc{}) {
+                throw std::runtime_error("Cannot observe placeholder index");
+            }
+            item.append(buffer, end);
+            event(item);
+        }
+        return FixtureDialect::placeholder(r, index);
+    }
+
+private:
+    void event(std::string_view text) const {
+        if (record) {
+            events.emplace_back(text);
+        }
+    }
+};
+
 static Json evaluate(Memory r, const Json& j) {
-    FixtureDialect d;
+    auto observed = optional(j, "observe_hooks");
+    RecordingDialect d(r, observed && std::get<bool>(observed->data));
     if (auto p = optional(j, "numbered")) {
         d.numbered = std::get<bool>(p->data);
+    }
+    if (auto p = optional(j, "fail_quote")) {
+        if (std::holds_alternative<String>(p->data)) {
+            d.fail_quote = text(*p);
+        }
     }
     auto e = entity(r, field(j, "entity"));
     auto out = detail::model_json(r);
@@ -112,6 +167,18 @@ static Json evaluate(Memory r, const Json& j) {
         detail::model_put(out, "panic", "overflow");
     } catch (const std::out_of_range&) {
         detail::model_put(out, "panic", "index");
+    } catch (const std::runtime_error& error) {
+        if (std::string_view(error.what()) != "fixture quote failure") {
+            throw;
+        }
+        detail::model_put(out, "panic", "hook");
+    }
+    if (d.record) {
+        Json::Array events(r);
+        for (const auto& item : d.events) {
+            events.emplace_back(item);
+        }
+        detail::model_put(out, "events", events);
     }
     return out;
 }

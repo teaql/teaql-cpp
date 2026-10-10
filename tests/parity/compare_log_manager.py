@@ -19,13 +19,15 @@ def normalize(text):
     return text.replace(RUST_HEADER, CPP_HEADER)
 
 
-def observe(executable, inputs):
+def observe(executable, inputs, emulator=()):
     executable = Path(executable).resolve()
+    if not executable.is_file():
+        raise FileNotFoundError(f'Probe executable is missing; build its target first: {executable}')
     outputs = []
     environment = {k: v for k, v in os.environ.items() if not k.startswith('TEAQL_')}
     for fixture in inputs:
         with tempfile.TemporaryDirectory(prefix='teaql-log-manager-') as directory:
-            result = subprocess.run([str(executable)], input=json.dumps(fixture) + '\n',
+            result = subprocess.run([*emulator, str(executable)], input=json.dumps(fixture) + '\n',
                                     cwd=directory, env=environment, text=True,
                                     capture_output=True, check=True)
             files = {}
@@ -43,6 +45,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--cpp', required=True)
     parser.add_argument('--rust')
+    parser.add_argument('--cpp-emulator', default='')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     corpus = json.loads(Path(__file__).with_name('log_manager_cases.json').read_text())
@@ -54,7 +57,8 @@ def main():
         subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], cwd=root, check=True)
         if not same(expected, observe(args.rust, inputs)):
             raise RuntimeError('Stored manager observations differ from live Rust')
-    actual = observe(args.cpp, inputs)
+    emulator = args.cpp_emulator.split(';') if args.cpp_emulator else []
+    actual = observe(args.cpp, inputs, emulator)
     failures = [(i, a, b) for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     for i, a, b in failures[:5]:
         print(f'Case {i}: {inputs[i]}\nRust: {str(a)[:3000]}\nC++: {str(b)[:3000]}')

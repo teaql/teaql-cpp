@@ -1,0 +1,150 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Actual original opaque state with non-Clone payload; registered native counterpart preserves identity/type/private Debug and readability after dropping the first wrapper.",
+  "cases": [
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": ""
+      },
+      "expected": {
+        "after_drop": "",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "",
+          "wrong_type_absent": true
+        }
+      }
+    },
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": "private"
+      },
+      "expected": {
+        "after_drop": "private",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "private",
+          "wrong_type_absent": true
+        }
+      }
+    },
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": "secret-token"
+      },
+      "expected": {
+        "after_drop": "secret-token",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "secret-token",
+          "wrong_type_absent": true
+        }
+      }
+    },
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": "状态-λ"
+      },
+      "expected": {
+        "after_drop": "状态-λ",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "状态-λ",
+          "wrong_type_absent": true
+        }
+      }
+    },
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "expected": {
+        "after_drop": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "wrong_type_absent": true
+        }
+      }
+    },
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": "private\n\u0000payload"
+      },
+      "expected": {
+        "after_drop": "private\n\u0000payload",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "private\n\u0000payload",
+          "wrong_type_absent": true
+        }
+      }
+    },
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": "🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀"
+      },
+      "expected": {
+        "after_drop": "🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀🦀",
+          "wrong_type_absent": true
+        }
+      }
+    },
+    {
+      "input": {
+        "op": "projection_scope",
+        "text": "a b"
+      },
+      "expected": {
+        "after_drop": "a b",
+        "before_drop": {
+          "clone_equal": true,
+          "debug": "SqlProjectionState(<private>)",
+          "empty_equal": true,
+          "empty_some_equal": false,
+          "independent_equal": false,
+          "text": "a b",
+          "wrong_type_absent": true
+        }
+      }
+    }
+  ]
+}

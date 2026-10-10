@@ -1,4 +1,4 @@
-#include <teaql/core/request.hpp>
+#include <teaql/core/request_debug.hpp>
 #include <teaql/core/detail/text.hpp>
 
 namespace teaql::request {
@@ -399,9 +399,12 @@ void merge_outer_filter_into_facet_aggregates(QuerySelection& selection, const S
     }
 }
 
-Value required_value(Memory r, FieldOperator, std::span<const Value> values, std::size_t index) {
+Value required_value(Memory r, FieldOperator op, std::span<const Value> values, std::size_t index) {
     if (index >= values.size()) {
-        throw std::invalid_argument("Field operator requires value at requested index");
+        auto message = debug_string(r, op);
+        message += " requires value at index ";
+        message += std::to_string(index);
+        throw std::invalid_argument(std::string(message));
     }
     return Value(r, values[index]);
 }
@@ -411,7 +414,10 @@ String required_text(Memory r, FieldOperator op, std::span<const Value> values, 
     if (auto text = value.try_text()) {
         return String(*text, r);
     }
-    throw std::invalid_argument("Field operator requires text value");
+    auto message = debug_string(r, op);
+    message += " requires text value, got ";
+    message += debug_string(r, value);
+    throw std::invalid_argument(std::string(message));
 }
 
 Expr field_operator_expr(Memory r,
@@ -431,9 +437,11 @@ Expr field_operator_expr(Memory r,
         return Expr::lt(r, field, required_value(r, op, values, 0));
     case FieldOperator::LessThanOrEqual:
         return Expr::lte(r, field, required_value(r, op, values, 0));
-    case FieldOperator::Between:
-        return Expr::between(
-            r, field, required_value(r, op, values, 0), required_value(r, op, values, 1));
+    case FieldOperator::Between: {
+        auto lower = required_value(r, op, values, 0);
+        auto upper = required_value(r, op, values, 1);
+        return Expr::between(r, field, lower, upper);
+    }
     case FieldOperator::In:
         return Expr::in_list(r, field, values);
     case FieldOperator::NotIn:
@@ -495,7 +503,9 @@ Expr field_operator_column_expr(Memory r,
         binary = BinaryOp::NotLike;
         break;
     default:
-        throw std::invalid_argument("Operator is not supported for property-to-property filters");
+        auto message = debug_string(r, op);
+        message += " is not supported for property-to-property filters";
+        throw std::invalid_argument(std::string(message));
     }
     return Expr::compare_columns(r, field, binary, other);
 }

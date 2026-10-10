@@ -168,10 +168,44 @@ static void status_table() {
     check(state == S::Persisted, "recover persisted");
 }
 
+static void trace_assignment_domains() {
+    NoDefaultAllocator guard;
+    GlobalContext global;
+    auto user = global.make_user_context();
+    auto r = user->memory_resource();
+    Ref<TraceNode> retained;
+    {
+        TraceNode source(std::allocator_arg,
+                         Allocator(r),
+                         TraceKind::Purpose,
+                         String(256, 'e', r),
+                         String(4096, 'c', r),
+                         7);
+        retained = user->make_global<TraceNode>(TraceKind::Operation, "old", "old");
+        user->get(retained) = std::move(source);
+        check(user->get(retained).memory_resource() == global.memory_resource() &&
+                  user->get(retained).comment.get_allocator().resource() ==
+                      global.memory_resource(),
+              "trace move assignment preserves the destination domain for both strings");
+        TraceChain from(r), to(r);
+        from.emplace_back(TraceKind::Request, "Entity", "request");
+        to = std::move(from);
+        check(to.size() == 1 && to[0].kind == TraceKind::Request,
+              "trace elements support standard vector move assignment");
+    }
+    user.reset();
+    auto next = global.make_user_context();
+    const auto& kept = next->get(next->rebind_global(retained));
+    check(kept.kind == TraceKind::Purpose && kept.entity_type.size() == 256 &&
+              kept.comment.size() == 4096 && kept.entity_id == 7,
+          "assigned trace data survives actual User deletion through explicit Global ownership");
+}
+
 int main() {
     try {
         metadata_and_batches();
         status_table();
+        trace_assignment_domains();
         std::cout << "Core model contracts passed\n";
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';

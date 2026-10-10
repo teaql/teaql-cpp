@@ -1,0 +1,1742 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Actual original execute_in_transaction with a non-Clone callback capture/result and Drop counter; begin/body/commit/rollback success and failure. Original provider io::Error itself is also non-Clone. Outcome and exact terminal ordering are observed after explicit result/Context teardown.",
+  "cases": [
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": false,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "commit"
+        ],
+        "outcome": {
+          "value": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": false,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "commit"
+        ],
+        "outcome": {
+          "value": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": true,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 1,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "commit"
+        ],
+        "outcome": {
+          "error": "transaction error: commit failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": true,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 1,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "commit"
+        ],
+        "outcome": {
+          "error": "transaction error: commit failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": false,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": false,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": true,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": true,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": false,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": false,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "rollback"
+        ],
+        "outcome": {
+          "error": "entity event error: business failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": false,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 1,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "rollback"
+        ],
+        "outcome": {
+          "error": "transaction error: operation failed (entity event error: business failed); rollback also failed (rollback failed)"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": true,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "rollback"
+        ],
+        "outcome": {
+          "error": "entity event error: business failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": false,
+        "commit_fail": true,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 1,
+        "destroyed": 1,
+        "notes": [
+          "begin",
+          "rollback"
+        ],
+        "outcome": {
+          "error": "transaction error: operation failed (entity event error: business failed); rollback also failed (rollback failed)"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": false,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": false,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": true,
+        "rollback_fail": false,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    },
+    {
+      "input": {
+        "values": {
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": {
+            "kind": "i64",
+            "value": "3"
+          },
+          "name": {
+            "kind": "text",
+            "value": "input"
+          }
+        },
+        "runtime": true,
+        "seeds": [
+          {
+            "entity": "Order",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "values": {
+              "name": {
+                "kind": "text",
+                "value": "new"
+              }
+            },
+            "new": true,
+            "delete": false,
+            "version": null,
+            "path": []
+          }
+        ],
+        "fresh": false,
+        "removed": false,
+        "loaded": null,
+        "dirty": null,
+        "old": null,
+        "reason": "reason",
+        "checker": "none",
+        "descriptors": [
+          {
+            "entity": "Order",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          },
+          {
+            "entity": "Child",
+            "id": "id",
+            "version": "version",
+            "required": false,
+            "timestamps": false,
+            "relations": []
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "9"
+            },
+            "name": {
+              "kind": "text",
+              "value": "database"
+            }
+          }
+        ],
+        "read_batches": [],
+        "counts": [
+          1,
+          1,
+          1
+        ],
+        "read_fail_at": -1,
+        "fail": -1,
+        "event_fail": -1,
+        "id_fail": -1,
+        "mode": "automatic",
+        "registered": true,
+        "ambient_rows": [],
+        "begin_fail": true,
+        "commit_fail": true,
+        "rollback_fail": true,
+        "flow": "move_only",
+        "body_fail": true,
+        "payload": "owned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddcaowned\ud83e\uddca"
+      },
+      "expected": {
+        "abandoned": 0,
+        "destroyed": 1,
+        "notes": [
+          "begin"
+        ],
+        "outcome": {
+          "error": "transaction error: begin failed"
+        }
+      }
+    }
+  ]
+}

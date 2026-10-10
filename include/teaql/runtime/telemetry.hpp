@@ -25,6 +25,11 @@ struct RuntimeAttributeValue {
     RuntimeAttributeValue(std::allocator_arg_t, Allocator a, std::uint64_t v)
         : data(std::bit_cast<std::int64_t>(v)), resource_(a.resource()) {}
 
+    template <class T>
+        requires(std::same_as<T, std::size_t> && !std::same_as<T, std::uint64_t>)
+    RuntimeAttributeValue(std::allocator_arg_t, Allocator a, T v)
+        : RuntimeAttributeValue(std::allocator_arg, a, static_cast<std::uint64_t>(v)) {}
+
     RuntimeAttributeValue(std::allocator_arg_t, Allocator a, double v)
         : data(v), resource_(a.resource()) {}
 
@@ -220,7 +225,7 @@ struct TelemetryRun {
         forward.attach(future.wake_signal(), wake);
         return scope.poll_with_context([&]() -> std::optional<T> {
             if (auto* value = future.poll()) {
-                return clone_in(resource, *value);
+                return copy_or_take_completed(future, *value);
             }
             return {};
         });

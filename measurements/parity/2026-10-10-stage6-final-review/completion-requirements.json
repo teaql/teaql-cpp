@@ -1,0 +1,279 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "requirements": [
+    {
+      "id": "baseline",
+      "requirement": "Rust v5.0.5 exact locked commit and immutable reference",
+      "evidence_scope": "upstream.txt; inventory.txt; ../../../upstream.lock.json",
+      "status": "verified",
+      "evidence": [
+        "upstream.txt",
+        "inventory.txt",
+        "../../../upstream.lock.json"
+      ]
+    },
+    {
+      "id": "concepts",
+      "requirement": "Every in-scope concept/responsibility/default/protocol; no layer merging",
+      "evidence_scope": "leaf-review-scope.json; ../../../docs/design-parity.md; ../../../docs/parity/cpp-modules.json",
+      "status": "verified",
+      "evidence": [
+        "leaf-review-scope.json",
+        "../../../docs/design-parity.md",
+        "../../../docs/parity/cpp-modules.json"
+      ]
+    },
+    {
+      "id": "dependencies",
+      "requirement": "C++20 standard facilities and SQLite only; edge/kernel scope",
+      "evidence_scope": "native-layers.txt; sanitize-layers.txt; mips-layers.txt",
+      "status": "verified",
+      "evidence": [
+        "native-layers.txt",
+        "sanitize-layers.txt",
+        "mips-layers.txt"
+      ]
+    },
+    {
+      "id": "memory",
+      "requirement": "Global/User lifetimes; explicit factories/proxy; growing arenas and teardown",
+      "evidence_scope": "../../../docs/context-memory-implementation.md; native-full-ctest.txt; sanitize-full-ctest.txt; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "../../../docs/context-memory-implementation.md",
+        "native-full-ctest.txt",
+        "sanitize-full-ctest.txt",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "safety",
+      "requirement": "Bounded allocation IDs, independent live bitmaps, bytes/object limits, no reuse",
+      "evidence_scope": "../../../docs/context-memory-design.md; ../../../tests/context_reference_tests.cpp; sanitize-full-ctest.txt; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "../../../docs/context-memory-design.md",
+        "../../../tests/context_reference_tests.cpp",
+        "sanitize-full-ctest.txt",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "copy",
+      "requirement": "Nested allocator propagation and explicit destination retention; no hidden User owner",
+      "evidence_scope": "../../../docs/context-lifetime.md; leaf-review-scope.json; sanitize-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "../../../docs/context-lifetime.md",
+        "leaf-review-scope.json",
+        "sanitize-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "native_cleanup",
+      "requirement": "Native resource cleanup and async stop/join before arena reclamation",
+      "evidence_scope": "../../../docs/context-memory-implementation.md; leaf-review-scope.json; sanitize-full-ctest.txt; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "../../../docs/context-memory-implementation.md",
+        "leaf-review-scope.json",
+        "sanitize-full-ctest.txt",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "strings",
+      "requirement": "Separate bytes/string backing; bounded explicit interning by reuse intent",
+      "evidence_scope": "../../../docs/context-memory-design.md; ../../../include/teaql/memory/strings.hpp; sanitize-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "../../../docs/context-memory-design.md",
+        "../../../include/teaql/memory/strings.hpp",
+        "sanitize-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "generator",
+      "requirement": "Entity generator remains unchanged; handwritten example models",
+      "evidence_scope": "upstream.txt; source-snapshot.json; ../../../examples/models.hpp; ../../../docs/generated-runtime-support.md",
+      "status": "verified",
+      "evidence": [
+        "upstream.txt",
+        "source-snapshot.json",
+        "../../../examples/models.hpp",
+        "../../../docs/generated-runtime-support.md"
+      ]
+    },
+    {
+      "id": "query_mutation",
+      "requirement": "Distinct query/graph/ledger/mutation/snapshot/generated types and source semantics",
+      "evidence_scope": "leaf-review-scope.json; ../../../docs/runtime-graph-save-api-contract.md; native-full-ctest.txt; sanitize-full-ctest.txt; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "leaf-review-scope.json",
+        "../../../docs/runtime-graph-save-api-contract.md",
+        "native-full-ctest.txt",
+        "sanitize-full-ctest.txt",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "privacy",
+      "requirement": "Rust 5.0.5 source provenance/privacy and event/log call sites",
+      "evidence_scope": "leaf-review-scope.json; ../../../docs/runtime-graph-save-api-contract.md; sanitize-full-ctest.txt; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "leaf-review-scope.json",
+        "../../../docs/runtime-graph-save-api-contract.md",
+        "sanitize-full-ctest.txt",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "sqlite",
+      "requirement": "Full supported SQLite provider/driver profiles and native resource contracts",
+      "evidence_scope": "final-build-profiles.json; matched-sqlite-archive.json; leaf-review-scope.json; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "final-build-profiles.json",
+        "matched-sqlite-archive.json",
+        "leaf-review-scope.json",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "root",
+      "requirement": "Complete lib.rs production and all75 root tests/assertions",
+      "evidence_scope": "../../../docs/runtime-root-source-acceptance.md; runtime-root-test-review.json; public-exports.txt; runtime-modules-before.json; runtime-modules-after.json; original-runtime-tests.txt; native-full-ctest.txt; sanitize-full-ctest.txt; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "../../../docs/runtime-root-source-acceptance.md",
+        "runtime-root-test-review.json",
+        "public-exports.txt",
+        "runtime-modules-before.json",
+        "runtime-modules-after.json",
+        "original-runtime-tests.txt",
+        "native-full-ctest.txt",
+        "sanitize-full-ctest.txt",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "examples",
+      "requirement": "Simple examples execute actual entity/query/graph runtime; complete rows/provenance",
+      "evidence_scope": "native-examples-live.txt; sanitize-examples-live.txt; mips-examples-live.txt; native-full-ctest.txt; sanitize-full-ctest.txt; mips-full-ctest.txt",
+      "status": "verified",
+      "evidence": [
+        "native-examples-live.txt",
+        "sanitize-examples-live.txt",
+        "mips-examples-live.txt",
+        "native-full-ctest.txt",
+        "sanitize-full-ctest.txt",
+        "mips-full-ctest.txt"
+      ]
+    },
+    {
+      "id": "source_tests",
+      "requirement": "All451 source dispositions individually reviewed; 441 covered/5backend/5external",
+      "evidence_scope": "source-test-dispositions.txt; sanitize-source-test-dispositions.txt; mips-source-test-dispositions.txt; native-registration.json; sanitize-registration.json; mips-registration.json",
+      "status": "verified",
+      "evidence": [
+        "source-test-dispositions.txt",
+        "sanitize-source-test-dispositions.txt",
+        "mips-source-test-dispositions.txt",
+        "native-registration.json",
+        "sanitize-registration.json",
+        "mips-registration.json"
+      ]
+    },
+    {
+      "id": "style",
+      "requirement": "Pinned clang-format18.1.8, braces, English explanatory material",
+      "evidence_scope": "formatting.txt; whitespace.txt; ../../../.clang-format; ../../../AGENTS.md",
+      "status": "verified",
+      "evidence": [
+        "formatting.txt",
+        "whitespace.txt",
+        "../../../.clang-format",
+        "../../../AGENTS.md"
+      ]
+    },
+    {
+      "id": "native",
+      "requirement": "Final full native build/CTest with complete dependency records",
+      "evidence_scope": "native-final-results.json; native-dependencies.txt; native-layers.txt",
+      "status": "verified",
+      "evidence": [
+        "native-final-results.json",
+        "native-dependencies.txt",
+        "native-layers.txt"
+      ]
+    },
+    {
+      "id": "sanitizer",
+      "requirement": "Final complete ASan/UBSan lifetime/composition validation",
+      "evidence_scope": "sanitize-final-results.json; sanitize-dependencies.txt; sanitize-layers.txt",
+      "status": "verified",
+      "evidence": [
+        "sanitize-final-results.json",
+        "sanitize-dependencies.txt",
+        "sanitize-layers.txt"
+      ]
+    },
+    {
+      "id": "mips",
+      "requirement": "Final MIPS cross build/QEMU validation and supported engine profile",
+      "evidence_scope": "mips-final-results.json; mips-dependencies.txt; mips-layers.txt; registration-difference.json",
+      "status": "verified",
+      "evidence": [
+        "mips-final-results.json",
+        "mips-dependencies.txt",
+        "mips-layers.txt",
+        "registration-difference.json"
+      ]
+    },
+    {
+      "id": "physical",
+      "requirement": "Physical WNDR4300 execution expressly deferred by user",
+      "evidence_scope": "README.md; mips-final-results.json",
+      "status": "deferred_by_user",
+      "evidence": [
+        "README.md",
+        "mips-final-results.json"
+      ]
+    },
+    {
+      "id": "documentation",
+      "requirement": "Plans/design/results/measurements stored in English",
+      "evidence_scope": "README.md; ../../../README.md; ../../../docs/migration-plan.md",
+      "status": "verified",
+      "evidence": [
+        "README.md",
+        "../../../README.md",
+        "../../../docs/migration-plan.md"
+      ]
+    },
+    {
+      "id": "completion",
+      "requirement": "All six stage requirements accepted at final code state",
+      "evidence_scope": "../../../docs/migration-plan.md; ../../../docs/remaining-stage-gates.md; ../../../docs/parity/cpp-modules.json; native-final-results.json; sanitize-final-results.json; mips-final-results.json",
+      "status": "verified",
+      "evidence": [
+        "../../../docs/migration-plan.md",
+        "../../../docs/remaining-stage-gates.md",
+        "../../../docs/parity/cpp-modules.json",
+        "native-final-results.json",
+        "sanitize-final-results.json",
+        "mips-final-results.json"
+      ]
+    }
+  ],
+  "verdict": "All six in-scope stages accepted within documented C++ ownership, owner-thread and supported-protocol adaptations.",
+  "limitations": [
+    "Final ASan/UBSan leak scanning disabled.",
+    "Physical WNDR4300 execution deferred by user; QEMU is emulation.",
+    "One raw FromSql Debug comparison is native64-only; structured target diagnostics remain covered.",
+    "Raw native pointers remain borrows after Context close.",
+    "Generator changes, GPU adapters and concrete external/non-SQLite integrations remain outside scope."
+  ]
+}

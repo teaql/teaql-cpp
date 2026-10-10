@@ -1,0 +1,7 @@
+{
+  "include/teaql/runtime/detail/entity_service.hpp": "4cd314b5b002b808c793508e6700cb4be413eea484dd00b7f88597ed57959787",
+  "src/runtime/context_entity.cpp": "a82fc0c7fe8d7e335feefb7760eca63cd56758942b014eec41c27c46e26bff8a",
+  "src/runtime/business_service.cpp": "1a68974b443c26d5446590ec960ce96d0074a5df93e7a873b5e79e20cf2b0ce8",
+  "tests/runtime_callback_scope_tests.cpp": "34a43f701fd738b9040648e4feb76437eb97de12466f3d0c4aa496eeec2a0c26",
+  "CMakeLists.txt": "a7706fee09417a2f05175699439264314b0908794fd0db37f4aa2ef42694379f"
+}

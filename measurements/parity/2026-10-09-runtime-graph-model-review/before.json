@@ -1,0 +1,15 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source": "teaql-runtime/src/graph.rs",
+  "production_lines": 369,
+  "command": [
+    "/usr/bin/c++",
+    "-std=c++20",
+    "-I",
+    "include",
+    "-fsyntax-only",
+    "/tmp/teaql-graph-debug-before.cpp"
+  ],
+  "exit_code": 1,
+  "gap": "Public runtime umbrella cannot format GraphNode structural Debug; source derives Debug. Complete graph/source/stage acceptance remains partial."
+}

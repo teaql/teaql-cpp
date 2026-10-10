@@ -2,6 +2,8 @@
 #include <teaql/sql/types.hpp>
 
 namespace teaql {
+class DebugWriter;
+
 namespace detail {
 SqlParameterLogPolicy sql_field_policy(const EntityDescriptor&, std::string_view);
 std::optional<SqlParameterLogPolicy> combine_sql_policy(std::optional<SqlParameterLogPolicy>,
@@ -36,8 +38,16 @@ public:
         append(value, scope_.value_or(SqlParameterLogPolicy::Unknown));
     }
 
+    void push(Value&& value) {
+        append(std::move(value), scope_.value_or(SqlParameterLogPolicy::Unknown));
+    }
+
     void push_field(const EntityDescriptor& entity, std::string_view field, const Value& value) {
         append(value, detail::sql_field_policy(entity, field));
+    }
+
+    void push_field(const EntityDescriptor& entity, std::string_view field, Value&& value) {
+        append(std::move(value), detail::sql_field_policy(entity, field));
     }
 
     void mark_untrusted_sql() {
@@ -76,8 +86,10 @@ public:
     }
 
 private:
+    friend void write_debug(DebugWriter&, const SqlBindings&);
     friend class detail::SqlBindingScope;
     void append(const Value&, SqlParameterLogPolicy);
+    void append(Value&&, SqlParameterLogPolicy);
     Vector<Value> values_;
     Vector<SqlParameterLogPolicy> policies_;
     std::optional<SqlParameterLogPolicy> scope_;

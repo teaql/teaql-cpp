@@ -1,0 +1,543 @@
+--- a/include/teaql/runtime/mutation_governance.hpp
++++ b/include/teaql/runtime/mutation_governance.hpp
+@@ -2,6 +2,7 @@
+ #include <teaql/runtime/entity_key.hpp>
+ #include <teaql/core/detail/text.hpp>
+ #include <teaql/memory/clone.hpp>
++#include <functional>
+ 
+ namespace teaql {
+ struct MutationPolicyIdentity {
+@@ -134,3 +135,21 @@
+     bool operator==(const MutationGovernanceSnapshot&) const = default;
+ };
+ }
++
++namespace std {
++template <>
++struct hash<teaql::MutationPolicyIdentity> {
++    std::size_t operator()(const teaql::MutationPolicyIdentity& value) const noexcept {
++        // Hash-table capability follows all equality fields. This is a native
++        // process hash, not Rust DefaultHasher bytes or a persisted identity.
++        std::size_t result = 0;
++        for (std::string_view field : {std::string_view(value.id),
++                                       std::string_view(value.version),
++                                       std::string_view(value.fingerprint)}) {
++            auto part = std::hash<std::string_view>{}(field);
++            result ^= part + std::size_t(0x9e3779b9) + (result << 6) + (result >> 2);
++        }
++        return result;
++    }
++};
++}
+--- /dev/null
++++ b/include/teaql/runtime/mutation_policy_debug.hpp
+@@ -0,0 +1,211 @@
++#pragma once
++#include <teaql/runtime/mutation_policy.hpp>
++#include <teaql/runtime/entity_runtime_debug.hpp>
++#include <teaql/core/system_time_debug.hpp>
++
++namespace teaql {
++inline void write_debug(DebugWriter& writer, MutationOperationKind value) {
++    switch (value) {
++    case MutationOperationKind::Create:
++        writer.raw("Create");
++        return;
++    case MutationOperationKind::Update:
++        writer.raw("Update");
++        return;
++    case MutationOperationKind::Delete:
++        writer.raw("Delete");
++        return;
++    case MutationOperationKind::Recover:
++        writer.raw("Recover");
++        return;
++    }
++    throw std::invalid_argument("Unknown mutation operation kind");
++}
++
++inline void write_debug(DebugWriter& writer, MutationVerdict value) {
++    writer.raw(value == MutationVerdict::Allow ? "Allow" : "Deny");
++}
++
++inline void write_debug(DebugWriter& writer, MutationPolicySource value) {
++    writer.raw(value == MutationPolicySource::GeneratedDefault ? "GeneratedDefault" : "Customer");
++}
++
++inline void write_debug(DebugWriter& writer, MutationPolicyApprovalStatus value) {
++    switch (value) {
++    case MutationPolicyApprovalStatus::NotApplicable:
++        writer.raw("NotApplicable");
++        return;
++    case MutationPolicyApprovalStatus::Missing:
++        writer.raw("Missing");
++        return;
++    case MutationPolicyApprovalStatus::Approved:
++        writer.raw("Approved");
++        return;
++    }
++    throw std::invalid_argument("Unknown mutation approval status");
++}
++
++inline void write_debug(DebugWriter& writer, const MutationPolicyIdentity& value) {
++    writer.structure("MutationPolicyIdentity", [&](auto& fields) {
++        fields.field("id", [&](auto& out) {
++            write_debug(out, value.id);
++        });
++        fields.field("version", [&](auto& out) {
++            write_debug(out, value.version);
++        });
++        fields.field("fingerprint", [&](auto& out) {
++            write_debug(out, value.fingerprint);
++        });
++    });
++}
++
++namespace detail {
++template <class T>
++void write_policy_optional(DebugWriter& writer, const std::optional<T>& value) {
++    if (value) {
++        writer.tuple("Some", [&](auto& out) {
++            write_debug(out, *value);
++        });
++    } else {
++        writer.raw("None");
++    }
++}
++
++template <class T>
++void write_policy_list(DebugWriter& writer, const Vector<T>& values) {
++    writer.sequence(values, [](auto& out, const auto& value) {
++        write_debug(out, value);
++    });
++}
++}
++
++inline void write_debug(DebugWriter& writer, const MutationOperation& value) {
++    writer.structure("MutationOperation", [&](auto& fields) {
++        fields.field("kind", [&](auto& out) {
++            write_debug(out, value.kind);
++        });
++        fields.field("entity", [&](auto& out) {
++            write_debug(out, value.entity);
++        });
++        fields.field("original_version", [&](auto& out) {
++            detail::write_policy_optional(out, value.original_version);
++        });
++        fields.field("changed_values", [&](auto& out) {
++            out.sequence(
++                value.changed_values,
++                [](auto& inner, const auto& entry) {
++                    write_debug(inner, entry.first);
++                    inner.raw(": ");
++                    write_debug(inner, entry.second);
++                },
++                "{",
++                "}");
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const MutationPlan& value) {
++    writer.structure("MutationPlan", [&](auto& fields) {
++        fields.field("execution_id", [&](auto& out) {
++            write_debug(out, value.execution_id);
++        });
++        fields.field("request_key", [&](auto& out) {
++            write_debug(out, value.request_key);
++        });
++        fields.field("root_entity_type", [&](auto& out) {
++            write_debug(out, value.root_entity_type);
++        });
++        fields.field("audit_reason", [&](auto& out) {
++            detail::write_policy_optional(out, value.audit_reason);
++        });
++        fields.field("operations", [&](auto& out) {
++            detail::write_policy_list(out, value.operations);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const MutationDecision& value) {
++    writer.structure("MutationDecision", [&](auto& fields) {
++        fields.field("verdict", [&](auto& out) {
++            write_debug(out, value.verdict);
++        });
++        fields.field("code", [&](auto& out) {
++            detail::write_policy_optional(out, value.code);
++        });
++        fields.field("message", [&](auto& out) {
++            detail::write_policy_optional(out, value.message);
++        });
++        fields.field("field_paths", [&](auto& out) {
++            detail::write_policy_list(out, value.field_paths);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const MutationPolicyApproval& value) {
++    writer.structure("MutationPolicyApproval", [&](auto& fields) {
++        fields.field("policy", [&](auto& out) {
++            write_debug(out, value.policy);
++        });
++        fields.field("approved_by", [&](auto& out) {
++            write_debug(out, value.approved_by);
++        });
++        fields.field("approved_at", [&](auto& out) {
++            write_debug(out, value.approved_at);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const MutationOperationSummary& value) {
++    writer.structure("MutationOperationSummary", [&](auto& fields) {
++        fields.field("kind", [&](auto& out) {
++            write_debug(out, value.kind);
++        });
++        fields.field("entity", [&](auto& out) {
++            write_debug(out, value.entity);
++        });
++        fields.field("changed_fields", [&](auto& out) {
++            detail::write_policy_list(out, value.changed_fields);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const MutationGovernanceSnapshot& value) {
++    writer.structure("MutationGovernanceSnapshot", [&](auto& fields) {
++        fields.field("execution_id", [&](auto& out) {
++            write_debug(out, value.execution_id);
++        });
++        fields.field("request_key", [&](auto& out) {
++            write_debug(out, value.request_key);
++        });
++        fields.field("source", [&](auto& out) {
++            write_debug(out, value.source);
++        });
++        fields.field("policy", [&](auto& out) {
++            detail::write_policy_optional(out, value.policy);
++        });
++        fields.field("approval_status", [&](auto& out) {
++            write_debug(out, value.approval_status);
++        });
++        fields.field("warning_codes", [&](auto& out) {
++            detail::write_policy_list(out, value.warning_codes);
++        });
++        fields.field("operations", [&](auto& out) {
++            detail::write_policy_list(out, value.operations);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const MutationGovernanceEvent& value) {
++    writer.structure("MutationGovernanceEvent", [&](auto& fields) {
++        fields.field("snapshot", [&](auto& out) {
++            write_debug(out, value.snapshot);
++        });
++        fields.field("warning_code", [&](auto& out) {
++            write_debug(out, value.warning_code);
++        });
++        fields.field("first_occurrence", [&](auto& out) {
++            out.boolean(value.first_occurrence);
++        });
++    });
++}
++}
+--- a/include/teaql/runtime.hpp
++++ b/include/teaql/runtime.hpp
+@@ -26,6 +26,7 @@
+ #include <teaql/runtime/purposed_query_debug.hpp>
+ #include <teaql/runtime/query_store_debug.hpp>
+ #include <teaql/runtime/mutation_policy.hpp>
++#include <teaql/runtime/mutation_policy_debug.hpp>
+ #include <teaql/runtime/round_trip_reference.hpp>
+ #include <teaql/runtime/reference_model_debug.hpp>
+ #include <teaql/runtime/registry_debug.hpp>
+--- /dev/null
++++ b/tests/policy_model_tests.cpp
+@@ -0,0 +1,81 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/mutation_policy_debug.hpp>
++#include <iostream>
++#include <unordered_set>
++using namespace teaql;
++
++static void check(bool value, const char* message) {
++    if (!value) {
++        throw std::runtime_error(message);
++    }
++}
++
++int main() {
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto owner = user->memory_resource();
++    auto source = user->make_ref<MutationPolicyIdentity>(" policy ", " version ", " fingerprint ");
++    auto& policy = user->get(source);
++    {
++        std::pmr::unordered_set<MutationPolicyIdentity> identities(owner);
++        identities.emplace(detail::clone_in(owner, policy));
++        identities.emplace(detail::clone_in(owner, policy));
++        auto different = detail::clone_in(owner, policy);
++        different.version += '!';
++        identities.emplace(std::move(different));
++        check(identities.size() == 2 && policy.id == " policy ",
++              "Hash/equality preserve every identity field and untrimmed constructor data");
++    }
++    auto& plan = user->make<MutationPlan>();
++    plan.execution_id.assign(512, 'e');
++    plan.request_key = "Order.saveGraph";
++    plan.root_entity_type = "Order";
++    plan.audit_reason.emplace(512, 'r', owner);
++    EntityKey key(std::allocator_arg, Allocator(owner), "Order", Value(owner, std::uint64_t(7)));
++    auto& operation = plan.operations.emplace_back(MutationOperationKind::Update, key);
++    operation.original_version = -3;
++    operation.changed_values.emplace(String("private payload", owner),
++                                     Value(owner, String(512, 'p', owner)));
++    auto& snapshot = user->make<MutationGovernanceSnapshot>(plan.execution_id,
++                                                            plan.request_key,
++                                                            MutationPolicySource::Customer,
++                                                            MutationPolicyApprovalStatus::Approved);
++    snapshot.policy.emplace(std::allocator_arg, Allocator(owner), policy);
++    snapshot.warning_codes.emplace_back("warning");
++    auto& summary = snapshot.operations.emplace_back(operation.kind, operation.entity);
++    summary.changed_fields.emplace_back("private payload");
++    auto& event = user->make<MutationGovernanceEvent>(snapshot, "warning", true);
++    auto retained_plan = user->make_global<MutationPlan>(plan);
++    auto retained_event = user->make_global<MutationGovernanceEvent>(event);
++    auto retained_policy = user->make_global<MutationPolicyIdentity>(policy);
++    user.reset();
++    check(global.live_user_bytes() == 0, "Original policy User arena is fully reclaimed");
++    auto next = global.make_user_context();
++    const auto& kept_plan = next->get(next->rebind_global(retained_plan));
++    const auto& kept_event = next->get(next->rebind_global(retained_event));
++    const auto& kept_policy = next->get(next->rebind_global(retained_policy));
++    check(kept_plan.operations[0].changed_values.begin()->second.memory_resource() ==
++                  global.memory_resource() &&
++              kept_event.snapshot.operations[0].changed_fields[0].get_allocator().resource() ==
++                  global.memory_resource() &&
++              kept_event.snapshot.policy->memory_resource() == global.memory_resource(),
++          "All nested policy payloads belong to the explicit destination domain");
++    {
++        auto debug = debug_string(next->memory_resource(), kept_plan, DebugOptions{.pretty = true});
++        check(debug.find("private payload") != debug.npos &&
++                  debug.get_allocator().resource() == next->memory_resource(),
++              "Raw diagnostics preserve actual values and use the caller's allocation domain");
++        check(std::hash<MutationPolicyIdentity>{}(kept_policy) ==
++                  std::hash<MutationPolicyIdentity>{}(*kept_event.snapshot.policy),
++              "Equal retained identities retain equal native hash behavior");
++    }
++    bool rejected = false;
++    try {
++        (void)next->get(source);
++    } catch (const ReferenceError&) {
++        rejected = true;
++    }
++    check(rejected, "Expired source policy access rejects before hashing or formatting");
++    std::cout << "Policy model hash and ownership contracts pass\n";
++}
+--- /dev/null
++++ b/tests/parity/policy_model_probe.cpp
+@@ -0,0 +1,182 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/mutation_policy_debug.hpp>
++#include <teaql/core/detail/model_json.hpp>
++#include "fixture_value.hpp"
++#include "debug_modes.hpp"
++#include <iostream>
++#include <unordered_set>
++
++static MutationPolicyIdentity identity(Memory owner, const Json& input) {
++    return MutationPolicyIdentity(std::allocator_arg,
++                                  Allocator(owner),
++                                  text(field(input, "id")),
++                                  text(field(input, "version")),
++                                  text(field(input, "fingerprint")));
++}
++
++static MutationOperation operation(Memory owner, const Json& input) {
++    auto kind_name = text(field(input, "kind"));
++    auto kind = kind_name == "Create"   ? MutationOperationKind::Create
++                : kind_name == "Update" ? MutationOperationKind::Update
++                : kind_name == "Delete" ? MutationOperationKind::Delete
++                                        : MutationOperationKind::Recover;
++    const auto& key_input = field(input, "key");
++    EntityKey key(std::allocator_arg,
++                  Allocator(owner),
++                  text(field(key_input, "entity")),
++                  value(owner, field(key_input, "id")));
++    MutationOperation result(std::allocator_arg, Allocator(owner), kind, key);
++    if (std::holds_alternative<String>(field(input, "version").data)) {
++        result.original_version = number<std::int64_t>(field(input, "version"));
++    }
++    for (const auto& [name, item] : detail::model_object(field(input, "values"), "values")) {
++        result.changed_values.emplace(String(name, owner), value(owner, item));
++    }
++    return result;
++}
++
++static Json evaluate(UserContext& user, const Json& input) {
++    auto owner = user.memory_resource();
++    auto output = detail::model_json(owner);
++    auto put = [&](std::string_view name, auto&& value) {
++        detail::model_put(output, name, std::forward<decltype(value)>(value));
++    };
++    auto type = text(field(input, "type"));
++    try {
++        if (type == "identity") {
++            auto value = identity(owner, input);
++            auto clone = detail::clone_in(owner, value);
++            auto other = identity(owner, field(input, "other"));
++            std::pmr::unordered_set<MutationPolicyIdentity> set(owner);
++            set.emplace(detail::clone_in(owner, value));
++            set.emplace(detail::clone_in(owner, value));
++            set.emplace(detail::clone_in(owner, other));
++            put("debug", formatted_debug(owner, value));
++            put("clone", formatted_debug(owner, clone));
++            put("clone_equal", value == clone);
++            put("other_equal", value == other);
++            auto order = value <=> other;
++            put("order", std::string_view(order < 0 ? "Less" : order > 0 ? "Greater" : "Equal"));
++            put("set_size", std::uint64_t(set.size()));
++        } else if (type == "decision") {
++            Vector<String> fields(owner);
++            for (const auto& item : detail::model_array(field(input, "fields"), "fields")) {
++                fields.emplace_back(text(item));
++            }
++            auto value =
++                std::get<bool>(field(input, "deny").data)
++                    ? MutationDecision::deny(
++                          owner, text(field(input, "code")), text(field(input, "message")), fields)
++                    : MutationDecision::allow(owner);
++            auto clone = detail::clone_in(owner, value);
++            auto other = detail::clone_in(owner, value);
++            other.message.emplace("changed", owner);
++            put("debug", formatted_debug(owner, value));
++            put("clone", formatted_debug(owner, clone));
++            put("clone_equal", value == clone);
++            put("changed_equal", value == other);
++            put("allowed", value.is_allowed());
++        } else if (type == "approval") {
++            auto policy = identity(owner, field(input, "policy"));
++            auto time = SystemTime::from_unix_seconds(
++                number<std::int64_t>(field(input, "seconds")),
++                detail::model_integer<std::uint32_t>(field(input, "nanos"), "nanos"));
++            MutationPolicyApproval value(
++                std::allocator_arg, Allocator(owner), policy, text(field(input, "approver")), time);
++            auto clone = detail::clone_in(owner, value);
++            auto other = detail::clone_in(owner, value);
++            other.approved_by += '!';
++            put("debug", formatted_debug(owner, value));
++            put("clone", formatted_debug(owner, clone));
++            put("clone_equal", value == clone);
++            put("changed_equal", value == other);
++        } else if (type == "defaults") {
++            EmptyMutationPolicyRegistry registry;
++            NoMutationPolicyApprovalProvider approvals;
++            auto policy = identity(owner, field(input, "policy"));
++            put("empty_registry", !registry.resolve(owner, "Order.saveGraph"));
++            put("no_approval", !approvals.find_approval(owner, policy));
++            put("warning", missing_mutation_policy_warning);
++            put("approval_warning", missing_mutation_policy_approval_warning);
++        } else if (type == "models") {
++            MutationPlan plan(std::allocator_arg, Allocator(owner));
++            plan.execution_id = text(field(input, "execution"));
++            plan.request_key = text(field(input, "request"));
++            plan.root_entity_type = text(field(input, "root"));
++            if (std::holds_alternative<String>(field(input, "reason").data)) {
++                plan.audit_reason.emplace(text(field(input, "reason")), owner);
++            }
++            for (const auto& item : detail::model_array(field(input, "operations"), "operations")) {
++                plan.operations.emplace_back(operation(owner, item));
++            }
++            auto approval = text(field(input, "approval"));
++            MutationGovernanceSnapshot snapshot(
++                std::allocator_arg,
++                Allocator(owner),
++                plan.execution_id,
++                plan.request_key,
++                std::get<bool>(field(input, "customer").data)
++                    ? MutationPolicySource::Customer
++                    : MutationPolicySource::GeneratedDefault,
++                approval == "Approved"  ? MutationPolicyApprovalStatus::Approved
++                : approval == "Missing" ? MutationPolicyApprovalStatus::Missing
++                                        : MutationPolicyApprovalStatus::NotApplicable);
++            if (std::holds_alternative<Json::Object>(field(input, "policy").data)) {
++                snapshot.policy.emplace(identity(owner, field(input, "policy")));
++            }
++            for (const auto& item : detail::model_array(field(input, "warnings"), "warnings")) {
++                snapshot.warning_codes.emplace_back(text(item));
++            }
++            for (const auto& op : plan.operations) {
++                auto& summary = snapshot.operations.emplace_back(op.kind, op.entity);
++                for (const auto& [name, item] : op.changed_values) {
++                    summary.changed_fields.emplace_back(name);
++                }
++            }
++            MutationGovernanceEvent event(std::allocator_arg,
++                                          Allocator(owner),
++                                          snapshot,
++                                          text(field(input, "warning")),
++                                          std::get<bool>(field(input, "first").data));
++            auto plan_clone = detail::clone_in(owner, plan);
++            auto plan_other = detail::clone_in(owner, plan);
++            plan_other.execution_id += '!';
++            auto snapshot_clone = detail::clone_in(owner, snapshot);
++            auto snapshot_other = detail::clone_in(owner, snapshot);
++            snapshot_other.warning_codes.emplace_back("changed");
++            auto event_clone = detail::clone_in(owner, event);
++            auto event_other = detail::clone_in(owner, event);
++            event_other.first_occurrence = !event_other.first_occurrence;
++            put("plan", formatted_debug(owner, plan));
++            put("plan_clone", formatted_debug(owner, plan_clone));
++            put("plan_clone_equal", plan == plan_clone);
++            put("plan_changed_equal", plan == plan_other);
++            put("snapshot", formatted_debug(owner, snapshot));
++            put("snapshot_clone", formatted_debug(owner, snapshot_clone));
++            put("snapshot_clone_equal", snapshot == snapshot_clone);
++            put("snapshot_changed_equal", snapshot == snapshot_other);
++            put("event", formatted_debug(owner, event));
++            put("event_clone", formatted_debug(owner, event_clone));
++            put("event_clone_equal", event == event_clone);
++            put("event_changed_equal", event == event_other);
++        } else {
++            throw std::runtime_error("Unknown policy model input");
++        }
++    } catch (const std::invalid_argument& error) {
++        put("panic", std::string_view(error.what()));
++    }
++    return output;
++}
++
++int main() {
++    GlobalContext global;
++    std::string line;
++    while (std::getline(std::cin, line)) {
++        auto user = global.make_user_context();
++        auto input = Json::parse(user->memory_resource(), line);
++        if (!input) {
++            throw std::invalid_argument("Invalid policy model fixture");
++        }
++        std::cout << evaluate(*user, *input).dump(user->memory_resource()) << '\n';
++    }
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -229,6 +229,15 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_transaction_move_only.py
+         --cpp $<TARGET_FILE:teaql_transaction_move_only_probe>
+         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
++    add_executable(teaql_policy_model_tests tests/policy_model_tests.cpp)
++    target_link_libraries(teaql_policy_model_tests PRIVATE teaql::runtime)
++    add_test(NAME policy_model_contracts COMMAND teaql_policy_model_tests)
++    add_executable(teaql_policy_model_probe tests/parity/policy_model_probe.cpp)
++    target_link_libraries(teaql_policy_model_probe PRIVATE teaql::runtime)
++    add_test(NAME policy_model_rust_parity COMMAND ${Python3_EXECUTABLE}
++        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_policy_models.py
++        --cpp $<TARGET_FILE:teaql_policy_model_probe>
++        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+     add_executable(teaql_transaction_scope_tests tests/transaction_scope_tests.cpp)
+     target_link_libraries(teaql_transaction_scope_tests PRIVATE teaql::provider_sqlite)
+     add_test(NAME transaction_scope_context_contracts COMMAND teaql_transaction_scope_tests)

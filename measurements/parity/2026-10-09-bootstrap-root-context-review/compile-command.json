@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/usr/bin/c++",
+    "-std=c++20",
+    "-g",
+    "-I",
+    "include",
+    "/tmp/teaql-bootstrap-root-repro.cpp",
+    "build-root-integration/libteaql_runtime.a",
+    "build-root-integration/libteaql_sql.a",
+    "build-root-integration/libteaql_data_service.a",
+    "build-root-integration/libteaql_core.a",
+    "build-root-integration/libteaql_memory.a",
+    "-o",
+    "/tmp/teaql-bootstrap-root-repro"
+  ],
+  "working_directory": "/home/philip/githome/teaql-cpp",
+  "build_exit_code": 0,
+  "execution_after_build_exit": true
+}

@@ -6,6 +6,34 @@
 #include <cmath>
 
 namespace teaql {
+bool SqlCompileError::operator==(const SqlCompileError& other) const {
+    if (code != other.code) {
+        return false;
+    }
+    switch (code) {
+    case Code::EmptyInList:
+        return true;
+    case Code::InvalidRecoverVersion:
+        return version == other.version;
+    case Code::UnsupportedSchemaType:
+        return data_type == other.data_type;
+    case Code::InvalidSchemaShape:
+        return name == other.name && reason == other.reason;
+    case Code::SchemaIdentifierTooLong:
+        return name == other.name && identifier == other.identifier &&
+               actual_bytes == other.actual_bytes && max_bytes == other.max_bytes;
+    case Code::UnknownEntity:
+    case Code::UnknownField:
+    case Code::MissingIdProperty:
+    case Code::MissingVersionProperty:
+    case Code::EmptyMutation:
+    case Code::InvalidFunctionArguments:
+    case Code::InvalidSubQueryOperator:
+        return name == other.name;
+    }
+    throw std::invalid_argument("Unknown SQL compile error variant");
+}
+
 namespace {
 template <class T>
 void number(String& out, T n) {

@@ -2,6 +2,31 @@
 #include <teaql/memory/scoped.hpp>
 
 namespace teaql {
+Value::Value(Memory r, String&& text) : Value(r) {
+    if (text.get_allocator().resource() == r) {
+        data.emplace<String>(std::move(text));
+    } else {
+        data.emplace<String>(text, r);
+    }
+}
+
+Value::Value(Memory r, List&& values) : Value(r) {
+    if (values.get_allocator().resource() == r) {
+        data.emplace<List>(std::move(values));
+    } else {
+        Value copy(r, std::as_const(values));
+        data = std::move(copy.data);
+    }
+}
+
+Value::Value(Memory r, Object&& values) : Value(r) {
+    if (values.get_allocator().resource() == r) {
+        data.emplace<Object>(std::move(values));
+    } else {
+        data.emplace<Object>(clone_record(r, values));
+    }
+}
+
 Value::Value(Memory r, const List& values) : Value(r) {
     List copy(r);
     copy.reserve(values.size());

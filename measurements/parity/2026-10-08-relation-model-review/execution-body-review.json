@@ -1,0 +1,38 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "reviewed_original_production_lines": [
+    1,
+    1142
+  ],
+  "status": "complete execution-body comparison; installed wider regressions and full source acceptance pending",
+  "source_sha256": {
+    ".reference/teaql-rs/teaql-runtime/src/data_service/relation.rs": "048d0c37cda90f210f7c470cab951f6c0c06ed66a218911faffe1f0c64e79bc3",
+    "src/runtime/relation.cpp": "a8ca2aeeeb6f274a88e72df299c283f81158858fa0966f6ec35f104648257459",
+    "include/teaql/runtime/detail/relation_execution.hpp": "d8ef76903d9c54ae38040f481ca28af70fb3d8e5ba0bc40ac691895071ccd17e",
+    "include/teaql/runtime/detail/relation_hydration.hpp": "9798f47eb57954dcf532f77f47c412a095573345ab326c81190cc70abffc450d",
+    "src/runtime/relation_installation.cpp": "e24dd6cb5cea1afb288786371cd8e37f6f298e53e273e110fde3258ebe0a9eb8",
+    "include/teaql/runtime/detail/relation_enhancement.hpp": "14d08d0c9315fd2e24d3642abfaf506642fef24c13577ab40973623155459085",
+    "src/runtime/relation_enhancement.cpp": "c84e2aab257e855322b51baedd3df68cee978f8d0a25e945d9994608e2675edd",
+    "include/teaql/runtime/detail/entity_service.hpp": "7540137be8f497c1e7515817bd3432ae711bacae0efa34a96d84bac4f02cd606",
+    "include/teaql/runtime/detail/entity_query.hpp": "1d98c40e12e439c2ca59a0e19a9e2a3fecc28fff3db4c36ed54cc29b4edf8ec5",
+    "include/teaql/runtime/detail/enhanced_entities.hpp": "b804839245c0df7b7e7b661424572a4aab9ecd78cc206e8ea4e524094fb92b8c",
+    "docs/relation-api-contract.md": "da6cf09243519e102f843320401f132f7e09efe5d4c8243a6339d922d805dded"
+  },
+  "source_group_accepted": false,
+  "physical_router_verified": false,
+  "installed_mips_wider_selection": {
+    "passed": 9,
+    "total": 9,
+    "seconds": 5.81,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_sanitizer_wider_selection": {
+    "passed": 9,
+    "total": 9,
+    "seconds": 7.31,
+    "refresh": "ninja: no work to do.",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  }
+}

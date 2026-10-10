@@ -1,0 +1,12 @@
+Hardware execution: PENDING (device address/authentication not provided).
+Project sources: unchanged at c9b96bb4ee6546fe7e9f71b9855f15d93d892eb7.
+Target: MIPS32r2, O32, big endian, soft float; 74Kc DSP/DSP2 supported.
+Toolchain: OpenWrt 24.10.4 ath79/nand GCC 13.3.0 musl.
+SQLite: 3.40.1.
+Static exception unwinding: explicit libstdc++/libgcc_eh link group.
+Full CMake library/example build: PASS.
+The QEMU 24Kc model cannot execute the 74Kc DSP/DSP2 output.
+Final emulator validation uses QEMU 74Kf; ELF FP ABI is verified soft float.
+teaql_context_lifetime: QEMU 74Kf PASS; stripped size 571208 bytes; no dynamic interpreter/dependencies; soft-float ABI.
+teaql_sqlite_schema_crud: QEMU 74Kf PASS; stripped size 1487520 bytes; no dynamic interpreter/dependencies; soft-float ABI.
+teaql_sqlite_relations_graph: QEMU 74Kf PASS; stripped size 1491792 bytes; no dynamic interpreter/dependencies; soft-float ABI.

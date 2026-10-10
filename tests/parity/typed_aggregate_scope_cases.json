@@ -1,0 +1,966 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Pinned private typed-aggregate method/decode/identity projection compiled verbatim, with controlled row input; broader row aggregation execution is verified separately. Two source executions agree.",
+  "cases": [
+    {
+      "input": {
+        "projection": [],
+        "rows": 0,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 0,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [
+            1,
+            2
+          ],
+          "loaded": true,
+          "rows": 2,
+          "total": null
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": []
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [
+            1,
+            2
+          ],
+          "loaded": true,
+          "rows": 2,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [
+            1,
+            2
+          ],
+          "loaded": true,
+          "rows": 2,
+          "total": null
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "id"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 0,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "ids": [],
+          "loaded": true,
+          "rows": 0,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 0,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "ids": [
+            1,
+            2
+          ],
+          "loaded": true,
+          "rows": 2,
+          "total": null
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 2,
+        "failure": false,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "Parent: model decode failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": null
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 0
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    },
+    {
+      "input": {
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ],
+        "rows": 2,
+        "failure": true,
+        "fail_model": 1
+      },
+      "expected": {
+        "outcome": {
+          "error": "provider failed"
+        },
+        "projection": [
+          "label",
+          "id",
+          "version"
+        ]
+      }
+    }
+  ]
+}

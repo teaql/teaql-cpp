@@ -1,0 +1,6 @@
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philip/githome/teaql-cpp/build-sanitize
+[1/2] Building CXX object CMakeFiles/teaql_graph_node_command_tests.dir/tests/graph_node_command_tests.cpp.o
+[2/2] Linking CXX executable teaql_graph_node_command_tests

@@ -102,13 +102,8 @@ LogDuration elapsed(ExecutionMetadata::SystemTime start, ExecutionMetadata::Syst
     if (end < start) {
         return {};
     }
-    // The full signed clock interval fits an unsigned counter even when signed
-    // duration subtraction would overflow (min -> max).
-    using D = ExecutionMetadata::SystemTime::duration;
-    static_assert(std::is_same_v<D, std::chrono::nanoseconds>);
-    auto delta = std::uint64_t(end.time_since_epoch().count()) -
-                 std::uint64_t(start.time_since_epoch().count());
-    return {delta / 1000000000, std::uint32_t(delta % 1000000000)};
+    auto elapsed = end.duration_since(start);
+    return {elapsed->seconds, elapsed->nanos};
 }
 }
 

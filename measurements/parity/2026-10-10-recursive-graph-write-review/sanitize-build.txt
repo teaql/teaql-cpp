@@ -1,0 +1,2 @@
+[1/2] Building CXX object CMakeFiles/teaql_recursive_graph_write_tests.dir/tests/recursive_graph_write_tests.cpp.o
+[2/2] Linking CXX executable teaql_recursive_graph_write_tests

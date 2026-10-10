@@ -236,6 +236,9 @@ static ds::SearchModels models(Memory r) {
 }
 
 static void search_bindings() {
+    static_assert(noexcept(std::declval<const ds::DynamicSearchError&>().source()));
+    check(ds::DynamicSearchError{"binding failure"}.source() == nullptr,
+          "source Error trait supplies no implicit search-error cause");
     NoDefaultAllocator guard;
     GlobalContext global;
     auto user = global.make_user_context();

@@ -1,0 +1,1 @@
+Checked 127 Markdown explanatory documents: no CJK explanatory text. Non-English semantic fixtures/raw evidence remain data.

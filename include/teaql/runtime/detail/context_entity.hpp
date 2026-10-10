@@ -6,6 +6,17 @@ namespace teaql::detail {
 // Crate-private runtime boundary in Rust. The registry itself is public; these
 // Context conveniences are reserved for the entity runtime.
 struct ContextEntityAccess {
+    template <class E>
+    static ResourceBorrow<E> executor_borrow(const UserContext& context, Ref<E> reference) {
+        auto& origin = context.reference_arena(reference.id(), std::source_location::current());
+        auto& value = context.get(reference);
+        return ResourceBorrow<E>(std::allocator_arg,
+                                 Allocator(context.memory_resource()),
+                                 value,
+                                 origin,
+                                 detail::reference_slot(reference.id()));
+    }
+
 private:
     template <class F>
     static EntityGraphDecodeResult with_decoders(const UserContext& context, F&& call) {
@@ -43,6 +54,9 @@ public:
 
     static const RequestPolicy* request_policy(const UserContext& context) {
         context.ensure_open();
+        if (context.request_policy_borrow_) {
+            (void)context.request_policy_borrow_->get();
+        }
         return context.request_policy_;
     }
 

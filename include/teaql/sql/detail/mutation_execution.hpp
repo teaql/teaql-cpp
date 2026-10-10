@@ -15,8 +15,12 @@ CompiledQuery compile_mutation(Memory,
                                const EntityDescriptor&,
                                const MutationRequest&,
                                const std::optional<Expr>& guard);
-ExecutionMetadata mutation_metadata(
-    Memory, const SqlDialect&, const CompiledQuery&, const MutationRequest&, DataServiceOperation);
+std::string_view mutation_backend_name(const SqlDialect&);
+ExecutionMetadata mutation_metadata(Memory,
+                                    std::string_view backend,
+                                    const CompiledQuery&,
+                                    const MutationRequest&,
+                                    DataServiceOperation);
 
 template <class E>
 class ObservedSqlTransport;
@@ -65,12 +69,12 @@ public:
                 return {};
             }
             forwarding_.reset();
-            pending_ = nullptr;
+            auto* completed = std::exchange(pending_, nullptr);
             if (!*result) {
                 if (diagnostic_) {
                     diagnostic_->fail();
                 }
-                return Output::err(resource_, clone_in(resource_, result->error()));
+                return Output::err(resource_, copy_or_take_error(*completed, *result));
             }
             auto value = clone_in(resource_, result->value());
             if (diagnostic_) {
@@ -128,7 +132,7 @@ class ObservedSqlTransport : public SqlTransport<E> {
 public:
     using allocator_type = Allocator;
     SqlTransport<E>& inner;
-    const SqlDialect& dialect;
+    String backend;
     const MutationRequest& request;
     DataServiceOperation operation;
     std::optional<ExecutionObserver> observer;
@@ -140,12 +144,13 @@ public:
                          const SqlDialect& dialect,
                          const MutationRequest& request,
                          std::optional<ExecutionObserver> observer)
-        : inner(inner), dialect(dialect), request(request), operation(mutation_operation(request)),
+        : inner(inner), backend(mutation_backend_name(dialect), a.resource()), request(request),
+          operation(mutation_operation(request)),
           observer(move_in(a.resource(), std::move(observer))), intent(a.resource()) {}
 
     ExecutionMetadata metadata(const CompiledQuery& query, DataServiceOperation op) const {
         auto r = intent.memory_resource();
-        auto m = mutation_metadata(r, dialect, query, request, op);
+        auto m = mutation_metadata(r, backend, query, request, op);
         if (op == DataServiceOperation::Query) {
             m.sql_log.intent_redactions = clone_in(r, intent);
         }
@@ -206,11 +211,11 @@ public:
                     return {};
                 }
                 forwarding_.reset();
-                write_ = nullptr;
+                auto* completed = std::exchange(write_, nullptr);
                 if (!*result) {
                     return Output::err(
                         resource_,
-                        Error::transport(resource_, clone_in(resource_, result->error())));
+                        Error::transport(resource_, copy_or_take_error(*completed, *result)));
                 }
                 metadata_->ended_at = ExecutionMetadata::SystemTime::clock::now();
                 metadata_->affected_rows = result->value();
@@ -243,11 +248,11 @@ public:
                     return {};
                 }
                 forwarding_.reset();
-                read_ = nullptr;
+                auto* completed = std::exchange(read_, nullptr);
                 if (!*result) {
                     return Output::err(
                         resource_,
-                        Error::transport(resource_, clone_in(resource_, result->error())));
+                        Error::transport(resource_, copy_or_take_error(*completed, *result)));
                 }
                 if (result->value().size() != 1) {
                     String error("persisted ", resource_);
@@ -257,6 +262,9 @@ public:
                 }
                 snapshot.emplace(resource_);
                 snapshot->fields = result->value()[0].into_map(resource_);
+            }
+            if (guard_) {
+                metadata_->backend = mutation_backend_name(dialect_);
             }
             MutationResult result(std::allocator_arg,
                                   Allocator(resource_),
@@ -311,7 +319,6 @@ private:
             auto now = ExecutionMetadata::SystemTime::clock::now();
             metadata_.emplace(
                 std::allocator_arg, Allocator(resource_), DataServiceOperation::Batch, now, now);
-            metadata_->backend = backend_name();
             metadata_->affected_rows = 0;
             return;
         }
@@ -329,26 +336,24 @@ private:
                                   SqlCompileError::Code::UnknownEntity,
                                   name);
         }
-        compiled_.emplace(compile_mutation(resource_, dialect_, *entity_, request_, guard_));
-        observed_ = &async_arena(resource_).template make<ObservedSqlTransport<E>>(
-            transport_, dialect_, request_, observer_);
-        metadata_.emplace(
-            guard_ ? mutation_metadata(
-                         resource_, dialect_, *compiled_, request_, mutation_operation(request_))
-                   : observed_->metadata(*compiled_, mutation_operation(request_)));
-        write_ = &observed_->execute_sql(resource_, *compiled_);
-    }
-
-    std::string_view backend_name() const {
-        switch (dialect_.kind()) {
-        case DatabaseKind::Sqlite:
-            return "sqlite";
-        case DatabaseKind::PostgreSql:
-            return "postgresql";
-        case DatabaseKind::MySql:
-            return "mysql";
+        // Guarded source execution captures its observed transport before
+        // compiling the statement; ordinary leaves compile before capture.
+        if (guard_) {
+            observed_ = &async_arena(resource_).template make<ObservedSqlTransport<E>>(
+                transport_, dialect_, request_, observer_);
         }
-        return {};
+        compiled_.emplace(compile_mutation(resource_, dialect_, *entity_, request_, guard_));
+        if (!observed_) {
+            observed_ = &async_arena(resource_).template make<ObservedSqlTransport<E>>(
+                transport_, dialect_, request_, observer_);
+        }
+        metadata_.emplace(guard_ ? mutation_metadata(resource_,
+                                                     std::string_view{},
+                                                     *compiled_,
+                                                     request_,
+                                                     mutation_operation(request_))
+                                 : observed_->metadata(*compiled_, mutation_operation(request_)));
+        write_ = &observed_->execute_sql(resource_, *compiled_);
     }
 
     std::optional<Output> poll_batch(WakeSignal& wake, const MutationRequest::Batch& batch) {
@@ -370,9 +375,9 @@ private:
                 return {};
             }
             forwarding_.reset();
-            child_ = nullptr;
+            auto* completed = std::exchange(child_, nullptr);
             if (!*result) {
-                return Output::err(resource_, clone_in(resource_, result->error()));
+                return Output::err(resource_, copy_or_take_error(*completed, *result));
             }
             const auto& value = result->value();
             if (value.affected_rows >
@@ -394,6 +399,7 @@ private:
             metadata_->statements.emplace_back(value.metadata);
             ++index_;
         }
+        metadata_->backend = mutation_backend_name(dialect_);
         metadata_->ended_at = ExecutionMetadata::SystemTime::clock::now();
         auto count = *metadata_->affected_rows;
         return Output::ok(
@@ -462,8 +468,8 @@ public:
                 return {};
             }
             forwarding_.reset();
-            pending_ = nullptr;
-            auto output = clone_in(resource_, *result);
+            auto* completed = std::exchange(pending_, nullptr);
+            auto output = copy_or_take_completed(*completed, *result);
             if (output) {
                 journal_->disarm();
             } else {

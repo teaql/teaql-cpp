@@ -3,6 +3,7 @@
 #include <teaql/runtime/detail/audit_privacy.hpp>
 #include <teaql/core/detail/debug.hpp>
 #include <bit>
+#include <array>
 #include <cstdlib>
 #include <iostream>
 #include <limits>
@@ -179,6 +180,55 @@ struct Sink final : RawAuditEventSink {
     }
 };
 
+struct CallbackSink final : RawAuditEventSink {
+    UserContext* closing;
+    unsigned& calls;
+
+    CallbackSink(UserContext* closing, unsigned& calls) : closing(closing), calls(calls) {}
+
+    Result<std::monostate, RuntimeError>
+    on_event(Memory, const UserContext&, const RawAuditEvent&) const override {
+        ++calls;
+        if (closing) {
+            closing->close();
+        }
+        throw std::runtime_error("controlled fan-out callback failure");
+    }
+};
+
+static void direct_callback(std::optional<std::size_t> closing) {
+    GlobalContext global;
+    std::array<std::unique_ptr<UserContext>, 4> users;
+    for (auto& user : users) {
+        user = global.make_user_context();
+    }
+    unsigned calls = 0;
+    auto& callback =
+        global.make_resource<CallbackSink>(closing ? users.at(*closing).get() : nullptr, calls);
+    auto& fanout = users[1]->make<InMemoryRawAuditEventSink>();
+    fanout.register_sink(global, callback);
+    auto& values = users[2]->make<Record>();
+    auto& event = users[2]->make<RawAuditEvent>(
+        RawAuditEvent::created(users[2]->memory_resource(), "Item", values));
+    bool failed = false;
+    try {
+        (void)fanout.on_event(users[3]->memory_resource(), *users[0], event);
+    } catch (const std::runtime_error& error) {
+        failed = std::string_view(error.what()) == "controlled fan-out callback failure";
+    }
+    check(failed && calls == 1, "ordinary fan-out exception propagates exactly once");
+    if (closing) {
+        // A controlled pre-repair close returns before the exception. No freed
+        // payload is accessed on this path.
+        std::_Exit(2);
+    }
+    for (auto& user : users) {
+        user.reset();
+    }
+    check(global.live_user_bytes() == 0,
+          "fan-out exceptions detach all guards before actual User reclamation");
+}
+
 static void sinks() {
     GlobalContext global;
     auto user = global.make_user_context();
@@ -313,11 +363,25 @@ static void privacy() {
     unsetenv("TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS");
 }
 
-int main() {
+int main(int argc, char** argv) {
+    if (argc == 2) {
+        constexpr std::array modes{"context-close", "owner-close", "event-close", "result-close"};
+        for (std::size_t index = 0; index < modes.size(); ++index) {
+            if (std::string_view(argv[1]) == modes[index]) {
+                std::set_terminate([] {
+                    std::_Exit(0);
+                });
+                direct_callback(index);
+                return 1;
+            }
+        }
+        return 3;
+    }
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         copies();
         sinks();
+        direct_callback({});
         identities_and_boundaries();
         privacy();
         std::pmr::set_default_resource(previous);

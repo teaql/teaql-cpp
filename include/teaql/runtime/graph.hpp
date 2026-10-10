@@ -69,6 +69,7 @@ struct EntityValues {
 };
 enum class GraphOperation { Upsert, Create, Reference, Remove };
 enum class GraphMutationKind { Create, Update, Delete, Reference };
+enum class GraphTransactionBoundary { Started, AlreadyActive, Unsupported };
 
 inline GraphMutationKind graph_mutation_kind_for_update(bool update) {
     return update ? GraphMutationKind::Update : GraphMutationKind::Create;

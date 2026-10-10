@@ -24,7 +24,7 @@ public:
                     return RuntimeSchemaResult::err(
                         resource_, RuntimeError::schema(resource_, "missing schema provider"));
                 }
-                child_ = &context_.schema_provider_->ensure_schema(context_, invocation_);
+                child_ = &context_.schema_provider_->get().ensure_schema(context_, invocation_);
                 check_child();
             }
             auto result = poll_child(wake);
@@ -111,6 +111,7 @@ private:
 
     void check_child() {
         if (child_->memory_resource() != resource_) {
+            child_->cancel();
             child_ = nullptr;
             throw std::invalid_argument("Schema operation must belong to its UserContext");
         }
@@ -152,12 +153,18 @@ AsyncOperation<RuntimeSchemaResult>& UserContext::ensure_schema() const {
     return make_operation<RuntimeSchemaResult, detail::SchemaOperation>(memory_resource(), *this);
 }
 
+UserContext& UserContext::with_module(const RuntimeModule& module) & {
+    module.apply_to(*this);
+    return *this;
+}
+
 void RuntimeModule::apply_to(UserContext& context) const {
     context.ensure_mutable();
     auto& metadata_copy = context.make<InMemoryMetadataStore>(metadata);
     auto& entities_copy = context.make<InMemoryEntityRegistry>(entities_);
     auto& behaviors = context.make<InMemoryEntityDataServiceBehaviorRegistry>(behaviors_);
     auto& decoders = context.make<InMemoryEntityGraphDecoderRegistry>(graph_decoders_);
+    auto& checkers = context.make<InMemoryCheckerRegistry>(checkers_);
     auto& sinks = context.make<InMemoryRawAuditEventSink>(event_sinks_);
     auto& callbacks = context.make<Vector<GeneratedSchemaBootstrap>>(bootstraps_);
     auto& initial = context.make<Vector<GraphNode>>(initial_graphs_);
@@ -166,10 +173,14 @@ void RuntimeModule::apply_to(UserContext& context) const {
     context.set_entity_registry(context, entities_copy);
     context.set_event_sink(context, sinks);
     context.set_entity_data_service_behavior_registry(context, behaviors);
+    context.set_checker_registry(context, checkers);
     context.graph_decoders_ = &decoders;
     context.initial_graphs_ = &initial;
     context.root_graphs_ = &roots;
     context.generated_schema_bootstraps_ = &callbacks;
+    if (language_) {
+        context.set_language(*language_);
+    }
 }
 
 std::unique_ptr<UserContext> RuntimeModule::into_context(GlobalContext& global) const {

@@ -561,10 +561,261 @@ static void sqlite_base_adapter() {
         "runtime base adapter outlives temporary wrappers and composes actual SQL executor, transport and SQLite provider");
 }
 
+static void public_query_boundary() {
+    GlobalContext g;
+    auto c = g.make_user_context();
+    auto r = c->memory_resource();
+    auto& metadata = c->make<InMemoryMetadataStore>();
+    EntityDescriptor descriptor(std::allocator_arg, Allocator(r), "Item");
+    descriptor.property("id", DataType::U64).is_id = true;
+    descriptor.property("fail", DataType::Bool);
+    metadata.register_entity(std::move(descriptor));
+    c->set_metadata(*c, metadata);
+    auto& executor = c->make<Executor>();
+    auto& service = EntityDataService<Executor>::for_executor(*c, "Item", *c, executor);
+    auto query = service.select();
+    bool empty = false;
+    try {
+        PurposedSelectQuery invalid(std::allocator_arg, Allocator(r), query, " \t\n");
+    } catch (const std::invalid_argument&) {
+        empty = true;
+    }
+    check(empty, "the public query boundary rejects an empty purpose");
+    PurposedSelectQuery purposed(std::allocator_arg, Allocator(r), query, "  Inspect items  ");
+    check(purposed.as_query().trace_chain.back().comment == "  Inspect items  " &&
+              query.trace_chain.empty(),
+          "purpose validation retains the original text and snapshots the input query");
+    auto& rows = service.fetch_all(purposed);
+    check(executor.queries == 0 && rows.wait() && rows.wait().value().size() == 1,
+          "public fetch_all lazily executes the independent provider adapter");
+    check(executor.seen->query.trace_chain.empty() && executor.seen->trace_chain.size() >= 1 &&
+              executor.seen->trace_chain.back().kind == TraceKind::Purpose,
+          "owned direct execution moves trace provenance into the request envelope");
+    auto& list = service.fetch_smart_list(purposed);
+    check(list.wait() && list.wait().value().is_loaded,
+          "public SmartList retains the separate base-list path");
+    auto& typed = service.fetch_entities<decoder_fixture::Item<>>(purposed);
+    check(typed.wait() && !typed.wait().value()[0].state,
+          "ordinary Entity decoding remains distinct from enhanced graph decoding");
+    auto& cache = g.make<InMemoryAggregationCache>("integration");
+    c->insert_resource(g, cache);
+    auto cached_query = service.select();
+    cached_query.count("count").enable_aggregation_cache();
+    PurposedSelectQuery cached(std::allocator_arg, Allocator(r), cached_query, "Count items");
+    auto before = executor.queries;
+    check(service.fetch_all(cached).wait() && service.fetch_all(cached).wait() &&
+              executor.queries == before + 1,
+          "public aggregation cache misses once and then avoids provider I/O");
+    cache.clear();
+    executor.pending = true;
+    unsigned cancelled = 0;
+    executor.external_cancel = &cancelled;
+    auto& pending = service.fetch_all(cached);
+    check(!pending.poll(), "public cached query forwards provider Pending");
+    auto ticket = pending.wake_signal().ticket();
+    executor.child_wake->notify();
+    check(pending.wake_signal().ticket() != ticket,
+          "public query forwards completion notifications");
+    pending.cancel();
+    check(cancelled == 1, "public query cancellation reaches the actual provider work");
+    executor.pending = false;
+    executor.fail = true;
+    auto& failed = service.fetch_all(cached);
+    check(!failed.wait() && failed.wait().error().executor_error() == "executor failed",
+          "cache miss preserves provider errors without installing rows");
+    executor.fail = false;
+    auto& store = g.make<InMemoryContinuousPageCursorStore>();
+    c->set_continuous_page_cursor_store(g, store);
+    auto page = service.select();
+    page.order_asc("id").page(0, 1).optimize_for_continuous_page_fetch();
+    PurposedSelectQuery first(std::allocator_arg, Allocator(r), page, "Read items");
+    check(service.fetch_all(first).wait() &&
+              c->continuous_page_plan() == "OFFSET_FALLBACK:FIRST_PAGE",
+          "first full page registers a retained cursor");
+    page.page(1, 1);
+    PurposedSelectQuery second(std::allocator_arg, Allocator(r), page, "Read items");
+    check(service.fetch_all(second).wait() && c->continuous_page_plan() == "CURSOR_SEEK" &&
+              executor.seen->query.slice->offset == 0 && executor.seen->query.predicate,
+          "the next page applies the retained id boundary before provider execution");
+}
+
+static void sqlite_public_query_runtime() {
+    GlobalContext g;
+    auto c = g.make_user_context();
+    c->disable_sql_log();
+    auto r = c->memory_resource();
+    auto& connection = c->make_resource<SqliteConnection>();
+    auto& provider = c->make<SqliteMutationExecutor>(connection);
+    auto& sql = c->make<CompiledQuery>();
+    for (auto text : {"CREATE TABLE items(id INTEGER PRIMARY KEY,label TEXT)",
+                      "CREATE TABLE children(id INTEGER PRIMARY KEY,parent_id INTEGER,label TEXT)",
+                      "INSERT INTO items VALUES(1,'one'),(2,'two'),(3,'three')",
+                      "INSERT INTO children VALUES(10,1,'first'),(11,1,'second'),(20,2,'third')"}) {
+        sql.sql = text;
+        check(bool(provider.execute(r, sql)), "SQLite runtime setup succeeds");
+    }
+    auto& metadata = c->make<InMemoryMetadataStore>();
+    EntityDescriptor item(std::allocator_arg, Allocator(r), "Item");
+    item.table("items");
+    item.property("id", DataType::U64).is_id = true;
+    item.property("label", DataType::Text);
+    auto& relation = item.relation("children", "Child");
+    relation.many = true;
+    relation.local_key = "id";
+    relation.foreign_key = "parent_id";
+    EntityDescriptor child(std::allocator_arg, Allocator(r), "Child");
+    child.table("children");
+    child.property("id", DataType::U64).is_id = true;
+    child.property("parent_id", DataType::U64);
+    child.property("label", DataType::Text);
+    metadata.register_entity(std::move(item));
+    metadata.register_entity(std::move(child));
+    c->set_metadata(*c, metadata);
+    auto& dialect = c->make_resource<SqliteDialect>();
+    auto& state = c->make<SqlExecutorState>();
+    auto& executor =
+        c->make<SqlDataServiceExecutor<MutationExecutorError>>(dialect, provider, metadata, state);
+    auto& repo = EntityDataService<std::remove_reference_t<decltype(executor)>>::for_executor(
+        *c, "Item", *c, executor);
+    auto page = repo.select();
+    page.projects({"id", "label"})
+        .order_asc("id")
+        .page(0, 1)
+        .optimize_for_continuous_page_fetch()
+        .relation("children");
+    PurposedSelectQuery first(std::allocator_arg, Allocator(r), page, "Inspect the first item");
+    auto& first_result = repo.fetch_all(first).wait();
+    check(first_result && first_result.value().size() == 1 &&
+              first_result.value()[0].get("id")->try_u64() == 1 &&
+              first_result.value()[0].get("children")->as_list()->size() == 2,
+          "public runtime executes root SQL and recursively embeds related rows");
+    page.page(1, 1);
+    // Purpose comments do not change cursor identity, matching the source key.
+    PurposedSelectQuery second(std::allocator_arg, Allocator(r), page, "Inspect the second item");
+    auto& second_result = repo.fetch_all(second).wait();
+    check(second_result && second_result.value()[0].get("id")->try_u64() == 2 &&
+              second_result.value()[0].get("children")->as_list()->size() == 1 &&
+              c->continuous_page_plan() == "CURSOR_SEEK",
+          "actual SQLite next-page execution uses a seek boundary and repeats relation hydration");
+    auto count = repo.select();
+    count.count("count").enable_aggregation_cache();
+    auto& cache = g.make<InMemoryAggregationCache>("actual-sqlite");
+    c->insert_resource(g, cache);
+    PurposedSelectQuery counted(std::allocator_arg, Allocator(r), count, "Count items");
+    auto& initial_count = repo.fetch_all(counted).wait();
+    check(initial_count && initial_count.value()[0].get("count")->try_i64() == 3,
+          "actual SQLite aggregation passes through the public cache path");
+    sql.sql = "INSERT INTO items VALUES(4,'four')";
+    check(bool(provider.execute(r, sql)), "change the backing table after cache admission");
+    check(repo.fetch_all(counted).wait().value()[0].get("count")->try_i64() == 3,
+          "a public cache hit avoids querying the changed backing table");
+    cache.clear();
+    check(repo.fetch_all(counted).wait().value()[0].get("count")->try_i64() == 4,
+          "cache invalidation restores authoritative SQLite execution");
+    auto enhanced = repo.select();
+    enhanced.projects({"id", "label"}).order_asc("id");
+    SelectQuery extra(std::allocator_arg, Allocator(r), "Item");
+    extra.project("label");
+    enhanced.child_enhancement(extra);
+    SelectQuery lookup(std::allocator_arg, Allocator(r), "Item");
+    lookup.project("label");
+    enhanced.object_group_by("self", "id", lookup);
+    Vector<RelationAggregate> aggregates(r);
+    SelectQuery count_children(std::allocator_arg, Allocator(r), "Child");
+    aggregates.emplace_back("children", "child_count", count_children, true);
+    PurposedSelectQuery enrich(
+        std::allocator_arg, Allocator(r), enhanced, "Inspect item summaries");
+    auto& summary = repo.fetch_smart_list_with_relation_aggregates(enrich, aggregates).wait();
+    check(summary && summary.value().is_loaded && !summary.value().total_count &&
+              summary.value().data.size() == 4 &&
+              summary.value().data[0].get("label")->try_text() == "one" &&
+              summary.value().data[0].get("self")->as_object()->at(String("label", r)).try_text() ==
+                  "one" &&
+              summary.value().data[0].get("child_count")->try_u64() == 2 &&
+              summary.value().data[3].get("child_count")->try_u64() == 0,
+          "public SmartList composes object-group, child merge, and outer aggregate SQL execution");
+}
+
+static void public_query_lifetimes() {
+    GlobalContext global;
+    auto bind = [](UserContext& user) -> EntityDataService<Executor>& {
+        auto r = user.memory_resource();
+        auto& metadata = user.make<InMemoryMetadataStore>();
+        EntityDescriptor descriptor(std::allocator_arg, Allocator(r), "Item");
+        descriptor.property("id", DataType::U64).is_id = true;
+        metadata.register_entity(std::move(descriptor));
+        user.set_metadata(user, metadata);
+        auto& executor = user.make<Executor>();
+        return EntityDataService<Executor>::for_executor(user, "Item", user, executor);
+    };
+    Ref<InMemoryAggregationCache> saved;
+    {
+        auto user = global.make_user_context();
+        auto& repo = bind(*user);
+        saved = user->make_global<InMemoryAggregationCache>("retained-query");
+        user->insert_resource(saved);
+        auto& query = user->make<SelectQuery>("Item");
+        query.count("count").enable_aggregation_cache();
+        auto& purposed = user->make<PurposedSelectQuery>(query, "Populate shared rows");
+        auto& work = repo.fetch_all(purposed);
+        query.entity = "Changed after dispatch";
+        query.trace_chain.clear();
+        auto& result = work.wait();
+        check(result && result.value()[0].get("id")->try_u64() == 1,
+              "the operation snapshots input data before lazy execution");
+        check(result.value()[0].memory_resource() == user->memory_resource(),
+              "query rows remain in the requesting User domain");
+        user->close();
+    }
+    {
+        auto user = global.make_user_context();
+        auto& repo = bind(*user);
+        auto rebound = user->rebind_global(saved);
+        user->insert_resource(rebound);
+        auto& query = user->make<SelectQuery>("Item");
+        query.count("count").enable_aggregation_cache();
+        auto& purposed = user->make<PurposedSelectQuery>(query, "Read retained rows");
+        auto& result = repo.fetch_all(purposed).wait();
+        auto& executor = Access::context_service(repo).executor.get();
+        check(result && result.value()[0].get("id")->try_u64() == 1 && executor.queries == 0 &&
+                  result.value()[0].memory_resource() == user->memory_resource(),
+              "Global cache copies survive the first User and copy back into the second User");
+        user->get(rebound).clear();
+        unsigned cancelled = 0;
+        executor.pending = true;
+        executor.external_cancel = &cancelled;
+        auto& pending = repo.fetch_all(purposed);
+        check(!pending.poll(), "cached public work can remain Pending until Context close");
+        user->close();
+        check(cancelled == 1, "Context close cancels provider work before returning arena blocks");
+    }
+    {
+        auto user = global.make_user_context();
+        (void)bind(*user);
+        auto executor = user->make_ref<Executor>();
+        auto& replacement =
+            EntityDataService<Executor>::for_executor(*user, "Item", *user, user->get(executor));
+        auto& query = user->make<SelectQuery>("Item");
+        auto& purposed = user->make<PurposedSelectQuery>(query, "Reject a destroyed executor");
+        auto& lazy = replacement.fetch_all(purposed);
+        user->destroy(executor);
+        bool dead = false;
+        try {
+            lazy.poll();
+        } catch (const ReferenceError& error) {
+            dead = error.kind() == ReferenceError::Kind::Dead;
+        }
+        check(dead, "lazy execution rejects an early-destroyed provider before dereferencing it");
+    }
+}
+
 int main() {
     try {
         auto* old = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         binding_and_base_queries();
+        public_query_boundary();
+        sqlite_public_query_runtime();
+        public_query_lifetimes();
         hooks_and_metadata();
         plans_and_scopes();
         sqlite_base_adapter();

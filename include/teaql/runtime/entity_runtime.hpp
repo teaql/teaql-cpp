@@ -3,10 +3,12 @@
 #include <teaql/runtime/id_space.hpp>
 #include <teaql/core/list.hpp>
 #include <teaql/memory/arena.hpp>
+#include <teaql/memory/function_ref.hpp>
 #include <typeindex>
 #include <unordered_map>
 
 namespace teaql {
+class DebugWriter;
 enum class LoadedRelation { Loaded, Empty, NotLoaded };
 
 template <class T>
@@ -39,6 +41,7 @@ private:
 
 namespace detail {
 struct EntityRuntimeClone;
+void with_entity_runtime_copy(Memory, FunctionRef<void()>);
 struct EntityLedgerSlot;
 struct EntityGraphSlot;
 struct FrozenEntityGraph;
@@ -288,6 +291,7 @@ public:
 
 private:
     friend class EntityRuntimeState;
+    friend void write_debug(DebugWriter&, const EntityGraphBuilder&);
     friend struct detail::EntityRuntimeClone;
     using EntityTable = std::pmr::unordered_map<std::uint64_t, detail::EntityGraphValue>;
     std::pmr::unordered_map<std::type_index, EntityTable> tables_;
@@ -411,6 +415,7 @@ public:
 
 private:
     friend class EntityRuntimeState;
+    friend void write_debug(DebugWriter&, const ChangeSetStack&);
     Vector<EntityChangeSet> stack_;
 };
 
@@ -449,6 +454,10 @@ struct LedgerCompositionError {
     }
 
     String to_string(Memory) const;
+
+    const std::exception* error_source() const noexcept {
+        return nullptr;
+    }
 };
 
 using LedgerCompositionResult = Result<std::monostate, LedgerCompositionError>;
@@ -574,6 +583,7 @@ public:
 
 private:
     friend struct detail::EntityRuntimeAccess;
+    friend void write_debug(DebugWriter&, const EntityRuntimeState&);
     friend struct detail::EntityRuntimeClone;
 
     struct LoadedSnapshot {

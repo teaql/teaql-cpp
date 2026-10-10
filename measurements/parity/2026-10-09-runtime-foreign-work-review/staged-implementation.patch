@@ -1,0 +1,189 @@
+--- a/include/teaql/runtime/detail/base_query.hpp
++++ b/include/teaql/runtime/detail/base_query.hpp
+@@ -34,6 +34,7 @@
+             auto& child = executor_.get().query_observed(
+                 resource_, std::move(request), store.query_diagnostic_observer(resource_));
+             if (child.memory_resource() != resource_) {
++                child.cancel();
+                 throw std::invalid_argument(
+                     "Runtime query operation must belong to its result Context");
+             }
+--- a/include/teaql/runtime/detail/base_mutation.hpp
++++ b/include/teaql/runtime/detail/base_mutation.hpp
+@@ -129,6 +129,7 @@
+                     clone_in(resource_, *request_),
+                     metadata_.get().mutation_diagnostic_observer(resource_));
+                 if (work.memory_resource() != resource_) {
++                    work.cancel();
+                     throw std::invalid_argument(
+                         "Runtime mutation must belong to its result Context");
+                 }
+--- a/include/teaql/runtime/detail/entity_query.hpp
++++ b/include/teaql/runtime/detail/entity_query.hpp
+@@ -138,6 +138,7 @@
+                 auto& work = cs.executor.get().query_observed(
+                     r, std::move(request), EntityDataServiceAccess::observer(service_));
+                 if (work.memory_resource() != r) {
++                    work.cancel();
+                     throw std::invalid_argument(
+                         "Entity query result must belong to its UserContext");
+                 }
+--- a/include/teaql/runtime/detail/relation_execution.hpp
++++ b/include/teaql/runtime/detail/relation_execution.hpp
+@@ -106,6 +106,7 @@
+                 }
+                 auto& child = fetch_(std::move(query));
+                 if (child.memory_resource() != r) {
++                    child.cancel();
+                     throw std::invalid_argument(
+                         "Relation fetch result must belong to its query Context");
+                 }
+--- a/include/teaql/runtime/detail/relation_enhancement.hpp
++++ b/include/teaql/runtime/detail/relation_enhancement.hpp
+@@ -99,6 +99,7 @@
+                 repo.with_trace_context(trace);
+                 auto& child = fetch_(repo, std::move(query));
+                 if (child.memory_resource() != r) {
++                    child.cancel();
+                     throw std::invalid_argument(
+                         "Relation aggregate result must belong to its query Context");
+                 }
+@@ -226,6 +227,7 @@
+                 repo.with_trace_context(trace_);
+                 auto& child = fetch_(repo, std::move(query));
+                 if (child.memory_resource() != r) {
++                    child.cancel();
+                     throw std::invalid_argument(
+                         "Row enhancement result must belong to its query Context");
+                 }
+--- a/include/teaql/runtime/transaction.hpp
++++ b/include/teaql/runtime/transaction.hpp
+@@ -322,6 +322,7 @@
+             if (!child_) {
+                 auto& child = callback_(scope);
+                 if (child.memory_resource() != r) {
++                    child.cancel();
+                     throw std::invalid_argument(
+                         "Transaction callback result must belong to its UserContext");
+                 }
+--- /dev/null
++++ b/tests/runtime_foreign_work_tests.cpp
+@@ -0,0 +1,105 @@
++#include <teaql/runtime/data_service.hpp>
++#include <iostream>
++using namespace teaql;
++
++struct Control {
++    unsigned cancelled = 0;
++    bool alive = false;
++};
++
++template <class T>
++struct ForeignState {
++    using allocator_type = Allocator;
++    const UserContext& caller;
++    Control& control;
++    bool stopped = false;
++
++    ForeignState(std::allocator_arg_t, Allocator, const UserContext& caller, Control& control)
++        : caller(caller), control(control) {}
++
++    std::optional<Result<T, unsigned>> poll(WakeSignal&) {
++        return {};
++    }
++
++    void finish_and_wait() noexcept {
++        cancel_and_wait();
++    }
++
++    void cancel_and_wait() noexcept {
++        if (!stopped) {
++            stopped = true;
++            ++control.cancelled;
++            control.alive = !dynamic_cast<Arena*>(caller.memory_resource())->closed();
++        }
++    }
++};
++
++class ForeignExecutor final : public QueryExecutor<unsigned>, public MutationExecutor<unsigned> {
++public:
++    GlobalContext& global;
++    const UserContext& caller;
++    Control& control;
++    AsyncOperation<Result<QueryResult, unsigned>>* query_child = nullptr;
++    AsyncOperation<Result<MutationResult, unsigned>>* mutation_child = nullptr;
++
++    ForeignExecutor(GlobalContext& global, const UserContext& caller, Control& control)
++        : global(global), caller(caller), control(control) {}
++
++    DataServiceCapabilities capabilities() const override {
++        return {};
++    }
++
++    AsyncOperation<Result<QueryResult, unsigned>>& query(Memory, QueryRequest) override {
++        query_child = &make_operation<Result<QueryResult, unsigned>, ForeignState<QueryResult>>(
++            global.memory_resource(), caller, control);
++        return *query_child;
++    }
++
++    AsyncOperation<Result<MutationResult, unsigned>>& mutate(Memory, MutationRequest) override {
++        mutation_child =
++            &make_operation<Result<MutationResult, unsigned>, ForeignState<MutationResult>>(
++                global.memory_resource(), caller, control);
++        return *mutation_child;
++    }
++
++    void cleanup() noexcept {
++        if (query_child) {
++            query_child->cancel();
++        }
++        if (mutation_child) {
++            mutation_child->cancel();
++        }
++    }
++};
++
++int main(int argc, char** argv) {
++    Control control;
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto& metadata = user->make<InMemoryMetadataStore>();
++    auto& executor = global.make_resource<ForeignExecutor>(global, *user, control);
++    auto& borrow = user->make<ResourceBorrow<ForeignExecutor>>(
++        executor, *dynamic_cast<Arena*>(global.memory_resource()));
++    auto& service = user->make<detail::RuntimeDataService<InMemoryMetadataStore, ForeignExecutor>>(
++        metadata, borrow);
++    bool rejected = false;
++    try {
++        if (argc == 2 && std::string_view(argv[1]) == "mutation") {
++            auto& command = user->make<InsertCommand>("Item");
++            (void)service.insert(command).poll();
++        } else {
++            auto& query = user->make<SelectQuery>("Item");
++            (void)service.fetch_all(query).poll();
++        }
++    } catch (const std::invalid_argument&) {
++        rejected = true;
++    }
++    const bool stopped_before_rejection = control.cancelled == 1 && control.alive;
++    // A failing negative control explicitly cancels before User teardown.
++    executor.cleanup();
++    user.reset();
++    std::cout << "{\"rejected\":" << (rejected ? "true" : "false")
++              << ",\"cancelled_before_rejection\":" << (stopped_before_rejection ? "true" : "false")
++              << ",\"user_bytes\":" << global.live_user_bytes() << "}\n";
++    return rejected && stopped_before_rejection ? 0 : 1;
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -285,6 +285,10 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_relation_models.py
+         --cpp $<TARGET_FILE:teaql_relation_model_probe>
+         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
++    add_executable(teaql_runtime_foreign_work_tests tests/runtime_foreign_work_tests.cpp)
++    target_link_libraries(teaql_runtime_foreign_work_tests PRIVATE teaql::runtime)
++    add_test(NAME runtime_foreign_query_cleanup COMMAND teaql_runtime_foreign_work_tests query)
++    add_test(NAME runtime_foreign_mutation_cleanup COMMAND teaql_runtime_foreign_work_tests mutation)
+     add_executable(teaql_unified_buffer_clone_tests tests/unified_buffer_clone_tests.cpp)
+     target_link_libraries(teaql_unified_buffer_clone_tests PRIVATE teaql::runtime)
+     add_test(NAME unified_buffer_clone_contracts COMMAND teaql_unified_buffer_clone_tests)

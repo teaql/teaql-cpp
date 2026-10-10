@@ -41,4 +41,22 @@ fn evaluate(j:J)->J{
  _=>{let e=raw(&j);if j["formatter"]==true{return json!({"human":without_time(HumanReaderFormatter.format_audit_log(&e)),"human_sensitive":without_time(HumanReaderFormatter.format_sensitive_audit_log(&e)),"debug":DebugReaderFormatter.format_audit_log(&e),"debug_sensitive":DebugReaderFormatter.format_sensitive_audit_log(&e)});}let before=raw_out(&e);let safe=e.build_safe_event(&strings(&j["masks"]),j["max"].as_u64().map(|n|n as usize));json!({"raw":before,"unchanged":raw_out(&e)==before,"safe":{"kind":format!("{:?}",safe.kind),"entity":safe.entity,"fields":safe.fields.iter().map(field_out).collect::<Vec<_>>(),"trace":trace_out(&safe.trace_chain),"governance":governance(&safe.mutation_governance)},"projection":raw_out(&log_privacy::audit_event(&e,j["allow"].as_bool().unwrap()))})}
  }
 }
-fn main(){std::panic::set_hook(Box::new(|_|{}));for line in io::stdin().lock().lines(){let j=serde_json::from_str(&line.unwrap()).unwrap();println!("{}",evaluate(j));}}
+fn validate_counts_32(j: &J) -> J {
+    // The native oracle remains 64-bit. Parse the same fixture decimal strings
+    // into u32 to observe the exact 32-bit usize input range before source calls.
+    let fits = |key: &str| j[key].as_str().unwrap().parse::<u32>().is_ok();
+    let accepted = match j["kind"].as_str().unwrap() {
+        "schema_created" | "schema_verified" => fits("count"),
+        "data_seeded" => fits("count") && fits("updated"),
+        _ => true,
+    };
+    json!({"accepted": accepted})
+}
+fn main() {
+    std::panic::set_hook(Box::new(|_| {}));
+    let validate = std::env::args().nth(1).as_deref() == Some("--validate-counts-32");
+    for line in io::stdin().lock().lines() {
+        let input = serde_json::from_str(&line.unwrap()).unwrap();
+        println!("{}", if validate { validate_counts_32(&input) } else { evaluate(input) });
+    }
+}

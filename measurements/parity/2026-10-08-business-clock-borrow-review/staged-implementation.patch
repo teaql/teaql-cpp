@@ -1,0 +1,550 @@
+--- a/include/teaql/runtime/context.hpp
++++ b/include/teaql/runtime/context.hpp
+@@ -1073,9 +1073,17 @@
+     template <class Owner, class T>
+         requires std::derived_from<T, BusinessClock>
+     void set_business_clock(Owner& origin, T& clock) {
+-        ensure_mutable();
+-        detail::ContextResources::entry(memory_, origin.memory_resource(), clock);
+-        business_clock_ = &clock;
++        check_public();
++        ensure_mutable();
++        auto registered = detail::ContextResources::entry(memory_, origin.memory_resource(), clock);
++        if (!registered.slot) {
++            throw std::invalid_argument("Business clock must be a managed Context object");
++        }
++        business_clock_.emplace(std::allocator_arg,
++                                Allocator(memory_resource()),
++                                clock,
++                                *registered.owner,
++                                registered.slot);
+     }
+ 
+     template <class Owner, class T>
+@@ -1087,16 +1095,34 @@
+ 
+     UtcDateTime business_time() const {
+         ensure_open();
+-        return business_clock_ ? business_clock_->business_time()
+-                               : SystemBusinessClock{}.business_time();
++        if (!business_clock_) {
++            return SystemBusinessClock{}.business_time();
++        }
++        const auto& clock = business_clock_->get();
++        Arena::Quiescence active;
++        if (!memory_.closing()) {
++            active.attach(const_cast<detail::ContextArena&>(memory_), nullptr, [](void*) noexcept {
++                std::terminate();
++            });
++        }
++        return clock.business_time();
+     }
+ 
+     Date business_date() const {
+         if (auto* date = get_resource<BusinessDate>()) {
+             return date->value;
+         }
+-        return business_clock_ ? business_clock_->business_date()
+-                               : SystemBusinessClock{}.business_date();
++        if (!business_clock_) {
++            return SystemBusinessClock{}.business_date();
++        }
++        const auto& clock = business_clock_->get();
++        Arena::Quiescence active;
++        if (!memory_.closing()) {
++            active.attach(const_cast<detail::ContextArena&>(memory_), nullptr, [](void*) noexcept {
++                std::terminate();
++            });
++        }
++        return clock.business_date();
+     }
+ 
+     template <class Owner>
+@@ -1164,9 +1190,18 @@
+     template <class Owner, class T>
+         requires std::derived_from<T, EntityRegistry>
+     void set_entity_registry(Owner& origin, T& registry) {
+-        ensure_mutable();
+-        detail::ContextResources::entry(memory_, origin.memory_resource(), registry);
+-        entity_registry_ = &registry;
++        check_public();
++        ensure_mutable();
++        auto registered =
++            detail::ContextResources::entry(memory_, origin.memory_resource(), registry);
++        if (!registered.slot) {
++            throw std::invalid_argument("Context provider must be a managed Context object");
++        }
++        entity_registry_.emplace(std::allocator_arg,
++                                 Allocator(memory_resource()),
++                                 registry,
++                                 *registered.owner,
++                                 registered.slot);
+     }
+ 
+     template <class Owner, class T>
+@@ -1211,15 +1246,37 @@
+ 
+     bool has_entity_data_service(std::string_view name) const {
+         ensure_open();
+-        return (entity_registry_ && entity_registry_->contains(name)) || entity(name) != nullptr;
++        if (entity_registry_) {
++            const auto& registry = entity_registry_->get();
++            Arena::Quiescence active;
++            if (!memory_.closing()) {
++                active.attach(
++                    const_cast<detail::ContextArena&>(memory_), nullptr, [](void*) noexcept {
++                        std::terminate();
++                    });
++            }
++            if (registry.contains(name)) {
++                return true;
++            }
++        }
++        return entity(name) != nullptr;
+     }
+ 
+     template <class Owner, class T>
+         requires std::derived_from<T, runtime::SchemaProvider>
+     void set_schema_provider(Owner& origin, T& provider) {
+-        ensure_mutable();
+-        detail::ContextResources::entry(memory_, origin.memory_resource(), provider);
+-        schema_provider_ = &provider;
++        check_public();
++        ensure_mutable();
++        auto registered =
++            detail::ContextResources::entry(memory_, origin.memory_resource(), provider);
++        if (!registered.slot) {
++            throw std::invalid_argument("Context provider must be a managed Context object");
++        }
++        schema_provider_.emplace(std::allocator_arg,
++                                 Allocator(memory_resource()),
++                                 provider,
++                                 *registered.owner,
++                                 registered.slot);
+     }
+ 
+     template <class Owner, class T>
+@@ -1333,7 +1390,7 @@
+     friend class detail::SchemaOperation;
+     friend bool detail::is_generated_schema_bootstrap(const UserContext&);
+     mutable std::size_t pending_schema_operations_ = 0;
+-    runtime::SchemaProvider* schema_provider_ = nullptr;
++    std::optional<ResourceBorrow<const runtime::SchemaProvider>> schema_provider_;
+     const Vector<GeneratedSchemaBootstrap>* generated_schema_bootstraps_ = nullptr;
+ 
+     void ensure_mutable() const {
+@@ -1346,9 +1403,9 @@
+         }
+     }
+ 
+-    BusinessClock* business_clock_ = nullptr;
++    std::optional<ResourceBorrow<const BusinessClock>> business_clock_;
+     MetadataStore* metadata_ = nullptr;
+-    EntityRegistry* entity_registry_ = nullptr;
++    std::optional<ResourceBorrow<const EntityRegistry>> entity_registry_;
+     std::optional<ResourceBorrow<const InternalIdGenerator>> internal_id_generator_;
+     GlobalContext& global_;
+     detail::ContextArena memory_;
+--- a/src/runtime/schema.cpp
++++ b/src/runtime/schema.cpp
+@@ -24,7 +24,7 @@
+                     return RuntimeSchemaResult::err(
+                         resource_, RuntimeError::schema(resource_, "missing schema provider"));
+                 }
+-                child_ = &context_.schema_provider_->ensure_schema(context_, invocation_);
++                child_ = &context_.schema_provider_->get().ensure_schema(context_, invocation_);
+                 check_child();
+             }
+             auto result = poll_child(wake);
+--- /dev/null
++++ b/tests/business_clock_scope_tests.cpp
+@@ -0,0 +1,126 @@
++#include <teaql/runtime/context.hpp>
++#include <iostream>
++using namespace teaql;
++
++static void check(bool condition, const char* message) {
++    if (!condition) {
++        throw std::runtime_error(message);
++    }
++}
++
++template <class F>
++static void dead(F&& call) {
++    bool rejected = false;
++    try {
++        call();
++    } catch (const ReferenceError& error) {
++        rejected = error.kind() == ReferenceError::Kind::Dead;
++    }
++    check(rejected, "Destroyed clock rejects before virtual dispatch");
++}
++
++struct ClosingClock final : BusinessClock {
++    UserContext& context;
++
++    explicit ClosingClock(UserContext& user) : context(user) {}
++
++    UtcDateTime business_time() const override {
++        context.close();
++        return *UtcDateTime::from_timestamp(123, 0);
++    }
++};
++
++int main(int argc, char** argv) {
++    if (argc == 2) {
++        std::set_terminate([] {
++            std::_Exit(0);
++        });
++        GlobalContext global;
++        auto user = global.make_user_context();
++        auto& clock = user->make_resource<ClosingClock>(*user);
++        user->set_business_clock(*user, clock);
++        try {
++            if (std::string_view(argv[1]) == "reentrant-time") {
++                (void)user->business_time();
++            } else {
++                (void)user->business_date();
++            }
++        } catch (...) {
++            std::_Exit(2);
++        }
++        return 1;
++    }
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto timestamp = *UtcDateTime::from_timestamp(-1, 123456789);
++    auto clock = user->make_ref<FixedBusinessClock>(timestamp);
++    user->set_business_clock(*user, user->get(clock));
++    check(user->business_time() == timestamp && user->business_date() == timestamp.date_naive(),
++          "Live checked clock preserves time and inherited date");
++    user->destroy(clock);
++    dead([&] {
++        (void)user->business_time();
++    });
++    dead([&] {
++        (void)user->business_date();
++    });
++
++    FixedBusinessClock unmanaged(timestamp);
++    bool unmanaged_rejected = false;
++    try {
++        user->set_business_clock(*user, unmanaged);
++    } catch (const std::invalid_argument&) {
++        unmanaged_rejected = true;
++    }
++    check(unmanaged_rejected, "Unmanaged clock cannot bypass explicit Context ownership");
++    dead([&] {
++        (void)user->business_time();
++    });
++
++    auto& override_date = user->make<BusinessDate>(*Date::from_ymd(2040, 1, 2));
++    user->insert_resource(*user, override_date);
++    check(user->business_date() == override_date.value,
++          "Date override precedes the destroyed clock without invoking it");
++    dead([&] {
++        (void)user->business_time();
++    });
++
++    auto shared = user->make_global<FixedBusinessClock>(timestamp);
++    auto next = global.make_user_context();
++    user->set_business_clock(global, user->get(shared));
++    next->set_business_clock(global, next->get(next->rebind_global(shared)));
++    check(next->business_time() == timestamp, "Global clock supports independent User borrows");
++    user->destroy(shared);
++    dead([&] {
++        (void)user->business_time();
++    });
++    dead([&] {
++        (void)next->business_time();
++    });
++    dead([&] {
++        (void)next->business_date();
++    });
++
++    auto replacement = next->make_ref<FixedBusinessClock>(timestamp);
++    next->set_business_clock(*next, next->get(replacement));
++    bool during_close = false;
++
++    struct Closing {
++        UserContext* user;
++        UtcDateTime timestamp;
++        bool* observed;
++    };
++
++    Closing closing{next.get(), timestamp, &during_close};
++    Arena::Quiescence stop;
++    stop.attach(*dynamic_cast<Arena*>(next->memory_resource()), &closing, [](void* raw) noexcept {
++        auto& state = *static_cast<Closing*>(raw);
++        *state.observed = state.user->business_time() == state.timestamp;
++    });
++    next.reset();
++    check(during_close, "Checked clock remains readable during owner quiescence");
++    user.reset();
++    check(global.live_user_bytes() == 0, "All User clock borrow storage is reclaimed");
++    std::cout << "Checked business clock lifecycle contracts pass\n";
++}
+--- /dev/null
++++ b/tests/context_provider_borrow_tests.cpp
+@@ -0,0 +1,148 @@
++#include <teaql/runtime/context.hpp>
++#include <iostream>
++using namespace teaql;
++
++static void check(bool condition, const char* message) {
++    if (!condition) {
++        throw std::runtime_error(message);
++    }
++}
++
++template <class F>
++static void dead(F&& call) {
++    bool rejected = false;
++    try {
++        call();
++    } catch (const ReferenceError& error) {
++        rejected = error.kind() == ReferenceError::Kind::Dead;
++    }
++    check(rejected, "Destroyed provider rejects before dispatch");
++}
++
++struct Registry final : EntityRegistry {
++    using allocator_type = Allocator;
++    Memory owner;
++    const UserContext* close_owner = nullptr;
++
++    Registry(std::allocator_arg_t, Allocator allocator) : owner(allocator.resource()) {}
++
++    Memory memory_resource() const noexcept override {
++        return owner;
++    }
++
++    bool contains(std::string_view name) const override {
++        if (close_owner) {
++            const_cast<UserContext*>(close_owner)->close();
++        }
++        return name == "Order";
++    }
++};
++
++struct Ready {
++    using allocator_type = Allocator;
++    Memory owner;
++
++    Ready(std::allocator_arg_t, Allocator allocator) : owner(allocator.resource()) {}
++
++    std::optional<RuntimeSchemaResult> poll(WakeSignal&) {
++        return RuntimeSchemaResult::ok(owner, {});
++    }
++
++    void finish_and_wait() noexcept {}
++
++    void cancel_and_wait() noexcept {}
++};
++
++struct Provider final : runtime::SchemaProvider {
++    using allocator_type = Allocator;
++    Memory owner;
++    mutable unsigned calls = 0;
++    bool close_owner = false;
++
++    Provider(std::allocator_arg_t, Allocator allocator) : owner(allocator.resource()) {}
++
++    Memory memory_resource() const noexcept {
++        return owner;
++    }
++
++    AsyncOperation<RuntimeSchemaResult>& ensure_schema(const UserContext& user,
++                                                       const SchemaInvocation&) const override {
++        ++calls;
++        if (close_owner) {
++            const_cast<UserContext&>(user).close();
++        }
++        return make_operation<RuntimeSchemaResult, Ready>(user.memory_resource());
++    }
++};
++
++int main(int argc, char** argv) {
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    if (argc == 2) {
++        std::set_terminate([] {
++            std::_Exit(0);
++        });
++        try {
++            if (std::string_view(argv[1]) == "reentrant-registry") {
++                auto& registry = user->make<Registry>();
++                registry.close_owner = user.get();
++                user->set_entity_registry(*user, registry);
++                (void)user->has_entity_data_service("Order");
++            } else {
++                auto& provider = user->make<Provider>();
++                provider.close_owner = true;
++                user->set_schema_provider(*user, provider);
++                (void)user->ensure_schema().poll();
++            }
++        } catch (...) {
++            std::_Exit(2);
++        }
++        return 1;
++    }
++    auto registry = user->make_ref<Registry>();
++    user->set_entity_registry(*user, user->get(registry));
++    check(user->has_entity_data_service("Order") && !user->has_entity_data_service("Absent"),
++          "Live registry preserves presence and metadata fallback");
++    user->destroy(registry);
++    dead([&] {
++        (void)user->has_entity_data_service("Order");
++    });
++
++    auto shared_registry = user->make_global<Registry>();
++    auto next = global.make_user_context();
++    user->set_entity_registry(global, user->get(shared_registry));
++    next->set_entity_registry(global, next->get(next->rebind_global(shared_registry)));
++    user->destroy(shared_registry);
++    dead([&] {
++        (void)user->has_entity_data_service("Order");
++    });
++    dead([&] {
++        (void)next->has_entity_data_service("Order");
++    });
++
++    auto provider = user->make_ref<Provider>();
++    user->set_schema_provider(*user, user->get(provider));
++    auto& live = user->ensure_schema();
++    check(bool(live.wait()) && user->get(provider).calls == 1,
++          "Live schema provider is lazy and called once");
++    auto& pending = user->ensure_schema();
++    user->destroy(provider);
++    dead([&] {
++        (void)pending.poll();
++    });
++    pending.cancel();
++
++    auto shared_provider = user->make_global<Provider>();
++    next->set_schema_provider(global, next->get(next->rebind_global(shared_provider)));
++    auto& shared_work = next->ensure_schema();
++    user->destroy(shared_provider);
++    dead([&] {
++        (void)shared_work.poll();
++    });
++    shared_work.cancel();
++    user.reset();
++    next.reset();
++    check(global.live_user_bytes() == 0, "Provider borrows release all User arena blocks");
++    std::cout << "Checked Context provider lifecycle contracts pass\n";
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -136,6 +136,16 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_entity_runtime_models.py
+         --cpp $<TARGET_FILE:teaql_entity_runtime_model_probe>
+         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
++    add_executable(teaql_business_clock_scope_tests tests/business_clock_scope_tests.cpp)
++    target_link_libraries(teaql_business_clock_scope_tests PRIVATE teaql::runtime)
++    add_test(NAME business_clock_scope_contracts COMMAND teaql_business_clock_scope_tests)
++    add_test(NAME business_clock_reentrant_time COMMAND teaql_business_clock_scope_tests reentrant-time)
++    add_test(NAME business_clock_reentrant_date COMMAND teaql_business_clock_scope_tests reentrant-date)
++    add_executable(teaql_context_provider_borrow_tests tests/context_provider_borrow_tests.cpp)
++    target_link_libraries(teaql_context_provider_borrow_tests PRIVATE teaql::runtime)
++    add_test(NAME context_provider_borrow_contracts COMMAND teaql_context_provider_borrow_tests)
++    add_test(NAME context_provider_reentrant_registry COMMAND teaql_context_provider_borrow_tests reentrant-registry)
++    add_test(NAME context_provider_reentrant_schema COMMAND teaql_context_provider_borrow_tests reentrant-schema)
+     add_executable(teaql_runtime_id_model_tests tests/runtime_id_model_tests.cpp)
+     target_link_libraries(teaql_runtime_id_model_tests PRIVATE teaql::runtime)
+     add_test(NAME runtime_id_model_contracts COMMAND teaql_runtime_id_model_tests)
+--- a/tests/internal_id_tests.cpp
++++ b/tests/internal_id_tests.cpp
+@@ -275,15 +275,19 @@
+         std::set_terminate([] {
+             std::_Exit(0);
+         });
+-        GlobalContext global;
+-        auto user = global.make_user_context();
+-        auto& generator = user->make_resource<ClosingGenerator>(*user);
+-        user->set_internal_id_generator(*user, generator);
+-        if (std::string_view(argv[1]) == "reentrant-close") {
+-            (void)user->next_id("Order");
+-        } else {
+-            auto& model = user->make<Model>();
+-            (void)user->initialize_generated_bootstrap_entity(model, "Order", 1);
++        try {
++            GlobalContext global;
++            auto user = global.make_user_context();
++            auto& generator = user->make_resource<ClosingGenerator>(*user);
++            user->set_internal_id_generator(*user, generator);
++            if (std::string_view(argv[1]) == "reentrant-close") {
++                (void)user->next_id("Order");
++            } else {
++                auto& model = user->make<Model>();
++                (void)user->initialize_generated_bootstrap_entity(model, "Order", 1);
++            }
++        } catch (...) {
++            std::_Exit(2);
+         }
+         return 1;
+     }
+--- a/tests/mutation_policy_tests.cpp
++++ b/tests/mutation_policy_tests.cpp
+@@ -230,16 +230,20 @@
+         std::set_terminate([] {
+             std::_Exit(0);
+         });
+-        GlobalContext global;
+-        auto user = global.make_user_context();
+-        auto sink = user->make_ref<FunctionMutationGovernanceSink>(
+-            [&user](Memory r, const UserContext&, const MutationGovernanceEvent&) {
+-                user->close();
+-                return Outcome::ok(r, {});
+-            });
+-        user->set_mutation_governance_sink(sink);
+-        auto& plan = user->make<MutationPlan>();
+-        (void)user->review_mutation_plan(plan);
++        try {
++            GlobalContext global;
++            auto user = global.make_user_context();
++            auto sink = user->make_ref<FunctionMutationGovernanceSink>(
++                [&user](Memory r, const UserContext&, const MutationGovernanceEvent&) {
++                    user->close();
++                    return Outcome::ok(r, {});
++                });
++            user->set_mutation_governance_sink(sink);
++            auto& plan = user->make<MutationPlan>();
++            (void)user->review_mutation_plan(plan);
++        } catch (...) {
++            std::_Exit(2);
++        }
+         return 1;
+     }
+     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
+--- a/tests/checker_tests.cpp
++++ b/tests/checker_tests.cpp
+@@ -213,14 +213,18 @@
+         std::set_terminate([] {
+             std::_Exit(0);
+         });
+-        GlobalContext global;
+-        auto user = global.make_user_context();
+-        auto registry = user->make_ref<InMemoryCheckerRegistry>();
+-        auto callback = user->make_resource_ref<Closing>(*user);
+-        user->get(registry).register_checker(*user, callback);
+-        user->set_checker_registry(registry);
+-        auto& values = user->make<EntityValues>();
+-        (void)user->check_and_fix_values("Item", values);
++        try {
++            GlobalContext global;
++            auto user = global.make_user_context();
++            auto registry = user->make_ref<InMemoryCheckerRegistry>();
++            auto callback = user->make_resource_ref<Closing>(*user);
++            user->get(registry).register_checker(*user, callback);
++            user->set_checker_registry(registry);
++            auto& values = user->make<EntityValues>();
++            (void)user->check_and_fix_values("Item", values);
++        } catch (...) {
++            std::_Exit(2);
++        }
+         return 1;
+     }
+     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());

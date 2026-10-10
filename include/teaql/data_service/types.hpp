@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/core/mutation.hpp>
+#include <teaql/core/system_time.hpp>
 #include <teaql/data_service/sql_log.hpp>
 #include <chrono>
 
@@ -142,7 +143,7 @@ struct GuardedMutationRequest {
 
 struct ExecutionMetadata {
     using allocator_type = Allocator;
-    using SystemTime = std::chrono::system_clock::time_point;
+    using SystemTime = teaql::SystemTime;
     Vector<ExecutionMetadata> statements;
     SqlLogContext sql_log;
     String backend;

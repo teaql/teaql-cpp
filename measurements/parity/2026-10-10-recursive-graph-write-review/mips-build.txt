@@ -1,0 +1,5 @@
+[1/2] Building CXX object CMakeFiles/teaql_recursive_graph_write_tests.dir/tests/recursive_graph_write_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[2/2] Linking CXX executable teaql_recursive_graph_write_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined

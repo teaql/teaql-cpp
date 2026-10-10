@@ -1,9 +1,22 @@
 #include <teaql/runtime/context.hpp>
 #include <teaql/runtime/error.hpp>
+#include <teaql/runtime/error_debug.hpp>
+#include <teaql/runtime/entity_status_debug.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include "fixture_value.hpp"
 #include <iostream>
 using namespace teaql;
+
+static Json formatted(Memory owner, const auto& value) {
+    Json::Array result(owner);
+    for (auto options : {DebugOptions{},
+                         DebugOptions{true},
+                         DebugOptions{false, DebugNumbers::LowerHex},
+                         DebugOptions{true, DebugNumbers::UpperHex}}) {
+        result.emplace_back(debug_string(owner, value, options));
+    }
+    return Json(owner, std::move(result));
+}
 
 static CheckResult make_check(Memory r, const Json& input) {
     auto location = ObjectLocation::root(r);
@@ -119,6 +132,7 @@ static RuntimeError make_error(Memory r, const Json& input) {
 static Json evaluate(Memory r, const Json& input) {
     auto out = detail::model_json(r);
     auto op = text(field(input, "op"));
+    const bool debug = optional(input, "debug") && std::get<bool>(field(input, "debug").data);
     if (op == "check") {
         auto profile = json_field_naming_from_model_value(r, text(field(input, "profile")));
         if (!profile) {
@@ -126,6 +140,9 @@ static Json evaluate(Memory r, const Json& input) {
             return out;
         }
         auto result = make_check(r, input);
+        if (debug) {
+            detail::model_put(out, "debug", formatted(r, result));
+        }
         auto& location = result.location;
         detail::model_put(out, "root", location.is_root());
         detail::model_put(out, "level", location.level());
@@ -140,6 +157,11 @@ static Json evaluate(Memory r, const Json& input) {
         detail::model_put(out, "wire", result.to_wire(r, profile.value()).to_json(r));
     } else if (op == "error") {
         auto error = make_error(r, input);
+        if (debug) {
+            detail::model_put(out, "debug", formatted(r, error));
+            auto wrapped = DataServiceError<String>::runtime(r, detail::clone_in(r, error));
+            detail::model_put(out, "wrapped_debug", formatted(r, wrapped));
+        }
         detail::model_put(out, "display", error.to_string(r));
         if (error.kind() == RuntimeError::Kind::Check) {
             Json::Array checks(r);
@@ -153,6 +175,14 @@ static Json evaluate(Memory r, const Json& input) {
         detail::model_put(
             out, "wrapped", DataServiceError<String>::runtime(r, std::move(error)).to_string(r));
     } else if (op == "entity_error") {
+        if (debug) {
+            auto error = DataServiceError<String>::entity(r,
+                                                          EntityError(std::allocator_arg,
+                                                                      Allocator(r),
+                                                                      text(field(input, "entity")),
+                                                                      text(field(input, "text"))));
+            detail::model_put(out, "debug", formatted(r, error));
+        }
         detail::model_put(out,
                           "display",
                           DataServiceError<String>::entity(r,
@@ -162,18 +192,56 @@ static Json evaluate(Memory r, const Json& input) {
                                                                        text(field(input, "text"))))
                               .to_string(r));
     } else if (op == "executor_error") {
+        if (debug) {
+            auto error =
+                DataServiceError<String>::executor(r, String(text(field(input, "text")), r));
+            detail::model_put(out, "debug", formatted(r, error));
+        }
         detail::model_put(
             out,
             "display",
             DataServiceError<String>::executor(r, String(text(field(input, "text")), r))
                 .to_string(r));
+    } else if (op == "context_error") {
+        ContextError error(std::allocator_arg,
+                           Allocator(r),
+                           ContextError::Kind(std::get<std::uint64_t>(field(input, "kind").data)),
+                           text(field(input, "text")));
+        detail::model_put(out, "display", error.to_string(r));
+        detail::model_put(out, "debug", formatted(r, error));
+    } else if (op == "status") {
+        auto status = EntityStatus(std::get<std::uint64_t>(field(input, "status").data));
+        auto action = EntityAction(std::get<std::uint64_t>(field(input, "action").data));
+        detail::model_put(out, "status_debug", formatted(r, status));
+        detail::model_put(out, "action_debug", formatted(r, action));
+        detail::model_put(out, "status_display", to_string(status));
+        detail::model_put(out, "action_display", to_string(action));
+        detail::model_put(out, "default", to_string(EntityStatus{}));
+        try {
+            detail::model_put(out, "next", to_string(next_status(status, action)));
+        } catch (const std::invalid_argument& error) {
+            detail::model_put(out, "error", error.what());
+        }
+        Json::Array flags(r);
+        for (auto flag : {need_persist(status),
+                          is_new(status),
+                          is_updated(status),
+                          is_deleted(status),
+                          is_recover(status)}) {
+            flags.emplace_back(flag);
+        }
+        detail::model_put(out, "flags", std::move(flags));
     } else {
         throw std::runtime_error("unknown operation");
     }
     return out;
 }
 
-int main() {
+int main(int argc, char** argv) {
+    if (argc == 2 && std::string_view(argv[1]) == "--pointer-bits") {
+        std::cout << sizeof(std::size_t) * 8 << '\n';
+        return 0;
+    }
     GlobalContext global;
     std::string line;
     while (std::getline(std::cin, line)) {

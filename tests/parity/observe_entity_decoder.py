@@ -34,11 +34,22 @@ def cases():
     actions=[dict(op='entity',kind=0),dict(op='entity',kind=1),dict(op='entity',kind=2),dict(op='entity_behavior',value='first'),dict(op='entity_behavior',kind=2,value='alias behavior'),dict(op='behavior',name='Item',value='custom'),dict(op='behavior',name='OnlyBehavior',value='orphan'),dict(op='descriptor',name='Item')]
     for i,(a,b) in enumerate(itertools.product(actions,repeat=2)):
         add(f'module order {i}',[a,b,dict(op='behavior',name='Item',value='last')],mode='module')
+    for case in range(8):
+        for first, last, alias in [
+            ('first', 'last', 'alias'),
+            ('first-' + 'x' * 96, 'last-关系-é', 'alias-\u2028-λ'),
+        ]:
+            cases.append(dict(
+                label=f'actual module macro case {case} first {first}',
+                input=dict(mode='macro_module', case=case, first=first, last=last, alias=alias),
+            ))
     return cases
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--rust',required=True);args=p.parse_args();root=Path(__file__).resolve().parents[2]
     subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
     data=cases();outputs=observe(args.rust,[c['input'] for c in data])
+    if outputs != observe(args.rust, [c['input'] for c in data]):
+        raise RuntimeError('Original decoder/module observations changed between runs')
     for c,o in zip(data,outputs):c['expected']=o
     baseline=json.loads((root/'upstream.lock.json').read_text())['commit']
     Path(__file__).with_name('entity_decoder_cases.json').write_text('{"baseline":'+json.dumps(baseline)+',"cases":[\n'+',\n'.join(json.dumps(c,ensure_ascii=True,separators=(',',':')) for c in data)+'\n]}\n')

@@ -1,0 +1,19 @@
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philip/githome/teaql-cpp/build-wndr4300-memory
+[1/7] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/relation_enhancement.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[2/7] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/generated_support.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[3/7] Linking CXX static library libteaql_runtime.a
+[4/7] Building CXX object CMakeFiles/teaql_graph_save_adapter_tests.dir/tests/graph_save_adapter_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[5/7] Linking CXX executable teaql_graph_save_adapter_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[6/7] Building CXX object CMakeFiles/teaql_graph_execution_probe.dir/tests/parity/graph_execution_probe.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[7/7] Linking CXX executable teaql_graph_execution_probe
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined

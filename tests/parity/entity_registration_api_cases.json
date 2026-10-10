@@ -1,0 +1,564 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Original register_entities macro: overridden/default hooks and store failure order.",
+  "cases": [
+    {
+      "input": {
+        "scenario": 0,
+        "limit": 0
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": false,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 0,
+        "limit": 1
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": true,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 0,
+        "limit": 2
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": true,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 0,
+        "limit": 3
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": true,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 0,
+        "limit": 4
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": true,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 0,
+        "limit": 5
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": true,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 0,
+        "limit": 6
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": true,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 1,
+        "limit": 0
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": false,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 1,
+        "limit": 1
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": false,
+        "names": [
+          "OverrideA"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 1,
+        "limit": 2
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 1,
+        "limit": 3
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 1,
+        "limit": 4
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 1,
+        "limit": 5
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 1,
+        "limit": 6
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 2,
+        "limit": 0
+      },
+      "expected": {
+        "attempted": 0,
+        "completed": true,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 2,
+        "limit": 1
+      },
+      "expected": {
+        "attempted": 0,
+        "completed": true,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 2,
+        "limit": 2
+      },
+      "expected": {
+        "attempted": 0,
+        "completed": true,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 2,
+        "limit": 3
+      },
+      "expected": {
+        "attempted": 0,
+        "completed": true,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 2,
+        "limit": 4
+      },
+      "expected": {
+        "attempted": 0,
+        "completed": true,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 2,
+        "limit": 5
+      },
+      "expected": {
+        "attempted": 0,
+        "completed": true,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 2,
+        "limit": 6
+      },
+      "expected": {
+        "attempted": 0,
+        "completed": true,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 3,
+        "limit": 0
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": false,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 3,
+        "limit": 1
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": false,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 3,
+        "limit": 2
+      },
+      "expected": {
+        "attempted": 3,
+        "completed": false,
+        "names": [
+          "Default",
+          "OverrideA"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 3,
+        "limit": 3
+      },
+      "expected": {
+        "attempted": 4,
+        "completed": false,
+        "names": [
+          "Default",
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 3,
+        "limit": 4
+      },
+      "expected": {
+        "attempted": 4,
+        "completed": true,
+        "names": [
+          "Default",
+          "OverrideA",
+          "OverrideB",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 3,
+        "limit": 5
+      },
+      "expected": {
+        "attempted": 4,
+        "completed": true,
+        "names": [
+          "Default",
+          "OverrideA",
+          "OverrideB",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 3,
+        "limit": 6
+      },
+      "expected": {
+        "attempted": 4,
+        "completed": true,
+        "names": [
+          "Default",
+          "OverrideA",
+          "OverrideB",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 4,
+        "limit": 0
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": false,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 4,
+        "limit": 1
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": false,
+        "names": [
+          "OverrideA"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 4,
+        "limit": 2
+      },
+      "expected": {
+        "attempted": 3,
+        "completed": false,
+        "names": [
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 4,
+        "limit": 3
+      },
+      "expected": {
+        "attempted": 4,
+        "completed": false,
+        "names": [
+          "OverrideA",
+          "OverrideB",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 4,
+        "limit": 4
+      },
+      "expected": {
+        "attempted": 5,
+        "completed": false,
+        "names": [
+          "OverrideA",
+          "OverrideB",
+          "Default",
+          "OverrideA"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 4,
+        "limit": 5
+      },
+      "expected": {
+        "attempted": 5,
+        "completed": true,
+        "names": [
+          "OverrideA",
+          "OverrideB",
+          "Default",
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 4,
+        "limit": 6
+      },
+      "expected": {
+        "attempted": 5,
+        "completed": true,
+        "names": [
+          "OverrideA",
+          "OverrideB",
+          "Default",
+          "OverrideA",
+          "OverrideB"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 5,
+        "limit": 0
+      },
+      "expected": {
+        "attempted": 1,
+        "completed": false,
+        "names": []
+      }
+    },
+    {
+      "input": {
+        "scenario": 5,
+        "limit": 1
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": false,
+        "names": [
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 5,
+        "limit": 2
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "Default",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 5,
+        "limit": 3
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "Default",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 5,
+        "limit": 4
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "Default",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 5,
+        "limit": 5
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "Default",
+          "Default"
+        ]
+      }
+    },
+    {
+      "input": {
+        "scenario": 5,
+        "limit": 6
+      },
+      "expected": {
+        "attempted": 2,
+        "completed": true,
+        "names": [
+          "Default",
+          "Default"
+        ]
+      }
+    }
+  ]
+}

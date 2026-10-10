@@ -37,6 +37,8 @@ ready(UserContext& context, Result<T, Error> value, int& polls) {
 }
 
 struct Tx final : DataServiceTransaction<Error> {
+    void cancel_transaction() noexcept override {}
+
     UserContext& context;
     int& polls;
     int queries = 0, mutations = 0;
@@ -218,6 +220,16 @@ static void contracts() {
     auto& begin = provider.begin(r);
     const auto& handle = begin.wait().value();
     auto& tx = handle.get();
+    check(&handle.get_as<QueryExecutor<Error>>() == static_cast<QueryExecutor<Error>*>(&tx),
+          "erased transaction retains its implemented query capability");
+    bool missing_guard = false;
+    try {
+        (void)handle.get_as<GuardedMutationExecutor<Error>>();
+    } catch (const std::logic_error&) {
+        missing_guard = true;
+    }
+    check(missing_guard && !tx.consumed(),
+          "ordinary transaction does not advertise or emulate guarded mutation");
     check(tx.query(r, request()).wait().error() == Error::Query &&
               tx.mutate(r, mutation()).wait().error() == Error::Mutation,
           "associated transaction supports query and mutation independently");

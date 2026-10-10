@@ -45,12 +45,14 @@ static void row_lifetimes() {
                       std::get<String>(array[0].data).get_allocator().resource() == r,
                   "nested object, key, array and text propagate domain");
             retained = &global.make<CompactRow>(*row);
-            check(retained->shared_columns() == nullptr &&
+            check(retained->shared_columns() != &layout.columns() &&
+                      retained->shared_columns()->memory_resource() == gr &&
                       retained->keys()[0].get_allocator().resource() == gr,
                   "cross-domain row copies layout");
             Vector<Value> owned(row->values().begin(), row->values().end(), r);
             transferred = &global.make<CompactRow>(layout.columns(), std::move(owned));
-            check(transferred->shared_columns() == nullptr &&
+            check(transferred->shared_columns() != &layout.columns() &&
+                      transferred->shared_columns()->memory_resource() == gr &&
                       std::get<Json>(transferred->get("doc")->data).memory_resource() == gr,
                   "moving a value vector across domains still deep-copies");
         }

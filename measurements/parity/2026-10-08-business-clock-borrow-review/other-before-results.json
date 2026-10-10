@@ -1,0 +1,14 @@
+{
+  "registry": {
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "pure virtual method called\nterminate called without an active exception\n",
+    "expected": "ReferenceError::Dead before provider dispatch"
+  },
+  "schema": {
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "pure virtual method called\nterminate called without an active exception\n",
+    "expected": "ReferenceError::Dead before provider dispatch"
+  }
+}

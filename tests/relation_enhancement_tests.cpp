@@ -322,12 +322,13 @@ static void domains_and_aliases() {
           "returned-row index snapshots isolate overlapping source and destination rows");
     auto& foreign = sibling->make<Vector<CompactRow>>();
     foreign.emplace_back(row(sibling->memory_resource(), {{"id", 1}}));
-    auto& unrelated = make_operation<Rows, Ready>(*sibling);
+    AsyncOperation<Rows>* returned = nullptr;
     unsigned calls = 0;
     detail::EntityRelationFetch<E> fetch(
         std::allocator_arg, Allocator(r), [&](const auto&, SelectQuery) -> auto& {
             ++calls;
-            return unrelated;
+            returned = &make_operation<Rows, Ready>(*sibling);
+            return *returned;
         });
     Vector<RelationAggregate> aggregates(r);
     aggregates.emplace_back("children", "stats", q, true);
@@ -352,6 +353,7 @@ static void domains_and_aliases() {
         "child enhancement refuses cross-domain parent borrow");
     check(calls == 0, "domain rejection precedes I/O");
     for (unsigned mode = 0; mode < 3; ++mode) {
+        returned = nullptr;
         auto& work =
             mode == 0   ? detail::enhance_relation_aggregates(repo, rows, aggregates, {}, {}, fetch)
             : mode == 1 ? detail::enhance_object_group_bys(repo, rows, groups, {}, fetch)
@@ -361,10 +363,9 @@ static void domains_and_aliases() {
                 work.poll();
             },
             "all enhancement paths reject foreign child operations");
-        check(unrelated.status() == AsyncStatus::Pending,
-              "domain rejection preserves foreign owner's operation");
+        check(returned && returned->status() == AsyncStatus::Cancelled,
+              "each enhancement cancels its newly returned foreign callback result");
     }
-    unrelated.cancel();
 }
 
 int main() {

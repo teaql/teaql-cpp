@@ -1,0 +1,13 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "profile": "ASan/UBSan",
+  "passed": 31,
+  "total": 31,
+  "seconds": 25.46,
+  "detect_leaks": false,
+  "initial_build_tasks": 69,
+  "additional_scope_build_tasks": 6,
+  "post_test": "no work",
+  "native_full": "pending",
+  "source_acceptance": "pending"
+}

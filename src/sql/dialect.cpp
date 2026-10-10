@@ -1,5 +1,6 @@
 #include <teaql/sql/dialect.hpp>
 #include <algorithm>
+#include <array>
 #include <charconv>
 #include <limits>
 
@@ -86,9 +87,8 @@ void validate_schema_shape(Memory r, const PropertyDescriptor& property) {
         invalid(reason);
     }
 }
-}
 
-String quote_identifier_if_needed(Memory r, std::string_view ident, char quote) {
+String quote_identifier_bytes(Memory r, std::string_view ident, std::string_view quote) {
     if (!ident.empty() && ((ident.front() == '"' && ident.back() == '"') ||
                            (ident.front() == '`' && ident.back() == '`') ||
                            (ident.front() == '[' && ident.back() == ']'))) {
@@ -116,14 +116,51 @@ String quote_identifier_if_needed(Memory r, std::string_view ident, char quote) 
     }
     String out(r);
     out += quote;
-    for (char c : ident) {
-        out += c;
-        if (c == quote) {
+    for (std::size_t index = 0; index < ident.size();) {
+        if (ident.substr(index).starts_with(quote)) {
             out += quote;
+            out += quote;
+            index += quote.size();
+        } else {
+            out += ident[index++];
         }
     }
     out += quote;
     return out;
+}
+}
+
+String quote_identifier_if_needed(Memory r, std::string_view ident, char quote) {
+    return quote_identifier_bytes(r, ident, std::string_view(&quote, 1));
+}
+
+String quote_identifier_if_needed(Memory r, std::string_view ident, char32_t quote) {
+    auto code = static_cast<std::uint32_t>(quote);
+    if (code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)) {
+        throw std::invalid_argument("SQL quote must be a Unicode scalar value");
+    }
+    std::array<char, 4> bytes{};
+    std::size_t size;
+    if (code <= 0x7f) {
+        bytes[0] = static_cast<char>(code);
+        size = 1;
+    } else if (code <= 0x7ff) {
+        bytes[0] = static_cast<char>(0xc0 | (code >> 6));
+        bytes[1] = static_cast<char>(0x80 | (code & 0x3f));
+        size = 2;
+    } else if (code <= 0xffff) {
+        bytes[0] = static_cast<char>(0xe0 | (code >> 12));
+        bytes[1] = static_cast<char>(0x80 | ((code >> 6) & 0x3f));
+        bytes[2] = static_cast<char>(0x80 | (code & 0x3f));
+        size = 3;
+    } else {
+        bytes[0] = static_cast<char>(0xf0 | (code >> 18));
+        bytes[1] = static_cast<char>(0x80 | ((code >> 12) & 0x3f));
+        bytes[2] = static_cast<char>(0x80 | ((code >> 6) & 0x3f));
+        bytes[3] = static_cast<char>(0x80 | (code & 0x3f));
+        size = 4;
+    }
+    return quote_identifier_bytes(r, ident, std::string_view(bytes.data(), size));
 }
 
 String bounded_sql_identifier(Memory r, std::string_view full, std::size_t max) {
@@ -746,6 +783,12 @@ String SqlDialect::compile_in(Memory r,
                               const Expr& right,
                               SqlBindings& params) const {
     auto lhs = compile_expr(r, entity, left, params);
+    if (op != BinaryOp::In && op != BinaryOp::NotIn && op != BinaryOp::InLarge &&
+        op != BinaryOp::NotInLarge) {
+        // Preserve the source's unreachable precondition after left evaluation;
+        // this is not an invented SQL error or a silent NOT IN fallback.
+        throw std::logic_error("Invalid direct IN operator");
+    }
     String out("(", r);
     out += lhs;
     out += op == BinaryOp::In || op == BinaryOp::InLarge ? " IN (" : " NOT IN (";

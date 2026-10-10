@@ -56,7 +56,13 @@ struct WebStyle {
 
     template <BaseEntity T>
     void bind_entity(T& entity) const {
-        bind_base(entity.base_mut());
+        auto value = to_json_value(entity.base().memory_resource());
+        if constexpr (requires { entity.put_dynamic(STYLE_KEY, std::move(value)); }) {
+            entity.put_dynamic(STYLE_KEY, std::move(value));
+        } else {
+            // Handwritten models without the CRTP helper retain the trait default.
+            entity.base_mut().put_dynamic(STYLE_KEY, std::move(value));
+        }
     }
 
     void bind_record(Record&) const;
@@ -226,11 +232,23 @@ struct WebResponse {
     static WebResponse from_records(Memory, std::span<const Record>);
 
     template <Entity T>
-    static WebResponse from_entity(Memory r, const T& entity) {
+    static WebResponse from_entity(Memory r, const T& entity)
+        requires detail::domain_copyable<T>
+    {
         auto copy = detail::clone_in(r, entity);
         auto values = std::move(copy).into_values();
         auto result = success(r);
         result.push_json(record_to_json_value(r, values.fields));
+        return result;
+    }
+
+    template <std::ranges::input_range Records>
+        requires std::same_as<std::ranges::range_value_t<Records>, Record>
+    static WebResponse from_records(Memory owner, Records&& records) {
+        auto result = success(owner);
+        for (const auto& record : records) {
+            result.push_json(record_to_json_value(owner, record));
+        }
         return result;
     }
 
@@ -242,6 +260,34 @@ struct WebResponse {
             result.push_json(record_to_json_value(r, values.fields));
         }
         return result;
+    }
+
+    template <std::ranges::input_range Entities>
+        requires Entity<std::ranges::range_value_t<Entities>>
+    static WebResponse from_entities(Memory owner, Entities&& entities) {
+        using T = std::ranges::range_value_t<Entities>;
+        using Reference = std::ranges::range_reference_t<Entities>;
+        constexpr bool consuming =
+            (!std::is_lvalue_reference_v<Reference> &&
+             !std::is_const_v<std::remove_reference_t<Reference>>) ||
+            (!std::is_lvalue_reference_v<Entities> && !std::ranges::borrowed_range<Entities>);
+        if constexpr (!consuming && !detail::domain_copyable<T>) {
+            throw std::invalid_argument(
+                "Borrowed entity projection requires an allocator-aware copy");
+        } else {
+            auto result = success(owner);
+            for (auto&& entity : entities) {
+                if constexpr (consuming) {
+                    auto values = std::move(entity).into_values();
+                    result.push_json(record_to_json_value(owner, values.fields));
+                } else {
+                    auto copy = detail::clone_in(owner, entity);
+                    auto values = std::move(copy).into_values();
+                    result.push_json(record_to_json_value(owner, values.fields));
+                }
+            }
+            return result;
+        }
     }
 
     template <Entity T>

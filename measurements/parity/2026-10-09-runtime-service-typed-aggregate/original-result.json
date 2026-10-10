@@ -1,0 +1,13 @@
+{
+  "observations": 48,
+  "independent_runs": 2,
+  "agreement": true,
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source_methods": [
+    "decode_compact_rows",
+    "ensure_entity_identity_projection",
+    "fetch_entities_with_relation_aggregates_internal",
+    "ensure_projection"
+  ],
+  "scope": "Controlled row/error input isolates the exact helper body; complete row aggregation runtime remains a separate comparison."
+}

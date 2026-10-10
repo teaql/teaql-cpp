@@ -52,4 +52,78 @@ fn module(input:&J)->J{
   m.clone().apply_to(&mut c);out.push(["Item","Alias","OnlyBehavior"].iter().map(|name|{let e=c.entity(name);json!({"entity":e.map(|e|&e.name),"table":e.map(|e|&e.table_name),"has":c.has_entity_data_service(name),"behavior":c.entity_data_service_behavior(name).map(|b|b.relation_loads(&c))})}).collect::<Vec<_>>());
  }json!(out)
 }
-fn main(){for line in io::stdin().lock().lines(){let j:J=serde_json::from_str(&line.unwrap()).unwrap();println!("{}",if j["mode"]=="module"{module(&j)}else{decode(&j)});}}
+fn module_snapshot(context: &UserContext) -> J {
+    json!(["Item", "Alias", "OnlyBehavior"].iter().map(|name| {
+        let descriptor = context.entity(name);
+        json!({
+            "entity": descriptor.map(|value| &value.name),
+            "table": descriptor.map(|value| &value.table_name),
+            "has": context.has_entity_data_service(name),
+            "behavior": context.entity_data_service_behavior(name)
+                .map(|value| value.relation_loads(context)),
+        })
+    }).collect::<Vec<_>>())
+}
+
+fn macro_module(input: &J) -> J {
+    let first = input["first"].as_str().unwrap();
+    let last = input["last"].as_str().unwrap();
+    let alias = input["alias"].as_str().unwrap();
+    // Invoke the unchanged original macro, including recursive and terminal
+    // branches, rather than reconstructing its builder algorithm in the oracle.
+    let mut module = match input["case"].as_u64().unwrap() {
+        0 => teaql_runtime::module!(Item<0>, Item<2>,),
+        1 => teaql_runtime::module!(Item<2>, Item<0>),
+        2 => teaql_runtime::module!(Item<0>, Item<1>, Item<2>),
+        3 => teaql_runtime::module!(Item<2>, Item<1>, Item<0>,),
+        4 => teaql_runtime::module!(
+            Item<0> => NamedBehavior(first.into()),
+            Item<2> => NamedBehavior(alias.into()),
+            Item<1> => NamedBehavior(last.into()),
+        ),
+        5 => teaql_runtime::module!(
+            Item<2> => NamedBehavior(alias.into()),
+            Item<0> => NamedBehavior(first.into()),
+            Item<0> => NamedBehavior(last.into()),
+        ),
+        6 => teaql_runtime::module!(
+            Item<0> => NamedBehavior(first.into()), Item<1>, Item<2>,
+        ),
+        7 => teaql_runtime::module!(
+            Item<0>, Item<2> => NamedBehavior(alias.into()),
+            Item<0> => NamedBehavior(last.into()),
+        ),
+        _ => panic!("macro fixture case"),
+    };
+    let cloned = module.clone();
+    let mut original_context = UserContext::new();
+    module.clone().apply_to(&mut original_context);
+    let before = module_snapshot(&original_context);
+    let cloned_context = cloned.into_context();
+    let cloned_snapshot = module_snapshot(&cloned_context);
+    let built = module.clone().into_context();
+    let built_snapshot = module_snapshot(&built);
+    module = module.entity::<Item<1>>().behavior("Item", NamedBehavior(last.into()));
+    let mut updated = UserContext::new();
+    module.apply_to(&mut updated);
+    json!({
+        "before": before,
+        "cloned": cloned_snapshot,
+        "built": built_snapshot,
+        "updated": module_snapshot(&updated),
+        "original_after": module_snapshot(&original_context),
+        "clone_after": module_snapshot(&cloned_context),
+    })
+}
+
+fn main() {
+    for line in io::stdin().lock().lines() {
+        let input: J = serde_json::from_str(&line.unwrap()).unwrap();
+        let output = match input["mode"].as_str().unwrap() {
+            "module" => module(&input),
+            "macro_module" => macro_module(&input),
+            _ => decode(&input),
+        };
+        println!("{output}");
+    }
+}

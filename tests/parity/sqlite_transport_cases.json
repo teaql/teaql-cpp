@@ -75483,6 +75483,136 @@
           }
         ]
       }
+    },
+    {
+      "input": {
+        "mode": "capabilities",
+        "count": 0,
+        "sql": "SELECT 1",
+        "params": []
+      },
+      "expected": {
+        "outcome": {
+          "batch_mutation": false,
+          "business_id_space_table": "teaql_business_id_space",
+          "column_cache_capacity": 64,
+          "id_generation": true,
+          "id_space_table": "teaql_id_space",
+          "mutation": true,
+          "prepared_cache_capacity": 64,
+          "query": true,
+          "returning": false,
+          "schema": true,
+          "small_parent_relation_probes": false,
+          "transaction": true
+        },
+        "saved": []
+      }
+    },
+    {
+      "input": {
+        "mode": "units",
+        "count": 0,
+        "sql": "SELECT 1",
+        "params": []
+      },
+      "expected": {
+        "outcome": {
+          "dialect": {
+            "clone": {
+              "compact": "SqliteDialect",
+              "fancy": "SqliteDialect",
+              "lower_hex": "SqliteDialect",
+              "pretty": "SqliteDialect",
+              "pretty_lower_hex": "SqliteDialect",
+              "pretty_upper_hex": "SqliteDialect",
+              "upper_hex": "SqliteDialect",
+              "width_precision": "SqliteDialect",
+              "zero_pad": "SqliteDialect"
+            },
+            "copy": {
+              "compact": "SqliteDialect",
+              "fancy": "SqliteDialect",
+              "lower_hex": "SqliteDialect",
+              "pretty": "SqliteDialect",
+              "pretty_lower_hex": "SqliteDialect",
+              "pretty_upper_hex": "SqliteDialect",
+              "upper_hex": "SqliteDialect",
+              "width_precision": "SqliteDialect",
+              "zero_pad": "SqliteDialect"
+            },
+            "default": {
+              "compact": "SqliteDialect",
+              "fancy": "SqliteDialect",
+              "lower_hex": "SqliteDialect",
+              "pretty": "SqliteDialect",
+              "pretty_lower_hex": "SqliteDialect",
+              "pretty_upper_hex": "SqliteDialect",
+              "upper_hex": "SqliteDialect",
+              "width_precision": "SqliteDialect",
+              "zero_pad": "SqliteDialect"
+            },
+            "direct": {
+              "compact": "SqliteDialect",
+              "fancy": "SqliteDialect",
+              "lower_hex": "SqliteDialect",
+              "pretty": "SqliteDialect",
+              "pretty_lower_hex": "SqliteDialect",
+              "pretty_upper_hex": "SqliteDialect",
+              "upper_hex": "SqliteDialect",
+              "width_precision": "SqliteDialect",
+              "zero_pad": "SqliteDialect"
+            }
+          },
+          "schema": {
+            "clone": {
+              "compact": "SqliteSchemaProvider",
+              "fancy": "SqliteSchemaProvider",
+              "lower_hex": "SqliteSchemaProvider",
+              "pretty": "SqliteSchemaProvider",
+              "pretty_lower_hex": "SqliteSchemaProvider",
+              "pretty_upper_hex": "SqliteSchemaProvider",
+              "upper_hex": "SqliteSchemaProvider",
+              "width_precision": "SqliteSchemaProvider",
+              "zero_pad": "SqliteSchemaProvider"
+            },
+            "copy": {
+              "compact": "SqliteSchemaProvider",
+              "fancy": "SqliteSchemaProvider",
+              "lower_hex": "SqliteSchemaProvider",
+              "pretty": "SqliteSchemaProvider",
+              "pretty_lower_hex": "SqliteSchemaProvider",
+              "pretty_upper_hex": "SqliteSchemaProvider",
+              "upper_hex": "SqliteSchemaProvider",
+              "width_precision": "SqliteSchemaProvider",
+              "zero_pad": "SqliteSchemaProvider"
+            },
+            "default": {
+              "compact": "SqliteSchemaProvider",
+              "fancy": "SqliteSchemaProvider",
+              "lower_hex": "SqliteSchemaProvider",
+              "pretty": "SqliteSchemaProvider",
+              "pretty_lower_hex": "SqliteSchemaProvider",
+              "pretty_upper_hex": "SqliteSchemaProvider",
+              "upper_hex": "SqliteSchemaProvider",
+              "width_precision": "SqliteSchemaProvider",
+              "zero_pad": "SqliteSchemaProvider"
+            },
+            "direct": {
+              "compact": "SqliteSchemaProvider",
+              "fancy": "SqliteSchemaProvider",
+              "lower_hex": "SqliteSchemaProvider",
+              "pretty": "SqliteSchemaProvider",
+              "pretty_lower_hex": "SqliteSchemaProvider",
+              "pretty_upper_hex": "SqliteSchemaProvider",
+              "upper_hex": "SqliteSchemaProvider",
+              "width_precision": "SqliteSchemaProvider",
+              "zero_pad": "SqliteSchemaProvider"
+            }
+          }
+        },
+        "saved": []
+      }
     }
   ]
 }

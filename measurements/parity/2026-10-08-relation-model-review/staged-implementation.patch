@@ -1,0 +1,232 @@
+--- /dev/null
++++ b/include/teaql/runtime/relation_model_debug.hpp
+@@ -0,0 +1,45 @@
++#pragma once
++#include <teaql/runtime/relation.hpp>
++#include <teaql/core/query_debug.hpp>
++
++namespace teaql {
++inline void write_debug(DebugWriter& writer, const RelationLoadPlan& value) {
++    writer.structure("RelationLoadPlan", [&](auto& fields) {
++        fields.field("parent_entity", [&](auto& out) {
++            out.text(value.parent_entity);
++        });
++        fields.field("relation_name", [&](auto& out) {
++            out.text(value.relation_name);
++        });
++        fields.field("path", [&](auto& out) {
++            out.text(value.path);
++        });
++        fields.field("target_entity", [&](auto& out) {
++            out.text(value.target_entity);
++        });
++        fields.field("local_key", [&](auto& out) {
++            out.text(value.local_key);
++        });
++        fields.field("foreign_key", [&](auto& out) {
++            out.text(value.foreign_key);
++        });
++        fields.field("many", [&](auto& out) {
++            out.boolean(value.many);
++        });
++        fields.field("query", [&](auto& out) {
++            if (value.query) {
++                out.tuple("Some", [&](auto& inner) {
++                    write_debug(inner, *value.query);
++                });
++            } else {
++                out.raw("None");
++            }
++        });
++        fields.field("children", [&](auto& out) {
++            out.sequence(value.children, [](auto& inner, const auto& child) {
++                write_debug(inner, child);
++            });
++        });
++    });
++}
++}
+--- a/include/teaql/runtime.hpp
++++ b/include/teaql/runtime.hpp
+@@ -28,6 +28,7 @@
+ #include <teaql/runtime/mutation_policy.hpp>
+ #include <teaql/runtime/round_trip_reference.hpp>
+ #include <teaql/runtime/reference_model_debug.hpp>
++#include <teaql/runtime/relation_model_debug.hpp>
+ #include <teaql/runtime/registry_debug.hpp>
+ #include <teaql/runtime/telemetry.hpp>
+ #include <teaql/runtime/telemetry_debug.hpp>
+--- /dev/null
++++ b/tests/relation_model_tests.cpp
+@@ -0,0 +1,55 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/relation_model_debug.hpp>
++#include <iostream>
++using namespace teaql;
++
++static void check(bool value, const char* message) {
++    if (!value) {
++        throw std::runtime_error(message);
++    }
++}
++
++int main() {
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto owner = user->memory_resource();
++    auto& relation = user->make<RelationDescriptor>("items", "Item");
++    relation.local_key = "id";
++    relation.foreign_key = "order_id";
++    relation.many = true;
++    auto source = user->make_ref<RelationLoadPlan>("Order", relation);
++    auto& plan = user->get(source);
++    plan.path.assign(512, 'p');
++    plan.query.emplace(std::allocator_arg, Allocator(owner), "Item");
++    plan.query->and_filter(Expr::eq(owner, "name", Value(owner, String(512, 'v', owner))));
++    plan.query->comment("reason🧊").limit(UINT64_MAX).offset(17).top_n_probe_parent_threshold(7);
++    auto& child_relation = user->make<RelationDescriptor>("parts", "Part");
++    auto& child = plan.children.emplace_back("Item", child_relation);
++    child.query.emplace(std::allocator_arg, Allocator(owner), "Part");
++    child.query->comment(String(512, 'c', owner));
++    auto kept = user->make_global<RelationLoadPlan>(plan);
++    user.reset();
++    check(global.live_user_bytes() == 0, "Source relation-plan User is fully reclaimed");
++    auto next = global.make_user_context();
++    const auto& retained = next->get(next->rebind_global(kept));
++    check(retained.path.get_allocator().resource() == global.memory_resource() &&
++              retained.query->memory_resource() == global.memory_resource() &&
++              retained.children[0].query->memory_resource() == global.memory_resource(),
++          "Full recursive relation plans and query payloads use the destination scope");
++    {
++        auto debug = debug_string(next->memory_resource(), retained, DebugOptions{.pretty = true});
++        auto copy = detail::clone_in(next->memory_resource(), retained);
++        check(debug.find("parts") != debug.npos && debug.find("reason") != debug.npos &&
++                  copy == retained && debug.get_allocator().resource() == next->memory_resource(),
++              "Retained recursive diagnostics and explicit copies preserve actual query fields");
++    }
++    bool rejected = false;
++    try {
++        (void)next->get(source);
++    } catch (const ReferenceError&) {
++        rejected = true;
++    }
++    check(rejected, "Expired plan reference rejects before traversal or diagnostics");
++    std::cout << "Recursive relation model ownership contracts pass\n";
++}
+--- /dev/null
++++ b/tests/parity/relation_model_probe.cpp
+@@ -0,0 +1,95 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/relation_model_debug.hpp>
++#include <teaql/core/detail/model_json.hpp>
++#include "fixture_value.hpp"
++#include "debug_modes.hpp"
++#include <iostream>
++
++static RelationLoadPlan plan(Memory owner, const Json& input) {
++    RelationDescriptor relation(std::allocator_arg,
++                                Allocator(owner),
++                                text(field(input, "name")),
++                                text(field(input, "target")));
++    relation.local_key = text(field(input, "local"));
++    relation.foreign_key = text(field(input, "foreign"));
++    relation.many = std::get<bool>(field(input, "many").data);
++    RelationLoadPlan result(
++        std::allocator_arg, Allocator(owner), text(field(input, "parent")), relation);
++    result.path = text(field(input, "path"));
++    if (std::holds_alternative<Json::Object>(field(input, "query").data)) {
++        const auto& query_input = field(input, "query");
++        result.query.emplace(
++            std::allocator_arg, Allocator(owner), text(field(query_input, "entity")));
++        auto& query = *result.query;
++        query.and_filter(Expr::eq(owner, "name", value(owner, field(query_input, "value"))));
++        query.comment(text(field(query_input, "comment")));
++        query.order_by.emplace_back(OrderBy::asc(owner, "id"));
++        if (std::holds_alternative<String>(field(query_input, "limit").data)) {
++            query.limit(number<std::uint64_t>(field(query_input, "limit")));
++        }
++        if (std::holds_alternative<String>(field(query_input, "offset").data)) {
++            query.offset(number<std::uint64_t>(field(query_input, "offset")));
++        }
++        if (!std::holds_alternative<std::monostate>(field(query_input, "threshold").data)) {
++            query.top_n_probe_parent_threshold(
++                detail::model_integer<std::size_t>(field(query_input, "threshold"), "threshold"));
++        }
++    }
++    for (const auto& child : detail::model_array(field(input, "children"), "children")) {
++        result.children.emplace_back(plan(owner, child));
++    }
++    return result;
++}
++
++static Json evaluate(UserContext& user, const Json& input) {
++    auto owner = user.memory_resource();
++    auto value = plan(owner, input);
++    auto clone = detail::clone_in(owner, value);
++    auto other = detail::clone_in(owner, value);
++    auto changed = text(field(input, "changed"));
++    if (changed == "parent") {
++        other.parent_entity += '!';
++    } else if (changed == "name") {
++        other.relation_name += '!';
++    } else if (changed == "path") {
++        other.path += '!';
++    } else if (changed == "target") {
++        other.target_entity += '!';
++    } else if (changed == "local") {
++        other.local_key += '!';
++    } else if (changed == "foreign") {
++        other.foreign_key += '!';
++    } else if (changed == "many") {
++        other.many = !other.many;
++    } else if (changed == "query") {
++        if (other.query) {
++            other.query.reset();
++        } else {
++            other.query.emplace(std::allocator_arg, Allocator(owner), "Other");
++        }
++    } else {
++        RelationDescriptor relation(std::allocator_arg, Allocator(owner), "empty", "Other");
++        relation.local_key = "id";
++        relation.foreign_key = "owner_id";
++        other.children.emplace_back("Child", relation);
++    }
++    auto output = detail::model_json(owner);
++    detail::model_put(output, "debug", formatted_debug(owner, value));
++    detail::model_put(output, "clone", formatted_debug(owner, clone));
++    detail::model_put(output, "clone_equal", value == clone);
++    detail::model_put(output, "changed_equal", value == other);
++    return output;
++}
++
++int main() {
++    GlobalContext global;
++    std::string line;
++    while (std::getline(std::cin, line)) {
++        auto user = global.make_user_context();
++        auto input = Json::parse(user->memory_resource(), line);
++        if (!input) {
++            throw std::invalid_argument("Invalid relation plan model fixture");
++        }
++        std::cout << evaluate(*user, *input).dump(user->memory_resource()) << '\n';
++    }
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -229,6 +229,15 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_transaction_move_only.py
+         --cpp $<TARGET_FILE:teaql_transaction_move_only_probe>
+         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
++    add_executable(teaql_relation_model_tests tests/relation_model_tests.cpp)
++    target_link_libraries(teaql_relation_model_tests PRIVATE teaql::runtime)
++    add_test(NAME relation_model_contracts COMMAND teaql_relation_model_tests)
++    add_executable(teaql_relation_model_probe tests/parity/relation_model_probe.cpp)
++    target_link_libraries(teaql_relation_model_probe PRIVATE teaql::runtime)
++    add_test(NAME relation_model_rust_parity COMMAND ${Python3_EXECUTABLE}
++        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_relation_models.py
++        --cpp $<TARGET_FILE:teaql_relation_model_probe>
++        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+     add_executable(teaql_transaction_scope_tests tests/transaction_scope_tests.cpp)
+     target_link_libraries(teaql_transaction_scope_tests PRIVATE teaql::provider_sqlite)
+     add_test(NAME transaction_scope_context_contracts COMMAND teaql_transaction_scope_tests)

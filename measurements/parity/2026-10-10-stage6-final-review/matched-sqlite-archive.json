@@ -1,0 +1,6 @@
+{
+  "path": ".tools/wndr4300/libsqlite3-source-3530200.a",
+  "sha256": "5a84342bc371970e034fb499483e555044f93fe38b1f0c6636585e111d64d59a",
+  "version": "3.53.2",
+  "purpose": "Final same-engine target parity; preserve previous 3.40.1 evidence as historical"
+}

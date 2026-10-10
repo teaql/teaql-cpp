@@ -1,0 +1,50 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "sources": [
+    "teaql-runtime/src/data_service/graph.rs:948\u20131100",
+    "teaql-runtime/src/data_service/graph.rs:1187\u20131286"
+  ],
+  "restored_entries": [
+    "validate_reference_node",
+    "validate_remove_node",
+    "graph_update_command",
+    "delete_graph_node"
+  ],
+  "observations": 1620,
+  "source_runs": 2,
+  "native": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 3.3,
+    "live_matches": 1620
+  },
+  "asan_ubsan": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 7.31,
+    "live_matches": 1620,
+    "detect_leaks": false
+  },
+  "mips_qemu": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 4.33,
+    "live_matches": 1620
+  },
+  "existing_matrices_in_scope": [
+    541,
+    520
+  ],
+  "post_test": "no work on selected targets for all profiles",
+  "registered_tests": 385,
+  "prior_whole_native": {
+    "passed": 381,
+    "scope": "Precedes adapter/node-command edits; no full385 run is claimed"
+  },
+  "remaining_source_entries": [
+    "insert_graph_node_scoped",
+    "upsert_graph_node_scoped"
+  ],
+  "group_status": "partial: recursive graph writes and final integration remain open",
+  "physical_device": "Deferred by explicit user request"
+}

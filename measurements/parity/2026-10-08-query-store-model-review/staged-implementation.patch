@@ -1,0 +1,371 @@
+--- a/include/teaql/runtime/cache.hpp
++++ b/include/teaql/runtime/cache.hpp
+@@ -4,6 +4,8 @@
+ #include <chrono>
+ 
+ namespace teaql {
++class DebugWriter;
++
+ namespace detail {
+ struct QueryStoreAccess;
+ }
+@@ -48,6 +50,7 @@
+ 
+ private:
+     friend struct detail::QueryStoreAccess;
++    friend void write_debug(DebugWriter&, const InMemoryAggregationCache&);
+ 
+     struct Entry {
+         using allocator_type = Allocator;
+--- /dev/null
++++ b/include/teaql/runtime/query_store_debug.hpp
+@@ -0,0 +1,115 @@
++#pragma once
++#include <teaql/core/debug.hpp>
++#include <teaql/core/query_debug.hpp>
++#include <teaql/core/system_time_debug.hpp>
++#include <teaql/runtime/cache.hpp>
++#include <teaql/runtime/pagination.hpp>
++
++namespace teaql {
++inline void write_debug(DebugWriter& writer, const ContinuousPageCursor& value) {
++    writer.structure("ContinuousPageCursor", [&](auto& fields) {
++        fields.field("cursor_id", [&](auto& out) {
++            write_debug(out, value.cursor_id);
++        });
++        fields.field("query_key", [&](auto& out) {
++            write_debug(out, value.query_key);
++        });
++        fields.field("entity", [&](auto& out) {
++            write_debug(out, value.entity);
++        });
++        fields.field("direction", [&](auto& out) {
++            write_debug(out, value.direction);
++        });
++        fields.field("boundary", [&](auto& out) {
++            write_debug(out, value.boundary);
++        });
++        fields.field("page_size", [&](auto& out) {
++            out.integer(value.page_size);
++        });
++        fields.field("next_offset", [&](auto& out) {
++            out.integer(value.next_offset);
++        });
++        fields.field("expires_at", [&](auto& out) {
++            write_debug(out, value.expires_at);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const RetainedIdSet& value) {
++    writer.structure("RetainedIdSet", [&](auto& fields) {
++        fields.field("query_key", [&](auto& out) {
++            write_debug(out, value.query_key);
++        });
++        fields.field("ids", [&](auto& out) {
++            out.sequence(value.ids, [](auto& inner, std::uint64_t id) {
++                inner.integer(id);
++            });
++        });
++        fields.field("expires_at", [&](auto& out) {
++            write_debug(out, value.expires_at);
++        });
++    });
++}
++
++namespace detail {
++inline void write_cache_instant(DebugWriter& writer, std::chrono::steady_clock::time_point time) {
++    auto total = time.time_since_epoch();
++    auto seconds = std::chrono::floor<std::chrono::seconds>(total);
++    auto nanos = std::chrono::duration_cast<std::chrono::nanoseconds>(total - seconds);
++    writer.structure("Instant", [&](auto& fields) {
++        fields.field("tv_sec", [&](auto& out) {
++            out.integer(seconds.count());
++        });
++        fields.field("tv_nsec", [&](auto& out) {
++            out.integer(nanos.count());
++        });
++    });
++}
++}
++
++inline void write_debug(DebugWriter& writer, const InMemoryAggregationCache& value) {
++    writer.structure("InMemoryAggregationCache", [&](auto& fields) {
++        fields.field("namespace", [&](auto& out) {
++            write_debug(out, value.namespace_);
++        });
++        fields.field("entries", [&](auto& out) {
++            // Context storage is owner-thread confined. Preserve the source
++            // Mutex diagnostic structure without adding a shared Context owner.
++            String text(out.memory_resource());
++            DebugWriter nested(text, out.options());
++            nested.structure("Mutex", [&](auto& mutex) {
++                mutex.field("data", [&](auto& data) {
++                    data.sequence(
++                        value.entries_,
++                        [](auto& inner, const auto& entry) {
++                            write_debug(inner, entry.first);
++                            inner.raw(": ");
++                            inner.structure("AggregationCacheEntry", [&](auto& fields) {
++                                fields.field("stored_at", [&](auto& instant) {
++                                    detail::write_cache_instant(instant, entry.second.stored_at);
++                                });
++                                fields.field("rows", [&](auto& rows) {
++                                    rows.sequence(entry.second.rows,
++                                                  [](auto& row, const auto& value) {
++                                                      write_debug(row, value);
++                                                  });
++                                });
++                            });
++                        },
++                        "{",
++                        "}");
++                });
++                mutex.field("poisoned", [&](auto& flag) {
++                    flag.boolean(false);
++                });
++            });
++            if (out.options().pretty) {
++                text.insert(text.size() - 1, "    ..\n");
++            } else {
++                text.insert(text.size() - 2, ", ..");
++            }
++            out.raw(text);
++        });
++    });
++}
++}
+--- a/include/teaql/runtime.hpp
++++ b/include/teaql/runtime.hpp
+@@ -23,6 +23,7 @@
+ #include <teaql/runtime/log_manager.hpp>
+ #include <teaql/runtime/module.hpp>
+ #include <teaql/runtime/purposed_query_debug.hpp>
++#include <teaql/runtime/query_store_debug.hpp>
+ #include <teaql/runtime/mutation_policy.hpp>
+ #include <teaql/runtime/round_trip_reference.hpp>
+ #include <teaql/runtime/reference_model_debug.hpp>
+--- /dev/null
++++ b/tests/parity/query_store_model_probe.cpp
+@@ -0,0 +1,110 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/query_store_debug.hpp>
++#include <teaql/core/detail/model_json.hpp>
++#include "fixture_value.hpp"
++#include "debug_modes.hpp"
++#include <iostream>
++
++static SystemTime expiry(const Json& input) {
++    return SystemTime::from_unix_seconds(
++        number<std::int64_t>(field(input, "seconds")),
++        detail::model_integer<std::uint32_t>(field(input, "nanos"), "nanos"));
++}
++
++static ContinuousPageCursor cursor(Memory owner, const Json& input) {
++    ContinuousPageCursor result(std::allocator_arg, Allocator(owner));
++    result.cursor_id = text(field(input, "cursor"));
++    result.query_key = text(field(input, "key"));
++    result.entity = text(field(input, "entity"));
++    result.direction =
++        text(field(input, "direction")) == "Asc" ? SortDirection::Asc : SortDirection::Desc;
++    result.boundary = value(owner, field(input, "boundary"));
++    result.page_size = number<std::uint64_t>(field(input, "page_size"));
++    result.next_offset = number<std::uint64_t>(field(input, "offset"));
++    result.expires_at = expiry(input);
++    return result;
++}
++
++static std::int64_t instant_number(std::string_view input, std::string_view key) {
++    auto start = input.find(key);
++    if (start == input.npos) {
++        throw std::runtime_error("Missing Instant diagnostic field");
++    }
++    input.remove_prefix(start + key.size());
++    std::int64_t result{};
++    auto parsed = std::from_chars(input.data(), input.data() + input.size(), result);
++    if (parsed.ec != std::errc{}) {
++        throw std::runtime_error("Invalid Instant diagnostic field");
++    }
++    return result;
++}
++
++static Json evaluate(UserContext& user, const Json& input) {
++    auto owner = user.memory_resource();
++    auto output = detail::model_json(owner);
++    auto put = [&](std::string_view name, auto&& value) {
++        detail::model_put(output, name, std::forward<decltype(value)>(value));
++    };
++    auto kind = text(field(input, "kind"));
++    if (kind == "cursor") {
++        auto value = cursor(owner, input);
++        auto clone = detail::clone_in(owner, value);
++        auto other = cursor(owner, field(input, "other"));
++        put("debug", formatted_debug(owner, value));
++        put("clone", formatted_debug(owner, clone));
++        put("clone_equal", value == clone);
++        put("other_equal", value == other);
++    } else if (kind == "ids") {
++        RetainedIdSet value(std::allocator_arg, Allocator(owner));
++        value.query_key = text(field(input, "key"));
++        value.expires_at = expiry(input);
++        for (const auto& id : detail::model_array(field(input, "ids"), "ids")) {
++            value.ids.push_back(number<std::uint64_t>(id));
++        }
++        auto clone = detail::clone_in(owner, value);
++        put("debug", formatted_debug(owner, value));
++        put("clone", formatted_debug(owner, clone));
++    } else if (kind == "cache_live") {
++        auto& cache = user.make<InMemoryAggregationCache>("ns");
++        Record fields(owner);
++        fields.emplace(String("value", owner), Value(owner, "clock payload"));
++        CompactRow row(std::allocator_arg, Allocator(owner), fields);
++        auto row_debug = debug_string(owner, row);
++        auto before = std::chrono::steady_clock::now();
++        cache.put("ns::item", std::span<const CompactRow>(&row, 1));
++        auto after = std::chrono::steady_clock::now();
++        auto debug = debug_string(owner, cache);
++        auto ticks = std::chrono::seconds(instant_number(debug, "tv_sec: ")) +
++                     std::chrono::nanoseconds(instant_number(debug, "tv_nsec: "));
++        auto rows = cache.get(owner, "ns::item", 0);
++        put("within_put_bracket",
++            ticks >= before.time_since_epoch() && ticks <= after.time_since_epoch());
++        put("row_debug_included", debug.find(row_debug) != debug.npos);
++        put("read_preserves_timestamp", debug == debug_string(owner, cache));
++        put("rows_equal",
++            rows && rows->size() == 1 && debug_string(owner, rows->front()) == row_debug);
++    } else if (kind == "cache") {
++        auto& empty = user.make<InMemoryAggregationCache>();
++        auto& named = user.make<InMemoryAggregationCache>(text(field(input, "namespace")));
++        put("default", formatted_debug(owner, empty));
++        put("default_namespace", empty.name_space());
++        put("named", formatted_debug(owner, named));
++        put("namespace", named.name_space());
++    } else {
++        throw std::invalid_argument("Unknown query-store model fixture");
++    }
++    return output;
++}
++
++int main() {
++    GlobalContext global;
++    std::string line;
++    while (std::getline(std::cin, line)) {
++        auto user = global.make_user_context();
++        auto input = Json::parse(user->memory_resource(), line);
++        if (!input) {
++            throw std::invalid_argument("Invalid query-store fixture");
++        }
++        std::cout << evaluate(*user, *input).dump(user->memory_resource()) << '\n';
++    }
++}
+--- /dev/null
++++ b/tests/query_store_model_tests.cpp
+@@ -0,0 +1,90 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/query_store_debug.hpp>
++#include <charconv>
++#include <iostream>
++
++using namespace teaql;
++
++static void check(bool condition, const char* message) {
++    if (!condition) {
++        throw std::runtime_error(message);
++    }
++}
++
++static std::int64_t integer_field(std::string_view text, std::string_view name) {
++    auto begin = text.find(name);
++    check(begin != text.npos, "Instant diagnostics retain their source field");
++    text.remove_prefix(begin + name.size());
++    std::int64_t result{};
++    auto parsed = std::from_chars(text.data(), text.data() + text.size(), result);
++    check(parsed.ec == std::errc{}, "Instant fields are numeric observations");
++    return result;
++}
++
++int main() {
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto owner = user->memory_resource();
++    auto cursor = user->make_ref<ContinuousPageCursor>();
++    auto& input = user->get(cursor);
++    input.cursor_id.assign(512, 'c');
++    input.query_key.assign(512, 'k');
++    input.entity = "Item";
++    input.boundary = Value(owner, std::string_view("nested boundary"));
++    input.expires_at = SystemTime::from_unix_seconds(253402300800, 123456789);
++    auto kept_cursor = user->make_global<ContinuousPageCursor>(input);
++    auto& ids = user->make<RetainedIdSet>();
++    ids.query_key.assign(512, 'q');
++    ids.ids = {0, 1, UINT64_MAX};
++    ids.expires_at = input.expires_at;
++    auto kept_ids = user->make_global<RetainedIdSet>(ids);
++    auto kept_cache = user->make_global<InMemoryAggregationCache>("ns");
++    {
++        Record fields(owner);
++        fields.emplace(String("value", owner), Value(owner, "retained cache payload"));
++        auto& row = user->make<CompactRow>(fields);
++        auto before = std::chrono::steady_clock::now();
++        auto& cache = user->get(kept_cache);
++        cache.put("ns::item", std::span<const CompactRow>(&row, 1));
++        auto after = std::chrono::steady_clock::now();
++        auto diagnostic = debug_string(owner, cache);
++        auto seconds = integer_field(diagnostic, "tv_sec: ");
++        auto nanos = integer_field(diagnostic, "tv_nsec: ");
++        check(nanos >= 0 && nanos < 1000000000, "Instant nanoseconds remain normalized");
++        auto observed = std::chrono::seconds(seconds) + std::chrono::nanoseconds(nanos);
++        check(observed >= before.time_since_epoch() && observed <= after.time_since_epoch(),
++              "Populated cache diagnostics retain the actual monotonic timestamp");
++        check(diagnostic.find("AggregationCacheEntry") != diagnostic.npos &&
++                  diagnostic.find("retained cache payload") != diagnostic.npos,
++              "Populated cache diagnostics include the actual rows");
++    }
++    user.reset();
++    check(global.live_user_bytes() == 0, "Source User is fully reclaimed");
++    auto next = global.make_user_context();
++    const auto& retained = next->get(next->rebind_global(kept_cursor));
++    const auto& retained_ids = next->get(next->rebind_global(kept_ids));
++    check(retained.query_key.get_allocator().resource() == global.memory_resource() &&
++              retained.boundary.memory_resource() == global.memory_resource() &&
++              retained_ids.ids.get_allocator().resource() == global.memory_resource(),
++          "Nested strings, values and ID storage move to the destination scope");
++    {
++        auto rows =
++            next->get(next->rebind_global(kept_cache)).get(next->memory_resource(), "ns::item", 0);
++        check(rows && rows->size() == 1 && rows->front().get("value")->try_text() &&
++                  *rows->front().get("value")->try_text() == "retained cache payload",
++              "Global cache owns copied rows after actual source User deletion");
++        auto text = debug_string(next->memory_resource(), retained, DebugOptions{.pretty = true});
++        check(text.get_allocator().resource() == next->memory_resource() &&
++                  text.find("nested boundary") != text.npos,
++              "Retained cursor diagnostics allocate in the caller's current User");
++    }
++    bool rejected = false;
++    try {
++        (void)next->get(cursor);
++    } catch (const ReferenceError&) {
++        rejected = true;
++    }
++    check(rejected, "Expired cursor access is rejected before formatting or copying");
++    std::cout << "Query-store model ownership and monotonic-clock contracts pass\n";
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -530,6 +530,15 @@
+     target_link_libraries(teaql_id_set_build_tests PRIVATE teaql::runtime)
+     add_test(NAME id_set_build_contracts COMMAND teaql_id_set_build_tests)
+     set_tests_properties(id_set_build_contracts PROPERTIES TIMEOUT 30)
++    add_executable(teaql_query_store_model_tests tests/query_store_model_tests.cpp)
++    target_link_libraries(teaql_query_store_model_tests PRIVATE teaql::runtime)
++    add_test(NAME query_store_model_contracts COMMAND teaql_query_store_model_tests)
++    add_executable(teaql_query_store_model_probe tests/parity/query_store_model_probe.cpp)
++    target_link_libraries(teaql_query_store_model_probe PRIVATE teaql::runtime)
++    add_test(NAME query_store_model_rust_parity COMMAND ${Python3_EXECUTABLE}
++        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_query_store_models.py
++        --cpp $<TARGET_FILE:teaql_query_store_model_probe>
++        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+     add_executable(teaql_query_store_probe tests/parity/query_store_probe.cpp)
+     target_link_libraries(teaql_query_store_probe PRIVATE teaql::runtime)
+     add_executable(teaql_query_store_tests tests/query_store_tests.cpp)

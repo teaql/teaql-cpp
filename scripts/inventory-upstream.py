@@ -37,8 +37,28 @@ for path in paths:
         declarations.append({"name": m[3], "kind": m[2], "visibility": m[1],
                              "line": source.count("\n", 0, m.start()) + 1})
     tests = []
+    # Explicit adapter for the pinned source's six mask_case! modules. The two
+    # template functions are not runnable tests until their module is expanded.
+    mask_macro = None
+    if path == "teaql-runtime/src/masking_contract_tests.rs":
+        mask_macro = re.search(r"macro_rules! mask_case \{.*?\n\}", source, re.S)
+        if not mask_macro:
+            raise SystemExit("Pinned mask_case macro shape changed")
     for m in re.finditer(r"#\[(?:\w+::)?test(?:\([^\]]*\))?\]\s*(?:#\[[^\]]*\]\s*)*(?:async\s+)?fn\s+(\w+)", source):
+        if mask_macro and mask_macro.start() <= m.start() < mask_macro.end():
+            continue
         tests.append({"name": m[1], "line": source.count("\n", 0, m.start()) + 1})
+    if mask_macro:
+        templates = re.findall(r"#\[test\]\s*fn\s+(\w+)", mask_macro[0])
+        invocations = list(re.finditer(r"^mask_case!\(\s*(\w+)\s*,", source, re.M))
+        if templates != ["mask_contract_expanded_sql", "mask_contract_audit_algorithm"] or len(invocations) != 6:
+            raise SystemExit("Pinned mask_case test expansion changed")
+        for invocation in invocations:
+            for template in templates:
+                tests.append({"name": f"{invocation[1]}::{template}",
+                              "line": source.count("\n", 0, invocation.start()) + 1,
+                              "macro": "mask_case", "template": template})
+        tests.sort(key=lambda test: (test["line"], test["name"]))
     # Also index public methods/functions, constants, exports and module declarations.
     # This is a source index, not a Rust parser: trait defaults, cfg reachability,
     # macro expansion and serialized representations still require semantic review.
@@ -72,6 +92,7 @@ if mapping["commit"] != commit:
 expected = {f["path"] for f in files}
 mapped = set()
 status_labels = {"partial": "Partial", "missing": "Pending implementation/validation",
+                 "accepted": "Accepted module contract (not stage completion)",
                  "reference_only": "Reference oracle", "excluded_external": "External adapter excluded"}
 rows = ["# Rust to C++ module and acceptance map", "", f"Pinned commit: `{commit}`.", "",
         "Generated from the manually maintained responsibilities in `cpp-modules.json`; planned paths may not exist.",
@@ -83,6 +104,17 @@ rows = ["# Rust to C++ module and acceptance map", "", f"Pinned commit: `{commit
 for group in mapping["groups"]:
     if group["status"] not in status_labels or group["stage"] not in range(1, 7):
         raise SystemExit("Invalid module stage/status")
+    if group["status"] == "accepted":
+        acceptance = group.get("acceptance", {})
+        if acceptance.get("commit") != commit or not acceptance.get("review"):
+            raise SystemExit("Accepted module requires a pinned, explicit review")
+        if acceptance.get("sources") != group["sources"] or not acceptance.get("checks"):
+            raise SystemExit("Accepted module requires complete source locators and named checks")
+        for requirement in ("public_surface", "defaults_and_traits", "wire_protocol", "ownership"):
+            if not acceptance.get(requirement):
+                raise SystemExit(f"Accepted module requires review of {requirement}")
+        if acceptance["review"] not in group["evidence"]:
+            raise SystemExit("Accepted module review must be existing evidence")
     for source in group["sources"]:
         if source not in expected or source in mapped:
             raise SystemExit(f"Unknown or duplicate source mapping: {source}")

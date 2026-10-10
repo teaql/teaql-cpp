@@ -82,13 +82,14 @@ public:
                 return {};
             }
             forwarding_.reset();
-            pending_ = nullptr;
+            auto* completed = std::exchange(pending_, nullptr);
             if (!*result) {
                 if (diagnostic_) {
                     diagnostic_->fail();
                 }
                 return Output::err(
-                    resource_, Error::transport(resource_, clone_in(resource_, result->error())));
+                    resource_,
+                    Error::transport(resource_, copy_or_take_error(*completed, *result)));
             }
             Vector<CompactRow> rows(result->value(), resource_);
             auto metadata =

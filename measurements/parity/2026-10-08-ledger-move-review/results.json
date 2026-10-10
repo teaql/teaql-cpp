@@ -1,0 +1,83 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed full native343 and sanitizer20/MIPS20 selections pass; complete source/composition acceptance separate",
+  "original_inputs": 356,
+  "original_repeats_agree": true,
+  "native_parity": {
+    "passed": 356,
+    "total": 356,
+    "live_original": true
+  },
+  "repair": "Constrain AuditedLedgerResult allocator-copy constructor to actual entity domain-copy capability, so wrappers consume noncopyable results instead of instantiating an impossible copy.",
+  "source_sha256": {
+    "include/teaql/runtime/detail/audited_save.hpp": "58fb3e4fe2c60fe880c50e06af0ad0ce1fcfc598697895a9a52981434e94fe84",
+    "tests/parity/rust-values/src/bin/ledger_move_only_oracle.rs": "1f76a94cd71db73090d2ce5f9527daef0b34c54d742c465403f14a5c4125656f",
+    "tests/parity/ledger_move_only_cases.json.gz": "c3d18c6b7291ee3c69b2dd01a9b6bb137a3c24bd1814f9cb8a7f7e4c0df6f616",
+    "tests/parity/generate_ledger_move_only.py": "061c9856355175913b1d1211aa757f45a5fe1e2ee38279b420cd8beda6cd9fb5",
+    "tests/parity/compare_ledger_move_only.py": "7ab925a0158e93a57a725c95f19f7d01cc3565be140a1c63410c094600646fa7"
+  },
+  "staged_patch_sha256": "b703376301d1d74efa2956569968f961a4ccb4cc7b6fdc1b9881a69489048c21",
+  "staged_sources_sha256": {
+    "include/teaql/runtime/detail/audited_save.hpp": "763526105d79e86bad6a9e434d02e5e7f47ad5cad36461d34e46fd10a642bbc4",
+    "tests/ledger_move_fixture.hpp": "8fe98b3799eb7e2148e20ff6345ff8544cde8728a5bf04e300b696ced01d6947",
+    "tests/ledger_move_only_tests.cpp": "8bdf6a27001824610e08e900dddfd69c9cb83a8c21a7c5c3706e16f3f1dd360d",
+    "tests/parity/ledger_move_only_probe.cpp": "775f8b251e25a1bad53de493a33d6c1f23c044a6db1724ea6dec2c25b43a3e23",
+    "CMakeLists.txt": "9231025a0a78be3f441e9db9b6e66a2a051721bde651329c392a8e8bcf42caa5"
+  },
+  "notes": "The separate original oracle matches the audited-save fixture shape with only Clone derive removed. All356 cases use actual unchanged original save; fixture timestamp projection remains separately documented. Patch includes two CMake registrations, which remain staged while331 production consumers build.",
+  "native_sqlite": {
+    "passed": true,
+    "default_pmr_disabled": true,
+    "commit": "verified",
+    "rollback": "verified",
+    "ledger_identity_and_retention": "verified",
+    "actual_user_reclamation": "verified"
+  },
+  "mips": {
+    "models_passed": 356,
+    "models_total": 356,
+    "live_original": true,
+    "sqlite_lifecycle": "passed",
+    "default_pmr_disabled": true,
+    "physical_router_verified": false
+  },
+  "sanitizer": {
+    "models_passed": 356,
+    "models_total": 356,
+    "live_original": true,
+    "sqlite_lifecycle": "passed",
+    "default_pmr_disabled": true,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "installed_in_worktree": true,
+  "installed_native_selection": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.44,
+    "full_native343_pending": true
+  },
+  "installed_mips_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 25.0,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_mips_live_original": "all six installed probes match1199/1199 live pinned Rust observations",
+  "installed_sanitizer_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 35.65,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1",
+    "refresh": "ninja: no work to do."
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  }
+}

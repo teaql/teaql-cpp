@@ -1,0 +1,54 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source": "teaql-runtime/src/data_service/graph.rs:324",
+  "observations": 141,
+  "original_runs": 2,
+  "formatting_modes": 9,
+  "negative_public_compile": {
+    "before_exit": 1,
+    "after_exit": 0,
+    "after_command": [
+      "c++",
+      "-std=c++20",
+      "-I",
+      "include",
+      "-fsyntax-only",
+      "measurements/parity/2026-10-09-runtime-graph-repository-review/before.cpp"
+    ]
+  },
+  "native_live_matches": 141,
+  "asan_ubsan": {
+    "live_matches": 141,
+    "ctest_passed": 1,
+    "ctest_total": 1,
+    "seconds": 1.17,
+    "detect_leaks": false,
+    "post_build": "no work"
+  },
+  "mips_qemu": {
+    "live_matches": 141,
+    "ctest_passed": 1,
+    "ctest_total": 1,
+    "seconds": 1.0,
+    "post_build": "no work"
+  },
+  "ownership": "Move-only model in another Context; actual source destruction before observation; null default PMR; explicit destination Global graph copy",
+  "complete_native_integration": {
+    "passed": 381,
+    "total": 381,
+    "seconds": 77.7,
+    "build_tasks": 340,
+    "compiled_objects_with_nonempty_dependencies": 423,
+    "pre_post_test": "no work"
+  },
+  "physical_device": "Deferred by explicit user request",
+  "group_status": "partial: retained graph execution and internal save adapters remain under review",
+  "original_runtime_unit_tests": {
+    "passed": 224,
+    "ignored": 1,
+    "seconds": 1.13,
+    "root_tests_passed": 75,
+    "ignored_reason": "file_log_child is a subprocess fixture invoked by file_log_gate_runs_in_isolated_processes"
+  },
+  "registered_ctest_count": 381
+}

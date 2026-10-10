@@ -1,0 +1,83 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed full native343 and sanitizer20/MIPS20 selections pass; complete source/composition acceptance separate",
+  "original_inputs": 162,
+  "original_repeats_agree": true,
+  "formats_per_model": 9,
+  "source_sha256": {
+    "include/teaql/runtime/relation.hpp": "9b29196f246065b0679d68dccc01db3c8447864b0866f6ef281f7fd9e77b828a",
+    "src/runtime/relation.cpp": "a8ca2aeeeb6f274a88e72df299c283f81158858fa0966f6ec35f104648257459",
+    "include/teaql/runtime/detail/relation_execution.hpp": "d8ef76903d9c54ae38040f481ca28af70fb3d8e5ba0bc40ac691895071ccd17e",
+    "tests/parity/rust-values/src/bin/relation_model_oracle.rs": "5a5d9b054a4855d826ebebab64eac3fff0c73cca322f7243806b8d6d8dc1b082",
+    "tests/parity/relation_model_cases.json.gz": "7232bd76aadded83732cc1d7c660e5072b3b865c83d618a4aa16aa8dac346d9b",
+    "tests/parity/generate_relation_models.py": "d2ca0d3dd1e550fc512f435010c29acc6b0caf30d3ccd7e2838e73a3b84bfee5",
+    "tests/parity/compare_relation_models.py": "5ff5e14cee9498f6f97677986b1ef33b63c6506bea29aa12c112df64fd17bd6a"
+  },
+  "staged_patch_sha256": "447e4c291d230c13af385db297d8d253ac4e85242d1326ea2c5e61b842774246",
+  "staged_source_sha256": {
+    "include/teaql/runtime/relation_model_debug.hpp": "32ebd53a0b2e803fda5410850489b96d73ba0ea5372e1731c2fabeb3ce24650b",
+    "include/teaql/runtime.hpp": "01cbb810e95a37dae85124254322a0cc2e631c1692645e2215cc326ef9f68086",
+    "tests/relation_model_tests.cpp": "ef9edde091ec07ec8b16ff00ee1380a0754d89aadeb4a8cbad2df4806666f1ab",
+    "tests/parity/relation_model_probe.cpp": "8db68dc57a9e6fe8c9dce4d67122e6b021177f5103a46f4ed4a041adb08f6a92",
+    "CMakeLists.txt": "10be44325f3325ed7e937b1b06ea7efea3cfc4ad0b25d19cf2031adcda9197d7"
+  },
+  "targets": {
+    "native": {
+      "models_passed": 162,
+      "models_total": 162,
+      "live_original": true,
+      "recursive_ownership_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "sanitizer": {
+      "models_passed": 162,
+      "models_total": 162,
+      "live_original": true,
+      "recursive_ownership_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "mips": {
+      "models_passed": 162,
+      "models_total": 162,
+      "live_original": true,
+      "recursive_ownership_contracts": "passed",
+      "default_pmr_disabled": true
+    }
+  },
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "UBSAN_OPTIONS": "halt_on_error=1"
+  },
+  "physical_router_verified": false,
+  "notes": "Public model declaration belongs to runtime data-service types group; larger relation execution group remains separately partial. No execution planner/hydrator/telemetry/graph algorithm changes. Patch includes umbrella and two CMake registrations, still outside active331 inputs.",
+  "installed_in_worktree": true,
+  "installed_native_selection": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.44,
+    "full_native343_pending": true
+  },
+  "installed_mips_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 25.0,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_mips_live_original": "all six installed probes match1199/1199 live pinned Rust observations",
+  "installed_sanitizer_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 35.65,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1",
+    "refresh": "ninja: no work to do."
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  }
+}

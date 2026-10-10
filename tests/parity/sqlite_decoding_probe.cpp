@@ -84,6 +84,7 @@ static Json evaluate(UserContext& user, const Json& input) {
         if (!decoded) {
             auto out = detail::model_json(r);
             detail::model_put(out, "error", decoded.error().to_string(r));
+            detail::model_put(out, "source_none", decoded.error().source() == nullptr);
             detail::model_put(out,
                               "kind",
                               decoded.error().kind() == MutationExecutorError::Kind::Bind ? "Bind"

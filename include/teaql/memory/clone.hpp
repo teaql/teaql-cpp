@@ -5,6 +5,20 @@
 
 namespace teaql::detail {
 template <class T>
+inline constexpr bool domain_copyable =
+    std::uses_allocator_v<T, Allocator>
+        ? (std::is_constructible_v<T, std::allocator_arg_t, Allocator, const T&> ||
+           std::is_constructible_v<T, const T&, Allocator>)
+        : (std::is_trivially_destructible_v<T> && std::is_copy_constructible_v<T>);
+
+// Standard containers advertise copy constructors independently of element
+// capabilities. Their Context copy capability follows the actual payloads.
+template <class T>
+inline constexpr bool domain_copyable<std::optional<T>> = domain_copyable<T>;
+template <class T>
+inline constexpr bool domain_copyable<Vector<T>> = domain_copyable<T>;
+
+template <class T>
 struct DomainCopy {
     static T copy(Memory r, const T& value) {
         static_assert(std::uses_allocator_v<T, Allocator> || std::is_trivially_destructible_v<T>,

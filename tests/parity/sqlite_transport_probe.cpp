@@ -1,4 +1,6 @@
 #include <teaql/provider_sqlite/provider.hpp>
+#include <teaql/provider_sqlite/model_debug.hpp>
+#include "debug_modes.hpp"
 #include <teaql/provider_sqlite/id.hpp>
 #include <teaql/provider_sqlite/business_id.hpp>
 #include <teaql/sql/dialect.hpp>
@@ -270,7 +272,45 @@ static Json evaluate(UserContext& context, const Json& j) {
     auto out = detail::model_json(r), outcome = detail::model_json(r);
     auto mode = text(field(j, "mode"));
     try {
-        if (mode == "business_id") {
+        if (mode == "units") {
+            const auto& dialect = context.make_resource<SqliteDialect>();
+            const auto& dialect_default = context.make_resource<SqliteDialect>();
+            const auto& dialect_clone = context.make_resource<SqliteDialect>(dialect);
+            const auto& dialect_copy = context.make_resource<SqliteDialect>(dialect);
+            const auto& schema = context.make<SqliteSchemaProvider>();
+            const auto& schema_default = context.make<SqliteSchemaProvider>();
+            const auto& schema_clone = context.make<SqliteSchemaProvider>(schema);
+            const auto& schema_copy = context.make<SqliteSchemaProvider>(schema);
+            auto dialect_result = detail::model_json(r);
+            detail::model_put(dialect_result, "direct", formatted_debug(r, dialect));
+            detail::model_put(dialect_result, "default", formatted_debug(r, dialect_default));
+            detail::model_put(dialect_result, "clone", formatted_debug(r, dialect_clone));
+            detail::model_put(dialect_result, "copy", formatted_debug(r, dialect_copy));
+            auto schema_result = detail::model_json(r);
+            detail::model_put(schema_result, "direct", formatted_debug(r, schema));
+            detail::model_put(schema_result, "default", formatted_debug(r, schema_default));
+            detail::model_put(schema_result, "clone", formatted_debug(r, schema_clone));
+            detail::model_put(schema_result, "copy", formatted_debug(r, schema_copy));
+            detail::model_put(outcome, "dialect", std::move(dialect_result));
+            detail::model_put(outcome, "schema", std::move(schema_result));
+        } else if (mode == "capabilities") {
+            const auto caps = provider.capabilities();
+            detail::model_put(outcome, "query", caps.query);
+            detail::model_put(outcome, "mutation", caps.mutation);
+            detail::model_put(outcome, "transaction", caps.transaction);
+            detail::model_put(outcome, "schema", caps.schema);
+            detail::model_put(outcome, "id_generation", caps.id_generation);
+            detail::model_put(outcome, "batch_mutation", caps.batch_mutation);
+            detail::model_put(outcome, "returning", caps.returning);
+            detail::model_put(
+                outcome, "small_parent_relation_probes", caps.small_parent_relation_probes);
+            detail::model_put(
+                outcome, "prepared_cache_capacity", DEFAULT_PREPARED_STATEMENT_CACHE_CAPACITY);
+            detail::model_put(
+                outcome, "column_cache_capacity", DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY);
+            detail::model_put(outcome, "id_space_table", DEFAULT_ID_SPACE_TABLE);
+            detail::model_put(outcome, "business_id_space_table", DEFAULT_BUSINESS_ID_SPACE_TABLE);
+        } else if (mode == "business_id") {
             outcome = business_steps(context, provider, j);
         } else if (mode == "id_space") {
             outcome = id_steps(context, provider, j);

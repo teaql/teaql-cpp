@@ -1,0 +1,5178 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Actual original executor with mandatory kind hook counting and a getter failure after two calls. Observes per-invocation backend capture, guarded and batch final getter timing, transport calls and diagnostics without rewriting algorithms. Original 1012 execution observations unchanged; native/MIPS match all44 after repair.",
+  "cases": [
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "insert",
+          "values": {
+            "name": {
+              "kind": "null",
+              "value": null
+            },
+            "payload": {
+              "kind": "typed_null",
+              "value": null
+            }
+          },
+          "trace": "change 5"
+        },
+        "observe_kind": true,
+        "observe": false
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              null
+            ],
+            "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 5",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 1,
+          "outcome": 0,
+          "params": [
+            null,
+            null
+          ],
+          "policies": [
+            2,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "insert",
+          "values": {
+            "name": {
+              "kind": "null",
+              "value": null
+            },
+            "payload": {
+              "kind": "typed_null",
+              "value": null
+            }
+          },
+          "trace": "change 5"
+        },
+        "observe_kind": true,
+        "observe": false,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              null
+            ],
+            "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 5",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 1,
+          "outcome": 0,
+          "params": [
+            null,
+            null
+          ],
+          "policies": [
+            2,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "insert",
+          "values": {
+            "name": {
+              "kind": "null",
+              "value": null
+            },
+            "payload": {
+              "kind": "typed_null",
+              "value": null
+            }
+          },
+          "trace": "change 5"
+        },
+        "observe_kind": true,
+        "observe": true
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              null
+            ],
+            "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 5",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 1,
+          "outcome": 0,
+          "params": [
+            null,
+            null
+          ],
+          "policies": [
+            2,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "insert",
+          "values": {
+            "name": {
+              "kind": "null",
+              "value": null
+            },
+            "payload": {
+              "kind": "typed_null",
+              "value": null
+            }
+          },
+          "trace": "change 5"
+        },
+        "observe_kind": true,
+        "observe": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              null
+            ],
+            "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 5",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 1,
+          "outcome": 0,
+          "params": [
+            null,
+            null
+          ],
+          "policies": [
+            2,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "INSERT INTO \"order\" (\"display name\", payload) VALUES (?1, ?2)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {},
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "0",
+          "trace": "change 10"
+        },
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": false
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1,
+              1,
+              0,
+              7
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          },
+          {
+            "comment": null,
+            "kind": "fetch",
+            "params": [
+              1,
+              7
+            ],
+            "sql": "SELECT record_id AS id, revision AS version, \"display name\" AS name, access_token AS token, payload, amount, tenant FROM \"order\" WHERE ((record_id = ?1) AND (tenant = ?2))"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 4,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 10",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 2,
+          "outcome": 0,
+          "params": [
+            1,
+            1,
+            0,
+            7
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": {
+          "id": 7,
+          "saved": "database default"
+        }
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {},
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "0",
+          "trace": "change 10"
+        },
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": false,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1,
+              1,
+              0,
+              7
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {},
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "0",
+          "trace": "change 10"
+        },
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": true
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1,
+              1,
+              0,
+              7
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          },
+          {
+            "comment": null,
+            "kind": "fetch",
+            "params": [
+              1,
+              7
+            ],
+            "sql": "SELECT record_id AS id, revision AS version, \"display name\" AS name, access_token AS token, payload, amount, tenant FROM \"order\" WHERE ((record_id = ?1) AND (tenant = ?2))"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 4,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 10",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 2,
+          "outcome": 0,
+          "params": [
+            1,
+            1,
+            0,
+            7
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": {
+          "id": 7,
+          "saved": "database default"
+        }
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {},
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "0",
+          "trace": "change 10"
+        },
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1,
+              1,
+              0,
+              7
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [
+          {
+            "affected": 1,
+            "backend": "sqlite",
+            "comment": "change 10",
+            "count": null,
+            "debug": null,
+            "generated": true,
+            "operation": 2,
+            "outcome": 0,
+            "params": [
+              1,
+              1,
+              0,
+              7
+            ],
+            "policies": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "secrets": [
+              "1"
+            ],
+            "secrets_debug": [
+              "1"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+            "statements": [],
+            "trace": 1
+          }
+        ],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": true,
+          "trace": "change 70"
+        },
+        "observe_kind": true,
+        "observe": false
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -1,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 70",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            -1,
+            1
+          ],
+          "policies": [
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": true,
+          "trace": "change 70"
+        },
+        "observe_kind": true,
+        "observe": false,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -1,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 70",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            -1,
+            1
+          ],
+          "policies": [
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": true,
+          "trace": "change 70"
+        },
+        "observe_kind": true,
+        "observe": true
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -1,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 70",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            -1,
+            1
+          ],
+          "policies": [
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": true,
+          "trace": "change 70"
+        },
+        "observe_kind": true,
+        "observe": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -1,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 70",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            -1,
+            1
+          ],
+          "policies": [
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": false,
+          "trace": "change 115"
+        },
+        "observe_kind": true,
+        "observe": false
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 115",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            1
+          ],
+          "policies": [
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "DELETE FROM \"order\" WHERE record_id = ?1",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": false,
+          "trace": "change 115"
+        },
+        "observe_kind": true,
+        "observe": false,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 115",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            1
+          ],
+          "policies": [
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "DELETE FROM \"order\" WHERE record_id = ?1",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": false,
+          "trace": "change 115"
+        },
+        "observe_kind": true,
+        "observe": true
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 115",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            1
+          ],
+          "policies": [
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "DELETE FROM \"order\" WHERE record_id = ?1",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": null,
+          "soft": false,
+          "trace": "change 115"
+        },
+        "observe_kind": true,
+        "observe": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              1
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 115",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            1
+          ],
+          "policies": [
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "DELETE FROM \"order\" WHERE record_id = ?1",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "trace": "change 160"
+        },
+        "observe_kind": true,
+        "observe": false
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 160",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            1,
+            -2
+          ],
+          "policies": [
+            1,
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "trace": "change 160"
+        },
+        "observe_kind": true,
+        "observe": false,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 160",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            1,
+            -2
+          ],
+          "policies": [
+            1,
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "trace": "change 160"
+        },
+        "observe_kind": true,
+        "observe": true
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 160",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            1,
+            -2
+          ],
+          "policies": [
+            1,
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "trace": "change 160"
+        },
+        "observe_kind": true,
+        "observe": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 160",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            1,
+            -2
+          ],
+          "policies": [
+            1,
+            1,
+            1
+          ],
+          "secrets": [
+            "1"
+          ],
+          "secrets_debug": [
+            "1"
+          ],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {
+            "payload": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          "id": {
+            "kind": "null",
+            "value": null
+          },
+          "version": "1",
+          "trace": "change 2245"
+        },
+        "observe_kind": true,
+        "observe": false
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              2,
+              null,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 2245",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 2,
+          "outcome": 0,
+          "params": [
+            null,
+            2,
+            null,
+            1
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {
+            "payload": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          "id": {
+            "kind": "null",
+            "value": null
+          },
+          "version": "1",
+          "trace": "change 2245"
+        },
+        "observe_kind": true,
+        "observe": false,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              2,
+              null,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 2245",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 2,
+          "outcome": 0,
+          "params": [
+            null,
+            2,
+            null,
+            1
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {
+            "payload": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          "id": {
+            "kind": "null",
+            "value": null
+          },
+          "version": "1",
+          "trace": "change 2245"
+        },
+        "observe_kind": true,
+        "observe": true
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              2,
+              null,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 2245",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 2,
+          "outcome": 0,
+          "params": [
+            null,
+            2,
+            null,
+            1
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "update",
+          "values": {
+            "payload": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          "id": {
+            "kind": "null",
+            "value": null
+          },
+          "version": "1",
+          "trace": "change 2245"
+        },
+        "observe_kind": true,
+        "observe": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              null,
+              2,
+              null,
+              1
+            ],
+            "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 2,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 2245",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 2,
+          "outcome": 0,
+          "params": [
+            null,
+            2,
+            null,
+            1
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET payload = ?1, revision = ?2 WHERE record_id = ?3 AND revision = ?4",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "values": {
+            "name": {
+              "kind": "text",
+              "value": "masked"
+            }
+          },
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "soft": true,
+          "trace": "change 2500"
+        },
+        "guard": {
+          "kind": "subquery",
+          "left": {
+            "kind": "column",
+            "name": "token"
+          },
+          "op": 8,
+          "entity": {
+            "name": "Account",
+            "table": "child",
+            "declared": true,
+            "masked": [],
+            "properties": [
+              {
+                "name": "id",
+                "type": 2,
+                "column": "record_id",
+                "id": true
+              },
+              {
+                "name": "version",
+                "type": 1,
+                "column": "revision",
+                "version": true
+              },
+              {
+                "name": "name",
+                "type": 5,
+                "column": "display name"
+              },
+              {
+                "name": "token",
+                "type": 5,
+                "column": "access_token"
+              },
+              {
+                "name": "payload",
+                "type": 7
+              },
+              {
+                "name": "amount",
+                "type": 4
+              },
+              {
+                "name": "tenant",
+                "type": 2
+              }
+            ]
+          },
+          "query": {
+            "projection": [
+              "name"
+            ],
+            "filter": {
+              "kind": "binary",
+              "left": {
+                "kind": "column",
+                "name": "name"
+              },
+              "op": 0,
+              "right": {
+                "kind": "value",
+                "value": {
+                  "kind": "text",
+                  "value": "plain child"
+                }
+              }
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": false
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2,
+              "plain child"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?4)))"
+          },
+          {
+            "comment": null,
+            "kind": "fetch",
+            "params": [
+              1,
+              "plain child"
+            ],
+            "sql": "SELECT record_id AS id, revision AS version, \"display name\" AS name, access_token AS token, payload, amount, tenant FROM \"order\" WHERE ((record_id = ?1) AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?2))))"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 4,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 2500",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            1,
+            -2,
+            "plain child"
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?4)))",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": {
+          "id": 7,
+          "saved": "database default"
+        }
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "values": {
+            "name": {
+              "kind": "text",
+              "value": "masked"
+            }
+          },
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "soft": true,
+          "trace": "change 2500"
+        },
+        "guard": {
+          "kind": "subquery",
+          "left": {
+            "kind": "column",
+            "name": "token"
+          },
+          "op": 8,
+          "entity": {
+            "name": "Account",
+            "table": "child",
+            "declared": true,
+            "masked": [],
+            "properties": [
+              {
+                "name": "id",
+                "type": 2,
+                "column": "record_id",
+                "id": true
+              },
+              {
+                "name": "version",
+                "type": 1,
+                "column": "revision",
+                "version": true
+              },
+              {
+                "name": "name",
+                "type": 5,
+                "column": "display name"
+              },
+              {
+                "name": "token",
+                "type": 5,
+                "column": "access_token"
+              },
+              {
+                "name": "payload",
+                "type": 7
+              },
+              {
+                "name": "amount",
+                "type": 4
+              },
+              {
+                "name": "tenant",
+                "type": 2
+              }
+            ]
+          },
+          "query": {
+            "projection": [
+              "name"
+            ],
+            "filter": {
+              "kind": "binary",
+              "left": {
+                "kind": "column",
+                "name": "name"
+              },
+              "op": 0,
+              "right": {
+                "kind": "value",
+                "value": {
+                  "kind": "text",
+                  "value": "plain child"
+                }
+              }
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": false,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2,
+              "plain child"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?4)))"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "values": {
+            "name": {
+              "kind": "text",
+              "value": "masked"
+            }
+          },
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "soft": true,
+          "trace": "change 2500"
+        },
+        "guard": {
+          "kind": "subquery",
+          "left": {
+            "kind": "column",
+            "name": "token"
+          },
+          "op": 8,
+          "entity": {
+            "name": "Account",
+            "table": "child",
+            "declared": true,
+            "masked": [],
+            "properties": [
+              {
+                "name": "id",
+                "type": 2,
+                "column": "record_id",
+                "id": true
+              },
+              {
+                "name": "version",
+                "type": 1,
+                "column": "revision",
+                "version": true
+              },
+              {
+                "name": "name",
+                "type": 5,
+                "column": "display name"
+              },
+              {
+                "name": "token",
+                "type": 5,
+                "column": "access_token"
+              },
+              {
+                "name": "payload",
+                "type": 7
+              },
+              {
+                "name": "amount",
+                "type": 4
+              },
+              {
+                "name": "tenant",
+                "type": 2
+              }
+            ]
+          },
+          "query": {
+            "projection": [
+              "name"
+            ],
+            "filter": {
+              "kind": "binary",
+              "left": {
+                "kind": "column",
+                "name": "name"
+              },
+              "op": 0,
+              "right": {
+                "kind": "value",
+                "value": {
+                  "kind": "text",
+                  "value": "plain child"
+                }
+              }
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": true
+      },
+      "expected": {
+        "affected": 1,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2,
+              "plain child"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?4)))"
+          },
+          {
+            "comment": null,
+            "kind": "fetch",
+            "params": [
+              1,
+              "plain child"
+            ],
+            "sql": "SELECT record_id AS id, revision AS version, \"display name\" AS name, access_token AS token, payload, amount, tenant FROM \"order\" WHERE ((record_id = ?1) AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?2))))"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 4,
+        "metadata": {
+          "affected": 1,
+          "backend": "sqlite",
+          "comment": "change 2500",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            1,
+            -2,
+            "plain child"
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?4)))",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": {
+          "id": 7,
+          "saved": "database default"
+        }
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "values": {
+            "name": {
+              "kind": "text",
+              "value": "masked"
+            }
+          },
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "version": "-2",
+          "soft": true,
+          "trace": "change 2500"
+        },
+        "guard": {
+          "kind": "subquery",
+          "left": {
+            "kind": "column",
+            "name": "token"
+          },
+          "op": 8,
+          "entity": {
+            "name": "Account",
+            "table": "child",
+            "declared": true,
+            "masked": [],
+            "properties": [
+              {
+                "name": "id",
+                "type": 2,
+                "column": "record_id",
+                "id": true
+              },
+              {
+                "name": "version",
+                "type": 1,
+                "column": "revision",
+                "version": true
+              },
+              {
+                "name": "name",
+                "type": 5,
+                "column": "display name"
+              },
+              {
+                "name": "token",
+                "type": 5,
+                "column": "access_token"
+              },
+              {
+                "name": "payload",
+                "type": 7
+              },
+              {
+                "name": "amount",
+                "type": 4
+              },
+              {
+                "name": "tenant",
+                "type": 2
+              }
+            ]
+          },
+          "query": {
+            "projection": [
+              "name"
+            ],
+            "filter": {
+              "kind": "binary",
+              "left": {
+                "kind": "column",
+                "name": "name"
+              },
+              "op": 0,
+              "right": {
+                "kind": "value",
+                "value": {
+                  "kind": "text",
+                  "value": "plain child"
+                }
+              }
+            }
+          }
+        },
+        "observe_kind": true,
+        "observe": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              1,
+              -2,
+              "plain child"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?4)))"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [
+          {
+            "affected": 1,
+            "backend": "sqlite",
+            "comment": "change 2500",
+            "count": null,
+            "debug": null,
+            "generated": true,
+            "operation": 4,
+            "outcome": 0,
+            "params": [
+              3,
+              1,
+              -2,
+              "plain child"
+            ],
+            "policies": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "secrets": [
+              "1"
+            ],
+            "secrets_debug": [
+              "1"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (access_token IN (SELECT \"display name\" AS name FROM child WHERE (\"display name\" = ?4)))",
+            "statements": [],
+            "trace": 1
+          }
+        ],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": true,
+          "version": "2",
+          "trace": "soft"
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -3,
+              7,
+              2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 3,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": "soft",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            -3,
+            7,
+            2,
+            2
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": true,
+          "version": "2",
+          "trace": "soft"
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -3,
+              7,
+              2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": true,
+          "version": "2",
+          "trace": "soft"
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -3,
+              7,
+              2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 3,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": "soft",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            -3,
+            7,
+            2,
+            2
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": true,
+          "version": "2",
+          "trace": "soft"
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              -3,
+              7,
+              2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [
+          {
+            "affected": 0,
+            "backend": "sqlite",
+            "comment": "soft",
+            "count": null,
+            "debug": null,
+            "generated": true,
+            "operation": 3,
+            "outcome": 0,
+            "params": [
+              -3,
+              7,
+              2,
+              2
+            ],
+            "policies": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "secrets": [
+              "7"
+            ],
+            "secrets_debug": [
+              "7"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+            "statements": [],
+            "trace": 1
+          }
+        ],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": false,
+          "trace": "hard"
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              7,
+              2
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1 AND (tenant = ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 3,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": "hard",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            7,
+            2
+          ],
+          "policies": [
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "DELETE FROM \"order\" WHERE record_id = ?1 AND (tenant = ?2)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": false,
+          "trace": "hard"
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              7,
+              2
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1 AND (tenant = ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": false,
+          "trace": "hard"
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              7,
+              2
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1 AND (tenant = ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 3,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": "hard",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 3,
+          "outcome": 0,
+          "params": [
+            7,
+            2
+          ],
+          "policies": [
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "DELETE FROM \"order\" WHERE record_id = ?1 AND (tenant = ?2)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "delete",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "soft": false,
+          "trace": "hard"
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              7,
+              2
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1 AND (tenant = ?2)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [
+          {
+            "affected": 0,
+            "backend": "sqlite",
+            "comment": "hard",
+            "count": null,
+            "debug": null,
+            "generated": true,
+            "operation": 3,
+            "outcome": 0,
+            "params": [
+              7,
+              2
+            ],
+            "policies": [
+              1,
+              1
+            ],
+            "secrets": [
+              "7"
+            ],
+            "secrets_debug": [
+              "7"
+            ],
+            "sql": "DELETE FROM \"order\" WHERE record_id = ?1 AND (tenant = ?2)",
+            "statements": [],
+            "trace": 1
+          }
+        ],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": "-2",
+          "trace": "recover"
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              7,
+              -2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 3,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": "recover",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            7,
+            -2,
+            2
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": "-2",
+          "trace": "recover"
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              7,
+              -2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": "-2",
+          "trace": "recover"
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              7,
+              -2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 3,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": "recover",
+          "count": null,
+          "debug": null,
+          "generated": true,
+          "operation": 4,
+          "outcome": 0,
+          "params": [
+            3,
+            7,
+            -2,
+            2
+          ],
+          "policies": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+          "statements": [],
+          "trace": 1
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "recover",
+          "id": {
+            "kind": "u64",
+            "value": "7"
+          },
+          "version": "-2",
+          "trace": "recover"
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success",
+            "count": 0
+          }
+        ],
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "2"
+            }
+          }
+        },
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "calls": [
+          {
+            "comment": null,
+            "kind": "execute",
+            "params": [
+              3,
+              7,
+              -2,
+              2
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)"
+          }
+        ],
+        "calls_before_poll": 0,
+        "events": [
+          {
+            "affected": 0,
+            "backend": "sqlite",
+            "comment": "recover",
+            "count": null,
+            "debug": null,
+            "generated": true,
+            "operation": 4,
+            "outcome": 0,
+            "params": [
+              3,
+              7,
+              -2,
+              2
+            ],
+            "policies": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "secrets": [
+              "7"
+            ],
+            "secrets_debug": [
+              "7"
+            ],
+            "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+            "statements": [],
+            "trace": 1
+          }
+        ],
+        "kind_calls": 3,
+        "panic": true
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "batch",
+          "children": []
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success"
+          }
+        ],
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 1,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": null,
+          "count": null,
+          "debug": null,
+          "generated": false,
+          "operation": 5,
+          "outcome": null,
+          "params": [],
+          "policies": [],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": null,
+          "statements": [],
+          "trace": 0
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "batch",
+          "children": []
+        },
+        "observe": false,
+        "steps": [
+          {
+            "mode": "success"
+          }
+        ],
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 1,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": null,
+          "count": null,
+          "debug": null,
+          "generated": false,
+          "operation": 5,
+          "outcome": null,
+          "params": [],
+          "policies": [],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": null,
+          "statements": [],
+          "trace": 0
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "batch",
+          "children": []
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success"
+          }
+        ],
+        "observe_kind": true
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 1,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": null,
+          "count": null,
+          "debug": null,
+          "generated": false,
+          "operation": 5,
+          "outcome": null,
+          "params": [],
+          "policies": [],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": null,
+          "statements": [],
+          "trace": 0
+        },
+        "snapshot": null
+      }
+    },
+    {
+      "input": {
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "request": {
+          "mode": "batch",
+          "children": []
+        },
+        "observe": true,
+        "steps": [
+          {
+            "mode": "success"
+          }
+        ],
+        "observe_kind": true,
+        "kind_fail_after": 2
+      },
+      "expected": {
+        "affected": 0,
+        "calls": [],
+        "calls_before_poll": 0,
+        "events": [],
+        "generated": 0,
+        "kind_calls": 1,
+        "metadata": {
+          "affected": 0,
+          "backend": "sqlite",
+          "comment": null,
+          "count": null,
+          "debug": null,
+          "generated": false,
+          "operation": 5,
+          "outcome": null,
+          "params": [],
+          "policies": [],
+          "secrets": [],
+          "secrets_debug": [],
+          "sql": null,
+          "statements": [],
+          "trace": 0
+        },
+        "snapshot": null
+      }
+    }
+  ]
+}

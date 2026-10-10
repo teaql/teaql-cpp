@@ -1,4 +1,5 @@
 #include <teaql/runtime/entity_runtime.hpp>
+#include <teaql/runtime/entity_runtime_debug.hpp>
 #include <teaql/runtime/resources.hpp>
 #include <charconv>
 #include <teaql/core/detail/debug.hpp>
@@ -197,6 +198,11 @@ struct EntityCloneScope {
         return *arena.entity_runtime_clone;
     }
 };
+
+void with_entity_runtime_copy(Memory r, FunctionRef<void()> copy) {
+    EntityCloneScope scope(r);
+    copy();
+}
 
 bool EntityRuntimeAccess::has_mutation_context(const EntityRuntimeState& state) {
     return bool(state.inner_->value);
@@ -668,5 +674,226 @@ void EntityRuntimeState::adopt_mutations_from(const EntityRuntimeState& source) 
     if (!result) {
         context().composition_errors.emplace_back(result.error());
     }
+}
+}
+
+namespace teaql {
+namespace {
+template <class Range, class Element>
+void write_runtime_map(DebugWriter& writer, const Range& values, Element element) {
+    writer.sequence(
+        values,
+        [&](auto& out, const auto& entry) {
+            write_debug(out, entry.first);
+            out.raw(": ");
+            element(out, entry.second);
+        },
+        "{",
+        "}");
+}
+
+template <class T>
+void write_runtime_optional(DebugWriter& writer, const std::optional<T>& value) {
+    if (value) {
+        writer.tuple("Some", [&](auto& out) {
+            write_debug(out, *value);
+        });
+    } else {
+        writer.raw("None");
+    }
+}
+
+void write_runtime_versions(DebugWriter& writer, const detail::OriginalVersions& versions) {
+    writer.structure("OriginalVersions", [&](auto& fields) {
+        fields.field("first", [&](auto& out) {
+            if (versions.first) {
+                out.tuple("Some", [&](auto& inner) {
+                    inner.sequence(
+                        std::array{0, 1},
+                        [&](auto& item, int index) {
+                            if (index == 0) {
+                                write_debug(item, versions.first->first);
+                            } else {
+                                item.integer(versions.first->second);
+                            }
+                        },
+                        "(",
+                        ")");
+                });
+            } else {
+                out.raw("None");
+            }
+        });
+        fields.field("overflow", [&](auto& out) {
+            write_runtime_map(out, versions.overflow, [](auto& inner, auto value) {
+                inner.integer(value);
+            });
+        });
+    });
+}
+
+void write_runtime_ledger(DebugWriter& writer, const detail::EntityMutationLedger& value) {
+    writer.structure("EntityMutationLedger", [&](auto& fields) {
+        fields.field("change_sets", [&](auto& out) {
+            write_debug(out, value.change_sets);
+        });
+        fields.field("comment", [&](auto& out) {
+            write_runtime_optional(out, value.comment);
+        });
+        fields.field("deleted_keys", [&](auto& out) {
+            out.sequence(
+                value.deleted_keys,
+                [](auto& inner, const auto& key) {
+                    write_debug(inner, key);
+                },
+                "{",
+                "}");
+        });
+        fields.field("new_keys", [&](auto& out) {
+            out.sequence(
+                value.new_keys,
+                [](auto& inner, const auto& key) {
+                    write_debug(inner, key);
+                },
+                "{",
+                "}");
+        });
+        fields.field("original_snapshot", [&](auto& out) {
+            if (value.original_snapshot) {
+                out.tuple("Some", [&](auto& inner) {
+                    std::visit(
+                        [&](const auto& snapshot) {
+                            using T = std::decay_t<decltype(snapshot)>;
+                            inner.tuple(std::same_as<T, EntitySnapshot> ? "Materialized"
+                                                                        : "Compact",
+                                        [&](auto& item) {
+                                            write_debug(item, snapshot);
+                                        });
+                        },
+                        *value.original_snapshot);
+                });
+            } else {
+                out.raw("None");
+            }
+        });
+        fields.field("trace_chains", [&](auto& out) {
+            write_runtime_map(out, value.trace_chains, [](auto& inner, const auto& nodes) {
+                inner.sequence(nodes, [](auto& item, const auto& node) {
+                    write_debug(item, node);
+                });
+            });
+        });
+        fields.field("original_versions", [&](auto& out) {
+            write_runtime_versions(out, value.original_versions);
+        });
+        fields.field("composition_errors", [&](auto& out) {
+            out.sequence(value.composition_errors, [](auto& inner, const auto& error) {
+                write_debug(inner, error);
+            });
+        });
+        fields.field("is_new", [&](auto& out) {
+            out.boolean(value.is_new);
+        });
+    });
+}
+
+// Source Mutex Debug ends with a non-exhaustive marker. A scoped scratch writer
+// retains inherited options and lets the outer writer add its current indentation.
+void write_runtime_mutex(DebugWriter& writer, const detail::EntityMutationLedger& value) {
+    String text(writer.memory_resource());
+    DebugWriter nested(text, writer.options());
+    nested.structure("Mutex", [&](auto& fields) {
+        fields.field("data", [&](auto& out) {
+            write_runtime_ledger(out, value);
+        });
+        fields.field("poisoned", [&](auto& out) {
+            out.boolean(false);
+        });
+    });
+    if (writer.options().pretty) {
+        text.insert(text.size() - 1, "    ..\n");
+    } else {
+        text.insert(text.size() - 2, ", ..");
+    }
+    writer.raw(text);
+}
+
+void write_runtime_frozen(DebugWriter& writer, const EntityGraphBuilder& value) {
+    String text(writer.memory_resource());
+    DebugWriter nested(text, writer.options());
+    write_debug(nested, value);
+    text.replace(0, std::string_view("EntityGraphBuilder").size(), "FrozenEntityGraph");
+    writer.raw(text);
+}
+}
+
+void write_debug(DebugWriter& writer, const EntityGraphBuilder& value) {
+    writer.structure("EntityGraphBuilder", [&](auto& fields) {
+        fields.field("entity_types", [&](auto& out) {
+            out.integer(value.tables_.size());
+        });
+        fields.field("entities", [&](auto& out) {
+            out.integer(value.entity_count());
+        });
+        fields.field("relation_lists", [&](auto& out) {
+            out.integer(value.relation_list_count());
+        });
+    });
+}
+
+void write_debug(DebugWriter& writer, const ChangeSetStack& value) {
+    writer.structure("ChangeSetStack", [&](auto& fields) {
+        fields.field("stack", [&](auto& out) {
+            out.sequence(value.stack_, [](auto& inner, const auto& set) {
+                write_debug(inner, set);
+            });
+        });
+    });
+}
+
+void write_debug(DebugWriter& writer, const EntityRuntimeState& value) {
+    detail::resource_arena(value.resource_);
+    writer.structure("EntityRuntimeState", [&](auto& fields) {
+        fields.field("inner", [&](auto& out) {
+            out.tuple("OnceLock", [&](auto& inner) {
+                if (value.inner_->value) {
+                    write_runtime_mutex(inner, *value.inner_->value);
+                } else {
+                    inner.raw("<uninit>");
+                }
+            });
+        });
+        fields.field("graph", [&](auto& out) {
+            out.tuple(value.graph_.is_weak ? "Weak" : "Strong", [&](auto& inner) {
+                if (value.graph_.is_weak) {
+                    inner.raw("(Weak)");
+                } else {
+                    inner.tuple("OnceLock", [&](auto& item) {
+                        if (value.graph_.slot->value) {
+                            write_runtime_frozen(item, value.graph_.slot->value->contents);
+                        } else {
+                            item.raw("<uninit>");
+                        }
+                    });
+                }
+            });
+        });
+        fields.field("loaded_snapshot", [&](auto& out) {
+            if (value.loaded_snapshot_) {
+                out.tuple("Some", [&](auto& inner) {
+                    inner.structure("LoadedEntitySnapshot", [&](auto& loaded) {
+                        loaded.field("entity", [&](auto& item) {
+                            item.text(value.loaded_snapshot_->entity);
+                        });
+                        loaded.field("row", [&](auto& item) {
+                            write_debug(item, value.loaded_snapshot_->row);
+                        });
+                    });
+                });
+            } else {
+                out.raw("None");
+            }
+        });
+    });
 }
 }

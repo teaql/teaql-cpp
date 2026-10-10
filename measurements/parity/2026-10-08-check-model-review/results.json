@@ -1,0 +1,91 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed full native343 and sanitizer20/MIPS20 selections pass; complete source/composition acceptance separate",
+  "original_inputs": 220,
+  "original_repeats_agree": true,
+  "formats_per_model": 9,
+  "missing_derives": [
+    "CheckObjectStatus",
+    "CheckRule",
+    "JsonFieldNamingProfile",
+    "WireLocationSegment",
+    "WireCheckResult"
+  ],
+  "source_sha256": {
+    "include/teaql/runtime/check_result.hpp": "1523d7aa8bdf2248e7573bdff4b358651401ae40fe8ed2ffe053a89bab630a84",
+    "include/teaql/runtime/check_result_debug.hpp": "b1b8ea9330497fcff356e823a05860a8461023a9469a700e934de7645e4e218e",
+    "include/teaql/runtime/checker.hpp": "98e65d0a33786ff76cfbf6f72924fcd26fbaa7f474d7747a45395e61dd793cc1",
+    "src/runtime/check_result.cpp": "e6beca80ea929a171611793bc3d5a743dd30328568d9237639761cbf2759f6d8",
+    "tests/parity/rust-values/src/bin/check_model_oracle.rs": "c7776ea6e1bef06aa2694354eb45ad0031d5cf81335ed9055b5a2c859f829e45",
+    "tests/parity/check_model_cases.json.gz": "a8b6637c53adebf7c8b7b803b574cc36294c94e972208c41ead23e83906752ff",
+    "tests/parity/generate_check_models.py": "6d024e2de71a800441a67af8c3a2c32c4a779e278c91dd6848c67d22fba810b7",
+    "tests/parity/compare_check_models.py": "4e339ebf9ef3fc98dfcda2d72f25501e993875eb476f88ed537733b3d41b1739"
+  },
+  "staged_patch_sha256": "c3e0d19f9c2554f4e6df61f353b40650e8da1d12cc0879fbc0e274eae4652734",
+  "staged_source_sha256": {
+    "include/teaql/runtime/checker_model_debug.hpp": "7fad20607f711fa61723018eba013bde82967f7bed859649d88eb88043da95ac",
+    "include/teaql/runtime.hpp": "c0d734aa4afc0b32e7be41d92a874f24a25b76ef081bed220dab81e930a7d455",
+    "tests/check_model_tests.cpp": "e3b99df26a17b862cedeb3838f17c8eb31a8753b14c8a379523f31f68294ddef",
+    "tests/parity/check_model_probe.cpp": "977785193ac7c3d8f0e846144915caed900402234cd83266abc0080137e2c857",
+    "CMakeLists.txt": "84767fdf59db42e7ea4e8671e468edfb5cff476ba0bed50f357448c269f5d8ff"
+  },
+  "targets": {
+    "native": {
+      "models_passed": 220,
+      "models_total": 220,
+      "live_original": true,
+      "ownership_wire_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "sanitizer": {
+      "models_passed": 220,
+      "models_total": 220,
+      "live_original": true,
+      "ownership_wire_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "mips": {
+      "models_passed": 220,
+      "models_total": 220,
+      "live_original": true,
+      "ownership_wire_contracts": "passed",
+      "default_pmr_disabled": true
+    }
+  },
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "UBSAN_OPTIONS": "halt_on_error=1"
+  },
+  "physical_router_verified": false,
+  "notes": "Existing path/rendering/wire serialization and typed checker behavior are unchanged. Source typed adapter legitimately requires Clone. Patch includes public umbrella and two CMake registrations; do not copy complete staged files over other installed changes.",
+  "installed_in_worktree": true,
+  "installed_native_selection": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.44,
+    "full_native343_pending": true
+  },
+  "installed_mips_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 25.0,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_mips_live_original": "all six installed probes match1199/1199 live pinned Rust observations",
+  "installed_sanitizer_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 35.65,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1",
+    "refresh": "ninja: no work to do."
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  }
+}

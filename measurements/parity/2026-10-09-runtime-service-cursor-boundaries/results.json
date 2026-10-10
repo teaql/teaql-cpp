@@ -1,0 +1,32 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "native": {
+    "passed": 376,
+    "total": 376,
+    "seconds": 77.29,
+    "build_tasks": 332,
+    "compiled_dependency_records": 418,
+    "ctest_workers": 4
+  },
+  "asan_ubsan": {
+    "passed": 51,
+    "total": 51,
+    "seconds": 37.43,
+    "build_tasks": 70,
+    "detect_leaks": false,
+    "generic_foreign_checks": 3,
+    "generic_foreign_seconds": 0.23
+  },
+  "mips_qemu": {
+    "passed": 51,
+    "total": 51,
+    "seconds": 29.45,
+    "build_tasks": 69,
+    "generic_foreign_checks": 3,
+    "generic_foreign_seconds": 0.4,
+    "live_release_boundary_observations": 16
+  },
+  "pre_post_test": "no work",
+  "physical_device": "Deferred by explicit user request",
+  "scope": "Cursor-profile correction and retained existing service composition. Full service source remains partial pending private typed-aggregate capability."
+}

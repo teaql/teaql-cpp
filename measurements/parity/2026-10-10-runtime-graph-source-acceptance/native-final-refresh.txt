@@ -1,0 +1,2 @@
+[1/2] Building CXX object CMakeFiles/teaql_audited_auto_save_tests.dir/tests/audited_auto_save_tests.cpp.o
+[2/2] Linking CXX executable teaql_audited_auto_save_tests

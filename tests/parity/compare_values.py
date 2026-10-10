@@ -3,7 +3,9 @@
 import argparse
 import json
 import math
+import gzip
 import subprocess
+import shutil
 from pathlib import Path
 
 
@@ -20,8 +22,10 @@ def same(expected, actual):
     return expected == actual
 
 
-def observe(executable, inputs):
-    result = subprocess.run([executable], input="".join(json.dumps(v, ensure_ascii=True) + "\n" for v in inputs),
+def observe(executable, inputs, emulator=(), arguments=()):
+    if not Path(executable).is_file() and not shutil.which(executable):
+        raise FileNotFoundError(f'Probe executable is missing; build its target first: {executable}')
+    result = subprocess.run([*emulator, executable, *arguments], input="".join(json.dumps(v, ensure_ascii=True) + "\n" for v in inputs),
                             text=True, capture_output=True, check=True)
     # JSON Lines uses LF framing. Python splitlines() also splits literal U+0085,
     # U+2028 and U+2029 inside valid JSON strings emitted by the Rust serializer.
@@ -38,8 +42,15 @@ def main(corpus_name="value_cases.json", label="Value"):
     parser = argparse.ArgumentParser()
     parser.add_argument("--cpp", required=True)
     parser.add_argument("--rust")
+    parser.add_argument("--cpp-emulator", default="",
+                        help="CMake emulator command and arguments, separated by semicolons")
     args = parser.parse_args()
-    corpus = json.loads(Path(__file__).with_name(corpus_name).read_text())
+    corpus_path = Path(__file__).with_name(corpus_name)
+    if corpus_path.suffix == ".gz":
+        with gzip.open(corpus_path, "rt", encoding="utf-8") as source:
+            corpus = json.load(source)
+    else:
+        corpus = json.loads(corpus_path.read_text())
     root = Path(__file__).resolve().parents[2]
     lock = json.loads((root / "upstream.lock.json").read_text())
     if corpus["baseline"] != lock["commit"]:
@@ -52,7 +63,8 @@ def main(corpus_name="value_cases.json", label="Value"):
         live = observe(args.rust, inputs)
         if not same(expected, live):
             raise RuntimeError("Committed observations differ from live Rust oracle")
-    actual = observe(args.cpp, inputs)
+    emulator = args.cpp_emulator.split(";") if args.cpp_emulator else ()
+    actual = observe(args.cpp, inputs, emulator)
     failures = [(i, inputs[i], a, b) for i, (a, b) in enumerate(zip(expected, actual)) if not same(a, b)]
     for i, input_value, a, b in failures[:20]:
         print(f"Case {i}: {input_value}\n Rust: {a}\n C++:  {b}")

@@ -1952,7 +1952,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -2028,7 +2028,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -2104,7 +2104,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -4352,7 +4352,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -4428,7 +4428,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -4504,7 +4504,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -6752,7 +6752,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -6828,7 +6828,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -6904,7 +6904,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -9152,7 +9152,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -9228,7 +9228,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -9304,7 +9304,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -11552,7 +11552,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -11628,7 +11628,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -11704,7 +11704,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -13952,7 +13952,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -14028,7 +14028,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -14104,7 +14104,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -16352,7 +16352,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -16428,7 +16428,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -16504,7 +16504,7 @@
               "trace": [
                 {
                   "kind": "0",
-                  "entity": " ",
+                  "entity": "\u2003",
                   "comment": "note secret-name private-token"
                 },
                 {
@@ -17888,7 +17888,7 @@
             "op": "record",
             "metadata": {
               "operation": "0",
-              "backend": "   ",
+              "backend": " \u2003 ",
               "start": "-1000000010",
               "end": "1000000001",
               "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
@@ -17948,7 +17948,7 @@
             "op": "record",
             "metadata": {
               "operation": "0",
-              "backend": "   ",
+              "backend": " \u2003 ",
               "start": "-1000000010",
               "end": "1000000001",
               "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
@@ -18008,7 +18008,7 @@
             "op": "record",
             "metadata": {
               "operation": "0",
-              "backend": "   ",
+              "backend": " \u2003 ",
               "start": "-1000000010",
               "end": "1000000001",
               "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
@@ -18068,7 +18068,7 @@
             "op": "record",
             "metadata": {
               "operation": "0",
-              "backend": "   ",
+              "backend": " \u2003 ",
               "start": "-1000000010",
               "end": "1000000001",
               "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
@@ -18128,7 +18128,7 @@
             "op": "record",
             "metadata": {
               "operation": "0",
-              "backend": "   ",
+              "backend": " \u2003 ",
               "start": "-1000000010",
               "end": "1000000001",
               "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
@@ -18188,7 +18188,7 @@
             "op": "record",
             "metadata": {
               "operation": "0",
-              "backend": "   ",
+              "backend": " \u2003 ",
               "start": "-1000000010",
               "end": "1000000001",
               "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
@@ -27150,7 +27150,7 @@
         "steps": [
           {
             "op": "user",
-            "value": "用户 / edge"
+            "value": "\u7528\u6237 / edge"
           },
           {
             "op": "record",
@@ -27253,7 +27253,7 @@
               "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -2, tv_nsec: 999999990 }, ended_at: SystemTime { tv_sec: 1, tv_nsec: 1 }, elapsed: 2.000000011s, result_count: Some(0), result_type: None, affected_rows: Some(4), result_summary: \"0 rows returned\" }",
               "timestamp": "-1000000010",
               "trace_matches": true,
-              "user": "用户 / edge"
+              "user": "\u7528\u6237 / edge"
             }
           ]
         },
@@ -27268,7 +27268,7 @@
               "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -2, tv_nsec: 999999990 }, ended_at: SystemTime { tv_sec: 1, tv_nsec: 1 }, elapsed: 2.000000011s, result_count: Some(0), result_type: None, affected_rows: Some(4), result_summary: \"0 rows returned\" }",
               "timestamp": "-1000000010",
               "trace_matches": true,
-              "user": "用户 / edge"
+              "user": "\u7528\u6237 / edge"
             }
           ]
         },
@@ -27284,7 +27284,7 @@
               "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -2, tv_nsec: 999999990 }, ended_at: SystemTime { tv_sec: 1, tv_nsec: 1 }, elapsed: 2.000000011s, result_count: Some(0), result_type: None, affected_rows: Some(4), result_summary: \"0 rows returned\" }",
               "timestamp": "-1000000010",
               "trace_matches": true,
-              "user": "用户 / edge"
+              "user": "\u7528\u6237 / edge"
             },
             {
               "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -2, tv_nsec: 999999990 }, ended_at: SystemTime { tv_sec: 1, tv_nsec: 1 }, elapsed: 2.000000011s, result_count: Some(0), result_type: None, affected_rows: Some(4), result_summary: \"0 rows returned\" }",
@@ -27303,7 +27303,7 @@
               "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -2, tv_nsec: 999999990 }, ended_at: SystemTime { tv_sec: 1, tv_nsec: 1 }, elapsed: 2.000000011s, result_count: Some(0), result_type: None, affected_rows: Some(4), result_summary: \"0 rows returned\" }",
               "timestamp": "-1000000010",
               "trace_matches": true,
-              "user": "用户 / edge"
+              "user": "\u7528\u6237 / edge"
             },
             {
               "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -2, tv_nsec: 999999990 }, ended_at: SystemTime { tv_sec: 1, tv_nsec: 1 }, elapsed: 2.000000011s, result_count: Some(0), result_type: None, affected_rows: Some(4), result_summary: \"0 rows returned\" }",
@@ -28738,6 +28738,798 @@
             {
               "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Delete, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"delete\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -2, tv_nsec: 999999990 }, ended_at: SystemTime { tv_sec: 1, tv_nsec: 1 }, elapsed: 2.000000011s, result_count: Some(0), result_type: None, affected_rows: Some(4), result_summary: \"0 rows returned\" }",
               "timestamp": "-1000000010",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "0",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "-9223372036854775808",
+                "nanos": 0
+              },
+              "end": {
+                "seconds": "9223372036854775807",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 18446744073709551615.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 18446744073709551615.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "-9223372036854775808000000000",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "1",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "-9223372036854775808",
+                "nanos": 0
+              },
+              "end": {
+                "seconds": "9223372036854775807",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 18446744073709551615.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 18446744073709551615.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "-9223372036854775808000000000",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "0",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "9223372036854775807",
+                "nanos": 999999999
+              },
+              "end": {
+                "seconds": "-9223372036854775808",
+                "nanos": 0
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, elapsed: 0ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, elapsed: 0ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "9223372036854775807999999999",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "1",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "9223372036854775807",
+                "nanos": 999999999
+              },
+              "end": {
+                "seconds": "-9223372036854775808",
+                "nanos": 0
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, elapsed: 0ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: -9223372036854775808, tv_nsec: 0 }, elapsed: 0ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "9223372036854775807999999999",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "0",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "-10000000000",
+                "nanos": 1
+              },
+              "end": {
+                "seconds": "10000000000",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 20000000000.999999998s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 20000000000.999999998s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "-9999999999999999999",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "1",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "-10000000000",
+                "nanos": 1
+              },
+              "end": {
+                "seconds": "10000000000",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 20000000000.999999998s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 20000000000.999999998s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "-9999999999999999999",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "0",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "10000000000",
+                "nanos": 1
+              },
+              "end": {
+                "seconds": "10000000000",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 999.999998ms, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 999.999998ms, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "10000000000000000001",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "1",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "10000000000",
+                "nanos": 1
+              },
+              "end": {
+                "seconds": "10000000000",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 999.999998ms, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 10000000000, tv_nsec: 1 }, ended_at: SystemTime { tv_sec: 10000000000, tv_nsec: 999999999 }, elapsed: 999.999998ms, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "10000000000000000001",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "0",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "-1",
+                "nanos": 999999999
+              },
+              "end": {
+                "seconds": "0",
+                "nanos": 1
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -1, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: 0, tv_nsec: 1 }, elapsed: 2ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -1, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: 0, tv_nsec: 1 }, elapsed: 2ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "-1",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "1",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "-1",
+                "nanos": 999999999
+              },
+              "end": {
+                "seconds": "0",
+                "nanos": 1
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -1, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: 0, tv_nsec: 1 }, elapsed: 2ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: -1, tv_nsec: 999999999 }, ended_at: SystemTime { tv_sec: 0, tv_nsec: 1 }, elapsed: 2ns, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "-1",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "0",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "0",
+                "nanos": 0
+              },
+              "end": {
+                "seconds": "9223372036854775807",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 0, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 9223372036854775807.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Select, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"query\" }, TraceNode { kind: Request, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"select\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 0, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 9223372036854775807.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "0",
+              "trace_matches": true,
+              "user": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "steps": [
+          {
+            "op": "record",
+            "metadata": {
+              "operation": "1",
+              "backend": "sqlite",
+              "start": {
+                "seconds": "0",
+                "nanos": 0
+              },
+              "end": {
+                "seconds": "9223372036854775807",
+                "nanos": 999999999
+              },
+              "sql": "SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?",
+              "debug": "SELECT secret-name, private-token FROM orders WHERE id = 7",
+              "comment": "fallback secret-name private-token",
+              "database": null,
+              "generated": true,
+              "policies": [
+                "2",
+                "3",
+                "1"
+              ],
+              "params": [
+                {
+                  "kind": "text",
+                  "value": "secret-name"
+                },
+                {
+                  "kind": "text",
+                  "value": "private-token"
+                },
+                {
+                  "kind": "u64",
+                  "value": "7"
+                }
+              ],
+              "trace": [],
+              "count": null,
+              "affected": null,
+              "children": []
+            }
+          }
+        ]
+      },
+      "expected": [
+        {
+          "entries": [
+            "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 0, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 9223372036854775807.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }"
+          ],
+          "mutation": true,
+          "select": true,
+          "unified": [
+            {
+              "entry": "SqlLogEntry { log_context: SqlLogContext { projection_state: SqlProjectionState(<private>), intent_redactions: SqlIntentRedactions { count: 0 }, execution_outcome: None, database_kind: Some(\"sqlite\"), parameter_policies: [Masked, Credential, Plain], generated_sql: true, masked_parameters: [true, true, false], mode: Some(\"safe\"), omission_reason: None }, operation: Insert, comment: Some(\"fallback [REDACTED] [REDACTED]\"), purpose: None, audit_reason: None, trace_path: [TraceNode { kind: Operation, entity_type: \"unknown\", entity_id: None, comment: \"mutation\" }, TraceNode { kind: Entity, entity_type: \"unknown\", entity_id: None, comment: \"\" }, TraceNode { kind: Provider, entity_type: \"sqlite\", entity_id: None, comment: \"\" }, TraceNode { kind: Sql, entity_type: \"insert\", entity_id: None, comment: \"\" }], sql: \"SELECT name, password FROM orders WHERE name = ? AND password = ? AND id = ?\", params: [Text(\"se*******me\"), Text(\"[REDACTED]\"), U64(7)], debug_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", pretty_sql: \"-- TeaQL SAFE; MASKED; NOT REPLAYABLE\\nSELECT name, password FROM orders WHERE name = 'se*******me' /* masked */ AND password = '[REDACTED]' /* masked */ AND id = 7\", started_at: SystemTime { tv_sec: 0, tv_nsec: 0 }, ended_at: SystemTime { tv_sec: 9223372036854775807, tv_nsec: 999999999 }, elapsed: 9223372036854775807.999999999s, result_count: None, result_type: None, affected_rows: None, result_summary: \"\" }",
+              "timestamp": "0",
               "trace_matches": true,
               "user": null
             }

@@ -1,0 +1,10 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "passed": 388,
+  "total": 388,
+  "seconds": 187.25,
+  "namespace_consumer_build_tasks": 44,
+  "compiled_objects": 427,
+  "pre_post": "no work",
+  "concurrent_profiles": "Full sanitizer and same-engine MIPS compilation still running; no final Stage6 acceptance yet"
+}

@@ -30,11 +30,11 @@ public:
             return {};
         }
         forwarding_.reset();
-        pending_ = nullptr;
+        auto* completed = std::exchange(pending_, nullptr);
         if (!*result) {
             return Output::err(
                 resource_,
-                SqlExecutorError<E>::transport(resource_, clone_in(resource_, result->error())));
+                SqlExecutorError<E>::transport(resource_, copy_or_take_error(*completed, *result)));
         }
         return Output::ok(resource_, std::monostate{});
     }
@@ -154,6 +154,10 @@ public:
     }
 
 protected:
+    void cancel_transaction() noexcept override {
+        transport.cancel_sql();
+    }
+
     DataServiceOperationResult<QueryResult, Error>&
     query_transaction(Memory r, QueryRequest request) override {
         return query_transaction_observed(r, std::move(request), {});
@@ -240,16 +244,22 @@ public:
             return {};
         }
         forwarding_.reset();
-        pending_ = nullptr;
+        auto* completed = std::exchange(pending_, nullptr);
         if (!*result) {
-            return Output::err(resource_,
-                               Error::transport(resource_, clone_in(resource_, result->error())));
+            return Output::err(
+                resource_, Error::transport(resource_, copy_or_take_error(*completed, *result)));
         }
-        auto& transaction = async_arena(resource_).template make<SqlDataServiceTransaction<E>>(
-            dialect_, result->value().get(), schema_, cache_);
-        return Output::ok(
-            resource_,
-            TransactionHandle<Error>(std::allocator_arg, Allocator(resource_), transaction));
+        auto& native = result->value().get();
+        try {
+            auto& transaction = async_arena(resource_).template make<SqlDataServiceTransaction<E>>(
+                dialect_, native, schema_, cache_);
+            return Output::ok(
+                resource_,
+                TransactionHandle<Error>(std::allocator_arg, Allocator(resource_), transaction));
+        } catch (...) {
+            native.cancel_sql();
+            throw;
+        }
     }
 
     void finish_and_wait() noexcept {

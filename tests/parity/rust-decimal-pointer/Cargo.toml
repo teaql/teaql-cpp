@@ -1,0 +1,13 @@
+[package]
+name = "teaql-cpp-decimal-pointer-oracle"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+# Test-only: same exact enabled Decimal dependency as the locked Rust baseline.
+rust_decimal = "=1.42.1"
+num-traits = "=0.2.19"
+serde_json = "=1.0.150"
+
+[workspace]

@@ -5,13 +5,15 @@
 #include <typeinfo>
 
 namespace teaql {
+class DebugWriter;
 enum class SqlParameterLogPolicy { Unknown, Plain, Masked, Credential };
 enum class SqlExecutionOutcome { Success, Failure, Cancelled };
 std::string_view as_str(SqlExecutionOutcome);
 bool is_credential_log_name(std::string_view);
 
 // Opaque runtime state borrowed from the explicit Context. Same-domain copies
-// retain identity; cross-domain copies clone the concrete allocator-aware state.
+// retain identity; explicit cross-domain copies retain logical identity while
+// cloning the concrete allocator-aware state into the destination lifetime.
 class SqlProjectionState {
 public:
     using allocator_type = Allocator;
@@ -21,7 +23,8 @@ public:
     SqlProjectionState(std::allocator_arg_t, Allocator a) : SqlProjectionState(a.resource()) {}
 
     SqlProjectionState(std::allocator_arg_t, Allocator a, const SqlProjectionState& other)
-        : resource_(a.resource()), state_(other.state_), table_(other.table_) {
+        : resource_(a.resource()), state_(other.state_), table_(other.table_),
+          identity_(other.identity_) {
         if (state_ && resource_ != other.resource_) {
             state_ = table_->clone(detail::context_arena(resource_), state_);
         }
@@ -42,7 +45,10 @@ public:
         static_assert(std::uses_allocator_v<T, Allocator> || std::is_trivially_destructible_v<T>,
                       "Projection state must propagate its allocator");
         SqlProjectionState result(r);
-        result.state_ = &detail::context_arena(r).make<T>(std::forward<Args>(args)...);
+        auto& arena = detail::context_arena(r);
+        auto allocated = arena.make_with_identity<T>(std::forward<Args>(args)...);
+        result.state_ = &allocated.object;
+        result.identity_ = allocated.identity;
         result.table_ = &table<T>;
         return result;
     }
@@ -57,7 +63,7 @@ public:
     }
 
     bool operator==(const SqlProjectionState& other) const {
-        return state_ == other.state_;
+        return identity_ == other.identity_;
     }
 
     static constexpr std::string_view debug() {
@@ -72,17 +78,19 @@ private:
     template <class T>
     static inline const Table table{
         &typeid(T), [](Arena& arena, const void* source) -> const void* {
-            if constexpr (std::uses_allocator_v<T, Allocator> || std::is_arithmetic_v<T> ||
-                          std::is_enum_v<T> || std::is_empty_v<T>) {
+            if constexpr (detail::domain_copyable<T> &&
+                          (std::uses_allocator_v<T, Allocator> || std::is_arithmetic_v<T> ||
+                           std::is_enum_v<T> || std::is_empty_v<T>)) {
                 return &arena.make<T>(*static_cast<const T*>(source));
             } else {
                 throw std::invalid_argument(
-                    "Cross-context projection state requires allocator-aware data");
+                    "Cross-context projection state requires copyable allocator-aware data");
             }
         }};
     Memory resource_;
     const void* state_ = nullptr;
     const Table* table_ = nullptr;
+    std::uint64_t identity_ = 0;
 };
 struct SqlLogContext;
 
@@ -131,6 +139,8 @@ public:
     bool operator==(const SqlIntentRedactions&) const = default;
 
 private:
+    friend void write_debug(DebugWriter&, const SqlIntentRedactions&);
+
     struct Entry {
         using allocator_type = Allocator;
         String text;

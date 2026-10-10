@@ -176,6 +176,8 @@ struct Transport : StreamingSqlTransport<String>, SqlTransactionTransport<String
     };
 
     struct Tx : SqlTransportTransaction<String> {
+        void cancel_sql_transaction() noexcept override {}
+
         using allocator_type = Allocator;
         Transport& owner;
 

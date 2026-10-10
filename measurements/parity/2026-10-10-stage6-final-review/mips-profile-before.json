@@ -1,0 +1,7 @@
+{
+  "CMAKE_BUILD_TYPE:STRING": "MinSizeRel",
+  "CMAKE_CROSSCOMPILING_EMULATOR:UNINITIALIZED": "/usr/bin/qemu-mips;-cpu;74Kf",
+  "CMAKE_TOOLCHAIN_FILE:FILEPATH": "/home/philip/githome/teaql-cpp/.tools/wndr4300/toolchain.cmake",
+  "SQLite3_INCLUDE_DIR:PATH": "/home/philip/githome/teaql-cpp/.tools/mips-cross/sqlite-amalgamation-3400100",
+  "SQLite3_LIBRARY:FILEPATH": "/home/philip/githome/teaql-cpp/.tools/wndr4300/libsqlite3.a"
+}

@@ -1,0 +1,137 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "accepted complete cache/pagination source group within documented Context ownership/owner-thread/Linux-OpenWrt profiles",
+  "original_inputs": 74,
+  "original_repeats_agree": true,
+  "source_sha256": {
+    "include/teaql/runtime/cache.hpp": "bb7fadc24ecc88251afb11d9807c416d8ac0391bf5b681ea28f73d8e810f5d46",
+    "include/teaql/runtime/pagination.hpp": "ea30ae642d2d57672c1432003f355f088305615a7b1636c12691677a16e73dfc",
+    "src/runtime/query_stores.cpp": "fef3ced846f64e3d12311d5b8337780fe8a10825b166758abb5a550c40bd3ec8",
+    "src/runtime/context_pagination.cpp": "eaefbbfc90b73fd0c6307bacda83a8584d7c18a7e2110b7fb6d4c736806473c3",
+    "src/runtime/id_set_build_lock.cpp": "09239a76a2472363fc2bea6aba2b23c45376e1c6cd913b44645c20475b12f558",
+    "tests/parity/query_store_model_cases.json.gz": "8dad247d422b87a03b6b8813b2202536928d9c5371fe07b7ae6bf40c9b5be959",
+    "tests/parity/generate_query_store_models.py": "30ee15631783696c6ee88097221d7cfddfed9e56ac2ea7071e5266b88bbe29a2",
+    "tests/parity/compare_query_store_models.py": "f162bb9e1bcfef5005d13503244b59add82f180b1671e160546ddf455e470a5a",
+    "tests/parity/rust-values/src/bin/query_store_model_oracle.rs": "17283a623f3763bcaa7d460ab4a9a0f4cf09e99f96b1e1ee462bcd7e545b872e"
+  },
+  "staged_patch_sha256": "6c95ce5a89f61241ded11e204399ed7aea350d9f97a919a2fe852f8e37e295a4",
+  "staged_source_sha256": {
+    "include/teaql/runtime/cache.hpp": "cb11e13f4d9e48ff6d7e425e6a0faa1b4863f8f390638b7fff8377fb025500c5",
+    "include/teaql/runtime/query_store_debug.hpp": "d37801ca7968fdfe25df0496cdc4ef293f658e51b6e48af27bd8dcab2254dfe3",
+    "include/teaql/runtime.hpp": "f400301288fa896cc53d72790d71c98ddabaabd5d39547cb4825bdb79f8dcc22",
+    "tests/parity/query_store_model_probe.cpp": "533128f1ee204c7f5f9cad06ab3b9e1942939cf6c533d815497d7a12f8e346f4",
+    "tests/query_store_model_tests.cpp": "3693ae314bb14685c0614fb05b6587ea4767abdbd83513039df1777b86a25bbe",
+    "CMakeLists.txt": "82bbc3bc48536e1950e05f57646c7e053e9b88f712400a60471ca438f133acee"
+  },
+  "native": {
+    "models_passed": 74,
+    "models_total": 74,
+    "live_original": true,
+    "lifecycle": "passed",
+    "default_pmr_disabled": true
+  },
+  "sanitizer": {
+    "models_passed": 74,
+    "models_total": 74,
+    "live_original": true,
+    "lifecycle": "passed",
+    "default_pmr_disabled": true,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "mips": {
+    "models_passed": 74,
+    "models_total": 74,
+    "live_original": true,
+    "lifecycle": "passed",
+    "default_pmr_disabled": true,
+    "flags": [
+      "-march=74kc",
+      "-msoft-float",
+      "-Os",
+      "-DNDEBUG"
+    ],
+    "emulator": [
+      "qemu-mips",
+      "-cpu",
+      "74Kf"
+    ],
+    "physical_router_verified": false
+  },
+  "integration_note": "Initial combined repair completes native331 and sanitizer/MIPS17 checks. A subsequent six-repair batch registers343 tests and is building. Complete source/stage acceptance remains independent.",
+  "installed_in_worktree": true,
+  "installed_source_sha256": {
+    "include/teaql/runtime/cache.hpp": "cb11e13f4d9e48ff6d7e425e6a0faa1b4863f8f390638b7fff8377fb025500c5",
+    "include/teaql/runtime/query_store_debug.hpp": "d37801ca7968fdfe25df0496cdc4ef293f658e51b6e48af27bd8dcab2254dfe3",
+    "include/teaql/runtime.hpp": "3c914940671c7200b77653d26a51ff6cc388514b82bb998a2210384af1e66e77",
+    "tests/parity/query_store_model_probe.cpp": "533128f1ee204c7f5f9cad06ab3b9e1942939cf6c533d815497d7a12f8e346f4",
+    "tests/query_store_model_tests.cpp": "3693ae314bb14685c0614fb05b6587ea4767abdbd83513039df1777b86a25bbe"
+  },
+  "registered_native_tests": 331,
+  "previous_full_native_checkpoint": {
+    "passed": 324,
+    "total": 324,
+    "seconds": 151.69
+  },
+  "installed_mips": {
+    "selected_passed": 17,
+    "selected_total": 17,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false,
+    "seconds": 12.2
+  },
+  "installed_sanitizer": {
+    "selected_passed": 17,
+    "selected_total": 17,
+    "seconds": 13.69,
+    "refresh": "ninja: no work to do.",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "installed_native": {
+    "passed": 331,
+    "total": 331,
+    "seconds": 72.65,
+    "pre_test_no_work": true,
+    "post_test_no_work": true,
+    "evidence": "installed-native331.log"
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  },
+  "full_store_selections": {
+    "sanitizer": {
+      "passed": 8,
+      "total": 8,
+      "seconds": 6.36,
+      "asan_options": "detect_leaks=0",
+      "ubsan_options": "halt_on_error=1"
+    },
+    "mips": {
+      "passed": 8,
+      "total": 8,
+      "seconds": 2.32,
+      "physical_router_verified": false
+    }
+  },
+  "live_original_refresh": {
+    "query_store": 259,
+    "id_set_build": 144,
+    "query_store_model": 74,
+    "matched": 477,
+    "total": 477
+  },
+  "source_group_accepted": true,
+  "final_native": {
+    "passed": 351,
+    "total": 351,
+    "seconds": 76.06,
+    "pre_test_no_work": true,
+    "post_test_no_work": true,
+    "valid_nonempty_dependency_records": 415
+  }
+}

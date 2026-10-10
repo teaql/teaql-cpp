@@ -1,0 +1,16 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-wndr4300-memory
+Test project /home/philip/githome/teaql-cpp/build-wndr4300-memory
+    Start 76: recursive_graph_write_context_contracts
+1/5 Test #76: recursive_graph_write_context_contracts ...   Passed    0.19 sec
+    Start 77: recursive_graph_write_rust_parity
+2/5 Test #77: recursive_graph_write_rust_parity .........   Passed    1.94 sec
+    Start 79: graph_node_command_rust_parity
+3/5 Test #79: graph_node_command_rust_parity ............   Passed    2.16 sec
+    Start 81: graph_save_adapter_rust_parity
+4/5 Test #81: graph_save_adapter_rust_parity ............   Passed    1.34 sec
+    Start 84: graph_execution_rust_parity
+5/5 Test #84: graph_execution_rust_parity ...............   Passed    0.96 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =   6.60 sec

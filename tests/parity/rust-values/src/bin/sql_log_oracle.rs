@@ -1,7 +1,7 @@
 use std::io::{self,BufRead};
 use serde_json::{json,Value as Json};
 use teaql_core::Value;
-use teaql_data_service::{SqlLogContext,SqlIntentRedactions,SqlParameterLogPolicy as Policy,is_credential_log_name};
+use teaql_data_service::{SqlLogContext,SqlProjectionState,SqlIntentRedactions,SqlParameterLogPolicy as Policy,is_credential_log_name};
 #[path="../fixture_value.rs"] mod fixture_value;
 use fixture_value::value;
 fn binding(input:&Json)->SqlIntentRedactions {
@@ -11,6 +11,26 @@ fn binding(input:&Json)->SqlIntentRedactions {
     SqlIntentRedactions::from_bindings(&source,&params,input["sql"].as_str().unwrap())
 }
 fn evaluate(input:Json)->Json {
+    if input["op"] == "projection_scope" {
+        // The payload deliberately has no Clone implementation. The original
+        // opaque state Clone retains the selected state, not a cloned payload.
+        struct State(String);
+        let first = SqlProjectionState::new(State(input["text"].as_str().unwrap().into()));
+        let cloned = first.clone();
+        let independent = SqlProjectionState::new(State(input["text"].as_str().unwrap().into()));
+        let empty = SqlProjectionState::default();
+        let output = json!({
+            "text": cloned.get::<State>().unwrap().0,
+            "wrong_type_absent": cloned.get::<String>().is_none(),
+            "clone_equal": cloned == first,
+            "independent_equal": independent == first,
+            "empty_equal": empty == SqlProjectionState::default(),
+            "empty_some_equal": empty == first,
+            "debug": format!("{cloned:?}"),
+        });
+        drop(first);
+        return json!({"before_drop": output, "after_drop": cloned.get::<State>().unwrap().0});
+    }
     let mut collected=binding(&input);
     if let Some(extra)=input["extend"].as_array(){for item in extra{collected.extend(&binding(item));}}
     if let Some(ids)=input["ids"].as_array(){for id in ids{collected.capture_target_id(&value(id));}}

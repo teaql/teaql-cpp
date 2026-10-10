@@ -99,6 +99,8 @@ struct PendingRows {
 };
 
 struct Tx final : SqlTransportTransaction<Error> {
+    void cancel_sql_transaction() noexcept override {}
+
     int queries = 0;
 
     explicit Tx(Memory r) : SqlTransportTransaction(r) {}

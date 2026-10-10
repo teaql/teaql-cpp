@@ -1,0 +1,22 @@
+{
+  "registry": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "loads": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "select-behavior": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "select-policy": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

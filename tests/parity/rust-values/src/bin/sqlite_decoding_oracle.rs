@@ -26,7 +26,7 @@ fn evaluate(input:Json)->Json {
     let query=CompiledQuery{log_context:Default::default(),sql:input["query"].as_str().unwrap_or("SELECT v FROM data").into(),params:vec![],comment:None};
     match provider.fetch_all_compact(&query) {
         Ok(rows)=>json!({"rows":rows.iter().map(|row|json!({"keys":row.keys().collect::<Vec<_>>(),"values":row.values().map(value).collect::<Vec<_>>()})).collect::<Vec<_>>()}),
-        Err(error)=>json!({"error":error.to_string(),"kind":match error {MutationExecutorError::Bind(_)=>"Bind",MutationExecutorError::UnsupportedColumnType(_)=>"UnsupportedColumnType",_=>"Sqlite"}}),
+        Err(error)=>json!({"error":error.to_string(),"source_none":std::error::Error::source(&error).is_none(),"kind":match error {MutationExecutorError::Bind(_)=>"Bind",MutationExecutorError::UnsupportedColumnType(_)=>"UnsupportedColumnType",_=>"Sqlite"}}),
     }
 }
 fn main(){for line in io::stdin().lock().lines(){println!("{}",evaluate(serde_json::from_str(&line.unwrap()).unwrap()));}}

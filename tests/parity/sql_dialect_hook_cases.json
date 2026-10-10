@@ -1,0 +1,4174 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Actual original mutation default calls with mandatory provider hooks recording kind, identifier quoting, and placeholder order. Rendering failure is an instrumented provider panic. Original 2505 mutation outputs are unchanged.",
+  "cases": [
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {
+          "id": {
+            "kind": "null",
+            "value": null
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          6
+        ],
+        "null_types": [
+          2
+        ],
+        "policies": [
+          1
+        ],
+        "sql": "INSERT INTO \"order\" (record_id) VALUES (?)",
+        "values": [
+          null
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {
+          "id": {
+            "kind": "null",
+            "value": null
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {
+          "id": {
+            "kind": "null",
+            "value": null
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          6
+        ],
+        "null_types": [
+          2
+        ],
+        "policies": [
+          1
+        ],
+        "sql": "INSERT INTO \"order\" (record_id) VALUES (?1)",
+        "values": [
+          null
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {
+          "id": {
+            "kind": "null",
+            "value": null
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {
+          "version": {
+            "kind": "i64",
+            "value": "99"
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          2
+        ],
+        "null_types": [
+          null
+        ],
+        "policies": [
+          1
+        ],
+        "sql": "INSERT INTO \"order\" (revision) VALUES (?)",
+        "values": [
+          99
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {
+          "version": {
+            "kind": "i64",
+            "value": "99"
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {
+          "version": {
+            "kind": "i64",
+            "value": "99"
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          2
+        ],
+        "null_types": [
+          null
+        ],
+        "policies": [
+          1
+        ],
+        "sql": "INSERT INTO \"order\" (revision) VALUES (?1)",
+        "values": [
+          99
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "insert",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {
+          "version": {
+            "kind": "i64",
+            "value": "99"
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 0
+            }
+          ]
+        },
+        "numbered": false,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "generated": true,
+        "kinds": [
+          6,
+          6,
+          6
+        ],
+        "null_types": [
+          0,
+          0,
+          5
+        ],
+        "policies": [
+          0,
+          0,
+          0
+        ],
+        "sql": "INSERT INTO typed_data (field) VALUES (?), (?), (?)",
+        "values": [
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 0
+            }
+          ]
+        },
+        "numbered": false,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true,
+        "fail_quote": "typed_data"
+      },
+      "expected": {
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 0
+            }
+          ]
+        },
+        "numbered": true,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "generated": true,
+        "kinds": [
+          6,
+          6,
+          6
+        ],
+        "null_types": [
+          0,
+          0,
+          5
+        ],
+        "policies": [
+          0,
+          0,
+          0
+        ],
+        "sql": "INSERT INTO typed_data (field) VALUES (?1), (?2), (?3)",
+        "values": [
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 0
+            }
+          ]
+        },
+        "numbered": true,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true,
+        "fail_quote": "typed_data"
+      },
+      "expected": {
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 1
+            }
+          ]
+        },
+        "numbered": false,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "generated": true,
+        "kinds": [
+          6,
+          6,
+          6
+        ],
+        "null_types": [
+          1,
+          1,
+          5
+        ],
+        "policies": [
+          0,
+          0,
+          0
+        ],
+        "sql": "INSERT INTO typed_data (field) VALUES (?), (?), (?)",
+        "values": [
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 1
+            }
+          ]
+        },
+        "numbered": false,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true,
+        "fail_quote": "typed_data"
+      },
+      "expected": {
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 1
+            }
+          ]
+        },
+        "numbered": true,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "generated": true,
+        "kinds": [
+          6,
+          6,
+          6
+        ],
+        "null_types": [
+          1,
+          1,
+          5
+        ],
+        "policies": [
+          0,
+          0,
+          0
+        ],
+        "sql": "INSERT INTO typed_data (field) VALUES (?1), (?2), (?3)",
+        "values": [
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_insert",
+        "entity": {
+          "name": "Typed",
+          "properties": [
+            {
+              "name": "field",
+              "type": 1
+            }
+          ]
+        },
+        "numbered": true,
+        "rows": [
+          {
+            "field": {
+              "kind": "null",
+              "value": null
+            }
+          },
+          {},
+          {
+            "field": {
+              "kind": "typed_null",
+              "value": null
+            }
+          }
+        ],
+        "observe_hooks": true,
+        "fail_quote": "typed_data"
+      },
+      "expected": {
+        "events": [
+          "quote:field",
+          "placeholder:1",
+          "placeholder:2",
+          "placeholder:3",
+          "kind",
+          "quote:typed_data"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ? WHERE record_id = ? AND revision = ? AND (tenant = ?)",
+        "values": [
+          -1,
+          1,
+          -2,
+          7
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+        "values": [
+          -1,
+          1,
+          -2,
+          7
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-1",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ? WHERE record_id = ? AND revision = ? AND (tenant = ?)",
+        "values": [
+          0,
+          1,
+          -1,
+          7
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-1",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-1",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+        "values": [
+          0,
+          1,
+          -1,
+          7
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "values": {},
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-1",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:revision",
+          "placeholder:1",
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          "1",
+          null
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          3,
+          2,
+          3,
+          3,
+          3,
+          2
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = CASE record_id WHEN ? THEN ? ELSE revision END WHERE record_id IN (?, ?) AND revision = CASE record_id WHEN ? THEN ? ELSE revision END",
+        "values": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          "1",
+          null
+        ],
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          "1",
+          null
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          3,
+          2,
+          3,
+          3,
+          3,
+          2
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = CASE record_id WHEN ?1 THEN ?2 ELSE revision END WHERE record_id IN (?3, ?4) AND revision = CASE record_id WHEN ?5 THEN ?6 ELSE revision END",
+        "values": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          "1",
+          null
+        ],
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          null,
+          "2"
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          3,
+          2,
+          3,
+          3,
+          3,
+          2
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = CASE record_id WHEN ? THEN ? ELSE revision END WHERE record_id IN (?, ?) AND revision = CASE record_id WHEN ? THEN ? ELSE revision END",
+        "values": [
+          2,
+          3,
+          1,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          null,
+          "2"
+        ],
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          null,
+          "2"
+        ],
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          3,
+          2,
+          3,
+          3,
+          3,
+          2
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = CASE record_id WHEN ?1 THEN ?2 ELSE revision END WHERE record_id IN (?3, ?4) AND revision = CASE record_id WHEN ?5 THEN ?6 ELSE revision END",
+        "values": [
+          2,
+          3,
+          1,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "batch_update",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "fields": [],
+        "rows": [
+          {
+            "name": {
+              "kind": "text",
+              "value": "a"
+            },
+            "id": {
+              "kind": "u64",
+              "value": "9"
+            },
+            "version": {
+              "kind": "i64",
+              "value": "100"
+            }
+          },
+          {
+            "token": {
+              "kind": "null",
+              "value": null
+            },
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          }
+        ],
+        "ids": [
+          {
+            "kind": "u64",
+            "value": "1"
+          },
+          {
+            "kind": "u64",
+            "value": "2"
+          }
+        ],
+        "versions": [
+          null,
+          "2"
+        ],
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "placeholder:2",
+          "quote:revision",
+          "quote:revision",
+          "placeholder:3",
+          "placeholder:4",
+          "quote:record_id",
+          "quote:record_id",
+          "placeholder:5",
+          "placeholder:6",
+          "quote:revision",
+          "quote:revision",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": true,
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "kind",
+          "quote:order",
+          "quote:revision",
+          "placeholder:1"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ? WHERE record_id = ?",
+        "values": [
+          -1,
+          1
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": true,
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": true,
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "kind",
+          "quote:order",
+          "quote:revision",
+          "placeholder:1"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2",
+        "values": [
+          -1,
+          1
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": true,
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": false,
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          3
+        ],
+        "null_types": [
+          null
+        ],
+        "policies": [
+          1
+        ],
+        "sql": "DELETE FROM \"order\" WHERE record_id = ?",
+        "values": [
+          1
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": false,
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": false,
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "generated": true,
+        "kinds": [
+          3
+        ],
+        "null_types": [
+          null
+        ],
+        "policies": [
+          1
+        ],
+        "sql": "DELETE FROM \"order\" WHERE record_id = ?1",
+        "values": [
+          1
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "delete",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": null,
+        "soft": false,
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:1",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "kind",
+          "quote:order",
+          "quote:revision",
+          "placeholder:1"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2
+        ],
+        "null_types": [
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ? WHERE record_id = ? AND revision = ?",
+        "values": [
+          3,
+          1,
+          -2
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "kind",
+          "quote:order",
+          "quote:revision",
+          "placeholder:1"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2
+        ],
+        "null_types": [
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3",
+        "values": [
+          3,
+          1,
+          -2
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order",
+          "quote:revision",
+          "placeholder:1"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ? WHERE record_id = ? AND revision = ? AND (tenant = ?)",
+        "values": [
+          3,
+          1,
+          -2,
+          7
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": false,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true
+      },
+      "expected": {
+        "comment": null,
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order",
+          "quote:revision",
+          "placeholder:1"
+        ],
+        "generated": true,
+        "kinds": [
+          2,
+          3,
+          2,
+          3
+        ],
+        "null_types": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "policies": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "sql": "UPDATE \"order\" SET revision = ?1 WHERE record_id = ?2 AND revision = ?3 AND (tenant = ?4)",
+        "values": [
+          3,
+          1,
+          -2,
+          7
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "recover",
+        "entity": {
+          "name": "Account",
+          "table": "order",
+          "declared": true,
+          "masked": [
+            "name"
+          ],
+          "properties": [
+            {
+              "name": "id",
+              "type": 2,
+              "column": "record_id",
+              "id": true
+            },
+            {
+              "name": "version",
+              "type": 1,
+              "column": "revision",
+              "version": true
+            },
+            {
+              "name": "name",
+              "type": 5,
+              "column": "display name"
+            },
+            {
+              "name": "token",
+              "type": 5,
+              "column": "access_token"
+            },
+            {
+              "name": "payload",
+              "type": 7
+            },
+            {
+              "name": "amount",
+              "type": 4
+            },
+            {
+              "name": "tenant",
+              "type": 2
+            }
+          ]
+        },
+        "numbered": true,
+        "id": {
+          "kind": "u64",
+          "value": "1"
+        },
+        "version": "-2",
+        "guard": {
+          "kind": "binary",
+          "left": {
+            "kind": "column",
+            "name": "tenant"
+          },
+          "op": 0,
+          "right": {
+            "kind": "value",
+            "value": {
+              "kind": "u64",
+              "value": "7"
+            }
+          }
+        },
+        "observe_hooks": true,
+        "fail_quote": "order"
+      },
+      "expected": {
+        "events": [
+          "quote:record_id",
+          "placeholder:2",
+          "quote:revision",
+          "placeholder:3",
+          "quote:tenant",
+          "placeholder:4",
+          "kind",
+          "quote:order"
+        ],
+        "panic": "hook"
+      }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed full native343 and sanitizer20/MIPS20 selections pass; complete source/composition acceptance separate",
+  "original_inputs": 172,
+  "original_repeats_agree": true,
+  "formats_per_model": 9,
+  "source_sha256": {
+    "include/teaql/runtime/logging.hpp": "fdc79b1d5f6bd99acc5d8ec13548e1f057719e46544ee72ae8677ac93b719de0",
+    "include/teaql/runtime/log_formatter.hpp": "489a137ee1b95389805feaa9f13f724aadfab7df69b073358e52c456bda30e22",
+    "include/teaql/runtime/log_manager.hpp": "4c261f20b943d60c036f7560137897da44b428d6bf8fc7af348b8da84e3e1449",
+    "tests/parity/rust-values/src/bin/log_model_oracle.rs": "958cf729e105c1003698489f78276cfc1596d7b18ed0e48bb6703c3d4209548d",
+    "tests/parity/log_model_cases.json.gz": "e1971dbb5ab4056a9e53904ad2a78f15e0f56d3bca13606f70751cc0f6b463ec",
+    "tests/parity/generate_log_models.py": "24bac6bfb6ea2be92e634a7d5e7e26177466e71b8f81c24327ec13829ae05b28",
+    "tests/parity/compare_log_models.py": "40e4f2cdb38629eaff9f606632f93a789fc586285beeacad9ec97bc25323b08c"
+  },
+  "staged_patch_sha256": "b7e6ed8ae23c7beae30155f4c3213372d72366d205461c10d778e9b86f69f66b",
+  "staged_source_sha256": {
+    "include/teaql/runtime/log_model_debug.hpp": "8372b6fb56044ec2d5b5504c8cc0aabdbaf6af3b71d3aa5fc2b15876025e27e0",
+    "include/teaql/runtime.hpp": "14e3ec8403983cc9721e72436e636e0be8c9ba4ece87eabb2207a11889f1a5fe",
+    "tests/log_model_tests.cpp": "9ef9e26560b500f2af46c1f5b3ad36f563c816d76d3dcc68011a3caf4f015f5e",
+    "tests/parity/log_model_probe.cpp": "328cdd2341951ad7dfa4e1b618f5c6d238db3beec01a54a38390f7730bf3e17b",
+    "CMakeLists.txt": "9387f44b9ab603c41db6fdcb0382c1c5c7bd7296890770f57551522f96b49225"
+  },
+  "targets": {
+    "native": {
+      "models_passed": 172,
+      "models_total": 172,
+      "live_original": true,
+      "nested_ownership_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "sanitizer": {
+      "models_passed": 172,
+      "models_total": 172,
+      "live_original": true,
+      "nested_ownership_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "mips": {
+      "models_passed": 172,
+      "models_total": 172,
+      "live_original": true,
+      "nested_ownership_contracts": "passed",
+      "default_pmr_disabled": true
+    }
+  },
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "UBSAN_OPTIONS": "halt_on_error=1"
+  },
+  "physical_router_verified": false,
+  "notes": "Seven source Debug derives restored; auxiliary LogDuration maps original Duration without a new raw data shape. Raw derived diagnostics are not a privacy projection or sink publication API. No factory/projection/formatter route changes. Private LogLevel original source included by existing formatter fixture, along with unchanged event/privacy modules. Patch remains outside active331 inputs and includes two future CMake registrations.",
+  "installed_in_worktree": true,
+  "installed_native_selection": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.44,
+    "full_native343_pending": true
+  },
+  "installed_mips_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 25.0,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_mips_live_original": "all six installed probes match1199/1199 live pinned Rust observations",
+  "installed_sanitizer_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 35.65,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1",
+    "refresh": "ninja: no work to do."
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  }
+}

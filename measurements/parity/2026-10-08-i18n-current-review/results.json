@@ -1,0 +1,38 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; full native integration pending",
+  "sanitizer": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 11.1,
+    "leak_detection": false
+  },
+  "mips": {
+    "passed": 4,
+    "total": 4,
+    "seconds": 7.2,
+    "physical_router": "unverified"
+  },
+  "live_original": {
+    "translation_mips": 4575,
+    "diagnostic_mips": 60
+  },
+  "source_sha256": {
+    "include/teaql/runtime/context.hpp": "fe51d735f8e4cd58d3d830cc461ee12d17fa0de840989da56f13dc111dd7482e",
+    "include/teaql/runtime/language.hpp": "54715ced274d8fe0fdcc2f724dbe8656f2b2edcd7c54b43fb3450baf7264ed83",
+    "include/teaql/runtime/i18n.hpp": "b5700abe6bab184ce20e234dcfd0dd749361382c44b95913286e9b41d9891f4d",
+    "include/teaql/runtime/i18n_debug.hpp": "7a8163f698c62eb0c7ff2f74d864007e4c6c31a8336c0e1347292d9e52a8a485",
+    "src/runtime/language.cpp": "161d67f8cb74b0a6fe1520763f791df262e5b68efe7ef7b72a1a320af8c4a56a",
+    "src/runtime/i18n.cpp": "d1577cb707c5e1248c3c6443c80483c695bda82bc1673840a6d575eff710eb87",
+    "src/runtime/i18n_debug.cpp": "8ae9b67d3be631c121b415054577908414f4fedc1d0af9258110a89ae2a98256",
+    "src/runtime/context_language.cpp": "11e64fe089cf0f59375b8e5c2ce95640ad09ef2a1b5e62f37ab76790b76f3841",
+    "tests/i18n_tests.cpp": "3de8f0ced0e1799a8dd087afaffa2631f2c023c79c1ace3eb4f8fea3e053c465"
+  },
+  "native": {
+    "passed": 322,
+    "total": 322,
+    "seconds": 119.11,
+    "pending_build_work": false,
+    "dependency_records": 390
+  }
+}

@@ -24860,8 +24860,8 @@
         "op": "key",
         "entity": "Order",
         "id": {
-          "kind": "f64",
-          "value": "NaN"
+          "kind": "f64_bits",
+          "value": "7ff8000000000000"
         }
       },
       "expected": "EntityKey { entity: \"Order\", id: F64(NaN), id_key: F64(9221120237041090560) }"
@@ -38713,5 +38713,6 @@
         "tool": false
       }
     }
-  ]
+  ],
+  "note": " The EntityKey NaN input specifies exact f64 bits so platform-dependent text-parser NaN payloads do not change the input identity. All expected outputs are unchanged; out-of-range 32-bit audit-count fixtures have explicit parser rejection checks."
 }

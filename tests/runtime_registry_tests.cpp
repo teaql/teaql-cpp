@@ -1,4 +1,5 @@
 #include <teaql/runtime/context.hpp>
+#include <teaql/runtime/registry_debug.hpp>
 #include <iostream>
 using namespace teaql;
 
@@ -127,6 +128,27 @@ static void registration_and_domains() {
               assigned.entity("Zoo")->memory_resource() == g,
           "metadata clone and move assignment preserve nested allocation domains");
     check(registry_copy.contains("RegisteredOnly"), "registry deep copy survives source close");
+    auto next = global.make_user_context();
+    Ref<String> retained_diagnostic;
+    std::size_t expected_size = 0;
+    {
+        auto metadata_debug = debug_string(next->memory_resource(), metadata_copy);
+        auto registry_debug = debug_string(next->memory_resource(), registry_copy);
+        check(
+            metadata_debug.find("replacement_table") != String::npos &&
+                metadata_debug.find("OtherEntity") != String::npos &&
+                metadata_debug.get_allocator().resource() == next->memory_resource() &&
+                registry_debug ==
+                    "InMemoryEntityRegistry { entities: {\"RegisteredOnly\": \"RegisteredOnly\"} }",
+            "Global registry diagnostics survive source User deletion and retain source map shape");
+        retained_diagnostic = next->make_global<String>(metadata_debug);
+        expected_size = metadata_debug.size();
+    }
+    next.reset();
+    auto reader = global.make_user_context();
+    const auto& retained_text = reader->get(reader->rebind_global(retained_diagnostic));
+    check(retained_text.size() == expected_size && retained_text.get_allocator().resource() == g,
+          "explicit Global diagnostic copy survives its formatting User deletion");
     sibling->set_metadata(global, metadata_copy);
     sibling->close();
     rejected(

@@ -15,9 +15,13 @@ public:
             if (operation.memory_resource() != entries_.get_allocator().resource()) {
                 throw std::invalid_argument("Transaction operation belongs to a different Context");
             }
-            entries_.push_back({&operation, [](const void* p) {
+            entries_.push_back({&operation,
+                                [](const void* p) {
                                     return static_cast<const AsyncOperation<T>*>(p)->status() ==
                                            AsyncStatus::Pending;
+                                },
+                                [](void* p) noexcept {
+                                    static_cast<AsyncOperation<T>*>(p)->cancel();
                                 }});
         } catch (...) {
             operation.cancel();
@@ -32,9 +36,13 @@ public:
             if (stream.memory_resource() != entries_.get_allocator().resource()) {
                 throw std::invalid_argument("Transaction stream belongs to a different Context");
             }
-            entries_.push_back({&stream, [](const void* p) {
+            entries_.push_back({&stream,
+                                [](const void* p) {
                                     return static_cast<const AsyncStream<T>*>(p)->status() ==
                                            StreamStatus::Open;
+                                },
+                                [](void* p) noexcept {
+                                    static_cast<AsyncStream<T>*>(p)->cancel();
                                 }});
         } catch (...) {
             stream.cancel();
@@ -52,10 +60,19 @@ public:
         return false;
     }
 
+    void cancel_all() noexcept {
+        for (auto entry = entries_.rbegin(); entry != entries_.rend(); ++entry) {
+            if (entry->pending(entry->operation)) {
+                entry->cancel(entry->operation);
+            }
+        }
+    }
+
 private:
     struct Entry {
-        const void* operation;
+        void* operation;
         bool (*pending)(const void*);
+        void (*cancel)(void*) noexcept;
     };
 
     Vector<Entry> entries_;

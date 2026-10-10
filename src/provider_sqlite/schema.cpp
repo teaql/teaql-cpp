@@ -37,12 +37,10 @@ MutationExecutorError error(Memory r, sqlite3& db, int code) {
 MutationExecutorError prepare_error(Memory r, sqlite3& db, int code, std::string_view sql) {
 #if SQLITE_VERSION_NUMBER >= 3038000
     if ((code & 255) == SQLITE_ERROR && sqlite3_error_offset(&db) >= 0) {
-        String message(sqlite3_errmsg(&db), r);
-        message += " in ";
-        message += sql;
-        message += " at offset ";
-        number(message, sqlite3_error_offset(&db));
-        return MutationExecutorError::sqlite(r, 0, message);
+        return MutationExecutorError::sqlite(
+            r,
+            SqliteDriverError::sql_input(
+                r, code, sqlite3_errmsg(&db), sql, sqlite3_error_offset(&db)));
     }
 #else
     (void)sql;
@@ -78,7 +76,7 @@ struct Statement {
                 sqlite3_finalize(next);
             }
             if (extra) {
-                throw MutationExecutorError::sqlite(r, 0, "Multiple statements provided");
+                throw MutationExecutorError::sqlite(r, SqliteDriverError::multiple_statement(r));
             }
         } catch (...) {
             sqlite3_finalize(stmt);
@@ -114,8 +112,7 @@ struct Statement {
 
     void exec() {
         if (next()) {
-            throw MutationExecutorError::sqlite(
-                r, 0, "Execute returned results - did you mean to call query?");
+            throw MutationExecutorError::sqlite(r, SqliteDriverError::execute_returned_results(r));
         }
     }
 
@@ -124,17 +121,15 @@ struct Statement {
         if (type == expected) {
             return;
         }
-        String message("Invalid column type ", r);
-        message += type == SQLITE_INTEGER ? "Integer"
-                   : type == SQLITE_FLOAT ? "Real"
-                   : type == SQLITE_TEXT  ? "Text"
-                   : type == SQLITE_BLOB  ? "Blob"
-                                          : "Null";
-        message += " at index: ";
-        number(message, index);
-        message += ", name: ";
-        message += sqlite3_column_name(stmt, index);
-        throw MutationExecutorError::sqlite(r, 0, message);
+        auto native_type = type == SQLITE_INTEGER ? SqliteValueType::Integer
+                           : type == SQLITE_FLOAT ? SqliteValueType::Real
+                           : type == SQLITE_TEXT  ? SqliteValueType::Text
+                           : type == SQLITE_BLOB  ? SqliteValueType::Blob
+                                                  : SqliteValueType::Null;
+        throw MutationExecutorError::sqlite(
+            r,
+            SqliteDriverError::invalid_column_type(
+                r, std::size_t(index), sqlite3_column_name(stmt, index), native_type));
     }
 
     std::int64_t integer(int index) {
@@ -149,10 +144,9 @@ struct Statement {
             throw MutationExecutorError::sqlite(r, SQLITE_NOMEM, "out of memory");
         }
         std::string_view value(data, std::size_t(sqlite3_column_bytes(stmt, index)));
-        if (auto invalid = sqlite_utf8_error(r, value)) {
-            *invalid += " at index ";
-            number(*invalid, index);
-            throw MutationExecutorError::sqlite(r, 0, *invalid);
+        if (auto invalid = SqliteUtf8Error::validate(value)) {
+            throw MutationExecutorError::sqlite(
+                r, SqliteDriverError::utf8_error(r, std::size_t(index), *invalid));
         }
         return String(value, r);
     }

@@ -4,6 +4,8 @@
 #include <chrono>
 
 namespace teaql {
+class DebugWriter;
+
 namespace detail {
 struct QueryStoreAccess;
 }
@@ -48,6 +50,7 @@ public:
 
 private:
     friend struct detail::QueryStoreAccess;
+    friend void write_debug(DebugWriter&, const InMemoryAggregationCache&);
 
     struct Entry {
         using allocator_type = Allocator;

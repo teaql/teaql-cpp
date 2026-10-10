@@ -3,6 +3,7 @@
 #include <teaql/core/time.hpp>
 #include <concepts>
 #include <cstdint>
+#include <exception>
 #include <optional>
 #include <string_view>
 
@@ -47,6 +48,11 @@ struct BusinessIdError {
     }
 
     String to_string(Memory destination) const;
+
+    // The pinned Error implementation uses the default empty source chain.
+    const std::exception* source() const noexcept {
+        return nullptr;
+    }
 
     bool operator==(const BusinessIdError& other) const {
         return code == other.code && message == other.message;

@@ -1,0 +1,62 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source_group_status": "partial",
+  "native": {
+    "passed": 322,
+    "total": 322,
+    "seconds": 119.11,
+    "pending_build_work": false,
+    "dependency_records": 390
+  },
+  "sanitizer": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 16.33,
+    "leak_detection": false
+  },
+  "mips": {
+    "status": "selected checks passed; whole-native integration pending",
+    "prior_selection": {
+      "passed": 11,
+      "total": 12,
+      "failed": "reference_model_rust_parity",
+      "cause": "New fixture incorrectly parsed numeric JSON as string-backed integers; corrected to the existing checked model_integer reader."
+    },
+    "live_codec": 548,
+    "live_round_trip": 933,
+    "physical_router": "unverified",
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.21,
+    "live_models": 229
+  },
+  "original_models": {
+    "inputs": 229,
+    "repeated_executions_agree": true
+  },
+  "source_sha256": {
+    "include/teaql/runtime/reference_model_debug.hpp": "3a9f6f08420ad75e8ec9ebead3718a9ef1ff4c66b744383c345c08bcb1e3b941",
+    "include/teaql/runtime/entity_reference.hpp": "f52ea0bb05c7e7efb35cd984dde94386995e6c82625f3c16ece7b1fd3cb43d2f",
+    "include/teaql/runtime/round_trip_reference_types.hpp": "7c1204b3ad01b2d81d4ec196b3beeeedb91e892b29b59aee228511b9e92a14d4",
+    "src/runtime/round_trip_reference_types.cpp": "552a1686bd4c1d2e5f6937a790496ce818212a236ab0c9274c0e3366f72c1f27",
+    "tests/reference_model_tests.cpp": "a88619e867fe0fe8d68636e82f03fdb103136be00ebad0084f50704bce34cda9",
+    "tests/parity/reference_model_probe.cpp": "31e4aab4f743eea5c3dc69383a4024acf9d6b05933ed8f9fc18caa96a943acda",
+    "tests/parity/reference_model_cases.json.gz": "cfe46cb7e36de4d8c873ac11fe6c1dcd887cf87e2bdbae3f02d0ea4e8d83af67",
+    "tests/parity/rust-values/src/bin/reference_model_oracle.rs": "78f8d7cc01a249d1b1f24722f6b25a01b012364b7606868bb19e3804b3cfe925"
+  },
+  "context_revalidation_required": false,
+  "context_revalidation": {
+    "sanitizer": {
+      "passed": 21,
+      "total": 21,
+      "seconds": 17.05,
+      "leak_detection": false
+    },
+    "mips": {
+      "passed": 21,
+      "total": 21,
+      "seconds": 13.22
+    },
+    "current_context_header_sha256": "fe51d735f8e4cd58d3d830cc461ee12d17fa0de840989da56f13dc111dd7482e"
+  }
+}

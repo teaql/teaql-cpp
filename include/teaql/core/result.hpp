@@ -19,6 +19,7 @@ public:
     }
 
     Result(std::allocator_arg_t, Allocator a, const Result& other)
+        requires(detail::domain_copyable<T> && detail::domain_copyable<E>)
         : Result(other.is_ok() ? ok(a.resource(), detail::clone_in(a.resource(), other.value()))
                                : err(a.resource(), detail::clone_in(a.resource(), other.error()))) {
     }

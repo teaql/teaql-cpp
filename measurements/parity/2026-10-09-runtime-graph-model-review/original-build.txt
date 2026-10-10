@@ -1,0 +1,11 @@
+   Compiling teaql-cpp-value-oracle v0.1.0 (/home/philip/githome/teaql-cpp/tests/parity/rust-values)
+warning: unused import: `BTreeSet`
+ --> src/bin/runtime_graph_model_oracle.rs:3:35
+  |
+3 | use std::{collections::{BTreeMap, BTreeSet}, io::{self, BufRead}, sync::Arc};
+  |                                   ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `teaql-cpp-value-oracle` (bin "runtime_graph_model_oracle") generated 1 warning (run `cargo fix --bin "runtime_graph_model_oracle" -p teaql-cpp-value-oracle` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s

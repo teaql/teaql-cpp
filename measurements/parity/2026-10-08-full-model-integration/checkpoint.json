@@ -1,0 +1,100 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "installed full native343, selected native12/sanitizer20/MIPS20 and wider relation9 selections pass; later Context borrow repair staged",
+  "preceding_native_checkpoint": {
+    "passed": 331,
+    "total": 331,
+    "seconds": 72.65,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  },
+  "registered_tests": 343,
+  "format_files": 660,
+  "repairs": [
+    "ledger-move",
+    "policy-model",
+    "event-model",
+    "check-model",
+    "relation-model",
+    "log-model"
+  ],
+  "patch_application": "sequential reviewed patches; policy before event; existing CMake/umbrella registrations preserved",
+  "extra_contract": "Log model probe compares compact derived Debug with the existing complete SQL fingerprint writer",
+  "source_sha256": {
+    "CMakeLists.txt": "b3a676cd4d17914836d8a175f4f772e664c602f95534bdbbff38fa7fcf4dea25",
+    "include/teaql/runtime.hpp": "a4cff1e766f7c25e0df2a9df49425007c14d0f0847e0c318009959c7c9aca0c5",
+    "include/teaql/runtime/checker_model_debug.hpp": "7fad20607f711fa61723018eba013bde82967f7bed859649d88eb88043da95ac",
+    "include/teaql/runtime/detail/audited_save.hpp": "763526105d79e86bad6a9e434d02e5e7f47ad5cad36461d34e46fd10a642bbc4",
+    "include/teaql/runtime/event_debug.hpp": "cd489f1efc3e3d3339f21779380064c078b78036a9af9ef135d764eb547e68d2",
+    "include/teaql/runtime/log_model_debug.hpp": "8372b6fb56044ec2d5b5504c8cc0aabdbaf6af3b71d3aa5fc2b15876025e27e0",
+    "include/teaql/runtime/mutation_governance.hpp": "71552256434ebdf7845b2f0d234feb1b55f60b07f273684eaeceff54fdf08f69",
+    "include/teaql/runtime/mutation_policy_debug.hpp": "1e24193662def1ed632e2795a5d7d9dc17bf23509dbf1ba46e4d33020d6c825e",
+    "include/teaql/runtime/relation_model_debug.hpp": "32ebd53a0b2e803fda5410850489b96d73ba0ea5372e1731c2fabeb3ce24650b",
+    "tests/check_model_tests.cpp": "e3b99df26a17b862cedeb3838f17c8eb31a8753b14c8a379523f31f68294ddef",
+    "tests/event_model_tests.cpp": "6a79910005f9d44c16b1aa51c588e35749778fa0455811bf8a4b6dcb3f0f233f",
+    "tests/ledger_move_fixture.hpp": "8fe98b3799eb7e2148e20ff6345ff8544cde8728a5bf04e300b696ced01d6947",
+    "tests/ledger_move_only_tests.cpp": "8bdf6a27001824610e08e900dddfd69c9cb83a8c21a7c5c3706e16f3f1dd360d",
+    "tests/log_model_tests.cpp": "9ef9e26560b500f2af46c1f5b3ad36f563c816d76d3dcc68011a3caf4f015f5e",
+    "tests/parity/check_model_probe.cpp": "977785193ac7c3d8f0e846144915caed900402234cd83266abc0080137e2c857",
+    "tests/parity/event_model_probe.cpp": "d2a1b2948d5ea98015e2f773bf67dc391473b4cd6029f9aec8b596572c6b5af6",
+    "tests/parity/ledger_move_only_probe.cpp": "775f8b251e25a1bad53de493a33d6c1f23c044a6db1724ea6dec2c25b43a3e23",
+    "tests/parity/log_model_probe.cpp": "54b804b079e6375813eb0617bdffe4beedd9ddeadfce6b291e4ae8f536f4972f",
+    "tests/parity/policy_model_probe.cpp": "da4e575d89a8228c3d45b696815e3dfbbae43e2cf73b7b263ba8a603c60f4fd1",
+    "tests/parity/relation_model_probe.cpp": "8db68dc57a9e6fe8c9dce4d67122e6b021177f5103a46f4ed4a041adb08f6a92",
+    "tests/policy_model_tests.cpp": "94ec58f6c6140e84f3bfe53cd3bda0610bee85619abd097d99025443f83845c5",
+    "tests/relation_model_tests.cpp": "ef9edde091ec07ec8b16ff00ee1380a0754d89aadeb4a8cbad2df4806666f1ab"
+  },
+  "physical_router_verified": false,
+  "source_group_acceptance": false,
+  "installed_mips": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 25.0,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_native_selection": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.44,
+    "scope": "new six-repair contracts; full native343 regression pending"
+  },
+  "installed_mips_live_original": {
+    "ledger_move_only": 356,
+    "policy_model": 177,
+    "event_model": 112,
+    "check_model": 220,
+    "relation_model": 162,
+    "log_model": 172,
+    "matched": 1199,
+    "total": 1199
+  },
+  "installed_sanitizer": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 35.65,
+    "refresh": "ninja: no work to do.",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "wider_relation_selections": {
+    "sanitizer": {
+      "passed": 9,
+      "total": 9,
+      "seconds": 7.31
+    },
+    "mips": {
+      "passed": 9,
+      "total": 9,
+      "seconds": 5.81
+    }
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true,
+    "valid_nonempty_compiled_dependency_records": 411
+  }
+}

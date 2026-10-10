@@ -1,0 +1,115 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed native331 and sanitizer/MIPS17 selections pass; subsequent343 integration active",
+  "original_inputs": 82,
+  "repeated_executions_agree": true,
+  "source_sha256": {
+    "include/teaql/runtime/business_clock.hpp": "f450bb8fdc1a167d8f98cdfee1fbb3573061f091a92d574305d1ebee65b24157",
+    "include/teaql/runtime/business_id.hpp": "8c9b93cea710736506eacf180568203496491453b40da208ee90df224155d6f9",
+    "include/teaql/runtime/id.hpp": "9a789ed606e0b9ac705f15a4477d4d592aa4fc94e5f048ae7f3d6c0431490df4",
+    "tests/parity/rust-values/src/bin/runtime_id_model_oracle.rs": "d016cb781478599c306245333a9cb2071a508d375056f512b48a6ad0c893b6d0",
+    "tests/parity/runtime_id_model_cases.json.gz": "cac1b1eecff9154724e240c0d29d1e51eb3f2a55251276bf8bddc41f1afb2ca0",
+    "tests/parity/generate_runtime_id_models.py": "fdb8593a2a0de75bd945b53465930ea4e617b060bf079d13808aa4e3ca7c1138",
+    "tests/parity/compare_runtime_id_models.py": "30e8b4ca93b0f1820f398309e2ab61570ec4ce14617dfc0658b2aca9b1ee4adc"
+  },
+  "staged_native": {
+    "models": {
+      "passed": 82,
+      "total": 82,
+      "live_original": true,
+      "profile": "debug"
+    },
+    "lifecycle": "passed"
+  },
+  "original_profiles": {
+    "debug": {
+      "inputs": 82,
+      "repeats_agree": true
+    },
+    "release": {
+      "inputs": 82,
+      "repeats_agree": true
+    },
+    "different_cases": 9
+  },
+  "staged_patch_sha256": "86e5cb2e4901148ad4967a590c455d9d37977f29862f2d02813f5cad181f69b1",
+  "staged_sanitizer": {
+    "models": {
+      "passed": 82,
+      "total": 82,
+      "live_original": true,
+      "profile": "debug"
+    },
+    "lifecycle": "passed",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "staged_mips": {
+    "models": {
+      "passed": 82,
+      "total": 82,
+      "live_original": true,
+      "profile": "release"
+    },
+    "lifecycle": "passed",
+    "emulator": [
+      "qemu-mips",
+      "-cpu",
+      "74Kf"
+    ],
+    "physical_router_verified": false
+  },
+  "integration_note": "Initial combined repair completes native331 and sanitizer/MIPS17 checks. A subsequent six-repair batch registers343 tests and is building. Complete source/stage acceptance remains independent.",
+  "staged_sources_sha256": {
+    "include/teaql/runtime/business_id.hpp": "6796e3c0011647bad1cc33eabcf7ecce5bc436922152942eb9fbdbd97da89893",
+    "include/teaql/runtime/id.hpp": "41754c6f576d69fd433782a795dfe527061601d894275c95b4b38ad1c5009c61",
+    "include/teaql/runtime/runtime_id_debug.hpp": "0682cb3d0079e1b19e6aa7bae59431acbf87d2fefc00239b6e9e80d6f6bd34f9",
+    "include/teaql/runtime.hpp": "19f4348be45948faeaa1c4a49b38d2e1c992b3e1050cda94f4e5b8dc624e7125",
+    "tests/parity/runtime_id_model_probe.cpp": "3a2a005c27dd42f843c89cde4a82779a69ff3b0ae665f67240377c7656e134da",
+    "tests/runtime_id_model_tests.cpp": "c44aeaf78d110da8e2067eb617015de526a11e824cbbd425dfd4c8fc1baf2d9b",
+    "CMakeLists.txt": "8acd645455051dc2dd7a8a20274f0b2894bfb397e0a7811b6e61b54ca0fd3c08"
+  },
+  "default_pmr_disabled_lifecycle": {
+    "native": "passed",
+    "sanitizer": "passed",
+    "mips": "passed"
+  },
+  "installed_in_worktree": true,
+  "installed_source_sha256": {
+    "include/teaql/runtime/business_id.hpp": "6796e3c0011647bad1cc33eabcf7ecce5bc436922152942eb9fbdbd97da89893",
+    "include/teaql/runtime/id.hpp": "41754c6f576d69fd433782a795dfe527061601d894275c95b4b38ad1c5009c61",
+    "include/teaql/runtime/runtime_id_debug.hpp": "0682cb3d0079e1b19e6aa7bae59431acbf87d2fefc00239b6e9e80d6f6bd34f9",
+    "include/teaql/runtime.hpp": "3c914940671c7200b77653d26a51ff6cc388514b82bb998a2210384af1e66e77",
+    "tests/parity/runtime_id_model_probe.cpp": "3a2a005c27dd42f843c89cde4a82779a69ff3b0ae665f67240377c7656e134da",
+    "tests/runtime_id_model_tests.cpp": "c44aeaf78d110da8e2067eb617015de526a11e824cbbd425dfd4c8fc1baf2d9b"
+  },
+  "registered_native_tests": 331,
+  "previous_full_native_checkpoint": {
+    "passed": 324,
+    "total": 324,
+    "seconds": 151.69
+  },
+  "installed_mips": {
+    "selected_passed": 17,
+    "selected_total": 17,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false,
+    "seconds": 12.2
+  },
+  "installed_sanitizer": {
+    "selected_passed": 17,
+    "selected_total": 17,
+    "seconds": 13.69,
+    "refresh": "ninja: no work to do.",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "installed_native": {
+    "passed": 331,
+    "total": 331,
+    "seconds": 72.65,
+    "pre_test_no_work": true,
+    "post_test_no_work": true,
+    "evidence": "installed-native331.log"
+  }
+}

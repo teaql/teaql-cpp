@@ -1,5 +1,6 @@
 #include <teaql/runtime/graph.hpp>
 #include <teaql/runtime/context.hpp>
+#include <teaql/runtime/module.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/core/detail/debug.hpp>
 #include "fixture_value.hpp"
@@ -241,6 +242,67 @@ static Json evaluate(UserContext& c, const Json& j) {
     return Json(r, out);
 }
 
+static Json graph_snapshot(Memory owner, const UserContext& context) {
+    auto output = detail::model_json(owner);
+    Json::Array initial(owner), roots(owner);
+    for (const auto& graph : context.initial_graphs()) {
+        initial.emplace_back(node_out(owner, graph));
+    }
+    for (const auto& graph : context.root_graphs()) {
+        roots.emplace_back(node_out(owner, graph));
+    }
+    detail::model_put(output, "initial", initial);
+    detail::model_put(output, "roots", roots);
+    return output;
+}
+
+static Json module_graphs(GlobalContext& global, UserContext& installed, const Json& input) {
+    auto owner = installed.memory_resource();
+    auto source = global.make_user_context();
+    auto& nodes = source->make<Vector<GraphNode>>();
+    for (const auto& value : std::get<Json::Array>(field(input, "nodes").data)) {
+        nodes.emplace_back(node(source->memory_resource(), value));
+    }
+    auto& module = source->make<RuntimeModule>();
+    module.apply_to(installed);
+    Json::Array steps(owner);
+    steps.emplace_back(graph_snapshot(owner, installed));
+    for (const auto& step : std::get<Json::Array>(field(input, "steps").data)) {
+        Vector<GraphNode> selected(source->memory_resource());
+        for (const auto& index : std::get<Json::Array>(field(step, "indices").data)) {
+            selected.emplace_back(nodes.at(integer(index)));
+        }
+        auto operation = text(field(step, "op"));
+        if (operation == "initial") {
+            module.initial_graph(selected.at(0));
+        } else if (operation == "initials") {
+            module.initial_graphs(selected);
+        } else if (operation == "root") {
+            module.root_graph(selected.at(0));
+        } else if (operation == "roots") {
+            module.root_graphs(selected);
+        } else {
+            throw std::invalid_argument("module graph fixture operation");
+        }
+        module.apply_to(installed);
+        steps.emplace_back(graph_snapshot(owner, installed));
+    }
+    auto& retained = global.make<RuntimeModule>(module);
+    module.initial_graph(nodes.at(0));
+    auto updated = module.into_context(global);
+    source.reset();
+    auto cloned = retained.into_context(global);
+    auto& empty_module = global.make<RuntimeModule>();
+    auto empty = empty_module.into_context(global);
+    auto output = detail::model_json(owner);
+    detail::model_put(output, "steps", steps);
+    detail::model_put(output, "cloned", graph_snapshot(owner, *cloned));
+    detail::model_put(output, "updated", graph_snapshot(owner, *updated));
+    detail::model_put(output, "installed_after", graph_snapshot(owner, installed));
+    detail::model_put(output, "empty", graph_snapshot(owner, *empty));
+    return output;
+}
+
 int main() {
     std::string line;
     while (std::getline(std::cin, line)) {
@@ -248,6 +310,9 @@ int main() {
         auto c = global.make_user_context();
         auto r = c->memory_resource();
         auto j = Json::parse(r, line);
-        std::cout << evaluate(*c, *j).dump(r) << '\n';
+        auto output = text(field(*j, "mode")) == "module_graphs" ? module_graphs(global, *c, *j)
+                                                                 : evaluate(*c, *j);
+        std::cout << output.dump(r) << '\n';
     }
+    return 0;
 }

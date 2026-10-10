@@ -1,0 +1,8 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "exit_code": 2,
+  "expected_pre_repair": 2,
+  "stdout": "direct fan-out callback returned after Context close\n",
+  "stderr": "",
+  "physical_device": "deferred"
+}

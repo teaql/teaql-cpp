@@ -1,0 +1,1 @@
+SQLite 3.53.2; sizeof(long double)=8; value=9.9999999999999997e-29; bits=3a1fb0f6be506019

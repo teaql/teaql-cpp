@@ -7735,6 +7735,264 @@
         "emitted": [],
         "error": "Invalid value for known search field"
       }
+    },
+    {
+      "input": {
+        "error_contract": 0
+      },
+      "expected": {
+        "debug": "DynamicSearchError(\"Invalid trusted search setup\")",
+        "display": "Invalid trusted search setup",
+        "equal_clone": true,
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "error_contract": 1
+      },
+      "expected": {
+        "debug": "DynamicSearchError(\"Invalid value for known search field\")",
+        "display": "Invalid value for known search field",
+        "equal_clone": true,
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "error_contract": 2
+      },
+      "expected": {
+        "debug": "DynamicSearchError(\"binding failure\")",
+        "display": "binding failure",
+        "equal_clone": true,
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "error_contract": 3
+      },
+      "expected": {
+        "debug": "DynamicSearchError(\"callback failure\")",
+        "display": "callback failure",
+        "equal_clone": true,
+        "source_none": true
+      }
+    },
+    {
+      "input": {
+        "field_contract": "warning",
+        "field": "same"
+      },
+      "expected": {
+        "after": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"FILTER\", field_path: \"field\" }",
+        "after_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "before": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"FILTER\", field_path: \"field\" }",
+        "before_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "equal": true
+      }
+    },
+    {
+      "input": {
+        "field_contract": "warning",
+        "field": "code"
+      },
+      "expected": {
+        "after": "DynamicSearchWarning { code: \"OTHER\", entity: \"Entity\", clause: \"FILTER\", field_path: \"field\" }",
+        "after_json": {
+          "clause": "FILTER",
+          "code": "OTHER",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "before": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"FILTER\", field_path: \"field\" }",
+        "before_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "warning",
+        "field": "entity"
+      },
+      "expected": {
+        "after": "DynamicSearchWarning { code: \"CODE\", entity: \"Changed\", clause: \"FILTER\", field_path: \"field\" }",
+        "after_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Changed",
+          "fieldPath": "field"
+        },
+        "before": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"FILTER\", field_path: \"field\" }",
+        "before_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "warning",
+        "field": "clause"
+      },
+      "expected": {
+        "after": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"ORDER_BY\", field_path: \"field\" }",
+        "after_json": {
+          "clause": "ORDER_BY",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "before": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"FILTER\", field_path: \"field\" }",
+        "before_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "warning",
+        "field": "field_path"
+      },
+      "expected": {
+        "after": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"FILTER\", field_path: \"changed\" }",
+        "after_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "changed"
+        },
+        "before": "DynamicSearchWarning { code: \"CODE\", entity: \"Entity\", clause: \"FILTER\", field_path: \"field\" }",
+        "before_json": {
+          "clause": "FILTER",
+          "code": "CODE",
+          "entity": "Entity",
+          "fieldPath": "field"
+        },
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "filter",
+        "field": "same"
+      },
+      "expected": {
+        "after": "DynamicSearchFilter { field_path: \"field\", operator: \"$eq\", value: String(\"value\") }",
+        "before": "DynamicSearchFilter { field_path: \"field\", operator: \"$eq\", value: String(\"value\") }",
+        "equal": true
+      }
+    },
+    {
+      "input": {
+        "field_contract": "filter",
+        "field": "field_path"
+      },
+      "expected": {
+        "after": "DynamicSearchFilter { field_path: \"changed\", operator: \"$eq\", value: String(\"value\") }",
+        "before": "DynamicSearchFilter { field_path: \"field\", operator: \"$eq\", value: String(\"value\") }",
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "filter",
+        "field": "operator"
+      },
+      "expected": {
+        "after": "DynamicSearchFilter { field_path: \"field\", operator: \"$ne\", value: String(\"value\") }",
+        "before": "DynamicSearchFilter { field_path: \"field\", operator: \"$eq\", value: String(\"value\") }",
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "filter",
+        "field": "value"
+      },
+      "expected": {
+        "after": "DynamicSearchFilter { field_path: \"field\", operator: \"$eq\", value: Bool(false) }",
+        "before": "DynamicSearchFilter { field_path: \"field\", operator: \"$eq\", value: String(\"value\") }",
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "order",
+        "field": "same"
+      },
+      "expected": {
+        "after": "DynamicSearchOrder { field_path: \"field\", descending: false }",
+        "before": "DynamicSearchOrder { field_path: \"field\", descending: false }",
+        "equal": true
+      }
+    },
+    {
+      "input": {
+        "field_contract": "order",
+        "field": "field_path"
+      },
+      "expected": {
+        "after": "DynamicSearchOrder { field_path: \"changed\", descending: false }",
+        "before": "DynamicSearchOrder { field_path: \"field\", descending: false }",
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "order",
+        "field": "descending"
+      },
+      "expected": {
+        "after": "DynamicSearchOrder { field_path: \"field\", descending: true }",
+        "before": "DynamicSearchOrder { field_path: \"field\", descending: false }",
+        "equal": false
+      }
+    },
+    {
+      "input": {
+        "field_contract": "error",
+        "field": "same"
+      },
+      "expected": {
+        "after": "DynamicSearchError(\"error\")",
+        "before": "DynamicSearchError(\"error\")",
+        "equal": true
+      }
+    },
+    {
+      "input": {
+        "field_contract": "error",
+        "field": "message"
+      },
+      "expected": {
+        "after": "DynamicSearchError(\"changed\")",
+        "before": "DynamicSearchError(\"error\")",
+        "equal": false
+      }
     }
   ]
 }

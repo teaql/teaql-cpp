@@ -88,6 +88,34 @@ static void context_contracts() {
     (void)r;
 }
 
+static void checked_generator_expiry() {
+    GlobalContext global;
+    auto user = global.make_user_context();
+    auto generator = user->make_global<AtomicCounterIdGenerator>(10);
+    user->with_internal_id_generator(generator);
+    check(user->next_id("Order").value() == 11, "Global ID generator installs through User proxy");
+    auto other = global.make_user_context();
+    other->set_internal_id_generator(other->rebind_global(generator));
+    user->destroy(generator);
+    bool expired = false;
+    try {
+        (void)other->next_id("Order");
+    } catch (const ReferenceError& error) {
+        expired = error.kind() == ReferenceError::Kind::Dead;
+    }
+    check(expired, "early-destroyed ID generator is rejected before virtual dispatch");
+    auto local = other->make_ref<AtomicCounterIdGenerator>(20);
+    other->set_internal_id_generator(local);
+    other->destroy(local);
+    expired = false;
+    try {
+        (void)other->generate_id("Order");
+    } catch (const ReferenceError& error) {
+        expired = error.kind() == ReferenceError::Kind::Dead;
+    }
+    check(expired, "User ID generator uses the same checked lifetime");
+}
+
 static void counters_and_threads() {
     GlobalContext owner;
     auto& counter = owner.make<AtomicCounterIdGenerator>(0);
@@ -224,10 +252,49 @@ static void sqlite_adapter() {
           "failed SQLite floor leaves entity unchanged");
 }
 
-int main() {
+struct ClosingGenerator final : InternalIdGenerator {
+    UserContext& context;
+
+    explicit ClosingGenerator(UserContext& context) : context(context) {}
+
+    Result<std::uint64_t, RuntimeError> generate_id(Memory r, std::string_view) const override {
+        context.close();
+        return Result<std::uint64_t, RuntimeError>::ok(r, 1);
+    }
+
+protected:
+    Result<std::monostate, RuntimeError>
+    do_ensure_floor(Memory r, std::string_view, std::uint64_t) const override {
+        context.close();
+        return Result<std::monostate, RuntimeError>::ok(r, {});
+    }
+};
+
+int main(int argc, char** argv) {
+    if (argc == 2) {
+        std::set_terminate([] {
+            std::_Exit(0);
+        });
+        try {
+            GlobalContext global;
+            auto user = global.make_user_context();
+            auto& generator = user->make_resource<ClosingGenerator>(*user);
+            user->set_internal_id_generator(*user, generator);
+            if (std::string_view(argv[1]) == "reentrant-close") {
+                (void)user->next_id("Order");
+            } else {
+                auto& model = user->make<Model>();
+                (void)user->initialize_generated_bootstrap_entity(model, "Order", 1);
+            }
+        } catch (...) {
+            std::_Exit(2);
+        }
+        return 1;
+    }
     try {
         auto* old = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         context_contracts();
+        checked_generator_expiry();
         counters_and_threads();
         snowflake_transitions();
         sqlite_adapter();

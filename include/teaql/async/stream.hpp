@@ -48,12 +48,17 @@ public:
         if (polling_) {
             throw std::logic_error("Recursive poll of the same stream");
         }
+        latest_item_ = nullptr;
+        latest_slot_ = 0;
         polling_ = true;
         try {
             auto next = table_->poll(state_, wake_);
             const T* item = nullptr;
             if (next && *next) {
-                item = &static_cast<Arena*>(resource_)->template make<T>(std::move(**next));
+                auto stored =
+                    static_cast<Arena*>(resource_)->template make_identified<T>(std::move(**next));
+                item = latest_item_ = &stored.object;
+                latest_slot_ = stored.slot;
             } else if (next) {
                 table_->finish(state_);
                 status_ = StreamStatus::Ended;
@@ -82,6 +87,21 @@ public:
             }
             wake_.wait(observed);
         }
+    }
+
+    // Take only the item from the most recent successful poll. Other delivered
+    // borrows remain valid. This item's registered slot is retired immediately.
+    T take_item() {
+        auto& arena = detail::async_arena(resource_);
+        arena.check_thread();
+        if (!latest_item_) {
+            throw std::logic_error("Stream has no current item to take");
+        }
+        auto result = detail::move_in(resource_, std::move(*latest_item_));
+        auto slot = std::exchange(latest_slot_, 0);
+        latest_item_ = nullptr;
+        arena.destroy(slot, typeid(T), 0);
+        return result;
     }
 
     void cancel() noexcept {
@@ -137,8 +157,30 @@ private:
     Arena::Quiescence quiescence_;
     StreamStatus status_ = StreamStatus::Open;
     bool polling_ = false;
+    T* latest_item_ = nullptr;
+    std::uint32_t latest_slot_ = 0;
     std::exception_ptr failure_;
 };
+
+namespace detail {
+template <class T>
+T copy_or_take_item(AsyncStream<T>& stream, const T& item) {
+    if constexpr (domain_copyable<T>) {
+        return clone_in(stream.memory_resource(), item);
+    } else {
+        return stream.take_item();
+    }
+}
+
+template <class T, class E>
+E copy_or_take_error(AsyncStream<Result<T, E>>& stream, const Result<T, E>& item) {
+    if constexpr (domain_copyable<E>) {
+        return clone_in(stream.memory_resource(), item.error());
+    } else {
+        return std::move(stream.take_item()).error();
+    }
+}
+}
 
 template <class T, class State, class... Args>
 AsyncStream<T>& make_stream(Memory r, Args&&... args) {

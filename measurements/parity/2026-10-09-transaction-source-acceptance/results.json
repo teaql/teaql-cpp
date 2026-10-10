@@ -1,0 +1,50 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source": "teaql-runtime/src/context/transaction.rs",
+  "source_lines": 212,
+  "checks": [
+    "transaction_move_only_contracts",
+    "transaction_provider_error_contracts",
+    "transaction_move_only_rust_parity",
+    "ledger_move_only_contracts",
+    "ledger_move_only_rust_parity",
+    "transaction_scope_context_contracts",
+    "transaction_scope_rust_parity",
+    "original_provider_transaction_contracts",
+    "sql_transaction_execution_contracts",
+    "sqlite_provider_transaction_rust_parity",
+    "sql_transaction_rust_parity"
+  ],
+  "native": {
+    "passed": 11,
+    "total": 11,
+    "seconds": 7.87
+  },
+  "asan_ubsan": {
+    "passed": 11,
+    "total": 11,
+    "seconds": 12.19,
+    "detect_leaks": false
+  },
+  "mips_qemu": {
+    "passed": 11,
+    "total": 11,
+    "seconds": 9.92,
+    "cpu": "74Kf"
+  },
+  "live_original_comparisons": {
+    "profiles": [
+      "native",
+      "mips_qemu"
+    ],
+    "transaction": 1288,
+    "nonclone_callback": 16,
+    "nonclone_entity_save": 356
+  },
+  "full_native_checkpoint": {
+    "passed": 369,
+    "total": 369,
+    "seconds": 80.91
+  },
+  "hardware": "Deferred by explicit user instruction; not a current acceptance gate."
+}

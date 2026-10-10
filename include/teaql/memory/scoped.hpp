@@ -1,6 +1,8 @@
 #pragma once
+#include <teaql/memory/clone.hpp>
 #include <memory>
 #include <memory_resource>
+#include <stdexcept>
 #include <type_traits>
 #include <utility>
 
@@ -29,8 +31,12 @@ T move_to(std::pmr::memory_resource* target, T&& source) {
     if (target == source.memory_resource()) {
         return std::move(source);
     }
-    return std::make_obj_using_allocator<T>(std::pmr::polymorphic_allocator<T>(target),
-                                            std::as_const(source));
+    if constexpr (domain_copyable<T>) {
+        return std::make_obj_using_allocator<T>(std::pmr::polymorphic_allocator<T>(target),
+                                                std::as_const(source));
+    } else {
+        throw std::invalid_argument("Cross-context retention requires an allocator-aware copy");
+    }
 }
 
 // Prepare first: allocation failure leaves the destination alive and unchanged.

@@ -223,6 +223,92 @@ static Json module(UserContext& c, const Json& input) {
     return Json(r, out);
 }
 
+static Json module_snapshot(Memory owner, const UserContext& context) {
+    Json::Array snapshot(owner);
+    for (auto name : {"Item", "Alias", "OnlyBehavior"}) {
+        auto one = detail::model_json(owner);
+        auto* descriptor = context.entity(name);
+        detail::model_put(one, "entity", descriptor ? Json(owner, descriptor->name) : Json(owner));
+        detail::model_put(
+            one, "table", descriptor ? Json(owner, descriptor->table_name) : Json(owner));
+        detail::model_put(one, "has", context.has_entity_data_service(name));
+        auto behavior = context.entity_data_service_behavior(name);
+        Json names(owner);
+        if (behavior) {
+            Json::Array values(owner);
+            for (const auto& value :
+                 behavior->get().relation_loads(context.memory_resource(), context)) {
+                values.emplace_back(value);
+            }
+            names = Json(owner, std::move(values));
+        }
+        detail::model_put(one, "behavior", names);
+        snapshot.emplace_back(std::move(one));
+    }
+    return Json(owner, std::move(snapshot));
+}
+
+static Json macro_module(GlobalContext& global, UserContext& user, const Json& input) {
+    auto owner = user.memory_resource();
+    auto& module = user.make<RuntimeModule>();
+    // The harness owns GlobalContext. These explicitly Global behaviors allow
+    // independent target Users without extending source User ownership.
+    auto& first = global.make<NamedBehavior>(text(field(input, "first")));
+    auto& last = global.make<NamedBehavior>(text(field(input, "last")));
+    auto& alias = global.make<NamedBehavior>(text(field(input, "alias")));
+    switch (std::get<std::uint64_t>(field(input, "case").data)) {
+    case 0:
+        module.entity<Item<0>>().entity<Item<2>>();
+        break;
+    case 1:
+        module.entity<Item<2>>().entity<Item<0>>();
+        break;
+    case 2:
+        module.entity<Item<0>>().entity<Item<1>>().entity<Item<2>>();
+        break;
+    case 3:
+        module.entity<Item<2>>().entity<Item<1>>().entity<Item<0>>();
+        break;
+    case 4:
+        module.entity_with_behavior<Item<0>>(global, first)
+            .entity_with_behavior<Item<2>>(global, alias)
+            .entity_with_behavior<Item<1>>(global, last);
+        break;
+    case 5:
+        module.entity_with_behavior<Item<2>>(global, alias)
+            .entity_with_behavior<Item<0>>(global, first)
+            .entity_with_behavior<Item<0>>(global, last);
+        break;
+    case 6:
+        module.entity_with_behavior<Item<0>>(global, first).entity<Item<1>>().entity<Item<2>>();
+        break;
+    case 7:
+        module.entity<Item<0>>()
+            .entity_with_behavior<Item<2>>(global, alias)
+            .entity_with_behavior<Item<0>>(global, last);
+        break;
+    default:
+        throw std::invalid_argument("macro fixture case");
+    }
+    auto& cloned = user.make<RuntimeModule>(module);
+    auto original = module.into_context(global);
+    auto before = module_snapshot(owner, *original);
+    auto cloned_context = cloned.into_context(global);
+    auto cloned_snapshot = module_snapshot(owner, *cloned_context);
+    auto built = module.into_context(global);
+    auto built_snapshot = module_snapshot(owner, *built);
+    module.entity<Item<1>>().behavior("Item", global, last);
+    auto updated = module.into_context(global);
+    auto output = detail::model_json(owner);
+    detail::model_put(output, "before", before);
+    detail::model_put(output, "cloned", cloned_snapshot);
+    detail::model_put(output, "built", built_snapshot);
+    detail::model_put(output, "updated", module_snapshot(owner, *updated));
+    detail::model_put(output, "original_after", module_snapshot(owner, *original));
+    detail::model_put(output, "clone_after", module_snapshot(owner, *cloned_context));
+    return output;
+}
+
 int main() {
     std::string line;
     while (std::getline(std::cin, line)) {
@@ -230,7 +316,10 @@ int main() {
         auto c = global.make_user_context();
         auto r = c->memory_resource();
         auto j = Json::parse(r, line);
-        std::cout << (text(field(*j, "mode")) == "module" ? module(*c, *j) : decode(*c, *j)).dump(r)
-                  << '\n';
+        auto mode = text(field(*j, "mode"));
+        auto output = mode == "module"         ? module(*c, *j)
+                      : mode == "macro_module" ? macro_module(global, *c, *j)
+                                               : decode(*c, *j);
+        std::cout << output.dump(r) << '\n';
     }
 }

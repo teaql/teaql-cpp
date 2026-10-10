@@ -70,6 +70,10 @@ struct NativeTransaction final : SqlTransportTransaction<String> {
     };
 
 protected:
+    void cancel_sql_transaction() noexcept override {
+        close();
+    }
+
     DataServiceOperationResult<Rows, String>&
     fetch_all_compact_sql_transaction(Memory r, const CompiledQuery& q) override {
         return inner.fetch_all_compact_sql(r, q);

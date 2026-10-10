@@ -18,12 +18,170 @@ static Json error(Memory r, const BusinessIdError& e) {
     detail::model_put(result, "code", business_id_error_code_name(e.code));
     detail::model_put(result, "message", e.message);
     detail::model_put(result, "display", e.to_string(r));
+    detail::model_put(result, "source_none", !e.source());
     return result;
+}
+
+static Json equality(Memory r, const Json& input) {
+    const auto model = text(field(input, "model"));
+    const int index = detail::model_integer<int>(field(input, "field"), "field");
+    auto definition = BusinessIdDefinition::daily_sequence(r, "field", "prefix", "namespace");
+    auto scope = BusinessIdScope(
+        std::allocator_arg, Allocator(r), "root", "Aggregate", "namespace", "period");
+    auto change_definition = [&](BusinessIdDefinition& value, int field) {
+        switch (field) {
+        case 0:
+            value.field_name += "!";
+            break;
+        case 1:
+            value.profile += "!";
+            break;
+        case 2:
+            value.prefix += "!";
+            break;
+        case 3:
+            value.namespace_name += "!";
+            break;
+        case 4:
+            value.split_by_date = !value.split_by_date;
+            break;
+        case 5:
+            ++value.preserve_digits;
+            break;
+        case 6:
+            value.separator += "!";
+            break;
+        }
+    };
+    auto change_scope = [&](BusinessIdScope& value, int field) {
+        switch (field) {
+        case 0:
+            value.domain_root_key += "!";
+            break;
+        case 1:
+            value.aggregate_type += "!";
+            break;
+        case 2:
+            value.namespace_name += "!";
+            break;
+        case 3:
+            value.period_key += "!";
+            break;
+        }
+    };
+    auto compare = [&](const auto& original, const auto& changed) {
+        auto output = detail::model_json(r);
+        detail::model_put(output, "clone_equal", original == detail::clone_in(r, original));
+        detail::model_put(output, "changed_equal", original == changed);
+        detail::model_put(output, "reverse_equal", changed == original);
+        return output;
+    };
+    if (model == "definition") {
+        auto changed = detail::clone_in(r, definition);
+        change_definition(changed, index);
+        return compare(definition, changed);
+    }
+    if (model == "scope") {
+        auto changed = detail::clone_in(r, scope);
+        change_scope(changed, index);
+        return compare(scope, changed);
+    }
+    if (model == "request") {
+        BusinessIdGenerationRequest original(std::allocator_arg,
+                                             Allocator(r),
+                                             definition,
+                                             "root",
+                                             "Aggregate",
+                                             *Date::from_ymd(2024, 2, 29));
+        auto changed = detail::clone_in(r, original);
+        if (index < 7) {
+            change_definition(changed.definition, index);
+        } else if (index == 7) {
+            changed.domain_root_key += "!";
+        } else if (index == 8) {
+            changed.aggregate_type += "!";
+        } else if (index == 9) {
+            changed.business_date = *Date::from_ymd(2024, 3, 1);
+        }
+        return compare(original, changed);
+    }
+    if (model == "plan") {
+        BusinessIdPlan original(
+            std::allocator_arg, Allocator(r), scope, "prefix", std::nullopt, 6, "-", 1, 99);
+        auto changed = detail::clone_in(r, original);
+        if (index < 4) {
+            change_scope(changed.scope, index);
+        } else {
+            switch (index) {
+            case 4:
+                changed.prefix += "!";
+                break;
+            case 5:
+                changed.date_text.emplace("", r);
+                break;
+            case 6:
+                ++changed.preserve_digits;
+                break;
+            case 7:
+                changed.separator += "!";
+                break;
+            case 8:
+                ++changed.initial_sequence;
+                break;
+            case 9:
+                ++changed.max_sequence;
+                break;
+            }
+        }
+        return compare(original, changed);
+    }
+    if (model == "allocation") {
+        BusinessIdAllocation original(std::allocator_arg, Allocator(r), scope, 7);
+        auto changed = detail::clone_in(r, original);
+        if (index < 4) {
+            change_scope(changed.scope, index);
+        } else if (index == 4) {
+            ++changed.sequence;
+        }
+        return compare(original, changed);
+    }
+    if (model == "value") {
+        BusinessIdValue original(std::allocator_arg, Allocator(r), "value");
+        auto changed = detail::clone_in(r, original);
+        if (index == 0) {
+            changed.value += "!";
+        }
+        return compare(original, changed);
+    }
+    if (model == "error") {
+        BusinessIdError original(
+            std::allocator_arg, Allocator(r), BusinessIdErrorCode::Encoding, "message");
+        auto changed = detail::clone_in(r, original);
+        if (index == 0) {
+            changed.code = BusinessIdErrorCode::Allocation;
+        } else if (index == 1) {
+            changed.message += "!";
+        }
+        return compare(original, changed);
+    }
+    if (model == "code") {
+        auto output = detail::model_json(r);
+        const auto left =
+            BusinessIdErrorCode(detail::model_integer<int>(field(input, "left"), "left"));
+        const auto right =
+            BusinessIdErrorCode(detail::model_integer<int>(field(input, "right"), "right"));
+        detail::model_put(output, "equal", left == right);
+        return output;
+    }
+    throw std::runtime_error("Unknown business ID equality fixture");
 }
 
 static Json evaluate(Memory r, const Json& input) {
     auto kind = text(field(input, "kind"));
     auto result = detail::model_json(r);
+    if (kind == "equality") {
+        return equality(r, input);
+    }
     if (kind == "definition") {
         const auto& object = std::get<Json::Object>(input.data);
         auto legacy = object.find("legacy");

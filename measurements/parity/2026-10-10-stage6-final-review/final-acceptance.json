@@ -1,0 +1,63 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "stages": [
+    {
+      "stage": 1,
+      "status": "accepted"
+    },
+    {
+      "stage": 2,
+      "status": "accepted"
+    },
+    {
+      "stage": 3,
+      "status": "accepted"
+    },
+    {
+      "stage": 4,
+      "status": "accepted"
+    },
+    {
+      "stage": 5,
+      "status": "accepted"
+    },
+    {
+      "stage": 6,
+      "status": "accepted"
+    }
+  ],
+  "module_counts": {
+    "accepted": 55,
+    "reference_only": 1,
+    "excluded_external": 2
+  },
+  "requirements": {
+    "verified": 21,
+    "deferred_by_user": 1
+  },
+  "source_tests": {
+    "covered_in_scope": 441,
+    "excluded_backend": 5,
+    "excluded_external": 5
+  },
+  "native": {
+    "passed": 388,
+    "seconds": 187.25
+  },
+  "sanitizer": {
+    "passed": 388,
+    "seconds": 171.81,
+    "leak_scanning": false
+  },
+  "mips": {
+    "passed": 387,
+    "seconds": 173.24,
+    "physical_device": false
+  },
+  "compiled_dependency_records_per_profile": 427,
+  "live_examples_per_profile": "2/2",
+  "source_snapshot_sha256": "7b62174109aa8b6d3a7f55896dc2b6e718c3ab37866e98d4008634d8c10611da",
+  "source_snapshot_files": 1266,
+  "format": "clang-format18.1.8; 682 handwritten files",
+  "scope": "All six in-scope stages complete within documented C++ ownership/owner-thread/protocol adaptations; external exclusions and physical-device deferral explicit."
+}

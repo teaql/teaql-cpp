@@ -180,9 +180,11 @@ struct NativeState {
 
     std::optional<std::uint64_t> poll(WakeSignal& wake) {
         if (!worker.joinable() && !done.load()) {
-            worker = std::thread([this, &wake] {
+            // Resolve on the owner; registered work borrows this host object until join.
+            auto* native_guard = &guard.get();
+            worker = std::thread([this, &wake, native_guard] {
                 go.acquire();
-                read = input.size() == 32768 && input.back() == 'n' && guard.get().owns_lock();
+                read = input.size() == 32768 && input.back() == 'n' && native_guard->owns_lock();
                 done.store(true);
                 wake.notify();
             });

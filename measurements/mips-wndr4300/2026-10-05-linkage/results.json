@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "collected_on": "2026-10-05",
+  "source_checkpoint": "c9b96bb4ee6546fe7e9f71b9855f15d93d892eb7",
+  "rust_baseline": {
+    "version": "5.0.5",
+    "commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a"
+  },
+  "target": {
+    "hardware_report_source": "User-provided CPU information; no SSH access or hardware execution.",
+    "machine": "Netgear WNDR4300",
+    "soc": "Atheros AR9344 rev 2",
+    "cpu": "MIPS 74Kc V4.12",
+    "isa": "MIPS32r2 with 74Kc DSP/DSP2",
+    "abi": "O32",
+    "endianness": "big",
+    "floating_point": "soft",
+    "device_openwrt_release": null,
+    "device_shared_libraries_verified": false
+  },
+  "toolchain": {
+    "distribution": "OpenWrt 24.10.4 ath79/nand",
+    "versions": {
+      "cxx_compiler": "mips-openwrt-linux-musl-g++.bin (OpenWrt GCC 13.3.0 r28959-29397011cc) 13.3.0",
+      "binutils_strip": "GNU strip (GNU Binutils) 2.42",
+      "qemu": "qemu-mips version 6.2.0 (Debian 1:6.2+dfsg-2ubuntu6.30)",
+      "cmake": "cmake version 3.22.1",
+      "ninja": "1.10.1",
+      "musl": "1.2.5"
+    },
+    "archive_name": "openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64.tar.zst",
+    "archive_bytes": 44792809,
+    "archive_sha256": "bdf5de723eb2fd7b5ee5b7aea1da4d46ddd28a73ac4c2e2b146f0d2f6eae4b1f"
+  },
+  "sqlite": {
+    "version": "3.40.1",
+    "source_file_sha256": "b919a49fac461984e93808c21755b678622f2a94903455270d097e856a792a62",
+    "static_shared_compile_options_match": true,
+    "compile_options_evidence": "sqlite-compile-options.txt",
+    "shared_compile_command_key": "sqlite-shared",
+    "shared_text_relocations": false
+  },
+  "methodology": {
+    "object_reuse": "Relink the original CMake-compiled objects at the recorded checkpoint.",
+    "optimization": "-Os",
+    "link_gc": "--gc-sections",
+    "strip": "--strip-all",
+    "size_unit": "File bytes; KiB = bytes / 1024.",
+    "shared_libraries_excluded_from_executable_bytes": true,
+    "timing_rss_and_compressed_flash_usage_measured": false,
+    "missing_library_totals_assumption": "All listed non-libc dependencies are absent; libc already exists. Shared libraries are counted once per executable dependency closure, using stripped test copies, not installed router packages.",
+    "validation": "QEMU user-mode 74Kf output equivalence; not physical-device evidence."
+  },
+  "artifacts": [
+    {
+      "example": "teaql_context_lifetime",
+      "linkage": "fully-static",
+      "bytes": 571208,
+      "kib": 557.8203125,
+      "sha256": "8138233f66b9f38a679bdbd50c0a8f38c04b9418e34de986c671a4dbe314e415",
+      "static_baseline_bytes": 571208,
+      "reduction_percent": 0.0,
+      "local_binary_path": "build-wndr4300/dist/teaql_context_lifetime",
+      "stdout_evidence": "outputs/fully-static/teaql_context_lifetime.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "fully-static/teaql_context_lifetime",
+      "needed_libraries": [],
+      "interpreter": null,
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/fully-static/teaql_context_lifetime.txt",
+      "shared_dependency_closure": [],
+      "dependency_bytes_excluding_existing_libc": 0,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 571208
+    },
+    {
+      "example": "teaql_context_lifetime",
+      "linkage": "libc-dynamic",
+      "bytes": 572180,
+      "kib": 558.76953125,
+      "sha256": "4ba7a1280a7b0584b2938764f230c94710d5d2f9d9afec9105cb45f62716051d",
+      "static_baseline_bytes": 571208,
+      "reduction_percent": -0.17016568395400444,
+      "local_binary_path": "build-wndr4300/link-comparison/libc-dynamic/teaql_context_lifetime",
+      "stdout_evidence": "outputs/libc-dynamic/teaql_context_lifetime.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "libc-dynamic/teaql_context_lifetime",
+      "needed_libraries": [
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/libc-dynamic/teaql_context_lifetime.txt",
+      "shared_dependency_closure": [
+        "libc.so"
+      ],
+      "dependency_bytes_excluding_existing_libc": 0,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 572180
+    },
+    {
+      "example": "teaql_context_lifetime",
+      "linkage": "runtime-dynamic",
+      "bytes": 17240,
+      "kib": 16.8359375,
+      "sha256": "173f32013d59d27795f6ae503a7cebdc728e952091402ee4a703b380a51adfe5",
+      "static_baseline_bytes": 571208,
+      "reduction_percent": 96.98183498830548,
+      "local_binary_path": "build-wndr4300/link-comparison/runtime-dynamic/teaql_context_lifetime",
+      "stdout_evidence": "outputs/runtime-dynamic/teaql_context_lifetime.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "runtime-dynamic/teaql_context_lifetime",
+      "needed_libraries": [
+        "libstdc++.so.6",
+        "libgcc_s.so.1",
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/runtime-dynamic/teaql_context_lifetime.txt",
+      "shared_dependency_closure": [
+        "libc.so",
+        "libgcc_s.so.1",
+        "libstdc++.so.6"
+      ],
+      "dependency_bytes_excluding_existing_libc": 2254528,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 2271768
+    },
+    {
+      "example": "teaql_context_lifetime",
+      "linkage": "fully-dynamic",
+      "bytes": 17240,
+      "kib": 16.8359375,
+      "sha256": "173f32013d59d27795f6ae503a7cebdc728e952091402ee4a703b380a51adfe5",
+      "static_baseline_bytes": 571208,
+      "reduction_percent": 96.98183498830548,
+      "local_binary_path": "build-wndr4300/link-comparison/fully-dynamic/teaql_context_lifetime",
+      "stdout_evidence": "outputs/fully-dynamic/teaql_context_lifetime.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "fully-dynamic/teaql_context_lifetime",
+      "needed_libraries": [
+        "libstdc++.so.6",
+        "libgcc_s.so.1",
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/fully-dynamic/teaql_context_lifetime.txt",
+      "shared_dependency_closure": [
+        "libc.so",
+        "libgcc_s.so.1",
+        "libstdc++.so.6"
+      ],
+      "dependency_bytes_excluding_existing_libc": 2254528,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 2271768
+    },
+    {
+      "example": "teaql_sqlite_schema_crud",
+      "linkage": "fully-static",
+      "bytes": 1487520,
+      "kib": 1452.65625,
+      "sha256": "4735bd3b4faa6b289f35d02be841dd86fa1519f6f04164f55b1ea6e7fb069e8b",
+      "static_baseline_bytes": 1487520,
+      "reduction_percent": 0.0,
+      "local_binary_path": "build-wndr4300/dist/teaql_sqlite_schema_crud",
+      "stdout_evidence": "outputs/fully-static/teaql_sqlite_schema_crud.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "fully-static/teaql_sqlite_schema_crud",
+      "needed_libraries": [],
+      "interpreter": null,
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/fully-static/teaql_sqlite_schema_crud.txt",
+      "shared_dependency_closure": [],
+      "dependency_bytes_excluding_existing_libc": 0,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 1487520
+    },
+    {
+      "example": "teaql_sqlite_schema_crud",
+      "linkage": "libc-dynamic",
+      "bytes": 1491924,
+      "kib": 1456.95703125,
+      "sha256": "04679a2a2bea03aca8a23b3608b3b8303bca83804538f0d84797bb5b5fc0a3ac",
+      "static_baseline_bytes": 1487520,
+      "reduction_percent": -0.2960632462084556,
+      "local_binary_path": "build-wndr4300/link-comparison/libc-dynamic/teaql_sqlite_schema_crud",
+      "stdout_evidence": "outputs/libc-dynamic/teaql_sqlite_schema_crud.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "libc-dynamic/teaql_sqlite_schema_crud",
+      "needed_libraries": [
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/libc-dynamic/teaql_sqlite_schema_crud.txt",
+      "shared_dependency_closure": [
+        "libc.so"
+      ],
+      "dependency_bytes_excluding_existing_libc": 0,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 1491924
+    },
+    {
+      "example": "teaql_sqlite_schema_crud",
+      "linkage": "runtime-dynamic",
+      "bytes": 794840,
+      "kib": 776.2109375,
+      "sha256": "4a3259cd64527219e3fa61b12a721edee68fb0e4b118e28cc8b1b03850bbfa71",
+      "static_baseline_bytes": 1487520,
+      "reduction_percent": 46.566096590297946,
+      "local_binary_path": "build-wndr4300/link-comparison/runtime-dynamic/teaql_sqlite_schema_crud",
+      "stdout_evidence": "outputs/runtime-dynamic/teaql_sqlite_schema_crud.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "runtime-dynamic/teaql_sqlite_schema_crud",
+      "needed_libraries": [
+        "libstdc++.so.6",
+        "libgcc_s.so.1",
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/runtime-dynamic/teaql_sqlite_schema_crud.txt",
+      "shared_dependency_closure": [
+        "libc.so",
+        "libgcc_s.so.1",
+        "libstdc++.so.6"
+      ],
+      "dependency_bytes_excluding_existing_libc": 2254528,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 3049368
+    },
+    {
+      "example": "teaql_sqlite_schema_crud",
+      "linkage": "fully-dynamic",
+      "bytes": 140184,
+      "kib": 136.8984375,
+      "sha256": "18099a9c86715cb30093765464af04f590f43f45fc9038b47f9b7d96eabb2e04",
+      "static_baseline_bytes": 1487520,
+      "reduction_percent": 90.57599225556632,
+      "local_binary_path": "build-wndr4300/link-comparison/fully-dynamic/teaql_sqlite_schema_crud",
+      "stdout_evidence": "outputs/fully-dynamic/teaql_sqlite_schema_crud.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "fully-dynamic/teaql_sqlite_schema_crud",
+      "needed_libraries": [
+        "libsqlite3.so.0",
+        "libstdc++.so.6",
+        "libgcc_s.so.1",
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/fully-dynamic/teaql_sqlite_schema_crud.txt",
+      "shared_dependency_closure": [
+        "libc.so",
+        "libgcc_s.so.1",
+        "libsqlite3.so.0",
+        "libstdc++.so.6"
+      ],
+      "dependency_bytes_excluding_existing_libc": 3126540,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 3266724
+    },
+    {
+      "example": "teaql_sqlite_relations_graph",
+      "linkage": "fully-static",
+      "bytes": 1491792,
+      "kib": 1456.828125,
+      "sha256": "165162fd6cb2595c52d40aaed8038a05c2aec5f61dcbdae2def3678f415fd015",
+      "static_baseline_bytes": 1491792,
+      "reduction_percent": 0.0,
+      "local_binary_path": "build-wndr4300/dist/teaql_sqlite_relations_graph",
+      "stdout_evidence": "outputs/fully-static/teaql_sqlite_relations_graph.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "fully-static/teaql_sqlite_relations_graph",
+      "needed_libraries": [],
+      "interpreter": null,
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/fully-static/teaql_sqlite_relations_graph.txt",
+      "shared_dependency_closure": [],
+      "dependency_bytes_excluding_existing_libc": 0,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 1491792
+    },
+    {
+      "example": "teaql_sqlite_relations_graph",
+      "linkage": "libc-dynamic",
+      "bytes": 1496196,
+      "kib": 1461.12890625,
+      "sha256": "5b2a007900221c4bde4bd642536edc5226facb954f7c53bfb183013d4f5d5188",
+      "static_baseline_bytes": 1491792,
+      "reduction_percent": -0.2952154187715106,
+      "local_binary_path": "build-wndr4300/link-comparison/libc-dynamic/teaql_sqlite_relations_graph",
+      "stdout_evidence": "outputs/libc-dynamic/teaql_sqlite_relations_graph.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "libc-dynamic/teaql_sqlite_relations_graph",
+      "needed_libraries": [
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/libc-dynamic/teaql_sqlite_relations_graph.txt",
+      "shared_dependency_closure": [
+        "libc.so"
+      ],
+      "dependency_bytes_excluding_existing_libc": 0,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 1496196
+    },
+    {
+      "example": "teaql_sqlite_relations_graph",
+      "linkage": "runtime-dynamic",
+      "bytes": 798936,
+      "kib": 780.2109375,
+      "sha256": "7a7df559d928dbc9163398715f8ae0c15a5087c2cf1ed717f85433f2db470210",
+      "static_baseline_bytes": 1491792,
+      "reduction_percent": 46.444544547765375,
+      "local_binary_path": "build-wndr4300/link-comparison/runtime-dynamic/teaql_sqlite_relations_graph",
+      "stdout_evidence": "outputs/runtime-dynamic/teaql_sqlite_relations_graph.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "runtime-dynamic/teaql_sqlite_relations_graph",
+      "needed_libraries": [
+        "libstdc++.so.6",
+        "libgcc_s.so.1",
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/runtime-dynamic/teaql_sqlite_relations_graph.txt",
+      "shared_dependency_closure": [
+        "libc.so",
+        "libgcc_s.so.1",
+        "libstdc++.so.6"
+      ],
+      "dependency_bytes_excluding_existing_libc": 2254528,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 3053464
+    },
+    {
+      "example": "teaql_sqlite_relations_graph",
+      "linkage": "fully-dynamic",
+      "bytes": 143704,
+      "kib": 140.3359375,
+      "sha256": "96d6be41436a4377b178235d8d95c35efb6bba62cc0129e3fbab3ff85203d920",
+      "static_baseline_bytes": 1491792,
+      "reduction_percent": 90.3670216759441,
+      "local_binary_path": "build-wndr4300/link-comparison/fully-dynamic/teaql_sqlite_relations_graph",
+      "stdout_evidence": "outputs/fully-dynamic/teaql_sqlite_relations_graph.stdout.txt",
+      "validation": {
+        "emulator": "PASS",
+        "exit_code": 0,
+        "matches_static_stdout_and_stderr": true,
+        "physical_device": "NOT_RUN"
+      },
+      "link_command_key": "fully-dynamic/teaql_sqlite_relations_graph",
+      "needed_libraries": [
+        "libsqlite3.so.0",
+        "libstdc++.so.6",
+        "libgcc_s.so.1",
+        "libc.so"
+      ],
+      "interpreter": "/lib/ld-musl-mips-sf.so.1",
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/fully-dynamic/teaql_sqlite_relations_graph.txt",
+      "shared_dependency_closure": [
+        "libc.so",
+        "libgcc_s.so.1",
+        "libsqlite3.so.0",
+        "libstdc++.so.6"
+      ],
+      "dependency_bytes_excluding_existing_libc": 3126540,
+      "executable_plus_dependencies_excluding_existing_libc_bytes": 3270244
+    }
+  ],
+  "shared_libraries": [
+    {
+      "name": "libc.so",
+      "bytes": 791836,
+      "kib": 773.27734375,
+      "sha256": "26d2d59108488f63631969df7442d8f51bfeefd741b43fa854f5814c7288f808",
+      "origin": "OpenWrt toolchain library, stripped with --strip-all",
+      "needed_libraries": [],
+      "interpreter": null,
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/shared-libraries/libc.txt"
+    },
+    {
+      "name": "libgcc_s.so.1",
+      "bytes": 139716,
+      "kib": 136.44140625,
+      "sha256": "266c90bbe8ad0a1b59cdd3fbe960e7a7d20408126e3c2ca98d70c90346f9380b",
+      "origin": "OpenWrt toolchain library, stripped with --strip-all",
+      "needed_libraries": [
+        "libc.so"
+      ],
+      "interpreter": null,
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/shared-libraries/libgcc_s.txt"
+    },
+    {
+      "name": "libsqlite3.so.0",
+      "bytes": 872012,
+      "kib": 851.57421875,
+      "sha256": "e41f9e29e844fa667b98b2160b113a0df5bcc0a8b631100bae46b95eb42f8de4",
+      "origin": "SQLite 3.40.1 rebuilt with PIC",
+      "needed_libraries": [
+        "libgcc_s.so.1",
+        "libc.so"
+      ],
+      "interpreter": null,
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/shared-libraries/libsqlite3.txt"
+    },
+    {
+      "name": "libstdc++.so.6",
+      "bytes": 2114812,
+      "kib": 2065.24609375,
+      "sha256": "64f0dabdb3f382ba62a56c4b3383ecacb2b9a8ba99ae7b64bf6a7ee84a20ae7f",
+      "origin": "OpenWrt toolchain library, stripped with --strip-all",
+      "needed_libraries": [
+        "libc.so",
+        "libgcc_s.so.1"
+      ],
+      "interpreter": null,
+      "soft_float_abi": true,
+      "text_relocations": false,
+      "elf_evidence": "elf/shared-libraries/libstdcxx.txt"
+    }
+  ]
+}

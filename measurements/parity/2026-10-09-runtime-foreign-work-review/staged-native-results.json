@@ -1,0 +1,12 @@
+{
+  "query": {
+    "exit_code": 0,
+    "stdout": "{\"rejected\":true,\"cancelled_before_rejection\":true,\"user_bytes\":0}\n",
+    "stderr": ""
+  },
+  "mutation": {
+    "exit_code": 0,
+    "stdout": "{\"rejected\":true,\"cancelled_before_rejection\":true,\"user_bytes\":0}\n",
+    "stderr": ""
+  }
+}

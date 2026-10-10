@@ -2,6 +2,18 @@
 
 Contexts use growing multi-block arenas. Every result belongs to its Context and becomes invalid on close. Retention across lifetimes requires explicit copying; shared_ptr must not defer reclamation.
 
+See the [Context API design and memory-safety review](context-design-review.md)
+for the original application-boundary discussion and review. The
+application examples below use checked references and delegate Global allocation
+through UserContext. Runtime bootstrap owns GlobalContext.
+
+The [Context memory implementation](context-memory-implementation.md) provides
+typed object IDs, separate exact validity bitmaps, allocation budgets, checked
+Global delegation, and ordinary versus shared string storage. Its
+[design rationale](context-memory-design.md) borrows existing mechanisms without
+new runtime dependencies. The raw kernel borrows below remain temporary and do
+not intercept arbitrary C++ pointer access.
+
 ## Two ownership domains
 
 | Owner | Typical contents | Destruction |
@@ -15,22 +27,33 @@ Global objects must not retain User-owned data; copy it into Global explicitly. 
 
 Arena uses std::pmr::monotonic_buffer_resource, growing on demand with new_delete_resource as the default upstream. Each Context exclusively owns its blocks; no hidden global pool retains them. Injected upstream resources must outlive the Context; their own caching policies govern returned blocks.
 
-Allocation sites expose lifetime:
+Application allocation sites expose lifetime:
 
 ```cpp
-teaql::GlobalContext global;
-auto& metadata = global.make<std::pmr::string>("EdgeDevice");
-auto user_context = global.make_user_context();
-auto& rows = user_context->make<std::pmr::vector<std::pmr::string>>();
+// Runtime bootstrap creates and owns GlobalContext and UserContext.
+void prepare(teaql::UserContext& user) {
+    auto metadata = user.make_global<teaql::String>("EdgeDevice");
+    auto rows = user.make_ref<teaql::Vector<teaql::String>>();
+    user.get(rows).emplace_back(user.get(metadata));
+}
 ```
 
 GlobalContext is application-owned, not a singleton. UserContext requires an explicit Global and has no default constructor. Global destruction with live Users fails fast rather than leaving dangling metadata. Both scopes currently use owner-thread access.
 
-make returns borrows and registers nontrivial destruction. Constraints reject ordinary std::string/vector; make_resource explicitly admits foreign RAII wrappers without claiming arena-backed internals. PMR strings/vectors and nested allocator-aware containers receive the selected resource. Ordinary containers inside foreign wrappers retain their own allocations and release them through registered destruction. Implemented core/SQL/result/log dynamic storage uses explicit PMR; tests disable default PMR while running real SQLite paths.
+Checked factories return `Ref<T>`; `user.get(ref)` validates access before returning
+a temporary borrow. The lower-level `make()` and `make_resource()` APIs remain
+available for kernel code that explicitly controls its borrows. Both forms
+register nontrivial destruction. Constraints reject ordinary std::string/vector;
+resource factories explicitly admit foreign RAII wrappers without claiming
+arena-backed internals. PMR strings/vectors and nested allocator-aware containers
+receive the selected resource. Ordinary containers inside foreign wrappers retain
+their own allocations and release them through registered destruction.
+Implemented core/SQL/result/log dynamic storage uses explicit PMR; tests disable
+default PMR while running real SQLite paths.
 
 Close order:
 
-1. Enter closing and reject new asynchronous registration.
+1. Enter closing, invalidate checked User access, and reject new asynchronous registration.
 2. Stop/join registered work while ordinary objects remain alive. Final diagnostics may allocate in the original scope.
 3. After host-memory access stops, reject allocation and destroy successfully constructed objects in reverse order.
 4. Return every block; live_blocks/live_bytes become zero.
@@ -42,12 +65,16 @@ Contexts cannot copy/move. close is idempotent/noexcept and destruction follows 
 ```cpp
 teaql::GlobalContext global;
 auto ctx = global.make_user_context();
-auto& rows = ctx->make<std::pmr::vector<std::pmr::string>>();
-rows.emplace_back("edge-device-001");
-// Explicit deep copy; nested strings also use the Global allocator.
-auto& retained = global.make<std::pmr::vector<std::pmr::string>>(rows);
+auto rows = ctx->make_ref<teaql::Vector<teaql::String>>();
+ctx->get(rows).emplace_back("edge-device-001");
+// Business code delegates the explicit deep copy, including nested strings.
+auto retained = ctx->make_global<teaql::Vector<teaql::String>>(ctx->get(rows));
 ctx.reset(); // Destroy the Context and return all its blocks.
-// rows is invalid; retained remains valid until Global destruction.
+auto next = global.make_user_context();
+// next->get(rows) rejects the expired User reference before reading its storage.
+// Global storage survives, but access from the old User has expired.
+auto rebound = next->rebind_global(retained);
+auto& retained_rows = next->get(rebound); // Temporary borrow from a live User.
 ```
 
 Never delete/manually destroy make results or transfer them to owning smart pointers. Stack PMR containers using a Context resource must be destroyed before close; prefer Context-managed construction when their cleanup belongs to the Context.
@@ -58,7 +85,7 @@ Arena reclamation does not replace SQLite finalize/rollback, file close, or GPU-
 
 Allocation/poll/cancel/close run on the owner thread. AsyncOperation/AsyncStream and quiescence already exist; native completion threads only notify WakeSignal, never allocate Context values/run observers. There is no scheduler/pool/GPU synchronization implementation. Hosts must finish unregistered work first. Future GPU adapters must await completion/synchronization so devices stop touching host memory; requesting cancel alone is insufficient. Device/driver/SQLite heap allocations are accounted separately and released by resource destructors.
 
-Reclamation releases allocation ownership, not necessarily immediate OS RSS. Long-lived Context temporary bytes are not returned individually; edge workloads should use short-lived Users. Future explicit budgets must not silently become cross-request caching.
+Reclamation releases allocation ownership, not necessarily immediate OS RSS. Long-lived Context temporary bytes are not returned individually; edge workloads should use short-lived Users. Implemented byte and identity budgets do not introduce cross-request caching. Global retains only bounded Context state for rejecting expired access; User bitmaps and payloads are fully reclaimed.
 
 ## Acceptance tests
 
@@ -82,7 +109,7 @@ Entity/BaseEntity traits map to concepts/CRTP defaults. EntityError/Result are s
 
 Audited validates a nonempty Unicode reason; into_entity applies it. It preserves the typed save gate, whose runtime remains pending. Annotated EntityGraph save input carries relation names/per-node reasons/Save-Delete separately from identity graphs. Input graphs allow absent and empty comments; do not apply Audited validation to them.
 
-Naming adaptations: EntityGraph::new becomes from_entity; delete becomes delete_; BaseEntityData.dynamic storage becomes dynamic_values while dynamic(key) remains accessor. BoxedRelations delegates scoped allocation. Invalid BaseEntity fields retain entity/field/value diagnostics; value text currently uses JSON projection rather than complete Rust Debug, so acceptance remains partial.
+Naming adaptations: EntityGraph::new becomes from_entity; delete becomes delete_; BaseEntityData.dynamic storage becomes dynamic_values while dynamic(key) remains accessor. BoxedRelations delegates scoped allocation. Invalid BaseEntity fields retain entity/field/value diagnostics with the original Some(Value Debug) projection. The dedicated BaseEntity acceptance covers this diagnostic contract; surrounding entity/runtime acceptance remains partial.
 
 ## Asynchronous handles and interfaces
 
@@ -364,7 +391,13 @@ executing mutation. Environment is read per call, with no Context-owned process
 cache; LogManager owns the warning state. Event dispatch is wired, while complete
 business-save audit timing is pending.
 
-SQL log payloads and UnifiedLogBuffer recursively propagate allocators. Registration
+SQL log payloads and UnifiedLogBuffer recursively propagate allocators.
+UnifiedLogBuffer same-domain copies share a registered vector without extending
+Context lifetime. Cross-domain copies own independent destination vectors and
+nested entries. Every new vector state consumes its own managed object slot;
+same-domain clone handles reuse it. Destroying one buffer handle does not
+invalidate another live same-Context alias. Complete current validation of this
+restored Clone contract remains pending. Registration
 checks borrows; insertion copies entries. Private safe projection stores SHA-256
 and protected state, not original bindings or ownership cycles. Same-domain
 cloning is a borrow; cross-domain cloning rebuilds state. A Global copy remains
@@ -508,7 +541,13 @@ cross-domain assignment deep-copies.
 
 Context observation activates scopes only during poll. Finish consumes and destroys
 the delegate. Cancel joins the child before freeing scopes. Wake state belongs to
-the owner. A foreign child is rejected without canceling that foreign operation.
+the owner. Observation wrappers reject caller-supplied foreign operations without
+canceling them, because the caller retains responsibility for that input.
+In contrast, query, mutation, relation, enhancement and transaction callbacks
+transfer responsibility for their returned work to the awaiting adapter. If its
+domain is invalid, the adapter cancels and joins it before rejection; otherwise
+its state could retain the caller's User memory beyond User destruction. This
+does not grant an operation permission to escape its allocation domain.
 
 ## Relation execution, hydration, and enhancement
 
@@ -573,3 +612,86 @@ monotonic allocations. Query Debug contains values and must remain internal to k
 construction rather than bypassing log privacy projection. Native contracts use
 null default PMR and verify source immutability, recursive Global retention, and
 complete User reclamation.
+
+
+## Graph-reference lifetime adaptation acceptance
+
+Revalidated on 2026-10-08 after resuming interrupted work. Both exact original
+Rust source tests pass individually. The source/C++ assertion review confirms
+that storage reclamation intentionally follows Context close, while weak
+publication refusal, clone promotion on an unfrozen anchor, graph/list identity,
+closed-reference rejection, explicit Global deep copying and exactly-once
+payload destruction remain independently exercised. Five selected native,
+ASan/UBSan with leak detection, and MIPS/QEMU tests pass 5/5. Current leak
+scanning is available after the environment change; older disabled-scan results
+must retain their original qualifications.
+
+
+
+The pinned Rust `EntityGraphReference` keeps strong Arc anchors for root and
+cloned external views, and Weak anchors for entities stored inside their own
+frozen graph. An internal entity cannot publish a graph; cloning promotes its
+anchor. The last strong Arc release destroys the graph.
+
+C++ preserves these reference roles and graph identity, while the agreed Context
+ownership design changes the storage reclamation boundary. EntityRuntimeState
+views borrow one Context-owned graph slot. Destroying a root or detached view
+does not reclaim that slot; it remains within the owner's byte budget until
+Context close. Internal graph cycles do not introduce a shared owner. A clone
+promotes the weak role and shares the same-domain slot, but cannot extend its
+Context lifetime. Explicit cross-domain retention deep-copies the complete
+slot, adjacency and payloads into the destination Context; it never borrows the
+source User graph.
+
+`tests/parity/teaql-runtime/graph_reference_lifetime.cpp` directly tests the
+pinned Owner#1/children/GraphChild shape. Before freeze, weak child publication
+fails and returns the complete builder. An actual child copy can publish an
+unfrozen anchor, and both original and weak views see exactly the same entity
+address; this observes promotion rather than only Context expiry. After freeze,
+a cloned detached child resolves the same relation list after original root-view
+destruction. User close rejects its checked reference, destroys the graph cycle
+exactly once, and returns all User blocks. A separately deep-copied Global child
+still resolves a fully Global-allocated cyclic list after actual source User
+deletion. Destroying the retained view leaves the Global-owned graph child until
+Global teardown; every constructed payload is then destroyed exactly once.
+
+Native, ASan/UBSan with leak detection and MIPS/QEMU evidence is recorded in
+[runtime source acceptance](runtime-source-test-acceptance.md). This accepts the
+explicit ownership adaptation, not identical Rust Arc destruction timing,
+a general C++ borrow checker or permission to use escaped native pointers.
+
+
+## Explicit asynchronous completion consumption
+
+Ordinary poll/wait results remain Context borrows. `AsyncOperation::take_result()`
+adds an explicit consuming path for noncopyable payloads. It requires Ready with
+an available result, performs no new poll or terminal hook, moves the complete
+payload within the same Context, and clears the stored optional. Ready still
+means work has completed; it does not promise availability after explicit
+consumption. Taking twice, taking pending work, and polling a taken result fail
+with logic_error rather than reading empty storage. Any native borrow of the
+consumed result is invalid after take; this is caller-visible consumption, not
+an implicit lifetime extension.
+
+`AsyncStream::take_item()` consumes only the most recently delivered item before
+a further poll. It stores the existing managed slot when publishing that item,
+moves the payload within the same domain, retires the source live bit and invokes
+its moved-from destructor exactly once. Later Context cleanup skips that retired
+registration. Previously delivered unconsumed items remain valid Context borrows.
+The last-item marker is cleared when another active poll begins; EOF, cancellation
+and explicit consumption remain distinct. This does not reclaim monotonic bytes
+or reuse an issued identity. No side map, shared owner or new lifetime is added.
+
+Internal completion adapters choose explicit taking only when their error or
+complete result is not domain-copyable. Copyable payloads retain existing copies
+and stable child-result borrows. Query, mutation, repeated-query, transaction and
+stream mappings preserve concrete error tags. Diagnostics stop/release child
+work and retain existing observer outcomes and ordering. Source Rust futures and
+stream items yield owned completions; this path restores that capability for
+noncopyable C++ errors without a blanket Clone requirement.
+
+The direct contracts in `tests/sql_move_only_tests.cpp` cover pending/duplicate
+consumption rejection, retired item IDs, EOF and cleanup, and actual SQL executor
+query/mutation/begin/transaction-query/commit/rollback/repeated-fetch/diagnostic-
+stream errors. Default PMR is disabled. See the current runtime acceptance record
+for scoped native/sanitizer/MIPS evidence and remaining full integration work.

@@ -1,0 +1,712 @@
+In file included from include/teaql/runtime/check_result_debug.hpp:2,
+                 from include/teaql/runtime/checker_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/debug.hpp: In instantiation of ‘teaql::String teaql::debug_string(teaql::Memory, const T&, teaql::DebugOptions) [with T = teaql::GraphNode; teaql::String = std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >; teaql::Memory = std::pmr::memory_resource*]’:
+/tmp/teaql-graph-debug-before.cpp:3:30:   required from here
+include/teaql/core/debug.hpp:558:20: error: no matching function for call to ‘write_debug(teaql::DebugWriter&, const teaql::GraphNode&, teaql::DefaultDebugElement)’
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/teaql/core/debug.hpp:457:6: note: candidate: ‘template<class T>  requires (integral<T>) && !(same_as<T, bool>) void teaql::write_debug(teaql::DebugWriter&, T)’
+  457 | void write_debug(DebugWriter& writer, T value) {
+      |      ^~~~~~~~~~~
+include/teaql/core/debug.hpp:457:6: note:   template argument deduction/substitution failed:
+include/teaql/core/debug.hpp:558:20: note:   candidate expects 2 arguments, 3 provided
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/teaql/core/debug.hpp:503:6: note: candidate: ‘template<class T, class Element> void teaql::write_debug(teaql::DebugWriter&, const teaql::SmartList<T>&, Element&&)’
+  503 | void write_debug(DebugWriter& writer, const SmartList<T>& list, Element&& element) {
+      |      ^~~~~~~~~~~
+include/teaql/core/debug.hpp:503:6: note:   template argument deduction/substitution failed:
+include/teaql/core/debug.hpp:558:20: note:   ‘const teaql::GraphNode’ is not derived from ‘const teaql::SmartList<T>’
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from include/teaql/runtime.hpp:15,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/error_debug.hpp:96:6: note: candidate: ‘template<class E>  requires requires(teaql::DebugWriter& writer, const E& value) {teaql::write_debug(writer, value);} void teaql::write_debug(teaql::DebugWriter&, const teaql::DataServiceError<Error>&)’
+   96 | void write_debug(DebugWriter& writer, const DataServiceError<E>& error) {
+      |      ^~~~~~~~~~~
+include/teaql/runtime/error_debug.hpp:96:6: note:   template argument deduction/substitution failed:
+In file included from include/teaql/runtime/check_result_debug.hpp:2,
+                 from include/teaql/runtime/checker_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/debug.hpp:558:20: note:   ‘const teaql::GraphNode’ is not derived from ‘const teaql::DataServiceError<Error>’
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from include/teaql/runtime.hpp:15,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/error_debug.hpp:77:6: note: candidate: ‘template<class E, class Element> void teaql::write_debug(teaql::DebugWriter&, const teaql::DataServiceError<Error>&, Element&&)’
+   77 | void write_debug(DebugWriter& writer, const DataServiceError<E>& error, Element&& element) {
+      |      ^~~~~~~~~~~
+include/teaql/runtime/error_debug.hpp:77:6: note:   template argument deduction/substitution failed:
+In file included from include/teaql/runtime/check_result_debug.hpp:2,
+                 from include/teaql/runtime/checker_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/debug.hpp:558:20: note:   ‘const teaql::GraphNode’ is not derived from ‘const teaql::DataServiceError<Error>’
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from include/teaql/runtime/error_debug.hpp:5,
+                 from include/teaql/runtime.hpp:15,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/sql/error_debug.hpp:84:6: note: candidate: ‘template<class E>  requires requires(teaql::DebugWriter& writer, const E& value) {teaql::write_debug(writer, value);} void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlExecutorError<E>&)’
+   84 | void write_debug(DebugWriter& writer, const SqlExecutorError<E>& error) {
+      |      ^~~~~~~~~~~
+include/teaql/sql/error_debug.hpp:84:6: note:   template argument deduction/substitution failed:
+In file included from include/teaql/runtime/check_result_debug.hpp:2,
+                 from include/teaql/runtime/checker_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/debug.hpp:558:20: note:   ‘const teaql::GraphNode’ is not derived from ‘const teaql::SqlExecutorError<E>’
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from include/teaql/runtime/error_debug.hpp:5,
+                 from include/teaql/runtime.hpp:15,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/sql/error_debug.hpp:68:6: note: candidate: ‘template<class E, class Element> void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlExecutorError<E>&, Element&&)’
+   68 | void write_debug(DebugWriter& writer, const SqlExecutorError<E>& error, Element&& element) {
+      |      ^~~~~~~~~~~
+include/teaql/sql/error_debug.hpp:68:6: note:   template argument deduction/substitution failed:
+In file included from include/teaql/runtime/check_result_debug.hpp:2,
+                 from include/teaql/runtime/checker_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/debug.hpp:558:20: note:   ‘const teaql::GraphNode’ is not derived from ‘const teaql::SqlExecutorError<E>’
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from include/teaql/runtime.hpp:11,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/entity_runtime_debug.hpp:27:6: note: candidate: ‘template<class T> void teaql::write_debug(teaql::DebugWriter&, const teaql::RelationHandle<T>&)’
+   27 | void write_debug(DebugWriter& writer, const RelationHandle<T>& value) {
+      |      ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:27:6: note:   template argument deduction/substitution failed:
+In file included from include/teaql/runtime/check_result_debug.hpp:2,
+                 from include/teaql/runtime/checker_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/debug.hpp:558:20: note:   ‘const teaql::GraphNode’ is not derived from ‘const teaql::RelationHandle<T>’
+  558 |         write_debug(writer, value, DefaultDebugElement{});
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/teaql/core/debug.hpp:359:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::Value&)’
+  359 | inline void write_debug(DebugWriter& writer, const Value& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:359:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:325:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::DataType)’
+  325 | inline void write_debug(DebugWriter& writer, DataType type) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:325:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:335:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::Json&)’
+  335 | inline void write_debug(DebugWriter& writer, const Json& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:335:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:436:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::CompactRow&)’
+  436 | inline void write_debug(DebugWriter& writer, const CompactRow& row) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:436:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:451:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, bool)’
+  451 | inline void write_debug(DebugWriter& writer, bool value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:451:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:461:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, double)’
+  461 | inline void write_debug(DebugWriter& writer, double value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:461:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:465:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, float)’
+  465 | inline void write_debug(DebugWriter& writer, float value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:465:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:469:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, std::string_view)’
+  469 | inline void write_debug(DebugWriter& writer, std::string_view value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:469:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:473:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const String&)’
+  473 | inline void write_debug(DebugWriter& writer, const String& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:473:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:477:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const char*)’
+  477 | inline void write_debug(DebugWriter& writer, const char* value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:477:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:481:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::Decimal&)’
+  481 | inline void write_debug(DebugWriter& writer, const Decimal& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:481:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:485:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::Timestamp)’
+  485 | inline void write_debug(DebugWriter& writer, Timestamp value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:485:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/debug.hpp:491:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::Date)’
+  491 | inline void write_debug(DebugWriter& writer, Date value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/debug.hpp:491:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:38,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/telemetry_debug.hpp:21:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RuntimeOperation&)’
+   21 | inline void write_debug(DebugWriter& writer, const RuntimeOperation& operation) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/telemetry_debug.hpp:21:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/telemetry_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RuntimeAttributeValue&)’
+    6 | inline void write_debug(DebugWriter& writer, const RuntimeAttributeValue& attribute) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/telemetry_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:36,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/registry_debug.hpp:22:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::InMemoryEntityRegistry&)’
+   22 | inline void write_debug(DebugWriter& writer, const InMemoryEntityRegistry& registry) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/registry_debug.hpp:22:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/registry_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::InMemoryMetadataStore&)’
+    6 | inline void write_debug(DebugWriter& writer, const InMemoryMetadataStore& metadata) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/registry_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:35,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/relation_model_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RelationLoadPlan&)’
+    6 | inline void write_debug(DebugWriter& writer, const RelationLoadPlan& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/relation_model_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:30,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/query_store_debug.hpp:70:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::InMemoryAggregationCache&)’
+   70 | inline void write_debug(DebugWriter& writer, const InMemoryAggregationCache& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/query_store_debug.hpp:70:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/query_store_debug.hpp:38:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RetainedIdSet&)’
+   38 | inline void write_debug(DebugWriter& writer, const RetainedIdSet& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/query_store_debug.hpp:38:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/query_store_debug.hpp:9:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ContinuousPageCursor&)’
+    9 | inline void write_debug(DebugWriter& writer, const ContinuousPageCursor& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/query_store_debug.hpp:9:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:29,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/purposed_query_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::PurposedSelectQuery&)’
+    6 | inline void write_debug(DebugWriter& writer, const PurposedSelectQuery& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/purposed_query_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:27,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/log_model_debug.hpp:137:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::UnifiedLogEntry&)’
+  137 | inline void write_debug(DebugWriter& writer, const UnifiedLogEntry& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:137:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/log_model_debug.hpp:126:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const LogPayload&)’
+  126 | inline void write_debug(DebugWriter& writer, const LogPayload& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:126:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/log_model_debug.hpp:70:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlLogEntry&)’
+   70 | inline void write_debug(DebugWriter& writer, const SqlLogEntry& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:70:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/log_model_debug.hpp:62:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::InfoLogEntry&)’
+   62 | inline void write_debug(DebugWriter& writer, const InfoLogEntry& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:62:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/log_model_debug.hpp:58:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::LogDuration)’
+   58 | inline void write_debug(DebugWriter& writer, LogDuration value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:58:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/log_model_debug.hpp:47:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlLogOptions&)’
+   47 | inline void write_debug(DebugWriter& writer, const SqlLogOptions& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:47:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/log_model_debug.hpp:29:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::LogLevel)’
+   29 | inline void write_debug(DebugWriter& writer, LogLevel value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:29:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/log_model_debug.hpp:8:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::SqlLogOperation)’
+    8 | inline void write_debug(DebugWriter& writer, SqlLogOperation value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/log_model_debug.hpp:8:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/log_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:27,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/data_service/sql_log_debug.hpp:49:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlLogContext&)’
+   49 | inline void write_debug(DebugWriter& writer, const SqlLogContext& value) {
+      |             ^~~~~~~~~~~
+include/teaql/data_service/sql_log_debug.hpp:49:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/data_service/sql_log_debug.hpp:28:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlIntentRedactions&)’
+   28 | inline void write_debug(DebugWriter& writer, const SqlIntentRedactions& value) {
+      |             ^~~~~~~~~~~
+include/teaql/data_service/sql_log_debug.hpp:28:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/data_service/sql_log_debug.hpp:24:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlProjectionState&)’
+   24 | inline void write_debug(DebugWriter& writer, const SqlProjectionState&) {
+      |             ^~~~~~~~~~~
+include/teaql/data_service/sql_log_debug.hpp:24:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/data_service/sql_log_debug.hpp:15:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::SqlExecutionOutcome)’
+   15 | inline void write_debug(DebugWriter& writer, SqlExecutionOutcome value) {
+      |             ^~~~~~~~~~~
+include/teaql/data_service/sql_log_debug.hpp:15:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/data_service/sql_log_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::SqlParameterLogPolicy)’
+    6 | inline void write_debug(DebugWriter& writer, SqlParameterLogPolicy value) {
+      |             ^~~~~~~~~~~
+include/teaql/data_service/sql_log_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:22,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/runtime_id_debug.hpp:88:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SnowflakeIdGenerator&)’
+   88 | inline void write_debug(DebugWriter& writer, const SnowflakeIdGenerator& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/runtime_id_debug.hpp:88:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/runtime_id_debug.hpp:65:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::InMemoryBusinessIdAllocator&)’
+   65 | inline void write_debug(DebugWriter& writer, const InMemoryBusinessIdAllocator& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/runtime_id_debug.hpp:65:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/runtime_id_debug.hpp:57:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::AtomicCounterIdGenerator&)’
+   57 | inline void write_debug(DebugWriter& writer, const AtomicCounterIdGenerator& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/runtime_id_debug.hpp:57:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/runtime_id_debug.hpp:25:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::DailySequenceBusinessIdProfile&)’
+   25 | inline void write_debug(DebugWriter& writer, const DailySequenceBusinessIdProfile&) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/runtime_id_debug.hpp:25:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/runtime_id_debug.hpp:19:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::BusinessDate)’
+   19 | inline void write_debug(DebugWriter& writer, BusinessDate value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/runtime_id_debug.hpp:19:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/runtime_id_debug.hpp:11:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::FixedBusinessClock&)’
+   11 | inline void write_debug(DebugWriter& writer, const FixedBusinessClock& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/runtime_id_debug.hpp:11:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/runtime_id_debug.hpp:7:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SystemBusinessClock&)’
+    7 | inline void write_debug(DebugWriter& writer, const SystemBusinessClock&) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/runtime_id_debug.hpp:7:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/runtime_id_debug.hpp:4,
+                 from include/teaql/runtime.hpp:22,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/reference_model_debug.hpp:259:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::ReferenceWireCodec)’
+  259 | inline void write_debug(DebugWriter& writer, ReferenceWireCodec) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:259:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:228:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ReferenceStartupNotice&)’
+  228 | inline void write_debug(DebugWriter& writer, const ReferenceStartupNotice& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:228:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:208:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ResolvedEntityReference&)’
+  208 | inline void write_debug(DebugWriter& writer, const ResolvedEntityReference& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:208:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:190:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ExternalEntityReference&)’
+  190 | inline void write_debug(DebugWriter& writer, const ExternalEntityReference& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:190:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:178:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::ReferenceMode)’
+  178 | inline void write_debug(DebugWriter& writer, ReferenceMode value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:178:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:163:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::DeploymentProfile)’
+  163 | inline void write_debug(DebugWriter& writer, DeploymentProfile value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:163:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:152:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ReferenceKey&)’
+  152 | inline void write_debug(DebugWriter& writer, const ReferenceKey& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:152:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:138:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ReferenceIdentity&)’
+  138 | inline void write_debug(DebugWriter& writer, const ReferenceIdentity& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:138:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:118:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ReferenceDocumentScope&)’
+  118 | inline void write_debug(DebugWriter& writer, const ReferenceDocumentScope& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:118:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:101:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::TrustedReferencePrincipal&)’
+  101 | inline void write_debug(DebugWriter& writer, const TrustedReferencePrincipal& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:101:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:93:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RoundTripReferenceError&)’
+   93 | inline void write_debug(DebugWriter& writer, const RoundTripReferenceError& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:93:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:85:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityReferenceTokenError&)’
+   85 | inline void write_debug(DebugWriter& writer, const EntityReferenceTokenError& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:85:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:59:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityReferenceClaims&)’
+   59 | inline void write_debug(DebugWriter& writer, const EntityReferenceClaims& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:59:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/reference_model_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::UtcDateTime)’
+    6 | inline void write_debug(DebugWriter& writer, UtcDateTime value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/reference_model_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:20,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/i18n_debug.hpp:37:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::I18nCatalog&)’
+   37 | void write_debug(DebugWriter&, const I18nCatalog&);
+      |      ^~~~~~~~~~~
+include/teaql/runtime/i18n_debug.hpp:37:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/i18n_debug.hpp:29:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::BuiltinTranslator&)’
+   29 | inline void write_debug(DebugWriter& writer, const BuiltinTranslator& translator) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/i18n_debug.hpp:29:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/i18n_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::Language)’
+    6 | inline void write_debug(DebugWriter& writer, Language language) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/i18n_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:17,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/event_debug.hpp:144:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RawAuditEvent&)’
+  144 | inline void write_debug(DebugWriter& writer, const RawAuditEvent& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/event_debug.hpp:144:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/event_debug.hpp:124:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SafeAuditEvent&)’
+  124 | inline void write_debug(DebugWriter& writer, const SafeAuditEvent& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/event_debug.hpp:124:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/event_debug.hpp:95:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SafeAuditField&)’
+   95 | inline void write_debug(DebugWriter& writer, const SafeAuditField& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/event_debug.hpp:95:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/event_debug.hpp:75:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::BootstrapAuditIdentity&)’
+   75 | inline void write_debug(DebugWriter& writer, const BootstrapAuditIdentity& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/event_debug.hpp:75:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/event_debug.hpp:61:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityPropertyChange&)’
+   61 | inline void write_debug(DebugWriter& writer, const EntityPropertyChange& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/event_debug.hpp:61:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/event_debug.hpp:7:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::RawAuditEventKind)’
+    7 | inline void write_debug(DebugWriter& writer, RawAuditEventKind value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/event_debug.hpp:7:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/event_debug.hpp:3,
+                 from include/teaql/runtime.hpp:17,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/mutation_policy_debug.hpp:198:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationGovernanceEvent&)’
+  198 | inline void write_debug(DebugWriter& writer, const MutationGovernanceEvent& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:198:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:172:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationGovernanceSnapshot&)’
+  172 | inline void write_debug(DebugWriter& writer, const MutationGovernanceSnapshot& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:172:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:158:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationOperationSummary&)’
+  158 | inline void write_debug(DebugWriter& writer, const MutationOperationSummary& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:158:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:144:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationPolicyApproval&)’
+  144 | inline void write_debug(DebugWriter& writer, const MutationPolicyApproval& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:144:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:127:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationDecision&)’
+  127 | inline void write_debug(DebugWriter& writer, const MutationDecision& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:127:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:107:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationPlan&)’
+  107 | inline void write_debug(DebugWriter& writer, const MutationPlan& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:107:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:82:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationOperation&)’
+   82 | inline void write_debug(DebugWriter& writer, const MutationOperation& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:82:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:48:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationPolicyIdentity&)’
+   48 | inline void write_debug(DebugWriter& writer, const MutationPolicyIdentity& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:48:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:33:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::MutationPolicyApprovalStatus)’
+   33 | inline void write_debug(DebugWriter& writer, MutationPolicyApprovalStatus value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:33:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:29:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::MutationPolicySource)’
+   29 | inline void write_debug(DebugWriter& writer, MutationPolicySource value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:29:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:25:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::MutationVerdict)’
+   25 | inline void write_debug(DebugWriter& writer, MutationVerdict value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:25:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/mutation_policy_debug.hpp:7:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::MutationOperationKind)’
+    7 | inline void write_debug(DebugWriter& writer, MutationOperationKind value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/mutation_policy_debug.hpp:7:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/mutation_policy_debug.hpp:4,
+                 from include/teaql/runtime/event_debug.hpp:3,
+                 from include/teaql/runtime.hpp:17,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/system_time_debug.hpp:109:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SystemTimeDifference&)’
+  109 | inline void write_debug(DebugWriter& writer, const SystemTimeDifference& difference) {
+      |             ^~~~~~~~~~~
+include/teaql/core/system_time_debug.hpp:109:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/system_time_debug.hpp:103:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SystemTimeError&)’
+  103 | inline void write_debug(DebugWriter& writer, const SystemTimeError& error) {
+      |             ^~~~~~~~~~~
+include/teaql/core/system_time_debug.hpp:103:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/system_time_debug.hpp:17:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::SystemDuration)’
+   17 | inline void write_debug(DebugWriter& writer, SystemDuration duration) {
+      |             ^~~~~~~~~~~
+include/teaql/core/system_time_debug.hpp:17:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/system_time_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::SystemTime)’
+    6 | inline void write_debug(DebugWriter& writer, SystemTime time) {
+      |             ^~~~~~~~~~~
+include/teaql/core/system_time_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:15,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/error_debug.hpp:20:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RuntimeError&)’
+   20 | inline void write_debug(DebugWriter& writer, const RuntimeError& error) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/error_debug.hpp:20:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/error_debug.hpp:9:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ContextError&)’
+    9 | inline void write_debug(DebugWriter& writer, const ContextError& error) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/error_debug.hpp:9:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/error_debug.hpp:5,
+                 from include/teaql/runtime.hpp:15,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/sql/error_debug.hpp:7:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SqlCompileError&)’
+    7 | inline void write_debug(DebugWriter& writer, const SqlCompileError& error) {
+      |             ^~~~~~~~~~~
+include/teaql/sql/error_debug.hpp:7:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/error_debug.hpp:2,
+                 from include/teaql/runtime.hpp:15,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/entity_debug.hpp:18:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::BaseEntityData&)’
+   18 | inline void write_debug(DebugWriter& writer, const BaseEntityData& entity) {
+      |             ^~~~~~~~~~~
+include/teaql/core/entity_debug.hpp:18:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/entity_debug.hpp:7:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityError&)’
+    7 | inline void write_debug(DebugWriter& writer, const EntityError& error) {
+      |             ^~~~~~~~~~~
+include/teaql/core/entity_debug.hpp:7:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:14,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/entity_status_debug.hpp:10:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::EntityAction)’
+   10 | inline void write_debug(DebugWriter& writer, EntityAction action) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/entity_status_debug.hpp:10:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/entity_status_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::EntityStatus)’
+    6 | inline void write_debug(DebugWriter& writer, EntityStatus status) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/entity_status_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:11,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/entity_runtime_debug.hpp:64:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::LedgerCompositionError&)’
+   64 | inline void write_debug(DebugWriter& writer, const LedgerCompositionError& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:64:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/entity_runtime_debug.hpp:48:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityChangeSet&)’
+   48 | inline void write_debug(DebugWriter& writer, const EntityChangeSet& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:48:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/entity_runtime_debug.hpp:11:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::LoadedRelation)’
+   11 | inline void write_debug(DebugWriter& writer, LoadedRelation value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:11:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/entity_runtime_debug.hpp:9:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityRuntimeState&)’
+    9 | void write_debug(DebugWriter&, const EntityRuntimeState&);
+      |      ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:9:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/entity_runtime_debug.hpp:8:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ChangeSetStack&)’
+    8 | void write_debug(DebugWriter&, const ChangeSetStack&);
+      |      ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:8:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/entity_runtime_debug.hpp:7:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityGraphBuilder&)’
+    7 | void write_debug(DebugWriter&, const EntityGraphBuilder&);
+      |      ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:7:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/entity_runtime_debug.hpp:6:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityKey&)’
+    6 | void write_debug(DebugWriter&, const EntityKey&);
+      |      ^~~~~~~~~~~
+include/teaql/runtime/entity_runtime_debug.hpp:6:6: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/entity_runtime_debug.hpp:2,
+                 from include/teaql/runtime.hpp:11,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/mutation_debug.hpp:84:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::MutationKind)’
+   84 | inline void write_debug(DebugWriter& writer, MutationKind value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:84:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:190:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RecoverCommand&)’
+  190 | inline void write_debug(DebugWriter& writer, const RecoverCommand& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:190:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:170:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::DeleteCommand&)’
+  170 | inline void write_debug(DebugWriter& writer, const DeleteCommand& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:170:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:144:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::BatchUpdateCommand&)’
+  144 | inline void write_debug(DebugWriter& writer, const BatchUpdateCommand& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:144:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:130:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::BatchInsertCommand&)’
+  130 | inline void write_debug(DebugWriter& writer, const BatchInsertCommand& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:130:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:107:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::UpdateCommand&)’
+  107 | inline void write_debug(DebugWriter& writer, const UpdateCommand& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:107:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:93:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::InsertCommand&)’
+   93 | inline void write_debug(DebugWriter& writer, const InsertCommand& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:93:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:70:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntitySnapshot&)’
+   70 | inline void write_debug(DebugWriter& writer, const EntitySnapshot& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:70:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:56:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::GeneratedValues&)’
+   56 | inline void write_debug(DebugWriter& writer, const GeneratedValues& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:56:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/mutation_debug.hpp:42:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::MutationValues&)’
+   42 | inline void write_debug(DebugWriter& writer, const MutationValues& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/mutation_debug.hpp:42:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/core/mutation_debug.hpp:3,
+                 from include/teaql/runtime/entity_runtime_debug.hpp:2,
+                 from include/teaql/runtime.hpp:11,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/query_debug.hpp:27:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::SelectQuery&)’
+   27 | void write_debug(DebugWriter&, const SelectQuery&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:27:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:26:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::TraceNode&)’
+   26 | void write_debug(DebugWriter&, const TraceNode&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:26:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:25:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::IdSetPaginationOptions&)’
+   25 | void write_debug(DebugWriter&, const IdSetPaginationOptions&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:25:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:24:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ContinuousPageFetchOptions&)’
+   24 | void write_debug(DebugWriter&, const ContinuousPageFetchOptions&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:24:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:23:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::StreamConfig&)’
+   23 | void write_debug(DebugWriter&, const StreamConfig&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:23:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:22:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::AggregationCacheOptions&)’
+   22 | void write_debug(DebugWriter&, const AggregationCacheOptions&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:22:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:21:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ObjectGroupBy&)’
+   21 | void write_debug(DebugWriter&, const ObjectGroupBy&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:21:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:20:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RawSqlProjection&)’
+   20 | void write_debug(DebugWriter&, const RawSqlProjection&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:20:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:19:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RelationAggregate&)’
+   19 | void write_debug(DebugWriter&, const RelationAggregate&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:19:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:18:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RelationLoad&)’
+   18 | void write_debug(DebugWriter&, const RelationLoad&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:18:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:17:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::Slice&)’
+   17 | void write_debug(DebugWriter&, const Slice&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:17:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:16:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::Aggregate&)’
+   16 | void write_debug(DebugWriter&, const Aggregate&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:16:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:15:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::OrderBy&)’
+   15 | void write_debug(DebugWriter&, const OrderBy&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:15:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:14:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::NamedExpr&)’
+   14 | void write_debug(DebugWriter&, const NamedExpr&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:14:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:13:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::Expr&)’
+   13 | void write_debug(DebugWriter&, const Expr&);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:13:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:12:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::TraceKind)’
+   12 | void write_debug(DebugWriter&, TraceKind);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:12:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:11:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::AggregateFunction)’
+   11 | void write_debug(DebugWriter&, AggregateFunction);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:11:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:10:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::SortDirection)’
+   10 | void write_debug(DebugWriter&, SortDirection);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:10:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:9:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::ExprFunction)’
+    9 | void write_debug(DebugWriter&, ExprFunction);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:9:6: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/query_debug.hpp:8:6: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::BinaryOp)’
+    8 | void write_debug(DebugWriter&, BinaryOp);
+      |      ^~~~~~~~~~~
+include/teaql/core/query_debug.hpp:8:6: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/core/query_debug.hpp:3,
+                 from include/teaql/core/mutation_debug.hpp:3,
+                 from include/teaql/runtime/entity_runtime_debug.hpp:2,
+                 from include/teaql/runtime.hpp:11,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/core/meta_debug.hpp:78:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::EntityDescriptor&)’
+   78 | inline void write_debug(DebugWriter& writer, const EntityDescriptor& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/meta_debug.hpp:78:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/meta_debug.hpp:52:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::RelationDescriptor&)’
+   52 | inline void write_debug(DebugWriter& writer, const RelationDescriptor& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/meta_debug.hpp:52:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/core/meta_debug.hpp:20:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::PropertyDescriptor&)’
+   20 | inline void write_debug(DebugWriter& writer, const PropertyDescriptor& value) {
+      |             ^~~~~~~~~~~
+include/teaql/core/meta_debug.hpp:20:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:5,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/context_model_debug.hpp:39:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::FixEvidence&)’
+   39 | inline void write_debug(DebugWriter& writer, const FixEvidence& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/context_model_debug.hpp:39:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/context_model_debug.hpp:35:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::FixEvidenceSource)’
+   35 | inline void write_debug(DebugWriter& writer, FixEvidenceSource value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/context_model_debug.hpp:35:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/context_model_debug.hpp:18:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ContextRootError&)’
+   18 | inline void write_debug(DebugWriter& writer, const ContextRootError& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/context_model_debug.hpp:18:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/context_model_debug.hpp:7:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ContextEntityRef&)’
+    7 | inline void write_debug(DebugWriter& writer, const ContextEntityRef& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/context_model_debug.hpp:7:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/checker_model_debug.hpp:56:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::WireCheckResult&)’
+   56 | inline void write_debug(DebugWriter& writer, const WireCheckResult& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/checker_model_debug.hpp:56:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/checker_model_debug.hpp:40:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::WireLocationSegment&)’
+   40 | inline void write_debug(DebugWriter& writer, const WireLocationSegment& value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/checker_model_debug.hpp:40:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/checker_model_debug.hpp:25:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::JsonFieldNamingProfile)’
+   25 | inline void write_debug(DebugWriter& writer, JsonFieldNamingProfile value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/checker_model_debug.hpp:25:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/checker_model_debug.hpp:21:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::CheckRule)’
+   21 | inline void write_debug(DebugWriter& writer, CheckRule value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/checker_model_debug.hpp:21:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/checker_model_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, teaql::CheckObjectStatus)’
+    6 | inline void write_debug(DebugWriter& writer, CheckObjectStatus value) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/checker_model_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided
+In file included from include/teaql/runtime/checker_model_debug.hpp:3,
+                 from include/teaql/runtime.hpp:4,
+                 from /tmp/teaql-graph-debug-before.cpp:1:
+include/teaql/runtime/check_result_debug.hpp:27:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::CheckResult&)’
+   27 | inline void write_debug(DebugWriter& writer, const CheckResult& result) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/check_result_debug.hpp:27:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/check_result_debug.hpp:17:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::ObjectLocation&)’
+   17 | inline void write_debug(DebugWriter& writer, const ObjectLocation& location) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/check_result_debug.hpp:17:13: note:   candidate expects 2 arguments, 3 provided
+include/teaql/runtime/check_result_debug.hpp:6:13: note: candidate: ‘void teaql::write_debug(teaql::DebugWriter&, const teaql::LocationSegment&)’
+    6 | inline void write_debug(DebugWriter& writer, const LocationSegment& segment) {
+      |             ^~~~~~~~~~~
+include/teaql/runtime/check_result_debug.hpp:6:13: note:   candidate expects 2 arguments, 3 provided

@@ -71,7 +71,19 @@ struct ExpressionRoot {
 
     ExpressionRoot(std::allocator_arg_t, Allocator a, const R& root)
         : value(clone_in(a.resource(), root)) {}
+
+    ExpressionRoot(std::allocator_arg_t, Allocator a, R&& root)
+        : value(move_in(a.resource(), std::move(root))) {}
 };
+
+template <class T>
+auto expression_result(Memory owner, T&& result) {
+    if constexpr (std::is_lvalue_reference_v<T>) {
+        return clone_in(owner, result);
+    } else {
+        return move_in(owner, std::forward<T>(result));
+    }
+}
 
 template <class F, class... Args>
 decltype(auto) invoke_in(const F& function, Memory r, Args&&... args) {
@@ -99,6 +111,10 @@ struct ListValue<SmartList<T>> {
     using type = T;
 };
 
+template <class T>
+concept CopyableExpressionList =
+    requires { typename ListValue<T>::type; } && domain_copyable<typename ListValue<T>::type>;
+
 template <class R, class T, class F>
 struct ExpressionEvaluator {
     using allocator_type = Allocator;
@@ -115,11 +131,16 @@ struct ExpressionEvaluator {
     }
 
     ExpressionEvaluator(std::allocator_arg_t, Allocator a, const ExpressionEvaluator& other)
+        requires detail::domain_copyable<F>
         : resource(a.resource()),
           function(copy_callable(a.resource(), other.resource, other.function)) {}
 
+    ExpressionEvaluator(std::allocator_arg_t, Allocator a, ExpressionEvaluator&& other)
+        : resource(a.resource()),
+          function(std::make_obj_using_allocator<F>(a, std::move(other.function))) {}
+
     std::optional<T> operator()(const R& root, Memory r) const {
-        return clone_in(r, invoke_in(function, r, root));
+        return expression_result(r, invoke_in(function, r, root));
     }
 };
 
@@ -140,8 +161,13 @@ struct ExpressionMapper {
     }
 
     ExpressionMapper(std::allocator_arg_t, Allocator a, const ExpressionMapper& other)
+        requires detail::domain_copyable<F>
         : previous(std::allocator_arg, a, other.previous),
           mapper(copy_callable(a.resource(), other.previous.memory_resource(), other.mapper)) {}
+
+    ExpressionMapper(std::allocator_arg_t, Allocator a, ExpressionMapper&& other)
+        : previous(std::allocator_arg, a, std::move(other.previous)),
+          mapper(std::make_obj_using_allocator<F>(a, std::move(other.mapper))) {}
 
     std::optional<U> operator()(const R& root, Memory r) const {
         auto input = previous(root, r);
@@ -149,9 +175,9 @@ struct ExpressionMapper {
             return {};
         }
         if constexpr (Optional) {
-            return clone_in(r, invoke_in(mapper, r, std::move(*input)));
+            return expression_result(r, invoke_in(mapper, r, std::move(*input)));
         } else {
-            return clone_in(r, invoke_in(mapper, r, std::move(*input)));
+            return expression_result(r, invoke_in(mapper, r, std::move(*input)));
         }
     }
 };
@@ -200,6 +226,7 @@ public:
 
     template <class F>
     SafeExpression(std::allocator_arg_t, Allocator a, const R& root, F evaluator)
+        requires detail::domain_copyable<R>
         : resource_(a.resource()),
           root_(&detail::context_arena(resource_).make<detail::ExpressionRoot<R>>(root).value),
           evaluator_(
@@ -207,12 +234,18 @@ public:
               a,
               detail::ExpressionEvaluator<R, T, F>(std::allocator_arg, a, std::move(evaluator))) {}
 
+    template <class F>
+    SafeExpression(std::allocator_arg_t, Allocator a, R&& root, F evaluator)
+        : resource_(a.resource()), root_(&detail::context_arena(resource_)
+                                              .make<detail::ExpressionRoot<R>>(std::move(root))
+                                              .value),
+          evaluator_(
+              std::allocator_arg,
+              a,
+              detail::ExpressionEvaluator<R, T, F>(std::allocator_arg, a, std::move(evaluator))) {}
+
     SafeExpression(std::allocator_arg_t, Allocator a, const SafeExpression& other)
-        : resource_(a.resource()), root_(a.resource() == other.resource_
-                                             ? other.root_
-                                             : &detail::context_arena(resource_)
-                                                    .make<detail::ExpressionRoot<R>>(*other.root_)
-                                                    .value),
+        : resource_(a.resource()), root_(copy_root(a.resource(), other)),
           evaluator_(std::allocator_arg, a, other.evaluator_) {}
 
     SafeExpression(std::allocator_arg_t, Allocator a, SafeExpression&& other)
@@ -227,7 +260,7 @@ public:
     }
 
     static SafeExpression value(Memory r, const R& root)
-        requires std::same_as<R, T>
+        requires(std::same_as<R, T> && detail::domain_copyable<R>)
     {
         return SafeExpression(std::allocator_arg,
                               Allocator(r),
@@ -238,7 +271,7 @@ public:
     }
 
     const R& root() const
-        requires std::same_as<R, T>
+        requires(std::same_as<R, T> && detail::domain_copyable<R>)
     {
         return *root_;
     }
@@ -266,14 +299,15 @@ public:
 
     T or_else(T fallback) const {
         auto result = eval();
-        return result ? std::move(*result) : detail::clone_in(resource_, fallback);
+        return result ? std::move(*result) : detail::move_in(resource_, std::move(fallback));
     }
 
     template <class F>
     T or_else_with(F&& fallback) const {
         auto result = eval();
-        return result ? std::move(*result)
-                      : detail::clone_in(resource_, std::invoke(std::forward<F>(fallback)));
+        return result
+                   ? std::move(*result)
+                   : detail::expression_result(resource_, std::invoke(std::forward<F>(fallback)));
     }
 
     template <class F>
@@ -341,7 +375,7 @@ public:
     }
 
     auto entity_id() const
-        requires BaseEntity<T>
+        requires(BaseEntity<T> && detail::domain_copyable<T>)
     {
         return apply([](T entity) {
             return entity.id();
@@ -349,7 +383,7 @@ public:
     }
 
     auto entity_version() const
-        requires BaseEntity<T>
+        requires(BaseEntity<T> && detail::domain_copyable<T>)
     {
         return apply([](T entity) {
             return entity.version_value();
@@ -357,13 +391,13 @@ public:
     }
 
     auto update_entity_id(std::uint64_t id) const
-        requires BaseEntity<T>
+        requires(BaseEntity<T> && detail::domain_copyable<T>)
     {
         return apply(detail::EntityIdMapper<T>(std::allocator_arg, Allocator(resource_), id));
     }
 
     auto size() const
-        requires requires { typename detail::ListValue<T>::type; }
+        requires detail::CopyableExpressionList<T>
     {
         return apply([](T list) {
             return list.len();
@@ -371,19 +405,33 @@ public:
     }
 
     auto first() const
-        requires requires { typename detail::ListValue<T>::type; }
+        requires detail::CopyableExpressionList<T>
     {
         return get(0);
     }
 
     auto get(std::size_t index) const
-        requires requires { typename detail::ListValue<T>::type; }
+        requires detail::CopyableExpressionList<T>
     {
         return apply_optional(
             detail::ListGetMapper<T>(std::allocator_arg, Allocator(resource_), index));
     }
 
 private:
+    static const R* copy_root(Memory owner, const SafeExpression& other) {
+        if (owner == other.resource_) {
+            return other.root_;
+        }
+        if constexpr (detail::domain_copyable<R>) {
+            return &detail::context_arena(owner)
+                        .make<detail::ExpressionRoot<R>>(*other.root_)
+                        .value;
+        } else {
+            throw std::invalid_argument(
+                "Foreign SafeExpression roots require an explicit domain copy");
+        }
+    }
+
     template <class, class>
     friend class SafeExpression;
 

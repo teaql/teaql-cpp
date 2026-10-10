@@ -470,8 +470,8 @@ static void domain_contracts() {
             invalid.poll();
         },
         "recursive fetch refuses a child operation from another Context");
-    check(unrelated.status() == AsyncStatus::Pending,
-          "foreign operation remains under its original owner's control");
+    check(unrelated.status() == AsyncStatus::Cancelled,
+          "recursive fetch cancels its rejected callback result");
     unrelated.cancel();
 }
 

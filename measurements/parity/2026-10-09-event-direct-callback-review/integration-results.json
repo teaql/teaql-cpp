@@ -1,0 +1,41 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source": "teaql-runtime/src/event.rs",
+  "production_lines": 572,
+  "native": {
+    "passed": 375,
+    "total": 375,
+    "seconds": 236.7,
+    "build_tasks": 261,
+    "compiled_dependency_records": 418
+  },
+  "asan_ubsan": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 7.97,
+    "detect_leaks": false,
+    "build_tasks": 28
+  },
+  "mips_qemu": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 10.99,
+    "build_tasks": 28
+  },
+  "live_original": {
+    "native": {
+      "event_models": 112,
+      "audit_projection": 1427,
+      "context_event": 1088
+    },
+    "mips": {
+      "event_models": 112,
+      "audit_projection": 1421,
+      "audit_target_width_rejections": 6,
+      "context_event": 1088
+    }
+  },
+  "pre_post_test": "no work",
+  "physical_device": "Deferred by explicit user request",
+  "scope": "Complete event source responsibility; broader Context/graph/log privacy and stage acceptance remain independent."
+}

@@ -1,8 +1,10 @@
 #pragma once
 #include <teaql/core/value.hpp>
+#include <teaql/memory/scoped.hpp>
 #include <span>
 #include <algorithm>
 #include <stdexcept>
+#include <ranges>
 
 namespace teaql {
 // Immutable, scope-owned column layout. Only rows in the same allocation domain
@@ -47,96 +49,53 @@ class CompactRow {
 public:
     using allocator_type = Allocator;
 
-    CompactRow(std::allocator_arg_t, Allocator a) : columns_(a.resource()), values_(a.resource()) {}
-
-    CompactRow(std::allocator_arg_t, Allocator a, const Record& record)
-        : CompactRow(std::allocator_arg, a) {
-        for (const auto& [key, value] : record) {
-            columns_.emplace_back(key);
-            values_.emplace_back(value);
-        }
-    }
+    CompactRow(std::allocator_arg_t, Allocator);
+    CompactRow(std::allocator_arg_t, Allocator, const Record&);
+    CompactRow(std::allocator_arg_t, Allocator, Record&&);
 
     CompactRow(std::allocator_arg_t,
                Allocator a,
                const ColumnLayout& columns,
-               std::span<const Value> values)
-        : CompactRow(std::allocator_arg, a) {
-        if (columns.names().size() != values.size()) {
-            throw std::invalid_argument("CompactRow column/value count mismatch");
-        }
-        if (columns.memory_resource() == a.resource()) {
-            shared_ = &columns;
-        } else {
-            for (const auto& name : columns.names()) {
-                columns_.emplace_back(name);
-            }
-        }
-        for (const auto& value : values) {
-            values_.emplace_back(value);
-        }
-    }
+               std::span<const Value> values);
 
     CompactRow(std::allocator_arg_t,
                Allocator a,
                const ColumnLayout& columns,
-               Vector<Value>&& values)
-        : CompactRow(std::allocator_arg, a) {
-        if (columns.names().size() != values.size()) {
-            throw std::invalid_argument("CompactRow column/value count mismatch");
-        }
-        if (columns.memory_resource() == a.resource()) {
-            shared_ = &columns;
-        } else {
-            for (const auto& name : columns.names()) {
-                columns_.emplace_back(name);
-            }
-        }
-        // Same-domain decoding transfers the values without duplicating nested
-        // strings/JSON in a monotonic arena. Other domains still deep-copy.
-        values_ = Vector<Value>(std::move(values), a.resource());
-    }
+               Vector<Value>&& values);
 
-    CompactRow(std::allocator_arg_t, Allocator a, const CompactRow& other)
-        : CompactRow(std::allocator_arg, a) {
-        for (const auto& key : other.keys()) {
-            columns_.emplace_back(key);
-        }
-        for (const auto& value : other.values_) {
-            values_.emplace_back(value);
-        }
-    }
+    CompactRow(std::allocator_arg_t, Allocator, const CompactRow&);
 
     CompactRow(const CompactRow&) = delete;
 
     CompactRow(CompactRow&& other) noexcept
-        : shared_(std::exchange(other.shared_, nullptr)), columns_(std::move(other.columns_)),
-          values_(std::move(other.values_)) {
-        other.columns_.clear();
+        : shared_(std::exchange(other.shared_, nullptr)), values_(std::move(other.values_)) {
         other.values_.clear();
     }
 
     CompactRow(std::allocator_arg_t, Allocator a, CompactRow&& other)
-        : CompactRow(std::allocator_arg, a) {
-        *this = std::move(other);
-    }
+        : CompactRow(detail::move_to(a.resource(), std::move(other))) {}
 
     CompactRow& operator=(CompactRow&& other);
 
     Memory memory_resource() const noexcept {
-        return columns_.get_allocator().resource();
+        return values_.get_allocator().resource();
     }
 
-    const ColumnLayout* shared_columns() const noexcept {
-        return shared_;
-    }
+    const ColumnLayout* shared_columns() const;
 
     std::span<const String> keys() const noexcept {
-        return shared_ ? shared_->names() : std::span<const String>(columns_);
+        return shared_ ? shared_->names() : std::span<const String>{};
     }
 
     std::span<const Value> values() const noexcept {
         return values_;
+    }
+
+    auto iter() const {
+        return std::views::iota(std::size_t{0}, values_.size()) |
+               std::views::transform([this](std::size_t index) {
+                   return std::pair<const String&, const Value&>(keys()[index], values_[index]);
+               });
     }
 
     const Value* get(std::string_view name) const noexcept;
@@ -157,17 +116,21 @@ public:
     std::optional<Value> insert(std::string_view name, const Value& value);
     std::optional<Value> remove(std::string_view name);
     void extend(const CompactRow& other);
-    Record into_map(Memory target) const;
+    Record copy_map(Memory target) const;
+
+    Record into_map(Memory target) const& {
+        return copy_map(target);
+    }
+
+    Record into_map(Memory target) &&;
 
     bool operator==(const CompactRow& other) const {
         return std::ranges::equal(keys(), other.keys()) && values_ == other.values_;
     }
 
 private:
-    const ColumnLayout* shared_ = nullptr;
-    Vector<String> columns_;
+    mutable const ColumnLayout* shared_ = nullptr;
     Vector<Value> values_;
-    void detach_columns();
 };
 
 Json compact_row_to_json_value(Memory destination, const CompactRow&);

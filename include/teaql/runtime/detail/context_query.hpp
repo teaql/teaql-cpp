@@ -41,7 +41,7 @@ public:
         forwarding_.attach(work_->wake_signal(), wake);
         auto work = [&]() -> std::optional<R> {
             if (auto* result = work_->poll()) {
-                return clone_in(r, *result);
+                return copy_or_take_completed(*work_, *result);
             }
             return {};
         };
@@ -176,7 +176,7 @@ public:
         }
         forwarding_.attach(child_->wake_signal(), wake);
         if (auto* result = child_->poll()) {
-            return clone_in(r, *result);
+            return copy_or_take_completed(*child_, *result);
         }
         return {};
     }

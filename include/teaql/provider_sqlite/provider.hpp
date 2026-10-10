@@ -5,6 +5,9 @@
 struct sqlite3;
 
 namespace teaql {
+inline constexpr std::size_t DEFAULT_PREPARED_STATEMENT_CACHE_CAPACITY = 64;
+inline constexpr std::size_t DEFAULT_COLUMN_LAYOUT_CACHE_CAPACITY = 64;
+
 namespace detail {
 struct SqliteConnectionState;
 struct SqliteProviderState;

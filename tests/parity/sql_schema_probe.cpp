@@ -1,4 +1,6 @@
 #include "fixture_sql.hpp"
+#include <teaql/sql/model_debug.hpp>
+#include "debug_modes.hpp"
 #include <iostream>
 
 static Json evaluate(Memory r, const Json& j) {
@@ -39,6 +41,10 @@ static Json evaluate(Memory r, const Json& j) {
                 detail::model_put(s, "name", spec.name);
                 detail::model_put(s, "table", spec.table);
                 detail::model_put(s, "unique", spec.unique);
+                detail::model_put(s, "debug", formatted_debug(r, spec));
+                detail::model_put(s,
+                                  "clone_equal",
+                                  spec == SchemaIndexSpec(std::allocator_arg, Allocator(r), spec));
                 Json::Array columns(r);
                 for (const auto& c : spec.columns) {
                     columns.emplace_back(c);

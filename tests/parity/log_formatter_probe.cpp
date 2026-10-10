@@ -2,6 +2,7 @@
 #include <teaql/runtime/log_formatter.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include "fixture_value.hpp"
+#include <bit>
 #include <cstdlib>
 #include <iostream>
 using namespace teaql;
@@ -9,8 +10,21 @@ using namespace teaql;
 static Json evaluate(Memory r, const Json& j) {
     auto op = text(field(j, "op"));
     if (op == "key") {
-        EntityKey k(
-            std::allocator_arg, Allocator(r), text(field(j, "entity")), value(r, field(j, "id")));
+        const auto& input = field(j, "id");
+        auto id = [&] {
+            if (text(field(input, "kind")) == "f64_bits") {
+                const auto encoded = text(field(input, "value"));
+                std::uint64_t bits = 0;
+                auto [end, error] =
+                    std::from_chars(encoded.data(), encoded.data() + encoded.size(), bits, 16);
+                if (error != std::errc{} || end != encoded.data() + encoded.size()) {
+                    throw std::runtime_error("Invalid floating-point fixture bits");
+                }
+                return Value(r, std::bit_cast<double>(bits));
+            }
+            return value(r, input);
+        }();
+        EntityKey k(std::allocator_arg, Allocator(r), text(field(j, "entity")), id);
         if (auto* mutation = optional(j, "mutated")) {
             k.id = value(r, *mutation);
         }

@@ -1,0 +1,17 @@
+{
+  "slot": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "key": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "allocator": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  }
+}

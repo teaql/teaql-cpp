@@ -1,0 +1,6 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "compiler_exit": 1,
+  "gap": "Four published runtime module namespaces absent although root members exist",
+  "interrupted_builds": "Both final compiler sessions stopped and polled terminal before the header repair; existing compiled objects preserved"
+}

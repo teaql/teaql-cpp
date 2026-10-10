@@ -1,0 +1,14 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-sanitize
+Test project /home/philip/githome/teaql-cpp/build-sanitize
+    Start 76: graph_node_command_context_contracts
+1/4 Test #76: graph_node_command_context_contracts ...   Passed    0.05 sec
+    Start 77: graph_node_command_rust_parity
+2/4 Test #77: graph_node_command_rust_parity .........   Passed    3.69 sec
+    Start 79: graph_save_adapter_rust_parity
+3/4 Test #79: graph_save_adapter_rust_parity .........   Passed    2.24 sec
+    Start 82: graph_execution_rust_parity
+4/4 Test #82: graph_execution_rust_parity ............   Passed    1.32 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   7.31 sec

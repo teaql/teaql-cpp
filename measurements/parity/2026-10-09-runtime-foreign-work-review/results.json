@@ -1,0 +1,71 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "installed native2 passes after native351 stable checkpoint; full native353 and broader sanitizer/MIPS builds active",
+  "installed": true,
+  "returned_work_sites": 7,
+  "scope": "Only work returned by executor/fetch/callback factories is cancelled before throwing for a foreign domain. Existing caller-supplied wrapper inputs are not changed. Cursor read/write already store their child before validation and are cancelled by AsyncOperation exception cleanup. Entity stream, ID-set, schema and DataStore checks already cancel.",
+  "patch_sha256": "2be50a972047674b68897b4aa8594b6e6c4322bf839146ffb7378e1c447e2967",
+  "current_source_sha256": {
+    "include/teaql/runtime/detail/base_query.hpp": "60dd5d49d7e6b97ff70a65734f560388b54a68f524791adc919f03d4850b743e",
+    "include/teaql/runtime/detail/base_mutation.hpp": "74d1b9eeea34045441747ec09d47ac3b186f7d3647d4b65e085a0c907d97b1ca",
+    "include/teaql/runtime/detail/entity_query.hpp": "1d98c40e12e439c2ca59a0e19a9e2a3fecc28fff3db4c36ed54cc29b4edf8ec5",
+    "include/teaql/runtime/detail/relation_execution.hpp": "d8ef76903d9c54ae38040f481ca28af70fb3d8e5ba0bc40ac691895071ccd17e",
+    "include/teaql/runtime/detail/relation_enhancement.hpp": "14d08d0c9315fd2e24d3642abfaf506642fef24c13577ab40973623155459085",
+    "include/teaql/runtime/transaction.hpp": "7c732f08f47808742bff6d9d03256ddb7b1fc688e64e38094b627190420ad3db"
+  },
+  "staged_source_sha256": {
+    "include/teaql/runtime/detail/base_query.hpp": "2a6f5a97930538e12e2dfb2bad9271b195428dd313471d9756ec90db31c90fb7",
+    "include/teaql/runtime/detail/base_mutation.hpp": "20b6037c8491f55e3d037d56c075f025d6b6bf8d814a342b9519d4589ba18bb5",
+    "include/teaql/runtime/detail/entity_query.hpp": "83ea5ef1cb455d28323263a6c2120142903d2bab614db68e78d6c244faaeff78",
+    "include/teaql/runtime/detail/relation_execution.hpp": "c0d4d72e011ae5deaac741a4e58672d4c00cfd8ea8181d4bad02e831a3ae173d",
+    "include/teaql/runtime/detail/relation_enhancement.hpp": "ce6ccc540c062f3aee9c3d2c9e27a9eb8ad0ebacb79239c1ff3f03d3c9872510",
+    "include/teaql/runtime/transaction.hpp": "02fed8f1949f0cf3e4b8fec6c0d674e2a78bd57261f033a015909a9792caddcd",
+    "tests/runtime_foreign_work_tests.cpp": "a9b40e1277a134db1e66e29e5d9183aa1d67e8fcec8e2f816da2339b6ad6d7bd",
+    "CMakeLists.txt": "299853cfb6c3b98376cf74b969bc5c3e42771e69d8ba70fc9e8088322a34b2c7"
+  },
+  "future_native_registered_tests": 353,
+  "physical_router_verified": false,
+  "staged_targets": {
+    "native": {
+      "query": "passed",
+      "mutation": "passed"
+    },
+    "sanitizer": {
+      "query": "passed",
+      "mutation": "passed",
+      "asan_options": "detect_leaks=0",
+      "ubsan_options": "halt_on_error=1"
+    },
+    "mips": {
+      "query": "passed",
+      "mutation": "passed",
+      "profile": "74Kc soft-float, -Os -DNDEBUG; dynamically linked musl toolchain runtime",
+      "emulator": "qemu-mips -L toolchain-sysroot -cpu74Kf",
+      "physical_router_verified": false
+    }
+  },
+  "preceding_native": {
+    "passed": 351,
+    "total": 351,
+    "seconds": 76.06,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  },
+  "installed_source_sha256": {
+    "include/teaql/runtime/detail/base_query.hpp": "2a6f5a97930538e12e2dfb2bad9271b195428dd313471d9756ec90db31c90fb7",
+    "include/teaql/runtime/detail/base_mutation.hpp": "20b6037c8491f55e3d037d56c075f025d6b6bf8d814a342b9519d4589ba18bb5",
+    "include/teaql/runtime/detail/entity_query.hpp": "83ea5ef1cb455d28323263a6c2120142903d2bab614db68e78d6c244faaeff78",
+    "include/teaql/runtime/detail/relation_execution.hpp": "c0d4d72e011ae5deaac741a4e58672d4c00cfd8ea8181d4bad02e831a3ae173d",
+    "include/teaql/runtime/detail/relation_enhancement.hpp": "ce6ccc540c062f3aee9c3d2c9e27a9eb8ad0ebacb79239c1ff3f03d3c9872510",
+    "include/teaql/runtime/transaction.hpp": "02fed8f1949f0cf3e4b8fec6c0d674e2a78bd57261f033a015909a9792caddcd",
+    "tests/runtime_foreign_work_tests.cpp": "a9b40e1277a134db1e66e29e5d9183aa1d67e8fcec8e2f816da2339b6ad6d7bd",
+    "CMakeLists.txt": "299853cfb6c3b98376cf74b969bc5c3e42771e69d8ba70fc9e8088322a34b2c7"
+  },
+  "format_files": 665,
+  "registered_native_tests": 353,
+  "installed_native_focus": {
+    "passed": 2,
+    "total": 2,
+    "seconds": 0.03
+  }
+}

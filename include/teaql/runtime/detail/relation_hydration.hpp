@@ -1,5 +1,5 @@
 #pragma once
-#include <teaql/runtime/data_service.hpp>
+#include <teaql/runtime/detail/entity_service.hpp>
 #include <teaql/runtime/detail/relation_execution.hpp>
 #include <teaql/runtime/detail/relation_installation.hpp>
 
@@ -120,7 +120,7 @@ private:
                 return {};
             }
             if (!*result) {
-                return R::err(r, clone_in(r, result->error()));
+                return R::err(r, copy_or_take_error(*rows_operation_, *result));
             }
             for (const auto& row : result->value()) {
                 children_.emplace_back(row);
@@ -194,7 +194,7 @@ private:
                 return {};
             }
             if (!*result) {
-                return R::err(r, clone_in(r, result->error()));
+                return R::err(r, copy_or_take_error(*descendant_, *result));
             }
             forwarding_.reset();
             descendant_ = nullptr;
@@ -299,7 +299,7 @@ public:
                 return {};
             }
             if (!*result) {
-                return R::err(r, clone_in(r, result->error()));
+                return R::err(r, copy_or_take_error(*child_, *result));
             }
             forwarding_.reset();
             child_ = nullptr;

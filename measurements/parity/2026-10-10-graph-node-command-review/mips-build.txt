@@ -1,0 +1,9 @@
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philip/githome/teaql-cpp/build-wndr4300-memory
+[1/2] Building CXX object CMakeFiles/teaql_graph_node_command_tests.dir/tests/graph_node_command_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[2/2] Linking CXX executable teaql_graph_node_command_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined

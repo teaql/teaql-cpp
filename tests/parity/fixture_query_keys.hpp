@@ -123,7 +123,7 @@ static SelectQuery key_query(Memory r, const Json& j) {
                                                       integer(field(*v, "propagate_age"))};
     }
     if (auto* v = optional(j, "stream")) {
-        q.stream_config = StreamConfig{integer(*v)};
+        q.stream_config = StreamConfig{static_cast<std::size_t>(integer(*v))};
     }
     if (auto* v = optional(j, "continuous")) {
         q.continuous_page_fetch.emplace(std::allocator_arg,

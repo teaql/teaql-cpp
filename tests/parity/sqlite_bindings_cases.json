@@ -86,7 +86,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -101,7 +102,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -208,7 +210,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -216,7 +218,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -466,7 +468,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -481,7 +484,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -2242,7 +2246,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -2257,7 +2262,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -2364,7 +2370,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -2372,7 +2378,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -2622,7 +2628,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -2637,7 +2644,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -4362,7 +4370,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -4377,7 +4386,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -4484,7 +4494,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -4492,7 +4502,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -4742,7 +4752,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -4757,7 +4768,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -6518,7 +6530,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -6533,7 +6546,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -6640,7 +6654,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -6648,7 +6662,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -6898,7 +6912,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -6913,7 +6928,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -8674,7 +8690,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -8689,7 +8706,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -8796,7 +8814,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -8804,7 +8822,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -9054,7 +9072,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -9069,7 +9088,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -10830,7 +10850,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -10845,7 +10866,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -10952,7 +10974,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -10960,7 +10982,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -11210,7 +11232,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -11225,7 +11248,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -12986,7 +13010,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -13001,7 +13026,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -13108,7 +13134,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -13116,7 +13142,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -13366,7 +13392,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -13381,7 +13408,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -15142,7 +15170,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -15157,7 +15186,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -15264,7 +15294,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -15272,7 +15302,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -15522,7 +15552,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -15537,7 +15568,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -17298,7 +17330,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -17313,7 +17346,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: object",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -17420,7 +17454,7 @@
         "params": [
           {
             "kind": "text",
-            "value": "雪 / 🙂"
+            "value": "\u96ea / \ud83d\ude42"
           }
         ]
       },
@@ -17428,7 +17462,7 @@
         "affected": 1,
         "stored": {
           "type": "text",
-          "value": "雪 / 🙂"
+          "value": "\u96ea / \ud83d\ude42"
         }
       }
     },
@@ -17678,7 +17712,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 9223372036854775808 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -17693,7 +17728,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     },
     {
@@ -19377,7 +19413,8 @@
       },
       "expected": {
         "error": "Wrong number of parameters passed to query. Got 0, needed 1",
-        "kind": "Sqlite"
+        "kind": "Sqlite",
+        "source_none": true
       }
     },
     {
@@ -19396,7 +19433,8 @@
       },
       "expected": {
         "error": "Wrong number of parameters passed to query. Got 2, needed 1",
-        "kind": "Sqlite"
+        "kind": "Sqlite",
+        "source_none": true
       }
     },
     {
@@ -19419,7 +19457,8 @@
       },
       "expected": {
         "error": "Wrong number of parameters passed to query. Got 2, needed 1",
-        "kind": "Sqlite"
+        "kind": "Sqlite",
+        "source_none": true
       }
     },
     {
@@ -19470,7 +19509,8 @@
       },
       "expected": {
         "error": "Wrong number of parameters passed to query. Got 2, needed 1",
-        "kind": "Sqlite"
+        "kind": "Sqlite",
+        "source_none": true
       }
     },
     {
@@ -19489,7 +19529,8 @@
       },
       "expected": {
         "error": "unsupported rusqlite bind value for mutation executor: list",
-        "kind": "UnsupportedValue"
+        "kind": "UnsupportedValue",
+        "source_none": true
       }
     },
     {
@@ -19508,7 +19549,8 @@
       },
       "expected": {
         "error": "rusqlite bind error: u64 value 18446744073709551615 exceeds i64 range",
-        "kind": "Bind"
+        "kind": "Bind",
+        "source_none": true
       }
     }
   ]

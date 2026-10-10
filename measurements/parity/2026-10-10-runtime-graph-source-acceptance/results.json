@@ -1,0 +1,47 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "sources": [
+    "teaql-runtime/src/graph.rs",
+    "teaql-runtime/src/data_service/graph.rs",
+    "teaql-runtime/src/data_service/executor.rs",
+    "teaql-runtime/src/entity_save.rs"
+  ],
+  "native": {
+    "passed": 387,
+    "total": 387,
+    "seconds": 79.85,
+    "initial_build_tasks": 344,
+    "fixture_refresh_tasks": 2,
+    "compiled_objects": 426,
+    "pre_post": "no work"
+  },
+  "asan_ubsan": {
+    "passed": 44,
+    "total": 44,
+    "seconds": 26.98,
+    "build_tasks": 61,
+    "fixture_refresh_tasks": 2,
+    "detect_leaks": false,
+    "post": "no work"
+  },
+  "mips_qemu": {
+    "passed": 44,
+    "total": 44,
+    "seconds": 24.58,
+    "build_tasks": 61,
+    "fixture_refresh_tasks": 2,
+    "post": "no work"
+  },
+  "new_live_matrices": {
+    "models": 128,
+    "repository_extraction": 141,
+    "retained_save_adapters": 541,
+    "node_validation_commands": 1620,
+    "recursive_graph_writes": 792
+  },
+  "complete_source_group": "accepted within explicit Context/owner-thread and supported protocol adaptations",
+  "stage5": "accepted",
+  "remaining": "runtime root source and final Stage6 requirement/target/example acceptance",
+  "physical_device": "Deferred by explicit user request",
+  "stage5_source_groups": 6
+}

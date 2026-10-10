@@ -92,7 +92,8 @@ static void compact_rows() {
     check(row.shared_columns() == &columns && sibling.get("id")->try_i64() == 5,
           "value edit preserves sharing and sibling value");
     row.insert("another_property", Value(r, 9));
-    check(row.shared_columns() == nullptr && sibling.shared_columns() == &columns,
+    check(row.shared_columns() != &columns && row.shared_columns()->names().size() == 3 &&
+              sibling.shared_columns() == &columns,
           "shape change detaches only edited row");
     check(row.remove("long_property_name")->try_text() ==
               "a long property value that requires allocation",
@@ -107,11 +108,16 @@ static void compact_rows() {
     check(row.len() == 3, "self extension");
     auto& retained = global.make<CompactRow>(sibling);
     auto& from_layout = global.make<CompactRow>(columns, std::span<const Value>(values));
-    check(!retained.shared_columns() && !from_layout.shared_columns(),
+    check(retained.shared_columns() != &columns && from_layout.shared_columns() != &columns &&
+              retained.shared_columns()->memory_resource() == global.memory_resource() &&
+              from_layout.shared_columns()->memory_resource() == global.memory_resource(),
           "cross-domain construction never borrows source layout");
     auto& assigned = global.make<CompactRow>();
     assigned = std::move(sibling);
-    check(!assigned.shared_columns() && sibling.len() == 2, "cross-domain move assignment clones");
+    check(assigned.shared_columns() != &columns &&
+              assigned.shared_columns()->memory_resource() == global.memory_resource() &&
+              sibling.len() == 2,
+          "cross-domain move assignment clones");
     auto& moved = source->make<CompactRow>(std::move(sibling));
     check(moved.shared_columns() == &columns && sibling.is_empty() && !sibling.get("id"),
           "moved-from shared row remains valid");

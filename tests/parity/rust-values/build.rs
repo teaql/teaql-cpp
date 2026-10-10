@@ -80,4 +80,30 @@ fn main(){
     observations.push_str("}\n");fs::write(out.join("pagination_observations.rs"),observations).unwrap();
     let path=root.join("data_service/cache.rs");println!("cargo:rerun-if-changed={}",path.display());fs::write(out.join("aggregation_cache.rs"),fs::read_to_string(path).unwrap()).unwrap();
 
+
+    // Compile the retained private typed-aggregate helper verbatim. Controlled
+    // row input isolates this helper from separately verified query execution.
+    let mut typed_aggregate = String::new();
+    for (start, end) in [
+        ("fn decode_compact_rows<T: Entity>(", "impl<'a, E> EntityDataService<'a, E>"),
+    ] {
+        let from = resolved.find(start).expect("typed aggregate decode start");
+        let to = from + resolved[from..].find(end).expect("typed aggregate decode end");
+        typed_aggregate.push_str(&resolved[from..to]);
+    }
+    typed_aggregate.push_str("impl<'a, E> SourceRepo<'a, E> where E: teaql_data_service::QueryExecutor + teaql_data_service::MutationExecutor + Send + Sync {\n");
+    for (start, end) in [
+        ("    fn ensure_entity_identity_projection(", "    pub fn prepare_insert_command("),
+        ("    pub(crate) async fn fetch_entities_with_relation_aggregates_internal<T>(", "    pub(crate) async fn fetch_enhanced_entities_with_relation_aggregates_internal<T>("),
+    ] {
+        let from = resolved.find(start).expect("typed aggregate method start");
+        let to = from + resolved[from..].find(end).expect("typed aggregate method end");
+        typed_aggregate.push_str(&resolved[from..to]);
+    }
+    typed_aggregate.push_str("}\n");
+    let from = helpers.find("pub(super) fn ensure_projection(").expect("projection helper start");
+    let to = from + helpers[from..].find("pub(super) fn attach_empty_relation_aggregate(").expect("projection helper end");
+    typed_aggregate.push_str(&helpers[from..to]);
+    fs::write(out.join("typed_aggregate_scope.rs"), typed_aggregate).unwrap();
+
 }

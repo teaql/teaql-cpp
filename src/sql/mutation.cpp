@@ -79,10 +79,13 @@ String equal_binding(const SqlDialect& d,
     return out;
 }
 
-CompiledQuery compiled(Memory r, const SqlDialect& d, String sql, SqlBindings& params) {
+template <class BuildSql>
+CompiledQuery compiled(Memory r, const SqlDialect& d, BuildSql&& build_sql, SqlBindings& params) {
     CompiledQuery out(std::allocator_arg, Allocator(r));
-    out.sql = std::move(sql);
+    // Source struct fields evaluate in declaration order. Provider hooks can
+    // observe kind() before final table/assignment rendering, including failure.
     out.log_context = params.log_context(r, d.kind());
+    out.sql = build_sql();
     out.params = std::move(params).into_values();
     return out;
 }
@@ -96,6 +99,20 @@ String update_sql(const SqlDialect& d,
     out += d.quote_ident(r, entity.table_name);
     out += " SET ";
     out += join(r, assignments, ", ");
+    out += " WHERE ";
+    out += join(r, predicates, " AND ");
+    return out;
+}
+
+String version_update_sql(const SqlDialect& d,
+                          Memory r,
+                          const EntityDescriptor& entity,
+                          const PropertyDescriptor& version,
+                          const Vector<String>& predicates) {
+    String out("UPDATE ", r);
+    out += d.quote_ident(r, entity.table_name);
+    out += " SET ";
+    out += equal_binding(d, r, version, 1);
     out += " WHERE ";
     out += join(r, predicates, " AND ");
     return out;
@@ -117,14 +134,20 @@ CompiledQuery SqlDialect::compile_insert(Memory r,
     if (columns.empty()) {
         fail(r, SqlCompileError::Code::EmptyMutation, "insert");
     }
-    String sql("INSERT INTO ", r);
-    sql += quote_ident(r, entity.table_name);
-    sql += " (";
-    sql += join(r, columns, ", ");
-    sql += ") VALUES (";
-    sql += join(r, placeholders, ", ");
-    sql += ')';
-    return compiled(r, *this, std::move(sql), params);
+    return compiled(
+        r,
+        *this,
+        [&] {
+            String sql("INSERT INTO ", r);
+            sql += quote_ident(r, entity.table_name);
+            sql += " (";
+            sql += join(r, columns, ", ");
+            sql += ") VALUES (";
+            sql += join(r, placeholders, ", ");
+            sql += ')';
+            return sql;
+        },
+        params);
 }
 
 CompiledQuery SqlDialect::compile_batch_insert(Memory r,
@@ -160,13 +183,19 @@ CompiledQuery SqlDialect::compile_batch_insert(Memory r,
         row += ')';
         rows.emplace_back(std::move(row));
     }
-    String sql("INSERT INTO ", r);
-    sql += quote_ident(r, entity.table_name);
-    sql += " (";
-    sql += join(r, names, ", ");
-    sql += ") VALUES ";
-    sql += join(r, rows, ", ");
-    return compiled(r, *this, std::move(sql), params);
+    return compiled(
+        r,
+        *this,
+        [&] {
+            String sql("INSERT INTO ", r);
+            sql += quote_ident(r, entity.table_name);
+            sql += " (";
+            sql += join(r, names, ", ");
+            sql += ") VALUES ";
+            sql += join(r, rows, ", ");
+            return sql;
+        },
+        params);
 }
 
 CompiledQuery SqlDialect::compile_update(Memory r,
@@ -216,7 +245,13 @@ CompiledQuery SqlDialect::compile_update_with_guard(Memory r,
     if (guard) {
         predicates.emplace_back(compile_expr(r, entity, *guard, params));
     }
-    return compiled(r, *this, update_sql(*this, r, entity, assignments, predicates), params);
+    return compiled(
+        r,
+        *this,
+        [&] {
+            return update_sql(*this, r, entity, assignments, predicates);
+        },
+        params);
 }
 
 CompiledQuery SqlDialect::compile_batch_update(Memory r,
@@ -326,7 +361,13 @@ CompiledQuery SqlDialect::compile_batch_update(Memory r,
         case_end(body, version);
         predicates.emplace_back(assignment(version, std::move(body)));
     }
-    return compiled(r, *this, update_sql(*this, r, entity, assignments, predicates), params);
+    return compiled(
+        r,
+        *this,
+        [&] {
+            return update_sql(*this, r, entity, assignments, predicates);
+        },
+        params);
 }
 
 CompiledQuery SqlDialect::compile_delete(Memory r,
@@ -364,9 +405,13 @@ CompiledQuery SqlDialect::compile_delete_with_guard(Memory r,
         if (guard) {
             predicates.emplace_back(compile_expr(r, entity, *guard, params));
         }
-        Vector<String> assignments(r);
-        assignments.emplace_back(equal_binding(*this, r, version, 1));
-        return compiled(r, *this, update_sql(*this, r, entity, assignments, predicates), params);
+        return compiled(
+            r,
+            *this,
+            [&] {
+                return version_update_sql(*this, r, entity, version, predicates);
+            },
+            params);
     }
     params.push_field(entity, id.name, command.id);
     predicates.emplace_back(equal_binding(*this, r, id, params.size()));
@@ -378,11 +423,17 @@ CompiledQuery SqlDialect::compile_delete_with_guard(Memory r,
     if (guard) {
         predicates.emplace_back(compile_expr(r, entity, *guard, params));
     }
-    String sql("DELETE FROM ", r);
-    sql += quote_ident(r, entity.table_name);
-    sql += " WHERE ";
-    sql += join(r, predicates, " AND ");
-    return compiled(r, *this, std::move(sql), params);
+    return compiled(
+        r,
+        *this,
+        [&] {
+            String sql("DELETE FROM ", r);
+            sql += quote_ident(r, entity.table_name);
+            sql += " WHERE ";
+            sql += join(r, predicates, " AND ");
+            return sql;
+        },
+        params);
 }
 
 CompiledQuery SqlDialect::compile_recover(Memory r,
@@ -421,8 +472,12 @@ CompiledQuery SqlDialect::compile_recover_with_guard(Memory r,
     if (guard) {
         predicates.emplace_back(compile_expr(r, entity, *guard, params));
     }
-    Vector<String> assignments(r);
-    assignments.emplace_back(equal_binding(*this, r, version, 1));
-    return compiled(r, *this, update_sql(*this, r, entity, assignments, predicates), params);
+    return compiled(
+        r,
+        *this,
+        [&] {
+            return version_update_sql(*this, r, entity, version, predicates);
+        },
+        params);
 }
 }

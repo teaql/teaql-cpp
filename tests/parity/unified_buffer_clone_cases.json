@@ -1,0 +1,15 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "cases": [
+    {
+      "input": {
+        "kind": "buffer_clone"
+      },
+      "expected": {
+        "clone_after_source_clear": 0,
+        "shares_entries": true,
+        "source_after_clone_push": 1
+      }
+    }
+  ]
+}

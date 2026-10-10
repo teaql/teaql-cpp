@@ -1,0 +1,27 @@
+{
+  "entity": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "all-entities": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "checker": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "telemetry-noop": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "telemetry-start": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  }
+}

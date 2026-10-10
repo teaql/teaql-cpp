@@ -189,6 +189,8 @@ struct Transport : SqlTransactionTransport<String> {
     };
 
     struct Tx : SqlTransportTransaction<String> {
+        void cancel_sql_transaction() noexcept override {}
+
         using allocator_type = Allocator;
         Transport& inner;
 
@@ -236,11 +238,28 @@ struct Transport : SqlTransactionTransport<String> {
     }
 };
 
+class KindCountingDialect : public FixtureDialect {
+public:
+    mutable std::size_t calls = 0;
+    std::optional<std::size_t> fail_after;
+
+    DatabaseKind kind() const override {
+        ++calls;
+        if (fail_after && calls > *fail_after) {
+            throw std::runtime_error("fixture kind failure");
+        }
+        return FixtureDialect::kind();
+    }
+};
+
 static Json evaluate(UserContext& user, const Json& j) {
     auto r = user.memory_resource();
     auto e = entity(r, field(j, "entity"));
-    auto& d = user.make_resource<FixtureDialect>();
+    auto& d = user.make_resource<KindCountingDialect>();
     d.numbered = true;
+    if (auto limit = optional(j, "kind_fail_after")) {
+        d.fail_after = integer(*limit);
+    }
     auto& schema = user.make_resource<Schema>(e);
     auto& transport = user.make<Transport>(j);
     auto& state = user.make<SqlExecutorState>();
@@ -295,6 +314,9 @@ static Json evaluate(UserContext& user, const Json& j) {
     }
     detail::model_put(out, "calls", transport.calls);
     detail::model_put(out, "events", events);
+    if (auto flag = optional(j, "observe_kind"); flag && std::get<bool>(flag->data)) {
+        detail::model_put(out, "kind_calls", d.calls);
+    }
     return out;
 }
 

@@ -1,0 +1,2 @@
+[1/2] Building CXX object CMakeFiles/teaql_graph_execution_probe.dir/tests/parity/graph_execution_probe.cpp.o
+[2/2] Linking CXX executable teaql_graph_execution_probe

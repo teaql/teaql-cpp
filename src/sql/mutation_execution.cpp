@@ -67,25 +67,27 @@ CompiledQuery compile_mutation(Memory r,
         request.data);
 }
 
+std::string_view mutation_backend_name(const SqlDialect& dialect) {
+    switch (dialect.kind()) {
+    case DatabaseKind::Sqlite:
+        return "sqlite";
+    case DatabaseKind::PostgreSql:
+        return "postgresql";
+    case DatabaseKind::MySql:
+        return "mysql";
+    }
+    throw std::invalid_argument("Invalid mutation database kind");
+}
+
 ExecutionMetadata mutation_metadata(Memory r,
-                                    const SqlDialect& dialect,
+                                    std::string_view backend,
                                     const CompiledQuery& query,
                                     const MutationRequest& request,
                                     DataServiceOperation operation) {
     auto now = ExecutionMetadata::SystemTime::clock::now();
     ExecutionMetadata m(std::allocator_arg, Allocator(r), operation, now, now);
     m.sql_log = clone_in(r, query.log_context);
-    switch (dialect.kind()) {
-    case DatabaseKind::Sqlite:
-        m.backend = "sqlite";
-        break;
-    case DatabaseKind::PostgreSql:
-        m.backend = "postgresql";
-        break;
-    case DatabaseKind::MySql:
-        m.backend = "mysql";
-        break;
-    }
+    m.backend = backend;
     for (const auto& node : request.trace_chain()) {
         m.trace_chain.emplace_back(node);
     }

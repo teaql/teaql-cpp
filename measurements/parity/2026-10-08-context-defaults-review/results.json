@@ -1,0 +1,54 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source_group_status": "partial",
+  "original_default_observations": 75,
+  "repeated_original_executions_agree": true,
+  "native": {
+    "passed": 322,
+    "total": 322,
+    "seconds": 119.11,
+    "pending_build_work": false,
+    "dependency_records": 390
+  },
+  "sanitizer": {
+    "status": "stable selected checks passed; full native integration pending",
+    "leak_detection": false,
+    "focused_defaults": {
+      "passed": 2,
+      "total": 2,
+      "seconds": 0.29
+    },
+    "passed": 21,
+    "total": 21,
+    "seconds": 17.05,
+    "pending_selected_build_work": false
+  },
+  "mips": {
+    "status": "stable selected checks passed; full native integration pending",
+    "physical_router": "unverified",
+    "focused_defaults": {
+      "passed": 2,
+      "total": 2,
+      "seconds": 0.53,
+      "live_original_observations": 75
+    },
+    "passed": 21,
+    "total": 21,
+    "seconds": 13.22,
+    "pending_selected_build_work": false
+  },
+  "negative_reproductions": {
+    "trace": "The original microsecond clock bracket fails on the former nanosecond trace counter.",
+    "timezone": "Public getter/setter/builder compilation fails before the added methods.",
+    "with_module": "Public Context facade compilation fails despite the existing independent installer."
+  },
+  "source_sha256": {
+    "include/teaql/runtime/context.hpp": "fe51d735f8e4cd58d3d830cc461ee12d17fa0de840989da56f13dc111dd7482e",
+    "include/teaql/runtime/detail/context_identity.hpp": "8e366653ac5fcca8c881d929823b5caa36cf0de0d064bdcd0c356e9c24c66313",
+    "src/runtime/schema.cpp": "b167a2dc16ab29c3991d6e3155fcd146ff2ed8f028df98928c29bbb097673607",
+    "tests/context_defaults_tests.cpp": "9cdba99e449ee439995ca8bfabc3ab72dd91de056f553c3e8a998d91e3411557",
+    "tests/parity/context_defaults_probe.cpp": "3be412ffcd41639f3b3c85bbc954386f50791654576096c2a0fada5449e0053c",
+    "tests/parity/context_defaults_cases.json": "0951f1cb34467c994b81b2ef3821e9fe7ba83b278dd666d07a44021ad370b625",
+    "tests/parity/rust-values/src/bin/context_defaults_oracle.rs": "58d96066c5e9d794a4eca6bcb419c17f0860e3e6a8f5a259b24b57ab38ad7247"
+  }
+}

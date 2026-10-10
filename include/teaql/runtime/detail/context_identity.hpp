@@ -1,5 +1,7 @@
 #pragma once
 #include <teaql/memory/types.hpp>
+#include <teaql/core/integer128.hpp>
+#include <teaql/runtime/system_time.hpp>
 #include <charconv>
 #include <cstdlib>
 #include <thread>
@@ -70,6 +72,44 @@ inline String default_user_identifier(Memory r) {
 #else
     append(std::hash<std::thread::id>{}(std::this_thread::get_id()));
 #endif
+    return result;
+}
+
+inline String default_trace_id(Memory r) {
+    String result("req-", r);
+    auto append = [&](auto value) {
+        char buffer[32];
+        auto end = std::to_chars(buffer, buffer + sizeof(buffer), value).ptr;
+        result.append(buffer, end);
+    };
+#if defined(_WIN32)
+    append(::_getpid());
+#else
+    append(::getpid());
+#endif
+    result += '-';
+#if defined(__linux__)
+    append(::syscall(SYS_gettid));
+#else
+    append(std::hash<std::thread::id>{}(std::this_thread::get_id()));
+#endif
+    result += '-';
+    auto now = SystemTime::now();
+    auto micros = UInt128::from_u64(now.unix_seconds() < 0 ? 0 : now.unix_seconds());
+    std::uint64_t carry = now.unix_seconds() < 0 ? 0 : now.subsec_nanos() / 1000;
+    for (auto& word : micros.words) {
+        carry += std::uint64_t(word) * 1'000'000;
+        word = std::uint32_t(carry);
+        carry >>= 32;
+    }
+    bool started = false;
+    for (int i = 31; i >= 0; --i) {
+        auto digit = (micros.words[i / 8] >> ((i % 8) * 4)) & 15;
+        if (digit || started || i == 0) {
+            result += "0123456789abcdef"[digit];
+            started = true;
+        }
+    }
     return result;
 }
 }

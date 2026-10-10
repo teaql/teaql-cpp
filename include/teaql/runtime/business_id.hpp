@@ -8,6 +8,7 @@
 #include <unordered_map>
 
 namespace teaql {
+class DebugWriter;
 class UserContext;
 inline constexpr std::string_view BUSINESS_ID_V1_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 inline constexpr std::size_t BUSINESS_ID_V1_WIDTH = 6;
@@ -141,6 +142,7 @@ public:
                                                            const BusinessIdPlan&) const override;
 
 private:
+    friend void write_debug(DebugWriter&, const InMemoryBusinessIdAllocator&);
     Memory resource_;
 
     struct ScopeHash {

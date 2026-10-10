@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/sql/types.hpp>
+#include <teaql/provider_sqlite/driver_error.hpp>
 
 namespace teaql {
 // Provider failures stay distinct from SqlExecutorError's transport wrapper.
@@ -9,6 +10,7 @@ public:
     using allocator_type = Allocator;
     enum class Kind { Sqlite, SqlCompile, UnsupportedValue, UnsupportedColumnType, Bind, Lock };
     static MutationExecutorError sqlite(Memory r, int extended_code, std::string_view message);
+    static MutationExecutorError sqlite(Memory r, SqliteDriverError error);
     static MutationExecutorError sql_compile(Memory r, SqlCompileError error);
     static MutationExecutorError unsupported_value(Memory r, std::string_view kind);
     static MutationExecutorError unsupported_column_type(Memory r, std::string_view kind);
@@ -42,11 +44,19 @@ public:
         return compile_.value();
     }
 
+    const SqliteDriverError& driver_error() const {
+        return driver_.value();
+    }
+
     Memory memory_resource() const noexcept {
         return message_.get_allocator().resource();
     }
 
     String to_string(Memory) const;
+
+    const std::exception* source() const noexcept {
+        return nullptr;
+    }
 
 private:
     MutationExecutorError(Memory r, Kind kind, std::string_view message)
@@ -55,6 +65,7 @@ private:
     Kind kind_;
     String message_;
     std::optional<SqlCompileError> compile_;
+    std::optional<SqliteDriverError> driver_;
     int sqlite_code_ = 0;
 };
 }

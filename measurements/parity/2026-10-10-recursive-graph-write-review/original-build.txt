@@ -1,0 +1,6 @@
+Verified v5.0.5 @ 62940ae2b88e7acc32763853b8b4685a01c7e90a
+   Compiling teaql-runtime v5.0.5 (/home/philip/githome/teaql-cpp/build/rust-graph-execution-original/original/teaql-runtime)
+   Compiling teaql-provider-sqlite v5.0.5 (/home/philip/githome/teaql-cpp/build/rust-graph-execution-original/original/teaql-provider-sqlite)
+   Compiling teaql-cpp-value-oracle v0.1.0 (/home/philip/githome/teaql-cpp/build/rust-graph-execution-original/probe)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.04s
+/home/philip/githome/teaql-cpp/build/rust-graph-execution-target/debug/teaql-cpp-value-oracle

@@ -7,6 +7,8 @@
 #include <mutex>
 
 namespace teaql {
+class DebugWriter;
+
 class InternalIdGenerator {
 public:
     virtual ~InternalIdGenerator() = default;
@@ -54,6 +56,7 @@ protected:
         do_ensure_floor(Memory, std::string_view, std::uint64_t) const override;
 
 private:
+    friend void write_debug(DebugWriter&, const AtomicCounterIdGenerator&);
     Memory resource_;
     mutable std::atomic<std::uint64_t> counter_;
 };
@@ -97,10 +100,11 @@ protected:
     }
 
 private:
+    friend void write_debug(DebugWriter&, const SnowflakeIdGenerator&);
     Memory resource_;
     std::uint64_t worker_, datacenter_;
     mutable std::mutex mutex_;
     mutable detail::SnowflakeState state_;
-    mutable bool poisoned_ = false;
+    mutable std::atomic<bool> poisoned_{false};
 };
 }

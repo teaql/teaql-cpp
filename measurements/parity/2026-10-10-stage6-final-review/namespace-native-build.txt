@@ -1,0 +1,6 @@
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philip/githome/teaql-cpp/build-root-integration
+[1/2] Building CXX object CMakeFiles/teaql_runtime_namespace_tests.dir/tests/runtime_namespace_tests.cpp.o
+[2/2] Linking CXX executable teaql_runtime_namespace_tests

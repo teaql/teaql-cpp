@@ -259,6 +259,38 @@ static void schema_domains() {
     }
 }
 
+static void unicode_quote_lifetime() {
+    GlobalContext global;
+    auto user = global.make_user_context();
+    auto owner = user->memory_resource();
+    Ref<String> retained;
+    {
+        auto quoted = quote_identifier_if_needed(owner, "has « space", U'«');
+        check(quoted == "«has «« space«" && quoted.get_allocator().resource() == owner,
+              "Unicode quote escaping preserves scalar boundaries and the destination allocator");
+        check(quote_identifier_if_needed(owner, "some\" quoted", U'"') ==
+                  quote_identifier_if_needed(owner, "some\" quoted", '"'),
+              "ASCII quote overloads retain the same escaping contract");
+        check(quote_identifier_if_needed(owner, "\"already quoted\"", U'«') == "\"already quoted\"",
+              "existing wrapped identifiers remain unchanged for any quote scalar");
+        retained = user->make_global<String>(quoted);
+    }
+    for (auto code : {char32_t{0xd800}, char32_t{0x110000}}) {
+        bool rejected = false;
+        try {
+            (void)quote_identifier_if_needed(owner, "has space", code);
+        } catch (const std::invalid_argument&) {
+            rejected = true;
+        }
+        check(rejected, "C++ quote values outside the Rust char domain are rejected");
+    }
+    user.reset();
+    auto next = global.make_user_context();
+    auto rebound = next->rebind_global(retained);
+    check(next->get(rebound) == "«has «« space«",
+          "explicit Global copy of quoted text survives User deletion");
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
@@ -266,6 +298,7 @@ int main() {
         scope_after_failures();
         destination_lifetime();
         schema_domains();
+        unicode_quote_lifetime();
         std::pmr::set_default_resource(previous);
         std::cout << "SQL dialect contracts passed\n";
     } catch (const SqlCompileError& e) {

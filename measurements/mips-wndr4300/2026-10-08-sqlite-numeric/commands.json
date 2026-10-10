@@ -1,0 +1,79 @@
+{
+  "toolchain_configuration": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build-mips-toolchain-review",
+    "-G",
+    "Ninja",
+    "-DCMAKE_BUILD_TYPE=MinSizeRel",
+    "-DCMAKE_TOOLCHAIN_FILE=scripts/toolchains/openwrt-wndr4300.cmake",
+    "-DTEAQL_OPENWRT_TOOLCHAIN_DIR=<extracted OpenWrt toolchain>",
+    "-DSQLite3_INCLUDE_DIR=<SQLite amalgamation>",
+    "-DSQLite3_LIBRARY=<matching cross archive>"
+  ],
+  "source_sqlite_compile": {
+    "environment": {
+      "STAGING_DIR": "<extracted OpenWrt toolchain>"
+    },
+    "argv": [
+      "<toolchain>/bin/mips-openwrt-linux-musl-gcc",
+      "-Os",
+      "-march=74kc",
+      "-msoft-float",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DSQLITE_THREADSAFE=1",
+      "-DSQLITE_ENABLE_COLUMN_METADATA",
+      "-c",
+      "<locked libsqlite3-sys 0.38.1>/sqlite3/sqlite3.c",
+      "-o",
+      "<ignored output>/sqlite3-source-3530200.o"
+    ]
+  },
+  "archive": [
+    "<toolchain>/bin/mips-openwrt-linux-musl-ar",
+    "rcs",
+    "<ignored output>/libsqlite3-source-3530200.a",
+    "<ignored output>/sqlite3-source-3530200.o"
+  ],
+  "isolated_control": [
+    "<toolchain>/bin/mips-openwrt-linux-musl-g++",
+    "-std=c++20",
+    "-Os",
+    "-march=74kc",
+    "-msoft-float",
+    "-static",
+    "-I<matching SQLite headers>",
+    "measurements/mips-wndr4300/2026-10-08-sqlite-numeric/sqlite-affinity-repro.cpp",
+    "<matching archive>",
+    "-pthread",
+    "-ldl",
+    "-o",
+    "<ignored output>/sqlite-affinity-repro"
+  ],
+  "run_control": [
+    "qemu-mips",
+    "-cpu",
+    "74Kf",
+    "<ignored output>/sqlite-affinity-repro"
+  ],
+  "selected_tests": [
+    "ctest",
+    "--test-dir",
+    "<cross build>",
+    "--output-on-failure",
+    "-R",
+    "^(provider_sqlite_error_contracts|provider_sqlite_binding_contracts|provider_sqlite_decoding_contracts|sqlite_bindings_rust_parity|sqlite_decoding_rust_parity)$"
+  ],
+  "decoding_oracle_profile": "release; use --locked --offline; debug overflows on an existing malformed-timestamp input",
+  "isolated_corpus_control": [
+    "python3",
+    "measurements/mips-wndr4300/2026-10-08-sqlite-numeric/compare-engines.py",
+    "--old",
+    "<SQLite 3.40.1 reproduction binary>",
+    "--new",
+    "<SQLite 3.53.2 reproduction binary>"
+  ]
+}

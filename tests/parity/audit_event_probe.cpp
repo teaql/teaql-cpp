@@ -388,7 +388,12 @@ static Json evaluate(Memory r, const Json& j) {
     return out;
 }
 
-int main() {
+int main(int argc, char** argv) {
+    if (argc == 2 && std::string_view(argv[1]) == "--pointer-bits") {
+        std::cout << sizeof(std::size_t) * 8 << '\n';
+        return 0;
+    }
+    const bool validate_counts = argc == 2 && std::string_view(argv[1]) == "--validate-counts";
     GlobalContext global;
     std::string line;
     while (std::getline(std::cin, line)) {
@@ -397,6 +402,25 @@ int main() {
         auto j = Json::parse(r, line);
         if (!j) {
             throw std::runtime_error("invalid input");
+        }
+        if (validate_counts) {
+            bool accepted = true;
+            try {
+                const auto kind = text(field(*j, "kind"));
+                if (kind == "schema_created" || kind == "schema_verified" ||
+                    kind == "data_seeded") {
+                    (void)number<std::size_t>(field(*j, "count"));
+                }
+                if (kind == "data_seeded") {
+                    (void)number<std::size_t>(field(*j, "updated"));
+                }
+            } catch (const std::runtime_error&) {
+                accepted = false;
+            }
+            auto output = detail::model_json(r);
+            detail::model_put(output, "accepted", accepted);
+            std::cout << output.dump(r) << '\n';
+            continue;
         }
         std::cout << evaluate(r, *j).dump(r) << '\n';
     }

@@ -1,0 +1,5 @@
+[1/2] Building CXX object CMakeFiles/teaql_audited_auto_save_tests.dir/tests/audited_auto_save_tests.cpp.o
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[2/2] Linking CXX executable teaql_audited_auto_save_tests
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined

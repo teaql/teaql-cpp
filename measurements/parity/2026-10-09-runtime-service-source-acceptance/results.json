@@ -1,0 +1,74 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "sources": {
+    "base.rs": 348,
+    "context.rs": 353,
+    "mod.rs": 15,
+    "types.rs": 166,
+    "resolved.rs": 1823,
+    "helpers.rs": 363
+  },
+  "native": {
+    "passed": 378,
+    "total": 378,
+    "seconds": 77.97,
+    "ctest_workers": 4,
+    "build_tasks": 338,
+    "compiled_dependency_records": 420
+  },
+  "asan_ubsan": {
+    "passed": 56,
+    "total": 56,
+    "seconds": 38.96,
+    "detect_leaks": false,
+    "build_tasks": 62,
+    "base_stream_checks": 3,
+    "base_stream_seconds": 0.89
+  },
+  "mips_qemu": {
+    "passed": 56,
+    "total": 56,
+    "seconds": 30.28,
+    "build_tasks": 62,
+    "base_stream_checks": 3,
+    "base_stream_seconds": 0.76
+  },
+  "live_original": {
+    "native": {
+      "runtime_base": 256,
+      "context_query": 468,
+      "entity_service": 112,
+      "entity_query": 165,
+      "entity_stream": 193,
+      "enhanced_entities": 154,
+      "relation_execution": 432,
+      "relation_enhancement": 266,
+      "relation_hydration": 356,
+      "typed_aggregate_scope": 48,
+      "query_keys": 451,
+      "runtime_mutation": 1502,
+      "relation_models": 162
+    },
+    "mips": {
+      "runtime_base": 256,
+      "context_query": 468,
+      "entity_service": 112,
+      "entity_query": 165,
+      "entity_stream": 193,
+      "enhanced_entities": 154,
+      "relation_execution": 432,
+      "relation_enhancement": 266,
+      "relation_hydration": 356,
+      "typed_aggregate_scope": 48,
+      "query_keys": 451,
+      "runtime_mutation": 1502,
+      "relation_models": 162
+    },
+    "mips_key_width": "Actual original key functions with 32-bit native-sized fixture fields",
+    "runtime_mutation": "Access-only bridges in a pinned git archive; original method bodies unchanged",
+    "typed_helper": "Pinned method/decode/projection bodies with controlled row input; public row execution verified independently"
+  },
+  "pre_post_test": "no work",
+  "physical_device": "Deferred by explicit user request",
+  "scope": "Complete six-file runtime service source and Stage 4 composition; complete graph/save/runtime-root and final migration acceptance remain separate."
+}

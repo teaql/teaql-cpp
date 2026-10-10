@@ -10,6 +10,20 @@ public:
 
     SqliteSchemaProvider(std::allocator_arg_t, Allocator a) : resource_(a.resource()) {}
 
+    SqliteSchemaProvider(std::allocator_arg_t, Allocator a, const SqliteSchemaProvider&)
+        : SqliteSchemaProvider(std::allocator_arg, a) {}
+
+    SqliteSchemaProvider(std::allocator_arg_t, Allocator a, SqliteSchemaProvider&&)
+        : SqliteSchemaProvider(std::allocator_arg, a) {}
+
+    SqliteSchemaProvider(const SqliteSchemaProvider&) = delete;
+    SqliteSchemaProvider(SqliteSchemaProvider&&) noexcept = default;
+
+    SqliteSchemaProvider& operator=(SqliteSchemaProvider&&) noexcept {
+        // The source unit has no state. Assignment keeps this Context's owner.
+        return *this;
+    }
+
     Memory memory_resource() const noexcept {
         return resource_;
     }

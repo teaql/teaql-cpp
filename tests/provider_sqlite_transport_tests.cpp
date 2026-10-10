@@ -103,9 +103,12 @@ static void calls_and_error_order() {
         rejected = true;
     }
     check(rejected, "provider clone cannot silently retain another Context");
-    check(!f.provider.capabilities().schema && !f.provider.capabilities().id_generation &&
-              f.provider.capabilities().transaction,
-          "unfinished provider features are not advertised");
+    const auto capabilities = f.provider.capabilities();
+    check(
+        capabilities.query && capabilities.mutation && capabilities.transaction &&
+            capabilities.schema && capabilities.id_generation && !capabilities.batch_mutation &&
+            !capabilities.returning && !capabilities.small_parent_relation_probes,
+        "provider retains all eight source capability declarations independently of the SQL adapter");
     bool wrong_thread_rejected = false;
     std::thread worker([&] {
         try {

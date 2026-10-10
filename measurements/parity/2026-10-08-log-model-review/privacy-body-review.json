@@ -1,0 +1,30 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "reviewed_original_production_lines": [
+    1,
+    410
+  ],
+  "status": "complete projection body review; installed full regression and remaining publication composition pending",
+  "source_sha256": {
+    ".reference/teaql-rs/teaql-runtime/src/log_privacy.rs": "61d89b3159113a9cd0770457be227006eb4428b27bc7897b07710f3e66d6cf6e",
+    "src/runtime/audit_privacy.cpp": "e05124bd453d483b9bbf8a8fa3ea791f4e34fb2749567fe4316e7ed4d0862bf7",
+    "src/runtime/logging.cpp": "3328a9f87f183654d0aae40324fb115bec7bf2399c9999f8d986ef1c5a911c9e",
+    "src/runtime/log_manager.cpp": "3730f71cc369789c208cf65b58e534aa7083e0bed1884c7d6e9a95233172f458",
+    "include/teaql/data_service/sql_log_debug.hpp": "10ea99f839044178e9da428d90d6f59f8fe8460d4b229fece3a930e2b44c7e12",
+    "docs/runtime-log-api-contract.md": "e7f0988beca320794ac96f863c991b4703c660e34ea482c56ba320e5ec197ddf"
+  },
+  "corpus_sizes": {
+    "runtime_log": 425,
+    "context_logging": 327,
+    "log_formatter": 927,
+    "log_manager": 94
+  },
+  "explicit_adaptations": [
+    "SQLite-only rendering",
+    "application-owned warning and endpoint state",
+    "Context-owned safe alternative with explicit destination copies",
+    "owner-thread allocation/poll/close"
+  ],
+  "source_group_accepted": false,
+  "physical_router_verified": false
+}

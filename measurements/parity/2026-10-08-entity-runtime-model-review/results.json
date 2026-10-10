@@ -1,0 +1,90 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "accepted; complete source/public/default/trait/protocol/ownership review and final native324/selected sanitizer/MIPS validation",
+  "original_inputs": 252,
+  "repeated_original_executions_agree": true,
+  "formats_per_model": 9,
+  "negative_compile": [
+    "LoadedRelation",
+    "RelationHandle",
+    "EntityKey",
+    "EntityGraphBuilder",
+    "EntityChangeSet",
+    "ChangeSetStack",
+    "EntityRuntimeState",
+    "LedgerCompositionError"
+  ],
+  "error_cause": "Native conflict payload has a source field; empty-cause method needs a documented C++ naming adaptation.",
+  "staged_native": {
+    "models_passed": 252,
+    "models_total": 252,
+    "ownership_contracts": "passed",
+    "installed_in_worktree": true,
+    "location": "/tmp/teaql-entity-debug-stage",
+    "patch_sha256": "363f62ec8b6ef2d477718ebbc8344e6eb2db08adbefd5971e615a4b1bbec9ebb",
+    "error_cause_adapter": "error_source() preserves the source conflict-version payload field"
+  },
+  "source_before_sha256": {
+    "include/teaql/runtime/entity_key.hpp": "c2920f1e47743e54fe7b45251e2bb4d84eeaa43c648e2a49c78e5a96304992df",
+    "include/teaql/runtime/entity_runtime.hpp": "4a3ae13802488fac3226f5bdac9acee9e91a282b6f32bb57ae0971f81f66dfe3",
+    "src/runtime/entity_key.cpp": "6cff7705f7cb32a55ce159eede03a1c6a566518ce97ae8f8b8be5e8708d67f66",
+    "tests/parity/rust-values/src/bin/entity_runtime_model_oracle.rs": "bac77be3e92363f736e77818f2ea46ad24faa648ce4255e8270333af45ddd279",
+    "tests/parity/entity_runtime_model_cases.json.gz": "e7c08f0ccddcc55d90c95111efd29fce5c87cef5d759358f0d510fe685d33ec3",
+    "tests/parity/generate_entity_runtime_models.py": "ff90c1ebab72a0369937a06d8cabcf52bfc2e8ecb8104371a17dab9094d323ed"
+  },
+  "source_sha256": {
+    "include/teaql/runtime/entity_key.hpp": "893f7b4771ced3112d8a7862f9648aad657ad3f0f1417cbe8a2466cb9b7415d4",
+    "include/teaql/runtime/entity_runtime.hpp": "8d1c95daefcf815aad197de461ae9113b1c8cbd7dac19a3c345f781c998a532f",
+    "include/teaql/runtime/entity_runtime_debug.hpp": "7846ac8f4f7705eab7620c7dfd1e3d2ad760614e365d1799bf89a39856985f78",
+    "src/runtime/entity_key.cpp": "5fd77decde105aa70e300f939c0828fb07130383c01c677b85261596aad19336",
+    "src/runtime/entity_runtime.cpp": "cf787e4514c3ae556419da5b85c210a0a21d48d059420246fb61365bc13782d6",
+    "tests/entity_runtime_model_tests.cpp": "2398a5c391d86610011c553a26b4c3279a029d4b84aacd5105108be9e9af1791",
+    "tests/parity/entity_runtime_model_probe.cpp": "b1852187fdf46184af85be1f797f2ca27b81127ae9813757d8e9e3e162a6abad",
+    "tests/parity/entity_runtime_model_cases.json.gz": "7f32213a6ec6c3bbd8d3a62c82d3c1827563ddba5109f523df5822dc4d33aa2b"
+  },
+  "staged_sanitizer": {
+    "ownership_contracts": "passed",
+    "leak_detection": false
+  },
+  "native": {
+    "prior_full_passed": 322,
+    "registered": 324,
+    "status": "fresh complete consumer build running"
+  },
+  "sanitizer": {
+    "passed": 6,
+    "total": 6,
+    "seconds": 21.17,
+    "leak_detection": false,
+    "pending_selected_work": false
+  },
+  "mips": {
+    "passed": 6,
+    "total": 6,
+    "seconds": 7.21,
+    "live_original_models": 252,
+    "pending_selected_work": false,
+    "physical_router": "unverified"
+  },
+  "fixture_correction": "NaN text parsing produced different target/host IEEE bits; key fixture now constructs the identical explicit bits on both sides before calling unchanged production EntityKey. No output identity normalization or production key changes.",
+  "native_final_refresh": {
+    "tasks": 2,
+    "corrected_probe_rebuilt": true,
+    "followup": "ninja: no work to do.",
+    "full_ctest": {
+      "passed": 324,
+      "total": 324,
+      "seconds": 151.69
+    }
+  },
+  "native_post_test": "ninja: no work to do.",
+  "native_dependency_records": {
+    "total": 392,
+    "nonempty": 392,
+    "all_valid": true
+  },
+  "native_live_original": {
+    "passed": 252,
+    "total": 252
+  }
+}

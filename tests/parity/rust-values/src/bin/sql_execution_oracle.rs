@@ -39,8 +39,22 @@ fn ready<F:Future>(f:F)->F::Output{let mut f=std::pin::pin!(f);match f.as_mut().
 fn poll<F:Future<Output=Result<teaql_data_service::MutationResult,SqlExecutorError<Error>>>>(f:F)->J{
     let mut f=std::pin::pin!(f);match f.as_mut().poll(&mut Context::from_waker(Waker::noop())){Poll::Pending=>json!({"pending":true}),Poll::Ready(Err(e))=>json!({"error":e.to_string()}),Poll::Ready(Ok(v))=>json!({"affected":v.affected_rows,"metadata":metadata(v.metadata),"snapshot":v.persisted_snapshot.map(|s|s.iter().map(|(k,v)|(k.clone(),v.to_json_value())).collect::<serde_json::Map<_,_>>()),"generated":v.generated_values.len()})}
 }
+struct KindCountingDialect {
+    base: fixture_sql::FixtureDialect,
+    calls: std::sync::atomic::AtomicUsize,
+    fail_after: Option<usize>,
+}
+impl SqlDialect for KindCountingDialect {
+    fn kind(&self)->DatabaseKind {
+        let count=self.calls.fetch_add(1,std::sync::atomic::Ordering::Relaxed)+1;
+        if self.fail_after.is_some_and(|limit|count>limit) {panic!("fixture kind failure");}
+        self.base.kind()
+    }
+    fn quote_ident(&self,name:&str)->String {self.base.quote_ident(name)}
+    fn placeholder(&self,index:usize)->String {self.base.placeholder(index)}
+}
 fn evaluate(j:J)->J{
-    let e=fixture_sql::entity(&j["entity"]);let request=mutation(&j["request"],&e.name);let transport=Transport{steps:j["steps"].as_array().cloned().unwrap_or_default(),calls:Mutex::new(vec![])};let executor=SqlDataServiceExecutor::new(fixture_sql::FixtureDialect{numbered:true},transport,Schema(Arc::new(e)));let events=Arc::new(Mutex::new(vec![]));let observer=if j["observe"].as_bool().unwrap_or(true){let events=events.clone();Some(Arc::new(move |m|events.lock().unwrap().push(metadata(m))) as teaql_data_service::ExecutionObserver)}else{None};
-    let mut out=match std::panic::catch_unwind(std::panic::AssertUnwindSafe(||{if j["transaction"]==true{let tx=ready(executor.begin()).unwrap();if let Some(g)=j.get("guard"){poll(tx.mutate_guarded_observed(GuardedMutationRequest{mutation:request,guard:fixture_sql::expression(g)},observer))}else{poll(tx.mutate_observed(request,observer))}}else if let Some(g)=j.get("guard"){poll(executor.mutate_guarded_observed(GuardedMutationRequest{mutation:request,guard:fixture_sql::expression(g)},observer))}else{poll(executor.mutate_observed(request,observer))}})){Ok(v)=>v,Err(_)=>json!({"panic":true})};out["calls_before_poll"]=json!(0);out["calls"]=json!(*executor.transport.calls.lock().unwrap());out["events"]=json!(*events.lock().unwrap());out
+    let e=fixture_sql::entity(&j["entity"]);let request=mutation(&j["request"],&e.name);let transport=Transport{steps:j["steps"].as_array().cloned().unwrap_or_default(),calls:Mutex::new(vec![])};let dialect=KindCountingDialect{base:fixture_sql::FixtureDialect{numbered:true},calls:Default::default(),fail_after:j["kind_fail_after"].as_u64().map(|n|n as usize)};let executor=SqlDataServiceExecutor::new(dialect,transport,Schema(Arc::new(e)));let events=Arc::new(Mutex::new(vec![]));let observer=if j["observe"].as_bool().unwrap_or(true){let events=events.clone();Some(Arc::new(move |m|events.lock().unwrap().push(metadata(m))) as teaql_data_service::ExecutionObserver)}else{None};
+    let mut out=match std::panic::catch_unwind(std::panic::AssertUnwindSafe(||{if j["transaction"]==true{let tx=ready(executor.begin()).unwrap();if let Some(g)=j.get("guard"){poll(tx.mutate_guarded_observed(GuardedMutationRequest{mutation:request,guard:fixture_sql::expression(g)},observer))}else{poll(tx.mutate_observed(request,observer))}}else if let Some(g)=j.get("guard"){poll(executor.mutate_guarded_observed(GuardedMutationRequest{mutation:request,guard:fixture_sql::expression(g)},observer))}else{poll(executor.mutate_observed(request,observer))}})){Ok(v)=>v,Err(_)=>json!({"panic":true})};out["calls_before_poll"]=json!(0);out["calls"]=json!(*executor.transport.calls.lock().unwrap());out["events"]=json!(*events.lock().unwrap());if j["observe_kind"]==true{out["kind_calls"]=json!(executor.dialect.calls.load(std::sync::atomic::Ordering::Relaxed));}out
 }
 fn main(){std::panic::set_hook(Box::new(|_|{}));for line in io::stdin().lock().lines(){println!("{}",evaluate(serde_json::from_str(&line.unwrap()).unwrap()));}}

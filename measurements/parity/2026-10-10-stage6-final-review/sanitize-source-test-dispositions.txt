@@ -1,0 +1,2 @@
+Indexed 451 pinned source tests: covered_in_scope=441, excluded_backend=5, excluded_external=5
+Evidence paths and registration are locators, not semantic or passing-test proof

@@ -165,6 +165,17 @@ struct AggregationCacheOptions {
     std::uint64_t cache_expired_millis = 0;
     bool propagate = false;
     std::uint64_t propagate_cache_expired_millis = 0;
+
+    static AggregationCacheOptions for_duration(std::uint64_t millis) {
+        return {true, millis, false, 0};
+    }
+
+    AggregationCacheOptions& with_propagation(std::uint64_t millis) {
+        propagate = true;
+        propagate_cache_expired_millis = millis;
+        return *this;
+    }
+
     bool operator==(const AggregationCacheOptions&) const = default;
 };
 
@@ -275,6 +286,21 @@ struct SelectQuery {
     }
 
     SelectQuery& projects(std::initializer_list<std::string_view>);
+
+    template <std::ranges::input_range Names>
+        requires std::convertible_to<std::ranges::range_reference_t<Names>, std::string_view>
+    SelectQuery& projects(Names&& names) {
+        Vector<String> snapshot(memory_resource());
+        for (auto&& name : names) {
+            snapshot.emplace_back(std::string_view(name));
+        }
+        projection.reserve(projection.size() + snapshot.size());
+        for (auto& name : snapshot) {
+            projection.emplace_back(std::move(name));
+        }
+        return *this;
+    }
+
     SelectQuery& project_expr(std::string_view, const Expr&);
     SelectQuery& project_raw(std::string_view, std::string_view);
     SelectQuery& dynamic_property_raw(std::string_view, std::string_view);

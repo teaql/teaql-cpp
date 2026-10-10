@@ -1,7 +1,7 @@
 #pragma once
 #include <teaql/core/entity.hpp>
 
-namespace teaql {
+namespace teaql::core {
 // Annotated save input, distinct from the runtime identity/loading graph.
 enum class EntityGraphOperation { Save, Delete };
 
@@ -18,6 +18,13 @@ struct EntityGraphNode {
                     std::string_view type,
                     const MutationValues& mutation)
         : entity_type(type, a.resource()), values(a.resource(), mutation), children(a.resource()) {}
+
+    EntityGraphNode(std::allocator_arg_t,
+                    Allocator a,
+                    std::string_view type,
+                    MutationValues&& mutation)
+        : entity_type(type, a.resource()), values(std::allocator_arg, a, std::move(mutation)),
+          children(a.resource()) {}
 
     EntityGraphNode(std::allocator_arg_t, Allocator a, const EntityGraphNode& other);
 
@@ -137,6 +144,13 @@ EntityGraphBuilder EntityGraph::from_entity(Memory r, T entity) {
     return EntityGraphBuilder(
         std::allocator_arg,
         Allocator(r),
-        EntityGraphNode(std::allocator_arg, Allocator(r), descriptor.name, values));
+        EntityGraphNode(std::allocator_arg, Allocator(r), descriptor.name, std::move(values)));
 }
+}
+
+namespace teaql {
+using core::EntityGraph;
+using core::EntityGraphNode;
+using core::EntityGraphOperation;
+using CoreEntityGraphBuilder = core::EntityGraphBuilder;
 }

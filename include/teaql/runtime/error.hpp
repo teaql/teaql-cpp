@@ -197,6 +197,11 @@ public:
 
     String to_string(Memory) const;
 
+    // The pinned Error implementation uses the default empty source chain.
+    const std::exception* source() const noexcept {
+        return nullptr;
+    }
+
 private:
     using Storage = std::variant<String,
                                  SqlCompileError,
@@ -233,6 +238,7 @@ public:
     }
 
     DataServiceError(std::allocator_arg_t, Allocator a, const DataServiceError& other)
+        requires(detail::domain_copyable<E>)
         : resource_(a.resource()), data_(clone(a.resource(), other.data_)) {}
 
     DataServiceError(std::allocator_arg_t, Allocator a, DataServiceError&& other)
@@ -279,6 +285,10 @@ public:
             }
         };
         return to_string(r, format);
+    }
+
+    const std::exception* source() const noexcept {
+        return nullptr;
     }
 
     String to_string(Memory r, FunctionRef<String(const E&)> format) const {

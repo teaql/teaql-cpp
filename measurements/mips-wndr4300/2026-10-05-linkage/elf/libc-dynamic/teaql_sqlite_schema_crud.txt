@@ -1,0 +1,98 @@
+ELF Header:
+  Magic:   7f 45 4c 46 01 02 01 00 01 00 00 00 00 00 00 00
+  Class:                             ELF32
+  Data:                              2's complement, big endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       1
+  Type:                              EXEC (Executable file)
+  Machine:                           MIPS R3000
+  Version:                           0x1
+  Entry point address:               0x41b630
+  Start of program headers:          52 (bytes into file)
+  Start of section headers:          1490644 (bytes into file)
+  Flags:                             0x70001005, noreorder, cpic, o32, mips32r2
+  Size of this header:               52 (bytes)
+  Size of program headers:           32 (bytes)
+  Number of program headers:         10
+  Size of section headers:           40 (bytes)
+  Number of section headers:         32
+  Section header string table index: 31
+
+Program Headers:
+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+  PHDR           0x000034 0x00400034 0x00400034 0x00140 0x00140 R   0x4
+  INTERP         0x000174 0x00400174 0x00400174 0x0001a 0x0001a R   0x1
+      [Requesting program interpreter: /lib/ld-musl-mips-sf.so.1]
+  ABIFLAGS       0x000190 0x00400190 0x00400190 0x00018 0x00018 R   0x8
+  LOAD           0x000000 0x00400000 0x00400000 0x1637f0 0x1637f0 R E 0x10000
+  LOAD           0x164000 0x00574000 0x00574000 0x07d70 0x09af0 RW  0x10000
+  DYNAMIC        0x0001a8 0x004001a8 0x004001a8 0x00128 0x00128 R   0x4
+  TLS            0x1669da 0x005769dc 0x005769dc 0x00000 0x00008 R   0x4
+  GNU_EH_FRAME   0x14cb10 0x0054cb10 0x0054cb10 0x042fc 0x042fc R   0x4
+  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+  NULL           0x000000 0x00000000 0x00000000 0x00000 0x00000     0x4
+
+ Section to Segment mapping:
+  Segment Sections...
+   00
+   01     .interp
+   02     .MIPS.abiflags
+   03     .interp .MIPS.abiflags .dynamic .hash .dynsym .dynstr .rel.dyn .rel.plt .init .text .MIPS.stubs .fini .rodata .eh_frame_hdr .eh_frame .plt
+   04     .gcc_except_table .init_array .fini_array .data.rel.ro .got.plt .data .rld_map .got .sdata .bss
+   05     .dynamic
+   06     .tbss
+   07     .eh_frame_hdr
+   08
+   09
+
+Dynamic section at offset 0x1a8 contains 31 entries:
+  Tag        Type                         Name/Value
+ 0x00000001 (NEEDED)                     Shared library: [libc.so]
+ 0x0000000c (INIT)                       0x419b60
+ 0x0000000d (FINI)                       0x51e900
+ 0x00000019 (INIT_ARRAY)                 0x5769dc
+ 0x0000001b (INIT_ARRAYSZ)               40 (bytes)
+ 0x0000001a (FINI_ARRAY)                 0x576a04
+ 0x0000001c (FINI_ARRAYSZ)               8 (bytes)
+ 0x00000004 (HASH)                       0x4002d0
+ 0x00000005 (STRTAB)                     0x40749c
+ 0x00000006 (SYMTAB)                     0x40267c
+ 0x0000000a (STRSZ)                      62531 (bytes)
+ 0x0000000b (SYMENT)                     16 (bytes)
+ 0x70000016 (MIPS_RLD_MAP)               0x57a910
+ 0x70000035 (MIPS_RLD_MAP_REL)           0x17a700
+ 0x00000015 (DEBUG)                      0x0
+ 0x00000003 (PLTGOT)                     0x57a920
+ 0x00000011 (REL)                        0x4168e0
+ 0x00000012 (RELSZ)                      168 (bytes)
+ 0x00000013 (RELENT)                     8 (bytes)
+ 0x70000001 (MIPS_RLD_VERSION)           1
+ 0x70000005 (MIPS_FLAGS)                 NOTPOT
+ 0x70000006 (MIPS_BASE_ADDRESS)          0x400000
+ 0x7000000a (MIPS_LOCAL_GOTNO)           1205
+ 0x70000011 (MIPS_SYMTABNO)              1250
+ 0x70000012 (MIPS_UNREFEXTNO)            40
+ 0x70000013 (MIPS_GOTSYM)                0x486
+ 0x00000014 (PLTREL)                     REL
+ 0x00000017 (JMPREL)                     0x419a18
+ 0x00000002 (PLTRELSZ)                   328 (bytes)
+ 0x70000032 (MIPS_PLTGOT)                0x578fdc
+ 0x00000000 (NULL)                       0x0
+Attribute Section: gnu
+File Attributes
+  Tag_GNU_MIPS_ABI_FP: Soft float
+
+MIPS ABI Flags Version: 0
+
+ISA: MIPS32r2
+GPR size: 32
+CPR1 size: 0
+CPR2 size: 0
+FP ABI: Soft float
+ISA Extension: None
+ASEs:
+	DSP ASE
+	DSP R2 ASE
+FLAGS 1: 00000001
+FLAGS 2: 00000000

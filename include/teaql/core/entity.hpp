@@ -6,6 +6,7 @@
 #include <teaql/core/detail/text.hpp>
 #include <set>
 #include <typeinfo>
+#include <exception>
 
 namespace teaql {
 using FieldSet = std::pmr::set<String, std::less<>>;
@@ -60,6 +61,10 @@ struct EntityError {
     bool operator==(const EntityError& other) const {
         return entity == other.entity && message == other.message;
     }
+
+    const std::exception* source() const noexcept {
+        return nullptr;
+    }
 };
 
 class EntityDescriptorStore {
@@ -76,7 +81,14 @@ concept TeaqlEntity = requires(Memory r) {
 
 template <TeaqlEntity... T>
 void register_entities(EntityDescriptorStore& store) {
-    (store.register_descriptor(T::entity_descriptor(store.memory_resource())), ...);
+    auto register_one = [&]<class Model>() {
+        if constexpr (requires { Model::register_into(store); }) {
+            Model::register_into(store);
+        } else {
+            store.register_descriptor(Model::entity_descriptor(store.memory_resource()));
+        }
+    };
+    (register_one.template operator()<T>(), ...);
 }
 template <class T>
 class Audited;
@@ -87,7 +99,7 @@ template <class Derived>
 class EntityDefaults {
 public:
     static void register_into(EntityDescriptorStore& store) {
-        register_entities<Derived>(store);
+        store.register_descriptor(Derived::entity_descriptor(store.memory_resource()));
     }
 
     static Result<Derived, EntityError>
@@ -192,7 +204,11 @@ public:
     }
 
     Audited(std::allocator_arg_t, Allocator a, const Audited& other)
+        requires detail::domain_copyable<T>
         : Audited(std::allocator_arg, a, other.inner_, other.comment_) {}
+
+    Audited(std::allocator_arg_t, Allocator a, Audited&& other)
+        : Audited(detail::move_to(a.resource(), std::move(other))) {}
 
     Audited(const Audited&) = delete;
     Audited(Audited&&) noexcept = default;
@@ -438,7 +454,11 @@ public:
         : inner_(detail::make_box<T>(a.resource(), std::forward<U>(value))) {}
 
     BoxedRelations(std::allocator_arg_t, Allocator a, const BoxedRelations& other)
+        requires detail::domain_copyable<T>
         : BoxedRelations(std::allocator_arg, a, *other.inner_) {}
+
+    BoxedRelations(std::allocator_arg_t, Allocator a, BoxedRelations&& other)
+        : BoxedRelations(detail::move_to(a.resource(), std::move(other))) {}
 
     BoxedRelations(const BoxedRelations&) = delete;
     BoxedRelations(BoxedRelations&&) noexcept = default;

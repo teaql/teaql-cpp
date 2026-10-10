@@ -1,0 +1,16 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-sql-model-review-mips
+Test project /home/philip/githome/teaql-cpp/build-sql-model-review-mips
+    Start 130: provider_sqlite_decoding_contracts
+1/5 Test #130: provider_sqlite_decoding_contracts ...   Passed    0.75 sec
+    Start 131: provider_sqlite_binding_contracts
+2/5 Test #131: provider_sqlite_binding_contracts ....   Passed    0.56 sec
+    Start 132: provider_sqlite_error_contracts
+3/5 Test #132: provider_sqlite_error_contracts ......   Passed    0.18 sec
+    Start 211: sqlite_decoding_rust_parity
+4/5 Test #211: sqlite_decoding_rust_parity ..........   Passed   68.38 sec
+    Start 212: sqlite_bindings_rust_parity
+5/5 Test #212: sqlite_bindings_rust_parity ..........   Passed   12.23 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =  82.13 sec

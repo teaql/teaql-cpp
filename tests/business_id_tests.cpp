@@ -202,6 +202,7 @@ static void contracts_and_lifetimes() {
     check(error->error().to_string(g) ==
               "InvalidFormat: test validation error requiring allocated storage",
           "typed errors retain exact display and destination lifetime");
+    check(!error->error().source(), "Business ID errors preserve the source empty cause chain");
 }
 
 struct FailingResource : std::pmr::memory_resource {

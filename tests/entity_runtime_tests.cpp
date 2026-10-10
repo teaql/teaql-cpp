@@ -1,5 +1,6 @@
 #include <teaql/runtime/entity_runtime.hpp>
 #include <teaql/runtime/context.hpp>
+#include "parity/teaql-runtime/entity_runtime_contracts.hpp"
 #include <iostream>
 using namespace teaql;
 static_assert(std::is_copy_constructible_v<RelationHandle<int>>);
@@ -308,6 +309,7 @@ int main() {
         public_composition();
         graph_and_copy();
         eager_payload_cleanup();
+        teaql::test::source_entity_runtime::run_original_contracts();
         std::pmr::set_default_resource(previous);
         std::cout << "Entity identity graph and ledger contracts passed\n";
     } catch (const std::exception& e) {

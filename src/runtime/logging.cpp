@@ -33,17 +33,10 @@ String optional_number(Memory r, std::optional<T> n) {
 }
 
 String system_time(Memory r, SqlLogEntry::SystemTime time) {
-    auto ticks =
-        std::chrono::duration_cast<std::chrono::nanoseconds>(time.time_since_epoch()).count();
-    auto seconds = ticks / 1000000000, nanos = ticks % 1000000000;
-    if (nanos < 0) {
-        --seconds;
-        nanos += 1000000000;
-    }
     String out("SystemTime { tv_sec: ", r);
-    out += number(r, seconds);
+    out += number(r, time.unix_seconds());
     out += ", tv_nsec: ";
-    out += number(r, nanos);
+    out += number(r, time.subsec_nanos());
     out += " }";
     return out;
 }

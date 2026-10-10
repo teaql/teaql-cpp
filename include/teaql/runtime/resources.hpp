@@ -16,8 +16,12 @@ struct EntityRuntimeClone;
 // memory layer has no logging policy, owner registry, or runtime dependency.
 class ContextArena final : public Arena {
 public:
-    ContextArena(std::size_t size, Memory upstream, const Arena* parent, GlobalContext& global)
-        : Arena(size, upstream, parent), global_(global) {}
+    ContextArena(std::size_t size,
+                 Memory upstream,
+                 const Arena* parent,
+                 GlobalContext& global,
+                 MemoryLimits limits = {})
+        : Arena(size, upstream, parent, limits), global_(global) {}
 
     ~ContextArena() override {
         close();
@@ -30,8 +34,30 @@ public:
     // Borrowed only during one synchronous cross-domain graph copy; never TLS.
     EntityRuntimeClone* entity_runtime_clone = nullptr;
 
+    void bind_state(ContextState& state) noexcept {
+        state_ = &state;
+    }
+
+    ContextState* state() const noexcept {
+        return state_;
+    }
+
 private:
     GlobalContext& global_;
+    ContextState* state_ = nullptr;
+
+    void on_closing(std::source_location where) noexcept override {
+        if (state_) {
+            state_->closed_at = where;
+            state_->phase = ContextState::Phase::Closing;
+        }
+    }
+
+    void on_closed() noexcept override {
+        if (state_) {
+            state_->phase = ContextState::Phase::Closed;
+        }
+    }
 };
 
 inline GlobalContext& application_context(Memory r) {
@@ -68,6 +94,52 @@ inline Arena& resource_arena(Memory r) {
     }
     return *arena;
 }
+
+// Only scalar state and static source locations are retained, never User data.
+class ContextDirectory final {
+public:
+    using allocator_type = Allocator;
+
+    ContextDirectory(std::allocator_arg_t, Allocator allocator, std::uint32_t limit)
+        : arena_(resource_arena(allocator.resource())), pages_(allocator.resource()),
+          limit_(limit) {}
+
+    std::pair<std::uint32_t, ContextState&> create() {
+        arena_.check_thread();
+        if (issued_ == limit_) {
+            throw MemoryLimitError(MemoryLimitError::Kind::Contexts);
+        }
+        if (issued_ / page_size == pages_.size()) {
+            auto& page = arena_.make_payload<Page>();
+            pages_.push_back(&page);
+        }
+        auto id = ++issued_;
+        return {id, pages_[(id - 1) / page_size]->states[(id - 1) % page_size]};
+    }
+
+    const ContextState* find(std::uint32_t id) const noexcept {
+        if (id == 0 || id > issued_) {
+            return nullptr;
+        }
+        return &pages_[(id - 1) / page_size]->states[(id - 1) % page_size];
+    }
+
+    std::uint32_t issued() const noexcept {
+        return issued_;
+    }
+
+private:
+    static constexpr std::uint32_t page_size = 64;
+
+    struct Page {
+        std::array<ContextState, page_size> states{};
+    };
+
+    Arena& arena_;
+    std::pmr::vector<Page*> pages_;
+    std::uint32_t limit_;
+    std::uint32_t issued_ = 0;
+};
 }
 
 // Allocator-aware carrier for a required resource reference. Copying the result
@@ -77,15 +149,21 @@ class ResourceBorrow {
 public:
     using allocator_type = Allocator;
 
-    ResourceBorrow(std::allocator_arg_t, Allocator a, T& object, Arena& owner)
-        : resource_(a.resource()), object_(&object), owner_(&owner) {
-        if (!owner.can_lend_to(detail::resource_arena(resource_))) {
+    ResourceBorrow(
+        std::allocator_arg_t, Allocator a, T& object, Arena& owner, std::uint32_t known_slot = 0)
+        : resource_(a.resource()), object_(&object), owner_(&owner),
+          scope_(&detail::resource_arena(resource_)),
+          slot_(known_slot ? known_slot : owner.slot_for_address(&object)) {
+        if (!owner.can_lend_to(*scope_)) {
             throw std::invalid_argument("Resource borrow cannot outlive its owning Context");
+        }
+        if (auto* context = dynamic_cast<detail::ContextArena*>(scope_)) {
+            state_ = context->state();
         }
     }
 
     ResourceBorrow(std::allocator_arg_t, Allocator a, const ResourceBorrow& other)
-        : ResourceBorrow(std::allocator_arg, a, *other.object_, *other.owner_) {}
+        : ResourceBorrow(std::allocator_arg, a, other.get(), other.checked_owner(), other.slot_) {}
 
     ResourceBorrow(std::allocator_arg_t, Allocator a, ResourceBorrow&& other)
         : ResourceBorrow(std::allocator_arg, a, std::as_const(other)) {}
@@ -93,7 +171,20 @@ public:
     ResourceBorrow(const ResourceBorrow&) = delete;
     ResourceBorrow(ResourceBorrow&&) noexcept = default;
 
-    T& get() const noexcept {
+    T& get(std::source_location access = std::source_location::current()) const {
+        // Check Global metadata before accessing a possibly destroyed User arena.
+        if (state_ && (state_->phase == detail::ContextState::Phase::Closed ||
+                       state_->phase == detail::ContextState::Phase::Constructing)) {
+            throw ReferenceError(ReferenceError::Kind::Closed, 0, access, state_->closed_at);
+        }
+        scope_->check_thread();
+        if (scope_->closed()) {
+            throw ReferenceError(ReferenceError::Kind::Closed, 0, access);
+        }
+        // Trusted kernel quiescence can still access objects before destruction.
+        if (slot_) {
+            owner_->check_live(slot_, 0, access, true);
+        }
         return *object_;
     }
 
@@ -102,9 +193,17 @@ public:
     }
 
 private:
+    Arena& checked_owner() const {
+        (void)get();
+        return *owner_;
+    }
+
     Memory resource_;
     T* object_;
     Arena* owner_;
+    Arena* scope_;
+    std::uint32_t slot_;
+    detail::ContextState* state_ = nullptr;
 };
 
 namespace detail {
@@ -112,6 +211,7 @@ struct RegisteredResource {
     void* object;
     Arena* owner;
     const std::type_info* type;
+    std::uint32_t slot = 0;
 };
 
 class ContextResources {
@@ -123,13 +223,18 @@ public:
           locals(std::less<>{}, resource) {}
 
     template <class T>
-    static RegisteredResource entry(Arena& destination, Memory origin, T& object) {
+    static RegisteredResource
+    entry(Arena& destination, Memory origin, T& object, std::uint32_t known_slot = 0) {
         static_assert(!std::is_const_v<T>,
                       "Register the owning mutable resource; const lookups remain available");
         auto& owner = resource_arena(origin);
         if (owner.closing() || !owner.can_lend_to(destination)) {
             throw std::invalid_argument(
                 "Registered resource belongs to a shorter or unrelated Context");
+        }
+        auto slot = known_slot ? known_slot : owner.slot_for_address(&object);
+        if (slot) {
+            owner.check_live(slot, 0);
         }
         if constexpr (requires { object.memory_resource(); }) {
             if (object.memory_resource() != origin) {
@@ -142,7 +247,7 @@ public:
                     "Registered resource allocator differs from the declared Context");
             }
         }
-        return {&object, &owner, &typeid(T)};
+        return {&object, &owner, &typeid(T), slot};
     }
 
     template <class T>
@@ -158,13 +263,21 @@ public:
     template <class T>
     const RegisteredResource* find() const {
         auto it = typed.find(std::type_index(typeid(T)));
-        return it == typed.end() ? nullptr : &it->second;
+        if (it == typed.end()) {
+            return nullptr;
+        }
+        validate(it->second);
+        return &it->second;
     }
 
     template <class T>
     const RegisteredResource* find_named(std::string_view name) const {
         auto it = named.find(name);
-        return it == named.end() || *it->second.type != typeid(T) ? nullptr : &it->second;
+        if (it == named.end() || *it->second.type != typeid(T)) {
+            return nullptr;
+        }
+        validate(it->second);
+        return &it->second;
     }
 
     void put_local(std::string_view key, const Value& value) {
@@ -192,6 +305,12 @@ public:
     }
 
 private:
+    static void validate(const RegisteredResource& entry) {
+        if (entry.slot) {
+            entry.owner->check_live(entry.slot, 0, std::source_location::current(), true);
+        }
+    }
+
     Memory resource;
     std::pmr::unordered_map<std::type_index, RegisteredResource> typed;
     std::pmr::map<String, RegisteredResource, std::less<>> named;

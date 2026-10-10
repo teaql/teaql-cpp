@@ -458,15 +458,13 @@ static void expression_lifetimes() {
         unsigned failed = 0, succeeded = 0;
         for (unsigned limit = 0; limit < 24; ++limit) {
             LimitedResource resource(limit);
-            {
+            try {
                 GlobalContext destination(&resource, 64);
-                try {
-                    auto& copy = destination.make<SafeExpression<String, String>>(expression);
-                    check(copy.eval()->size() == 8000, "cloned state evaluates");
-                    ++succeeded;
-                } catch (const std::bad_alloc&) {
-                    ++failed;
-                }
+                auto& copy = destination.make<SafeExpression<String, String>>(expression);
+                check(copy.eval()->size() == 8000, "cloned state evaluates");
+                ++succeeded;
+            } catch (const std::bad_alloc&) {
+                ++failed;
             }
             check(resource.live == 0 && alive == initial,
                   "partial expression graph cleans up every registered callback and arena block");

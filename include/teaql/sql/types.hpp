@@ -2,6 +2,7 @@
 #include <teaql/data_service/sql_log.hpp>
 #include <teaql/core/result.hpp>
 #include <teaql/memory/function_ref.hpp>
+#include <exception>
 
 namespace teaql {
 // Discriminators are retained; this edge implementation supplies SQLite only.
@@ -93,6 +94,10 @@ struct SqlCompileError {
     }
 
     String to_string(Memory) const;
-    bool operator==(const SqlCompileError&) const = default;
+    bool operator==(const SqlCompileError&) const;
+
+    const std::exception* source() const noexcept {
+        return nullptr;
+    }
 };
 }

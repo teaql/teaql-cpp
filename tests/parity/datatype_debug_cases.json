@@ -1,0 +1,416 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Original derived DataType Debug and equality; nine modes per type/TypedNull.",
+  "cases": [
+    {
+      "input": {
+        "type": 0
+      },
+      "expected": {
+        "equal": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "Bool",
+          "fancy": "Bool",
+          "lower_hex": "Bool",
+          "pretty": "Bool",
+          "pretty_lower_hex": "Bool",
+          "pretty_upper_hex": "Bool",
+          "upper_hex": "Bool",
+          "width_precision": "Bool",
+          "zero_pad": "Bool"
+        },
+        "typed_null": {
+          "compact": "TypedNull(Bool)",
+          "fancy": "TypedNull(Bool)",
+          "lower_hex": "TypedNull(Bool)",
+          "pretty": "TypedNull(\n    Bool,\n)",
+          "pretty_lower_hex": "TypedNull(\n    Bool,\n)",
+          "pretty_upper_hex": "TypedNull(\n    Bool,\n)",
+          "upper_hex": "TypedNull(Bool)",
+          "width_precision": "TypedNull(Bool)",
+          "zero_pad": "TypedNull(Bool)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 1
+      },
+      "expected": {
+        "equal": [
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "I64",
+          "fancy": "I64",
+          "lower_hex": "I64",
+          "pretty": "I64",
+          "pretty_lower_hex": "I64",
+          "pretty_upper_hex": "I64",
+          "upper_hex": "I64",
+          "width_precision": "I64",
+          "zero_pad": "I64"
+        },
+        "typed_null": {
+          "compact": "TypedNull(I64)",
+          "fancy": "TypedNull(I64)",
+          "lower_hex": "TypedNull(I64)",
+          "pretty": "TypedNull(\n    I64,\n)",
+          "pretty_lower_hex": "TypedNull(\n    I64,\n)",
+          "pretty_upper_hex": "TypedNull(\n    I64,\n)",
+          "upper_hex": "TypedNull(I64)",
+          "width_precision": "TypedNull(I64)",
+          "zero_pad": "TypedNull(I64)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 2
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "U64",
+          "fancy": "U64",
+          "lower_hex": "U64",
+          "pretty": "U64",
+          "pretty_lower_hex": "U64",
+          "pretty_upper_hex": "U64",
+          "upper_hex": "U64",
+          "width_precision": "U64",
+          "zero_pad": "U64"
+        },
+        "typed_null": {
+          "compact": "TypedNull(U64)",
+          "fancy": "TypedNull(U64)",
+          "lower_hex": "TypedNull(U64)",
+          "pretty": "TypedNull(\n    U64,\n)",
+          "pretty_lower_hex": "TypedNull(\n    U64,\n)",
+          "pretty_upper_hex": "TypedNull(\n    U64,\n)",
+          "upper_hex": "TypedNull(U64)",
+          "width_precision": "TypedNull(U64)",
+          "zero_pad": "TypedNull(U64)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 3
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "F64",
+          "fancy": "F64",
+          "lower_hex": "F64",
+          "pretty": "F64",
+          "pretty_lower_hex": "F64",
+          "pretty_upper_hex": "F64",
+          "upper_hex": "F64",
+          "width_precision": "F64",
+          "zero_pad": "F64"
+        },
+        "typed_null": {
+          "compact": "TypedNull(F64)",
+          "fancy": "TypedNull(F64)",
+          "lower_hex": "TypedNull(F64)",
+          "pretty": "TypedNull(\n    F64,\n)",
+          "pretty_lower_hex": "TypedNull(\n    F64,\n)",
+          "pretty_upper_hex": "TypedNull(\n    F64,\n)",
+          "upper_hex": "TypedNull(F64)",
+          "width_precision": "TypedNull(F64)",
+          "zero_pad": "TypedNull(F64)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 4
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "Decimal",
+          "fancy": "Decimal",
+          "lower_hex": "Decimal",
+          "pretty": "Decimal",
+          "pretty_lower_hex": "Decimal",
+          "pretty_upper_hex": "Decimal",
+          "upper_hex": "Decimal",
+          "width_precision": "Decimal",
+          "zero_pad": "Decimal"
+        },
+        "typed_null": {
+          "compact": "TypedNull(Decimal)",
+          "fancy": "TypedNull(Decimal)",
+          "lower_hex": "TypedNull(Decimal)",
+          "pretty": "TypedNull(\n    Decimal,\n)",
+          "pretty_lower_hex": "TypedNull(\n    Decimal,\n)",
+          "pretty_upper_hex": "TypedNull(\n    Decimal,\n)",
+          "upper_hex": "TypedNull(Decimal)",
+          "width_precision": "TypedNull(Decimal)",
+          "zero_pad": "TypedNull(Decimal)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 5
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "Text",
+          "fancy": "Text",
+          "lower_hex": "Text",
+          "pretty": "Text",
+          "pretty_lower_hex": "Text",
+          "pretty_upper_hex": "Text",
+          "upper_hex": "Text",
+          "width_precision": "Text",
+          "zero_pad": "Text"
+        },
+        "typed_null": {
+          "compact": "TypedNull(Text)",
+          "fancy": "TypedNull(Text)",
+          "lower_hex": "TypedNull(Text)",
+          "pretty": "TypedNull(\n    Text,\n)",
+          "pretty_lower_hex": "TypedNull(\n    Text,\n)",
+          "pretty_upper_hex": "TypedNull(\n    Text,\n)",
+          "upper_hex": "TypedNull(Text)",
+          "width_precision": "TypedNull(Text)",
+          "zero_pad": "TypedNull(Text)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 6
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "LargeText",
+          "fancy": "LargeText",
+          "lower_hex": "LargeText",
+          "pretty": "LargeText",
+          "pretty_lower_hex": "LargeText",
+          "pretty_upper_hex": "LargeText",
+          "upper_hex": "LargeText",
+          "width_precision": "LargeText",
+          "zero_pad": "LargeText"
+        },
+        "typed_null": {
+          "compact": "TypedNull(LargeText)",
+          "fancy": "TypedNull(LargeText)",
+          "lower_hex": "TypedNull(LargeText)",
+          "pretty": "TypedNull(\n    LargeText,\n)",
+          "pretty_lower_hex": "TypedNull(\n    LargeText,\n)",
+          "pretty_upper_hex": "TypedNull(\n    LargeText,\n)",
+          "upper_hex": "TypedNull(LargeText)",
+          "width_precision": "TypedNull(LargeText)",
+          "zero_pad": "TypedNull(LargeText)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 7
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false
+        ],
+        "type": {
+          "compact": "Json",
+          "fancy": "Json",
+          "lower_hex": "Json",
+          "pretty": "Json",
+          "pretty_lower_hex": "Json",
+          "pretty_upper_hex": "Json",
+          "upper_hex": "Json",
+          "width_precision": "Json",
+          "zero_pad": "Json"
+        },
+        "typed_null": {
+          "compact": "TypedNull(Json)",
+          "fancy": "TypedNull(Json)",
+          "lower_hex": "TypedNull(Json)",
+          "pretty": "TypedNull(\n    Json,\n)",
+          "pretty_lower_hex": "TypedNull(\n    Json,\n)",
+          "pretty_upper_hex": "TypedNull(\n    Json,\n)",
+          "upper_hex": "TypedNull(Json)",
+          "width_precision": "TypedNull(Json)",
+          "zero_pad": "TypedNull(Json)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 8
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "type": {
+          "compact": "Date",
+          "fancy": "Date",
+          "lower_hex": "Date",
+          "pretty": "Date",
+          "pretty_lower_hex": "Date",
+          "pretty_upper_hex": "Date",
+          "upper_hex": "Date",
+          "width_precision": "Date",
+          "zero_pad": "Date"
+        },
+        "typed_null": {
+          "compact": "TypedNull(Date)",
+          "fancy": "TypedNull(Date)",
+          "lower_hex": "TypedNull(Date)",
+          "pretty": "TypedNull(\n    Date,\n)",
+          "pretty_lower_hex": "TypedNull(\n    Date,\n)",
+          "pretty_upper_hex": "TypedNull(\n    Date,\n)",
+          "upper_hex": "TypedNull(Date)",
+          "width_precision": "TypedNull(Date)",
+          "zero_pad": "TypedNull(Date)"
+        }
+      }
+    },
+    {
+      "input": {
+        "type": 9
+      },
+      "expected": {
+        "equal": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true
+        ],
+        "type": {
+          "compact": "Timestamp",
+          "fancy": "Timestamp",
+          "lower_hex": "Timestamp",
+          "pretty": "Timestamp",
+          "pretty_lower_hex": "Timestamp",
+          "pretty_upper_hex": "Timestamp",
+          "upper_hex": "Timestamp",
+          "width_precision": "Timestamp",
+          "zero_pad": "Timestamp"
+        },
+        "typed_null": {
+          "compact": "TypedNull(Timestamp)",
+          "fancy": "TypedNull(Timestamp)",
+          "lower_hex": "TypedNull(Timestamp)",
+          "pretty": "TypedNull(\n    Timestamp,\n)",
+          "pretty_lower_hex": "TypedNull(\n    Timestamp,\n)",
+          "pretty_upper_hex": "TypedNull(\n    Timestamp,\n)",
+          "upper_hex": "TypedNull(Timestamp)",
+          "width_precision": "TypedNull(Timestamp)",
+          "zero_pad": "TypedNull(Timestamp)"
+        }
+      }
+    }
+  ]
+}

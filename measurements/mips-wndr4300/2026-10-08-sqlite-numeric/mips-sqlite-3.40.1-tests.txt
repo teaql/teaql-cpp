@@ -1,0 +1,106 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-sql-model-review-mips
+Test project /home/philip/githome/teaql-cpp/build-sql-model-review-mips
+    Start 130: provider_sqlite_decoding_contracts
+1/5 Test #130: provider_sqlite_decoding_contracts ...   Passed    0.69 sec
+    Start 131: provider_sqlite_binding_contracts
+2/5 Test #131: provider_sqlite_binding_contracts ....   Passed    0.58 sec
+    Start 132: provider_sqlite_error_contracts
+3/5 Test #132: provider_sqlite_error_contracts ......   Passed    0.16 sec
+    Start 211: sqlite_decoding_rust_parity
+4/5 Test #211: sqlite_decoding_rust_parity ..........***Failed   76.12 sec
+Case 35: {'decl': '', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 61: {'decl': 'BOOLEAN', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 87: {'decl': 'bool', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 113: {'decl': 'NuMeRiC(12,3)', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 139: {'decl': 'DECIMAL', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 165: {'decl': 'JSON', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 191: {'decl': 'DATE', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 217: {'decl': 'TIMESTAMP', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 243: {'decl': 'datetime', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 373: {'decl': 'BIGINT', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 399: {'decl': 'CUSTOM', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 425: {'decl': ' BOOLEAN ', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 451: {'decl': '\u2002JSON\xa0', 'sql_value': "CAST(x'3165313030' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e+100}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000002e+100}]}]}
+Case 532: {'decl': 'DECIMAL', 'sql_value': "CAST(x'31652d3239' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1e-29}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0000000000000001e-29}]}]}
+Case 5579: {'decl': 'DECIMAL', 'sql_value': "CAST(x'31323334353637383930313233343536373839303132333435363738' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.2345678901234569e+27}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.2345678901234567e+27}]}]}
+Case 5603: {'decl': 'DECIMAL', 'sql_value': "CAST(x'312e3032333435363738393031323334353637383930313233343536373839' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0234567890123456}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.0234567890123458}]}]}
+Case 5626: {'decl': 'DECIMAL', 'sql_value': "CAST(x'312e323334353638393031323334353637383930313233343536373839' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.234568901234568}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.2345689012345678}]}]}
+Case 5679: {'decl': 'DECIMAL', 'sql_value': "CAST(x'312e323334353637383930323233343537383930313233343536373839' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.2345678902234578}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.234567890223458}]}]}
+Case 5701: {'decl': 'DECIMAL', 'sql_value': "CAST(x'312e32333435363738393031323331343536373839303132343536373839' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.2345678901231456}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 1.2345678901231458}]}]}
+Case 5755: {'decl': 'DECIMAL', 'sql_value': "CAST(x'373932323831363235313432363433333539333534333935303333352e35' AS TEXT)"}
+ Rust: {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 7.922816251426433e+27}]}]}
+ C++:  {'rows': [{'keys': ['v'], 'values': [{'kind': 'f64', 'value': 7.922816251426434e+27}]}]}
+SQLite row decoding parity: 6002/6029 observations match
+
+    Start 212: sqlite_bindings_rust_parity
+5/5 Test #212: sqlite_bindings_rust_parity ..........***Failed   16.85 sec
+Case 290: {'affinity': 'NUMERIC', 'params': [{'kind': 'decimal', 'value': '1e-28'}]}
+ Rust: {'affected': 1, 'stored': {'type': 'real', 'value': 1e-28}}
+ C++:  {'affected': 1, 'stored': {'type': 'real', 'value': 1.0000000000000001e-28}}
+Case 410: {'affinity': 'INTEGER', 'params': [{'kind': 'decimal', 'value': '1e-28'}]}
+ Rust: {'affected': 1, 'stored': {'type': 'real', 'value': 1e-28}}
+ C++:  {'affected': 1, 'stored': {'type': 'real', 'value': 1.0000000000000001e-28}}
+Case 530: {'affinity': 'REAL', 'params': [{'kind': 'decimal', 'value': '1e-28'}]}
+ Rust: {'affected': 1, 'stored': {'type': 'real', 'value': 1e-28}}
+ C++:  {'affected': 1, 'stored': {'type': 'real', 'value': 1.0000000000000001e-28}}
+Case 650: {'affinity': 'JSON', 'params': [{'kind': 'decimal', 'value': '1e-28'}]}
+ Rust: {'affected': 1, 'stored': {'type': 'real', 'value': 1e-28}}
+ C++:  {'affected': 1, 'stored': {'type': 'real', 'value': 1.0000000000000001e-28}}
+Case 770: {'affinity': 'DATE', 'params': [{'kind': 'decimal', 'value': '1e-28'}]}
+ Rust: {'affected': 1, 'stored': {'type': 'real', 'value': 1e-28}}
+ C++:  {'affected': 1, 'stored': {'type': 'real', 'value': 1.0000000000000001e-28}}
+Case 890: {'affinity': 'TIMESTAMP', 'params': [{'kind': 'decimal', 'value': '1e-28'}]}
+ Rust: {'affected': 1, 'stored': {'type': 'real', 'value': 1e-28}}
+ C++:  {'affected': 1, 'stored': {'type': 'real', 'value': 1.0000000000000001e-28}}
+Case 1010: {'affinity': 'BOOLEAN', 'params': [{'kind': 'decimal', 'value': '1e-28'}]}
+ Rust: {'affected': 1, 'stored': {'type': 'real', 'value': 1e-28}}
+ C++:  {'affected': 1, 'stored': {'type': 'real', 'value': 1.0000000000000001e-28}}
+SQLite bindings/storage parity: 1077/1084 observations match
+
+
+60% tests passed, 2 tests failed out of 5
+
+Total Test time (real) =  94.41 sec
+
+The following tests FAILED:
+	211 - sqlite_decoding_rust_parity (Failed)
+	212 - sqlite_bindings_rust_parity (Failed)
+Errors while running CTest

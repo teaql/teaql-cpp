@@ -298,11 +298,13 @@ public:
 
         std::optional<PaginationResult<std::optional<RetainedIdSet>>> poll(WakeSignal& wake) {
             if (!worker.joinable() && !done.load()) {
-                worker = std::thread([this, &wake] {
+                // Owner-thread resolution precedes the registered native borrow.
+                auto* native_store = &store.get();
+                worker = std::thread([this, &wake, native_store] {
                     go.acquire();
-                    store.get().counts.read = key == "native-query" &&
-                                              store.get().payload.size() == 32768 &&
-                                              store.get().payload.back() == 's';
+                    native_store->counts.read = key == "native-query" &&
+                                                native_store->payload.size() == 32768 &&
+                                                native_store->payload.back() == 's';
                     done.store(true);
                     wake.notify();
                 });

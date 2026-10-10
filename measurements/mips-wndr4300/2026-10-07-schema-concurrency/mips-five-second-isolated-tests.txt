@@ -1,0 +1,14 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-wndr4300-memory
+Test project /home/philip/githome/teaql-cpp/build-wndr4300-memory
+    Start 75: original_provider_schema_contracts
+1/1 Test #75: original_provider_schema_contracts ...***Failed    5.16 sec
+database is locked
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   5.17 sec
+
+The following tests FAILED:
+	 75 - original_provider_schema_contracts (Failed)
+Errors while running CTest

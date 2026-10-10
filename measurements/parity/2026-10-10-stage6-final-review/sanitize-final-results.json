@@ -1,0 +1,15 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "passed": 388,
+  "total": 388,
+  "seconds": 171.81,
+  "build_tasks": 411,
+  "compiled_objects": 427,
+  "pre_post": "no work",
+  "live_examples": "2/2",
+  "profile": "Debug ASan/UBSan GCC11 native SQLite3.37.2",
+  "ASAN_OPTIONS": "detect_leaks=0",
+  "UBSAN_OPTIONS": "halt_on_error=1",
+  "leak_scanning": "disabled; not verified by this full suite",
+  "chain_exit": 0
+}

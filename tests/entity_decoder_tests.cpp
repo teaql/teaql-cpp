@@ -300,10 +300,61 @@ static void sqlite_rows_to_graph() {
           "explicit graph retention survives SQLite native teardown");
 }
 
+static void module_clone_after_user_deletion() {
+    GlobalContext global;
+    auto source = global.make_user_context();
+    auto& first = global.make<NamedBehavior>("first global behavior with a long retained name");
+    auto& replacement = global.make<NamedBehavior>("replacement global behavior");
+    auto& module = source->make<RuntimeModule>();
+    module.entity_with_behavior<Item<2>>(global, first)
+        .entity_with_behavior<Item<0>>(global, first)
+        .entity<Item<1>>();
+    auto& retained = global.make<RuntimeModule>(module);
+    module.entity<Item<2>>().behavior("Item", global, replacement);
+    source.reset();
+
+    auto target = retained.into_context(global);
+    auto owner = target->memory_resource();
+    check(target->entity("Alias") && target->entity("Item") &&
+              target->entity("Item")->table_name == "alternate_items" &&
+              target->entity("Item")->memory_resource() == owner,
+          "Global module clone retains independent metadata after actual source User deletion");
+    check(target->entity_data_service_behavior("Item")->get().relation_loads(owner, *target)[0] ==
+              "first global behavior with a long retained name",
+          "entity-only replacement preserves independently registered behavior");
+    check(Access::has_entity_graph_decoder(*target, "Item") &&
+              !Access::has_entity_graph_decoder(*target, "Alias"),
+          "retained typed registration keeps type keys separate from descriptor keys");
+    auto& root = target->make<EntityRuntimeState>();
+    {
+        EntityGraphBuilder graph(std::allocator_arg, Allocator(owner));
+        check(bool(Access::decode_entity_graph_compact(*target, "Item", row(owner), root, graph)),
+              "cloned module decoder runs after its source User is destroyed");
+        check(bool(root.freeze_graph(std::move(graph))), "cloned decoder graph freezes");
+    }
+    check(root.resolve_entity<Item<1>>(1) && !root.resolve_entity<Item<2>>(1),
+          "decoder replacement order is retained in the module snapshot");
+
+    retained.entity<Item<2>>().behavior("Item", global, replacement);
+    auto next = retained.into_context(global);
+    check(target->entity_data_service_behavior("Item")->get().relation_loads(owner, *target)[0] ==
+                  "first global behavior with a long retained name" &&
+              next->entity_data_service_behavior("Item")->get().relation_loads(
+                  next->memory_resource(), *next)[0] == "replacement global behavior",
+          "installed Context snapshot stays independent of later module behavior replacement");
+    auto& empty = global.make<RuntimeModule>();
+    empty.apply_to(*target);
+    check(!target->entity("Item") && !target->has_entity_data_service("Alias") &&
+              !target->entity_data_service_behavior("Item") &&
+              !Access::has_entity_graph_decoder(*target, "Item"),
+          "empty module replaces every independent metadata, entity, behavior and decoder role");
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         decoding_and_copies();
+        module_clone_after_user_deletion();
         registrations_and_hooks();
         close_reads_empty_registries();
         sqlite_rows_to_graph();

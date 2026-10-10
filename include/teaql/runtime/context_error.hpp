@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/core/result.hpp>
+#include <exception>
 
 namespace teaql {
 class ContextError {
@@ -43,6 +44,10 @@ public:
                     r);
         text += name_;
         return text;
+    }
+
+    const std::exception* source() const noexcept {
+        return nullptr;
     }
 
 private:

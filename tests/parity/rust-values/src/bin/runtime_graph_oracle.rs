@@ -1,6 +1,6 @@
 use std::{io::{self,BufRead},collections::BTreeMap,sync::Arc,panic::{catch_unwind,AssertUnwindSafe}};
 use serde_json::{json,Value as J};
-use teaql_runtime::{EntityValues,GraphNode,GraphOperation,GraphMutationKind,GraphMutationPlan,TraceScopeToken};
+use teaql_runtime::{EntityValues,GraphNode,GraphOperation,GraphMutationKind,GraphMutationPlan,TraceScopeToken,RuntimeModule,UserContext};
 use teaql_core::{Value,TraceNode,TraceKind,MutationValues,EntitySnapshot};
 fn value(j:&J)->Value{match j["kind"].as_str().unwrap(){"null"=>Value::Null,"text"=>Value::Text(j["value"].as_str().unwrap().into()),"i64"=>Value::I64(j["value"].as_str().unwrap().parse().unwrap()),"u64"=>Value::U64(j["value"].as_str().unwrap().parse().unwrap()),"bool"=>Value::Bool(j["value"].as_bool().unwrap()),"list"=>Value::List(j["value"].as_array().unwrap().iter().map(value).collect()),"object"=>Value::Object(record(&j["value"])),_=>panic!("fixture value")}}
 fn record(j:&J)->BTreeMap<String,Value>{j.as_object().unwrap().iter().map(|(k,v)|(k.clone(),value(v))).collect()}
@@ -15,4 +15,54 @@ fn evaluate(j:J)->J{if j["mode"]=="node"{let n=node(&j["node"]);let copy=n.clone
  let mut p=GraphMutationPlan::default();p.next_item_index=j["start"].as_str().unwrap().parse().unwrap();if !j["root"].is_null(){p.planned_root=Some(node(&j["root"]));}let mut trace=None;for (i,t) in j["trace"].as_array().unwrap().iter().enumerate(){trace=Some(Arc::new(TraceScopeToken{parent:trace,track:TraceNode::typed(TraceKind::Entity,t["entity"].as_str().unwrap(),Some(i as u64),t["comment"].as_str().unwrap()),node_index:i as u64}));}let mut out=vec![];
  for step in j["steps"].as_array().unwrap(){let mut overflow=false;match step["op"].as_str().unwrap(){"push"=>{let values:MutationValues=record(&step["values"]).into();let old:Option<EntitySnapshot>=if step["old"].is_null(){None}else{Some(record(&step["old"]).into())};let kind=[GraphMutationKind::Create,GraphMutationKind::Update,GraphMutationKind::Delete,GraphMutationKind::Reference][step["kind"].as_u64().unwrap() as usize];overflow=catch_unwind(AssertUnwindSafe(||p.push(step["entity"].as_str().unwrap(),kind,values,strings(&step["fields"]),if step["scope"]==true{trace.clone()}else{None},old))).is_err();},"rebuild"=>p.rebuild_batches(),"clear_items"=>p.items.clear(),"clear_batches"=>p.batches.clear(),_=>panic!("step")};out.push(json!({"plan":plan_out(&p.clone()),"overflow":overflow}));}json!(out)
 }
-fn main(){std::panic::set_hook(Box::new(|_|{}));for line in io::stdin().lock().lines(){println!("{}",evaluate(serde_json::from_str(&line.unwrap()).unwrap()));}}
+fn graph_snapshot(context: &UserContext) -> J {
+    json!({
+        "initial": context.initial_graphs().iter().map(node_out).collect::<Vec<_>>(),
+        "roots": context.root_graphs().iter().map(node_out).collect::<Vec<_>>(),
+    })
+}
+
+fn module_graphs(input: &J) -> J {
+    let nodes = input["nodes"].as_array().unwrap().iter().map(node).collect::<Vec<_>>();
+    let mut module = RuntimeModule::new();
+    let mut installed = UserContext::new();
+    module.clone().apply_to(&mut installed);
+    let mut steps = vec![graph_snapshot(&installed)];
+    for step in input["steps"].as_array().unwrap() {
+        let selected = step["indices"].as_array().unwrap().iter()
+            .map(|index| nodes[index.as_u64().unwrap() as usize].clone()).collect::<Vec<_>>();
+        module = match step["op"].as_str().unwrap() {
+            "initial" => module.initial_graph(selected.into_iter().next().unwrap()),
+            "initials" => module.initial_graphs(selected),
+            "root" => module.root_graph(selected.into_iter().next().unwrap()),
+            "roots" => module.root_graphs(selected),
+            _ => panic!("module graph fixture operation"),
+        };
+        module.clone().apply_to(&mut installed);
+        steps.push(graph_snapshot(&installed));
+    }
+    let cloned = module.clone();
+    let updated = module.initial_graph(nodes[0].clone()).into_context();
+    let cloned_context = cloned.into_context();
+    let empty = RuntimeModule::new().into_context();
+    json!({
+        "steps": steps,
+        "cloned": graph_snapshot(&cloned_context),
+        "updated": graph_snapshot(&updated),
+        "installed_after": graph_snapshot(&installed),
+        "empty": graph_snapshot(&empty),
+    })
+}
+
+fn main() {
+    std::panic::set_hook(Box::new(|_| {}));
+    for line in io::stdin().lock().lines() {
+        let input: J = serde_json::from_str(&line.unwrap()).unwrap();
+        let output = if input["mode"] == "module_graphs" {
+            module_graphs(&input)
+        } else {
+            evaluate(input)
+        };
+        println!("{output}");
+    }
+}

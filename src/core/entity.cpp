@@ -1,4 +1,5 @@
 #include <teaql/core/entity.hpp>
+#include <teaql/core/detail/debug.hpp>
 
 namespace teaql {
 Record BaseEntityData::to_values_map(Memory r) const {
@@ -20,7 +21,9 @@ Result<BaseEntityData, EntityError> BaseEntityData::from_values_map(Memory r,
         String message("invalid ", r);
         message += field;
         message += " field: ";
-        message += value.to_json_value(r).dump(r);
+        message += "Some(";
+        message += detail::debug_value(r, value);
+        message += ")";
         return Outcome::err(r,
                             EntityError(std::allocator_arg, Allocator(r), "BaseEntity", message));
     };

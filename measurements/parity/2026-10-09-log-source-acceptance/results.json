@@ -1,0 +1,70 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "sources": {
+    "teaql-runtime/src/context/logging.rs": 391,
+    "teaql-runtime/src/log_privacy.rs": 410,
+    "teaql-runtime/src/log_formatter.rs": 566
+  },
+  "native_full_regression": {
+    "passed": 375,
+    "total": 375,
+    "seconds": 236.7,
+    "evidence": "../2026-10-09-event-direct-callback-review/integration-results.json",
+    "production_code_changes_since_regression": false
+  },
+  "logging_selections": {
+    "native": {
+      "passed": 16,
+      "total": 16,
+      "seconds": 5.25
+    },
+    "asan_ubsan": {
+      "passed": 16,
+      "total": 16,
+      "seconds": 8.32,
+      "detect_leaks": false
+    },
+    "mips_qemu": {
+      "passed": 16,
+      "total": 16,
+      "seconds": 11.14
+    }
+  },
+  "live_original": {
+    "native": {
+      "models": 172,
+      "buffer_clone": 1,
+      "projection": 425,
+      "context": 327,
+      "formatter": 927,
+      "manager": 94
+    },
+    "mips": {
+      "models": 172,
+      "buffer_clone": 1,
+      "projection": 425,
+      "context": 327,
+      "formatter": 921,
+      "formatter_target_width_rejections": 6,
+      "manager": 94
+    }
+  },
+  "source_library_tests": {
+    "privacy": {
+      "passed": 39,
+      "ignored_subprocess_fixture": 1,
+      "failed": 0
+    },
+    "formatter": {
+      "passed": 4,
+      "failed": 0
+    }
+  },
+  "pre_post_test": "no work",
+  "physical_device": "Deferred by explicit user request",
+  "normalizations": [
+    "Volatile Human UTC prefix",
+    "Documented informational header correction: json selects DebugReaderFormatter"
+  ],
+  "scope": "Complete logging source group; Context/service/graph/runtime-root and whole-stage acceptance remain independent."
+}

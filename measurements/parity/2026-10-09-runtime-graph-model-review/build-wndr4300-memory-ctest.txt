@@ -1,0 +1,14 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-wndr4300-memory
+Test project /home/philip/githome/teaql-cpp/build-wndr4300-memory
+    Start 165: runtime_graph_model_contracts
+1/4 Test #165: runtime_graph_model_contracts .....   Passed    0.05 sec
+    Start 166: runtime_graph_model_rust_parity
+2/4 Test #166: runtime_graph_model_rust_parity ...   Passed    4.22 sec
+    Start 167: runtime_graph_contracts
+3/4 Test #167: runtime_graph_contracts ...........   Passed    0.05 sec
+    Start 269: runtime_graph_rust_parity
+4/4 Test #269: runtime_graph_rust_parity .........   Passed    4.08 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   8.41 sec

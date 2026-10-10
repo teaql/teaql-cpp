@@ -99,6 +99,7 @@ public:
                 repo.with_trace_context(trace);
                 auto& child = fetch_(repo, std::move(query));
                 if (child.memory_resource() != r) {
+                    child.cancel();
                     throw std::invalid_argument(
                         "Relation aggregate result must belong to its query Context");
                 }
@@ -110,7 +111,7 @@ public:
                 return {};
             }
             if (!*result) {
-                return R::err(r, clone_in(r, result->error()));
+                return R::err(r, copy_or_take_error(*child_, *result));
             }
             Vector<CompactRow> rows(result->value(), r);
             // Metadata is resolved after the asynchronous fetch, like the source.
@@ -226,6 +227,7 @@ public:
                 repo.with_trace_context(trace_);
                 auto& child = fetch_(repo, std::move(query));
                 if (child.memory_resource() != r) {
+                    child.cancel();
                     throw std::invalid_argument(
                         "Row enhancement result must belong to its query Context");
                 }
@@ -237,7 +239,7 @@ public:
                 return {};
             }
             if (!*result) {
-                return R::err(r, clone_in(r, result->error()));
+                return R::err(r, copy_or_take_error(*child_, *result));
             }
             if constexpr (ObjectGroup) {
                 attach_object_group_rows(parents_, enhancement, result->value());

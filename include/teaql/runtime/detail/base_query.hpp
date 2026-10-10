@@ -34,6 +34,7 @@ public:
             auto& child = executor_.get().query_observed(
                 resource_, std::move(request), store.query_diagnostic_observer(resource_));
             if (child.memory_resource() != resource_) {
+                child.cancel();
                 throw std::invalid_argument(
                     "Runtime query operation must belong to its result Context");
             }
@@ -47,7 +48,7 @@ public:
         if (!*result) {
             return R::err(
                 resource_,
-                DataServiceError<Error>::executor(resource_, clone_in(resource_, result->error())));
+                DataServiceError<Error>::executor(resource_, copy_or_take_error(*child_, *result)));
         }
         if constexpr (!List) {
             return R::ok(resource_, Vector<CompactRow>(result->value().rows, resource_));

@@ -26,7 +26,8 @@ fn evaluate(input: Json) -> Json {
                 MutationExecutorError::Bind(_) => "Bind",
                 MutationExecutorError::Lock(_) => "Lock",
             };
-            json!({"error": error.to_string(), "kind": kind})
+            json!({"error": error.to_string(), "kind": kind,
+                "source_none":std::error::Error::source(&error).is_none()})
         },
         Ok(affected) => {
             let connection = provider.connection(); let connection = connection.lock().unwrap();

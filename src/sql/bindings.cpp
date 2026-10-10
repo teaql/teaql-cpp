@@ -1,16 +1,30 @@
 #include <teaql/sql/bindings.hpp>
 
 namespace teaql {
-void SqlBindings::append(const Value& value, SqlParameterLogPolicy policy) {
+namespace {
+template <class T>
+void append_binding(Vector<Value>& values,
+                    Vector<SqlParameterLogPolicy>& policies,
+                    T&& value,
+                    SqlParameterLogPolicy policy) {
     // Keep amortized vector growth and restore logical alignment if cloning the
     // value fails. Scalar policy rollback cannot allocate or throw.
-    policies_.push_back(policy);
+    policies.push_back(policy);
     try {
-        values_.emplace_back(value);
+        values.emplace_back(std::forward<T>(value));
     } catch (...) {
-        policies_.pop_back();
+        policies.pop_back();
         throw;
     }
+}
+}
+
+void SqlBindings::append(const Value& value, SqlParameterLogPolicy policy) {
+    append_binding(values_, policies_, value, policy);
+}
+
+void SqlBindings::append(Value&& value, SqlParameterLogPolicy policy) {
+    append_binding(values_, policies_, std::move(value), policy);
 }
 
 SqlLogContext SqlBindings::log_context(Memory r, DatabaseKind kind) const {

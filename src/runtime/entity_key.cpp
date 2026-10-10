@@ -1,4 +1,5 @@
 #include <teaql/runtime/entity_key.hpp>
+#include <teaql/runtime/entity_runtime_debug.hpp>
 #include <bit>
 #include <charconv>
 #include <teaql/core/detail/debug.hpp>
@@ -99,37 +100,50 @@ std::strong_ordering EntityKey::operator<=>(const EntityKey& other) const {
 }
 
 namespace teaql {
+void write_debug(DebugWriter& writer, const EntityKey& key) {
+    writer.structure("EntityKey", [&](auto& fields) {
+        fields.field("entity", [&](auto& out) {
+            out.text(key.entity);
+        });
+        fields.field("id", [&](auto& out) {
+            write_debug(out, key.id);
+        });
+        fields.field("id_key", [&](auto& out) {
+            if (key.kind_ == EntityKey::Kind::Null) {
+                out.raw("Null");
+                return;
+            }
+            constexpr std::string_view names[]{"Null",
+                                               "Bool",
+                                               "I64",
+                                               "U64",
+                                               "F64",
+                                               "Decimal",
+                                               "Text",
+                                               "Date",
+                                               "Timestamp",
+                                               "Other"};
+            out.tuple(names[static_cast<unsigned>(key.kind_)], [&](auto& inner) {
+                std::visit(
+                    [&](const auto& value) {
+                        using T = std::decay_t<decltype(value)>;
+                        if constexpr (std::same_as<T, Timestamp>) {
+                            inner.integer(value.as_millis());
+                        } else if constexpr (std::same_as<T, bool> || std::integral<T> ||
+                                             std::same_as<T, String> || std::same_as<T, Decimal> ||
+                                             std::same_as<T, Date>) {
+                            write_debug(inner, value);
+                        } else {
+                            throw std::logic_error("Invalid cached entity identity diagnostic");
+                        }
+                    },
+                    key.identity_.data);
+            });
+        });
+    });
+}
+
 String EntityKey::debug(Memory r) const {
-    String out("EntityKey { entity: ", r);
-    out += detail::debug_text(r, entity);
-    out += ", id: ";
-    out += detail::debug_value(r, id);
-    out += ", id_key: ";
-    if (kind_ == Kind::Other) {
-        out += "Other(";
-        out += detail::debug_text(r, std::get<String>(identity_.data));
-        out += ')';
-    } else if (kind_ == Kind::F64) {
-        out += "F64(";
-        char buffer[32];
-        auto end =
-            std::to_chars(buffer, buffer + sizeof(buffer), std::get<std::uint64_t>(identity_.data))
-                .ptr;
-        out.append(buffer, end);
-        out += ')';
-    } else if (kind_ == Kind::Timestamp) {
-        out += "Timestamp(";
-        char buffer[32];
-        auto end = std::to_chars(buffer,
-                                 buffer + sizeof(buffer),
-                                 std::get<Timestamp>(identity_.data).as_millis())
-                       .ptr;
-        out.append(buffer, end);
-        out += ')';
-    } else {
-        out += detail::debug_value(r, identity_);
-    }
-    out += " }";
-    return out;
+    return debug_string(r, *this);
 }
 }

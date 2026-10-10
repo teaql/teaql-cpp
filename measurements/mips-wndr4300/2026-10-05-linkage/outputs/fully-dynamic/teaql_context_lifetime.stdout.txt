@@ -1,0 +1,2 @@
+Context blocks: 1
+EdgeDevice: edge-device-001

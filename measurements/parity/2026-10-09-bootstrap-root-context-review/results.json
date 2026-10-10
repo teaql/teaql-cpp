@@ -1,0 +1,64 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source": "teaql-runtime/src/context.rs",
+  "production_ranges": [
+    [
+      1,
+      83
+    ],
+    [
+      103,
+      1266
+    ]
+  ],
+  "native": {
+    "passed": 375,
+    "total": 375,
+    "seconds": 76.3,
+    "ctest_workers": 4,
+    "build_tasks": 262,
+    "compiled_dependency_records": 418
+  },
+  "asan_ubsan": {
+    "passed": 64,
+    "total": 64,
+    "seconds": 33.16,
+    "detect_leaks": false,
+    "build_tasks": 43
+  },
+  "mips_qemu": {
+    "passed": 64,
+    "total": 64,
+    "seconds": 24.0,
+    "build_tasks": 43
+  },
+  "live_original": {
+    "native": {
+      "defaults": 75,
+      "models": 234,
+      "store": 251,
+      "resources": 410,
+      "schema": 384,
+      "internal_ids": 171,
+      "business_service": 859
+    },
+    "mips": {
+      "defaults": 75,
+      "models": 234,
+      "store": 251,
+      "resources": 410,
+      "schema": 384,
+      "internal_ids": 171,
+      "business_service": 859
+    },
+    "bootstrap_root_pipeline": {
+      "original_exit_code": 0,
+      "native_before_exit_code": 2,
+      "native_after_exit_code": 0,
+      "registered_negative_control_ctest_exit_code": 8
+    }
+  },
+  "pre_post_test": "no work",
+  "physical_device": "Deferred by explicit user request",
+  "scope": "Complete Context source group. Runtime services, graph/save, runtime root and whole-stage acceptance remain separate."
+}

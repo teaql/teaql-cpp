@@ -3,6 +3,10 @@
 #include <teaql/core/list.hpp>
 #include <teaql/memory/clone.hpp>
 
+namespace teaql {
+class DebugWriter;
+}
+
 namespace teaql::request {
 inline constexpr std::string_view COUNT_ALIAS = "count", TYPE_FIELD = "internal_type",
                                   TYPE_GROUP_FIELD = "type_group";
@@ -33,20 +37,42 @@ struct DateRange {
     T start, end;
 
     DateRange(std::allocator_arg_t, Allocator a, const T& start, const T& end)
-        : start(detail::clone_in(a.resource(), start)), end(detail::clone_in(a.resource(), end)) {}
+        requires detail::domain_copyable<T>
+        : start(detail::clone_in(a.resource(), start)), end(detail::clone_in(a.resource(), end)),
+          resource_(a.resource()) {}
+
+    DateRange(std::allocator_arg_t, Allocator a, T&& start, T&& end)
+        : start(detail::move_in(a.resource(), std::move(start))),
+          end(detail::move_in(a.resource(), std::move(end))), resource_(a.resource()) {}
 
     DateRange(std::allocator_arg_t, Allocator a, const DateRange& other)
+        requires detail::domain_copyable<T>
         : DateRange(std::allocator_arg, a, other.start, other.end) {}
 
+    DateRange(std::allocator_arg_t, Allocator a, DateRange&& other)
+        : DateRange(detail::move_to(a.resource(), std::move(other))) {}
+
     DateRange(const DateRange&) = delete;
-    DateRange(DateRange&&) noexcept = default;
-    bool operator==(const DateRange&) const = default;
+    DateRange(DateRange&&) noexcept(std::is_nothrow_move_constructible_v<T>) = default;
+
+    Memory memory_resource() const noexcept {
+        return resource_;
+    }
+
+    bool operator==(const DateRange& other) const
+        requires std::equality_comparable<T>
+    {
+        return start == other.start && end == other.end;
+    }
+
+private:
+    Memory resource_;
 };
 template <class T>
 concept EntityReference =
     std::same_as<std::remove_cvref_t<T>, Value> ||
     std::same_as<std::remove_cvref_t<T>, std::uint64_t> || requires(T&& value) {
-        { std::move(value).entity_id_value() } -> std::same_as<Value>;
+        { std::forward<T>(value).entity_id_value() } -> std::same_as<Value>;
     };
 
 template <EntityReference T>
@@ -84,6 +110,8 @@ public:
     bool operator==(const UnsafeRawSqlSegment&) const = default;
 
 private:
+    friend void write_debug(DebugWriter&, const UnsafeRawSqlSegment&);
+
     UnsafeRawSqlSegment(Memory r, std::string_view sql) : sql_(sql, r) {}
 
     String sql_;

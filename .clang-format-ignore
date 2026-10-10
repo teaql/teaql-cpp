@@ -2,3 +2,5 @@
 include/teaql/core/detail/debug_escape_ranges.hpp
 include/teaql/core/detail/uppercase_tables.hpp
 src/provider_sqlite/unicode_lower_data.inc
+include/teaql/core/detail/language_case_tables.hpp
+include/teaql/runtime/detail/builtin_i18n_data.hpp

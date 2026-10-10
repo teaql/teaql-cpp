@@ -1,0 +1,22 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-wndr4300-memory
+Test project /home/philip/githome/teaql-cpp/build-wndr4300-memory
+    Start 76: recursive_graph_write_context_contracts
+1/5 Test #76: recursive_graph_write_context_contracts ...***Exception: SegFault  1.28 sec
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+
+    Start 77: recursive_graph_write_rust_parity
+2/5 Test #77: recursive_graph_write_rust_parity .........   Passed    1.76 sec
+    Start 79: graph_node_command_rust_parity
+3/5 Test #79: graph_node_command_rust_parity ............   Passed    1.98 sec
+    Start 81: graph_save_adapter_rust_parity
+4/5 Test #81: graph_save_adapter_rust_parity ............   Passed    1.29 sec
+    Start 84: graph_execution_rust_parity
+5/5 Test #84: graph_execution_rust_parity ...............   Passed    0.79 sec
+
+80% tests passed, 1 tests failed out of 5
+
+Total Test time (real) =   7.11 sec
+
+The following tests FAILED:
+	 76 - recursive_graph_write_context_contracts (SEGFAULT)
+Errors while running CTest

@@ -2,6 +2,7 @@
 #include <teaql/runtime/entity_key.hpp>
 #include <teaql/core/detail/text.hpp>
 #include <teaql/memory/clone.hpp>
+#include <functional>
 
 namespace teaql {
 struct MutationPolicyIdentity {
@@ -132,5 +133,23 @@ struct MutationGovernanceSnapshot {
     }
 
     bool operator==(const MutationGovernanceSnapshot&) const = default;
+};
+}
+
+namespace std {
+template <>
+struct hash<teaql::MutationPolicyIdentity> {
+    std::size_t operator()(const teaql::MutationPolicyIdentity& value) const noexcept {
+        // Hash-table capability follows all equality fields. This is a native
+        // process hash, not Rust DefaultHasher bytes or a persisted identity.
+        std::size_t result = 0;
+        for (std::string_view field : {std::string_view(value.id),
+                                       std::string_view(value.version),
+                                       std::string_view(value.fingerprint)}) {
+            auto part = std::hash<std::string_view>{}(field);
+            result ^= part + std::size_t(0x9e3779b9) + (result << 6) + (result >> 2);
+        }
+        return result;
+    }
 };
 }

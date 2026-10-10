@@ -1,0 +1,10 @@
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/philip/githome/teaql-cpp/build-root-integration
+[1/6] Building CXX object CMakeFiles/teaql_runtime_graph_model_tests.dir/tests/runtime_graph_model_tests.cpp.o
+[2/6] Linking CXX executable teaql_runtime_graph_model_tests
+[3/6] Building CXX object CMakeFiles/teaql_runtime_graph_model_probe.dir/tests/parity/runtime_graph_model_probe.cpp.o
+[4/6] Linking CXX executable teaql_runtime_graph_model_probe
+[5/6] Building CXX object CMakeFiles/teaql_runtime_graph_probe.dir/tests/parity/runtime_graph_probe.cpp.o
+[6/6] Linking CXX executable teaql_runtime_graph_probe

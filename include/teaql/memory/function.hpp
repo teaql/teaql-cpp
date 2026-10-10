@@ -1,6 +1,7 @@
 #pragma once
 #include <teaql/memory/arena.hpp>
 #include <teaql/memory/types.hpp>
+#include <teaql/memory/clone.hpp>
 #include <functional>
 
 namespace teaql {
@@ -85,7 +86,7 @@ private:
             return std::invoke(*static_cast<const F*>(state), std::forward<Args>(args)...);
         },
         [](Arena& arena, const void* state) -> const void* {
-            if constexpr (!detail::relocatable_callable<F>) {
+            if constexpr (!detail::relocatable_callable<F> || !detail::domain_copyable<F>) {
                 throw std::invalid_argument(
                     "Cross-context callback captures require allocator-aware state");
             } else {

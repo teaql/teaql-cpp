@@ -40,7 +40,22 @@
   implementing logs. Do not claim unsupported features or ordinary CRUD as graph save.
 - Do not modify the generator yet. Port simple Rust examples semantically with
   handwritten models and mappings; let runnable examples drive kernel work.
-- Update migration status honestly. SQLite CRUD/transactions and basic safe SQL
-  logs are implemented; generic graph save, mutation governance, full audit/log
-  parity and GPU adapters are not.
+- Update migration status honestly. The six in-scope migration stages, graph/
+  ledger save, mutation governance and audit/log source contracts are accepted
+  within documented C++ ownership/protocol adaptations. See the final Stage 6
+  evidence; do not claim GPU adapters, external integrations or physical-router
+  execution. Final full sanitizer leak scanning is disabled.
 - Validate relevant contracts through CMake/CTest. Use sanitizers for lifetime work.
+
+## Command execution reliability
+
+- Wait for every compiler or linker process to exit successfully before executing,
+  inspecting, copying, or replacing its output. A returned session ID means the
+  command is still running: poll it to completion and check its exit code first.
+- Do not run dependent build and execution steps concurrently. In a single shell,
+  join them with `&&` or use `set -e`; do not let a subsequent `cat` mask a failed
+  test command's exit status.
+- Diagnose permission failures from the actual command, file mode, mount options,
+  and effective session permissions. Do not infer a sandbox failure from an
+  unfinished linker output, and do not recursively chmod the workspace.
+- Preserve ongoing migration edits and session history during troubleshooting.

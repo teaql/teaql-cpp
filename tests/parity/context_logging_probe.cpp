@@ -5,15 +5,45 @@
 #include <cstdlib>
 using namespace teaql;
 
+static SystemTime time_value(const Json& input) {
+    if (std::holds_alternative<Json::Object>(input.data)) {
+        return SystemTime::from_unix_seconds(number<std::int64_t>(field(input, "seconds")),
+                                             std::get<std::uint64_t>(field(input, "nanos").data));
+    }
+    return SystemTime(std::chrono::nanoseconds(number<std::int64_t>(input)));
+}
+
+static String epoch_nanoseconds(Memory owner, SystemTime value) {
+    auto elapsed = value.duration_since(SystemTime{});
+    bool negative = !elapsed;
+    if (!elapsed) {
+        elapsed = SystemTime{}.duration_since(value);
+    }
+    String output(owner);
+    if (negative) {
+        output += '-';
+    }
+    char digits[24];
+    if (elapsed->seconds) {
+        auto end = std::to_chars(digits, digits + sizeof(digits), elapsed->seconds).ptr;
+        output.append(digits, end);
+        end = std::to_chars(digits, digits + sizeof(digits), elapsed->nanos).ptr;
+        output.append(9 - (end - digits), '0');
+        output.append(digits, end);
+    } else {
+        auto end = std::to_chars(digits, digits + sizeof(digits), elapsed->nanos).ptr;
+        output.append(digits, end);
+    }
+    return output;
+}
+
 static ExecutionMetadata metadata(Memory r, const Json& j) {
     ExecutionMetadata m(std::allocator_arg,
                         Allocator(r),
                         DataServiceOperation(number<unsigned>(field(j, "operation"))));
     m.backend = text(field(j, "backend"));
-    m.started_at = ExecutionMetadata::SystemTime(
-        std::chrono::nanoseconds(number<std::int64_t>(field(j, "start"))));
-    m.ended_at = ExecutionMetadata::SystemTime(
-        std::chrono::nanoseconds(number<std::int64_t>(field(j, "end"))));
+    m.started_at = time_value(field(j, "start"));
+    m.ended_at = time_value(field(j, "end"));
     auto opt = [&](std::optional<String>& out, const char* key) {
         const auto& x = field(j, key);
         if (std::holds_alternative<String>(x.data)) {
@@ -60,7 +90,7 @@ static Json snapshot(UserContext& c, UnifiedLogBuffer& buffer) {
         auto x = detail::model_json(r);
         detail::model_put(x, "entry", detail::debug_sql_log(r, std::get<SqlLogEntry>(e.payload)));
         detail::model_put(x, "user", e.user_identifier ? Json(r, *e.user_identifier) : Json(r));
-        detail::model_put(x, "timestamp", std::to_string(e.timestamp.time_since_epoch().count()));
+        detail::model_put(x, "timestamp", epoch_nanoseconds(r, e.timestamp));
         detail::model_put(
             x, "trace_matches", e.trace_chain == std::get<SqlLogEntry>(e.payload).trace_path);
         unified.emplace_back(std::move(x));

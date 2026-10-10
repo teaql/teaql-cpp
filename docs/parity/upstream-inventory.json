@@ -8400,12 +8400,76 @@
           "line": 424
         },
         {
-          "name": "mask_contract_expanded_sql",
-          "line": 454
+          "name": "empty::mask_contract_audit_algorithm",
+          "line": 465,
+          "macro": "mask_case",
+          "template": "mask_contract_audit_algorithm"
         },
         {
-          "name": "mask_contract_audit_algorithm",
-          "line": 458
+          "name": "empty::mask_contract_expanded_sql",
+          "line": 465,
+          "macro": "mask_case",
+          "template": "mask_contract_expanded_sql"
+        },
+        {
+          "name": "short::mask_contract_audit_algorithm",
+          "line": 466,
+          "macro": "mask_case",
+          "template": "mask_contract_audit_algorithm"
+        },
+        {
+          "name": "short::mask_contract_expanded_sql",
+          "line": 466,
+          "macro": "mask_case",
+          "template": "mask_contract_expanded_sql"
+        },
+        {
+          "name": "digits::mask_contract_audit_algorithm",
+          "line": 467,
+          "macro": "mask_case",
+          "template": "mask_contract_audit_algorithm"
+        },
+        {
+          "name": "digits::mask_contract_expanded_sql",
+          "line": 467,
+          "macro": "mask_case",
+          "template": "mask_contract_expanded_sql"
+        },
+        {
+          "name": "boundary::mask_contract_audit_algorithm",
+          "line": 468,
+          "macro": "mask_case",
+          "template": "mask_contract_audit_algorithm"
+        },
+        {
+          "name": "boundary::mask_contract_expanded_sql",
+          "line": 468,
+          "macro": "mask_case",
+          "template": "mask_contract_expanded_sql"
+        },
+        {
+          "name": "long::mask_contract_audit_algorithm",
+          "line": 469,
+          "macro": "mask_case",
+          "template": "mask_contract_audit_algorithm"
+        },
+        {
+          "name": "long::mask_contract_expanded_sql",
+          "line": 469,
+          "macro": "mask_case",
+          "template": "mask_contract_expanded_sql"
+        },
+        {
+          "name": "quote::mask_contract_audit_algorithm",
+          "line": 470,
+          "macro": "mask_case",
+          "template": "mask_contract_audit_algorithm"
+        },
+        {
+          "name": "quote::mask_contract_expanded_sql",
+          "line": 470,
+          "macro": "mask_case",
+          "template": "mask_contract_expanded_sql"
         },
         {
           "name": "mixed_policies_preserve_sql_and_execution_values",

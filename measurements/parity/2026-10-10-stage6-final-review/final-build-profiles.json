@@ -1,0 +1,56 @@
+{
+  "native": {
+    "CMAKE_BUILD_TYPE": "Debug",
+    "CMAKE_CXX_COMPILER": "/usr/bin/c++",
+    "CMAKE_CXX_FLAGS": "",
+    "CMAKE_CXX_FLAGS_DEBUG": "-g",
+    "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+    "CMAKE_EXE_LINKER_FLAGS": "",
+    "SQLite3_INCLUDE_DIR": "/usr/include",
+    "SQLite3_LIBRARY": "/usr/lib/x86_64-linux-gnu/libsqlite3.so",
+    "build_directory": "build-root-integration",
+    "layer_metadata_sha256": "a41d2c3778a2debc4ede94c6077d433651ef77825fdd52feb54cef6235c3a655",
+    "CMAKE_CXX_COMPILER_VERSION": "11.4.0",
+    "CMAKE_CXX_COMPILER_ID": "GNU",
+    "CMAKE_SIZEOF_VOID_P": "${CMAKE_CXX_SIZEOF_DATA_PTR}",
+    "cmake_cache_sha256": "f6a6500d3a50346ab82c216c1759c4f31528376f2b24235ff06281943a0b692a"
+  },
+  "sanitizer": {
+    "CMAKE_BUILD_TYPE": "Debug",
+    "CMAKE_CXX_COMPILER": "/usr/bin/c++",
+    "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined -fno-omit-frame-pointer",
+    "CMAKE_CXX_FLAGS_DEBUG": "-g",
+    "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+    "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined",
+    "SQLite3_INCLUDE_DIR": "/usr/include",
+    "SQLite3_LIBRARY": "/usr/lib/x86_64-linux-gnu/libsqlite3.so",
+    "build_directory": "build-sanitize",
+    "layer_metadata_sha256": "a41d2c3778a2debc4ede94c6077d433651ef77825fdd52feb54cef6235c3a655",
+    "test_environment": {
+      "ASAN_OPTIONS": "detect_leaks=0",
+      "UBSAN_OPTIONS": "halt_on_error=1"
+    },
+    "CMAKE_CXX_COMPILER_VERSION": "11.4.0",
+    "CMAKE_CXX_COMPILER_ID": "GNU",
+    "CMAKE_SIZEOF_VOID_P": "${CMAKE_CXX_SIZEOF_DATA_PTR}",
+    "cmake_cache_sha256": "d35b94a415b2675ecf74b4fe4f5d305227a6b48bdc949373ce222fcddda5867c"
+  },
+  "mips": {
+    "CMAKE_BUILD_TYPE": "MinSizeRel",
+    "CMAKE_CXX_FLAGS": "-march=74kc -msoft-float -ffunction-sections -fdata-sections",
+    "CMAKE_CXX_FLAGS_DEBUG": "-g",
+    "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+    "CMAKE_EXE_LINKER_FLAGS": "-static -static-libgcc -static-libstdc++ -Wl,--gc-sections -Wl,-z,noexecstack",
+    "CMAKE_CROSSCOMPILING_EMULATOR": "/usr/bin/qemu-mips;-cpu;74Kf",
+    "SQLite3_INCLUDE_DIR": "/home/philip/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libsqlite3-sys-0.38.1/sqlite3",
+    "SQLite3_LIBRARY": "/home/philip/githome/teaql-cpp/.tools/wndr4300/libsqlite3-source-3530200.a",
+    "build_directory": "build-wndr4300-memory",
+    "layer_metadata_sha256": "a41d2c3778a2debc4ede94c6077d433651ef77825fdd52feb54cef6235c3a655",
+    "execution": "QEMU; physical WNDR4300 explicitly deferred",
+    "CMAKE_CXX_COMPILER": "/home/philip/githome/teaql-cpp/.tools/wndr4300/openwrt-toolchain-24.10.4-ath79-nand_gcc-13.3.0_musl.Linux-x86_64/toolchain-mips_24kc_gcc-13.3.0_musl/bin/mips-openwrt-linux-musl-g++",
+    "CMAKE_CXX_COMPILER_VERSION": "13.3.0",
+    "CMAKE_CXX_COMPILER_ID": "GNU",
+    "CMAKE_SIZEOF_VOID_P": "${CMAKE_CXX_SIZEOF_DATA_PTR}",
+    "cmake_cache_sha256": "2c00381f1b4f4cb7069572c7a9b6cd4089b172a427daf13c2f38d2c7da3b43be"
+  }
+}

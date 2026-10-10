@@ -1,0 +1,1542 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Actual public EntityDataService cursor registration in both original build profiles. Fixture offsets are supplied directly; all runtime arithmetic is performed by unchanged Rust. Smart-list compatibility is an independent control.",
+  "cases": [
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "rows",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          0
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "rows",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551614
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "rows",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:CACHE_MISS",
+        "outcomes": [
+          {
+            "execution_panic": true
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "rows",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 2,
+        "offsets": [
+          18446744073709551614,
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "CURSOR_SEEK",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "execution_panic": true
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": "Binary { left: Column(\"id\"), op: Gt, right: Value(U64(1)) }",
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "CURSOR_SEEK",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": "Binary { left: Column(\"id\"), op: Gt, right: Value(U64(1)) }",
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "owned",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          0
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "owned",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551614
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "owned",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:CACHE_MISS",
+        "outcomes": [
+          {
+            "execution_panic": true
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "owned",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 2,
+        "offsets": [
+          18446744073709551614,
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "CURSOR_SEEK",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "execution_panic": true
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": "Binary { left: Column(\"id\"), op: Gt, right: Value(U64(1)) }",
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "CURSOR_SEEK",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": "Binary { left: Column(\"id\"), op: Gt, right: Value(U64(1)) }",
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "aggregates",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          0
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "aggregates",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551614
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "aggregates",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "OFFSET_FALLBACK:CACHE_MISS",
+        "outcomes": [
+          {
+            "execution_panic": true
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "OFFSET_FALLBACK:FIRST_PAGE",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "aggregates",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 2,
+        "offsets": [
+          18446744073709551614,
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "CURSOR_SEEK",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "execution_panic": true
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": "Binary { left: Column(\"id\"), op: Gt, right: Value(U64(1)) }",
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "CURSOR_SEEK",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": "Binary { left: Column(\"id\"), op: Gt, right: Value(U64(1)) }",
+            "projection": [],
+            "query_comment": "[fixture] Item(pending): Inspect cursor boundaries",
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "list",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          0
+        ]
+      },
+      "expected": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "list",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551614
+        ]
+      },
+      "expected": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "list",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 1,
+        "offsets": [
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "capture": false,
+        "cache": false,
+        "backend": false,
+        "aggregate": false,
+        "failure": false,
+        "mode": "list",
+        "continuous": true,
+        "purpose": "Inspect cursor boundaries",
+        "comment": null,
+        "limit": null,
+        "calls": 2,
+        "offsets": [
+          18446744073709551614,
+          18446744073709551615
+        ]
+      },
+      "expected": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      },
+      "expected_release": {
+        "continuous": "DISABLED",
+        "outcomes": [
+          {
+            "rows": 1
+          },
+          {
+            "rows": 1
+          }
+        ],
+        "requests": [
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551614,
+              1
+            ]
+          },
+          {
+            "capture": false,
+            "comment": null,
+            "debug": false,
+            "entity": "Item",
+            "filter": null,
+            "projection": [],
+            "query_comment": null,
+            "query_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "request_trace": [
+              {
+                "comment": "Inspect cursor boundaries",
+                "entity": "Item",
+                "kind": 7
+              }
+            ],
+            "slice": [
+              18446744073709551615,
+              1
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include <stdexcept>
+#include <string>
 #include <string_view>
 
 namespace teaql {
@@ -13,6 +14,9 @@ enum class EntityStatus {
     UpdatedRecover,
     Refer
 };
+
+constexpr std::string_view to_string(EntityStatus status) noexcept;
+constexpr std::string_view to_string(EntityAction action) noexcept;
 
 // Exact transition table from Rust v5.0.5 runtime/entity_status.rs.
 constexpr EntityStatus next_status(EntityStatus status, EntityAction action) {
@@ -65,7 +69,9 @@ constexpr EntityStatus next_status(EntityStatus status, EntityAction action) {
     case EntityStatus::Refer:
         break;
     }
-    throw std::invalid_argument("Invalid entity status transition");
+    throw std::invalid_argument(
+        "invalid entity status transition: " + std::string(to_string(status)) + " + " +
+        std::string(to_string(action)));
 }
 
 constexpr bool need_persist(EntityStatus status) noexcept {
@@ -105,6 +111,20 @@ constexpr std::string_view to_string(EntityStatus status) noexcept {
         return "UpdatedRecover";
     case EntityStatus::Refer:
         return "Refer";
+    }
+    return {};
+}
+
+constexpr std::string_view to_string(EntityAction action) noexcept {
+    switch (action) {
+    case EntityAction::Update:
+        return "Update";
+    case EntityAction::Delete:
+        return "Delete";
+    case EntityAction::Persist:
+        return "Persist";
+    case EntityAction::Recover:
+        return "Recover";
     }
     return {};
 }

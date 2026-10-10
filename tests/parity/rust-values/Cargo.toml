@@ -12,6 +12,8 @@ teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
 teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
 chrono = "=0.4.45"
 rust_decimal = "=1.42.1"
+# Oracle-only: invoke the enabled locked Decimal reciprocal trait directly.
+num-traits = "=0.2.19"
 serde_json = "=1.0.150"
 # Oracle-only Stream fixture; already used transitively by pinned teaql-sql.
 futures-core = "=0.3.34"
@@ -34,5 +36,15 @@ async-trait = "=0.1.92"
 
 # Oracle-only direct import of the runtime's already locked asynchronous mutex.
 futures-util = "=0.3.34"
+
+# Oracle-only: use unchanged derive mappings from the locked example library.
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+
+# Oracle-only: already locked by the original runtime; manufacture authenticated
+# malformed payload fixtures without copying either original codec.
+aes-gcm = "=0.10.3"
+base64 = "=0.22.1"
+# Oracle-only existing runtime dependency for authenticated round-trip fixtures.
+hkdf = "=0.12.4"
 
 [workspace]

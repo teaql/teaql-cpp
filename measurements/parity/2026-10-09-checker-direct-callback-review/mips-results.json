@@ -1,0 +1,20 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "profile": "OpenWrt MIPS/QEMU",
+  "passed": 31,
+  "total": 31,
+  "seconds": 26.46,
+  "initial_build_tasks": 69,
+  "additional_scope_build_tasks": 6,
+  "post_test": "no work",
+  "hardware": "Explicitly deferred by user",
+  "native_full": "pending",
+  "sanitizer": "pending",
+  "source_acceptance": "pending",
+  "live_original_comparisons": {
+    "checker_models": 220,
+    "policy_models": 177,
+    "checker_runtime": 1362,
+    "policy_review": 276
+  }
+}

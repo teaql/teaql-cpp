@@ -6,7 +6,8 @@
 #include <stdexcept>
 
 namespace teaql::detail {
-void append_float(String& out, double value, bool json) {
+template <class Float>
+void append_float_impl(String& out, Float value, bool json) {
     if (!std::isfinite(value)) {
         out += json ? "null" : std::isnan(value) ? "NaN" : std::signbit(value) ? "-inf" : "inf";
         return;
@@ -46,16 +47,20 @@ void append_float(String& out, double value, bool json) {
         // Rust Display breaks shortest-decimal ties away from zero; to_chars
         // and serde_json use ties-to-even. Detect the exact binary midpoint,
         // without floating arithmetic or allocating a big integer.
-        const auto bits = std::bit_cast<std::uint64_t>(std::abs(value));
-        const int binary_exponent = int(bits >> 52);
-        auto significand = bits & ((std::uint64_t(1) << 52) - 1);
+        using Bits = std::conditional_t<std::same_as<Float, float>, std::uint32_t, std::uint64_t>;
+        constexpr int fraction_bits = std::same_as<Float, float> ? 23 : 52;
+        constexpr int exponent_bias = std::same_as<Float, float> ? 150 : 1075;
+        const auto bits = std::bit_cast<Bits>(std::abs(value));
+        const int binary_exponent = int(bits >> fraction_bits);
+        auto significand = bits & ((Bits(1) << fraction_bits) - 1);
         if (binary_exponent) {
-            significand |= std::uint64_t(1) << 52;
+            significand |= Bits(1) << fraction_bits;
         }
         const int trailing = std::countr_zero(significand);
         significand >>= trailing;
         const int power = exponent - count + 1;
-        const int binary_power = (binary_exponent ? binary_exponent - 1075 : -1074) + trailing;
+        const int binary_power =
+            (binary_exponent ? binary_exponent - exponent_bias : 1 - exponent_bias) + trailing;
         bool divisible = true;
         for (int i = 0; i < power; ++i) {
             if (significand % 5) {
@@ -94,5 +99,13 @@ void append_float(String& out, double value, bool json) {
         out += '.';
         out.append(digits + exponent + 1, digits + count);
     }
+}
+
+void append_float(String& out, double value, bool json) {
+    append_float_impl(out, value, json);
+}
+
+void append_float(String& out, float value, bool json) {
+    append_float_impl(out, value, json);
 }
 }

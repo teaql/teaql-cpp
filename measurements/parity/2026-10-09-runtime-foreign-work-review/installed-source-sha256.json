@@ -1,0 +1,15 @@
+{
+  "include/teaql/runtime/detail/base_query.hpp": "2a6f5a97930538e12e2dfb2bad9271b195428dd313471d9756ec90db31c90fb7",
+  "include/teaql/runtime/detail/base_mutation.hpp": "20b6037c8491f55e3d037d56c075f025d6b6bf8d814a342b9519d4589ba18bb5",
+  "include/teaql/runtime/detail/entity_query.hpp": "83ea5ef1cb455d28323263a6c2120142903d2bab614db68e78d6c244faaeff78",
+  "include/teaql/runtime/detail/relation_execution.hpp": "c0d4d72e011ae5deaac741a4e58672d4c00cfd8ea8181d4bad02e831a3ae173d",
+  "include/teaql/runtime/detail/relation_enhancement.hpp": "ce6ccc540c062f3aee9c3d2c9e27a9eb8ad0ebacb79239c1ff3f03d3c9872510",
+  "include/teaql/runtime/transaction.hpp": "02fed8f1949f0cf3e4b8fec6c0d674e2a78bd57261f033a015909a9792caddcd",
+  "tests/runtime_foreign_work_tests.cpp": "a9b40e1277a134db1e66e29e5d9183aa1d67e8fcec8e2f816da2339b6ad6d7bd",
+  "tests/relation_execution_tests.cpp": "6c2bf2f2bc29b41c309e6f0d3ec786a2d7e0a7ebee273cf9ee33c3402671624c",
+  "tests/relation_hydration_tests.cpp": "e60c32f42bcc2a82b522e71429826deab62981ec047636a6a23bfc09756f7ee3",
+  "tests/relation_enhancement_tests.cpp": "4ec07a4ed97dc5e7d8f1a50fd0d274fc24077a3c80ee2c79a4a92f9fce287048",
+  "tests/transaction_scope_tests.cpp": "df4d885584705afa5cec26193a1760728f066ef6ced5c304504bb74511f25b0d",
+  "tests/parity/compare_runtime_examples.py": "c229e39b478968045e71c284754943333ec1fdbb8416fcc7f38f5f5f8a2ffb98",
+  "CMakeLists.txt": "51b35e7a5e1f0bc83ef22d322d1ac54db2e7bb170b379e2bcfc168bea901585b"
+}

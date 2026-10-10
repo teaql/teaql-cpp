@@ -1,0 +1,133 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "corrected full native351 and native10/sanitizer42/MIPS42 pass; complete source/stage acceptance remains separate",
+  "before_returncode": -6,
+  "before_stderr": "pure virtual method called; terminate called without an active exception",
+  "installed": true,
+  "patch_sha256": "e854a014d8e8c3660989f08e61dca81ebee7e43c262698216b0a35e9610950f5",
+  "future_registered_tests": 349,
+  "gates": [
+    "staged syntax check",
+    "installed full consumer rebuild",
+    "clock stale references/date override/global borrows/quiescence contracts",
+    "reentrant time and date termination contracts",
+    "existing Business ID clock/service parity",
+    "ASan/UBSan and MIPS/QEMU"
+  ],
+  "physical_router_verified": false,
+  "staged_syntax_check": "passed for both new lifecycle fixtures and updated schema.cpp; full runtime linking/testing remains pending",
+  "scope": [
+    "BusinessClock",
+    "EntityRegistry",
+    "runtime::SchemaProvider"
+  ],
+  "other_before_results": {
+    "registry": {
+      "returncode": -6,
+      "stdout": "",
+      "stderr": "pure virtual method called\nterminate called without an active exception\n",
+      "expected": "ReferenceError::Dead before provider dispatch"
+    },
+    "schema": {
+      "returncode": -6,
+      "stdout": "",
+      "stderr": "pure virtual method called\nterminate called without an active exception\n",
+      "expected": "ReferenceError::Dead before provider dispatch"
+    }
+  },
+  "current_source_sha256": {
+    "include/teaql/runtime/context.hpp": "fe51d735f8e4cd58d3d830cc461ee12d17fa0de840989da56f13dc111dd7482e",
+    "src/runtime/schema.cpp": "b167a2dc16ab29c3991d6e3155fcd146ff2ed8f028df98928c29bbb097673607"
+  },
+  "staged_source_sha256": {
+    "include/teaql/runtime/context.hpp": "8a5cb45a45c0b8ba65d3771ae928376364dc577e2b7afbfa88550218013434ea",
+    "src/runtime/schema.cpp": "0a51831ea53e50ec0c5427650224fbf97a9f3f545ad792272e9daac9b8fecb59",
+    "tests/business_clock_scope_tests.cpp": "bccbb9ebbc8f4011514eaf8a0f177e2369080a9472e5d9c91af0d5629cd54dbb",
+    "tests/context_provider_borrow_tests.cpp": "cf88578de77a56fda1f9ef10a95516c4ac504ffc9ae8871634798207f74f71c0",
+    "CMakeLists.txt": "8ecab3116af0fbb1b7b4359a75e720a690ae361791402c06757f80ffee79d677",
+    "tests/internal_id_tests.cpp": "0ff870b6cf37c4be95431ce372f66eeaf343b8809bf928a6979eed8801934c4f",
+    "tests/mutation_policy_tests.cpp": "bf26fd868faacde2b3bece4816495205ef56a7d52ad6315f91df1d0509ed9cb1",
+    "tests/checker_tests.cpp": "3c3be6f7643e0ed5da2a1609be2651dba32074cf01ef31248e706101b29041e7"
+  },
+  "reentrant_test_contract": "Explicit terminate succeeds; ordinary caught exceptions exit2 and returning from the callback exits1, preventing false-positive termination after reclamation",
+  "existing_reentrant_checks_strengthened": [
+    "internal_id_reentrant_close",
+    "internal_id_reentrant_floor",
+    "mutation_policy_reentrant_close",
+    "checker_reentrant_close"
+  ],
+  "registered_native_tests": 351,
+  "format_files": 662,
+  "installed_source_sha256": {
+    "include/teaql/runtime/context.hpp": "8a5cb45a45c0b8ba65d3771ae928376364dc577e2b7afbfa88550218013434ea",
+    "src/runtime/schema.cpp": "0a51831ea53e50ec0c5427650224fbf97a9f3f545ad792272e9daac9b8fecb59",
+    "tests/business_clock_scope_tests.cpp": "bccbb9ebbc8f4011514eaf8a0f177e2369080a9472e5d9c91af0d5629cd54dbb",
+    "tests/context_provider_borrow_tests.cpp": "cf88578de77a56fda1f9ef10a95516c4ac504ffc9ae8871634798207f74f71c0",
+    "tests/internal_id_tests.cpp": "0ff870b6cf37c4be95431ce372f66eeaf343b8809bf928a6979eed8801934c4f",
+    "tests/mutation_policy_tests.cpp": "bf26fd868faacde2b3bece4816495205ef56a7d52ad6315f91df1d0509ed9cb1",
+    "tests/checker_tests.cpp": "3c3be6f7643e0ed5da2a1609be2651dba32074cf01ef31248e706101b29041e7",
+    "CMakeLists.txt": "8ecab3116af0fbb1b7b4359a75e720a690ae361791402c06757f80ffee79d677"
+  },
+  "preceding_checkpoint": {
+    "native": {
+      "passed": 343,
+      "total": 343,
+      "seconds": 78.97,
+      "pre_test_no_work": true,
+      "post_test_no_work": true,
+      "valid_dependency_records": 411
+    },
+    "store_sanitizer": {
+      "passed": 8,
+      "total": 8,
+      "seconds": 6.36
+    },
+    "store_mips": {
+      "passed": 8,
+      "total": 8,
+      "seconds": 2.32
+    },
+    "store_live_original": {
+      "passed": 477,
+      "total": 477
+    }
+  },
+  "initial_native349": {
+    "passed": 347,
+    "total": 349,
+    "failed": [
+      "business_service_contracts",
+      "runtime_registry_contracts"
+    ],
+    "seconds": 68.01
+  },
+  "correction": "ensure_mutable precedes check_public in all three setters, preserving previous closing/closed exception behavior",
+  "corrected_native_focus": {
+    "passed": 10,
+    "total": 10,
+    "seconds": 0.19
+  },
+  "corrected_mips_selection": {
+    "passed": 42,
+    "total": 42,
+    "seconds": 22.51,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "corrected_sanitizer_selection": {
+    "passed": 42,
+    "total": 42,
+    "seconds": 31.1,
+    "refresh": "ninja: no work to do.",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "full_native": {
+    "passed": 351,
+    "total": 351,
+    "seconds": 76.06,
+    "pre_test_no_work": true,
+    "post_test_no_work": true,
+    "valid_nonempty_dependency_records": 415
+  }
+}

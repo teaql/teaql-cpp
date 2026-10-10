@@ -1,0 +1,105 @@
+{
+  "baseline": {
+    "tag": "v5.0.5",
+    "commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a"
+  },
+  "purpose": "Record the original eight-connection schema fixture and independent SQLite-only reproduction of the MIPS contention deadline.",
+  "workers": 8,
+  "native_full": {
+    "passed": 261,
+    "failed": 0,
+    "seconds": 73.17,
+    "evidence": "native-full-tests.txt"
+  },
+  "sanitize_selection": {
+    "passed": 3,
+    "failed": 0,
+    "evidence": "sanitize-selected-tests.txt"
+  },
+  "mips": {
+    "architecture": "big-endian MIPS32r2/O32",
+    "compiler": "OpenWrt GCC 13.3.0",
+    "libc": "musl 1.2.5",
+    "emulator": "qemu-mips -cpu 74Kf",
+    "sqlite_version": "3.40.1",
+    "library_sha256": "0ceb207a56546da52ac0704586d364f9190095269db23ba0e73b8dea4e57e0bc",
+    "original_busy_timeout_ms": 5000,
+    "original_selection": {
+      "passed": 2,
+      "failed": 1,
+      "schema_seconds": 5.38,
+      "evidence": "mips-five-second-tests.txt"
+    },
+    "isolated_original": {
+      "passed": 0,
+      "failed": 1,
+      "schema_seconds": 5.16,
+      "evidence": "mips-five-second-isolated-tests.txt"
+    },
+    "fixture_busy_timeout_ms": 30000,
+    "adapted_selection": {
+      "passed": 3,
+      "failed": 0,
+      "schema_seconds": 7.32,
+      "evidence": "mips-thirty-second-tests.txt"
+    }
+  },
+  "interpretation": "The original eight writers and all source assertions remain. Only the slow-target test fixture deadline changes; production SqliteConnection still defaults to 5000 ms. A SQLite-only eight-writer program also failed with the shorter deadline and succeeded with 30000 ms; one timed successful run took 4.09 seconds. This is measured emulator contention evidence, not a proven SQLite defect or physical-router result.",
+  "repro_source": "sqlite-only-repro.cpp",
+  "repro_notes": "Standalone diagnostic source uses only the C++ standard library and the same SQLite archive, with no TEAQL objects, arenas or schema code. Its default deadline is 30000 ms; replace that fixture constant with 5000 for the original diagnostic. It is not part of the production kernel or the CTest source-coverage count.",
+  "physical_router_execution": "unverified",
+  "sqlite_only_isolated_five_second_run": {
+    "passed": 6,
+    "failed": 2,
+    "seconds": 5.09,
+    "workers": [
+      {
+        "worker": 4,
+        "begun": true,
+        "result": 0
+      },
+      {
+        "worker": 1,
+        "begun": true,
+        "result": 0
+      },
+      {
+        "worker": 5,
+        "begun": true,
+        "result": 0
+      },
+      {
+        "worker": 0,
+        "begun": true,
+        "result": 0
+      },
+      {
+        "worker": 2,
+        "begun": true,
+        "result": 0
+      },
+      {
+        "worker": 6,
+        "begun": false,
+        "result": 5
+      },
+      {
+        "worker": 7,
+        "begun": false,
+        "result": 5
+      },
+      {
+        "worker": 3,
+        "begun": true,
+        "result": 0
+      }
+    ],
+    "evidence": "sqlite-only-five-second-output.txt",
+    "source_variant": "sqlite-only-repro.cpp with fixture busy timeout changed from 30000 to 5000 ms"
+  },
+  "native_refreshed_selection": {
+    "passed": 3,
+    "failed": 0,
+    "evidence": "native-selected-tests.txt"
+  }
+}

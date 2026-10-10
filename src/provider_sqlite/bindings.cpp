@@ -98,11 +98,11 @@ bind_statement(Memory r, sqlite3_stmt& statement, std::span<const SqliteBoundVal
     }
     if (values.size() != expected) {
         // rusqlite's iterator stops at the first excess parameter.
-        String message("Wrong number of parameters passed to query. Got ", r);
-        append_number(message, std::min(values.size(), expected + 1));
-        message += ", needed ";
-        append_number(message, expected);
-        return Output::err(r, MutationExecutorError::sqlite(r, 0, message));
+        return Output::err(
+            r,
+            MutationExecutorError::sqlite(r,
+                                          SqliteDriverError::invalid_parameter_count(
+                                              r, std::min(values.size(), expected + 1), expected)));
     }
     return Output::ok(r, {});
 }

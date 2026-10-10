@@ -62,6 +62,8 @@ struct Value {
 
     Value(Memory r, const String& v) : Value(r, std::string_view(v)) {}
 
+    Value(Memory, String&&);
+
     Value(Memory r, TypedNull v) : data(v), resource_(r) {}
 
     Value(Memory r, Decimal v) : data(v), resource_(r) {}
@@ -75,7 +77,9 @@ struct Value {
     Value(Memory r, Json&& v) : data(Json(r, std::move(v))), resource_(r) {}
 
     Value(Memory, const List&);
+    Value(Memory, List&&);
     Value(Memory, const Object&);
+    Value(Memory, Object&&);
     Value(Memory, const Value&);
     Value(Memory, Value&&);
 

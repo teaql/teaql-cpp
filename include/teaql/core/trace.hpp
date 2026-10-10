@@ -23,6 +23,13 @@ struct TraceNode {
 
     TraceNode(std::allocator_arg_t,
               Allocator a,
+              std::string_view entity,
+              std::string_view comment,
+              std::optional<std::uint64_t> id = {})
+        : TraceNode(std::allocator_arg, a, TraceKind::Entity, entity, comment, id) {}
+
+    TraceNode(std::allocator_arg_t,
+              Allocator a,
               TraceKind kind,
               std::string_view entity,
               std::string_view comment,
@@ -38,8 +45,19 @@ struct TraceNode {
                     other.comment,
                     other.entity_id) {}
 
+    TraceNode(std::allocator_arg_t, Allocator a, TraceNode&& other)
+        : TraceNode(detail::move_to(a.resource(), std::move(other))) {}
+
     TraceNode(const TraceNode&) = delete;
     TraceNode(TraceNode&&) noexcept = default;
+
+    TraceNode& operator=(TraceNode&& other) {
+        return detail::assign_scoped(*this, std::move(other));
+    }
+
+    Memory memory_resource() const noexcept {
+        return entity_type.get_allocator().resource();
+    }
 
     bool operator==(const TraceNode& other) const {
         return kind == other.kind && entity_type == other.entity_type &&

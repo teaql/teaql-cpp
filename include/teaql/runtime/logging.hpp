@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/data_service/types.hpp>
+#include <teaql/runtime/resources.hpp>
 #include <limits>
 
 namespace teaql {
@@ -188,16 +189,21 @@ struct UnifiedLogEntry {
     bool operator==(const UnifiedLogEntry&) const = default;
 };
 
-// Context/arena confinement replaces Arc<Mutex<Vec<_>>>. Explicit cross-domain
-// construction clones entries; ordinary clients borrow the registered buffer.
+// Context confinement replaces Arc ownership without losing shared mutations.
+// Same-domain clones borrow one registered vector; cross-domain copies own a
+// new vector and recursively copy entries into the destination Context.
 struct UnifiedLogBuffer {
     using allocator_type = Allocator;
-    Vector<UnifiedLogEntry> entries;
+    Vector<UnifiedLogEntry>& entries;
 
-    UnifiedLogBuffer(std::allocator_arg_t, Allocator a) : entries(a.resource()) {}
+    UnifiedLogBuffer(std::allocator_arg_t, Allocator a)
+        : entries(detail::resource_arena(a.resource()).make<Vector<UnifiedLogEntry>>()) {}
 
     UnifiedLogBuffer(std::allocator_arg_t, Allocator a, const UnifiedLogBuffer& other)
-        : entries(other.entries, a.resource()) {}
+        : entries(a.resource() == other.memory_resource()
+                      ? other.entries
+                      : detail::resource_arena(a.resource())
+                            .make<Vector<UnifiedLogEntry>>(other.entries)) {}
 
     UnifiedLogBuffer(std::allocator_arg_t, Allocator a, UnifiedLogBuffer&& other)
         : UnifiedLogBuffer(detail::move_to(a.resource(), std::move(other))) {}

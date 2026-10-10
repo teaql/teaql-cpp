@@ -1,0 +1,16 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-sql-model-review-sanitize
+Test project /home/philip/githome/teaql-cpp/build-sql-model-review-sanitize
+    Start 130: provider_sqlite_decoding_contracts
+1/5 Test #130: provider_sqlite_decoding_contracts ...   Passed    0.05 sec
+    Start 131: provider_sqlite_binding_contracts
+2/5 Test #131: provider_sqlite_binding_contracts ....   Passed    0.04 sec
+    Start 132: provider_sqlite_error_contracts
+3/5 Test #132: provider_sqlite_error_contracts ......   Passed    0.04 sec
+    Start 210: sqlite_decoding_rust_parity
+4/5 Test #210: sqlite_decoding_rust_parity ..........   Passed   10.77 sec
+    Start 211: sqlite_bindings_rust_parity
+5/5 Test #211: sqlite_bindings_rust_parity ..........   Passed    2.00 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =  12.91 sec

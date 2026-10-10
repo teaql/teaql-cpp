@@ -1,0 +1,397 @@
+--- /dev/null
++++ b/include/teaql/runtime/log_model_debug.hpp
+@@ -0,0 +1,153 @@
++#pragma once
++#include <teaql/runtime/log_formatter.hpp>
++#include <teaql/data_service/sql_log_debug.hpp>
++#include <teaql/core/query_debug.hpp>
++#include <teaql/core/system_time_debug.hpp>
++
++namespace teaql {
++inline void write_debug(DebugWriter& writer, SqlLogOperation value) {
++    switch (value) {
++    case SqlLogOperation::Select:
++        writer.raw("Select");
++        return;
++    case SqlLogOperation::Insert:
++        writer.raw("Insert");
++        return;
++    case SqlLogOperation::Update:
++        writer.raw("Update");
++        return;
++    case SqlLogOperation::Delete:
++        writer.raw("Delete");
++        return;
++    case SqlLogOperation::Recover:
++        writer.raw("Recover");
++        return;
++    }
++    throw std::invalid_argument("Unknown SQL log operation");
++}
++
++inline void write_debug(DebugWriter& writer, LogLevel value) {
++    switch (value) {
++    case LogLevel::Silent:
++        writer.raw("Silent");
++        return;
++    case LogLevel::Summary:
++        writer.raw("Summary");
++        return;
++    case LogLevel::Full:
++        writer.raw("Full");
++        return;
++    case LogLevel::FullWithPayload:
++        writer.raw("FullWithPayload");
++        return;
++    }
++    throw std::invalid_argument("Unknown log level");
++}
++
++inline void write_debug(DebugWriter& writer, const SqlLogOptions& value) {
++    writer.structure("SqlLogOptions", [&](auto& fields) {
++        fields.field("select", [&](auto& out) {
++            out.boolean(value.select);
++        });
++        fields.field("mutation", [&](auto& out) {
++            out.boolean(value.mutation);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, LogDuration value) {
++    write_debug(writer, SystemDuration{value.seconds, value.nanos});
++}
++
++inline void write_debug(DebugWriter& writer, const InfoLogEntry& value) {
++    writer.structure("InfoLogEntry", [&](auto& fields) {
++        fields.field("message", [&](auto& out) {
++            out.text(value.message);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const SqlLogEntry& value) {
++    writer.structure("SqlLogEntry", [&](auto& fields) {
++        fields.field("log_context", [&](auto& out) {
++            write_debug(out, value.log_context);
++        });
++        fields.field("operation", [&](auto& out) {
++            write_debug(out, value.operation);
++        });
++        fields.field("comment", [&](auto& out) {
++            detail::write_sql_log_optional(out, value.comment);
++        });
++        fields.field("purpose", [&](auto& out) {
++            detail::write_sql_log_optional(out, value.purpose);
++        });
++        fields.field("audit_reason", [&](auto& out) {
++            detail::write_sql_log_optional(out, value.audit_reason);
++        });
++        fields.field("trace_path", [&](auto& out) {
++            out.sequence(value.trace_path, DefaultDebugElement{});
++        });
++        fields.field("sql", [&](auto& out) {
++            out.text(value.sql);
++        });
++        fields.field("params", [&](auto& out) {
++            out.sequence(value.params, DefaultDebugElement{});
++        });
++        fields.field("debug_sql", [&](auto& out) {
++            out.text(value.debug_sql);
++        });
++        fields.field("pretty_sql", [&](auto& out) {
++            out.text(value.pretty_sql);
++        });
++        fields.field("started_at", [&](auto& out) {
++            write_debug(out, value.started_at);
++        });
++        fields.field("ended_at", [&](auto& out) {
++            write_debug(out, value.ended_at);
++        });
++        fields.field("elapsed", [&](auto& out) {
++            write_debug(out, value.elapsed);
++        });
++        fields.field("result_count", [&](auto& out) {
++            detail::write_sql_log_optional(out, value.result_count);
++        });
++        fields.field("result_type", [&](auto& out) {
++            detail::write_sql_log_optional(out, value.result_type);
++        });
++        fields.field("affected_rows", [&](auto& out) {
++            detail::write_sql_log_optional(out, value.affected_rows);
++        });
++        fields.field("result_summary", [&](auto& out) {
++            out.text(value.result_summary);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const LogPayload& value) {
++    std::visit(
++        [&](const auto& payload) {
++            using T = std::remove_cvref_t<decltype(payload)>;
++            writer.tuple(std::same_as<T, SqlLogEntry> ? "Sql" : "Info", [&](auto& out) {
++                write_debug(out, payload);
++            });
++        },
++        value);
++}
++
++inline void write_debug(DebugWriter& writer, const UnifiedLogEntry& value) {
++    writer.structure("UnifiedLogEntry", [&](auto& fields) {
++        fields.field("timestamp", [&](auto& out) {
++            write_debug(out, value.timestamp);
++        });
++        fields.field("user_identifier", [&](auto& out) {
++            detail::write_sql_log_optional(out, value.user_identifier);
++        });
++        fields.field("trace_chain", [&](auto& out) {
++            out.sequence(value.trace_chain, DefaultDebugElement{});
++        });
++        fields.field("payload", [&](auto& out) {
++            write_debug(out, value.payload);
++        });
++    });
++}
++}
+--- a/include/teaql/runtime.hpp
++++ b/include/teaql/runtime.hpp
+@@ -22,6 +22,7 @@
+ #include <teaql/runtime/language.hpp>
+ #include <teaql/runtime/log_formatter.hpp>
+ #include <teaql/runtime/log_manager.hpp>
++#include <teaql/runtime/log_model_debug.hpp>
+ #include <teaql/runtime/module.hpp>
+ #include <teaql/runtime/purposed_query_debug.hpp>
+ #include <teaql/runtime/query_store_debug.hpp>
+--- /dev/null
++++ b/tests/log_model_tests.cpp
+@@ -0,0 +1,73 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/log_model_debug.hpp>
++#include <iostream>
++using namespace teaql;
++
++static void check(bool value, const char* message) {
++    if (!value) {
++        throw std::runtime_error(message);
++    }
++}
++
++int main() {
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto owner = user->memory_resource();
++    auto source = user->make_ref<SqlLogEntry>(SqlLogOperation::Update);
++    auto& sql = user->get(source);
++    sql.sql.assign(512, 's');
++    sql.debug_sql = "raw diagnostic";
++    sql.pretty_sql = "pretty diagnostic";
++    sql.params.emplace_back(String(512, 'p', owner));
++    sql.log_context.database_kind.emplace("sqlite", owner);
++    sql.log_context.parameter_policies.push_back(SqlParameterLogPolicy::Masked);
++    sql.log_context.masked_parameters.push_back(true);
++    sql.log_context.intent_redactions.capture_target_id(Value(owner, "target-id"));
++    sql.trace_path.emplace_back(TraceKind::Sql, "sqlite", "trace🧊");
++    sql.elapsed = LogDuration(UINT64_MAX, 999999999);
++    sql.started_at = SystemTime::from_unix_seconds(-1, 999999999);
++    sql.ended_at = SystemTime::from_unix_seconds(253402300800, 123456789);
++    sql.result_summary = "summary";
++    auto& buffer = user->make<UnifiedLogBuffer>();
++    {
++        LogPayload payload(detail::clone_in(owner, sql));
++        auto& entry = buffer.entries.emplace_back(sql.started_at, payload);
++        entry.user_identifier.emplace("user🧊", owner);
++        entry.trace_chain = detail::clone_in(owner, sql.trace_path);
++        InfoLogEntry info(std::allocator_arg, Allocator(owner), "info message");
++        LogPayload info_payload(detail::clone_in(owner, info));
++        buffer.entries.emplace_back(sql.ended_at, info_payload);
++    }
++    auto kept = user->make_global<UnifiedLogBuffer>(buffer);
++    auto retained = kept;
++    {
++        auto text = debug_string(owner, buffer.entries[0]);
++        check(
++            text.find("target-id") == text.npos && text.find("raw diagnostic") != text.npos,
++            "Derived raw model Debug preserves fields while provenance redactions keep their source count-only shape");
++    }
++    user.reset();
++    check(global.live_user_bytes() == 0, "Source log User is fully reclaimed");
++    auto next = global.make_user_context();
++    const auto& copied = next->get(next->rebind_global(retained));
++    check(copied.entries.size() == 2 &&
++              std::get<SqlLogEntry>(copied.entries[0].payload).params[0].memory_resource() ==
++                  global.memory_resource(),
++          "Unified buffer copies both variants and all nested SQL payloads into Global");
++    {
++        auto diagnostic =
++            debug_string(next->memory_resource(), copied.entries[0], DebugOptions{.pretty = true});
++        check(diagnostic.get_allocator().resource() == next->memory_resource() &&
++                  diagnostic.find("summary") != diagnostic.npos,
++              "Retained log diagnostics use the caller's current User");
++    }
++    bool rejected = false;
++    try {
++        (void)next->get(source);
++    } catch (const ReferenceError&) {
++        rejected = true;
++    }
++    check(rejected, "Expired SQL log reference rejects before diagnostics or parameter access");
++    std::cout << "Runtime log model ownership contracts pass\n";
++}
+--- /dev/null
++++ b/tests/parity/log_model_probe.cpp
+@@ -0,0 +1,134 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/log_model_debug.hpp>
++#include <teaql/core/detail/model_json.hpp>
++#include "fixture_value.hpp"
++#include "debug_modes.hpp"
++#include <iostream>
++
++static SystemTime time(const Json& input) {
++    return SystemTime::from_unix_seconds(
++        number<std::int64_t>(field(input, "seconds")),
++        detail::model_integer<std::uint32_t>(field(input, "nanos"), "nanos"));
++}
++
++static std::optional<String> optional_text(Memory owner, const Json& input) {
++    if (std::holds_alternative<String>(input.data)) {
++        return String(text(input), owner);
++    }
++    return {};
++}
++
++static SqlLogEntry entry(Memory owner, const Json& input) {
++    SqlLogEntry result(
++        std::allocator_arg,
++        Allocator(owner),
++        SqlLogOperation(detail::model_integer<unsigned>(field(input, "operation"), "operation")));
++    result.log_context.database_kind.emplace("sqlite", owner);
++    result.log_context.parameter_policies = {SqlParameterLogPolicy::Plain,
++                                             SqlParameterLogPolicy::Masked,
++                                             SqlParameterLogPolicy::Credential};
++    result.log_context.generated_sql = true;
++    result.log_context.masked_parameters = {false, true, true};
++    result.log_context.mode.emplace("safe", owner);
++    result.log_context.omission_reason = optional_text(owner, field(input, "optional"));
++    result.log_context.execution_outcome =
++        SqlExecutionOutcome(detail::model_integer<unsigned>(field(input, "outcome"), "outcome"));
++    result.comment = optional_text(owner, field(input, "optional"));
++    result.purpose.emplace("purpose🧊", owner);
++    result.audit_reason.emplace("audit reason", owner);
++    result.trace_path.emplace_back(TraceKind::Operation, "Order", "query", 7);
++    result.trace_path.emplace_back(TraceKind::Sql, "sqlite", "statement🧊");
++    result.sql = "SELECT ?";
++    for (const auto& item : detail::model_array(field(input, "params"), "params")) {
++        result.params.emplace_back(value(owner, item));
++    }
++    result.debug_sql = "SELECT 'raw'";
++    result.pretty_sql = "SELECT\n  ?";
++    result.started_at = time(field(input, "start"));
++    result.ended_at = time(field(input, "end"));
++    result.elapsed = LogDuration(
++        number<std::uint64_t>(field(input, "duration_seconds")),
++        detail::model_integer<std::uint32_t>(field(input, "duration_nanos"), "duration_nanos"));
++    result.result_count = 17;
++    result.result_type.emplace("Order", owner);
++    result.affected_rows = UINT64_MAX;
++    result.result_summary = "summary🧊";
++    return result;
++}
++
++static Json evaluate(UserContext& user, const Json& input) {
++    auto owner = user.memory_resource();
++    auto output = detail::model_json(owner);
++    auto put = [&](std::string_view name, auto&& value) {
++        detail::model_put(output, name, std::forward<decltype(value)>(value));
++    };
++    auto kind = text(field(input, "kind"));
++    if (kind == "options") {
++        auto operation = SqlLogOperation(
++            detail::model_integer<unsigned>(field(input, "operation"), "operation"));
++        const SqlLogOptions modes[]{SqlLogOptions::disabled(),
++                                    SqlLogOptions::select_only(),
++                                    SqlLogOptions::mutation_only(),
++                                    SqlLogOptions::all()};
++        auto options = modes[detail::model_integer<unsigned>(field(input, "mode"), "mode")];
++        put("operation", formatted_debug(owner, operation));
++        put("select", is_select(operation));
++        put("mutation", is_mutation(operation));
++        put("options", formatted_debug(owner, options));
++        put("default", formatted_debug(owner, SqlLogOptions{}));
++        put("enabled", options.enabled_for(operation));
++    } else if (kind == "level") {
++        auto fallback =
++            LogLevel(detail::model_integer<unsigned>(field(input, "fallback"), "fallback"));
++        auto level = parse_log_level(text(field(input, "text")), fallback);
++        put("debug", formatted_debug(owner, level));
++        put("clone_equal", level == LogLevel(level));
++    } else {
++        auto sql = entry(owner, input);
++        auto changed_sql = detail::clone_in(owner, sql);
++        changed_sql.result_summary += '!';
++        InfoLogEntry info(std::allocator_arg,
++                          Allocator(owner),
++                          std::string_view("info🧊\0message", sizeof("info🧊\0message") - 1));
++        LogPayload payload = std::get<bool>(field(input, "info").data)
++                                 ? LogPayload(detail::clone_in(owner, info))
++                                 : LogPayload(detail::clone_in(owner, sql));
++        UnifiedLogEntry unified(
++            std::allocator_arg, Allocator(owner), time(field(input, "start")), payload);
++        unified.user_identifier = optional_text(owner, field(input, "optional"));
++        unified.trace_chain = detail::clone_in(owner, sql.trace_path);
++        auto other = detail::clone_in(owner, unified);
++        other.trace_chain.clear();
++        auto payload_clone = std::visit(
++            [&](const auto& value) -> LogPayload {
++                return detail::clone_in(owner, value);
++            },
++            payload);
++        put("sql", formatted_debug(owner, sql));
++        put("sql_clone", formatted_debug(owner, detail::clone_in(owner, sql)));
++        put("sql_clone_equal", sql == detail::clone_in(owner, sql));
++        put("sql_changed_equal", sql == changed_sql);
++        put("parameter_count", std::uint64_t(sql.parameter_count()));
++        put("info", formatted_debug(owner, info));
++        put("payload", formatted_debug(owner, payload));
++        put("payload_clone_equal", payload == payload_clone);
++        put("unified", formatted_debug(owner, unified));
++        put("unified_clone", formatted_debug(owner, detail::clone_in(owner, unified)));
++        put("unified_clone_equal", unified == detail::clone_in(owner, unified));
++        put("unified_changed_equal", unified == other);
++    }
++    return output;
++}
++
++int main() {
++    GlobalContext global;
++    std::string line;
++    while (std::getline(std::cin, line)) {
++        auto user = global.make_user_context();
++        auto input = Json::parse(user->memory_resource(), line);
++        if (!input) {
++            throw std::invalid_argument("Invalid runtime log model fixture");
++        }
++        std::cout << evaluate(*user, *input).dump(user->memory_resource()) << '\n';
++    }
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -229,6 +229,15 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_transaction_move_only.py
+         --cpp $<TARGET_FILE:teaql_transaction_move_only_probe>
+         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
++    add_executable(teaql_log_model_tests tests/log_model_tests.cpp)
++    target_link_libraries(teaql_log_model_tests PRIVATE teaql::runtime)
++    add_test(NAME log_model_contracts COMMAND teaql_log_model_tests)
++    add_executable(teaql_log_model_probe tests/parity/log_model_probe.cpp)
++    target_link_libraries(teaql_log_model_probe PRIVATE teaql::runtime)
++    add_test(NAME log_model_rust_parity COMMAND ${Python3_EXECUTABLE}
++        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_log_models.py
++        --cpp $<TARGET_FILE:teaql_log_model_probe>
++        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+     add_executable(teaql_transaction_scope_tests tests/transaction_scope_tests.cpp)
+     target_link_libraries(teaql_transaction_scope_tests PRIVATE teaql::provider_sqlite)
+     add_test(NAME transaction_scope_context_contracts COMMAND teaql_transaction_scope_tests)

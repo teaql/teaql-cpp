@@ -43,16 +43,24 @@ ContinuousPageCursorStore& ContextPaginationAccess::cursor_store(const UserConte
     c.ensure_open();
     if (!c.continuous_page_cursor_store_) {
         c.continuous_page_cursor_store_ = &c.make<InMemoryContinuousPageCursorStore>();
+        c.continuous_page_cursor_borrow_.emplace(std::allocator_arg,
+                                                 Allocator(c.memory_resource()),
+                                                 *c.continuous_page_cursor_store_,
+                                                 resource_arena(c.memory_resource()));
     }
-    return *c.continuous_page_cursor_store_;
+    return c.continuous_page_cursor_borrow_->get();
 }
 
 IdSetStore& ContextPaginationAccess::id_set_store(const UserContext& c) {
     c.ensure_open();
     if (!c.id_set_store_) {
         c.id_set_store_ = &c.make<InMemoryIdSetStore>();
+        c.id_set_store_borrow_.emplace(std::allocator_arg,
+                                       Allocator(c.memory_resource()),
+                                       *c.id_set_store_,
+                                       resource_arena(c.memory_resource()));
     }
-    return *c.id_set_store_;
+    return c.id_set_store_borrow_->get();
 }
 
 void ContextPaginationAccess::observe_continuous_page(const UserContext& c,

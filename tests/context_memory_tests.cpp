@@ -97,10 +97,12 @@ static void growth_and_cleanup() {
     context.make_resource<Resource>(2, order, upstream);
     auto stats = context.allocation_stats();
     check(stats.live_blocks > 1 && stats.live_bytes > 0, "arena grows across blocks");
-    check(stats.live_blocks == upstream.allocations.size(), "all blocks accounted");
+    check(stats.live_blocks + global.allocation_stats().live_blocks == upstream.allocations.size(),
+          "User blocks and Global control metadata accounted separately");
     context.close();
     check(order == std::vector<int>({2, 1}), "reverse resource cleanup");
-    check(upstream.allocations.empty(), "every upstream block returned");
+    check(upstream.allocations.size() == global.allocation_stats().live_blocks,
+          "every User block returned; only Global control metadata remains");
     check(context.allocation_stats().live_bytes == 0 && context.allocation_stats().live_blocks == 0,
           "zero live context allocations");
     context.close();
@@ -140,12 +142,14 @@ static void exception_and_isolation() {
         check(upstream.allocations.size() == outer_blocks, "exception releases inner context only");
         check(retained.size() == 1000 && retained.front() == 'o', "other context survives");
     }
-    check(upstream.allocations.empty(), "scope destruction returns all blocks");
+    check(upstream.allocations.size() == global.allocation_stats().live_blocks,
+          "scope destruction returns all User blocks");
     for (int n = 0; n < 1000; ++n) {
         UserContext context(global, 64);
         context.make<std::pmr::vector<int>>(1000, n);
     }
-    check(upstream.allocations.empty(), "repeated context destruction has no retained blocks");
+    check(upstream.allocations.size() == global.allocation_stats().live_blocks,
+          "repeated Context destruction retains only bounded Global identity records");
     bool failed = false;
     try {
         GlobalContext failing_global(std::pmr::null_memory_resource());

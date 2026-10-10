@@ -93,6 +93,27 @@ public:
         return fetch_entities<T>(query);
     }
 
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    insert(const InsertCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    update(const UpdateCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    delete_command(const DeleteCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    recover(const RecoverCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    batch_insert(const BatchInsertCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    batch_update(const BatchUpdateCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+        insert_many(std::span<const InsertCommand>) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+        update_many(std::span<const UpdateCommand>) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+        delete_many(std::span<const DeleteCommand>) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+        recover_many(std::span<const RecoverCommand>) const;
+
 private:
     ResourceBorrow<const M> metadata_;
     ResourceBorrow<E> executor_;
@@ -153,8 +174,23 @@ public:
     auto& fetch_enhanced_entities(const SelectQuery& query) const {
         return fetch_entities<T>(query);
     }
+
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    insert(const InsertCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    update(const UpdateCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    delete_command(const DeleteCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    recover(const RecoverCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    batch_insert(const BatchInsertCommand&) const;
+    DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
+    batch_update(const BatchUpdateCommand&) const;
 };
 }
 
 #include <teaql/runtime/detail/base_query.hpp>
 #include <teaql/runtime/detail/context_query.hpp>
+#include <teaql/runtime/detail/base_mutation.hpp>
+#include <teaql/runtime/detail/context_mutation.hpp>

@@ -1,0 +1,10 @@
+{
+  "native_tests": 388,
+  "mips_tests": 387,
+  "native_only": [
+    "sqlite_from_sql_raw_debug_rust_parity"
+  ],
+  "reason": "Existing CMake gate: native 64-bit only for raw Rust FromSql Debug. Structured supported FromSql errors and provider contracts remain registered on MIPS. This is a platform-specific diagnostic test, not a dropped source responsibility.",
+  "cmake_gate": "CMakeLists.txt:1296-1299",
+  "status": "registration reviewed; full MIPS 387/387 passed"
+}

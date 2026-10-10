@@ -8,6 +8,9 @@
 #include <optional>
 
 namespace teaql {
+template <class T, class E>
+class Result;
+
 namespace detail {
 inline Arena& async_arena(Memory r) {
     auto* arena = dynamic_cast<Arena*>(r);
@@ -154,6 +157,9 @@ public:
             std::rethrow_exception(failure_);
         }
         if (status_ == AsyncStatus::Ready) {
+            if (!result_) {
+                throw std::logic_error("Operation result has been taken");
+            }
             return &*result_;
         }
         if (polling_) {
@@ -188,6 +194,18 @@ public:
             }
             wake_.wait(observed);
         }
+    }
+
+    // Explicit consumption invalidates prior native borrows of this result.
+    // Completion hooks have already run; taking never polls or cancels work.
+    T take_result() {
+        detail::async_arena(resource_).check_thread();
+        if (status_ != AsyncStatus::Ready || !result_) {
+            throw std::logic_error("Operation has no completed result to take");
+        }
+        auto result = detail::move_in(resource_, std::move(*result_));
+        result_.reset();
+        return result;
     }
 
     void cancel() noexcept {
@@ -248,6 +266,26 @@ private:
     std::optional<T> result_;
     std::exception_ptr failure_;
 };
+
+namespace detail {
+template <class T>
+T copy_or_take_completed(AsyncOperation<T>& operation, const T& result) {
+    if constexpr (domain_copyable<T>) {
+        return clone_in(operation.memory_resource(), result);
+    } else {
+        return operation.take_result();
+    }
+}
+
+template <class T, class E>
+E copy_or_take_error(AsyncOperation<Result<T, E>>& operation, const Result<T, E>& result) {
+    if constexpr (domain_copyable<E>) {
+        return clone_in(operation.memory_resource(), result.error());
+    } else {
+        return std::move(operation.take_result()).error();
+    }
+}
+}
 
 // Managed state and native-resource state have intentionally separate factories.
 // Operation handles themselves are Context borrows; cancel explicitly when a

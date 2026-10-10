@@ -1,0 +1,84 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed full native343 and sanitizer20/MIPS20 selections pass; complete source/composition acceptance separate",
+  "original_inputs": 112,
+  "repeats_agree": true,
+  "formats_per_model": 9,
+  "source_sha256": {
+    "include/teaql/runtime/event.hpp": "84e46e49bd1c72d831e76b5eabde7122638bba7f85eba7ad70eaaaaa0fecdc7f",
+    "src/runtime/event.cpp": "9e3788e5e23b1f15cf45cda2db02bdaf1de1bc2aca550c8def4d702bc0d5d7c1",
+    "src/runtime/audit_privacy.cpp": "e05124bd453d483b9bbf8a8fa3ea791f4e34fb2749567fe4316e7ed4d0862bf7",
+    "tests/parity/rust-values/src/bin/event_model_oracle.rs": "181465735c7364b27d2e69e393c1a4b672c8b4047ca67128de4c546faf0a9c9f",
+    "tests/parity/event_model_cases.json.gz": "838f9c7a8324901611cca16844dcf7d8b9ee16fb731c9b6f9b9bf355f9cb1a5f",
+    "tests/parity/generate_event_models.py": "93bd61e7fcb77cb40f8dc156ea3b95d6ec2ccf7f5654d522267bb945e74bcc29",
+    "tests/parity/compare_event_models.py": "dfef09e4071f156d8014ac316c4b746c7594c8b5ed1b6c37331962fdcfbbfb17"
+  },
+  "staged_patch_sha256": "d5688d966656d70faba23db0e7ce137aee10d40ed18318e7a0d3dbe54be17665",
+  "staged_source_sha256": {
+    "include/teaql/runtime/event_debug.hpp": "cd489f1efc3e3d3339f21779380064c078b78036a9af9ef135d764eb547e68d2",
+    "include/teaql/runtime.hpp": "9c6f9fffd7d3a9b326453b996f70e95e8b3421a89399cd9197e3d85100a62813",
+    "tests/event_model_tests.cpp": "6a79910005f9d44c16b1aa51c588e35749778fa0455811bf8a4b6dcb3f0f233f",
+    "tests/parity/event_model_probe.cpp": "d2a1b2948d5ea98015e2f773bf67dc391473b4cd6029f9aec8b596572c6b5af6",
+    "CMakeLists.txt": "8c4e813c4a8b01286d4aae9f617b000a84f7850c8de31af6f4f98b2bbf39f4d3"
+  },
+  "targets": {
+    "native": {
+      "models_passed": 112,
+      "models_total": 112,
+      "live_original": true,
+      "ownership_privacy_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "sanitizer": {
+      "models_passed": 112,
+      "models_total": 112,
+      "live_original": true,
+      "ownership_privacy_contracts": "passed",
+      "default_pmr_disabled": true
+    },
+    "mips": {
+      "models_passed": 112,
+      "models_total": 112,
+      "live_original": true,
+      "ownership_privacy_contracts": "passed",
+      "default_pmr_disabled": true
+    }
+  },
+  "dependency": "Apply the separately staged mutation-policy model patch before this event patch; event_debug.hpp reuses its complete governance writers. Preserve other CMake/umbrella registrations by patching, not copying entire files.",
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "UBSAN_OPTIONS": "halt_on_error=1"
+  },
+  "physical_router_verified": false,
+  "privacy_note": "No production event factory or projection code changed. Corpus compares actual build_safe_event output; raw Debug is not a safe logging API. Exact original sensitive plaintext acknowledgement is used, credentials remain redacted.",
+  "installed_in_worktree": true,
+  "installed_native_selection": {
+    "passed": 12,
+    "total": 12,
+    "seconds": 9.44,
+    "full_native343_pending": true
+  },
+  "installed_mips_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 25.0,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "installed_mips_live_original": "all six installed probes match1199/1199 live pinned Rust observations",
+  "installed_sanitizer_selection": {
+    "passed": 20,
+    "total": 20,
+    "seconds": 35.65,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1",
+    "refresh": "ninja: no work to do."
+  },
+  "full_native": {
+    "passed": 343,
+    "total": 343,
+    "seconds": 78.97,
+    "pre_test_no_work": true,
+    "post_test_no_work": true
+  }
+}

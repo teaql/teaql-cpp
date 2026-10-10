@@ -222,6 +222,51 @@ static void pipeline() {
     }
 }
 
+static GeneratedSchemaBootstrapFuture& root_bootstrap(const UserContext& context) {
+    check(detail::is_generated_schema_bootstrap(context),
+          "active root initialization runs inside the bootstrap scope");
+    check(bool(context.set_generated_bootstrap_active_root("Tenant", 42)),
+          "bootstrap assigns the active root while schema initialization borrows Context");
+    check(bool(context.set_generated_bootstrap_active_root("Tenant", 42)),
+          "same bootstrap root assignment is idempotent");
+    auto conflict = context.set_generated_bootstrap_active_root("Tenant", 43);
+    check(!conflict && conflict.error().kind() == RuntimeError::Kind::Schema &&
+              conflict.error().message() == "active root already set to tenant:42",
+          "different bootstrap root retains the canonical source conflict");
+    auto invalid = context.set_generated_bootstrap_active_root("", 0);
+    check(!invalid && invalid.error().kind() == RuntimeError::Kind::Schema &&
+              invalid.error().message() == "invalid generated active root",
+          "invalid bootstrap root retains source validation precedence");
+    check(context.require_active_root("Tenant").value().get().id == 42,
+          "bootstrap can read the installed typed root immediately");
+    return bootstrap(context);
+}
+
+static void bootstrap_root_installation() {
+    Fixture f;
+    auto& module = f.global.make<RuntimeModule>();
+    module.generated_schema_bootstrap(root_bootstrap);
+    module.apply_to(*f.user);
+    check(!f.user->require_active_root("Tenant"), "root is absent before the first schema poll");
+    auto& operation = f.user->ensure_schema();
+    rejected(
+        [&] {
+            f.user->with_active_root("Tenant", 42);
+        },
+        "ordinary root assignment cannot mutate a pending schema Context");
+    check(bool(operation.wait()), "schema callback installs the generated active root");
+    check(f.user->require_active_root("Tenant").value().get().id == 42,
+          "installed root survives schema completion");
+    check(bool(f.user->ensure_schema().wait()), "repeated bootstrap retains the same root");
+    check(!detail::is_generated_schema_bootstrap(*f.user), "root installation restores scope");
+    f.user->close();
+    rejected(
+        [&] {
+            f.user->set_generated_bootstrap_active_root("Tenant", 42);
+        },
+        "generated root initialization still rejects a closed Context");
+}
+
 static void cancellation_and_interleaving() {
     Fixture f;
     auto sibling = f.global.make_user_context();
@@ -348,14 +393,112 @@ static void module_and_lifetimes() {
         "cannot borrow sibling-owned provider");
 }
 
+struct ForeignSchemaProvider final : runtime::SchemaProvider {
+    GlobalContext& owner;
+    bool foreign_provider = true;
+    mutable unsigned cancelled = 0;
+    mutable bool saw_live_context = false, bootstrap_cancel = false;
+    mutable AsyncOperation<RuntimeSchemaResult>* child = nullptr;
+
+    explicit ForeignSchemaProvider(GlobalContext& owner) : owner(owner) {}
+
+    struct Work {
+        const ForeignSchemaProvider& provider;
+        const UserContext& context;
+
+        std::optional<RuntimeSchemaResult> poll(WakeSignal&) {
+            return {};
+        }
+
+        void finish_and_wait() noexcept {}
+
+        void cancel_and_wait() noexcept {
+            ++provider.cancelled;
+            provider.saw_live_context = context.trace_id() == "live-schema-context";
+            provider.bootstrap_cancel = detail::is_generated_schema_bootstrap(context);
+        }
+    };
+
+    AsyncOperation<RuntimeSchemaResult>& foreign_work(const UserContext& context) const {
+        child = &make_operation<RuntimeSchemaResult, Work>(owner, Work{*this, context});
+        return *child;
+    }
+
+    AsyncOperation<RuntimeSchemaResult>& ensure_schema(const UserContext& context,
+                                                       const SchemaInvocation&) const override {
+        if (foreign_provider) {
+            return foreign_work(context);
+        }
+
+        struct Ready {
+            Memory owner;
+
+            std::optional<RuntimeSchemaResult> poll(WakeSignal&) {
+                return RuntimeSchemaResult::ok(owner, {});
+            }
+
+            void finish_and_wait() noexcept {}
+
+            void cancel_and_wait() noexcept {}
+        };
+
+        return make_operation<RuntimeSchemaResult, Ready>(context.memory_resource(),
+                                                          Ready{context.memory_resource()});
+    }
+};
+
+static GeneratedSchemaBootstrapFuture& foreign_schema_bootstrap(const UserContext& context) {
+    return context.require_resource<ForeignSchemaProvider>().value().get().foreign_work(context);
+}
+
+static void foreign_schema_children_are_quiesced() {
+    for (bool bootstrap : {false, true}) {
+        GlobalContext global;
+        auto& provider = global.make_resource<ForeignSchemaProvider>(global);
+        provider.foreign_provider = !bootstrap;
+        auto user = global.make_user_context();
+        user->set_trace_id("live-schema-context");
+        user->set_schema_provider(global, provider);
+        if (bootstrap) {
+            user->insert_resource(global, provider);
+            auto& module = global.make<RuntimeModule>();
+            module.generated_schema_bootstrap(foreign_schema_bootstrap);
+            module.apply_to(*user);
+        }
+        bool failed = false;
+        try {
+            (void)user->ensure_schema().poll();
+        } catch (const std::invalid_argument&) {
+            failed = true;
+        }
+        const bool quiesced = provider.cancelled == 1 && provider.saw_live_context &&
+                              provider.bootstrap_cancel == bootstrap &&
+                              provider.child->status() == AsyncStatus::Cancelled;
+        if (!quiesced) {
+            provider.child->cancel();
+        }
+        check(failed && quiesced,
+              "foreign schema child stops before rejection with the correct bootstrap scope");
+        check(!detail::is_generated_schema_bootstrap(*user),
+              "foreign schema rejection restores activation");
+        auto& replacement = global.make_resource<Provider>(global.make<Control>());
+        user->set_schema_provider(global, replacement);
+        user.reset();
+        check(provider.cancelled == 1 && global.live_user_bytes() == 0,
+              "foreign schema rejection releases Context borrow without deferred child access");
+    }
+}
+
 int main() {
     try {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         pipeline();
+        bootstrap_root_installation();
         cancellation_and_interleaving();
         closing();
         nested_close();
         module_and_lifetimes();
+        foreign_schema_children_are_quiesced();
         std::pmr::set_default_resource(previous);
         std::cout << "Schema runtime contracts passed\n";
     } catch (const std::exception& e) {

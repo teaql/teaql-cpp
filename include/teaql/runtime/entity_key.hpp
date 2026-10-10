@@ -4,6 +4,8 @@
 #include <compare>
 
 namespace teaql {
+class DebugWriter;
+
 class EntityKey {
 public:
     using allocator_type = Allocator;
@@ -34,6 +36,7 @@ public:
     String debug(Memory) const;
 
 private:
+    friend void write_debug(DebugWriter&, const EntityKey&);
     enum class Kind { Null, Bool, I64, U64, F64, Decimal, Text, Date, Timestamp, Other };
     Kind kind_;
     Value identity_;

@@ -4,6 +4,7 @@
 
 namespace teaql {
 String quote_identifier_if_needed(Memory, std::string_view, char quote);
+String quote_identifier_if_needed(Memory, std::string_view, char32_t quote);
 String bounded_sql_identifier(Memory, std::string_view, std::size_t max_bytes);
 
 struct SchemaIndexSpec {

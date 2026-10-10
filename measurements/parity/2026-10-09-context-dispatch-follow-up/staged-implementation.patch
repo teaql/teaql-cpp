@@ -1,0 +1,107 @@
+--- a/include/teaql/runtime/context.hpp
++++ b/include/teaql/runtime/context.hpp
+@@ -859,8 +859,16 @@
+         requires std::derived_from<T, RuntimeTelemetry>
+     void set_runtime_telemetry(Owner& origin, T& telemetry) {
+         ensure_mutable();
+-        detail::ContextResources::entry(memory_, origin.memory_resource(), telemetry);
+-        runtime_telemetry_ = &telemetry;
++        auto registered =
++            detail::ContextResources::entry(memory_, origin.memory_resource(), telemetry);
++        if (!registered.slot) {
++            throw std::invalid_argument("Context telemetry must be a managed Context object");
++        }
++        runtime_telemetry_.emplace(std::allocator_arg,
++                                   Allocator(memory_resource()),
++                                   static_cast<const RuntimeTelemetry&>(telemetry),
++                                   *registered.owner,
++                                   registered.slot);
+     }
+ 
+     template <class Owner, class T>
+@@ -1216,6 +1224,12 @@
+         if (metadata_borrow_) {
+             (void)metadata_borrow_->get();
+         }
++        Arena::Quiescence active;
++        if (!memory_.closing()) {
++            active.attach(const_cast<detail::ContextArena&>(memory_), nullptr, [](void*) noexcept {
++                std::terminate();
++            });
++        }
+         return metadata_ ? metadata_->entity(name) : nullptr;
+     }
+ 
+@@ -1223,6 +1237,12 @@
+         ensure_open();
+         if (metadata_borrow_) {
+             (void)metadata_borrow_->get();
++        }
++        Arena::Quiescence active;
++        if (!memory_.closing()) {
++            active.attach(const_cast<detail::ContextArena&>(memory_), nullptr, [](void*) noexcept {
++                std::terminate();
++            });
+         }
+         auto r = const_cast<detail::ContextArena*>(&memory_);
+         return metadata_ ? metadata_->all_entities(r) : Vector<const EntityDescriptor*>(r);
+@@ -1584,7 +1604,7 @@
+     mutable std::optional<ResourceBorrow<IdSetStore>> id_set_store_borrow_;
+     struct PaginationObservation;
+     mutable PaginationObservation* pagination_observation_ = nullptr;
+-    mutable const RuntimeTelemetry* runtime_telemetry_ = nullptr;
++    mutable std::optional<ResourceBorrow<const RuntimeTelemetry>> runtime_telemetry_;
+     const RawAuditEventSink* event_sink_ = nullptr;
+     const SafeAuditEventSink* custom_event_sink_ = nullptr;
+     const Vector<GraphNode>* initial_graphs_ = nullptr;
+--- a/src/runtime/context_checker.cpp
++++ b/src/runtime/context_checker.cpp
+@@ -24,6 +24,7 @@
+ 
+ bool UserContext::has_checker(std::string_view entity) const {
+     check_public();
++    CheckerCallScope active(detail::resource_arena(memory_resource()));
+     return checker_registry_ &&
+            checker_registry_->get().checker(memory_resource(), entity).has_value();
+ }
+--- a/src/runtime/telemetry.cpp
++++ b/src/runtime/telemetry.cpp
+@@ -207,17 +207,35 @@
+ const RuntimeTelemetry& UserContext::runtime_telemetry() const {
+     ensure_open();
+     if (!runtime_telemetry_) {
+-        runtime_telemetry_ = &make<NoopRuntimeTelemetry>();
+-    }
+-    return *runtime_telemetry_;
++        auto& telemetry = make<NoopRuntimeTelemetry>();
++        auto registered = detail::ContextResources::entry(
++            detail::resource_arena(memory_resource()), memory_resource(), telemetry);
++        runtime_telemetry_.emplace(std::allocator_arg,
++                                   Allocator(memory_resource()),
++                                   static_cast<const RuntimeTelemetry&>(telemetry),
++                                   *registered.owner,
++                                   registered.slot);
++    }
++    return runtime_telemetry_->get();
+ }
+ 
+ bool UserContext::runtime_telemetry_is_noop() const {
++    ensure_open();
++    Arena::Quiescence active;
++    if (!memory_.closing()) {
++        active.attach(const_cast<detail::ContextArena&>(memory_), nullptr, [](void*) noexcept {
++            std::terminate();
++        });
++    }
+     return runtime_telemetry().is_noop();
+ }
+ 
+ FailOpenRuntimeTelemetryScope&
+ UserContext::start_runtime_operation(const RuntimeOperation& operation) const {
++    Arena::Quiescence active;
++    active.attach(detail::resource_arena(memory_resource()), nullptr, [](void*) noexcept {
++        std::terminate();
++    });
+     return teaql::start_runtime_operation(memory_resource(), runtime_telemetry(), operation);
+ }
+ }

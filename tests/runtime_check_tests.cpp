@@ -1,13 +1,78 @@
 #include <teaql/runtime/context.hpp>
 #include <teaql/runtime/error.hpp>
+#include <teaql/runtime/error_debug.hpp>
 #include <teaql/sql/error.hpp>
 #include <iostream>
 using namespace teaql;
+
+template <class E>
+concept HasDefaultErrorDebug =
+    requires(DebugWriter& writer, const DataServiceError<E>& error) { write_debug(writer, error); };
+
+struct DisplayOnlyError {
+    const char* what() const {
+        return "display only";
+    }
+};
+
+static_assert(HasDefaultErrorDebug<String>);
+static_assert(!HasDefaultErrorDebug<DisplayOnlyError>);
 
 static void check(bool ok, const char* message) {
     if (!ok) {
         throw std::runtime_error(message);
     }
+}
+
+static void diagnostic_ownership() {
+    GlobalContext global;
+    Ref<RuntimeError> retained;
+    {
+        auto user = global.make_user_context();
+        auto owner = user->memory_resource();
+        CheckResults results(owner);
+        results.emplace_back(CheckResult::required(owner, ObjectLocation::array_root(owner, 42)));
+        results.back()
+            .with_message(String(4096, 'm', owner))
+            .with_input_value(Value(owner, "private input"))
+            .with_source_instance_path("/raw/source");
+        auto error = RuntimeError::check(owner, std::move(results));
+        retained = user->make_global<RuntimeError>(error);
+        auto text = debug_string(owner, error);
+        check(text.get_allocator().resource() == owner && text.find("Check([CheckResult {") == 0 &&
+                  text.find("Some(Text(\"private input\"))") != String::npos,
+              "raw Debug retains full structured payload in the chosen allocation domain");
+
+        struct Concrete {
+            int code;
+        };
+
+        auto wrapped = DataServiceError<Concrete>::executor(owner, Concrete{42});
+        String output(owner);
+        DebugWriter writer(output, {true, DebugNumbers::UpperHex});
+        write_debug(writer, wrapped, [](auto& out, const Concrete& value) {
+            out.structure("Concrete", [&](auto& fields) {
+                fields.field("code", [&](auto& inner) {
+                    inner.integer(value.code);
+                });
+            });
+        });
+        check(
+            output.find("Executor(\n    Concrete {") == 0 &&
+                output.find("code: 0x2A") != String::npos,
+            "borrowed concrete executor formatter retains its own type and inherited numeric mode");
+    }
+    check(global.live_user_bytes() == 0, "retained diagnostics leave no source User allocations");
+    auto user = global.make_user_context();
+    const auto& error = user->get(user->rebind_global(retained));
+    String output(global.memory_resource());
+    DebugWriter writer(output, {true});
+    write_debug(writer, error);
+    check(
+        output.find(String(4096, 'm', global.memory_resource())) != String::npos &&
+            output.find("/raw/source") != String::npos &&
+            output.find("private input") != String::npos,
+        "all diagnostic fields survive actual source User deletion through explicit Global copying");
 }
 
 static void models_and_domains() {
@@ -167,6 +232,7 @@ int main() {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         models_and_domains();
         constructors_and_optional_presence();
+        diagnostic_ownership();
         std::pmr::set_default_resource(previous);
         std::cout << "Runtime check/error contracts passed\n";
     } catch (const std::exception& error) {

@@ -1,0 +1,24 @@
+{
+  "native": "388/388 passed; final namespace source snapshot",
+  "sanitizer": {
+    "exec_session": 69943,
+    "build": "build-sanitize",
+    "log": "/tmp/teaql-stage6-sanitize-full-build.log",
+    "status": "build, full 388/388 regression and 2/2 live original examples completed with exit 0",
+    "build_exit": 0,
+    "test_session": 24271,
+    "test_exit": 0
+  },
+  "mips": {
+    "exec_session": 11964,
+    "build": "build-wndr4300-memory",
+    "log": "/tmp/teaql-stage6-mips-full-build.log",
+    "sqlite": "3.53.2",
+    "status": "build, full 387/387 regression and 2/2 live original examples completed with exit 0",
+    "build_exit": 0,
+    "test_session": 89562,
+    "registered_checks": 387,
+    "test_exit": 0
+  },
+  "goal": "All six in-scope stages accepted; compiler/test sessions are terminal with exit 0"
+}

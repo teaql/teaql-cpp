@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-sanitize
+Test project /home/philip/githome/teaql-cpp/build-sanitize
+    Start 165: graph_repository_rust_parity
+1/1 Test #165: graph_repository_rust_parity .....   Passed    1.16 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   1.17 sec

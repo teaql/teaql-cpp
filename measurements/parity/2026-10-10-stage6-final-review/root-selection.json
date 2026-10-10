@@ -1,0 +1,16 @@
+{
+  "tests": [
+    "original_runtime_aggregate_cache_contracts",
+    "original_runtime_context_tail_contracts",
+    "original_runtime_events_relations_contracts",
+    "original_runtime_memory_service_contracts",
+    "original_runtime_optimistic_conflict_output_contracts",
+    "original_runtime_pagination_contracts",
+    "original_runtime_registration_contracts",
+    "original_runtime_service_boundary_contracts",
+    "original_runtime_typed_query_contracts",
+    "original_runtime_validation_contracts"
+  ],
+  "count": 75,
+  "regex": "^(original_runtime_aggregate_cache_contracts|original_runtime_context_tail_contracts|original_runtime_events_relations_contracts|original_runtime_memory_service_contracts|original_runtime_optimistic_conflict_output_contracts|original_runtime_pagination_contracts|original_runtime_registration_contracts|original_runtime_service_boundary_contracts|original_runtime_typed_query_contracts|original_runtime_validation_contracts)$"
+}

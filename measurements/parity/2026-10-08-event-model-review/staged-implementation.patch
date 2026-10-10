@@ -1,0 +1,448 @@
+--- /dev/null
++++ b/include/teaql/runtime/event_debug.hpp
+@@ -0,0 +1,178 @@
++#pragma once
++#include <teaql/runtime/event.hpp>
++#include <teaql/runtime/mutation_policy_debug.hpp>
++#include <teaql/core/mutation_debug.hpp>
++
++namespace teaql {
++inline void write_debug(DebugWriter& writer, RawAuditEventKind value) {
++    switch (value) {
++    case RawAuditEventKind::Created:
++        writer.raw("Created");
++        return;
++    case RawAuditEventKind::Updated:
++        writer.raw("Updated");
++        return;
++    case RawAuditEventKind::Deleted:
++        writer.raw("Deleted");
++        return;
++    case RawAuditEventKind::Recovered:
++        writer.raw("Recovered");
++        return;
++    case RawAuditEventKind::SchemaCreated:
++        writer.raw("SchemaCreated");
++        return;
++    case RawAuditEventKind::SchemaVerified:
++        writer.raw("SchemaVerified");
++        return;
++    case RawAuditEventKind::FieldAdded:
++        writer.raw("FieldAdded");
++        return;
++    case RawAuditEventKind::DataSeeded:
++        writer.raw("DataSeeded");
++        return;
++    }
++    throw std::invalid_argument("Unknown raw audit event kind");
++}
++
++namespace detail {
++inline void write_event_record(DebugWriter& writer, const Record& value) {
++    writer.sequence(
++        value,
++        [](auto& out, const auto& entry) {
++            write_debug(out, entry.first);
++            out.raw(": ");
++            write_debug(out, entry.second);
++        },
++        "{",
++        "}");
++}
++
++inline void write_event_record_optional(DebugWriter& writer, const std::optional<Record>& value) {
++    if (value) {
++        writer.tuple("Some", [&](auto& out) {
++            write_event_record(out, *value);
++        });
++    } else {
++        writer.raw("None");
++    }
++}
++}
++
++inline void write_debug(DebugWriter& writer, const EntityPropertyChange& value) {
++    writer.structure("EntityPropertyChange", [&](auto& fields) {
++        fields.field("field", [&](auto& out) {
++            write_debug(out, value.field);
++        });
++        fields.field("old_value", [&](auto& out) {
++            detail::write_policy_optional(out, value.old_value);
++        });
++        fields.field("new_value", [&](auto& out) {
++            detail::write_policy_optional(out, value.new_value);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const BootstrapAuditIdentity& value) {
++    writer.structure("BootstrapAuditIdentity", [&](auto& fields) {
++        fields.field("actor", [&](auto& out) {
++            write_debug(out, value.actor);
++        });
++        fields.field("category", [&](auto& out) {
++            write_debug(out, value.category);
++        });
++        fields.field("reason", [&](auto& out) {
++            write_debug(out, value.reason);
++        });
++        fields.field("resulting_version", [&](auto& out) {
++            detail::write_policy_optional(out, value.resulting_version);
++        });
++        fields.field("occurred_at_millis", [&](auto& out) {
++            out.integer(value.occurred_at_millis);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const SafeAuditField& value) {
++    writer.structure("SafeAuditField", [&](auto& fields) {
++        fields.field("name", [&](auto& out) {
++            write_debug(out, value.name);
++        });
++        fields.field("value", [&](auto& out) {
++            detail::write_policy_optional(out, value.value);
++        });
++        fields.field("masked", [&](auto& out) {
++            out.boolean(value.masked);
++        });
++        fields.field("truncated", [&](auto& out) {
++            out.boolean(value.truncated);
++        });
++        fields.field("raw_length", [&](auto& out) {
++            detail::write_policy_optional(out, value.raw_length);
++        });
++        fields.field("output_length", [&](auto& out) {
++            detail::write_policy_optional(out, value.output_length);
++        });
++        fields.field("mask_reason", [&](auto& out) {
++            detail::write_policy_optional(out, value.mask_reason);
++        });
++        fields.field("truncate_reason", [&](auto& out) {
++            detail::write_policy_optional(out, value.truncate_reason);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const SafeAuditEvent& value) {
++    writer.structure("SafeAuditEvent", [&](auto& fields) {
++        fields.field("kind", [&](auto& out) {
++            write_debug(out, value.kind);
++        });
++        fields.field("entity", [&](auto& out) {
++            write_debug(out, value.entity);
++        });
++        fields.field("fields", [&](auto& out) {
++            detail::write_policy_list(out, value.fields);
++        });
++        fields.field("trace_chain", [&](auto& out) {
++            detail::write_policy_list(out, value.trace_chain);
++        });
++        fields.field("mutation_governance", [&](auto& out) {
++            detail::write_policy_optional(out, value.mutation_governance);
++        });
++    });
++}
++
++inline void write_debug(DebugWriter& writer, const RawAuditEvent& value) {
++    writer.structure("RawAuditEvent", [&](auto& fields) {
++        fields.field("kind", [&](auto& out) {
++            write_debug(out, value.kind);
++        });
++        fields.field("entity", [&](auto& out) {
++            write_debug(out, value.entity);
++        });
++        fields.field("values", [&](auto& out) {
++            detail::write_event_record(out, value.values);
++        });
++        fields.field("updated_fields", [&](auto& out) {
++            detail::write_policy_list(out, value.updated_fields);
++        });
++        fields.field("old_values", [&](auto& out) {
++            detail::write_event_record_optional(out, value.old_values);
++        });
++        fields.field("new_values", [&](auto& out) {
++            detail::write_event_record_optional(out, value.new_values);
++        });
++        fields.field("changes", [&](auto& out) {
++            detail::write_policy_list(out, value.changes);
++        });
++        fields.field("trace_chain", [&](auto& out) {
++            detail::write_policy_list(out, value.trace_chain);
++        });
++        fields.field("bootstrap_audit", [&](auto& out) {
++            detail::write_policy_optional(out, value.bootstrap_audit);
++        });
++        fields.field("mutation_governance", [&](auto& out) {
++            detail::write_policy_optional(out, value.mutation_governance);
++        });
++    });
++}
++}
+--- a/include/teaql/runtime.hpp
++++ b/include/teaql/runtime.hpp
+@@ -13,6 +13,7 @@
+ #include <teaql/runtime/entity_status_debug.hpp>
+ #include <teaql/runtime/error_debug.hpp>
+ #include <teaql/runtime/event.hpp>
++#include <teaql/runtime/event_debug.hpp>
+ #include <teaql/runtime/generated_support.hpp>
+ #include <teaql/runtime/i18n.hpp>
+ #include <teaql/runtime/i18n_debug.hpp>
+--- /dev/null
++++ b/tests/event_model_tests.cpp
+@@ -0,0 +1,75 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/event_debug.hpp>
++#include <cstdlib>
++#include <iostream>
++using namespace teaql;
++
++static void check(bool value, const char* message) {
++    if (!value) {
++        throw std::runtime_error(message);
++    }
++}
++
++int main() {
++    unsetenv("TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS");
++    std::pmr::set_default_resource(std::pmr::null_memory_resource());
++    GlobalContext global;
++    auto user = global.make_user_context();
++    auto owner = user->memory_resource();
++    auto& values = user->make<Record>();
++    values.emplace(String("id", owner), Value(owner, std::uint64_t(1001)));
++    values.emplace(String("name", owner), Value(owner, "display🧊"));
++    values.emplace(String("password", owner), Value(owner, "credential-secret"));
++    auto source = user->make_ref<RawAuditEvent>(RawAuditEvent::created(owner, "Order", values));
++    auto& event = user->get(source);
++    event.trace_chain.emplace_back(TraceKind::AuditReason, "Order", "credential-secret 1001", 1001);
++    event.bootstrap_audit.emplace(
++        std::allocator_arg, Allocator(owner), "actor", "category", "reason", -3, UINT64_MAX);
++    event.mutation_governance.emplace(std::allocator_arg,
++                                      Allocator(owner),
++                                      "execution",
++                                      "Order.saveGraph",
++                                      MutationPolicySource::Customer,
++                                      MutationPolicyApprovalStatus::Approved);
++    event.mutation_governance->policy.emplace(
++        std::allocator_arg, Allocator(owner), "policy", "v1", "fingerprint");
++    auto& safe = user->make<SafeAuditEvent>(event.build_safe_event(owner, {}, {}));
++    auto retained_raw = user->make_global<RawAuditEvent>(event);
++    auto retained_safe = user->make_global<SafeAuditEvent>(safe);
++    {
++        auto raw_text = debug_string(owner, event);
++        auto safe_text = debug_string(owner, safe);
++        check(raw_text.find("credential-secret") != raw_text.npos,
++              "Raw source-derived diagnostics retain actual event data");
++        check(
++            safe_text.find("credential-secret") == safe_text.npos &&
++                safe_text.find("[REDACTED]") != safe_text.npos,
++            "Safe diagnostics format the actual privacy projection without reintroducing credentials");
++    }
++    auto kept_raw = retained_raw;
++    auto kept_safe = retained_safe;
++    user.reset();
++    check(global.live_user_bytes() == 0, "Source event User blocks are reclaimed");
++    auto next = global.make_user_context();
++    const auto& raw = next->get(next->rebind_global(kept_raw));
++    const auto& projected = next->get(next->rebind_global(kept_safe));
++    check(raw.values.get_allocator().resource() == global.memory_resource() &&
++              raw.bootstrap_audit->memory_resource() == global.memory_resource() &&
++              raw.mutation_governance->policy->memory_resource() == global.memory_resource() &&
++              projected.fields[0].memory_resource() == global.memory_resource(),
++          "Raw and safe nested data are independently owned by the selected destination");
++    {
++        auto text = debug_string(next->memory_resource(), projected, DebugOptions{.pretty = true});
++        check(text.find("credential-secret") == text.npos &&
++                  text.get_allocator().resource() == next->memory_resource(),
++              "Retained safe events stay safe and format in the caller's User");
++    }
++    bool rejected = false;
++    try {
++        (void)next->get(source);
++    } catch (const ReferenceError&) {
++        rejected = true;
++    }
++    check(rejected, "Expired raw event reference rejects before diagnostic access");
++    std::cout << "Raw/safe event model ownership and privacy contracts pass\n";
++}
+--- /dev/null
++++ b/tests/parity/event_model_probe.cpp
+@@ -0,0 +1,158 @@
++#include <teaql/runtime.hpp>
++#include <teaql/runtime/event_debug.hpp>
++#include <teaql/core/detail/model_json.hpp>
++#include "fixture_value.hpp"
++#include "debug_modes.hpp"
++#include <cstdlib>
++#include <iostream>
++
++static Record record(Memory owner, const Json& input) {
++    Record result(owner);
++    for (const auto& [name, item] : detail::model_object(input, "record")) {
++        result.emplace(String(name, owner), value(owner, item));
++    }
++    return result;
++}
++
++static Vector<String> strings(Memory owner, const Json& input) {
++    Vector<String> result(owner);
++    for (const auto& item : detail::model_array(input, "strings")) {
++        result.emplace_back(text(item));
++    }
++    return result;
++}
++
++static RawAuditEvent raw(Memory owner, const Json& input) {
++    auto entity = text(field(input, "entity"));
++    auto values = record(owner, field(input, "values"));
++    std::optional<Record> old;
++    if (std::holds_alternative<Json::Object>(field(input, "old").data)) {
++        old.emplace(record(owner, field(input, "old")));
++    }
++    auto identifier = value(owner, field(input, "id"));
++    std::optional<std::int64_t> version;
++    if (std::holds_alternative<String>(field(input, "version").data)) {
++        version = number<std::int64_t>(field(input, "version"));
++    }
++    auto kind = text(field(input, "kind"));
++    auto count = detail::model_integer<std::size_t>(field(input, "count"), "count");
++    auto event = [&] {
++        if (kind == "created") {
++            return RawAuditEvent::created(owner, entity, values);
++        }
++        if (kind == "updated") {
++            return RawAuditEvent::updated(owner, entity, values);
++        }
++        if (kind == "updated_old") {
++            return RawAuditEvent::updated_with_old_values(owner,
++                                                          entity,
++                                                          values,
++                                                          old,
++                                                          record(owner, field(input, "new")),
++                                                          strings(owner, field(input, "fields")));
++        }
++        if (kind == "deleted") {
++            return RawAuditEvent::deleted(owner, entity, identifier, version);
++        }
++        if (kind == "deleted_old") {
++            return RawAuditEvent::deleted_with_old_values(owner, entity, identifier, version, old);
++        }
++        if (kind == "recovered") {
++            return RawAuditEvent::recovered(owner, entity, identifier, *version);
++        }
++        if (kind == "recovered_old") {
++            return RawAuditEvent::recovered_with_old_values(
++                owner, entity, identifier, *version, old);
++        }
++        if (kind == "schema_created") {
++            return RawAuditEvent::schema_created(owner, entity, "orders", count);
++        }
++        if (kind == "schema_verified") {
++            return RawAuditEvent::schema_verified(owner, entity, "orders", count);
++        }
++        if (kind == "field_added") {
++            return RawAuditEvent::field_added(owner, entity, "orders", "name");
++        }
++        return RawAuditEvent::data_seeded(owner, entity, "orders", count, 2);
++    }();
++    if (std::get<bool>(field(input, "trace").data)) {
++        event.trace_chain.emplace_back(TraceKind::AuditReason, "Order", "reason secret 1001", 1001);
++        event.trace_chain.emplace_back(TraceKind::Entity, "Order", "trace🧊");
++    }
++    if (std::get<bool>(field(input, "bootstrap").data)) {
++        event.bootstrap_audit.emplace(std::allocator_arg,
++                                      Allocator(owner),
++                                      "actor🧊",
++                                      "category",
++                                      "bootstrap reason",
++                                      -3,
++                                      UINT64_MAX);
++    }
++    if (std::get<bool>(field(input, "governance").data)) {
++        event.mutation_governance.emplace(std::allocator_arg,
++                                          Allocator(owner),
++                                          "execution",
++                                          "Order.saveGraph",
++                                          MutationPolicySource::Customer,
++                                          MutationPolicyApprovalStatus::Approved);
++        auto& snapshot = *event.mutation_governance;
++        snapshot.policy.emplace(
++            std::allocator_arg, Allocator(owner), "policy", "v1", "fingerprint");
++        snapshot.warning_codes.emplace_back("warning");
++        EntityKey key(
++            std::allocator_arg, Allocator(owner), "Order", Value(owner, std::uint64_t(1001)));
++        auto& operation = snapshot.operations.emplace_back(MutationOperationKind::Update, key);
++        operation.changed_fields.emplace_back("secret");
++        operation.changed_fields.emplace_back("name");
++    }
++    return event;
++}
++
++static Json evaluate(UserContext& user, const Json& input) {
++    auto owner = user.memory_resource();
++    if (std::get<bool>(field(input, "plaintext").data)) {
++        setenv("TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS",
++               "I_UNDERSTAND_SENSITIVE_DATA_MAY_BE_WRITTEN_TO_DISK",
++               1);
++    } else {
++        unsetenv("TEAQL_ALLOW_SENSITIVE_PLAINTEXT_LOGS");
++    }
++    auto event = raw(owner, input);
++    auto clone = detail::clone_in(owner, event);
++    auto other = detail::clone_in(owner, event);
++    other.entity += '!';
++    std::optional<std::size_t> maximum;
++    if (!std::holds_alternative<std::monostate>(field(input, "maximum").data)) {
++        maximum = detail::model_integer<std::size_t>(field(input, "maximum"), "maximum");
++    }
++    auto safe = event.build_safe_event(owner, strings(owner, field(input, "mask")), maximum);
++    auto safe_clone = detail::clone_in(owner, safe);
++    auto safe_other = detail::clone_in(owner, safe);
++    safe_other.entity += '!';
++    auto output = detail::model_json(owner);
++    auto put = [&](std::string_view name, auto&& value) {
++        detail::model_put(output, name, std::forward<decltype(value)>(value));
++    };
++    put("raw", formatted_debug(owner, event));
++    put("raw_clone", formatted_debug(owner, clone));
++    put("raw_clone_equal", event == clone);
++    put("raw_changed_equal", event == other);
++    put("safe", formatted_debug(owner, safe));
++    put("safe_clone", formatted_debug(owner, safe_clone));
++    put("safe_clone_equal", safe == safe_clone);
++    put("safe_changed_equal", safe == safe_other);
++    return output;
++}
++
++int main() {
++    GlobalContext global;
++    std::string line;
++    while (std::getline(std::cin, line)) {
++        auto user = global.make_user_context();
++        auto input = Json::parse(user->memory_resource(), line);
++        if (!input) {
++            throw std::invalid_argument("Invalid event model fixture");
++        }
++        std::cout << evaluate(*user, *input).dump(user->memory_resource()) << '\n';
++    }
++}
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -229,6 +229,15 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_transaction_move_only.py
+         --cpp $<TARGET_FILE:teaql_transaction_move_only_probe>
+         "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
++    add_executable(teaql_event_model_tests tests/event_model_tests.cpp)
++    target_link_libraries(teaql_event_model_tests PRIVATE teaql::runtime)
++    add_test(NAME event_model_contracts COMMAND teaql_event_model_tests)
++    add_executable(teaql_event_model_probe tests/parity/event_model_probe.cpp)
++    target_link_libraries(teaql_event_model_probe PRIVATE teaql::runtime)
++    add_test(NAME event_model_rust_parity COMMAND ${Python3_EXECUTABLE}
++        ${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/compare_event_models.py
++        --cpp $<TARGET_FILE:teaql_event_model_probe>
++        "--cpp-emulator=${CMAKE_CROSSCOMPILING_EMULATOR}")
+     add_executable(teaql_transaction_scope_tests tests/transaction_scope_tests.cpp)
+     target_link_libraries(teaql_transaction_scope_tests PRIVATE teaql::provider_sqlite)
+     add_test(NAME transaction_scope_context_contracts COMMAND teaql_transaction_scope_tests)

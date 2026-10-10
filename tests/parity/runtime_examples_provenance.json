@@ -1,0 +1,143 @@
+{
+  "schema": [
+    {
+      "audit": "Create the example order",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order",
+      "operation": "Insert",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Submit the example order",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Submit the example order",
+      "operation": "Update",
+      "purpose": null
+    },
+    {
+      "audit": "Submit the example order",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": null,
+      "operation": "Delete",
+      "purpose": null
+    },
+    {
+      "audit": null,
+      "operation": "Select",
+      "purpose": "Inspect the soft-deleted example order"
+    }
+  ],
+  "relations": [
+    {
+      "audit": "Seed the product before creating an order line that references it",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Seed the product before creating an order line that references it",
+      "operation": "Insert",
+      "purpose": null
+    },
+    {
+      "audit": "Seed the product before creating an order line that references it",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Seed the product before creating an order line that references it",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Seed the product before creating an order line that references it",
+      "operation": "Insert",
+      "purpose": null
+    },
+    {
+      "audit": "Seed the product before creating an order line that references it",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order graph",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order graph",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order graph",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order graph",
+      "operation": "Insert",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order graph",
+      "operation": "Insert",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order graph",
+      "operation": "Insert",
+      "purpose": null
+    },
+    {
+      "audit": "Create the example order graph",
+      "operation": "Select",
+      "purpose": null
+    },
+    {
+      "audit": null,
+      "operation": "Select",
+      "purpose": "Display the saved example order"
+    },
+    {
+      "audit": null,
+      "operation": "Select",
+      "purpose": "Display the saved example order"
+    },
+    {
+      "audit": null,
+      "operation": "Select",
+      "purpose": "Display the saved example order"
+    },
+    {
+      "audit": null,
+      "operation": "Select",
+      "purpose": "Display the saved example order"
+    },
+    {
+      "audit": null,
+      "operation": "Select",
+      "purpose": "Display the saved example order"
+    },
+    {
+      "audit": null,
+      "operation": "Select",
+      "purpose": "Display the saved example order"
+    }
+  ],
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Ordered safe SQL operation/purpose/audit observations from actual locked Rust examples. Includes the plain graph-delete path whose audit_reason is absent in 5.0.5."
+}

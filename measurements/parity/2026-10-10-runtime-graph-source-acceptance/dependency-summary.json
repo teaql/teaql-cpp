@@ -1,0 +1,5 @@
+{
+  "compiled_objects": 426,
+  "empty_dependency_records": 0,
+  "source": "ninja -C build-root-integration -t deps"
+}

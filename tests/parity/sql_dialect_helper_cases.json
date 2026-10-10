@@ -1,0 +1,2976 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Direct original public Unicode-scalar quoting and storage-coverage helpers; observed twice without source algorithm copies. Registered native counterpart uses char32_t. Original 1305 schema observations remain unchanged.",
+  "cases": [
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u0000\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "''"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "``"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00ab\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd80\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u0000Select\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"Select\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "'Select'"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`Select`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00abSelect\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd80Select\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u00001name\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"1name\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "'1name'"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`1name`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00ab1name\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd801name\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u0000has space\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"has space\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "'has space'"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`has space`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00abhas space\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd80has space\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u0000a\u00abb\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"a\u00abb\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "'a\u00abb'"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`a\u00abb`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00aba\u00ab\u00abb\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd80a\u00abb\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u0000\u03a3x\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"\u03a3x\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "'\u03a3x'"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`\u03a3x`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00ab\u03a3x\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd80\u03a3x\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u0000a\u0000\u0000b\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"a\u0000b\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "'a\u0000b'"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`a\u0000b`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00aba\u0000b\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd80a\u0000b\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": null,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": null,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 0,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": null,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 1,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 12,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 255,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 0,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 4294967295,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 1,
+        "actual_scale": 2
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": null,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 12,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 0,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 14,
+        "actual_scale": 6
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 1,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 4294967295,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 255,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 4294967295,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 4294967295,
+        "expected_precision": 0,
+        "expected_scale": 0,
+        "actual_precision": 0,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": null,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": null,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 0,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": null,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 1,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 12,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 255,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 0,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 4294967295,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 1,
+        "actual_scale": 2
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": null,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 12,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 0,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 14,
+        "actual_scale": 6
+      },
+      "expected": {
+        "length": false,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 1,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 4294967295,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 255,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 4294967295,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 4294967295,
+        "expected_precision": 1,
+        "expected_scale": 2,
+        "actual_precision": 0,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": null,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": null,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 0,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": null,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 1,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 12,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 255,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 0,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 4294967295,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 1,
+        "actual_scale": 2
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": null,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 12,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 0,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 14,
+        "actual_scale": 6
+      },
+      "expected": {
+        "length": false,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 1,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 4294967295,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 255,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 4294967295,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 4294967295,
+        "expected_precision": 12,
+        "expected_scale": 4,
+        "actual_precision": 0,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": null,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": null,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 0,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": null,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 1,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 12,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 255,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 0,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 4294967295,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 1,
+        "actual_scale": 2
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": null,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 12,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 0,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 14,
+        "actual_scale": 6
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 1,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 4294967295,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": false,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 255,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 4294967295,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 4294967295,
+        "actual_length": 4294967295,
+        "expected_precision": 12,
+        "expected_scale": 12,
+        "actual_precision": 0,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": null,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": null,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 0,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": null,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 1,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 12,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 255,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 0,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 4294967295,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 1,
+        "actual_scale": 2
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": null,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 12,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 0,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 14,
+        "actual_scale": 6
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 1,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 4294967295,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 255,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 4294967295,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 0,
+        "actual_length": 4294967295,
+        "expected_precision": 4294967295,
+        "expected_scale": 4294967295,
+        "actual_precision": 0,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": null,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": null,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 0,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": null,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 1,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 12,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 255,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 0,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 4294967295,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 1,
+        "actual_scale": 2
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": null,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 12,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 0,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 14,
+        "actual_scale": 6
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 1,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 4294967295,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 255,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 4294967295,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 1,
+        "actual_length": 4294967295,
+        "expected_precision": 4294967295,
+        "expected_scale": 0,
+        "actual_precision": 0,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": null,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": null,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 0,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": null,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 1,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 12,
+        "actual_scale": null
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 255,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 0,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 4294967295,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 1,
+        "actual_scale": 2
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": null,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 12,
+        "actual_scale": 4
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 0,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 14,
+        "actual_scale": 6
+      },
+      "expected": {
+        "length": false,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 1,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 4294967295,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": false,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 255,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 4294967295,
+        "actual_scale": 0
+      },
+      "expected": {
+        "length": true,
+        "numeric": false
+      }
+    },
+    {
+      "input": {
+        "mode": "storage",
+        "expected_length": 255,
+        "actual_length": 4294967295,
+        "expected_precision": 0,
+        "expected_scale": 4294967295,
+        "actual_precision": 0,
+        "actual_scale": 4294967295
+      },
+      "expected": {
+        "length": true,
+        "numeric": true
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007f\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u0080\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ff\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u0800\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ff\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue000\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffff\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc00\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfff\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c49\u6c49"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "name",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007fSelect\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u0080Select\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ffSelect\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u0800Select\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ffSelect\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue000Select\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffffSelect\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc00Select\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfffSelect\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "Select",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c49Select\u6c49"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007f1name\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u00801name\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ff1name\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u08001name\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ff1name\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue0001name\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffff1name\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc001name\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfff1name\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "1name",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c491name\u6c49"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007fhas space\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u0080has space\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ffhas space\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u0800has space\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ffhas space\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue000has space\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffffhas space\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc00has space\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfffhas space\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has space",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c49has space\u6c49"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007fa\u00abb\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u0080a\u00abb\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ffa\u00abb\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u0800a\u00abb\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ffa\u00abb\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue000a\u00abb\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffffa\u00abb\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc00a\u00abb\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfffa\u00abb\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u00abb",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c49a\u00abb\u6c49"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\"quoted\"",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\"quoted\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "`quoted`",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "`quoted`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "[quoted]",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "[quoted]"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007f\u03a3x\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u0080\u03a3x\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ff\u03a3x\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u0800\u03a3x\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ff\u03a3x\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue000\u03a3x\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffff\u03a3x\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc00\u03a3x\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfff\u03a3x\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "\u03a3x",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c49\u03a3x\u6c49"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007fa\u0000b\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u0080a\u0000b\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ffa\u0000b\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u0800a\u0000b\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ffa\u0000b\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue000a\u0000b\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffffa\u0000b\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc00a\u0000b\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfffa\u0000b\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "a\u0000b",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c49a\u0000b\u6c49"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 0
+      },
+      "expected": {
+        "quoted": "\u0000has \u00ab space\u0000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 34
+      },
+      "expected": {
+        "quoted": "\"has \u00ab space\""
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 39
+      },
+      "expected": {
+        "quoted": "'has \u00ab space'"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 96
+      },
+      "expected": {
+        "quoted": "`has \u00ab space`"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 171
+      },
+      "expected": {
+        "quoted": "\u00abhas \u00ab\u00ab space\u00ab"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 129408
+      },
+      "expected": {
+        "quoted": "\ud83e\udd80has \u00ab space\ud83e\udd80"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 127
+      },
+      "expected": {
+        "quoted": "\u007fhas \u00ab space\u007f"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 128
+      },
+      "expected": {
+        "quoted": "\u0080has \u00ab space\u0080"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 2047
+      },
+      "expected": {
+        "quoted": "\u07ffhas \u00ab space\u07ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 2048
+      },
+      "expected": {
+        "quoted": "\u0800has \u00ab space\u0800"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 55295
+      },
+      "expected": {
+        "quoted": "\ud7ffhas \u00ab space\ud7ff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 57344
+      },
+      "expected": {
+        "quoted": "\ue000has \u00ab space\ue000"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 65535
+      },
+      "expected": {
+        "quoted": "\uffffhas \u00ab space\uffff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 65536
+      },
+      "expected": {
+        "quoted": "\ud800\udc00has \u00ab space\ud800\udc00"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 1114111
+      },
+      "expected": {
+        "quoted": "\udbff\udfffhas \u00ab space\udbff\udfff"
+      }
+    },
+    {
+      "input": {
+        "mode": "quote",
+        "identifier": "has \u00ab space",
+        "quote_code": 27721
+      },
+      "expected": {
+        "quoted": "\u6c49has \u00ab space\u6c49"
+      }
+    }
+  ]
+}

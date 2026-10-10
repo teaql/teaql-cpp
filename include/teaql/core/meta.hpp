@@ -2,6 +2,8 @@
 #include <teaql/core/value.hpp>
 #include <stdexcept>
 #include <ranges>
+#include <span>
+#include <concepts>
 
 namespace teaql {
 String default_table_name(Memory, std::string_view);
@@ -207,11 +209,21 @@ struct EntityDescriptor {
     }
 
     EntityDescriptor& mask_fields(std::initializer_list<std::string_view> names) {
+        return mask_fields(std::span<const std::string_view>(names.begin(), names.size()));
+    }
+
+    template <std::ranges::input_range Names>
+        requires std::convertible_to<std::ranges::range_reference_t<Names>, std::string_view>
+    EntityDescriptor& mask_fields(Names&& names) {
+        // Snapshot before publication, including when names aliases our current fields.
         Vector<String> copy(memory_resource());
-        for (auto name : names) {
-            copy.emplace_back(name);
+        if constexpr (std::ranges::sized_range<Names>) {
+            copy.reserve(std::ranges::size(names));
         }
-        audit_mask_fields = std::move(copy);
+        for (auto&& name : names) {
+            copy.emplace_back(std::string_view(name));
+        }
+        audit_mask_fields.swap(copy);
         audit_mask_fields_declared = true;
         return *this;
     }

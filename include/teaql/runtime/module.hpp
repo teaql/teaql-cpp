@@ -5,11 +5,13 @@
 #include <teaql/runtime/graph.hpp>
 #include <teaql/runtime/behavior.hpp>
 #include <teaql/runtime/entity_graph_decoder.hpp>
+#include <teaql/runtime/language.hpp>
+#include <teaql/runtime/checker.hpp>
 
 namespace teaql {
 class GlobalContext;
 
-// Checker and language registrations remain pending. Registries preserve their
+// Registries preserve their
 // independent responsibilities, including entity-name versus descriptor-name keys.
 class RuntimeModule {
 public:
@@ -19,23 +21,43 @@ public:
     RuntimeModule(std::allocator_arg_t, Allocator a)
         : metadata(std::allocator_arg, a), entities_(std::allocator_arg, a),
           behaviors_(std::allocator_arg, a), graph_decoders_(std::allocator_arg, a),
-          event_sinks_(std::allocator_arg, a), initial_graphs_(a.resource()),
-          root_graphs_(a.resource()), bootstraps_(a.resource()) {}
+          checkers_(std::allocator_arg, a), event_sinks_(std::allocator_arg, a),
+          initial_graphs_(a.resource()), root_graphs_(a.resource()), bootstraps_(a.resource()) {}
 
     RuntimeModule(std::allocator_arg_t, Allocator a, const RuntimeModule& other)
         : metadata(std::allocator_arg, a, other.metadata),
           entities_(std::allocator_arg, a, other.entities_),
           behaviors_(std::allocator_arg, a, other.behaviors_),
           graph_decoders_(std::allocator_arg, a, other.graph_decoders_),
+          checkers_(std::allocator_arg, a, other.checkers_),
           event_sinks_(std::allocator_arg, a, other.event_sinks_),
           initial_graphs_(other.initial_graphs_, a.resource()),
           root_graphs_(other.root_graphs_, a.resource()),
-          bootstraps_(other.bootstraps_, a.resource()) {}
+          bootstraps_(other.bootstraps_, a.resource()), language_(other.language_) {}
 
     RuntimeModule(const RuntimeModule&) = delete;
 
     Memory memory_resource() const noexcept {
         return metadata.memory_resource();
+    }
+
+    RuntimeModule& language(Language value) & {
+        language_ = value;
+        return *this;
+    }
+
+    template <class Owner, class C>
+        requires std::derived_from<C, Checker>
+    RuntimeModule& checker(Owner& origin, C& value) & {
+        checkers_.register_checker(origin, value);
+        return *this;
+    }
+
+    template <class C>
+        requires std::derived_from<C, Checker>
+    RuntimeModule& checker(const UserContext& context, Ref<C> value) & {
+        checkers_.register_checker(context, value);
+        return *this;
     }
 
     template <IdentifiableEntity T>
@@ -114,8 +136,10 @@ private:
     InMemoryEntityRegistry entities_;
     InMemoryEntityDataServiceBehaviorRegistry behaviors_;
     InMemoryEntityGraphDecoderRegistry graph_decoders_;
+    InMemoryCheckerRegistry checkers_;
     InMemoryRawAuditEventSink event_sinks_;
     Vector<GraphNode> initial_graphs_, root_graphs_;
     Vector<GeneratedSchemaBootstrap> bootstraps_;
+    std::optional<Language> language_;
 };
 }

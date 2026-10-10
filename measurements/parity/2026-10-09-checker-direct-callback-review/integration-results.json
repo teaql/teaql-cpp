@@ -1,0 +1,24 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "native": {
+    "passed": 371,
+    "total": 371,
+    "seconds": 210.67,
+    "build_tasks": 656,
+    "compiled_dependency_records": 418,
+    "before_and_after": "no work"
+  },
+  "asan_ubsan": {
+    "passed": 31,
+    "total": 31,
+    "seconds": 25.46,
+    "detect_leaks": false
+  },
+  "mips_qemu": {
+    "passed": 31,
+    "total": 31,
+    "seconds": 26.46
+  },
+  "hardware": "Explicitly deferred by user",
+  "scope": "Complete checker and mutation-policy source responsibility, not complete graph/privacy/stage acceptance."
+}

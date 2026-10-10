@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/sql/types.hpp>
+#include <exception>
 
 namespace teaql {
 // Keep compile, typed transport, and persisted-record failures distinct.
@@ -23,6 +24,7 @@ public:
     }
 
     SqlExecutorError(std::allocator_arg_t, Allocator a, const SqlExecutorError& other)
+        requires(detail::domain_copyable<E>)
         : resource_(a.resource()), data_(clone(a.resource(), other.data_)) {}
 
     SqlExecutorError(std::allocator_arg_t, Allocator a, SqlExecutorError&& other)
@@ -71,6 +73,10 @@ public:
             }
         };
         return to_string(r, format);
+    }
+
+    const std::exception* source() const noexcept {
+        return nullptr;
     }
 
     String to_string(Memory r, FunctionRef<String(const E&)> format) const {

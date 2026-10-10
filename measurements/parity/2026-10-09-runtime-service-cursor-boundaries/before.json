@@ -1,0 +1,15 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "source": "teaql-runtime/src/data_service/resolved.rs:572-625",
+  "native_debug": {
+    "passed": 16,
+    "total": 16,
+    "exit_code": 0
+  },
+  "mips_release": {
+    "passed": 10,
+    "total": 16,
+    "exit_code": 1
+  },
+  "gap": "C++ throws on next_offset overflow in all profiles; actual original Rust checks Debug and wraps Release. Six rows/owned/aggregate observations differ; plain SmartList controls do not enter cursor registration."
+}

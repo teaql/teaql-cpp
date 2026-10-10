@@ -1,0 +1,100 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "partial; installed native331 and sanitizer/MIPS17 selections pass; subsequent343 integration active",
+  "original_non_clone_inputs": 16,
+  "original_repeats_agree": true,
+  "native": {
+    "models_passed": 16,
+    "models_total": 16,
+    "live_original": true,
+    "value_cleanup_contracts": "passed",
+    "provider_error_contracts": "passed",
+    "default_pmr_disabled": true
+  },
+  "mips": {
+    "models_passed": 16,
+    "models_total": 16,
+    "live_original": true,
+    "value_cleanup_contracts": "passed",
+    "provider_error_contracts": "passed",
+    "default_pmr_disabled": true,
+    "physical_router_verified": false
+  },
+  "sanitizer": {
+    "models_passed": 16,
+    "models_total": 16,
+    "live_original": true,
+    "value_cleanup_contracts": "passed",
+    "provider_error_contracts": "passed",
+    "default_pmr_disabled": true,
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "source_sha256": {
+    "include/teaql/runtime/transaction.hpp": "7913fde896cc96e8c35fa1dcb9871f585fc69bbf1dcdfe95ae7a5cd73292a098",
+    "tests/parity/rust-values/src/bin/transaction_scope_oracle.rs": "48f5549f2b913a2cd849939c2190611330c7bdb46e29658ca379952e2ae5a7cf",
+    "tests/parity/transaction_move_only_cases.json": "3ad4861304ccefd3a41935c6ab336e1035a557603c4ed04be2a3224830358623",
+    "tests/parity/generate_transaction_move_only.py": "4a25fe8d7dca5a29dcf322496b2bb6bc363a24520a0a1360f132534be89de180",
+    "tests/parity/compare_transaction_move_only.py": "c93ba77fa43033258d1582d33f172d657f7e50bcd74559da2a06ccbbec85f433"
+  },
+  "staged_patch_sha256": "8a615bf8b814fa3d0b702d0b8940c86683a89923d43d91cf98cf6dea59f35de4",
+  "staged_source_sha256": {
+    "include/teaql/runtime/transaction.hpp": "7c732f08f47808742bff6d9d03256ddb7b1fc688e64e38094b627190420ad3db",
+    "tests/transaction_move_only_fixture.hpp": "63105317c241111bd7b0f657423f6ede2659812c1f8e0af2fb0daf4a8857ac3a",
+    "tests/transaction_move_only_tests.cpp": "52ec06b96d60f9055e91ed7f0d8a17f3d5b4d981f9e04702099ebbfbb77b2a73",
+    "tests/transaction_provider_error_tests.cpp": "a03cf965ca8621836d5d77a9e2d41745f8a68c7a034d81b7e85d909459d33e45",
+    "tests/parity/transaction_move_only_probe.cpp": "517131a65814183e63ad2ad13db50059de97090c052c63ee0ee4001a38dc76ef",
+    "CMakeLists.txt": "5d85f1e3eb8fbfee9682360c91fa61f382e13908a968073a457622dc8cf581f0"
+  },
+  "notes": "Complete original transaction source reviewed; broader noncopyable ledger-save/installed consumer acceptance remains independent. Apply integration patch instead of overwriting whole staged CMake file. Staged probe has relative fixture include adjusted for installation; standalone compiled probe uses the same fixture and implementation.",
+  "existing_production_live_original": {
+    "passed": 1288,
+    "total": 1288
+  },
+  "staged_existing_live_original": {
+    "passed": 1288,
+    "total": 1288
+  },
+  "installed_in_worktree": true,
+  "installed_source_sha256": {
+    "include/teaql/runtime/transaction.hpp": "7c732f08f47808742bff6d9d03256ddb7b1fc688e64e38094b627190420ad3db",
+    "tests/transaction_move_only_fixture.hpp": "63105317c241111bd7b0f657423f6ede2659812c1f8e0af2fb0daf4a8857ac3a",
+    "tests/transaction_move_only_tests.cpp": "52ec06b96d60f9055e91ed7f0d8a17f3d5b4d981f9e04702099ebbfbb77b2a73",
+    "tests/transaction_provider_error_tests.cpp": "a03cf965ca8621836d5d77a9e2d41745f8a68c7a034d81b7e85d909459d33e45",
+    "tests/parity/transaction_move_only_probe.cpp": "517131a65814183e63ad2ad13db50059de97090c052c63ee0ee4001a38dc76ef"
+  },
+  "registered_native_tests": 331,
+  "previous_full_native_checkpoint": {
+    "passed": 324,
+    "total": 324,
+    "seconds": 151.69
+  },
+  "integration_note": "Initial combined repair completes native331 and sanitizer/MIPS17 checks. A subsequent six-repair batch registers343 tests and is building. Complete source/stage acceptance remains independent.",
+  "installed_mips": {
+    "selected_passed": 17,
+    "selected_total": 17,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false,
+    "seconds": 12.2
+  },
+  "installed_sanitizer": {
+    "selected_passed": 17,
+    "selected_total": 17,
+    "seconds": 13.69,
+    "refresh": "ninja: no work to do.",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "installed_mips_existing_live_original": {
+    "passed": 1288,
+    "total": 1288
+  },
+  "installed_native": {
+    "passed": 331,
+    "total": 331,
+    "seconds": 72.65,
+    "pre_test_no_work": true,
+    "post_test_no_work": true,
+    "evidence": "installed-native331.log"
+  }
+}

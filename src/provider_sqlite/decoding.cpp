@@ -23,51 +23,13 @@ Decoded invalid(Memory r, std::string_view type, std::string_view message) {
     return Decoded::err(r, MutationExecutorError::bind(r, text));
 }
 
-std::optional<String> utf8_error(Memory r, std::string_view s) {
-    for (std::size_t p = 0; p < s.size();) {
-        const auto first = static_cast<unsigned char>(s[p]);
-        if (first < 128) {
-            ++p;
-            continue;
-        }
-        const unsigned width = first >= 0xc2 && first <= 0xdf   ? 2
-                               : first >= 0xe0 && first <= 0xef ? 3
-                               : first >= 0xf0 && first <= 0xf4 ? 4
-                                                                : 0;
-        unsigned length = 1;
-        bool incomplete = false;
-        if (width) {
-            for (; length < width; ++length) {
-                if (p + length == s.size()) {
-                    incomplete = true;
-                    break;
-                }
-                const auto byte = static_cast<unsigned char>(s[p + length]);
-                if ((byte & 0xc0) != 0x80 ||
-                    (length == 1 &&
-                     ((first == 0xe0 && byte < 0xa0) || (first == 0xed && byte >= 0xa0) ||
-                      (first == 0xf0 && byte < 0x90) || (first == 0xf4 && byte >= 0x90)))) {
-                    break;
-                }
-            }
-            if (length == width) {
-                p += width;
-                continue;
-            }
-        }
-        String error(r);
-        if (incomplete) {
-            error = "incomplete utf-8 byte sequence from index ";
-        } else {
-            error = "invalid utf-8 sequence of ";
-            append_number(error, length);
-            error += " bytes from index ";
-        }
-        append_number(error, p);
-        return error;
+std::optional<String> utf8_error(Memory r, std::string_view bytes) {
+    if (auto error = SqliteUtf8Error::validate(bytes)) {
+        return error->to_string(r);
     }
     return {};
 }
+
 enum class TimeError { Range, Invalid, Short, Long };
 
 std::string_view time_error(TimeError e) {
@@ -233,7 +195,9 @@ struct TimeParser {
     }
 };
 
-std::optional<Timestamp> fixed_timestamp(std::string_view s) {
+}
+
+std::optional<Timestamp> parse_fixed_sqlite_timestamp(std::string_view s) {
     if (s.size() < 19 || s[4] != '-' || s[7] != '-' || (s[10] != ' ' && s[10] != 'T') ||
         s[13] != ':' || s[16] != ':') {
         return {};
@@ -297,8 +261,9 @@ std::optional<Timestamp> fixed_timestamp(std::string_view s) {
     }
 }
 
+namespace {
 Decoded timestamp(Memory r, std::string_view s) {
-    if (auto value = fixed_timestamp(s)) {
+    if (auto value = parse_fixed_sqlite_timestamp(s)) {
         return Decoded::ok(r, Value(r, *value));
     }
     if (auto value = Timestamp::parse(s)) {
@@ -444,9 +409,8 @@ decode_sqlite_row(Memory r, sqlite3_stmt& statement, const SqliteRowLayout& layo
     values.reserve(layout.kinds().size());
     for (std::size_t i = 0; i < layout.kinds().size(); ++i) {
         if (i >= std::size_t(sqlite3_column_count(&statement))) {
-            String message("Invalid column index: ", r);
-            append_number(message, i);
-            return Output::err(r, MutationExecutorError::sqlite(r, 0, message));
+            return Output::err(
+                r, MutationExecutorError::sqlite(r, SqliteDriverError::invalid_column_index(r, i)));
         }
         auto column = int(i);
         auto kind = layout.kinds()[i];

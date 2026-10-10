@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-08",
+  "git_head": "b90face53b11ac546b00f615560e0333febf8699",
+  "worktree": "Uncommitted modifications are included; this is not a clean HEAD measurement.",
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "target": "OpenWrt 24.10.4 ath79/nand GCC 13.3.0 musl; -march=74kc -msoft-float",
+  "emulator": [
+    "/usr/bin/qemu-mips",
+    "-cpu",
+    "74Kf"
+  ],
+  "physical_device_tested": false,
+  "source_sqlite_sha256": "0a409f1633283fa31a9126b11fbfd64a1991c5d30defad07e5745d4667f5e23d",
+  "source_sqlite_controls": {
+    "3400100": {
+      "stdout": "SQLite 3.40.1; sizeof(long double)=8; value=1.0000000000000001e-28; bits=3a1fb0f6be50601a",
+      "binary_sha256": "fbcacfdbfd2f64a24ab89b92eabcf7e0f7ebaf423e60b897a6bf05fda246bbe5"
+    },
+    "3530200": {
+      "stdout": "SQLite 3.53.2; sizeof(long double)=8; value=9.9999999999999997e-29; bits=3a1fb0f6be506019",
+      "binary_sha256": "a69cef54afb888509c4026852ea8bf6886a8a782e26ab6c717a44d334ec77329"
+    }
+  },
+  "sqlite_3_40_1_full_parity": {
+    "binding_matches": 1077,
+    "binding_total": 1084,
+    "decoding_matches": 6002,
+    "decoding_total": 6029,
+    "native_contracts_passed": 3,
+    "total_selected_checks": 5,
+    "accepted": false
+  },
+  "sqlite_3_53_2_full_parity": {
+    "selected_checks_passed": 5,
+    "selected_checks_total": 5,
+    "seconds": 82.13,
+    "binding_matches": 1084,
+    "binding_total": 1084,
+    "decoding_matches": 6029,
+    "decoding_total": 6029,
+    "scope": "Prior default-cause repair before the subsequent structured driver layout change. It is not final current-code regression."
+  },
+  "project_stage_acceptance": false,
+  "relevant_source_hashes": {
+    "include/teaql/provider_sqlite/error.hpp": "8fe08d4c0f32b1d20227ce213dd9aecae6b683d9d3cb6b0599e615dda572a3e3",
+    "src/provider_sqlite/bindings.cpp": "1c0c04451345da1a546a6e3f875a625e71e4b7edbac47a9d20ab3c71624bf2d0",
+    "src/provider_sqlite/decoding.cpp": "6ec40358b4e4c83fd83b259beb24120bd2d635c7bd0e035febe0932429088e2f",
+    "tests/parity/sqlite_bindings_cases.json": "8ca490cdf263b82dcd7416cc5b95d70a2f12a29ea0e220416b8a271a124e27c5",
+    "tests/parity/sqlite_decoding_cases.json": "deddcd599f9c6d1921e09420095d5e762fb900f522520b41278e06dd5e308b2b",
+    "scripts/toolchains/openwrt-wndr4300.cmake": "5350e1f2eecb14be423af52019183ff4291a65d5fd24becf992a144ef6d9bff3",
+    "measurements/mips-wndr4300/2026-10-08-sqlite-numeric/sqlite-affinity-repro.cpp": "f57ef383ff706fc5c2f9cd1db774e0775c5a9e1e6e76ffbd1c3cd1bcfd49a4d7",
+    "measurements/mips-wndr4300/2026-10-08-sqlite-numeric/compare-engines.py": "288cfe5690548da2fa3973170603f358ad3c6093ee56ada601f9b172ed41fcae"
+  },
+  "isolated_mismatch_controls": {
+    "total": 34,
+    "old_reproduces_previous": 34,
+    "new_matches_original": 34,
+    "comparison": "Exact IEEE754 binary64 bits; no TEAQL or JSON formatting participates."
+  },
+  "tracked_toolchain_validation": {
+    "cmake_configuration": "passed",
+    "clean_memory_library_build": "passed",
+    "nonempty_compiler_dependency_records": 1,
+    "emulator": "74Kf",
+    "build_environment": "CMake compiler launcher supplies STAGING_DIR."
+  }
+}

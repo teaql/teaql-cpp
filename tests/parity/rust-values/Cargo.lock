@@ -913,17 +913,22 @@ dependencies = [
 name = "teaql-cpp-value-oracle"
 version = "0.1.0"
 dependencies = [
+ "aes-gcm",
  "async-trait",
+ "base64",
  "chrono",
  "futures-core",
  "futures-util",
+ "hkdf",
  "libsqlite3-sys",
+ "num-traits",
  "rusqlite",
  "rust_decimal",
  "serde_json",
  "sha2",
  "teaql-core",
  "teaql-data-service",
+ "teaql-macros",
  "teaql-provider-sqlite",
  "teaql-runtime",
  "teaql-sql",
@@ -936,6 +941,15 @@ version = "5.0.5"
 dependencies = [
  "futures-core",
  "teaql-core",
+]
+
+[[package]]
+name = "teaql-macros"
+version = "5.0.5"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
 ]
 
 [[package]]

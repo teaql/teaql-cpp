@@ -89,17 +89,31 @@ public:
     DataServiceOperationResult<std::monostate, E>& commit(Memory r) {
         require_domain(r);
         consume();
-        return commit_transaction(r);
+        return pending_.track(commit_transaction(r));
     }
 
     DataServiceOperationResult<std::monostate, E>& rollback(Memory r) {
         require_domain(r);
         consume();
-        return rollback_transaction(r);
+        return pending_.track(rollback_transaction(r));
     }
 
     bool consumed() const noexcept {
         return consumed_;
+    }
+
+    // Explicit equivalent of dropping an owned Rust transaction. No allocation
+    // or new async work is permitted while a Context is quiescing.
+    void cancel() noexcept {
+        if (auto* owner = dynamic_cast<Arena*>(resource_)) {
+            owner->check_thread();
+        }
+        if (!cancelled_) {
+            cancelled_ = true;
+            consumed_ = true;
+            pending_.cancel_all();
+            cancel_transaction();
+        }
     }
 
     Memory memory_resource() const noexcept {
@@ -131,6 +145,7 @@ protected:
 
     virtual DataServiceOperationResult<std::monostate, E>& commit_transaction(Memory) = 0;
     virtual DataServiceOperationResult<std::monostate, E>& rollback_transaction(Memory) = 0;
+    virtual void cancel_transaction() noexcept = 0;
 
 private:
     void consume() {
@@ -144,6 +159,7 @@ private:
     Memory resource_;
     detail::PendingOperations pending_;
     bool consumed_ = false;
+    bool cancelled_ = false;
 };
 
 // The associated transaction satisfies query + mutation + terminal transaction
@@ -220,6 +236,19 @@ public:
 
     DataServiceTransaction<E>& get() const {
         return *transaction_;
+    }
+
+    // Rust's associated concrete transaction retains its additional SPIs.
+    // Recover one explicitly from this erased Context borrow; never emulate a
+    // guard with a pre-read or advertise it on every generic transaction.
+    template <class Capability>
+        requires std::derived_from<Capability, DataServiceExecutor<E>>
+    Capability& get_as() const {
+        auto* capability = dynamic_cast<Capability*>(transaction_);
+        if (!capability) {
+            throw std::logic_error("Transaction does not implement the requested capability");
+        }
+        return *capability;
     }
 
     Memory memory_resource() const noexcept {

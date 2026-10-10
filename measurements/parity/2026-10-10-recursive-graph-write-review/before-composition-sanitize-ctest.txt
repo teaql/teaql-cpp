@@ -1,0 +1,82 @@
+Internal ctest changing into directory: /home/philip/githome/teaql-cpp/build-sanitize
+Test project /home/philip/githome/teaql-cpp/build-sanitize
+    Start 67: audited_auto_save_context_contracts
+1/1 Test #67: audited_auto_save_context_contracts ...***Failed    1.05 sec
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Order.saveGraph source=GeneratedDefault approval=NotApplicable
+[TeaQL][MUTATION-POLICY-001] request=Parent.saveGraph source=GeneratedDefault approval=NotApplicable
+=================================================================
+==560330==ERROR: AddressSanitizer: heap-use-after-free on address 0x531000016508 at pc 0x5c7b60f38718 bp 0x7ffdda02e250 sp 0x7ffdda02e240
+READ of size 8 at 0x531000016508 thread T0
+    #0 0x5c7b60f38717 in std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> >, std::less<void>, std::pmr::polymorphic_allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> > >::_S_right(std::_Rb_tree_node_base*) /usr/include/c++/11/bits/stl_tree.h:788
+    #1 0x5c7b60eb876c in std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> >, std::less<void>, std::pmr::polymorphic_allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> > >::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> >*) /usr/include/c++/11/bits/stl_tree.h:1889
+    #2 0x5c7b60e3fdcf in std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> >, std::less<void>, std::pmr::polymorphic_allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> > >::~_Rb_tree() /usr/include/c++/11/bits/stl_tree.h:984
+    #3 0x5c7b60dbf741 in std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >, teaql::Value, std::less<void>, std::pmr::polymorphic_allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> > >::~map() /usr/include/c++/11/bits/stl_map.h:302
+    #4 0x5c7b60dc5c27 in teaql::MutationValues::~MutationValues() /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:25
+    #5 0x5c7b60e345cf in save_fixture::Model::~Model() (/home/philip/githome/teaql-cpp/build-sanitize/teaql_audited_auto_save_tests+0x428d5cf)
+    #6 0x5c7b60da2dc5 in sqlite_commit_and_reconstruction /home/philip/githome/teaql-cpp/tests/audited_auto_save_tests.cpp:160
+    #7 0x5c7b60da3517 in main /home/philip/githome/teaql-cpp/tests/audited_auto_save_tests.cpp:167
+    #8 0x7c812ca29d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7c812ca29e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #10 0x5c7b60d9b6e4 in _start (/home/philip/githome/teaql-cpp/build-sanitize/teaql_audited_auto_save_tests+0x41f46e4)
+
+0x531000016508 is located 7432 bytes inside of 70016-byte region [0x531000014800,0x531000025980)
+freed by thread T0 here:
+    #0 0x7c812dab7a9c in operator delete(void*, unsigned long, std::align_val_t) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:190
+    #1 0x5c7b60db5093 in std::pmr::memory_resource::deallocate(void*, unsigned long, unsigned long) /usr/include/c++/11/memory_resource:111
+    #2 0x5c7b60db70af in teaql::detail::ByteBudgetResource::do_deallocate(void*, unsigned long, unsigned long) (/home/philip/githome/teaql-cpp/build-sanitize/teaql_audited_auto_save_tests+0x42100af)
+    #3 0x5c7b60db5093 in std::pmr::memory_resource::deallocate(void*, unsigned long, unsigned long) /usr/include/c++/11/memory_resource:111
+    #4 0x5c7b624cb4f5 in teaql::Arena::TrackingResource::do_deallocate(void*, unsigned long, unsigned long) /home/philip/githome/teaql-cpp/src/memory/arena.cpp:47
+    #5 0x7c812d78e432 in std::pmr::monotonic_buffer_resource::_M_release_buffers() (/lib/x86_64-linux-gnu/libstdc++.so.6+0x18e432)
+
+previously allocated by thread T0 here:
+    #0 0x7c812dab6777 in operator new(unsigned long, std::align_val_t) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:111
+    #1 0x5c7b60db4e96 in std::pmr::memory_resource::allocate(unsigned long, unsigned long) /usr/include/c++/11/memory_resource:106
+    #2 0x5c7b60db672b in teaql::detail::ByteBudgetResource::do_allocate(unsigned long, unsigned long) (/home/philip/githome/teaql-cpp/build-sanitize/teaql_audited_auto_save_tests+0x420f72b)
+    #3 0x5c7b60db4e96 in std::pmr::memory_resource::allocate(unsigned long, unsigned long) /usr/include/c++/11/memory_resource:106
+    #4 0x5c7b624caa22 in teaql::Arena::TrackingResource::do_allocate(unsigned long, unsigned long) /home/philip/githome/teaql-cpp/src/memory/arena.cpp:38
+    #5 0x7c812d78e271 in std::pmr::monotonic_buffer_resource::_M_new_buffer(unsigned long, unsigned long) (/lib/x86_64-linux-gnu/libstdc++.so.6+0x18e271)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /usr/include/c++/11/bits/stl_tree.h:788 in std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> >, std::less<void>, std::pmr::polymorphic_allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> > const, teaql::Value> > >::_S_right(std::_Rb_tree_node_base*)
+Shadow bytes around the buggy address:
+  0x0a627fffac50: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffac60: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffac70: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffac80: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffac90: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+=>0x0a627fffaca0: fd[fd]fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffacb0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffacc0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffacd0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627ffface0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0a627fffacf0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==560330==ABORTING
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.06 sec
+
+The following tests FAILED:
+	 67 - audited_auto_save_context_contracts (Failed)
+Errors while running CTest

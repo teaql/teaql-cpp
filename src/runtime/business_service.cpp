@@ -64,6 +64,10 @@ BusinessIdService::ensure_value(Memory r,
                                 FunctionRef<bool()> fresh,
                                 FunctionRef<void(BusinessIdValue)> assign) const {
     using R = Result<BusinessIdValue, BusinessIdError>;
+    Arena::Quiescence active;
+    active.attach(detail::resource_arena(context.memory_resource()), nullptr, [](void*) noexcept {
+        std::terminate();
+    });
     DailySequenceBusinessIdProfile legacy;
     std::optional<PermutedDailyBusinessIdProfile> permuted;
     const BusinessIdProfile* profile = nullptr;

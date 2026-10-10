@@ -1,0 +1,65 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "status": "corrected full native351 and native10/sanitizer42/MIPS42 pass; complete source/stage acceptance remains separate",
+  "original_inputs": 1,
+  "original_repeats_agree": true,
+  "original": {
+    "clone_after_source_clear": 0,
+    "shares_entries": true,
+    "source_after_clone_push": 1
+  },
+  "native_before": {
+    "shares_entries": false,
+    "source_after_clone_push": 0,
+    "clone_after_source_clear": 1
+  },
+  "source_sha256": {
+    "include/teaql/runtime/logging.hpp": "df4dec50d345bd2e57d37ebd13625e58a96521d45bae52090bd5122e2bedbf28",
+    "tests/unified_buffer_clone_tests.cpp": "6a887d76eedcf37b064dfd95256144f54860fe4269f8a68edd11ce6ccf377ff8",
+    "tests/parity/unified_buffer_clone_probe.cpp": "6ba3bf2f991368eddafc49acb2a4f11ae434d3d075f0805b94e6f4310ae11396",
+    "tests/parity/compare_unified_buffer_clone.py": "c0f499cb0f0f40017269f5031abb498eec89cdca15d0bd43fa969c17067a1f34",
+    "tests/parity/unified_buffer_clone_cases.json": "313bba39f10e9f06250e884c7de69e313742030bb47058434fb0c4f0a3d965d9",
+    "tests/parity/rust-values/src/bin/log_model_oracle.rs": "6f940f688ad81d29b46de80aac8f6e0bd4d1f08e26539d5df45323207b990d91"
+  },
+  "design": "Same-domain copies share one Context-owned registered vector. Explicit cross-domain copies recursively own destination entries. Borrow handles never extend Context lifetime. Each new storage vector is a separately registered managed object; same-domain copies allocate no additional vector state.",
+  "previous_native349": "347/349; two setter-order regressions corrected in current snapshot",
+  "registered_native_tests": 351,
+  "format_files": 664,
+  "physical_router_verified": false,
+  "corrected_native_focus": {
+    "passed": 10,
+    "total": 10,
+    "seconds": 0.19
+  },
+  "native_live_original": {
+    "passed": 1,
+    "total": 1
+  },
+  "corrected_mips_selection": {
+    "passed": 42,
+    "total": 42,
+    "seconds": 22.51,
+    "refresh": "ninja: no work to do.",
+    "physical_router_verified": false
+  },
+  "mips_live_original": {
+    "passed": 1,
+    "total": 1
+  },
+  "corrected_sanitizer_selection": {
+    "passed": 42,
+    "total": 42,
+    "seconds": 31.1,
+    "refresh": "ninja: no work to do.",
+    "asan_options": "detect_leaks=0",
+    "ubsan_options": "halt_on_error=1"
+  },
+  "full_native": {
+    "passed": 351,
+    "total": 351,
+    "seconds": 76.06,
+    "pre_test_no_work": true,
+    "post_test_no_work": true,
+    "valid_nonempty_dependency_records": 415
+  }
+}

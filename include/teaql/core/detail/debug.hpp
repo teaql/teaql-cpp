@@ -4,4 +4,5 @@
 namespace teaql::detail {
 String debug_text(Memory, std::string_view);
 String debug_value(Memory, const Value&);
+String debug_float32(Memory, float);
 }

@@ -14,6 +14,7 @@ static Json failure(Memory r, const MutationExecutorError& error) {
     auto out = detail::model_json(r);
     detail::model_put(out, "error", error.to_string(r));
     detail::model_put(out, "kind", kinds[unsigned(error.kind())]);
+    detail::model_put(out, "source_none", error.source() == nullptr);
     return out;
 }
 

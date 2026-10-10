@@ -1,0 +1,13 @@
+relation+graph example rows: [{name: graph-order, lines: [first-line -> keyboard, second-line -> mouse]}]
+SQL CREATE TABLE IF NOT EXISTS "example_orders" ("id" INTEGER PRIMARY KEY NOT NULL, "version" INTEGER, "name" TEXT) | count=0
+SQL CREATE TABLE IF NOT EXISTS "example_orderline" ("id" INTEGER PRIMARY KEY NOT NULL, "order_id" INTEGER, "name" TEXT, "product_id" INTEGER) | count=0
+SQL CREATE TABLE IF NOT EXISTS "example_product" ("id" INTEGER PRIMARY KEY NOT NULL, "name" TEXT) | count=0
+SQL INSERT INTO "example_product" ("id", "name") VALUES (?, ?) | count=1 | audit=Seed the referenced product
+SQL INSERT INTO "example_product" ("id", "name") VALUES (?, ?) | count=1 | audit=Seed the referenced product
+SQL INSERT INTO "example_orders" ("id", "version", "name") VALUES (?, ?, ?) | count=1 | audit=Create the example order graph
+SQL INSERT INTO "example_orderline" ("id", "order_id", "name", "product_id") VALUES (?, ?, ?, ?) | count=1 | audit=Create the example order graph
+SQL INSERT INTO "example_orderline" ("id", "order_id", "name", "product_id") VALUES (?, ?, ?, ?) | count=1 | audit=Create the example order graph
+SQL SELECT "id", "name" FROM "example_orders" ORDER BY "id" ASC LIMIT 10000 | count=1 | purpose=Display the saved example order
+SQL SELECT "id", "order_id", "name", "product_id" FROM "example_orderline" WHERE ("order_id" = ?) ORDER BY "id" ASC LIMIT 10000 | count=2 | purpose=Load order lines
+SQL SELECT "id", "name" FROM "example_product" WHERE ("id" = ?) LIMIT 10000 | count=1 | purpose=Load the referenced product
+SQL SELECT "id", "name" FROM "example_product" WHERE ("id" = ?) LIMIT 10000 | count=1 | purpose=Load the referenced product

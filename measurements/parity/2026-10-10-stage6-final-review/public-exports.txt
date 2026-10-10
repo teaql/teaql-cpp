@@ -1,0 +1,7 @@
+Verified v5.0.5 @ 62940ae2b88e7acc32763853b8b4685a01c7e90a
+Verified core: 6 public module namespaces; member behavior remains separate
+Verified core: 69 root reexport names; template/member/default/serialization/privacy acceptance remains separate
+Verified data-service: 29 root reexport names; template/member/default/serialization/privacy acceptance remains separate
+Verified sql: 22 root reexport names; template/member/default/serialization/privacy acceptance remains separate
+Verified runtime: 4 public module namespaces and complete member bindings; behavior remains separate
+Verified runtime: 188 root reexport names; template/member/default/serialization/privacy acceptance remains separate

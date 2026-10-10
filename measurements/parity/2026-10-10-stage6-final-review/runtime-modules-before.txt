@@ -1,0 +1,13 @@
+/tmp/teaql-runtime-module-before.cpp:2:32: error: ‘inmemory_engine’ in namespace ‘teaql::runtime’ does not name a type; did you mean ‘InMemoryQueryEngine’?
+    2 | using Engine = teaql::runtime::inmemory_engine::InMemoryQueryEngine;
+      |                                ^~~~~~~~~~~~~~~
+      |                                InMemoryQueryEngine
+/tmp/teaql-runtime-module-before.cpp:3:35: error: ‘log_formatter’ in namespace ‘teaql::runtime’ does not name a type
+    3 | using Formatter = teaql::runtime::log_formatter::LogFormatter;
+      |                                   ^~~~~~~~~~~~~
+/tmp/teaql-runtime-module-before.cpp:4:31: error: ‘entity_save’ in namespace ‘teaql::runtime’ does not name a type
+    4 | using Saved = teaql::runtime::entity_save::AuditedSaveExt<int>;
+      |                               ^~~~~~~~~~~
+/tmp/teaql-runtime-module-before.cpp:5:33: error: ‘generated_support’ in namespace ‘teaql::runtime’ does not name a type
+    5 | using Purpose = teaql::runtime::generated_support::PurposedSelectQuery;
+      |                                 ^~~~~~~~~~~~~~~~~

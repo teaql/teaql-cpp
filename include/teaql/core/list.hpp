@@ -2,6 +2,7 @@
 #include <teaql/core/row.hpp>
 #include <teaql/core/entity.hpp>
 #include <teaql/memory/clone.hpp>
+#include <teaql/core/detail/bool_vector.hpp>
 #include <algorithm>
 #include <functional>
 #include <memory>
@@ -16,7 +17,8 @@ template <class T>
 class SmartList {
 public:
     using allocator_type = Allocator;
-    Vector<T> data;
+    using storage_type = std::conditional_t<std::same_as<T, bool>, detail::BoolVector, Vector<T>>;
+    storage_type data;
     std::optional<std::uint64_t> total_count;
     Record aggregations, summary;
     std::pmr::map<String, SmartList<CompactRow>, std::less<>> facets;
@@ -27,6 +29,7 @@ public:
           facets(a.resource()) {}
 
     SmartList(std::allocator_arg_t, Allocator a, std::span<const T> items)
+        requires detail::domain_copyable<T>
         : SmartList(std::allocator_arg, a) {
         for (const auto& item : items) {
             data.emplace_back(item);
@@ -34,7 +37,56 @@ public:
         is_loaded = true;
     }
 
+    SmartList(std::allocator_arg_t, Allocator a, Vector<T>&& items)
+        : SmartList(std::allocator_arg, a) {
+        if constexpr (std::same_as<T, bool>) {
+            // A C++ packed vector must be decoded into real Boolean objects.
+            data.reserve(items.size());
+            for (bool item : items) {
+                data.emplace_back(item);
+            }
+            items.clear();
+        } else if (items.get_allocator().resource() == a.resource()) {
+            data.swap(items);
+        } else {
+            if constexpr (detail::domain_copyable<T>) {
+                data.reserve(items.size());
+                for (const auto& item : items) {
+                    data.emplace_back(detail::clone_in(a.resource(), item));
+                }
+                items.clear();
+            } else {
+                throw std::invalid_argument("Foreign list items require an explicit domain copy");
+            }
+        }
+        is_loaded = true;
+    }
+
+    SmartList(std::allocator_arg_t, Allocator a, detail::BoolVector&& items)
+        requires std::same_as<T, bool>
+        : SmartList(std::allocator_arg, a) {
+        if (items.get_allocator().resource() == a.resource()) {
+            data.swap(items);
+        } else {
+            data.reserve(items.size());
+            for (bool item : items) {
+                data.emplace_back(item);
+            }
+            items.clear();
+        }
+        is_loaded = true;
+    }
+
+    template <std::ranges::input_range Items>
+    static SmartList from_range(Memory owner, Items&& items) {
+        SmartList result(std::allocator_arg, Allocator(owner));
+        result.extend(std::forward<Items>(items));
+        result.is_loaded = true;
+        return result;
+    }
+
     SmartList(std::allocator_arg_t, Allocator a, const SmartList& other)
+        requires detail::domain_copyable<T>
         : SmartList(std::allocator_arg, a) {
         for (const auto& item : other.data) {
             data.emplace_back(item);
@@ -54,10 +106,15 @@ public:
     SmartList(SmartList&&) noexcept = default;
 
     SmartList(std::allocator_arg_t, Allocator a, SmartList&& other)
-        : SmartList(detail::move_to(a.resource(), std::move(other))) {}
+        : SmartList(move_scoped(a.resource(), std::move(other))) {}
 
     SmartList& operator=(SmartList&& other) {
-        return detail::assign_scoped(*this, std::move(other));
+        if (this != &other) {
+            auto replacement = move_scoped(memory_resource(), std::move(other));
+            std::destroy_at(this);
+            std::construct_at(this, std::move(replacement));
+        }
+        return *this;
     }
 
     Memory memory_resource() const {
@@ -149,9 +206,13 @@ public:
         data.emplace_back(value);
     }
 
+    void push(T&& value) {
+        data.emplace_back(std::move(value));
+    }
+
     void extend(std::span<const T> values) {
         // A temporary also handles self-extension and propagates the target allocator.
-        Vector<T> incoming(memory_resource());
+        storage_type incoming(memory_resource());
         incoming.reserve(values.size());
         for (const auto& value : values) {
             incoming.emplace_back(value);
@@ -162,6 +223,36 @@ public:
         }
     }
 
+    template <std::ranges::input_range Items>
+    void extend(Items&& values) {
+        if constexpr (std::same_as<std::remove_cvref_t<Items>, storage_type> &&
+                      !std::is_lvalue_reference_v<Items>) {
+            if (&values == &data) {
+                throw std::invalid_argument(
+                    "Cannot consume this list's own data as incoming items");
+            }
+        }
+        if constexpr (consuming_input<Items>) {
+            // Retain the applied prefix if the owned iterator fails later.
+            for (auto&& value : values) {
+                data.emplace_back(std::move(value));
+            }
+        } else {
+            // Snapshot borrowed ranges before growth, including self-extension.
+            storage_type incoming(memory_resource());
+            if constexpr (std::ranges::sized_range<Items>) {
+                incoming.reserve(std::ranges::size(values));
+            }
+            for (auto&& value : values) {
+                incoming.emplace_back(std::forward<decltype(value)>(value));
+            }
+            data.reserve(data.size() + incoming.size());
+            for (auto& value : incoming) {
+                data.emplace_back(std::move(value));
+            }
+        }
+    }
+
     std::optional<T> set(std::size_t index, const T& value) {
         if (index >= data.size()) {
             return {};
@@ -169,7 +260,21 @@ public:
         auto a = std::pmr::polymorphic_allocator<T>(memory_resource());
         T incoming = std::make_obj_using_allocator<T>(a, value);
         T previous = std::make_obj_using_allocator<T>(a, data[index]);
-        data[index] = std::move(incoming);
+        replace_element(data[index], std::move(incoming));
+        return previous;
+    }
+
+    std::optional<T> set(std::size_t index, T&& value) {
+        if (index >= data.size()) {
+            return {};
+        }
+        if (&value == &data[index]) {
+            throw std::invalid_argument("Cannot consume the target list element in place");
+        }
+        auto a = std::pmr::polymorphic_allocator<T>(memory_resource());
+        auto incoming = std::make_obj_using_allocator<T>(a, std::move(value));
+        T previous = std::move(data[index]);
+        replace_element(data[index], std::move(incoming));
         return previous;
     }
 
@@ -197,11 +302,50 @@ public:
         return data;
     }
 
+    std::span<const T> iter() const {
+        return data;
+    }
+
+    std::span<T> iter_mut() {
+        return data;
+    }
+
     template <class Filter>
     void retain(Filter&& filter) {
-        std::erase_if(data, [&](const T& item) {
-            return !filter(item);
-        });
+        std::size_t kept = 0;
+        auto finish = [&] {
+            while (data.size() > kept) {
+                data.pop_back();
+            }
+        };
+        for (std::size_t index = 0; index < data.size(); ++index) {
+            bool keep;
+            try {
+                keep = static_cast<bool>(filter(std::as_const(data[index])));
+            } catch (...) {
+                // Rust Vec::retain preserves every unvisited item on unwind.
+                // Compact that tail without invoking the filter again.
+                for (; index < data.size(); ++index) {
+                    if (kept != index) {
+                        replace_element(data[kept], std::move(data[index]));
+                    }
+                    ++kept;
+                }
+                finish();
+                throw;
+            }
+            if (keep) {
+                if (kept != index) {
+                    replace_element(data[kept], std::move(data[index]));
+                }
+                ++kept;
+            } else {
+                // Release an erased element's ownership before the next filter
+                // call; its moved-from slot remains valid until compaction.
+                [[maybe_unused]] auto dropped = std::move(data[index]);
+            }
+        }
+        finish();
     }
 
     std::uint64_t total_count_or_len() const {
@@ -226,8 +370,8 @@ public:
         return record_to_json_value(destination, summary);
     }
 
-    Vector<T> into_vec() && {
-        Vector<T> result(memory_resource());
+    auto into_vec() && {
+        storage_type result(memory_resource());
         result.swap(data);
         return result;
     }
@@ -236,17 +380,20 @@ public:
     auto map(Mapper&& mapper) && {
         using U = std::remove_cvref_t<std::invoke_result_t<Mapper&, T&&>>;
         SmartList<U> result(std::allocator_arg, Allocator(memory_resource()));
-        result.data.reserve(data.size());
-        for (auto& item : data) {
+        auto incoming = std::move(*this).into_vec();
+        result.data.reserve(incoming.size());
+        for (auto& item : incoming) {
+            // The source mapper owns T. A local also supplies that ownership
+            // when a C++ callable accepts T&& instead of a by-value parameter.
+            auto owned = std::move(item);
             result.data.push_back(
-                detail::move_in(memory_resource(), std::invoke(mapper, std::move(item))));
+                detail::move_in(memory_resource(), std::invoke(mapper, std::move(owned))));
         }
         result.total_count = total_count;
         result.is_loaded = is_loaded;
         result.aggregations = std::move(aggregations);
         result.summary = std::move(summary);
         result.facets = take_facets();
-        data.clear();
         return result;
     }
 
@@ -256,7 +403,7 @@ public:
         Vector<U> result(memory_resource());
         result.reserve(data.size());
         for (const auto& item : data) {
-            result.push_back(detail::clone_in(memory_resource(), std::invoke(mapper, item)));
+            result.push_back(mapped_in(std::invoke(mapper, item)));
         }
         return result;
     }
@@ -266,7 +413,7 @@ public:
         using U = std::remove_cvref_t<std::invoke_result_t<Mapper&, const T&>>;
         std::pmr::set<U> result(memory_resource());
         for (const auto& item : data) {
-            result.insert(detail::clone_in(memory_resource(), std::invoke(mapper, item)));
+            result.insert(mapped_in(std::invoke(mapper, item)));
         }
         return result;
     }
@@ -276,7 +423,7 @@ public:
         using K = std::remove_cvref_t<std::invoke_result_t<Key&, const T&>>;
         std::pmr::map<K, T> result(memory_resource());
         for (const auto& item : data) {
-            auto k = detail::clone_in(memory_resource(), std::invoke(key, item));
+            auto k = mapped_in(std::invoke(key, item));
             // Erase/emplace also supports cloneable entities without assignment.
             result.erase(k);
             result.emplace(std::move(k), detail::clone_in(memory_resource(), item));
@@ -289,7 +436,7 @@ public:
         using K = std::remove_cvref_t<std::invoke_result_t<Key&, const T&>>;
         std::pmr::map<K, Vector<T>> result(memory_resource());
         for (const auto& item : data) {
-            auto k = detail::clone_in(memory_resource(), std::invoke(key, item));
+            auto k = mapped_in(std::invoke(key, item));
             auto [it, inserted] = result.try_emplace(std::move(k));
             (void)inserted;
             it->second.push_back(detail::clone_in(memory_resource(), item));
@@ -297,28 +444,49 @@ public:
         return result;
     }
 
-    template <class Key>
-    void merge_by(std::span<const T> incoming, Key&& key) {
+    template <std::ranges::input_range Items, class Key>
+    void merge_by(Items&& incoming, Key&& key) {
+        if constexpr (std::same_as<std::remove_cvref_t<Items>, storage_type> &&
+                      !std::is_lvalue_reference_v<Items>) {
+            if (&incoming == &data) {
+                throw std::invalid_argument(
+                    "Cannot consume this list's own data as incoming items");
+            }
+        }
         using K = std::remove_cvref_t<std::invoke_result_t<Key&, const T&>>;
         std::pmr::unordered_map<K, std::size_t> positions(memory_resource());
         for (std::size_t i = 0; i < data.size(); ++i) {
-            positions.insert_or_assign(
-                detail::clone_in(memory_resource(), std::invoke(key, std::as_const(data[i]))), i);
+            positions.insert_or_assign(mapped_in(std::invoke(key, std::as_const(data[i]))), i);
         }
-        // Snapshot first: incoming may be a subspan of this list or another domain.
-        Vector<T> items(memory_resource());
-        items.reserve(incoming.size());
-        for (const auto& item : incoming) {
-            items.push_back(detail::clone_in(memory_resource(), item));
-        }
-        for (auto& item : items) {
-            auto k = detail::clone_in(memory_resource(), std::invoke(key, std::as_const(item)));
+        auto merge = [&](T&& item) {
+            auto k = mapped_in(std::invoke(key, std::as_const(item)));
             auto it = positions.find(k);
             if (it != positions.end()) {
-                data[it->second] = std::move(item);
+                replace_element(data[it->second], std::move(item));
             } else {
                 positions.emplace(std::move(k), data.size());
                 data.push_back(std::move(item));
+            }
+        };
+        if constexpr (consuming_input<Items>) {
+            // Like Rust IntoIterator, apply each owned item before requesting
+            // the next. Iterator failure must retain the already merged prefix.
+            for (auto&& item : incoming) {
+                auto owned = detail::move_in(memory_resource(), std::move(item));
+                merge(std::move(owned));
+            }
+        } else {
+            // Borrowed C++ ranges may alias this list, unlike an owned Rust
+            // iterator. Snapshot them before replacement or vector growth.
+            storage_type items(memory_resource());
+            if constexpr (std::ranges::sized_range<Items>) {
+                items.reserve(std::ranges::size(incoming));
+            }
+            for (auto&& item : incoming) {
+                items.emplace_back(std::forward<decltype(item)>(item));
+            }
+            for (auto& item : items) {
+                merge(std::move(item));
             }
         }
     }
@@ -328,8 +496,10 @@ public:
     {
         bool changes = false;
         Value::List items(memory_resource());
-        items.reserve(data.size());
-        for (auto& entity : data) {
+        auto incoming = std::move(*this).into_vec();
+        items.reserve(incoming.size());
+        for (auto& item : incoming) {
+            auto entity = std::move(item);
             if (entity.is_new() || entity.dirty_fields().has_value() ||
                 entity.is_marked_as_delete()) {
                 changes = true;
@@ -337,7 +507,6 @@ public:
             auto values = std::move(entity).into_values();
             items.emplace_back(values.fields);
         }
-        data.clear();
         if (!is_loaded && !changes) {
             return {};
         }
@@ -376,7 +545,11 @@ public:
         });
     }
 
-    bool operator==(const SmartList& other) const {
+    bool operator==(const SmartList& other) const
+        requires requires(const T& left, const T& right) {
+            { left == right } -> std::convertible_to<bool>;
+        }
+    {
         return data == other.data && total_count == other.total_count &&
                aggregations == other.aggregations && summary == other.summary &&
                facets == other.facets && is_loaded == other.is_loaded;
@@ -412,6 +585,43 @@ public:
 
     auto end() const {
         return data.end();
+    }
+
+private:
+    template <class Items>
+    static constexpr bool consuming_input =
+        !std::is_lvalue_reference_v<std::ranges::range_reference_t<Items>> ||
+        (!std::is_lvalue_reference_v<Items> && !std::ranges::borrowed_range<Items>);
+
+    static void replace_element(T& destination, T&& value) {
+        if constexpr (std::is_move_assignable_v<T>) {
+            destination = std::move(value);
+        } else {
+            static_assert(std::is_nothrow_move_constructible_v<T>,
+                          "Replacing non-assignable elements requires noexcept movement");
+            std::destroy_at(&destination);
+            std::construct_at(&destination, std::move(value));
+        }
+    }
+
+    static SmartList move_scoped(Memory owner, SmartList&& other) {
+        if (owner == other.memory_resource()) {
+            return std::move(other);
+        }
+        if constexpr (detail::domain_copyable<T>) {
+            return SmartList(std::allocator_arg, Allocator(owner), std::as_const(other));
+        } else {
+            throw std::invalid_argument("Foreign list items require an explicit domain copy");
+        }
+    }
+
+    template <class U>
+    auto mapped_in(U&& value) const {
+        if constexpr (std::is_lvalue_reference_v<U>) {
+            return detail::clone_in(memory_resource(), value);
+        } else {
+            return detail::move_in(memory_resource(), std::forward<U>(value));
+        }
     }
 };
 }

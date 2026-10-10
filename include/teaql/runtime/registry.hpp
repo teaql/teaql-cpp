@@ -5,6 +5,8 @@
 #include <set>
 
 namespace teaql {
+class DebugWriter;
+
 // Runtime metadata is independent of the data-service SchemaProvider SPI.
 class MetadataStore {
 public:
@@ -90,6 +92,7 @@ public:
     }
 
 private:
+    friend void write_debug(DebugWriter&, const InMemoryMetadataStore&);
     std::pmr::map<String, EntityDescriptor, std::less<>> entities_;
 };
 
@@ -136,6 +139,7 @@ public:
     }
 
 private:
+    friend void write_debug(DebugWriter&, const InMemoryEntityRegistry&);
     std::pmr::set<String, std::less<>> entities_;
 };
 }

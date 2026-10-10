@@ -1,0 +1,8 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "cpp_exit_code": 2,
+  "cpp_error": "Context is borrowed by schema initialization",
+  "original_exit_code": 0,
+  "original_observation": "bootstrap root accepted; same assignment idempotent; conflict and invalid root reject",
+  "scope": "Generated bootstrap active-root installation during ensure_schema. Context source acceptance remains partial pending repair and final validation."
+}

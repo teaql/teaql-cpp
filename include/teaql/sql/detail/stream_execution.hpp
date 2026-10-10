@@ -69,8 +69,8 @@ public:
         if (!*next.item) {
             return std::optional<Item>(
                 Item::err(resource_,
-                          SqlExecutorError<E>::transport(resource_,
-                                                         clone_in(resource_, next.item->error()))));
+                          SqlExecutorError<E>::transport(
+                              resource_, copy_or_take_error(*source_, *next.item))));
         }
         return std::optional<Item>(Item::ok(resource_, clone_in(resource_, next.item->value())));
     }
@@ -134,7 +134,7 @@ public:
                 finish(SqlExecutionOutcome::Success);
                 return std::optional<Item>{};
             }
-            auto item = clone_in(resource_, *next.item);
+            auto item = copy_or_take_item(*source_, *next.item);
             if (item) {
                 if (item.value().rows.size() >
                     std::numeric_limits<std::size_t>::max() - delivered_) {
@@ -290,11 +290,11 @@ public:
                 return {};
             }
             forwarding_.reset();
-            pending_ = nullptr;
+            auto* completed = std::exchange(pending_, nullptr);
             if (!*result) {
                 done_ = true;
                 return std::optional<Item>(
-                    Item::err(resource_, clone_in(resource_, result->error())));
+                    Item::err(resource_, copy_or_take_error(*completed, *result)));
             }
             rows_ = &result->value().rows;
         }

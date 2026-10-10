@@ -41,17 +41,29 @@ public:
     DataServiceOperationResult<std::monostate, E>& commit_sql(Memory r) {
         require_domain(r);
         consume();
-        return commit_sql_transaction(r);
+        return pending_.track(commit_sql_transaction(r));
     }
 
     DataServiceOperationResult<std::monostate, E>& rollback_sql(Memory r) {
         require_domain(r);
         consume();
-        return rollback_sql_transaction(r);
+        return pending_.track(rollback_sql_transaction(r));
     }
 
     bool consumed() const noexcept {
         return consumed_;
+    }
+
+    void cancel_sql() noexcept {
+        if (auto* owner = dynamic_cast<Arena*>(resource_)) {
+            owner->check_thread();
+        }
+        if (!cancelled_) {
+            cancelled_ = true;
+            consumed_ = true;
+            pending_.cancel_all();
+            cancel_sql_transaction();
+        }
     }
 
     Memory memory_resource() const noexcept {
@@ -78,6 +90,7 @@ protected:
 
     virtual DataServiceOperationResult<std::monostate, E>& commit_sql_transaction(Memory) = 0;
     virtual DataServiceOperationResult<std::monostate, E>& rollback_sql_transaction(Memory) = 0;
+    virtual void cancel_sql_transaction() noexcept = 0;
 
 private:
     void consume() {
@@ -91,6 +104,7 @@ private:
     Memory resource_;
     detail::PendingOperations pending_;
     bool consumed_ = false;
+    bool cancelled_ = false;
 };
 
 // C++ carrier for the source associated Tx bound: SqlTransport + SqlTransaction.
@@ -212,9 +226,9 @@ public:
                 return {};
             }
             forwarding_.reset();
-            pending_ = nullptr;
+            auto* completed = std::exchange(pending_, nullptr);
             if (!*result) {
-                return Output::err(resource_, detail::clone_in(resource_, result->error()));
+                return Output::err(resource_, detail::copy_or_take_error(*completed, *result));
             }
             for (const auto& row : result->value()) {
                 rows_.emplace_back(row);

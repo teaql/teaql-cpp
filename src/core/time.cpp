@@ -7,7 +7,7 @@
 
 namespace teaql {
 Json Timestamp::to_json_value(Memory destination) const {
-    return Json(destination, millis_);
+    return Json(destination, millis);
 }
 
 std::optional<Timestamp> Timestamp::from_json_value(const Json& value) {
@@ -239,7 +239,7 @@ Timestamp Timestamp::from_u64(std::uint64_t n) {
 }
 
 Timestamp Timestamp::now() {
-    return Timestamp(std::chrono::duration_cast<std::chrono::milliseconds>(
+    return Timestamp(std::chrono::floor<std::chrono::milliseconds>(
                          std::chrono::system_clock::now().time_since_epoch())
                          .count());
 }
@@ -258,12 +258,12 @@ std::optional<Timestamp> Timestamp::parse(std::string_view s) {
 }
 
 DateTime Timestamp::to_datetime() const {
-    auto days = floor_div(millis_, day_ms);
+    auto days = floor_div(millis, day_ms);
     auto d = Date::from_epoch_days(days);
     if (!d) {
         return {};
     }
-    auto rest = millis_ - days * day_ms;
+    auto rest = millis - days * day_ms;
     return {*d,
             unsigned(rest / 3600000),
             unsigned(rest / 60000 % 60),

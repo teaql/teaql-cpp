@@ -1,4 +1,7 @@
 #include <teaql/runtime/event.hpp>
+#include <teaql/runtime/context.hpp>
+#include <algorithm>
+#include <array>
 #include <bit>
 #include <limits>
 
@@ -179,6 +182,20 @@ RawAuditEvent RawAuditEvent::data_seeded(Memory r,
 
 Result<std::monostate, RuntimeError> InMemoryRawAuditEventSink::on_event(
     Memory r, const UserContext& context, const RawAuditEvent& event) const {
+    // Each argument can borrow a different scope. Register each distinct arena
+    // once; a synchronous callback cannot join its own stack during teardown.
+    const std::array domains{
+        context.memory_resource(), memory_resource(), event.memory_resource(), r};
+    std::array<Arena::Quiescence, 4> active;
+    for (std::size_t index = 0; index < domains.size(); ++index) {
+        if (std::find(domains.begin(), domains.begin() + index, domains[index]) !=
+            domains.begin() + index) {
+            continue;
+        }
+        active[index].attach(detail::resource_arena(domains[index]), nullptr, [](void*) noexcept {
+            std::terminate();
+        });
+    }
     for (const auto& sink : sinks_) {
         auto result = sink.get().on_event(r, context, event);
         if (!result) {

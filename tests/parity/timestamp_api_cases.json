@@ -1,0 +1,2924 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "note": "Actual Timestamp public methods, derived Debug and transparent serde acceptance; error text is not observed.",
+  "cases": [
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-9223372036854775808"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-9223372036854775808)",
+          "fancy": "Timestamp(-9223372036854775808)",
+          "lower_hex": "Timestamp(8000000000000000)",
+          "pretty": "Timestamp(\n    -9223372036854775808,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x8000000000000000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x8000000000000000,\n)",
+          "upper_hex": "Timestamp(8000000000000000)",
+          "width_precision": "Timestamp(                    -9223372036854775808)",
+          "zero_pad": "Timestamp(-9223372036854775808)"
+        },
+        "default": 0,
+        "millis": "-9223372036854775808",
+        "now_in_bounds": true,
+        "serialized": "-9223372036854775808"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-8334601228801001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-8334601228801001)",
+          "fancy": "Timestamp(-8334601228801001\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffe263b96e69ac17)",
+          "pretty": "Timestamp(\n    -8334601228801001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffe263b96e69ac17,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFE263B96E69AC17,\n)",
+          "upper_hex": "Timestamp(FFE263B96E69AC17)",
+          "width_precision": "Timestamp(                       -8334601228801001)",
+          "zero_pad": "Timestamp(-8334601228801001)"
+        },
+        "default": 0,
+        "millis": "-8334601228801001",
+        "now_in_bounds": true,
+        "serialized": "-8334601228801001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-8334601228800001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-8334601228800001)",
+          "fancy": "Timestamp(-8334601228800001\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffe263b96e69afff)",
+          "pretty": "Timestamp(\n    -8334601228800001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffe263b96e69afff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFE263B96E69AFFF,\n)",
+          "upper_hex": "Timestamp(FFE263B96E69AFFF)",
+          "width_precision": "Timestamp(                       -8334601228800001)",
+          "zero_pad": "Timestamp(-8334601228800001)"
+        },
+        "default": 0,
+        "millis": "-8334601228800001",
+        "now_in_bounds": true,
+        "serialized": "-8334601228800001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-8334601228800000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          -262143,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-8334601228800000)",
+          "fancy": "Timestamp(-8334601228800000\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffe263b96e69b000)",
+          "pretty": "Timestamp(\n    -8334601228800000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffe263b96e69b000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFE263B96E69B000,\n)",
+          "upper_hex": "Timestamp(FFE263B96E69B000)",
+          "width_precision": "Timestamp(                       -8334601228800000)",
+          "zero_pad": "Timestamp(-8334601228800000)"
+        },
+        "default": 0,
+        "millis": "-8334601228800000",
+        "now_in_bounds": true,
+        "serialized": "-8334601228800000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-8334601228799999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          -262143,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(-8334601228799999)",
+          "fancy": "Timestamp(-8334601228799999\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffe263b96e69b001)",
+          "pretty": "Timestamp(\n    -8334601228799999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffe263b96e69b001,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFE263B96E69B001,\n)",
+          "upper_hex": "Timestamp(FFE263B96E69B001)",
+          "width_precision": "Timestamp(                       -8334601228799999)",
+          "zero_pad": "Timestamp(-8334601228799999)"
+        },
+        "default": 0,
+        "millis": "-8334601228799999",
+        "now_in_bounds": true,
+        "serialized": "-8334601228799999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-8334601228798999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          -262143,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(-8334601228798999)",
+          "fancy": "Timestamp(-8334601228798999\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffe263b96e69b3e9)",
+          "pretty": "Timestamp(\n    -8334601228798999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffe263b96e69b3e9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFE263B96E69B3E9,\n)",
+          "upper_hex": "Timestamp(FFE263B96E69B3E9)",
+          "width_precision": "Timestamp(                       -8334601228798999)",
+          "zero_pad": "Timestamp(-8334601228798999)"
+        },
+        "default": 0,
+        "millis": "-8334601228798999",
+        "now_in_bounds": true,
+        "serialized": "-8334601228798999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-2208988801001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1899,
+          12,
+          31,
+          23,
+          59,
+          58,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-2208988801001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca-2208988801001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffdfdae01d817)",
+          "pretty": "Timestamp(\n    -2208988801001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffdfdae01d817,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFDFDAE01D817,\n)",
+          "upper_hex": "Timestamp(FFFFFDFDAE01D817)",
+          "width_precision": "Timestamp(                          -2208988801001)",
+          "zero_pad": "Timestamp(-2208988801001)"
+        },
+        "default": 0,
+        "millis": "-2208988801001",
+        "now_in_bounds": true,
+        "serialized": "-2208988801001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-2208988800001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1899,
+          12,
+          31,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-2208988800001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca-2208988800001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffdfdae01dbff)",
+          "pretty": "Timestamp(\n    -2208988800001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffdfdae01dbff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFDFDAE01DBFF,\n)",
+          "upper_hex": "Timestamp(FFFFFDFDAE01DBFF)",
+          "width_precision": "Timestamp(                          -2208988800001)",
+          "zero_pad": "Timestamp(-2208988800001)"
+        },
+        "default": 0,
+        "millis": "-2208988800001",
+        "now_in_bounds": true,
+        "serialized": "-2208988800001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-2208988800000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1900,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-2208988800000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca-2208988800000\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffdfdae01dc00)",
+          "pretty": "Timestamp(\n    -2208988800000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffdfdae01dc00,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFDFDAE01DC00,\n)",
+          "upper_hex": "Timestamp(FFFFFDFDAE01DC00)",
+          "width_precision": "Timestamp(                          -2208988800000)",
+          "zero_pad": "Timestamp(-2208988800000)"
+        },
+        "default": 0,
+        "millis": "-2208988800000",
+        "now_in_bounds": true,
+        "serialized": "-2208988800000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-2208988799999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1900,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(-2208988799999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca-2208988799999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffdfdae01dc01)",
+          "pretty": "Timestamp(\n    -2208988799999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffdfdae01dc01,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFDFDAE01DC01,\n)",
+          "upper_hex": "Timestamp(FFFFFDFDAE01DC01)",
+          "width_precision": "Timestamp(                          -2208988799999)",
+          "zero_pad": "Timestamp(-2208988799999)"
+        },
+        "default": 0,
+        "millis": "-2208988799999",
+        "now_in_bounds": true,
+        "serialized": "-2208988799999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-2208988798999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1900,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(-2208988798999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca-2208988798999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffdfdae01dfe9)",
+          "pretty": "Timestamp(\n    -2208988798999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffdfdae01dfe9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFDFDAE01DFE9,\n)",
+          "upper_hex": "Timestamp(FFFFFDFDAE01DFE9)",
+          "width_precision": "Timestamp(                          -2208988798999)",
+          "zero_pad": "Timestamp(-2208988798999)"
+        },
+        "default": 0,
+        "millis": "-2208988798999",
+        "now_in_bounds": true,
+        "serialized": "-2208988798999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-86401001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          30,
+          23,
+          59,
+          58,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-86401001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-86401001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffad9a017)",
+          "pretty": "Timestamp(\n    -86401001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffad9a017,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFAD9A017,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFAD9A017)",
+          "width_precision": "Timestamp(                               -86401001)",
+          "zero_pad": "Timestamp(-00086401001)"
+        },
+        "default": 0,
+        "millis": "-86401001",
+        "now_in_bounds": true,
+        "serialized": "-86401001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-86400001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          30,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-86400001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-86400001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffad9a3ff)",
+          "pretty": "Timestamp(\n    -86400001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffad9a3ff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFAD9A3FF,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFAD9A3FF)",
+          "width_precision": "Timestamp(                               -86400001)",
+          "zero_pad": "Timestamp(-00086400001)"
+        },
+        "default": 0,
+        "millis": "-86400001",
+        "now_in_bounds": true,
+        "serialized": "-86400001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-86400000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-86400000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-86400000\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffad9a400)",
+          "pretty": "Timestamp(\n    -86400000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffad9a400,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFAD9A400,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFAD9A400)",
+          "width_precision": "Timestamp(                               -86400000)",
+          "zero_pad": "Timestamp(-00086400000)"
+        },
+        "default": 0,
+        "millis": "-86400000",
+        "now_in_bounds": true,
+        "serialized": "-86400000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-86399999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(-86399999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-86399999\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffad9a401)",
+          "pretty": "Timestamp(\n    -86399999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffad9a401,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFAD9A401,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFAD9A401)",
+          "width_precision": "Timestamp(                               -86399999)",
+          "zero_pad": "Timestamp(-00086399999)"
+        },
+        "default": 0,
+        "millis": "-86399999",
+        "now_in_bounds": true,
+        "serialized": "-86399999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-86398999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          0,
+          0,
+          1,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(-86398999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-86398999\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffad9a7e9)",
+          "pretty": "Timestamp(\n    -86398999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffad9a7e9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFAD9A7E9,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFAD9A7E9)",
+          "width_precision": "Timestamp(                               -86398999)",
+          "zero_pad": "Timestamp(-00086398999)"
+        },
+        "default": 0,
+        "millis": "-86398999",
+        "now_in_bounds": true,
+        "serialized": "-86398999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-2001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          57,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-2001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-2001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffffff82f)",
+          "pretty": "Timestamp(\n    -2001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffffff82f,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFF82F,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFF82F)",
+          "width_precision": "Timestamp(                                   -2001)",
+          "zero_pad": "Timestamp(-00000002001)"
+        },
+        "default": 0,
+        "millis": "-2001",
+        "now_in_bounds": true,
+        "serialized": "-2001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-1001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          58,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-1001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-1001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffffffc17)",
+          "pretty": "Timestamp(\n    -1001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffffffc17,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFC17,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFC17)",
+          "width_precision": "Timestamp(                                   -1001)",
+          "zero_pad": "Timestamp(-00000001001)"
+        },
+        "default": 0,
+        "millis": "-1001",
+        "now_in_bounds": true,
+        "serialized": "-1001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-1000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          59,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-1000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-1000\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffffffc18)",
+          "pretty": "Timestamp(\n    -1000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffffffc18,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFC18,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFC18)",
+          "width_precision": "Timestamp(                                   -1000)",
+          "zero_pad": "Timestamp(-00000001000)"
+        },
+        "default": 0,
+        "millis": "-1000",
+        "now_in_bounds": true,
+        "serialized": "-1000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          59,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(-999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-999\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffffffc19)",
+          "pretty": "Timestamp(\n    -999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffffffc19,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFC19,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFC19)",
+          "width_precision": "Timestamp(                                    -999)",
+          "zero_pad": "Timestamp(-00000000999)"
+        },
+        "default": 0,
+        "millis": "-999",
+        "now_in_bounds": true,
+        "serialized": "-999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "-1"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-1)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-1\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffffffffffffffff)",
+          "pretty": "Timestamp(\n    -1,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffffffffffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFFFF,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFFFF)",
+          "width_precision": "Timestamp(                                      -1)",
+          "zero_pad": "Timestamp(-00000000001)"
+        },
+        "default": 0,
+        "millis": "-1",
+        "now_in_bounds": true,
+        "serialized": "-1"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "0"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(0)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+0\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(0)",
+          "pretty": "Timestamp(\n    0,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x0,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x0,\n)",
+          "upper_hex": "Timestamp(0)",
+          "width_precision": "Timestamp(                                       0)",
+          "zero_pad": "Timestamp(+00000000000)"
+        },
+        "default": 0,
+        "millis": "0",
+        "now_in_bounds": true,
+        "serialized": "0"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(1)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+1\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1)",
+          "pretty": "Timestamp(\n    1,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1,\n)",
+          "upper_hex": "Timestamp(1)",
+          "width_precision": "Timestamp(                                       1)",
+          "zero_pad": "Timestamp(+00000000001)"
+        },
+        "default": 0,
+        "millis": "1",
+        "now_in_bounds": true,
+        "serialized": "1"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+999\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e7)",
+          "pretty": "Timestamp(\n    999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e7,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E7,\n)",
+          "upper_hex": "Timestamp(3E7)",
+          "width_precision": "Timestamp(                                     999)",
+          "zero_pad": "Timestamp(+00000000999)"
+        },
+        "default": 0,
+        "millis": "999",
+        "now_in_bounds": true,
+        "serialized": "999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(1000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+1000\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e8)",
+          "pretty": "Timestamp(\n    1000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e8,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E8,\n)",
+          "upper_hex": "Timestamp(3E8)",
+          "width_precision": "Timestamp(                                    1000)",
+          "zero_pad": "Timestamp(+00000001000)"
+        },
+        "default": 0,
+        "millis": "1000",
+        "now_in_bounds": true,
+        "serialized": "1000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(1001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+1001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e9)",
+          "pretty": "Timestamp(\n    1001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E9,\n)",
+          "upper_hex": "Timestamp(3E9)",
+          "width_precision": "Timestamp(                                    1001)",
+          "zero_pad": "Timestamp(+00000001001)"
+        },
+        "default": 0,
+        "millis": "1001",
+        "now_in_bounds": true,
+        "serialized": "1001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "2001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          2,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(2001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+2001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(7d1)",
+          "pretty": "Timestamp(\n    2001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x7d1,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x7D1,\n)",
+          "upper_hex": "Timestamp(7D1)",
+          "width_precision": "Timestamp(                                    2001)",
+          "zero_pad": "Timestamp(+00000002001)"
+        },
+        "default": 0,
+        "millis": "2001",
+        "now_in_bounds": true,
+        "serialized": "2001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "86398999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          23,
+          59,
+          58,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(86398999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+86398999\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(5265817)",
+          "pretty": "Timestamp(\n    86398999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x5265817,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x5265817,\n)",
+          "upper_hex": "Timestamp(5265817)",
+          "width_precision": "Timestamp(                                86398999)",
+          "zero_pad": "Timestamp(+00086398999)"
+        },
+        "default": 0,
+        "millis": "86398999",
+        "now_in_bounds": true,
+        "serialized": "86398999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "86399999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(86399999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+86399999\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(5265bff)",
+          "pretty": "Timestamp(\n    86399999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x5265bff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x5265BFF,\n)",
+          "upper_hex": "Timestamp(5265BFF)",
+          "width_precision": "Timestamp(                                86399999)",
+          "zero_pad": "Timestamp(+00086399999)"
+        },
+        "default": 0,
+        "millis": "86399999",
+        "now_in_bounds": true,
+        "serialized": "86399999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "86400000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(86400000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+86400000\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(5265c00)",
+          "pretty": "Timestamp(\n    86400000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x5265c00,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x5265C00,\n)",
+          "upper_hex": "Timestamp(5265C00)",
+          "width_precision": "Timestamp(                                86400000)",
+          "zero_pad": "Timestamp(+00086400000)"
+        },
+        "default": 0,
+        "millis": "86400000",
+        "now_in_bounds": true,
+        "serialized": "86400000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "86400001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          2,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(86400001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+86400001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(5265c01)",
+          "pretty": "Timestamp(\n    86400001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x5265c01,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x5265C01,\n)",
+          "upper_hex": "Timestamp(5265C01)",
+          "width_precision": "Timestamp(                                86400001)",
+          "zero_pad": "Timestamp(+00086400001)"
+        },
+        "default": 0,
+        "millis": "86400001",
+        "now_in_bounds": true,
+        "serialized": "86400001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "86401001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          2,
+          0,
+          0,
+          1,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(86401001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+86401001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(5265fe9)",
+          "pretty": "Timestamp(\n    86401001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x5265fe9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x5265FE9,\n)",
+          "upper_hex": "Timestamp(5265FE9)",
+          "width_precision": "Timestamp(                                86401001)",
+          "zero_pad": "Timestamp(+00086401001)"
+        },
+        "default": 0,
+        "millis": "86401001",
+        "now_in_bounds": true,
+        "serialized": "86401001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "951782398999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2000,
+          2,
+          28,
+          23,
+          59,
+          58,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(951782398999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+951782398999\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(dd9aa6dc17)",
+          "pretty": "Timestamp(\n    951782398999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xdd9aa6dc17,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xDD9AA6DC17,\n)",
+          "upper_hex": "Timestamp(DD9AA6DC17)",
+          "width_precision": "Timestamp(                            951782398999)",
+          "zero_pad": "Timestamp(+951782398999)"
+        },
+        "default": 0,
+        "millis": "951782398999",
+        "now_in_bounds": true,
+        "serialized": "951782398999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "951782399999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2000,
+          2,
+          28,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(951782399999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+951782399999\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(dd9aa6dfff)",
+          "pretty": "Timestamp(\n    951782399999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xdd9aa6dfff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xDD9AA6DFFF,\n)",
+          "upper_hex": "Timestamp(DD9AA6DFFF)",
+          "width_precision": "Timestamp(                            951782399999)",
+          "zero_pad": "Timestamp(+951782399999)"
+        },
+        "default": 0,
+        "millis": "951782399999",
+        "now_in_bounds": true,
+        "serialized": "951782399999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "951782400000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2000,
+          2,
+          29,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(951782400000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+951782400000\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(dd9aa6e000)",
+          "pretty": "Timestamp(\n    951782400000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xdd9aa6e000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xDD9AA6E000,\n)",
+          "upper_hex": "Timestamp(DD9AA6E000)",
+          "width_precision": "Timestamp(                            951782400000)",
+          "zero_pad": "Timestamp(+951782400000)"
+        },
+        "default": 0,
+        "millis": "951782400000",
+        "now_in_bounds": true,
+        "serialized": "951782400000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "951782400001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2000,
+          2,
+          29,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(951782400001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+951782400001\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(dd9aa6e001)",
+          "pretty": "Timestamp(\n    951782400001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xdd9aa6e001,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xDD9AA6E001,\n)",
+          "upper_hex": "Timestamp(DD9AA6E001)",
+          "width_precision": "Timestamp(                            951782400001)",
+          "zero_pad": "Timestamp(+951782400001)"
+        },
+        "default": 0,
+        "millis": "951782400001",
+        "now_in_bounds": true,
+        "serialized": "951782400001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "951782401001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2000,
+          2,
+          29,
+          0,
+          0,
+          1,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(951782401001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+951782401001\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(dd9aa6e3e9)",
+          "pretty": "Timestamp(\n    951782401001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xdd9aa6e3e9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xDD9AA6E3E9,\n)",
+          "upper_hex": "Timestamp(DD9AA6E3E9)",
+          "width_precision": "Timestamp(                            951782401001)",
+          "zero_pad": "Timestamp(+951782401001)"
+        },
+        "default": 0,
+        "millis": "951782401001",
+        "now_in_bounds": true,
+        "serialized": "951782401001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1709164798999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2024,
+          2,
+          28,
+          23,
+          59,
+          58,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(1709164798999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+1709164798999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(18df2292417)",
+          "pretty": "Timestamp(\n    1709164798999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x18df2292417,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x18DF2292417,\n)",
+          "upper_hex": "Timestamp(18DF2292417)",
+          "width_precision": "Timestamp(                           1709164798999)",
+          "zero_pad": "Timestamp(+1709164798999)"
+        },
+        "default": 0,
+        "millis": "1709164798999",
+        "now_in_bounds": true,
+        "serialized": "1709164798999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1709164799999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2024,
+          2,
+          28,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(1709164799999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+1709164799999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(18df22927ff)",
+          "pretty": "Timestamp(\n    1709164799999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x18df22927ff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x18DF22927FF,\n)",
+          "upper_hex": "Timestamp(18DF22927FF)",
+          "width_precision": "Timestamp(                           1709164799999)",
+          "zero_pad": "Timestamp(+1709164799999)"
+        },
+        "default": 0,
+        "millis": "1709164799999",
+        "now_in_bounds": true,
+        "serialized": "1709164799999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1709164800000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2024,
+          2,
+          29,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(1709164800000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+1709164800000\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(18df2292800)",
+          "pretty": "Timestamp(\n    1709164800000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x18df2292800,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x18DF2292800,\n)",
+          "upper_hex": "Timestamp(18DF2292800)",
+          "width_precision": "Timestamp(                           1709164800000)",
+          "zero_pad": "Timestamp(+1709164800000)"
+        },
+        "default": 0,
+        "millis": "1709164800000",
+        "now_in_bounds": true,
+        "serialized": "1709164800000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1709164800001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2024,
+          2,
+          29,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(1709164800001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+1709164800001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(18df2292801)",
+          "pretty": "Timestamp(\n    1709164800001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x18df2292801,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x18DF2292801,\n)",
+          "upper_hex": "Timestamp(18DF2292801)",
+          "width_precision": "Timestamp(                           1709164800001)",
+          "zero_pad": "Timestamp(+1709164800001)"
+        },
+        "default": 0,
+        "millis": "1709164800001",
+        "now_in_bounds": true,
+        "serialized": "1709164800001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "1709164801001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2024,
+          2,
+          29,
+          0,
+          0,
+          1,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(1709164801001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+1709164801001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(18df2292be9)",
+          "pretty": "Timestamp(\n    1709164801001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x18df2292be9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x18DF2292BE9,\n)",
+          "upper_hex": "Timestamp(18DF2292BE9)",
+          "width_precision": "Timestamp(                           1709164801001)",
+          "zero_pad": "Timestamp(+1709164801001)"
+        },
+        "default": 0,
+        "millis": "1709164801001",
+        "now_in_bounds": true,
+        "serialized": "1709164801001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "2147483645999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2038,
+          1,
+          19,
+          3,
+          14,
+          5,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(2147483645999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+2147483645999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1f3fffff82f)",
+          "pretty": "Timestamp(\n    2147483645999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1f3fffff82f,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1F3FFFFF82F,\n)",
+          "upper_hex": "Timestamp(1F3FFFFF82F)",
+          "width_precision": "Timestamp(                           2147483645999)",
+          "zero_pad": "Timestamp(+2147483645999)"
+        },
+        "default": 0,
+        "millis": "2147483645999",
+        "now_in_bounds": true,
+        "serialized": "2147483645999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "2147483646999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2038,
+          1,
+          19,
+          3,
+          14,
+          6,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(2147483646999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+2147483646999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1f3fffffc17)",
+          "pretty": "Timestamp(\n    2147483646999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1f3fffffc17,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1F3FFFFFC17,\n)",
+          "upper_hex": "Timestamp(1F3FFFFFC17)",
+          "width_precision": "Timestamp(                           2147483646999)",
+          "zero_pad": "Timestamp(+2147483646999)"
+        },
+        "default": 0,
+        "millis": "2147483646999",
+        "now_in_bounds": true,
+        "serialized": "2147483646999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "2147483647000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2038,
+          1,
+          19,
+          3,
+          14,
+          7,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(2147483647000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+2147483647000\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1f3fffffc18)",
+          "pretty": "Timestamp(\n    2147483647000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1f3fffffc18,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1F3FFFFFC18,\n)",
+          "upper_hex": "Timestamp(1F3FFFFFC18)",
+          "width_precision": "Timestamp(                           2147483647000)",
+          "zero_pad": "Timestamp(+2147483647000)"
+        },
+        "default": 0,
+        "millis": "2147483647000",
+        "now_in_bounds": true,
+        "serialized": "2147483647000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "2147483647001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2038,
+          1,
+          19,
+          3,
+          14,
+          7,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(2147483647001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+2147483647001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1f3fffffc19)",
+          "pretty": "Timestamp(\n    2147483647001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1f3fffffc19,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1F3FFFFFC19,\n)",
+          "upper_hex": "Timestamp(1F3FFFFFC19)",
+          "width_precision": "Timestamp(                           2147483647001)",
+          "zero_pad": "Timestamp(+2147483647001)"
+        },
+        "default": 0,
+        "millis": "2147483647001",
+        "now_in_bounds": true,
+        "serialized": "2147483647001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "2147483648001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2038,
+          1,
+          19,
+          3,
+          14,
+          8,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(2147483648001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+2147483648001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1f400000001)",
+          "pretty": "Timestamp(\n    2147483648001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1f400000001,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1F400000001,\n)",
+          "upper_hex": "Timestamp(1F400000001)",
+          "width_precision": "Timestamp(                           2147483648001)",
+          "zero_pad": "Timestamp(+2147483648001)"
+        },
+        "default": 0,
+        "millis": "2147483648001",
+        "now_in_bounds": true,
+        "serialized": "2147483648001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "4294967294999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2106,
+          2,
+          7,
+          6,
+          28,
+          14,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(4294967294999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+4294967294999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e7fffffc17)",
+          "pretty": "Timestamp(\n    4294967294999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e7fffffc17,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E7FFFFFC17,\n)",
+          "upper_hex": "Timestamp(3E7FFFFFC17)",
+          "width_precision": "Timestamp(                           4294967294999)",
+          "zero_pad": "Timestamp(+4294967294999)"
+        },
+        "default": 0,
+        "millis": "4294967294999",
+        "now_in_bounds": true,
+        "serialized": "4294967294999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "4294967295999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2106,
+          2,
+          7,
+          6,
+          28,
+          15,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(4294967295999)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+4294967295999\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e7ffffffff)",
+          "pretty": "Timestamp(\n    4294967295999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e7ffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E7FFFFFFFF,\n)",
+          "upper_hex": "Timestamp(3E7FFFFFFFF)",
+          "width_precision": "Timestamp(                           4294967295999)",
+          "zero_pad": "Timestamp(+4294967295999)"
+        },
+        "default": 0,
+        "millis": "4294967295999",
+        "now_in_bounds": true,
+        "serialized": "4294967295999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "4294967296000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2106,
+          2,
+          7,
+          6,
+          28,
+          16,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(4294967296000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+4294967296000\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e800000000)",
+          "pretty": "Timestamp(\n    4294967296000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e800000000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E800000000,\n)",
+          "upper_hex": "Timestamp(3E800000000)",
+          "width_precision": "Timestamp(                           4294967296000)",
+          "zero_pad": "Timestamp(+4294967296000)"
+        },
+        "default": 0,
+        "millis": "4294967296000",
+        "now_in_bounds": true,
+        "serialized": "4294967296000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "4294967296001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2106,
+          2,
+          7,
+          6,
+          28,
+          16,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(4294967296001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+4294967296001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e800000001)",
+          "pretty": "Timestamp(\n    4294967296001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e800000001,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E800000001,\n)",
+          "upper_hex": "Timestamp(3E800000001)",
+          "width_precision": "Timestamp(                           4294967296001)",
+          "zero_pad": "Timestamp(+4294967296001)"
+        },
+        "default": 0,
+        "millis": "4294967296001",
+        "now_in_bounds": true,
+        "serialized": "4294967296001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "4294967297001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2106,
+          2,
+          7,
+          6,
+          28,
+          17,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(4294967297001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+4294967297001\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(3e8000003e9)",
+          "pretty": "Timestamp(\n    4294967297001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x3e8000003e9,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x3E8000003E9,\n)",
+          "upper_hex": "Timestamp(3E8000003E9)",
+          "width_precision": "Timestamp(                           4294967297001)",
+          "zero_pad": "Timestamp(+4294967297001)"
+        },
+        "default": 0,
+        "millis": "4294967297001",
+        "now_in_bounds": true,
+        "serialized": "4294967297001"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "8210266876798998"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          262142,
+          12,
+          31,
+          23,
+          59,
+          58,
+          998
+        ],
+        "debug": {
+          "compact": "Timestamp(8210266876798998)",
+          "fancy": "Timestamp(+8210266876798998\ud83e\uddca)",
+          "lower_hex": "Timestamp(1d2b31b8b3e816)",
+          "pretty": "Timestamp(\n    8210266876798998,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1d2b31b8b3e816,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1D2B31B8B3E816,\n)",
+          "upper_hex": "Timestamp(1D2B31B8B3E816)",
+          "width_precision": "Timestamp(                        8210266876798998)",
+          "zero_pad": "Timestamp(+8210266876798998)"
+        },
+        "default": 0,
+        "millis": "8210266876798998",
+        "now_in_bounds": true,
+        "serialized": "8210266876798998"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "8210266876799998"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          262142,
+          12,
+          31,
+          23,
+          59,
+          59,
+          998
+        ],
+        "debug": {
+          "compact": "Timestamp(8210266876799998)",
+          "fancy": "Timestamp(+8210266876799998\ud83e\uddca)",
+          "lower_hex": "Timestamp(1d2b31b8b3ebfe)",
+          "pretty": "Timestamp(\n    8210266876799998,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1d2b31b8b3ebfe,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1D2B31B8B3EBFE,\n)",
+          "upper_hex": "Timestamp(1D2B31B8B3EBFE)",
+          "width_precision": "Timestamp(                        8210266876799998)",
+          "zero_pad": "Timestamp(+8210266876799998)"
+        },
+        "default": 0,
+        "millis": "8210266876799998",
+        "now_in_bounds": true,
+        "serialized": "8210266876799998"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "8210266876799999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          262142,
+          12,
+          31,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(8210266876799999)",
+          "fancy": "Timestamp(+8210266876799999\ud83e\uddca)",
+          "lower_hex": "Timestamp(1d2b31b8b3ebff)",
+          "pretty": "Timestamp(\n    8210266876799999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1d2b31b8b3ebff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1D2B31B8B3EBFF,\n)",
+          "upper_hex": "Timestamp(1D2B31B8B3EBFF)",
+          "width_precision": "Timestamp(                        8210266876799999)",
+          "zero_pad": "Timestamp(+8210266876799999)"
+        },
+        "default": 0,
+        "millis": "8210266876799999",
+        "now_in_bounds": true,
+        "serialized": "8210266876799999"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "8210266876800000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(8210266876800000)",
+          "fancy": "Timestamp(+8210266876800000\ud83e\uddca)",
+          "lower_hex": "Timestamp(1d2b31b8b3ec00)",
+          "pretty": "Timestamp(\n    8210266876800000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1d2b31b8b3ec00,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1D2B31B8B3EC00,\n)",
+          "upper_hex": "Timestamp(1D2B31B8B3EC00)",
+          "width_precision": "Timestamp(                        8210266876800000)",
+          "zero_pad": "Timestamp(+8210266876800000)"
+        },
+        "default": 0,
+        "millis": "8210266876800000",
+        "now_in_bounds": true,
+        "serialized": "8210266876800000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "8210266876801000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(8210266876801000)",
+          "fancy": "Timestamp(+8210266876801000\ud83e\uddca)",
+          "lower_hex": "Timestamp(1d2b31b8b3efe8)",
+          "pretty": "Timestamp(\n    8210266876801000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1d2b31b8b3efe8,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1D2B31B8B3EFE8,\n)",
+          "upper_hex": "Timestamp(1D2B31B8B3EFE8)",
+          "width_precision": "Timestamp(                        8210266876801000)",
+          "zero_pad": "Timestamp(+8210266876801000)"
+        },
+        "default": 0,
+        "millis": "8210266876801000",
+        "now_in_bounds": true,
+        "serialized": "8210266876801000"
+      }
+    },
+    {
+      "input": {
+        "kind": "signed",
+        "value": "9223372036854775807"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(9223372036854775807)",
+          "fancy": "Timestamp(+9223372036854775807)",
+          "lower_hex": "Timestamp(7fffffffffffffff)",
+          "pretty": "Timestamp(\n    9223372036854775807,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x7fffffffffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x7FFFFFFFFFFFFFFF,\n)",
+          "upper_hex": "Timestamp(7FFFFFFFFFFFFFFF)",
+          "width_precision": "Timestamp(                     9223372036854775807)",
+          "zero_pad": "Timestamp(+9223372036854775807)"
+        },
+        "default": 0,
+        "millis": "9223372036854775807",
+        "now_in_bounds": true,
+        "serialized": "9223372036854775807"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "0"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(0)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+0\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(0)",
+          "pretty": "Timestamp(\n    0,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x0,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x0,\n)",
+          "upper_hex": "Timestamp(0)",
+          "width_precision": "Timestamp(                                       0)",
+          "zero_pad": "Timestamp(+00000000000)"
+        },
+        "default": 0,
+        "millis": "0",
+        "now_in_bounds": true,
+        "serialized": "0"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "1"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(1)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+1\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1)",
+          "pretty": "Timestamp(\n    1,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1,\n)",
+          "upper_hex": "Timestamp(1)",
+          "width_precision": "Timestamp(                                       1)",
+          "zero_pad": "Timestamp(+00000000001)"
+        },
+        "default": 0,
+        "millis": "1",
+        "now_in_bounds": true,
+        "serialized": "1"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "2000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          2,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(2000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+2000\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(7d0)",
+          "pretty": "Timestamp(\n    2000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x7d0,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x7D0,\n)",
+          "upper_hex": "Timestamp(7D0)",
+          "width_precision": "Timestamp(                                    2000)",
+          "zero_pad": "Timestamp(+00000002000)"
+        },
+        "default": 0,
+        "millis": "2000",
+        "now_in_bounds": true,
+        "serialized": "2000"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "4294967295"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          2,
+          19,
+          17,
+          2,
+          47,
+          295
+        ],
+        "debug": {
+          "compact": "Timestamp(4294967295)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca+4294967295\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffffffff)",
+          "pretty": "Timestamp(\n    4294967295,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFF,\n)",
+          "upper_hex": "Timestamp(FFFFFFFF)",
+          "width_precision": "Timestamp(                              4294967295)",
+          "zero_pad": "Timestamp(+04294967295)"
+        },
+        "default": 0,
+        "millis": "4294967295",
+        "now_in_bounds": true,
+        "serialized": "4294967295"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "4294967296"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          2,
+          19,
+          17,
+          2,
+          47,
+          296
+        ],
+        "debug": {
+          "compact": "Timestamp(4294967296)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca+4294967296\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(100000000)",
+          "pretty": "Timestamp(\n    4294967296,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x100000000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x100000000,\n)",
+          "upper_hex": "Timestamp(100000000)",
+          "width_precision": "Timestamp(                              4294967296)",
+          "zero_pad": "Timestamp(+04294967296)"
+        },
+        "default": 0,
+        "millis": "4294967296",
+        "now_in_bounds": true,
+        "serialized": "4294967296"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "9223372036854775807"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(9223372036854775807)",
+          "fancy": "Timestamp(+9223372036854775807)",
+          "lower_hex": "Timestamp(7fffffffffffffff)",
+          "pretty": "Timestamp(\n    9223372036854775807,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x7fffffffffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x7FFFFFFFFFFFFFFF,\n)",
+          "upper_hex": "Timestamp(7FFFFFFFFFFFFFFF)",
+          "width_precision": "Timestamp(                     9223372036854775807)",
+          "zero_pad": "Timestamp(+9223372036854775807)"
+        },
+        "default": 0,
+        "millis": "9223372036854775807",
+        "now_in_bounds": true,
+        "serialized": "9223372036854775807"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "9223372036854775808"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-9223372036854775808)",
+          "fancy": "Timestamp(-9223372036854775808)",
+          "lower_hex": "Timestamp(8000000000000000)",
+          "pretty": "Timestamp(\n    -9223372036854775808,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x8000000000000000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x8000000000000000,\n)",
+          "upper_hex": "Timestamp(8000000000000000)",
+          "width_precision": "Timestamp(                    -9223372036854775808)",
+          "zero_pad": "Timestamp(-9223372036854775808)"
+        },
+        "default": 0,
+        "millis": "-9223372036854775808",
+        "now_in_bounds": true,
+        "serialized": "-9223372036854775808"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "9223372036854775809"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-9223372036854775807)",
+          "fancy": "Timestamp(-9223372036854775807)",
+          "lower_hex": "Timestamp(8000000000000001)",
+          "pretty": "Timestamp(\n    -9223372036854775807,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x8000000000000001,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x8000000000000001,\n)",
+          "upper_hex": "Timestamp(8000000000000001)",
+          "width_precision": "Timestamp(                    -9223372036854775807)",
+          "zero_pad": "Timestamp(-9223372036854775807)"
+        },
+        "default": 0,
+        "millis": "-9223372036854775807",
+        "now_in_bounds": true,
+        "serialized": "-9223372036854775807"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "18446744073709551614"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          59,
+          998
+        ],
+        "debug": {
+          "compact": "Timestamp(-2)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-2\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffffffffe)",
+          "pretty": "Timestamp(\n    -2,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffffffffe,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFFFE,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFFFE)",
+          "width_precision": "Timestamp(                                      -2)",
+          "zero_pad": "Timestamp(-00000000002)"
+        },
+        "default": 0,
+        "millis": "-2",
+        "now_in_bounds": true,
+        "serialized": "-2"
+      }
+    },
+    {
+      "input": {
+        "kind": "unsigned",
+        "value": "18446744073709551615"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-1)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-1\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffffffffffffffff)",
+          "pretty": "Timestamp(\n    -1,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffffffffffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFFFF,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFFFF)",
+          "width_precision": "Timestamp(                                      -1)",
+          "zero_pad": "Timestamp(-00000000001)"
+        },
+        "default": 0,
+        "millis": "-1",
+        "now_in_bounds": true,
+        "serialized": "-1"
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "0"
+      },
+      "expected": {
+        "accepted": true,
+        "millis": "0",
+        "serialized": "0"
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "-0"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "  1000\n"
+      },
+      "expected": {
+        "accepted": true,
+        "millis": "1000",
+        "serialized": "1000"
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "-1"
+      },
+      "expected": {
+        "accepted": true,
+        "millis": "-1",
+        "serialized": "-1"
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "9223372036854775807"
+      },
+      "expected": {
+        "accepted": true,
+        "millis": "9223372036854775807",
+        "serialized": "9223372036854775807"
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "-9223372036854775808"
+      },
+      "expected": {
+        "accepted": true,
+        "millis": "-9223372036854775808",
+        "serialized": "-9223372036854775808"
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "9223372036854775808"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "18446744073709551615"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "-9223372036854775809"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "18446744073709551616"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "1.0"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "-0.0"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "1e0"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "1e999"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "null"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "true"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "false"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "\"1000\""
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "[]"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "[1000]"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "{}"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "{\"value\":1000}"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": ""
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "1 2"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "01"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "+1"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "NaN"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "Infinity"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "1."
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "--1"
+      },
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "input": {
+        "kind": "wire",
+        "wire": "\n-2000\t"
+      },
+      "expected": {
+        "accepted": true,
+        "millis": "-2000",
+        "serialized": "-2000"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "-9223372036854775808"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(-9223372036854775808)",
+          "fancy": "Timestamp(-9223372036854775808)",
+          "lower_hex": "Timestamp(8000000000000000)",
+          "pretty": "Timestamp(\n    -9223372036854775808,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x8000000000000000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x8000000000000000,\n)",
+          "upper_hex": "Timestamp(8000000000000000)",
+          "width_precision": "Timestamp(                    -9223372036854775808)",
+          "zero_pad": "Timestamp(-9223372036854775808)"
+        },
+        "default": 0,
+        "millis": "-9223372036854775808",
+        "now_in_bounds": true,
+        "serialized": "-9223372036854775808"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "-86400001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          30,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-86400001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-86400001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffad9a3ff)",
+          "pretty": "Timestamp(\n    -86400001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffad9a3ff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFAD9A3FF,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFAD9A3FF)",
+          "width_precision": "Timestamp(                               -86400001)",
+          "zero_pad": "Timestamp(-00086400001)"
+        },
+        "default": 0,
+        "millis": "-86400001",
+        "now_in_bounds": true,
+        "serialized": "-86400001"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "-1001"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          58,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-1001)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-1001\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(fffffffffffffc17)",
+          "pretty": "Timestamp(\n    -1001,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xfffffffffffffc17,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFC17,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFC17)",
+          "width_precision": "Timestamp(                                   -1001)",
+          "zero_pad": "Timestamp(-00000001001)"
+        },
+        "default": 0,
+        "millis": "-1001",
+        "now_in_bounds": true,
+        "serialized": "-1001"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "-1"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1969,
+          12,
+          31,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(-1)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca-1\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(ffffffffffffffff)",
+          "pretty": "Timestamp(\n    -1,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xffffffffffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xFFFFFFFFFFFFFFFF,\n)",
+          "upper_hex": "Timestamp(FFFFFFFFFFFFFFFF)",
+          "width_precision": "Timestamp(                                      -1)",
+          "zero_pad": "Timestamp(-00000000001)"
+        },
+        "default": 0,
+        "millis": "-1",
+        "now_in_bounds": true,
+        "serialized": "-1"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "0"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(0)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+0\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(0)",
+          "pretty": "Timestamp(\n    0,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x0,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x0,\n)",
+          "upper_hex": "Timestamp(0)",
+          "width_precision": "Timestamp(                                       0)",
+          "zero_pad": "Timestamp(+00000000000)"
+        },
+        "default": 0,
+        "millis": "0",
+        "now_in_bounds": true,
+        "serialized": "0"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "1"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "debug": {
+          "compact": "Timestamp(1)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca+1\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(1)",
+          "pretty": "Timestamp(\n    1,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1,\n)",
+          "upper_hex": "Timestamp(1)",
+          "width_precision": "Timestamp(                                       1)",
+          "zero_pad": "Timestamp(+00000000001)"
+        },
+        "default": 0,
+        "millis": "1",
+        "now_in_bounds": true,
+        "serialized": "1"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "951782400000"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          2000,
+          2,
+          29,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(951782400000)",
+          "fancy": "Timestamp(\ud83e\uddca\ud83e\uddca+951782400000\ud83e\uddca\ud83e\uddca\ud83e\uddca)",
+          "lower_hex": "Timestamp(dd9aa6e000)",
+          "pretty": "Timestamp(\n    951782400000,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0xdd9aa6e000,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0xDD9AA6E000,\n)",
+          "upper_hex": "Timestamp(DD9AA6E000)",
+          "width_precision": "Timestamp(                            951782400000)",
+          "zero_pad": "Timestamp(+951782400000)"
+        },
+        "default": 0,
+        "millis": "951782400000",
+        "now_in_bounds": true,
+        "serialized": "951782400000"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "8210266876799999"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          262142,
+          12,
+          31,
+          23,
+          59,
+          59,
+          999
+        ],
+        "debug": {
+          "compact": "Timestamp(8210266876799999)",
+          "fancy": "Timestamp(+8210266876799999\ud83e\uddca)",
+          "lower_hex": "Timestamp(1d2b31b8b3ebff)",
+          "pretty": "Timestamp(\n    8210266876799999,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x1d2b31b8b3ebff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x1D2B31B8B3EBFF,\n)",
+          "upper_hex": "Timestamp(1D2B31B8B3EBFF)",
+          "width_precision": "Timestamp(                        8210266876799999)",
+          "zero_pad": "Timestamp(+8210266876799999)"
+        },
+        "default": 0,
+        "millis": "8210266876799999",
+        "now_in_bounds": true,
+        "serialized": "8210266876799999"
+      }
+    },
+    {
+      "input": {
+        "kind": "field",
+        "value": "2000",
+        "replacement": "9223372036854775807"
+      },
+      "expected": {
+        "clone_equal": true,
+        "copy_equal": true,
+        "datetime": [
+          1970,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "debug": {
+          "compact": "Timestamp(9223372036854775807)",
+          "fancy": "Timestamp(+9223372036854775807)",
+          "lower_hex": "Timestamp(7fffffffffffffff)",
+          "pretty": "Timestamp(\n    9223372036854775807,\n)",
+          "pretty_lower_hex": "Timestamp(\n    0x7fffffffffffffff,\n)",
+          "pretty_upper_hex": "Timestamp(\n    0x7FFFFFFFFFFFFFFF,\n)",
+          "upper_hex": "Timestamp(7FFFFFFFFFFFFFFF)",
+          "width_precision": "Timestamp(                     9223372036854775807)",
+          "zero_pad": "Timestamp(+9223372036854775807)"
+        },
+        "default": 0,
+        "millis": "9223372036854775807",
+        "now_in_bounds": true,
+        "serialized": "9223372036854775807"
+      }
+    }
+  ]
+}
