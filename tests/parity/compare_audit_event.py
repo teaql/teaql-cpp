@@ -24,7 +24,7 @@ def main():
     expected = [case['expected'] for case in corpus['cases']]
     emulator = args.cpp_emulator.split(';') if args.cpp_emulator else []
     if args.rust:
-        subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
         if not same(expected, observe(args.rust, inputs)):
             raise RuntimeError('Audit observations differ from live original Rust')
     bits = int(subprocess.check_output(emulator + [args.cpp, '--pointer-bits'], text=True))

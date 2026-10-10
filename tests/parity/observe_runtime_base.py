@@ -8,7 +8,7 @@ import subprocess
 from compare_values import observe
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--rust',required=True);args=p.parse_args();root=Path(__file__).resolve().parents[2]
-    subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     cases=[dict(input=dict(zip(['mode','capture','debug','failure','bad_model','event','trace'],values))) for values in itertools.product(['all','list','entities','enhanced'],*[ [False,True] for _ in range(6)])]
     for c,o in zip(cases,observe(args.rust,[c['input'] for c in cases])):c['expected']=o
     baseline=json.loads((root/'upstream.lock.json').read_text())['commit']

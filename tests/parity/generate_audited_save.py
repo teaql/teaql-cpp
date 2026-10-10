@@ -56,7 +56,7 @@ def inputs():
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--rust',required=True);args=parser.parse_args()
     root=Path(__file__).resolve().parents[2]
-    subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     cases=inputs();outputs=observe(args.rust,cases);lock=json.loads((root/'upstream.lock.json').read_text())
     corpus=dict(baseline=lock['commit'],note='Original public save_audited_ledger_entity_with_executor against unmodified locked runtime; handwritten models and provider/checker/sink/ID SPIs only.',cases=[dict(input=i,expected=o)for i,o in zip(cases,outputs)])
     Path(__file__).with_name('audited_save_cases.json').write_text(json.dumps(corpus,indent=2)+'\n')

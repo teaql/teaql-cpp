@@ -20,7 +20,7 @@ def main():
     inputs = [dict(corpus['setup'], **case['input']) for case in corpus['cases']]
     expected = [case['expected'] for case in corpus['cases']]
     if args.rust:
-        subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], cwd=root, check=True)
+        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], cwd=root, check=True)
         if not same(expected, observe(args.rust, inputs)):
             raise RuntimeError('Committed search observations differ from live Rust')
     emulator = args.cpp_emulator.split(';') if args.cpp_emulator else []

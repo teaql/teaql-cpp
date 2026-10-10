@@ -2,7 +2,7 @@
 
 TEAQL for edge runtimes, following the core design of Rust **v5.0.5** with SQLite as the only database implementation. The project connects TEAQL to the C++ systems programming and GPU ecosystem. Memory has two explicit lifetimes: application-owned `GlobalContext` and `UserContext`. Development is kernel first, using C++20 standard facilities and few dependencies.
 
-Pinned commit: `62940ae2b88e7acc32763853b8b4685a01c7e90a`. See the [baseline lock](upstream.lock.json) and [migration plan](docs/migration-plan.md).
+Pinned commit: `62940ae2b88e7acc32763853b8b4685a01c7e90a`. See the [baseline lock](upstream.lock.json) and [migration plan](docs/migration_plan.md).
 
 All six migration stages are accepted within the documented C++ ownership,
 owner-thread and supported-protocol adaptations. The source ledger is **55
@@ -27,7 +27,18 @@ The generator is unchanged. C++20 standard facilities and SQLite remain the
 production dependency scope; GPU adapters and external integrations are excluded.
 
 See [the final requirement audit](measurements/parity/2026-10-10-stage6-final-review/README.md)
-and [the migration plan](docs/migration-plan.md).
+and [the migration plan](docs/migration_plan.md).
+
+The C++20 named-modules refactor follows [the modules plan](docs/cpp_modules_plan.md).
+The workspace now uses Rust-shaped `teaql_core`, `teaql_data_service`, `teaql_sql`,
+`teaql_runtime` and `teaql_provider_sqlite` package directories, plus the C++
+`teaql_memory` and `teaql_async` adaptations. Each package owns its CMake definition,
+headers and implementation; runtime implementations preserve `context/` and
+`data_service/` subtrees. Shared test fixtures live in `tests/support`, while the
+Rust comparison harness stays in `tests/parity`. Public `<teaql/...>` include
+spelling and C++ APIs remain stable. Production `lib.cppm` interfaces and import
+consumers remain the next milestone; directory moves alone do not establish
+named-module support. See [the workspace move](docs/workspace_move.md).
 
 Two runnable examples reproduce the business semantics of the corresponding Rust examples:
 
@@ -51,7 +62,7 @@ checkers and translation, policy/approval, graph/ledger saves, TransactionScope,
 raw/safe audit events, source log provenance/privacy and telemetry interfaces.
 The public in-memory query engine retains its original supported behavior.
 Complete contracts, source ordering, failure paths and differential evidence
-are linked from [the module map](docs/parity/cpp-module-map.md).
+are linked from [the module map](docs/parity/cpp_module_map.md).
 
 Application code receives UserContext and delegates Global allocation through it.
 Managed objects explicitly select `global.make<T>()` or
@@ -61,12 +72,12 @@ reclaiming all blocks. Context results are borrows, invalid after close. Nested
 containers inherit the allocator; retention across domains requires an explicit
 deep copy. Asynchronous work stops and joins before referenced storage is freed.
 
-The [memory implementation](docs/context-memory-implementation.md) provides
+The [memory implementation](docs/context_memory_implementation.md) provides
 64-bit object references, separate Global/User live bitmaps, non-reused IDs,
 object/byte limits, aggregate User budgets, shutdown reserves, stable byte/string
 storage and bounded explicit interning. Checked resolution validates identity
 and liveness. Arbitrary escaped native pointers and unmanaged PMR stack objects
-still require the [lifetime contract](docs/context-lifetime.md).
+still require the [lifetime contract](docs/context_lifetime.md).
 
 ## Scope and limitations
 
@@ -74,7 +85,7 @@ Production dependencies are C++20 standard facilities and SQLite. Generator
 changes, GPU adapters and concrete non-SQLite/cloud/external integrations remain
 outside this migration. Their retained core interfaces are not claims of an
 external backend implementation. Legacy compatibility limitations are documented
-separately in [the compatibility contract](docs/sqlite-compatibility.md).
+separately in [the compatibility contract](docs/sqlite_compatibility.md).
 
 The accepted contracts describe explicit C++ ownership, owner-thread dispatch,
 protocol and native-width diagnostic adaptations. Final sanitizer leak scanning
@@ -83,15 +94,17 @@ A passing test suite cannot establish safety for raw pointers used after close.
 
 ## Build
 
-Requirements: CMake 3.20+, a C++20 compiler, and SQLite 3.37+ development headers/libraries, such as `libsqlite3-dev`. Core and memory targets depend only on the standard library. Tests require Python 3. Ordinary CTest uses recorded Rust observations and does not require Rust.
+Use the locked local development tools described in [the toolchain guide](docs/development_toolchain.md). The current baseline is CMake4.4, Ninja1.13, Clang23/GCC16 and OpenWrt GCC14.3. SQLite3.37+ development headers/libraries are required for native builds. Core and memory targets depend only on standard facilities. Tests require Python3; recorded parity tests do not require Rust.
 
 ```sh
-cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
-cmake --build build
-ctest --test-dir build --output-on-failure
-./build/teaql_context_lifetime
-./build/teaql_sqlite_schema_crud
-./build/teaql_sqlite_relations_graph
+python3 scripts/toolchains/setup.py --check
+source scripts/toolchains/activate.sh
+cmake --preset native
+cmake --build --preset native
+ctest --preset native
+./build_native_current/teaql_context_lifetime
+./build_native_current/teaql_sqlite_schema_crud
+./build_native_current/teaql_sqlite_relations_graph
 ```
 
 ## Measurements
@@ -118,12 +131,12 @@ Unicode fact tables are excluded through `.clang-format-ignore`.
 Install the development tool in an ignored repository-local virtual environment:
 
 ```sh
-python3 scripts/format-cpp.py --install
-python3 scripts/format-cpp.py
-python3 scripts/format-cpp.py --check
+python3 scripts/format_cpp.py --install
+python3 scripts/format_cpp.py
+python3 scripts/format_cpp.py --check
 ```
 
-The CMake targets `format` and `format-check` run the same commands. An existing
+The CMake targets `format` and `format_check` run the same commands. An existing
 clang-format 18.1.8 can be supplied with `--clang-format PATH`; mismatched versions
 are rejected. Editors can read `.clang-format` and `.editorconfig` directly.
 Git selects tracked and new, nonignored files, keeping build artifacts out of the
@@ -138,7 +151,7 @@ Reference sources support development comparisons and are not part of the C++ bu
 ```sh
 git clone --branch v5.0.5 https://github.com/teaql/teaql-rs.git .reference/teaql-rs
 git -C .reference/teaql-rs checkout --detach 62940ae2b88e7acc32763853b8b4685a01c7e90a
-python3 scripts/verify-upstream.py
+python3 scripts/verify_upstream.py
 ```
 
 ## Validation
@@ -148,6 +161,6 @@ Both original Rust examples were run from the pinned reference to verify version
 The Value corpus contains 722 recorded Rust cases for conversions, precision, overflow, date boundaries, and invalid JSON; dynamic search has 491 for validation, warnings, and type boundaries. Optional live runners are documented in [parity testing](tests/parity/README.md). Decimal/JSON/Date/Timestamp database binding and metadata decoding are implemented in the independent provider; the retained legacy SqliteSession compatibility path has separate type limitations.
 
 ```sh
-python3 scripts/verify-upstream.py
-python3 scripts/inventory-upstream.py --check
+python3 scripts/verify_upstream.py
+python3 scripts/inventory_upstream.py --check
 ```

@@ -1,0 +1,5 @@
+{
+  "status": "All compiler and validation sessions terminal with exit0. Source-bootstrap session was explicitly stopped with exit130 and superseded by verified prebuilt GCC16.2.",
+  "full_validation": "native388/388; sanitizer388/388; MIPS387/387",
+  "examples": "2/2 per profile"
+}

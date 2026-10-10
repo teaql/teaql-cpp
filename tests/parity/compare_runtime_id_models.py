@@ -24,7 +24,7 @@ def main():
     key = "expected_release" if args.profile == "release" else "expected"
     expected = [case[key] for case in cases]
     if args.rust:
-        subprocess.run(["python3", str(root / "scripts/verify-upstream.py")], check=True)
+        subprocess.run(["python3", str(root / "scripts/verify_upstream.py")], check=True)
         if not same(expected, observe(args.rust, inputs)):
             raise RuntimeError("Recorded observations differ from the original build profile")
     emulator = args.cpp_emulator.split(";") if args.cpp_emulator else ()

@@ -1,0 +1,23 @@
+{
+  "changes": [
+    {
+      "path": "include/teaql/core/expr.hpp",
+      "sha256": "8c1e3bde2e57ac11376b2b4192c63f32942a3accf45f7dc0567e2526ea29b040",
+      "scope": "Additional direct standard header include only"
+    },
+    {
+      "path": "include/teaql/memory/clone.hpp",
+      "sha256": "415b228bce37901f6433706eead720123dbca9a984567ffce4a1c77ce18625f6",
+      "scope": "Additional direct standard header include only"
+    }
+  ],
+  "function_bodies_changed": false,
+  "build_repairs": [
+    "CMake minimum4.4",
+    "Disable scanning for non-importing legacy implementation units",
+    "Use SQLite3::SQLite3 target spelling",
+    "Declare SQLite dependency directly on graph_saver test",
+    "Capture direct kernel link properties before CMP0189 generator-expression transitive expansion; verifier contract unchanged"
+  ],
+  "future_module_migration": "Not performed; compiler probes only."
+}

@@ -2,7 +2,7 @@
 
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 The complete source contract is in
-[checker-api-contract.md](../../../docs/checker-api-contract.md).
+[checker-api-contract.md](../../../docs/checker_api_contract.md).
 
 Two controlled native callbacks close UserContext and then throw, before any
 reclaimed payload is dereferenced. Registry registration dispatches Checker.entity

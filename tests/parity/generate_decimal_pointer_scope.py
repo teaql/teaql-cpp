@@ -33,7 +33,7 @@ def main():
     parser.add_argument('--rust32-emulator', default='qemu-arm')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     values = list(inputs())
     profiles = {}
     for bits, executable, emulator in [

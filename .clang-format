@@ -1,4 +1,4 @@
-# Use scripts/format-cpp.py with clang-format 18.1.8.
+# Use scripts/format_cpp.py with clang-format 18.1.8.
 BasedOnStyle: LLVM
 Language: Cpp
 Standard: c++20

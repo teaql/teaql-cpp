@@ -16,7 +16,7 @@ The independent Rust binary calls the unchanged pinned Context, schema provider
 and RuntimeModule; it installs Tenant42, repeats the same assignment, rejects a
 different ID and invalid input, and reads the installed root after completion.
 The source's canonical error uses `tenant`, not `Tenant`. Its execution exits0.
-See `before.json`, the output logs and the [original probe](../../../tests/parity/rust-values/src/bin/bootstrap_root_scope_oracle.rs).
+See `before.json`, the output logs and the [original probe](../../../tests/parity/rust_values/src/bin/bootstrap_root_scope_oracle.rs).
 
 The fresh pre-repair Context selections pass64/64 on native, ASan/UBSan and
 MIPS/QEMU, demonstrating that those previous tests omit this composition.

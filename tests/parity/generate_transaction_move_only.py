@@ -13,7 +13,7 @@ def main():
     parser.add_argument("--rust", required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(["python3", str(root / "scripts/verify-upstream.py")], check=True)
+    subprocess.run(["python3", str(root / "scripts/verify_upstream.py")], check=True)
     cases = [case(flow="move_only", body_fail=body, begin_fail=begin,
                   commit_fail=commit, rollback_fail=rollback, payload="owned🧊" * 80)
              for body, begin, commit, rollback in itertools.product([False, True], repeat=4)]

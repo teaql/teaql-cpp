@@ -1,7 +1,7 @@
 #include <teaql/provider_sqlite/detail/decoding.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/runtime/context.hpp>
-#include "../provider_sqlite_fixture.hpp"
+#include "../support/provider_sqlite_fixture.hpp"
 #include "fixture_value.hpp"
 #include <cmath>
 #include <iostream>

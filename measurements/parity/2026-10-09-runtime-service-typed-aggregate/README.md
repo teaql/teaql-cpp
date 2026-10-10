@@ -31,7 +31,7 @@ or the installed build snapshot; runtime/retention/target verification is pendin
 Source acceptance remains partial until that work and complete integration end.
 
 Physical-router execution is deferred. No generator or runtime dependency is
-introduced. See the [runtime service review](../../../docs/runtime-data-service-api-contract.md).
+introduced. See the [runtime service review](../../../docs/runtime_data_service_api_contract.md).
 
 
 ## Installed focused checkpoint

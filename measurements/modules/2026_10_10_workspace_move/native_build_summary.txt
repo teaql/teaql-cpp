@@ -1,0 +1,14 @@
+Complete workspace build: terminal exit code 0.
+Final source-owner placement build: terminal exit code 0.
+The following are final task lines from the completed builds:
+
+[476/479] Linking CXX executable teaql_data_store_probe
+[477/479] Linking CXX executable teaql_sqlite_tests
+[478/479] Linking CXX executable teaql_generated_support_tests
+[479/479] Linking CXX executable teaql_generated_support_probe
+
+[43/46] Building CXX object CMakeFiles/teaql_safe_expression_api_tests.dir/teaql_core/tests/safe_expression_api_tests.cpp.o
+[44/46] Linking CXX executable teaql_safe_expression_api_tests
+[45/46] Linking CXX executable teaql_query_api_tests
+[46/46] Linking CXX executable teaql_compact_row_api_tests
+

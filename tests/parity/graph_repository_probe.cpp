@@ -1,4 +1,4 @@
-#include "../relation_hydration_fixture.hpp"
+#include "../support/relation_hydration_fixture.hpp"
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/runtime/module.hpp>
 #include <teaql/runtime/graph_debug.hpp>

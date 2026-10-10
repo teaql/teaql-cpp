@@ -1,0 +1,61 @@
+add_library(teaql_runtime
+    src/data_service/query_keys.cpp
+    src/data_service/id_set_build_lock.cpp
+    src/data_service/query_stores.cpp
+    src/context/pagination.cpp
+    src/data_service/relation_enhancement.cpp
+    src/data_service/relation_installation.cpp
+    src/data_service/relation.cpp
+    src/data_service/mod.cpp
+    src/entity_graph_decoder.cpp
+    src/context/entity.cpp
+    src/entity_runtime.cpp
+    src/graph.cpp
+    src/context/graph.cpp
+    src/context/event.cpp
+    src/telemetry.cpp
+    src/context/logging.cpp
+    src/log_manager.cpp
+    src/log_formatter.cpp
+    src/logging.cpp
+    src/entity_key.cpp
+    src/event.cpp
+    src/audit_privacy.cpp
+    src/schema.cpp
+    src/id.cpp
+    src/business_clock.cpp
+    src/business_service.cpp
+    src/business_id.cpp
+    src/registry.cpp
+    src/check_result.cpp
+    src/error.cpp
+    src/data_store.cpp
+    src/context/data_store.cpp
+    src/generated_support.cpp
+    src/round_trip_reference_types.cpp
+    src/round_trip_reference.cpp
+    src/context/round_trip_reference.cpp
+    src/reference_crypto.cpp
+    src/entity_reference.cpp
+    src/context/entity_reference.cpp
+    src/inmemory_engine.cpp
+    src/context/root.cpp
+    src/context/locking.cpp
+    src/data_service/relation_graph.cpp
+    src/language.cpp
+    src/i18n.cpp
+    src/i18n_debug.cpp
+    src/context/language.cpp
+    src/checker.cpp
+    src/context/checker.cpp
+    src/fix_evidence.cpp
+    src/context/fix.cpp
+    src/entity_save_preparation.cpp
+    src/data_service/ledger_plan.cpp
+    src/mutation_policy.cpp
+    src/context/mutation_policy.cpp
+    src/mutation_policy_plan.cpp
+)
+add_library(teaql::runtime ALIAS teaql_runtime)
+teaql_configure_package(teaql_runtime)
+target_link_libraries(teaql_runtime PUBLIC teaql::sql)

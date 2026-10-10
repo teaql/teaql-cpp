@@ -1,7 +1,7 @@
 #include <teaql/runtime/entity_save.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include "fixture_value.hpp"
-#include "../runtime_mutation_fixture.hpp"
+#include "../support/runtime_mutation_fixture.hpp"
 #include <iostream>
 
 static EntityKey key(Memory r, const Json& input) {

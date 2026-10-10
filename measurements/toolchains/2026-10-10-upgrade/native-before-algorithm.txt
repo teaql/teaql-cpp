@@ -1,0 +1,913 @@
+[1/640] Building CXX object CMakeFiles/teaql_reference_model_probe.dir/tests/parity/reference_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/reference_model_probe.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[2/640] Building CXX object CMakeFiles/teaql_round_trip_reference_probe.dir/tests/parity/round_trip_reference_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/round_trip_reference_probe.cpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[3/640] Building CXX object CMakeFiles/teaql_round_trip_reference_tests.dir/tests/round_trip_reference_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/round_trip_reference_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/round_trip_reference_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/entity_reference_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[4/640] Building CXX object CMakeFiles/teaql_context_defaults_tests.dir/tests/context_defaults_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/context_defaults_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[5/640] Building CXX object CMakeFiles/teaql_runtime_id_model_tests.dir/tests/runtime_id_model_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_id_model_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[6/640] Building CXX object CMakeFiles/teaql_reference_model_tests.dir/tests/reference_model_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/reference_model_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[7/640] Building CXX object CMakeFiles/teaql_context_defaults_probe.dir/tests/parity/context_defaults_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/context_defaults_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[8/640] Building CXX object CMakeFiles/teaql_entity_reference_tests.dir/tests/entity_reference_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/entity_reference_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/entity_reference_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[9/640] Building CXX object CMakeFiles/teaql_reference_crypto_tests.dir/tests/reference_crypto_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/reference_crypto_tests.cpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[10/640] Building CXX object CMakeFiles/teaql_entity_reference_probe.dir/tests/parity/entity_reference_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/entity_reference_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../entity_reference_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[11/640] Building CXX object CMakeFiles/teaql_inmemory_tests.dir/tests/inmemory_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/inmemory_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[12/640] Building CXX object CMakeFiles/teaql_locking_tests.dir/tests/locking_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/locking_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/locking_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[13/640] Building CXX object CMakeFiles/teaql_inmemory_probe.dir/tests/parity/inmemory_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/inmemory_probe.cpp:4:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[14/640] Building CXX object CMakeFiles/teaql_locking_probe.dir/tests/parity/locking_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/locking_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../locking_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[15/640] Building CXX object CMakeFiles/teaql_sqlite_schema_crud.dir/examples/sqlite_schema_crud.cpp.o
+In file included from /home/philip/githome/teaql-cpp/examples/sqlite_schema_crud.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/examples/scenarios.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/examples/models.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[16/640] Building CXX object CMakeFiles/teaql_transaction_move_only_tests.dir/tests/transaction_move_only_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/transaction_move_only_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/transaction_move_only_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/transaction.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[17/640] Building CXX object CMakeFiles/teaql_transaction_provider_error_tests.dir/tests/transaction_provider_error_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/transaction_provider_error_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/transaction.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[18/640] Building CXX object CMakeFiles/teaql_transaction_move_only_probe.dir/tests/parity/transaction_move_only_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/transaction_move_only_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../transaction_move_only_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/transaction.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[19/640] Building CXX object CMakeFiles/teaql_policy_model_tests.dir/tests/policy_model_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/policy_model_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[20/640] Building CXX object CMakeFiles/teaql_policy_model_probe.dir/tests/parity/policy_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/policy_model_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[21/640] Building CXX object CMakeFiles/teaql_event_model_tests.dir/tests/event_model_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/event_model_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[22/640] Building CXX object CMakeFiles/teaql_event_model_probe.dir/tests/parity/event_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/event_model_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[23/640] Building CXX object CMakeFiles/teaql_ledger_move_only_probe.dir/tests/parity/ledger_move_only_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/ledger_move_only_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../ledger_move_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[24/640] Building CXX object CMakeFiles/teaql_runtime_examples_tests.dir/tests/runtime_examples_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_examples_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/../examples/scenarios.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/../examples/models.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[25/640] Building CXX object CMakeFiles/teaql_ledger_move_only_tests.dir/tests/ledger_move_only_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/ledger_move_only_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/ledger_move_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[26/640] Building CXX object CMakeFiles/teaql_check_model_tests.dir/tests/check_model_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/check_model_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[27/640] Building CXX object CMakeFiles/teaql_check_model_probe.dir/tests/parity/check_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/check_model_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[28/640] Building CXX object CMakeFiles/teaql_unified_buffer_clone_tests.dir/tests/unified_buffer_clone_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/unified_buffer_clone_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[29/640] Building CXX object CMakeFiles/teaql_unified_buffer_clone_probe.dir/tests/parity/unified_buffer_clone_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/unified_buffer_clone_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[30/640] Building CXX object CMakeFiles/teaql_relation_model_tests.dir/tests/relation_model_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/relation_model_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[31/640] Building CXX object CMakeFiles/teaql_runtime_foreign_work_tests.dir/tests/runtime_foreign_work_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_foreign_work_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[32/640] Building CXX object CMakeFiles/teaql_relation_model_probe.dir/tests/parity/relation_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/relation_model_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[33/640] Building CXX object CMakeFiles/teaql_log_model_tests.dir/tests/log_model_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/log_model_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[34/640] Building CXX object CMakeFiles/teaql_log_model_probe.dir/tests/parity/log_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[35/640] Building CXX object CMakeFiles/teaql_transaction_scope_probe.dir/tests/parity/transaction_scope_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/transaction_scope_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/transaction.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[36/640] Building CXX object CMakeFiles/teaql_audited_save_probe.dir/tests/parity/audited_save_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/audited_save_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../audited_save_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[37/640] Building CXX object CMakeFiles/teaql_audited_auto_save_probe.dir/tests/parity/audited_auto_save_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/audited_auto_save_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../audited_save_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[38/640] Building CXX object CMakeFiles/teaql_transaction_scope_tests.dir/tests/transaction_scope_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/transaction_scope_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/transaction.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[39/640] Building CXX object CMakeFiles/teaql_graph_saver_probe.dir/tests/parity/graph_saver_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/graph_saver_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../graph_saver_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[40/640] Building CXX object CMakeFiles/teaql_audited_save_tests.dir/tests/audited_save_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/audited_save_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/audited_save_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[41/640] Building CXX object CMakeFiles/teaql_audited_auto_save_tests.dir/tests/audited_auto_save_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/audited_auto_save_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/audited_save_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[42/640] Building CXX object CMakeFiles/teaql_graph_saver_tests.dir/tests/graph_saver_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/graph_saver_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/graph_saver_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[43/640] Building CXX object CMakeFiles/teaql_ledger_execution_probe.dir/tests/parity/ledger_execution_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/ledger_execution_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[44/640] Building CXX object CMakeFiles/teaql_ledger_plan_tests.dir/tests/ledger_plan_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/ledger_plan_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/entity_save.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[45/640] Building CXX object CMakeFiles/teaql_graph_execution_probe.dir/tests/parity/graph_execution_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/graph_execution_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[46/640] Building CXX object CMakeFiles/teaql_graph_node_command_tests.dir/tests/graph_node_command_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/graph_node_command_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[47/640] Building CXX object CMakeFiles/teaql_ledger_execution_tests.dir/tests/ledger_execution_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/ledger_execution_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[48/640] Building CXX object CMakeFiles/teaql_entity_graph_execution_tests.dir/tests/entity_graph_execution_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/entity_graph_execution_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[49/640] Building CXX object CMakeFiles/teaql_graph_save_adapter_tests.dir/tests/graph_save_adapter_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/graph_save_adapter_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/graph_save_adapter_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[50/640] Building CXX object CMakeFiles/teaql_ledger_plan_probe.dir/tests/parity/ledger_plan_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/ledger_plan_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/entity_save.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[51/640] Building CXX object CMakeFiles/teaql_recursive_graph_write_tests.dir/tests/recursive_graph_write_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/recursive_graph_write_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[52/640] Building CXX object CMakeFiles/teaql_policy_plan_probe.dir/tests/parity/policy_plan_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/policy_plan_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[53/640] Building CXX object CMakeFiles/teaql_mutation_policy_tests.dir/tests/mutation_policy_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/mutation_policy_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[54/640] Building CXX object CMakeFiles/teaql_mutation_policy_probe.dir/tests/parity/mutation_policy_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/mutation_policy_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[55/640] Building CXX object CMakeFiles/teaql_runtime_mutation_tests.dir/tests/runtime_mutation_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[56/640] Building CXX object CMakeFiles/teaql_save_preparation_tests.dir/tests/save_preparation_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/save_preparation_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/save_preparation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/entity_save.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[57/640] Building CXX object CMakeFiles/teaql_runtime_mutation_probe.dir/tests/parity/runtime_mutation_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/runtime_mutation_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../runtime_mutation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[58/640] Building CXX object CMakeFiles/teaql_entity_graph_plan_probe.dir/tests/parity/entity_graph_plan_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/entity_graph_plan_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../entity_graph_plan_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[59/640] Building CXX object CMakeFiles/teaql_entity_graph_plan_tests.dir/tests/entity_graph_plan_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/entity_graph_plan_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/entity_graph_plan_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[60/640] Building CXX object CMakeFiles/teaql_graph_fix_tests.dir/tests/graph_fix_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/graph_fix_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/graph_fix_scope.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[61/640] Building CXX object CMakeFiles/teaql_save_preparation_probe.dir/tests/parity/save_preparation_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/save_preparation_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../save_preparation_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/entity_save.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[62/640] Building CXX object CMakeFiles/teaql_graph_fix_probe.dir/tests/parity/graph_fix_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/graph_fix_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/graph_fix_scope.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[63/640] Building CXX object CMakeFiles/teaql_checker_tests.dir/tests/checker_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/checker_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/checker_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[64/640] Building CXX object CMakeFiles/teaql_i18n_tests.dir/tests/i18n_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/i18n_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[65/640] Building CXX object CMakeFiles/teaql_original_sql_binding_tests.dir/tests/parity/teaql-sql/binding_tests.cpp.o
+[66/640] Building CXX object CMakeFiles/teaql_checker_probe.dir/tests/parity/checker_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/checker_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/../checker_fixture.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[67/640] Building CXX object CMakeFiles/teaql_i18n_probe.dir/tests/parity/i18n_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/i18n_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[68/640] Building CXX object CMakeFiles/teaql_i18n_debug_scope_probe.dir/tests/parity/i18n_debug_scope_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/i18n_debug_scope_probe.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[69/640] Building CXX object CMakeFiles/teaql_original_sql_rendering_tests.dir/tests/parity/teaql-sql/log_rendering_tests.cpp.o
+[70/640] Building CXX object CMakeFiles/teaql_sqlite_schema_probe.dir/tests/parity/sqlite_schema_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/sqlite_schema_probe.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/provider_sqlite/schema.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/provider_sqlite/provider.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[71/640] Building CXX object CMakeFiles/teaql_original_sql_default_tests.dir/tests/parity/teaql-sql/default_contracts.cpp.o
+FAILED: [code=1] CMakeFiles/teaql_original_sql_default_tests.dir/tests/parity/teaql-sql/default_contracts.cpp.o 
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++  -I/home/philip/githome/teaql-cpp/include --gcc-install-dir=/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0 -g1 -std=gnu++20 -MD -MT CMakeFiles/teaql_original_sql_default_tests.dir/tests/parity/teaql-sql/default_contracts.cpp.o -MF CMakeFiles/teaql_original_sql_default_tests.dir/tests/parity/teaql-sql/default_contracts.cpp.o.d -o CMakeFiles/teaql_original_sql_default_tests.dir/tests/parity/teaql-sql/default_contracts.cpp.o -c /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/default_contracts.cpp
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/default_contracts.cpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/default_contracts.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/dialect.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/bindings.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:267:17: error: no matching function for call to 'find'
+  267 |             if (std::find(result.args.begin(), result.args.end(), item) == result.args.end()) {
+      |                 ^~~~~~~~~
+/home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:278:17: note: in instantiation of function template specialization 'teaql::Expr::logical_range(Memory, Kind, std::vector<teaql::Expr, std::pmr::polymorphic_allocator<teaql::Expr>> &&)::(lambda)::operator()<teaql::Expr>' requested here
+  278 |                 retain_unique(std::move(current));
+      |                 ^
+/home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:225:16: note: in instantiation of function template specialization 'teaql::Expr::logical_range<std::vector<teaql::Expr, std::pmr::polymorphic_allocator<teaql::Expr>>>' requested here
+  225 |         return logical_range(owner, Kind::And, std::forward<Parts>(parts));
+      |                ^
+/home/philip/githome/teaql-cpp/tests/parity/teaql-sql/default_contracts.cpp:78:24: note: in instantiation of function template specialization 'teaql::Expr::all_of<std::vector<teaql::Expr, std::pmr::polymorphic_allocator<teaql::Expr>>>' requested here
+   78 |     query.filter(Expr::all_of(owner, std::move(filters)))
+      |                        ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/streambuf_iterator.h:437:5: note: candidate template ignored: could not match 'istreambuf_iterator' against '__gnu_cxx::__normal_iterator'
+  437 |     find(istreambuf_iterator<_CharT> __first,
+      |     ^
+1 warning and 1 error generated.
+[72/640] Building CXX object CMakeFiles/teaql_provider_sqlite_schema_tests.dir/tests/provider_sqlite_schema_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/provider_sqlite_schema_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/provider_sqlite/schema.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/provider_sqlite/provider.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[73/640] Building CXX object CMakeFiles/teaql_original_sql_executor_tests.dir/tests/parity/teaql-sql/executor_contracts.cpp.o
+FAILED: [code=1] CMakeFiles/teaql_original_sql_executor_tests.dir/tests/parity/teaql-sql/executor_contracts.cpp.o 
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++  -I/home/philip/githome/teaql-cpp/include --gcc-install-dir=/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0 -g1 -std=gnu++20 -MD -MT CMakeFiles/teaql_original_sql_executor_tests.dir/tests/parity/teaql-sql/executor_contracts.cpp.o -MF CMakeFiles/teaql_original_sql_executor_tests.dir/tests/parity/teaql-sql/executor_contracts.cpp.o.d -o CMakeFiles/teaql_original_sql_executor_tests.dir/tests/parity/teaql-sql/executor_contracts.cpp.o -c /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/executor_contracts.cpp
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/executor_contracts.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/executor.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/executor_contracts.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/executor.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/error.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:267:17: error: no matching function for call to 'find'
+  267 |             if (std::find(result.args.begin(), result.args.end(), item) == result.args.end()) {
+      |                 ^~~~~~~~~
+/home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:280:17: note: in instantiation of function template specialization 'teaql::Expr::logical_range(Memory, Kind, std::vector<teaql::Expr, std::pmr::polymorphic_allocator<teaql::Expr>> &)::(lambda)::operator()<teaql::Expr &>' requested here
+  280 |                 retain_unique(std::forward<decltype(item)>(item));
+      |                 ^
+/home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:225:16: note: in instantiation of function template specialization 'teaql::Expr::logical_range<std::vector<teaql::Expr, std::pmr::polymorphic_allocator<teaql::Expr>> &>' requested here
+  225 |         return logical_range(owner, Kind::And, std::forward<Parts>(parts));
+      |                ^
+/home/philip/githome/teaql-cpp/tests/parity/teaql-sql/executor_contracts.cpp:335:24: note: in instantiation of function template specialization 'teaql::Expr::all_of<std::vector<teaql::Expr, std::pmr::polymorphic_allocator<teaql::Expr>> &>' requested here
+  335 |     query.filter(Expr::all_of(owner, filters)).order_desc("id").limit(3).partition_by("owner_id");
+      |                        ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0/../../../gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/bits/streambuf_iterator.h:437:5: note: candidate template ignored: could not match 'istreambuf_iterator' against '__gnu_cxx::__normal_iterator'
+  437 |     find(istreambuf_iterator<_CharT> __first,
+      |     ^
+1 warning and 1 error generated.
+[74/640] Building CXX object CMakeFiles/teaql_original_sql_compiler_tests.dir/tests/parity/teaql-sql/compiler.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/compiler.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[75/640] Building CXX object CMakeFiles/teaql_original_query_execution_tests.dir/tests/parity/teaql-sql/execution_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/execution_tests.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/execution_fixture.hpp:4:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/executor.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[76/640] Building CXX object CMakeFiles/teaql_original_diagnostic_stream_tests.dir/tests/parity/teaql-sql/diagnostic_stream.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/diagnostic_stream.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/stream_execution.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/query_execution.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[77/640] Building CXX object CMakeFiles/teaql_original_business_clock_tests.dir/tests/parity/teaql-runtime/business_clock.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-runtime/business_clock.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[78/640] Building CXX object CMakeFiles/teaql_original_mutation_execution_tests.dir/tests/parity/teaql-sql/mutation_execution_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/mutation_execution_tests.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/parity/teaql-sql/execution_fixture.hpp:4:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/executor.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+ninja: build stopped: subcommand failed.

@@ -1,0 +1,13 @@
+{
+  "compiler": "OpenWrt25.12.5/GCC14.3.0/musl",
+  "passed": 387,
+  "total": 387,
+  "seconds": 90.87,
+  "compiled_objects": 427,
+  "examples": "2/2 live original matches",
+  "compiled_layers": "independent; no native SQLite calls in runtime",
+  "chain_exit": 0,
+  "pre_post": "no work after metadata regeneration",
+  "leak_scanning": "not applicable",
+  "physical_device": "deferred; QEMU only"
+}

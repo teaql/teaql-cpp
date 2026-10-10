@@ -1,0 +1,89 @@
+{
+  "cpp_commit": "04fe05bc07c899e089bcbfd7550b5449639fad91",
+  "cpp_tag": "0.0.1",
+  "rust_commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "headers": 211,
+  "header_lines": 37771,
+  "sources": 102,
+  "source_lines": 26698,
+  "tools": {
+    "cmake": {
+      "path": "/usr/bin/cmake",
+      "version": "cmake version 3.22.1"
+    },
+    "ninja": {
+      "path": "/usr/bin/ninja",
+      "version": "1.10.1"
+    },
+    "g++": {
+      "path": "/usr/bin/g++",
+      "version": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0"
+    },
+    "clang++": {
+      "path": "/home/philip/.local/bin/clang++",
+      "version": "clang version 21.0.0 (https://github.com/swiftlang/llvm-project.git 82cdc19fa54d566969527b56f587ea8ea30bef51)"
+    },
+    "clang-scan-deps": {
+      "path": null,
+      "version": null
+    }
+  },
+  "mips_compiler": "OpenWrt GCC13.3.0 musl; accepted header build",
+  "textual_include_cycles": [
+    [
+      "teaql/runtime/detail/base_mutation.hpp",
+      "teaql/runtime/detail/base_query.hpp",
+      "teaql/runtime/detail/context_mutation.hpp",
+      "teaql/runtime/detail/context_query.hpp",
+      "teaql/runtime/detail/data_service.hpp"
+    ]
+  ],
+  "fanout": {
+    "teaql/core.hpp": {
+      "project_headers": 53,
+      "project_header_lines": 9555
+    },
+    "teaql/data_service.hpp": {
+      "project_headers": 43,
+      "project_header_lines": 8050
+    },
+    "teaql/sql.hpp": {
+      "project_headers": 53,
+      "project_header_lines": 10157
+    },
+    "teaql/runtime.hpp": {
+      "project_headers": 150,
+      "project_header_lines": 28518
+    },
+    "teaql/runtime/context.hpp": {
+      "project_headers": 64,
+      "project_header_lines": 12320
+    },
+    "teaql/runtime/data_service.hpp": {
+      "project_headers": 112,
+      "project_header_lines": 23383
+    }
+  },
+  "scan_limit": "Literal project #include graph, not preprocessing or semantic/module ownership analysis; standard/system headers excluded.",
+  "probe": {
+    "kind": "isolated time-type facade; manual Clang build, no CMake integration",
+    "compiler": "Clang21.0.0",
+    "standard_library": "system libstdc++",
+    "module_build_exit": 0,
+    "consumer_link_exit": 0,
+    "consumer_run_exit": 0,
+    "unchanged_libraries": [
+      "build-root-integration/libteaql_core.a",
+      "build-root-integration/libteaql_memory.a"
+    ],
+    "exercised": [
+      "Date::from_ymd",
+      "Date::epoch_days",
+      "Timestamp::from_u64",
+      "Timestamp::as_millis",
+      "std::hash<Timestamp>"
+    ],
+    "negative_control": "BMI without -pthread rejected by consumer compiled with -pthread; corrected consistent configuration succeeds",
+    "limits": "Does not establish whole-module, template/runtime, mixed-TU, CMake/scanner, sanitizer or MIPS module support."
+  }
+}

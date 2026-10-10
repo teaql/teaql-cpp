@@ -1,5 +1,5 @@
-#include <teaql/runtime/detail/relation_enhancement.hpp>
-#include "../relation_hydration_fixture.hpp"
+#include <teaql/runtime/detail/data_service/relation_enhancement.hpp>
+#include "../support/relation_hydration_fixture.hpp"
 #include "fixture_sql.hpp"
 #include <teaql/core/detail/debug.hpp>
 #include <iostream>

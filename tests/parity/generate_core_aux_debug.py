@@ -14,7 +14,7 @@ def main():
     parser.add_argument('--rust', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     cases = []
     values = [None, False, True, 0, -1, 1.0, -0.0, '', 'private\n雪\u0000', [], {},
               {'items': [None, 1.0, '雪']}]

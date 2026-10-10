@@ -1,0 +1,12 @@
+error: POSIX thread support was disabled in precompiled file '/tmp/teaql-modules-assessment/time.pcm' but is currently enabled
+error: module file '/tmp/teaql-modules-assessment/time.pcm' cannot be loaded due to a configuration mismatch with the current compilation [-Wmodule-file-config-mismatch]
+/tmp/teaql-modules-assessment/consumer.cpp:4:17: error: use of undeclared identifier 'teaql'
+    4 |     auto time = teaql::Timestamp::from_u64(42);
+      |                 ^
+/tmp/teaql-modules-assessment/consumer.cpp:5:17: error: use of undeclared identifier 'teaql'
+    5 |     auto date = teaql::Date::from_ymd(1970, 1, 1);
+      |                 ^
+/tmp/teaql-modules-assessment/consumer.cpp:6:27: error: use of undeclared identifier 'teaql'
+    6 |     auto hash = std::hash<teaql::Timestamp>{}(time);
+      |                           ^
+5 errors generated.

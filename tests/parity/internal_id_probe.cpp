@@ -1,4 +1,4 @@
-#include "../internal_id_fixture.hpp"
+#include "../support/internal_id_fixture.hpp"
 #include <teaql/core/detail/model_json.hpp>
 #include "fixture_value.hpp"
 #include <chrono>

@@ -4,7 +4,7 @@ Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 All original source bodies, helper models, JSON inputs and assertions in core
 221-line dynamic_search.rs, SQLite provider 142-line dynamic_search.rs and
 203-line guarded_mutation.rs were compared with their direct C++ ports.
-See [the complete review](../../../docs/dynamic-search-source-acceptance.md).
+See [the complete review](../../../docs/dynamic_search_source_acceptance.md).
 
 Fresh unchanged locked/offline original integration tests pass core8/8 and
 provider1/1 plus1/1. The core subprocess privacy parent and child remain distinct;

@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--rust', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     seconds = [-(1 << 63), -(1 << 63) + 1, -10000000000, -9223372037, -1, 0, 1,
                9223372036, 10000000000, (1 << 63) - 2, (1 << 63) - 1]
     durations = [0, 1, 2, (1 << 63) - 1, 1 << 63, (1 << 64) - 2, (1 << 64) - 1]

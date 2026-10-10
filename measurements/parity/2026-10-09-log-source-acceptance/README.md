@@ -4,7 +4,7 @@ Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 
 The complete production bodies of Context logging (391 lines), privacy (410)
 and formatter/manager (566) were reconciled with their C++ responsibilities.
-See [the API review](../../../docs/runtime-log-api-contract.md) for public
+See [the API review](../../../docs/runtime_log_api_contract.md) for public
 surfaces, defaults, traits, diagnostics, provenance, ordering and ownership.
 [results.json](results.json) records counts and the independent full-regression
 checkpoint. No production changes followed that successful 375/375 run.

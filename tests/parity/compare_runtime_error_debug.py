@@ -44,7 +44,7 @@ def main(corpus_name='runtime_error_debug_cases.json.gz', label='Runtime error a
     key = 'expected_32' if bits == 32 else 'expected'
     expected = [case.get(key, case['expected']) for case in data['cases']]
     if args.rust:
-        subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
         if not same(expected, observe(args.rust, target_inputs(inputs, bits))):
             raise RuntimeError('Committed target-width observations differ from live Rust methods')
     actual = observe(args.cpp, inputs, prefix)

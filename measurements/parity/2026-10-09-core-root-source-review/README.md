@@ -3,7 +3,7 @@
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 The complete 984-line core/src/lib.rs, all26 embedded bodies/helpers/inputs/
 assertions, six public namespaces and69 named root exports are reconciled in
-[the full review](../../../docs/core-root-source-acceptance.md).
+[the full review](../../../docs/core_root_source_acceptance.md).
 Handwritten models retain original derive output behavior; no generator change.
 
 Fresh unchanged locked/offline core library tests pass65/65, including all26

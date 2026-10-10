@@ -1,0 +1,3 @@
+# Preserve exact compiler output and CTest JSON snapshots in measurement artifacts.
+measurements/**/*.txt whitespace=-blank-at-eol,-blank-at-eof
+measurements/**/*.json whitespace=-blank-at-eol,-blank-at-eof

@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--rust', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     values = [dict(kind='null'), dict(kind='bool', value=False), dict(kind='bool', value=True),
               dict(kind='i64', value=str(-(1 << 63))), dict(kind='u64', value=str((1 << 64) - 1)),
               dict(kind='f64', value='-0'), dict(kind='f64', value='NaN'),

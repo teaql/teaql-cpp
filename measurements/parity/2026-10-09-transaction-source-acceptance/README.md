@@ -2,7 +2,7 @@
 
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 The complete 212-line `context/transaction.rs` production source is reviewed in
-[the transaction contract](../../../docs/transaction-scope-api-contract.md).
+[the transaction contract](../../../docs/transaction_scope_api_contract.md).
 This directory records current installed consumers after the Context layout
 changes, rather than earlier staged standalone executables.
 

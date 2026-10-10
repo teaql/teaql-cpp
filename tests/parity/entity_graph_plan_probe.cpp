@@ -1,4 +1,4 @@
-#include "../entity_graph_plan_fixture.hpp"
+#include "../support/entity_graph_plan_fixture.hpp"
 #include <teaql/runtime/module.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/core/detail/debug.hpp>

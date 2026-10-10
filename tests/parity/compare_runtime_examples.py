@@ -20,7 +20,7 @@ def main():
         raise RuntimeError("Examples belong to a different baseline")
     expected = [case["expected"] for case in corpus["cases"]]
     if args.rust:
-        subprocess.run(["python3", str(root / "scripts/verify-upstream.py")], check=True)
+        subprocess.run(["python3", str(root / "scripts/verify_upstream.py")], check=True)
         if not same(expected, observe(args.rust, [case["input"] for case in corpus["cases"]])):
             raise RuntimeError("Recorded examples differ from live original Rust calls")
         provenance = json.loads(Path(__file__).with_name("runtime_examples_provenance.json").read_text())

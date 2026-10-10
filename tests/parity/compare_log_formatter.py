@@ -25,7 +25,7 @@ def main():
     if corpus['baseline'] != json.loads((root / 'upstream.lock.json').read_text())['commit']:
         raise RuntimeError('Formatter observations belong to a different baseline')
     if args.rust:
-        subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True, cwd=root)
+        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True, cwd=root)
     probes = {'audit': ('teaql_audit_event_probe', 'audit_event_oracle'),
               'sql': ('teaql_runtime_log_probe', 'runtime_log_oracle'),
               'config': ('teaql_log_formatter_probe', 'log_formatter_oracle')}

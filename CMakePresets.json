@@ -1,0 +1,101 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 4,
+    "minor": 4,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "native",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build_native_current",
+      "toolchainFile": "${sourceDir}/scripts/toolchains/clang_native.cmake",
+      "cacheVariables": {
+        "CMAKE_MAKE_PROGRAM": "${sourceDir}/.tools/toolchains/ninja-1.13.2/ninja",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g1",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "sanitize",
+      "inherits": "native",
+      "binaryDir": "${sourceDir}/build_sanitize_current",
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "--gcc-install-dir=${sourceDir}/.tools/toolchains/gcc-16.2.0/lib/gcc/x86_64-conda-linux-gnu/16.2.0 -fsanitize=address,undefined -fno-omit-frame-pointer",
+        "CMAKE_EXE_LINKER_FLAGS": "-Wl,-rpath,${sourceDir}/.tools/toolchains/gcc-16.2.0/lib -fsanitize=address,undefined"
+      }
+    },
+    {
+      "name": "mips",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build_mips_current",
+      "toolchainFile": "${sourceDir}/scripts/toolchains/openwrt_wndr4300.cmake",
+      "cacheVariables": {
+        "CMAKE_MAKE_PROGRAM": "${sourceDir}/.tools/toolchains/ninja-1.13.2/ninja",
+        "CMAKE_BUILD_TYPE": "MinSizeRel",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "TEAQL_OPENWRT_TOOLCHAIN_DIR": "${sourceDir}/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl",
+        "SQLite3_INCLUDE_DIR": "${sourceDir}/.tools/toolchains/sqlite-3.53.2/include",
+        "SQLite3_LIBRARY": "${sourceDir}/.tools/toolchains/sqlite-3.53.2/lib/libsqlite3.a"
+      },
+      "environment": {
+        "STAGING_DIR": "${sourceDir}/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "native",
+      "configurePreset": "native",
+      "jobs": 8
+    },
+    {
+      "name": "sanitize",
+      "configurePreset": "sanitize",
+      "jobs": 4
+    },
+    {
+      "name": "mips",
+      "configurePreset": "mips",
+      "jobs": 4
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "native",
+      "configurePreset": "native",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "jobs": 4
+      }
+    },
+    {
+      "name": "sanitize",
+      "configurePreset": "sanitize",
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=0",
+        "UBSAN_OPTIONS": "halt_on_error=1"
+      },
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "jobs": 4
+      }
+    },
+    {
+      "name": "mips",
+      "configurePreset": "mips",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "jobs": 4
+      }
+    }
+  ]
+}

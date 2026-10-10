@@ -63,7 +63,7 @@ def main():
     parser.add_argument('--oracle', type=Path, default=ROOT/'tests/parity/graph_fix_oracle.rs')
     parser.add_argument('--generated-dir', type=Path, default=ROOT/'build/rust-graph-fix-original')
     args = parser.parse_args()
-    subprocess.run(['python3',str(ROOT/'scripts/verify-upstream.py')],check=True)
+    subprocess.run(['python3',str(ROOT/'scripts/verify_upstream.py')],check=True)
     lock=json.loads((ROOT/'upstream.lock.json').read_text())
     generated=args.generated_dir; source=generated/'original'
     archive=subprocess.check_output(['git','-C',str(ROOT/'.reference/teaql-rs'),'archive',lock['commit']])
@@ -81,13 +81,13 @@ def main():
     exports=source/'teaql-runtime/src/lib.rs'
     exports.write_text(exports.read_text()+'\npub use entity_save::{__teaql_cpp_fix_scope, __teaql_cpp_install_save_hook};\n'+EXTRA_EXPORTS)
     project=generated/'probe'; (project/'src').mkdir(parents=True,exist_ok=True)
-    manifest=(ROOT/'tests/parity/rust-values/Cargo.toml').read_text()
+    manifest=(ROOT/'tests/parity/rust_values/Cargo.toml').read_text()
     manifest=re.sub(r'path = "\.\./\.\./\.\./\.reference/teaql-rs/([^"]+)"',
                     lambda match:'path = '+json.dumps(str(source/match[1])),manifest)
     (project/'Cargo.toml').write_text(manifest)
-    (project/'Cargo.lock').write_bytes((ROOT/'tests/parity/rust-values/Cargo.lock').read_bytes())
+    (project/'Cargo.lock').write_bytes((ROOT/'tests/parity/rust_values/Cargo.lock').read_bytes())
     (project/'src/main.rs').write_bytes(args.oracle.read_bytes())
-    (project/'src/fixture_value.rs').write_bytes((ROOT/'tests/parity/rust-values/src/fixture_value.rs').read_bytes())
+    (project/'src/fixture_value.rs').write_bytes((ROOT/'tests/parity/rust_values/src/fixture_value.rs').read_bytes())
     env=dict(os.environ,CARGO_TARGET_DIR=str(args.target_dir.resolve()))
     subprocess.run(['cargo','build','--locked','--offline','--manifest-path',str(project/'Cargo.toml')],env=env,check=True)
     (generated/'baseline.json').write_text(json.dumps(dict(commit=lock['commit'],context_bridge=CONTEXT_BRIDGE,save_bridge=SAVE_BRIDGE,extra_bridges=EXTRA_BRIDGES,extra_exports=EXTRA_EXPORTS),indent=2)+'\n')

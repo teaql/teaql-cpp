@@ -29,7 +29,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--target-dir', type=Path, default=ROOT / 'build/rust-id-set-target')
     args = parser.parse_args()
-    subprocess.run(['python3', str(ROOT / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(ROOT / 'scripts/verify_upstream.py')], check=True)
     lock = json.loads((ROOT / 'upstream.lock.json').read_text())
     generated = ROOT / 'build/rust-id-set-original'
     source = generated / 'original'
@@ -50,11 +50,11 @@ def main():
     resolved.write_text(resolved.read_text() + BRIDGE)
     project = generated / 'probe'
     (project / 'src').mkdir(parents=True, exist_ok=True)
-    manifest = (ROOT / 'tests/parity/rust-values/Cargo.toml').read_text()
+    manifest = (ROOT / 'tests/parity/rust_values/Cargo.toml').read_text()
     manifest = re.sub(r'path = "\.\./\.\./\.\./\.reference/teaql-rs/([^"]+)"',
                       lambda match: 'path = ' + json.dumps(str(source / match[1])), manifest)
     (project / 'Cargo.toml').write_text(manifest)
-    (project / 'Cargo.lock').write_bytes((ROOT / 'tests/parity/rust-values/Cargo.lock').read_bytes())
+    (project / 'Cargo.lock').write_bytes((ROOT / 'tests/parity/rust_values/Cargo.lock').read_bytes())
     (project / 'src/main.rs').write_bytes((ROOT / 'tests/parity/id_set_page_oracle.rs').read_bytes())
     env = dict(os.environ, CARGO_TARGET_DIR=str(args.target_dir.resolve()))
     subprocess.run(['cargo', 'build', '--locked', '--offline', '--manifest-path', str(project / 'Cargo.toml')],

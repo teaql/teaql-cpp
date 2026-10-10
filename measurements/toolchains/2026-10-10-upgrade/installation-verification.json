@@ -1,0 +1,10 @@
+{
+  "tools_match_lock": true,
+  "installer_idempotent_exit": 0,
+  "native_gcc_and_clang_stdlib_programs_exit": 0,
+  "module_smoke_clang_exit": 0,
+  "module_smoke_gcc_exit": 0,
+  "module_smoke_mips_exit": 0,
+  "toolchains_lock_sha256": "cb872117610ef3606215c9ac92f40382fd21321aedf731249175b8f4ff53c102",
+  "project_validation": "Full builds in progress; installation verification is separate from full project regression."
+}

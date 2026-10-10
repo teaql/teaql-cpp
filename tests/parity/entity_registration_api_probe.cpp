@@ -1,4 +1,4 @@
-#include "../entity_registration_fixture.hpp"
+#include "../support/entity_registration_fixture.hpp"
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/runtime/context.hpp>
 #include <iostream>

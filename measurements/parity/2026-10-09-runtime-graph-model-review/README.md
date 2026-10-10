@@ -18,7 +18,7 @@ Two source runs agree on 128 inputs in nine Debug modes. All four focused
 checks pass on native, ASan/UBSan (leak scanning disabled) and MIPS/QEMU.
 The recorded lifetime contract destroys User and rebinds explicit Global
 copies while default PMR is disabled. Complete consumer validation and retained
-graph/save execution responsibilities remain independent. See the [source review](../../../docs/runtime-graph-save-api-contract.md).
+graph/save execution responsibilities remain independent. See the [source review](../../../docs/runtime_graph_save_api_contract.md).
 
 Physical-router testing remains explicitly deferred. Generator/dependency scope
 is unchanged. No stage completion follows from reviewed fields or earlier tests.

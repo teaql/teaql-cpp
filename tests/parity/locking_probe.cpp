@@ -1,4 +1,4 @@
-#include "../locking_fixture.hpp"
+#include "../support/locking_fixture.hpp"
 #include <teaql/core/detail/model_json.hpp>
 #include <array>
 #include <iostream>

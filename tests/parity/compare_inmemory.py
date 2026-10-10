@@ -38,7 +38,7 @@ def main():
     inputs = [c["input"] for c in cases]
     expected = [c.get("expected_32", c["expected"]) if bits == 32 else c["expected"] for c in cases]
     if args.rust:
-        subprocess.run(["python3", str(root / "scripts/verify-upstream.py")], check=True)
+        subprocess.run(["python3", str(root / "scripts/verify_upstream.py")], check=True)
         # On a 64-bit host, normalize only the source's explicit `as usize`
         # pagination casts before calling the unchanged public Rust engine.
         live = observe(args.rust, [target_input(i, bits) for i in inputs])

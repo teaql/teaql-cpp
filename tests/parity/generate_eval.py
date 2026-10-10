@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--rust', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     states = ['NotLoaded', 'FullyLoaded', {'NotLoaded': None}, {'FullyLoaded': None}]
     for names in [[], ['name'], ['name', 'name', 'company'],
                   ['field'+str(i) for i in range(9)], ['雪', '', 'quote"\\', '\u0000']]:

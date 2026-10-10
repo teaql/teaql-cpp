@@ -10,7 +10,7 @@ the configured cache during regeneration. The SQLite binding test raises SIGILL
 at sqlite3_config's lwx instruction. The same executable passes its native
 contract on 74Kf. The target remains soft float; an emulator model change does
 not introduce a hardware-FPU dependency. The tracked
-[toolchain](../../../scripts/toolchains/openwrt-wndr4300.cmake) preserves explicit
+[toolchain](../../../scripts/toolchains/openwrt_wndr4300.cmake) preserves explicit
 emulator settings and defaults to 74Kf when qemu-mips is available.
 
 Correct emulation exposes independent numeric failures with the existing SQLite

@@ -1,0 +1,23 @@
+{
+  "kind": "isolated time-type facade; manual Clang build, no CMake integration",
+  "compiler": "Clang21.0.0",
+  "standard_library": "system libstdc++",
+  "module_build_exit": 0,
+  "consumer_link_exit": 0,
+  "consumer_run_exit": 0,
+  "unchanged_libraries": [
+    "build-root-integration/libteaql_core.a",
+    "build-root-integration/libteaql_memory.a"
+  ],
+  "exercised": [
+    "Date::from_ymd",
+    "Date::epoch_days",
+    "Timestamp::from_u64",
+    "Timestamp::as_millis",
+    "std::hash<Timestamp>"
+  ],
+  "negative_control": "BMI without -pthread rejected by consumer compiled with -pthread; corrected consistent configuration succeeds",
+  "limits": "Does not establish whole-module, template/runtime, mixed-TU, CMake/scanner, sanitizer or MIPS module support.",
+  "formatted_probe_revalidation": "All three compiler/link steps and consumer execution repeated after clang-format18.1.8, exit 0.",
+  "production_unchanged": true
+}

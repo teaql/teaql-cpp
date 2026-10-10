@@ -2,7 +2,7 @@
 
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 The complete production body is reviewed in
-[the provider contract](../../../docs/sqlite-provider-api-contract.md).
+[the provider contract](../../../docs/sqlite_provider_api_contract.md).
 
 The current native suite passes 315/315 in 73.69 seconds. Fresh 28-target builds
 precede 32/32 provider checks under ASan/UBSan (32.73 seconds, leak scanning

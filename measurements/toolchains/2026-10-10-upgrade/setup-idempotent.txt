@@ -1,0 +1,6 @@
+clang++: 23.1.3 (/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++)
+clang-scan-deps: 23.1.3 (/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang-scan-deps)
+g++: 16.2.0 (/home/philip/githome/teaql-cpp/.tools/toolchains/gcc-16.2.0/bin/g++)
+cmake: 4.4.4 (/home/philip/githome/teaql-cpp/.tools/toolchains/cmake-4.4.4/bin/cmake)
+ninja: 1.13.2 (/home/philip/githome/teaql-cpp/.tools/toolchains/ninja-1.13.2/ninja)
+mips-g++: 14.3.0 (/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/bin/mips-openwrt-linux-musl-g++)

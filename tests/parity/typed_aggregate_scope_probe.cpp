@@ -1,6 +1,6 @@
-#include <teaql/runtime/detail/typed_aggregate.hpp>
+#include <teaql/runtime/detail/data_service/typed_aggregate.hpp>
 #include <teaql/core/detail/model_json.hpp>
-#include "../relation_hydration_fixture.hpp"
+#include "../support/relation_hydration_fixture.hpp"
 #include "fixture_value.hpp"
 #include <iostream>
 

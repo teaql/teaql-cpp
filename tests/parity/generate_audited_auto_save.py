@@ -33,7 +33,7 @@ def inputs():
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--rust',required=True);args=parser.parse_args()
-    root=Path(__file__).resolve().parents[2];subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    root=Path(__file__).resolve().parents[2];subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     cases=inputs();outputs=observe(args.rust,cases);lock=json.loads((root/'upstream.lock.json').read_text())
     corpus=dict(baseline=lock['commit'],note='Direct unmodified public AuditedSaveExt and save_audited_ledger_entity calls with handwritten models/SPIs. Only the compiler-specific missing-saver type suffix is normalized; message prefix, failure ordering and all other observations remain exact.',cases=[dict(input=i,expected=o)for i,o in zip(cases,outputs)])
     Path(__file__).with_name('audited_auto_save_cases.json').write_text(json.dumps(corpus,indent=2)+'\n');print(f'Recorded {len(cases)} automatic audited observations')

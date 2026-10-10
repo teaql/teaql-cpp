@@ -33,7 +33,7 @@ def inputs():
 def main():
     parser=argparse.ArgumentParser();parser.add_argument("--rust",required=True);args=parser.parse_args()
     root=Path(__file__).resolve().parents[2]
-    subprocess.run(["python3",str(root/"scripts/verify-upstream.py")],check=True)
+    subprocess.run(["python3",str(root/"scripts/verify_upstream.py")],check=True)
     cases=inputs();outputs=observe(args.rust,cases)
     lock=json.loads((root/"upstream.lock.json").read_text())
     corpus=dict(baseline=lock["commit"],note="Direct unchanged public UserContext local/remote methods. Provider fixtures only. Opaque owner tokens are normalized by first-seen identity across providers, preserving equality, replacement and recreation. Rust local keys receive a unique script prefix to isolate process-static entries; C++ uses an explicit Global-owned application directory.",cases=[dict(input=i,expected=o)for i,o in zip(cases,outputs)])

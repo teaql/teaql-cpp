@@ -12,7 +12,7 @@ def main():
     parser.add_argument('--rust', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     ticks = [-1000000001, -1000000, -1001, -1000, -999, -1, 0, 1, 999, 1000,
              1001, 999999, 1000000, 1000000001]
     bounds = {'seconds': [-8000000000000, 8000000000000],

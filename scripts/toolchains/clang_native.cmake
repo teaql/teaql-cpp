@@ -1,0 +1,11 @@
+get_filename_component(TEAQL_TOOLCHAINS_ROOT
+    "${CMAKE_CURRENT_LIST_DIR}/../../.tools/toolchains" ABSOLUTE)
+set(TEAQL_LLVM_ROOT "${TEAQL_TOOLCHAINS_ROOT}/llvm-23.1.3")
+set(TEAQL_GCC_ROOT "${TEAQL_TOOLCHAINS_ROOT}/gcc-16.2.0")
+set(CMAKE_CXX_COMPILER "${TEAQL_LLVM_ROOT}/bin/clang++")
+set(CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS "${TEAQL_LLVM_ROOT}/bin/clang-scan-deps")
+set(CMAKE_CXX_FLAGS_INIT
+    "--gcc-install-dir=${TEAQL_GCC_ROOT}/lib/gcc/x86_64-conda-linux-gnu/16.2.0")
+set(CMAKE_EXE_LINKER_FLAGS_INIT
+    "-Wl,-rpath,${TEAQL_GCC_ROOT}/lib")
+set(CMAKE_SHARED_LINKER_FLAGS_INIT "${CMAKE_EXE_LINKER_FLAGS_INIT}")

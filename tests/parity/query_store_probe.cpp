@@ -1,4 +1,4 @@
-#include "../query_store_fixture.hpp"
+#include "../support/query_store_fixture.hpp"
 #include "fixture_value.hpp"
 #include <teaql/core/detail/debug.hpp>
 #include <teaql/core/detail/model_json.hpp>

@@ -1,0 +1,7 @@
+Test project /home/philip/githome/teaql-cpp/build-native-current
+    Start 2: runtime_layer_boundaries
+1/1 Test #2: runtime_layer_boundaries .........   Passed    0.90 sec
+
+100% tests passed out of 1
+
+Total Test time (real) =   0.92 sec

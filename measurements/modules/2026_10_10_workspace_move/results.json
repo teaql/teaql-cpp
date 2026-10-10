@@ -1,0 +1,42 @@
+{
+  "baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "cpp_checkpoint": "04fe05bc07c899e089bcbfd7550b5449639fad91",
+  "stage": "M1a",
+  "moved_files": 776,
+  "production_files": 315,
+  "production_non_include_contents": "exact checkpoint byte match for all 315 files after include-line removal",
+  "rust_inventory": "unchanged",
+  "source_test_dispositions": {
+    "covered_in_scope": 441,
+    "excluded_backend": 5,
+    "excluded_external": 5
+  },
+  "module_interfaces": "not implemented in this directory move",
+  "native_build": "passed",
+  "native_tests": {
+    "passed": 388,
+    "total": 388,
+    "exit_code": 0,
+    "seconds": 71.3
+  },
+  "asan_ubsan": "not repeated: no memory/lifetime/cleanup implementation change",
+  "mips_qemu": "not repeated: no target toolchain/architecture change",
+  "test_dependencies": "explicit Context/provider/legacy fixture dependencies; production layer graph preserved",
+  "build_repairs": [
+    "SQL/core fixture Context dependencies were hidden by the old shared include directory.",
+    "Runtime log fixture intentionally compares current and legacy log-entry types and requires the compatibility include."
+  ],
+  "native_build_exit_code": 0,
+  "active_compiled_dependency_records": 427,
+  "core_contracts_placed_by_source_map": 23,
+  "formatter": {
+    "version": "18.1.8",
+    "files": 682,
+    "check": "passed"
+  },
+  "source_export_audit": "passed",
+  "path_verification": "passed",
+  "source_test_registration": "451 reviewed dispositions validated against 388 registered CTest contracts",
+  "generated_data_fixture_bytes": "unchanged for all 9 moved generated/data fixtures",
+  "final_native_rebuild": "no work to do"
+}

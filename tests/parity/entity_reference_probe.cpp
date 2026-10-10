@@ -1,4 +1,4 @@
-#include "../entity_reference_fixture.hpp"
+#include "../support/entity_reference_fixture.hpp"
 #include "fixture_value.hpp"
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/runtime/detail/reference_crypto.hpp>

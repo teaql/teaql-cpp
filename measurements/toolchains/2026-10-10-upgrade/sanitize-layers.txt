@@ -1,0 +1,2 @@
+Verified kernel layers retain their independent dependencies
+Verified compiled runtime has no SQLite C API calls

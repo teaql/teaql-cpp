@@ -48,7 +48,7 @@ def cases():
         add('Context observations','observations',[dict(op='read'),dict(op='continuous',key=plan,cursor=cursor_id),dict(op='ids',key=plan,count=count),dict(op='continuous',key='replacement',cursor=None),dict(op='ids',key='replacement',count=None)])
     return result
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--rust',required=True);args=p.parse_args();root=Path(__file__).resolve().parents[2];subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    p=argparse.ArgumentParser();p.add_argument('--rust',required=True);args=p.parse_args();root=Path(__file__).resolve().parents[2];subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     data=cases();outputs=observe(args.rust,[c['input'] for c in data]);assert len(outputs)==len(data)
     for c,out in zip(data,outputs):c['expected']=out
     baseline=json.loads((root/'upstream.lock.json').read_text())['commit'];Path(__file__).with_name('query_store_cases.json').write_text('{"baseline":'+json.dumps(baseline)+',"cases":[\n'+',\n'.join(json.dumps(c,separators=(',',':')) for c in data)+'\n]}\n');print(f'Observed {len(data)} locked query-store cases')

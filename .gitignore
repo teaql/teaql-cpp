@@ -42,6 +42,7 @@
 build/
 Build/
 build-*/
+build_*/
 
 # CMake generated files
 CMakeFiles/
@@ -72,6 +73,8 @@ Testing/
 
 # Optional Rust parity oracle build products
 tests/parity/rust-values/target/
+tests/parity/rust_values/target/
+tests/parity/rust_decimal_pointer/target/
 __pycache__/
 
 # Repository-local development tools

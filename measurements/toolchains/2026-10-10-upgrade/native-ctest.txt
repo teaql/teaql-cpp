@@ -1,0 +1,781 @@
+Test project /home/philip/githome/teaql-cpp/build-native-current
+        Start 132: original_runtime_business_permutation_contracts
+        Start 366: smart_list_api_rust_parity
+        Start 368: compact_row_api_rust_parity
+        Start 322: core_aux_debug_rust_parity
+  1/388 Test #322: core_aux_debug_rust_parity ..............................   Passed   25.47 sec
+        Start 152: provider_sqlite_unicode_contracts
+  2/388 Test #368: compact_row_api_rust_parity .............................   Passed   32.82 sec
+        Start 232: system_time_error_scope_rust_parity
+  3/388 Test #366: smart_list_api_rust_parity ..............................   Passed   47.39 sec
+        Start 344: request_api_rust_parity
+  4/388 Test #152: provider_sqlite_unicode_contracts .......................   Passed   25.26 sec
+        Start 320: decimal_extended_rust_parity
+  5/388 Test #232: system_time_error_scope_rust_parity .....................   Passed   23.00 sec
+        Start  40: entity_reference_rust_parity
+  6/388 Test #320: decimal_extended_rust_parity ............................   Passed   12.91 sec
+        Start 277: runtime_graph_rust_parity
+  7/388 Test #344: request_api_rust_parity .................................   Passed   17.46 sec
+        Start 108: i18n_debug_scope_rust_parity
+  8/388 Test  #40: entity_reference_rust_parity ............................   Passed   12.87 sec
+        Start 299: sqlite_native_diagnostics_rust_parity
+  9/388 Test #277: runtime_graph_rust_parity ...............................   Passed   11.74 sec
+        Start 276: entity_runtime_rust_parity
+ 10/388 Test #108: i18n_debug_scope_rust_parity ............................   Passed   10.64 sec
+        Start 174: runtime_graph_model_rust_parity
+ 11/388 Test #132: original_runtime_business_permutation_contracts .........   Passed   78.92 sec
+        Start 265: id_set_build_rust_parity
+ 12/388 Test #299: sqlite_native_diagnostics_rust_parity ...................   Passed   10.85 sec
+        Start  67: transaction_scope_rust_parity
+ 13/388 Test #174: runtime_graph_model_rust_parity .........................   Passed    7.80 sec
+        Start 372: query_api_rust_parity
+ 14/388 Test #276: entity_runtime_rust_parity ..............................   Passed   10.39 sec
+        Start 348: query_debug_rust_parity
+ 15/388 Test #265: id_set_build_rust_parity ................................   Passed    7.62 sec
+        Start 377: generated_support_rust_parity
+ 16/388 Test  #67: transaction_scope_rust_parity ...........................   Passed    7.80 sec
+        Start 318: sql_model_api_rust_parity
+ 17/388 Test #372: query_api_rust_parity ...................................   Passed    7.66 sec
+        Start 317: data_service_model_rust_parity
+ 18/388 Test #377: generated_support_rust_parity ...........................   Passed    6.90 sec
+        Start 296: sqlite_decoding_rust_parity
+ 19/388 Test #348: query_debug_rust_parity .................................   Passed    7.68 sec
+        Start 328: decimal_wire_format_rust_parity
+ 20/388 Test #318: sql_model_api_rust_parity ...............................   Passed    6.69 sec
+        Start  69: audited_auto_save_rust_parity
+ 21/388 Test #317: data_service_model_rust_parity ..........................   Passed    6.40 sec
+        Start 325: decimal_numeric_rust_parity
+ 22/388 Test #328: decimal_wire_format_rust_parity .........................   Passed    5.52 sec
+        Start  99: save_preparation_rust_parity
+ 23/388 Test #296: sqlite_decoding_rust_parity .............................   Passed    5.59 sec
+        Start 350: meta_api_rust_parity
+ 24/388 Test  #69: audited_auto_save_rust_parity ...........................   Passed    5.41 sec
+        Start  65: log_model_rust_parity
+ 25/388 Test #325: decimal_numeric_rust_parity .............................   Passed    4.94 sec
+        Start  89: runtime_mutation_rust_parity
+ 26/388 Test  #65: log_model_rust_parity ...................................   Passed    4.58 sec
+        Start 340: core_graph_api_rust_parity
+ 27/388 Test  #99: save_preparation_rust_parity ............................   Passed    5.11 sec
+        Start  43: inmemory_rust_parity
+ 28/388 Test #350: meta_api_rust_parity ....................................   Passed    5.10 sec
+        Start 264: query_keys_rust_parity
+ 29/388 Test  #89: runtime_mutation_rust_parity ............................   Passed    4.41 sec
+        Start  55: event_model_rust_parity
+ 30/388 Test  #43: inmemory_rust_parity ....................................   Passed    4.13 sec
+        Start  80: graph_node_command_rust_parity
+ 31/388 Test #340: core_graph_api_rust_parity ..............................   Passed    4.25 sec
+        Start  41: reference_crypto_nist_contracts
+ 32/388 Test #264: query_keys_rust_parity ..................................   Passed    4.17 sec
+        Start  73: graph_saver_rust_parity
+ 33/388 Test  #55: event_model_rust_parity .................................   Passed    3.91 sec
+        Start 234: data_service_model_scope_rust_parity
+ 34/388 Test  #73: graph_saver_rust_parity .................................   Passed    3.69 sec
+        Start  36: round_trip_reference_rust_parity
+ 35/388 Test  #80: graph_node_command_rust_parity ..........................   Passed    4.00 sec
+        Start  78: recursive_graph_write_rust_parity
+ 36/388 Test  #41: reference_crypto_nist_contracts .........................   Passed    4.19 sec
+        Start 327: decimal_foundation_rust_parity
+ 37/388 Test #234: data_service_model_scope_rust_parity ....................   Passed    3.79 sec
+        Start  59: relation_model_rust_parity
+ 38/388 Test  #78: recursive_graph_write_rust_parity .......................   Passed    3.38 sec
+        Start 338: presentation_api_rust_parity
+ 39/388 Test  #36: round_trip_reference_rust_parity ........................   Passed    3.71 sec
+        Start 128: original_runtime_incremental_ledger_contracts
+ 40/388 Test #327: decimal_foundation_rust_parity ..........................   Passed    3.53 sec
+        Start 311: sql_mutation_rust_parity
+ 41/388 Test  #59: relation_model_rust_parity ..............................   Passed    3.49 sec
+        Start 288: runtime_business_id_rust_parity
+ 42/388 Test #338: presentation_api_rust_parity ............................   Passed    3.20 sec
+        Start 268: relation_hydration_rust_parity
+ 43/388 Test #128: original_runtime_incremental_ledger_contracts ...........   Passed    3.48 sec
+        Start  57: check_model_rust_parity
+ 44/388 Test #311: sql_mutation_rust_parity ................................   Passed    3.35 sec
+        Start 324: decimal_parsing_rust_parity
+ 45/388 Test #288: runtime_business_id_rust_parity .........................   Passed    3.08 sec
+        Start 283: runtime_log_rust_parity
+ 46/388 Test #268: relation_hydration_rust_parity ..........................   Passed    2.90 sec
+        Start  82: graph_save_adapter_rust_parity
+ 47/388 Test  #57: check_model_rust_parity .................................   Passed    2.56 sec
+        Start  94: policy_plan_rust_parity
+ 48/388 Test #324: decimal_parsing_rust_parity .............................   Passed    2.72 sec
+        Start 346: mutation_debug_rust_parity
+ 49/388 Test #283: runtime_log_rust_parity .................................   Passed    2.71 sec
+        Start 304: sql_transaction_rust_parity
+ 50/388 Test  #94: policy_plan_rust_parity .................................   Passed    2.67 sec
+        Start 356: eval_rust_parity
+ 51/388 Test  #82: graph_save_adapter_rust_parity ..........................   Passed    2.73 sec
+        Start 313: sql_dialect_rust_parity
+ 52/388 Test #346: mutation_debug_rust_parity ..............................   Passed    2.56 sec
+        Start 281: log_manager_rust_parity
+ 53/388 Test #304: sql_transaction_rust_parity .............................   Passed    2.68 sec
+        Start  75: ledger_execution_rust_parity
+ 54/388 Test #356: eval_rust_parity ........................................   Passed    2.54 sec
+        Start 260: provider_sqlite_schema_rust_parity
+ 55/388 Test #313: sql_dialect_rust_parity .................................   Passed    2.63 sec
+        Start 305: sql_execution_rust_parity
+ 56/388 Test #281: log_manager_rust_parity .................................   Passed    2.48 sec
+        Start  70: audited_save_rust_parity
+ 57/388 Test  #75: ledger_execution_rust_parity ............................   Passed    2.24 sec
+        Start 308: sql_query_rust_parity
+ 58/388 Test #260: provider_sqlite_schema_rust_parity ......................   Passed    2.46 sec
+        Start 295: sqlite_provider_transport_rust_parity
+ 59/388 Test  #70: audited_save_rust_parity ................................   Passed    2.39 sec
+        Start  93: entity_graph_plan_rust_parity
+ 60/388 Test #305: sql_execution_rust_parity ...............................   Passed    2.59 sec
+        Start 197: runtime_error_debug_rust_parity
+ 61/388 Test #308: sql_query_rust_parity ...................................   Passed    2.31 sec
+        Start 298: sqlite_error_model_rust_parity
+ 62/388 Test #295: sqlite_provider_transport_rust_parity ...................   Passed    2.28 sec
+        Start  51: ledger_move_only_rust_parity
+ 63/388 Test  #93: entity_graph_plan_rust_parity ...........................   Passed    2.26 sec
+        Start  53: policy_model_rust_parity
+ 64/388 Test #197: runtime_error_debug_rust_parity .........................   Passed    2.17 sec
+        Start 278: context_event_rust_parity
+ 65/388 Test #298: sqlite_error_model_rust_parity ..........................   Passed    2.06 sec
+        Start  84: ledger_plan_rust_parity
+ 66/388 Test  #53: policy_model_rust_parity ................................   Passed    1.95 sec
+        Start 274: enhanced_entities_rust_parity
+ 67/388 Test  #51: ledger_move_only_rust_parity ............................   Passed    2.03 sec
+        Start 292: sqlite_provider_business_id_rust_parity
+ 68/388 Test #278: context_event_rust_parity ...............................   Passed    1.97 sec
+        Start 310: sql_schema_rust_parity
+ 69/388 Test  #84: ledger_plan_rust_parity .................................   Passed    1.82 sec
+        Start 319: decimal_rust_parity
+ 70/388 Test #274: enhanced_entities_rust_parity ...........................   Passed    1.72 sec
+        Start 109: i18n_rust_parity
+ 71/388 Test #310: sql_schema_rust_parity ..................................   Passed    1.71 sec
+        Start 287: business_service_rust_parity
+ 72/388 Test #292: sqlite_provider_business_id_rust_parity .................   Passed    2.00 sec
+        Start 280: context_logging_rust_parity
+ 73/388 Test #319: decimal_rust_parity .....................................   Passed    1.78 sec
+        Start  85: graph_execution_rust_parity
+ 74/388 Test #287: business_service_rust_parity ............................   Passed    1.65 sec
+        Start 284: audit_event_rust_parity
+ 75/388 Test #109: i18n_rust_parity ........................................   Passed    1.77 sec
+        Start   4: entity_runtime_model_rust_parity
+ 76/388 Test #280: context_logging_rust_parity .............................   Passed    1.82 sec
+        Start 357: mutation_model_api_rust_parity
+ 77/388 Test  #85: graph_execution_rust_parity .............................   Passed    1.79 sec
+        Start 106: checker_rust_parity
+ 78/388 Test #284: audit_event_rust_parity .................................   Passed    1.63 sec
+        Start 293: sqlite_provider_id_rust_parity
+ 79/388 Test   #4: entity_runtime_model_rust_parity ........................   Passed    1.71 sec
+        Start 200: context_model_rust_parity
+ 80/388 Test #357: mutation_model_api_rust_parity ..........................   Passed    1.71 sec
+        Start 303: sql_stream_rust_parity
+ 81/388 Test #106: checker_rust_parity .....................................   Passed    1.59 sec
+        Start 323: decimal_scale_rust_parity
+ 82/388 Test #200: context_model_rust_parity ...............................   Passed    1.44 sec
+        Start  32: reference_model_rust_parity
+ 83/388 Test #293: sqlite_provider_id_rust_parity ..........................   Passed    1.63 sec
+        Start 365: model_debug_rust_parity
+ 84/388 Test #303: sql_stream_rust_parity ..................................   Passed    1.60 sec
+        Start 294: sqlite_provider_transaction_rust_parity
+ 85/388 Test #323: decimal_scale_rust_parity ...............................   Passed    1.49 sec
+        Start 172: graph_repository_rust_parity
+ 86/388 Test #365: model_debug_rust_parity .................................   Passed    1.46 sec
+        Start 289: runtime_registry_rust_parity
+ 87/388 Test  #32: reference_model_rust_parity .............................   Passed    1.57 sec
+        Start 316: system_time_rust_parity
+ 88/388 Test #294: sqlite_provider_transaction_rust_parity .................   Passed    1.34 sec
+        Start 378: purposed_query_debug_rust_parity
+ 89/388 Test #172: graph_repository_rust_parity ............................   Passed    1.29 sec
+        Start 267: relation_enhancement_rust_parity
+ 90/388 Test #289: runtime_registry_rust_parity ............................   Passed    1.39 sec
+        Start 282: log_formatter_rust_parity
+ 91/388 Test #316: system_time_rust_parity .................................   Passed    1.38 sec
+        Start 145: original_runtime_pagination_contracts
+ 92/388 Test #378: purposed_query_debug_rust_parity ........................   Passed    1.20 sec
+        Start 263: relation_execution_rust_parity
+ 93/388 Test #267: relation_enhancement_rust_parity ........................   Passed    1.18 sec
+        Start 231: system_time_arithmetic_scope_rust_parity
+ 94/388 Test #145: original_runtime_pagination_contracts ...................   Passed    1.22 sec
+        Start 297: sqlite_bindings_rust_parity
+ 95/388 Test #263: relation_execution_rust_parity ..........................   Passed    1.14 sec
+        Start 375: safe_expression_api_rust_parity
+ 96/388 Test #282: log_formatter_rust_parity ...............................   Passed    1.28 sec
+        Start 315: sql_log_rust_parity
+ 97/388 Test #231: system_time_arithmetic_scope_rust_parity ................   Passed    1.06 sec
+        Start 291: runtime_context_rust_parity
+ 98/388 Test #375: safe_expression_api_rust_parity .........................   Passed    1.01 sec
+        Start 290: runtime_check_rust_parity
+ 99/388 Test #297: sqlite_bindings_rust_parity .............................   Passed    1.11 sec
+        Start 262: context_query_rust_parity
+100/388 Test #315: sql_log_rust_parity .....................................   Passed    1.10 sec
+        Start 353: value_api_rust_parity
+101/388 Test #291: runtime_context_rust_parity .............................   Passed    1.07 sec
+        Start 254: entity_debug_rust_parity
+102/388 Test #290: runtime_check_rust_parity ...............................   Passed    1.06 sec
+        Start 101: graph_fix_rust_parity
+103/388 Test #262: context_query_rust_parity ...............................   Passed    1.00 sec
+        Start   2: runtime_layer_boundaries
+104/388 Test #353: value_api_rust_parity ...................................   Passed    0.99 sec
+        Start 314: sql_types_rust_parity
+105/388 Test #254: entity_debug_rust_parity ................................   Passed    0.91 sec
+        Start  97: mutation_policy_rust_parity
+106/388 Test #101: graph_fix_rust_parity ...................................   Passed    0.84 sec
+        Start 252: base_entity_api_rust_parity
+107/388 Test   #2: runtime_layer_boundaries ................................   Passed    0.93 sec
+        Start 279: telemetry_rust_parity
+108/388 Test #314: sql_types_rust_parity ...................................   Passed    0.96 sec
+        Start 342: request_helpers_rust_parity
+109/388 Test  #97: mutation_policy_rust_parity .............................   Passed    0.92 sec
+        Start 178: telemetry_model_scope_rust_parity
+110/388 Test #252: base_entity_api_rust_parity .............................   Passed    0.90 sec
+        Start  45: context_locking_rust_parity
+111/388 Test #279: telemetry_rust_parity ...................................   Passed    0.84 sec
+        Start 193: registry_debug_scope_rust_parity
+112/388 Test #342: request_helpers_rust_parity .............................   Passed    0.92 sec
+        Start 256: entity_defaults_api_rust_parity
+113/388 Test #178: telemetry_model_scope_rust_parity .......................   Passed    0.84 sec
+        Start 380: data_store_rust_parity
+114/388 Test  #45: context_locking_rust_parity .............................   Passed    0.74 sec
+        Start 273: id_set_page_rust_parity
+115/388 Test #193: registry_debug_scope_rust_parity ........................   Passed    0.74 sec
+        Start 269: entity_service_rust_parity
+116/388 Test #256: entity_defaults_api_rust_parity .........................   Passed    0.74 sec
+        Start 226: executor_defaults_scope_rust_parity
+117/388 Test #380: data_store_rust_parity ..................................   Passed    0.68 sec
+        Start 382: context_reference_contracts
+118/388 Test #269: entity_service_rust_parity ..............................   Passed    0.65 sec
+        Start 331: search_rust_parity
+119/388 Test #273: id_set_page_rust_parity .................................   Passed    0.76 sec
+        Start 329: business_id_rust_parity
+120/388 Test #226: executor_defaults_scope_rust_parity .....................   Passed    0.66 sec
+        Start 135: original_provider_query_contracts
+121/388 Test #382: context_reference_contracts .............................   Passed    0.72 sec
+        Start 266: query_store_rust_parity
+122/388 Test #331: search_rust_parity ......................................   Passed    0.55 sec
+        Start 359: core_api_rust_parity
+123/388 Test #329: business_id_rust_parity .................................   Passed    0.68 sec
+        Start 156: query_store_model_rust_parity
+124/388 Test #135: original_provider_query_contracts .......................   Passed    0.67 sec
+        Start 336: value_owned_api_rust_parity
+125/388 Test #266: query_store_rust_parity .................................   Passed    0.60 sec
+        Start 275: entity_decoder_rust_parity
+126/388 Test #359: core_api_rust_parity ....................................   Passed    0.59 sec
+        Start 270: entity_query_rust_parity
+127/388 Test #156: query_store_model_rust_parity ...........................   Passed    0.54 sec
+        Start 309: sql_transport_rust_parity
+128/388 Test #336: value_owned_api_rust_parity .............................   Passed    0.54 sec
+        Start 286: internal_id_rust_parity
+129/388 Test #275: entity_decoder_rust_parity ..............................   Passed    0.56 sec
+        Start 330: presentation_rust_parity
+130/388 Test #270: entity_query_rust_parity ................................   Passed    0.55 sec
+        Start 307: sql_executor_error_rust_parity
+131/388 Test #286: internal_id_rust_parity .................................   Passed    0.50 sec
+        Start 332: value_rust_parity
+132/388 Test #309: sql_transport_rust_parity ...............................   Passed    0.58 sec
+        Start 326: decimal_pointer_scope_rust_parity
+133/388 Test #330: presentation_rust_parity ................................   Passed    0.46 sec
+        Start 239: core_aux_debug_contracts
+134/388 Test #307: sql_executor_error_rust_parity ..........................   Passed    0.47 sec
+        Start 285: schema_runtime_rust_parity
+135/388 Test #332: value_rust_parity .......................................   Passed    0.43 sec
+        Start  44: context_locking_contracts
+136/388 Test #326: decimal_pointer_scope_rust_parity .......................   Passed    0.44 sec
+        Start 272: entity_stream_rust_parity
+137/388 Test #239: core_aux_debug_contracts ................................   Passed    0.43 sec
+        Start 208: provider_sqlite_driver_error_contracts
+138/388 Test #285: schema_runtime_rust_parity ..............................   Passed    0.38 sec
+        Start 333: format_rust_parity
+139/388 Test #272: entity_stream_rust_parity ...............................   Passed    0.37 sec
+        Start 171: entity_runtime_contracts
+140/388 Test  #44: context_locking_contracts ...............................   Passed    0.41 sec
+        Start 321: decimal_inline_rust_parity
+141/388 Test #208: provider_sqlite_driver_error_contracts ..................   Passed    0.36 sec
+        Start  28: runtime_id_model_rust_parity
+142/388 Test #333: format_rust_parity ......................................   Passed    0.34 sec
+        Start 261: runtime_base_rust_parity
+143/388 Test  #28: runtime_id_model_rust_parity ............................   Passed    0.29 sec
+        Start 228: data_service_model_contracts
+144/388 Test #171: entity_runtime_contracts ................................   Passed    0.33 sec
+        Start 221: sql_dialect_in_rust_parity
+145/388 Test #321: decimal_inline_rust_parity ..............................   Passed    0.35 sec
+        Start 302: sqlite_from_sql_raw_debug_rust_parity
+146/388 Test #261: runtime_base_rust_parity ................................   Passed    0.28 sec
+        Start 215: sql_query_executor_contracts
+147/388 Test #228: data_service_model_contracts ............................   Passed    0.30 sec
+        Start 388: runtime_examples_rust_parity
+148/388 Test #221: sql_dialect_in_rust_parity ..............................   Passed    0.32 sec
+        Start 306: sql_executor_kind_rust_parity
+149/388 Test #302: sqlite_from_sql_raw_debug_rust_parity ...................   Passed    0.33 sec
+        Start 301: sqlite_from_sql_error_rust_parity
+150/388 Test #215: sql_query_executor_contracts ............................   Passed    0.32 sec
+        Start 352: timestamp_api_rust_parity
+151/388 Test #388: runtime_examples_rust_parity ............................   Passed    0.30 sec
+        Start 312: sql_dialect_hooks_rust_parity
+152/388 Test #306: sql_executor_kind_rust_parity ...........................   Passed    0.32 sec
+        Start  30: context_defaults_rust_parity
+153/388 Test #301: sqlite_from_sql_error_rust_parity .......................   Passed    0.29 sec
+        Start 220: sql_dialect_helpers_rust_parity
+154/388 Test #352: timestamp_api_rust_parity ...............................   Passed    0.29 sec
+        Start 300: sqlite_simple_error_rust_parity
+155/388 Test #312: sql_dialect_hooks_rust_parity ...........................   Passed    0.31 sec
+        Start 236: sql_projection_scope_rust_parity
+156/388 Test #220: sql_dialect_helpers_rust_parity .........................   Passed    0.28 sec
+        Start 169: typed_aggregate_scope_rust_parity
+157/388 Test  #30: context_defaults_rust_parity ............................   Passed    0.31 sec
+        Start  49: transaction_move_only_rust_parity
+158/388 Test #300: sqlite_simple_error_rust_parity .........................   Passed    0.27 sec
+        Start 127: original_runtime_file_log_privacy_contracts
+159/388 Test #236: sql_projection_scope_rust_parity ........................   Passed    0.17 sec
+        Start 381: context_memory_contracts
+160/388 Test  #49: transaction_move_only_rust_parity .......................   Passed    0.20 sec
+        Start 271: entity_query_boundary_rust_parity
+161/388 Test #169: typed_aggregate_scope_rust_parity .......................   Passed    0.23 sec
+        Start  46: runtime_examples_context_contracts
+162/388 Test #127: original_runtime_file_log_privacy_contracts .............   Passed    0.21 sec
+        Start 258: chrono_value_rust_parity
+163/388 Test #381: context_memory_contracts ................................   Passed    0.19 sec
+        Start 138: original_runtime_round_trip_reference_contracts
+164/388 Test  #46: runtime_examples_context_contracts ......................   Passed    0.19 sec
+        Start  63: unified_buffer_clone_rust_parity
+165/388 Test #271: entity_query_boundary_rust_parity .......................   Passed    0.22 sec
+        Start 250: entity_registration_api_rust_parity
+166/388 Test #138: original_runtime_round_trip_reference_contracts .........   Passed    0.15 sec
+        Start 363: datatype_debug_rust_parity
+167/388 Test #258: chrono_value_rust_parity ................................   Passed    0.18 sec
+        Start 134: original_provider_schema_contracts
+168/388 Test  #63: unified_buffer_clone_rust_parity ........................   Passed    0.15 sec
+        Start 149: original_runtime_optimistic_conflict_output_contracts
+169/388 Test #250: entity_registration_api_rust_parity .....................   Passed    0.18 sec
+        Start 248: original_core_dynamic_search_warning_privacy
+170/388 Test #134: original_provider_schema_contracts ......................   Passed    0.13 sec
+        Start 202: provider_sqlite_id_contracts
+171/388 Test #363: datatype_debug_rust_parity ..............................   Passed    0.18 sec
+        Start 207: provider_sqlite_error_contracts
+172/388 Test #149: original_runtime_optimistic_conflict_output_contracts ...   Passed    0.14 sec
+        Start 240: business_id_contracts
+173/388 Test #248: original_core_dynamic_search_warning_privacy ............   Passed    0.14 sec
+        Start 201: provider_sqlite_business_id_contracts
+174/388 Test #202: provider_sqlite_id_contracts ............................   Passed    0.15 sec
+        Start 337: presentation_api_contracts
+175/388 Test #207: provider_sqlite_error_contracts .........................   Passed    0.12 sec
+        Start  66: transaction_scope_context_contracts
+176/388 Test #240: business_id_contracts ...................................   Passed    0.11 sec
+        Start 130: original_runtime_masking_contracts
+177/388 Test #337: presentation_api_contracts ..............................   Passed    0.07 sec
+        Start 223: sql_model_api_contracts
+178/388 Test #130: original_runtime_masking_contracts ......................   Passed    0.06 sec
+        Start 147: original_runtime_context_tail_contracts
+179/388 Test #201: provider_sqlite_business_id_contracts ...................   Passed    0.13 sec
+        Start 387: example_sqlite_relations_graph
+180/388 Test  #66: transaction_scope_context_contracts .....................   Passed    0.11 sec
+        Start  37: entity_reference_context_contracts
+181/388 Test #223: sql_model_api_contracts .................................   Passed    0.06 sec
+        Start 165: runtime_generic_completion_contracts
+182/388 Test #147: original_runtime_context_tail_contracts .................   Passed    0.07 sec
+        Start 163: enhanced_entities_contracts
+183/388 Test #387: example_sqlite_relations_graph ..........................   Passed    0.07 sec
+        Start 209: provider_sqlite_simple_error_contracts
+184/388 Test  #37: entity_reference_context_contracts ......................   Passed    0.05 sec
+        Start 136: original_provider_transaction_contracts
+185/388 Test #165: runtime_generic_completion_contracts ....................   Passed    0.05 sec
+        Start 203: provider_sqlite_transport_contracts
+186/388 Test #209: provider_sqlite_simple_error_contracts ..................   Passed    0.04 sec
+        Start 162: entity_service_contracts
+187/388 Test #136: original_provider_transaction_contracts .................   Passed    0.04 sec
+        Start 159: relation_hydration_contracts
+188/388 Test #163: enhanced_entities_contracts .............................   Passed    0.06 sec
+        Start  33: round_trip_reference_context_contracts
+189/388 Test #203: provider_sqlite_transport_contracts .....................   Passed    0.04 sec
+        Start  72: graph_saver_context_contracts
+190/388 Test #162: entity_service_contracts ................................   Passed    0.04 sec
+        Start 113: original_sql_binding_policy_contracts
+191/388 Test #159: relation_hydration_contracts ............................   Passed    0.04 sec
+        Start 110: provider_sqlite_schema_contracts
+192/388 Test  #33: round_trip_reference_context_contracts ..................   Passed    0.04 sec
+        Start 386: example_sqlite_schema_crud
+193/388 Test  #72: graph_saver_context_contracts ...........................   Passed    0.04 sec
+        Start 111: original_sql_mutation_execution_contracts
+194/388 Test #113: original_sql_binding_policy_contracts ...................   Passed    0.03 sec
+        Start 194: runtime_check_error_contracts
+195/388 Test #110: provider_sqlite_schema_contracts ........................   Passed    0.03 sec
+        Start  77: recursive_graph_write_context_contracts
+196/388 Test #194: runtime_check_error_contracts ...........................   Passed    0.02 sec
+        Start  50: ledger_move_only_contracts
+197/388 Test #386: example_sqlite_schema_crud ..............................   Passed    0.04 sec
+        Start 133: original_provider_storage_contracts
+198/388 Test #111: original_sql_mutation_execution_contracts ...............   Passed    0.03 sec
+        Start 180: log_manager_contracts
+199/388 Test  #77: recursive_graph_write_context_contracts .................   Passed    0.03 sec
+        Start 246: original_core_functional_contracts
+200/388 Test #246: original_core_functional_contracts ......................   Passed    0.01 sec
+        Start  71: audited_save_context_contracts
+201/388 Test  #50: ledger_move_only_contracts ..............................   Passed    0.03 sec
+        Start 155: query_store_model_contracts
+202/388 Test #180: log_manager_contracts ...................................   Passed    0.03 sec
+203/388 Test #155: query_store_model_contracts .............................   Passed    0.01 sec
+        Start 164: runtime_move_only_query_contracts
+        Start 339: core_graph_api_contracts
+204/388 Test #133: original_provider_storage_contracts .....................   Passed    0.04 sec
+        Start 144: original_runtime_aggregate_cache_contracts
+205/388 Test  #71: audited_save_context_contracts ..........................   Passed    0.02 sec
+        Start 345: mutation_debug_contracts
+206/388 Test #339: core_graph_api_contracts ................................   Passed    0.03 sec
+        Start 190: business_service_contracts
+207/388 Test #164: runtime_move_only_query_contracts .......................   Passed    0.03 sec
+        Start 199: context_model_contracts
+208/388 Test #345: mutation_debug_contracts ................................   Passed    0.03 sec
+        Start  74: ledger_execution_context_contracts
+209/388 Test #144: original_runtime_aggregate_cache_contracts ..............   Passed    0.03 sec
+        Start  68: audited_auto_save_context_contracts
+210/388 Test #190: business_service_contracts ..............................   Passed    0.02 sec
+        Start 114: original_sql_executor_contracts
+211/388 Test #199: context_model_contracts .................................   Passed    0.02 sec
+        Start 160: relation_enhancement_contracts
+212/388 Test  #74: ledger_execution_context_contracts ......................   Passed    0.02 sec
+        Start 176: context_event_contracts
+213/388 Test  #68: audited_auto_save_context_contracts .....................   Passed    0.03 sec
+        Start 182: runtime_log_contracts
+214/388 Test #114: original_sql_executor_contracts .........................   Passed    0.02 sec
+        Start 189: internal_id_contracts
+215/388 Test #176: context_event_contracts .................................   Passed    0.02 sec
+        Start 137: original_runtime_entity_save_contracts
+216/388 Test #182: runtime_log_contracts ...................................   Passed    0.02 sec
+217/388 Test #160: relation_enhancement_contracts ..........................   Passed    0.03 sec
+        Start 167: id_set_page_contracts
+        Start 213: sql_transaction_execution_contracts
+218/388 Test #189: internal_id_contracts ...................................   Passed    0.02 sec
+        Start 143: original_runtime_typed_query_contracts
+219/388 Test #137: original_runtime_entity_save_contracts ..................   Passed    0.02 sec
+        Start 142: original_runtime_events_relations_contracts
+220/388 Test #167: id_set_page_contracts ...................................   Passed    0.02 sec
+        Start  76: entity_graph_execution_context_contracts
+221/388 Test #213: sql_transaction_execution_contracts .....................   Passed    0.02 sec
+222/388 Test #143: original_runtime_typed_query_contracts ..................   Passed    0.02 sec
+        Start 212: sql_stream_execution_contracts
+        Start 233: data_service_scope_contracts
+223/388 Test #212: sql_stream_execution_contracts ..........................   Passed    0.01 sec
+        Start 151: original_provider_guarded_mutation_contracts
+224/388 Test #142: original_runtime_events_relations_contracts .............   Passed    0.03 sec
+225/388 Test  #76: entity_graph_execution_context_contracts ................   Passed    0.02 sec
+        Start 214: sql_mutation_execution_contracts
+        Start 384: sqlite_contracts
+226/388 Test #233: data_service_scope_contracts ............................   Passed    0.02 sec
+        Start 153: query_keys_contracts
+227/388 Test #151: original_provider_guarded_mutation_contracts ............   Passed    0.02 sec
+        Start 358: mutation_model_api_contracts
+228/388 Test #214: sql_mutation_execution_contracts ........................   Passed    0.02 sec
+        Start 379: data_store_contracts
+229/388 Test #384: sqlite_contracts ........................................   Passed    0.02 sec
+        Start 107: i18n_context_contracts
+230/388 Test #153: query_keys_contracts ....................................   Passed    0.02 sec
+        Start  90: entity_graph_plan_context_contracts
+231/388 Test #379: data_store_contracts ....................................   Passed    0.01 sec
+        Start  86: runtime_mutation_context_contracts
+232/388 Test #358: mutation_model_api_contracts ............................   Passed    0.02 sec
+        Start 195: error_generic_context_contracts
+233/388 Test #107: i18n_context_contracts ..................................   Passed    0.02 sec
+        Start 154: id_set_build_contracts
+234/388 Test  #90: entity_graph_plan_context_contracts .....................   Passed    0.02 sec
+235/388 Test #195: error_generic_context_contracts .........................   Passed    0.01 sec
+        Start 141: original_runtime_validation_contracts
+        Start  42: inmemory_context_contracts
+236/388 Test  #86: runtime_mutation_context_contracts ......................   Passed    0.02 sec
+237/388 Test #154: id_set_build_contracts ..................................   Passed    0.01 sec
+        Start 210: provider_sqlite_boxed_error_contracts
+        Start 150: original_provider_dynamic_search_contracts
+238/388 Test #141: original_runtime_validation_contracts ...................   Passed    0.02 sec
+        Start 146: original_runtime_memory_service_contracts
+239/388 Test  #42: inmemory_context_contracts ..............................   Passed    0.02 sec
+        Start 140: original_runtime_service_boundary_contracts
+240/388 Test #210: provider_sqlite_boxed_error_contracts ...................   Passed    0.02 sec
+        Start 166: entity_stream_contracts
+241/388 Test #150: original_provider_dynamic_search_contracts ..............   Passed    0.02 sec
+        Start 245: original_core_entity_mapping_contracts
+242/388 Test #140: original_runtime_service_boundary_contracts .............   Passed    0.01 sec
+        Start 247: original_core_dynamic_search_contracts
+243/388 Test #166: entity_stream_contracts .................................   Passed    0.02 sec
+244/388 Test #146: original_runtime_memory_service_contracts ...............   Passed    0.02 sec
+245/388 Test #245: original_core_entity_mapping_contracts ..................   Passed    0.01 sec
+        Start 157: query_store_contracts
+        Start 347: query_debug_contracts
+        Start 179: context_logging_contracts
+246/388 Test #157: query_store_contracts ...................................   Passed    0.01 sec
+        Start 373: query_model_contracts
+247/388 Test #247: original_core_dynamic_search_contracts ..................   Passed    0.02 sec
+        Start 158: relation_execution_contracts
+248/388 Test #347: query_debug_contracts ...................................   Passed    0.02 sec
+        Start 216: sql_transport_contracts
+249/388 Test #179: context_logging_contracts ...............................   Passed    0.02 sec
+        Start 376: generated_support_contracts
+250/388 Test #373: query_model_contracts ...................................   Passed    0.02 sec
+        Start 122: original_runtime_checker_locale_contracts
+251/388 Test #158: relation_execution_contracts ............................   Passed    0.02 sec
+        Start 235: sql_projection_scope_contracts
+252/388 Test #216: sql_transport_contracts .................................   Passed    0.01 sec
+        Start 115: original_sql_compiler_contracts
+253/388 Test #376: generated_support_contracts .............................   Passed    0.02 sec
+254/388 Test #235: sql_projection_scope_contracts ..........................   Passed    0.01 sec
+        Start  81: graph_save_adapter_context_contracts
+        Start  95: mutation_policy_context_contracts
+255/388 Test #122: original_runtime_checker_locale_contracts ...............   Passed    0.02 sec
+        Start 259: entity_expression_contracts
+256/388 Test  #95: mutation_policy_context_contracts .......................   Passed    0.01 sec
+        Start 218: sql_mutation_contracts
+257/388 Test #115: original_sql_compiler_contracts .........................   Passed    0.02 sec
+        Start 334: value_model_contracts
+258/388 Test  #81: graph_save_adapter_context_contracts ....................   Passed    0.02 sec
+        Start 360: core_api_contracts
+259/388 Test #259: entity_expression_contracts .............................   Passed    0.02 sec
+        Start 364: model_debug_contracts
+260/388 Test #218: sql_mutation_contracts ..................................   Passed    0.02 sec
+        Start 343: request_api_contracts
+261/388 Test #334: value_model_contracts ...................................   Passed    0.02 sec
+        Start 170: entity_decoder_contracts
+262/388 Test #364: model_debug_contracts ...................................   Passed    0.01 sec
+        Start 242: request_search_contracts
+263/388 Test #360: core_api_contracts ......................................   Passed    0.02 sec
+        Start 371: query_api_contracts
+264/388 Test #343: request_api_contracts ...................................   Passed    0.01 sec
+        Start 241: presentation_contracts
+265/388 Test #170: entity_decoder_contracts ................................   Passed    0.01 sec
+        Start 112: original_sql_query_execution_contracts
+266/388 Test #242: request_search_contracts ................................   Passed    0.01 sec
+        Start 126: original_runtime_context_contracts
+267/388 Test #241: presentation_contracts ..................................   Passed    0.01 sec
+        Start 183: audit_event_contracts
+268/388 Test #371: query_api_contracts .....................................   Passed    0.02 sec
+269/388 Test #112: original_sql_query_execution_contracts ..................   Passed    0.01 sec
+        Start  64: log_model_contracts
+        Start 217: provider_sqlite_dialect_contracts
+270/388 Test #126: original_runtime_context_contracts ......................   Passed    0.01 sec
+        Start 369: compact_row_api_contracts
+271/388 Test #183: audit_event_contracts ...................................   Passed    0.01 sec
+272/388 Test #217: provider_sqlite_dialect_contracts .......................   Passed    0.01 sec
+273/388 Test  #64: log_model_contracts .....................................   Passed    0.01 sec
+        Start 191: runtime_business_id_contracts
+        Start 367: smart_list_api_contracts
+        Start 196: sql_move_only_context_contracts
+274/388 Test #369: compact_row_api_contracts ...............................   Passed    0.01 sec
+        Start 237: decimal_contracts
+275/388 Test #367: smart_list_api_contracts ................................   Passed    0.01 sec
+        Start 102: checker_context_contracts
+276/388 Test #191: runtime_business_id_contracts ...........................   Passed    0.02 sec
+        Start 121: original_runtime_inmemory_contracts
+277/388 Test #196: sql_move_only_context_contracts .........................   Passed    0.01 sec
+        Start 161: context_query_contracts
+278/388 Test #237: decimal_contracts .......................................   Passed    0.01 sec
+        Start  16: context_provider_borrow_contracts
+279/388 Test #102: checker_context_contracts ...............................   Passed    0.01 sec
+        Start 177: telemetry_contracts
+280/388 Test #121: original_runtime_inmemory_contracts .....................   Passed    0.01 sec
+        Start 188: schema_runtime_contracts
+281/388 Test #161: context_query_contracts .................................   Passed    0.01 sec
+        Start 222: sql_model_contracts
+282/388 Test  #16: context_provider_borrow_contracts .......................   Passed    0.01 sec
+        Start   8: runtime_callback_scope_contracts
+283/388 Test #177: telemetry_contracts .....................................   Passed    0.01 sec
+284/388 Test #188: schema_runtime_contracts ................................   Passed    0.01 sec
+        Start  58: relation_model_contracts
+        Start  98: save_preparation_context_contracts
+285/388 Test   #8: runtime_callback_scope_contracts ........................   Passed    0.01 sec
+        Start  79: graph_node_command_context_contracts
+286/388 Test #222: sql_model_contracts .....................................   Passed    0.01 sec
+        Start 120: original_runtime_cache_relation_contracts
+287/388 Test  #58: relation_model_contracts ................................   Passed    0.01 sec
+288/388 Test  #98: save_preparation_context_contracts ......................   Passed    0.01 sec
+        Start 205: provider_sqlite_binding_contracts
+        Start 204: provider_sqlite_decoding_contracts
+289/388 Test  #79: graph_node_command_context_contracts ....................   Passed    0.01 sec
+        Start 244: original_core_composition_contracts
+290/388 Test #120: original_runtime_cache_relation_contracts ...............   Passed    0.02 sec
+291/388 Test #205: provider_sqlite_binding_contracts .......................   Passed    0.01 sec
+        Start  31: reference_model_contracts
+        Start   3: entity_runtime_model_contracts
+292/388 Test #204: provider_sqlite_decoding_contracts ......................   Passed    0.01 sec
+        Start 230: system_time_arithmetic_scope_contracts
+293/388 Test #244: original_core_composition_contracts .....................   Passed    0.01 sec
+        Start 370: core_collection_contracts
+294/388 Test  #31: reference_model_contracts ...............................   Passed    0.01 sec
+        Start  52: policy_model_contracts
+295/388 Test   #3: entity_runtime_model_contracts ..........................   Passed    0.01 sec
+        Start  11: runtime_callback_select_behavior_close
+296/388 Test #230: system_time_arithmetic_scope_contracts ..................   Passed    0.01 sec
+        Start 349: meta_api_contracts
+297/388 Test #370: core_collection_contracts ...............................   Passed    0.01 sec
+        Start  15: runtime_callback_business_allocator_close
+298/388 Test  #52: policy_model_contracts ..................................   Passed    0.01 sec
+299/388 Test  #11: runtime_callback_select_behavior_close ..................   Passed    0.01 sec
+        Start  54: event_model_contracts
+        Start 173: runtime_graph_model_contracts
+300/388 Test #349: meta_api_contracts ......................................   Passed    0.01 sec
+301/388 Test  #15: runtime_callback_business_allocator_close ...............   Passed    0.01 sec
+        Start 192: runtime_registry_contracts
+        Start   5: business_clock_scope_contracts
+302/388 Test  #54: event_model_contracts ...................................   Passed    0.01 sec
+303/388 Test #173: runtime_graph_model_contracts ...........................   Passed    0.01 sec
+        Start  20: context_dispatch_exception_contracts
+        Start 206: provider_sqlite_model_contracts
+304/388 Test #192: runtime_registry_contracts ..............................   Passed    0.01 sec
+305/388 Test   #5: business_clock_scope_contracts ..........................   Passed    0.01 sec
+        Start 125: original_runtime_log_privacy_contracts
+        Start 227: data_service_contracts
+306/388 Test  #20: context_dispatch_exception_contracts ....................   Passed    0.01 sec
+        Start 168: typed_aggregate_context_contracts
+307/388 Test #206: provider_sqlite_model_contracts .........................   Passed    0.01 sec
+        Start 181: log_formatter_contracts
+308/388 Test #125: original_runtime_log_privacy_contracts ..................   Passed    0.01 sec
+        Start   6: business_clock_reentrant_time
+309/388 Test #227: data_service_contracts ..................................   Passed    0.01 sec
+        Start   1: runtime_public_namespace_contracts
+310/388 Test #168: typed_aggregate_context_contracts .......................   Passed    0.01 sec
+        Start  12: runtime_callback_select_policy_close
+311/388 Test #181: log_formatter_contracts .................................   Passed    0.01 sec
+312/388 Test   #6: business_clock_reentrant_time ...........................   Passed    0.01 sec
+        Start 219: sql_dialect_contracts
+        Start 139: original_runtime_registration_contracts
+313/388 Test  #12: runtime_callback_select_policy_close ....................   Passed    0.01 sec
+        Start  13: runtime_callback_business_slot_close
+314/388 Test   #1: runtime_public_namespace_contracts ......................   Passed    0.01 sec
+        Start  14: runtime_callback_business_key_close
+315/388 Test #219: sql_dialect_contracts ...................................   Passed    0.01 sec
+316/388 Test #139: original_runtime_registration_contracts .................   Passed    0.01 sec
+        Start 175: runtime_graph_contracts
+        Start   9: runtime_callback_registry_close
+317/388 Test  #13: runtime_callback_business_slot_close ....................   Passed    0.01 sec
+318/388 Test  #14: runtime_callback_business_key_close .....................   Passed    0.01 sec
+        Start 224: async_context_contracts
+        Start  27: runtime_id_model_contracts
+319/388 Test   #9: runtime_callback_registry_close .........................   Passed    0.01 sec
+        Start 148: original_runtime_graph_reference_contracts
+320/388 Test #175: runtime_graph_contracts .................................   Passed    0.01 sec
+        Start 335: value_owned_api_contracts
+321/388 Test #224: async_context_contracts .................................   Passed    0.01 sec
+322/388 Test  #27: runtime_id_model_contracts ..............................   Passed    0.01 sec
+        Start   7: business_clock_reentrant_date
+        Start 124: original_runtime_policy_graph_contracts
+323/388 Test #148: original_runtime_graph_reference_contracts ..............   Passed    0.01 sec
+        Start  48: transaction_provider_error_contracts
+324/388 Test #335: value_owned_api_contracts ...............................   Passed    0.01 sec
+325/388 Test   #7: business_clock_reentrant_date ...........................   Passed    0.01 sec
+        Start 100: graph_fix_context_contracts
+        Start 211: provider_sqlite_from_sql_error_contracts
+326/388 Test #124: original_runtime_policy_graph_contracts .................   Passed    0.01 sec
+        Start  17: context_provider_reentrant_registry
+327/388 Test  #48: transaction_provider_error_contracts ....................   Passed    0.01 sec
+        Start  56: check_model_contracts
+328/388 Test #100: graph_fix_context_contracts .............................   Passed    0.01 sec
+        Start  19: context_dispatch_lifecycle_contracts
+329/388 Test #211: provider_sqlite_from_sql_error_contracts ................   Passed    0.01 sec
+330/388 Test  #17: context_provider_reentrant_registry .....................   Passed    0.01 sec
+        Start  83: ledger_plan_context_contracts
+        Start 116: original_sql_default_contracts
+331/388 Test  #19: context_dispatch_lifecycle_contracts ....................   Passed    0.01 sec
+        Start 225: executor_spi_contracts
+332/388 Test  #56: check_model_contracts ...................................   Passed    0.01 sec
+        Start  24: context_dispatch_checker_close
+333/388 Test  #83: ledger_plan_context_contracts ...........................   Passed    0.01 sec
+        Start  91: internal_id_reentrant_close
+334/388 Test #116: original_sql_default_contracts ..........................   Passed    0.01 sec
+335/388 Test  #24: context_dispatch_checker_close ..........................   Passed    0.01 sec
+        Start  21: context_dispatch_shutdown_contracts
+        Start  87: runtime_mutation_reentrant_prepare
+336/388 Test #225: executor_spi_contracts ..................................   Passed    0.01 sec
+337/388 Test  #91: internal_id_reentrant_close .............................   Passed    0.01 sec
+        Start  22: context_dispatch_entity_close
+        Start  88: runtime_mutation_reentrant_event
+338/388 Test  #21: context_dispatch_shutdown_contracts .....................   Passed    0.01 sec
+339/388 Test  #87: runtime_mutation_reentrant_prepare ......................   Passed    0.01 sec
+        Start  60: runtime_foreign_query_cleanup
+        Start 117: original_sql_diagnostic_stream_contracts
+340/388 Test  #22: context_dispatch_entity_close ...........................   Passed    0.01 sec
+341/388 Test  #88: runtime_mutation_reentrant_event ........................   Passed    0.01 sec
+        Start 253: entity_debug_contracts
+        Start  10: runtime_callback_relation_loads_close
+342/388 Test  #60: runtime_foreign_query_cleanup ...........................   Passed    0.01 sec
+343/388 Test #117: original_sql_diagnostic_stream_contracts ................   Passed    0.01 sec
+        Start  61: runtime_foreign_mutation_cleanup
+        Start 129: original_runtime_flat_identity_graph_contracts
+344/388 Test #253: entity_debug_contracts ..................................   Passed    0.01 sec
+345/388 Test  #10: runtime_callback_relation_loads_close ...................   Passed    0.01 sec
+        Start 354: core_contracts
+        Start 341: request_helpers_contracts
+346/388 Test #129: original_runtime_flat_identity_graph_contracts ..........   Passed    0.01 sec
+        Start 361: core_model_contracts
+347/388 Test  #61: runtime_foreign_mutation_cleanup ........................   Passed    0.01 sec
+        Start  47: transaction_move_only_contracts
+348/388 Test #354: core_contracts ..........................................   Passed    0.01 sec
+349/388 Test #341: request_helpers_contracts ...............................   Passed    0.01 sec
+        Start  92: internal_id_reentrant_floor
+        Start 355: eval_context_contracts
+350/388 Test #361: core_model_contracts ....................................   Passed    0.01 sec
+351/388 Test  #47: transaction_move_only_contracts .........................   Passed    0.01 sec
+        Start  25: context_dispatch_telemetry_noop_close
+        Start 123: original_runtime_log_telemetry_contracts
+352/388 Test  #92: internal_id_reentrant_floor .............................   Passed    0.01 sec
+        Start 105: checker_typed_direct_reentrant_close
+353/388 Test #355: eval_context_contracts ..................................   Passed    0.01 sec
+354/388 Test  #25: context_dispatch_telemetry_noop_close ...................   Passed    0.01 sec
+        Start  23: context_dispatch_all_entities_close
+        Start 255: entity_owned_api_contracts
+355/388 Test #123: original_runtime_log_telemetry_contracts ................   Passed    0.01 sec
+        Start  62: unified_buffer_clone_contracts
+356/388 Test  #23: context_dispatch_all_entities_close .....................   Passed    0.01 sec
+        Start  96: mutation_policy_reentrant_close
+357/388 Test #255: entity_owned_api_contracts ..............................   Passed    0.01 sec
+        Start  38: entity_reference_reentrant_owner
+358/388 Test  #62: unified_buffer_clone_contracts ..........................   Passed    0.01 sec
+359/388 Test #105: checker_typed_direct_reentrant_close ....................   Passed    0.02 sec
+        Start 229: system_time_contracts
+        Start 385: example_context_lifetime
+360/388 Test  #96: mutation_policy_reentrant_close .........................   Passed    0.01 sec
+361/388 Test  #38: entity_reference_reentrant_owner ........................   Passed    0.01 sec
+        Start 198: runtime_context_resource_contracts
+        Start 103: checker_reentrant_close
+362/388 Test #229: system_time_contracts ...................................   Passed    0.01 sec
+363/388 Test #385: example_context_lifetime ................................   Passed    0.01 sec
+        Start 104: checker_registration_reentrant_close
+        Start 131: original_runtime_business_clock_contracts
+364/388 Test #103: checker_reentrant_close .................................   Passed    0.01 sec
+        Start 243: original_core_value_contracts
+365/388 Test #198: runtime_context_resource_contracts ......................   Passed    0.01 sec
+366/388 Test #104: checker_registration_reentrant_close ....................   Passed    0.01 sec
+        Start 186: audit_event_payload_reentrant_close
+        Start 187: audit_event_result_reentrant_close
+367/388 Test #131: original_runtime_business_clock_contracts ...............   Passed    0.01 sec
+        Start 185: audit_event_owner_reentrant_close
+368/388 Test #243: original_core_value_contracts ...........................   Passed    0.01 sec
+369/388 Test #186: audit_event_payload_reentrant_close .....................   Passed    0.01 sec
+        Start 374: safe_expression_api_contracts
+        Start 184: audit_event_context_reentrant_close
+370/388 Test #187: audit_event_result_reentrant_close ......................   Passed    0.01 sec
+371/388 Test #185: audit_event_owner_reentrant_close .......................   Passed    0.01 sec
+        Start 351: timestamp_api_contracts
+        Start 251: base_entity_api_contracts
+372/388 Test #374: safe_expression_api_contracts ...........................   Passed    0.01 sec
+373/388 Test #184: audit_event_context_reentrant_close .....................   Passed    0.01 sec
+        Start 257: chrono_value_contracts
+        Start  39: entity_reference_reentrant_output
+374/388 Test #351: timestamp_api_contracts .................................   Passed    0.01 sec
+375/388 Test #251: base_entity_api_contracts ...............................   Passed    0.01 sec
+        Start 119: original_runtime_entity_status_contracts
+        Start 238: decimal_inline_contracts
+376/388 Test #257: chrono_value_contracts ..................................   Passed    0.01 sec
+377/388 Test  #39: entity_reference_reentrant_output .......................   Passed    0.01 sec
+        Start 249: entity_registration_api_contracts
+        Start  26: context_dispatch_telemetry_start_close
+378/388 Test #238: decimal_inline_contracts ................................   Passed    0.01 sec
+        Start 383: context_early_global_close
+379/388 Test #119: original_runtime_entity_status_contracts ................   Passed    0.01 sec
+380/388 Test #249: entity_registration_api_contracts .......................   Passed    0.01 sec
+        Start 118: original_sql_log_rendering_contracts
+        Start 362: datatype_debug_contracts
+381/388 Test  #26: context_dispatch_telemetry_start_close ..................   Passed    0.01 sec
+382/388 Test #383: context_early_global_close ..............................   Passed    0.01 sec
+        Start  34: round_trip_reference_reentrant_owner
+        Start  35: round_trip_reference_reentrant_output
+383/388 Test #118: original_sql_log_rendering_contracts ....................   Passed    0.01 sec
+384/388 Test #362: datatype_debug_contracts ................................   Passed    0.01 sec
+        Start  29: context_defaults_contracts
+        Start  18: context_provider_reentrant_schema
+385/388 Test  #34: round_trip_reference_reentrant_owner ....................   Passed    0.01 sec
+386/388 Test  #35: round_trip_reference_reentrant_output ...................   Passed    0.01 sec
+387/388 Test  #29: context_defaults_contracts ..............................   Passed    0.01 sec
+388/388 Test  #18: context_provider_reentrant_schema .......................   Passed    0.01 sec
+
+100% tests passed out of 388
+
+Total Test time (real) = 155.59 sec

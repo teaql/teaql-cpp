@@ -54,7 +54,7 @@ def main():
     inputs = [c['input'] for c in corpus['cases']]
     expected = [c['expected'] for c in corpus['cases']]
     if args.rust:
-        subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], cwd=root, check=True)
+        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], cwd=root, check=True)
         if not same(expected, observe(args.rust, inputs)):
             raise RuntimeError('Stored manager observations differ from live Rust')
     emulator = args.cpp_emulator.split(';') if args.cpp_emulator else []

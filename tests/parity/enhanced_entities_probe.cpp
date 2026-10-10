@@ -5,7 +5,7 @@
 #include <teaql/core/detail/query_debug.hpp>
 #include <teaql/core/detail/debug.hpp>
 #include <teaql/core/detail/model_json.hpp>
-#include "../relation_hydration_fixture.hpp"
+#include "../support/relation_hydration_fixture.hpp"
 #include <iostream>
 using namespace teaql;
 using Parent = hydration_fixture::Model<0>;

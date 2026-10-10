@@ -1,4 +1,4 @@
-#include "../context_query_fixture.hpp"
+#include "../support/context_query_fixture.hpp"
 #include <teaql/core/detail/model_json.hpp>
 #include "fixture_value.hpp"
 #include <iostream>

@@ -2,7 +2,7 @@
 #include <teaql/runtime/context.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/core/detail/debug.hpp>
-#include "../entity_decoder_fixture.hpp"
+#include "../support/entity_decoder_fixture.hpp"
 #include "fixture_value.hpp"
 #include <iostream>
 using namespace teaql;

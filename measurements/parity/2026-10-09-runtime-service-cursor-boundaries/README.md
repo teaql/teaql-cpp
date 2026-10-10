@@ -32,7 +32,7 @@ python3 tests/parity/compare_entity_query_boundaries.py --cpp build-wndr4300-mem
 ```
 
 The complete runtime service responsibility is reviewed in
-[the API contract](../../../docs/runtime-data-service-api-contract.md).
+[the API contract](../../../docs/runtime_data_service_api_contract.md).
 Physical-router testing remains explicitly deferred. Generator and production
 dependency scope are unchanged; this numerical behavior is independent of
 Context allocation quotas and lifetime contracts.

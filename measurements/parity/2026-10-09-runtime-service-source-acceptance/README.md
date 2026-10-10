@@ -5,7 +5,7 @@ Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 All six complete source files and their public/private/default/trait/diagnostic/
 ownership/execution responsibilities were reconciled with the separate native
 RuntimeDataService, ContextDataService, EntityDataService and metadata adapters.
-See [the API contract](../../../docs/runtime-data-service-api-contract.md).
+See [the API contract](../../../docs/runtime_data_service_api_contract.md).
 
 The final native consumer build finishes338 tasks, then no-work refresh precedes
 378/378 CTest in77.97 seconds with four workers. All420 compiled dependency

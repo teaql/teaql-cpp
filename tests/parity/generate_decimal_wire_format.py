@@ -51,12 +51,12 @@ def main():
     parser.add_argument('--rust', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     lock = json.loads((root / 'upstream.lock.json').read_text())
     cases = inputs()
     results = observe(args.rust, cases)
     corpus = dict(baseline=lock['commit'],
-                  dependency='rust_decimal 1.42.1, serde default/std; tests/parity/rust-values/Cargo.lock',
+                  dependency='rust_decimal 1.42.1, serde default/std; tests/parity/rust_values/Cargo.lock',
                   note='Original serde_json::from_value/to_value and formatting macros; no optional serde modes.',
                   cases=[dict(input=case, expected=output) for case, output in zip(cases, results)])
     Path(__file__).with_name('decimal_wire_format_cases.json').write_text(

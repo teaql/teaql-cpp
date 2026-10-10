@@ -3,7 +3,7 @@
 #include <teaql/runtime/context.hpp>
 #include "fixture_value.hpp"
 #include <iostream>
-#include "../safe_expression_empty_fixture.hpp"
+#include "../support/safe_expression_empty_fixture.hpp"
 
 static Json shown(Memory owner, std::optional<Value> value) {
     return value ? Json(owner, detail::debug_value(owner, *value)) : Json(owner);

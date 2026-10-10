@@ -3,7 +3,7 @@
 Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 Both complete original files, all eight bodies, helpers, inputs and assertions
 were reconciled with their direct C++ ports. See
-[the full review](../../../docs/flat-ledger-source-acceptance.md).
+[the full review](../../../docs/flat_ledger_source_acceptance.md).
 Fresh unchanged locked/offline original integration suites each pass4/4.
 
 Current ASan/UBSan and MIPS/QEMU consumers each pass2/2 after all four build/link

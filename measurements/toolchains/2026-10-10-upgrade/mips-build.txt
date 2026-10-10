@@ -1,0 +1,887 @@
+[1/725] Building CXX object CMakeFiles/teaql_core.dir/src/core/core.cpp.o
+[2/725] Building CXX object CMakeFiles/teaql_core.dir/src/core/dynamic_search.cpp.o
+[3/725] Building CXX object CMakeFiles/teaql_core.dir/src/core/query_debug.cpp.o
+[4/725] Building CXX object CMakeFiles/teaql_core.dir/src/core/expr.cpp.o
+[5/725] Building CXX object CMakeFiles/teaql_core.dir/src/core/request.cpp.o
+[6/725] Building CXX object CMakeFiles/teaql_core.dir/src/core/query.cpp.o
+[7/725] Linking CXX static library libteaql_core.a
+[8/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/bindings.cpp.o
+[9/725] Building CXX object CMakeFiles/teaql_data_service.dir/src/data_service/sql_log.cpp.o
+[10/725] Linking CXX static library libteaql_data_service.a
+[11/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/types.cpp.o
+[12/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/dialect.cpp.o
+[13/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/schema.cpp.o
+[14/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/mutation.cpp.o
+[15/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/query_plan.cpp.o
+[16/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/query_keys.cpp.o
+[17/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/diagnostic.cpp.o
+[18/725] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/mutation_execution.cpp.o
+[19/725] Linking CXX static library libteaql_sql.a
+[20/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/query_stores.cpp.o
+[21/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/id_set_build_lock.cpp.o
+[22/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_pagination.cpp.o
+[23/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/relation_enhancement.cpp.o
+[24/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/relation_installation.cpp.o
+[25/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/relation.cpp.o
+[26/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/data_service.cpp.o
+[27/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_entity.cpp.o
+[28/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_graph.cpp.o
+[29/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/entity_runtime.cpp.o
+[30/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_event.cpp.o
+[31/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/telemetry.cpp.o
+[32/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/logging.cpp.o
+[33/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_logging.cpp.o
+[34/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/log_manager.cpp.o
+[35/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/log_formatter.cpp.o
+[36/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/entity_key.cpp.o
+[37/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/id.cpp.o
+[38/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/event.cpp.o
+[39/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/audit_privacy.cpp.o
+[40/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/schema.cpp.o
+[41/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/error.cpp.o
+[42/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/registry.cpp.o
+[43/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/business_service.cpp.o
+[44/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_data_store.cpp.o
+[45/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_entity_reference.cpp.o
+[46/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_round_trip_reference.cpp.o
+[47/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/generated_support.cpp.o
+[48/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/inmemory_engine.cpp.o
+[49/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_root.cpp.o
+[50/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_locking.cpp.o
+[51/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/language.cpp.o
+[52/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/relation_graph.cpp.o
+[53/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/i18n_debug.cpp.o
+[54/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/i18n.cpp.o
+[55/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_language.cpp.o
+[56/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_checker.cpp.o
+[57/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_fix.cpp.o
+[58/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/entity_save_preparation.cpp.o
+[59/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/mutation_policy.cpp.o
+[60/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/ledger_plan.cpp.o
+[61/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_mutation_policy.cpp.o
+[62/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/schema_model.cpp.o
+[63/725] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/mutation_policy_plan.cpp.o
+[64/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/dialect.cpp.o
+[65/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/schema_unicode.cpp.o
+[66/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/schema.cpp.o
+[67/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/error.cpp.o
+[68/725] Linking CXX static library libteaql_runtime.a
+[69/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/bindings.cpp.o
+[70/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/decoding.cpp.o
+[71/725] Building CXX object CMakeFiles/teaql_legacy_sqlite.dir/src/compatibility/legacy_sqlite_compiler.cpp.o
+[72/725] Building CXX object CMakeFiles/teaql_legacy_sqlite.dir/src/compatibility/sqlite.cpp.o
+[73/725] Linking CXX static library libteaql_legacy_sqlite.a
+[74/725] Building CXX object CMakeFiles/teaql_context_lifetime.dir/examples/context_lifetime.cpp.o
+[75/725] Building CXX object CMakeFiles/teaql_provider_sqlite.dir/src/provider_sqlite/provider.cpp.o
+[76/725] Linking CXX static library libteaql_provider_sqlite.a
+[77/725] Building CXX object CMakeFiles/teaql_runtime_namespace_tests.dir/tests/runtime_namespace_tests.cpp.o
+[78/725] Building CXX object CMakeFiles/teaql_entity_runtime_model_tests.dir/tests/entity_runtime_model_tests.cpp.o
+[79/725] Building CXX object CMakeFiles/teaql_business_clock_scope_tests.dir/tests/business_clock_scope_tests.cpp.o
+[80/725] Building CXX object CMakeFiles/teaql_entity_runtime_model_probe.dir/tests/parity/entity_runtime_model_probe.cpp.o
+[81/725] Building CXX object CMakeFiles/teaql_context_provider_borrow_tests.dir/tests/context_provider_borrow_tests.cpp.o
+[82/725] Building CXX object CMakeFiles/teaql_sqlite_schema_crud.dir/examples/sqlite_schema_crud.cpp.o
+[83/725] Building CXX object CMakeFiles/teaql_runtime_callback_scope_tests.dir/tests/runtime_callback_scope_tests.cpp.o
+[84/725] Building CXX object CMakeFiles/teaql_sqlite_relations_graph.dir/examples/sqlite_relations_graph.cpp.o
+[85/725] Building CXX object CMakeFiles/teaql_context_provider_dispatch_tests.dir/tests/context_provider_dispatch_tests.cpp.o
+[86/725] Building CXX object CMakeFiles/teaql_runtime_id_model_tests.dir/tests/runtime_id_model_tests.cpp.o
+[87/725] Building CXX object CMakeFiles/teaql_runtime_id_model_probe.dir/tests/parity/runtime_id_model_probe.cpp.o
+[88/725] Building CXX object CMakeFiles/teaql_context_defaults_tests.dir/tests/context_defaults_tests.cpp.o
+[89/725] Building CXX object CMakeFiles/teaql_context_defaults_probe.dir/tests/parity/context_defaults_probe.cpp.o
+[90/725] Building CXX object CMakeFiles/teaql_reference_model_tests.dir/tests/reference_model_tests.cpp.o
+[91/725] Building CXX object CMakeFiles/teaql_round_trip_reference_tests.dir/tests/round_trip_reference_tests.cpp.o
+[92/725] Building CXX object CMakeFiles/teaql_reference_model_probe.dir/tests/parity/reference_model_probe.cpp.o
+[93/725] Building CXX object CMakeFiles/teaql_round_trip_reference_probe.dir/tests/parity/round_trip_reference_probe.cpp.o
+[94/725] Building CXX object CMakeFiles/teaql_entity_reference_tests.dir/tests/entity_reference_tests.cpp.o
+[95/725] Building CXX object CMakeFiles/teaql_reference_crypto_tests.dir/tests/reference_crypto_tests.cpp.o
+[96/725] Building CXX object CMakeFiles/teaql_entity_reference_probe.dir/tests/parity/entity_reference_probe.cpp.o
+[97/725] Building CXX object CMakeFiles/teaql_inmemory_tests.dir/tests/inmemory_tests.cpp.o
+[98/725] Building CXX object CMakeFiles/teaql_inmemory_probe.dir/tests/parity/inmemory_probe.cpp.o
+[99/725] Building CXX object CMakeFiles/teaql_locking_tests.dir/tests/locking_tests.cpp.o
+[100/725] Building CXX object CMakeFiles/teaql_locking_probe.dir/tests/parity/locking_probe.cpp.o
+[101/725] Building CXX object CMakeFiles/teaql_transaction_move_only_tests.dir/tests/transaction_move_only_tests.cpp.o
+[102/725] Building CXX object CMakeFiles/teaql_transaction_provider_error_tests.dir/tests/transaction_provider_error_tests.cpp.o
+[103/725] Building CXX object CMakeFiles/teaql_transaction_move_only_probe.dir/tests/parity/transaction_move_only_probe.cpp.o
+[104/725] Building CXX object CMakeFiles/teaql_policy_model_tests.dir/tests/policy_model_tests.cpp.o
+[105/725] Building CXX object CMakeFiles/teaql_runtime_examples_tests.dir/tests/runtime_examples_tests.cpp.o
+[106/725] Building CXX object CMakeFiles/teaql_ledger_move_only_probe.dir/tests/parity/ledger_move_only_probe.cpp.o
+[107/725] Building CXX object CMakeFiles/teaql_policy_model_probe.dir/tests/parity/policy_model_probe.cpp.o
+[108/725] Building CXX object CMakeFiles/teaql_ledger_move_only_tests.dir/tests/ledger_move_only_tests.cpp.o
+[109/725] Building CXX object CMakeFiles/teaql_check_model_tests.dir/tests/check_model_tests.cpp.o
+[110/725] Building CXX object CMakeFiles/teaql_event_model_probe.dir/tests/parity/event_model_probe.cpp.o
+[111/725] Building CXX object CMakeFiles/teaql_event_model_tests.dir/tests/event_model_tests.cpp.o
+[112/725] Building CXX object CMakeFiles/teaql_check_model_probe.dir/tests/parity/check_model_probe.cpp.o
+[113/725] Building CXX object CMakeFiles/teaql_relation_model_tests.dir/tests/relation_model_tests.cpp.o
+[114/725] Building CXX object CMakeFiles/teaql_unified_buffer_clone_tests.dir/tests/unified_buffer_clone_tests.cpp.o
+[115/725] Building CXX object CMakeFiles/teaql_relation_model_probe.dir/tests/parity/relation_model_probe.cpp.o
+[116/725] Building CXX object CMakeFiles/teaql_runtime_foreign_work_tests.dir/tests/runtime_foreign_work_tests.cpp.o
+[117/725] Building CXX object CMakeFiles/teaql_unified_buffer_clone_probe.dir/tests/parity/unified_buffer_clone_probe.cpp.o
+[118/725] Building CXX object CMakeFiles/teaql_log_model_tests.dir/tests/log_model_tests.cpp.o
+[119/725] Building CXX object CMakeFiles/teaql_log_model_probe.dir/tests/parity/log_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_uninitialized.h:63,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory:69,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/clone.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/result.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/business_id.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/runtime/business_id.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/runtime.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:521:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:548:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:555:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:651:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1133:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::SqlLogEntry entry(teaql::Memory, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:31:62,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:87:38:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  452 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/string:68,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/locale_classes.h:40,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/ios_base.h:41,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/ios:44,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/ostream:40,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/unique_ptr.h:43,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory:78:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:452:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1131:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::SqlLogEntry entry(teaql::Memory, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:31:62,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/log_model_probe.cpp:87:38:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[120/725] Building CXX object CMakeFiles/teaql_transaction_scope_probe.dir/tests/parity/transaction_scope_probe.cpp.o
+[121/725] Building CXX object CMakeFiles/teaql_audited_auto_save_probe.dir/tests/parity/audited_auto_save_probe.cpp.o
+[122/725] Building CXX object CMakeFiles/teaql_transaction_scope_tests.dir/tests/transaction_scope_tests.cpp.o
+[123/725] Building CXX object CMakeFiles/teaql_audited_auto_save_tests.dir/tests/audited_auto_save_tests.cpp.o
+[124/725] Building CXX object CMakeFiles/teaql_audited_save_probe.dir/tests/parity/audited_save_probe.cpp.o
+[125/725] Building CXX object CMakeFiles/teaql_audited_save_tests.dir/tests/audited_save_tests.cpp.o
+[126/725] Building CXX object CMakeFiles/teaql_graph_saver_probe.dir/tests/parity/graph_saver_probe.cpp.o
+[127/725] Building CXX object CMakeFiles/teaql_graph_saver_tests.dir/tests/graph_saver_tests.cpp.o
+[128/725] Building CXX object CMakeFiles/teaql_ledger_execution_tests.dir/tests/ledger_execution_tests.cpp.o
+[129/725] Building CXX object CMakeFiles/teaql_ledger_execution_probe.dir/tests/parity/ledger_execution_probe.cpp.o
+[130/725] Building CXX object CMakeFiles/teaql_entity_graph_execution_tests.dir/tests/entity_graph_execution_tests.cpp.o
+[131/725] Building CXX object CMakeFiles/teaql_graph_execution_probe.dir/tests/parity/graph_execution_probe.cpp.o
+[132/725] Building CXX object CMakeFiles/teaql_graph_node_command_tests.dir/tests/graph_node_command_tests.cpp.o
+[133/725] Building CXX object CMakeFiles/teaql_ledger_plan_tests.dir/tests/ledger_plan_tests.cpp.o
+[134/725] Building CXX object CMakeFiles/teaql_recursive_graph_write_tests.dir/tests/recursive_graph_write_tests.cpp.o
+[135/725] Building CXX object CMakeFiles/teaql_graph_save_adapter_tests.dir/tests/graph_save_adapter_tests.cpp.o
+[136/725] Building CXX object CMakeFiles/teaql_ledger_plan_probe.dir/tests/parity/ledger_plan_probe.cpp.o
+[137/725] Building CXX object CMakeFiles/teaql_runtime_mutation_tests.dir/tests/runtime_mutation_tests.cpp.o
+[138/725] Building CXX object CMakeFiles/teaql_entity_graph_plan_probe.dir/tests/parity/entity_graph_plan_probe.cpp.o
+[139/725] Building CXX object CMakeFiles/teaql_runtime_mutation_probe.dir/tests/parity/runtime_mutation_probe.cpp.o
+[140/725] Building CXX object CMakeFiles/teaql_policy_plan_probe.dir/tests/parity/policy_plan_probe.cpp.o
+[141/725] Building CXX object CMakeFiles/teaql_entity_graph_plan_tests.dir/tests/entity_graph_plan_tests.cpp.o
+[142/725] Building CXX object CMakeFiles/teaql_mutation_policy_probe.dir/tests/parity/mutation_policy_probe.cpp.o
+[143/725] Building CXX object CMakeFiles/teaql_mutation_policy_tests.dir/tests/mutation_policy_tests.cpp.o
+[144/725] Building CXX object CMakeFiles/teaql_save_preparation_tests.dir/tests/save_preparation_tests.cpp.o
+[145/725] Building CXX object CMakeFiles/teaql_graph_fix_tests.dir/tests/graph_fix_tests.cpp.o
+[146/725] Building CXX object CMakeFiles/teaql_save_preparation_probe.dir/tests/parity/save_preparation_probe.cpp.o
+[147/725] Building CXX object CMakeFiles/teaql_graph_fix_probe.dir/tests/parity/graph_fix_probe.cpp.o
+[148/725] Building CXX object CMakeFiles/teaql_checker_tests.dir/tests/checker_tests.cpp.o
+[149/725] Building CXX object CMakeFiles/teaql_i18n_tests.dir/tests/i18n_tests.cpp.o
+[150/725] Building CXX object CMakeFiles/teaql_checker_probe.dir/tests/parity/checker_probe.cpp.o
+[151/725] Building CXX object CMakeFiles/teaql_i18n_probe.dir/tests/parity/i18n_probe.cpp.o
+[152/725] Building CXX object CMakeFiles/teaql_i18n_debug_scope_probe.dir/tests/parity/i18n_debug_scope_probe.cpp.o
+[153/725] Building CXX object CMakeFiles/teaql_original_sql_binding_tests.dir/tests/parity/teaql-sql/binding_tests.cpp.o
+[154/725] Building CXX object CMakeFiles/teaql_sqlite_schema_probe.dir/tests/parity/sqlite_schema_probe.cpp.o
+[155/725] Building CXX object CMakeFiles/teaql_provider_sqlite_schema_tests.dir/tests/provider_sqlite_schema_tests.cpp.o
+[156/725] Building CXX object CMakeFiles/teaql_original_sql_rendering_tests.dir/tests/parity/teaql-sql/log_rendering_tests.cpp.o
+[157/725] Building CXX object CMakeFiles/teaql_original_sql_default_tests.dir/tests/parity/teaql-sql/default_contracts.cpp.o
+[158/725] Building CXX object CMakeFiles/teaql_original_query_execution_tests.dir/tests/parity/teaql-sql/execution_tests.cpp.o
+[159/725] Building CXX object CMakeFiles/teaql_original_mutation_execution_tests.dir/tests/parity/teaql-sql/mutation_execution_tests.cpp.o
+[160/725] Building CXX object CMakeFiles/teaql_original_diagnostic_stream_tests.dir/tests/parity/teaql-sql/diagnostic_stream.cpp.o
+[161/725] Building CXX object CMakeFiles/teaql_original_sql_executor_tests.dir/tests/parity/teaql-sql/executor_contracts.cpp.o
+[162/725] Building CXX object CMakeFiles/teaql_original_sql_compiler_tests.dir/tests/parity/teaql-sql/compiler.cpp.o
+[163/725] Building CXX object CMakeFiles/teaql_original_entity_status_tests.dir/tests/parity/teaql-runtime/entity_status.cpp.o
+[164/725] Building CXX object CMakeFiles/teaql_original_business_clock_tests.dir/tests/parity/teaql-runtime/business_clock.cpp.o
+[165/725] Building CXX object CMakeFiles/teaql_original_cache_relation_tests.dir/tests/parity/teaql-runtime/cache_relation.cpp.o
+[166/725] Building CXX object CMakeFiles/teaql_original_checker_locale_tests.dir/tests/parity/teaql-runtime/checker_locale.cpp.o
+[167/725] Building CXX object CMakeFiles/teaql_original_inmemory_tests.dir/tests/parity/teaql-runtime/inmemory_engine.cpp.o
+[168/725] Building CXX object CMakeFiles/teaql_original_log_telemetry_tests.dir/tests/parity/teaql-runtime/log_telemetry.cpp.o
+[169/725] Building CXX object CMakeFiles/teaql_original_log_privacy_tests.dir/tests/parity/teaql-runtime/log_privacy.cpp.o
+[170/725] Building CXX object CMakeFiles/teaql_original_policy_graph_tests.dir/tests/parity/teaql-runtime/policy_graph.cpp.o
+[171/725] Building CXX object CMakeFiles/teaql_original_context_tests.dir/tests/parity/teaql-runtime/context.cpp.o
+[172/725] Building CXX object CMakeFiles/teaql_original_masking_tests.dir/tests/parity/teaql-runtime/masking_contract_tests.cpp.o
+[173/725] Building CXX object CMakeFiles/teaql_original_business_permutation_tests.dir/tests/parity/teaql-runtime/business_id_permutation.cpp.o
+[174/725] Building CXX object CMakeFiles/teaql_original_flat_graph_tests.dir/tests/parity/teaql-runtime/flat_identity_graph.cpp.o
+[175/725] Building CXX object CMakeFiles/teaql_original_ledger_tests.dir/tests/parity/teaql-runtime/test_incremental_ledger.cpp.o
+[176/725] Building CXX object CMakeFiles/teaql_original_provider_search_tests.dir/tests/parity/teaql-provider-sqlite/dynamic_search.cpp.o
+[177/725] Building CXX object CMakeFiles/teaql_original_provider_storage_tests.dir/tests/parity/teaql-provider-sqlite/storage.cpp.o
+[178/725] Building CXX object CMakeFiles/teaql_original_provider_schema_tests.dir/tests/parity/teaql-provider-sqlite/schema.cpp.o
+[179/725] Building CXX object CMakeFiles/teaql_original_provider_query_tests.dir/tests/parity/teaql-provider-sqlite/query_rows.cpp.o
+[180/725] Building CXX object CMakeFiles/teaql_original_round_trip_reference_tests.dir/tests/parity/teaql-runtime/round_trip_reference.cpp.o
+[181/725] Building CXX object CMakeFiles/teaql_original_runtime_registration_tests.dir/tests/parity/teaql-runtime/registration.cpp.o
+[182/725] Building CXX object CMakeFiles/teaql_original_provider_transaction_tests.dir/tests/parity/teaql-provider-sqlite/transactions.cpp.o
+[183/725] Building CXX object CMakeFiles/teaql_original_entity_save_tests.dir/tests/parity/teaql-runtime/entity_save.cpp.o
+[184/725] Building CXX object CMakeFiles/teaql_original_runtime_service_tests.dir/tests/parity/teaql-runtime/service_boundaries.cpp.o
+[185/725] Building CXX object CMakeFiles/teaql_original_runtime_validation_tests.dir/tests/parity/teaql-runtime/validation.cpp.o
+[186/725] Building CXX object CMakeFiles/teaql_original_runtime_events_relations_tests.dir/tests/parity/teaql-runtime/events_relations.cpp.o
+[187/725] Building CXX object CMakeFiles/teaql_original_runtime_typed_query_tests.dir/tests/parity/teaql-runtime/typed_queries.cpp.o
+[188/725] Building CXX object CMakeFiles/teaql_original_runtime_aggregate_tests.dir/tests/parity/teaql-runtime/aggregates_cache.cpp.o
+[189/725] Building CXX object CMakeFiles/teaql_original_runtime_graph_reference_tests.dir/tests/parity/teaql-runtime/graph_reference_lifetime.cpp.o
+[190/725] Building CXX object CMakeFiles/teaql_original_runtime_context_tail_tests.dir/tests/parity/teaql-runtime/context_tail.cpp.o
+[191/725] Building CXX object CMakeFiles/teaql_provider_sqlite_unicode_tests.dir/tests/provider_sqlite_unicode_tests.cpp.o
+[192/725] Building CXX object CMakeFiles/teaql_original_runtime_pagination_tests.dir/tests/parity/teaql-runtime/pagination.cpp.o
+[193/725] Building CXX object CMakeFiles/teaql_original_runtime_memory_service_tests.dir/tests/parity/teaql-runtime/memory_service.cpp.o
+[194/725] Building CXX object CMakeFiles/teaql_original_provider_guard_tests.dir/tests/parity/teaql-provider-sqlite/guarded_mutation.cpp.o
+[195/725] Building CXX object CMakeFiles/teaql_runtime_base_probe.dir/tests/parity/runtime_base_probe.cpp.o
+[196/725] Building CXX object CMakeFiles/teaql_relation_execution_probe.dir/tests/parity/relation_execution_probe.cpp.o
+[197/725] Building CXX object CMakeFiles/teaql_context_query_probe.dir/tests/parity/context_query_probe.cpp.o
+[198/725] Building CXX object CMakeFiles/teaql_query_keys_tests.dir/tests/query_keys_tests.cpp.o
+[199/725] Building CXX object CMakeFiles/teaql_id_set_build_probe.dir/tests/parity/id_set_build_probe.cpp.o
+[200/725] Building CXX object CMakeFiles/teaql_query_keys_probe.dir/tests/parity/query_keys_probe.cpp.o
+[201/725] Building CXX object CMakeFiles/teaql_id_set_build_tests.dir/tests/id_set_build_tests.cpp.o
+[202/725] Building CXX object CMakeFiles/teaql_query_store_model_tests.dir/tests/query_store_model_tests.cpp.o
+[203/725] Building CXX object CMakeFiles/teaql_query_store_probe.dir/tests/parity/query_store_probe.cpp.o
+[204/725] Building CXX object CMakeFiles/teaql_query_store_model_probe.dir/tests/parity/query_store_model_probe.cpp.o
+[205/725] Building CXX object CMakeFiles/teaql_query_store_tests.dir/tests/query_store_tests.cpp.o
+[206/725] Building CXX object CMakeFiles/teaql_relation_enhancement_probe.dir/tests/parity/relation_enhancement_probe.cpp.o
+[207/725] Building CXX object CMakeFiles/teaql_relation_execution_tests.dir/tests/relation_execution_tests.cpp.o
+[208/725] Building CXX object CMakeFiles/teaql_relation_hydration_probe.dir/tests/parity/relation_hydration_probe.cpp.o
+[209/725] Building CXX object CMakeFiles/teaql_relation_hydration_tests.dir/tests/relation_hydration_tests.cpp.o
+[210/725] Building CXX object CMakeFiles/teaql_context_query_tests.dir/tests/context_query_tests.cpp.o
+[211/725] Building CXX object CMakeFiles/teaql_relation_enhancement_tests.dir/tests/relation_enhancement_tests.cpp.o
+[212/725] Building CXX object CMakeFiles/teaql_runtime_move_only_tests.dir/tests/runtime_move_only_tests.cpp.o
+[213/725] Building CXX object CMakeFiles/teaql_entity_service_tests.dir/tests/entity_service_tests.cpp.o
+[214/725] Building CXX object CMakeFiles/teaql_enhanced_entities_tests.dir/tests/enhanced_entities_tests.cpp.o
+[215/725] Building CXX object CMakeFiles/teaql_runtime_completion_tests.dir/tests/runtime_completion_tests.cpp.o
+[216/725] Building CXX object CMakeFiles/teaql_enhanced_entities_probe.dir/tests/parity/enhanced_entities_probe.cpp.o
+[217/725] Building CXX object CMakeFiles/teaql_entity_stream_tests.dir/tests/entity_stream_tests.cpp.o
+[218/725] Building CXX object CMakeFiles/teaql_id_set_page_probe.dir/tests/parity/id_set_page_probe.cpp.o
+[219/725] Building CXX object CMakeFiles/teaql_id_set_page_tests.dir/tests/id_set_page_tests.cpp.o
+[220/725] Building CXX object CMakeFiles/teaql_entity_service_probe.dir/tests/parity/entity_service_probe.cpp.o
+[221/725] Building CXX object CMakeFiles/teaql_typed_aggregate_scope_probe.dir/tests/parity/typed_aggregate_scope_probe.cpp.o
+[222/725] Building CXX object CMakeFiles/teaql_typed_aggregate_tests.dir/tests/typed_aggregate_tests.cpp.o
+[223/725] Building CXX object CMakeFiles/teaql_entity_stream_probe.dir/tests/parity/entity_stream_probe.cpp.o
+[224/725] Building CXX object CMakeFiles/teaql_entity_query_probe.dir/tests/parity/entity_query_probe.cpp.o
+[225/725] Building CXX object CMakeFiles/teaql_entity_decoder_probe.dir/tests/parity/entity_decoder_probe.cpp.o
+[226/725] Building CXX object CMakeFiles/teaql_entity_runtime_probe.dir/tests/parity/entity_runtime_probe.cpp.o
+[227/725] Building CXX object CMakeFiles/teaql_entity_decoder_tests.dir/tests/entity_decoder_tests.cpp.o
+[228/725] Building CXX object CMakeFiles/teaql_entity_runtime_tests.dir/tests/entity_runtime_tests.cpp.o
+[229/725] Building CXX object CMakeFiles/teaql_runtime_graph_model_tests.dir/tests/runtime_graph_model_tests.cpp.o
+[230/725] Building CXX object CMakeFiles/teaql_runtime_graph_model_probe.dir/tests/parity/runtime_graph_model_probe.cpp.o
+[231/725] Building CXX object CMakeFiles/teaql_graph_repository_probe.dir/tests/parity/graph_repository_probe.cpp.o
+[232/725] Building CXX object CMakeFiles/teaql_runtime_graph_probe.dir/tests/parity/runtime_graph_probe.cpp.o
+[233/725] Building CXX object CMakeFiles/teaql_runtime_graph_tests.dir/tests/runtime_graph_tests.cpp.o
+[234/725] Building CXX object CMakeFiles/teaql_context_event_probe.dir/tests/parity/context_event_probe.cpp.o
+[235/725] Building CXX object CMakeFiles/teaql_telemetry_tests.dir/tests/telemetry_tests.cpp.o
+[236/725] Building CXX object CMakeFiles/teaql_context_event_tests.dir/tests/context_event_tests.cpp.o
+[237/725] Building CXX object CMakeFiles/teaql_telemetry_model_scope_probe.dir/tests/parity/telemetry_model_scope_probe.cpp.o
+[238/725] Building CXX object CMakeFiles/teaql_telemetry_probe.dir/tests/parity/telemetry_probe.cpp.o
+[239/725] Building CXX object CMakeFiles/teaql_context_logging_tests.dir/tests/context_logging_tests.cpp.o
+[240/725] Building CXX object CMakeFiles/teaql_context_logging_probe.dir/tests/parity/context_logging_probe.cpp.o
+[241/725] Building CXX object CMakeFiles/teaql_log_manager_probe.dir/tests/parity/log_manager_probe.cpp.o
+[242/725] Building CXX object CMakeFiles/teaql_log_manager_tests.dir/tests/log_manager_tests.cpp.o
+[243/725] Building CXX object CMakeFiles/teaql_log_formatter_tests.dir/tests/log_formatter_tests.cpp.o
+[244/725] Building CXX object CMakeFiles/teaql_runtime_log_tests.dir/tests/runtime_log_tests.cpp.o
+[245/725] Building CXX object CMakeFiles/teaql_log_formatter_probe.dir/tests/parity/log_formatter_probe.cpp.o
+[246/725] Building CXX object CMakeFiles/teaql_runtime_log_probe.dir/tests/parity/runtime_log_probe.cpp.o
+[247/725] Building CXX object CMakeFiles/teaql_audit_event_tests.dir/tests/audit_event_tests.cpp.o
+[248/725] Building CXX object CMakeFiles/teaql_audit_event_probe.dir/tests/parity/audit_event_probe.cpp.o
+[249/725] Building CXX object CMakeFiles/teaql_schema_runtime_probe.dir/tests/parity/schema_runtime_probe.cpp.o
+[250/725] Building CXX object CMakeFiles/teaql_internal_id_probe.dir/tests/parity/internal_id_probe.cpp.o
+[251/725] Building CXX object CMakeFiles/teaql_schema_runtime_tests.dir/tests/schema_runtime_tests.cpp.o
+[252/725] Building CXX object CMakeFiles/teaql_internal_id_tests.dir/tests/internal_id_tests.cpp.o
+[253/725] Building CXX object CMakeFiles/teaql_runtime_business_id_tests.dir/tests/runtime_business_id_tests.cpp.o
+[254/725] Building CXX object CMakeFiles/teaql_business_service_probe.dir/tests/parity/business_service_probe.cpp.o
+[255/725] Building CXX object CMakeFiles/teaql_business_service_tests.dir/tests/business_service_tests.cpp.o
+[256/725] Building CXX object CMakeFiles/teaql_runtime_business_id_probe.dir/tests/parity/runtime_business_id_probe.cpp.o
+[257/725] Building CXX object CMakeFiles/teaql_runtime_registry_probe.dir/tests/parity/runtime_registry_probe.cpp.o
+[258/725] Building CXX object CMakeFiles/teaql_runtime_registry_tests.dir/tests/runtime_registry_tests.cpp.o
+[259/725] Building CXX object CMakeFiles/teaql_registry_debug_scope_probe.dir/tests/parity/registry_debug_scope_probe.cpp.o
+[260/725] Building CXX object CMakeFiles/teaql_runtime_check_tests.dir/tests/runtime_check_tests.cpp.o
+[261/725] Building CXX object CMakeFiles/teaql_error_generic_tests.dir/tests/error_generic_tests.cpp.o
+[262/725] Building CXX object CMakeFiles/teaql_runtime_check_probe.dir/tests/parity/runtime_check_probe.cpp.o
+[263/725] Building CXX object CMakeFiles/teaql_sql_move_only_tests.dir/tests/sql_move_only_tests.cpp.o
+[264/725] Building CXX object CMakeFiles/teaql_runtime_context_tests.dir/tests/runtime_context_tests.cpp.o
+[265/725] Building CXX object CMakeFiles/teaql_context_model_tests.dir/tests/context_model_tests.cpp.o
+[266/725] Building CXX object CMakeFiles/teaql_context_model_probe.dir/tests/parity/context_model_probe.cpp.o
+[267/725] Building CXX object CMakeFiles/teaql_runtime_context_probe.dir/tests/parity/runtime_context_probe.cpp.o
+[268/725] Building CXX object CMakeFiles/teaql_provider_sqlite_id_tests.dir/tests/provider_sqlite_id_tests.cpp.o
+[269/725] Building CXX object CMakeFiles/teaql_provider_sqlite_business_id_tests.dir/tests/provider_sqlite_business_id_tests.cpp.o
+[270/725] Building CXX object CMakeFiles/teaql_sqlite_decoding_probe.dir/tests/parity/sqlite_decoding_probe.cpp.o
+[271/725] Building CXX object CMakeFiles/teaql_sqlite_transport_probe.dir/tests/parity/sqlite_transport_probe.cpp.o
+[272/725] Building CXX object CMakeFiles/teaql_provider_sqlite_decoding_tests.dir/tests/provider_sqlite_decoding_tests.cpp.o
+[273/725] Building CXX object CMakeFiles/teaql_provider_sqlite_transport_tests.dir/tests/provider_sqlite_transport_tests.cpp.o
+[274/725] Building CXX object CMakeFiles/teaql_provider_sqlite_model_tests.dir/tests/provider_sqlite_model_tests.cpp.o
+[275/725] Building CXX object CMakeFiles/teaql_sqlite_bindings_probe.dir/tests/parity/sqlite_bindings_probe.cpp.o
+[276/725] Building CXX object CMakeFiles/teaql_provider_sqlite_bindings_tests.dir/tests/provider_sqlite_bindings_tests.cpp.o
+[277/725] Building CXX object CMakeFiles/teaql_provider_sqlite_error_tests.dir/tests/provider_sqlite_error_tests.cpp.o
+[278/725] Building CXX object CMakeFiles/teaql_provider_sqlite_driver_error_tests.dir/tests/provider_sqlite_driver_error_tests.cpp.o
+[279/725] Building CXX object CMakeFiles/teaql_sqlite_native_diagnostics_probe.dir/tests/parity/sqlite_native_diagnostics_probe.cpp.o
+[280/725] Building CXX object CMakeFiles/teaql_sqlite_error_model_probe.dir/tests/parity/sqlite_error_model_probe.cpp.o
+[281/725] Building CXX object CMakeFiles/teaql_provider_sqlite_simple_error_tests.dir/tests/provider_sqlite_simple_error_tests.cpp.o
+[282/725] Building CXX object CMakeFiles/teaql_provider_sqlite_boxed_error_tests.dir/tests/provider_sqlite_boxed_error_tests.cpp.o
+[283/725] Building CXX object CMakeFiles/teaql_provider_sqlite_from_sql_error_tests.dir/tests/provider_sqlite_from_sql_error_tests.cpp.o
+[284/725] Building CXX object CMakeFiles/teaql_sqlite_from_sql_error_probe.dir/tests/parity/sqlite_from_sql_error_probe.cpp.o
+[285/725] Building CXX object CMakeFiles/teaql_sqlite_simple_error_probe.dir/tests/parity/sqlite_simple_error_probe.cpp.o
+[286/725] Building CXX object CMakeFiles/teaql_sql_stream_probe.dir/tests/parity/sql_stream_probe.cpp.o
+[287/725] Building CXX object CMakeFiles/teaql_sql_stream_tests.dir/tests/sql_stream_tests.cpp.o
+[288/725] Building CXX object CMakeFiles/teaql_sql_execution_tests.dir/tests/sql_execution_tests.cpp.o
+[289/725] Building CXX object CMakeFiles/teaql_sql_transaction_tests.dir/tests/sql_transaction_tests.cpp.o
+[290/725] Building CXX object CMakeFiles/teaql_sql_query_probe.dir/tests/parity/sql_query_probe.cpp.o
+[291/725] Building CXX object CMakeFiles/teaql_sql_execution_probe.dir/tests/parity/sql_execution_probe.cpp.o
+[292/725] Building CXX object CMakeFiles/teaql_sql_transport_probe.dir/tests/parity/sql_transport_probe.cpp.o
+[293/725] Building CXX object CMakeFiles/teaql_sql_query_tests.dir/tests/sql_query_tests.cpp.o
+[294/725] Building CXX object CMakeFiles/teaql_sql_executor_error_probe.dir/tests/parity/sql_executor_error_probe.cpp.o
+[295/725] Building CXX object CMakeFiles/teaql_provider_sqlite_tests.dir/tests/provider_sqlite_tests.cpp.o
+[296/725] Building CXX object CMakeFiles/teaql_sql_transport_tests.dir/tests/sql_transport_tests.cpp.o
+[297/725] Building CXX object CMakeFiles/teaql_sql_schema_probe.dir/tests/parity/sql_schema_probe.cpp.o
+[298/725] Building CXX object CMakeFiles/teaql_sql_mutation_tests.dir/tests/sql_mutation_tests.cpp.o
+[299/725] Building CXX object CMakeFiles/teaql_sql_mutation_probe.dir/tests/parity/sql_mutation_probe.cpp.o
+[300/725] Building CXX object CMakeFiles/teaql_sql_dialect_tests.dir/tests/sql_dialect_tests.cpp.o
+[301/725] Building CXX object CMakeFiles/teaql_sql_dialect_helper_probe.dir/tests/parity/sql_dialect_helper_probe.cpp.o
+[302/725] Building CXX object CMakeFiles/teaql_sql_dialect_probe.dir/tests/parity/sql_dialect_probe.cpp.o
+[303/725] Building CXX object CMakeFiles/teaql_sql_model_tests.dir/tests/sql_model_tests.cpp.o
+[304/725] Building CXX object CMakeFiles/teaql_sql_model_api_tests.dir/tests/sql_model_api_tests.cpp.o
+[305/725] Building CXX object CMakeFiles/teaql_sql_types_probe.dir/tests/parity/sql_types_probe.cpp.o
+[306/725] Building CXX object CMakeFiles/teaql_sql_model_api_probe.dir/tests/parity/sql_model_api_probe.cpp.o
+[307/725] Building CXX object CMakeFiles/teaql_async_tests.dir/tests/async_tests.cpp.o
+[308/725] Building CXX object CMakeFiles/teaql_executor_tests.dir/tests/executor_tests.cpp.o
+[309/725] Building CXX object CMakeFiles/teaql_data_service_tests.dir/tests/data_service_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/vector:62,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory_resource:65,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/data_service_tests.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:521:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:548:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:555:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:651:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1133:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'void scope_and_models()' at /home/philip/githome/teaql-cpp/tests/data_service_tests.cpp:124:54:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  452 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory_resource:64:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:452:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1131:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'void scope_and_models()' at /home/philip/githome/teaql-cpp/tests/data_service_tests.cpp:124:54:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[310/725] Building CXX object CMakeFiles/teaql_executor_defaults_scope_probe.dir/tests/parity/executor_defaults_scope_probe.cpp.o
+[311/725] Building CXX object CMakeFiles/teaql_data_service_model_tests.dir/tests/data_service_model_tests.cpp.o
+[312/725] Building CXX object CMakeFiles/teaql_system_time_tests.dir/tests/system_time_tests.cpp.o
+[313/725] Building CXX object CMakeFiles/teaql_system_time_arithmetic_scope_tests.dir/tests/system_time_arithmetic_scope_tests.cpp.o
+[314/725] Building CXX object CMakeFiles/teaql_system_time_arithmetic_scope_probe.dir/tests/parity/system_time_arithmetic_scope_probe.cpp.o
+[315/725] Building CXX object CMakeFiles/teaql_system_time_probe.dir/tests/parity/system_time_probe.cpp.o
+[316/725] Building CXX object CMakeFiles/teaql_system_time_error_scope_probe.dir/tests/parity/system_time_error_scope_probe.cpp.o
+[317/725] Building CXX object CMakeFiles/teaql_data_service_scope_tests.dir/tests/data_service_scope_tests.cpp.o
+[318/725] Building CXX object CMakeFiles/teaql_data_service_model_scope_probe.dir/tests/parity/data_service_model_scope_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/vector:62,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory_resource:65,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/model_debug.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/parity/data_service_model_scope_probe.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:521:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:548:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:555:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:651:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1133:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_scope_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  452 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory_resource:64:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:452:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1131:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_scope_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[319/725] Building CXX object CMakeFiles/teaql_sql_log_probe.dir/tests/parity/sql_log_probe.cpp.o
+[320/725] Building CXX object CMakeFiles/teaql_data_service_model_probe.dir/tests/parity/data_service_model_probe.cpp.o
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/vector:62,
+                 from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory_resource:65,
+                 from /home/philip/githome/teaql-cpp/include/teaql/memory/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:2,
+                 from /home/philip/githome/teaql-cpp/include/teaql/data_service/model_debug.hpp:2,
+                 from /home/philip/githome/teaql-cpp/tests/parity/data_service_model_probe.cpp:1:
+In static member function 'static constexpr _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = long unsigned int; _Up = long unsigned int; bool _IsMove = false]',
+    inlined from 'constexpr _OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:521:30,
+    inlined from 'constexpr _OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:548:42,
+    inlined from 'constexpr _OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:555:31,
+    inlined from 'constexpr _OI std::copy(_II, _II, _OI) [with _II = long unsigned int*; _OI = long unsigned int*]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:651:7,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::_M_copy_aligned(const_iterator, const_iterator, iterator) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1342:28,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1133:33,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, unsigned int)' writing between 5 and 2147483647 bytes into a region of size 4 overflows the destination [-Wstringop-overflow=]
+  452 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/memory_resource:64:
+In member function '_Tp* std::pmr::polymorphic_allocator<_Tp>::allocate(std::size_t) [with _Tp = long unsigned int]',
+    inlined from 'static _Tp* std::allocator_traits<std::pmr::polymorphic_allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = long unsigned int]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:452:28,
+    inlined from 'constexpr std::_Bvector_base<_Alloc>::_Bit_pointer std::_Bvector_base<_Alloc>::_M_allocate(std::size_t) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:679:48,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_insert_range(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/vector.tcc:1131:39,
+    inlined from 'constexpr std::vector<bool, _Alloc>::iterator std::vector<bool, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1219:19,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const bool*; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:1479:14,
+    inlined from 'constexpr void std::vector<bool, _Alloc>::assign(_InputIterator, _InputIterator) [with _InputIterator = const bool*; <template-parameter-2-2> = void; _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:974:17,
+    inlined from 'constexpr std::vector<bool, _Alloc>& std::vector<bool, _Alloc>::operator=(std::initializer_list<bool>) [with _Alloc = std::pmr::polymorphic_allocator<bool>]' at /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/stl_bvector.h:954:14,
+    inlined from 'teaql::Json evaluate(teaql::UserContext&, const teaql::Json&)' at /home/philip/githome/teaql-cpp/tests/parity/data_service_model_probe.cpp:60:54:
+/home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/mips-openwrt-linux-musl/include/c++/14.3.0/bits/memory_resource.h:162:55: note: destination object of size 4 allocated by 'std::pmr::memory_resource::allocate'
+  162 |         return static_cast<_Tp*>(_M_resource->allocate(__n * sizeof(_Tp),
+      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+  163 |                                                        alignof(_Tp)));
+      |                                                        ~~~~~~~~~~~~~
+[321/725] Building CXX object CMakeFiles/teaql_sql_projection_scope_tests.dir/tests/sql_projection_scope_tests.cpp.o
+[322/725] Building CXX object CMakeFiles/teaql_sql_projection_scope_probe.dir/tests/parity/sql_projection_scope_probe.cpp.o
+[323/725] Building CXX object CMakeFiles/teaql_decimal_tests.dir/tests/decimal_tests.cpp.o
+[324/725] Building CXX object CMakeFiles/teaql_decimal_inline_tests.dir/tests/decimal_inline_tests.cpp.o
+[325/725] Building CXX object CMakeFiles/teaql_core_aux_debug_tests.dir/tests/core_aux_debug_tests.cpp.o
+[326/725] Building CXX object CMakeFiles/teaql_decimal_inline_probe.dir/tests/parity/decimal_inline_probe.cpp.o
+[327/725] Building CXX object CMakeFiles/teaql_core_aux_debug_probe.dir/tests/parity/core_aux_debug_probe.cpp.o
+[328/725] Building CXX object CMakeFiles/teaql_business_id_tests.dir/tests/business_id_tests.cpp.o
+[329/725] Building CXX object CMakeFiles/teaql_business_id_probe.dir/tests/parity/business_id_probe.cpp.o
+[330/725] Building CXX object CMakeFiles/teaql_decimal_probe.dir/tests/parity/decimal_probe.cpp.o
+[331/725] Building CXX object CMakeFiles/teaql_original_core_search_tests.dir/tests/parity/teaql-core/dynamic_search.cpp.o
+[332/725] Building CXX object CMakeFiles/teaql_presentation_tests.dir/tests/presentation_tests.cpp.o
+[333/725] Building CXX object CMakeFiles/teaql_presentation_probe.dir/tests/parity/presentation_probe.cpp.o
+[334/725] Building CXX object CMakeFiles/teaql_request_search_tests.dir/tests/request_search_tests.cpp.o
+[335/725] Building CXX object CMakeFiles/teaql_original_core_mapping_tests.dir/tests/parity/teaql-core/entity_mapping.cpp.o
+[336/725] Building CXX object CMakeFiles/teaql_original_core_value_tests.dir/tests/parity/teaql-core/value_contracts.cpp.o
+[337/725] Building CXX object CMakeFiles/teaql_original_core_functional_tests.dir/tests/parity/teaql-core/functional_contracts.cpp.o
+[338/725] Building CXX object CMakeFiles/teaql_original_core_composition_tests.dir/tests/parity/teaql-core/composition_contracts.cpp.o
+[339/725] Building CXX object CMakeFiles/teaql_base_entity_api_tests.dir/tests/base_entity_api_tests.cpp.o
+[340/725] Building CXX object CMakeFiles/teaql_entity_registration_api_probe.dir/tests/parity/entity_registration_api_probe.cpp.o
+[341/725] Building CXX object CMakeFiles/teaql_entity_registration_api_tests.dir/tests/entity_registration_api_tests.cpp.o
+[342/725] Building CXX object CMakeFiles/teaql_base_entity_api_probe.dir/tests/parity/base_entity_api_probe.cpp.o
+[343/725] Building CXX object CMakeFiles/teaql_entity_debug_tests.dir/tests/entity_debug_tests.cpp.o
+[344/725] Building CXX object CMakeFiles/teaql_entity_owned_api_tests.dir/tests/entity_owned_api_tests.cpp.o
+[345/725] Building CXX object CMakeFiles/teaql_entity_debug_probe.dir/tests/parity/entity_debug_probe.cpp.o
+[346/725] Building CXX object CMakeFiles/teaql_entity_defaults_api_probe.dir/tests/parity/entity_defaults_api_probe.cpp.o
+[347/725] Building CXX object CMakeFiles/teaql_chrono_value_probe.dir/tests/parity/chrono_value_probe.cpp.o
+[348/725] Building CXX object CMakeFiles/teaql_chrono_value_tests.dir/tests/chrono_value_tests.cpp.o
+[349/725] Building CXX object CMakeFiles/teaql_search_probe.dir/tests/parity/search_probe.cpp.o
+[350/725] Building CXX object CMakeFiles/teaql_value_probe.dir/tests/parity/value_probe.cpp.o
+[351/725] Building CXX object CMakeFiles/teaql_entity_expression_tests.dir/tests/entity_expression_tests.cpp.o
+[352/725] Building CXX object CMakeFiles/teaql_value_model_tests.dir/tests/value_model_tests.cpp.o
+[353/725] Building CXX object CMakeFiles/teaql_value_owned_api_tests.dir/tests/value_owned_api_tests.cpp.o
+[354/725] Building CXX object CMakeFiles/teaql_value_owned_api_probe.dir/tests/parity/value_owned_api_probe.cpp.o
+[355/725] Building CXX object CMakeFiles/teaql_core_tests.dir/tests/core_tests.cpp.o
+[356/725] Building CXX object CMakeFiles/teaql_query_debug_tests.dir/tests/query_debug_tests.cpp.o
+[357/725] Building CXX object CMakeFiles/teaql_meta_api_tests.dir/tests/meta_api_tests.cpp.o
+[358/725] Building CXX object CMakeFiles/teaql_mutation_debug_tests.dir/tests/mutation_debug_tests.cpp.o
+[359/725] Building CXX object CMakeFiles/teaql_request_api_tests.dir/tests/request_api_tests.cpp.o
+[360/725] Building CXX object CMakeFiles/teaql_request_helpers_tests.dir/tests/request_helpers_tests.cpp.o
+[361/725] Building CXX object CMakeFiles/teaql_core_graph_api_tests.dir/tests/core_graph_api_tests.cpp.o
+[362/725] Building CXX object CMakeFiles/teaql_presentation_api_tests.dir/tests/presentation_api_tests.cpp.o
+[363/725] Building CXX object CMakeFiles/teaql_presentation_api_probe.dir/tests/parity/presentation_api_probe.cpp.o
+[364/725] Building CXX object CMakeFiles/teaql_core_graph_api_probe.dir/tests/parity/core_graph_api_probe.cpp.o
+[365/725] Building CXX object CMakeFiles/teaql_request_helpers_probe.dir/tests/parity/request_helpers_probe.cpp.o
+[366/725] Building CXX object CMakeFiles/teaql_mutation_debug_probe.dir/tests/parity/mutation_debug_probe.cpp.o
+[367/725] Building CXX object CMakeFiles/teaql_request_api_probe.dir/tests/parity/request_api_probe.cpp.o
+[368/725] Building CXX object CMakeFiles/teaql_meta_api_probe.dir/tests/parity/meta_api_probe.cpp.o
+[369/725] Building CXX object CMakeFiles/teaql_query_debug_probe.dir/tests/parity/query_debug_probe.cpp.o
+[370/725] Building CXX object CMakeFiles/teaql_timestamp_api_tests.dir/tests/timestamp_api_tests.cpp.o
+[371/725] Building CXX object CMakeFiles/teaql_timestamp_api_probe.dir/tests/parity/timestamp_api_probe.cpp.o
+[372/725] Building CXX object CMakeFiles/teaql_value_api_probe.dir/tests/parity/value_api_probe.cpp.o
+[373/725] Building CXX object CMakeFiles/teaql_core_model_tests.dir/tests/core_model_tests.cpp.o
+[374/725] Building CXX object CMakeFiles/teaql_eval_probe.dir/tests/parity/eval_probe.cpp.o
+[375/725] Building CXX object CMakeFiles/teaql_eval_tests.dir/tests/eval_tests.cpp.o
+[376/725] Building CXX object CMakeFiles/teaql_mutation_model_api_tests.dir/tests/mutation_model_api_tests.cpp.o
+[377/725] Building CXX object CMakeFiles/teaql_mutation_model_api_probe.dir/tests/parity/mutation_model_api_probe.cpp.o
+[378/725] Building CXX object CMakeFiles/teaql_core_api_tests.dir/tests/core_api_tests.cpp.o
+[379/725] Building CXX object CMakeFiles/teaql_core_api_probe.dir/tests/parity/core_api_probe.cpp.o
+[380/725] Building CXX object CMakeFiles/teaql_core_collection_tests.dir/tests/core_collection_tests.cpp.o
+[381/725] Building CXX object CMakeFiles/teaql_model_debug_tests.dir/tests/model_debug_tests.cpp.o
+[382/725] Building CXX object CMakeFiles/teaql_datatype_debug_tests.dir/tests/datatype_debug_tests.cpp.o
+[383/725] Building CXX object CMakeFiles/teaql_smart_list_api_tests.dir/tests/smart_list_api_tests.cpp.o
+[384/725] Building CXX object CMakeFiles/teaql_datatype_debug_probe.dir/tests/parity/datatype_debug_probe.cpp.o
+[385/725] Building CXX object CMakeFiles/teaql_compact_row_api_tests.dir/tests/compact_row_api_tests.cpp.o
+[386/725] Building CXX object CMakeFiles/teaql_model_debug_probe.dir/tests/parity/model_debug_probe.cpp.o
+[387/725] Building CXX object CMakeFiles/teaql_compact_row_api_probe.dir/tests/parity/compact_row_api_probe.cpp.o
+[388/725] Building CXX object CMakeFiles/teaql_query_model_tests.dir/tests/query_model_tests.cpp.o
+[389/725] Building CXX object CMakeFiles/teaql_smart_list_api_probe.dir/tests/parity/smart_list_api_probe.cpp.o
+[390/725] Building CXX object CMakeFiles/teaql_query_api_tests.dir/tests/query_api_tests.cpp.o
+[391/725] Building CXX object CMakeFiles/teaql_context_memory_tests.dir/tests/context_memory_tests.cpp.o
+[392/725] Building CXX object CMakeFiles/teaql_safe_expression_api_tests.dir/tests/safe_expression_api_tests.cpp.o
+[393/725] Building CXX object CMakeFiles/teaql_query_api_probe.dir/tests/parity/query_api_probe.cpp.o
+[394/725] Building CXX object CMakeFiles/teaql_safe_expression_api_probe.dir/tests/parity/safe_expression_api_probe.cpp.o
+[395/725] Building CXX object CMakeFiles/teaql_data_store_probe.dir/tests/parity/data_store_probe.cpp.o
+[396/725] Building CXX object CMakeFiles/teaql_data_store_tests.dir/tests/data_store_tests.cpp.o
+[397/725] Building CXX object CMakeFiles/teaql_generated_support_tests.dir/tests/generated_support_tests.cpp.o
+[398/725] Linking CXX executable teaql_context_lifetime
+[399/725] Linking CXX executable teaql_sqlite_schema_crud
+[400/725] Linking CXX executable teaql_sqlite_relations_graph
+[401/725] Linking CXX executable teaql_runtime_namespace_tests
+[402/725] Linking CXX executable teaql_entity_runtime_model_tests
+[403/725] Linking CXX executable teaql_entity_runtime_model_probe
+[404/725] Linking CXX executable teaql_business_clock_scope_tests
+[405/725] Linking CXX executable teaql_runtime_callback_scope_tests
+[406/725] Linking CXX executable teaql_context_provider_borrow_tests
+[407/725] Linking CXX executable teaql_context_provider_dispatch_tests
+[408/725] Linking CXX executable teaql_runtime_id_model_tests
+[409/725] Linking CXX executable teaql_runtime_id_model_probe
+[410/725] Linking CXX executable teaql_context_defaults_tests
+[411/725] Linking CXX executable teaql_context_defaults_probe
+[412/725] Linking CXX executable teaql_reference_model_tests
+[413/725] Linking CXX executable teaql_reference_model_probe
+[414/725] Linking CXX executable teaql_round_trip_reference_tests
+[415/725] Linking CXX executable teaql_round_trip_reference_probe
+[416/725] Linking CXX executable teaql_entity_reference_tests
+[417/725] Linking CXX executable teaql_entity_reference_probe
+[418/725] Linking CXX executable teaql_reference_crypto_tests
+[419/725] Linking CXX executable teaql_inmemory_tests
+[420/725] Linking CXX executable teaql_inmemory_probe
+[421/725] Linking CXX executable teaql_locking_tests
+[422/725] Linking CXX executable teaql_locking_probe
+[423/725] Linking CXX executable teaql_runtime_examples_tests
+[424/725] Linking CXX executable teaql_transaction_move_only_tests
+[425/725] Building CXX object CMakeFiles/teaql_context_reference_tests.dir/tests/context_reference_tests.cpp.o
+[426/725] Linking CXX executable teaql_transaction_provider_error_tests
+[427/725] Linking CXX executable teaql_transaction_move_only_probe
+[428/725] Linking CXX executable teaql_ledger_move_only_probe
+[429/725] Linking CXX executable teaql_ledger_move_only_tests
+[430/725] Linking CXX executable teaql_policy_model_tests
+[431/725] Linking CXX executable teaql_policy_model_probe
+[432/725] Building CXX object CMakeFiles/teaql_sqlite_tests.dir/tests/sqlite_tests.cpp.o
+[433/725] Linking CXX executable teaql_event_model_tests
+[434/725] Linking CXX executable teaql_event_model_probe
+[435/725] Linking CXX executable teaql_check_model_tests
+[436/725] Linking CXX executable teaql_check_model_probe
+[437/725] Linking CXX executable teaql_relation_model_tests
+[438/725] Linking CXX executable teaql_relation_model_probe
+[439/725] Linking CXX executable teaql_runtime_foreign_work_tests
+[440/725] Linking CXX executable teaql_unified_buffer_clone_tests
+[441/725] Linking CXX executable teaql_unified_buffer_clone_probe
+[442/725] Linking CXX executable teaql_log_model_tests
+[443/725] Linking CXX executable teaql_log_model_probe
+[444/725] Linking CXX executable teaql_transaction_scope_tests
+[445/725] Linking CXX executable teaql_transaction_scope_probe
+[446/725] Linking CXX executable teaql_audited_auto_save_tests
+[447/725] Linking CXX executable teaql_audited_save_probe
+[448/725] Linking CXX executable teaql_audited_auto_save_probe
+[449/725] Linking CXX executable teaql_audited_save_tests
+[450/725] Linking CXX executable teaql_graph_saver_probe
+[451/725] Linking CXX executable teaql_graph_saver_tests
+[452/725] Linking CXX executable teaql_ledger_execution_tests
+[453/725] Linking CXX executable teaql_ledger_execution_probe
+[454/725] Linking CXX executable teaql_entity_graph_execution_tests
+[455/725] Linking CXX executable teaql_graph_execution_probe
+[456/725] Linking CXX executable teaql_recursive_graph_write_tests
+[457/725] Linking CXX executable teaql_graph_node_command_tests
+[458/725] Linking CXX executable teaql_graph_save_adapter_tests
+[459/725] Linking CXX executable teaql_ledger_plan_tests
+[460/725] Linking CXX executable teaql_ledger_plan_probe
+[461/725] Linking CXX executable teaql_runtime_mutation_probe
+[462/725] Linking CXX executable teaql_runtime_mutation_tests
+[463/725] Linking CXX executable teaql_entity_graph_plan_tests
+[464/725] Linking CXX executable teaql_policy_plan_probe
+[465/725] Linking CXX executable teaql_entity_graph_plan_probe
+[466/725] Linking CXX executable teaql_mutation_policy_tests
+[467/725] Linking CXX executable teaql_mutation_policy_probe
+[468/725] Linking CXX executable teaql_save_preparation_tests
+[469/725] Linking CXX executable teaql_save_preparation_probe
+[470/725] Linking CXX executable teaql_graph_fix_tests
+[471/725] Linking CXX executable teaql_graph_fix_probe
+[472/725] Linking CXX executable teaql_checker_tests
+[473/725] Linking CXX executable teaql_checker_probe
+[474/725] Linking CXX executable teaql_i18n_tests
+[475/725] Linking CXX executable teaql_i18n_probe
+[476/725] Linking CXX executable teaql_i18n_debug_scope_probe
+[477/725] Linking CXX executable teaql_original_sql_binding_tests
+[478/725] Linking CXX executable teaql_sqlite_schema_probe
+[479/725] Linking CXX executable teaql_provider_sqlite_schema_tests
+[480/725] Linking CXX executable teaql_original_query_execution_tests
+[481/725] Linking CXX executable teaql_original_sql_rendering_tests
+[482/725] Linking CXX executable teaql_original_mutation_execution_tests
+[483/725] Linking CXX executable teaql_original_sql_default_tests
+[484/725] Linking CXX executable teaql_original_sql_executor_tests
+[485/725] Linking CXX executable teaql_original_sql_compiler_tests
+[486/725] Linking CXX executable teaql_original_business_clock_tests
+[487/725] Linking CXX executable teaql_original_diagnostic_stream_tests
+[488/725] Linking CXX executable teaql_original_entity_status_tests
+[489/725] Linking CXX executable teaql_original_cache_relation_tests
+[490/725] Linking CXX executable teaql_original_inmemory_tests
+[491/725] Linking CXX executable teaql_original_checker_locale_tests
+[492/725] Linking CXX executable teaql_original_log_telemetry_tests
+[493/725] Linking CXX executable teaql_original_policy_graph_tests
+[494/725] Linking CXX executable teaql_original_log_privacy_tests
+[495/725] Linking CXX executable teaql_original_context_tests
+[496/725] Linking CXX executable teaql_original_masking_tests
+[497/725] Linking CXX executable teaql_original_flat_graph_tests
+[498/725] Linking CXX executable teaql_original_ledger_tests
+[499/725] Linking CXX executable teaql_original_business_permutation_tests
+[500/725] Linking CXX executable teaql_original_provider_search_tests
+[501/725] Linking CXX executable teaql_original_provider_storage_tests
+[502/725] Linking CXX executable teaql_original_provider_schema_tests
+[503/725] Linking CXX executable teaql_original_provider_query_tests
+[504/725] Linking CXX executable teaql_original_entity_save_tests
+[505/725] Linking CXX executable teaql_original_provider_transaction_tests
+[506/725] Linking CXX executable teaql_original_round_trip_reference_tests
+[507/725] Building CXX object CMakeFiles/teaql_generated_support_probe.dir/tests/parity/generated_support_probe.cpp.o
+[508/725] Linking CXX executable teaql_original_runtime_registration_tests
+[509/725] Linking CXX executable teaql_original_runtime_service_tests
+[510/725] Linking CXX executable teaql_original_runtime_validation_tests
+[511/725] Linking CXX executable teaql_original_runtime_typed_query_tests
+[512/725] Linking CXX executable teaql_original_runtime_events_relations_tests
+[513/725] Linking CXX executable teaql_original_runtime_aggregate_tests
+[514/725] Linking CXX executable teaql_original_runtime_pagination_tests
+[515/725] Linking CXX executable teaql_original_runtime_context_tail_tests
+[516/725] Linking CXX executable teaql_original_runtime_memory_service_tests
+[517/725] Linking CXX executable teaql_original_runtime_graph_reference_tests
+[518/725] Linking CXX executable teaql_original_provider_guard_tests
+[519/725] Linking CXX executable teaql_provider_sqlite_unicode_tests
+[520/725] Linking CXX executable teaql_runtime_base_probe
+[521/725] Linking CXX executable teaql_context_query_probe
+[522/725] Linking CXX executable teaql_relation_execution_probe
+[523/725] Linking CXX executable teaql_query_keys_probe
+[524/725] Linking CXX executable teaql_query_keys_tests
+[525/725] Linking CXX executable teaql_id_set_build_probe
+[526/725] Linking CXX executable teaql_id_set_build_tests
+[527/725] Linking CXX executable teaql_query_store_model_tests
+[528/725] Linking CXX executable teaql_query_store_model_probe
+[529/725] Linking CXX executable teaql_query_store_probe
+[530/725] Linking CXX executable teaql_query_store_tests
+[531/725] Linking CXX executable teaql_relation_enhancement_probe
+[532/725] Linking CXX executable teaql_relation_hydration_probe
+[533/725] Linking CXX executable teaql_relation_execution_tests
+[534/725] Linking CXX executable teaql_relation_hydration_tests
+[535/725] Linking CXX executable teaql_context_query_tests
+[536/725] Linking CXX executable teaql_relation_enhancement_tests
+[537/725] Linking CXX executable teaql_entity_service_tests
+[538/725] Linking CXX executable teaql_enhanced_entities_tests
+[539/725] Linking CXX executable teaql_runtime_move_only_tests
+[540/725] Linking CXX executable teaql_runtime_completion_tests
+[541/725] Linking CXX executable teaql_entity_stream_tests
+[542/725] Linking CXX executable teaql_id_set_page_tests
+[543/725] Linking CXX executable teaql_enhanced_entities_probe
+[544/725] Linking CXX executable teaql_id_set_page_probe
+[545/725] Linking CXX executable teaql_entity_service_probe
+[546/725] Linking CXX executable teaql_typed_aggregate_scope_probe
+[547/725] Linking CXX executable teaql_typed_aggregate_tests
+[548/725] Linking CXX executable teaql_entity_query_probe
+[549/725] Linking CXX executable teaql_entity_stream_probe
+[550/725] Linking CXX executable teaql_entity_decoder_probe
+[551/725] Linking CXX executable teaql_entity_runtime_probe
+[552/725] Linking CXX executable teaql_entity_decoder_tests
+[553/725] Linking CXX executable teaql_entity_runtime_tests
+[554/725] Linking CXX executable teaql_runtime_graph_model_probe
+[555/725] Linking CXX executable teaql_runtime_graph_model_tests
+[556/725] Linking CXX executable teaql_graph_repository_probe
+[557/725] Linking CXX executable teaql_runtime_graph_probe
+[558/725] Linking CXX executable teaql_runtime_graph_tests
+[559/725] Linking CXX executable teaql_context_event_probe
+[560/725] Linking CXX executable teaql_context_event_tests
+[561/725] Linking CXX executable teaql_telemetry_tests
+[562/725] Linking CXX executable teaql_telemetry_probe
+[563/725] Linking CXX executable teaql_telemetry_model_scope_probe
+[564/725] Linking CXX executable teaql_context_logging_tests
+[565/725] Linking CXX executable teaql_context_logging_probe
+[566/725] Linking CXX executable teaql_log_manager_tests
+[567/725] Linking CXX executable teaql_log_formatter_tests
+[568/725] Linking CXX executable teaql_log_manager_probe
+[569/725] Linking CXX executable teaql_log_formatter_probe
+[570/725] Linking CXX executable teaql_runtime_log_tests
+[571/725] Linking CXX executable teaql_runtime_log_probe
+[572/725] Linking CXX executable teaql_audit_event_tests
+[573/725] Linking CXX executable teaql_audit_event_probe
+[574/725] Linking CXX executable teaql_schema_runtime_probe
+[575/725] Linking CXX executable teaql_schema_runtime_tests
+[576/725] Linking CXX executable teaql_internal_id_tests
+[577/725] Linking CXX executable teaql_internal_id_probe
+[578/725] Linking CXX executable teaql_business_service_tests
+[579/725] Linking CXX executable teaql_business_service_probe
+[580/725] Linking CXX executable teaql_runtime_business_id_tests
+[581/725] Linking CXX executable teaql_runtime_business_id_probe
+[582/725] Linking CXX executable teaql_runtime_registry_tests
+[583/725] Linking CXX executable teaql_runtime_registry_probe
+[584/725] Linking CXX executable teaql_registry_debug_scope_probe
+[585/725] Linking CXX executable teaql_runtime_check_tests
+[586/725] Linking CXX executable teaql_error_generic_tests
+[587/725] Linking CXX executable teaql_sql_move_only_tests
+[588/725] Linking CXX executable teaql_runtime_check_probe
+[589/725] Linking CXX executable teaql_runtime_context_tests
+[590/725] Linking CXX executable teaql_context_model_tests
+[591/725] Linking CXX executable teaql_context_model_probe
+[592/725] Linking CXX executable teaql_runtime_context_probe
+[593/725] Linking CXX executable teaql_provider_sqlite_business_id_tests
+[594/725] Linking CXX executable teaql_provider_sqlite_id_tests
+[595/725] Linking CXX executable teaql_sqlite_transport_probe
+[596/725] Linking CXX executable teaql_provider_sqlite_transport_tests
+[597/725] Linking CXX executable teaql_provider_sqlite_decoding_tests
+[598/725] Linking CXX executable teaql_sqlite_decoding_probe
+[599/725] Linking CXX executable teaql_sqlite_bindings_probe
+[600/725] Linking CXX executable teaql_provider_sqlite_bindings_tests
+[601/725] Linking CXX executable teaql_provider_sqlite_model_tests
+[602/725] Linking CXX executable teaql_provider_sqlite_error_tests
+[603/725] Linking CXX executable teaql_provider_sqlite_driver_error_tests
+[604/725] Linking CXX executable teaql_sqlite_error_model_probe
+[605/725] Linking CXX executable teaql_sqlite_native_diagnostics_probe
+[606/725] Linking CXX executable teaql_provider_sqlite_simple_error_tests
+[607/725] Linking CXX executable teaql_provider_sqlite_boxed_error_tests
+[608/725] Linking CXX executable teaql_provider_sqlite_from_sql_error_tests
+[609/725] Linking CXX executable teaql_sqlite_from_sql_error_probe
+[610/725] Linking CXX executable teaql_sqlite_simple_error_probe
+[611/725] Linking CXX executable teaql_sql_stream_probe
+[612/725] Linking CXX executable teaql_sql_stream_tests
+[613/725] Linking CXX executable teaql_sql_transaction_tests
+[614/725] Linking CXX executable teaql_sql_execution_tests
+[615/725] Linking CXX executable teaql_sql_execution_probe
+[616/725] Linking CXX executable teaql_sql_query_probe
+[617/725] Linking CXX executable teaql_sql_transport_probe
+[618/725] Linking CXX executable teaql_sql_query_tests
+[619/725] Linking CXX executable teaql_sql_executor_error_probe
+[620/725] Linking CXX executable teaql_sql_transport_tests
+[621/725] Linking CXX executable teaql_provider_sqlite_tests
+[622/725] Linking CXX executable teaql_sql_schema_probe
+[623/725] Linking CXX executable teaql_sql_mutation_tests
+[624/725] Linking CXX executable teaql_sql_mutation_probe
+[625/725] Linking CXX executable teaql_sql_dialect_tests
+[626/725] Linking CXX executable teaql_sql_dialect_helper_probe
+[627/725] Linking CXX executable teaql_sql_dialect_probe
+[628/725] Linking CXX executable teaql_sql_model_tests
+[629/725] Linking CXX executable teaql_sql_model_api_tests
+[630/725] Linking CXX executable teaql_sql_model_api_probe
+[631/725] Linking CXX executable teaql_sql_types_probe
+[632/725] Linking CXX executable teaql_async_tests
+[633/725] Linking CXX executable teaql_executor_tests
+[634/725] Linking CXX executable teaql_executor_defaults_scope_probe
+[635/725] Linking CXX executable teaql_data_service_tests
+[636/725] Linking CXX executable teaql_data_service_model_tests
+[637/725] Linking CXX executable teaql_system_time_tests
+[638/725] Linking CXX executable teaql_system_time_arithmetic_scope_tests
+[639/725] Linking CXX executable teaql_system_time_arithmetic_scope_probe
+[640/725] Linking CXX executable teaql_system_time_probe
+[641/725] Linking CXX executable teaql_system_time_error_scope_probe
+[642/725] Linking CXX executable teaql_data_service_scope_tests
+[643/725] Linking CXX executable teaql_data_service_model_scope_probe
+[644/725] Linking CXX executable teaql_data_service_model_probe
+[645/725] Linking CXX executable teaql_sql_log_probe
+[646/725] Linking CXX executable teaql_sql_projection_scope_tests
+[647/725] Linking CXX executable teaql_sql_projection_scope_probe
+[648/725] Linking CXX executable teaql_decimal_tests
+[649/725] Linking CXX executable teaql_decimal_inline_tests
+[650/725] Linking CXX executable teaql_core_aux_debug_tests
+[651/725] Linking CXX executable teaql_core_aux_debug_probe
+[652/725] Linking CXX executable teaql_decimal_inline_probe
+[653/725] Linking CXX executable teaql_decimal_probe
+[654/725] Linking CXX executable teaql_business_id_tests
+[655/725] Linking CXX executable teaql_business_id_probe
+[656/725] Linking CXX executable teaql_presentation_tests
+[657/725] Linking CXX executable teaql_presentation_probe
+[658/725] Linking CXX executable teaql_request_search_tests
+[659/725] Linking CXX executable teaql_original_core_search_tests
+[660/725] Linking CXX executable teaql_original_core_functional_tests
+[661/725] Linking CXX executable teaql_original_core_mapping_tests
+[662/725] Linking CXX executable teaql_original_core_value_tests
+[663/725] Linking CXX executable teaql_original_core_composition_tests
+[664/725] Linking CXX executable teaql_entity_registration_api_tests
+[665/725] Linking CXX executable teaql_entity_registration_api_probe
+[666/725] Linking CXX executable teaql_base_entity_api_tests
+[667/725] Linking CXX executable teaql_base_entity_api_probe
+[668/725] Linking CXX executable teaql_entity_debug_tests
+[669/725] Linking CXX executable teaql_entity_debug_probe
+[670/725] Linking CXX executable teaql_entity_owned_api_tests
+[671/725] Linking CXX executable teaql_entity_defaults_api_probe
+[672/725] Linking CXX executable teaql_chrono_value_tests
+[673/725] Linking CXX executable teaql_chrono_value_probe
+[674/725] Linking CXX executable teaql_entity_expression_tests
+[675/725] Linking CXX executable teaql_search_probe
+[676/725] Linking CXX executable teaql_value_probe
+[677/725] Linking CXX executable teaql_value_model_tests
+[678/725] Linking CXX executable teaql_value_owned_api_tests
+[679/725] Linking CXX executable teaql_value_owned_api_probe
+[680/725] Linking CXX executable teaql_core_tests
+[681/725] Linking CXX executable teaql_meta_api_tests
+[682/725] Linking CXX executable teaql_query_debug_tests
+[683/725] Linking CXX executable teaql_mutation_debug_tests
+[684/725] Linking CXX executable teaql_request_api_tests
+[685/725] Linking CXX executable teaql_request_helpers_tests
+[686/725] Linking CXX executable teaql_core_graph_api_tests
+[687/725] Linking CXX executable teaql_presentation_api_tests
+[688/725] Linking CXX executable teaql_presentation_api_probe
+[689/725] Linking CXX executable teaql_core_graph_api_probe
+[690/725] Linking CXX executable teaql_request_helpers_probe
+[691/725] Linking CXX executable teaql_request_api_probe
+[692/725] Linking CXX executable teaql_mutation_debug_probe
+[693/725] Linking CXX executable teaql_query_debug_probe
+[694/725] Linking CXX executable teaql_meta_api_probe
+[695/725] Linking CXX executable teaql_timestamp_api_tests
+[696/725] Linking CXX executable teaql_timestamp_api_probe
+[697/725] Linking CXX executable teaql_value_api_probe
+[698/725] Linking CXX executable teaql_core_model_tests
+[699/725] Linking CXX executable teaql_eval_tests
+[700/725] Linking CXX executable teaql_eval_probe
+[701/725] Linking CXX executable teaql_mutation_model_api_tests
+[702/725] Linking CXX executable teaql_mutation_model_api_probe
+[703/725] Linking CXX executable teaql_core_api_tests
+[704/725] Linking CXX executable teaql_core_api_probe
+[705/725] Linking CXX executable teaql_core_collection_tests
+[706/725] Linking CXX executable teaql_model_debug_tests
+[707/725] Linking CXX executable teaql_smart_list_api_tests
+[708/725] Linking CXX executable teaql_datatype_debug_tests
+[709/725] Linking CXX executable teaql_datatype_debug_probe
+[710/725] Linking CXX executable teaql_model_debug_probe
+[711/725] Linking CXX executable teaql_smart_list_api_probe
+[712/725] Linking CXX executable teaql_compact_row_api_tests
+[713/725] Linking CXX executable teaql_compact_row_api_probe
+[714/725] Linking CXX executable teaql_query_model_tests
+[715/725] Linking CXX executable teaql_query_api_tests
+[716/725] Linking CXX executable teaql_query_api_probe
+[717/725] Linking CXX executable teaql_safe_expression_api_tests
+[718/725] Linking CXX executable teaql_context_memory_tests
+[719/725] Linking CXX executable teaql_safe_expression_api_probe
+[720/725] Linking CXX executable teaql_data_store_tests
+[721/725] Linking CXX executable teaql_generated_support_tests
+[722/725] Linking CXX executable teaql_data_store_probe
+[723/725] Linking CXX executable teaql_context_reference_tests
+[724/725] Linking CXX executable teaql_generated_support_probe
+[725/725] Linking CXX executable teaql_sqlite_tests

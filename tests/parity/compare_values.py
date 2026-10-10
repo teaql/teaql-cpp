@@ -59,7 +59,7 @@ def main(corpus_name="value_cases.json", label="Value"):
     inputs = [c["input"] for c in cases]
     expected = [c["expected"] for c in cases]
     if args.rust:
-        subprocess.run(["python3", str(root / "scripts/verify-upstream.py")], cwd=root, check=True)
+        subprocess.run(["python3", str(root / "scripts/verify_upstream.py")], cwd=root, check=True)
         live = observe(args.rust, inputs)
         if not same(expected, live):
             raise RuntimeError("Committed observations differ from live Rust oracle")

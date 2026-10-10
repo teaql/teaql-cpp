@@ -33,7 +33,7 @@ be explicit; they cannot delete a source responsibility.
 | `teaql-core/src/time.rs`: Timestamp derives PartialOrd, Ord and Hash on its i64 millisecond value. | Timestamp now supplies total ordering and standard hash; native container tests compile and pass. | 67 original public-call inputs cover default, sorted values, hash scalar writes and 16,698 pairwise comparisons. |
 | `teaql-core/src/meta.rs`: EntityDescriptor's audit_mask_fields builder accepts a runtime Vec of names, including an explicitly declared empty list. | The builder now accepts dynamic string ranges, snapshots into the owner and publishes fields/flag after successful copying. | 192 original public-call inputs cover policy/default/clone results. Native contracts cover failure consistency, aliasing and actual User deletion. |
 
-See [the capability acceptance contract](../core-api-acceptance.md) for the 259
+See [the capability acceptance contract](../core_api_acceptance.md) for the 259
 original-call comparisons and ownership boundaries. These repairs do not prove
 complete model acceptance. C++ standard hashes need equal-value consistency;
 the source's default hash algorithm is not a persistent wire format.
@@ -54,7 +54,7 @@ the source's default hash algorithm is not a persistent wire format.
   `typed`. C++ now preserves both constructor flavors and their domain-aware
   copy behavior. BatchUpdateCommand also accepts dynamic field collections.
 
-The [mutation/trace acceptance contract](../mutation-model-api-acceptance.md)
+The [mutation/trace acceptance contract](../mutation_model_api_acceptance.md)
 records 1,642 original public-call observations. These repairs are not a complete
 list or proof of the remaining API requirements.
 
@@ -74,7 +74,7 @@ list or proof of the remaining API requirements.
   conversion and Record construction now consume only after complete preparation;
   same-domain nested data transfers, while foreign retention deep-copies.
 
-The [row capability contract](../compact-row-api-acceptance.md) records 356
+The [row capability contract](../compact_row_api_acceptance.md) records 356
 original-call sequences, including layout identity and every saved snapshot.
 Native tests cover failed preparation and actual owner destruction. Complete
 query/model API acceptance remains open.
@@ -94,7 +94,7 @@ query/model API acceptance remains open.
   assignment operator. A separate construct-only fixture checks these paths.
 - Named const/mutable iterators and slices retain borrowing. The complete six
   public fields and every generic/entity method are mapped in
-  [the list contract](../smart-list-api-acceptance.md). Its 526 original-call
+  [the list contract](../smart_list_api_acceptance.md). Its 526 original-call
   inputs retain recursive metadata, optional results, duplicate behavior and
   exact entity-conversion callback order. The two unchanged original list tests
   pass independently. The separate model Debug boundary now supplies structural
@@ -105,22 +105,22 @@ These repairs do not complete all model or runtime acceptance.
 
 ## Entity registration, diagnostics and consuming capabilities
 
-The [registration dispatch audit](../entity-registration-api-acceptance.md)
+The [registration dispatch audit](../entity_registration_api_acceptance.md)
 reproduced a source responsibility: the original macro invokes each entity's
 `register_into`, while C++ bypassed its override. The negative control matched
 12/42 original calls; an isolated dispatcher/default repair matched 42/42. That
 repair is now in the production header, with a direct inherited default to avoid
 recursive redispatch and both named checks registered.
 
-The [BaseEntityData diagnostic audit](../base-entity-api-acceptance.md) repairs
+The [BaseEntityData diagnostic audit](../base_entity_api_acceptance.md) repairs
 optional Value Debug errors that previously used JSON projection. All 1,481
 original inputs match native and MIPS, with exact roles, precedence and errors.
-The [Entity Debug audit](../entity-debug-acceptance.md) supplies both derived
+The [Entity Debug audit](../entity_debug_acceptance.md) supplies both derived
 structures through core.hpp; all 5,202 formatter outputs match native and MIPS.
 Their scoped ownership checks pass native, ASan/UBSan and MIPS. Raw core
 information remains separate from safe log projections.
 
-The [consuming wrapper audit](../entity-owned-api-acceptance.md) removes extra
+The [consuming wrapper audit](../entity_owned_api_acceptance.md) removes extra
 Clone/assignment restrictions from Result, Audited and boxed relations. The
 original non-Clone fixture executes actual public trait/wrapper methods. Current
 production headers pass the new native contract with default PMR disabled,
@@ -134,7 +134,7 @@ and eleven selected sanitizer/MIPS checks are running. Fresh MIPS acceptance now
 four relevant ownership consumers; rebuilt MIPS probes match the live original
 registration, parsing and Debug corpora. Fresh ASan/UBSan with leak detection also passes the same 11/11 selection.
 The final full-current native rebuild has now completed with 215/215 checks
-passed, and the expanded sanitizer/MIPS selections pass 14/14 each. The [complete Entity method mapping](../entity-api-contract.md)
+passed, and the expanded sanitizer/MIPS selections pass 14/14 each. The [complete Entity method mapping](../entity_api_contract.md)
 adds 93 original default/dynamic sequences matching native and MIPS, with every
 intermediate state and exact default/no-op behavior. Its sequence probe is now registered and passes named native/sanitizer/MIPS
 checks plus live original comparisons. Complete
@@ -142,7 +142,7 @@ Entity/API/default/privacy/source-test gates remain separate.
 
 ## Native UTC conversion
 
-The [UTC Value capability](../chrono-value-acceptance.md) adapts the original
+The [UTC Value capability](../chrono_value_acceptance.md) adapts the original
 From<DateTime<Utc>> to an explicit-destination C++ system-clock factory. Negative
 fractional milliseconds use floor; seconds bounds are checked before scaling.
 All 64 original conversion inputs match native and MIPS, with scoped native,
@@ -152,7 +152,7 @@ passes 215/215 and selected sanitizer/MIPS acceptance passes 14/14 each.
 
 ## DataType independent diagnostics
 
-The [DataType audit](../datatype-debug-acceptance.md) repairs standalone derived
+The [DataType audit](../datatype_debug_acceptance.md) repairs standalone derived
 Debug that was previously available only inside TypedNull. Ten original types
 compare 180 exact formatter outputs and 100 equality results. Native owner/facade
 checks pass with default PMR disabled. TypedNull now delegates without a wrapped
@@ -162,7 +162,7 @@ Both named native and MIPS probes match all original scalar outputs. No new vari
 
 ## Owned Value input repair
 
-The [owned Value audit](../value-owned-api-acceptance.md) restores direct storage
+The [owned Value audit](../value_owned_api_acceptance.md) restores direct storage
 transfer for same-owner String/List/Object rvalues that previously selected a
 borrowed copying constructor. Foreign retention still deep-copies and preserves
 the source on failure, following the existing domain adaptation. All 171 actual
@@ -176,7 +176,7 @@ named probe matches all 171 live original owning observations.
 
 ## Complete metadata model audit
 
-The [metadata contract](../meta-api-acceptance.md) maps all fields, defaults,
+The [metadata contract](../meta_api_acceptance.md) maps all fields, defaults,
 builders, lookups and derived traits of the three original descriptors. New
 meta_debug.hpp overloads retain their full raw shapes and inherited formatter
 flags. All 160 original public inputs and 11,520 formatting outputs match native
@@ -189,14 +189,14 @@ separate from model presence.
 
 ## Value and Timestamp public contract mapping
 
-[Value enum API acceptance](../value-api-acceptance.md) now maps all thirteen
+[Value enum API acceptance](../value_api_acceptance.md) now maps all thirteen
 variants, ten TypedNull types, every From responsibility and all eight extractors.
 The additional 115 actual original inputs expose optional floating results and
 13,225 pairwise equalities, preserving source NaN behavior. Native matches the
 corpus; the MIPS rerun applies only the documented width-changing NaN contract.
 No production conversion or variant was changed.
 
-[Timestamp API acceptance](../timestamp-api-acceptance.md) adds 99 actual original
+[Timestamp API acceptance](../timestamp_api_acceptance.md) adds 99 actual original
 calls spanning signed/unsigned wrapping, chrono calendar fallback, Debug flags
 and transparent raw JSON type/syntax acceptance. Native/MIPS probes match; both
 unchanged source tests pass and their latest ownership/source ports pass native,
@@ -207,7 +207,7 @@ wording, complete Decimal or all-stage acceptance.
 
 ## Public query and expression diagnostics repair
 
-The [query Debug contract](../query-debug-acceptance.md) closes the previously
+The [query Debug contract](../query_debug_acceptance.md) closes the previously
 reproduced missing public formatter with twenty overloads through core.hpp.
 Every Expr/query/Trace type retains its original fields and inherited formatter
 options. Private non-pretty cache-key entry points now delegate to the same
@@ -225,7 +225,7 @@ separate from safe logs.
 
 ## Mutation diagnostics implementation
 
-The [mutation Debug contract](../mutation-debug-acceptance.md) supplies all ten
+The [mutation Debug contract](../mutation_debug_acceptance.md) supplies all ten
 original derived model capabilities: three distinct wrappers, MutationKind and
 six commands, with complete fields and inherited formatter options. The correct
 negative public-core compile now succeeds. The initial native probe matches 120
@@ -248,7 +248,7 @@ propagation and rejection of unsupported foreign retention while restoring the
 same-owner non-Clone capability. The initial native model/ownership checks pass; named sanitizer/MIPS selections
 pass 10/10 each. Native full-current model regression completed with 230/230 checks and all
 120 live original inputs matched; sanitizer/MIPS selections pass 10/10 each. See
-[the complete request mapping](../request-api-acceptance.md). Its additional 872
+[the complete request mapping](../request_api_acceptance.md). Its additional 872
 original helper inputs reproduce lost diagnostic information and Between check
 order; an isolated repair matches 872/872. After the 230-check boundary finished,
 production diagnostics and sequential Between preparation were repaired. Named full native regression passes 232/232; twelve selected sanitizer/MIPS
@@ -261,7 +261,7 @@ Original entity_graph.rs derives Debug for EntityGraphOperation and EntityGraphN
 The builder and whole EntityGraph do not derive it; do not invent a source trait
 for those wrappers. The previous correct public-core node construction followed by
 production debug_string(owner, node) failed at the missing formatter.
-[The input graph contract](../core-graph-api-acceptance.md) now provides both
+[The input graph contract](../core_graph_api_acceptance.md) now provides both
 actual derived types and owning mutation forwarding; its initial native probe
 matches 240 original inputs and 12,960 exact outputs. The original source test
 and exact native port pass, as do ownership contracts after actual User deletion.
@@ -269,7 +269,7 @@ Fresh full native regression passes 234/234; ten selected sanitizer/MIPS
 checks pass 10/10 each, and named native/MIPS probes match all original outputs. The annotated source input graph remains separate from the runtime
 identity graph and saving; node diagnostics cannot establish graph persistence.
 The previously reproduced missing WebStyle formatter is repaired by
-[the seven-type presentation diagnostic header](../presentation-api-acceptance.md).
+[the seven-type presentation diagnostic header](../presentation_api_acceptance.md).
 The original 452 model inputs and 8,127 formatting outputs match native/MIPS.
 The expanded 524-input corpus includes 72 binding sequences: pre-repair C++
 matched only 452/524; repaired native/MIPS match 524/524. Generic
@@ -285,7 +285,7 @@ under the full six-stage objective.
 
 ## Remaining audit scope
 
-The [core query capability audit](../query-api-acceptance.md) restores arbitrary
+The [core query capability audit](../query_api_acceptance.md) restores arbitrary
 input ranges for Expr function/logical/IN factories and SelectQuery projection.
 Standalone AggregationCacheOptions factories/propagation retain the public
 fields with explicit C++ collision renaming. Its 980 unchanged original calls
@@ -301,7 +301,7 @@ unknown fields, wire errors and destination ownership need explicit protocol
 checks wherever the source defines serialization. Source types without serde
 must not be assigned an invented serde protocol.
 
-The [extended Decimal arithmetic audit](../decimal-extended-acceptance.md)
+The [extended Decimal arithmetic audit](../decimal_extended_acceptance.md)
 adds 8,056 direct original-call fixtures. It repairs result scale, intermediate
 panic boundaries, division power-table/constructor failures and buffered
 remainder window behavior. The scalar arithmetic implementation adds no runtime
@@ -332,7 +332,7 @@ Reproduce live source comparison after building the registered targets:
 
 ```sh
 CARGO_TARGET_DIR=/home/philip/shared-cargo-target cargo build \
-  --manifest-path tests/parity/rust-values/Cargo.toml \
+  --manifest-path tests/parity/rust_values/Cargo.toml \
   --bin decimal_inline_oracle --locked --offline
 python3 tests/parity/generate_decimal_inline.py \
   --rust /home/philip/shared-cargo-target/debug/decimal_inline_oracle

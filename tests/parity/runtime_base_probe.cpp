@@ -1,8 +1,8 @@
-#include <teaql/runtime/detail/data_service.hpp>
+#include <teaql/runtime/detail/data_service/data_service.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/core/detail/debug.hpp>
 #include "fixture_value.hpp"
-#include "../entity_decoder_fixture.hpp"
+#include "../support/entity_decoder_fixture.hpp"
 #include <iostream>
 using namespace teaql;
 

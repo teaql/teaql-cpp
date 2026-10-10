@@ -1,0 +1,835 @@
+[1/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/business_id.cpp.o
+[2/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/xls.cpp.o
+[3/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/number_text.cpp.o
+[4/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/core.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/core.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/meta.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[5/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/debug.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/debug.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/detail/debug.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[6/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/list.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/list.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/list.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/row.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[7/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/entity.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/entity.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/meta.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[8/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/query_debug.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/query_debug.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query_debug.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/debug.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/list.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/row.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[9/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/decimal_arithmetic.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/decimal_arithmetic.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[10/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/web.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/web.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/web.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/list.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/row.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[11/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/decimal.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/decimal.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[12/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/decimal_format.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/decimal_format.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[13/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/value.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/value.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[14/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/decimal_json.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/decimal_json.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[15/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/json.cpp.o
+[16/758] Linking CXX static library libteaql_memory.a
+[17/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/dynamic_search.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/dynamic_search.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/dynamic_search.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[18/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/time.cpp.o
+[19/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/aes_gcm.cpp.o
+[20/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/row.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/row.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/row.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[21/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/request.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/request.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/request_debug.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query_debug.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/debug.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/list.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/row.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[22/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/expr.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/expr.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[23/758] Building CXX object CMakeFiles/teaql_core.dir/src/core/query.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/core/query.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[24/758] Linking CXX static library libteaql_core.a
+[25/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/bindings.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/sql/bindings.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/bindings.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[26/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/types.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/sql/types.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[27/758] Building CXX object CMakeFiles/teaql_data_service.dir/src/data_service/sql_log.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/data_service/sql_log.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[28/758] Linking CXX static library libteaql_data_service.a
+[29/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/dialect.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/sql/dialect.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/dialect.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/bindings.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[30/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/schema.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/sql/schema.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/dialect.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/bindings.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[31/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/mutation.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/sql/mutation.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/dialect.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/bindings.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[32/758] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/query_keys.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/runtime/query_keys.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/query_keys.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+1 warning generated.
+[33/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/mutation_execution.cpp.o
+FAILED: [code=1] CMakeFiles/teaql_sql.dir/src/sql/mutation_execution.cpp.o 
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++  -I/home/philip/githome/teaql-cpp/include -stdlib=libc++ -g1 -std=gnu++20 -Wall -Wextra -Wpedantic -MD -MT CMakeFiles/teaql_sql.dir/src/sql/mutation_execution.cpp.o -MF CMakeFiles/teaql_sql.dir/src/sql/mutation_execution.cpp.o.d -o CMakeFiles/teaql_sql.dir/src/sql/mutation_execution.cpp.o -c /home/philip/githome/teaql-cpp/src/sql/mutation_execution.cpp
+In file included from /home/philip/githome/teaql-cpp/src/sql/mutation_execution.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/mutation_execution.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/error.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/sql/mutation_execution.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/mutation_execution.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+In file included from /home/philip/githome/teaql-cpp/src/sql/mutation_execution.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/mutation_execution.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/sql/transport.hpp:210:26: error: no matching constructor for initialization of 'Vector<Value>' (aka 'std::vector<Value, polymorphic_allocator<Value>>')
+  210 |           index_(index), values_(values.begin(), values.end(), a.resource()), rows_(a.resource()) {}
+      |                          ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::Value *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::Value, const teaql::Value &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:299:25: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 |   _LIBCPP_HIDE_FROM_ABI vector(vector&& __x, const __type_identity_t<allocator_type>& __a);
+      |                         ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:913:85: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 | _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI vector<_Tp, _Allocator>::vector(vector&& __x)
+      |                                                                                     ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+2 warnings and 1 error generated.
+[34/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/query_plan.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/sql/query_plan.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/query_plan.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/dialect.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/bindings.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/sql_log.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/query.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/expr.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/sql/query_plan.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/query_plan.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[35/758] Building CXX object CMakeFiles/teaql_sql.dir/src/sql/diagnostic.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/sql/diagnostic.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/diagnostic.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/mutation.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/sql/diagnostic.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/sql/detail/diagnostic.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[36/758] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/query_stores.cpp.o
+FAILED: [code=1] CMakeFiles/teaql_runtime.dir/src/runtime/query_stores.cpp.o 
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++  -I/home/philip/githome/teaql-cpp/include -stdlib=libc++ -g1 -std=gnu++20 -Wall -Wextra -Wpedantic -MD -MT CMakeFiles/teaql_runtime.dir/src/runtime/query_stores.cpp.o -MF CMakeFiles/teaql_runtime.dir/src/runtime/query_stores.cpp.o.d -o CMakeFiles/teaql_runtime.dir/src/runtime/query_stores.cpp.o -c /home/philip/githome/teaql-cpp/src/runtime/query_stores.cpp
+In file included from /home/philip/githome/teaql-cpp/src/runtime/query_stores.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/cache.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/row.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/query_stores.cpp:1:
+/home/philip/githome/teaql-cpp/include/teaql/runtime/cache.hpp:63:15: error: no matching constructor for initialization of 'Vector<CompactRow>' (aka 'std::vector<CompactRow, polymorphic_allocator<CompactRow>>')
+   63 |             : rows(rows.begin(), rows.end(), a.resource()),
+      |               ^    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::CompactRow *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::CompactRow, const teaql::CompactRow &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:299:25: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 |   _LIBCPP_HIDE_FROM_ABI vector(vector&& __x, const __type_identity_t<allocator_type>& __a);
+      |                         ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:291:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(vector&& __x)
+      |                                                       ^      ~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+1 warning and 1 error generated.
+[37/758] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/id_set_build_lock.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/runtime/id_set_build_lock.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/id_set_build_lock.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/resources.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/id_set_build_lock.cpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_pagination.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[38/758] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/context_pagination.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/runtime/context_pagination.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_pagination.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:4:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/resources.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/context_pagination.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_pagination.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+[39/758] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/relation_enhancement.cpp.o
+FAILED: [code=1] CMakeFiles/teaql_runtime.dir/src/runtime/relation_enhancement.cpp.o 
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/clang++  -I/home/philip/githome/teaql-cpp/include -stdlib=libc++ -g1 -std=gnu++20 -Wall -Wextra -Wpedantic -MD -MT CMakeFiles/teaql_runtime.dir/src/runtime/relation_enhancement.cpp.o -MF CMakeFiles/teaql_runtime.dir/src/runtime/relation_enhancement.cpp.o.d -o CMakeFiles/teaql_runtime.dir/src/runtime/relation_enhancement.cpp.o -c /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_hydration.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:4:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/resources.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_hydration.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_hydration.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/data_service.hpp:196:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_mutation.hpp:4:
+/home/philip/githome/teaql-cpp/include/teaql/runtime/cache.hpp:63:15: error: no matching constructor for initialization of 'Vector<CompactRow>' (aka 'std::vector<CompactRow, polymorphic_allocator<CompactRow>>')
+   63 |             : rows(rows.begin(), rows.end(), a.resource()),
+      |               ^    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::CompactRow *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::CompactRow, const teaql::CompactRow &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:299:25: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 |   _LIBCPP_HIDE_FROM_ABI vector(vector&& __x, const __type_identity_t<allocator_type>& __a);
+      |                         ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:913:85: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 | _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI vector<_Tp, _Allocator>::vector(vector&& __x)
+      |                                                                                     ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_hydration.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_execution.hpp:77:11: error: no matching constructor for initialization of 'Vector<CompactRow>' (aka 'std::vector<CompactRow, polymorphic_allocator<CompactRow>>')
+   77 |           parents_(parents.begin(), parents.end(), a.resource()), compact_(compact),
+      |           ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::CompactRow *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::CompactRow, const teaql::CompactRow &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:299:25: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 |   _LIBCPP_HIDE_FROM_ABI vector(vector&& __x, const __type_identity_t<allocator_type>& __a);
+      |                         ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:913:85: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 | _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI vector<_Tp, _Allocator>::vector(vector&& __x)
+      |                                                                                     ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_hydration.hpp:266:46: error: no matching constructor for initialization of 'Vector<RelationLoadPlan>' (aka 'std::vector<RelationLoadPlan, polymorphic_allocator<RelationLoadPlan>>')
+  266 |           mutable_parents_(mutable_parents), plans_(plans.begin(), plans.end(), a.resource()),
+      |                                              ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::RelationLoadPlan *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::RelationLoadPlan, const teaql::RelationLoadPlan &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:924:26: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 | vector<_Tp, _Allocator>::vector(vector&& __x, const __type_identity_t<allocator_type>& __a)
+      |                          ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:913:85: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 | _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI vector<_Tp, _Allocator>::vector(vector&& __x)
+      |                                                                                     ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+/home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:34:11: error: no matching constructor for initialization of 'Vector<RelationAggregate>' (aka 'std::vector<RelationAggregate, polymorphic_allocator<RelationAggregate>>')
+   34 |           aggregates_(aggregates.begin(), aggregates.end(), a.resource()), cache_(cache),
+      |           ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::RelationAggregate *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::RelationAggregate, const teaql::RelationAggregate &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:299:25: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 |   _LIBCPP_HIDE_FROM_ABI vector(vector&& __x, const __type_identity_t<allocator_type>& __a);
+      |                         ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:291:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(vector&& __x)
+      |                                                       ^      ~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+/home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:35:11: error: no matching constructor for initialization of 'TraceChain' (aka 'std::vector<TraceNode, polymorphic_allocator<TraceNode>>')
+   35 |           trace_(trace.begin(), trace.end(), a.resource()), fetch_(std::allocator_arg, a, fetch) {
+      |           ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::TraceNode *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::TraceNode, const teaql::TraceNode &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:299:25: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 |   _LIBCPP_HIDE_FROM_ABI vector(vector&& __x, const __type_identity_t<allocator_type>& __a);
+      |                         ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:913:85: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 | _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI vector<_Tp, _Allocator>::vector(vector&& __x)
+      |                                                                                     ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_enhancement.cpp:1:
+/home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_enhancement.hpp:186:11: error: no matching constructor for initialization of 'TraceChain' (aka 'std::vector<TraceNode, polymorphic_allocator<TraceNode>>')
+  186 |           trace_(trace.begin(), trace.end(), a.resource()), fetch_(std::allocator_arg, a, fetch) {
+      |           ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:177:3: note: candidate constructor template not viable: no known conversion from 'iterator' (aka '__wrap_iter<const teaql::TraceNode *>') to 'size_type' (aka 'unsigned long') for 1st argument
+  177 |   vector(size_type __n, const value_type& __x, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:200:3: note: candidate template ignored: requirement 'std::integral_constant<bool, false>::value' was not satisfied [with _InputIterator = iterator]
+  200 |   vector(_InputIterator __first, _InputIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:221:3: note: candidate template ignored: requirement 'std::is_constructible<teaql::TraceNode, const teaql::TraceNode &>::value' was not satisfied [with _ForwardIterator = iterator]
+  221 |   vector(_ForwardIterator __first, _ForwardIterator __last, const allocator_type& __a)
+      |   ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:156:64: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  156 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n, const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:166:55: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  166 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(size_type __n, const value_type& __x) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:268:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  268 |   vector(const vector& __x, const __type_identity_t<allocator_type>& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:280:3: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  280 |   vector(initializer_list<value_type> __il, const allocator_type& __a)
+      |   ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:299:25: note: candidate constructor not viable: requires 2 arguments, but 3 were provided
+  299 |   _LIBCPP_HIDE_FROM_ABI vector(vector&& __x, const __type_identity_t<allocator_type>& __a);
+      |                         ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:191:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  191 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_InputIterator __first, _InputIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:210:55: note: candidate constructor template not viable: requires 2 arguments, but 3 were provided
+  210 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(_ForwardIterator __first, _ForwardIterator __last) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:138:64: note: candidate constructor not viable: requires single argument '__a', but 3 arguments were provided
+  138 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(const allocator_type& __a)
+      |                                                                ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:147:64: note: candidate constructor not viable: requires single argument '__n', but 3 arguments were provided
+  147 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit vector(size_type __n) {
+      |                                                                ^      ~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:263:55: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  263 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(const vector& __x)
+      |                                                       ^      ~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:275:55: note: candidate constructor not viable: requires single argument '__il', but 3 arguments were provided
+  275 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector(initializer_list<value_type> __il) {
+      |                                                       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:913:85: note: candidate constructor not viable: requires single argument '__x', but 3 arguments were provided
+  291 | _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI vector<_Tp, _Allocator>::vector(vector&& __x)
+      |                                                                                     ^
+/home/philip/githome/teaql-cpp/.tools/toolchains/llvm-23.1.3/bin/../include/c++/v1/__vector/vector.h:136:55: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  136 |   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI vector()
+      |                                                       ^
+2 warnings and 6 errors generated.
+[40/758] Building CXX object CMakeFiles/teaql_runtime.dir/src/runtime/relation_installation.cpp.o
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_installation.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_installation.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:4:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/resources.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/value.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/core/decimal.hpp:3:
+/home/philip/githome/teaql-cpp/include/teaql/core/decimal_error.hpp:49:79: warning: missing field 'precision' initializer [-Wmissing-designated-field-initializers]
+   49 |                   DecimalFormat options = {.alignment = DecimalAlignment::Left}) const;
+      |                                                                               ^
+In file included from /home/philip/githome/teaql-cpp/src/runtime/relation_installation.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/relation_installation.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/detail/context_entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+2 warnings generated.
+ninja: build stopped: subcommand failed.

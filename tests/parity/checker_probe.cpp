@@ -1,4 +1,4 @@
-#include "../checker_fixture.hpp"
+#include "../support/checker_fixture.hpp"
 #include "fixture_value.hpp"
 #include <teaql/runtime/module.hpp>
 #include <teaql/core/detail/debug.hpp>

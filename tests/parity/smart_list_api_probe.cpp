@@ -3,7 +3,7 @@
 #include <teaql/core/detail/debug.hpp>
 #include <teaql/core/debug.hpp>
 #include "fixture_value.hpp"
-#include "../smart_list_drop_fixture.hpp"
+#include "../support/smart_list_drop_fixture.hpp"
 #include "debug_modes.hpp"
 #include <bit>
 #include <iostream>

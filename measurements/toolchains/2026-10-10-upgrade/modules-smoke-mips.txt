@@ -1,0 +1,28 @@
+-- The CXX compiler identification is GNU 14.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/philip/githome/teaql-cpp/.tools/toolchains/openwrt-25.12.5/toolchain-mips_24kc_gcc-14.3.0_musl/bin/mips-openwrt-linux-musl-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/philip/githome/teaql-cpp/.tools/toolchain-upgrade/modules-smoke-mips
+[1/8] Scanning /home/philip/githome/teaql-cpp/.tools/toolchain-upgrade/modules-smoke/consumer.cpp for CXX dependencies
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[2/8] Scanning /home/philip/githome/teaql-cpp/.tools/toolchain-upgrade/modules-smoke/probe.cppm for CXX dependencies
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+[3/8] Generating CXX dyndep file CMakeFiles/teaql_probe.dir/CXX.dd
+[4/8] Generating CXX dyndep file CMakeFiles/teaql_probe_consumer.dir/CXX.dd
+[5/8] Building CXX object CMakeFiles/teaql_probe.dir/probe.cppm.o
+[6/8] Linking CXX static library libteaql_probe.a
+[7/8] Building CXX object CMakeFiles/teaql_probe_consumer.dir/consumer.cpp.o
+[8/8] Linking CXX executable teaql_probe_consumer
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+mips-openwrt-linux-musl-g++.bin: warning: environment variable 'STAGING_DIR' not defined
+Test project /home/philip/githome/teaql-cpp/.tools/toolchain-upgrade/modules-smoke-mips
+    Start 1: imported_existing_types
+1/1 Test #1: imported_existing_types ..........   Passed    0.01 sec
+
+100% tests passed out of 1
+
+Total Test time (real) =   0.02 sec

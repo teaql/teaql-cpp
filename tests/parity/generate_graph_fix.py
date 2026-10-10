@@ -44,7 +44,7 @@ def inputs():
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--rust',required=True);args=parser.parse_args()
     root=Path(__file__).resolve().parents[2]
-    subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     cases=inputs(); outputs=observe(args.rust,cases)
     lock=json.loads((root/'upstream.lock.json').read_text())
     corpus=dict(baseline=lock['commit'],note='Original FixEvidence/Context/private CREATE methods and task-local keys through access bridges; publication/cancellation/panic observations use the original public audited-save wrapper with a delegated saver fixture, not copied orchestration.',

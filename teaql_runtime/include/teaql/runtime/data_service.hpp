@@ -1,0 +1,17 @@
+#pragma once
+#include <teaql/runtime/detail/data_service/entity_service.hpp>
+#include <teaql/runtime/detail/data_service/entity_query.hpp>
+#include <teaql/runtime/detail/data_service/typed_aggregate.hpp>
+#include <teaql/runtime/detail/data_service/entity_stream.hpp>
+#include <teaql/runtime/detail/data_service/enhanced_entities.hpp>
+#include <teaql/runtime/detail/data_service/entity_graph_plan.hpp>
+#include <teaql/runtime/detail/data_service/entity_mutation.hpp>
+#include <teaql/runtime/detail/data_service/entity_graph_execution.hpp>
+#include <teaql/runtime/detail/data_service/entity_save_adapters.hpp>
+#include <teaql/runtime/detail/data_service/graph_node_commands.hpp>
+#include <teaql/runtime/detail/data_service/recursive_graph_write.hpp>
+#include <teaql/runtime/detail/data_service/ledger_plan.hpp>
+#include <teaql/runtime/detail/data_service/ledger_execution.hpp>
+#include <teaql/runtime/detail/data_service/graph_saver.hpp>
+#include <teaql/runtime/detail/data_service/audited_save.hpp>
+#include <teaql/runtime/detail/data_service/audited_auto_save.hpp>

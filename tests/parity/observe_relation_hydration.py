@@ -65,7 +65,7 @@ def cases():
     return out
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--rust',required=True);args=p.parse_args();root=Path(__file__).resolve().parents[2]
-    subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     data=cases()
     for c,o in zip(data,observe(args.rust,[c['input'] for c in data])):c['expected']=o
     baseline=json.loads((root/'upstream.lock.json').read_text())['commit']

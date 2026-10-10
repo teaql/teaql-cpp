@@ -46,7 +46,7 @@ def cases():
     return cases
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--rust',required=True);args=p.parse_args();root=Path(__file__).resolve().parents[2]
-    subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     data=cases();outputs=observe(args.rust,[c['input'] for c in data])
     if outputs != observe(args.rust, [c['input'] for c in data]):
         raise RuntimeError('Original decoder/module observations changed between runs')

@@ -29,7 +29,7 @@ def main():
     inputs = [case['input'] for case in cases]
     expected = [case['expected'][bits] for case in cases]
     if args.rust:
-        subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+        subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
         rust_emulator = args.rust_emulator.split(';') if args.rust_emulator else []
         rust_bits = subprocess.check_output(rust_emulator + [args.rust, '--pointer-bits'], text=True).strip()
         if rust_bits != bits:

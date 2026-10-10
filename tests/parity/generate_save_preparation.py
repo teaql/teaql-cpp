@@ -85,7 +85,7 @@ def inputs():
     return cases
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--rust',required=True);args=parser.parse_args();root=Path(__file__).resolve().parents[2]
-    subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True);cases=inputs();outputs=observe(args.rust,cases)
+    subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True);cases=inputs();outputs=observe(args.rust,cases)
     lock=json.loads((root/'upstream.lock.json').read_text());corpus=dict(baseline=lock['commit'],note='Original public typed extraction and private extraction/preflight/merge/hydration/location/cancellation/preservation methods via access-only archive bridges; fixture models/checkers do not reimplement runtime algorithms.',cases=[dict(input=i,expected=o)for i,o in zip(cases,outputs)])
     Path(__file__).with_name('save_preparation_cases.json').write_text(json.dumps(corpus,indent=2)+'\n');print(f'Recorded {len(cases)} save-preparation observations')
 if __name__=='__main__':main()

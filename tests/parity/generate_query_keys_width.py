@@ -14,7 +14,7 @@ def main():
     parser.add_argument('--rust64', required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    subprocess.run(['python3', str(root / 'scripts/verify-upstream.py')], check=True)
+    subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
     source = json.loads(Path(__file__).with_name('query_keys_cases.json').read_text())
     inputs = [case['input'] for case in source['cases']]
     original = observe(args.rust64, inputs)

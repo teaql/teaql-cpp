@@ -93,7 +93,7 @@ def cases():
 if __name__ == '__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--rust',required=True);args=parser.parse_args()
     root=Path(__file__).resolve().parents[2]
-    subprocess.run(['python3',str(root/'scripts/verify-upstream.py')],check=True)
+    subprocess.run(['python3',str(root/'scripts/verify_upstream.py')],check=True)
     data=cases();values=observe(args.rust,[c['input'] for c in data])
     for c,v in zip(data,values):c['expected']=v
     path=Path(__file__).with_name('sqlite_schema_cases.json')
