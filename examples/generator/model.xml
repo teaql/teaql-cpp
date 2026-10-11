@@ -1,0 +1,6 @@
+<root name="cpp_examples" org="teaql" data_service="sqlite">
+    <product name="string()" _name="Product" />
+    <order name="string()" _name="Order" />
+    <order_line name="string()" order="order(reverseName=lines)" product="product()"
+                _name="Order line" />
+</root>

@@ -1,0 +1,9 @@
+Test project /home/philip/githome/teaql-cpp/build_sanitize_current
+    Start 385: generated_api_contracts
+    Start 390: example_generated_query_expression
+1/2 Test #390: example_generated_query_expression ...   Passed    0.07 sec
+2/2 Test #385: generated_api_contracts ..............   Passed    0.15 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   0.15 sec

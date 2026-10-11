@@ -74,6 +74,8 @@ if(TEAQL_BUILD_EXAMPLES)
     target_link_libraries(teaql_sqlite_schema_crud PRIVATE teaql::provider_sqlite)
     add_executable(teaql_sqlite_relations_graph examples/sqlite_relations_graph.cpp)
     target_link_libraries(teaql_sqlite_relations_graph PRIVATE teaql::provider_sqlite)
+    add_executable(teaql_generated_query_expression examples/generated_query_expression.cpp)
+    target_link_libraries(teaql_generated_query_expression PRIVATE teaql::provider_sqlite)
 endif()
 
 include(CTest)

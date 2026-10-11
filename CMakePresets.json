@@ -141,7 +141,8 @@
         "teaql_module_sqlite_schema_crud",
         "teaql_module_sqlite_relations_graph",
         "teaql_sqlite_schema_crud",
-        "teaql_sqlite_relations_graph"
+        "teaql_sqlite_relations_graph",
+        "teaql_generated_query_expression"
       ]
     },
     {

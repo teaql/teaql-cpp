@@ -1,0 +1,19 @@
+[1/2] Building CXX object CMakeFiles/teaql_generated_api_tests.dir/tests/generator/generated_api_tests.cpp.o
+In file included from /home/philip/githome/teaql-cpp/tests/generator/generated_api_tests.cpp:1:
+In file included from /home/philip/githome/teaql-cpp/tests/generator/../../examples/generated/include/cpp_examples.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/tests/generator/../../examples/generated/include/cpp_examples/queries.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/tests/generator/../../examples/generated/include/cpp_examples/models.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/tests/generator/../../examples/generated/include/cpp_examples/support.hpp:32:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/data_service/data_service.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/data_service/declarations.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/detail/context/entity.hpp:2:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/context.hpp:5:
+In file included from /home/philip/githome/teaql-cpp/teaql_runtime/include/teaql/runtime/registry.hpp:3:
+In file included from /home/philip/githome/teaql-cpp/teaql_data_service/include/teaql/data_service/executor.hpp:2:
+/home/philip/githome/teaql-cpp/teaql_data_service/include/teaql/data_service/types.hpp:102:16: warning: address of stack memory associated with local variable 'chain' returned [-Wreturn-stack-address]
+  102 |         return chain.back().comment;
+      |                ^~~~~
+1 warning generated.
+[2/2] Linking CXX executable teaql_generated_api_tests

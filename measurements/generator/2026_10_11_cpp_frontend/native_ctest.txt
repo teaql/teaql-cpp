@@ -1,0 +1,15 @@
+Test project /home/philip/githome/teaql-cpp/build_native_current
+    Start 391: runtime_examples_rust_parity
+    Start 385: generated_api_contracts
+    Start 389: example_sqlite_relations_graph
+    Start 390: example_generated_query_expression
+1/5 Test #390: example_generated_query_expression ...   Passed    0.02 sec
+    Start 388: example_sqlite_schema_crud
+2/5 Test #389: example_sqlite_relations_graph .......   Passed    0.02 sec
+3/5 Test #388: example_sqlite_schema_crud ...........   Passed    0.01 sec
+4/5 Test #385: generated_api_contracts ..............   Passed    0.05 sec
+5/5 Test #391: runtime_examples_rust_parity .........   Passed    0.09 sec
+
+100% tests passed out of 5
+
+Total Test time (real) =   0.10 sec

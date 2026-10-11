@@ -1,0 +1,151 @@
+Test project /home/philip/githome/teaql-cpp/build_modules_native
+      Start 419: module_original_runtime_pagination
+      Start 443: module_context_reference_contracts
+      Start 395: module_core_aux_debug_contracts
+      Start 400: module_data_service_model_contracts
+ 1/73 Test #400: module_data_service_model_contracts ............................   Passed    0.23 sec
+      Start 409: module_sql_query_executor_contracts
+ 2/73 Test #395: module_core_aux_debug_contracts ................................   Passed    0.26 sec
+      Start 464: module_canonical_examples_rust_parity
+ 3/73 Test #443: module_context_reference_contracts .............................   Passed    0.34 sec
+      Start 463: module_examples_rust_parity
+ 4/73 Test #409: module_sql_query_executor_contracts ............................   Passed    0.17 sec
+      Start 459: module_runtime_examples_context_contracts
+ 5/73 Test #464: module_canonical_examples_rust_parity ..........................   Passed    0.17 sec
+      Start 421: module_original_runtime_context_tail
+ 6/73 Test #463: module_examples_rust_parity ....................................   Passed    0.15 sec
+      Start 460: module_original_runtime_optimistic_conflict_output_contracts
+ 7/73 Test #421: module_original_runtime_context_tail ...........................   Passed    0.07 sec
+      Start 407: module_sql_model_api_contracts
+ 8/73 Test #459: module_runtime_examples_context_contracts ......................   Passed    0.10 sec
+      Start 462: module_example_sqlite_relations_graph
+ 9/73 Test #407: module_sql_model_api_contracts .................................   Passed    0.04 sec
+      Start 440: module_entity_reference_context_contracts
+10/73 Test #462: module_example_sqlite_relations_graph ..........................   Passed    0.05 sec
+      Start 437: module_round_trip_reference_context_contracts
+11/73 Test #460: module_original_runtime_optimistic_conflict_output_contracts ...   Passed    0.08 sec
+      Start 453: module_relation_hydration_contracts
+12/73 Test #440: module_entity_reference_context_contracts ......................   Passed    0.04 sec
+      Start 392: module_generated_query_expression
+13/73 Test #437: module_round_trip_reference_context_contracts ..................   Passed    0.03 sec
+      Start 456: module_provider_sqlite_schema_contracts
+14/73 Test #453: module_relation_hydration_contracts ............................   Passed    0.03 sec
+      Start 445: module_graph_saver_context_contracts
+15/73 Test #456: module_provider_sqlite_schema_contracts ........................   Passed    0.02 sec
+      Start 429: module_log_manager_contracts
+16/73 Test #392: module_generated_query_expression ..............................   Passed    0.04 sec
+      Start 461: module_example_sqlite_schema_crud
+17/73 Test #445: module_graph_saver_context_contracts ...........................   Passed    0.02 sec
+      Start 452: module_ledger_move_only_contracts
+18/73 Test #429: module_log_manager_contracts ...................................   Passed    0.02 sec
+      Start 446: module_audited_auto_save_context_contracts
+19/73 Test #461: module_example_sqlite_schema_crud ..............................   Passed    0.02 sec
+      Start 418: module_original_runtime_aggregates_cache
+20/73 Test #446: module_audited_auto_save_context_contracts .....................   Passed    0.02 sec
+      Start 451: module_ledger_execution_context_contracts
+21/73 Test #452: module_ledger_move_only_contracts ..............................   Passed    0.02 sec
+      Start 411: module_sql_transaction_execution_contracts
+22/73 Test #418: module_original_runtime_aggregates_cache .......................   Passed    0.01 sec
+      Start 417: module_original_runtime_typed_queries
+23/73 Test #451: module_ledger_execution_context_contracts ......................   Passed    0.01 sec
+      Start 447: module_audited_save_context_contracts
+24/73 Test #411: module_sql_transaction_execution_contracts .....................   Passed    0.01 sec
+      Start 401: module_data_service_scope_contracts
+25/73 Test #417: module_original_runtime_typed_queries ..........................   Passed    0.02 sec
+      Start 416: module_original_runtime_events_relations
+26/73 Test #447: module_audited_save_context_contracts ..........................   Passed    0.01 sec
+      Start 436: module_inmemory_context_contracts
+27/73 Test #401: module_data_service_scope_contracts ............................   Passed    0.01 sec
+      Start 410: module_sql_mutation_execution_contracts
+28/73 Test #416: module_original_runtime_events_relations .......................   Passed    0.01 sec
+      Start 415: module_original_runtime_validation
+29/73 Test #436: module_inmemory_context_contracts ..............................   Passed    0.01 sec
+      Start 448: module_runtime_mutation_context_contracts
+30/73 Test #410: module_sql_mutation_execution_contracts ........................   Passed    0.01 sec
+      Start 420: module_original_runtime_memory_service
+31/73 Test #415: module_original_runtime_validation .............................   Passed    0.01 sec
+      Start 454: module_relation_execution_contracts
+32/73 Test #448: module_runtime_mutation_context_contracts ......................   Passed    0.01 sec
+      Start 398: module_query_model_contracts
+33/73 Test #420: module_original_runtime_memory_service .........................   Passed    0.01 sec
+      Start 414: module_original_runtime_service_boundaries
+34/73 Test #454: module_relation_execution_contracts ............................   Passed    0.01 sec
+35/73 Test #398: module_query_model_contracts ...................................   Passed    0.01 sec
+      Start 412: module_sql_stream_execution_contracts
+      Start 427: module_context_logging_contracts
+36/73 Test #414: module_original_runtime_service_boundaries .....................   Passed    0.01 sec
+      Start 408: module_sql_transport_contracts
+37/73 Test #412: module_sql_stream_execution_contracts ..........................   Passed    0.01 sec
+      Start 430: module_audit_event_contracts
+38/73 Test #427: module_context_logging_contracts ...............................   Passed    0.01 sec
+      Start 425: module_mutation_policy_context_contracts
+39/73 Test #408: module_sql_transport_contracts .................................   Passed    0.01 sec
+      Start 405: module_system_time_arithmetic_scope_contracts
+40/73 Test #430: module_audit_event_contracts ...................................   Passed    0.01 sec
+      Start 413: module_original_runtime_registration
+41/73 Test #425: module_mutation_policy_context_contracts .......................   Passed    0.01 sec
+      Start 394: module_decimal_contracts
+42/73 Test #405: module_system_time_arithmetic_scope_contracts ..................   Passed    0.01 sec
+      Start 396: module_core_collection_contracts
+43/73 Test #413: module_original_runtime_registration ...........................   Passed    0.01 sec
+      Start 403: module_sql_projection_scope_contracts
+44/73 Test #394: module_decimal_contracts .......................................   Passed    0.01 sec
+      Start 435: module_event_model_contracts
+45/73 Test #396: module_core_collection_contracts ...............................   Passed    0.01 sec
+      Start 399: module_data_service_contracts
+46/73 Test #403: module_sql_projection_scope_contracts ..........................   Passed    0.00 sec
+      Start 406: module_sql_dialect_contracts
+47/73 Test #435: module_event_model_contracts ...................................   Passed    0.00 sec
+      Start 457: module_provider_sqlite_binding_contracts
+48/73 Test #399: module_data_service_contracts ..................................   Passed    0.00 sec
+      Start 423: module_runtime_graph_contracts
+49/73 Test #406: module_sql_dialect_contracts ...................................   Passed    0.01 sec
+      Start 458: module_provider_sqlite_decoding_contracts
+50/73 Test #457: module_provider_sqlite_binding_contracts .......................   Passed    0.01 sec
+      Start 424: module_runtime_registry_contracts
+51/73 Test #423: module_runtime_graph_contracts .................................   Passed    0.00 sec
+      Start 434: module_audit_event_result_reentrant_close
+52/73 Test #458: module_provider_sqlite_decoding_contracts ......................   Passed    0.01 sec
+      Start 432: module_audit_event_owner_reentrant_close
+53/73 Test #434: module_audit_event_result_reentrant_close ......................   Passed    0.00 sec
+      Start 449: module_runtime_mutation_reentrant_prepare
+54/73 Test #424: module_runtime_registry_contracts ..............................   Passed    0.01 sec
+      Start 404: module_system_time_contracts
+55/73 Test #432: module_audit_event_owner_reentrant_close .......................   Passed    0.00 sec
+      Start 428: module_log_formatter_contracts
+56/73 Test #449: module_runtime_mutation_reentrant_prepare ......................   Passed    0.00 sec
+      Start 397: module_core_contracts
+57/73 Test #404: module_system_time_contracts ...................................   Passed    0.00 sec
+      Start 442: module_entity_reference_reentrant_output
+58/73 Test #428: module_log_formatter_contracts .................................   Passed    0.00 sec
+      Start 431: module_audit_event_context_reentrant_close
+59/73 Test #397: module_core_contracts ..........................................   Passed    0.00 sec
+      Start 402: module_executor_spi_contracts
+60/73 Test #442: module_entity_reference_reentrant_output .......................   Passed    0.00 sec
+      Start 450: module_runtime_mutation_reentrant_event
+61/73 Test #431: module_audit_event_context_reentrant_close .....................   Passed    0.00 sec
+      Start 455: module_provider_sqlite_dialect_contracts
+62/73 Test #402: module_executor_spi_contracts ..................................   Passed    0.00 sec
+      Start 438: module_round_trip_reference_reentrant_owner
+63/73 Test #450: module_runtime_mutation_reentrant_event ........................   Passed    0.00 sec
+      Start 439: module_round_trip_reference_reentrant_output
+64/73 Test #455: module_provider_sqlite_dialect_contracts .......................   Passed    0.00 sec
+      Start 433: module_audit_event_payload_reentrant_close
+65/73 Test #438: module_round_trip_reference_reentrant_owner ....................   Passed    0.00 sec
+      Start 426: module_mutation_policy_reentrant_close
+66/73 Test #439: module_round_trip_reference_reentrant_output ...................   Passed    0.00 sec
+      Start 444: module_context_early_global_close
+67/73 Test #433: module_audit_event_payload_reentrant_close .....................   Passed    0.00 sec
+      Start 422: module_runtime_public_namespace_contracts
+68/73 Test #426: module_mutation_policy_reentrant_close .........................   Passed    0.00 sec
+      Start 441: module_entity_reference_reentrant_owner
+69/73 Test #444: module_context_early_global_close ..............................   Passed    0.00 sec
+      Start 393: module_import_contracts
+70/73 Test #422: module_runtime_public_namespace_contracts ......................   Passed    0.00 sec
+71/73 Test #441: module_entity_reference_reentrant_owner ........................   Passed    0.00 sec
+72/73 Test #393: module_import_contracts ........................................   Passed    0.00 sec
+73/73 Test #419: module_original_runtime_pagination .............................   Passed    1.20 sec
+
+100% tests passed out of 73
+
+Total Test time (real) =   1.22 sec

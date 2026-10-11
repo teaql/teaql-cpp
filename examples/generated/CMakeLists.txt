@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(cpp_examples LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(cpp_examples INTERFACE)
+target_include_directories(cpp_examples INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(cpp_examples INTERFACE cxx_std_20)
+target_link_libraries(cpp_examples INTERFACE teaql::provider_sqlite)

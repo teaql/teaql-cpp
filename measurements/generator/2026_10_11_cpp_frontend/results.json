@@ -1,0 +1,64 @@
+{
+  "status": "Initial C++ typed entity/query/expression generation frontend qualified within the documented feature scope",
+  "generator_workspace": "/home/philip/githome/teaql_code_gen_cpp",
+  "generator_branch": "cpp_support",
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "runtime_cpp_parent": "42e688ee59ea9a7671a0d0ea6a6549fd850e993f",
+  "rust_baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "generator_tests": {
+    "CppGenerationTest": {
+      "run": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "RustLibGenerationTest": {
+      "run": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "PredicateNamingParityTest": {
+      "run": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "native_selection": {
+    "passed": 5,
+    "total": 5
+  },
+  "module_selection": {
+    "passed": 73,
+    "total": 73
+  },
+  "sanitizer_selection": {
+    "passed": 2,
+    "total": 2,
+    "leak_scanning": false
+  },
+  "compiler_contracts": {
+    "positive": 1,
+    "negative": 7
+  },
+  "reproducible_outputs": {
+    "examples/generated": 10,
+    "tests/generated_types": 10
+  },
+  "formatting": {
+    "clang_format": "18.1.8",
+    "cpp_files": 714
+  },
+  "source_tests": {
+    "covered_in_scope": 441,
+    "excluded_backend": 5,
+    "excluded_external": 5
+  },
+  "original_generator": "Unchanged clean checkout at the recorded base commit",
+  "kernel_function_implementations": "Unchanged; 309 original production checkpoints remain verified",
+  "mips": "Not repeated; no target toolchain or architecture changes",
+  "physical_device": "Not executed",
+  "feature_contract": "docs/cpp_generator.md",
+  "full_rust_generator_parity": "Not claimed; explicit unsupported/deferred features are documented"
+}

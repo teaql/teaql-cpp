@@ -53,7 +53,14 @@ Two runnable examples reproduce the business semantics of the corresponding Rust
 - [sqlite_schema_crud](examples/sqlite_schema_crud.cpp): provider schema creation, audited entity graph saves, soft delete, and typed query; versions change from `1` to `2` to `-3`.
 - [sqlite_relations_graph](examples/sqlite_relations_graph.cpp): one runtime graph save of an order and two items, followed by enhanced entity queries loading `lines.product`.
 
-Both examples now use the entity/query/graph runtime and independent SQLite provider. Handwritten models reproduce the locked Rust example mappings; runtime code owns traversal, planning, child writes, transactions and relationship queries. The model generator has not been changed.
+Both examples use the entity/query/graph runtime and independent SQLite provider. Handwritten models reproduce the locked Rust example mappings; runtime code owns traversal, planning, child writes, transactions and relationship queries. These two original mappings remain unchanged semantic baselines.
+
+The additional [generated_query_expression](examples/generated_query_expression.cpp)
+example uses C++ models, staged typed Q requests and E expression accessors produced
+by the independent `teaql-code-gen` C++ branch. It saves an audited order graph,
+loads `lines.product` and evaluates the product name through the existing runtime.
+See [generation and supported features](docs/cpp_generator.md). Ordinary builds
+use checked-in generated headers and require no Java/Maven or generator service.
 
 ## Implementation and ownership
 

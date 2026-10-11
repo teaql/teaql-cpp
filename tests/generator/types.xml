@@ -1,0 +1,10 @@
+<root name="cpp_types" org="teaql" data_service="sqlite">
+    <person _cat="human" email="string()" active="true" nickname="string()?"
+            balance="number()" height="double()" ratio="float()" age="integer()"
+            birthday="date()" updated_at="dateTime()" payload="jsonMe()" />
+    <device code="string()" active="true" owner="person()" />
+    <order_status name="string()" />
+    <category name="string()" />
+    <child name="string()" />
+    <inventory name="string()" />
+</root>

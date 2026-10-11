@@ -1,0 +1,14 @@
+01:43:16.522 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files started: domainName=cpp_examples, scope=cpp-lib-core
+01:43:16.603 [main] INFO com.skynet.codegenerator.DomainGenerationService - Total generators found: 129
+01:43:16.609 [main] INFO com.skynet.codegenerator.DomainGenerationService - PojoGenerator skipped. scope=cpp-lib-core, generator.getScopes()=[java-lib-core]
+01:43:16.609 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=cpp-lib-core, generator=com.skynet.codegenerator.cpp.CppCoreGenerator
+01:43:16.692 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=cpp-lib-core, generator=com.skynet.codegenerator.cpp.CppCoreGenerator, fileCount=9
+01:43:16.703 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files completed: domainName=cpp_examples, scope=cpp-lib-core, fileCount=9
+01:43:17.643 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files started: domainName=cpp_types, scope=cpp-lib-core
+01:43:17.731 [main] INFO com.skynet.codegenerator.DomainGenerationService - Total generators found: 129
+01:43:17.737 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator matched scope: scope=cpp-lib-core, generator=com.skynet.codegenerator.cpp.CppCoreGenerator
+01:43:17.815 [main] INFO com.skynet.codegenerator.DomainGenerationService - generator produced files: scope=cpp-lib-core, generator=com.skynet.codegenerator.cpp.CppCoreGenerator, fileCount=9
+01:43:17.822 [main] INFO com.skynet.codegenerator.DomainGenerationService - PojoGenerator skipped. scope=cpp-lib-core, generator.getScopes()=[java-lib-core]
+01:43:17.823 [main] INFO com.skynet.codegenerator.DomainGenerationService - generate domain files completed: domainName=cpp_types, scope=cpp-lib-core, fileCount=9
+Verified 10 files: examples/generated
+Verified 10 files: tests/generated_types

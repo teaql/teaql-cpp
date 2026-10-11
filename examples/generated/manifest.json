@@ -1,0 +1,23 @@
+{
+  "scope": "cpp-lib-core",
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "2b58d772263ae9aeb89515bbab3368a9d8a8edb6b1456d34b8b37152b99ba39b",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "50720516099aa7505693fef3373944a7c53f57085ce0005c8819e44b3e9269f3"
+  },
+  "model": "examples/generator/model.xml",
+  "model_sha256": "3c3bc503e910fe63beeb32f80b779f11ae3ec0c719d4d969019babe63759e852",
+  "runtime_rust_baseline": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "2c234e4c63e00ac6e95f40638352d017a05e3ab254a46f80cb9ce0c0a3c10c1a",
+    "ASSIST.md": "a9c5cfa408803f76266c93f905764bc53bfbc62617108c9c7c4c8a24cb0ef5d3",
+    "CMakeLists.txt": "0174e79f569bfe997b5a483a5dc41e7878abfed2504cf155f49574aaf124873f",
+    "include/cpp_examples/expressions.hpp": "b5e3ac0874b931d9194689f6b71fcc9f5e9e1494863a8c73e286508fc0b87d88",
+    "include/cpp_examples/models.hpp": "3e0d73f5ea31384bd5012e38a2ac24da0c42075b8ddfd747fc2939f252c15af7",
+    "include/cpp_examples/queries.hpp": "6c087706ed8569adfbe55977538683a0b526510f4a2b6142f3f96526c65bff6e",
+    "include/cpp_examples/runtime.hpp": "0cbee59ad344945eb0e2c3a65dd2118755cc15f596dcfaaf0332f68a1956d437",
+    "include/cpp_examples/support.hpp": "53e8e973d1ae38a4fd83f40ce365ac2a8233bb3816cce5d9fac1bf3f859f07fc",
+    "include/cpp_examples.hpp": "166a756aee687bf436c441a87ecf4123ebcc10a700df73ffbb2308972a595604"
+  }
+}

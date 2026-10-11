@@ -1,0 +1,9 @@
+Verified positive
+Verified missing_purpose
+Verified missing_audit
+Verified unknown_field
+Verified wrong_scalar
+Verified wrong_relation
+Verified extra_runtime_argument
+Verified global_builder
+Verified one positive and seven negative generated API compiler contracts

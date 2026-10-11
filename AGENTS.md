@@ -38,8 +38,10 @@
 - Preserve Rust core query/mutation/trace semantics, including distinct mutation,
   snapshot, and generated-value types. Preserve 5.0.5 log provenance/privacy when
   implementing logs. Do not claim unsupported features or ordinary CRUD as graph save.
-- Do not modify the generator yet. Port simple Rust examples semantically with
-  handwritten models and mappings; let runnable examples drive kernel work.
+- Generator development is authorized as of 2026-10-11. Follow
+  docs/cpp_generator_plan.md in the independent cpp_support workspace. Preserve
+  the original handwritten examples as semantic baselines while adding generated
+  C++ models, typed queries and expressions; keep generation a development step.
 - Follow docs/cpp_modules_plan.md for the Rust-shaped module migration. Use
   underscore-separated project-owned package, directory, file and module names;
   primary module names match package/CMake target names such as `teaql_core`.
