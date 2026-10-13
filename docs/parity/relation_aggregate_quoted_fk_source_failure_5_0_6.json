@@ -1,0 +1,277 @@
+{
+  "status": "pending_user_decision_not_parity_acceptance",
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "producer": {
+    "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "model": "tests/generator/dynamic_json.xml",
+    "model_sha256": "926d116146ea28d5c612ab14a01304595f27aac14d2a8476291f98c7c797a97f",
+    "hand_edited": false,
+    "files": {
+      "lib/Cargo.toml": "afcd5a97d8297f3f41517c8829dea55defdea20544bf49b8486f48793137406e",
+      "lib/src/company/behavior.rs": "17d954f0c4200220c41d08c3dee2d858ca968aad75674382881de01998bbb8fb",
+      "lib/src/company/checker.rs": "b6a8493868745d1d468cad44ca7124cb5ee8fe5e3d08a14d96229626e000b872",
+      "lib/src/company/entity.rs": "1a0ac87eab7ec79b8b57121af7e04ccaa5dbc9444f3a90a2236a8030921d33bc",
+      "lib/src/company/expression.rs": "d7f9f48d32f5d70044440ee83b02f49bacf882a908137b4808b6ac07b04379c5",
+      "lib/src/company/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/company/request.rs": "cd3cd8392147172e8cd3234d5886bd45b54cda78fe5f9cf96b15f02f901d0993",
+      "lib/src/e.rs": "77f8a661233f743c8340442f28fd5a4bd98c18fa25389345b53b888b3009f78b",
+      "lib/src/lib.rs": "389f0066250da897b12e554cc4822e84343075edb5e61260de33ee8720abb297",
+      "lib/src/line/behavior.rs": "c2d4bd5656893edb1cabcc84ac22be10cdd31501e4a3fa9a6dbf82c40ca983cf",
+      "lib/src/line/checker.rs": "0dfd02c5092e211c56dc652eb893607415e87cdff202b8e306e98902a260a919",
+      "lib/src/line/entity.rs": "caf909fabb2d718c783d7d99d49543a5073525515c9a8eab8024147fae379ac5",
+      "lib/src/line/expression.rs": "38de06af9beb71b28d0a37996037d31d6a450f04d649269992e0fddfedcb0cfd",
+      "lib/src/line/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/line/request.rs": "7ea75abcd7278b653a01ef393459d5bbcb5e4467e656a733b82d700fe9578ae9",
+      "lib/src/order/behavior.rs": "96e1c114f9008b9439c653fab8d9c876975f05032f0b25d7a25241bccb1e43d7",
+      "lib/src/order/checker.rs": "e5837f533a7156488daae0b5b69ac9eda7d107706d496fdc88ddd34f7330bb22",
+      "lib/src/order/entity.rs": "86f3119db163c1817c3b0c9eaa653405a00431b0906b48226ea30ec5142c45be",
+      "lib/src/order/expression.rs": "b8d84a34216e65031ec238259b46f23b8cf8d1fa1337f7994668bd469f5e08c9",
+      "lib/src/order/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/order/request.rs": "5f1ff86ad020908b486dfa0a425661379eda9c569f06d097106aa957d5273507",
+      "lib/src/person/behavior.rs": "933e3536a311464810021f84e99e59a4e9b7710340dcdc0a491be535b6978e60",
+      "lib/src/person/checker.rs": "945a725fcd48ac6c77efed99b2e29dc4e88824be49031527de49bc8650692ee9",
+      "lib/src/person/entity.rs": "39ffb9eb9ebab6871867fd2cb73ae11d2e396500423abdda3eb02afc4a24e128",
+      "lib/src/person/expression.rs": "522eb3bc42cc3dde0731dd7f48026f72bc3edf732baada13a4e9eca7b6ca27c9",
+      "lib/src/person/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/person/request.rs": "4a9c067a846ef51294d20c36d216f00e3677dde3c0fb4c79640dded51e58a2b0",
+      "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+      "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+      "lib/src/platform/entity.rs": "692a3780a34ec19cdbf23b60c7dfa041157ceeb8796159c5a7fea826224ddcdf",
+      "lib/src/platform/expression.rs": "82c03e78724d197d2c0c4ca2987062a3c956dd25448a27c2fce3add428965d87",
+      "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/platform/request.rs": "cdc9d7c9ce62de4e5d7a92ab05441b3e8a6093e5d9bab0612175e767b59cc296",
+      "lib/src/product/behavior.rs": "e467ba14762f3dce7287ceefccff7ee0239ad5d9fef3ccb45894a9e59f525fef",
+      "lib/src/product/checker.rs": "972e0fce8e3add8fbc27dce4aad64b7cbb6b371c7d3d4c0c5555ddd1ad7bc82a",
+      "lib/src/product/entity.rs": "d54013c3d1402439b4f4f54240368deabf0763c33469dc5a2f792cdab70a9f9b",
+      "lib/src/product/expression.rs": "007c000aded0bb5cdd72f84f092704abc396bc720b1c467b6d0cc70cb95ccb2f",
+      "lib/src/product/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/product/request.rs": "51399407b28cb2528e5c9488a35f73839b2f284f206acd8a5e74c31d12973dce",
+      "lib/src/profile/behavior.rs": "482e3afb8a89e5e2d4ff75500599695b7fb87345d15a3263de5880d0281ca5d4",
+      "lib/src/profile/checker.rs": "ed5e1ca969436fa4f6cb776de15c52b2095ade1c1597b187f98bf0b450b29b1c",
+      "lib/src/profile/entity.rs": "d4b66a5024443a3aa0e0fbb50acb45740020ada4013a06b97b6ff7524176913e",
+      "lib/src/profile/expression.rs": "addf24597c3cbc76bf93a6da5fb9a64b35cbaa11538f663b312f414f57fb1259",
+      "lib/src/profile/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/profile/request.rs": "73e624bd4248d99e89d7d05cb5572505c58b3d8d2bbbf7504da75f59413c6104",
+      "lib/src/q.rs": "c26d1a64bc4b141a4f17ce25a6c290727b5b4a2a6acb479d9f02a39d2f895f62",
+      "lib/src/request_support.rs": "d7a0d7966bbabb3ff234c5aee596f1dc1098d6060e7611acbb651aa2b1255d1e",
+      "lib/src/runtime.rs": "2ec8634bffd0ba33046fec865feebb8796c9df087c93c40b3e3b1abc0ad361d5",
+      "lib/src/sample_data.rs": "9f9e5277af33c7e146b45c42c08ada052be8432edc88ef2abeb5458fa74accbb"
+    }
+  },
+  "input": {
+    "entity": "order",
+    "minimal": false,
+    "actions": [
+      "count"
+    ],
+    "alias": "_metric",
+    "execute": true,
+    "columns": [
+      "metric",
+      "_metric",
+      "count_orders",
+      "sum_amount_of_orders",
+      "avg_amount_of_orders",
+      "min_amount_of_orders",
+      "max_amount_of_orders",
+      "count_lines",
+      "sum_quantity_of_lines",
+      "avg_quantity_of_lines",
+      "min_quantity_of_lines",
+      "max_quantity_of_lines",
+      "refinements",
+      "_outer_count"
+    ],
+    "mode": "list"
+  },
+  "original_observation": {
+    "error": null,
+    "query": "SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\", \"id\", \"code\", \"amount\", \"priority\", \"version\", \"platform_id\", \"customer_id\", \"seller_id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"version\"), op: Gt, right: Value(I64(0)) }), having: None, order_by: [OrderBy { field: \"id\", expr: None, direction: Asc }], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [RelationAggregate { relation_name: \"lines\", alias: \"count_lines\", query: SelectQuery { hard_limit: 10000, entity: \"Line\", projection: [\"id\", \"version\", \"id\", \"quantity\", \"version\", \"order_id\", \"product_id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"version\"), op: Gt, right: Value(I64(0)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: None, purpose: None, trace_chain: [], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, single_result: true }], aggregation_cache: None, comment: None, purpose: None, trace_chain: [], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }",
+    "rows": [
+      {
+        "detail": null,
+        "id": 10,
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "U64(0)",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "version": 1
+      },
+      {
+        "detail": null,
+        "id": 11,
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "U64(0)",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "version": 1
+      },
+      {
+        "detail": null,
+        "id": 12,
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "U64(0)",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "version": 2
+      }
+    ],
+    "sql": [
+      {
+        "comment": "inspect relationship analysis",
+        "params": [
+          "I64(0)"
+        ],
+        "purpose": "qualify relationship analysis",
+        "sql": "SELECT id, version, code, amount, priority, platform AS platform_id, customer AS customer_id, seller AS seller_id FROM order_data WHERE (version > ?) ORDER BY id ASC LIMIT 10000"
+      },
+      {
+        "comment": "inspect relationship analysis",
+        "params": [
+          "I64(0)",
+          "I64(10)",
+          "I64(11)",
+          "I64(12)"
+        ],
+        "purpose": "qualify relationship analysis",
+        "sql": "SELECT \"order\", COUNT(*) AS count_lines FROM line_data WHERE ((version > ?) AND (\"order\" IN (?, ?, ?))) GROUP BY \"order\" LIMIT 10000"
+      }
+    ],
+    "total": null
+  },
+  "cpp_observation_at_review": {
+    "error": null,
+    "query": "SelectQuery { hard_limit: 10000, entity: \"Order\", projection: [\"id\", \"version\", \"id\", \"code\", \"amount\", \"priority\", \"version\", \"platform_id\", \"customer_id\", \"seller_id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"version\"), op: Gt, right: Value(I64(0)) }), having: None, order_by: [OrderBy { field: \"id\", expr: None, direction: Asc }], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [RelationAggregate { relation_name: \"lines\", alias: \"count_lines\", query: SelectQuery { hard_limit: 10000, entity: \"Line\", projection: [\"id\", \"version\", \"id\", \"quantity\", \"version\", \"order_id\", \"product_id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"version\"), op: Gt, right: Value(I64(0)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: None, purpose: None, trace_chain: [], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }, single_result: true }], aggregation_cache: None, comment: None, purpose: None, trace_chain: [], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None }",
+    "rows": [
+      {
+        "detail": null,
+        "id": 10,
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "I64(2)",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "version": 1
+      },
+      {
+        "detail": null,
+        "id": 11,
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "I64(1)",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "version": 1
+      },
+      {
+        "detail": null,
+        "id": 12,
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "U64(0)",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "version": 2
+      }
+    ],
+    "sql": [
+      {
+        "comment": "inspect relationship analysis",
+        "params": [
+          "I64(0)"
+        ],
+        "purpose": "qualify relationship analysis",
+        "sql": "SELECT id, version, code, amount, priority, platform AS platform_id, customer AS customer_id, seller AS seller_id FROM order_data WHERE (version > ?) ORDER BY id ASC LIMIT 10000"
+      },
+      {
+        "comment": "inspect relationship analysis",
+        "params": [
+          "I64(0)",
+          "I64(10)",
+          "I64(11)",
+          "I64(12)"
+        ],
+        "purpose": "qualify relationship analysis",
+        "sql": "SELECT \"order\", COUNT(*) AS count_lines FROM line_data WHERE ((version > ?) AND (\"order\" IN (?, ?, ?))) GROUP BY \"order\" LIMIT 10000"
+      }
+    ],
+    "total": null
+  },
+  "cause": "The frozen Line property order_id uses a quoted column_name. SQL returns the raw order column name; the source normalization cannot remove the quoted name, so aggregate buckets are absent and default zero/empty values are attached. C++ retains raw identifiers and resolves the returned key.",
+  "runtime_sources": {
+    "teaql-runtime/src/data_service/relation.rs": "fb28e3d7a93a7eba937154db25c899cd768d3a0b2d1a1353e821573543e874ad",
+    "teaql-runtime/src/data_service/helpers.rs": "0244a34e8467f716d09ebcbbb5f3c2b2ade41ef3b41070e3c919fa5dc5613421"
+  },
+  "generator_source": "generator/src/main/resources/generator/rust-lib-core/request/index.stg",
+  "reference_entity": "tests/generator/parity/dynamic_json_rust/lib/src/line/entity.rs"
+}

@@ -1,0 +1,7 @@
+<root name="cpp_inheritance" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <school platform="platform(contextRoot=true)" name="string()" rank="integer()"
+            _audit_mask_fields="name" />
+    <academy _parent="school" campus_code="string()" />
+    <research_academy _parent="academy" budget="number()" />
+</root>

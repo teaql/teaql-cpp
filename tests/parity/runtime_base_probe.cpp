@@ -87,7 +87,7 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
         seen = detail::model_json(r);
         detail::model_put(seen, "entity", q.query.entity);
         detail::model_put(seen, "trace", q.trace_chain.size());
-        detail::model_put(seen, "comment", q.comment ? Json(r, *q.comment) : Json(r));
+        detail::model_put(seen, "comment", q.comment());
         detail::model_put(seen, "capture", q.capture_execution_metadata);
         detail::model_put(seen, "debug", q.capture_debug_query);
         detail::model_put(seen, "observer", observer.has_value());
@@ -122,6 +122,10 @@ static Json evaluate(UserContext& c, const Json& j) {
     auto& base = c.make<detail::RuntimeDataService<Spy, Mock>>(spy, executor);
     auto& q = c.make<SelectQuery>("Item");
     q.comment_text.emplace("comment", r);
+    if (auto* purpose = optional(j, "purpose");
+        purpose && !std::holds_alternative<std::monostate>(purpose->data)) {
+        q.purpose_text.emplace(text(*purpose), r);
+    }
     if (flag(j, "trace")) {
         q.trace_chain.emplace_back(TraceKind::Request, "Item", "trace");
     }

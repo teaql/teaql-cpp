@@ -9,6 +9,11 @@ public:
     using Error = E;
     using Rows = Vector<CompactRow>;
     virtual ~SqlTransport() = default;
+
+    virtual const DynamicFieldStore* dynamic_field_store() const {
+        return nullptr;
+    }
+
     // Transport and borrowed query must outlive their pending operation. The
     // result/operation belongs to the explicitly supplied Context arena.
     virtual DataServiceOperationResult<Rows, E>& fetch_all_compact_sql(Memory,
@@ -24,6 +29,12 @@ public:
 template <class E>
 class StreamingSqlTransport : public virtual SqlTransport<E> {
 public:
+    virtual Result<QueryStream<E>*, DynamicFieldError>
+    stream_sql_with_dynamic_fields(Memory r, CompiledQuery, std::size_t, DynamicFieldStreamPlan) {
+        return Result<QueryStream<E>*, DynamicFieldError>::err(
+            r, DynamicFieldError(r, "DYNAMIC_FIELD_STREAM_UNSUPPORTED", "stream"));
+    }
+
     virtual QueryStream<E>& stream_sql(Memory, CompiledQuery, std::size_t chunk_size) = 0;
 };
 

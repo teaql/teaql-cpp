@@ -1,0 +1,58 @@
+[
+  {
+    "family": "entity_runtime_model",
+    "original_driver": "tests/parity/rust_values/src/bin/entity_runtime_model_oracle.rs",
+    "original_sha256": "27e47f6548b427a889c981a7e70a5ed92a8cce7af31dbc4043a40caafd68ece9",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/entity_runtime_model_5_0_6.rs",
+    "active_sha256": "226abdb260a7d9067184186a3a778d1e3c9090423a529dd2c286d183f1fdacc2",
+    "adaptation": "fixture_import_only"
+  },
+  {
+    "family": "context_defaults",
+    "original_driver": "tests/parity/rust_values/src/bin/context_defaults_oracle.rs",
+    "original_sha256": "58d96066c5e9d794a4eca6bcb419c17f0860e3e6a8f5a259b24b57ab38ad7247",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/context_defaults_5_0_6.rs",
+    "active_sha256": "58d96066c5e9d794a4eca6bcb419c17f0860e3e6a8f5a259b24b57ab38ad7247",
+    "adaptation": "byte_identical"
+  },
+  {
+    "family": "reference_model",
+    "original_driver": "tests/parity/rust_values/src/bin/reference_model_oracle.rs",
+    "original_sha256": "78f8d7cc01a249d1b1f24722f6b25a01b012364b7606868bb19e3804b3cfe925",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/reference_model_5_0_6.rs",
+    "active_sha256": "78f8d7cc01a249d1b1f24722f6b25a01b012364b7606868bb19e3804b3cfe925",
+    "adaptation": "byte_identical"
+  },
+  {
+    "family": "policy_model",
+    "original_driver": "tests/parity/rust_values/src/bin/policy_model_oracle.rs",
+    "original_sha256": "9983793b6a5e4332db8d3843322d7d9a29466f4aa52bfe7643d78b797557a86a",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/policy_model_5_0_6.rs",
+    "active_sha256": "4484b8de90eb3ff93c41ae64f02a68c61c1c2cbd8500efc29195dac11d1f6475",
+    "adaptation": "fixture_import_only"
+  },
+  {
+    "family": "log_model",
+    "original_driver": "tests/parity/rust_values/src/bin/log_model_oracle.rs",
+    "original_sha256": "6f940f688ad81d29b46de80aac8f6e0bd4d1f08e26539d5df45323207b990d91",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/log_model_5_0_6.rs",
+    "active_sha256": "7e03926f9e3af7e5e53d272d69b25e09076e467de9bc632698115cc40034c965",
+    "adaptation": "fixture_import_only"
+  },
+  {
+    "family": "query_store_model",
+    "original_driver": "tests/parity/rust_values/src/bin/query_store_model_oracle.rs",
+    "original_sha256": "17283a623f3763bcaa7d460ab4a9a0f4cf09e99f96b1e1ee462bcd7e545b872e",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/query_store_model_5_0_6.rs",
+    "active_sha256": "e81c585f3b979644feeb6235ede814c78574e6d17243f0d383aaeae382f0e05f",
+    "adaptation": "fixture_import_only"
+  },
+  {
+    "family": "context_model",
+    "original_driver": "tests/parity/rust_values/src/bin/context_model_oracle.rs",
+    "original_sha256": "806bd66953ee1555dd3523147cc7e416086ad8efe298b6c1d98d523bbe1345d7",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/context_model_5_0_6.rs",
+    "active_sha256": "806bd66953ee1555dd3523147cc7e416086ad8efe298b6c1d98d523bbe1345d7",
+    "adaptation": "byte_identical"
+  }
+]

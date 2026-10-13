@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "sanitize",
+  "scope": "Targeted migration lifecycle/source gates, project code only; SQLite archive uninstrumented; leak scanning disabled.",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "exit_code": 0,
+  "tests": [
+    {
+      "id": 318,
+      "name": "generated_candidates_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "id": 98,
+      "name": "graph_node_command_context_contracts",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "id": 100,
+      "name": "graph_save_adapter_context_contracts",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "id": 69,
+      "name": "ledger_move_only_contracts",
+      "status": "passed",
+      "seconds": 0.09
+    },
+    {
+      "id": 96,
+      "name": "recursive_graph_write_context_contracts",
+      "status": "passed",
+      "seconds": 0.09
+    },
+    {
+      "id": 105,
+      "name": "runtime_mutation_context_contracts",
+      "status": "passed",
+      "seconds": 0.08
+    },
+    {
+      "id": 106,
+      "name": "runtime_mutation_reentrant_prepare",
+      "status": "passed",
+      "seconds": 0.05
+    },
+    {
+      "id": 107,
+      "name": "runtime_mutation_reentrant_event",
+      "status": "passed",
+      "seconds": 0.05
+    },
+    {
+      "id": 196,
+      "name": "runtime_graph_contracts",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "id": 109,
+      "name": "entity_graph_plan_context_contracts",
+      "status": "passed",
+      "seconds": 0.1
+    },
+    {
+      "id": 197,
+      "name": "scoped_comments_rust_parity",
+      "status": "passed",
+      "seconds": 0.43
+    },
+    {
+      "id": 112,
+      "name": "graph_plan_scopes_rust_parity",
+      "status": "passed",
+      "seconds": 1.27
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "historical_source_observations": 356,
+  "explicit_intent_source_observations": 362,
+  "explicit_provider_calls": 348,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "initial_raw_differences": 0,
+  "initial_explicit_differences": 1,
+  "profiles": {
+    "native": {
+      "passed": 7,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "relation_hydration_contracts",
+        "relation_hydration_intent_rust_parity",
+        "loaded_row_graph_rust_parity",
+        "loaded_row_graph_context_contracts",
+        "hydration_flat_facets_rust_parity",
+        "hydration_flat_facets_context_close",
+        "relation_hydration_rust_parity"
+      ]
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "relation_hydration_contracts",
+        "relation_hydration_intent_rust_parity",
+        "relation_hydration_rust_parity"
+      ]
+    },
+    "modules_native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_relation_hydration_contracts",
+        "module_relation_hydration_replay_rust_parity",
+        "module_relation_hydration_intent_rust_parity"
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 118,
+  "catalog_exports": 1477,
+  "module_paths_exit_code": 0,
+  "formatting": {
+    "handwritten_files": 1003,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_runtime/src/data_service/relation_installation.cpp": "1ca0ae711fb50891b0dd7d889877e95052460fa8451d62c06523752ffc5e9e1e",
+    "teaql_provider_sqlite/tests/relation_hydration_tests.cpp": "29354f6df08f041199501ec216d64552784b614a86b53306dff04c2f05382fa7",
+    "tests/parity/relation_hydration_replay_probe.cpp": "3ed09cf3727c76e8c3435039a31b770509bfdc1c6e67896f28cea4d6dfe3894d",
+    "tests/parity/rust_private_save_5_0_6/src/bin/relation_hydration_5_0_6.rs": "113e0b6557b64cdc151cf987688985c8e1761181e8bd7cb417a6d6afea42a86a"
+  },
+  "notice": "Complete retained hydration input matrix over actual original query/decoder path. Separate explicit intent controls. Not every dynamic/JSON/facet/decoder/privacy/model/configuration capability or physical original SQL."
+}

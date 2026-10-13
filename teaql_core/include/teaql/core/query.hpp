@@ -236,6 +236,11 @@ struct IdSetPaginationOptions {
     bool operator==(const IdSetPaginationOptions&) const = default;
 };
 struct ObjectGroupBy;
+struct RelationAggregate;
+
+namespace request {
+struct FacetRequest;
+}
 
 struct SelectQuery {
     using allocator_type = Allocator;
@@ -252,12 +257,16 @@ struct SelectQuery {
     Vector<Aggregate> aggregates;
     Vector<String> group_by_fields;
     Vector<RelationLoad> relations;
+    Vector<request::FacetRequest> facets;
+    Vector<RelationAggregate> relation_aggregates;
     std::optional<AggregationCacheOptions> aggregation_cache;
-    std::optional<String> comment_text;
+    std::optional<String> comment_text, purpose_text;
     TraceChain trace_chain;
     std::optional<String> raw_sql_text;
     Vector<String> raw_sql_search_criteria;
     Vector<RawSqlProjection> dynamic_properties, raw_projections;
+    detail::ScopedBox<DynamicPropertyDefinitions> dynamic_property_definitions;
+    detail::ScopedBox<DynamicFieldSelection> dynamic_field_selection;
     Vector<ObjectGroupBy> object_group_bys;
     Vector<SelectQuery> child_enhancements;
     std::optional<StreamConfig> stream_config;
@@ -304,6 +313,7 @@ struct SelectQuery {
     SelectQuery& project_expr(std::string_view, const Expr&);
     SelectQuery& project_raw(std::string_view, std::string_view);
     SelectQuery& dynamic_property_raw(std::string_view, std::string_view);
+    SelectQuery& select_dynamic_fields(const DynamicFieldSelection&);
     SelectQuery& search_with_text(std::string_view);
     SelectQuery& filter(const Expr&);
     SelectQuery& and_filter(const Expr&);

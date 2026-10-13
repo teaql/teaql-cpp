@@ -1,5 +1,6 @@
 #include <teaql/runtime/context.hpp>
 #include <teaql/runtime/entity_runtime.hpp>
+#include <teaql/runtime/dynamic_fields.hpp>
 #include <charconv>
 #include <mutex>
 
@@ -84,6 +85,11 @@ MutationPlan ledger_policy_plan(const UserContext& context,
     for (const auto& [key, values] : changes.changes()) {
         keys.emplace(key);
     }
+    if (const auto* dynamic = changes.dynamic_changes()) {
+        for (const auto& [key, values] : *dynamic) {
+            keys.emplace(key);
+        }
+    }
     for (const auto& key : deleted) {
         keys.emplace(key);
     }
@@ -106,6 +112,16 @@ MutationPlan ledger_policy_plan(const UserContext& context,
         auto found = changes.changes().find(key);
         if (found != changes.changes().end()) {
             operation.changed_values = clone_record(r, found->second.fields);
+        }
+        if (const auto* dynamic = changes.dynamic_changes()) {
+            if (auto fields = dynamic->find(key); fields != dynamic->end()) {
+                for (const auto& [code, mutation] : fields->second) {
+                    String field("#", r);
+                    field += code;
+                    operation.changed_values.insert_or_assign(
+                        std::move(field), mutation_audit_value(r, mutation, nullptr));
+                }
+            }
         }
     }
     plan.execution_id = next_execution_id(context);

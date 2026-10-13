@@ -1,0 +1,35 @@
+{
+  "relation_execution": {
+    "cases": 432,
+    "child_fetch_calls": 554,
+    "cancellations": 96,
+    "errors": {
+      "child failed": 72
+    }
+  },
+  "relation_enhancement": {
+    "cases": 266,
+    "child_fetch_calls": 185,
+    "cancellations": 28,
+    "errors": {
+      "QUERY_PURPOSE_REQUIRED: Query Request requires a non-blank purpose; supply it at the request entry point": 25,
+      "REQUEST_COMMENT_REQUIRED: Query Request requires a non-blank comment; supply it at the request entry point": 41,
+      "fetch failed": 18,
+      "missing entity descriptor: Parent": 1,
+      "missing entity descriptor: Child": 1,
+      "missing relation absent on entity Parent": 1,
+      "missing relation absent on entity Child": 1,
+      "missing entity descriptor: Leaf": 1,
+      "missing relation absent on entity Leaf": 1
+    }
+  },
+  "relation_enhancement_variants": {
+    "cases": 111,
+    "child_fetch_calls": 94,
+    "cancellations": 26,
+    "errors": {
+      "fetch failed": 15,
+      "missing relation missing on entity Parent": 12
+    }
+  }
+}

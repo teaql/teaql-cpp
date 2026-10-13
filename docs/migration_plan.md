@@ -1,6 +1,10 @@
 # TEAQL C++ six-stage migration plan
 
-The only baseline is Rust `v5.0.5`, commit `62940ae2b88e7acc32763853b8b4685a01c7e90a`, pinned in `upstream.lock.json`. Verify it with `scripts/verify_upstream.py`.
+The active baseline is Rust `v5.0.6`, commit `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`, pinned in `upstream.lock.json`. Verify it with `scripts/verify_upstream.py`.
+
+The stage evidence below qualifies the historical 5.0.5 checkpoint. New 5.0.6
+contracts require separate acceptance; see [the upgrade audit](baseline_5_0_6_upgrade.md)
+and [the generator parity plan](cpp_generator_parity_plan.md).
 
 **Preserve every core concept, responsibility, and abstraction. C++ optimization concerns memory and resource lifetimes.** SQLite is the only database implementation. Fewer dependencies must not mean fewer design elements. The generator remains outside the current work scope. See the complete [design parity contract](design_parity.md).
 

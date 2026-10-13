@@ -17,6 +17,17 @@ void attach_relation_aggregate_rows(std::span<CompactRow> parents,
                                     const RelationLoadPlan& plan,
                                     const RelationAggregate& aggregate,
                                     Vector<CompactRow> rows) {
+    attach_relation_aggregate_rows(parents, parents, plan, aggregate, std::move(rows));
+}
+
+void attach_relation_aggregate_rows(std::span<CompactRow> parents,
+                                    std::span<const CompactRow> keys,
+                                    const RelationLoadPlan& plan,
+                                    const RelationAggregate& aggregate,
+                                    Vector<CompactRow> rows) {
+    if (parents.size() != keys.size()) {
+        throw std::invalid_argument("Aggregate key snapshots must correspond to parent rows");
+    }
     auto r = plan.memory_resource();
     std::pmr::map<String, Vector<CompactRow>, std::less<>> buckets(r);
     for (auto& row : rows) {
@@ -25,9 +36,10 @@ void attach_relation_aggregate_rows(std::span<CompactRow> parents,
                 .first->second.emplace_back(std::move(row));
         }
     }
-    for (auto& parent : parents) {
+    for (std::size_t index = 0; index < parents.size(); ++index) {
+        auto& parent = parents[index];
         auto value = default_aggregate_value(r, aggregate.single_result);
-        if (auto* key = parent.get(plan.local_key)) {
+        if (auto* key = keys[index].get(plan.local_key)) {
             if (auto it = buckets.find(graph_identity_key(r, *key)); it != buckets.end()) {
                 if (aggregate.single_result) {
                     const auto& row = it->second.front();
@@ -72,18 +84,26 @@ void attach_object_group_rows(std::span<CompactRow> parents,
     }
 }
 
-void attach_child_query_rows(std::span<CompactRow> parents, std::span<const CompactRow> rows) {
+Result<std::monostate, DynamicFieldError>
+attach_child_query_rows(std::span<CompactRow> parents, std::span<const CompactRow> rows) {
+    auto r = rows.empty() ? (parents.empty() ? nullptr : parents.front().memory_resource())
+                          : rows.front().memory_resource();
     if (parents.empty()) {
-        return;
+        return Result<std::monostate, DynamicFieldError>::ok(r, {});
     }
-    auto r = parents.front().memory_resource();
+    r = parents.front().memory_resource();
     auto index = index_rows(r, rows);
+    DynamicFieldMergeShapes shapes(std::allocator_arg, Allocator(r));
     for (auto& parent : parents) {
         if (auto* key = parent.get("id")) {
             if (auto it = index.find(graph_identity_key(r, *key)); it != index.end()) {
-                parent.extend(it->second);
+                auto merged = parent.try_extend(it->second, shapes);
+                if (!merged) {
+                    return merged;
+                }
             }
         }
     }
+    return Result<std::monostate, DynamicFieldError>::ok(r, {});
 }
 }

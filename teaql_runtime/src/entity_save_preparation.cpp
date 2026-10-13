@@ -2,6 +2,122 @@
 #include <teaql/core/detail/debug.hpp>
 
 namespace teaql::detail {
+RuntimeHookResult capture_ledger_trace_scopes(const EntityRuntimeState& root,
+                                              const GraphNode& node) {
+    auto r = root.memory_resource();
+    auto intent = MutationIntent::from_optional(
+        r, node.comment ? std::optional<std::string_view>(*node.comment) : std::nullopt);
+    if (!intent) {
+        return RuntimeHookResult::err(r, RuntimeError::request_intent(r, intent.error()));
+    }
+    using Scopes = EntityRuntimeAccess::TraceScopes;
+    Scopes scopes(r), unassigned(r);
+    auto annotated = [&](const GraphNode& current) {
+        auto text = current.comment ? std::string_view(*current.comment) : std::string_view{};
+        trim(text);
+        return !text.empty();
+    };
+    auto unallocated = [](const Value& value) {
+        if (value.is_null()) {
+            return true;
+        }
+        if (auto* id = std::get_if<std::uint64_t>(&value.data)) {
+            return *id == 0;
+        }
+        if (auto* id = std::get_if<std::int64_t>(&value.data)) {
+            return *id == 0;
+        }
+        return false;
+    };
+    auto make_scope =
+        [&](const GraphNode& current, const TraceScopeToken* parent, std::uint64_t index) {
+            if (!annotated(current)) {
+                return parent;
+            }
+            auto* value = current.id();
+            auto id = value ? value->try_u64() : std::nullopt;
+            if (id && *id == 0) {
+                id.reset();
+            }
+            TraceNode track(std::allocator_arg,
+                            Allocator(r),
+                            TraceKind::AuditReason,
+                            current.entity,
+                            *current.comment,
+                            id);
+            return static_cast<const TraceScopeToken*>(
+                &resource_arena(r).make<TraceScopeToken>(parent, track, index));
+        };
+    auto* root_scope = make_scope(node, nullptr, 0);
+
+    struct Pending {
+        const GraphNode* node;
+        const TraceScopeToken* parent;
+        bool root;
+    };
+
+    Vector<Pending> pending(r);
+    pending.push_back({&node, root_scope, true});
+    while (!pending.empty()) {
+        auto entry = pending.back();
+        pending.pop_back();
+        const auto& current = *entry.node;
+        auto* scope = entry.root ? root_scope : make_scope(current, entry.parent, scopes.size());
+        if (auto* id = current.id(); id && scope) {
+            EntityKey key(std::allocator_arg, Allocator(r), current.entity, *id);
+            if (unallocated(*id) && annotated(current)) {
+                unassigned.try_emplace(clone_in(r, key), scope);
+            }
+            scopes.try_emplace(std::move(key), scope);
+        }
+        for (auto relation = current.relations.rbegin(); relation != current.relations.rend();
+             ++relation) {
+            for (auto child = relation->second.rbegin(); child != relation->second.rend();
+                 ++child) {
+                pending.push_back({&*child, scope, false});
+            }
+        }
+    }
+    auto keys = root.deleted_keys();
+    for (const auto& key : root.new_keys()) {
+        keys.emplace(clone_in(r, key));
+    }
+    auto changes = root.current_change_set();
+    for (const auto& [key, fields] : changes.changes()) {
+        keys.emplace(clone_in(r, key));
+    }
+    if (auto* dynamic = changes.dynamic_changes()) {
+        for (const auto& [key, fields] : *dynamic) {
+            keys.emplace(clone_in(r, key));
+        }
+    }
+    for (const auto& key : keys) {
+        if (scopes.contains(key)) {
+            continue;
+        }
+        const TraceScopeToken* scope = root_scope;
+        auto comment = root.get_entity_comment(key);
+        auto text = comment ? std::string_view(*comment) : std::string_view{};
+        trim(text);
+        if (!text.empty()) {
+            auto id = key.id.try_u64();
+            if (id && *id == 0) {
+                id.reset();
+            }
+            TraceNode track(
+                std::allocator_arg, Allocator(r), TraceKind::AuditReason, key.entity, *comment, id);
+            scope = &resource_arena(r).make<TraceScopeToken>(root_scope, track, 0);
+            if (unallocated(key.id)) {
+                unassigned.emplace(clone_in(r, key), scope);
+            }
+        }
+        scopes.emplace(clone_in(r, key), scope);
+    }
+    root.set_comment(intent.value().comment());
+    EntityRuntimeAccess::replace_trace_scopes(root, scopes, unassigned);
+    return RuntimeHookResult::ok(r, {});
+}
+
 Result<GraphNode, RuntimeError>
 graph_node_from_values(const UserContext& context, std::string_view entity, MutationValues values) {
     auto r = context.memory_resource();
@@ -144,6 +260,50 @@ RuntimeHookResult preflight_graph(const UserContext& context,
     return RuntimeHookResult::ok(r, {});
 }
 
+RuntimeHookResult preflight_pending_dynamic_entities(const UserContext& context,
+                                                     const EntityRuntimeState& root,
+                                                     const GraphNode& node) {
+    auto r = context.memory_resource();
+    auto changes = root.current_change_set();
+    const auto* dynamic = changes.dynamic_changes();
+    if (!dynamic) {
+        return RuntimeHookResult::ok(r, {});
+    }
+    auto locations = ledger_object_locations(r, node);
+    auto deleted = root.deleted_keys();
+    auto fresh = root.new_keys();
+    for (const auto& [key, fields] : *dynamic) {
+        if (locations.contains(key) || deleted.contains(key)) {
+            continue;
+        }
+        GraphNode pending(std::allocator_arg, Allocator(r), key.entity);
+        pending.original_values = EntityRuntimeAccess::original_values_for(root, key);
+        if (pending.original_values) {
+            pending.values.fields = clone_record(r, pending.original_values->fields);
+        }
+        if (auto values = changes.changes().find(key); values != changes.changes().end()) {
+            for (const auto& [field, value] : values->second.fields) {
+                pending.values.fields.insert_or_assign(String(field, r), Value(r, value));
+            }
+        }
+        pending.values.fields.insert_or_assign(String("id", r), Value(r, key.id));
+        Value::List loaded(r);
+        for (const auto& [field, value] : pending.values.fields) {
+            if (!field.starts_with('_')) {
+                loaded.emplace_back(field);
+            }
+        }
+        pending.values.fields.insert_or_assign(String("_loaded_fields", r), Value(r, loaded));
+        pending.dirty_fields.emplace(root.changed_field_names(key), r);
+        pending.operation = fresh.contains(key) ? GraphOperation::Create : GraphOperation::Upsert;
+        auto result = preflight_graph(context, pending, ObjectLocation::root(r), &root);
+        if (!result) {
+            return result;
+        }
+    }
+    return RuntimeHookResult::ok(r, {});
+}
+
 RuntimeHookResult merge_relation_mutations_into_root(const EntityRuntimeState& root,
                                                      const GraphNode& node) {
     auto r = root.memory_resource();
@@ -214,27 +374,62 @@ RuntimeHookResult hydrate_ledger_relations(const UserContext& context,
         }
         Vector<GraphNode> discovered(nr);
         auto changes = root.current_change_set();
+        EntityRuntimeState::Keys pending(r);
         for (const auto& [key, fields] : changes.changes()) {
+            pending.emplace(key);
+        }
+        if (const auto* dynamic = changes.dynamic_changes()) {
+            for (const auto& [key, fields] : *dynamic) {
+                pending.emplace(key);
+            }
+        }
+        for (const auto& key : root.deleted_keys()) {
+            pending.emplace(key);
+        }
+        for (const auto& key : root.new_keys()) {
+            pending.emplace(key);
+        }
+        for (const auto& key : pending) {
             if (key.entity != relation.target_entity || existing_keys.contains(key)) {
                 continue;
             }
-            auto foreign = fields.fields.find(relation.foreign_key);
+            auto original = EntityRuntimeAccess::original_values_for(root, key);
+            EntityValues values(std::allocator_arg, Allocator(nr));
+            if (original) {
+                values.fields = clone_record(nr, original->fields);
+            }
+            if (auto fields = changes.changes().find(key); fields != changes.changes().end()) {
+                for (const auto& [name, value] : fields->second.fields) {
+                    values.fields.insert_or_assign(String(name, nr), Value(nr, value));
+                }
+            }
+            auto foreign = values.fields.find(relation.foreign_key);
             const Value* foreign_value = relation.foreign_key == "id"     ? &key.id
-                                         : foreign != fields.fields.end() ? &foreign->second
+                                         : foreign != values.fields.end() ? &foreign->second
                                                                           : nullptr;
-            if (!foreign_value || *foreign_value != local_value || !visited.emplace(key).second) {
+            if (std::holds_alternative<std::monostate>(local_value.data) || !foreign_value ||
+                EntityKey(
+                    std::allocator_arg, Allocator(nr), relation.target_entity, *foreign_value) !=
+                    EntityKey(
+                        std::allocator_arg, Allocator(nr), relation.target_entity, local_value) ||
+                !visited.emplace(key).second) {
                 continue;
             }
             GraphNode child(std::allocator_arg, Allocator(nr), key.entity);
-            child.values.fields = clone_record(nr, fields.fields);
+            child.values = std::move(values);
             child.values.fields.try_emplace(String("id", nr), key.id);
             child.operation = root.deleted_keys().contains(key) ? GraphOperation::Remove
                               : root.new_keys().contains(key) || !root.get_original_version(key)
                                   ? GraphOperation::Create
                                   : GraphOperation::Upsert;
-            auto result = hydrate_ledger_relations(context, root, child, visited);
-            if (!result) {
-                return result;
+            child.comment = clone_in(nr, root.get_entity_comment(key));
+            child.original_values = clone_in(nr, original);
+            child.dirty_fields.emplace(root.changed_field_names(key), nr);
+            if (child.operation != GraphOperation::Remove) {
+                auto result = hydrate_ledger_relations(context, root, child, visited);
+                if (!result) {
+                    return result;
+                }
             }
             discovered.emplace_back(std::move(child));
         }
@@ -282,6 +477,13 @@ bool can_preserve_loaded_relations(const EntityRuntimeState& root,
         return false;
     }
     auto changes = root.current_change_set();
+    if (auto* dynamic = changes.dynamic_changes()) {
+        for (const auto& [changed, fields] : *dynamic) {
+            if (changed != key) {
+                return false;
+            }
+        }
+    }
     for (const auto& [changed, fields] : changes.changes()) {
         if (changed != key) {
             return false;

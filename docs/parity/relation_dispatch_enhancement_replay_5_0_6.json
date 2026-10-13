@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "historical_observations": 698,
+  "variant_observations": 111,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native_before_fixture_lifetime_fix": {
+      "passed": 11,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "generated_facets_async_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "generated_facets_context_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "generated_facets_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "generated_relation_analysis_context_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "generated_relation_analysis_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "relation_execution_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "relation_hydration_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "relation_enhancement_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "relation_execution_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "relation_enhancement_variants_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "relation_enhancement_rust_parity",
+          "status": "passed"
+        }
+      ]
+    },
+    "native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "relation_enhancement_contracts",
+          "status": "passed"
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "relation_execution_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "relation_enhancement_contracts",
+          "status": "passed"
+        }
+      ]
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_relation_execution_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "module_relation_enhancement_contracts",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 110,
+  "formatting": {
+    "handwritten_files": 994,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "counts": {
+    "relation_execution": {
+      "cases": 432,
+      "child_fetch_calls": 554,
+      "cancellations": 96,
+      "errors": {
+        "child failed": 72
+      }
+    },
+    "relation_enhancement": {
+      "cases": 266,
+      "child_fetch_calls": 185,
+      "cancellations": 28,
+      "errors": {
+        "QUERY_PURPOSE_REQUIRED: Query Request requires a non-blank purpose; supply it at the request entry point": 25,
+        "REQUEST_COMMENT_REQUIRED: Query Request requires a non-blank comment; supply it at the request entry point": 41,
+        "fetch failed": 18,
+        "missing entity descriptor: Parent": 1,
+        "missing entity descriptor: Child": 1,
+        "missing relation absent on entity Parent": 1,
+        "missing relation absent on entity Child": 1,
+        "missing entity descriptor: Leaf": 1,
+        "missing relation absent on entity Leaf": 1
+      }
+    },
+    "relation_enhancement_variants": {
+      "cases": 111,
+      "child_fetch_calls": 94,
+      "cancellations": 26,
+      "errors": {
+        "fetch failed": 15,
+        "missing relation missing on entity Parent": 12
+      }
+    }
+  },
+  "notice": "Original method blocks qualify algorithm/SPI scope. Native branch excludes dynamic selection; enhancement intent delegates to complete original service. Recording fetch callbacks do not qualify physical SQL/provider/privacy or full hydration. Initial compile and ASan fixture failures retained."
+}

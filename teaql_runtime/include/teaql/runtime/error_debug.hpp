@@ -18,10 +18,37 @@ inline void write_debug(DebugWriter& writer, const ContextError& error) {
 }
 
 inline void write_debug(DebugWriter& writer, const RuntimeError& error) {
-    if (static_cast<std::size_t>(error.kind()) >= 14) {
+    if (static_cast<std::size_t>(error.kind()) >= 17) {
         throw std::invalid_argument("Unknown runtime error diagnostic variant");
     }
     using Kind = RuntimeError::Kind;
+    if (error.kind() == Kind::AuditAfterCommit) {
+        writer.structure("AuditAfterCommit", [&](auto& fields) {
+            fields.field("source", [&](auto& out) {
+                write_debug(out, error.audit_after_commit_error());
+            });
+        });
+        return;
+    }
+    if (error.kind() == Kind::DynamicField) {
+        writer.tuple("DynamicField", [&](auto& out) {
+            out.structure("DynamicFieldError", [&](auto& fields) {
+                fields.field("code", [&](auto& inner) {
+                    inner.text(error.dynamic_field_error().code);
+                });
+                fields.field("field", [&](auto& inner) {
+                    inner.text(error.dynamic_field_error().field);
+                });
+            });
+        });
+        return;
+    }
+    if (error.kind() == Kind::RequestIntent) {
+        writer.tuple("RequestIntent", [&](auto& out) {
+            write_debug(out, error.request_intent_error());
+        });
+        return;
+    }
     if (error.kind() == Kind::MissingRelation) {
         const auto& value = error.missing_relation_error();
         writer.structure("MissingRelation", [&](auto& fields) {

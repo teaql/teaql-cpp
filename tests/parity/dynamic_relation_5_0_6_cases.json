@@ -1,0 +1,8372 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "source": [
+    "teaql-runtime/src/data_service/relation.rs",
+    "teaql-runtime/src/data_service/resolved.rs",
+    "teaql-core/src/query.rs"
+  ],
+  "source_sha256": {
+    "teaql-runtime/src/data_service/relation.rs": "fb28e3d7a93a7eba937154db25c899cd768d3a0b2d1a1353e821573543e874ad",
+    "teaql-runtime/src/data_service/resolved.rs": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+    "teaql-core/src/query.rs": "02fd38d61f2505cb7cafe74c383ca03cccbc5aab633982900bd167b55f65194f"
+  },
+  "note": "Direct original public raw-row child enhancements and embedded self-relations using a configured School descriptor and actual SQLite. Source metadata retention is observed, not normalized. Typed graph/fixture cleanup is separate native evidence; facets are outside this corpus.",
+  "cases": [
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 9,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                5
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "count",
+                1
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "missing",
+                5
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                1
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 7
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 8
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 999
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": []
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                5
+              ]
+            ],
+            "name": "first",
+            "filter": null
+          },
+          {
+            "selection": [
+              [
+                "count",
+                1
+              ]
+            ],
+            "name": "second",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "second"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "second"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "first",
+            "filter": 7
+          },
+          {
+            "selection": [
+              [
+                "missing",
+                5
+              ]
+            ],
+            "name": "second",
+            "filter": 8
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 9,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                5
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {},
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "count",
+                1
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "missing",
+                5
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                1
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 7
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "enhanced"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 8
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "enhanced"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 999
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": []
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                5
+              ]
+            ],
+            "name": "first",
+            "filter": null
+          },
+          {
+            "selection": [
+              [
+                "count",
+                1
+              ]
+            ],
+            "name": "second",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": {
+              "count": null,
+              "title": "left"
+            },
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "second"
+            }
+          },
+          {
+            "dynamic": {
+              "count": 0
+            },
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "second"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "first",
+            "filter": 7
+          },
+          {
+            "selection": [
+              [
+                "missing",
+                5
+              ]
+            ],
+            "name": "second",
+            "filter": 8
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                5
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "count",
+                1
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "missing",
+                5
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                1
+              ]
+            ],
+            "name": "enhanced",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 7
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 8
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": 999
+          }
+        ]
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": []
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school"
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": [
+              [
+                "title",
+                5
+              ]
+            ],
+            "name": "first",
+            "filter": null
+          },
+          {
+            "selection": [
+              [
+                "count",
+                1
+              ]
+            ],
+            "name": "second",
+            "filter": null
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "child",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "first",
+            "filter": 7
+          },
+          {
+            "selection": [
+              [
+                "missing",
+                5
+              ]
+            ],
+            "name": "second",
+            "filter": 8
+          }
+        ]
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 9,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 9,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 9,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 7
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 8
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": []
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 999
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": []
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 1,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 7,
+                          "name": "school"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 8,
+                          "name": "school"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 2,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 7,
+                          "name": "school",
+                          "peers": [
+                            {
+                              "id": 7,
+                              "name": "school"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 8,
+                          "name": "school",
+                          "peers": [
+                            {
+                              "id": 8,
+                              "name": "school"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 9,
+              "name": "school",
+              "peers": {
+                "id": 9,
+                "name": "school",
+                "peers": {
+                  "id": 9,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 7
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 8
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 999
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 1,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school",
+                  "peers": {
+                    "id": 7,
+                    "name": "school"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school",
+                  "peers": {
+                    "id": 8,
+                    "name": "school"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "fixture",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 2,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school",
+                  "peers": {
+                    "id": 7,
+                    "name": "school",
+                    "peers": {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school",
+                  "peers": {
+                    "id": 8,
+                    "name": "school",
+                    "peers": {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 9,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 9,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 9,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 7
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 8
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": []
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 999
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": []
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 1,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 7,
+                          "name": "school"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 8,
+                          "name": "school"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 2,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 7,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 7,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 7,
+                          "name": "school",
+                          "peers": [
+                            {
+                              "id": 7,
+                              "name": "school"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": [
+                {
+                  "id": 8,
+                  "name": "school",
+                  "peers": [
+                    {
+                      "id": 8,
+                      "name": "school",
+                      "peers": [
+                        {
+                          "id": 8,
+                          "name": "school",
+                          "peers": [
+                            {
+                              "id": 8,
+                              "name": "school"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 9,
+              "name": "school",
+              "peers": {
+                "id": 9,
+                "name": "school",
+                "peers": {
+                  "id": 9,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 7
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 8
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 999
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school"
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND: missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 1,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school",
+                  "peers": {
+                    "id": 7,
+                    "name": "school"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school",
+                  "peers": {
+                    "id": 8,
+                    "name": "school"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "database",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 2,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7,
+                "name": "school",
+                "peers": {
+                  "id": 7,
+                  "name": "school",
+                  "peers": {
+                    "id": 7,
+                    "name": "school",
+                    "peers": {
+                      "id": 7,
+                      "name": "school"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8,
+                "name": "school",
+                "peers": {
+                  "id": 8,
+                  "name": "school",
+                  "peers": {
+                    "id": 8,
+                    "name": "school",
+                    "peers": {
+                      "id": 8,
+                      "name": "school"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 7
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 8
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": 999
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": []
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 1,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 2,
+        "many": true,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "rows": []
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8,
+          9
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 7
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 8
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": 999
+      },
+      "expected": {
+        "rows": [
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 7,
+              "name": "school",
+              "peers": {
+                "id": 7
+              }
+            }
+          },
+          {
+            "dynamic": null,
+            "loaded": null,
+            "native": {
+              "id": 8,
+              "name": "school",
+              "peers": {
+                "id": 8
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 0,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 1,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    },
+    {
+      "input": {
+        "mode": "relation",
+        "provider": "missing",
+        "selection": null,
+        "ids": [
+          7,
+          8
+        ],
+        "filter": null,
+        "chunk": 2,
+        "missing_id": false,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "left"
+            },
+            "count": {
+              "kind": "null"
+            }
+          },
+          "8": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "selection": null,
+            "name": "enhanced",
+            "filter": null
+          }
+        ],
+        "depth": 2,
+        "many": false,
+        "child_filter": null
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_PROVIDER_MISSING: School"
+      }
+    }
+  ]
+}

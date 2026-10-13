@@ -42,28 +42,27 @@ SqlLogContext SqlBindings::log_context(Memory r, DatabaseKind kind) const {
         result.database_kind.emplace("mysql", r);
         break;
     }
+    return rebind_log_context(r, result);
+}
+
+SqlLogContext SqlBindings::rebind_log_context(Memory r, const SqlLogContext& source) const {
+    auto result = detail::clone_in(r, source);
+    SqlLogContext original_source(r);
+    original_source.generated_sql = source.generated_sql;
+    Vector<Value> values(r);
+    for (const auto& [index, value] : originals_) {
+        values.emplace_back(value);
+        original_source.parameter_policies.push_back(index < source.parameter_policies.size()
+                                                         ? source.parameter_policies[index]
+                                                         : SqlParameterLogPolicy::Unknown);
+    }
+    result.intent_redactions = SqlIntentRedactions::from_bindings(r, original_source, values, {});
     return result;
 }
 
 namespace detail {
 SqlParameterLogPolicy sql_field_policy(const EntityDescriptor& entity, std::string_view field) {
-    auto* property = entity.property_by_name(field);
-    using P = SqlParameterLogPolicy;
-    if (!property) {
-        return P::Unknown;
-    }
-    if (is_credential_log_name(property->name) || is_credential_log_name(property->column_name)) {
-        return P::Credential;
-    }
-    if (!entity.audit_mask_fields_declared) {
-        return P::Unknown;
-    }
-    for (const auto& masked : entity.audit_mask_fields) {
-        if (masked == property->name) {
-            return P::Masked;
-        }
-    }
-    return P::Plain;
+    return SqlIntentRedactions::field_policy(entity, field);
 }
 
 std::optional<SqlParameterLogPolicy> combine_sql_policy(std::optional<SqlParameterLogPolicy> a,
@@ -89,7 +88,8 @@ std::optional<SqlParameterLogPolicy> sql_expression_policy(const EntityDescripto
     if (expr.kind == K::Column) {
         return sql_field_policy(entity, expr.name);
     }
-    if (expr.kind == K::Value || expr.kind == K::And || expr.kind == K::Or || expr.kind == K::Not) {
+    if (expr.kind == K::Value || expr.kind == K::LikePattern || expr.kind == K::And ||
+        expr.kind == K::Or || expr.kind == K::Not) {
         return {};
     }
     std::optional<SqlParameterLogPolicy> result;

@@ -86,7 +86,14 @@ static void sqlite_enhancements() {
             c->make<SqlDataServiceExecutor<MutationExecutorError>>(dialect, provider, store, state);
         using E = std::remove_reference_t<decltype(executor)>;
         auto& repo = EntityDataService<E>::for_executor(*c, "Parent", *c, executor);
+        auto root_intent =
+            std::move(QueryIntent::create(
+                          r, "load enhancement fixture", "verify child query enhancements"))
+                .value();
+        detail::EntityDataServiceAccess::bind_query_intent(repo, root_intent);
         auto q = repo.select();
+        q.comment_text.emplace(root_intent.comment(), r);
+        q.purpose_text.emplace(root_intent.purpose(), r);
         q.order_asc("id");
         auto& initial = Access::context_service(repo).fetch_all(q);
         check(bool(initial.wait()), "SQLite parents query");
@@ -131,9 +138,9 @@ static void sqlite_enhancements() {
                   seen[0].aggregation_cache->cache_expired_millis == 321,
               "aggregation planning preserves source cache propagation even from disabled parent");
         check(seen[0].trace_chain.size() == 2 &&
-                  seen[0].trace_chain.back().entity_type == "Child" &&
-                  seen[0].trace_chain.back().comment == "count",
-              "aggregate lineage records actual target and result alias");
+                  seen[0].trace_chain.back().entity_type == "children" &&
+                  seen[0].trace_chain.back().comment == "Parent.children",
+              "aggregate lineage preserves the original relation path");
         Vector<ObjectGroupBy> groups(r);
         SelectQuery target(std::allocator_arg, Allocator(r), "Child");
         target.project("label");
@@ -148,13 +155,31 @@ static void sqlite_enhancements() {
         parents[0].insert("label", Value(r, "before enhancement"));
         Vector<SelectQuery> children(r);
         children.emplace_back("Parent");
-        children.back().project("label");
+        children.back()
+            .project("label")
+            .comment("Load child query fields")
+            .purpose("Verify child row merge");
         check(bool(detail::enhance_child_queries(repo, parents, children, trace, fetch).wait()),
               "child query merges through prepared entity fetch");
         check(parents[0].get("label")->try_text() == "p1" &&
                   parents[0].get("count")->try_u64() == 2,
               "child merge replaces returned fields and retains prior aggregates");
         retained = &g.make<Vector<CompactRow>>(parents);
+        Vector<CompactRow> shadowed(r);
+        for (auto id : {1, 2, 3}) {
+            shadowed.emplace_back(row(r, {{"id", id}}));
+        }
+        Vector<RelationAggregate> siblings(r);
+        siblings.emplace_back("children", "id", target, true);
+        siblings.emplace_back("children", "after_shadow", target, true);
+        check(bool(detail::enhance_relation_aggregates(repo, shadowed, siblings, {}, trace, fetch)
+                       .wait()),
+              "sibling aggregates use captured identity keys after alias shadowing");
+        for (std::size_t index = 0; index < shadowed.size(); ++index) {
+            check(shadowed[index].get("id")->try_u64() == (index == 0 ? 2 : 0) &&
+                      shadowed[index].get("after_shadow")->try_u64() == (index == 0 ? 2 : 0),
+                  "aggregate attachment and subsequent fetch retain original parent identities");
+        }
     }
     auto r = g.memory_resource();
     check(retained && retained->front().get("object")->memory_resource() == r &&
@@ -255,7 +280,8 @@ static void native_lifetime(unsigned mode, unsigned action) {
     auto& aggregates = c->make<Vector<RelationAggregate>>();
     auto& groups = c->make<Vector<ObjectGroupBy>>();
     auto& queries = c->make<Vector<SelectQuery>>();
-    SelectQuery q(std::allocator_arg, Allocator(r), "Child");
+    auto& q = c->make<SelectQuery>("Child");
+    q.comment("Inspect enhancement fixtures").purpose("Verify child query lifetime");
     aggregates.emplace_back("children", "stats", q, true);
     groups.emplace_back("object", "ref", q);
     queries.emplace_back(q);
@@ -315,7 +341,8 @@ static void domains_and_aliases() {
     auto& rows = c->make<Vector<CompactRow>>();
     rows.emplace_back(row(r, {{"id", 1}, {"ref", 1}}));
     rows.emplace_back(row(r, {{"id", 2}, {"ref", 1}}));
-    SelectQuery q(std::allocator_arg, Allocator(r), "Child");
+    auto& q = c->make<SelectQuery>("Child");
+    q.comment("Inspect enhancement fixtures").purpose("Verify child query lifetime");
     ObjectGroupBy group(std::allocator_arg, Allocator(r), "object", "ref", q);
     detail::attach_object_group_rows(rows, group, rows);
     check(!std::get<Value::Object>(rows.back().get("object")->data).contains("object"),

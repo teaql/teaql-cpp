@@ -19,20 +19,22 @@ static void test_mutation_request_trace_and_comment_accessors(Memory owner) {
     traces.emplace_back(TraceKind::Entity, "Profile", "Create Profile");
     InsertCommand insert(std::allocator_arg, Allocator(owner), "User");
     insert.trace_chain = TraceChain(traces, owner);
-    MutationRequest request_insert(std::allocator_arg, Allocator(owner), insert);
+    MutationRequest request_insert(std::allocator_arg, Allocator(owner), insert, "Create Profile");
     check(request_insert.trace_chain().size() == 2 &&
               request_insert.trace_chain()[1] == traces[1] &&
               request_insert.comment() == "Create Profile",
           "original insert trace and final comment");
     UpdateCommand update(std::allocator_arg, Allocator(owner), "User", std::int64_t(1));
     update.trace_chain = TraceChain(traces, owner);
-    MutationRequest request_update(std::allocator_arg, Allocator(owner), update);
+    MutationRequest request_update(std::allocator_arg, Allocator(owner), update, "Create Profile");
     DeleteCommand deletion(std::allocator_arg, Allocator(owner), "User", std::int64_t(1));
     deletion.trace_chain = TraceChain(traces, owner);
-    MutationRequest request_delete(std::allocator_arg, Allocator(owner), deletion);
+    MutationRequest request_delete(
+        std::allocator_arg, Allocator(owner), deletion, "Create Profile");
     RecoverCommand recovery(std::allocator_arg, Allocator(owner), "User", std::int64_t(1), 1);
     recovery.trace_chain = TraceChain(traces, owner);
-    MutationRequest request_recover(std::allocator_arg, Allocator(owner), recovery);
+    MutationRequest request_recover(
+        std::allocator_arg, Allocator(owner), recovery, "Create Profile");
     for (auto* request : {&request_update, &request_delete, &request_recover}) {
         check(request->trace_chain().size() == 2 && request->comment() == "Create Profile",
               "original update/delete/recover trace accessors");
@@ -40,13 +42,15 @@ static void test_mutation_request_trace_and_comment_accessors(Memory owner) {
     MutationRequest::Batch batch(owner);
     batch.emplace_back(std::move(request_insert));
     batch.emplace_back(std::move(request_update));
-    MutationRequest request_batch(std::allocator_arg, Allocator(owner), std::move(batch));
-    check(request_batch.trace_chain().empty() && !request_batch.comment(),
-          "original batch has no aggregate trace");
+    MutationRequest request_batch(
+        std::allocator_arg, Allocator(owner), std::move(batch), "Create Profile");
+    check(request_batch.trace_chain().empty() && request_batch.comment() == "Create Profile",
+          "batch retains empty command trace with explicit request intent");
     InsertCommand empty(std::allocator_arg, Allocator(owner), "User");
-    MutationRequest request_empty(std::allocator_arg, Allocator(owner), std::move(empty));
-    check(request_empty.trace_chain().empty() && !request_empty.comment(),
-          "original empty trace has no comment");
+    MutationRequest request_empty(
+        std::allocator_arg, Allocator(owner), std::move(empty), "Create Profile");
+    check(request_empty.trace_chain().empty() && request_empty.comment() == "Create Profile",
+          "empty command trace remains independent of explicit request intent");
 }
 
 class NoIo final : public QueryExecutor<String> {

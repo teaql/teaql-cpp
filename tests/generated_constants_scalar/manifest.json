@@ -1,0 +1,30 @@
+{
+  "scope": "cpp-lib-core",
+  "qualification_only": true,
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "823c3b039ee3bc0ced7578da21f49c75ac3bfa41e345a98a0fe5fd5349ff840c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+    "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "d5568fb154711ac878c9171454644a04d2678a637eb148379544da66801ce139"
+  },
+  "model": "tests/generator/constants_scalar.xml",
+  "model_sha256": "80e4838ca6680d0f79deeaffb4f429031cf578cad1eb2c801bcd92d849e52554",
+  "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "ASSIST.md": "4786a07608037c99dc7d7c62845b0fbaf24633315e2c85f81e1007631778fa18",
+    "CMakeLists.txt": "82a61f17d367118e4d8674cfe1bc6b30f494b816e66260c75f8750fa9c217953",
+    "include/cpp_constants_scalar/checkers.hpp": "1e3cfd385bd82d5aa7a8c4ce982a011214bfe8cd04613cc3138687738673e3d3",
+    "include/cpp_constants_scalar/expressions.hpp": "f4dad288dad577dddef4904134fd95fd7629ab09db3927b5e22fbf79c5cf0698",
+    "include/cpp_constants_scalar/models.hpp": "b827f1012c44d3c33dc945b44a83fa9fa22aaeca631b03cc6a91c45049b0cf54",
+    "include/cpp_constants_scalar/queries.hpp": "c78de369d5589c1fdf42c06c66981b13b4fc96a2b8036a4e77d79476d9b266f1",
+    "include/cpp_constants_scalar/runtime.hpp": "419d0d531b36d58a29f6dbe24f518720bb2602820c48912f7609ef50b130562a",
+    "include/cpp_constants_scalar/sample_data.hpp": "29f085532a455993e1c60fbc5bc3a257820c7d5583dce7db5bf6345ab1d12c6c",
+    "include/cpp_constants_scalar/support.hpp": "96a1b662b62060417497d71c0c2fe8a1e60e4906ced31b7c6a342e6ea0ab2369",
+    "include/cpp_constants_scalar.hpp": "ce698433c229ab911587398bfccaf498a4b16590457d9687d4ff3234467d2998"
+  }
+}

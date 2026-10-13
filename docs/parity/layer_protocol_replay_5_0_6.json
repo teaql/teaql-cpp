@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Ten layered request/SQL/service/runtime model families replayed against actual source. Current full CTest remains on historical comparators.",
+  "total_observations": 4398,
+  "matching_families": 7,
+  "matching_whole_family_observations": 3374,
+  "families": [
+    {
+      "family": "request_api",
+      "observations": 174,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "request_helpers",
+      "observations": 872,
+      "exit_code": 1,
+      "status": "failed"
+    },
+    {
+      "family": "sql_types",
+      "observations": 1538,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "sql_executor_error",
+      "observations": 144,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "sql_log",
+      "observations": 1008,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "data_service_model",
+      "observations": 40,
+      "exit_code": 1,
+      "status": "failed"
+    },
+    {
+      "family": "runtime_graph_model",
+      "observations": 128,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "check_model",
+      "observations": 220,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "event_model",
+      "observations": 112,
+      "exit_code": 1,
+      "status": "failed"
+    },
+    {
+      "family": "relation_model",
+      "observations": 162,
+      "exit_code": 0,
+      "status": "passed"
+    }
+  ]
+}

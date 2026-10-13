@@ -10,6 +10,60 @@ static void check(bool value, const char* message) {
     }
 }
 
+static void lazy_slot_and_complete_metadata() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    EntityRuntimeState original(std::allocator_arg, Allocator(r));
+    EntityRuntimeState independent(std::allocator_arg, Allocator(r));
+    EntityKey key(std::allocator_arg, Allocator(r), "Item", Value(r, std::uint64_t{7}));
+    auto before = user_context->allocation_stats().issued_objects;
+    check(original == original && !(original == independent),
+          "unbound states have distinct identities; self comparison stays reflexive");
+    check(!original.get(key, "missing") && !original.pop_change_set() &&
+              original.changed_field_names(key).empty() && original.new_keys().empty() &&
+              original.deleted_keys().empty(),
+          "unbound readers and empty pop do not materialize the ledger");
+    original.clear_committed();
+    original.clear_current_change_set();
+    auto empty = debug_string(r, original);
+    check(empty.find("LazyLedgerSlot { shared: OnceLock(<uninit>) }") != empty.npos &&
+              user_context->allocation_stats().issued_objects == before,
+          "empty diagnostics and reads allocate no managed ledger slot");
+    auto copy = detail::clone_in(r, original);
+    check(user_context->allocation_stats().issued_objects == before + 1 && original == copy &&
+              !detail::EntityRuntimeAccess::has_mutation_context(copy),
+          "first Clone publishes exactly one shared empty binding without a ledger");
+    auto second_copy = detail::clone_in(r, original);
+    check(user_context->allocation_stats().issued_objects == before + 1 && copy == second_copy,
+          "further Clones reuse that binding");
+    copy.set(key, "name", Value(r, "native"));
+    copy.set_entity_comment(key, "entity comment");
+    check(original.get(key, "name")->try_text() == "native" &&
+              original.get_entity_comment(key) == "entity comment",
+          "mutation through a cloned binding reaches its siblings");
+    const std::array fields{DynamicFieldDefinitions::Field{"extension", DataType::Text}};
+    auto schema = DynamicFieldDefinitions::from_fields(r, "Item", "revision", fields);
+    check(bool(schema), "dynamic metadata fixture validates");
+    auto& definitions = user_context->make<DynamicFieldDefinitions>(std::move(schema).value());
+    DynamicFieldValues::Values initial(r);
+    auto payload = DynamicFieldValues::from_values(r, definitions, initial);
+    check(bool(payload), "dynamic payload validates");
+    auto& loaded = user_context->make<DynamicFieldValues>(std::move(payload).value());
+    check(bool(loaded.assign("extension", Value(r, "old extension"))),
+          "dynamic original value is loaded");
+    original.install_loaded_dynamic_fields(loaded);
+    check(bool(original.update_dynamic_field(key, "extension", Value(r, "new extension"))),
+          "production mutation records dynamic provenance");
+    auto output = debug_string(r, original);
+    check(output.find("dynamic_changes: Some(") != output.npos &&
+              output.find("dynamic_metadata: Some(DynamicMutationMetadata") != output.npos &&
+              output.find("entity_comments: {") != output.npos &&
+              output.find("old extension") != output.npos &&
+              output.find("dynamic_fields: Some(DynamicFieldValues") != output.npos,
+          "diagnostics traverse real dynamic changes, schemas, originals and per-entity comments");
+}
+
 static void retained_graph_and_cached_identity() {
     GlobalContext global;
     auto user = global.make_user_context();
@@ -17,7 +71,7 @@ static void retained_graph_and_cached_identity() {
     auto root = user->make_ref<EntityRuntimeState>();
     {
         auto empty = debug_string(owner, user->get(root));
-        check(empty.find("inner: OnceLock(<uninit>)") != empty.npos &&
+        check(empty.find("inner: LazyLedgerSlot { shared: OnceLock(<uninit>) }") != empty.npos &&
                   !detail::EntityRuntimeAccess::has_mutation_context(user->get(root)),
               "diagnostics preserve deferred ledger construction");
     }
@@ -85,6 +139,7 @@ static void retained_graph_and_cached_identity() {
 int main() {
     std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        lazy_slot_and_complete_metadata();
         retained_graph_and_cached_identity();
         std::cout << "Entity-runtime model contracts passed\n";
     } catch (const std::exception& error) {

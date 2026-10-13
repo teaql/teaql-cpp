@@ -60,6 +60,7 @@ static void scoped_dynamic_search_retains_outer_and_related_tenant_filters() {
         .order_desc("id")
         .limit(2)
         .comment("what: search tenant schools")
+        .purpose("why: verify schema drift isolation")
         .hard_limit(2);
     base.trace_chain.emplace_back(
         TraceKind::Purpose, "School", "why: verify schema drift isolation");
@@ -98,7 +99,6 @@ static void scoped_dynamic_search_retains_outer_and_related_tenant_filters() {
               result.value().query.trace_chain == base.trace_chain,
           "schema drift does not alter original scope, limit or provenance");
     QueryRequest request(std::allocator_arg, Allocator(r), result.value().query, true, true);
-    request.comment = detail::clone_in(r, base.comment_text);
     request.trace_chain = detail::clone_in(r, base.trace_chain);
     const auto& response = fixture.executor.query(r, std::move(request)).wait();
     check(response && response.value().rows.size() == 2 && response.value().rows[0].get("id") &&

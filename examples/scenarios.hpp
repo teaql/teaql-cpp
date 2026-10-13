@@ -3,32 +3,37 @@
 #include <tuple>
 
 namespace example {
-inline Order make_order(const UserContext& user, std::int64_t version, std::string_view name) {
-    Order order(std::allocator_arg, Allocator(user.memory_resource()));
+inline Order
+make_order(const UserContext& user_context, std::int64_t version, std::string_view name) {
+    Order order(std::allocator_arg, Allocator(user_context.memory_resource()));
     order.id = 1;
     order.version_value = version;
     order.name = name;
     return order;
 }
 
-// Same calls and reasons as the pinned examples/src/bin/sqlite_schema_crud.rs.
-inline const SmartList<Order>& schema_crud(UserContext& user) {
-    auto r = user.memory_resource();
-    setup(user);
-    auto service = user.entity_data_service<Executor>("Order");
+// Preserve the pinned example's business calls and reasons; supply the comment
+// required by the 5.0.6 request contract at the query entry.
+inline const SmartList<Order>& schema_crud(UserContext& user_context) {
+    auto r = user_context.memory_resource();
+    setup(user_context);
+    auto service = user_context.entity_data_service<Executor>("Order");
     auto& repository = value(service).get();
     value(AuditedSaveExt<Order>::save(
-              std::move(make_order(user, 1, "draft")).audit_as("Create the example order"), user)
+              std::move(make_order(user_context, 1, "draft")).audit_as("Create the example order"),
+              user_context)
               .wait());
-    value(
-        AuditedSaveExt<Order>::save(
-            std::move(make_order(user, 1, "submitted")).audit_as("Submit the example order"), user)
-            .wait());
-    auto deleted = make_order(user, 2, "submitted");
+    value(AuditedSaveExt<Order>::save(std::move(make_order(user_context, 1, "submitted"))
+                                          .audit_as("Submit the example order"),
+                                      user_context)
+              .wait());
+    auto deleted = make_order(user_context, 2, "submitted");
     deleted.root.mark_as_delete(deleted.entity_key());
-    value(AuditedSaveExt<Order>::save(std::move(deleted).audit_as("Delete the example order"), user)
+    value(AuditedSaveExt<Order>::save(std::move(deleted).audit_as("Delete the example order"),
+                                      user_context)
               .wait());
     auto query = repository.select();
+    query.comment("Inspect the soft-deleted example order");
     query.project("id").project("version").project("name").filter(
         Expr::eq(r, "id", std::uint64_t(1)));
     PurposedSelectQuery purpose(
@@ -42,10 +47,10 @@ inline const SmartList<Order>& schema_crud(UserContext& user) {
 
 // Saving a typed root delegates traversal, planning, transactions and child
 // mutations to the runtime. The query delegates nested relationship loading.
-inline const SmartList<Order>& relations_graph(UserContext& user) {
-    auto r = user.memory_resource();
-    setup(user);
-    auto service = user.entity_data_service<Executor>("Order");
+inline const SmartList<Order>& relations_graph(UserContext& user_context) {
+    auto r = user_context.memory_resource();
+    setup(user_context);
+    auto service = user_context.entity_data_service<Executor>("Order");
     auto& repository = value(service).get();
     for (auto [id, name] : {std::pair{100u, "keyboard"}, std::pair{101u, "mouse"}}) {
         Product product(std::allocator_arg, Allocator(r));
@@ -54,10 +59,10 @@ inline const SmartList<Order>& relations_graph(UserContext& user) {
         value(AuditedSaveExt<Product>::save(
                   std::move(product).audit_as(
                       "Seed the product before creating an order line that references it"),
-                  user)
+                  user_context)
                   .wait());
     }
-    auto order = make_order(user, 1, "graph-order");
+    auto order = make_order(user_context, 1, "graph-order");
     for (auto [id, name, product_id] :
          {std::tuple{10u, "first-line", 100u}, std::tuple{11u, "second-line", 101u}}) {
         OrderLine line(std::allocator_arg, Allocator(r));
@@ -69,9 +74,10 @@ inline const SmartList<Order>& relations_graph(UserContext& user) {
     }
     order.lines.loaded();
     value(AuditedSaveExt<Order>::save(std::move(order).audit_as("Create the example order graph"),
-                                      user)
+                                      user_context)
               .wait());
     SelectQuery query(std::allocator_arg, Allocator(r), "Order");
+    query.comment("Display the saved example order graph");
     SelectQuery lines(std::allocator_arg, Allocator(r), "OrderLine");
     lines.relation("product");
     query.project("name").relation_query("lines", lines).order_asc("id");

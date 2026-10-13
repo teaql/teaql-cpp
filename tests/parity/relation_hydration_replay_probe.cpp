@@ -1,0 +1,430 @@
+#include <teaql/runtime/data_service.hpp>
+#include "../support/relation_hydration_fixture.hpp"
+#include "fixture_sql.hpp"
+#include <teaql/core/detail/debug.hpp>
+#include <teaql/core/detail/query_debug.hpp>
+#include <iostream>
+using namespace hydration_fixture;
+
+static Json row_out(Memory r, const CompactRow& row) {
+    auto j = detail::model_json(r);
+    for (const auto& key : row.keys()) {
+        detail::model_put(j, key, detail::debug_value(r, *row.get(key)));
+    }
+    return j;
+}
+
+static Vector<CompactRow> rows_in(Memory r, const Json::Array& values) {
+    Vector<CompactRow> rows(r);
+    for (const auto& row : values) {
+        Record fields(r);
+        for (const auto& [key, v] : std::get<Json::Object>(row.data)) {
+            fields.emplace(String(key, r), value(r, v));
+        }
+        rows.emplace_back(fields);
+    }
+    return rows;
+}
+
+static RelationLoadPlan plan_in(Memory r, const Json& j, std::string_view parent) {
+    RelationDescriptor relation(
+        std::allocator_arg, Allocator(r), text(field(j, "name")), text(field(j, "target")));
+    relation.local_key = text(field(j, "local"));
+    relation.foreign_key = text(field(j, "foreign"));
+    relation.many = std::get<bool>(field(j, "many").data);
+    RelationLoadPlan p(std::allocator_arg, Allocator(r), parent, relation);
+    if (auto* q = optional(j, "query")) {
+        p.query.emplace(query(r, *q));
+        if (auto* purpose = optional(*q, "purpose")) {
+            p.query->purpose_text.emplace(text(*purpose), r);
+        }
+        if (auto* threshold = optional(*q, "threshold")) {
+            p.query->top_n_probe_parent_threshold_value = integer(*threshold);
+        }
+        for (const auto& name : items(*q, "relations")) {
+            p.query->relations.emplace_back(text(name));
+        }
+    }
+    for (const auto& child : items(j, "children")) {
+        p.children.emplace_back(plan_in(r, child, p.target_entity));
+    }
+    return p;
+}
+
+struct TelemetryState {
+    using allocator_type = Allocator;
+    Memory r;
+    Vector<String> events;
+    Vector<RuntimeOperation> starts;
+    unsigned depth = 0;
+
+    TelemetryState(std::allocator_arg_t, Allocator a) : r(a.resource()), events(r), starts(r) {}
+
+    void note(std::string_view kind, std::string_view name, std::string_view extra = {}) {
+        String s(kind, r);
+        s += ':';
+        s += name;
+        if (!extra.empty()) {
+            s += ':';
+            s += extra;
+        }
+        events.emplace_back(std::move(s));
+    }
+};
+
+struct Scope : RuntimeTelemetryScope {
+    using allocator_type = Allocator;
+    TelemetryState& state;
+    String name;
+
+    Scope(std::allocator_arg_t, Allocator a, TelemetryState& s, std::string_view n)
+        : state(s), name(n, a.resource()) {}
+
+    ~Scope() {
+        state.note("drop", name);
+    }
+
+    void with_context(FunctionRef<void()> cb) const override {
+        state.note("enter", name);
+        ++state.depth;
+
+        struct Leave {
+            TelemetryState& s;
+            std::string_view n;
+
+            ~Leave() {
+                --s.depth;
+                s.note("leave", n);
+            }
+        } leave{state, name};
+
+        cb();
+    }
+
+    void success(const RuntimeAttributes& a) override {
+        if (auto item = a.find(std::string_view("teaql.result.cardinality")); item != a.end()) {
+            auto n = std::get<std::int64_t>(item->second.data);
+            state.note("success", name, std::to_string(n));
+        } else {
+            state.note("success", name);
+        }
+    }
+
+    void failure(std::string_view error) override {
+        state.note("failure", name, error);
+    }
+};
+
+struct Telemetry : RuntimeTelemetry {
+    using allocator_type = Allocator;
+    Memory r;
+    TelemetryState& state;
+
+    Telemetry(std::allocator_arg_t, Allocator a, TelemetryState& s) : r(a.resource()), state(s) {}
+
+    Memory memory_resource() const noexcept override {
+        return r;
+    }
+
+    ContextBox<RuntimeTelemetryScope>& start(Memory target,
+                                             const RuntimeOperation& op) const override {
+        state.starts.emplace_back(op);
+        state.note("start", op.name);
+        return detail::resource_arena(target).make<ContextBox<RuntimeTelemetryScope>>(
+            std::in_place_type<Scope>, state, op.name);
+    }
+};
+
+struct Fetch : QueryExecutor<String>, MutationExecutor<String> {
+    using allocator_type = Allocator;
+    Memory r;
+    const Json& input;
+    TelemetryState& telemetry;
+    Vector<Json> calls;
+    unsigned drops = 0;
+    mutable unsigned capability_calls = 0;
+
+    Fetch(std::allocator_arg_t, Allocator a, const Json& j, TelemetryState& t)
+        : r(a.resource()), input(j), telemetry(t), calls(r) {}
+
+    Memory memory_resource() const noexcept {
+        return r;
+    }
+
+    DataServiceCapabilities capabilities() const override {
+        ++capability_calls;
+        DataServiceCapabilities c;
+        c.small_parent_relation_probes = std::get<bool>(field(input, "probes").data);
+        return c;
+    }
+
+    struct Work {
+        using allocator_type = Allocator;
+        Memory r;
+        Fetch& fetch;
+        unsigned index, pending;
+
+        Work(std::allocator_arg_t, Allocator a, Fetch& f, unsigned i)
+            : r(a.resource()), fetch(f), index(i), pending(integer(field(f.input, "pending"))) {}
+
+        std::optional<Result<QueryResult, String>> poll(WakeSignal& wake) {
+            using R = Result<QueryResult, String>;
+            if (pending) {
+                --pending;
+                wake.notify();
+                return {};
+            }
+            if (index == integer(field(fetch.input, "fail_at"))) {
+                return R::err(r, String("fetch failed", r));
+            }
+            auto replies = items(fetch.input, "responses");
+            auto rows = index <= replies.size()
+                            ? rows_in(r, std::get<Json::Array>(replies[index - 1].data))
+                            : Vector<CompactRow>(r);
+            QueryResult result(std::allocator_arg,
+                               Allocator(r),
+                               ExecutionMetadata::unrecorded_query(r, rows.size()));
+            result.rows.swap(rows);
+            return R::ok(r, std::move(result));
+        }
+
+        void finish_and_wait() noexcept {
+            ++fetch.drops;
+        }
+
+        void cancel_and_wait() noexcept {
+            ++fetch.drops;
+        }
+    };
+
+    DataServiceOperationResult<QueryResult, String>& query(Memory target,
+                                                           QueryRequest request) override {
+        auto& q = request.query;
+        auto call = detail::model_json(r);
+        detail::model_put(call, "entity", q.entity);
+        detail::model_put(call, "depth", telemetry.depth);
+        Json::Array lineage(r), relations(r);
+        for (const auto& n : request.trace_chain) {
+            auto node = detail::model_json(r);
+            detail::model_put(node, "entity", n.entity_type);
+            detail::model_put(node, "comment", n.comment);
+            lineage.emplace_back(std::move(node));
+        }
+        for (const auto& rel : q.relations) {
+            relations.emplace_back(rel.name);
+        }
+        detail::model_put(call, "trace", lineage);
+        detail::model_put(call, "relations", relations);
+        detail::model_put(call, "comment", request.intent.comment());
+        detail::model_put(call, "purpose", request.intent.purpose());
+        detail::model_put(
+            call, "filter", q.predicate ? Json(r, detail::debug_expr(r, *q.predicate)) : Json(r));
+        calls.emplace_back(std::move(call));
+        return make_operation<Result<QueryResult, String>, Work>(
+            target, *this, unsigned(calls.size()));
+    }
+
+    DataServiceOperationResult<MutationResult, String>& mutate(Memory, MutationRequest) override {
+        throw std::logic_error("unexpected mutation");
+    }
+};
+
+template <unsigned K>
+static Json model_out(Memory r, const Model<K>& m, Vector<EntityRuntimeState>& states) {
+    auto j = row_out(r, m.row);
+    if (m.state) {
+        states.emplace_back(*m.state);
+    }
+    return j;
+}
+
+static Json evaluate(UserContext& c, const Json& j) {
+    auto r = c.memory_resource();
+    auto& store = c.make<InMemoryMetadataStore>();
+    for (auto name : {"Parent", "Child", "Leaf"}) {
+        EntityDescriptor e(std::allocator_arg, Allocator(r), name);
+        e.property("id", DataType::U64).is_id = true;
+        for (const auto& relation : items(j, "metadata")) {
+            if (text(field(relation, "entity")) == name) {
+                auto& p =
+                    e.relation(text(field(relation, "name")), text(field(relation, "target")));
+                p.local_key = text(field(relation, "local"));
+                p.foreign_key = text(field(relation, "foreign"));
+                p.many = std::get<bool>(field(relation, "many").data);
+            }
+        }
+        store.register_entity(std::move(e));
+    }
+    c.set_metadata(c, store);
+    auto& decoders = c.make<InMemoryEntityGraphDecoderRegistry>();
+    for (const auto& name : items(j, "register")) {
+        if (text(name) == "Parent") {
+            decoders.register_entity<Model<0>>();
+        } else if (text(name) == "Child") {
+            decoders.register_entity<Model<1>>();
+        } else {
+            decoders.register_entity<Model<2>>();
+        }
+    }
+    c.set_entity_graph_decoder_registry(decoders);
+    auto& telemetry_state = c.make<TelemetryState>();
+    auto& telemetry = c.make<Telemetry>(telemetry_state);
+    c.set_runtime_telemetry(c, telemetry);
+    auto& fetch = c.make<Fetch>(j, telemetry_state);
+    auto& service = EntityDataService<Fetch>::for_executor(c, "Parent", c, fetch);
+    TraceChain trace(r);
+    trace.emplace_back(TraceKind::Request, "Parent", "root request");
+    service.with_trace_context(trace);
+    detail::EntityRelationFetch<Fetch> call(
+        std::allocator_arg, Allocator(r), [](const auto& repo, SelectQuery q) -> auto& {
+            return detail::EntityDataServiceAccess::fetch_all(repo, q);
+        });
+    auto& parents =
+        c.make<Vector<CompactRow>>(rows_in(r, std::get<Json::Array>(field(j, "parents").data)));
+    auto& plans = c.make<Vector<RelationLoadPlan>>();
+    for (const auto& p : items(j, "plans")) {
+        plans.emplace_back(plan_in(r, p, "Parent"));
+    }
+    auto& root = c.make<EntityRuntimeState>();
+    auto& graph = c.make<EntityGraphBuilder>();
+    auto out = detail::model_json(r);
+    auto mode = text(field(j, "mode"));
+    if (mode == "attach" || mode == "install") {
+        auto replies = items(j, "responses");
+        auto children = replies.empty() ? Vector<CompactRow>(r)
+                                        : rows_in(r, std::get<Json::Array>(replies[0].data));
+        if (mode == "attach") {
+            detail::attach_relation_rows(c, parents, plans[0], std::move(children));
+        } else {
+            auto result = detail::install_compact_flat_relation(
+                c, parents, plans[0], std::move(children), root, graph);
+            if (!result) {
+                detail::model_put(out, "error", result.error().to_string(r));
+            }
+        }
+    } else {
+        auto& operation = [&]() -> AsyncOperation<detail::RelationHydrationResult<Fetch>>& {
+            if (mode == "embedded") {
+                return detail::enhance_relation_plans(service, parents, plans, call);
+            }
+            if (mode == "flat") {
+                return detail::hydrate_flat_plans(service, parents, plans, root, graph, call);
+            }
+            return detail::hydrate_compact_flat_plans(service, parents, plans, root, graph, call);
+        }();
+        bool ready = false;
+        for (std::uint64_t i = 0; i < integer(field(j, "polls")); ++i) {
+            if (auto* result = operation.poll()) {
+                ready = true;
+                if (!*result) {
+                    detail::model_put(out, "error", result->error().to_string(r));
+                }
+                break;
+            }
+        }
+        if (!ready) {
+            operation.cancel();
+            detail::model_put(out, "cancelled", true);
+        }
+    }
+    Json::Array parent_rows(r);
+    for (const auto& row : parents) {
+        parent_rows.emplace_back(row_out(r, row));
+    }
+    detail::model_put(out, "parents", parent_rows);
+    detail::model_put(out, "entity_count", graph.entity_count());
+    detail::model_put(out, "relation_count", graph.relation_list_count());
+    if (!root.freeze_graph(std::move(graph))) {
+        throw std::logic_error("freeze failed");
+    }
+    Vector<EntityRuntimeState> states(r);
+    Json::Array entities(r), relations(r);
+    std::pmr::set<String, std::less<>> names(r);
+    auto collect = [&](auto&& self, const RelationLoadPlan& p) -> void {
+        names.emplace(p.relation_name);
+        for (const auto& child : p.children) {
+            self(self, child);
+        }
+    };
+    for (const auto& p : plans) {
+        collect(collect, p);
+    }
+    for (const auto& m : items(j, "metadata")) {
+        names.emplace(text(field(m, "name")));
+    }
+    auto inspect = [&]<unsigned K>() {
+        for (unsigned id = 0; id <= 32; ++id) {
+            if (auto* m = root.resolve_entity<Model<K>>(id)) {
+                auto item = detail::model_json(r);
+                detail::model_put(item, "kind", K);
+                detail::model_put(item, "id", id);
+                detail::model_put(item, "row", model_out(r, *m, states));
+                entities.emplace_back(std::move(item));
+            }
+            for (auto owner : {"Parent", "Child", "Leaf"}) {
+                for (const auto& name : names) {
+                    auto* list = root.resolve_relation_list<Model<K>>(owner, id, name);
+                    auto* optional = root.resolve_relation_option<Model<K>>(owner, id, name);
+                    if (!list && !optional) {
+                        continue;
+                    }
+                    auto item = detail::model_json(r);
+                    detail::model_put(item, "kind", K);
+                    detail::model_put(item, "owner", owner);
+                    detail::model_put(item, "id", id);
+                    detail::model_put(item, "name", name);
+                    detail::model_put(item, "mode", list ? "list" : "option");
+                    Json rows(r);
+                    if (list) {
+                        Json::Array values(r);
+                        for (const auto& m : *list) {
+                            values.emplace_back(model_out(r, m, states));
+                        }
+                        rows = Json(r, values);
+                        detail::model_put(item, "loaded", list->is_loaded);
+                    } else if (*optional) {
+                        rows = model_out(r, **optional, states);
+                    }
+                    detail::model_put(item, "rows", rows);
+                    relations.emplace_back(std::move(item));
+                }
+            }
+        }
+    };
+    inspect.template operator()<0>();
+    inspect.template operator()<1>();
+    inspect.template operator()<2>();
+    detail::model_put(out, "entities", entities);
+    detail::model_put(out, "relations", relations);
+    Json::Array ledger(r);
+    for (std::size_t i = 0; i < states.size(); ++i) {
+        std::size_t k = 0;
+        while (k < i && !(states[k] == states[i])) {
+            ++k;
+        }
+        ledger.emplace_back(k);
+    }
+    detail::model_put(out, "ledger", ledger);
+    detail::model_put(out, "calls", fetch.calls);
+    detail::model_put(out, "drops", fetch.drops);
+    detail::model_put(out, "capabilities", fetch.capability_calls);
+    Json::Array events(r);
+    for (const auto& event : telemetry_state.events) {
+        events.emplace_back(event);
+    }
+    detail::model_put(out, "events", events);
+    detail::model_put(out, "depth", telemetry_state.depth);
+    return out;
+}
+
+int main() {
+    auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        GlobalContext g;
+        auto c = g.make_user_context();
+        auto j = Json::parse(c->memory_resource(), line);
+        std::cout << evaluate(*c, *j).dump(c->memory_resource()) << '\n';
+    }
+    std::pmr::set_default_resource(previous);
+}

@@ -1,0 +1,28 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/constants_catalog.xml",
+  "model_sha256": "70a4a317cdc17edcf382f79125684f805a456552545e7ffec28142c2a61b61a3",
+  "hand_edited": false,
+  "files": {
+    "lib/Cargo.toml": "925a8a79b154e015a1fc2905a82fe5f24760a2be1c1ba30cb675bef331e75f12",
+    "lib/src/category/behavior.rs": "515d17a01fb121a84bc9789309041c31743ff9cfb20ec160cb2ef73b30cc4e4f",
+    "lib/src/category/checker.rs": "2c2bce82262b26c8bb6a239da51beb6d401bb45f73210b94bae747700b0008a9",
+    "lib/src/category/entity.rs": "89cdb313698427350c8905f957f29431f5fe75ff2cd0aa273d51dbf7bf9ad2db",
+    "lib/src/category/expression.rs": "96f546960a80a396388547453af635f5f9a2a160e7fbaefc147c925e67c4d9e5",
+    "lib/src/category/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/category/request.rs": "3fb4bbc95fab4855984143e5a88771df0f22b0496a8621164c7d686f135cab69",
+    "lib/src/e.rs": "4e83b8633f9ecce1f354d3010acb7034fc96a51b0e06bf6c5af874fdb30e26cd",
+    "lib/src/lib.rs": "20b5009bbe2e8f7164a0c479c7b2f743de8afda9780c2c29e8a8b651dba5b88b",
+    "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+    "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+    "lib/src/platform/entity.rs": "566578c3ffba3fc7eaa17f87f0364f59f66300b0e231580b142eaab7b1fcdb08",
+    "lib/src/platform/expression.rs": "4658e3b818692ce039814affff2ac041c099eed4d2c9e27d13faff5ff58ff473",
+    "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/platform/request.rs": "2f8351b6d2391026af0fa2bc944d47044e0e044b73125c4fb1cb193cccf9f57f",
+    "lib/src/q.rs": "e9bc040afb5df38ce7f9463fb2daa069a4742bec5d24e9490a5732b41ba6e63b",
+    "lib/src/request_support.rs": "14d31398562ca1d9534b5c8311da65ae3a3829b855c85b5e86812b0d4c73edbd",
+    "lib/src/runtime.rs": "116b85c7ad8b13943458d96f011a1719e84cc4f2d97769075c5141a778c0fb93",
+    "lib/src/sample_data.rs": "62f91175e6e9d9dab98db2e4457d5c8502a154d4f91913492bcc97551d25931e"
+  }
+}

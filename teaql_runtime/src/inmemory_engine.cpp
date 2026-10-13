@@ -304,6 +304,7 @@ bool ExprEvaluator::eval(Memory r, const Expr& expr, const CompactRow& row) {
     }
     case Expr::Kind::Column:
     case Expr::Kind::Value:
+    case Expr::Kind::LikePattern:
         return resolve(r, expr, row).try_bool() == true;
     case Expr::Kind::SubQuery:
     case Expr::Kind::Function:
@@ -319,6 +320,7 @@ Value ExprEvaluator::resolve(Memory r, const Expr& expr, const CompactRow& row) 
         return v ? Value(r, *v) : Value(r);
     }
     case Expr::Kind::Value:
+    case Expr::Kind::LikePattern:
         return Value(r, expr.literal);
     case Expr::Kind::SubQuery:
     case Expr::Kind::Function:

@@ -1,9 +1,24 @@
 #include <teaql/runtime/error.hpp>
 
 namespace teaql {
+RuntimeError RuntimeError::audit_after_commit(Memory r, const RuntimeError& source) {
+    RuntimeError result(r, Kind::AuditAfterCommit, String(r));
+    result.data_.emplace<detail::ScopedBox<RuntimeError>>(
+        detail::make_box<RuntimeError>(r, source));
+    return result;
+}
+
 String RuntimeError::to_string(Memory r) const {
     String out(r);
     switch (kind_) {
+    case Kind::AuditAfterCommit:
+        return String(
+            "AUDIT_DELIVERY_AFTER_COMMIT: transaction committed but audit delivery failed; do not retry the mutation blindly",
+            r);
+    case Kind::DynamicField:
+        return dynamic_field_error().to_string(r);
+    case Kind::RequestIntent:
+        return request_intent_error().to_string(r);
     case Kind::MissingEntity:
         out = "missing entity descriptor: ";
         out += message();

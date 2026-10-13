@@ -1,0 +1,6 @@
+<root name="cpp_relations" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <school name="string()" platform="platform()" />
+    <profile name="string()" platform="platform(relationType=oneToOne reverseName=profile)" />
+    <device name="string()" platform="platform()?" />
+</root>

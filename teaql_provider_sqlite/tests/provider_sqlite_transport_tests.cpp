@@ -120,6 +120,8 @@ static void calls_and_error_order() {
     worker.join();
     check(wrong_thread_rejected, "native access is confined to the owning Context thread");
     auto& direct = user->make<SelectQuery>("records");
+    direct.comment("Exercise direct transport query");
+    direct.purpose("Check compile failure behavior");
     direct.filter(Expr::eq(r, "id", 1));
     auto& invalid_stream = f.provider.query_stream(
         r, QueryRequest(std::allocator_arg, Allocator(r), direct, false, false), 2);
@@ -270,6 +272,8 @@ static void executor_integration() {
     auto user = f.global.make_user_context();
     auto r = user->memory_resource();
     auto& q = user->make<SelectQuery>("Record");
+    q.comment("Exercise production SQL transport");
+    q.purpose("Check query, stream and transaction behavior");
     q.filter(Expr::eq(r, "id", 1));
     auto& events = user->make<Vector<ExecutionMetadata>>();
     auto& observer = user->make<ExecutionObserver>([&](ExecutionMetadata m) {
@@ -283,11 +287,13 @@ static void executor_integration() {
           "production transport drives SQL query executor");
     UpdateCommand command(std::allocator_arg, Allocator(r), "Record", std::uint64_t(1));
     command.value("name", "guarded");
-    GuardedMutationRequest request(
-        std::allocator_arg,
-        Allocator(r),
-        MutationRequest(std::allocator_arg, Allocator(r), std::move(command)),
-        Expr::eq(r, "version", 1));
+    GuardedMutationRequest request(std::allocator_arg,
+                                   Allocator(r),
+                                   MutationRequest(std::allocator_arg,
+                                                   Allocator(r),
+                                                   std::move(command),
+                                                   "Exercise guarded transport mutation"),
+                                   Expr::eq(r, "version", 1));
     const auto& mutated = executor.mutate_guarded_observed(r, std::move(request), observer).wait();
     check(mutated && mutated.value().affected_rows == 1 && mutated.value().persisted_snapshot,
           "production guarded update performs authoritative snapshot read");
@@ -303,8 +309,12 @@ static void executor_integration() {
     auto& tx = executor.begin(r).wait().value().get();
     UpdateCommand update(std::allocator_arg, Allocator(r), "Record", std::uint64_t(1));
     update.value("name", "transactional");
-    const auto& saved =
-        tx.mutate(r, MutationRequest(std::allocator_arg, Allocator(r), std::move(update))).wait();
+    const auto& saved = tx.mutate(r,
+                                  MutationRequest(std::allocator_arg,
+                                                  Allocator(r),
+                                                  std::move(update),
+                                                  "Exercise transaction transport mutation"))
+                            .wait();
     check(saved && saved.value().persisted_snapshot,
           "production SQL transaction performs ordinary mutation readback");
     check(tx.query(r, QueryRequest(std::allocator_arg, Allocator(r), q, false, true))
@@ -397,12 +407,15 @@ static void native_transactions() {
     auto& cancelled = f.provider.begin_sql(or_).wait().value().get();
     cancelled.execute_sql(or_, query(or_, "UPDATE records SET version=22")).wait();
     auto& cursor = f.provider.stream_sql(rr, query(rr, "SELECT id FROM records ORDER BY id"), 1);
-    cursor.wait_next();
+    using CursorPoll = StreamPoll<Result<StreamChunk, MutationExecutorError>>;
+    check(cursor.poll_next().kind == CursorPoll::Kind::Pending,
+          "foreign Context cursor waits for the transaction lease");
     auto& terminal = cancelled.commit_sql(or_);
-    check(!terminal.poll(), "commit waits for foreign Context cursor lease");
+    check(terminal.status() == AsyncStatus::Pending, "unpolled commit remains cancellable");
     terminal.cancel();
     check(sqlite3_get_autocommit(db),
           "cancelled pending commit rolls back without waiting on foreign host memory");
+    check(cursor.wait_next() != nullptr, "rollback wakes the queued foreign cursor");
     cursor.cancel();
     check(f.provider.fetch_all_compact(rr, query(rr, "SELECT version FROM records WHERE id=1"))
                   .value()[0]
@@ -423,8 +436,8 @@ static void native_transactions() {
     failed.execute_sql(fr, query(fr, "INSERT INTO child VALUES(999)")).wait();
     const auto& result = failed.commit_sql(fr).wait();
     check(!result && result.error().sqlite_extended_code() == SQLITE_CONSTRAINT_FOREIGNKEY &&
-              failed.consumed() && !sqlite3_get_autocommit(db),
-          "failed native commit remains consumed and preserves deferred-constraint error");
+              failed.consumed() && sqlite3_get_autocommit(db),
+          "failed consumed native commit preserves the error and rolls back before returning");
     failure.reset();
     check(sqlite3_get_autocommit(db),
           "failed commit is rolled back before its Context is reclaimed");

@@ -91,27 +91,66 @@ public:
                         "streaming relation or aggregate enhancement is not supported; stream a root query or use execute_for_list")));
         }
         const auto& cs = EntityDataServiceAccess::context_service(service_);
-        query_.comment_text = cs.resolve_final_comment(
-            query_.trace_chain,
-            query_.comment_text ? std::optional<std::string_view>(*query_.comment_text)
-                                : std::nullopt);
         const bool capture = cs.metadata.capture_execution_metadata();
-        QueryRequest request(
-            std::allocator_arg, Allocator(r), query_, cs.metadata.capture_query_debug(), capture);
-        if (capture) {
-            for (const auto& node : query_.trace_chain) {
-                request.trace_chain.emplace_back(node);
-            }
-            request.comment = clone_in(r, query_.comment_text);
+        auto intent = EntityDataServiceAccess::request_intent(service_, query_);
+        if (!intent) {
+            return R::err(r, DataServiceError<Error>::runtime(r, std::move(intent).error()));
+        }
+        QueryRequest request(std::allocator_arg,
+                             Allocator(r),
+                             query_,
+                             intent.value(),
+                             cs.metadata.capture_query_debug(),
+                             capture);
+        if (!capture) {
+            request.trace_chain.clear();
         }
         const auto size = query_.stream_config ? query_.stream_config->chunk_size : 1000;
         auto& executor = cs.executor.get();
-        auto& source = capture ? executor.query_stream_observed(
-                                     r,
-                                     std::move(request),
-                                     size,
-                                     std::move(*cs.metadata.query_diagnostic_observer(r)))
-                               : executor.query_stream(r, std::move(request), size);
+        QueryStream<Error>* selected_source = nullptr;
+        if (query_.dynamic_field_selection) {
+            auto* store = executor.dynamic_field_store();
+            if (!store) {
+                return R::err(r,
+                              DataServiceError<Error>::runtime(
+                                  r,
+                                  RuntimeError::dynamic_field(
+                                      r,
+                                      DynamicFieldError(
+                                          r, "DYNAMIC_FIELD_STORAGE_UNSUPPORTED", query_.entity))));
+            }
+            auto plan = cs.metadata.context().prepare_dynamic_field_stream(
+                *store, query_.entity, *query_.dynamic_field_selection, intent.value());
+            if (!plan) {
+                return R::err(r,
+                              DataServiceError<Error>::runtime(
+                                  r, RuntimeError::dynamic_field(r, plan.error())));
+            }
+            auto source = executor.query_stream_with_dynamic_fields(
+                r,
+                std::move(request),
+                size,
+                std::move(plan).value(),
+                capture ? cs.metadata.query_diagnostic_observer(r)
+                        : std::optional<ExecutionObserver>{});
+            if (!source) {
+                return R::err(r,
+                              DataServiceError<Error>::runtime(
+                                  r, RuntimeError::dynamic_field(r, source.error())));
+            }
+            selected_source = source.value();
+            if (!selected_source) {
+                throw std::invalid_argument("Dynamic entity stream returned a null handle");
+            }
+        } else {
+            selected_source = capture ? &executor.query_stream_observed(
+                                            r,
+                                            std::move(request),
+                                            size,
+                                            std::move(*cs.metadata.query_diagnostic_observer(r)))
+                                      : &executor.query_stream(r, std::move(request), size);
+        }
+        auto& source = *selected_source;
         source_ = &source;
         if (source.memory_resource() != r) {
             source.cancel();

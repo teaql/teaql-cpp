@@ -60,6 +60,13 @@ public:
         return c;
     }
 
+    const DynamicFieldStore* dynamic_field_store() const override {
+        if constexpr (requires { transport.dynamic_field_store(); }) {
+            return transport.dynamic_field_store();
+        }
+        return nullptr;
+    }
+
     SqlIntentRedactions query_log_intent(Memory r, const SelectQuery& query) const override {
         if (auto* entity = state.entity_descriptor(schema_provider, query.entity)) {
             try {

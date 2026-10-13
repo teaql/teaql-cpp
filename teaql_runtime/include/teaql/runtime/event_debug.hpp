@@ -2,6 +2,7 @@
 #include <teaql/runtime/event.hpp>
 #include <teaql/runtime/mutation_policy_debug.hpp>
 #include <teaql/core/mutation_debug.hpp>
+#include <teaql/data_service/sql_log_debug.hpp>
 
 namespace teaql {
 inline void write_debug(DebugWriter& writer, RawAuditEventKind value) {
@@ -129,11 +130,17 @@ inline void write_debug(DebugWriter& writer, const SafeAuditEvent& value) {
         fields.field("entity", [&](auto& out) {
             write_debug(out, value.entity);
         });
+        fields.field("entity_id", [&](auto& out) {
+            detail::write_policy_optional(out, value.entity_id);
+        });
         fields.field("fields", [&](auto& out) {
             detail::write_policy_list(out, value.fields);
         });
         fields.field("trace_chain", [&](auto& out) {
             detail::write_policy_list(out, value.trace_chain);
+        });
+        fields.field("bootstrap_audit", [&](auto& out) {
+            detail::write_policy_optional(out, value.bootstrap_audit);
         });
         fields.field("mutation_governance", [&](auto& out) {
             detail::write_policy_optional(out, value.mutation_governance);
@@ -172,6 +179,15 @@ inline void write_debug(DebugWriter& writer, const RawAuditEvent& value) {
         });
         fields.field("mutation_governance", [&](auto& out) {
             detail::write_policy_optional(out, value.mutation_governance);
+        });
+        fields.field("diagnostic_redactions", [&](auto& out) {
+            if (const auto* provenance = value.diagnostic_redactions()) {
+                out.tuple("Some", [&](auto& inner) {
+                    write_debug(inner, *provenance);
+                });
+            } else {
+                out.raw("None");
+            }
         });
     });
 }

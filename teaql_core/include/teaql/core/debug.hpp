@@ -206,10 +206,24 @@ public:
     };
 
     template <class Body>
-    void structure(std::string_view name, Body&& body) {
+    void structure(std::string_view name, Body&& body, bool non_exhaustive = false) {
         raw(name);
         Fields fields(*this);
         std::invoke(body, fields);
+        if (non_exhaustive) {
+            if (fields.count_++ == 0) {
+                raw(options_.pretty ? " {\n" : " { ");
+                if (options_.pretty) {
+                    ++depth_;
+                }
+            } else if (!options_.pretty) {
+                raw(", ");
+            }
+            raw("..");
+            if (options_.pretty) {
+                raw("\n");
+            }
+        }
         if (fields.count_) {
             if (options_.pretty) {
                 --depth_;
@@ -433,20 +447,11 @@ inline void write_debug(DebugWriter& writer, const Value& value) {
         value.data);
 }
 
-inline void write_debug(DebugWriter& writer, const CompactRow& row) {
-    writer.structure("CompactRow", [&](auto& fields) {
-        fields.field("columns", [&](auto& out) {
-            out.sequence(row.keys(), [](auto& inner, const auto& name) {
-                inner.text(name);
-            });
-        });
-        fields.field("values", [&](auto& out) {
-            out.sequence(row.values(), [](auto& inner, const auto& value) {
-                write_debug(inner, value);
-            });
-        });
-    });
-}
+void write_debug(DebugWriter&, const FieldLayout&);
+void write_debug(DebugWriter&, const LoadedSnapshot&);
+void write_debug(DebugWriter&, const DynamicPropertyDefinitions&);
+void write_debug(DebugWriter&, const ColumnLayout&);
+void write_debug(DebugWriter&, const CompactRow&);
 
 inline void write_debug(DebugWriter& writer, bool value) {
     writer.boolean(value);

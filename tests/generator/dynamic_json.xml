@@ -1,0 +1,10 @@
+<root name="cpp_dynamic_json" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <person _cat="human" platform="platform(contextRoot=true)" name="string()" email="string()" />
+    <profile person="person(relationType=oneToOne reverseName=profile)" note="string()?" />
+    <company platform="platform(contextRoot=true)" name="string()" />
+    <order platform="platform(contextRoot=true)" customer="person(reverseName=orders)"
+           seller="company()" code="string()" amount="number()" priority="integer()" />
+    <product platform="platform(contextRoot=true)" sku="string()" price="number()" />
+    <line order="order(reverseName=lines)" product="product()" quantity="integer()" />
+</root>

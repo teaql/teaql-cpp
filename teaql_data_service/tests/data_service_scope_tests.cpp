@@ -45,8 +45,8 @@ static void retained_model_diagnostics() {
         expected = user->make_global<String>(diagnostic);
         auto& query = user->make<SelectQuery>("Edge");
         query.comment("query comment remains distinct");
-        auto& request = user->make<QueryRequest>(query, true, false);
-        request.comment.emplace("request comment", owner);
+        auto intent = QueryIntent::create(owner, "request comment", "request purpose");
+        auto& request = user->make<QueryRequest>(query, intent.value(), true, false);
         request.trace_chain.emplace_back("Edge", "trace comment");
         query_copy = user->make_global<QueryRequest>(request);
         query_expected = user->make_global<String>(debug_string(owner, request));
@@ -65,7 +65,7 @@ static void retained_model_diagnostics() {
     DebugWriter writer(formatted, {});
     data_service::write_debug(writer, request);
     check(formatted == next->get(next->rebind_global(query_expected)) &&
-              request.comment == "request comment" &&
+              request.comment() == "request comment" &&
               request.query.comment_text == "query comment remains distinct",
           "qualified data-service facade retains request/query/trace responsibilities");
 }

@@ -1,0 +1,13 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "producer": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "fixture": "tests/generator/dynamic_json.xml",
+  "model_sha256": "926d116146ea28d5c612ab14a01304595f27aac14d2a8476291f98c7c797a97f",
+  "input": {
+    "kind": "schema"
+  },
+  "expected": {
+    "error": "schema provider error: rusqlite bind error: ensure schema cannot add missing SQLite foreign key in place: table=line_data, column=\"order\", referenced_table=order_data, referenced_column=id; rebuild/migrate the table explicitly before retrying"
+  },
+  "note": "Unmodified frozen generated service_runtime_from_pool followed by public ensure_schema on a new in-memory database. This failure is preserved separately; paired query execution uses an explicit existing database fixture and makes no successful bootstrap claim."
+}

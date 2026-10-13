@@ -4,6 +4,7 @@
 #include <teaql/runtime/detail/data_service/typed_aggregate.hpp>
 #include <teaql/runtime/detail/data_service/entity_stream.hpp>
 #include <teaql/runtime/detail/data_service/enhanced_entities.hpp>
+#include <teaql/runtime/detail/data_service/entity_results.hpp>
 #include <teaql/runtime/detail/data_service/entity_graph_plan.hpp>
 #include <teaql/runtime/detail/data_service/entity_mutation.hpp>
 #include <teaql/runtime/detail/data_service/entity_graph_execution.hpp>

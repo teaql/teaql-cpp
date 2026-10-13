@@ -23,6 +23,7 @@
 #include <string_view>
 #include <tuple>
 #include <type_traits>
+#include <unordered_set>
 #include <utility>
 #include <variant>
 #include <vector>
@@ -30,7 +31,20 @@
 import teaql_provider_sqlite;
 #else
 #include <teaql/runtime/data_service.hpp>
+#include <teaql/runtime/entity_query.hpp>
+#include <teaql/runtime/entity_expression.hpp>
+#include <teaql/runtime/generated_checker.hpp>
+#include <teaql/runtime/generated_bootstrap.hpp>
+#include <teaql/runtime/generated_sample_data.hpp>
+#include <teaql/runtime/generated_dynamic_json.hpp>
+#include <teaql/runtime/generated_service_executor.hpp>
+#include <teaql/runtime/generated_dynamic_fields.hpp>
+#include <teaql/runtime/generated_readonly_properties.hpp>
+#include <teaql/runtime/generated_business_id.hpp>
+#include <teaql/runtime/module.hpp>
 #include <teaql/provider_sqlite/schema.hpp>
+#include <teaql/provider_sqlite/business_id.hpp>
+#include <teaql/provider_sqlite/id.hpp>
 #include <teaql/sql/executor.hpp>
 #include <teaql/core/eval.hpp>
 #include <teaql/core/detail/debug.hpp>
@@ -39,7 +53,21 @@ import teaql_provider_sqlite;
 
 namespace cpp_examples {
 using namespace teaql;
-using DataServiceExecutor = SqlDataServiceExecutor<MutationExecutorError, SqliteMutationExecutor>;
+
+class ServiceRuntimeExecutor final
+    : public GeneratedServiceRuntimeExecutor<
+          SqlDataServiceExecutor<MutationExecutorError, SqliteMutationExecutor>> {
+    using Base = GeneratedServiceRuntimeExecutor<
+        SqlDataServiceExecutor<MutationExecutorError, SqliteMutationExecutor>>;
+
+public:
+    using Base::Base;
+
+    ServiceRuntimeExecutor(std::allocator_arg_t, Allocator a, const ServiceRuntimeExecutor& other)
+        : Base(std::allocator_arg, a, static_cast<const Base&>(other)) {}
+};
+
+using DataServiceExecutor = ServiceRuntimeExecutor;
 
 template <class T, class E>
 const T& require_value(const Result<T, E>& result) {
@@ -70,6 +98,8 @@ template <class T>
 Value encode(Memory r, const T& input) {
     if constexpr (OptionalType<T>::value) {
         return input ? encode(r, *input) : Value(r);
+    } else if constexpr (requires { input.toValue(r); }) {
+        return input.toValue(r);
     } else {
         return Value(r, input);
     }
@@ -93,6 +123,12 @@ decode(Memory r, const Value* input, std::string_view entity, std::string_view f
             return Outcome::ok(r, String(*text, r));
         }
     } else if constexpr (std::same_as<T, std::uint64_t>) {
+        if (auto value = std::get_if<std::int64_t>(&input->data); value && *value < 0) {
+            String message("invalid field ", r);
+            message += field;
+            message += ": negative i64 cannot map to u64";
+            return Outcome::err(r, EntityError(std::allocator_arg, Allocator(r), entity, message));
+        }
         if (auto value = input->try_u64()) {
             return Outcome::ok(r, *value);
         }
@@ -144,12 +180,18 @@ detail::ScopedBox<T> copy_box(Memory r, const detail::ScopedBox<T>& input) {
 template <class Derived>
 struct Model : EntityDefaults<Derived> {
     using allocator_type = Allocator;
+    static constexpr bool generated_ledger_carrier = true;
     EntityRuntimeState root;
     eval::LoadState load_state;
     Record dynamic;
 
     Model(std::allocator_arg_t, Allocator a)
-        : root(std::allocator_arg, a), load_state(eval::LoadState::fully_loaded(a.resource())),
+        : root(std::allocator_arg, a),
+          load_state(
+              eval::LoadState::not_loaded(a.resource())
+                  .into_indexed(detail::ContextArena::from_memory(a.resource()).loaded_snapshots(),
+                                Derived::field_layout(a.resource()))
+                  .value()),
           dynamic(a.resource()) {}
 
     Model(std::allocator_arg_t, Allocator a, const Model& other)
@@ -169,7 +211,7 @@ struct Model : EntityDefaults<Derived> {
     }
 
     Value id_value() const {
-        return Value(memory_resource(), self().id());
+        return Value(memory_resource(), self().id_for_runtime());
     }
 
     EntityKey entity_key() const {
@@ -198,12 +240,17 @@ struct Model : EntityDefaults<Derived> {
         root.mark_as_delete(entity_key());
     }
 
+    Derived& markForDeletion() {
+        mark_as_delete();
+        return static_cast<Derived&>(*this);
+    }
+
     void set_comment(std::string_view text) {
-        root.set_comment(text);
+        root.set_entity_comment(entity_key(), text);
     }
 
     std::optional<String> get_comment() const {
-        return root.get_comment();
+        return root.get_entity_comment(entity_key());
     }
 
     std::optional<EntitySnapshot> original_values() const {
@@ -220,6 +267,84 @@ struct Model : EntityDefaults<Derived> {
         return load_state.is_loaded(field);
     }
 
+    std::optional<LoadedSnapshot::Borrow> loaded_state_snapshot() const {
+        if (const auto* snapshot = load_state.indexed_snapshot()) {
+            return *snapshot;
+        }
+        return {};
+    }
+
+    static constexpr bool supports_dynamic_field_load() {
+        return true;
+    }
+
+    static constexpr bool supports_dynamic_property_load() {
+        return true;
+    }
+
+    bool has_dynamic_property(std::string_view key) const {
+        return GeneratedReadonlyProperties::contains(dynamic, key);
+    }
+
+    const Value* dynamic_property(std::string_view key) const {
+        return GeneratedReadonlyProperties::get(dynamic, key);
+    }
+
+    bool hasDynamicProperty(std::string_view key) const {
+        return has_dynamic_property(key);
+    }
+
+    const Value* dynamicProperty(std::string_view key) const {
+        return dynamic_property(key);
+    }
+
+    const DynamicFieldValues* dynamic_field_values() const {
+        return root.loaded_dynamic_fields();
+    }
+
+    bool has_pending_dynamic_mutations() const {
+        return root.has_pending_dynamic_mutations();
+    }
+
+    Result<std::monostate, EntityError>
+    install_loaded_dynamic_fields(const DynamicFieldValues& fields,
+                                  LoadedSnapshot::Borrow snapshot) {
+        return GeneratedDynamicFields::install(root,
+                                               load_state,
+                                               Derived::field_layout(memory_resource()),
+                                               fields,
+                                               snapshot,
+                                               Derived::ENTITY_NAME);
+    }
+
+    Result<std::monostate, DynamicFieldError> update_dynamic_field(std::string_view code,
+                                                                   const Value& value) {
+        return GeneratedDynamicFields::update(
+            root, load_state, Derived::field_layout(memory_resource()), entity_key(), code, value);
+    }
+
+    Result<std::monostate, DynamicFieldError> delete_dynamic_field(std::string_view code) {
+        return GeneratedDynamicFields::erase(
+            root, load_state, Derived::field_layout(memory_resource()), entity_key(), code);
+    }
+
+    Result<std::monostate, DynamicFieldError> updateDynamicField(std::string_view code,
+                                                                 const Value& value) {
+        return update_dynamic_field(code, value);
+    }
+
+    Result<std::monostate, DynamicFieldError> deleteDynamicField(std::string_view code) {
+        return delete_dynamic_field(code);
+    }
+
+    const DynamicFieldValues* dynamicFieldValues() const {
+        return dynamic_field_values();
+    }
+
+    bool hasPendingDynamicMutations() const {
+        return has_pending_dynamic_mutations();
+    }
+
     bool is_field_loaded(std::string_view field) const {
         return is_loaded(field);
     }
@@ -229,7 +354,12 @@ struct Model : EntityDefaults<Derived> {
         for (const auto& field : fields) {
             names.push_back(field);
         }
-        load_state = eval::LoadState::partial(memory_resource(), names);
+        load_state =
+            eval::LoadState::partial(memory_resource(), names)
+                .into_indexed(
+                    detail::ContextArena::from_memory(memory_resource()).loaded_snapshots(),
+                    Derived::field_layout(memory_resource()))
+                .value();
     }
 
     void set_checker_dirty_fields(FieldSet fields, const MutationValues& values) {
@@ -273,122 +403,5 @@ struct Model : EntityDefaults<Derived> {
     }
 };
 
-template <class T, class Error>
-struct SingleResult {
-    using allocator_type = Allocator;
-    using Input = AsyncOperation<Result<SmartList<T>, Error>>;
-    using Output = Result<std::optional<T>, Error>;
-    Memory resource;
-    Input& input;
-    WakeSignal::Forward forwarding;
-
-    SingleResult(std::allocator_arg_t, Allocator a, Input& source)
-        : resource(a.resource()), input(source) {}
-
-    std::optional<Output> poll(WakeSignal& wake) {
-        forwarding.attach(input.wake_signal(), wake);
-        auto* result = input.poll();
-        if (!result) {
-            return {};
-        }
-        forwarding.reset();
-        if (!*result) {
-            return Output::err(resource, detail::clone_in(resource, result->error()));
-        }
-        auto* value = result->value().get(0);
-        return Output::ok(resource,
-                          value ? std::optional<T>(detail::clone_in(resource, *value))
-                                : std::optional<T>{});
-    }
-
-    void finish_and_wait() noexcept {
-        forwarding.reset();
-    }
-
-    void cancel_and_wait() noexcept {
-        forwarding.reset();
-        input.cancel();
-    }
-};
-
-template <class T>
-class Expression {
-public:
-    using allocator_type = Allocator;
-    eval::EvalResult<T> result;
-
-    Expression(std::allocator_arg_t, Allocator a, eval::EvalResult<T> input)
-        : result(std::allocator_arg, a, std::move(input)) {}
-
-    Expression(std::allocator_arg_t, Allocator a, const Expression& other)
-        : result(std::allocator_arg, a, other.result) {}
-
-    Expression(const Expression&) = delete;
-    Expression(Expression&&) noexcept = default;
-
-    Memory memory_resource() const {
-        return result.memory_resource();
-    }
-
-    std::optional<T> eval() const {
-        if (result.is_not_loaded()) {
-            String message("NotLoaded: ", memory_resource());
-            message += result.missing().attempted_path;
-            throw std::logic_error(std::string(message));
-        }
-        return result.is_null()
-                   ? std::optional<T>{}
-                   : std::optional<T>(detail::clone_in(memory_resource(), result.get()));
-    }
-
-    T unwrap() const {
-        auto value = eval();
-        if (!value) {
-            throw std::logic_error("Expression value is legitimately null");
-        }
-        return std::move(*value);
-    }
-
-    bool is_null() const {
-        return !eval();
-    }
-
-    bool is_not_null() const {
-        return bool(eval());
-    }
-
-    T or_if_null(T fallback) const {
-        auto value = eval();
-        return value ? std::move(*value) : detail::move_in(memory_resource(), std::move(fallback));
-    }
-
-    template <class F>
-    T or_else_if_null(F&& fallback) const {
-        auto value = eval();
-        return value ? std::move(*value)
-                     : detail::move_in(memory_resource(), std::invoke(std::forward<F>(fallback)));
-    }
-
-    T or_default_if_null() const {
-        auto value = eval();
-        return value ? std::move(*value) : default_value<T>(memory_resource());
-    }
-};
-
-template <class T>
-class RelationListExpression : public Expression<const SmartList<T>*> {
-public:
-    using Base = Expression<const SmartList<T>*>;
-    using Base::Base;
-
-    Expression<std::size_t> size() const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next = std::move(current).and_then("size", [r](const SmartList<T>* value) {
-            return eval::EvalResult<std::size_t>::value(r, value->len());
-        });
-        return Expression<std::size_t>(std::allocator_arg, Allocator(r), std::move(next));
-    }
-};
 }
 }

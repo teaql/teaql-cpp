@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/core/debug.hpp>
+#include <teaql/core/load_state.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/memory/arena.hpp>
 #include <algorithm>
@@ -11,12 +12,24 @@ namespace teaql::eval {
 class LoadState {
 public:
     using allocator_type = Allocator;
-    enum class Kind { NotLoaded, Partial, PartialCompact, SharedColumns, FullyLoaded };
+    enum class Kind { NotLoaded, Partial, PartialCompact, SharedColumns, Indexed, FullyLoaded };
 
     LoadState(std::allocator_arg_t, Allocator a) : fields_(a.resource()) {}
 
     LoadState(std::allocator_arg_t, Allocator a, const LoadState& other)
         : fields_(other.fields_, a.resource()), kind_(other.kind_) {
+        if (other.indexed_) {
+            if (a.resource() == other.memory_resource()) {
+                indexed_ = other.indexed_;
+            } else {
+                auto* destination = dynamic_cast<Arena*>(a.resource());
+                if (!destination) {
+                    throw std::invalid_argument("Indexed load state requires a Context arena");
+                }
+                auto& copied = destination->make<LoadedSnapshot>(other.indexed_->get());
+                indexed_.emplace(std::allocator_arg, a, copied);
+            }
+        }
         if (other.columns_) {
             if (a.resource() == other.memory_resource()) {
                 columns_ = other.columns_;
@@ -65,7 +78,107 @@ public:
         return result;
     }
 
+    static LoadState indexed(Memory owner, LoadedSnapshot::Borrow state) {
+        if (state.memory_resource() != owner) {
+            throw std::invalid_argument("Indexed state requires an explicit destination copy");
+        }
+        auto result = not_loaded(owner);
+        result.kind_ = Kind::Indexed;
+        result.indexed_ = state;
+        return result;
+    }
+
+    const LoadedSnapshot::Borrow* indexed_snapshot() const noexcept {
+        return indexed_ ? &*indexed_ : nullptr;
+    }
+
+    Result<LoadState, String> into_indexed(SnapshotPool& pool, const FieldLayout& layout) const {
+        auto owner = pool.memory_resource();
+        using Output = Result<LoadState, String>;
+        if (indexed_) {
+            if (&indexed_->get().layout() != &layout) {
+                return Output::err(
+                    owner, String("incompatible loaded-state type or layout revision", owner));
+            }
+            return Output::ok(owner, indexed(owner, *indexed_));
+        }
+        if (kind_ == Kind::FullyLoaded) {
+            return Output::ok(
+                owner,
+                indexed(owner, LoadedSnapshot::fully_loaded(owner, layout).into_shared(pool)));
+        }
+        Vector<std::string_view> fields(owner);
+        if (kind_ != Kind::NotLoaded) {
+            for (const auto& field : names()) {
+                fields.push_back(field);
+            }
+        }
+        return Output::ok(
+            owner,
+            indexed(owner, LoadedSnapshot::projection(owner, layout, fields).into_shared(pool)));
+    }
+
+    Result<std::monostate, String> mark_loaded(std::string_view field,
+                                               SnapshotPool* pool = nullptr) {
+        auto owner = memory_resource();
+        using Output = Result<std::monostate, String>;
+        if (indexed_) {
+            if (!pool || pool->memory_resource() != owner) {
+                throw std::invalid_argument("Indexed mutation requires its Context snapshot pool");
+            }
+            auto result = LoadedSnapshot::with_loaded(*pool, *indexed_, field, true);
+            if (!result) {
+                return Output::err(owner, std::move(result).error());
+            }
+            indexed_ = result.value();
+        } else if (kind_ != Kind::FullyLoaded && !is_loaded(field)) {
+            if (columns_) {
+                fields_.assign(names().begin(), names().end());
+                columns_ = nullptr;
+            }
+            fields_.emplace_back(field);
+            if (kind_ == Kind::NotLoaded) {
+                kind_ = Kind::PartialCompact;
+            }
+            if (kind_ == Kind::Partial) {
+                std::sort(fields_.begin(), fields_.end());
+            }
+        }
+        return Output::ok(owner, {});
+    }
+
+    Result<std::monostate, String> mark_unloaded(std::string_view field,
+                                                 SnapshotPool* pool = nullptr) {
+        auto owner = memory_resource();
+        using Output = Result<std::monostate, String>;
+        if (indexed_) {
+            if (!pool || pool->memory_resource() != owner) {
+                throw std::invalid_argument("Indexed mutation requires its Context snapshot pool");
+            }
+            auto result = LoadedSnapshot::with_loaded(*pool, *indexed_, field, false);
+            if (!result) {
+                return Output::err(owner, std::move(result).error());
+            }
+            indexed_ = result.value();
+        } else if (kind_ == Kind::FullyLoaded) {
+            return Output::err(owner,
+                               String("clearing availability requires a generated layout", owner));
+        } else {
+            if (columns_) {
+                fields_.assign(names().begin(), names().end());
+                columns_ = nullptr;
+            }
+            std::erase_if(fields_, [&](const auto& name) {
+                return name == field;
+            });
+        }
+        return Output::ok(owner, {});
+    }
+
     bool is_loaded(std::string_view field) const {
+        if (indexed_) {
+            return indexed_->get().is_loaded(field);
+        }
         if (kind_ == Kind::NotLoaded) {
             return false;
         }
@@ -93,12 +206,18 @@ public:
     }
 
     bool operator==(const LoadState& other) const {
+        if (indexed_ || other.indexed_) {
+            return indexed_ && other.indexed_ && indexed_->get() == other.indexed_->get();
+        }
         return kind_ == other.kind_ &&
                std::equal(
                    names().begin(), names().end(), other.names().begin(), other.names().end());
     }
 
     Json to_json(Memory destination) const {
+        if (indexed_) {
+            throw std::logic_error("the enum variant LoadState::Indexed cannot be serialized");
+        }
         if (kind_ == Kind::NotLoaded || kind_ == Kind::FullyLoaded) {
             return Json(destination, kind_ == Kind::NotLoaded ? "NotLoaded" : "FullyLoaded");
         }
@@ -166,6 +285,8 @@ public:
             return "PartialCompact";
         case Kind::SharedColumns:
             return "SharedColumns";
+        case Kind::Indexed:
+            return "Indexed";
         case Kind::FullyLoaded:
             return "FullyLoaded";
         }
@@ -199,6 +320,7 @@ private:
     Vector<String> fields_;
     Kind kind_ = Kind::NotLoaded;
     const ColumnLayout* columns_ = nullptr;
+    std::optional<LoadedSnapshot::Borrow> indexed_;
 };
 
 struct MissingPath {

@@ -1,0 +1,25 @@
+[package]
+name = "teaql_cpp_private_save_oracle"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../build_rust_private_save_5_0_6/original/teaql-core" }
+teaql-data-service = { path = "../../../build_rust_private_save_5_0_6/original/teaql-data-service" }
+teaql-runtime = { path = "../../../build_rust_private_save_5_0_6/original/teaql-runtime" }
+serde_json = "=1.0.150"
+# Exact versions in the original runtime lock, not C++ production dependencies.
+chrono = "=0.4.45"
+rust_decimal = "=1.42.1"
+
+# Already locked by the actual runtime; direct imports for stream/store fixtures.
+futures-core = "=0.3.32"
+async-trait = "=0.1.89"
+
+# Existing SQLite integration within the complete enhanced-entity observer.
+teaql-sql = { path = "../../../build_rust_private_save_5_0_6/original/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../build_rust_private_save_5_0_6/original/teaql-provider-sqlite" }
+rusqlite = { version = "=0.40.1", features = ["bundled", "column_decltype", "functions"] }
+
+[workspace]

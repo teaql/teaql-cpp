@@ -79,3 +79,6 @@ __pycache__/
 
 # Repository-local development tools
 .tools/
+
+# Rust 5.0.6 FieldLayout oracle build output
+tests/parity/rust_field_layout/target/

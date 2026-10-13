@@ -17,6 +17,13 @@ static void check(bool value, const char* message) {
     }
 }
 
+static SelectQuery query_request_fixture(Memory r) {
+    SelectQuery query(std::allocator_arg, Allocator(r), "Order");
+    query.comment_text.emplace("inspect transaction fixture", r);
+    query.purpose_text.emplace("verify transaction isolation", r);
+    return query;
+}
+
 struct Ready {
     using allocator_type = Allocator;
     Memory r;
@@ -82,9 +89,7 @@ static void error_order_and_consumption() {
                 try {
                     auto q = QueryRequest(std::allocator_arg,
                                           Allocator(user->memory_resource()),
-                                          SelectQuery(std::allocator_arg,
-                                                      Allocator(user->memory_resource()),
-                                                      "Order"),
+                                          query_request_fixture(user->memory_resource()),
                                           false,
                                           false);
                     (void)scope->query(std::move(q)).wait();
@@ -200,7 +205,7 @@ struct NativeBody {
             scope.context().clear_sql_logs();
         }
         if (!read) {
-            SelectQuery query(std::allocator_arg, Allocator(r), "Order");
+            auto query = query_request_fixture(r);
             read = &scope.query(QueryRequest(std::allocator_arg, Allocator(r), query, true, true));
         }
         forwarding.attach(read->wake_signal(), wake);
@@ -224,8 +229,11 @@ struct NativeBody {
             UpdateCommand command(std::allocator_arg, Allocator(r), "Order", std::uint64_t(7));
             command.values.fields.emplace(String("name", r), Value(r, "raw"));
             command.expected_version(4);
-            write = &scope.mutate(
-                MutationRequest(std::allocator_arg, Allocator(r), std::move(command)));
+            write = &scope.mutate(MutationRequest(
+                std::allocator_arg,
+                Allocator(r),
+                std::move(command),
+                std::move(MutationIntent::create(r, "modify transaction fixture")).value()));
         }
         forwarding.attach(write->wake_signal(), wake);
         auto* result = write->poll();
@@ -237,8 +245,12 @@ struct NativeBody {
         }
         check(result->value().affected_rows == 1,
               "scope provider-neutral mutation uses the active connection");
-        check(scope.context().sql_logs().size() == 2,
-              "successful SQL mutation returns metadata without duplicate observer notification");
+        auto logs = scope.context().sql_logs();
+        check(logs.size() == 3 && logs[0].operation == SqlLogOperation::Select &&
+                  logs[1].operation == SqlLogOperation::Update &&
+                  logs[2].operation == SqlLogOperation::Select &&
+                  result->value().metadata.statements.size() == 2,
+              "successful mutation logs its write and authoritative readback exactly once");
         return Output::ok(r, std::move(*entity));
     }
 
@@ -447,7 +459,7 @@ struct QueryOnly {
     std::optional<R> poll(WakeSignal& wake) {
         auto r = scope.context().memory_resource();
         if (!child) {
-            SelectQuery q(std::allocator_arg, Allocator(r), "Order");
+            auto q = query_request_fixture(r);
             child = &scope.query(QueryRequest(std::allocator_arg, Allocator(r), q, true, true));
         }
         forwarding.attach(child->wake_signal(), wake);

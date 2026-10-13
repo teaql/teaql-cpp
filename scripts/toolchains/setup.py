@@ -104,6 +104,7 @@ def check():
         if version not in result.stdout:
             raise RuntimeError(f"Wrong {name} version: {result.stdout}")
         print(f"{name}: {version} ({executable})")
+    run(["python3", ROOT / "scripts/toolchains/setup_native_sqlite.py", "--check"])
     if not (INSTALL / "sqlite-3.53.2/lib/libsqlite3.a").is_file():
         raise RuntimeError("Missing newly compiled MIPS SQLite archive")
 
@@ -120,6 +121,8 @@ def main():
         gcc = INSTALL / "gcc-16.2.0"
         configuration = INSTALL / "llvm-23.1.3/bin/clang++.cfg"
         configuration.write_text(f"--gcc-install-dir={gcc}/lib/gcc/x86_64-conda-linux-gnu/16.2.0\n-Wl,-rpath,{gcc}/lib\n")
+    if not args.check:
+        run(["python3", ROOT / "scripts/toolchains/setup_native_sqlite.py"])
     check()
 
 

@@ -1,0 +1,46 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Initial historical observer compile failures before reading the actual 5.0.6 MutationRequest command envelope. Historical driver remains intact.",
+  "errors": [
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Insert` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/ledger_move_only_5_0_6.rs:14:19"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Insert` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/audited_save_5_0_6.rs:13:19"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Update` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/ledger_move_only_5_0_6.rs:15:19"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Update` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/audited_save_5_0_6.rs:14:19"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Delete` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/ledger_move_only_5_0_6.rs:16:19"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Delete` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/audited_save_5_0_6.rs:15:19"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Recover` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/ledger_move_only_5_0_6.rs:17:19"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Recover` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/audited_save_5_0_6.rs:16:19"
+    }
+  ]
+}

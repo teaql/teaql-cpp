@@ -19,6 +19,8 @@ static void data_service_returns_optimistic_lock_conflict() {
     auto borrow = f.user->require_resource<StubExecutor>();
     auto& service = f.user->make<detail::RuntimeDataService<InMemoryMetadataStore, StubExecutor>>(
         f.store, borrow.value());
+    service.with_mutation_intent(
+        MutationIntent::create(f.owner, "Inspect native service mutation").value());
     UpdateCommand command(std::allocator_arg, Allocator(f.owner), "Order", std::uint64_t(1));
     command.expected_version(3).value("name", "next");
     const auto& result = service.update(command).wait();
@@ -36,6 +38,8 @@ static void user_context_builds_context_data_service() {
     check(bool(executor), "original Context resolves registered executor");
     auto& service =
         f.user->make<detail::ContextDataService<StubExecutor>>(*f.user, executor.value());
+    service.with_mutation_intent(
+        MutationIntent::create(f.owner, "Inspect native service mutation").value());
     UpdateCommand command(std::allocator_arg, Allocator(f.owner), "Order", std::uint64_t(1));
     command.expected_version(3).value("name", "next");
     const auto& result = service.update(command).wait();
@@ -49,6 +53,8 @@ static void user_context_builds_context_data_service() {
 static void user_context_resolves_entity_data_service_by_entity_type() {
     Fixture f;
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native service boundaries")),
+          "private native entry supplies explicit mutation intent");
     check(service.entity() == "Order" && service.select().entity == "Order",
           "original named entity/select binding");
     auto insert = service.insert_command();
@@ -61,6 +67,8 @@ static void entity_data_service_applies_behavior_hooks() {
     Fixture f(1, true);
     f.behavior<OrderBehavior>();
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native service boundaries")),
+          "private native entry supplies explicit mutation intent");
     auto insert = service.insert_command();
     insert.value("id", std::uint64_t(1)).value("name", "n");
     const auto& result = Access::insert_internal(service, insert).wait();
@@ -78,6 +86,8 @@ static void entity_data_service_applies_request_policy_after_behavior_hooks() {
     auto& tenant = f.user->make<std::uint64_t>(9);
     f.user->insert_named_resource("tenant_id", *f.user, tenant);
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native service boundaries")),
+          "private native entry supplies explicit mutation intent");
     auto insert = service.insert_command();
     insert.value("id", std::uint64_t(1)).value("name", "n");
     auto prepared = service.prepare_insert_command(insert);
@@ -100,8 +110,12 @@ static void public_query_families_cannot_bypass_request_policy() {
     auto& policy = f.user->make_resource<DenySelectRequestPolicy>();
     f.user->with_request_policy(*f.user, policy);
     auto& service = f.service();
-    PurposedSelectQuery query(
-        std::allocator_arg, Allocator(f.owner), service.select(), "verify query policy coverage");
+    check(bool(Access::bind_mutation_intent(service, "Inspect native service boundaries")),
+          "private native entry supplies explicit mutation intent");
+    PurposedSelectQuery query(std::allocator_arg,
+                              Allocator(f.owner),
+                              service.select().comment("Inspect native query policy"),
+                              "verify query policy coverage");
     SelectQuery child(std::allocator_arg, Allocator(f.owner), "OrderLine");
     RelationAggregate relation(
         std::allocator_arg, Allocator(f.owner), "lines", "lineCount", child, true);
@@ -133,6 +147,8 @@ static void entity_data_service_prepares_insert_command_with_generated_id() {
     f.behavior<OrderBehavior>();
     f.generator(42);
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native service boundaries")),
+          "private native entry supplies explicit mutation intent");
     auto insert = service.insert_command();
     insert.value("id", std::uint64_t(0)).value("name", "n");
     auto prepared = service.prepare_insert_command(insert);
@@ -159,6 +175,8 @@ static void custom_user_context_can_drive_insert_preparation() {
     f.user->insert_named_resource("initial_version", *f.user, version);
     f.user->put_local("trace_id", "req-9");
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native service boundaries")),
+          "private native entry supplies explicit mutation intent");
     auto prepared = service.prepare_insert_command(service.insert_command());
     check(bool(prepared), "original Context-aware preparation succeeds");
     field_is(prepared.value(), "id", Value(f.owner, std::uint64_t(99)));

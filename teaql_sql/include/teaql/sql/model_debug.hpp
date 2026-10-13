@@ -39,6 +39,15 @@ inline void write_debug(DebugWriter& writer, const SqlBindings& value) {
         fields.field("policies", [&](auto& out) {
             out.sequence(value.policies_, DefaultDebugElement{});
         });
+        fields.field("originals", [&](auto& out) {
+            out.sequence(value.originals_, [](auto& element, const auto& original) {
+                element.raw("(");
+                write_debug(element, original.first);
+                element.raw(", ");
+                write_debug(element, original.second);
+                element.raw(")");
+            });
+        });
         fields.field("scope", [&](auto& out) {
             detail::write_sql_log_optional(out, value.scope_);
         });

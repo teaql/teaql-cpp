@@ -1,0 +1,19 @@
+<root name="cpp_constants_scalar" org="teaql" data_service="sqlite">
+    <priority id="id()" platform="platform(contextRoot=true)" name="string()" code="string()"
+              active="true" rank="integer()" weight="double()" ratio="float()"
+              cost="number()" day="date()" payload="jsonMe()" note="string()?"
+              optional_rank="integer()?" _constant="true" _identifier="code">
+        <_value id="1" name="Basic" code="BASIC" active="false" rank="-7"
+                weight="2.5" ratio="1.25f" cost="12.50" day="2024-02-01"
+                payload='{"x":1}' note="First note" optional_rank="0" />
+        <_value id="22" name="Extended" code="EXTENDED" active="true" rank="9"
+                weight="-4.75" ratio="-0.5f" cost="-3.125" day="2020-04-09"
+                payload='{"x":2}' note="Second note" optional_rank="5" />
+    </priority>
+    <platform name="string()" />
+    <label id="id()" platform="platform(contextRoot=true)" priority="priority()" code="string()"
+           _constant="true" _identifier="code">
+        <_value id="31" code="PUBLIC" />
+        <_value id="32" code="PRIVATE" />
+    </label>
+</root>

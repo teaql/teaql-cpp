@@ -192,14 +192,14 @@ static void binding_and_base_queries() {
         std::allocator_arg, Allocator(r), executor, detail::resource_arena(r));
     auto& base = user->make<detail::RuntimeDataService<Spy, Executor>>(spy, borrow);
     auto& query = user->make<SelectQuery>("Item");
-    query.comment("business");
+    query.comment("business").purpose("verify runtime adapter forwarding");
     query.trace_chain.emplace_back(TraceKind::Request, "Item", "request");
     auto& all = base.fetch_all(query);
     check(executor.queries == 0, "runtime query remains lazy until polled");
     check(all.wait() && spy.logs == 0,
           "fetch_all forwards diagnostics without duplicate final metadata");
     check(executor.seen->trace_chain == query.trace_chain &&
-              executor.seen->comment == query.comment_text &&
+              executor.seen->comment() == *query.comment_text &&
               executor.seen->capture_execution_metadata && !executor.seen->capture_debug_query,
           "base adapter retains request trace, comment and separate capture flags");
     auto& list = base.fetch_smart_list(query);
@@ -318,7 +318,9 @@ struct Schema final : runtime::SchemaProvider {
 
 static GeneratedSchemaBootstrapFuture& bootstrap(const UserContext& c) {
     auto* service = c.get_resource<EntityDataService<Executor>>();
-    auto result = Access::prepare_select(*service, service->select());
+    auto query = service->select();
+    query.comment("exercise schema bootstrap policy").purpose("verify behavior bypass");
+    auto result = Access::prepare_select(*service, query);
     check(result && result.value().entity == "Final" && result.value().relations.empty(),
           "bootstrap bypasses behavior while policy still applies");
     check(service->relation_loads().empty(), "bootstrap skips behavior relation requests");
@@ -351,6 +353,8 @@ static void hooks_and_metadata() {
     trace.emplace_back(TraceKind::Request, "repository", "outer");
     service.with_trace_context(trace);
     auto& query = c->make<SelectQuery>("QueryEntity");
+    query.comment_text.emplace("exercise dispatch ordering", r);
+    query.purpose_text.emplace("verify behavior and policy projection", r);
     query.trace_chain.emplace_back(TraceKind::Comment, "query", "inner");
     auto prepared = Access::prepare_select(service, query);
     check(prepared && prepared.value().entity == "Final" &&
@@ -550,6 +554,7 @@ static void sqlite_base_adapter() {
     auto& service = EntityDataService<std::remove_reference_t<decltype(executor)>>::for_executor(
         *c, "Item", *c, executor);
     auto query = service.select();
+    query.comment("exercise public query fixture").purpose("verify layered SQLite execution");
     auto& result = [&]() -> auto& {
         auto temporary = Access::scoped(service, "Item");
         auto base = Access::context_service(temporary).data_service();
@@ -574,6 +579,7 @@ static void public_query_boundary() {
     auto& executor = c->make<Executor>();
     auto& service = EntityDataService<Executor>::for_executor(*c, "Item", *c, executor);
     auto query = service.select();
+    query.comment("exercise public query fixture");
     bool empty = false;
     try {
         PurposedSelectQuery invalid(std::allocator_arg, Allocator(r), query, " \t\n");
@@ -583,7 +589,8 @@ static void public_query_boundary() {
     check(empty, "the public query boundary rejects an empty purpose");
     PurposedSelectQuery purposed(std::allocator_arg, Allocator(r), query, "  Inspect items  ");
     check(purposed.as_query().trace_chain.back().comment == "  Inspect items  " &&
-              query.trace_chain.empty(),
+              query.trace_chain.size() == 1 && query.trace_chain[0].kind == TraceKind::Comment &&
+              query.trace_chain[0].comment == "exercise public query fixture",
           "purpose validation retains the original text and snapshots the input query");
     auto& rows = service.fetch_all(purposed);
     check(executor.queries == 0 && rows.wait() && rows.wait().value().size() == 1,
@@ -600,7 +607,8 @@ static void public_query_boundary() {
     auto& cache = g.make<InMemoryAggregationCache>("integration");
     c->insert_resource(g, cache);
     auto cached_query = service.select();
-    cached_query.count("count").enable_aggregation_cache();
+    cached_query.comment("exercise public cached_query fixture");
+    cached_query.comment("retain public count rows").count("count").enable_aggregation_cache();
     PurposedSelectQuery cached(std::allocator_arg, Allocator(r), cached_query, "Count items");
     auto before = executor.queries;
     check(service.fetch_all(cached).wait() && service.fetch_all(cached).wait() &&
@@ -627,6 +635,7 @@ static void public_query_boundary() {
     auto& store = g.make<InMemoryContinuousPageCursorStore>();
     c->set_continuous_page_cursor_store(g, store);
     auto page = service.select();
+    page.comment("exercise public page fixture");
     page.order_asc("id").page(0, 1).optimize_for_continuous_page_fetch();
     PurposedSelectQuery first(std::allocator_arg, Allocator(r), page, "Read items");
     check(service.fetch_all(first).wait() &&
@@ -678,6 +687,7 @@ static void sqlite_public_query_runtime() {
     auto& repo = EntityDataService<std::remove_reference_t<decltype(executor)>>::for_executor(
         *c, "Item", *c, executor);
     auto page = repo.select();
+    page.comment("exercise public page fixture");
     page.projects({"id", "label"})
         .order_asc("id")
         .page(0, 1)
@@ -690,14 +700,22 @@ static void sqlite_public_query_runtime() {
               first_result.value()[0].get("children")->as_list()->size() == 2,
           "public runtime executes root SQL and recursively embeds related rows");
     page.page(1, 1);
-    // Purpose comments do not change cursor identity, matching the source key.
+    // Rust 5.0.6 retains explicit purpose in the normalized cursor key.
     PurposedSelectQuery second(std::allocator_arg, Allocator(r), page, "Inspect the second item");
     auto& second_result = repo.fetch_all(second).wait();
     check(second_result && second_result.value()[0].get("id")->try_u64() == 2 &&
               second_result.value()[0].get("children")->as_list()->size() == 1 &&
+              c->continuous_page_plan() == "OFFSET_FALLBACK:FIRST_PAGE",
+          "a different purpose uses offset, registers a new cursor and preserves hydration");
+    PurposedSelectQuery same_intent(
+        std::allocator_arg, Allocator(r), page, "Inspect the first item");
+    auto& seek_result = repo.fetch_all(same_intent).wait();
+    check(seek_result && seek_result.value()[0].get("id")->try_u64() == 2 &&
+              seek_result.value()[0].get("children")->as_list()->size() == 1 &&
               c->continuous_page_plan() == "CURSOR_SEEK",
-          "actual SQLite next-page execution uses a seek boundary and repeats relation hydration");
+          "the same request purpose reuses the cursor and repeats actual SQLite hydration");
     auto count = repo.select();
+    count.comment("exercise public count fixture");
     count.count("count").enable_aggregation_cache();
     auto& cache = g.make<InMemoryAggregationCache>("actual-sqlite");
     c->insert_resource(g, cache);
@@ -713,6 +731,7 @@ static void sqlite_public_query_runtime() {
     check(repo.fetch_all(counted).wait().value()[0].get("count")->try_i64() == 4,
           "cache invalidation restores authoritative SQLite execution");
     auto enhanced = repo.select();
+    enhanced.comment("exercise public enhanced fixture");
     enhanced.projects({"id", "label"}).order_asc("id");
     SelectQuery extra(std::allocator_arg, Allocator(r), "Item");
     extra.project("label");
@@ -755,7 +774,7 @@ static void public_query_lifetimes() {
         saved = user->make_global<InMemoryAggregationCache>("retained-query");
         user->insert_resource(saved);
         auto& query = user->make<SelectQuery>("Item");
-        query.count("count").enable_aggregation_cache();
+        query.comment("retain public count rows").count("count").enable_aggregation_cache();
         auto& purposed = user->make<PurposedSelectQuery>(query, "Populate shared rows");
         auto& work = repo.fetch_all(purposed);
         query.entity = "Changed after dispatch";
@@ -773,8 +792,9 @@ static void public_query_lifetimes() {
         auto rebound = user->rebind_global(saved);
         user->insert_resource(rebound);
         auto& query = user->make<SelectQuery>("Item");
-        query.count("count").enable_aggregation_cache();
-        auto& purposed = user->make<PurposedSelectQuery>(query, "Read retained rows");
+        query.comment("retain public count rows").count("count").enable_aggregation_cache();
+        // The 5.0.6 aggregation key also retains explicit purpose.
+        auto& purposed = user->make<PurposedSelectQuery>(query, "Populate shared rows");
         auto& result = repo.fetch_all(purposed).wait();
         auto& executor = Access::context_service(repo).executor.get();
         check(result && result.value()[0].get("id")->try_u64() == 1 && executor.queries == 0 &&
@@ -796,6 +816,7 @@ static void public_query_lifetimes() {
         auto& replacement =
             EntityDataService<Executor>::for_executor(*user, "Item", *user, user->get(executor));
         auto& query = user->make<SelectQuery>("Item");
+        query.comment("verify destroyed executor rejection");
         auto& purposed = user->make<PurposedSelectQuery>(query, "Reject a destroyed executor");
         auto& lazy = replacement.fetch_all(purposed);
         user->destroy(executor);

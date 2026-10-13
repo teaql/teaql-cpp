@@ -94,28 +94,31 @@ static void scope_and_models() {
     auto u = user->memory_resource();
     auto& insert = user->make<InsertCommand>("Customer");
     insert.value("name", "a long field value living only in the user context").audit_as("create");
-    auto& request = user->make<MutationRequest>(insert);
+    auto& request = user->make<MutationRequest>(insert, "create");
     check(request.comment() == "create" && request.trace_chain().size() == 1,
-          "mutation trace uses final trace node");
+          "mutation intent remains independent of diagnostic trace");
     insert.trace_chain.emplace_back(TraceKind::Comment, "Customer", "");
-    auto& empty = user->make<MutationRequest>(insert);
-    check(empty.comment().has_value() && empty.comment()->empty(),
-          "Some empty comment differs from absent");
+    auto& empty = user->make<MutationRequest>(insert, "create");
+    check(empty.comment() == "create" && empty.trace_chain().back().comment.empty(),
+          "diagnostic empty comments cannot replace the owned root intent");
     auto& batch = user->make<MutationRequest::Batch>();
     batch.emplace_back(request);
     batch.emplace_back(empty);
-    auto& nested = user->make<MutationRequest>(batch);
-    check(nested.trace_chain().empty() && !nested.comment(), "batch keeps per-item traces only");
+    auto& nested = user->make<MutationRequest>(batch, "batch root");
+    check(nested.trace_chain().empty() && nested.comment() == "batch root",
+          "batch keeps per-item traces only");
     auto& retained = global.make<MutationRequest>(nested);
     auto& guarded =
         user->make<GuardedMutationRequest>(request, Expr::eq(u, "owner", std::uint64_t(7)));
     auto& retained_guard = global.make<GuardedMutationRequest>(guarded);
     auto& query = user->make<SelectQuery>("Customer");
-    query.comment("query-owned comment");
+    query.comment("query-owned comment").purpose("query-owned purpose");
     auto& query_request = user->make<QueryRequest>(query, true, false);
-    check(!query_request.comment && query_request.trace_chain.empty() &&
-              query_request.capture_debug_query && !query_request.capture_execution_metadata,
-          "request metadata stays distinct from query metadata");
+    check(query_request.comment() == "query-owned comment" &&
+              query_request.purpose() == "query-owned purpose" &&
+              query_request.trace_chain == query.trace_chain && query_request.capture_debug_query &&
+              !query_request.capture_execution_metadata,
+          "validated intent remains present when execution metadata is disabled");
     auto& metadata = user->make<ExecutionMetadata>(DataServiceOperation::Batch);
     metadata.backend = "sqlite";
     metadata.statements.emplace_back(DataServiceOperation::Insert);
@@ -144,15 +147,15 @@ static void scope_and_models() {
     update.old_values.emplace(u);
     update.old_values->fields.emplace(String("name", u),
                                       Value(u, "old snapshot stored only in user context"));
-    auto& update_request = user->make<MutationRequest>(update);
+    auto& update_request = user->make<MutationRequest>(update, "update");
     auto& retained_update = global.make<MutationRequest>(update_request);
     auto& deletion = user->make<DeleteCommand>("Customer", std::uint64_t(42));
     deletion.hard_delete().expected_version(4).audit_as("delete");
-    auto& delete_request = user->make<MutationRequest>(deletion);
+    auto& delete_request = user->make<MutationRequest>(deletion, "delete");
     auto& retained_delete = global.make<MutationRequest>(delete_request);
     auto& recovery = user->make<RecoverCommand>("Customer", std::uint64_t(42), -4);
     recovery.audit_as("recover");
-    auto& recover_request = user->make<MutationRequest>(recovery);
+    auto& recover_request = user->make<MutationRequest>(recovery, "recover");
     auto& retained_recover = global.make<MutationRequest>(recover_request);
     auto& query_result = user->make<QueryResult>(metadata);
     auto& retained_query_result = global.make<QueryResult>(query_result);

@@ -1,0 +1,119 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Initial actual-source/native private execution replay before restoring request-intent error precedence.",
+  "families": [
+    {
+      "family": "graph_execution",
+      "count": 520,
+      "failed": 1,
+      "failures": [
+        {
+          "index": 0,
+          "input": {
+            "mode": "execute",
+            "service": "Order",
+            "root": null,
+            "items": [
+              {
+                "entity": "Order",
+                "kind": 0,
+                "values": {
+                  "id": {
+                    "kind": "u64",
+                    "value": "7"
+                  },
+                  "version": {
+                    "kind": "i64",
+                    "value": "1"
+                  },
+                  "name": {
+                    "kind": "text",
+                    "value": "new"
+                  }
+                },
+                "fields": [
+                  "name"
+                ],
+                "token": [],
+                "old": null
+              }
+            ],
+            "descriptors": [
+              {
+                "entity": "Order",
+                "id": "id",
+                "relations": []
+              },
+              {
+                "entity": "Child",
+                "id": "id",
+                "relations": []
+              }
+            ],
+            "rows": [
+              {
+                "id": {
+                  "kind": "u64",
+                  "value": "7"
+                },
+                "version": {
+                  "kind": "i64",
+                  "value": "9"
+                },
+                "name": {
+                  "kind": "text",
+                  "value": "database"
+                }
+              }
+            ],
+            "counts": [
+              1,
+              1
+            ],
+            "fail": -1,
+            "event_fail": -1,
+            "read_fail": false,
+            "entity": "Order",
+            "property": "id",
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            },
+            "trace": []
+          },
+          "differences": [
+            {
+              "path": "/outcome/error",
+              "rust": "REQUEST_COMMENT_REQUIRED: Mutation Request requires a non-blank comment; supply it at the request entry point",
+              "cpp": "graph write error: graph mutation plan has no planned root"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family": "graph_node_command",
+      "count": 1620,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "graph_save_adapter",
+      "count": 541,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "recursive_graph_write",
+      "count": 792,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "ledger_execution",
+      "count": 760,
+      "failed": 0,
+      "failures": []
+    }
+  ]
+}

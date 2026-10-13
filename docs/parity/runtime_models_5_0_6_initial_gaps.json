@@ -1,0 +1,3900 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Initial complete original/native observations before runtime lazy slot and complete diagnostics corrections. Unchanged historical inputs; no normalization.",
+  "families": [
+    {
+      "family": "entity_runtime_model",
+      "count": 252,
+      "failed": 52,
+      "failures": [
+        {
+          "index": 180,
+          "input": {
+            "mode": "stack",
+            "steps": []
+          },
+          "paths": [
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [] }",
+          "cpp_compact": "ChangeSetStack { stack: [] }"
+        },
+        {
+          "index": 181,
+          "input": {
+            "mode": "stack",
+            "steps": [
+              {
+                "op": "push"
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {}, dynamic_changes: None, dynamic_metadata: None }] }",
+          "cpp_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {} }] }"
+        },
+        {
+          "index": 182,
+          "input": {
+            "mode": "stack",
+            "steps": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})}, dynamic_changes: None, dynamic_metadata: None }] }",
+          "cpp_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})} }] }"
+        },
+        {
+          "index": 183,
+          "input": {
+            "mode": "stack",
+            "steps": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})}, dynamic_changes: None, dynamic_metadata: None }, EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: MutationValues({\"another\": List([Null, TypedNull(Text), Bool(false), Bool(true)])})}, dynamic_changes: None, dynamic_metadata: None }] }",
+          "cpp_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})} }, EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: MutationValues({\"another\": List([Null, TypedNull(Text), Bool(false), Bool(true)])})} }] }"
+        },
+        {
+          "index": 184,
+          "input": {
+            "mode": "stack",
+            "steps": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              },
+              {
+                "op": "pop"
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})}, dynamic_changes: None, dynamic_metadata: None }] }",
+          "cpp_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})} }] }"
+        },
+        {
+          "index": 185,
+          "input": {
+            "mode": "stack",
+            "steps": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "clear"
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {}, dynamic_changes: None, dynamic_metadata: None }] }",
+          "cpp_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {} }] }"
+        },
+        {
+          "index": 186,
+          "input": {
+            "mode": "stack",
+            "steps": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "clear_entity",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                }
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {}, dynamic_changes: None, dynamic_metadata: None }] }",
+          "cpp_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {} }] }"
+        },
+        {
+          "index": 187,
+          "input": {
+            "mode": "stack",
+            "steps": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/current/compact",
+            "/current/fancy",
+            "/current/lower_hex",
+            "/current/pretty",
+            "/current/pretty_lower_hex",
+            "/current/pretty_upper_hex",
+            "/current/upper_hex",
+            "/current/width_precision",
+            "/current/zero_pad",
+            "/current_clone/compact",
+            "/current_clone/fancy",
+            "/current_clone/lower_hex",
+            "/current_clone/pretty",
+            "/current_clone/pretty_lower_hex",
+            "/current_clone/pretty_upper_hex",
+            "/current_clone/upper_hex",
+            "/current_clone/width_precision",
+            "/current_clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad"
+          ],
+          "rust_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})}, dynamic_changes: None, dynamic_metadata: None }, EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")}), EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: MutationValues({\"another\": List([Null, TypedNull(Text), Bool(false), Bool(true)])})}, dynamic_changes: None, dynamic_metadata: None }] }",
+          "cpp_compact": "ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})} }, EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")}), EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: MutationValues({\"another\": List([Null, TypedNull(Text), Bool(false), Bool(true)])})} }] }"
+        },
+        {
+          "index": 208,
+          "input": {
+            "mode": "state",
+            "actions": []
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(<uninit>) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Empty, poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(<uninit>), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: None }"
+        },
+        {
+          "index": 209,
+          "input": {
+            "mode": "state",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: Some(\"token=raw\"), entity_comments: {}, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_snapshots: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. })) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Empty, poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: Some(\"token=raw\"), deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. }), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: None }"
+        },
+        {
+          "index": 210,
+          "input": {
+            "mode": "state",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})}, dynamic_changes: None, dynamic_metadata: None }] }, comment: None, entity_comments: {}, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_snapshots: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. })) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Empty, poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})} }] }, comment: None, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. }), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: None }"
+        },
+        {
+          "index": 211,
+          "input": {
+            "mode": "state",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})}, dynamic_changes: None, dynamic_metadata: None }, EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: MutationValues({\"another\": List([Null, TypedNull(Text), Bool(false), Bool(true)])})}, dynamic_changes: None, dynamic_metadata: None }] }, comment: None, entity_comments: {}, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_snapshots: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. })) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Empty, poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})} }, EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: MutationValues({\"another\": List([Null, TypedNull(Text), Bool(false), Bool(true)])})} }] }, comment: None, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. }), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: None }"
+        },
+        {
+          "index": 212,
+          "input": {
+            "mode": "state",
+            "actions": [
+              {
+                "op": "version",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "value": "-1"
+              },
+              {
+                "op": "version",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "value": "7"
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: None, entity_comments: {}, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_snapshots: {}, original_versions: OriginalVersions { first: Some((EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }, -1)), overflow: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: 7} }, composition_errors: [], is_new: false }, poisoned: false, .. })) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Empty, poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: None, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_versions: OriginalVersions { first: Some((EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }, -1)), overflow: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }: 7} }, composition_errors: [], is_new: false }, poisoned: false, .. }), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: None }"
+        },
+        {
+          "index": 213,
+          "input": {
+            "mode": "state",
+            "actions": [
+              {
+                "op": "new",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                }
+              },
+              {
+                "op": "delete",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                }
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: None, entity_comments: {}, deleted_keys: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }}, new_keys: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_snapshots: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. })) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Empty, poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: None, deleted_keys: {EntityKey { entity: \"Item\", id: I64(2), id_key: U64(2) }}, new_keys: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. }), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: None }"
+        },
+        {
+          "index": 214,
+          "input": {
+            "mode": "state",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "snapshot",
+                "entity": "Item",
+                "values": [
+                  [
+                    "id",
+                    {
+                      "kind": "u64",
+                      "value": "1"
+                    }
+                  ],
+                  [
+                    "version",
+                    {
+                      "kind": "i64",
+                      "value": "9"
+                    }
+                  ]
+                ]
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})}, dynamic_changes: None, dynamic_metadata: None }] }, comment: None, entity_comments: {}, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_snapshots: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. })) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Inline(LoadedEntitySnapshot { entity: \"Item\", row: CompactRow { columns: CompactRowLayout { names: [\"id\", \"version\"], relation_names: [], dynamic_properties: None, primary: OnceLock(<uninit>), other_types: Mutex { data: {}, poisoned: false, .. } }, values: [U64(1), I64(9)], loaded_relations: None } }), poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [EntityChangeSet { changes: {EntityKey { entity: \"Item\", id: U64(1), id_key: U64(1) }: MutationValues({\"field\": Text(\"value\")})} }] }, comment: None, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. }), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: Some(LoadedEntitySnapshot { entity: \"Item\", row: CompactRow { columns: CompactRowLayout { names: [\"id\", \"version\"], relation_names: [], dynamic_properties: None, primary: OnceLock(<uninit>), other_types: Mutex { data: {}, poisoned: false, .. } }, values: [U64(1), I64(9)], loaded_relations: None } }) }"
+        },
+        {
+          "index": 215,
+          "input": {
+            "mode": "state",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "comment",
+                "value": "reason"
+              },
+              {
+                "op": "commit"
+              }
+            ]
+          },
+          "paths": [
+            "/clone/compact",
+            "/clone/fancy",
+            "/clone/lower_hex",
+            "/clone/pretty",
+            "/clone/pretty_lower_hex",
+            "/clone/pretty_upper_hex",
+            "/clone/upper_hex",
+            "/clone/width_precision",
+            "/clone/zero_pad",
+            "/debug/compact",
+            "/debug/fancy",
+            "/debug/lower_hex",
+            "/debug/pretty",
+            "/debug/pretty_lower_hex",
+            "/debug/pretty_upper_hex",
+            "/debug/upper_hex",
+            "/debug/width_precision",
+            "/debug/zero_pad",
+            "/fresh/compact",
+            "/fresh/fancy",
+            "/fresh/lower_hex",
+            "/fresh/pretty",
+            "/fresh/pretty_lower_hex",
+            "/fresh/pretty_upper_hex",
+            "/fresh/upper_hex",
+            "/fresh/width_precision",
+            "/fresh/zero_pad"
+          ],
+          "rust_compact": "EntityRuntimeState { inner: LazyLedgerSlot { shared: OnceLock(OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: None, entity_comments: {}, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_snapshots: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. })) }, graph: Strong(OnceLock(<uninit>)), json_view: 0, loaded_snapshot: LoadedSnapshotCarrier { storage: Mutex { data: Empty, poisoned: false, .. } }, dynamic_fields: None }",
+          "cpp_compact": "EntityRuntimeState { inner: OnceLock(Mutex { data: EntityMutationLedger { change_sets: ChangeSetStack { stack: [] }, comment: None, deleted_keys: {}, new_keys: {}, original_snapshot: None, trace_chains: {}, unassigned_trace_scopes: {}, original_versions: OriginalVersions { first: None, overflow: {} }, composition_errors: [], is_new: false }, poisoned: false, .. }), graph: Strong(OnceLock(<uninit>)), loaded_snapshot: None }"
+        },
+        {
+          "index": 216,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": []
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 217,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": []
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 218,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": []
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 219,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": []
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 220,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 221,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 222,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 223,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 224,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 225,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 226,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 227,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 228,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 229,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 230,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 231,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 232,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 233,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 234,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 235,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 236,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 237,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 238,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 239,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": []
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 240,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 241,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 242,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 243,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 244,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 245,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 246,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 247,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": null
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 248,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 249,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "comment",
+                "value": "token=raw"
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 250,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        },
+        {
+          "index": 251,
+          "input": {
+            "mode": "graph",
+            "owner": "Item",
+            "owner_id": "1",
+            "actions": [
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "u64",
+                    "value": "1"
+                  }
+                },
+                "field": "field",
+                "value": {
+                  "kind": "text",
+                  "value": "value"
+                }
+              },
+              {
+                "op": "push"
+              },
+              {
+                "op": "set",
+                "key": {
+                  "entity": "Item",
+                  "id": {
+                    "kind": "i64",
+                    "value": "2"
+                  }
+                },
+                "field": "another",
+                "value": {
+                  "kind": "list",
+                  "value": [
+                    {
+                      "kind": "null"
+                    },
+                    {
+                      "kind": "typed_null"
+                    },
+                    {
+                      "kind": "bool",
+                      "value": false
+                    },
+                    {
+                      "kind": "bool",
+                      "value": true
+                    }
+                  ]
+                }
+              }
+            ],
+            "entities": [
+              {
+                "id": "1",
+                "integer": false,
+                "value": "one"
+              },
+              {
+                "id": "1",
+                "integer": false,
+                "value": "replacement"
+              },
+              {
+                "id": "2",
+                "integer": true,
+                "value": 42
+              }
+            ],
+            "relations": [
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "items",
+                "list": true,
+                "values": [
+                  "payload"
+                ]
+              },
+              {
+                "owner": "Item",
+                "id": "1",
+                "name": "optional",
+                "list": false,
+                "value": "payload"
+              }
+            ]
+          },
+          "paths": [
+            "/clone_state/compact",
+            "/clone_state/fancy",
+            "/clone_state/lower_hex",
+            "/clone_state/pretty",
+            "/clone_state/pretty_lower_hex",
+            "/clone_state/pretty_upper_hex",
+            "/clone_state/upper_hex",
+            "/clone_state/width_precision",
+            "/clone_state/zero_pad",
+            "/state/compact",
+            "/state/fancy",
+            "/state/lower_hex",
+            "/state/pretty",
+            "/state/pretty_lower_hex",
+            "/state/pretty_upper_hex",
+            "/state/upper_hex",
+            "/state/width_precision",
+            "/state/zero_pad"
+          ],
+          "rust_compact": null,
+          "cpp_compact": null
+        }
+      ]
+    },
+    {
+      "family": "context_defaults",
+      "count": 75,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "reference_model",
+      "count": 229,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "policy_model",
+      "count": 177,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "log_model",
+      "count": 172,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "query_store_model",
+      "count": 74,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "context_model",
+      "count": 234,
+      "failed": 0,
+      "failures": []
+    }
+  ]
+}

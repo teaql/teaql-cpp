@@ -114,6 +114,7 @@ struct Fixture {
 
     SelectQuery query() {
         auto result = repo.select();
+        result.comment("Inspect enhanced entity fixtures");
         result.order_asc("id");
         return result;
     }
@@ -262,6 +263,7 @@ static void public_lifetimes() {
         auto& repo =
             EntityDataService<PendingExecutor>::for_executor(*user, "Parent", *user, executor);
         auto& query = user->make<SelectQuery>("Parent");
+        query.comment("Inspect transient enhanced query ownership");
         auto& operation = [&]() -> auto& {
             PurposedSelectQuery transient(std::allocator_arg,
                                           Allocator(user->memory_resource()),

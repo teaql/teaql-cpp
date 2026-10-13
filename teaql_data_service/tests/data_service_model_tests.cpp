@@ -77,11 +77,11 @@ static void ownership_and_borrows() {
         auto& row = user->make<CompactRow>(layout, std::move(values));
         auto& query = user->make<SelectQuery>("Device");
         query.filter(Expr::eq(owner, "payload", String(8192, 'q', owner)));
-        auto& request = user->make<QueryRequest>(query, true, false);
-        request.comment.emplace("request-owned comment", owner);
+        auto intent = QueryIntent::create(owner, "request-owned comment", String(8192, 'p', owner));
+        auto& request = user->make<QueryRequest>(query, intent.value(), true, false);
         auto& insert = user->make<InsertCommand>("Device");
         insert.value("payload", String(8192, 'm', owner)).audit_as("mutation reason");
-        auto& mutation = user->make<MutationRequest>(insert);
+        auto& mutation = user->make<MutationRequest>(insert, "mutation reason");
         auto& guarded =
             user->make<GuardedMutationRequest>(mutation, Expr::eq(owner, "owner", UINT64_C(7)));
         auto& result = user->make<QueryResult>(metadata);
@@ -129,7 +129,8 @@ static void ownership_and_borrows() {
             copied_metadata.statements[0].params[0].memory_resource() == destination &&
             copied_metadata.sql_log.projection_state.get<String>()->get_allocator().resource() ==
                 destination &&
-            copied_request.comment->get_allocator().resource() == destination &&
+            copied_request.intent.memory_resource() == destination &&
+            copied_request.purpose().size() == 8192 &&
             copied_request.query.memory_resource() == destination &&
             copied_mutation.memory_resource() == destination &&
             copied_guarded.guard.memory_resource() == destination &&

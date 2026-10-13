@@ -4,6 +4,7 @@
 #include <teaql/runtime/resources.hpp>
 #include <set>
 #include <unordered_set>
+#include <unordered_map>
 
 namespace teaql {
 // Mutable checker/planner state is distinct from commands and loaded snapshots.
@@ -84,6 +85,7 @@ struct GraphNode {
     std::optional<String> comment;
     std::optional<std::pmr::set<String, std::less<>>> dirty_fields;
     std::optional<EntitySnapshot> original_values;
+    detail::ScopedBox<DynamicFieldValues> dynamic_fields;
 
     GraphNode(std::allocator_arg_t, Allocator a, std::string_view entity)
         : entity(entity, a.resource()), values(std::allocator_arg, a), relations(a.resource()) {}
@@ -93,7 +95,12 @@ struct GraphNode {
           relations(other.relations, a.resource()), operation(other.operation),
           comment(detail::clone_in(a.resource(), other.comment)),
           dirty_fields(detail::clone_in(a.resource(), other.dirty_fields)),
-          original_values(detail::clone_in(a.resource(), other.original_values)) {}
+          original_values(detail::clone_in(a.resource(), other.original_values)) {
+        if (other.dynamic_fields) {
+            dynamic_fields =
+                detail::make_box<DynamicFieldValues>(a.resource(), *other.dynamic_fields);
+        }
+    }
 
     GraphNode(std::allocator_arg_t, Allocator a, GraphNode&& other)
         : GraphNode(detail::move_to(a.resource(), std::move(other))) {}
@@ -161,6 +168,8 @@ struct GraphNode {
         return entity == other.entity && values == other.values && relations == other.relations &&
                operation == other.operation && comment == other.comment &&
                dirty_fields == other.dirty_fields &&
+               (bool(dynamic_fields) == bool(other.dynamic_fields)) &&
+               (!dynamic_fields || *dynamic_fields == *other.dynamic_fields) &&
                ((!original_values && !other.original_values) ||
                 (original_values && other.original_values &&
                  original_values->fields == other.original_values->fields));
@@ -198,7 +207,9 @@ private:
 };
 
 namespace detail {
+using TraceScopeCopyCache = std::pmr::unordered_map<const TraceScopeToken*, const TraceScopeToken*>;
 const TraceScopeToken* clone_trace_scope(Memory, const TraceScopeToken*);
+const TraceScopeToken* clone_trace_scope(Memory, const TraceScopeToken*, TraceScopeCopyCache&);
 }
 
 struct GraphMutationPlanItem {

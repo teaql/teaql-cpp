@@ -30,10 +30,12 @@ public:
         auto r = service_.memory_resource();
         if (!started_) {
             started_ = true;
-            query_.comment_text = cs.resolve_final_comment(
-                query_.trace_chain,
-                query_.comment_text ? std::optional<std::string_view>(*query_.comment_text)
-                                    : std::nullopt);
+            auto intent = EntityDataServiceAccess::request_intent(service_, query_);
+            if (!intent) {
+                return R::err(
+                    r, DataServiceError<typename E::Error>::runtime(r, std::move(intent).error()));
+            }
+            EntityDataServiceAccess::bind_query_intent(service_, intent.value());
             if (!compact_ && query_.aggregation_cache && query_.aggregation_cache->enabled) {
                 auto& mutable_context = const_cast<UserContext&>(cs.metadata.context());
                 if (mutable_context.template get_resource<AggregationCacheBackend>()) {
@@ -121,15 +123,18 @@ private:
         auto request_work = [&]() -> const Q* {
             if (!child_) {
                 auto capture = cs.metadata.capture_execution_metadata();
+                auto intent = EntityDataServiceAccess::request_intent(service_, query_);
                 QueryRequest request(std::allocator_arg,
                                      Allocator(r),
                                      query_,
+                                     intent.value(),
                                      cs.metadata.capture_query_debug(),
                                      capture);
                 if (cache_ || capture) {
                     TraceChain trace(query_.trace_chain, r);
                     request.trace_chain.swap(trace);
-                    request.comment = clone_in(r, query_.comment_text);
+                } else {
+                    request.trace_chain.clear();
                 }
                 if (owned_ &&
                     (compact_ || !query_.aggregation_cache || !query_.aggregation_cache->enabled)) {
@@ -229,7 +234,18 @@ public:
                  [](const EntityDataService<E>& repo, SelectQuery query) -> AsyncOperation<R>& {
                      return EntityDataServiceAccess::fetch_all(repo, query);
                  }),
-          aggregate_entry_(aggregate_entry), prepared_(prepared) {}
+          aggregate_entry_(aggregate_entry), prepared_(prepared) {
+        if (!query_.relation_aggregates.empty()) {
+            Vector<RelationAggregate> combined(query_.relation_aggregates, a.resource());
+            for (const auto& aggregate : aggregates_) {
+                if (std::find(combined.begin(), combined.end(), aggregate) == combined.end()) {
+                    combined.emplace_back(aggregate);
+                }
+            }
+            aggregates_.swap(combined);
+            query_.relation_aggregates.clear();
+        }
+    }
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
@@ -244,6 +260,13 @@ public:
                     }
                     query_ = std::move(prepared).value();
                 }
+                auto intent = EntityDataServiceAccess::request_intent(service_, query_);
+                if (!intent) {
+                    return R::err(
+                        r,
+                        DataServiceError<typename E::Error>::runtime(r, std::move(intent).error()));
+                }
+                EntityDataServiceAccess::bind_query_intent(service_, intent.value());
                 try {
                     query_ = query_.prepare_for_list();
                 } catch (const std::invalid_argument& error) {
@@ -585,6 +608,14 @@ private:
     bool prepared_ = false;
 };
 
+}
+
+#include <teaql/runtime/detail/data_service/dynamic_entities.hpp>
+
+namespace teaql::detail {
+template <class E>
+class EntityRowListOperation;
+
 template <class E, class T>
 class EntityBasicListOperation {
     using R = Result<SmartList<T>, DataServiceError<typename E::Error>>;
@@ -600,6 +631,19 @@ public:
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
+        if constexpr (!std::same_as<T, CompactRow>) {
+            if (query_.dynamic_field_selection) {
+                if (!child_) {
+                    child_ =
+                        &make_operation<R, DynamicEntityListOperation<E, T>>(r, service_, query_);
+                }
+                forwarding_.attach(child_->wake_signal(), wake);
+                if (auto* result = child_->poll()) {
+                    return copy_or_take_completed(*child_, *result);
+                }
+                return {};
+            }
+        }
         if (!child_) {
             auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
             if (!prepared) {
@@ -608,10 +652,12 @@ public:
                     DataServiceError<typename E::Error>::runtime(r, std::move(prepared).error()));
             }
             query_ = std::move(prepared).value();
-            const auto& cs = EntityDataServiceAccess::context_service(service_);
             if constexpr (std::same_as<T, CompactRow>) {
-                child_ = &cs.fetch_smart_list(query_);
+                auto& rows = make_operation<RelationRowsResult<E>, PreparedEntityQueryOperation<E>>(
+                    r, service_, query_, true, true);
+                child_ = &make_operation<R, EntityRowListOperation<E>>(r, rows);
             } else {
+                const auto& cs = EntityDataServiceAccess::context_service(service_);
                 ensure_identity_projection(EntityDataServiceAccess::context(service_), query_);
                 child_ = &cs.template fetch_entities<T>(query_);
             }

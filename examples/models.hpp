@@ -405,27 +405,28 @@ using Executor = SqlDataServiceExecutor<MutationExecutorError, SqliteMutationExe
 
 // Corresponds to the original sqlite_context. Business setup sees only User;
 // it does not register extra graph decoders or assemble relationships locally.
-inline Ref<Executor> setup(UserContext& user) {
-    auto& metadata = user.make<InMemoryMetadataStore>();
-    metadata.register_entity(Order::entity_descriptor(user.memory_resource()));
-    metadata.register_entity(OrderLine::entity_descriptor(user.memory_resource()));
-    metadata.register_entity(Product::entity_descriptor(user.memory_resource()));
-    user.set_metadata(user, metadata);
-    auto& entities = user.make<InMemoryEntityRegistry>();
+inline Ref<Executor> setup(UserContext& user_context) {
+    auto& metadata = user_context.make<InMemoryMetadataStore>();
+    metadata.register_entity(Order::entity_descriptor(user_context.memory_resource()));
+    metadata.register_entity(OrderLine::entity_descriptor(user_context.memory_resource()));
+    metadata.register_entity(Product::entity_descriptor(user_context.memory_resource()));
+    user_context.set_metadata(user_context, metadata);
+    auto& entities = user_context.make<InMemoryEntityRegistry>();
     entities.register_entity("Order");
-    user.set_entity_registry(user, entities);
-    auto& relations = user.make_resource<OrderRelations>();
-    auto& behaviors = user.make<InMemoryEntityDataServiceBehaviorRegistry>();
-    behaviors.register_behavior("Order", user, relations);
-    user.set_entity_data_service_behavior_registry(user, behaviors);
-    auto& connection = user.make_resource<SqliteConnection>();
-    auto& transport = user.make<SqliteMutationExecutor>(connection);
-    use_sqlite_provider(user, user, transport);
-    auto dialect = user.require_resource<SqliteDialect>();
-    auto& state = user.make<SqlExecutorState>();
-    auto executor = user.make_ref<Executor>(value(dialect).get(), transport, metadata, state);
-    user.register_executor(executor);
-    value(user.ensure_schema().wait());
+    user_context.set_entity_registry(user_context, entities);
+    auto& relations = user_context.make_resource<OrderRelations>();
+    auto& behaviors = user_context.make<InMemoryEntityDataServiceBehaviorRegistry>();
+    behaviors.register_behavior("Order", user_context, relations);
+    user_context.set_entity_data_service_behavior_registry(user_context, behaviors);
+    auto& connection = user_context.make_resource<SqliteConnection>();
+    auto& transport = user_context.make<SqliteMutationExecutor>(connection);
+    use_sqlite_provider(user_context, user_context, transport);
+    auto dialect = user_context.require_resource<SqliteDialect>();
+    auto& state = user_context.make<SqlExecutorState>();
+    auto executor =
+        user_context.make_ref<Executor>(value(dialect).get(), transport, metadata, state);
+    user_context.register_executor(executor);
+    value(user_context.ensure_schema().wait());
     return executor;
 }
 }

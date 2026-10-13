@@ -1,6 +1,8 @@
 // Publish existing global declarations; implementation bodies remain canonical.
 module;
 #include <teaql/memory/arena.hpp>
+#include <teaql/memory/types.hpp>
+#include <teaql/memory/object_borrow.hpp>
 #include <teaql/memory/clone.hpp>
 #include <teaql/memory/context_box.hpp>
 #include <teaql/memory/function.hpp>
@@ -17,6 +19,7 @@ export namespace teaql {
 using ::teaql::AllocationStats;
 using ::teaql::Allocator;
 using ::teaql::Arena;
+using ::teaql::ArenaBorrow;
 using ::teaql::BytesRef;
 using ::teaql::ContextBox;
 using ::teaql::ContextFunction;

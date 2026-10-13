@@ -1,6 +1,7 @@
 #include <teaql/runtime/graph.hpp>
 #include <algorithm>
 #include <limits>
+#include <teaql/core/detail/text.hpp>
 
 namespace teaql {
 namespace detail {
@@ -8,7 +9,32 @@ const TraceScopeToken* clone_trace_scope(Memory r, const TraceScopeToken* token)
     if (!token || token->memory_resource() == r) {
         return token;
     }
-    return &resource_arena(r).make<TraceScopeToken>(*token);
+    TraceScopeCopyCache cache(r);
+    return clone_trace_scope(r, token, cache);
+}
+
+const TraceScopeToken*
+clone_trace_scope(Memory r, const TraceScopeToken* token, TraceScopeCopyCache& cache) {
+    if (!token) {
+        return token;
+    }
+    Vector<const TraceScopeToken*> pending(r);
+    for (auto* cursor = token; cursor && !cache.contains(cursor); cursor = cursor->parent()) {
+        pending.push_back(cursor);
+    }
+    while (!pending.empty()) {
+        auto* original = pending.back();
+        pending.pop_back();
+        auto* parent = original->parent() ? cache.at(original->parent()) : nullptr;
+        if (original->memory_resource() == r && parent == original->parent()) {
+            cache.emplace(original, original);
+        } else {
+            auto& copied = resource_arena(r).make<TraceScopeToken>(
+                parent, original->track, original->node_index);
+            cache.emplace(original, &copied);
+        }
+    }
+    return cache.at(token);
 }
 }
 
@@ -31,7 +57,9 @@ TraceScopeToken::TraceScopeToken(std::allocator_arg_t, Allocator a, const TraceS
 TraceChain TraceScopeToken::recover_trace_chain(Memory r) const {
     Vector<const TraceNode*> reversed(r);
     for (auto* token = this; token; token = token->parent_) {
-        if (!token->track.comment.empty()) {
+        auto text = std::string_view(token->track.comment);
+        detail::trim(text);
+        if (!text.empty()) {
             reversed.push_back(&token->track);
         }
     }
@@ -141,7 +169,9 @@ sorted_update_fields(Memory r, const EntityValues& values, std::span<const Strin
 TraceChain ScopedCommentNode::to_trace_chain(Memory r) const {
     Vector<const TraceNode*> reversed(r);
     for (auto* node = this; node; node = node->parent) {
-        if (!node->track.comment.empty()) {
+        auto text = std::string_view(node->track.comment);
+        detail::trim(text);
+        if (!text.empty()) {
             reversed.push_back(&node->track);
         }
     }

@@ -1,0 +1,1963 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "note": "Direct ObjectDescriptor fixed-layout API versus CppFieldLayoutMetadata on constructed metadata. Exact ordered fields, owners, revision and exception type/message. This does not claim malformed KSML frontend or full generator pipeline parity.",
+  "cases": [
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "Decimal"
+              }
+            ],
+            "parent": "missing"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Unresolved field-layout parent: missing"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "Decimal"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "587277e3033715f6a87ad8abf9032a84c36522640f207f27dc2df9f652dad59e",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 1,
+            "name": "display_name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 2,
+            "name": "active",
+            "type": "Boolean",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 3,
+            "name": "amount",
+            "type": "Decimal",
+            "entity_type": null,
+            "owner": "child"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "Decimal"
+              }
+            ],
+            "parent": ""
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "eb3c3be0b00c864c57ba7b0c614972b352bbc547ce0726dbd0ec78508e037ef7",
+        "fields": [
+          {
+            "index": 0,
+            "name": "amount",
+            "type": "Decimal",
+            "entity_type": null,
+            "owner": "child"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "Decimal"
+              }
+            ],
+            "parent": "   "
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "eb3c3be0b00c864c57ba7b0c614972b352bbc547ce0726dbd0ec78508e037ef7",
+        "fields": [
+          {
+            "index": 0,
+            "name": "amount",
+            "type": "Decimal",
+            "entity_type": null,
+            "owner": "child"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "displayName",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "a2dcc56a52fedf3ae7a4d997e8d540b4727d800e380a3c286edb17c746a7d233",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 1,
+            "name": "display_name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 2,
+            "name": "active",
+            "type": "Boolean",
+            "entity_type": null,
+            "owner": "base"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "displayName",
+                "type": "Boolean"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.display_name"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "displayName",
+                "type": "Long"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.display_name"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "displayName",
+                "type": "Decimal"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.display_name"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "display_name",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "a2dcc56a52fedf3ae7a4d997e8d540b4727d800e380a3c286edb17c746a7d233",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 1,
+            "name": "display_name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 2,
+            "name": "active",
+            "type": "Boolean",
+            "entity_type": null,
+            "owner": "base"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "display_name",
+                "type": "Boolean"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.display_name"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "display_name",
+                "type": "Long"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.display_name"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "display_name",
+                "type": "Decimal"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.display_name"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "active",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.active"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "a2dcc56a52fedf3ae7a4d997e8d540b4727d800e380a3c286edb17c746a7d233",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 1,
+            "name": "display_name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 2,
+            "name": "active",
+            "type": "Boolean",
+            "entity_type": null,
+            "owner": "base"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "active",
+                "type": "Long"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.active"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "active",
+                "type": "Decimal"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.active"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "id",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.id"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Boolean"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.id"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "a2dcc56a52fedf3ae7a4d997e8d540b4727d800e380a3c286edb17c746a7d233",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 1,
+            "name": "display_name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 2,
+            "name": "active",
+            "type": "Boolean",
+            "entity_type": null,
+            "owner": "base"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Decimal"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.id"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ],
+            "parent": "child"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Cyclic field-layout inheritance: child"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ],
+            "parent": "child"
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Cyclic field-layout inheritance: child"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ],
+            "parent": "middle"
+          },
+          {
+            "name": "middle",
+            "fields": [
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ],
+            "parent": "child"
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Cyclic field-layout inheritance: child"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": null,
+                "type": "String"
+              },
+              {
+                "name": null,
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Blank predefined field in child"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "",
+                "type": "String"
+              },
+              {
+                "name": "",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Blank predefined field in child"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "   ",
+                "type": "String"
+              },
+              {
+                "name": "   ",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Blank predefined field in child"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "_computed",
+                "type": "String"
+              },
+              {
+                "name": "_computed",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "a2dcc56a52fedf3ae7a4d997e8d540b4727d800e380a3c286edb17c746a7d233",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 1,
+            "name": "display_name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 2,
+            "name": "active",
+            "type": "Boolean",
+            "entity_type": null,
+            "owner": "base"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "#dynamic",
+                "type": "String"
+              },
+              {
+                "name": "#dynamic",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "a2dcc56a52fedf3ae7a4d997e8d540b4727d800e380a3c286edb17c746a7d233",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 1,
+            "name": "display_name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "base"
+          },
+          {
+            "index": 2,
+            "name": "active",
+            "type": "Boolean",
+            "entity_type": null,
+            "owner": "base"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "camelCase",
+                "type": "String"
+              },
+              {
+                "name": "camelCase",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Duplicate predefined field: child.camel_case"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "displayName",
+                "type": "String"
+              },
+              {
+                "name": "active",
+                "type": "Boolean"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "camel_case",
+                "type": "String"
+              },
+              {
+                "name": "camel_case",
+                "type": "String"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Duplicate predefined field: child.camel_case"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "owner",
+                "type": "Long",
+                "entity_type": "Tenant"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "owner",
+                "type": "Long",
+                "entity_type": "Tenant"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "revision": "b394c1316b433a752a5e835dad80a4412d90223725434ddf2ecf72cfa1f98637",
+        "fields": [
+          {
+            "index": 0,
+            "name": "owner",
+            "type": "Long",
+            "entity_type": "Tenant",
+            "owner": "base"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "owner",
+                "type": "Long",
+                "entity_type": "Tenant"
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "owner",
+                "type": "Long",
+                "entity_type": "Other"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.owner"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "base",
+            "fields": [
+              {
+                "name": "owner",
+                "type": "Long",
+                "entity_type": ""
+              }
+            ]
+          },
+          {
+            "name": "child",
+            "fields": [
+              {
+                "name": "owner",
+                "type": "Long",
+                "entity_type": "Tenant"
+              }
+            ],
+            "parent": "base"
+          }
+        ],
+        "target": "child"
+      },
+      "expected": {
+        "error": "IllegalArgumentException",
+        "message": "Incompatible inherited field: child.owner"
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "level_0",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "name",
+                "type": "String"
+              }
+            ]
+          },
+          {
+            "name": "level_1",
+            "fields": [],
+            "parent": "level_0"
+          }
+        ],
+        "target": "level_1"
+      },
+      "expected": {
+        "revision": "f3563bcbe220c78dbd3aff8a6d24ba1357096eb17b7c054771dc73b1cebf6a28",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_0"
+          },
+          {
+            "index": 1,
+            "name": "name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "level_0"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "level_0",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "name",
+                "type": "String"
+              }
+            ]
+          },
+          {
+            "name": "level_1",
+            "fields": [],
+            "parent": "level_0"
+          },
+          {
+            "name": "level_2",
+            "fields": [
+              {
+                "name": "value_2",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_1"
+          },
+          {
+            "name": "level_3",
+            "fields": [],
+            "parent": "level_2"
+          },
+          {
+            "name": "level_4",
+            "fields": [
+              {
+                "name": "value_4",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_3"
+          },
+          {
+            "name": "level_5",
+            "fields": [],
+            "parent": "level_4"
+          },
+          {
+            "name": "level_6",
+            "fields": [
+              {
+                "name": "value_6",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_5"
+          },
+          {
+            "name": "level_7",
+            "fields": [],
+            "parent": "level_6"
+          }
+        ],
+        "target": "level_7"
+      },
+      "expected": {
+        "revision": "100eb69b156bbd814a8902f59fc635275cbd2ed274c141e94fbba10722ccf8ad",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_0"
+          },
+          {
+            "index": 1,
+            "name": "name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "level_0"
+          },
+          {
+            "index": 2,
+            "name": "value_2",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_2"
+          },
+          {
+            "index": 3,
+            "name": "value_4",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_4"
+          },
+          {
+            "index": 4,
+            "name": "value_6",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_6"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "entities": [
+          {
+            "name": "level_0",
+            "fields": [
+              {
+                "name": "id",
+                "type": "Long"
+              },
+              {
+                "name": "name",
+                "type": "String"
+              }
+            ]
+          },
+          {
+            "name": "level_1",
+            "fields": [],
+            "parent": "level_0"
+          },
+          {
+            "name": "level_2",
+            "fields": [
+              {
+                "name": "value_2",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_1"
+          },
+          {
+            "name": "level_3",
+            "fields": [],
+            "parent": "level_2"
+          },
+          {
+            "name": "level_4",
+            "fields": [
+              {
+                "name": "value_4",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_3"
+          },
+          {
+            "name": "level_5",
+            "fields": [],
+            "parent": "level_4"
+          },
+          {
+            "name": "level_6",
+            "fields": [
+              {
+                "name": "value_6",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_5"
+          },
+          {
+            "name": "level_7",
+            "fields": [],
+            "parent": "level_6"
+          },
+          {
+            "name": "level_8",
+            "fields": [
+              {
+                "name": "value_8",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_7"
+          },
+          {
+            "name": "level_9",
+            "fields": [],
+            "parent": "level_8"
+          },
+          {
+            "name": "level_10",
+            "fields": [
+              {
+                "name": "value_10",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_9"
+          },
+          {
+            "name": "level_11",
+            "fields": [],
+            "parent": "level_10"
+          },
+          {
+            "name": "level_12",
+            "fields": [
+              {
+                "name": "value_12",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_11"
+          },
+          {
+            "name": "level_13",
+            "fields": [],
+            "parent": "level_12"
+          },
+          {
+            "name": "level_14",
+            "fields": [
+              {
+                "name": "value_14",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_13"
+          },
+          {
+            "name": "level_15",
+            "fields": [],
+            "parent": "level_14"
+          },
+          {
+            "name": "level_16",
+            "fields": [
+              {
+                "name": "value_16",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_15"
+          },
+          {
+            "name": "level_17",
+            "fields": [],
+            "parent": "level_16"
+          },
+          {
+            "name": "level_18",
+            "fields": [
+              {
+                "name": "value_18",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_17"
+          },
+          {
+            "name": "level_19",
+            "fields": [],
+            "parent": "level_18"
+          },
+          {
+            "name": "level_20",
+            "fields": [
+              {
+                "name": "value_20",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_19"
+          },
+          {
+            "name": "level_21",
+            "fields": [],
+            "parent": "level_20"
+          },
+          {
+            "name": "level_22",
+            "fields": [
+              {
+                "name": "value_22",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_21"
+          },
+          {
+            "name": "level_23",
+            "fields": [],
+            "parent": "level_22"
+          },
+          {
+            "name": "level_24",
+            "fields": [
+              {
+                "name": "value_24",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_23"
+          },
+          {
+            "name": "level_25",
+            "fields": [],
+            "parent": "level_24"
+          },
+          {
+            "name": "level_26",
+            "fields": [
+              {
+                "name": "value_26",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_25"
+          },
+          {
+            "name": "level_27",
+            "fields": [],
+            "parent": "level_26"
+          },
+          {
+            "name": "level_28",
+            "fields": [
+              {
+                "name": "value_28",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_27"
+          },
+          {
+            "name": "level_29",
+            "fields": [],
+            "parent": "level_28"
+          },
+          {
+            "name": "level_30",
+            "fields": [
+              {
+                "name": "value_30",
+                "type": "Long"
+              }
+            ],
+            "parent": "level_29"
+          },
+          {
+            "name": "level_31",
+            "fields": [],
+            "parent": "level_30"
+          }
+        ],
+        "target": "level_31"
+      },
+      "expected": {
+        "revision": "935e525fa19f54c45fe1a0bb7659c301b8bd0c03d2ea03e4dcaf84c4168a8db0",
+        "fields": [
+          {
+            "index": 0,
+            "name": "id",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_0"
+          },
+          {
+            "index": 1,
+            "name": "name",
+            "type": "String",
+            "entity_type": null,
+            "owner": "level_0"
+          },
+          {
+            "index": 2,
+            "name": "value_2",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_2"
+          },
+          {
+            "index": 3,
+            "name": "value_4",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_4"
+          },
+          {
+            "index": 4,
+            "name": "value_6",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_6"
+          },
+          {
+            "index": 5,
+            "name": "value_8",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_8"
+          },
+          {
+            "index": 6,
+            "name": "value_10",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_10"
+          },
+          {
+            "index": 7,
+            "name": "value_12",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_12"
+          },
+          {
+            "index": 8,
+            "name": "value_14",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_14"
+          },
+          {
+            "index": 9,
+            "name": "value_16",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_16"
+          },
+          {
+            "index": 10,
+            "name": "value_18",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_18"
+          },
+          {
+            "index": 11,
+            "name": "value_20",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_20"
+          },
+          {
+            "index": 12,
+            "name": "value_22",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_22"
+          },
+          {
+            "index": 13,
+            "name": "value_24",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_24"
+          },
+          {
+            "index": 14,
+            "name": "value_26",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_26"
+          },
+          {
+            "index": 15,
+            "name": "value_28",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_28"
+          },
+          {
+            "index": 16,
+            "name": "value_30",
+            "type": "Long",
+            "entity_type": null,
+            "owner": "level_30"
+          }
+        ]
+      }
+    }
+  ]
+}

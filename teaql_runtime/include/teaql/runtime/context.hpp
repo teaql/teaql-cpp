@@ -17,16 +17,21 @@
 #include <teaql/runtime/locking.hpp>
 #include <teaql/runtime/entity_reference.hpp>
 #include <teaql/runtime/round_trip_reference_types.hpp>
+#include <teaql/runtime/document_round_trip.hpp>
 #include <teaql/runtime/logging.hpp>
 #include <teaql/runtime/detail/context/identity.hpp>
+#include <teaql/data_service/dynamic_fields.hpp>
 #include <exception>
 
 namespace teaql {
 class UserContext;
+class ContextBinding;
 class RuntimeModule;
 class ContinuousPageCursorStore;
 class IdSetStore;
 class DataStore;
+class DynamicFieldsProvider;
+struct DynamicFieldBatch;
 class EntityRuntimeState;
 template <class E>
 class EntityDataService;
@@ -46,6 +51,9 @@ struct GraphNode;
 
 namespace detail {
 class GovernanceActivation;
+class AuditActivation;
+struct PendingAuditBatch;
+struct ContextAuditAccess;
 struct ContextEntityAccess;
 struct ContextPaginationAccess;
 class IdSetBuildRegistry;
@@ -151,6 +159,8 @@ private:
     friend class UserContext;
     friend class detail::SchemaOperation;
     friend class detail::GovernanceActivation;
+    friend class detail::AuditActivation;
+    detail::PendingAuditBatch* active_audit_batch_ = nullptr;
     friend class detail::GraphFixActivation;
     detail::GraphFixState* active_graph_fix_ = nullptr;
     friend struct detail::ContextPaginationAccess;
@@ -250,6 +260,13 @@ public:
     template <ArenaObject T, class... Args>
     T& make(Args&&... args) const {
         return const_cast<detail::ContextArena&>(memory_).make<T>(std::forward<Args>(args)...);
+    }
+
+    template <class Factory>
+        requires std::constructible_from<Factory, UserContext&>
+    Factory queries() {
+        check_public();
+        return Factory(*this);
     }
 
     template <class T, class... Args>
@@ -706,6 +723,37 @@ public:
 
     void set_trusted_reference_principal(const TrustedReferencePrincipal&);
 
+    template <class Owner, class T>
+        requires std::derived_from<T, ContextBoundDocumentService>
+    void set_context_bound_document_service(Owner& owner, T& service) {
+        check_public();
+        insert_resource(owner, static_cast<ContextBoundDocumentService&>(service));
+    }
+
+    template <class T>
+        requires std::derived_from<T, ContextBoundDocumentService>
+    void set_context_bound_document_service(Ref<T> reference) {
+        auto& origin = reference_arena(reference.id(), std::source_location::current());
+        resources().insert(
+            memory_, &origin, static_cast<ContextBoundDocumentService&>(get(reference)));
+    }
+
+    template <class... Args>
+    UserContext& with_context_bound_document_service(Args&&... args) {
+        set_context_bound_document_service(std::forward<Args>(args)...);
+        return *this;
+    }
+
+    AsyncOperation<DocumentResult<ContextualDocument>>& open_document(DocumentOpenRequest) const;
+    AsyncOperation<DocumentResult<AcceptedContextualDocument>>&
+        accept_document(DocumentAcceptRequest) const;
+    DocumentResult<String> issue_document_snapshot(const DocumentSnapshot&,
+                                                   ReferenceLifetime) const;
+    DocumentResult<VerifiedDocumentSnapshot>
+    consume_document_snapshot(std::string_view token,
+                              std::string_view expected_aggregate_type,
+                              std::string_view expected_purpose) const;
+
     UserContext& with_trusted_reference_principal(const TrustedReferencePrincipal& principal) {
         set_trusted_reference_principal(principal);
         return *this;
@@ -751,6 +799,24 @@ public:
 
     // Explicit origin makes registration a checked Context borrow, never a
     // second owner. Allocate the object with origin.make/make_resource first.
+    template <class Owner, class P>
+    void set_dynamic_fields_provider(Owner& origin, P& provider) {
+        insert_resource(origin, static_cast<DynamicFieldsProvider&>(provider));
+    }
+
+    Result<DynamicFieldStreamPlan, DynamicFieldError>
+    prepare_dynamic_field_stream(const DynamicFieldStore&,
+                                 std::string_view owner_type,
+                                 const DynamicFieldSelection&,
+                                 const QueryIntent&) const;
+    Result<const DynamicFieldsProvider*, RuntimeError> dynamic_graph_provider() const;
+    AsyncOperation<Result<DynamicFieldBatch, DynamicFieldError>>&
+    load_dynamic_fields(std::string_view owner_type,
+                        std::span<const std::uint64_t>,
+                        const DynamicFieldSelection&,
+                        const QueryIntent&) const;
+    DynamicStorageFuture<std::monostate>& ensure_dynamic_fields_schema() const;
+
     template <class Owner, class E>
     void register_executor(Owner&, E&);
 
@@ -1395,6 +1461,7 @@ public:
 
 private:
     friend class RuntimeModule;
+    friend class ContextBinding;
     friend Arena& detail::checker_reference_origin(const UserContext&, std::uint64_t);
     friend struct detail::ContextEntityAccess;
     const InMemoryEntityGraphDecoderRegistry* graph_decoders_ = nullptr;
@@ -1405,6 +1472,9 @@ private:
     std::optional<ResourceBorrow<const RequestPolicy>> request_policy_borrow_;
     std::optional<ResourceBorrow<const EntityDataServiceBehaviorRegistry>> entity_behaviors_borrow_;
     friend class detail::GovernanceActivation;
+    friend class detail::AuditActivation;
+    friend struct detail::ContextAuditAccess;
+    Result<std::monostate, RuntimeError> deliver_audit_event(const RawAuditEvent&) const;
     friend class detail::GraphFixActivation;
     friend struct detail::ContextFixAccess;
     friend class detail::SchemaOperation;

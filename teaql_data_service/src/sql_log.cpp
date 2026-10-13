@@ -4,6 +4,27 @@
 #include <charconv>
 
 namespace teaql {
+SqlParameterLogPolicy SqlIntentRedactions::field_policy(const EntityDescriptor& entity,
+                                                        std::string_view field) {
+    auto* property = entity.property_by_name(field);
+    using P = SqlParameterLogPolicy;
+    if (!property) {
+        return P::Unknown;
+    }
+    if (is_credential_log_name(property->name) || is_credential_log_name(property->column_name)) {
+        return P::Credential;
+    }
+    if (!entity.audit_mask_fields_declared) {
+        return P::Unknown;
+    }
+    for (const auto& masked : entity.audit_mask_fields) {
+        if (masked == property->name) {
+            return P::Masked;
+        }
+    }
+    return P::Plain;
+}
+
 std::string_view as_str(SqlExecutionOutcome outcome) {
     switch (outcome) {
     case SqlExecutionOutcome::Success:
@@ -220,9 +241,12 @@ SqlIntentRedactions SqlIntentRedactions::from_unclassified_query(Memory r,
             }
         } else {
             const auto& expr = **std::get_if<const Expr*>(&node);
-            if (expr.kind == Expr::Kind::Value) {
+            if (expr.kind == Expr::Kind::Value || expr.kind == Expr::Kind::LikePattern) {
                 values.emplace_back(expr.literal);
             } else if (expr.kind != Expr::Kind::Column) {
+                if (auto operand = expr.lowered_like_operand()) {
+                    values.emplace_back(operand->second);
+                }
                 for (const auto& arg : expr.args) {
                     pending.emplace_back(&arg);
                 }

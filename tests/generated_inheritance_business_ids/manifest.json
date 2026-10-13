@@ -1,0 +1,30 @@
+{
+  "scope": "cpp-lib-core",
+  "qualification_only": true,
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "823c3b039ee3bc0ced7578da21f49c75ac3bfa41e345a98a0fe5fd5349ff840c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+    "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "d5568fb154711ac878c9171454644a04d2678a637eb148379544da66801ce139"
+  },
+  "model": "tests/generator/inheritance_business_ids.xml",
+  "model_sha256": "b16651d1f4045c9335126721488959a00488a0e149e120dc6d2dad12c7e62f75",
+  "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "ASSIST.md": "2d653086981fefdc465f489f205dd5af76ea8f559542303680bfa38a73a35b7a",
+    "CMakeLists.txt": "ad848e742e71f0ecad0fed798e9b0eb08f36ef491d0aac93f644eff645c498e5",
+    "include/cpp_inheritance_business_ids/checkers.hpp": "8b3ed9a09fb9e64e4f3352d025126aac2082fe8d790feb6c6616222b4c60b414",
+    "include/cpp_inheritance_business_ids/expressions.hpp": "f16262f6944343566a7969d5e8e700f9c421045a69b46777473795c84f7f5c4e",
+    "include/cpp_inheritance_business_ids/models.hpp": "a3187b6c74d125e44527aaa306ef02aa6b093322c5083bfd8856f7da2e492ce6",
+    "include/cpp_inheritance_business_ids/queries.hpp": "fb146721184aa79f82fd2c22c5369896a2c102660a4da58c5a22e4806e4f91a6",
+    "include/cpp_inheritance_business_ids/runtime.hpp": "b78afcdb02004fb1b4a83380f5a3963b6f59a1f9995cd91426a67c6836141764",
+    "include/cpp_inheritance_business_ids/sample_data.hpp": "f40b776d4137a602689e939fe9fe631e7178e35611ef43ab9df161ecf99f379a",
+    "include/cpp_inheritance_business_ids/support.hpp": "8d8c9d0cf0c9c6e01de2a48e0824761df8c8eff16cd7707eb6f3581f1d67b23e",
+    "include/cpp_inheritance_business_ids.hpp": "20075a5feeedb323cc3df2b3809ae12de0d78ce46b9c20b2fe8075c672549fa9"
+  }
+}

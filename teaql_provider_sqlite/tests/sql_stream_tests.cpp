@@ -126,7 +126,8 @@ static void native_lifecycle() {
                 throw 1;
             }
         });
-        auto& stream = executor.query_stream_observed(r, request(r, capture), 0, observer);
+        auto& stream =
+            executor.query_stream_observed(r, fixture_query_request(r, capture), 0, observer);
         check(transport.requested_size == 0, "native provider receives chunk size unchanged");
         const auto* first = stream.wait_next();
         check(first && *first && first->value().chunk_index == 0, "first native chunk");
@@ -159,7 +160,7 @@ static void native_lifecycle() {
             events.emplace_back(std::move(m));
         });
         transport.error_at = 1;
-        auto& stream = executor.query_stream_observed(r, request(r), 1, observer);
+        auto& stream = executor.query_stream_observed(r, fixture_query_request(r), 1, observer);
         check(bool(*stream.wait_next()), "row before error");
         auto* error = stream.wait_next();
         check(error && !*error &&
@@ -177,7 +178,7 @@ static void native_lifecycle() {
             events.emplace_back(std::move(m));
         });
         transport.panic = true;
-        auto& stream = executor.query_stream_observed(r, request(r), 1, observer);
+        auto& stream = executor.query_stream_observed(r, fixture_query_request(r), 1, observer);
         bool threw = false;
         try {
             stream.wait_next();
@@ -196,7 +197,7 @@ static void native_lifecycle() {
             events.emplace_back(std::move(m));
         });
         transport.pending = true;
-        auto& stream = executor.query_stream_observed(r, request(r), 1, observer);
+        auto& stream = executor.query_stream_observed(r, fixture_query_request(r), 1, observer);
         check(stream.poll_next().kind ==
                   StreamPoll<Result<StreamChunk, SqlExecutorError<String>>>::Kind::Pending,
               "pending cursor");
@@ -215,6 +216,8 @@ static void native_lifecycle() {
             events.emplace_back(std::move(m));
         });
         SelectQuery q(std::allocator_arg, Allocator(r), "Unknown");
+        q.comment("Exercise unknown stream model");
+        q.purpose("Check compile failure before cursor creation");
         auto& stream = executor.query_stream_observed(
             r, QueryRequest(std::allocator_arg, Allocator(r), q, true, true), 1, observer);
         check(!*stream.wait_next() && !stream.wait_next() && transport.created == created &&
@@ -236,6 +239,8 @@ static void buffered_transactions() {
     });
     auto make_request = [&] {
         SelectQuery q(std::allocator_arg, Allocator(r), "Record");
+        q.comment("Exercise transaction stream");
+        q.purpose("Check buffered stream lifecycle");
         q.order_asc("id");
         return QueryRequest(std::allocator_arg, Allocator(r), q, false, true);
     };

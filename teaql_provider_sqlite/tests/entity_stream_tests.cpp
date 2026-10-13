@@ -146,6 +146,7 @@ static void mapped_cursor_contracts() {
     auto& executor = user->make<StreamExecutor>();
     auto& repo = EntityDataService<StreamExecutor>::for_executor(*user, "Item", *user, executor);
     auto& query = user->make<SelectQuery>("Item");
+    query.comment("inspect stream records");
     query.stream(2);
     auto& purposed = user->make<PurposedSelectQuery>(query, "Inspect root records");
     auto& startup = repo.fetch_stream(purposed);
@@ -157,7 +158,8 @@ static void mapped_cursor_contracts() {
     check(executor.request->query.entity == "Item" &&
               executor.request->query.trace_chain.back().kind == TraceKind::Purpose &&
               executor.request->trace_chain.back().kind == TraceKind::Purpose &&
-              executor.request->comment == "[reader] Item(pending): Inspect root records",
+              executor.request->comment() == "inspect stream records" &&
+              executor.request->purpose() == "Inspect root records",
           "stream request retains query provenance and captured purpose");
     auto& stream = result.value().get();
     executor.pending = true;
@@ -190,17 +192,20 @@ static void mapped_cursor_contracts() {
 
     user->disable_sql_log();
     auto& plain = user->make<SelectQuery>("Item");
+    plain.comment("inspect stream records");
     plain.count("count").enable_aggregation_cache();
     auto& allowed = user->make<PurposedSelectQuery>(plain, "Stream an aggregate root");
     auto& uncaptured = repo.fetch_stream(allowed).wait();
     check(uncaptured && executor.observed == 1 && executor.size == 1000 &&
-              !executor.request->comment && executor.request->trace_chain.empty() &&
-              !executor.request->query.trace_chain.empty(),
-          "uncaptured aggregate roots stream without cache admission or envelope provenance");
+              executor.request->comment() == "inspect stream records" &&
+              executor.request->purpose() == "Stream an aggregate root" &&
+              executor.request->trace_chain.empty() && !executor.request->query.trace_chain.empty(),
+          "uncaptured streams retain owned intent while omitting diagnostic trace capture");
     uncaptured.value().get().cancel();
     auto before = executor.calls;
     for (unsigned shape = 0; shape != 3; ++shape) {
         auto& unsupported = user->make<SelectQuery>("Item");
+        unsupported.comment("inspect stream records");
         auto& nested = user->make<SelectQuery>("Item");
         if (shape == 0) {
             unsupported.relation("children");
@@ -227,6 +232,7 @@ static void close_and_domain_contracts() {
     executor.external_closes = &closes;
     auto& repo = EntityDataService<StreamExecutor>::for_executor(*user, "Item", *user, executor);
     auto& query = user->make<SelectQuery>("Item");
+    query.comment("inspect stream records");
     auto& input = user->make<PurposedSelectQuery>(query, "Inspect shutdown");
     auto& abandoned = repo.fetch_stream(input);
     abandoned.cancel();
@@ -283,6 +289,7 @@ static void sqlite_stream_contracts() {
     auto& executor = user->make<E>(dialect, transport, metadata, state);
     auto& repo = EntityDataService<E>::for_executor(*user, "Item", *user, executor);
     auto& query = user->make<SelectQuery>("Item");
+    query.comment("inspect stream records");
     query.order_asc("id").stream(2);
     auto& purpose = user->make<PurposedSelectQuery>(query, "Inspect SQLite chunks");
     auto& result = repo.fetch_stream(purpose).wait();
@@ -321,6 +328,7 @@ static void failed_handoff_contract() {
     executor.exhaust_objects = true;
     auto& repo = EntityDataService<StreamExecutor>::for_executor(*user, "Item", *user, executor);
     auto& query = user->make<SelectQuery>("Item");
+    query.comment("inspect stream records");
     auto& input = user->make<PurposedSelectQuery>(query, "Reject failed cursor handoff");
     bool exhausted = false;
     try {

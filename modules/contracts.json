@@ -669,6 +669,222 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "general_query_tests",
+      "source": "teaql_runtime/tests/general_query_tests.cpp",
+      "cases": [
+        {
+          "name": "general_query_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "entity_graph_plan_tests",
+      "source": "teaql_provider_sqlite/tests/entity_graph_plan_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_graph_plan_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "provider_sqlite_id_tests",
+      "source": "teaql_provider_sqlite/tests/provider_sqlite_id_tests.cpp",
+      "cases": [
+        {
+          "name": "provider_sqlite_id_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "model_debug_tests",
+      "cases": [
+        {
+          "name": "model_debug_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_runtime_model_tests",
+      "cases": [
+        {
+          "name": "entity_runtime_model_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "entity_graph_execution_tests",
+      "source": "teaql_provider_sqlite/tests/entity_graph_execution_tests.cpp",
+      "cases": [
+        {
+          "name": "entity_graph_execution_context_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_query_tests",
+      "cases": [
+        {
+          "name": "runtime_entity_query_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "relation_planning_extensions_probe",
+      "source": "tests/parity/relation_planning_extensions_probe.cpp",
+      "cases": [
+        {
+          "name": "relation_planning_extensions_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_provider_sqlite",
+      "stem": "relation_enhancement_tests",
+      "cases": [
+        {
+          "name": "relation_enhancement_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "hydration_sibling_keys_probe",
+      "source": "tests/parity/hydration_sibling_keys_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "hydration_owner_facets_probe",
+      "source": "tests/parity/hydration_owner_facets_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "hydration_owner_facets_async_probe",
+      "source": "tests/parity/hydration_owner_facets_async_probe.cpp",
+      "cases": [
+        {
+          "name": "hydration_owner_facets_async_context_close",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "graph_relation_facets_probe",
+      "source": "tests/parity/graph_relation_facets_probe.cpp",
+      "cases": [
+        {
+          "name": "graph_relation_facets_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "hydration_flat_facets_probe",
+      "source": "tests/parity/hydration_flat_facets_probe.cpp",
+      "cases": [
+        {
+          "name": "hydration_flat_facets_context_close",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "loaded_row_graph_probe",
+      "source": "tests/parity/loaded_row_graph_probe.cpp",
+      "cases": [
+        {
+          "name": "loaded_row_graph_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "relation_hydration_replay_probe",
+      "source": "tests/parity/relation_hydration_replay_probe.cpp",
+      "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "json_graph_views_probe",
+      "source": "tests/parity/json_graph_views_probe.cpp",
+      "cases": [
+        {
+          "name": "json_graph_views_context_contracts",
+          "arguments": [
+            "--self-test"
+          ],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
     }
   ],
   "fixtures": [

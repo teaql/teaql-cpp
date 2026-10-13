@@ -177,6 +177,8 @@ static void contracts() {
     auto& descriptor = global.make<EntityDescriptor>("Customer");
     auto& provider = user->make_resource<Provider>(*user, descriptor);
     auto& query = user->make<SelectQuery>("Customer");
+    query.comment("Exercise the executor SPI fixture");
+    query.purpose("Check independent provider and transaction execution");
     query.filter(Expr::eq(r, "name", "UNKNOWN-SECRET"));
     auto request = [&] {
         return QueryRequest(std::allocator_arg, Allocator(r), query, false, true);
@@ -199,7 +201,7 @@ static void contracts() {
     auto& insert = user->make<InsertCommand>("Customer");
     insert.audit_as("insert reason");
     auto mutation = [&] {
-        return MutationRequest(std::allocator_arg, Allocator(r), insert);
+        return MutationRequest(std::allocator_arg, Allocator(r), insert, "insert reason");
     };
     check(provider.mutate_observed(r, mutation(), observer).wait().error() == Error::Mutation &&
               observed == 0,

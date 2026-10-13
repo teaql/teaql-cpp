@@ -60,6 +60,56 @@ struct CountingChecker final : teaql::Checker {
     }
 };
 
+static void late_identity_lineage_before_dispatch() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& store = metadata(*user_context);
+    EntityDescriptor item(std::allocator_arg, Allocator(r), "Item");
+    item.property("id", DataType::U64).id();
+    item.property("version", DataType::I64).version();
+    item.property("name", DataType::Text);
+    store.register_entity(std::move(item));
+    auto& state = user_context->make<State>();
+    auto& executor = user_context->make_resource<Executor>(state);
+    auto& service =
+        EntityDataService<Executor>::for_executor(*user_context, "Order", *user_context, executor);
+    auto& root = user_context->make<EntityRuntimeState>();
+    auto order_key = key(r, 0);
+    EntityKey item_key(std::allocator_arg, Allocator(r), "Item", Value(r, std::uint64_t{0}));
+    root.mark_as_new(order_key);
+    root.set(order_key, "name", Value(r, "order"));
+    root.mark_as_new(item_key);
+    root.set(item_key, "name", Value(r, "item"));
+    auto& graph = user_context->make<GraphNode>("Order");
+    graph.value("id", std::uint64_t{0}).with_comment("submit order");
+    auto& child = user_context->make<GraphNode>("Item");
+    child.value("id", std::uint64_t{0}).with_comment("add item");
+    graph.relation("items", child);
+    check(bool(detail::capture_ledger_trace_scopes(root, graph)), "capture pending graph lineage");
+    auto locations = detail::ledger_object_locations(r, graph);
+    auto& saved = Access::execute_ledger_plan_internal(service, root, locations).wait();
+    check(saved && state.requests.size() == 2, "execute two separately allocated entity batches");
+    auto root_id = saved.value().at(order_key).try_u64();
+    auto item_id = saved.value().at(item_key).try_u64();
+    bool checked_item = false;
+    for (const auto& request : state.requests) {
+        Vector<const TraceNode*> scope_trace(r);
+        for (const auto& node : request.trace_chain()) {
+            if (node.kind == TraceKind::AuditReason) {
+                scope_trace.push_back(&node);
+            }
+        }
+        if (!scope_trace.empty() && scope_trace.back()->entity_type == "Item") {
+            check(scope_trace.size() == 2 && scope_trace.front()->entity_id == root_id &&
+                      scope_trace.back()->entity_id == item_id,
+                  "child dispatch includes a root ID allocated after the child in batch order");
+            checked_item = true;
+        }
+    }
+    check(checked_item, "provider receives the enriched child lineage");
+}
+
 static void required_gate_before_deletes() {
     GlobalContext global;
     auto user = global.make_user_context();
@@ -69,6 +119,7 @@ static void required_gate_before_deletes() {
     auto& executor = user->make_resource<Executor>(state);
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
     auto& root = user->make<EntityRuntimeState>();
+    root.set_comment("Execute the ledger contract fixture");
     auto deleted = key(r, 7), fresh = key(r, 0);
     root.mark_as_delete(deleted);
     root.set_original_version(deleted, 3);
@@ -98,6 +149,7 @@ static void pending_work_closes() {
         auto& executor = user->make_resource<Executor>(state);
         auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
         auto& root = user->make<EntityRuntimeState>();
+        root.set_comment("Execute the ledger contract fixture");
         auto identity = key(r, 7);
         root.set(identity, "name", Value(r, "pending"));
         if (!read) {
@@ -121,9 +173,13 @@ static void version_overflow() {
     state.allow_reads = true;
     state.rows.emplace_back();
     state.rows.back().emplace(String("id", r), Value(r, std::uint64_t(7)));
+    state.rows.back().emplace(String("version", r),
+                              Value(r, std::numeric_limits<std::int64_t>::max()));
+    state.rows.back().emplace(String("name", r), Value(r, "original"));
     auto& executor = user->make_resource<Executor>(state);
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
     auto& root = user->make<EntityRuntimeState>();
+    root.set_comment("Execute the ledger contract fixture");
     auto identity = key(r, 7);
     root.set(identity, "name", Value(r, "overflow"));
     root.set_original_version(identity, std::numeric_limits<std::int64_t>::max());
@@ -165,6 +221,7 @@ static void expired_metadata_after_read() {
     auto& executor = user->make_resource<Executor>(state);
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
     auto& root = user->make<EntityRuntimeState>();
+    root.set_comment("Execute the ledger contract fixture");
     auto identity = key(r, 7);
     root.set(identity, "name", Value(r, "pending"));
     root.set_original_version(identity, 1);
@@ -213,6 +270,7 @@ static void sqlite_execution_and_rollback() {
     auto& service =
         EntityDataService<Transaction>::for_executor(*user, "Order", *user, transaction);
     auto& root = user->make<EntityRuntimeState>();
+    root.set_comment("Execute the ledger contract fixture");
     auto changed = key(r, 7), removed = key(r, 9), fresh = key(r, 0);
     root.set(changed, "name", Value(r, "updated"));
     root.set_original_version(changed, 3);
@@ -234,12 +292,20 @@ static void sqlite_execution_and_rollback() {
               root.get_original_version(changed) == 3,
           "executor leaves ledger completion to its transaction owner");
     sql.sql = "SELECT id,version,name FROM orders ORDER BY id";
-    auto& rows = transport.fetch_all_compact_sql(r, sql).wait();
-    check(rows && rows.value().size() == 3 && rows.value()[0].get("version")->try_i64() == 4 &&
-              rows.value()[1].get("version")->try_i64() == -3 &&
-              rows.value()[2].get("id")->try_u64() == 100,
+    auto& read = user->make<SelectQuery>("Order");
+    read.projects({"id", "version", "name"})
+        .order_asc("id")
+        .comment("Inspect the uncommitted ledger rows")
+        .purpose("Verify writes through their owning transaction");
+    auto& rows =
+        transaction.query(r, QueryRequest(std::allocator_arg, Allocator(r), read, false, true))
+            .wait();
+    check(rows && rows.value().rows.size() == 3 &&
+              rows.value().rows[0].get("version")->try_i64() == 4 &&
+              rows.value().rows[1].get("version")->try_i64() == -3 &&
+              rows.value().rows[2].get("id")->try_u64() == 100,
           "real SQLite executes guarded update, soft delete and generated insert");
-    auto& retained = global.make<detail::LedgerGeneratedIds>(result.value());
+    auto& retained = global.make<detail::LedgerGeneratedIds>(result.value().generated_ids);
     check(bool(transaction.rollback(r).wait()), "caller can roll back all ledger writes");
     auto& original = transport.fetch_all_compact_sql(r, sql).wait();
     check(original && original.value().size() == 2 &&
@@ -255,6 +321,7 @@ int main() {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
         required_gate_before_deletes();
+        late_identity_lineage_before_dispatch();
         pending_work_closes();
         version_overflow();
         expired_metadata_after_read();

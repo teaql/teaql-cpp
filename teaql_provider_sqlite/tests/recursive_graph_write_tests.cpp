@@ -61,6 +61,8 @@ static void sqlite_ordering_and_retention() {
     using Transaction = std::remove_reference_t<decltype(transaction)>;
     auto& service =
         EntityDataService<Transaction>::for_executor(*user, "Order", *user, transaction);
+    require(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+            "private fixture binds explicit mutation and readback intent");
     auto& root = user->make<GraphNode>("Order");
     root.value("id", std::uint64_t(7)).value("name", "input parent").with_comment("insert parent");
     auto& head = user->make<GraphNode>("Head");
@@ -153,6 +155,8 @@ static void recursive_pending_cancellation() {
     auto& executor = user->make_resource<mutation_fixture::Executor>(state);
     auto& service = EntityDataService<mutation_fixture::Executor>::for_executor(
         *user, "Order", *user, executor);
+    require(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+            "private fixture binds explicit mutation and readback intent");
     auto& node = user->make<GraphNode>("Order");
     node.value("id", std::uint64_t(7));
     auto& reference = user->make<GraphNode>("Head");

@@ -16,652 +16,445 @@ class ChildListExpression;
 class InventoryExpression;
 class InventoryListExpression;
 
-class PersonExpression : public generated_detail::Expression<const Person*> {
+class PersonExpression : public RuntimeExpression<EntityBorrow<Person>> {
 public:
-    using Base = generated_detail::Expression<const Person*>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<Person>>;
 
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const Person* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    explicit PersonExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<String> get_email() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("email", [r](const Person* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("email")) {
-                return Output::not_loaded(r, "email", "email");
-            }
-            return Output::value(r, detail::clone_in(r, value->email()));
+    RuntimeExpression<String> getEmail() const {
+        return this->andThen("email", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalEmail());
         });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<bool> get_active() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("active", [r](const Person* value) {
-            using Output = eval::EvalResult<bool>;
-            if (!value->is_loaded("active")) {
-                return Output::not_loaded(r, "active", "active");
-            }
-            return Output::value(r, detail::clone_in(r, value->active()));
+    RuntimeExpression<bool> getActive() const {
+        return this->andThen("active", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<bool>::from_result(source.get().evalActive());
         });
-        return generated_detail::Expression<bool>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::optional<String>> get_nickname() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("nickname", [r](const Person* value) {
-            using Output = eval::EvalResult<std::optional<String>>;
-            if (!value->is_loaded("nickname")) {
-                return Output::not_loaded(r, "nickname", "nickname");
-            }
-            if (!value->nickname()) {
-                return Output::null(r);
-            }
-            return Output::value(r, detail::clone_in(r, value->nickname()));
+    RuntimeExpression<std::optional<String>> getNickname() const {
+        return this->andThen("nickname", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<std::optional<String>>::from_result(
+                source.get().evalNickname());
         });
-        return generated_detail::Expression<std::optional<String>>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<Decimal> get_balance() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("balance", [r](const Person* value) {
-            using Output = eval::EvalResult<Decimal>;
-            if (!value->is_loaded("balance")) {
-                return Output::not_loaded(r, "balance", "balance");
-            }
-            return Output::value(r, detail::clone_in(r, value->balance()));
+    RuntimeExpression<Decimal> getBalance() const {
+        return this->andThen("balance", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<Decimal>::from_result(source.get().evalBalance());
         });
-        return generated_detail::Expression<Decimal>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<double> get_height() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("height", [r](const Person* value) {
-            using Output = eval::EvalResult<double>;
-            if (!value->is_loaded("height")) {
-                return Output::not_loaded(r, "height", "height");
-            }
-            return Output::value(r, detail::clone_in(r, value->height()));
+    RuntimeExpression<double> getHeight() const {
+        return this->andThen("height", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<double>::from_result(source.get().evalHeight());
         });
-        return generated_detail::Expression<double>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<float> get_ratio() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("ratio", [r](const Person* value) {
-            using Output = eval::EvalResult<float>;
-            if (!value->is_loaded("ratio")) {
-                return Output::not_loaded(r, "ratio", "ratio");
-            }
-            return Output::value(r, detail::clone_in(r, value->ratio()));
+    RuntimeExpression<float> getRatio() const {
+        return this->andThen("ratio", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<float>::from_result(source.get().evalRatio());
         });
-        return generated_detail::Expression<float>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::int64_t> get_age() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("age", [r](const Person* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("age")) {
-                return Output::not_loaded(r, "age", "age");
-            }
-            return Output::value(r, detail::clone_in(r, value->age()));
+    RuntimeExpression<std::int64_t> getAge() const {
+        return this->andThen("age", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalAge());
         });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<Date> get_birthday() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("birthday", [r](const Person* value) {
-            using Output = eval::EvalResult<Date>;
-            if (!value->is_loaded("birthday")) {
-                return Output::not_loaded(r, "birthday", "birthday");
-            }
-            return Output::value(r, detail::clone_in(r, value->birthday()));
+    RuntimeExpression<Date> getBirthday() const {
+        return this->andThen("birthday", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<Date>::from_result(source.get().evalBirthday());
         });
-        return generated_detail::Expression<Date>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<Timestamp> get_updated_at() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("updated_at", [r](const Person* value) {
-            using Output = eval::EvalResult<Timestamp>;
-            if (!value->is_loaded("updated_at")) {
-                return Output::not_loaded(r, "updated_at", "updated_at");
-            }
-            return Output::value(r, detail::clone_in(r, value->updated_at()));
+    RuntimeExpression<Timestamp> getUpdatedAt() const {
+        return this->andThen("updated_at", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<Timestamp>::from_result(source.get().evalUpdatedAt());
         });
-        return generated_detail::Expression<Timestamp>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::optional<Json>> get_payload() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("payload", [r](const Person* value) {
-            using Output = eval::EvalResult<std::optional<Json>>;
-            if (!value->is_loaded("payload")) {
-                return Output::not_loaded(r, "payload", "payload");
-            }
-            if (!value->payload()) {
-                return Output::null(r);
-            }
-            return Output::value(r, detail::clone_in(r, value->payload()));
+    RuntimeExpression<std::optional<Json>> getPayload() const {
+        return this->andThen("payload", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<std::optional<Json>>::from_result(source.get().evalPayload());
         });
-        return generated_detail::Expression<std::optional<Json>>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const Person* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<Person> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
         });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    DeviceListExpression get_device_list() const;
+    DeviceListExpression getDeviceList() const;
 };
 
-class PersonListExpression : public generated_detail::RelationListExpression<Person> {
+class PersonListExpression : public RuntimeExpression<EntityListBorrow<Person>> {
 public:
-    using Base = generated_detail::RelationListExpression<Person>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityListBorrow<Person>>;
+
+    explicit PersonListExpression(Base value) : Base(value) {}
 
     PersonExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next = std::move(current).and_then("get", [r, index](const SmartList<Person>* list) {
-            auto* value = list->get(index);
-            return value ? eval::EvalResult<const Person*>::value(r, value)
-                         : eval::EvalResult<const Person*>::null(r);
+        auto next = this->andThen("get", [index](EntityListBorrow<Person> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<Person>>;
+            return value ? entity_expression(*value) : Output::null(r);
         });
-        return PersonExpression(std::allocator_arg, Allocator(r), std::move(next));
+        return PersonExpression(next);
     }
 
     PersonExpression first() const {
         return get(0);
     }
+
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<Person> source) {
+            return source.get().len();
+        });
+    }
 };
 
-class DeviceExpression : public generated_detail::Expression<const Device*> {
+class DeviceExpression : public RuntimeExpression<EntityBorrow<Device>> {
 public:
-    using Base = generated_detail::Expression<const Device*>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<Device>>;
 
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const Device* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    explicit DeviceExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<Device> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<String> get_code() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("code", [r](const Device* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("code")) {
-                return Output::not_loaded(r, "code", "code");
-            }
-            return Output::value(r, detail::clone_in(r, value->code()));
+    RuntimeExpression<String> getCode() const {
+        return this->andThen("code", [](EntityBorrow<Device> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalCode());
         });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<bool> get_active() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("active", [r](const Device* value) {
-            using Output = eval::EvalResult<bool>;
-            if (!value->is_loaded("active")) {
-                return Output::not_loaded(r, "active", "active");
-            }
-            return Output::value(r, detail::clone_in(r, value->active()));
+    RuntimeExpression<bool> getActive() const {
+        return this->andThen("active", [](EntityBorrow<Device> source) {
+            return RuntimeExpression<bool>::from_result(source.get().evalActive());
         });
-        return generated_detail::Expression<bool>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::uint64_t> get_owner_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("owner_id", [r](const Device* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("owner_id")) {
-                return Output::not_loaded(r, "owner_id", "owner_id");
-            }
-            return Output::value(r, detail::clone_in(r, value->owner_id()));
+    RuntimeExpression<std::uint64_t> getOwnerId() const {
+        return this->andThen("owner_id", [](EntityBorrow<Device> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalOwnerId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const Device* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<Device> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
         });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    PersonExpression get_owner() const;
+    PersonExpression getOwner() const;
 };
 
-class DeviceListExpression : public generated_detail::RelationListExpression<Device> {
+class DeviceListExpression : public RuntimeExpression<EntityListBorrow<Device>> {
 public:
-    using Base = generated_detail::RelationListExpression<Device>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityListBorrow<Device>>;
+
+    explicit DeviceListExpression(Base value) : Base(value) {}
 
     DeviceExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next = std::move(current).and_then("get", [r, index](const SmartList<Device>* list) {
-            auto* value = list->get(index);
-            return value ? eval::EvalResult<const Device*>::value(r, value)
-                         : eval::EvalResult<const Device*>::null(r);
+        auto next = this->andThen("get", [index](EntityListBorrow<Device> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<Device>>;
+            return value ? entity_expression(*value) : Output::null(r);
         });
-        return DeviceExpression(std::allocator_arg, Allocator(r), std::move(next));
+        return DeviceExpression(next);
     }
 
     DeviceExpression first() const {
         return get(0);
     }
-};
 
-class OrderStatusExpression : public generated_detail::Expression<const OrderStatus*> {
-public:
-    using Base = generated_detail::Expression<const OrderStatus*>;
-    using Base::Base;
-
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const OrderStatus* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<Device> source) {
+            return source.get().len();
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<String> get_name() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("name", [r](const OrderStatus* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("name")) {
-                return Output::not_loaded(r, "name", "name");
-            }
-            return Output::value(r, detail::clone_in(r, value->name()));
-        });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const OrderStatus* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
-        });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 };
 
-class OrderStatusListExpression : public generated_detail::RelationListExpression<OrderStatus> {
+class OrderStatusExpression : public RuntimeExpression<EntityBorrow<OrderStatus>> {
 public:
-    using Base = generated_detail::RelationListExpression<OrderStatus>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<OrderStatus>>;
+
+    explicit OrderStatusExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<OrderStatus> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
+        });
+    }
+
+    RuntimeExpression<String> getName() const {
+        return this->andThen("name", [](EntityBorrow<OrderStatus> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalName());
+        });
+    }
+
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<OrderStatus> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
+        });
+    }
+};
+
+class OrderStatusListExpression : public RuntimeExpression<EntityListBorrow<OrderStatus>> {
+public:
+    using Base = RuntimeExpression<EntityListBorrow<OrderStatus>>;
+
+    explicit OrderStatusListExpression(Base value) : Base(value) {}
 
     OrderStatusExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next =
-            std::move(current).and_then("get", [r, index](const SmartList<OrderStatus>* list) {
-                auto* value = list->get(index);
-                return value ? eval::EvalResult<const OrderStatus*>::value(r, value)
-                             : eval::EvalResult<const OrderStatus*>::null(r);
-            });
-        return OrderStatusExpression(std::allocator_arg, Allocator(r), std::move(next));
+        auto next = this->andThen("get", [index](EntityListBorrow<OrderStatus> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<OrderStatus>>;
+            return value ? entity_expression(*value) : Output::null(r);
+        });
+        return OrderStatusExpression(next);
     }
 
     OrderStatusExpression first() const {
         return get(0);
     }
-};
 
-class CategoryExpression : public generated_detail::Expression<const Category*> {
-public:
-    using Base = generated_detail::Expression<const Category*>;
-    using Base::Base;
-
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const Category* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<OrderStatus> source) {
+            return source.get().len();
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<String> get_name() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("name", [r](const Category* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("name")) {
-                return Output::not_loaded(r, "name", "name");
-            }
-            return Output::value(r, detail::clone_in(r, value->name()));
-        });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const Category* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
-        });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 };
 
-class CategoryListExpression : public generated_detail::RelationListExpression<Category> {
+class CategoryExpression : public RuntimeExpression<EntityBorrow<Category>> {
 public:
-    using Base = generated_detail::RelationListExpression<Category>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<Category>>;
+
+    explicit CategoryExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<Category> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
+        });
+    }
+
+    RuntimeExpression<String> getName() const {
+        return this->andThen("name", [](EntityBorrow<Category> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalName());
+        });
+    }
+
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<Category> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
+        });
+    }
+};
+
+class CategoryListExpression : public RuntimeExpression<EntityListBorrow<Category>> {
+public:
+    using Base = RuntimeExpression<EntityListBorrow<Category>>;
+
+    explicit CategoryListExpression(Base value) : Base(value) {}
 
     CategoryExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next = std::move(current).and_then("get", [r, index](const SmartList<Category>* list) {
-            auto* value = list->get(index);
-            return value ? eval::EvalResult<const Category*>::value(r, value)
-                         : eval::EvalResult<const Category*>::null(r);
+        auto next = this->andThen("get", [index](EntityListBorrow<Category> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<Category>>;
+            return value ? entity_expression(*value) : Output::null(r);
         });
-        return CategoryExpression(std::allocator_arg, Allocator(r), std::move(next));
+        return CategoryExpression(next);
     }
 
     CategoryExpression first() const {
         return get(0);
     }
-};
 
-class ChildExpression : public generated_detail::Expression<const Child*> {
-public:
-    using Base = generated_detail::Expression<const Child*>;
-    using Base::Base;
-
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const Child* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<Category> source) {
+            return source.get().len();
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<String> get_name() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("name", [r](const Child* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("name")) {
-                return Output::not_loaded(r, "name", "name");
-            }
-            return Output::value(r, detail::clone_in(r, value->name()));
-        });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const Child* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
-        });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 };
 
-class ChildListExpression : public generated_detail::RelationListExpression<Child> {
+class ChildExpression : public RuntimeExpression<EntityBorrow<Child>> {
 public:
-    using Base = generated_detail::RelationListExpression<Child>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<Child>>;
+
+    explicit ChildExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<Child> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
+        });
+    }
+
+    RuntimeExpression<String> getName() const {
+        return this->andThen("name", [](EntityBorrow<Child> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalName());
+        });
+    }
+
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<Child> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
+        });
+    }
+};
+
+class ChildListExpression : public RuntimeExpression<EntityListBorrow<Child>> {
+public:
+    using Base = RuntimeExpression<EntityListBorrow<Child>>;
+
+    explicit ChildListExpression(Base value) : Base(value) {}
 
     ChildExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next = std::move(current).and_then("get", [r, index](const SmartList<Child>* list) {
-            auto* value = list->get(index);
-            return value ? eval::EvalResult<const Child*>::value(r, value)
-                         : eval::EvalResult<const Child*>::null(r);
+        auto next = this->andThen("get", [index](EntityListBorrow<Child> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<Child>>;
+            return value ? entity_expression(*value) : Output::null(r);
         });
-        return ChildExpression(std::allocator_arg, Allocator(r), std::move(next));
+        return ChildExpression(next);
     }
 
     ChildExpression first() const {
         return get(0);
     }
-};
 
-class InventoryExpression : public generated_detail::Expression<const Inventory*> {
-public:
-    using Base = generated_detail::Expression<const Inventory*>;
-    using Base::Base;
-
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const Inventory* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<Child> source) {
+            return source.get().len();
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<String> get_name() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("name", [r](const Inventory* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("name")) {
-                return Output::not_loaded(r, "name", "name");
-            }
-            return Output::value(r, detail::clone_in(r, value->name()));
-        });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
-    }
-
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const Inventory* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
-        });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 };
 
-class InventoryListExpression : public generated_detail::RelationListExpression<Inventory> {
+class InventoryExpression : public RuntimeExpression<EntityBorrow<Inventory>> {
 public:
-    using Base = generated_detail::RelationListExpression<Inventory>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<Inventory>>;
+
+    explicit InventoryExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<Inventory> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
+        });
+    }
+
+    RuntimeExpression<String> getName() const {
+        return this->andThen("name", [](EntityBorrow<Inventory> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalName());
+        });
+    }
+
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<Inventory> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
+        });
+    }
+};
+
+class InventoryListExpression : public RuntimeExpression<EntityListBorrow<Inventory>> {
+public:
+    using Base = RuntimeExpression<EntityListBorrow<Inventory>>;
+
+    explicit InventoryListExpression(Base value) : Base(value) {}
 
     InventoryExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next =
-            std::move(current).and_then("get", [r, index](const SmartList<Inventory>* list) {
-                auto* value = list->get(index);
-                return value ? eval::EvalResult<const Inventory*>::value(r, value)
-                             : eval::EvalResult<const Inventory*>::null(r);
-            });
-        return InventoryExpression(std::allocator_arg, Allocator(r), std::move(next));
+        auto next = this->andThen("get", [index](EntityListBorrow<Inventory> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<Inventory>>;
+            return value ? entity_expression(*value) : Output::null(r);
+        });
+        return InventoryExpression(next);
     }
 
     InventoryExpression first() const {
         return get(0);
     }
+
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<Inventory> source) {
+            return source.get().len();
+        });
+    }
 };
 
-inline DeviceListExpression PersonExpression::get_device_list() const {
-    auto r = memory_resource();
-    auto current = detail::clone_in(r, result);
-    auto next = std::move(current).and_then("device_list", [r](const Person* value) {
-        using Output = eval::EvalResult<const SmartList<Device>*>;
-        if (!value->is_loaded("device_list")) {
-            return Output::not_loaded(r, "device_list", "device_list");
-        }
-        if (!value->device_list().is_loaded) {
-            return Output::not_loaded(r, "device_list", "device_list");
-        }
-        return Output::value(r, &value->device_list());
+inline DeviceListExpression PersonExpression::getDeviceList() const {
+    auto next = this->andThen("device_list", [](EntityBorrow<Person> source) {
+        return RuntimeExpression<EntityListBorrow<Device>>::from_result(
+            source.get().evalDeviceList());
     });
-    return DeviceListExpression(std::allocator_arg, Allocator(r), std::move(next));
+    return DeviceListExpression(next);
 }
 
-inline PersonExpression DeviceExpression::get_owner() const {
-    auto r = memory_resource();
-    auto current = detail::clone_in(r, result);
-    auto next = std::move(current).and_then("owner", [r](const Device* value) {
-        using Output = eval::EvalResult<const Person*>;
-        if (!value->is_loaded("owner")) {
-            return Output::not_loaded(r, "owner", "owner");
-        }
-        auto* child = value->owner();
-        return child ? Output::value(r, child) : Output::null(r);
+inline PersonExpression DeviceExpression::getOwner() const {
+    auto next = this->andThen("owner", [](EntityBorrow<Device> source) {
+        return RuntimeExpression<EntityBorrow<Person>>::from_result(source.get().evalOwner());
     });
-    return PersonExpression(std::allocator_arg, Allocator(r), std::move(next));
+    return PersonExpression(next);
 }
 
 struct E {
     static PersonExpression person(const Person& value) {
-        auto r = value.memory_resource();
-        return PersonExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const Person*>::value(r, &value));
+        return PersonExpression(entity_expression(value));
     }
+
+    static PersonExpression person(Person&&) = delete;
+    static PersonExpression person(const Person&&) = delete;
 
     static DeviceExpression device(const Device& value) {
-        auto r = value.memory_resource();
-        return DeviceExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const Device*>::value(r, &value));
+        return DeviceExpression(entity_expression(value));
     }
 
-    static OrderStatusExpression order_status(const OrderStatus& value) {
-        auto r = value.memory_resource();
-        return OrderStatusExpression(std::allocator_arg,
-                                     Allocator(r),
-                                     eval::EvalResult<const OrderStatus*>::value(r, &value));
+    static DeviceExpression device(Device&&) = delete;
+    static DeviceExpression device(const Device&&) = delete;
+
+    static OrderStatusExpression orderStatus(const OrderStatus& value) {
+        return OrderStatusExpression(entity_expression(value));
     }
+
+    static OrderStatusExpression orderStatus(OrderStatus&&) = delete;
+    static OrderStatusExpression orderStatus(const OrderStatus&&) = delete;
 
     static CategoryExpression category(const Category& value) {
-        auto r = value.memory_resource();
-        return CategoryExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const Category*>::value(r, &value));
+        return CategoryExpression(entity_expression(value));
     }
+
+    static CategoryExpression category(Category&&) = delete;
+    static CategoryExpression category(const Category&&) = delete;
 
     static ChildExpression child(const Child& value) {
-        auto r = value.memory_resource();
-        return ChildExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const Child*>::value(r, &value));
+        return ChildExpression(entity_expression(value));
     }
 
+    static ChildExpression child(Child&&) = delete;
+    static ChildExpression child(const Child&&) = delete;
+
     static InventoryExpression inventory(const Inventory& value) {
-        auto r = value.memory_resource();
-        return InventoryExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const Inventory*>::value(r, &value));
+        return InventoryExpression(entity_expression(value));
     }
+
+    static InventoryExpression inventory(Inventory&&) = delete;
+    static InventoryExpression inventory(const Inventory&&) = delete;
 };
 }

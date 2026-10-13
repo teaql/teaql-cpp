@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Corrected ordinary row/result diagnostics and typed invalid-intent handling; initialized metadata/cache/Global retention is C++ ownership evidence with explicitly documented representation adaptations. Full G13/G15/G16/P7 remain open.",
+  "source_observations": 1081,
+  "native": {
+    "passed": 8,
+    "failed": 0,
+    "exit_code": 0,
+    "tests": [
+      {
+        "name": "data_service_model_contracts",
+        "status": "passed",
+        "seconds": 0.11
+      },
+      {
+        "name": "smart_list_api_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "dynamic_carrier_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "core_shape_presentation_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "model_debug_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "request_helpers_rust_parity",
+        "status": "passed",
+        "seconds": 0.28
+      },
+      {
+        "name": "model_debug_rust_parity",
+        "status": "passed",
+        "seconds": 0.55
+      },
+      {
+        "name": "data_service_model_rust_parity",
+        "status": "passed",
+        "seconds": 1.45
+      }
+    ]
+  },
+  "sanitize": {
+    "passed": 2,
+    "failed": 0,
+    "exit_code": 0,
+    "leak_scan": false,
+    "tests": [
+      {
+        "name": "core_shape_presentation_contracts",
+        "status": "passed",
+        "seconds": 0.01
+      },
+      {
+        "name": "model_debug_contracts",
+        "status": "passed",
+        "seconds": 0.02
+      }
+    ]
+  },
+  "modules_native": {
+    "passed": 1,
+    "failed": 0,
+    "exit_code": 0,
+    "tests": [
+      {
+        "name": "module_model_debug_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      }
+    ]
+  }
+}

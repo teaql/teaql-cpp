@@ -51,7 +51,8 @@ std::size_t mutation_size(const C& command) {
 }
 
 template <class C>
-MutationRequest mutation_item(Memory r, const C& command, std::size_t index) {
+MutationRequest
+mutation_item(Memory r, const C& command, std::size_t index, const MutationIntent& intent) {
     auto result = [&] {
         if constexpr (std::same_as<C, BatchInsertCommand>) {
             InsertCommand out(std::allocator_arg, Allocator(r), command.entity);
@@ -60,7 +61,7 @@ MutationRequest mutation_item(Memory r, const C& command, std::size_t index) {
                 TraceChain trace(command.trace_chains[index], r);
                 out.trace_chain.swap(trace);
             }
-            return MutationRequest(std::allocator_arg, Allocator(r), std::move(out));
+            return MutationRequest(std::allocator_arg, Allocator(r), std::move(out), intent);
         } else if constexpr (std::same_as<C, BatchUpdateCommand>) {
             UpdateCommand out(
                 std::allocator_arg, Allocator(r), command.entity, command.batch_ids.at(index));
@@ -81,11 +82,12 @@ MutationRequest mutation_item(Memory r, const C& command, std::size_t index) {
                 TraceChain trace(command.trace_chains[index], r);
                 out.trace_chain.swap(trace);
             }
-            return MutationRequest(std::allocator_arg, Allocator(r), std::move(out));
+            return MutationRequest(std::allocator_arg, Allocator(r), std::move(out), intent);
         } else if constexpr (requires { command.commands; }) {
-            return MutationRequest(std::allocator_arg, Allocator(r), command.commands.at(index));
+            return MutationRequest(
+                std::allocator_arg, Allocator(r), command.commands.at(index), intent);
         } else {
-            return MutationRequest(std::allocator_arg, Allocator(r), command);
+            return MutationRequest(std::allocator_arg, Allocator(r), command, intent);
         }
     }();
     std::visit(
@@ -116,14 +118,25 @@ public:
                           Allocator a,
                           const ResourceBorrow<const M>& metadata,
                           const ResourceBorrow<E>& executor,
-                          const C& command)
+                          const C& command,
+                          const std::optional<MutationIntent>& intent,
+                          const std::optional<SqlIntentRedactions>& privacy)
         : resource_(a.resource()), metadata_(std::allocator_arg, a, metadata),
-          executor_(std::allocator_arg, a, executor), command_(std::allocator_arg, a, command) {}
+          executor_(std::allocator_arg, a, executor), command_(std::allocator_arg, a, command),
+          intent_(clone_in(a.resource(), intent)), privacy_(clone_in(a.resource(), privacy)) {}
 
     std::optional<R> poll(WakeSignal& wake) {
         while (index_ < mutation_size(command_)) {
             if (!child_) {
-                request_.emplace(mutation_item(resource_, command_, index_));
+                if (!intent_) {
+                    RequestIntentError error(
+                        std::allocator_arg, Allocator(resource_), RequestKind::Mutation, "comment");
+                    return R::err(resource_,
+                                  DataServiceError<Error>::runtime(
+                                      resource_, RuntimeError::request_intent(resource_, error)));
+                }
+                request_.emplace(mutation_item(resource_, command_, index_, *intent_));
+                request_->with_diagnostic_redactions(privacy_ ? &*privacy_ : nullptr);
                 auto& work = executor_.get().mutate_observed(
                     resource_,
                     clone_in(resource_, *request_),
@@ -223,6 +236,8 @@ private:
     ResourceBorrow<const M> metadata_;
     ResourceBorrow<E> executor_;
     C command_;
+    std::optional<MutationIntent> intent_;
+    std::optional<SqlIntentRedactions> privacy_;
     std::optional<MutationRequest> request_;
     AsyncOperation<Result<MutationResult, Error>>* child_ = nullptr;
     WakeSignal::Forward forwarding_;
@@ -235,8 +250,12 @@ private:
     auto RuntimeDataService<M, E>::Name(const Command& command)                                    \
         const -> DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>& {             \
         using R = Result<std::uint64_t, DataServiceError<Error>>;                                  \
-        return make_operation<R, BaseMutationOperation<M, E, Command>>(                            \
-            memory_resource(), metadata_, executor_, command);                                     \
+        return make_operation<R, BaseMutationOperation<M, E, Command>>(memory_resource(),          \
+                                                                       metadata_,                  \
+                                                                       executor_,                  \
+                                                                       command,                    \
+                                                                       mutation_intent_,           \
+                                                                       mutation_privacy_);         \
     }
 TEAQL_BASE_MUTATION_METHOD(insert, InsertCommand)
 TEAQL_BASE_MUTATION_METHOD(update, UpdateCommand)
@@ -253,7 +272,12 @@ TEAQL_BASE_MUTATION_METHOD(batch_update, BatchUpdateCommand)
         MutationSequence<Command> snapshot(                                                        \
             std::allocator_arg, Allocator(memory_resource()), commands);                           \
         return make_operation<R, BaseMutationOperation<M, E, MutationSequence<Command>>>(          \
-            memory_resource(), metadata_, executor_, snapshot);                                    \
+            memory_resource(),                                                                     \
+            metadata_,                                                                             \
+            executor_,                                                                             \
+            snapshot,                                                                              \
+            mutation_intent_,                                                                      \
+            mutation_privacy_);                                                                    \
     }
 TEAQL_BASE_MUTATION_MANY(insert_many, InsertCommand)
 TEAQL_BASE_MUTATION_MANY(update_many, UpdateCommand)

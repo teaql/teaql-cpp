@@ -1,0 +1,417 @@
+{
+  "previous_commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "target_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "tag": "v5.0.6",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_provenance": "examples/shared-load-state/fixtures/narrow/PROVENANCE.json",
+  "changed_repository_paths": 328,
+  "changed_in_scope_source_files": [
+    {
+      "path": "teaql-core/src/dynamic_fields.rs",
+      "previous_sha256": null,
+      "target_sha256": "76c010da3d5d59601c15c11a9fa0267ee300c4d18744eab103edcaac8d3afc75",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/dynamic_properties.rs",
+      "previous_sha256": null,
+      "target_sha256": "9640444b772bf8c26cbc300e2ee8f796db232316c9165c7d4f7efb46d375227e",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/entity.rs",
+      "previous_sha256": "f822ebd942f85f7ed8bdce35f0a1121890c8210102747ab2dcda07fca07df19b",
+      "target_sha256": "d719e01d2e0f0aa054372a17727fc63a7119cae9562fbf120fe0eea04d542801",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/eval.rs",
+      "previous_sha256": "30abd32e8b67d6ddc8784ef43cf9cee6d578e12389f647494a0412a34c2f3525",
+      "target_sha256": "1b88d5c2f55c87c3d00035a4e39fc6e09823bf6094351b4813c7495d40ee77f7",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/expr.rs",
+      "previous_sha256": "cbff89025cdfd820967cb409d145d1b8c989de704f3d07676e2f6fda6ea36d35",
+      "target_sha256": "2d564a6b5c81ca0e0b9c3652190ac78e33e0119d655e874a6663cd27a4fcebb6",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/lib.rs",
+      "previous_sha256": "ac0b380a21671d8d46274e92c20a55a293faf4d2de8524db66a3ddb4edd363c0",
+      "target_sha256": "c1f1f8b32f3a70f241e7f689ce3387e41d42979b14dd02477eae30a0979d781a",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/load_state.rs",
+      "previous_sha256": null,
+      "target_sha256": "8fd4ffed7debf7e5d63f5c7e194d1e9b68d29a76cbe21317a46a1ec13ca0cf31",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/query.rs",
+      "previous_sha256": "01bdaed15832b0294cb85896d75d885866d64789718b8b68d3c37d33fa690088",
+      "target_sha256": "02fd38d61f2505cb7cafe74c383ca03cccbc5aab633982900bd167b55f65194f",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/request.rs",
+      "previous_sha256": "0856bfffe5bf207c99c4a8bd2eb05811b1dfca8dd9abeeb271cbef1a200eed91",
+      "target_sha256": "87df211a8920a2d2ddd7bb7a1554f3e2e0ca246482795ab817c4d2d713ac2095",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-core/src/request_intent.rs",
+      "previous_sha256": null,
+      "target_sha256": "d72b4864ac9a44ee1adfccbc2fadadbf0100ea93acfc19cd1061db7c48d2748b",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-data-service/src/dynamic_fields.rs",
+      "previous_sha256": null,
+      "target_sha256": "19cee0f360b71be990451d88c64ec6f0ef34fd49b77edbd870703f1c58afde8f",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-data-service/src/lib.rs",
+      "previous_sha256": "36eb8da205bbc3b70666d850b07c313d62b60868dec78b32b4b3783633f63172",
+      "target_sha256": "34d2ab35017432eeeeea1459f141695d19472ccde4cfc5343ed76844944ae6c6",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-data-service/src/sql_log.rs",
+      "previous_sha256": "a4eeb42cee23c2c89d913628af5e9f23055f72385094cd269ec3b19854fd17b8",
+      "target_sha256": "f39ddcdfddea2ac64637ea5bc04373566fb6446250786930b6f3353a2ff517f9",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-provider-sqlite/src/dynamic_fields.rs",
+      "previous_sha256": null,
+      "target_sha256": "016be6656f22fb68eb9c8a37a6aa174bbc6758c6417183272b0cc256036b75df",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-provider-sqlite/src/lib.rs",
+      "previous_sha256": "ae2b936469226aa19368ca2ce818285ab95ed80c3ef7f3bf676b9e6525a96505",
+      "target_sha256": "39a7d3951d19e7521851d73c76fc03374c9e913998c3193298d4a485f41b35f0",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-provider-sqlite/src/transaction.rs",
+      "previous_sha256": null,
+      "target_sha256": "363370ceac2dbd4566567bc62cb7b3e382d9442e054961dd75bec9bf3ac5f432",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/checker.rs",
+      "previous_sha256": "a3acecf77b0d5c8e8dc30824c09a09b45347497019c4957797cda501e97a4949",
+      "target_sha256": "648e4f475d2f3350d89241a9b61399e483f621d8f0a2ceeed219f0a6f7e3e96c",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/commit_audit.rs",
+      "previous_sha256": null,
+      "target_sha256": "df631a2b99502dae916383ff5aa80d7023e113628a23631044f22136f6cb1771",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/context.rs",
+      "previous_sha256": "c1bffd8022f3bfdcef48f40c9c78552beea287a19875c53aefcdb34379d4ed2d",
+      "target_sha256": "2285152dc8050ba9b23057491e5b0c94ffa3590bae1516f78758717458d990ae",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/context/json.rs",
+      "previous_sha256": null,
+      "target_sha256": "46854ba65946d60c0937a3d29ac4593a4318902c5bd11aee206d18eeac4190b5",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/context/json/graph.rs",
+      "previous_sha256": null,
+      "target_sha256": "7bdb1c0d3b9b513c5b796ba97df5bb18e79b63a01743acdb87509312a2c5629f",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/context/json/tests.rs",
+      "previous_sha256": null,
+      "target_sha256": "d7321358e2cda1fa817d4a77548dae9407079d872b2eac298e5ecffacd32d3b4",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/context/logging.rs",
+      "previous_sha256": "dbf5576868aa22889b70cf5cd14a13c8b1b0d1143571e29e48fb8f025f8c1228",
+      "target_sha256": "7be8e0a212c8c384c79d6551ebc33cc9785ae4b33d7f365bcd5deb812d614b8f",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/context/logging_vectors_tests.rs",
+      "previous_sha256": null,
+      "target_sha256": "fa8e8bdc993240f169e8a55b48dd5873070105b77eef2929685d56a361328a76",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/context/transaction.rs",
+      "previous_sha256": "8ef51933bb7b9fddf4cccb6c9993123e7ebac9c22530a493482d73e1f9744c6d",
+      "target_sha256": "b37904cf984691e5be9de814e07fe25ca7d8aa81b0a1afef967bc38414829fba",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/base.rs",
+      "previous_sha256": "83a8c17efe9716bedbe5c566c0f7ede7ea42163315e14edd38ec4bbffba4db5a",
+      "target_sha256": "67ab3d9e2bc6ba8b816a197d72d8194e005ba9454d58fe2bbd565c17387faff7",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/context.rs",
+      "previous_sha256": "ebcf032f4bb1e0becef083fc1643eff088ba4b57b04a37e2bf26ba6eeffa86de",
+      "target_sha256": "c0207f22d4935d6ab67ca5558cccaf5fc6697b1b6f8806939164f701f6fcef48",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/graph.rs",
+      "previous_sha256": "976cb023d4c8fae1953146a9fe17f8998b3abff1a1d8d8eb00d02eb5ead7bf66",
+      "target_sha256": "552c99766ae688454029c212dfa01f4e6ee27e836e955fa00fe34a8b3b8ca952",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/graph_readback_tests.rs",
+      "previous_sha256": null,
+      "target_sha256": "ac0ec1fdb9f7a37c0d3ddb36a02a5e88c35845c7ae2818153d563e9b77183176",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/helpers.rs",
+      "previous_sha256": "b0bdaa3a9d5c3f494bd001d097b2864c05ef02ba08c9d63e0f8b7fd1d854ad7d",
+      "target_sha256": "0244a34e8467f716d09ebcbbb5f3c2b2ade41ef3b41070e3c919fa5dc5613421",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/mod.rs",
+      "previous_sha256": "e42ed55b3bd28224d8a5c9012ea5185ea1e974f4cf8ee85f5d7c5d466fa6aa96",
+      "target_sha256": "bd2a22c42db1640d9ae0d6a81e8ba0ebba666293894ec63123980fc75140485c",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/query_future_tests.rs",
+      "previous_sha256": null,
+      "target_sha256": "95d77e4afb67776339cffe0ddd06f15050f42a9c1d733527384335d180d4157f",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/relation.rs",
+      "previous_sha256": "048d0c37cda90f210f7c470cab951f6c0c06ed66a218911faffe1f0c64e79bc3",
+      "target_sha256": "fb28e3d7a93a7eba937154db25c899cd768d3a0b2d1a1353e821573543e874ad",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/resolved.rs",
+      "previous_sha256": "d110ff0295d72d1a62e093c776a143efe2c752eca7343ff65311e7809cc243bc",
+      "target_sha256": "f15e11d112c32c3a076d35d7b548a2afe33f4a49236e61b454ea0fe57433f6d8",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/data_service/types.rs",
+      "previous_sha256": "301f600093dda9630917abfc2c54b10152b91de1a891a5ab256b81750879084d",
+      "target_sha256": "2a5a666d476fd77772d6b7ea71cb53754db18063ef1f823f216806b033127bf9",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/document_round_trip.rs",
+      "previous_sha256": null,
+      "target_sha256": "3fc36a65afe1689f735d7e4140d869081c1cd178542a294b1de0e36217f6ca0a",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/dynamic_fields.rs",
+      "previous_sha256": null,
+      "target_sha256": "fa62cfa06a0d1c2dfa0fbc88c9d73931692fcc72abf0b99731b0518e974432cd",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/entity_runtime.rs",
+      "previous_sha256": "82a4a9eeb950a426ad927fbf8eb9259bb4b68b6e63653d98a69dc744f03d2fcd",
+      "target_sha256": "1f2fb5566d622389afa8bfe5e760c294838175c4267711029514ce9e73401a1f",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/entity_save.rs",
+      "previous_sha256": "386bb43bd8265ba42a8abf70422d93e19e959351aaf177080143c2509ebe9a91",
+      "target_sha256": "ff04761be7223d57174a3ce3ed315f87a86ec728e48117e2a3ffb229a6427e5b",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/error.rs",
+      "previous_sha256": "55bd28e0119241f134d689718bc340ddbc0a3720b40197c59c952c3d76a0327e",
+      "target_sha256": "9f5210820329c00094aa69d144040d0f59aa3ba87ea785f8adf813f7160bc23c",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/event.rs",
+      "previous_sha256": "0db5d73d304e0078d2ed03a7a2d760a596be2c9237d2e8760b19c40290fcc97e",
+      "target_sha256": "8ce0ccadf2a2e5da385b65db4a38e05ce193242222554afc6a92a9d674225801",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/generated_support.rs",
+      "previous_sha256": "d5c182d828fa9de35450cde1392f32a8f6229b7a889f4e933f39e7c96f643df1",
+      "target_sha256": "f21089ff92ae378fa74174f1eb42c028728034e3cb92841fd0795afd14119a2c",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/graph.rs",
+      "previous_sha256": "46ea6a064bc5277138cd589d053518900cceb99a9c2773032e4a7b82a7dd9965",
+      "target_sha256": "2c0a3e061871b5dee9fef0d3f15987477c3e8051d66e5dbfbd2df1030fbaa93f",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/inmemory_engine.rs",
+      "previous_sha256": "2adb8d0494d92684db3e19e8713ab4376bdd6d0f481a6b081e86ed2bcdf56226",
+      "target_sha256": "23f6083be6bfc04c6e9ac45b271040b1ade0b07013b5f364472503f8abd3db81",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/lib.rs",
+      "previous_sha256": "fd19972f5410e2b417d39a36f71a7859d372f532203c2b34d248a7a1d889f961",
+      "target_sha256": "8afefa70e4dfc9b2564038f00b4f2f66aad91f59c32ef27a6fcb9f25fc6242e8",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/log_privacy.rs",
+      "previous_sha256": "61d89b3159113a9cd0770457be227006eb4428b27bc7897b07710f3e66d6cf6e",
+      "target_sha256": "a56d52323fbcdc6be8bc4a94efb2b73aa72942ddadb98cc486a274236122a288",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/memory.rs",
+      "previous_sha256": "0691c67246f73f3c4c9a79765c377d2b30110e2c0df268974db4a3fa5019a729",
+      "target_sha256": "a060730ead5abb201579e226f4c4a8ac9a3dc9b3ed6d9849c21a9cadfeb88886",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/mutation_policy.rs",
+      "previous_sha256": "de3fb83dbe6acbb2f1e212ab094d36c1eeb596e6b3a6760db71b366c007c5e82",
+      "target_sha256": "f571ff2deb5ecadf3217383f944b08b250874fca98fd9b0b6de86096f8cd0931",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/registry.rs",
+      "previous_sha256": "7fe39b80b4b5ffa3d4d42f6c9c72732c8c675f416d731729845c732c0603beed",
+      "target_sha256": "9a64562cf1f61c16f561c006df7be0eec9f1548b1dc1022dd7f748539da0b4bc",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-runtime/src/round_trip_reference.rs",
+      "previous_sha256": "b582ab043b8c930ef055f5a4254ec97318bf14c191f3f852ec498840fa9f3e38",
+      "target_sha256": "6742f82c825ffa7766f35c86ea4a0f9cffa5728e46d427c6348377b5b7945940",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/binding_tests.rs",
+      "previous_sha256": "0364a997a2bbe92c641c620839f7245fb0c77a5e4f993e778fe9e8affe452dd1",
+      "target_sha256": "9b8927dfb4c52e06266c8ce18da3b6a0df47b276432006f2e1a616ae78f1bffe",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/bindings.rs",
+      "previous_sha256": "235898e763ba6bb7f60895eb40cb4b4777d59c759b0bbaaea868e28d09d90bf7",
+      "target_sha256": "10d7705804dee3f1750b1b6a63936662fa5698b244a7839086e5642c9299013b",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/dialect.rs",
+      "previous_sha256": "ccec1c44f7c6f329d820014138fd1d619f10af9ccac2529c24a029e03aa4490a",
+      "target_sha256": "912ec61d08639a5cd65784405cd1513af80a5221796d600386c46587ff534a71",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/execution_tests.rs",
+      "previous_sha256": "9e0b5e2f46dc3d44814c1a17151ecf70f24a3d963cad4c8d7c65793f0a2ef441",
+      "target_sha256": "f2890aea330b90f81c5b5a3d7b8d58a980088296bdd7690e2d0518908b64e2e8",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/executor.rs",
+      "previous_sha256": "874ccd030e634586cef2f2f42a163a5e8aa4ea4ff3419c74daaf8b53421a5b5e",
+      "target_sha256": "1bb74fd208bc5cc9fd1c46c4907643cc1de6858a7de4b6a02028e99e34237de0",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/lib.rs",
+      "previous_sha256": "ec480895c397dace0528d482d13bef4479b6b4015b3b93af6bd1b03243b48181",
+      "target_sha256": "aee0b7efec029ded0d1ad1bbee02ad5ca33c3a03dec6d2f13aa26c6b82acc60a",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/mutation_execution.rs",
+      "previous_sha256": "c92cb26e112e00231ae7d42a6bfc0af3fb350c36809a55c6fa69d2e1812f4bf5",
+      "target_sha256": "252e05f6ef636a2b6bd911a794a88a9a6887a3a2282f78cde5cb21d4a1263d08",
+      "status": "pending_review",
+      "evidence": []
+    },
+    {
+      "path": "teaql-sql/src/mutation_execution_tests.rs",
+      "previous_sha256": "bd5d8494afd1071d92bbc8ef46d6cfdfe21315530ea0f34ef1f5a45584f59c36",
+      "target_sha256": "a4c7629f552c04bf0613dcc4954c910dc3d344757b5c817e642bc6bf008b9000",
+      "status": "pending_review",
+      "evidence": []
+    }
+  ],
+  "note": "Hashes establish source changes only; every behavioral impact requires review and new evidence."
+}

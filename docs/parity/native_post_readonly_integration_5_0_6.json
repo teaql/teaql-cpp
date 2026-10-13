@@ -1,0 +1,3455 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Complete post-readonly native run; all registered test names accounted for.",
+  "total": 499,
+  "passed": 355,
+  "failed": 144,
+  "skipped": 0,
+  "exit_code": 8,
+  "junit_sha256": "47956b1fb8c2d98ad36e71916f403112b0a86cf37c70fb64e25ceeb7e788473e",
+  "registry_sha256": "c71afd4491a553ecc9d001c94ce2018db13b30e4d6ff86687c29e1e90e23bcb8",
+  "notice": "Terminal diagnostic evidence, not complete capability qualification. Failure families are triage hints requiring inspection; output excerpts may be truncated. Earlier complete-run evidence remains unchanged.",
+  "failure_families": {
+    "historical_baseline_requires_replay": 141,
+    "source_comparison_requires_diagnosis": 3
+  },
+  "tests": [
+    {
+      "name": "workspace_paths_5_0_6_contracts",
+      "status": "passed",
+      "seconds": 1.46402,
+      "output_sha256": "81f5a04763692e5119b78085f8f8bd452e58b1e0c7f33e50e5410cb8541959b5"
+    },
+    {
+      "name": "workspace_path_negative_controls",
+      "status": "passed",
+      "seconds": 0.0859642,
+      "output_sha256": "71a2d84d80cbfb2d9d84dbf06d99b7db4c1b706daf150bad7b89a206bb623912"
+    },
+    {
+      "name": "runtime_public_namespace_contracts",
+      "status": "passed",
+      "seconds": 0.00276334,
+      "output_sha256": "06264bb1aa648dfecaa1c34405d89525c33e8372f66d8d5ddc3e6ad3f5d22111"
+    },
+    {
+      "name": "runtime_layer_boundaries",
+      "status": "passed",
+      "seconds": 0.520503,
+      "output_sha256": "e88eafde8265f4a711beeefb85c2e12fe3b193e708a84d56c8230ee74d70d8cb"
+    },
+    {
+      "name": "entity_runtime_model_contracts",
+      "status": "passed",
+      "seconds": 0.00544175,
+      "output_sha256": "d0c6a6d1da512becd081571403a4d48aa38c4afbd6164c519c55e20ee164e792"
+    },
+    {
+      "name": "entity_runtime_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.191917,
+      "output_sha256": "6dfa4d4f57e31fb430b6f6fd59485b41df3a75a25f3bae824d9c74bf080d5c40",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_runtime_models.py\", line 5, in <module>\n    raise SystemExit(main(\"entity_runtime_model_cases.json.gz\", \"Entity runtime models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity runtime models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "business_clock_scope_contracts",
+      "status": "passed",
+      "seconds": 0.00297755,
+      "output_sha256": "537ba2113eaefedbb57655034e95c94120db006387c8f6d97ccebdb5d12feb53"
+    },
+    {
+      "name": "business_clock_reentrant_time",
+      "status": "passed",
+      "seconds": 0.00262314,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "business_clock_reentrant_date",
+      "status": "passed",
+      "seconds": 0.00269863,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_scope_contracts",
+      "status": "passed",
+      "seconds": 0.00311838,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_registry_close",
+      "status": "passed",
+      "seconds": 0.00291975,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_relation_loads_close",
+      "status": "passed",
+      "seconds": 0.00284552,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_select_behavior_close",
+      "status": "passed",
+      "seconds": 0.00284154,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_select_policy_close",
+      "status": "passed",
+      "seconds": 0.00276253,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_business_slot_close",
+      "status": "passed",
+      "seconds": 0.00292932,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_business_key_close",
+      "status": "passed",
+      "seconds": 0.00294236,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_callback_business_allocator_close",
+      "status": "passed",
+      "seconds": 0.00294626,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_provider_borrow_contracts",
+      "status": "passed",
+      "seconds": 0.0030029,
+      "output_sha256": "dbdc8bf29cc033d4c11948df1a7872467218a29a627203021f539137dc43e15f"
+    },
+    {
+      "name": "context_provider_reentrant_registry",
+      "status": "passed",
+      "seconds": 0.00260908,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_provider_reentrant_schema",
+      "status": "passed",
+      "seconds": 0.00318418,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_lifecycle_contracts",
+      "status": "passed",
+      "seconds": 0.00303613,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_exception_contracts",
+      "status": "passed",
+      "seconds": 0.00288414,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_shutdown_contracts",
+      "status": "passed",
+      "seconds": 0.00298396,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_entity_close",
+      "status": "passed",
+      "seconds": 0.00281302,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_all_entities_close",
+      "status": "passed",
+      "seconds": 0.00282342,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_checker_close",
+      "status": "passed",
+      "seconds": 0.00253037,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_telemetry_noop_close",
+      "status": "passed",
+      "seconds": 0.00264583,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "context_dispatch_telemetry_start_close",
+      "status": "passed",
+      "seconds": 0.0025318,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_id_model_contracts",
+      "status": "passed",
+      "seconds": 0.00314804,
+      "output_sha256": "2e38bb41ec1fcbd04c7ad967c270df66912477933ff8244407c1be0cec958108"
+    },
+    {
+      "name": "runtime_id_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.151061,
+      "output_sha256": "c3d40183f8106d7872624b2d7b3832156a1f574f653a0b3e214f76727658e66b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_id_models.py\", line 41, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_id_models.py\", line 21, in main\n    raise RuntimeError(\"Runtime ID observations belong to a different baseline\")\nRuntimeError: Runtime ID observations belong to a different baseline\n"
+    },
+    {
+      "name": "context_defaults_contracts",
+      "status": "passed",
+      "seconds": 0.0036886,
+      "output_sha256": "0986894a3c89ccde36eae44ca2d16623acb03f022025b47f59566dd96a9def69"
+    },
+    {
+      "name": "context_defaults_rust_parity",
+      "status": "failed",
+      "seconds": 0.137905,
+      "output_sha256": "d6c4bb93f73545f5b3f8990c31847451c33c4a87c07b18b9ce30ef79dd7d0416",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_context_defaults.py\", line 5, in <module>\n    raise SystemExit(main(\"context_defaults_cases.json\", \"Context defaults\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context defaults observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "reference_model_contracts",
+      "status": "passed",
+      "seconds": 0.00409083,
+      "output_sha256": "9041e0accd7cf8153555ab7faebe8d3da007d7ea5bd37aa4562c7af9aec2f56a"
+    },
+    {
+      "name": "reference_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.188718,
+      "output_sha256": "bb8d47d733174d4808db335b0e803ef1e69645710941dc9f7706371181038782",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_reference_models.py\", line 5, in <module>\n    raise SystemExit(main(\"reference_model_cases.json.gz\", \"Reference models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Reference models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "generated_execution_rust_parity",
+      "status": "passed",
+      "seconds": 6.43552,
+      "output_sha256": "3ee3e7c8286b289168ac3179f702d39169bb28bec9cc9b85b90be4bf556e1a54"
+    },
+    {
+      "name": "generated_aggregation_cache_context_contracts",
+      "status": "passed",
+      "seconds": 0.0098795,
+      "output_sha256": "9ee68cb34ec8d521ace5fce6f79812f553bef5fb1f5c6e19793ce77869e3305f"
+    },
+    {
+      "name": "generated_aggregation_cache_rust_parity",
+      "status": "passed",
+      "seconds": 2.97788,
+      "output_sha256": "632e1a304b446180f8af7086488c4c64afb54b37a4ae2e2936f1630bf1ce425f"
+    },
+    {
+      "name": "generated_facets_async_contracts",
+      "status": "passed",
+      "seconds": 0.0154487,
+      "output_sha256": "3bafdc39d0da512a12b1269ee812313e8c750119039c3cdca659e54c28eb631b"
+    },
+    {
+      "name": "generated_facets_context_contracts",
+      "status": "passed",
+      "seconds": 0.0111509,
+      "output_sha256": "80c028f59c05cfd52d74291807a2ef78461fcb0c90437eeb90dd0b527536efaa"
+    },
+    {
+      "name": "generated_facets_rust_parity",
+      "status": "passed",
+      "seconds": 5.35713,
+      "output_sha256": "403a10f421bab23f0277be14ef4b7e400ec73903304b47b35a38889dba9f5242"
+    },
+    {
+      "name": "generated_relation_analysis_context_contracts",
+      "status": "passed",
+      "seconds": 0.00397318,
+      "output_sha256": "44b3ad859c66e128ddf193cf48f59e83312b70c0c89dc5aa106303ca831e1a2c"
+    },
+    {
+      "name": "generated_relation_analysis_rust_parity",
+      "status": "passed",
+      "seconds": 27.8383,
+      "output_sha256": "9138d2d02db6b34b012303087169177fbad5e011ef97c7b837aef1fb96564be8"
+    },
+    {
+      "name": "generated_aggregation_rust_parity",
+      "status": "passed",
+      "seconds": 2.59699,
+      "output_sha256": "706eea571b71ad9c4ab9ff18ec7a32e0649e63f01c647d4a2761bcad3f03447b"
+    },
+    {
+      "name": "generated_field_criteria_rust_parity",
+      "status": "passed",
+      "seconds": 4.80316,
+      "output_sha256": "a516d73fe4bf520c90ecef1a90c4219590076c5ae2a49b22e2839f96d72955f4"
+    },
+    {
+      "name": "general_query_rust_parity",
+      "status": "passed",
+      "seconds": 0.759481,
+      "output_sha256": "05d01d875cfa9a5d86edf0d5813d0c2bec2396a5a62710603e2938984d784102"
+    },
+    {
+      "name": "general_query_context_contracts",
+      "status": "passed",
+      "seconds": 0.00673883,
+      "output_sha256": "23f4c47af69d40cb6f00f97fc3daf0f2469d223f362ad0f1ed928d8fa5c711b3"
+    },
+    {
+      "name": "generated_execution_context_contracts",
+      "status": "passed",
+      "seconds": 0.00325498,
+      "output_sha256": "aeef46425390552ad1e129676b594607e87f75edba54e84d93c87638f6224f5d"
+    },
+    {
+      "name": "generated_dynamic_json_rust_parity",
+      "status": "passed",
+      "seconds": 1.53308,
+      "output_sha256": "44519a38383dd22164eeb304eef58e20c2dcb1ecbdf9dd87a28d0e7407e05577"
+    },
+    {
+      "name": "generated_dynamic_json_context_contracts",
+      "status": "passed",
+      "seconds": 0.00879168,
+      "output_sha256": "3650ee97d5677d28d5d85a73fbd41e41b6a9f3972609987ecca6550000967984"
+    },
+    {
+      "name": "document_round_trip_context_contracts",
+      "status": "passed",
+      "seconds": 0.0040458,
+      "output_sha256": "3fa4acb9bd4c3fcbe5b314b0abcfd99b1bb31e17cb1d4d56fb750663f907ab55"
+    },
+    {
+      "name": "document_round_trip_5_0_6_rust_parity",
+      "status": "passed",
+      "seconds": 15.8187,
+      "output_sha256": "233f4a451da90cf5836f006de38d2e0f4fc8bf0ffa0654a4e9833913c2cbbd0e"
+    },
+    {
+      "name": "round_trip_reference_context_contracts",
+      "status": "passed",
+      "seconds": 0.017554,
+      "output_sha256": "b1c27825c361f560e174be4906b20bd457efe27f8017804c79ea92080e9909f4"
+    },
+    {
+      "name": "round_trip_reference_reentrant_owner",
+      "status": "passed",
+      "seconds": 0.00280579,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "round_trip_reference_reentrant_output",
+      "status": "passed",
+      "seconds": 0.00282383,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "round_trip_reference_rust_parity",
+      "status": "failed",
+      "seconds": 0.227345,
+      "output_sha256": "20eeeb66b602dcadb0e312a4193b9680f132ec6979d9b1ed4e1e384f60dd21a8",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_round_trip_reference.py\", line 4, in <module>\n    raise SystemExit(main(\"round_trip_reference_cases.json\", \"Round-trip reference\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Round-trip reference observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_reference_context_contracts",
+      "status": "passed",
+      "seconds": 0.02331,
+      "output_sha256": "a8a172ced058074f928df2258e907ca817fa509ebfcf7e96e27602012791506e"
+    },
+    {
+      "name": "entity_reference_reentrant_owner",
+      "status": "passed",
+      "seconds": 0.00326407,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "entity_reference_reentrant_output",
+      "status": "passed",
+      "seconds": 0.00300681,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "entity_reference_rust_parity",
+      "status": "failed",
+      "seconds": 0.155736,
+      "output_sha256": "29a37d9df5093268c0fca8e1ba7d324671b1152636022cf3d0ff2dc67ff37f1b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_reference.py\", line 5, in <module>\n    raise SystemExit(main(\"entity_reference_cases.json\", \"Entity reference\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity reference observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "reference_crypto_nist_contracts",
+      "status": "passed",
+      "seconds": 2.51809,
+      "output_sha256": "c693556970e619324a530c2a9230c092a475b6d8f8948184129518a3a4ba00c6"
+    },
+    {
+      "name": "inmemory_context_contracts",
+      "status": "passed",
+      "seconds": 0.00660339,
+      "output_sha256": "e8153d212af6583ee1a4f9e86ad422d5c8ee664d604fe877a669b9d5914c43dc"
+    },
+    {
+      "name": "inmemory_rust_parity",
+      "status": "failed",
+      "seconds": 0.297611,
+      "output_sha256": "184b299109ecb3ccc3d653876866fa598866ff9cefa091ab0c603800e609c0f2",
+      "family": "source_comparison_requires_diagnosis",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_inmemory.py\", line 55, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_inmemory.py\", line 32, in main\n    raise RuntimeError(\"In-memory observations belong to another baseline\")\nRuntimeError: In-memory observations belong to another baseline\n",
+      "reviewed_family": "historical_baseline_requires_replay",
+      "review_note": "Inspected traceback and selected comparator: failure is the explicit active-lock/corpus-baseline check, before C++ observation."
+    },
+    {
+      "name": "context_locking_contracts",
+      "status": "passed",
+      "seconds": 0.406313,
+      "output_sha256": "8fb9dba5623da0c2c63fc6fdc60a71526227e98a9f199d4343b568b25c7c619a"
+    },
+    {
+      "name": "context_locking_rust_parity",
+      "status": "failed",
+      "seconds": 0.176232,
+      "output_sha256": "1aaa53b92e147cad0d25d1c4f22c7961497ffbdc8c8a9473ca6d2ee903a666c8",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_locking.py\", line 4, in <module>\n    raise SystemExit(main(\"locking_cases.json\", \"Context locking\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context locking observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_examples_context_contracts",
+      "status": "passed",
+      "seconds": 0.117642,
+      "output_sha256": "79e56c9bff228f554152fd471ca168c4e2d75ce90214a7d80e4ead75e0da75d6"
+    },
+    {
+      "name": "transaction_move_only_contracts",
+      "status": "passed",
+      "seconds": 0.00282638,
+      "output_sha256": "8b662a6dfe58783b77c085c7dcc1d3873e62eb486edd9cc810bdd9a030ff0b0c"
+    },
+    {
+      "name": "transaction_provider_error_contracts",
+      "status": "passed",
+      "seconds": 0.00355896,
+      "output_sha256": "4a0a741c050252c58990b59c1c3e3b1f4f733921201bdc677f9fc7abeb7a92db"
+    },
+    {
+      "name": "transaction_move_only_rust_parity",
+      "status": "failed",
+      "seconds": 0.227601,
+      "output_sha256": "8e303424d600afda9b4d8c8cafaa16d53e44657253d9758fea409a569dec44b5",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_transaction_move_only.py\", line 5, in <module>\n    raise SystemExit(main(\"transaction_move_only_cases.json\", \"Move-only transaction\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Move-only transaction observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "ledger_move_only_contracts",
+      "status": "passed",
+      "seconds": 0.013432,
+      "output_sha256": "75df031a1891ca529bb1189940f111fe933e18ac27066d81ba24ab072c98d750"
+    },
+    {
+      "name": "ledger_move_only_rust_parity",
+      "status": "failed",
+      "seconds": 0.165231,
+      "output_sha256": "ce1d67ce5fd2a5e759c3cd3051c746d51873b29661a8eac96d0197730c0f42ab",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_ledger_move_only.py\", line 5, in <module>\n    raise SystemExit(main(\"ledger_move_only_cases.json.gz\", \"Move-only ledger save\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Move-only ledger save observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "policy_model_contracts",
+      "status": "passed",
+      "seconds": 0.00522921,
+      "output_sha256": "86ab9851e8af88b8de3e671161ddf359b959221d492354ff67500a411f3fab5a"
+    },
+    {
+      "name": "policy_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.216263,
+      "output_sha256": "a390ed79d8c7c2fc29d3a5824701820285c647b0e128b2dad74fea004053485c",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_policy_models.py\", line 5, in <module>\n    raise SystemExit(main(\"policy_model_cases.json.gz\", \"Policy models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Policy models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "event_model_contracts",
+      "status": "passed",
+      "seconds": 0.00416779,
+      "output_sha256": "0845f891ff85509c9abd2ee019c5e82fa95435001d6e58b737559da75ebba732"
+    },
+    {
+      "name": "event_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.218404,
+      "output_sha256": "cccaad7c8ce9c1c4b2a8cbbee6e33d55e515e422ff7b875a040926c20f898b3d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_event_models.py\", line 5, in <module>\n    raise SystemExit(main(\"event_model_cases.json.gz\", \"Audit event models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Audit event models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "check_model_contracts",
+      "status": "passed",
+      "seconds": 0.00362931,
+      "output_sha256": "3bcaec4c4fc1abe09b191221fdfbf1b0648f2db78460e633ae1ad5c72d4842a1"
+    },
+    {
+      "name": "check_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.184482,
+      "output_sha256": "f29bff14901add62f824c6eeac9679bea7e2b571a27233d6374cc3a7f9a022e8",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_check_models.py\", line 5, in <module>\n    raise SystemExit(main(\"check_model_cases.json.gz\", \"Checker models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Checker models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "relation_model_contracts",
+      "status": "passed",
+      "seconds": 0.00496546,
+      "output_sha256": "6a7c0d3f6772e52efcb4f3e79be10d3080107545f0c9674944b3adaea0b2c70d"
+    },
+    {
+      "name": "relation_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.271446,
+      "output_sha256": "d20bd554806007f24044ef8daab7941b0c931735abd22ecd30871dc1cc0afc1d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_relation_models.py\", line 5, in <module>\n    raise SystemExit(main(\"relation_model_cases.json.gz\", \"Relation plan models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Relation plan models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_foreign_query_cleanup",
+      "status": "passed",
+      "seconds": 0.00320107,
+      "output_sha256": "9e459b8ae585368d6f5a6b37a41f047415e52fbf5d0bce9c35c18635b1dfab6b"
+    },
+    {
+      "name": "runtime_foreign_mutation_cleanup",
+      "status": "passed",
+      "seconds": 0.00297422,
+      "output_sha256": "9e459b8ae585368d6f5a6b37a41f047415e52fbf5d0bce9c35c18635b1dfab6b"
+    },
+    {
+      "name": "unified_buffer_clone_contracts",
+      "status": "passed",
+      "seconds": 0.00318975,
+      "output_sha256": "f71f876c2c70003e38210edd65d83e2c3c62c884537a8499a6b440124aa9703b"
+    },
+    {
+      "name": "unified_buffer_clone_rust_parity",
+      "status": "failed",
+      "seconds": 0.226425,
+      "output_sha256": "7aa191202ca7244fdee36af17205aa6b76ee33bfdf6c83217751c9cd79f7a5fa",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_unified_buffer_clone.py\", line 5, in <module>\n    raise SystemExit(main(\"unified_buffer_clone_cases.json\", \"Unified buffer Clone\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Unified buffer Clone observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "log_model_contracts",
+      "status": "passed",
+      "seconds": 0.00468165,
+      "output_sha256": "126fbf3fb91249446f49c019ed48a1f1c1633c44acce1808ed8ae9ff69dbb8c7"
+    },
+    {
+      "name": "log_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.31954,
+      "output_sha256": "8a55eba1480ae84edfca5ef293e610415c3e1819a2a5cc5918a58b9df77e0207",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_models.py\", line 5, in <module>\n    raise SystemExit(main(\"log_model_cases.json.gz\", \"Runtime log models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime log models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "transaction_scope_context_contracts",
+      "status": "passed",
+      "seconds": 0.052629,
+      "output_sha256": "cbef8d348bf4b0728a722f5a8539cfd0b63bd703911c4e7de5d89e59743f4601"
+    },
+    {
+      "name": "transaction_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.280706,
+      "output_sha256": "9b3b7c9cc9828cd2f59661ed8ed5a0284a7a986cb2dc3fa31401dad01d2fcb63",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_transaction_scope.py\", line 4, in <module>\n    raise SystemExit(main(\"transaction_scope_cases.json\", \"TransactionScope\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: TransactionScope observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "audited_auto_save_context_contracts",
+      "status": "passed",
+      "seconds": 0.0106457,
+      "output_sha256": "78b207abc4ad667b09797927ad85549c0d975780d8ada4a6be91e24e92846650"
+    },
+    {
+      "name": "audited_auto_save_rust_parity",
+      "status": "failed",
+      "seconds": 0.271156,
+      "output_sha256": "61f49f1f02faa18df2526ac77f6ad3fca3c1cd157760d4a41fe162cc8143d926",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_audited_auto_save.py\", line 4, in <module>\n    raise SystemExit(main('audited_auto_save_cases.json', 'Automatic audited save'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Automatic audited save observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "audited_save_rust_parity",
+      "status": "failed",
+      "seconds": 0.234384,
+      "output_sha256": "74e0d7c6d9ce2575b61eeb2018117d166db335dd6c8b487d61ce0ded441afe66",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_audited_save.py\", line 4, in <module>\n    raise SystemExit(main('audited_save_cases.json', 'Audited save'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Audited save observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "audited_save_context_contracts",
+      "status": "passed",
+      "seconds": 0.0110047,
+      "output_sha256": "923386123f19d7eb8fdeb8e0ba3e5053a8361815405aac498685c3f24e009783"
+    },
+    {
+      "name": "graph_saver_context_contracts",
+      "status": "passed",
+      "seconds": 0.0180259,
+      "output_sha256": "627f54dc19bf5da95c910e1c9ed20613623f6a333a33ca61c902608d4b8a1a3a"
+    },
+    {
+      "name": "graph_saver_rust_parity",
+      "status": "failed",
+      "seconds": 0.202747,
+      "output_sha256": "a041c6b17de2f161589dc1965877525faf07cd264798d7aa1a453923c1718926",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_graph_saver.py\", line 4, in <module>\n    raise SystemExit(main('graph_saver_cases.json', 'Transactional graph saver'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Transactional graph saver observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "ledger_execution_context_contracts",
+      "status": "passed",
+      "seconds": 0.0131777,
+      "output_sha256": "7c50c2bce9835b19a6ea2a5b6b2ed47a9df094295334a4adf32035796c45f94d"
+    },
+    {
+      "name": "ledger_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.175773,
+      "output_sha256": "0e34987ea03e5c851aa1a1e1a239b3d4e275372dda14aaa393a2609d20d67cca",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_ledger_execution.py\", line 4, in <module>\n    raise SystemExit(main('ledger_execution_cases.json', 'Ledger execution'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Ledger execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_graph_execution_context_contracts",
+      "status": "passed",
+      "seconds": 0.00807956,
+      "output_sha256": "071e2d47421ac73d5d012b0dd900541b751cadcc6d9f124e36f9e97644d6e4c3"
+    },
+    {
+      "name": "recursive_graph_write_context_contracts",
+      "status": "passed",
+      "seconds": 0.0113612,
+      "output_sha256": "ee40075ef68e5f9bb4d2e6e1b98f16599d381502c3a2fadc5d95197be506e7e5"
+    },
+    {
+      "name": "recursive_graph_write_rust_parity",
+      "status": "failed",
+      "seconds": 0.233855,
+      "output_sha256": "3114c1b1fe824279fb81243e8aba6fe7b77ed3a8f0ec5ef09e8f3861ffa8cb89",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_recursive_graph_write.py\", line 5, in <module>\n    raise SystemExit(main(\"recursive_graph_write_cases.json.gz\", \"Recursive graph writes\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Recursive graph writes observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "graph_node_command_context_contracts",
+      "status": "passed",
+      "seconds": 0.00516894,
+      "output_sha256": "a8b9c12e048dfefccb5661c4efacaf2a2c1f2e0baca3fd59e276f16ab8a17b48"
+    },
+    {
+      "name": "graph_node_command_rust_parity",
+      "status": "failed",
+      "seconds": 0.31082,
+      "output_sha256": "150f34453053e7df813ac9adc10f84d31e35eb7411a7d9d30963354e213cf688",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_graph_node_commands.py\", line 5, in <module>\n    raise SystemExit(main(\"graph_node_command_cases.json.gz\", \"Graph node commands\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Graph node commands observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "graph_save_adapter_context_contracts",
+      "status": "passed",
+      "seconds": 0.00531946,
+      "output_sha256": "cae544985e1524c7977ffbd58a5f6a280526d116fc3a912957aa0ba381b16234"
+    },
+    {
+      "name": "graph_save_adapter_rust_parity",
+      "status": "failed",
+      "seconds": 0.198842,
+      "output_sha256": "8f0fd8a762f3ab8b1b89f0787a69425a041d845d500278f1f8a30a0b82ad014b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_graph_save_adapters.py\", line 5, in <module>\n    raise SystemExit(main(\"graph_save_adapter_cases.json.gz\", \"Graph save adapters\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Graph save adapters observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "ledger_plan_context_contracts",
+      "status": "passed",
+      "seconds": 0.00335943,
+      "output_sha256": "4f19b8a89deff395f5c28afc9ab8ad2a07794a90898e2472461221f5a00c1c6b"
+    },
+    {
+      "name": "ledger_plan_rust_parity",
+      "status": "failed",
+      "seconds": 0.226193,
+      "output_sha256": "fda61dccd4e5fad126b79c2ad2870e1aca70b6cc6928a52383e74ab98011659b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_ledger_plan.py\", line 4, in <module>\n    raise SystemExit(main('ledger_plan_cases.json', 'Ledger dependency planning'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Ledger dependency planning observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "graph_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.193263,
+      "output_sha256": "a157d453ddfe95a98e54e41e5bc7771ec611addfbd52084ef5d9dc35919a29e7",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_graph_execution.py\", line 4, in <module>\n    raise SystemExit(main('graph_execution_cases.json', 'Graph execution'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Graph execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_mutation_context_contracts",
+      "status": "passed",
+      "seconds": 0.00621936,
+      "output_sha256": "c5409255a9a200cc004de545e2a9fc514fa00a5c68270cfed0f6d900c32722b2"
+    },
+    {
+      "name": "runtime_mutation_reentrant_prepare",
+      "status": "passed",
+      "seconds": 0.00415053,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_mutation_reentrant_event",
+      "status": "passed",
+      "seconds": 0.00304619,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime_mutation_rust_parity",
+      "status": "failed",
+      "seconds": 0.335624,
+      "output_sha256": "983e1cafd26ced7e289341bdacfc24faf3e20a6487e02e5de4fa82f0fdc9eaff",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_mutation.py\", line 4, in <module>\n    raise SystemExit(main('runtime_mutation_cases.json', 'Runtime mutation'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime mutation observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_graph_plan_context_contracts",
+      "status": "passed",
+      "seconds": 0.00629203,
+      "output_sha256": "8ce5955bc99cdf3dc37f7c89354b97d51f70cf25b72041ec65d36a230fd6531e"
+    },
+    {
+      "name": "internal_id_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00297915,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "internal_id_reentrant_floor",
+      "status": "passed",
+      "seconds": 0.00281533,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "graph_plan_scopes_rust_parity",
+      "status": "passed",
+      "seconds": 0.367928,
+      "output_sha256": "dda4066de2c8c86437de7289ed08ca35b9568d796824ae97acf60d1d8c1e7712"
+    },
+    {
+      "name": "entity_graph_plan_rust_parity",
+      "status": "failed",
+      "seconds": 0.182948,
+      "output_sha256": "4d778fc12718f56a8511c162dfeddd6841a5021251b35b08ec88e545136d5964",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_graph_plan.py\", line 4, in <module>\n    raise SystemExit(main('entity_graph_plan_cases.json', 'Entity graph plan'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity graph plan observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "policy_plan_rust_parity",
+      "status": "failed",
+      "seconds": 0.195069,
+      "output_sha256": "0a09b72e86e35620418af7e536c98f5c3db9ef58f738ffd1e980855595711a07",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_policy_plan.py\", line 4, in <module>\n    raise SystemExit(main('policy_plan_cases.json', 'Policy plan'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Policy plan observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "mutation_policy_context_contracts",
+      "status": "passed",
+      "seconds": 0.00359655,
+      "output_sha256": "dcceca4b59627fb95ba486366bb075145fc1908606b9ddb7f6d7a45f92b216d2"
+    },
+    {
+      "name": "mutation_policy_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00284261,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mutation_policy_rust_parity",
+      "status": "failed",
+      "seconds": 0.143597,
+      "output_sha256": "b98964e8aedc4737a246dd407c8205065deffd3d697c59789d9ed5b9ff3064a8",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_mutation_policy.py\", line 4, in <module>\n    raise SystemExit(main('mutation_policy_cases.json', 'Mutation policy'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Mutation policy observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "save_preparation_context_contracts",
+      "status": "passed",
+      "seconds": 0.00427773,
+      "output_sha256": "c34712a466efef979e496ee8a22b2fa80c22fd78ca3934baf5465f228bb384ef"
+    },
+    {
+      "name": "save_preparation_rust_parity",
+      "status": "failed",
+      "seconds": 0.2903,
+      "output_sha256": "8640a1904137fb1f2bca5b41390519cdb8266d5e7c4c6a26794fd30a94335faa",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_save_preparation.py\", line 4, in <module>\n    raise SystemExit(main('save_preparation_cases.json', 'Save preparation'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Save preparation observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "graph_fix_context_contracts",
+      "status": "passed",
+      "seconds": 0.00338264,
+      "output_sha256": "f62b6746f8bf81b9af9fbf1b8be9d14faa60d1a803d8b4b1c433aeba25396da9"
+    },
+    {
+      "name": "graph_fix_rust_parity",
+      "status": "failed",
+      "seconds": 0.153376,
+      "output_sha256": "aa5b0785ca90540573dd028d7105cd7296551ffa31a4241a36b244b6bc487bfc",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_graph_fix.py\", line 4, in <module>\n    raise SystemExit(main('graph_fix_cases.json', 'Graph Fix/CREATE validation'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Graph Fix/CREATE validation observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "checker_context_contracts",
+      "status": "passed",
+      "seconds": 0.00437138,
+      "output_sha256": "3c47c8d6162269b6bc27ec4d551245828a137c336c4b08efcac3a3617d6559d4"
+    },
+    {
+      "name": "checker_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00287112,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "checker_registration_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00394483,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "checker_typed_direct_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00282148,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "checker_rust_parity",
+      "status": "failed",
+      "seconds": 0.234474,
+      "output_sha256": "7124655fff69723b4dac2dc41171466c9c48487c07c07dc4e3aef587bdb1d2d3",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_checker.py\", line 5, in <module>\n    raise SystemExit(main('checker_cases.json', 'Checker/fix runtime'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Checker/fix runtime observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "i18n_context_contracts",
+      "status": "passed",
+      "seconds": 0.00549233,
+      "output_sha256": "12351cb7135d0b7a2c6c194baf36b15baac89a5c81cc3b9e85d9e82769301e84"
+    },
+    {
+      "name": "i18n_debug_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.335962,
+      "output_sha256": "6c202434d3da96566940146c855c3944ed76b4245ae7080f0e6f4c7a88bcdd97",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_i18n_debug_scope.py\", line 6, in <module>\n    raise SystemExit(main('i18n_debug_scope_cases.json.gz', 'Catalog diagnostics'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Catalog diagnostics observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "i18n_rust_parity",
+      "status": "failed",
+      "seconds": 0.143277,
+      "output_sha256": "25f951f40080dadd4fed6f6eb35524819156d5476e2afb4c1b2e005de78017ee",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_i18n.py\", line 5, in <module>\n    raise SystemExit(main('i18n_cases.json', 'Language and i18n'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Language and i18n observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "provider_sqlite_schema_contracts",
+      "status": "passed",
+      "seconds": 0.0107312,
+      "output_sha256": "eba8f2fb95ba92fb2cc54b516fa51505d9dfb247bd32e4ea81a9609295b542dc"
+    },
+    {
+      "name": "original_sql_mutation_execution_contracts",
+      "status": "passed",
+      "seconds": 0.0120764,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_sql_query_execution_contracts",
+      "status": "passed",
+      "seconds": 0.00605876,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_sql_binding_policy_contracts",
+      "status": "passed",
+      "seconds": 0.0141648,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_sql_executor_contracts",
+      "status": "passed",
+      "seconds": 0.00804193,
+      "output_sha256": "3638795defe3920ce37470b41cd61e04d50d11f0c9058f954d4b34f0530b879a"
+    },
+    {
+      "name": "original_sql_compiler_contracts",
+      "status": "passed",
+      "seconds": 0.00512867,
+      "output_sha256": "9e04e122b1e42682d31b182f1f44a2e3343f0589fb22e85cd0d394241ef4ed57"
+    },
+    {
+      "name": "original_sql_default_contracts",
+      "status": "passed",
+      "seconds": 0.00328242,
+      "output_sha256": "cae7ac036991a3d5f3765bad838b47481115d9a385b76bfd0f318d31617a3593"
+    },
+    {
+      "name": "original_sql_diagnostic_stream_contracts",
+      "status": "passed",
+      "seconds": 0.00340849,
+      "output_sha256": "44e1ee4f1ebdfbd1e199389976e50809638dc7f79a155b0fb4283e8706685cd6"
+    },
+    {
+      "name": "original_sql_log_rendering_contracts",
+      "status": "passed",
+      "seconds": 0.00628365,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_runtime_entity_status_contracts",
+      "status": "passed",
+      "seconds": 0.0029231,
+      "output_sha256": "90c829339b1706be8dd7e7b4d0d1930f3704cc9687a03243ecf62df17a357e9e"
+    },
+    {
+      "name": "original_runtime_cache_relation_contracts",
+      "status": "passed",
+      "seconds": 0.00489189,
+      "output_sha256": "3c1183e6180c9171c61f8f167420d280fffd4acc764734166f8c895f7385b975"
+    },
+    {
+      "name": "original_runtime_inmemory_contracts",
+      "status": "passed",
+      "seconds": 0.00531561,
+      "output_sha256": "f742bcfa706adba81c003f58594898a7329c68c0588f96361964255797cf54b7"
+    },
+    {
+      "name": "original_runtime_checker_locale_contracts",
+      "status": "passed",
+      "seconds": 0.00520847,
+      "output_sha256": "c486b087726c11b46a491ac9d870140f8a4d4ec1209afbb346f02f127cf7f349"
+    },
+    {
+      "name": "original_runtime_log_telemetry_contracts",
+      "status": "passed",
+      "seconds": 0.00324317,
+      "output_sha256": "7e5f39f1daec90e8a35e816df5082e49e4c225f7e6feca7f2af03651548ee2fd"
+    },
+    {
+      "name": "original_runtime_policy_graph_contracts",
+      "status": "passed",
+      "seconds": 0.00354173,
+      "output_sha256": "aa4b1b993a4f3fdee5a45fd7bfbcc87b6fb8533a857f06fa108c35c4429dc201"
+    },
+    {
+      "name": "original_runtime_log_privacy_contracts",
+      "status": "passed",
+      "seconds": 0.00379675,
+      "output_sha256": "192b8c35686484d586b0d17dfb5dc88143cdee1d0f6bee76185af01b3c66166d"
+    },
+    {
+      "name": "original_runtime_context_contracts",
+      "status": "passed",
+      "seconds": 0.00472725,
+      "output_sha256": "5b6410950f7b7e4de5151a15315be9c92345680aa5cb8fbf6d94c787f9dd24ab"
+    },
+    {
+      "name": "original_runtime_file_log_privacy_contracts",
+      "status": "passed",
+      "seconds": 0.0649038,
+      "output_sha256": "5075ccc8d167c3373261f8dd77fce22e8a1d2809f239de9b885ea7ba5f630d50"
+    },
+    {
+      "name": "original_runtime_incremental_ledger_contracts",
+      "status": "passed",
+      "seconds": 1.55429,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_runtime_flat_identity_graph_contracts",
+      "status": "passed",
+      "seconds": 0.0038746,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_runtime_masking_contracts",
+      "status": "passed",
+      "seconds": 0.0284334,
+      "output_sha256": "94ba9252caca7f2cb6ed0f4376a93e9cc82a255640519a6105f75efcc2cd2a82"
+    },
+    {
+      "name": "original_runtime_business_clock_contracts",
+      "status": "passed",
+      "seconds": 0.00294375,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_runtime_business_permutation_contracts",
+      "status": "passed",
+      "seconds": 30.5527,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_provider_storage_contracts",
+      "status": "passed",
+      "seconds": 0.0117131,
+      "output_sha256": "dea41d6c50b0c71c6c18b9f7879b8ec9cadeff1749f14d2db819939d8469d5cb"
+    },
+    {
+      "name": "original_provider_schema_contracts",
+      "status": "passed",
+      "seconds": 0.165762,
+      "output_sha256": "dcf9f6d9934a740a708cef5e8b00a484e1f277046a571881f9b9def0a7ca3b6c"
+    },
+    {
+      "name": "original_provider_query_contracts",
+      "status": "passed",
+      "seconds": 0.512774,
+      "output_sha256": "d3b9490620914b9f1957fff95ac4ed4414539511fbe7e15353bcf9adee9084fb"
+    },
+    {
+      "name": "original_provider_transaction_contracts",
+      "status": "passed",
+      "seconds": 0.0145799,
+      "output_sha256": "41c156079e221228c33965a644facd97429c2677a2ae85c339d3b87f7009866f"
+    },
+    {
+      "name": "original_runtime_entity_save_contracts",
+      "status": "passed",
+      "seconds": 0.00768778,
+      "output_sha256": "008579603798d7287d5a3059346edce7e57866c285f288918902300c07a0027f"
+    },
+    {
+      "name": "original_runtime_round_trip_reference_contracts",
+      "status": "passed",
+      "seconds": 0.0753039,
+      "output_sha256": "2090e1aeb60ea14ebc65f854fa87d1ff6459be36dbfbdd736a9150e1a1b1822f"
+    },
+    {
+      "name": "original_runtime_registration_contracts",
+      "status": "passed",
+      "seconds": 0.00374868,
+      "output_sha256": "9fac7255aa4e1b5a6f22eb1bee6943f31a643d32cb43b48c6b94cb2ec10591ca"
+    },
+    {
+      "name": "original_runtime_service_boundary_contracts",
+      "status": "passed",
+      "seconds": 0.00595218,
+      "output_sha256": "4b54cb4996f158bd5867d430d0330f7c719c8cc8690551e4fb3edce55752016f"
+    },
+    {
+      "name": "original_runtime_validation_contracts",
+      "status": "passed",
+      "seconds": 0.00605982,
+      "output_sha256": "f14269f53ceb7ee5d72a65339a165578a78c3040d8f9822da76fd59b31bad553"
+    },
+    {
+      "name": "original_runtime_events_relations_contracts",
+      "status": "passed",
+      "seconds": 0.0111108,
+      "output_sha256": "ffff60146135411472af43e8f3c98a5268d90d7dbf213da2d3f304d1f4a07c3f"
+    },
+    {
+      "name": "original_runtime_typed_query_contracts",
+      "status": "passed",
+      "seconds": 0.0128023,
+      "output_sha256": "0c54358a708f77536398498f12ed184ec396f6f734a22e6fde3511ada35bb0e9"
+    },
+    {
+      "name": "original_runtime_aggregate_cache_contracts",
+      "status": "passed",
+      "seconds": 0.00959951,
+      "output_sha256": "7c91e310db822d3f9cf4e4593179eb11286068139b70ddc40f4ff8ae8f89a524"
+    },
+    {
+      "name": "original_runtime_pagination_contracts",
+      "status": "passed",
+      "seconds": 1.19725,
+      "output_sha256": "ee7c0c2ac6b16761b4d980ca3dd2b1e89902be4e8b24476e65fe2131937df785"
+    },
+    {
+      "name": "original_runtime_memory_service_contracts",
+      "status": "passed",
+      "seconds": 0.00587155,
+      "output_sha256": "6ba255b1f1902f7109067cda55c2a7ceaeffe7fe9137cd8baaa0ba8b3f302e0e"
+    },
+    {
+      "name": "original_runtime_context_tail_contracts",
+      "status": "passed",
+      "seconds": 0.0631021,
+      "output_sha256": "97a41cdcd8318b91c2e263fd543f07c6a360725cf02c7c91359096e43dff2631"
+    },
+    {
+      "name": "original_runtime_graph_reference_contracts",
+      "status": "passed",
+      "seconds": 0.00331918,
+      "output_sha256": "64f52f594a1346302a6ad9c5acf5f7d4136411144fd9856c9c4331ed8ede8246"
+    },
+    {
+      "name": "original_runtime_optimistic_conflict_output_contracts",
+      "status": "passed",
+      "seconds": 0.0377004,
+      "output_sha256": "c3ca73f1990a383a0782033f00d5c5f4da03bd349152e6ac4173cf5f7ff91220"
+    },
+    {
+      "name": "original_provider_dynamic_search_contracts",
+      "status": "passed",
+      "seconds": 0.0086604,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original_provider_guarded_mutation_contracts",
+      "status": "passed",
+      "seconds": 0.0082096,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "provider_sqlite_unicode_contracts",
+      "status": "passed",
+      "seconds": 11.6204,
+      "output_sha256": "ebe98f75aff5d471481c149ebd5095525ca6eba6179c6a8a706078515dac47b7"
+    },
+    {
+      "name": "query_keys_contracts",
+      "status": "passed",
+      "seconds": 0.00668013,
+      "output_sha256": "bc4d0d31522321ca889525708200e1b7e7e13e501e7fe9751e6938a9eeadf8fc"
+    },
+    {
+      "name": "id_set_build_contracts",
+      "status": "passed",
+      "seconds": 0.0036643,
+      "output_sha256": "e9ee48405e19affbd8e1e9746008f005ad0bf95d6e13345420e432e23eda60ee"
+    },
+    {
+      "name": "query_store_model_contracts",
+      "status": "passed",
+      "seconds": 0.00368367,
+      "output_sha256": "0a05829018446d151e2d7c365b88f5d9a4f37c56504ff1e4851097c836c1a0a0"
+    },
+    {
+      "name": "query_store_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.158552,
+      "output_sha256": "6ec6b382177c02cf1a39a2f80b4766f338485b129ee27fbae64a882c9c028683",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_query_store_models.py\", line 5, in <module>\n    raise SystemExit(main(\"query_store_model_cases.json.gz\", \"Query store models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Query store models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "query_store_contracts",
+      "status": "passed",
+      "seconds": 0.00692497,
+      "output_sha256": "9748fc3d05021d8e1e44735c8b6c1c0a1318365cc8cdc216c9363634b324c38b"
+    },
+    {
+      "name": "relation_execution_contracts",
+      "status": "passed",
+      "seconds": 0.00578198,
+      "output_sha256": "67022a48370696f1d5315186e5091df2c1ef784c4731ccc9915ed5b2df516c70"
+    },
+    {
+      "name": "relation_hydration_contracts",
+      "status": "passed",
+      "seconds": 0.0205312,
+      "output_sha256": "1609f22caa2f9212dcb981b7f32d7d607a9e5bce87759d8286ed292b9156a582"
+    },
+    {
+      "name": "relation_enhancement_contracts",
+      "status": "passed",
+      "seconds": 0.0119439,
+      "output_sha256": "af123d40266b18d89aecfa0e015dda87aa6f2adae8414d0ce0d4e147393dc27c"
+    },
+    {
+      "name": "context_query_contracts",
+      "status": "passed",
+      "seconds": 0.00453957,
+      "output_sha256": "d2a7173dbb6a01e9f657429a15e4b131215d5b327d1ee4994690f2f3660a926e"
+    },
+    {
+      "name": "entity_service_contracts",
+      "status": "passed",
+      "seconds": 0.0206496,
+      "output_sha256": "487a689f8687a4aebb51d72829f28706d15da1547cc4d147f29b66f3367a07f4"
+    },
+    {
+      "name": "enhanced_entities_contracts",
+      "status": "passed",
+      "seconds": 0.0237607,
+      "output_sha256": "39a80db1bef83502eac767987e3b984d5b333e49077c5b0b702b59786cdca338"
+    },
+    {
+      "name": "runtime_move_only_query_contracts",
+      "status": "passed",
+      "seconds": 0.0121246,
+      "output_sha256": "f2a76760a44ae300e0592801e4b8d5745052ea46c0fcc5d9877f2530a855eefe"
+    },
+    {
+      "name": "runtime_generic_completion_contracts",
+      "status": "passed",
+      "seconds": 0.0276337,
+      "output_sha256": "8d0964a7c8947b0d975a9fcf30eceb29866857d1368f0d5748b6981501b9b8b1"
+    },
+    {
+      "name": "entity_stream_contracts",
+      "status": "passed",
+      "seconds": 0.00696436,
+      "output_sha256": "ea3835ad52e2336d059c66f03d94067c5538ae25f01c72ab2c31c13aba71c302"
+    },
+    {
+      "name": "id_set_page_contracts",
+      "status": "passed",
+      "seconds": 0.0129679,
+      "output_sha256": "cca763eaaf736b0fd9aca34e7d4715245ec3dcee9ee6ef3ea0f232764a688a40"
+    },
+    {
+      "name": "typed_aggregate_context_contracts",
+      "status": "passed",
+      "seconds": 0.00418635,
+      "output_sha256": "1f8699b9ce08564298176ad5533d3ee912882d71c5624af6a51d94fd75a96215"
+    },
+    {
+      "name": "typed_aggregate_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.140892,
+      "output_sha256": "9eaabeab335403d0606d2e135da2a7c8c5505633ef16d620b541a1cccdb35202",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_typed_aggregate_scope.py\", line 5, in <module>\n    raise SystemExit(main(\"typed_aggregate_scope_cases.json\", \"Typed aggregate helper\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Typed aggregate helper observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_decoder_contracts",
+      "status": "passed",
+      "seconds": 0.00520706,
+      "output_sha256": "4f1c7438f26254bd31bcd01e9f359353f84fc9c60f8c3954ba1b42ed73644cb6"
+    },
+    {
+      "name": "entity_runtime_contracts",
+      "status": "passed",
+      "seconds": 0.167188,
+      "output_sha256": "ff4a8eaf4e366f3d6a761263fe45df5c312ce76ed9eda69510b2a038d88aee4b"
+    },
+    {
+      "name": "request_trace_scope_contracts",
+      "status": "passed",
+      "seconds": 0.00715799,
+      "output_sha256": "58198a7b00dbbdf20493de7b13d3ab707a3894e76102337ae35441021ace6d01"
+    },
+    {
+      "name": "graph_repository_rust_parity",
+      "status": "failed",
+      "seconds": 0.194219,
+      "output_sha256": "c4c644bb53930bddadfd668b00083dbc59f7bfbe26eb74513069975bc77c8d51",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_graph_repository.py\", line 5, in <module>\n    raise SystemExit(main(\"graph_repository_cases.json.gz\", \"Graph repository extraction\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Graph repository extraction observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_graph_model_contracts",
+      "status": "passed",
+      "seconds": 0.00381123,
+      "output_sha256": "4be9675749f6e5727f2e49fc7850b305f7893f3896ef35935446506f604c1fd3"
+    },
+    {
+      "name": "runtime_graph_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.363557,
+      "output_sha256": "7ccc35581ee894466df48cdddc1b1b4df7881d2430dcd0b4588bb24c621f4983",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_graph_models.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_graph_model_cases.json.gz\", \"Runtime graph models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime graph models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_graph_contracts",
+      "status": "passed",
+      "seconds": 0.00370651,
+      "output_sha256": "21073d4464b4f7a7e6ff0e170a0379c150782e7018a644758ebdd5d2e571a3e1"
+    },
+    {
+      "name": "scoped_comments_rust_parity",
+      "status": "passed",
+      "seconds": 0.151224,
+      "output_sha256": "d4b01bd1829ff865e1b8a62100dda1754f0d2d890afa1b591a36c6e45b5c4ff4"
+    },
+    {
+      "name": "context_event_contracts",
+      "status": "passed",
+      "seconds": 0.00996884,
+      "output_sha256": "f35f75b043812e95124755d186064a8f3dc936af7f150435bcb560e425086780"
+    },
+    {
+      "name": "telemetry_contracts",
+      "status": "passed",
+      "seconds": 0.00593249,
+      "output_sha256": "19a5bc9223d7651066ad744cd9cd11e6e6b346f456a201af65734cc29e513281"
+    },
+    {
+      "name": "telemetry_model_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.193622,
+      "output_sha256": "c0af8de13031c6829f9d4fbe5f26ff547076e0bfde9725739b681c90918ad201",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_telemetry_model_scope.py\", line 6, in <module>\n    raise SystemExit(main('telemetry_model_scope_cases.json.gz', 'Telemetry models'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Telemetry models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "context_logging_contracts",
+      "status": "passed",
+      "seconds": 0.0053603,
+      "output_sha256": "58ef148d4c307f24095b57f6eaa40f07b2c9657ba4da5b943498372b20d61feb"
+    },
+    {
+      "name": "log_manager_contracts",
+      "status": "passed",
+      "seconds": 0.00921995,
+      "output_sha256": "6323a71051fbea1a2a26efc8d607159a4cc1bd01d5927c595f440f541d099895"
+    },
+    {
+      "name": "log_formatter_contracts",
+      "status": "passed",
+      "seconds": 0.00417264,
+      "output_sha256": "d68125f27dfd7f78961ac47820370f2fdd7a96fe8cec52fe8c107d2d5b00328d"
+    },
+    {
+      "name": "runtime_log_contracts",
+      "status": "passed",
+      "seconds": 0.00715041,
+      "output_sha256": "e3d82e45b12200244cc004cd45bd999b8d855b2b6da19ce5307287a13d4ab9e3"
+    },
+    {
+      "name": "audit_event_contracts",
+      "status": "passed",
+      "seconds": 0.00503247,
+      "output_sha256": "bd9d74c90f7c49cc81733c1347d0b4f2e5553b8b874d8949ef77e190c3729e36"
+    },
+    {
+      "name": "audit_event_context_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00302954,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "audit_event_owner_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00290404,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "audit_event_payload_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00323736,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "audit_event_result_reentrant_close",
+      "status": "passed",
+      "seconds": 0.00330586,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "schema_runtime_contracts",
+      "status": "passed",
+      "seconds": 0.00413793,
+      "output_sha256": "20429ac9d4be5f983b7ce13a653711cf89ad9f4ec5dcfb7ea3db9139a0337425"
+    },
+    {
+      "name": "generated_bootstrap_contracts",
+      "status": "passed",
+      "seconds": 0.00470641,
+      "output_sha256": "0c3b7be2be064c871c3d5d203ba4bba590c71d4f74fc9fa1d76777118aebb568"
+    },
+    {
+      "name": "bootstrap_classifier_rust_parity",
+      "status": "passed",
+      "seconds": 0.0513319,
+      "output_sha256": "0fe518b1641c2b258e7b0e0b2e7bb244d16a6e8c07e7bc6134f37115d094b720"
+    },
+    {
+      "name": "internal_id_contracts",
+      "status": "passed",
+      "seconds": 0.00973983,
+      "output_sha256": "d6cf8ce3f268bae46dd917cd0ebe33db7413a82741aa342a380cb91eb009f29a"
+    },
+    {
+      "name": "business_service_contracts",
+      "status": "passed",
+      "seconds": 0.00777713,
+      "output_sha256": "24e8696ca92192dde26ad4e84b2d0c818e530dd635d671dc006fff561377efe5"
+    },
+    {
+      "name": "runtime_business_id_contracts",
+      "status": "passed",
+      "seconds": 0.0045938,
+      "output_sha256": "d3df792bb00a5113cedbefcfab04e64717bf3130f752ab9c4b7091c8e291dea5"
+    },
+    {
+      "name": "runtime_registry_contracts",
+      "status": "passed",
+      "seconds": 0.00377025,
+      "output_sha256": "eddf210387a217f0fb120a32db0938769044dbf153957f8fa2247cd4f6f1bfaa"
+    },
+    {
+      "name": "registry_debug_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.20433,
+      "output_sha256": "b8c0a4f7508359c5d4471fe5e94d55becade5f46dc217c9c7ca0b1468a9dd9e7",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_registry_debug_scope.py\", line 6, in <module>\n    raise SystemExit(main('registry_debug_scope_cases.json.gz', 'Registry diagnostics'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Registry diagnostics observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_check_error_contracts",
+      "status": "passed",
+      "seconds": 0.00579181,
+      "output_sha256": "6724ffd807ae739e7157b40980eb6d617dd5271e98c6c7d93e7098a4c5c22b47"
+    },
+    {
+      "name": "error_generic_context_contracts",
+      "status": "passed",
+      "seconds": 0.00297473,
+      "output_sha256": "a13345f2497a532a35d210981b7a9bc451f0b59e5aba7d9a17a5a8e4c2f6062d"
+    },
+    {
+      "name": "sql_move_only_context_contracts",
+      "status": "passed",
+      "seconds": 0.00427168,
+      "output_sha256": "ed8204e4d9487e2b1725508a5226b7c435d1200fca10e51bcef74f58fdb48eb2"
+    },
+    {
+      "name": "runtime_error_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.243858,
+      "output_sha256": "6fbe49891d7e1d6917c804fc12f6ae90f892c22203aea9d3769fda4ebd1ab09b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_error_debug.py\", line 59, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_error_debug.py\", line 42, in main\n    raise RuntimeError('Runtime diagnostic observations use a different source baseline')\nRuntimeError: Runtime diagnostic observations use a different source baseline\n"
+    },
+    {
+      "name": "runtime_context_resource_contracts",
+      "status": "passed",
+      "seconds": 0.00320579,
+      "output_sha256": "f8b26e2fc458ff7e333338a782e1ffdf30242c35785bc92b5d2220d6190a3c61"
+    },
+    {
+      "name": "context_model_contracts",
+      "status": "passed",
+      "seconds": 0.00748806,
+      "output_sha256": "93fd3697600c5008c54bee88aca7ed1c1b970d03085398c41dbd2db5b10ee184"
+    },
+    {
+      "name": "context_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.151024,
+      "output_sha256": "2316b018f1452526b244892dbed17500c5e1063ea939d789f3cf112b5660601b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_context_model.py\", line 6, in <module>\n    raise SystemExit(main('context_model_cases.json.gz', 'Context model'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context model observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "provider_sqlite_business_id_contracts",
+      "status": "passed",
+      "seconds": 0.052485,
+      "output_sha256": "d39efc5f2a328d03abd8464869ef11415548cc6277ffe2ee562f53817789b48e"
+    },
+    {
+      "name": "provider_sqlite_id_contracts",
+      "status": "passed",
+      "seconds": 0.0661038,
+      "output_sha256": "b9a6882fd827a4c370b19c5f9168779d8aa6e52cd9a31f8da0e531242123c011"
+    },
+    {
+      "name": "sqlite_async_schedule_rust_parity",
+      "status": "passed",
+      "seconds": 0.457997,
+      "output_sha256": "360a3f7ba74003378ab21fcc5093b1dc498ea0f08148515a77c2e1797766a1ef"
+    },
+    {
+      "name": "sqlite_async_lease_rust_parity",
+      "status": "passed",
+      "seconds": 0.166504,
+      "output_sha256": "048f5e1588942543eaea1185081b646eeed2d1acc71bc42cfde4712e345dc7eb"
+    },
+    {
+      "name": "provider_sqlite_transport_contracts",
+      "status": "passed",
+      "seconds": 0.0237001,
+      "output_sha256": "7ed0ef43862a75bbf30224123da93facbcda58775cc1e7b55c366713777f6bd1"
+    },
+    {
+      "name": "provider_sqlite_decoding_contracts",
+      "status": "passed",
+      "seconds": 0.00495571,
+      "output_sha256": "9407a81445bed0bec79999f2c8a0114b6332903291048eb963e8776f1691b518"
+    },
+    {
+      "name": "provider_sqlite_binding_contracts",
+      "status": "passed",
+      "seconds": 0.00382466,
+      "output_sha256": "8781a8deca44b7c913bafc1d3586e4dc740a74c57d61ea33b565ec59c0db54b0"
+    },
+    {
+      "name": "provider_sqlite_model_contracts",
+      "status": "passed",
+      "seconds": 0.00314757,
+      "output_sha256": "70cdd27d29d353581703b2c3b4b6d076d99ca235b4f67147b7c63a7883c70944"
+    },
+    {
+      "name": "provider_sqlite_error_contracts",
+      "status": "passed",
+      "seconds": 0.0395483,
+      "output_sha256": "2bb2aec0dd3ca1f1250f12ee6de085b1cab237f691b492addddff0464f50a7c7"
+    },
+    {
+      "name": "provider_sqlite_driver_error_contracts",
+      "status": "passed",
+      "seconds": 0.137866,
+      "output_sha256": "32424b1fd325cdd66e89151652f62fbc0ba840f3a995101a7cad3dde5d2f5743"
+    },
+    {
+      "name": "provider_sqlite_simple_error_contracts",
+      "status": "passed",
+      "seconds": 0.0148296,
+      "output_sha256": "4808c3434c32a54db3917c2a74d64ef04281eb3ad59cac04d997ad2f6d92755b"
+    },
+    {
+      "name": "provider_sqlite_boxed_error_contracts",
+      "status": "passed",
+      "seconds": 0.00521594,
+      "output_sha256": "74354dc6359943b3330a3ecee6be427c6ed16bd408fe7265d0ef4f08d6703ab5"
+    },
+    {
+      "name": "provider_sqlite_from_sql_error_contracts",
+      "status": "passed",
+      "seconds": 0.00327611,
+      "output_sha256": "0506eeed539e19b362860422321738a4aae468df6eedcb4dd4b47c12a8ca6dc9"
+    },
+    {
+      "name": "sql_stream_execution_contracts",
+      "status": "passed",
+      "seconds": 0.00709382,
+      "output_sha256": "259dbb1054bf42d308d54024552fb8c1d6188b80a58f1567cb113babef7f3c2d"
+    },
+    {
+      "name": "sql_transaction_execution_contracts",
+      "status": "passed",
+      "seconds": 0.0110382,
+      "output_sha256": "f79fcf95b40474b7860005d6ac95f8975253ffb74ed5ec13e8829eb40c152c56"
+    },
+    {
+      "name": "sql_mutation_execution_contracts",
+      "status": "passed",
+      "seconds": 0.0124048,
+      "output_sha256": "4cd374e73bea3f89a0ebf9fb516d3f210429902a0bfe9cb0744f51babed1ef12"
+    },
+    {
+      "name": "sql_execution_5_0_6_rust_parity",
+      "status": "passed",
+      "seconds": 3.20484,
+      "output_sha256": "f6ad1397379b9906d787b215508866886b774d6029dd0e3cdd19d208c9d1b1d4"
+    },
+    {
+      "name": "sql_query_executor_contracts",
+      "status": "passed",
+      "seconds": 0.100251,
+      "output_sha256": "f0e5db449fa9238a74df4e236d31fed394d1aa0eac610e23fca2ec6da3405744"
+    },
+    {
+      "name": "sql_transport_contracts",
+      "status": "passed",
+      "seconds": 0.00491783,
+      "output_sha256": "9595912814383cb410b7baedbfc462b020536caa6deb5334b9efe01c67b807a6"
+    },
+    {
+      "name": "provider_sqlite_dialect_contracts",
+      "status": "passed",
+      "seconds": 0.00409127,
+      "output_sha256": "2ccb04fbc3ebc728a523a833d1ff58f467812f42d320c423d0e989973803db37"
+    },
+    {
+      "name": "sql_mutation_contracts",
+      "status": "passed",
+      "seconds": 0.00618827,
+      "output_sha256": "94e083f876dbcfe092729831989d3cee226f21df104af430b853fd70672090ef"
+    },
+    {
+      "name": "sql_dialect_contracts",
+      "status": "passed",
+      "seconds": 0.00394684,
+      "output_sha256": "a91aba20e4878da04ebdc5958612e55e670e312aa016c3616f583a94d2b2cfc2"
+    },
+    {
+      "name": "sql_dialect_helpers_rust_parity",
+      "status": "failed",
+      "seconds": 0.137508,
+      "output_sha256": "c0555daf69462b7ecff666c116ddc33b2a37463356c34d4256547b5157370c5d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_helpers.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_dialect_helper_cases.json\", \"SQL dialect helpers\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL dialect helpers observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_dialect_in_rust_parity",
+      "status": "failed",
+      "seconds": 0.151239,
+      "output_sha256": "4d139181cd1d5c6950f0054ada524540a42c15cb6f44c0ca631a2f0b5ceb412c",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_in.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_dialect_in_cases.json\", \"Direct SQL IN defaults\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Direct SQL IN defaults observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_model_contracts",
+      "status": "passed",
+      "seconds": 0.00415211,
+      "output_sha256": "7b51e73896a9e50180004b1d6a9fad2988030b41f0094350ae8c99437e9ab9c5"
+    },
+    {
+      "name": "sql_model_api_contracts",
+      "status": "passed",
+      "seconds": 0.0329659,
+      "output_sha256": "af19fa90fd87bb76c1ab9ea7647e5cf80313ba7f0601c9cf5306a87e23a83935"
+    },
+    {
+      "name": "async_context_contracts",
+      "status": "passed",
+      "seconds": 0.00357597,
+      "output_sha256": "a6836fa710191ef1baa37d6adf5aade58589c8cf5b448a4756a9e7f66619fb0a"
+    },
+    {
+      "name": "executor_spi_contracts",
+      "status": "passed",
+      "seconds": 0.00354421,
+      "output_sha256": "e69e06a3f1669dc3c0df8f4252728513f51b025bdb32d154f50d6bbabc453dfa"
+    },
+    {
+      "name": "executor_defaults_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.122454,
+      "output_sha256": "63f97858a64b3f00fcc5ac8c21b5819f9e408f2b6b2d370e7283eb51d5aaea29",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_executor_defaults_scope.py\", line 6, in <module>\n    raise SystemExit(main('executor_defaults_scope_cases.json', 'Executor defaults'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Executor defaults observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "data_service_contracts",
+      "status": "passed",
+      "seconds": 0.00373202,
+      "output_sha256": "921fe87e312704feb4f17efcbaf4f2d82af717597312eb9c1aa852f8f32f25a9"
+    },
+    {
+      "name": "data_service_model_contracts",
+      "status": "passed",
+      "seconds": 0.11612,
+      "output_sha256": "3cfc3e0218de76c24866f56404178bc2181f47aff25249eabe684150a04d9b10"
+    },
+    {
+      "name": "system_time_contracts",
+      "status": "passed",
+      "seconds": 0.00314023,
+      "output_sha256": "55eebf9e10533d7f543ea28d294286285de92940fa0a4b3f3f491824dda52f6b"
+    },
+    {
+      "name": "system_time_arithmetic_scope_contracts",
+      "status": "passed",
+      "seconds": 0.00413387,
+      "output_sha256": "47430663be0afb71282fb61eadecb048ca006599fadc955bef038c78bec41945"
+    },
+    {
+      "name": "system_time_arithmetic_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.177813,
+      "output_sha256": "46eca7cbd1f0a4a38deb73fbf6836144f118f94d202a17f65b1af1782d5a2086",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_system_time_arithmetic_scope.py\", line 6, in <module>\n    raise SystemExit(main('system_time_arithmetic_scope_cases.json', 'System-time arithmetic'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: System-time arithmetic observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "system_time_error_scope_rust_parity",
+      "status": "passed",
+      "seconds": 9.26323,
+      "output_sha256": "a7f0eb78aa11c61aa9e258a88abb7028b8bab9701dce1f549820cc9fd059b1e9"
+    },
+    {
+      "name": "data_service_scope_contracts",
+      "status": "passed",
+      "seconds": 0.00912613,
+      "output_sha256": "217bfd1d11b86350fd8f1621c6b0c7fd5839abf51237e1ea17c51eba4a8a1ca2"
+    },
+    {
+      "name": "data_service_model_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.228179,
+      "output_sha256": "51b7d2dd581cfa6b052ae1dc00413f4afdca27047c7880b7155442b79efeea48",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_data_service_model_scope.py\", line 6, in <module>\n    raise SystemExit(main('data_service_model_scope_cases.json.gz', 'Data-service models'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Data-service models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_projection_scope_contracts",
+      "status": "passed",
+      "seconds": 0.00310215,
+      "output_sha256": "d6ee335143ac45469e7377934d01ce4596fff2e8b2ad270e6bd86fe40d8bfcbd"
+    },
+    {
+      "name": "sql_projection_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.188039,
+      "output_sha256": "b25ee39ee39ece00339bf899a00a0d7a60b70620b1fdfb232ad4317a55ba1f50",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_projection_scope.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_projection_scope_cases.json\", \"SQL projection scope\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL projection scope observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_contracts",
+      "status": "passed",
+      "seconds": 0.00557708,
+      "output_sha256": "daa8343833f38d475f0f608b4cfafa695dce0bdd9886de1f152c19cf6b67d902"
+    },
+    {
+      "name": "decimal_inline_contracts",
+      "status": "passed",
+      "seconds": 0.00291339,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core_aux_debug_contracts",
+      "status": "passed",
+      "seconds": 0.186731,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "business_id_contracts",
+      "status": "passed",
+      "seconds": 0.0395849,
+      "output_sha256": "45f36225fdcadcc82c81e265f796e50f896e0930ebc30994d1b729832f313ce3"
+    },
+    {
+      "name": "presentation_contracts",
+      "status": "passed",
+      "seconds": 0.00545777,
+      "output_sha256": "0c2aad09197b627c028ff6f1dcc7559632b43d066589ad85136c42d75821e731"
+    },
+    {
+      "name": "request_search_contracts",
+      "status": "passed",
+      "seconds": 0.00693629,
+      "output_sha256": "143acb7b084aeea141386391b5454f4d4dc79db2e7c8dd4d62ed0165e2763d44"
+    },
+    {
+      "name": "original_core_value_contracts",
+      "status": "passed",
+      "seconds": 0.00308332,
+      "output_sha256": "109ba2c606d61033c8a14be85d5a447023f291fb33b6f1c212cdb9926b79603b"
+    },
+    {
+      "name": "original_core_composition_contracts",
+      "status": "passed",
+      "seconds": 0.00460267,
+      "output_sha256": "f43a17ef70c4f4bf581e212eee6ce54569ba5a7669c5bde6322cd5946a57ce7f"
+    },
+    {
+      "name": "original_core_entity_mapping_contracts",
+      "status": "passed",
+      "seconds": 0.00403815,
+      "output_sha256": "693ade67d4e954b38475dfc26f558155fd31374221bcddf373dac2bedc2be99a"
+    },
+    {
+      "name": "original_core_functional_contracts",
+      "status": "passed",
+      "seconds": 0.00375774,
+      "output_sha256": "975e87cb81148ab9284077893682e5509d17653626cf9742733786057c5b0c86"
+    },
+    {
+      "name": "original_core_dynamic_search_contracts",
+      "status": "passed",
+      "seconds": 0.00559549,
+      "output_sha256": "59277e0fc4ea669e72365f144a1f9bc7ecdaa42c2fbabaa92d92817e37aa652b"
+    },
+    {
+      "name": "original_core_dynamic_search_warning_privacy",
+      "status": "passed",
+      "seconds": 0.0444782,
+      "output_sha256": "a6ac232cb58cbe353fb38fbe925c0f15c5e2380d553dd43d22b1c4439acd5d02"
+    },
+    {
+      "name": "entity_registration_api_contracts",
+      "status": "passed",
+      "seconds": 0.00287857,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "entity_registration_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.189136,
+      "output_sha256": "e15a95b6d495e5c69828f078bb518a0aff2b546adffedada98c734e27f4700b1",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_registration_api.py\", line 6, in <module>\n    raise SystemExit(main('entity_registration_api_cases.json', 'Entity registration API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity registration API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "base_entity_api_contracts",
+      "status": "passed",
+      "seconds": 0.00322351,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "base_entity_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.220202,
+      "output_sha256": "b83522077ab09721be4e571ce6349efdef8a17bd50d492dcc95fcf7d012f6afa",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_base_entity_api.py\", line 6, in <module>\n    raise SystemExit(main('base_entity_api_cases.json', 'BaseEntityData API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: BaseEntityData API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_debug_contracts",
+      "status": "passed",
+      "seconds": 0.00326029,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "entity_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.120271,
+      "output_sha256": "19a4554dafd6f211d417102777cf1ffb6113667b88506ae351788bd6b284ed20",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_debug.py\", line 6, in <module>\n    raise SystemExit(main('entity_debug_cases.json', 'Entity Debug'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity Debug observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_owned_api_contracts",
+      "status": "passed",
+      "seconds": 0.00322121,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "entity_defaults_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.148375,
+      "output_sha256": "34b7b78e00525d66875adc8052bf84ffee6fe4d12cf134998a1d2157d028c891",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_defaults_api.py\", line 6, in <module>\n    raise SystemExit(main('entity_defaults_api_cases.json', 'Entity defaults API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity defaults API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "chrono_value_contracts",
+      "status": "passed",
+      "seconds": 0.00303,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "chrono_value_rust_parity",
+      "status": "failed",
+      "seconds": 0.185231,
+      "output_sha256": "27e55c1cf85b04ddbbbc77ff18cf41a37fe1a6b816622c74af3deafdc1d37c06",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_chrono_value.py\", line 6, in <module>\n    raise SystemExit(main('chrono_value_cases.json', 'UTC Value conversion'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: UTC Value conversion observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "field_layout_rust_parity",
+      "status": "passed",
+      "seconds": 0.187274,
+      "output_sha256": "cf1f6ad10f5eebfd48e4028d45ac6a109d177281ba7375f29546ac3074e92360"
+    },
+    {
+      "name": "loaded_snapshot_rust_parity",
+      "status": "passed",
+      "seconds": 0.998067,
+      "output_sha256": "d18319ddfb16ec5b36954b1e26e9de15a6afbdf5df9556fe1bd09adebbffe631"
+    },
+    {
+      "name": "loaded_snapshot_contracts",
+      "status": "passed",
+      "seconds": 0.0842097,
+      "output_sha256": "f37adac320c827550cdbf49474e45196a0ac2e0f367cfbc651d5bd7aa538146f"
+    },
+    {
+      "name": "dynamic_fields_contracts",
+      "status": "passed",
+      "seconds": 0.00855492,
+      "output_sha256": "e9551d0e77947c551d4c0d468c95b50366579ee0ef4e7d295d542a2c5beb6e7e"
+    },
+    {
+      "name": "dynamic_carrier_contracts",
+      "status": "passed",
+      "seconds": 0.00421568,
+      "output_sha256": "acf49114a1b07b5b06705b53c71e850dc48a645d6c18f0fd72a1ca99e95b5303"
+    },
+    {
+      "name": "commit_audit_contracts",
+      "status": "passed",
+      "seconds": 0.00677645,
+      "output_sha256": "d787c89f3dac16d9afe3edd9dbc51ec5d5a67b4508c863160a171d51c2b9fc9f"
+    },
+    {
+      "name": "commit_audit_transaction_contracts",
+      "status": "passed",
+      "seconds": 0.0201602,
+      "output_sha256": "c586b7186ce56cb45a07e6817330d24b2d0681cb0602e1eb99206f3e8b0aff78"
+    },
+    {
+      "name": "commit_audit_error_rust_parity",
+      "status": "passed",
+      "seconds": 0.088706,
+      "output_sha256": "e5080e14aa15ff7d3ba8d18d68fb768498ff4556be46998cd70b234cdc147c2b"
+    },
+    {
+      "name": "dynamic_relation_contracts",
+      "status": "passed",
+      "seconds": 0.00777672,
+      "output_sha256": "229cf8588dce5225ed11e4795afeac276a6c055e416e99d0618583df3154c976"
+    },
+    {
+      "name": "dynamic_relation_rust_parity",
+      "status": "passed",
+      "seconds": 0.593955,
+      "output_sha256": "29b92e0ea8de30b9890383d796319865da92373259f8a39647871d8716d0d532"
+    },
+    {
+      "name": "dynamic_query_rust_parity",
+      "status": "passed",
+      "seconds": 0.417447,
+      "output_sha256": "16d54033d32903fa7b12433028db6cc1a53c7ea3d5ddc5ccd57b1b22277f0d05"
+    },
+    {
+      "name": "dynamic_query_contracts",
+      "status": "passed",
+      "seconds": 0.0178537,
+      "output_sha256": "0287c26d40f47c6239ee01d12aee926eaad77c34dce1003a499683903e084a8c"
+    },
+    {
+      "name": "dynamic_provider_rust_parity",
+      "status": "passed",
+      "seconds": 0.143778,
+      "output_sha256": "818b2afe0894a02b569917ababe5aadfc2c58e77159a9e7552caf56bf6674b1f"
+    },
+    {
+      "name": "dynamic_provider_contracts",
+      "status": "passed",
+      "seconds": 0.00572192,
+      "output_sha256": "a8e2f1a37144663c444954da414573f812d9df2efe306bb4163b29ac031009ab"
+    },
+    {
+      "name": "dynamic_ledger_contracts",
+      "status": "passed",
+      "seconds": 0.00509367,
+      "output_sha256": "520602e8277d6d05a9d48f8cdde0874a789a72d240116eb68fbaec3432ddc58d"
+    },
+    {
+      "name": "dynamic_graph_save_contracts",
+      "status": "passed",
+      "seconds": 0.0661177,
+      "output_sha256": "0a89d83901933821f9413b0f264426172884ccc7461086153245b38c9d79de4b"
+    },
+    {
+      "name": "dynamic_preflight_contracts",
+      "status": "passed",
+      "seconds": 0.00799691,
+      "output_sha256": "e999387848e42dfa647cf4fe79f907ad1b6654ac558ee94027577264b8ca7989"
+    },
+    {
+      "name": "dynamic_governance_rust_parity",
+      "status": "passed",
+      "seconds": 0.128867,
+      "output_sha256": "9f5850b6bf9fb1fb19de5bfdca4ea1c72596209fef3482701ff07dd7d1175741"
+    },
+    {
+      "name": "dynamic_graph_debug_rust_parity",
+      "status": "passed",
+      "seconds": 0.0919414,
+      "output_sha256": "94b6143ebb9ef83262a24c74a2771e39c5ca0488d6c293d72f90ab80f96fe431"
+    },
+    {
+      "name": "dynamic_storage_contracts",
+      "status": "passed",
+      "seconds": 0.00359942,
+      "output_sha256": "1c897450364fd8505c5c4ee0d17f9902a945a5dd53522d1f16ec8d483c890717"
+    },
+    {
+      "name": "sqlite_dynamic_storage_contracts",
+      "status": "passed",
+      "seconds": 0.0121898,
+      "output_sha256": "ce32c1605a3300c9957ac3f6f26895958b94e580810a55f84170366d4295ecb2"
+    },
+    {
+      "name": "sqlite_dynamic_storage_rust_parity",
+      "status": "passed",
+      "seconds": 0.345885,
+      "output_sha256": "d4e03a063bf2266d09610e7ba010d8330a9448e931eb84d38008f929b2bd6265"
+    },
+    {
+      "name": "dynamic_storage_rust_parity",
+      "status": "passed",
+      "seconds": 0.0834247,
+      "output_sha256": "de33168ab308678115cdb46cfc83a8d4c52d2c59eca99b758439609c0940b058"
+    },
+    {
+      "name": "dynamic_ledger_rust_parity",
+      "status": "passed",
+      "seconds": 0.296489,
+      "output_sha256": "83c15d02d89984a0a2d0b7606d6b3bfd1a2439025d068e92c8d77862012622e0"
+    },
+    {
+      "name": "dynamic_carrier_rust_parity",
+      "status": "passed",
+      "seconds": 0.663107,
+      "output_sha256": "83e133b0320381fcd80f91b6ccba92d8f33d89cc84af5e98df129af88df427ef"
+    },
+    {
+      "name": "dynamic_fields_rust_parity",
+      "status": "passed",
+      "seconds": 0.289464,
+      "output_sha256": "d2b6f3d0e697151ed975c7de85e7b25363ca5cf060c3d004f18ea4c7303baf39"
+    },
+    {
+      "name": "original_snapshot_rust_parity",
+      "status": "passed",
+      "seconds": 0.157092,
+      "output_sha256": "4c81e56b2a0b0446b36e14524b4af23b3566a6386f63e90dbae71659a0744881"
+    },
+    {
+      "name": "checker_provenance_rust_parity",
+      "status": "passed",
+      "seconds": 0.596865,
+      "output_sha256": "5a75d20d42fae2fe1f50bf320dc8b015205f7371b258db02b7ee14e968d91e4c"
+    },
+    {
+      "name": "generated_entity_helpers_rust_parity",
+      "status": "passed",
+      "seconds": 1.67582,
+      "output_sha256": "296a1af2dcc74e5bfc88b19369cf43e93037110bdbba6bf19d05bed38f713a0c"
+    },
+    {
+      "name": "generated_optional_fields_rust_parity",
+      "status": "passed",
+      "seconds": 5.5101,
+      "output_sha256": "b64275b2295957821377bd4fb4e4afe2725f5d6c696ee9052aa3071c8f1a5c2b"
+    },
+    {
+      "name": "generated_constant_scalar_contracts",
+      "status": "passed",
+      "seconds": 0.095889,
+      "output_sha256": "f7cdab67b2d6b3e8bb4a2c470abb7bdb044f21285a239740a60111d96535fbfa"
+    },
+    {
+      "name": "generated_constant_variants_rust_parity",
+      "status": "passed",
+      "seconds": 2.48192,
+      "output_sha256": "89733a9e4e2adc20a716f5b0b0811f43503963c962d39706a32df6baf121f646"
+    },
+    {
+      "name": "generated_bootstrap_rust_parity",
+      "status": "passed",
+      "seconds": 2.88238,
+      "output_sha256": "cce684ba645a044cce54f8e3e9a2ca64d6d238456a9ceb8bfe053709ad26c516"
+    },
+    {
+      "name": "generated_candidates_rust_parity",
+      "status": "passed",
+      "seconds": 3.50825,
+      "output_sha256": "0bc89e10cee897f27cba44c10f4dfb0cd1aeee59829365cd6c87784450a1d4b9"
+    },
+    {
+      "name": "generated_candidates_contracts",
+      "status": "passed",
+      "seconds": 0.00347098,
+      "output_sha256": "d9f2ee7423db5d23f7f4d15d82ef2e8c05e46a4943b413bd131f09684c8e2d02"
+    },
+    {
+      "name": "generated_bootstrap_model_contracts",
+      "status": "passed",
+      "seconds": 0.00400653,
+      "output_sha256": "f853adb1f0c4dfb0f8b3accf6a1aad9307e534c2c9395ec1f3397c3963bc64a2"
+    },
+    {
+      "name": "generated_inheritance_rust_parity",
+      "status": "passed",
+      "seconds": 0.14772,
+      "output_sha256": "4bee830529b6a7dc0ca84ba3c307147a8769ff40f03bac6439bee8a167e76c0e"
+    },
+    {
+      "name": "generated_inheritance_contracts",
+      "status": "passed",
+      "seconds": 0.0548018,
+      "output_sha256": "fe0a6b9912b23b327a94d2ddbf5b6f7e278474d7b77bf8d8b67f413671516832"
+    },
+    {
+      "name": "generated_inheritance_query_rust_parity",
+      "status": "passed",
+      "seconds": 1.57043,
+      "output_sha256": "d83906ac1d3e2fa76b6fff817b51b690953a5234cfc37c389bea19ce1e7ebfe2"
+    },
+    {
+      "name": "generated_inheritance_query_contracts",
+      "status": "passed",
+      "seconds": 0.00578884,
+      "output_sha256": "5c5b345989f1202b93e49aa080dc6715c7d7a3e1a26239f511dd2a307523f041"
+    },
+    {
+      "name": "generated_return_type_contracts",
+      "status": "passed",
+      "seconds": 0.0344785,
+      "output_sha256": "ed35fdeda2031d7163687041ae80dcba099dd13a9c3455a9be8ae7e357222fb1"
+    },
+    {
+      "name": "generated_inheritance_sqlite_rust_parity",
+      "status": "passed",
+      "seconds": 1.46033,
+      "output_sha256": "7c8d60cad9ba502c736d7401482d109d6f09245f457a93d90bd8bd48e2e49664"
+    },
+    {
+      "name": "generated_return_type_rust_parity",
+      "status": "passed",
+      "seconds": 8.4181,
+      "output_sha256": "3ee02f02fc5a32f7f541dc6906ab598084a00d0916cadcf467b7fe63ce5ac2f0"
+    },
+    {
+      "name": "generated_inheritance_save_rust_parity",
+      "status": "passed",
+      "seconds": 24.5931,
+      "output_sha256": "512087c683f075f789be29af7aba0d6a9ba5c03a083109c1c07868ac37f7d6bf"
+    },
+    {
+      "name": "generated_inheritance_graph_rust_parity",
+      "status": "passed",
+      "seconds": 53.3871,
+      "output_sha256": "81468279b7f60143b837b9f65c8858b3faf79d9234424d388a9a4e3105cfa787"
+    },
+    {
+      "name": "generated_inheritance_graph_contracts",
+      "status": "passed",
+      "seconds": 0.113321,
+      "output_sha256": "97263e4da70e309fa3de825eff0d7514830abd69167de48118fc6b6dc81c4072"
+    },
+    {
+      "name": "generated_inheritance_variants_rust_parity",
+      "status": "passed",
+      "seconds": 6.5309,
+      "output_sha256": "e13c6d489e779bcca61d1e6d8337e6f462b5c4495cc92a8e38b45aa19e5c0b63"
+    },
+    {
+      "name": "generated_inheritance_variants_contracts",
+      "status": "passed",
+      "seconds": 0.0396106,
+      "output_sha256": "d39bdef9efdfa38d7b83c921da5e7e20d857cf1f7a29847b2ebbfe74e020cca8"
+    },
+    {
+      "name": "generated_inherited_stream_rust_parity",
+      "status": "passed",
+      "seconds": 5.32229,
+      "output_sha256": "864413abdc9db22959f6a684e9af5559296dfa618c21daaf0869d1a52bed02f9"
+    },
+    {
+      "name": "generated_checker_flow_rust_parity",
+      "status": "passed",
+      "seconds": 6.21286,
+      "output_sha256": "ad00bec1c9234515a09f48491f6e34d4d9c4499a9e25d494777c74ddc6f1bb95"
+    },
+    {
+      "name": "generated_checker_commit_rust_parity",
+      "status": "passed",
+      "seconds": 3.30155,
+      "output_sha256": "d0eb90dfa7c3ae42614f4b07031eaab33d153ef45c192c7e319acd8b8766f212"
+    },
+    {
+      "name": "generated_relations_rust_parity",
+      "status": "passed",
+      "seconds": 0.171081,
+      "output_sha256": "8b6a7b5f7e85d6b39f31e418a7967a78ead4a16379c512925e5e25169b723916"
+    },
+    {
+      "name": "generated_business_ids_rust_parity",
+      "status": "passed",
+      "seconds": 3.62088,
+      "output_sha256": "ac30804b17db739226d6c28a1011bff25caa8377d7151d30f09f69e86a0e6749"
+    },
+    {
+      "name": "intent_trace_rust_parity",
+      "status": "passed",
+      "seconds": 2.41136,
+      "output_sha256": "0f67ebf13d3876cc8177441bc471c3b5ef078eda23f62c9415e9099650a196d5"
+    },
+    {
+      "name": "field_layout_contracts",
+      "status": "passed",
+      "seconds": 0.00309111,
+      "output_sha256": "9026a77248242e722173b0629b8d2699df54f82ec51a2b5026fb2ca721aac786"
+    },
+    {
+      "name": "entity_expression_contracts",
+      "status": "passed",
+      "seconds": 0.00652084,
+      "output_sha256": "cfca6c7bc42aa8bca60f4682b53ac4899c8f92962316524db61436461b017e6a"
+    },
+    {
+      "name": "provider_sqlite_schema_rust_parity",
+      "status": "failed",
+      "seconds": 0.180079,
+      "output_sha256": "eec86bdc01d0c6b4eeff037c3422a9f4520b4427714523b5c8ad7eb0cab14758",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_schema.py\", line 5, in <module>\n    raise SystemExit(main('sqlite_schema_cases.json', 'Production SQLite schema'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Production SQLite schema observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_base_rust_parity",
+      "status": "failed",
+      "seconds": 0.233941,
+      "output_sha256": "f9f65ccf6b3e0626833f2127e560b560d5fe45c246639c50af4fc30db9c28403",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_base.py\", line 4, in <module>\n    raise SystemExit(main('runtime_base_cases.json','Runtime query adapter'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime query adapter observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "context_query_rust_parity",
+      "status": "failed",
+      "seconds": 0.142039,
+      "output_sha256": "2bb96d310ab9618a1f4737743a1e6d8077fd34169b455bce975a7a8f86ebb6fd",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_context_query.py\", line 4, in <module>\n    raise SystemExit(main('context_query_cases.json','Context query observation'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context query observation observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "relation_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.175825,
+      "output_sha256": "9fe2a79d9202d4ccbc2c725df584ba65ffa0540437855e2e6c881f127181402a",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_relation_execution.py\", line 4, in <module>\n    raise SystemExit(main('relation_execution_cases.json','Relation execution strategy'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Relation execution strategy observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "query_keys_rust_parity",
+      "status": "failed",
+      "seconds": 0.189899,
+      "output_sha256": "823a01122621bbc7dd0936d3a34b059606319fc339d501dea1e852b862a807e3",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_query_keys.py\", line 11, in <module>\n    raise SystemExit(main(corpus, f'canonical and pagination query keys ({args.pointer_bytes * 8}-bit usize)'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: canonical and pagination query keys (64-bit usize) observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "id_set_build_rust_parity",
+      "status": "failed",
+      "seconds": 0.283187,
+      "output_sha256": "65df2210d6b916d32fbb88efef879548bbc4097bd542cb5d7815e8f8a6378bfa",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_id_set_build.py\", line 4, in <module>\n    raise SystemExit(main('id_set_build_cases.json','ID set build coordination'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: ID set build coordination observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "query_store_rust_parity",
+      "status": "failed",
+      "seconds": 0.18523,
+      "output_sha256": "1ff37bb2d624bd6e0dd3ff793df4bffb2361725aa6f06ac93ae3ef6f79644d3b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_query_store.py\", line 4, in <module>\n    raise SystemExit(main('query_store_cases.json','Query stores'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Query stores observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "relation_enhancement_rust_parity",
+      "status": "failed",
+      "seconds": 0.174757,
+      "output_sha256": "3bf4c7afa1790f0b10832d9b8b7e3a6bdf15836f7107b4845be82b296d03d2f3",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_relation_enhancement.py\", line 4, in <module>\n    raise SystemExit(main('relation_enhancement_cases.json','Relation enhancements'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Relation enhancements observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "relation_hydration_rust_parity",
+      "status": "failed",
+      "seconds": 0.172619,
+      "output_sha256": "c429ddd2d9ad6599a8495b3bd72476e94961ad1c293268143ebf130fd4ee0e7d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_relation_hydration.py\", line 4, in <module>\n    raise SystemExit(main('relation_hydration_cases.json','Relation hydration'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Relation hydration observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_service_rust_parity",
+      "status": "failed",
+      "seconds": 0.139113,
+      "output_sha256": "76be18b379ba4dd019d32453a57948e28b524dfe37e9543484bcaa5a1e5a889d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_service.py\", line 4, in <module>\n    raise SystemExit(main('entity_service_cases.json','Entity service relation planning'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity service relation planning observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_query_rust_parity",
+      "status": "failed",
+      "seconds": 0.156296,
+      "output_sha256": "aed83800eae416dfbe433b7ea5e2ad9b8c6d33a37db73852158a94c7114465ed",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_query.py\", line 6, in <module>\n    raise SystemExit(main(\"entity_query_cases.json\", \"Entity query execution\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity query execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_query_boundary_rust_parity",
+      "status": "failed",
+      "seconds": 0.177886,
+      "output_sha256": "73a9ef2d73a1199ee8ec1a68e92b5bbc28f7c70ad724a05ddf81dcc67ec61c74",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_query_boundaries.py\", line 39, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_query_boundaries.py\", line 19, in main\n    raise RuntimeError(\"Entity query boundary observations belong to a different baseline\")\nRuntimeError: Entity query boundary observations belong to a different baseline\n"
+    },
+    {
+      "name": "entity_stream_rust_parity",
+      "status": "failed",
+      "seconds": 0.138038,
+      "output_sha256": "e9fcd70b48adf89c9a3b6c88cc62eeaa3bf2378e1c164f45f0e036c1fbab3bdb",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_stream.py\", line 5, in <module>\n    raise SystemExit(main('entity_stream_cases.json', 'Entity stream execution'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity stream execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "id_set_page_rust_parity",
+      "status": "failed",
+      "seconds": 0.199576,
+      "output_sha256": "2309abb7d20213ec10560118e5dbcd12892dd42a570488d98911ad90175329df",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_id_set_page.py\", line 5, in <module>\n    raise SystemExit(main('id_set_page_cases.json', 'ID-set page preparation'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: ID-set page preparation observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "enhanced_entities_rust_parity",
+      "status": "failed",
+      "seconds": 0.12998,
+      "output_sha256": "c226f463b6f6a84cc25712400d09788fb74a7b8913a0205cb83090b066ed5f87",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_enhanced_entities.py\", line 4, in <module>\n    raise SystemExit(main('enhanced_entities_cases.json', 'Enhanced entity execution'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Enhanced entity execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_decoder_rust_parity",
+      "status": "failed",
+      "seconds": 0.132714,
+      "output_sha256": "f3fdeecb00c2be2a5f4f7fb6b6c3f4fd194a9c1842103fbe6162fda54b502e8d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_decoder.py\", line 4, in <module>\n    raise SystemExit(main('entity_decoder_cases.json','Entity graph decoder and module'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Entity graph decoder and module observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "entity_runtime_rust_parity",
+      "status": "failed",
+      "seconds": 0.301008,
+      "output_sha256": "1ba499485cdb86794a07b96811354df2e6dbe565061b84a90d4353e19e680d9b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_entity_runtime.py\", line 4, in <module>\n    raise SystemExit(main('entity_runtime_cases.json','Identity graph and mutation ledger'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Identity graph and mutation ledger observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_graph_rust_parity",
+      "status": "failed",
+      "seconds": 0.319686,
+      "output_sha256": "bdd6c5fc2fc1c33c91d3d356e873ffa4251cfcda183485396751f8d20d19e9b9",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_graph.py\", line 4, in <module>\n    raise SystemExit(main('runtime_graph_cases.json', 'Runtime graph models'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime graph models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "context_event_rust_parity",
+      "status": "failed",
+      "seconds": 0.173932,
+      "output_sha256": "d48c80c2e88cad47f0e93b1246032ddbea2326fc9863451111101e665971abb3",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_context_event.py\", line 4, in <module>\n    raise SystemExit(main('context_event_cases.json', 'Context event dispatch'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context event dispatch observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "telemetry_rust_parity",
+      "status": "failed",
+      "seconds": 0.177474,
+      "output_sha256": "0b65126687e260ba0a732faeba4ff046dd7658102f11e1243b2569dc87a050f9",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_telemetry.py\", line 4, in <module>\n    raise SystemExit(main('telemetry_cases.json', 'Runtime telemetry'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime telemetry observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "context_logging_rust_parity",
+      "status": "failed",
+      "seconds": 0.13101,
+      "output_sha256": "508b15b01f779934b9bb3c7dbca48cbb0cccf78a4b856c68dd359270463114d4",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_context_logging.py\", line 4, in <module>\n    raise SystemExit(main('context_logging_cases.json', 'Context logging'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Context logging observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "log_manager_rust_parity",
+      "status": "failed",
+      "seconds": 0.18662,
+      "output_sha256": "e258be508adbaf929f5c82b38f66e198647c4b3790ff6ccad9c60a811ba84093",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_manager.py\", line 70, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_manager.py\", line 53, in main\n    raise RuntimeError('Log manager observations belong to a different baseline')\nRuntimeError: Log manager observations belong to a different baseline\n"
+    },
+    {
+      "name": "log_formatter_rust_parity",
+      "status": "failed",
+      "seconds": 0.209951,
+      "output_sha256": "95d1421f40cbd93dd42a116380e2fc107c5cc6691d513ef2e36d484937a93cc9",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_formatter.py\", line 71, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_log_formatter.py\", line 26, in main\n    raise RuntimeError('Formatter observations belong to a different baseline')\nRuntimeError: Formatter observations belong to a different baseline\n"
+    },
+    {
+      "name": "runtime_log_rust_parity",
+      "status": "failed",
+      "seconds": 0.159511,
+      "output_sha256": "3c4d7f700ed736eb334e7ff74feaae13027993f96e9842a2948c26672cc21851",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_log.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_log_cases.json\", \"Runtime SQL log projection\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime SQL log projection observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "audit_event_rust_parity",
+      "status": "failed",
+      "seconds": 0.250164,
+      "output_sha256": "d96f829c3d4a3e9ee243196b2e1a6e230984d65efaf03969a2256e3580b74b0f",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_audit_event.py\", line 56, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_audit_event.py\", line 22, in main\n    raise RuntimeError('Audit observations belong to a different source baseline')\nRuntimeError: Audit observations belong to a different source baseline\n"
+    },
+    {
+      "name": "schema_runtime_rust_parity",
+      "status": "failed",
+      "seconds": 0.164347,
+      "output_sha256": "ce2b472a7b3b0f96b66df0fed995705eaa4f2db9b873c59ad10065dc2055d9e8",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_schema_runtime.py\", line 5, in <module>\n    raise SystemExit(main(\"schema_runtime_cases.json\", \"Schema runtime\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Schema runtime observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "internal_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.133771,
+      "output_sha256": "f555fd606fd050fca555ae1890a11a3b0406f941fcd7c3c55a3edaa42022872b",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_internal_id.py\", line 5, in <module>\n    raise SystemExit(main(\"internal_id_cases.json\", \"Internal ID\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Internal ID observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "business_service_rust_parity",
+      "status": "failed",
+      "seconds": 0.25358,
+      "output_sha256": "33dcb404d2d9170abb3da1a76742d2f051d1d43e3ae71232513d1ee917fc7bb5",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_business_service.py\", line 5, in <module>\n    raise SystemExit(main(\"business_service_cases.json\", \"Business clock/service\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Business clock/service observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_business_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.1848,
+      "output_sha256": "cc5345b73b50b2d6bb1051e545aea9323dc0296a9c510383f34b24a1c29bee41",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_business_id.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_business_id_cases.json\", \"Runtime Business ID profiles\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime Business ID profiles observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_registry_rust_parity",
+      "status": "failed",
+      "seconds": 0.220961,
+      "output_sha256": "1e546272c44c8078e6e4438016526e1426a675327c0a1a4ac6b9ebeb94e114e0",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_registry.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_registry_cases.json\", \"Runtime metadata/registry\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime metadata/registry observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "runtime_check_rust_parity",
+      "status": "failed",
+      "seconds": 0.181345,
+      "output_sha256": "dc31e1b739dc32369e2144a2b2930ac9141a9c4d1d1e0a584a2c2e7b494ac379",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_check.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_check_cases.json\", \"Runtime checks/errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_error_debug.py\", line 42, in main\n    raise RuntimeError('Runtime diagnostic observations use a different source baseline')\nRuntimeError: Runtime diagnostic observations use a different source baseline\n"
+    },
+    {
+      "name": "runtime_context_rust_parity",
+      "status": "failed",
+      "seconds": 0.223941,
+      "output_sha256": "1e151dfcd71657813b65f3d44ebb749f9b19bc384d4dc0fc9c05d08cb14eedd1",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_runtime_context.py\", line 5, in <module>\n    raise SystemExit(main(\"runtime_context_cases.json\", \"Runtime Context resources\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Runtime Context resources observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sqlite_provider_business_id_rust_parity",
+      "status": "passed",
+      "seconds": 1.02417,
+      "output_sha256": "af42371873e5e0c4f855c5f5fe2b7e00cb036ace106980cb41237d35572a8021"
+    },
+    {
+      "name": "sqlite_provider_id_rust_parity",
+      "status": "passed",
+      "seconds": 0.735785,
+      "output_sha256": "b0913590b3aeb80ad14bb425ddb28688c99249f4b27e7dc487f43fdadbeada5b"
+    },
+    {
+      "name": "sqlite_provider_transaction_rust_parity",
+      "status": "passed",
+      "seconds": 0.852984,
+      "output_sha256": "a9232b2b7a14c02f88e090f76a6fe3c4e8f1485abce3e7471ed062ccd55ce301"
+    },
+    {
+      "name": "sqlite_sync_transaction_rust_parity",
+      "status": "passed",
+      "seconds": 0.23838,
+      "output_sha256": "88bb5155b56c61c437e747a191680ee5dd05affe4f75585cfd9af0b8d0142233"
+    },
+    {
+      "name": "sqlite_provider_transport_rust_parity",
+      "status": "passed",
+      "seconds": 0.909943,
+      "output_sha256": "ed5bcf8e05989ada62dff60e0aa2cf8019f60c417587212f914a30056951a6c2"
+    },
+    {
+      "name": "sqlite_decoding_rust_parity",
+      "status": "failed",
+      "seconds": 0.20008,
+      "output_sha256": "2c7d2864416492d5309f83112ee36add2154ff3d8ecdbc131fab862b2077f25f",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_decoding.py\", line 5, in <module>\n    raise SystemExit(main(\"sqlite_decoding_cases.json\", \"SQLite row decoding\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite row decoding observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sqlite_bindings_rust_parity",
+      "status": "failed",
+      "seconds": 0.158726,
+      "output_sha256": "644d1b305c320e1b340fb6c65c3664cb46feb9f6d064579fafc1f42a2ce74203",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_bindings.py\", line 5, in <module>\n    raise SystemExit(main(\"sqlite_bindings_cases.json\", \"SQLite bindings/storage\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite bindings/storage observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sqlite_error_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.251817,
+      "output_sha256": "e12066e88b717792f71a27c247679ace569ebff750626e2db4142ffd2e33c432",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_error_model.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_error_model_cases.json.gz\", \"SQLite driver/provider error models\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite driver/provider error models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sqlite_native_diagnostics_rust_parity",
+      "status": "failed",
+      "seconds": 0.440156,
+      "output_sha256": "2b557f96b42e6e9b3c13ff0ab6c3e347270ac4e35aa4ff3a78ec393709ee35bb",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_native_diagnostics.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_native_diagnostics_cases.json.gz\", \"SQLite native diagnostic payloads\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite native diagnostic payloads observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sqlite_simple_error_rust_parity",
+      "status": "failed",
+      "seconds": 0.214416,
+      "output_sha256": "bd58f19874b3af60a5945c483f657a5e369faed39900d4da7cacbd2151b1e304",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_simple_error.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_simple_error_cases.json.gz\", \"SQLite scalar/text/unit errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite scalar/text/unit errors observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sqlite_from_sql_error_rust_parity",
+      "status": "failed",
+      "seconds": 0.168994,
+      "output_sha256": "bdac4df7ca4c430ae194b539e1ff9c2be75da787191a76d7a2d03ff7b2ff2be4",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_from_sql_error.py\", line 6, in <module>\n    raise SystemExit(main(\"sqlite_from_sql_error_cases.json.gz\", \"SQLite column-conversion errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQLite column-conversion errors observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sqlite_from_sql_raw_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.129053,
+      "output_sha256": "b14ad20ccee13e03e3760bbb025a0b2f9471e3d6e9a3e43d57b2871fbe9aa276",
+      "family": "source_comparison_requires_diagnosis",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_from_sql_raw_debug.py\", line 31, in <module>\n    if __name__==\"__main__\":raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sqlite_from_sql_raw_debug.py\", line 18, in main\n    assert corpus[\"baseline\"]==json.loads((root/\"upstream.lock.json\").read_text())[\"commit\"]\nAssertionError\n",
+      "reviewed_family": "historical_baseline_requires_replay",
+      "review_note": "Inspected traceback and selected comparator: failure is the explicit active-lock/corpus-baseline check, before C++ observation."
+    },
+    {
+      "name": "sql_stream_rust_parity",
+      "status": "failed",
+      "seconds": 0.147385,
+      "output_sha256": "aa91cdad66133e23afb841afe9230fd9f06986ea91ab244e7f0a4e31b4c334a7",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_stream.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_stream_cases.json\", \"SQL stream execution\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL stream execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_transaction_rust_parity",
+      "status": "failed",
+      "seconds": 0.167809,
+      "output_sha256": "fce976de0a6594ebd250b4fba4586c602d9439fb29681f784905681357182a28",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_transaction.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_transaction_cases.json\", \"SQL transaction execution\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL transaction execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.244032,
+      "output_sha256": "fb2abc9896ff48ed1c0796770cf15d1f53b8fba494e1b795ce70b7588178b2fc",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_execution.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_execution_cases.json\", \"SQL mutation execution\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL mutation execution observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_executor_kind_rust_parity",
+      "status": "failed",
+      "seconds": 0.137417,
+      "output_sha256": "79c2b7c4d42d72531eaf852650bd7dfc1ce5d68094496019a97af29eacbe912f",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_executor_kind.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_executor_kind_cases.json\", \"SQL executor backend capture\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL executor backend capture observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_executor_error_rust_parity",
+      "status": "failed",
+      "seconds": 0.134636,
+      "output_sha256": "b8e0fa4ec81198032c6aab52f5e49783ab381303ca36aaec8ca11e38db9f2d30",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_executor_error.py\", line 6, in <module>\n    raise SystemExit(main('sql_executor_error_cases.json', 'SQL executor errors'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL executor errors observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_query_rust_parity",
+      "status": "failed",
+      "seconds": 0.221987,
+      "output_sha256": "05d820cfba289482e8167a1502fecabf20348ff5f25f5906485693dc28a8fbde",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_query.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_query_cases.json\", \"SQL query executor\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL query executor observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_transport_rust_parity",
+      "status": "failed",
+      "seconds": 0.199754,
+      "output_sha256": "ef068ad0a953d670f506081f3ca86872d096bfab05ef85411eda65ea4e2b5fe5",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_transport.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_transport_cases.json\", \"SQL transport defaults/errors\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL transport defaults/errors observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_schema_rust_parity",
+      "status": "failed",
+      "seconds": 0.160312,
+      "output_sha256": "e8c2c847191eab258709ee67d5a4d3214f8d47d713b1d2f9dd1261249a4ac2d3",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_schema.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_schema_cases.json\", \"SQL schema indexes/naming\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL schema indexes/naming observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_mutation_rust_parity",
+      "status": "failed",
+      "seconds": 0.246001,
+      "output_sha256": "7d4f73af540f727ff778aca7a4c2bc6b54cc152e21b535cd1156408a5113c306",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_mutation.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_mutation_cases.json\", \"SQL mutation compilation\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL mutation compilation observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_dialect_hooks_rust_parity",
+      "status": "failed",
+      "seconds": 0.125338,
+      "output_sha256": "095db0d97fb14cbc71aec725f7c2e7095902250f90290e3b667eeaa6797b703c",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect_hooks.py\", line 6, in <module>\n    raise SystemExit(main(\"sql_dialect_hook_cases.json\", \"SQL dialect hook order\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL dialect hook order observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_dialect_rust_parity",
+      "status": "failed",
+      "seconds": 0.238061,
+      "output_sha256": "f70e29b2f92c58e689b79b3e8186f1599034adccdbbc0b23df7bdf03ffe65d7f",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_dialect.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_dialect_cases.json\", \"SQL dialect query/schema\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL dialect query/schema observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_types_rust_parity",
+      "status": "failed",
+      "seconds": 0.206253,
+      "output_sha256": "20616818114ebd12c0f8011148fd8d480668d816986b105c8ab2865deb5aa57f",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_types.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_types_cases.json\", \"SQL models/rendering\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL models/rendering observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_log_rust_parity",
+      "status": "failed",
+      "seconds": 0.182589,
+      "output_sha256": "71c6121ac4c5f28e9eb096f098f4d79e989898886ea7105069d4ff682b57909a",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_log.py\", line 5, in <module>\n    raise SystemExit(main(\"sql_log_cases.json\", \"SQL log provenance\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL log provenance observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "system_time_rust_parity",
+      "status": "failed",
+      "seconds": 0.181135,
+      "output_sha256": "7bdabe81fe6a7a3ff3450bf7084e9c5fcc14644d263d54baa53965386ae0b9ba",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_system_time.py\", line 6, in <module>\n    raise SystemExit(main('system_time_cases.json.gz', 'SystemTime'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SystemTime observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "data_service_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.273013,
+      "output_sha256": "70e75680f98f7c725afe8214ce7fd1181c7d5f8411d9e4299e4a886eea0c1832",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_data_service_model.py\", line 6, in <module>\n    raise SystemExit(main('data_service_model_cases.json.gz', 'Data-service models'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Data-service models observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "sql_model_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.261081,
+      "output_sha256": "82ddb4ab852014b8e5401a565adfa97db64925d143c1c94870855b4a31678db3",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_sql_model_api.py\", line 6, in <module>\n    raise SystemExit(main('sql_model_api_cases.json.gz', 'SQL model API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SQL model API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_rust_parity",
+      "status": "failed",
+      "seconds": 0.148825,
+      "output_sha256": "81247fb54af00efde20a750deca62bff95ebf64d3734834b789229438c9bc7e6",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal.py\", line 5, in <module>\n    raise SystemExit(main(\"decimal_cases.json\", \"Decimal arithmetic\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal arithmetic observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_extended_rust_parity",
+      "status": "failed",
+      "seconds": 0.458608,
+      "output_sha256": "05ed9873b1d0d9b5aba366fe098fcf056a4d49b7887ce8647860ab12ddca5aff",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_extended.py\", line 6, in <module>\n    raise SystemExit(main('decimal_extended_cases.json.gz', 'Extended Decimal'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Extended Decimal observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_inline_rust_parity",
+      "status": "failed",
+      "seconds": 0.188538,
+      "output_sha256": "a8e2bd525c8261d998786c6296a5817e7fa84f3eb56c92a9adfff8d9fcd8c2b5",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_inline.py\", line 6, in <module>\n    raise SystemExit(main('decimal_inline_cases.json.gz', 'Decimal inline string'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal inline string observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "core_aux_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.454918,
+      "output_sha256": "aa4adbdfcc0b2da50971eda41e04225c0b52b03305c6431ced7f8e6ac2d77b2a",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_core_aux_debug.py\", line 6, in <module>\n    raise SystemExit(main('core_aux_debug_cases.json.gz', 'Auxiliary core diagnostics'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Auxiliary core diagnostics observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_scale_rust_parity",
+      "status": "failed",
+      "seconds": 0.187084,
+      "output_sha256": "b7f51bb75b6e58c85a2db62da8bbf81dd43757352072b97cbe85bb765b636473",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_scale.py\", line 5, in <module>\n    raise SystemExit(main(\"decimal_scale_cases.json\", \"Decimal scale/codec\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal scale/codec observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_parsing_rust_parity",
+      "status": "failed",
+      "seconds": 0.212033,
+      "output_sha256": "995e3e7ba396ad0c720da7aadfa454399dcc2aec32bf910f1c309165d719745d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_parsing.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_parsing_cases.json\", \"Decimal parsing\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal parsing observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_numeric_rust_parity",
+      "status": "failed",
+      "seconds": 0.249246,
+      "output_sha256": "de6326ab39ba492fabd5dfde8c99f27776af73ddc982fc602086d10a64780976",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_numeric.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_numeric_cases.json\", \"Decimal numeric conversion\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal numeric conversion observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_pointer_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.178723,
+      "output_sha256": "bb6d9ff124553f8c65a30e8a6095c38f1af5d5c410acb1b1382b9205ebf60cca",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_pointer_scope.py\", line 48, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_pointer_scope.py\", line 23, in main\n    raise RuntimeError('Decimal pointer observations belong to a different source baseline')\nRuntimeError: Decimal pointer observations belong to a different source baseline\n"
+    },
+    {
+      "name": "decimal_foundation_rust_parity",
+      "status": "failed",
+      "seconds": 0.240264,
+      "output_sha256": "f4b07666b83b5411f599cb0135a25bb6f8a77004495d4266379a0d8849bb0543",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_foundations.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_foundation_cases.json\", \"Decimal foundations\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal foundations observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "decimal_wire_format_rust_parity",
+      "status": "failed",
+      "seconds": 0.352939,
+      "output_sha256": "cb5512e0be99e05e5d05f5baee26bd97071e258c29829a1959d7d3f81a01dfa2",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_decimal_wire_format.py\", line 6, in <module>\n    raise SystemExit(main(\"decimal_wire_format_cases.json\", \"Decimal JSON/format\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Decimal JSON/format observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "business_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.202082,
+      "output_sha256": "f7ad8e3b56563703cd26d63e63554bc82eb23f11fbc5b93e56f2871cdae91464",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_business_id.py\", line 5, in <module>\n    raise SystemExit(main(\"business_id_cases.json\", \"Business ID core\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Business ID core observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "presentation_rust_parity",
+      "status": "failed",
+      "seconds": 0.14664,
+      "output_sha256": "1917309099804166b25f57251cfca04491b6c7bf7ae5c666ba135e094e8c80c7",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_presentation.py\", line 5, in <module>\n    raise SystemExit(main(\"presentation_cases.json\", \"Presentation\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Presentation observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "search_rust_parity",
+      "status": "failed",
+      "seconds": 0.149775,
+      "output_sha256": "00572a7e516638b6fe168caae494046e05a11bdec05cb127533683ac0a498267",
+      "family": "source_comparison_requires_diagnosis",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_search.py\", line 37, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_search.py\", line 19, in main\n    raise RuntimeError('Search corpus baseline differs')\nRuntimeError: Search corpus baseline differs\n",
+      "reviewed_family": "historical_baseline_requires_replay",
+      "review_note": "Inspected traceback and selected comparator: failure is the explicit active-lock/corpus-baseline check, before C++ observation."
+    },
+    {
+      "name": "value_rust_parity",
+      "status": "failed",
+      "seconds": 0.143665,
+      "output_sha256": "f45ac18413496ffc827d57de7898a3d2f783ff1fc3af98478ef9b90ee5e3d039",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 76, in <module>\n    raise SystemExit(main())\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Value observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "format_rust_parity",
+      "status": "failed",
+      "seconds": 0.214304,
+      "output_sha256": "a8d22dcaec9af99a03ec8fe3d6062e02fc23be09efeb9c87bf6e707627bc94df",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_formats.py\", line 6, in <module>\n    raise SystemExit(main(\"format_cases.json\", \"ID/JSON text\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: ID/JSON text observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "value_model_contracts",
+      "status": "passed",
+      "seconds": 0.00686448,
+      "output_sha256": "01f5b90d7fd813795e201b077425d29b2108d7591bd0fa80146c02b937361063"
+    },
+    {
+      "name": "value_owned_api_contracts",
+      "status": "passed",
+      "seconds": 0.00377305,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "value_owned_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.173593,
+      "output_sha256": "26a21a663ebbd6e8f91d7656a950085996e1a65d0280159e69d61a3cf0302239",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_value_owned_api.py\", line 6, in <module>\n    raise SystemExit(main('value_owned_api_cases.json', 'Owned Value API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Owned Value API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "presentation_api_contracts",
+      "status": "passed",
+      "seconds": 0.0441137,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "presentation_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.201774,
+      "output_sha256": "6c88d85109a2e615f54c854a8951671bec9f34eea75632f1319f101ac447edc1",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_presentation_api.py\", line 6, in <module>\n    raise SystemExit(main('presentation_api_cases.json.gz', 'Presentation API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Presentation API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "core_graph_api_contracts",
+      "status": "passed",
+      "seconds": 0.00765575,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core_graph_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.346457,
+      "output_sha256": "0f70e97277b644332594151626d25118d93b3d16364a5db38959776bb9e52b32",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_core_graph_api.py\", line 6, in <module>\n    raise SystemExit(main('core_graph_api_cases.json.gz', 'Core input graph API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Core input graph API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "request_helpers_contracts",
+      "status": "passed",
+      "seconds": 0.0035507,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "request_helpers_rust_parity",
+      "status": "failed",
+      "seconds": 0.13531,
+      "output_sha256": "ac64d48e8bac06d01a0edd4ff9b5eeb93203ce336243b9c49d4fe540a876df39",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_request_helpers.py\", line 6, in <module>\n    raise SystemExit(main('request_helpers_cases.json.gz', 'Request helpers'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Request helpers observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "request_api_contracts",
+      "status": "passed",
+      "seconds": 0.0053299,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "request_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.502497,
+      "output_sha256": "995dbb7845572fe6037ea83d992ae01320371d14ac54e7b26982ec482a2066f3",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_request_api.py\", line 6, in <module>\n    raise SystemExit(main('request_api_cases.json.gz', 'Request API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Request API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "mutation_debug_contracts",
+      "status": "passed",
+      "seconds": 0.00829213,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mutation_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.178485,
+      "output_sha256": "694c4c1737c8221bce61d5f44f08ce9fd803ceaf523c9d551b260329adb20422",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_mutation_debug.py\", line 6, in <module>\n    raise SystemExit(main('mutation_debug_cases.json.gz', 'Mutation Debug'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Mutation Debug observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "query_debug_contracts",
+      "status": "passed",
+      "seconds": 0.00722834,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "query_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.342197,
+      "output_sha256": "ea2ab473cb88efc794a7ad3340bd811ea34c68fc4f8fac33e5ee5a0142e89fd2",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_query_debug.py\", line 6, in <module>\n    raise SystemExit(main('query_debug_cases.json.gz', 'Query Debug'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Query Debug observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "meta_api_contracts",
+      "status": "passed",
+      "seconds": 0.00401722,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "meta_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.257954,
+      "output_sha256": "b11b8f96bba7ae87c8aefdcb0352ffb2feb346d9ad613c5667d0b4aebb589ab8",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_meta_api.py\", line 6, in <module>\n    raise SystemExit(main('meta_api_cases.json.gz', 'Metadata API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Metadata API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "timestamp_api_contracts",
+      "status": "passed",
+      "seconds": 0.00288667,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "timestamp_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.123181,
+      "output_sha256": "9652e25c77fb84f56431516ed4ba0d467634ba475da988644acf2ac9b2d7edcb",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_timestamp_api.py\", line 6, in <module>\n    raise SystemExit(main('timestamp_api_cases.json', 'Timestamp API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Timestamp API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "value_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.155049,
+      "output_sha256": "f0a46d83f82bcf39f03309320579de3d2f830fafa503aebd3939b3227cb1c9b5",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_value_api.py\", line 6, in <module>\n    raise SystemExit(main('value_api_cases.json.gz', 'Value API'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Value API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "core_contracts",
+      "status": "passed",
+      "seconds": 0.00339117,
+      "output_sha256": "92b768783873a37e8937614ea301f38e2059fc0dc449eaa630d06ae527838faf"
+    },
+    {
+      "name": "eval_context_contracts",
+      "status": "passed",
+      "seconds": 0.00333837,
+      "output_sha256": "c1bb1dd0950aca6bfb49125b9df7a7c06101062704543ae3a4bf48428f1bbd27"
+    },
+    {
+      "name": "eval_rust_parity",
+      "status": "failed",
+      "seconds": 0.204224,
+      "output_sha256": "83d9c23a1930161c234e4e326c499475743726d91bbe2577d0725ca82dfef56a",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_eval.py\", line 6, in <module>\n    raise SystemExit(main('eval_cases.json.gz', 'Evaluation and load states'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Evaluation and load states observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "mutation_model_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.23027,
+      "output_sha256": "535d6bba9a3557b235bb75f47267b10889b73b95228ddc470c56d6c24098a00f",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_mutation_model_api.py\", line 6, in <module>\n    raise SystemExit(main(\"mutation_model_api_cases.json\", \"Mutation model API\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Mutation model API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "mutation_model_api_contracts",
+      "status": "passed",
+      "seconds": 0.00931838,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.13326,
+      "output_sha256": "ad0dc1a1c3d07fcd4bedad6c4dd28d1872f091a838d4abf3de2c7d926cd55a94",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_core_api.py\", line 6, in <module>\n    raise SystemExit(main(\"core_api_cases.json\", \"Core API\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Core API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "core_api_contracts",
+      "status": "passed",
+      "seconds": 0.00719219,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core_model_contracts",
+      "status": "passed",
+      "seconds": 0.00314669,
+      "output_sha256": "505d882a2c9ed143a3fb4cb1c757a978508379f5dff1bd2c59e9eca13c87ad64"
+    },
+    {
+      "name": "datatype_debug_contracts",
+      "status": "passed",
+      "seconds": 0.0028156,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "datatype_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.19256,
+      "output_sha256": "5988faa7070ab77fad1bf7c95e1f5babf5408d6dfa1f4c6bb0f41dc7700f7940",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_datatype_debug.py\", line 6, in <module>\n    raise SystemExit(main('datatype_debug_cases.json', 'DataType Debug'))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: DataType Debug observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "model_debug_contracts",
+      "status": "passed",
+      "seconds": 0.00573372,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "model_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.154093,
+      "output_sha256": "b544bf4afe2b352a7ff8b08ab89e95bb9b957e95159f542aa045297ea2bda243",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_model_debug.py\", line 6, in <module>\n    raise SystemExit(main(\"model_debug_cases.json\", \"Model Debug\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Model Debug observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "smart_list_api_rust_parity",
+      "status": "passed",
+      "seconds": 21.0197,
+      "output_sha256": "29a48ccb7371a42180b6cd24b481e6f4f25d7c9a93f52d4a9277bc5f34a99f60"
+    },
+    {
+      "name": "smart_list_api_contracts",
+      "status": "passed",
+      "seconds": 0.00435732,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core_shape_presentation_contracts",
+      "status": "passed",
+      "seconds": 0.00268105,
+      "output_sha256": "7564b5a5380edefb422367c5bf5e8a0d0abbd45594b2397705cacf307118d7ef"
+    },
+    {
+      "name": "core_shape_presentation_rust_parity",
+      "status": "passed",
+      "seconds": 0.33125,
+      "output_sha256": "9db9f89186113d9bb7799089fbc43fc68e65bdf4c4052c82d5dd3ff0a953e0bf"
+    },
+    {
+      "name": "compact_row_api_rust_parity",
+      "status": "passed",
+      "seconds": 17.3992,
+      "output_sha256": "f24652eb86b90dd3a6efa0b98b95fd1aa3d068860f68281d87fb595af9507f2b"
+    },
+    {
+      "name": "compact_row_api_contracts",
+      "status": "passed",
+      "seconds": 0.00472347,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core_collection_contracts",
+      "status": "passed",
+      "seconds": 0.00413846,
+      "output_sha256": "f7b06ac9c9375eee2752e1645b01c1a9db2065b41aaa1e83b1a27cd811f1b54d"
+    },
+    {
+      "name": "query_api_contracts",
+      "status": "passed",
+      "seconds": 0.00499303,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "query_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.263621,
+      "output_sha256": "8771961be1acff89e76e4fdfdf8cde9ecaf3fd97c4b13a77db781c44a200677d",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_query_api.py\", line 6, in <module>\n    raise SystemExit(main(\"query_api_cases.json\", \"Core query API\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Core query API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "query_model_contracts",
+      "status": "passed",
+      "seconds": 0.00649202,
+      "output_sha256": "7fc62451b55b0589e8b9808d4e674f6b02f8406be991a77e1c2dba3d8739baa7"
+    },
+    {
+      "name": "safe_expression_api_contracts",
+      "status": "passed",
+      "seconds": 0.00382799,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "safe_expression_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.165987,
+      "output_sha256": "1cce4e9c4f268994d122b945d757d18952d7c46cdeb1d1711575b323bc34c35a",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_safe_expression_api.py\", line 6, in <module>\n    raise SystemExit(main(\"safe_expression_api_cases.json\", \"SafeExpression API\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: SafeExpression API observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "generated_support_contracts",
+      "status": "passed",
+      "seconds": 0.00626519,
+      "output_sha256": "88465e398dbe7626e157cb84891e6bbc1c5bd0b935e2e0b1891dc9ed67b393c3"
+    },
+    {
+      "name": "generated_support_rust_parity",
+      "status": "failed",
+      "seconds": 0.377931,
+      "output_sha256": "c224ca9999eee51c2b355e287d7b75f0ef0b64cd073e9a776082af3a6701ccbf",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_generated_support.py\", line 5, in <module>\n    raise SystemExit(main(\"generated_support_cases.json\", \"Generated runtime support\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Generated runtime support observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "purposed_query_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.202645,
+      "output_sha256": "93a841d5c3fd0fd4464e9ab90bd83d754c77d63d94f733f1ff85c152734a6e5f",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_purposed_query_debug.py\", line 5, in <module>\n    raise SystemExit(main(\"purposed_query_debug_cases.json.gz\", \"Purposed query diagnostics\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: Purposed query diagnostics observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "data_store_contracts",
+      "status": "passed",
+      "seconds": 0.00574001,
+      "output_sha256": "99f07d2e85df9153ebad9fb351e62a1c45df044b94a84885b476bfc78e0e0048"
+    },
+    {
+      "name": "data_store_rust_parity",
+      "status": "failed",
+      "seconds": 0.135409,
+      "output_sha256": "72ac0871313557f0abbf9a98133288c3fc430b9648bc90fccd30a5b576e7f209",
+      "family": "historical_baseline_requires_replay",
+      "message": "Failed",
+      "output_excerpt": "\nTraceback (most recent call last):\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_data_store.py\", line 5, in <module>\n    raise SystemExit(main(\"data_store_cases.json\", \"DataStore\"))\n  File \"/home/philip/githome/teaql-cpp/tests/parity/compare_values.py\", line 57, in main\n    raise RuntimeError(f\"{label} observations belong to a different upstream baseline\")\nRuntimeError: DataStore observations belong to a different upstream baseline\n"
+    },
+    {
+      "name": "context_memory_contracts",
+      "status": "passed",
+      "seconds": 0.0797369,
+      "output_sha256": "9b19a253dc341ff772ffcb0bc09fa5fa2ffbd52c9941eb0e72073cfaa30478bf"
+    },
+    {
+      "name": "context_reference_contracts",
+      "status": "passed",
+      "seconds": 0.274029,
+      "output_sha256": "6bf9d09daa27cca43aa956e15c479b1ef1ac01820b9af42ea840bfbb63b0b127"
+    },
+    {
+      "name": "context_early_global_close",
+      "status": "passed",
+      "seconds": 0.00274758,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sqlite_contracts",
+      "status": "passed",
+      "seconds": 0.0193883,
+      "output_sha256": "1c6f457a0ee3330e6a8ec55f148929baaa71b58c7ebd6bf462a41ef356d5846c"
+    },
+    {
+      "name": "generated_matching_any_rust_parity",
+      "status": "passed",
+      "seconds": 0.9705,
+      "output_sha256": "a847321a756a3cbc1a9811de386cd21e0cff87cd8b08718ab208edd240d1020e"
+    },
+    {
+      "name": "generated_matching_conversion_rust_parity",
+      "status": "passed",
+      "seconds": 2.19045,
+      "output_sha256": "8122a8112f19bfa6cc4a479d4142f2314dd1f42b4b325e81243f3f1b2bca7877"
+    },
+    {
+      "name": "generated_api_contracts",
+      "status": "passed",
+      "seconds": 0.0730936,
+      "output_sha256": "1c8769944bddf3c7a6f7e616e700e79d1caab552462276fd13d7786c43760f39"
+    },
+    {
+      "name": "generated_readonly_property_contracts",
+      "status": "passed",
+      "seconds": 0.00364526,
+      "output_sha256": "62a823b00bced422903f3d827191326e900eaa5f121813711e3d11406725506b"
+    },
+    {
+      "name": "generated_readonly_properties_rust_parity",
+      "status": "passed",
+      "seconds": 0.356311,
+      "output_sha256": "3ca016ec7425ad319ec06e6c1e40cb34e63ba36fc494f0d12f9a0fee603ea653"
+    },
+    {
+      "name": "generated_dynamic_field_contracts",
+      "status": "passed",
+      "seconds": 0.0197502,
+      "output_sha256": "c6cda69492df8562f790088109239a64e2820b30f9f5488dc1b8340d6e287952"
+    },
+    {
+      "name": "generated_dynamic_carrier_rust_parity",
+      "status": "passed",
+      "seconds": 0.115341,
+      "output_sha256": "a043cb5b0fa9232d6bd95a29566fc2e7dae46a265377afa05f047260fb3871d6"
+    },
+    {
+      "name": "generated_checker_contracts",
+      "status": "passed",
+      "seconds": 0.0220851,
+      "output_sha256": "f27fff6b5bdc55dbb2b6d413fda3b80c4638fa762e1d7ba045f748e94fe8e7c2"
+    },
+    {
+      "name": "generated_relation_contracts",
+      "status": "passed",
+      "seconds": 0.00381122,
+      "output_sha256": "132d7d65545be1e1bc56fc5f25cd4243f9d57826832900715cd64c873d512f45"
+    },
+    {
+      "name": "generated_optional_types_contracts",
+      "status": "passed",
+      "seconds": 0.0308131,
+      "output_sha256": "f8817e1a8744d2ec298141af6b54d00bacf06a80f1f54cdc7e655cf2da1f81ed"
+    },
+    {
+      "name": "generated_business_id_contracts",
+      "status": "passed",
+      "seconds": 0.0264726,
+      "output_sha256": "63d527757e965dc1cf02271155d8fbcb8716572d9d50104650fdb57c8b8c7b58"
+    },
+    {
+      "name": "runtime_entity_query_contracts",
+      "status": "passed",
+      "seconds": 0.0645342,
+      "output_sha256": "0428beff39601d0bf4ed154ac53394e5e7d4249298482fc9b60e3c77af3d5972"
+    },
+    {
+      "name": "runtime_query_binding_contracts",
+      "status": "passed",
+      "seconds": 0.0128157,
+      "output_sha256": "e64cd660b3eb72ed3a4c77f4004948bf98e99687a96d7f76fc6e0bec883984bf"
+    },
+    {
+      "name": "generated_sample_data_context_contracts",
+      "status": "passed",
+      "seconds": 0.00276053,
+      "output_sha256": "428065430022d9e2e38f0a576651e341be5459cad213064c05b446c2ee1413d8"
+    },
+    {
+      "name": "generated_runtime_assembly_rust_parity",
+      "status": "passed",
+      "seconds": 0.847914,
+      "output_sha256": "abd13bd13e5b7a0a4b3e18aaacf8b1d6df49d9cf1582fe94ec99cec7ed33e841"
+    },
+    {
+      "name": "generated_sample_execution_contracts",
+      "status": "passed",
+      "seconds": 1.59241,
+      "output_sha256": "4927a7e266cb7e906272516694f5d3a1c8013a2dee8de4f221c7080e404b8be3"
+    },
+    {
+      "name": "generated_sample_execution_rust_parity",
+      "status": "passed",
+      "seconds": 350.036,
+      "output_sha256": "dd843f65d29407f818c5b27ba039d5e1a35975a2eb0e59d9d244bd2bd95ed8b2"
+    },
+    {
+      "name": "generated_sample_failures_rust_parity",
+      "status": "passed",
+      "seconds": 8.16993,
+      "output_sha256": "00d02cf169d99ce2ff78a390ce74d9eddffee9da60491e533323e8823de8014c"
+    },
+    {
+      "name": "generated_sample_save_async_contracts",
+      "status": "passed",
+      "seconds": 3.8905,
+      "output_sha256": "9b97169b3b3d031c33b1cf309d58c302b16d24b0cfb83ad72311b5831fe98589"
+    },
+    {
+      "name": "generated_sample_fields_rust_parity",
+      "status": "passed",
+      "seconds": 26.8667,
+      "output_sha256": "77d5377fbfb2313f53dcfa0c1caade5cd2e7ee4400aa3691ce2b1f4b06a206a6"
+    },
+    {
+      "name": "generated_sample_state_rust_parity",
+      "status": "passed",
+      "seconds": 0.308409,
+      "output_sha256": "9705d5de4c4f4e51457c89d7029c8380f5f04625e4329fd88d8d98eec3679315"
+    },
+    {
+      "name": "generated_expression_values_rust_parity",
+      "status": "passed",
+      "seconds": 0.148522,
+      "output_sha256": "31b1a7e881da42cd48df00dcad575173f3b7c986fbe34ab7107072cac0e01846"
+    },
+    {
+      "name": "generated_expression_diagnostics_rust_parity",
+      "status": "passed",
+      "seconds": 0.163849,
+      "output_sha256": "a9aa4a6b391c5a4a15bdab9ee5fd356f9cc0903657eeea64a15394cfeea6b1a0"
+    },
+    {
+      "name": "runtime_entity_expression_contracts",
+      "status": "passed",
+      "seconds": 0.00542484,
+      "output_sha256": "256bf58ae79ff45c78f8e1b110f74825dab5f7fdee808c44735535aa977fc589"
+    },
+    {
+      "name": "generated_api_type_errors",
+      "status": "passed",
+      "seconds": 1746.76,
+      "output_sha256": "74b29b1b5ca80de165ba7f1f984f0b591532f5d63386aac32ab6f15fdbc2df8c"
+    },
+    {
+      "name": "example_context_lifetime",
+      "status": "passed",
+      "seconds": 0.00285199,
+      "output_sha256": "1ed765b846ac21915308e68847357fed6b778e86664aa5e8a849bfecb8adc2bd"
+    },
+    {
+      "name": "example_sqlite_schema_crud",
+      "status": "passed",
+      "seconds": 0.0129116,
+      "output_sha256": "94d242bd511a01c86aaddf03eb9d716d04f31d967b4f3d9c24d628cc0ff1dc01"
+    },
+    {
+      "name": "example_sqlite_relations_graph",
+      "status": "passed",
+      "seconds": 0.0328596,
+      "output_sha256": "51e0428f3e0f915fd85dc2c2e02684d62d36708f880278ed218aea8ea950c0fc"
+    },
+    {
+      "name": "example_generated_query_expression",
+      "status": "passed",
+      "seconds": 0.0315636,
+      "output_sha256": "98d8512842c34e55858773cb225984c5696e64614c8fb9cc68f4b2a318cb1b84"
+    },
+    {
+      "name": "runtime_examples_rust_parity",
+      "status": "passed",
+      "seconds": 0.101916,
+      "output_sha256": "4aa1262a586f68d46fb57a8b4558272e7f79edd7a3e9438b6d81ff05a69da068"
+    }
+  ],
+  "reviewed_failure_families": {
+    "historical_baseline_requires_replay": 144
+  }
+}

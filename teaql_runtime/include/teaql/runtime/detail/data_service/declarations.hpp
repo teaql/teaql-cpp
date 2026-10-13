@@ -71,13 +71,32 @@ public:
 
     RuntimeDataService(std::allocator_arg_t, Allocator a, const RuntimeDataService& other)
         : metadata_(std::allocator_arg, a, other.metadata_),
-          executor_(std::allocator_arg, a, other.executor_) {}
+          executor_(std::allocator_arg, a, other.executor_),
+          mutation_intent_(clone_in(a.resource(), other.mutation_intent_)),
+          mutation_privacy_(clone_in(a.resource(), other.mutation_privacy_)) {}
 
     RuntimeDataService(const RuntimeDataService&) = delete;
     RuntimeDataService(RuntimeDataService&&) noexcept = default;
 
     Memory memory_resource() const {
         return metadata_.memory_resource();
+    }
+
+    RuntimeDataService& with_mutation_intent(const MutationIntent& intent,
+                                             const SqlIntentRedactions* privacy = nullptr) & {
+        intent.require_valid();
+        if (!mutation_intent_ || &intent != &*mutation_intent_) {
+            mutation_intent_.emplace(std::allocator_arg, Allocator(memory_resource()), intent);
+        }
+        if (privacy != (mutation_privacy_ ? &*mutation_privacy_ : nullptr)) {
+            if (privacy) {
+                mutation_privacy_.emplace(
+                    std::allocator_arg, Allocator(memory_resource()), *privacy);
+            } else {
+                mutation_privacy_.reset();
+            }
+        }
+        return *this;
     }
 
     DataServiceOperationResult<Vector<CompactRow>, DataServiceError<Error>>&
@@ -117,6 +136,8 @@ public:
 private:
     ResourceBorrow<const M> metadata_;
     ResourceBorrow<E> executor_;
+    std::optional<MutationIntent> mutation_intent_;
+    std::optional<SqlIntentRedactions> mutation_privacy_;
 };
 
 template <class E>
@@ -135,7 +156,9 @@ public:
 
     ContextDataService(std::allocator_arg_t, Allocator a, const ContextDataService& other)
         : metadata(std::allocator_arg, a, other.metadata),
-          executor(std::allocator_arg, a, other.executor) {}
+          executor(std::allocator_arg, a, other.executor),
+          mutation_intent_(clone_in(a.resource(), other.mutation_intent_)),
+          mutation_privacy_(clone_in(a.resource(), other.mutation_privacy_)) {}
 
     ContextDataService(const ContextDataService&) = delete;
     ContextDataService(ContextDataService&&) noexcept = default;
@@ -148,8 +171,37 @@ public:
         // The asynchronous adapter may outlive this temporary wrapper. Keep its
         // metadata view in the Context and capture that stable view explicitly.
         auto& view = metadata.context().template make<UserContextMetadata>(metadata);
-        return RuntimeDataService<UserContextMetadata, E>(
+        RuntimeDataService<UserContextMetadata, E> service(
             std::allocator_arg, Allocator(memory_resource()), view, executor);
+        if (mutation_intent_) {
+            service.with_mutation_intent(*mutation_intent_, mutation_privacy());
+        }
+        return service;
+    }
+
+    ContextDataService& with_mutation_intent(const MutationIntent& intent,
+                                             const SqlIntentRedactions* privacy = nullptr) & {
+        intent.require_valid();
+        if (!mutation_intent_ || &intent != &*mutation_intent_) {
+            mutation_intent_.emplace(std::allocator_arg, Allocator(memory_resource()), intent);
+        }
+        if (privacy != (mutation_privacy_ ? &*mutation_privacy_ : nullptr)) {
+            if (privacy) {
+                mutation_privacy_.emplace(
+                    std::allocator_arg, Allocator(memory_resource()), *privacy);
+            } else {
+                mutation_privacy_.reset();
+            }
+        }
+        return *this;
+    }
+
+    const MutationIntent* mutation_intent() const {
+        return mutation_intent_ ? &*mutation_intent_ : nullptr;
+    }
+
+    const SqlIntentRedactions* mutation_privacy() const {
+        return mutation_privacy_ ? &*mutation_privacy_ : nullptr;
     }
 
     std::optional<String> resolve_final_comment(std::span<const TraceNode> trace,
@@ -187,5 +239,9 @@ public:
     batch_insert(const BatchInsertCommand&) const;
     DataServiceOperationResult<std::uint64_t, DataServiceError<Error>>&
     batch_update(const BatchUpdateCommand&) const;
+
+private:
+    std::optional<MutationIntent> mutation_intent_;
+    std::optional<SqlIntentRedactions> mutation_privacy_;
 };
 }

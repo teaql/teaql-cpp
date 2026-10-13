@@ -1,0 +1,3252 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "source_sha256": {
+    "examples/shared-load-state/fixtures/narrow/lib/src/school/entity.rs": "5b0ebc34c3aff86c2be9a3ec2e4eb67776e0a794c57983ea3c59a4963a78f063",
+    "examples/shared-load-state/fixtures/narrow/lib/src/platform/entity.rs": "0244cf625177b846b94a9c5bca6554172bf6efad8916ee25bb00ea1856c8343e",
+    "teaql-runtime/src/entity_runtime.rs": "1f2fb5566d622389afa8bfe5e760c294838175c4267711029514ce9e73401a1f"
+  },
+  "note": "Unmodified retained School/Platform generated-model calls. C++ uses matching entity/relation identities in a compact supported fixture. No source output normalization. Optional and reverse to-one native contracts are separate evidence.",
+  "cases": [
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "missing",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "present",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "empty",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": false,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": false,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": null,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "NotLoaded",
+        "list": {
+          "node": "school_list",
+          "path": "school_list",
+          "state": "NotLoaded"
+        },
+        "loaded": false
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": 0,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": true,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Empty",
+        "list": {
+          "ids": [],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": 1,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 0
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "node": "platform",
+          "path": "platform",
+          "state": "NotLoaded"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    },
+    {
+      "input": {
+        "kind": "generated_relations",
+        "forward": "wrong_type",
+        "selected": true,
+        "cached": true,
+        "count": 2,
+        "foreign_id": 9
+      },
+      "expected": {
+        "empty": false,
+        "forward": {
+          "id": 9,
+          "state": "Value"
+        },
+        "handle": "Loaded",
+        "list": {
+          "ids": [
+            20,
+            21
+          ],
+          "state": "Value"
+        },
+        "loaded": true
+      }
+    }
+  ]
+}

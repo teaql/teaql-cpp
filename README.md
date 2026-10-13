@@ -1,11 +1,13 @@
 # TEAQL C++
 
-TEAQL for edge runtimes, following the core design of Rust **v5.0.5** with SQLite as the only database implementation. The project connects TEAQL to the C++ systems programming and GPU ecosystem. Memory has two explicit lifetimes: application-owned `GlobalContext` and `UserContext`. Development is kernel first, using C++20 standard facilities and few dependencies.
+TEAQL for edge runtimes, following the core design of Rust **v5.0.6** with SQLite as the only database implementation. The project connects TEAQL to the C++ systems programming and GPU ecosystem. Memory has two explicit lifetimes: application-owned `GlobalContext` and `UserContext`. Development is kernel first, using C++20 standard facilities and few dependencies.
 
-Pinned commit: `62940ae2b88e7acc32763853b8b4685a01c7e90a`. See the [baseline lock](upstream.lock.json) and [migration plan](docs/migration_plan.md).
+Pinned commit: `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`. See the [baseline lock](upstream.lock.json) and [migration plan](docs/migration_plan.md).
+The 5.0.6 baseline is locked; its new behavior is being migrated. Historical
+5.0.5 acceptance does not establish 5.0.6 parity. See [the upgrade audit](docs/baseline_5_0_6_upgrade.md).
 
-All six migration stages are accepted within the documented C++ ownership,
-owner-thread and supported-protocol adaptations. The source ledger is **55
+All six historical 5.0.5 migration stages are accepted within the documented C++
+ownership, owner-thread and supported-protocol adaptations. The source ledger is **55
 accepted / 0 partial / 2 external exclusions / 1 reference-only helper**.
 
 | Final profile | Complete CTest | Live original examples |
@@ -23,7 +25,8 @@ All 451 original source tests have reviewed dispositions: 441 covered, five
 non-SQLite backend exclusions and five external exclusions. Complete leaf and
 root responsibility reviews accompany the tests; names and counts alone are
 not acceptance. Handwritten examples use the actual entity/query/graph runtime.
-The generator is unchanged. C++20 standard facilities and SQLite remain the
+The generator was unchanged at that historical acceptance checkpoint. Active C++
+generation work is described below. C++20 standard facilities and SQLite remain the
 production dependency scope; GPU adapters and external integrations are excluded.
 
 See [the final requirement audit](measurements/parity/2026-10-10-stage6-final-review/README.md)
@@ -56,15 +59,21 @@ Two runnable examples reproduce the business semantics of the corresponding Rust
 Both examples use the entity/query/graph runtime and independent SQLite provider. Handwritten models reproduce the locked Rust example mappings; runtime code owns traversal, planning, child writes, transactions and relationship queries. These two original mappings remain unchanged semantic baselines.
 
 The additional [generated_query_expression](examples/generated_query_expression.cpp)
-example uses C++ models, staged typed Q requests and E expression accessors produced
-by the independent `teaql-code-gen` C++ branch. It saves an audited order graph,
-loads `lines.product` and evaluates the product name through the existing runtime.
-See [generation and supported features](docs/cpp_generator.md). Ordinary builds
-use checked-in generated headers and require no Java/Maven or generator service.
+example uses generated C++ models, a Context-created Q factory and checked E
+accessors. Application methods use camelCase; runtime protocols remain snake_case.
+It saves an audited order graph, loads `lines.product`, evaluates the product name
+and exercises list, first-match and stream execution through runtime.
+See [the change plan](docs/query_expression_change_plan.md),
+[the E binding contract](docs/runtime_expression_binding.md) and
+[generation and supported features](docs/cpp_generator.md).
+Ordinary builds use checked-in generated headers and require no Java/Maven or
+generator service. Generator qualification is recorded in the change plan. Remaining Rust generator alignment follows
+[the parity plan](docs/cpp_generator_parity_plan.md).
 
 ## Implementation and ownership
 
-The C++ kernel retains the Rust 5.0.5 core models, distinct mutation/snapshot/
+The C++ kernel retains the previously qualified core models; alignment with
+the additional Rust 5.0.6 contracts is active. It preserves distinct mutation/snapshot/
 generated values, expression/query/request models, Entity/Audited contracts,
 annotated input graphs, identity graphs and mutation ledgers. Data-service, SQL
 executor, dialect, transport, SQLite provider and runtime remain independent
@@ -164,8 +173,8 @@ in the [LLVM 18.1.8 style reference](https://releases.llvm.org/18.1.8/tools/clan
 Reference sources support development comparisons and are not part of the C++ build.
 
 ```sh
-git clone --branch v5.0.5 https://github.com/teaql/teaql-rs.git .reference/teaql-rs
-git -C .reference/teaql-rs checkout --detach 62940ae2b88e7acc32763853b8b4685a01c7e90a
+git clone --branch v5.0.6 https://github.com/teaql/teaql-rs.git .reference/teaql-rs
+git -C .reference/teaql-rs checkout --detach fe82a18982415f1746df9a2cf7c42f5e9abdc6d3
 python3 scripts/verify_upstream.py
 ```
 

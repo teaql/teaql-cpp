@@ -322,7 +322,7 @@ inline MutationRequest insert(Memory r, std::uint64_t id) {
     InsertCommand command(std::allocator_arg, Allocator(r), "Customer");
     command.value("id", id).value("version", std::int64_t(1)).value("name", "Riverside");
     command.trace_chain.emplace_back(TraceKind::AuditReason, "Customer", "audited test", id);
-    return MutationRequest(std::allocator_arg, Allocator(r), std::move(command));
+    return MutationRequest(std::allocator_arg, Allocator(r), std::move(command), "audited test");
 }
 
 inline MutationRequest batch(Memory r) {
@@ -330,7 +330,8 @@ inline MutationRequest batch(Memory r) {
     for (std::uint64_t id : {1, 2, 3}) {
         children.emplace_back(insert(r, id));
     }
-    return MutationRequest(std::allocator_arg, Allocator(r), std::move(children));
+    return MutationRequest(
+        std::allocator_arg, Allocator(r), std::move(children), "ported mutation execution fixture");
 }
 
 inline void driver_error(const Error& error, std::string_view expected) {

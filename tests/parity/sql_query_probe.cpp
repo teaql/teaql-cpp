@@ -167,11 +167,19 @@ static Json evaluate(UserContext& user, const Json& j) {
         if (flag(item, "intent")) {
             (void)active.query_log_intent(r, q);
         }
-        QueryRequest request(
-            std::allocator_arg, Allocator(r), q, flag(item, "debug"), flag(item, "metadata", true));
-        if (auto p = optional(item, "comment")) {
-            request.comment.emplace(text(*p), r);
-        }
+        auto comment = optional(item, "comment");
+        auto intent = QueryIntent::from_optional(
+            r,
+            comment          ? std::optional<std::string_view>(text(*comment))
+            : q.comment_text ? std::optional<std::string_view>(*q.comment_text)
+                             : std::nullopt,
+            "inspect SQL query fixture");
+        QueryRequest request(std::allocator_arg,
+                             Allocator(r),
+                             q,
+                             intent.value(),
+                             flag(item, "debug"),
+                             flag(item, "metadata", true));
         if (flag(item, "trace")) {
             request.trace_chain.emplace_back(TraceKind::Request, "Fixture", "request trace");
         }

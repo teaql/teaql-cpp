@@ -212,6 +212,10 @@ bool audit_plaintext_enabled(Memory r) {
 RawAuditEvent audit_event_projection(Memory r, const RawAuditEvent& source, bool allow) {
     auto result = clone_in(r, source);
     Vector<String> secrets(r);
+    if (const auto* provenance = result.diagnostic_redactions()) {
+        provenance->extend_secrets(allow, secrets);
+    }
+    result.with_diagnostic_redactions(nullptr);
     auto redact = [&](std::string_view field, Value& value) {
         if (is_credential_log_name(field) || credentials(value) ||
             (!allow && field != "id" && field != "version")) {
@@ -281,7 +285,8 @@ SafeAuditField build_safe_audit_field(Memory r,
     }
     out.raw_length = boundaries(r, *raw).size() - 1;
     bool credential = is_credential_log_name(field);
-    out.masked = credential || (marked(masks, field) && !detail::audit_plaintext_enabled(r));
+    out.masked = credential || ((marked(masks, field) || field.starts_with('#')) &&
+                                !detail::audit_plaintext_enabled(r));
     out.value.emplace(credential   ? String("[REDACTED]", r)
                       : out.masked ? mask(r, *raw)
                                    : String(*raw, r));
@@ -306,8 +311,12 @@ SafeAuditEvent RawAuditEvent::build_safe_event(Memory r,
     SafeAuditEvent out(std::allocator_arg, Allocator(r), kind, entity);
     auto allow = detail::audit_plaintext_enabled(r);
     Vector<String> secrets(r);
+    if (const auto* provenance = diagnostic_redactions()) {
+        provenance->extend_secrets(allow, secrets);
+    }
     for (const auto& change : changes) {
-        if (is_credential_log_name(change.field) || (!allow && marked(masks, change.field)) ||
+        if (is_credential_log_name(change.field) ||
+            (!allow && (marked(masks, change.field) || change.field.starts_with('#'))) ||
             nested_credentials(change)) {
             if (change.old_value) {
                 collect(*change.old_value, secrets);
@@ -346,7 +355,8 @@ SafeAuditEvent RawAuditEvent::build_safe_event(Memory r,
             field.masked = true;
             field.output_length = 10;
             field.truncated = false;
-        } else if (field.value) {
+        } else if (field.value &&
+                   (field.masked || (change.field != "id" && change.field != "version"))) {
             scrub(*field.value, secrets);
             field.output_length = boundaries(r, *field.value).size() - 1;
         }
@@ -357,9 +367,21 @@ SafeAuditEvent RawAuditEvent::build_safe_event(Memory r,
     }
     if (auto id = values.find("id"); id != values.end()) {
         collect(id->second, secrets);
+        if (const auto* unsigned_id = std::get_if<std::uint64_t>(&id->second.data);
+            unsigned_id && *unsigned_id > 0) {
+            out.entity_id = *unsigned_id;
+        } else if (const auto* signed_id = std::get_if<std::int64_t>(&id->second.data);
+                   signed_id && *signed_id > 0) {
+            out.entity_id = static_cast<std::uint64_t>(*signed_id);
+        }
     }
     sort_secrets(secrets);
     scrub_trace(out.trace_chain, secrets);
+    out.bootstrap_audit = detail::clone_in(r, bootstrap_audit);
+    if (out.bootstrap_audit) {
+        scrub(out.bootstrap_audit->actor, secrets);
+        scrub(out.bootstrap_audit->reason, secrets);
+    }
     out.mutation_governance = detail::clone_in(r, mutation_governance);
     return out;
 }

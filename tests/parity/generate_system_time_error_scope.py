@@ -12,6 +12,8 @@ from compare_values import observe
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--rust', required=True)
+    parser.add_argument('--output', type=Path,
+                        help='Write a separately versioned corpus without replacing historical evidence')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     subprocess.run(['python3', str(root / 'scripts/verify_upstream.py')], check=True)
@@ -24,7 +26,8 @@ def main():
     corpus = dict(baseline=json.loads((root / 'upstream.lock.json').read_text())['commit'],
         note='Actual Rust SystemTime Result/Error, Clone, Duration Debug and Error/Display defaults; no copied source arithmetic.',
         cases=[dict(input=i, expected=o) for i, o in zip(cases, outputs)])
-    with gzip.GzipFile(filename=str(Path(__file__).with_name('system_time_error_scope_cases.json.gz')),
+    destination = args.output or Path(__file__).with_name('system_time_error_scope_cases.json.gz')
+    with gzip.GzipFile(filename=str(destination),
                        mode='wb', mtime=0) as output:
         output.write((json.dumps(corpus, ensure_ascii=True, separators=(',', ':')) + '\n').encode())
     print(f'Recorded {len(cases)} original time-error inputs')

@@ -64,6 +64,10 @@ struct Model : EntityDefaults<Model> {
         return detail::clone_in(memory_resource(), comment);
     }
 
+    void set_comment(std::string_view reason) {
+        comment.emplace(reason, memory_resource());
+    }
+
     bool is_new() const {
         return fresh;
     }

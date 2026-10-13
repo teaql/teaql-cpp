@@ -7,6 +7,9 @@ add_library(teaql_core
     src/xls.cpp
     src/entity.cpp
     src/list.cpp
+    src/load_state.cpp
+    src/dynamic_properties.cpp
+    src/dynamic_fields.cpp
     src/number_text.cpp
     src/request.cpp
     src/dynamic_search.cpp

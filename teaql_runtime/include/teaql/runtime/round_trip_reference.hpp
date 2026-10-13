@@ -2,6 +2,7 @@
 #include <teaql/runtime/round_trip_reference_types.hpp>
 #include <teaql/runtime/entity_reference.hpp>
 #include <teaql/runtime/resources.hpp>
+#include <teaql/runtime/document_round_trip.hpp>
 
 namespace teaql {
 namespace detail {
@@ -187,12 +188,25 @@ public:
                                                      const ReferenceDocumentScope&,
                                                      const ExternalEntityReference&,
                                                      std::string_view expected_entity_type) const;
+    DocumentResult<String> issue_document_snapshot(Memory destination,
+                                                   const TrustedReferencePrincipal&,
+                                                   const DocumentSnapshot&,
+                                                   ReferenceLifetime) const;
+    DocumentResult<VerifiedDocumentSnapshot>
+    consume_document_snapshot(Memory destination,
+                              const TrustedReferencePrincipal&,
+                              std::string_view token,
+                              std::string_view expected_aggregate_type,
+                              std::string_view expected_purpose) const;
 
     Memory memory_resource() const {
         return service_.get_allocator().resource();
     }
 
 private:
+    detail::ReferenceSecret document_derived_key(Memory, const ReferenceKey&) const;
+    detail::CryptoKey
+    document_actor_fingerprint(Memory, const ReferenceKey&, const TrustedReferencePrincipal&) const;
     DeploymentProfile profile_;
     ReferenceMode mode_;
     String service_, environment_;

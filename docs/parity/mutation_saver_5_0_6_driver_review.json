@@ -1,0 +1,34 @@
+[
+  {
+    "family": "runtime_mutation",
+    "historical_driver": "tests/parity/runtime_mutation_oracle.rs",
+    "historical_sha256": "8c0c9a0c778983b117c07eb0c95660a08709ba530b97a4e4b1ecd0bd8d4b62fc",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/runtime_mutation_5_0_6.rs",
+    "active_sha256": "8c83a7f957c545b07f48b0e2fe148e4cc9a92552e06e79083b4ea5ff229bd379",
+    "adaptation": "shared fixture import and actual request command envelope observation"
+  },
+  {
+    "family": "graph_saver",
+    "historical_driver": "tests/parity/graph_saver_oracle.rs",
+    "historical_sha256": "7fb82b26a1839450b9e46db08ca20543bc8f06fe867bfa193bfe3ce26258cf59",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/graph_saver_5_0_6.rs",
+    "active_sha256": "7e6fb3c0db5e3b916aa65b4fc3cc4d8d7344b21b74af1a8252eddddef87a4d49",
+    "adaptation": "shared fixture import and actual request command envelope observation"
+  },
+  {
+    "family": "audited_auto_save",
+    "historical_driver": "tests/parity/rust_values/src/bin/audited_auto_save_oracle.rs",
+    "historical_sha256": "f41caedf10fc47399dbc8dc4ddb1633419296260f67b8e211f2bed484d07f0a8",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/audited_auto_save_5_0_6.rs",
+    "active_sha256": "7f98ea1f4340f973acc16db8f494d1f58db6478de5163ef96a862f356c329a00",
+    "adaptation": "shared fixture import and actual request command envelope observation"
+  },
+  {
+    "family": "transaction_scope",
+    "historical_driver": "tests/parity/rust_values/src/bin/transaction_scope_oracle.rs",
+    "historical_sha256": "48f5549f2b913a2cd849939c2190611330c7bdb46e29658ca379952e2ae5a7cf",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/transaction_scope_5_0_6.rs",
+    "active_sha256": "b18ee5cfead75841701021c5b6e31b9322aa5182a334e84a11b068cfffc8755c",
+    "adaptation": "shared fixture import, command observation and actual fallible constructors preserving missing intent; non-Clone path logic unchanged"
+  }
+]

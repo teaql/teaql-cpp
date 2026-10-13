@@ -8,10 +8,16 @@ void attach_relation_aggregate_rows(std::span<CompactRow>,
                                     const RelationLoadPlan&,
                                     const RelationAggregate&,
                                     Vector<CompactRow>);
+void attach_relation_aggregate_rows(std::span<CompactRow>,
+                                    std::span<const CompactRow>,
+                                    const RelationLoadPlan&,
+                                    const RelationAggregate&,
+                                    Vector<CompactRow>);
 void attach_object_group_rows(std::span<CompactRow>,
                               const ObjectGroupBy&,
                               std::span<const CompactRow>);
-void attach_child_query_rows(std::span<CompactRow>, std::span<const CompactRow>);
+Result<std::monostate, DynamicFieldError> attach_child_query_rows(std::span<CompactRow>,
+                                                                  std::span<const CompactRow>);
 
 // Parent rows are stable, same-Context borrows, as in relation hydration. Query
 // inputs are snapshots; the fetch callback keeps the entity-runtime boundary.
@@ -38,6 +44,39 @@ public:
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
+        if (!keys_) {
+            keys_.emplace(r);
+            if (!aggregates_.empty()) {
+                auto descriptor = context().require_entity(service_.entity());
+                if (!descriptor) {
+                    return R::err(r,
+                                  DataServiceError<typename E::Error>::runtime(
+                                      r, std::move(descriptor).error()));
+                }
+                Vector<String> fields(r);
+                for (const auto& aggregate : aggregates_) {
+                    auto* relation =
+                        descriptor.value().get().relation_by_name(aggregate.relation_name);
+                    if (!relation) {
+                        return R::err(r,
+                                      DataServiceError<typename E::Error>::runtime(
+                                          r,
+                                          RuntimeError::missing_relation(
+                                              r, service_.entity(), aggregate.relation_name)));
+                    }
+                    fields.emplace_back(relation->local_key);
+                }
+                for (const auto& parent : parents_) {
+                    Record values(r);
+                    for (const auto& field : fields) {
+                        if (auto* value = parent.get(field)) {
+                            values.emplace(String(field, r), Value(r, *value));
+                        }
+                    }
+                    keys_->emplace_back(values);
+                }
+            }
+        }
         while (index_ < aggregates_.size()) {
             const auto& aggregate = aggregates_[index_];
             if (!child_) {
@@ -59,7 +98,7 @@ public:
                 }
                 plan_.emplace(std::move(plans.value().front()));
                 Vector<Value> ids(r);
-                for (const auto& parent : parents_) {
+                for (const auto& parent : *keys_) {
                     if (auto* id = parent.get(plan_->local_key)) {
                         ids.emplace_back(*id);
                     }
@@ -92,11 +131,10 @@ public:
                     query.group_by(plan_->foreign_key);
                 }
                 query.and_filter(Expr::in_list(r, plan_->foreign_key, ids));
+                auto parent = EntityDataServiceAccess::scoped(service_, service_.entity());
+                parent.with_trace_context(trace_);
                 auto& repo = context().template make<EntityDataService<E>>(
-                    EntityDataServiceAccess::relation_child(service_, *plan_));
-                TraceChain trace(trace_, r);
-                trace.emplace_back(TraceKind::Relation, query.entity, aggregate.alias);
-                repo.with_trace_context(trace);
+                    EntityDataServiceAccess::relation_child(parent, *plan_));
                 auto& child = fetch_(repo, std::move(query));
                 if (child.memory_resource() != r) {
                     child.cancel();
@@ -127,7 +165,7 @@ public:
                     }
                 }
             }
-            attach_relation_aggregate_rows(parents_, *plan_, aggregate, std::move(rows));
+            attach_relation_aggregate_rows(parents_, *keys_, *plan_, aggregate, std::move(rows));
             forwarding_.reset();
             child_ = nullptr;
             plan_.reset();
@@ -156,6 +194,7 @@ private:
 
     EntityDataService<E> service_;
     std::span<CompactRow> parents_;
+    std::optional<Vector<CompactRow>> keys_;
     Vector<RelationAggregate> aggregates_;
     std::optional<AggregationCacheOptions> cache_;
     TraceChain trace_;
@@ -192,7 +231,7 @@ public:
         auto r = service_.memory_resource();
         while (index_ < enhancements_.size()) {
             const auto& enhancement = enhancements_[index_];
-            if (!child_) {
+            if (!child_ && !dynamic_) {
                 std::string_view field = "id";
                 if constexpr (ObjectGroup) {
                     field = enhancement.storage_field;
@@ -225,6 +264,17 @@ public:
                 auto& repo = context.template make<EntityDataService<E>>(
                     EntityDataServiceAccess::scoped(service_, query.entity));
                 repo.with_trace_context(trace_);
+                if constexpr (!ObjectGroup) {
+                    auto intent = EntityDataServiceAccess::request_intent(repo, query);
+                    if (!intent) {
+                        return R::err(r,
+                                      DataServiceError<typename E::Error>::runtime(
+                                          r, std::move(intent).error()));
+                    }
+                    if (query.dynamic_field_selection) {
+                        dynamic_ = make_box<DynamicPayload>(r, query, repo, intent.value());
+                    }
+                }
                 auto& child = fetch_(repo, std::move(query));
                 if (child.memory_resource() != r) {
                     child.cancel();
@@ -233,21 +283,57 @@ public:
                 }
                 child_ = &child;
             }
-            forwarding_.attach(child_->wake_signal(), wake);
-            auto* result = child_->poll();
-            if (!result) {
-                return {};
-            }
-            if (!*result) {
-                return R::err(r, copy_or_take_error(*child_, *result));
+            const Vector<CompactRow>* fetched = nullptr;
+            if (child_) {
+                forwarding_.attach(child_->wake_signal(), wake);
+                auto* result = child_->poll();
+                if (!result) {
+                    return {};
+                }
+                if (!*result) {
+                    return R::err(r, copy_or_take_error(*child_, *result));
+                }
+                forwarding_.reset();
+                if (dynamic_) {
+                    dynamic_->rows = Vector<CompactRow>(result->value(), r);
+                } else {
+                    fetched = &result->value();
+                }
+                child_ = nullptr;
             }
             if constexpr (ObjectGroup) {
-                attach_object_group_rows(parents_, enhancement, result->value());
+                attach_object_group_rows(parents_, enhancement, *fetched);
             } else {
-                attach_child_query_rows(parents_, result->value());
+                if (dynamic_) {
+                    if (!dynamic_->work) {
+                        dynamic_
+                            ->work = &make_operation<R, DynamicRowsOperation<typename E::Error>>(
+                            r,
+                            EntityDataServiceAccess::context_service(service_).metadata.context(),
+                            std::span<CompactRow>(dynamic_->rows),
+                            dynamic_->query.entity,
+                            *dynamic_->query.dynamic_field_selection,
+                            dynamic_->intent);
+                    }
+                    forwarding_.attach(dynamic_->work->wake_signal(), wake);
+                    auto* result = dynamic_->work->poll();
+                    if (!result) {
+                        return {};
+                    }
+                    if (!*result) {
+                        return R::err(r, copy_or_take_error(*dynamic_->work, *result));
+                    }
+                    forwarding_.reset();
+                    fetched = &dynamic_->rows;
+                }
+                auto merged = attach_child_query_rows(parents_, *fetched);
+                if (!merged) {
+                    return R::err(r,
+                                  DataServiceError<typename E::Error>::runtime(
+                                      r, RuntimeError::dynamic_field(r, merged.error())));
+                }
             }
-            forwarding_.reset();
-            child_ = nullptr;
+            dynamic_.reset();
             ++index_;
         }
         return R::ok(r, {});
@@ -264,9 +350,29 @@ public:
             child_->cancel();
             child_ = nullptr;
         }
+        if (dynamic_ && dynamic_->work) {
+            dynamic_->work->cancel();
+        }
     }
 
 private:
+    struct DynamicPayload {
+        using allocator_type = Allocator;
+        SelectQuery query;
+        QueryIntent intent;
+        Vector<CompactRow> rows;
+        AsyncOperation<R>* work = nullptr;
+
+        DynamicPayload(std::allocator_arg_t,
+                       Allocator a,
+                       const SelectQuery& query,
+                       const EntityDataService<E>&,
+                       const QueryIntent& intent)
+            : query(std::allocator_arg, a, query), intent(std::allocator_arg, a, intent),
+              rows(a.resource()) {}
+    };
+
+    ScopedBox<DynamicPayload> dynamic_;
     EntityDataService<E> service_;
     std::span<CompactRow> parents_;
     Vector<Enhancement> enhancements_;

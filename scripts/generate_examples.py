@@ -34,11 +34,34 @@ def main():
         entries = [generator / 'generator/target/classes', generator / 'model/target/classes']
         cp = ':'.join(map(str, entries)) + ':' + classpath.read_text().strip()
         for model, destination in [('examples/generator/model.xml', 'examples/generated'),
-                                   ('tests/generator/types.xml', 'tests/generated_types')]:
+                                   ('tests/generator/types.xml', 'tests/generated_types'),
+                                   ('tests/generator/checkers.xml', 'tests/generated_checkers'),
+                                   ('tests/generator/relations.xml', 'tests/generated_relations'),
+                                   ('tests/generator/business_ids.xml', 'tests/generated_business_ids'),
+                                   ('tests/generator/optional_types.xml', 'tests/generated_optional_types'),
+                                   ('tests/generator/inheritance.xml', 'tests/generated_inheritance'),
+                                   ('tests/generator/inheritance_graph.xml', 'tests/generated_inheritance_graph'),
+                                   ('tests/generator/inheritance_variants.xml', 'tests/generated_inheritance_variants'),
+                                   ('tests/generator/inheritance_business_ids.xml', 'tests/generated_inheritance_business_ids'),
+                                   ('tests/generator/candidates.xml', 'tests/generated_candidates'),
+                                   ('tests/generator/constants_scalar.xml', 'tests/generated_constants_scalar'),
+                                   ('tests/generator/constants_numeric.xml', 'tests/generated_constants_numeric'),
+                                   ('tests/generator/constants_catalog.xml', 'tests/generated_constants_catalog'),
+                                   ('tests/generator/dynamic_json.xml', 'tests/generated_dynamic_json'),
+                                   ('tests/generator/sample_fields.xml', 'tests/generated_sample_fields'),
+                                   ('tests/generator/sample_fields_runtime.xml', 'tests/generated_sample_fields_runtime'),
+                                   ('tests/generator/sample_fields_temporal.xml', 'tests/generated_sample_fields_temporal')]:
             output = work / destination
-            subprocess.run(['java', '-cp', cp,
+            command = ['java', '-cp', cp,
                             'com.skynet.codegenerator.cpp.CppCoreGenerator',
-                            str(ROOT / model), str(output)], cwd=generator, check=True)
+                            str(ROOT / model), str(output)]
+            qualification = model.endswith(('/inheritance.xml', '/inheritance_graph.xml', '/inheritance_variants.xml', '/inheritance_business_ids.xml'))
+            if qualification:
+                command.append('--qualify-inheritance')
+            if model.endswith(('/candidates.xml', '/constants_scalar.xml', '/constants_numeric.xml', '/constants_catalog.xml')):
+                qualification = True
+                command.append('--qualify-constants')
+            subprocess.run(command, cwd=generator, check=True)
             files = sorted(path for path in output.rglob('*') if path.is_file())
             headers = [str(path) for path in files if path.suffix == '.hpp']
             subprocess.run([str(formatter), f'--style=file:{ROOT / ".clang-format"}',
@@ -46,9 +69,15 @@ def main():
             lock = json.loads((generator / 'cpp_generator.lock.json').read_text())
             checkpoint = lock['generator_baseline_commit']
             implementation = ['generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java',
+                              'generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java',
+                              'model/src/main/resources/models/infra/system-types.xml',
                               'generator/src/main/resources/generator/cpp_lib_core/support.hpp.template']
             manifest = {
-                'scope': 'cpp-lib-core', 'generator_base_commit': checkpoint,
+                'scope': 'cpp-lib-core',
+                'qualification_only': qualification,
+                'generator_base_commit': lock.get('generator_workspace_base_commit', checkpoint),
+                'generator_reference_commit': checkpoint,
                 'generator_implementation_sha256': {
                     path: hashlib.sha256((generator / path).read_bytes()).hexdigest()
                     for path in implementation},

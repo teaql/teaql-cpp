@@ -157,8 +157,8 @@ static void execution_and_diagnostics() {
     auto& query = user->make<SelectQuery>("Record");
     query.filter(Expr::eq(r, "name", "PRIVATE-VALUE")).comment("query comment");
     auto request = [&](bool metadata = true) {
-        QueryRequest req(std::allocator_arg, Allocator(r), query, true, metadata);
-        req.comment.emplace("request comment", r);
+        auto intent = QueryIntent::create(r, "request comment", "inspect masked records");
+        QueryRequest req(std::allocator_arg, Allocator(r), query, intent.value(), true, metadata);
         return req;
     };
     auto& observed = user->make<Vector<ExecutionMetadata>>();
@@ -242,6 +242,8 @@ static void probes_and_cache() {
     auto& cache = global.make<SqlExecutorState>();
     auto& executor = global.make<SqlDataServiceExecutor<Error>>(d, transport, schema, cache);
     auto& q = user->make<SelectQuery>("Record");
+    q.comment_text.emplace("inspect records", r);
+    q.purpose_text.emplace("executor contract", r);
     Vector<Value> values(r);
     values.emplace_back(7);
     values.emplace_back(9);
@@ -345,6 +347,8 @@ static void close_and_journal() {
         auto user = global.make_user_context();
         auto r = user->memory_resource();
         auto& q = user->make<SelectQuery>("Record");
+        q.comment_text.emplace("inspect records", r);
+        q.purpose_text.emplace("executor contract", r);
         auto observer =
             ExecutionObserver(std::allocator_arg, Allocator(r), [&](ExecutionMetadata m) {
                 check(transport.cancelled == 1, "close joins provider before diagnostic sink");
@@ -358,6 +362,97 @@ static void close_and_journal() {
     check(provider_cancelled == 1 &&
               delivered.back().sql_log.execution_outcome == SqlExecutionOutcome::Cancelled,
           "context close emits one cancellation while observers are alive");
+}
+
+static void lowered_like_provenance() {
+    GlobalContext global;
+    auto& state = global.make<SqlExecutorState>();
+    auto& dialect = global.make_resource<Dialect>();
+    auto& entity = model(global);
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& query = user_context->make<SelectQuery>("Record");
+    query.filter(Expr::contain(r, "name", "first private operand"));
+    auto& first =
+        user_context->make<CompiledQuery>(state.compile_select_cached(r, dialect, entity, query));
+    auto secrets = [&](const CompiledQuery& compiled) {
+        Vector<String> result(compiled.memory_resource());
+        compiled.log_context.intent_redactions.extend_secrets(false, result);
+        return result;
+    };
+    auto contains = [](const Vector<String>& values, std::string_view expected) {
+        return std::find(values.begin(), values.end(), expected) != values.end();
+    };
+    check(first.params[0] == Value(r, "%first private operand%") &&
+              contains(secrets(first), "first private operand"),
+          "typed LIKE retains both SQL pattern and original masked operand");
+    query.filter(Expr::contain(r, "name", "second private operand"));
+    auto& second =
+        user_context->make<CompiledQuery>(state.compile_select_cached(r, dialect, entity, query));
+    check(dialect.compiles == 1 && second.params[0] == Value(r, "%second private operand%") &&
+              contains(secrets(second), "second private operand") &&
+              !contains(secrets(second), "first private operand"),
+          "cache hits rebuild current LIKE privacy without retaining prior operands");
+    query.predicate->args[1].literal = Value(r, "%rewritten private operand%");
+    auto& rewritten =
+        user_context->make<CompiledQuery>(state.compile_select_cached(r, dialect, entity, query));
+    check(dialect.compiles == 1 && rewritten.params[0] == Value(r, "%rewritten private operand%") &&
+              secrets(rewritten).empty(),
+          "rewritten patterns invalidate retained lowering provenance without guessing");
+    query.filter(Expr::like(r, "name", "%raw private pattern%"));
+    auto& raw =
+        user_context->make<CompiledQuery>(state.compile_select_cached(r, dialect, entity, query));
+    check(secrets(raw).empty(), "raw LIKE does not manufacture an original operand");
+    query.filter(Expr::binary(Expr::column(r, "name"),
+                              BinaryOp::Eq,
+                              Expr::like_pattern(r, "%standalone%", "standalone")));
+    check(secrets(state.compile_select_cached(r, dialect, entity, query)).empty(),
+          "non-LIKE operations do not acquire lowering provenance");
+    auto& child = user_context->make<SelectQuery>("Record");
+    child.project("id").filter(Expr::not_contain(r, "name", "nested private operand"));
+    query.filter(Expr::in_subquery(r, "id", entity, child, "id"));
+    auto& nested =
+        user_context->make<CompiledQuery>(state.compile_select_cached(r, dialect, entity, query));
+    check(contains(secrets(nested), "nested private operand"),
+          "nested subquery retains its own binding provenance");
+    child.filter(Expr::not_contain(r, "name", "replacement nested operand"));
+    query.filter(Expr::in_subquery(r, "id", entity, child, "id"));
+    nested = state.compile_select_cached(r, dialect, entity, query);
+    check(contains(secrets(nested), "replacement nested operand") &&
+              !contains(secrets(nested), "nested private operand"),
+          "nested cache bindings use current offsets and operands");
+    entity.property("visible", DataType::Text);
+    entity.property("access_token", DataType::Text);
+    auto& unclassified = user_context->make<EntityDescriptor>(entity);
+    unclassified.audit_mask_fields_declared = false;
+    using TextFactory = Expr (*)(Memory, std::string_view, std::string_view);
+    const std::array<TextFactory, 6> factories{Expr::contain,
+                                               Expr::not_contain,
+                                               Expr::begin_with,
+                                               Expr::not_begin_with,
+                                               Expr::end_with,
+                                               Expr::not_end_with};
+    for (auto factory : factories) {
+        for (std::string_view field : {"name", "visible", "access_token", "unclassified"}) {
+            query.filter(factory(r, field == "unclassified" ? "name" : field, "matrix operand"));
+            auto compiled = state.compile_select_cached(
+                r, dialect, field == "unclassified" ? unclassified : entity, query);
+            check(
+                contains(secrets(compiled), "matrix operand") == (field != "visible"),
+                "all typed lowering variants respect masked, plain, credential and unknown policies");
+            Vector<String> allowed(r);
+            compiled.log_context.intent_redactions.extend_secrets(true, allowed);
+            check(contains(allowed, "matrix operand") ==
+                      (field == "access_token" || field == "unclassified"),
+                  "plaintext permission never bypasses forced credential or unknown privacy");
+        }
+    }
+    auto retained = user_context->make_global<CompiledQuery>(nested);
+    user_context.reset();
+    auto next_user_context = global.make_user_context();
+    const auto& retained_query = next_user_context->get(next_user_context->rebind_global(retained));
+    check(contains(secrets(retained_query), "replacement nested operand"),
+          "explicit Global copy owns nested LIKE intent after UserContext deletion");
 }
 
 static void cross_context_cache_and_request() {
@@ -375,6 +470,8 @@ static void cross_context_cache_and_request() {
         auto source = global.make_user_context();
         auto sr = source->memory_resource();
         auto& q = source->make<SelectQuery>("Record");
+        q.comment_text.emplace("inspect records", sr);
+        q.purpose_text.emplace("executor contract", sr);
         q.filter(Expr::eq(sr, "name", "a long private value owned by the source context"));
         QueryRequest request(std::allocator_arg, Allocator(sr), q, false, true);
         request.trace_chain.emplace_back(
@@ -384,13 +481,15 @@ static void cross_context_cache_and_request() {
     const auto& result = pending->wait().value();
     check(result.metadata.params[0] ==
                   Value(r, "a long private value owned by the source context") &&
-              result.metadata.trace_chain.size() == 1,
+              result.metadata.trace_chain.size() == 3,
           "request owns an explicit deep copy after source Context closes");
     auto& retained = global.make<QueryResult>(result);
     target.reset();
     auto next = global.make_user_context();
     auto nr = next->memory_resource();
     auto& q = next->make<SelectQuery>("Record");
+    q.comment_text.emplace("inspect records", nr);
+    q.purpose_text.emplace("executor contract", nr);
     q.filter(Expr::eq(nr, "name", "next context value"));
     const auto& again =
         executor.query(nr, QueryRequest(std::allocator_arg, Allocator(nr), q, false, true))
@@ -399,7 +498,7 @@ static void cross_context_cache_and_request() {
     check(dialect.compiles == 1 && schema.lookups == 1 &&
               again.metadata.params[0] == Value(nr, "next context value"),
           "global cache keeps no query/descriptor borrow from the previous UserContext");
-    check(retained.metadata.trace_chain[0].comment == "a long trace owned by the source context" &&
+    check(retained.metadata.trace_chain[2].comment == "a long trace owned by the source context" &&
               retained.rows[0].get("value"),
           "explicit global result copy survives both source scopes");
     bool rejected = false;
@@ -416,6 +515,7 @@ int main() {
         auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
         execution_and_diagnostics();
         probes_and_cache();
+        lowered_like_provenance();
         close_and_journal();
         cross_context_cache_and_request();
         std::pmr::set_default_resource(previous);

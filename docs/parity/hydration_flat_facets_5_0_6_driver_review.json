@@ -1,0 +1,61 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/hydration_flat_facets_5_0_6.rs",
+  "driver_sha256": "6d4e4ae1c35592bbb6e504fb166c905030298604029a6f6ed71f6df5331eb873",
+  "corpus_sha256": "4d77b243dd1ceb340c4936fe8c144e3dd61ace146339d40d3a02416c0ccbf267",
+  "observations": 2304,
+  "scope": "Direct bridge builds original relation plans then invokes complete original flat/compact-flat methods. Original Context graph registry decodes real fixture models; prepared requests reach recording QueryExecutor. Full graph, parent, facet, availability marker, request, error and stop snapshots.",
+  "bridge_error_mapping": "Explicit DataServiceError::Runtime conversion preserves planner error category; no rewritten planner or hydration algorithm.",
+  "controls": {
+    "compact": [
+      false,
+      true
+    ],
+    "many": [
+      false,
+      true
+    ],
+    "reverse": [
+      false,
+      true
+    ],
+    "keys": [
+      "valid",
+      "typed_null",
+      "missing"
+    ],
+    "pending": [
+      0,
+      1
+    ],
+    "polls": [
+      0,
+      1,
+      2,
+      20
+    ],
+    "fail_at": [
+      0,
+      1,
+      2
+    ],
+    "missing_id": [
+      false,
+      true
+    ],
+    "include_all": [
+      false,
+      true
+    ]
+  },
+  "outcomes": {
+    "cancelled": 1044,
+    "success": 192,
+    "Parent: Facet owner is missing its u64 id": 132,
+    "graph write error: facet fetch failed": 840,
+    "Parent: loaded reverse relation owner is missing its u64 id": 96
+  },
+  "initial_differences": 1728,
+  "initial_scope": "Before runtime dispatch and before adding explicit shape-only availability markers. Initial complete outputs remain retained.",
+  "remaining": "Physical SQL is checked separately in native C++; recording executor does not qualify original SQLite, JSON view coordinates, nested/dynamic/full decoder or generated model/configuration/privacy matrices."
+}

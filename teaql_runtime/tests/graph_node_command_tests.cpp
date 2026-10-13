@@ -39,6 +39,8 @@ static void reference_retention_and_cancel() {
     auto& executor = user->make_resource<mutation_fixture::Executor>(state);
     auto& service = EntityDataService<mutation_fixture::Executor>::for_executor(
         *user, "Other", *user, executor);
+    require(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+            "private fixture binds explicit mutation and readback intent");
     auto& node = user->make<GraphNode>("Order");
     node.value("id", std::uint64_t(7))
         .value("version", std::int64_t(1))
@@ -80,6 +82,8 @@ static void deletion_parent_scope_copy() {
     auto& executor = user->make_resource<mutation_fixture::Executor>(state);
     auto& service = EntityDataService<mutation_fixture::Executor>::for_executor(
         *user, "Order", *user, executor);
+    require(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+            "private fixture binds explicit mutation and readback intent");
     auto& node = user->make<GraphNode>("Order");
     node.value("id", std::int64_t(-7))
         .value("version", std::int64_t(1))
@@ -95,11 +99,12 @@ static void deletion_parent_scope_copy() {
     auto& result = work.wait();
     require(result && state.requests.size() == 1, "scoped deletion delegates one native mutation");
     const auto& command = std::get<DeleteCommand>(state.requests[0].data);
-    require(command.trace_chain.size() == 3 &&
-                command.trace_chain[0].comment == "parent allocation payload" &&
-                command.trace_chain[1].comment == "leaf allocation payload" &&
-                command.trace_chain[1].entity_id == std::uint64_t(-7),
-            "copied parent and leaf provenance retain source order and signed identity conversion");
+    require(
+        command.trace_chain.size() == 3 &&
+            command.trace_chain[0].comment == "parent allocation payload" &&
+            command.trace_chain[1].comment == "leaf allocation payload" &&
+            !command.trace_chain[1].entity_id,
+        "copied provenance retains source order without an unsigned trace ID for a negative identity");
 }
 
 int main() {

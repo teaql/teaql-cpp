@@ -115,6 +115,8 @@ public:
         return detail::assign_scoped(*this, std::move(other));
     }
 
+    static SqlParameterLogPolicy field_policy(const EntityDescriptor&, std::string_view);
+
     static SqlIntentRedactions from_unclassified_query(Memory, const SelectQuery&);
     static SqlIntentRedactions
     from_bindings(Memory, const SqlLogContext&, std::span<const Value>, std::string_view sql);

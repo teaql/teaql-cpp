@@ -1,0 +1,6 @@
+{
+  "reason": "New comparator initially discarded compare_values.main failure boolean, so first CTest reports passed despite mismatched output. Corrected to raise SystemExit(main(...)). Repository AST audit found no other comparator with this error.",
+  "negative_exit_code": 1,
+  "negative_result": "0/72 observations match",
+  "notice": "Initial native/SAN/module CTest parity results are invalid as acceptance; final checks must rerun after fixture correction."
+}

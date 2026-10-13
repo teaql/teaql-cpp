@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 24576,
+  "source_and_cpp_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "json_graph_decoder_rust_parity",
+        "json_graph_views_rust_parity",
+        "json_graph_views_context_contracts",
+        "entity_decoder_contracts"
+      ]
+    },
+    "sanitize": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "json_graph_decoder_rust_parity",
+        "json_graph_views_context_contracts"
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "generator_java_tests": {
+    "passed": 33,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_graph_decoder.hpp": "157d100585a785855ac29eee3a29094c4ab492a25e2fcfb4ad8e9fb223ecc9f4",
+    "teaql_runtime/include/teaql/runtime/entity_runtime.hpp": "9229bfc234eb96c091ae2e953c8a54afe21a023d5fc5274d41e3d2a96e6f1aa8",
+    "tests/parity/json_graph_decoder_probe.cpp": "d598f130026228e57f151b8faef5df6905389fcce96e8e3099c3cecfc778ce46",
+    "tests/parity/rust_private_save_5_0_6/src/bin/json_graph_decoder_5_0_6.rs": "71bb9be9d3149453390195dfb92ec30767ab54a7c31960a6dc9a65573d505ea8"
+  },
+  "notice": "Commit checkpoint of typed registry callbacks and weak JSON view moves only. Full JSON parser, recursive assembly, generated facades and complete capabilities/P7 remain open. No MIPS or physical-device test was run for this checkpoint.",
+  "formatting": {
+    "handwritten_files": 1006,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  }
+}

@@ -40,6 +40,111 @@ if(TEAQL_BUILD_EXAMPLES)
 endif()
 
 if(BUILD_TESTING)
+    add_executable(teaql_module_document_round_trip_tests
+        ${PROJECT_SOURCE_DIR}/teaql_runtime/tests/document_round_trip_tests.cpp)
+    target_compile_definitions(teaql_module_document_round_trip_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_document_round_trip_tests PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_document_round_trip_tests PRIVATE teaql_runtime_module)
+    add_test(NAME module_document_round_trip_contracts COMMAND teaql_module_document_round_trip_tests)
+    add_executable(teaql_module_core_shape_presentation_tests
+        ${PROJECT_SOURCE_DIR}/teaql_core/tests/shape_presentation_tests.cpp)
+    target_compile_definitions(teaql_module_core_shape_presentation_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_core_shape_presentation_tests PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_core_shape_presentation_tests PRIVATE teaql_runtime_module)
+    add_test(NAME module_core_shape_presentation_contracts COMMAND teaql_module_core_shape_presentation_tests)
+    add_executable(teaql_module_context_root_generated tests/context_root_generated.cpp)
+    target_compile_definitions(teaql_module_context_root_generated PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_context_root_generated PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_context_root_generated PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_context_root_generated_contracts COMMAND teaql_module_context_root_generated)
+    set_tests_properties(module_context_root_generated_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_sample_fields tests/generated_sample_fields.cpp)
+    target_compile_definitions(teaql_module_generated_sample_fields PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_sample_fields PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_sample_fields PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_sample_fields_contracts COMMAND teaql_module_generated_sample_fields)
+    set_tests_properties(module_generated_sample_fields_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_optional_types_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_optional_types_tests.cpp)
+    target_compile_definitions(teaql_module_generated_optional_types_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_optional_types_tests PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_optional_types_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_optional_types_contracts COMMAND teaql_module_generated_optional_types_tests)
+    set_tests_properties(module_generated_optional_types_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_inheritance_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_inheritance_tests.cpp)
+    target_compile_definitions(teaql_module_generated_inheritance_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_inheritance_tests PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_inheritance_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_inheritance_contracts COMMAND teaql_module_generated_inheritance_tests)
+    set_tests_properties(module_generated_inheritance_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_candidates_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_candidates_tests.cpp)
+    target_compile_definitions(teaql_module_generated_candidates_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_candidates_tests PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_candidates_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_candidates_contracts COMMAND teaql_module_generated_candidates_tests)
+    add_executable(teaql_module_generated_bootstrap_model_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_bootstrap_model_tests.cpp)
+    target_compile_definitions(teaql_module_generated_bootstrap_model_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_bootstrap_model_tests PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_bootstrap_model_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_bootstrap_model_contracts COMMAND teaql_module_generated_bootstrap_model_tests)
+    add_executable(teaql_module_generated_bootstrap_tests
+        ${PROJECT_SOURCE_DIR}/teaql_runtime/tests/generated_bootstrap_tests.cpp)
+    target_compile_definitions(teaql_module_generated_bootstrap_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_bootstrap_tests PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_bootstrap_tests PRIVATE teaql_runtime_module)
+    add_test(NAME module_generated_bootstrap_contracts COMMAND teaql_module_generated_bootstrap_tests)
+    add_executable(teaql_module_generated_inheritance_graph_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_inheritance_graph_tests.cpp)
+    target_compile_definitions(teaql_module_generated_inheritance_graph_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_inheritance_graph_tests PROPERTIES
+        CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_inheritance_graph_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_inheritance_graph_contracts COMMAND teaql_module_generated_inheritance_graph_tests)
+    set_tests_properties(module_generated_inheritance_graph_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_inheritance_variants_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_inheritance_variants_tests.cpp)
+    target_compile_definitions(teaql_module_generated_inheritance_variants_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_inheritance_variants_tests PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_inheritance_variants_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_inheritance_variants_contracts COMMAND teaql_module_generated_inheritance_variants_tests)
+    set_tests_properties(module_generated_inheritance_variants_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_inheritance_query_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_inheritance_query_tests.cpp)
+    target_compile_definitions(teaql_module_generated_inheritance_query_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_inheritance_query_tests PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_inheritance_query_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_inheritance_query_contracts COMMAND teaql_module_generated_inheritance_query_tests)
+    add_executable(teaql_module_generated_return_type_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_return_type_tests.cpp)
+    target_compile_definitions(teaql_module_generated_return_type_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_return_type_tests PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_return_type_tests PRIVATE teaql_provider_sqlite_module SQLite3::SQLite3)
+    add_test(NAME module_generated_return_type_contracts COMMAND teaql_module_generated_return_type_tests)
+    set_tests_properties(module_generated_return_type_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_dynamic_field_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_dynamic_field_tests.cpp)
+    target_compile_definitions(teaql_module_generated_dynamic_field_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_dynamic_field_tests PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_dynamic_field_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_dynamic_field_contracts COMMAND teaql_module_generated_dynamic_field_tests)
+    set_tests_properties(module_generated_dynamic_field_contracts PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_executable(teaql_module_generated_readonly_property_tests
+        ${PROJECT_SOURCE_DIR}/tests/generator/generated_readonly_property_tests.cpp)
+    target_compile_definitions(teaql_module_generated_readonly_property_tests PRIVATE TEAQL_USE_MODULES=1)
+    set_target_properties(teaql_module_generated_readonly_property_tests PROPERTIES
+        CXX_EXTENSIONS OFF CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(teaql_module_generated_readonly_property_tests PRIVATE teaql_provider_sqlite_module)
+    add_test(NAME module_generated_readonly_property_contracts COMMAND teaql_module_generated_readonly_property_tests)
     add_executable(teaql_module_contracts tests/contracts.cpp tests/header_bridge.cpp tests/lookup.cpp
         tests/reverse_imports.cpp tests/mixed_imports.cpp tests/teaql_memory_lookup.cpp
         tests/teaql_async_lookup.cpp tests/teaql_core_lookup.cpp tests/teaql_data_service_lookup.cpp
@@ -86,7 +191,7 @@ if(BUILD_TESTING)
         string(JSON case_count ERROR_VARIABLE case_error LENGTH "${contract_manifest}" contracts ${index} cases)
         if(case_error)
             add_test(NAME module_${contract} COMMAND teaql_module_${contract})
-        else()
+        elseif(case_count GREATER 0)
             math(EXPR last_case "${case_count} - 1")
             foreach(case_index RANGE ${last_case})
                 string(JSON case_name GET "${contract_manifest}" contracts ${index} cases ${case_index} name)
@@ -141,4 +246,55 @@ if(BUILD_TESTING)
             --relations-graph $<TARGET_FILE:teaql_sqlite_relations_graph>)
         set_tests_properties(module_canonical_examples_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
     endif()
+endif()
+
+if(TARGET teaql_module_hydration_sibling_keys_probe)
+    add_test(NAME module_hydration_sibling_keys_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_hydration_sibling_keys_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_hydration_sibling_keys_probe>)
+endif()
+
+if(TARGET teaql_module_hydration_owner_facets_probe)
+    add_test(NAME module_hydration_owner_facets_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_hydration_owner_facets_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_hydration_owner_facets_probe>)
+endif()
+
+if(TARGET teaql_module_hydration_owner_facets_async_probe)
+    add_test(NAME module_hydration_owner_facets_async_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_hydration_owner_facets_async_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_hydration_owner_facets_async_probe>)
+endif()
+
+if(TARGET teaql_module_graph_relation_facets_probe)
+    add_test(NAME module_graph_relation_facets_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_graph_relation_facets_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_graph_relation_facets_probe>)
+endif()
+
+if(TARGET teaql_module_hydration_flat_facets_probe)
+    add_test(NAME module_hydration_flat_facets_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_hydration_flat_facets_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_hydration_flat_facets_probe>)
+endif()
+
+if(TARGET teaql_module_loaded_row_graph_probe)
+    add_test(NAME module_loaded_row_graph_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_loaded_row_graph_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_loaded_row_graph_probe>)
+endif()
+
+if(TARGET teaql_module_relation_hydration_replay_probe)
+    add_test(NAME module_relation_hydration_replay_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_relation_hydration_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_relation_hydration_replay_probe>)
+    add_test(NAME module_relation_hydration_intent_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_relation_hydration_intent_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_relation_hydration_replay_probe>)
+endif()
+
+if(TARGET teaql_module_json_graph_views_probe)
+    add_test(NAME module_json_graph_views_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_json_graph_views_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_json_graph_views_probe>)
 endif()

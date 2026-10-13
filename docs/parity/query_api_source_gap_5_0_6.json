@@ -1,0 +1,1317 @@
+{
+  "total": 1089,
+  "failed": 42,
+  "cases": [
+    {
+      "index": 980,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "null",
+          "value": null
+        },
+        "upper": {
+          "kind": "f64",
+          "value": "NaN"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 981,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "null",
+          "value": null
+        },
+        "upper": {
+          "kind": "f64",
+          "value": "NaN"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 982,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "null",
+          "value": null
+        },
+        "upper": {
+          "kind": "f64",
+          "value": "NaN"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 983,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "typed_null",
+          "value": null
+        },
+        "upper": {
+          "kind": "f64",
+          "value": "-0.0"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 984,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "typed_null",
+          "value": null
+        },
+        "upper": {
+          "kind": "f64",
+          "value": "-0.0"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 985,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "typed_null",
+          "value": null
+        },
+        "upper": {
+          "kind": "f64",
+          "value": "-0.0"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 986,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "bool",
+          "value": true
+        },
+        "upper": {
+          "kind": "decimal",
+          "value": "1.20"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 987,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "bool",
+          "value": true
+        },
+        "upper": {
+          "kind": "decimal",
+          "value": "1.20"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 988,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "bool",
+          "value": true
+        },
+        "upper": {
+          "kind": "decimal",
+          "value": "1.20"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 989,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "i64",
+          "value": "-9223372036854775808"
+        },
+        "upper": {
+          "kind": "text",
+          "value": "\u96ea\n\u0000"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 990,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "i64",
+          "value": "-9223372036854775808"
+        },
+        "upper": {
+          "kind": "text",
+          "value": "\u96ea\n\u0000"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 991,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "i64",
+          "value": "-9223372036854775808"
+        },
+        "upper": {
+          "kind": "text",
+          "value": "\u96ea\n\u0000"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 992,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "u64",
+          "value": "18446744073709551615"
+        },
+        "upper": {
+          "kind": "date",
+          "value": "2024-02-29"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 993,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "u64",
+          "value": "18446744073709551615"
+        },
+        "upper": {
+          "kind": "date",
+          "value": "2024-02-29"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 994,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "u64",
+          "value": "18446744073709551615"
+        },
+        "upper": {
+          "kind": "date",
+          "value": "2024-02-29"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 995,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "f64",
+          "value": "NaN"
+        },
+        "upper": {
+          "kind": "timestamp",
+          "value": "42"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 996,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "f64",
+          "value": "NaN"
+        },
+        "upper": {
+          "kind": "timestamp",
+          "value": "42"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 997,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "f64",
+          "value": "NaN"
+        },
+        "upper": {
+          "kind": "timestamp",
+          "value": "42"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 998,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "f64",
+          "value": "-0.0"
+        },
+        "upper": {
+          "kind": "json",
+          "value": {
+            "x": [
+              1,
+              null
+            ]
+          }
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 999,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "f64",
+          "value": "-0.0"
+        },
+        "upper": {
+          "kind": "json",
+          "value": {
+            "x": [
+              1,
+              null
+            ]
+          }
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1000,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "f64",
+          "value": "-0.0"
+        },
+        "upper": {
+          "kind": "json",
+          "value": {
+            "x": [
+              1,
+              null
+            ]
+          }
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1001,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "decimal",
+          "value": "1.20"
+        },
+        "upper": {
+          "kind": "list",
+          "value": [
+            {
+              "kind": "text",
+              "value": "nested"
+            }
+          ]
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1002,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "decimal",
+          "value": "1.20"
+        },
+        "upper": {
+          "kind": "list",
+          "value": [
+            {
+              "kind": "text",
+              "value": "nested"
+            }
+          ]
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1003,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "decimal",
+          "value": "1.20"
+        },
+        "upper": {
+          "kind": "list",
+          "value": [
+            {
+              "kind": "text",
+              "value": "nested"
+            }
+          ]
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1004,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "text",
+          "value": "\u96ea\n\u0000"
+        },
+        "upper": {
+          "kind": "object",
+          "value": {
+            "x": {
+              "kind": "i64",
+              "value": "42"
+            }
+          }
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1005,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "text",
+          "value": "\u96ea\n\u0000"
+        },
+        "upper": {
+          "kind": "object",
+          "value": {
+            "x": {
+              "kind": "i64",
+              "value": "42"
+            }
+          }
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1006,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "text",
+          "value": "\u96ea\n\u0000"
+        },
+        "upper": {
+          "kind": "object",
+          "value": {
+            "x": {
+              "kind": "i64",
+              "value": "42"
+            }
+          }
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1007,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "date",
+          "value": "2024-02-29"
+        },
+        "upper": {
+          "kind": "null",
+          "value": null
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1008,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "date",
+          "value": "2024-02-29"
+        },
+        "upper": {
+          "kind": "null",
+          "value": null
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1009,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "date",
+          "value": "2024-02-29"
+        },
+        "upper": {
+          "kind": "null",
+          "value": null
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1010,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "timestamp",
+          "value": "42"
+        },
+        "upper": {
+          "kind": "typed_null",
+          "value": null
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1011,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "timestamp",
+          "value": "42"
+        },
+        "upper": {
+          "kind": "typed_null",
+          "value": null
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1012,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "timestamp",
+          "value": "42"
+        },
+        "upper": {
+          "kind": "typed_null",
+          "value": null
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1013,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "json",
+          "value": {
+            "x": [
+              1,
+              null
+            ]
+          }
+        },
+        "upper": {
+          "kind": "bool",
+          "value": true
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1014,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "json",
+          "value": {
+            "x": [
+              1,
+              null
+            ]
+          }
+        },
+        "upper": {
+          "kind": "bool",
+          "value": true
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1015,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "json",
+          "value": {
+            "x": [
+              1,
+              null
+            ]
+          }
+        },
+        "upper": {
+          "kind": "bool",
+          "value": true
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1016,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "list",
+          "value": [
+            {
+              "kind": "text",
+              "value": "nested"
+            }
+          ]
+        },
+        "upper": {
+          "kind": "i64",
+          "value": "-9223372036854775808"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1017,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "list",
+          "value": [
+            {
+              "kind": "text",
+              "value": "nested"
+            }
+          ]
+        },
+        "upper": {
+          "kind": "i64",
+          "value": "-9223372036854775808"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1018,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "list",
+          "value": [
+            {
+              "kind": "text",
+              "value": "nested"
+            }
+          ]
+        },
+        "upper": {
+          "kind": "i64",
+          "value": "-9223372036854775808"
+        },
+        "filter": true
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1019,
+      "input": {
+        "kind": "full_expression",
+        "column": "",
+        "pattern": "",
+        "lower": {
+          "kind": "object",
+          "value": {
+            "x": {
+              "kind": "i64",
+              "value": "42"
+            }
+          }
+        },
+        "upper": {
+          "kind": "u64",
+          "value": "18446744073709551615"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\"), op: NotLike, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: NotLike, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\"), op: Like, right: Value(Text(\"\")) }",
+          "Binary { left: Column(\"\"), op: Like, right: LikePattern { pattern: \"\", original: \"\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1020,
+      "input": {
+        "kind": "full_expression",
+        "column": "\u96ea\u0000column",
+        "pattern": "%_\\\u96ea\u0000",
+        "lower": {
+          "kind": "object",
+          "value": {
+            "x": {
+              "kind": "i64",
+              "value": "42"
+            }
+          }
+        },
+        "upper": {
+          "kind": "u64",
+          "value": "18446744073709551615"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: NotLike, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: Value(Text(\"%_\\\\\u96ea\\0\")) }",
+          "Binary { left: Column(\"\u96ea\\0column\"), op: Like, right: LikePattern { pattern: \"%_\\\\\u96ea\\0\", original: \"%_\\\\\u96ea\\0\" } }"
+        ]
+      ]
+    },
+    {
+      "index": 1021,
+      "input": {
+        "kind": "full_expression",
+        "column": "key",
+        "pattern": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "lower": {
+          "kind": "object",
+          "value": {
+            "x": {
+              "kind": "i64",
+              "value": "42"
+            }
+          }
+        },
+        "upper": {
+          "kind": "u64",
+          "value": "18446744073709551615"
+        },
+        "filter": false
+      },
+      "differences": [
+        [
+          "/not_like/debug",
+          "Binary { left: Column(\"key\"), op: NotLike, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: NotLike, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ],
+        [
+          "/like/debug",
+          "Binary { left: Column(\"key\"), op: Like, right: Value(Text(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\")) }",
+          "Binary { left: Column(\"key\"), op: Like, right: LikePattern { pattern: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", original: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" } }"
+        ]
+      ]
+    }
+  ],
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "note": "Initial actual-source discrepancy: raw like/not_like incorrectly emit LikePattern in C++. Only these two debug paths differ in all 42 failing cases. Runtime correction staged until complete CTest terminal state; historical/source corpora unchanged."
+}

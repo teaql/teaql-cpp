@@ -1,0 +1,14 @@
+<root name="cpp_sample_fields" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <sample_record platform="platform()" label="sample" quantity="7" zero_bound="0"
+                   negative_max="integer(sampleValue=-9)" signed_max="integer(sampleValue=+7)"
+                   wide_max="integer(sampleValue=18446744073709551615)"
+                   negative_bound="-9" amount="number()" height="double()"
+                   optional_count="integer()?" active="true" disabled="false"
+                   optional_active="bool()?" day="date()" optional_day="date()?"
+                   recorded_at="dateTime()" optional_recorded_at="dateTime()?"
+                   clock_text="time()" optional_clock_text="time()?" ratio="float()?"
+                   payload="{&quot;kind&quot;:&quot;fixture&quot;}" />
+    <sample_link first_record="sample_record(reverseName=first_links)"
+                 second_record="sample_record(reverseName=second_links)" name="string()" />
+</root>

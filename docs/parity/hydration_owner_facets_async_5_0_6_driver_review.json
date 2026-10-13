@@ -1,0 +1,46 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/hydration_owner_facets_async_5_0_6.rs",
+  "driver_sha256": "c09b167b666bee76394397e2f0409a2979fd2d5af99e814a88be7a8b93dcecd6",
+  "corpus_sha256": "3436c1cbf1bc4c16b533afd9edb92535f5d32c6d9169e41d1eb57a750cb8c8bc",
+  "scope": "Complete original embedded hydration, relation_facets and execute_facets with actual prepared recording executor. Full parent/facet/request/error/stop snapshots; no physical SQL or threaded scheduler qualification.",
+  "controls": {
+    "include_all": [
+      false,
+      true
+    ],
+    "many": [
+      false,
+      true
+    ],
+    "keys": [
+      "valid",
+      "typed_null",
+      "missing"
+    ],
+    "pending": [
+      0,
+      1,
+      3
+    ],
+    "polls": [
+      0,
+      1,
+      2,
+      20
+    ],
+    "fail_at": [
+      0,
+      1,
+      2
+    ]
+  },
+  "outcomes": {
+    "cancelled": 240,
+    "success": 60,
+    "failed": 132
+  },
+  "cancel": "Drop the actual Rust future before observing parents and executor stop counts.",
+  "cpp_context_close": "Public enhancement operation is Context-owned; active child stop checks 32768 bytes of Context host storage before reclamation. External counter equals one and live arena blocks equal zero after close.",
+  "fixture_module_correction": "The first cleanup fixture used private RelationFacetOperation. Replaced with the exported existing enhancement entry; no private type exported and no production implementation changed."
+}

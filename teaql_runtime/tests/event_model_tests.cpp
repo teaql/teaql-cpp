@@ -1,5 +1,6 @@
 #include <teaql/runtime.hpp>
 #include <teaql/runtime/event_debug.hpp>
+#include <teaql/runtime/detail/audit_privacy.hpp>
 #include <cstdlib>
 #include <iostream>
 using namespace teaql;
@@ -22,9 +23,28 @@ int main() {
     values.emplace(String("password", owner), Value(owner, "credential-secret"));
     auto source = user->make_ref<RawAuditEvent>(RawAuditEvent::created(owner, "Order", values));
     auto& event = user->get(source);
-    event.trace_chain.emplace_back(TraceKind::AuditReason, "Order", "credential-secret 1001", 1001);
-    event.bootstrap_audit.emplace(
-        std::allocator_arg, Allocator(owner), "actor", "category", "reason", -3, UINT64_MAX);
+    auto& binding_context = user->make<SqlLogContext>();
+    binding_context.parameter_policies = {SqlParameterLogPolicy::Masked,
+                                          SqlParameterLogPolicy::Credential};
+    auto& operands = user->make<Vector<Value>>();
+    operands.emplace_back("PRIVATE-SIBLING");
+    operands.emplace_back("PRIVATE-TOKEN");
+    auto& privacy = user->make<SqlIntentRedactions>(
+        SqlIntentRedactions::from_bindings(owner, binding_context, operands, ""));
+    event.with_diagnostic_redactions(&privacy);
+    event.with_diagnostic_redactions(event.diagnostic_redactions());
+    privacy.clear();
+    event.trace_chain.emplace_back(TraceKind::AuditReason,
+                                   "Order",
+                                   "credential-secret 1001 PRIVATE-SIBLING PRIVATE-TOKEN",
+                                   999);
+    event.bootstrap_audit.emplace(std::allocator_arg,
+                                  Allocator(owner),
+                                  "actor PRIVATE-TOKEN",
+                                  "category",
+                                  "reason PRIVATE-SIBLING 1001",
+                                  -3,
+                                  UINT64_MAX);
     event.mutation_governance.emplace(std::allocator_arg,
                                       Allocator(owner),
                                       "execution",
@@ -34,6 +54,17 @@ int main() {
     event.mutation_governance->policy.emplace(
         std::allocator_arg, Allocator(owner), "policy", "v1", "fingerprint");
     auto& safe = user->make<SafeAuditEvent>(event.build_safe_event(owner, {}, {}));
+    check(
+        safe.entity_id == 1001 && safe.trace_chain[0].entity_id == 999 && safe.bootstrap_audit &&
+            safe.bootstrap_audit->actor == "actor [REDACTED]" &&
+            safe.bootstrap_audit->reason == "reason [REDACTED] [REDACTED]",
+        "safe target identity stays separate from lineage and bootstrap uses the same privacy source");
+    {
+        auto projected = detail::audit_event_projection(owner, event, false);
+        check(!projected.diagnostic_redactions() && event.diagnostic_redactions() &&
+                  projected.trace_chain[0].comment.find("PRIVATE-") == String::npos,
+              "log projection consumes detached provenance without mutating raw event");
+    }
     auto retained_raw = user->make_global<RawAuditEvent>(event);
     auto retained_safe = user->make_global<SafeAuditEvent>(safe);
     {
@@ -56,6 +87,9 @@ int main() {
     check(raw.values.get_allocator().resource() == global.memory_resource() &&
               raw.bootstrap_audit->memory_resource() == global.memory_resource() &&
               raw.mutation_governance->policy->memory_resource() == global.memory_resource() &&
+              raw.diagnostic_redactions()->memory_resource() == global.memory_resource() &&
+              projected.bootstrap_audit->memory_resource() == global.memory_resource() &&
+              projected.entity_id == 1001 &&
               projected.fields[0].memory_resource() == global.memory_resource(),
           "Raw and safe nested data are independently owned by the selected destination");
     {
@@ -63,6 +97,12 @@ int main() {
         check(text.find("credential-secret") == text.npos &&
                   text.get_allocator().resource() == next->memory_resource(),
               "Retained safe events stay safe and format in the caller's User");
+    }
+    {
+        auto safe_again = raw.build_safe_event(next->memory_resource(), {}, {});
+        check(safe_again.trace_chain[0].comment.find("PRIVATE-") == String::npos &&
+                  safe_again.bootstrap_audit->actor.find("PRIVATE-TOKEN") == String::npos,
+              "retained raw provenance remains effective after source Context deletion");
     }
     bool rejected = false;
     try {

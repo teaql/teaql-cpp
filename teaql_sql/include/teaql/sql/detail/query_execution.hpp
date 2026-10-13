@@ -25,10 +25,10 @@ inline ExecutionMetadata query_diagnostic_metadata(Memory r,
         metadata.backend = "mysql";
         break;
     }
-    for (const auto& node : request.trace_chain) {
+    for (const auto& node : request.execution_trace_chain()) {
         metadata.trace_chain.emplace_back(node);
     }
-    metadata.comment = clone_in(r, request.comment);
+    metadata.comment.emplace(request.comment(), r);
     metadata.parameterized_query.emplace(compiled.sql, r);
     for (const auto& param : compiled.params) {
         metadata.params.emplace_back(param);
@@ -61,6 +61,7 @@ public:
     std::optional<Output> poll(WakeSignal& wake) {
         try {
             if (!initialized_) {
+                request_.require_valid_intent();
                 try {
                     initialize();
                 } catch (const SqlCompileError& e) {

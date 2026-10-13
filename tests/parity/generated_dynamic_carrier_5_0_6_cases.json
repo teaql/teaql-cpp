@@ -1,0 +1,3225 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "source_hashes": {
+    "teaql-macros/src/derive_impl.rs": "070322b967c628f7498557599b80fa7d3b18099bd97d89d7b3fbb261b76f34fd",
+    "teaql-runtime/src/entity_runtime.rs": "1f2fb5566d622389afa8bfe5e760c294838175c4267711029514ce9e73401a1f"
+  },
+  "note": "Direct frozen generated School entity macro and regenerated C++ Product adapters. Explicit model-independent projection compares dynamic values, #code availability, shared snapshot retention/transitions, clone isolation, pending intent and exact common errors. Native per-model layout bit positions/names are outside this projection, not normalized.",
+  "cases": [
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "new"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "new"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": ""
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": ""
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "\u96ea\n\t\"\\"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "\u96ea\n\t\"\\"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "typed_null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "bool",
+          "value": true
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {},
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {},
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_owner",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_layout",
+        "stored": {},
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "set",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {},
+        "op": "delete",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "new"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "new"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": ""
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": ""
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "\u96ea\n\t\"\\"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "\u96ea\n\t\"\\"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "typed_null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "bool",
+          "value": true
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_owner",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_layout",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "new"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "new"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": ""
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": ""
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "\u96ea\n\t\"\\"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "\u96ea\n\t\"\\"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "typed_null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "bool",
+          "value": true
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_owner",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_layout",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "set",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          }
+        },
+        "op": "delete",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "new"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "new"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": ""
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": ""
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "\u96ea\n\t\"\\"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "\u96ea\n\t\"\\"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "typed_null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "bool",
+          "value": true
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": true,
+          "values": {
+            "title": null
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": true,
+          "values": {}
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_owner",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_layout",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "set",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "null"
+          }
+        },
+        "op": "delete",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "new"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "new"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": ""
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": ""
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "\u96ea\n\t\"\\"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "\u96ea\n\t\"\\"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "typed_null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "bool",
+          "value": true
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "null"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": null,
+        "same_snapshot": false,
+        "view": {
+          "loaded": [
+            false,
+            true
+          ],
+          "pending": true,
+          "values": {
+            "count": 9
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "missing",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_INDEXED_STATE_MISSING: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "layout",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_LAYOUT_MISMATCH: title",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            false,
+            false
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_owner",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "install_layout",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "title",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "incompatible dynamic-field owner or loaded layout",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "set",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "mode": "normal",
+        "stored": {
+          "title": {
+            "kind": "text",
+            "value": "old"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "9"
+          }
+        },
+        "op": "delete",
+        "code": "unknown",
+        "value": {
+          "kind": "text",
+          "value": "old"
+        }
+      },
+      "expected": {
+        "copy": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        },
+        "error": "DYNAMIC_FIELD_NOT_FOUND: unknown",
+        "same_snapshot": true,
+        "view": {
+          "loaded": [
+            true,
+            true
+          ],
+          "pending": false,
+          "values": {
+            "count": 9,
+            "title": "old"
+          }
+        }
+      }
+    }
+  ]
+}

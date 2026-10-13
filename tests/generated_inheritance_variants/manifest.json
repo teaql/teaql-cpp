@@ -1,0 +1,30 @@
+{
+  "scope": "cpp-lib-core",
+  "qualification_only": true,
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "823c3b039ee3bc0ced7578da21f49c75ac3bfa41e345a98a0fe5fd5349ff840c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+    "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "d5568fb154711ac878c9171454644a04d2678a637eb148379544da66801ce139"
+  },
+  "model": "tests/generator/inheritance_variants.xml",
+  "model_sha256": "dd0d344e0f4ee1b176253d17e180946768737dce4c8304676a58a5f9554c6625",
+  "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "ASSIST.md": "ebc780212fe8a43e29f0180fdfde44d6f9b5a6b89bea99d5373c1d4a705a7c38",
+    "CMakeLists.txt": "61b339cfae53474527fc9b3b0ca4fe7c67033a263bd98663dbf39e7d0aad57ac",
+    "include/cpp_inheritance_variants/checkers.hpp": "41a7bd68fa322b85380a1c4744738950e40bd95a7c99c0a39fe6b335dc0a3844",
+    "include/cpp_inheritance_variants/expressions.hpp": "7db88ad98937583758f33c716b4e584c14e1d23449db295e505bf9a1b927c1d7",
+    "include/cpp_inheritance_variants/models.hpp": "98bb4e6fadb51d03bc3fbe0defe4b09a34777c07d3c5e7dc3c1748f2906d787a",
+    "include/cpp_inheritance_variants/queries.hpp": "90c32cba60391f4603693176cf8bf2e850398eb9e853bfe018d378a906f78ac3",
+    "include/cpp_inheritance_variants/runtime.hpp": "485c2f808356b9c94e55f854c31d7d1d2c0f2e8cc346cdf972c79cb7c401fb96",
+    "include/cpp_inheritance_variants/sample_data.hpp": "4345b785a4a38ebc9fb59333197b56dc4d37200cabf686a1a47ed681ad27f2b6",
+    "include/cpp_inheritance_variants/support.hpp": "15d9fbd24ecad4735d316ac3934da9ce8b53bf715a0f2ff1c08f2c7769886c08",
+    "include/cpp_inheritance_variants.hpp": "61c8b70aca65262182d1b37b4b10cfa5be0fddd0e06579bf2cf44f91e49905dd"
+  }
+}

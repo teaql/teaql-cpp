@@ -144,6 +144,7 @@ static void run(Mode mode, unsigned fail_at, bool pending = false, bool cancel_n
         auto& executor = user->make<Executor>(counts, fail_at, pending);
         auto& service = EntityDataService<Executor>::for_executor(*user, "Parent", *user, executor);
         auto query = service.select();
+        query.comment("Inspect move-only error propagation");
         if (mode == Mode::IdBuild || mode == Mode::IdPage) {
             query.order_asc("id").page(0, 1).optimize_pagination_with_id_set_config(
                 "move", 600, 10);

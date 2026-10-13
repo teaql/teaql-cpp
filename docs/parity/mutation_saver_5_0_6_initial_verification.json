@@ -1,0 +1,71 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Terminal first native selection: 11/12 pass. Non-ledger automatic-save fixture supplies only id for a descriptor that also declares version/name; preserve its original behavior check with a complete authoritative row.",
+  "exit_code": 8,
+  "passed": 11,
+  "failed": 1,
+  "tests": [
+    {
+      "name": "transaction_move_only_contracts",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "transaction_move_only_rust_parity",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "transaction_scope_context_contracts",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "transaction_scope_rust_parity",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "audited_auto_save_context_contracts",
+      "failed": true,
+      "messages": [
+        null
+      ]
+    },
+    {
+      "name": "audited_auto_save_rust_parity",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "graph_saver_context_contracts",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "graph_saver_rust_parity",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "runtime_mutation_context_contracts",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "runtime_mutation_reentrant_prepare",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "runtime_mutation_reentrant_event",
+      "failed": false,
+      "messages": []
+    },
+    {
+      "name": "runtime_mutation_rust_parity",
+      "failed": false,
+      "messages": []
+    }
+  ]
+}

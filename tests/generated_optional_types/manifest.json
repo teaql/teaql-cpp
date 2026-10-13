@@ -1,0 +1,30 @@
+{
+  "scope": "cpp-lib-core",
+  "qualification_only": false,
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "823c3b039ee3bc0ced7578da21f49c75ac3bfa41e345a98a0fe5fd5349ff840c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+    "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "d5568fb154711ac878c9171454644a04d2678a637eb148379544da66801ce139"
+  },
+  "model": "tests/generator/optional_types.xml",
+  "model_sha256": "ff97b883767d4892fcc19e36c64dd2765a1fb932b36326724a5ba63619bedec6",
+  "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "ASSIST.md": "cf2abaeffca9f62f1c2f4a85e954d9219b9954a316e3e45948656e12f249f6f3",
+    "CMakeLists.txt": "6b03ab7c34c94a2cb20c82a2f0e74e0800801745bc7d8d2f5c8d50d1a9ba12eb",
+    "include/cpp_optional_types/checkers.hpp": "ef15658d15f090a59f460fdd523ef342fa8019cb7d30b7ad3df6604d67614b75",
+    "include/cpp_optional_types/expressions.hpp": "cb35b8d6d26047966dc6fa0e6d2aa6c45a886a866a8e78e5595cad5b3caf8238",
+    "include/cpp_optional_types/models.hpp": "7f590905636a7d47d77d6bec911285bd9ca7d17b0406647b58097e103ae1ce33",
+    "include/cpp_optional_types/queries.hpp": "49421a4a6052057a31ce04834fd62d5b9bdb90a0bff4f6e5da76f09fa860ea65",
+    "include/cpp_optional_types/runtime.hpp": "7878e2420b7d60841907756f16d56e843b9bfbd65b017728cdbc595da4da5b77",
+    "include/cpp_optional_types/sample_data.hpp": "a54508599b2c6528e167c2dc772c7a75c0d68fafbde0cddc15eba204f744d224",
+    "include/cpp_optional_types/support.hpp": "3b1161079f110e64175f318919b2978c7fdeb4a722f1ec2aaf4bad7dd14d299b",
+    "include/cpp_optional_types.hpp": "9182d47d1ad4aca81c12883aa3e4ed8614edc5eeeb79cb1ff936de01005ffd8f"
+  }
+}

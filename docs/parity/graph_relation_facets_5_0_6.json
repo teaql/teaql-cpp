@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 72,
+  "lookups_per_state": 36,
+  "lookup_states": [
+    "before_freeze",
+    "frozen",
+    "fresh_shared_graph"
+  ],
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "relation_hydration_contracts",
+        "graph_relation_facets_rust_parity",
+        "graph_relation_facets_context_contracts",
+        "entity_runtime_contracts"
+      ]
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "graph_relation_facets_rust_parity",
+        "graph_relation_facets_context_contracts",
+        "entity_runtime_contracts"
+      ]
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_graph_relation_facets_context_contracts",
+        "module_graph_relation_facets_rust_parity"
+      ]
+    }
+  },
+  "known_mismatch_comparator_exit_code": 1,
+  "initial_fixture_output_differences": 72,
+  "initial_ctest_parity_results": "invalid: discarded comparator return boolean; replaced by terminal gates recorded here",
+  "canonical_consumer_bodies": 114,
+  "catalog_exports": 1477,
+  "formatting": {
+    "handwritten_files": 1000,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "module_paths_exit_code": 0,
+  "sanitizer_leak_scan": false,
+  "corpus_sha256": "a58009dde4915670787e2def87c072178c9eef29a3b9ddc23f4d63d90392c589",
+  "notice": "Graph relation facet storage/readback and Global deep-copy prerequisite only. Flat/compact-flat query dispatch, JSON view coordinates, generated APIs and full capabilities remain open."
+}

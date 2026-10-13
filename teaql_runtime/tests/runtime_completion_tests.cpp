@@ -58,6 +58,8 @@ static void query_entry(bool pending) {
         [](UserContext& user, Executor& executor) -> auto& {
             auto r = user.memory_resource();
             auto& query = user.make<SelectQuery>("Parent");
+            query.comment("Inspect native completion errors")
+                .purpose("Verify error ownership and cleanup");
             auto& context = user.make<detail::ContextDataService<Executor>>(
                 user,
                 ResourceBorrow<Executor>(
@@ -146,6 +148,8 @@ static void mutation_entry(bool pending) {
                 user,
                 ResourceBorrow<Executor>(
                     std::allocator_arg, Allocator(r), executor, detail::resource_arena(r)));
+            context.with_mutation_intent(
+                MutationIntent::create(r, "Inspect native mutation completion").value());
             if constexpr (S == Scope::Base) {
                 auto base = context.data_service();
                 return dispatch(base);
@@ -154,6 +158,9 @@ static void mutation_entry(bool pending) {
             } else {
                 auto& service =
                     EntityDataService<Executor>::for_executor(user, "Parent", user, executor);
+                check(bool(Access::bind_mutation_intent(service,
+                                                        "Inspect native mutation completion")),
+                      "private mutation entry has explicit intent");
                 if constexpr (Kind == 0) {
                     return Access::insert_internal(service, command);
                 } else if constexpr (Kind == 1) {
@@ -269,6 +276,7 @@ static void scoped_completions() {
 
 static GraphNode graph_input(Memory r, bool create) {
     GraphNode node(std::allocator_arg, Allocator(r), "Parent");
+    node.comment = String("Inspect native graph completion", r);
     node.value("id", std::uint64_t{7}).value("name", "input");
     node.with_operation(create ? GraphOperation::Create : GraphOperation::Upsert);
     return node;
@@ -304,6 +312,7 @@ static void graph_and_ledger() {
                 auto& service =
                     EntityDataService<Executor>::for_executor(user, "Parent", user, executor);
                 auto& root = user.make<EntityRuntimeState>();
+                root.set_comment("Inspect native ledger completion");
                 EntityKey key(
                     std::allocator_arg, Allocator(r), "Parent", Value(r, std::uint64_t{7}));
                 root.set(key, "name", Value(r, "input"));

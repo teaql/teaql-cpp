@@ -1,0 +1,38 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "base_driver": "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_5_0_6.rs",
+  "base_driver_sha256": "16c19d92e27ced431888697fa4f2668482cf04718a7620250b8bc0fccda07d9f",
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_capture_5_0_6.rs",
+  "driver_sha256": "e744dc05562c02b7dee81469b8d5d1c3fb9984aa8821ea7039d51f3b82008153",
+  "adaptation": "Only insert original public SqlLogOptions setter before provider/service construction; all original query calls and observations unchanged.",
+  "counts": {
+    "cases": 768,
+    "provider_calls": 488,
+    "captured_requests": 244,
+    "cases_rejected_before_provider": 512,
+    "list": {
+      "cases": 192,
+      "provider_calls": 128,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    },
+    "owned": {
+      "cases": 192,
+      "provider_calls": 120,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    },
+    "rows": {
+      "cases": 192,
+      "provider_calls": 120,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    },
+    "aggregates": {
+      "cases": 192,
+      "provider_calls": 120,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    }
+  }
+}

@@ -12,13 +12,13 @@
   Add braces explicitly in macros and around preprocessor-dependent bodies, which
   clang-format cannot always rewrite. Review brace insertion and run relevant tests.
 
-- Baseline: Rust v5.0.5 at the exact commit in `upstream.lock.json`. The source
+- Baseline: Rust v5.0.6 at the exact commit in `upstream.lock.json`. The source
   repository's active branch is not the reference. Use `scripts/verify_upstream.py`.
 - Edge runtime, kernel first. SQLite only. Do not add PostgreSQL/MySQL, cloud,
   web, cache, or unrelated Rust ecosystem integrations to the migration scope.
 - Keep the implementation compact. Prefer C++20 standard facilities. SQLite is
   the planned database dependency; justify any additional dependency before adding it.
-- Preserve every Rust 5.0.5 core concept, responsibility, and abstraction. Compact
+- Preserve every Rust 5.0.6 core concept, responsibility, and abstraction. Compact
   means few dependencies, not fewer design elements. Follow docs/design_parity.md
   and the six-stage docs/migration_plan.md; the source inventory is not proof of parity.
 - Do not merge data-service, SQL executor, transport, provider, or runtime layers.
@@ -27,6 +27,36 @@
 - Two explicit lifetimes: application-owned `GlobalContext` and `UserContext`.
   Allocate managed objects through `global.make<T>()` or `user_context.make<T>()`.
   External RAII wrappers use the correspondingly scoped `make_resource<T>()`.
+- Name `UserContext` variables and parameters `user_context` in examples and
+  generated C++ APIs and usage documentation. Use descriptive variants such as
+  `next_user_context` when multiple contexts are needed; do not abbreviate them
+  to `user`, which can be confused with an application user. Preserve existing
+  public member names such as `ContextLimits::user`.
+- Follow docs/query_expression_change_plan.md for the agreed Q/E target and its
+  runtime-first implementation phases. Create the local Q entry through
+  `user_context.queries<query_factory>()`; individual methods such as
+  `Q.orderLines()` take no Context parameter. All dynamic query/expression data
+  belongs to the bound Context, with checked Context/source identities and
+  explicit destination copies for cross-domain composition or retention.
+  Ordinary value wrappers do not extend Context lifetime. Execution receives
+  exactly one `user_context` argument and validates the binding. Query-private allocation regions are not approved ownership domains. The
+  runtime Q/E and generator migration gates are qualified; preserve them when
+  extending generation and do not hand-edit generated artifacts.
+- Use two deliberate API naming styles. Application-facing Q/E/model methods
+  use lowerCamelCase, including `orderLines`, `selectName`, `withNameIs`,
+  `executeForList`, `executeForOne` and `executeForStream`. Runtime/kernel
+  infrastructure APIs use snake_case, such as `entity_data_service`,
+  `fetch_enhanced_entities`, `fetch_entity_stream` and `memory_resource`.
+  Classify by interface responsibility, not source-file location: the
+  application-facing EntityQuery facade keeps lowerCamelCase even though it
+  is implemented in the runtime package; its underlying service protocols
+  remain snake_case. Adapters bridge the styles without duplicating behavior.
+  Keep the local query entry variable `Q` uppercase; descriptive factory type
+  names such as `query_factory` may use underscores. Variables, parameters,
+  files, packages and modules keep their underscore naming; common types keep
+  their established PascalCase names. Preserve authentic model metadata,
+  external identifiers and Rust reference APIs. Apply the application rule to
+  every generated Q/E/model API added during parity work.
 - Context memory uses a growing, multi-block arena; destroy registered objects
   before returning all blocks. Context results are borrows, invalid after close.
   Never use shared ownership to extend their lifetime implicitly.
@@ -36,8 +66,11 @@
 - SQLite/system/GPU resources need actual cleanup before arena reclamation;
   asynchronous work must complete before freeing its referenced host memory.
 - Preserve Rust core query/mutation/trace semantics, including distinct mutation,
-  snapshot, and generated-value types. Preserve 5.0.5 log provenance/privacy when
+  snapshot, and generated-value types. Preserve 5.0.6 log provenance/privacy when
   implementing logs. Do not claim unsupported features or ordinary CRUD as graph save.
+- Follow docs/cpp_generator_parity_plan.md for remaining Rust generator alignment.
+  Keep a locked-source capability ledger and qualify runtime mechanics before
+  emitting thin adapters. Context-bound Q/E acceptance is not full generator parity.
 - Generator development is authorized as of 2026-10-11. Follow
   docs/cpp_generator_plan.md in the independent cpp_support workspace. Preserve
   the original handwritten examples as semantic baselines while adding generated
@@ -49,12 +82,17 @@
   Keep directory moves and module export changes separate from function changes.
   Production sources and headers live in the corresponding `teaql_*` package;
   shared fixtures and Rust comparisons live in `tests/support` and `tests/parity`.
-  During M1a, verify the move with `python3 scripts/verify_module_paths.py`.
-- Update migration status honestly. The six in-scope migration stages, graph/
-  ledger save, mutation governance and audit/log source contracts are accepted
-  within documented C++ ownership/protocol adaptations. See the final Stage 6
-  evidence; do not claim GPU adapters, external integrations or physical-router
-  execution. Final full sanitizer leak scanning is disabled.
+  Verify active paths with `python3 scripts/verify_module_paths.py`; it checks
+  structure/source provenance without claiming semantic acceptance. Preserve
+  historical move ledger hashes and replay their fixed C++ checkpoint with
+  `python3 scripts/verify_module_paths.py --historical-checkpoint` when auditing
+  the original unchanged-function M1a move.
+- Update migration status honestly. The six-stage 5.0.5 qualification is historical. The active baseline is 5.0.6;
+  follow docs/baseline_5_0_6_upgrade.md and requalify changed source contracts,
+  ledgers and oracle corpora without relabeling old evidence. Preserve graph/
+  ledger, governance and audit abstractions; do not claim new baseline acceptance
+  before evidence, GPU adapters, external integrations or physical-router execution.
+  Final full sanitizer leak scanning is disabled.
 - Default to the native build and relevant CMake/CTest tests for routine changes.
   Do not run all three profiles for every change. Use ASan/UBSan when changes
   affect memory safety, lifetimes or asynchronous cleanup, or when requested.

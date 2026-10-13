@@ -64,6 +64,9 @@ static void pending_and_duplicate_identity() {
     auto& executor = user->make<Executor>();
     executor.pending = true;
     executor.rows.emplace_back();
+    executor.rows.back().emplace(String("id", r), Value(r, std::uint64_t{1}));
+    executor.rows.back().emplace(String("version", r), Value(r, std::int64_t{4}));
+    executor.rows.back().emplace(String("name", r), Value(r, "original"));
     auto& service = EntityDataService<Executor>::for_executor(*user, "Parent", *user, executor);
     auto& node = user->make<GraphNode>("Parent");
     node.value("id", std::uint64_t(1)).value("name", "changed").value("version", std::int64_t(4));
@@ -89,13 +92,54 @@ static void pending_and_duplicate_identity() {
               result->value().items[0].update_fields[0] == "name",
           "dirty fields filter update projection after excluding identity and version");
     auto& remove = user->make<GraphNode>("Missing");
-    remove.remove().with_comment("ignored token");
+    remove.remove().with_comment("inspect deletion");
     auto& missing_service =
         EntityDataService<Executor>::for_executor(*user, "Missing", *user, executor);
     auto& removed = missing_service.plan_graph(detail::clone_in(r, remove));
     auto* deletion = removed.poll();
-    check(deletion && *deletion && !deletion->value().items[0].scope_token,
-          "Remove bypasses descriptor lookup and ignores own comment token");
+    check(deletion && *deletion && deletion->value().items[0].scope_token &&
+              deletion->value().items[0].scope_token->recover_trace_chain(r).back().comment ==
+                  "inspect deletion",
+          "Remove bypasses descriptor lookup and preserves its own intent scope");
+}
+
+static void authoritative_readback() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& metadata = user_context->make<InMemoryMetadataStore>();
+    metadata.register_entity(descriptor(r, "Parent"));
+    user_context->set_metadata(*user_context, metadata);
+    auto& executor = user_context->make<Executor>();
+    auto& service =
+        EntityDataService<Executor>::for_executor(*user_context, "Parent", *user_context, executor);
+    auto intent = QueryIntent::create(r, "Inspect target 7", "Read a complete save snapshot");
+    check(bool(intent), "readback has explicit valid intent");
+    detail::EntityDataServiceAccess::bind_query_intent(service, intent.value());
+    Value id(r, std::uint64_t{7});
+    auto read = [&]() -> auto& {
+        return detail::EntityDataServiceAccess::fetch_graph_current_row_internal(
+            service, "Parent", "id", id, {});
+    };
+    executor.rows.emplace_back();
+    executor.rows.back().emplace(String("id", r), Value(r, std::uint64_t{7}));
+    auto& failed = read().wait();
+    check(!failed &&
+              failed.error().to_string(r) ==
+                  "graph write error: authoritative readback missing mapped field Parent.version",
+          "sparse authoritative rows fail in descriptor order");
+    executor.rows.back().emplace(String("version", r), Value(r));
+    executor.rows.back().emplace(String("name", r), Value(r));
+    executor.rows.back().emplace(String("extra", r), Value(r, "additional projection"));
+    auto& complete = read().wait();
+    check(complete && complete.value() && complete.value()->get("name")->is_null() &&
+              complete.value()->len() == 4,
+          "reordered complete rows, extra projections and explicit NULL stay legal");
+    check(!detail::EntityDataServiceAccess::intent(service),
+          "capturing a readback target does not change reusable parent provenance");
+    executor.rows.clear();
+    auto& absent = read().wait();
+    check(absent && !absent.value(), "no matching row remains an ordinary missing result");
 }
 
 static void cancellation_and_expiry() {
@@ -111,7 +155,7 @@ static void cancellation_and_expiry() {
     executor.external_cancelled = &cancellations;
     auto& service = EntityDataService<Executor>::for_executor(*user, "Parent", *user, executor);
     auto& node = user->make<GraphNode>("Parent");
-    node.value("id", std::uint64_t(1));
+    node.value("id", std::uint64_t(1)).with_comment("Inspect pending graph lookup");
     auto& operation = service.plan_graph(detail::clone_in(r, node));
     check(!operation.poll(), "native lookup is pending");
     user->destroy(metadata);
@@ -140,9 +184,10 @@ static void actual_sqlite_planning() {
     auto& metadata = user->make<InMemoryMetadataStore>();
     auto parent = descriptor(r, "Parent");
     parent.table("parent");
+    parent.audit_mask_fields_declared = true;
     metadata.register_entity(std::move(parent));
     user->set_metadata(*user, metadata);
-    user->disable_sql_log();
+    user->enable_all_sql_log();
     auto& connection = user->make_resource<SqliteConnection>();
     auto& transport = user->make<SqliteMutationExecutor>(connection);
     auto& sql = user->make<CompiledQuery>();
@@ -158,13 +203,25 @@ static void actual_sqlite_planning() {
     using E = std::remove_reference_t<decltype(executor)>;
     auto& service = EntityDataService<E>::for_executor(*user, "Parent", *user, executor);
     auto& node = user->make<GraphNode>("Parent");
-    node.value("id", std::uint64_t(7)).value("name", "new");
+    node.value("id", std::uint64_t(7))
+        .value("name", "new")
+        .with_comment("Inspect SQLite graph lookup target 7");
     auto* result = service.plan_graph(detail::clone_in(r, node)).poll();
     if (result && !*result) {
         throw std::runtime_error(std::string(result->error().to_string(r)));
     }
     check(result && *result && result->value().items[0].kind == GraphMutationKind::Update,
           "real SQLite existence lookup selects Update without writing");
+    auto logs = user->sql_logs();
+    check(logs.size() == 1, "the complete readback emits one real SQLite query log");
+    check(logs[0].comment && logs[0].comment->find("target [REDACTED]") != String::npos &&
+              logs[0].log_context.intent_redactions.is_empty(),
+          "safe readback logging scrubs the target and consumes private provenance");
+    check(logs[0].params.size() == 1 && logs[0].params[0].try_u64() == 7 &&
+              logs[0].log_context.parameter_policies[0] == SqlParameterLogPolicy::Plain,
+          "target provenance preserves the ordinary SQL parameter policy and binding");
+    check(!detail::EntityDataServiceAccess::intent(service),
+          "readback provenance does not modify reusable service state");
 }
 
 int main() {
@@ -172,6 +229,7 @@ int main() {
     try {
         planning_and_retention();
         pending_and_duplicate_identity();
+        authoritative_readback();
         cancellation_and_expiry();
         actual_sqlite_planning();
         std::pmr::set_default_resource(previous);

@@ -152,13 +152,17 @@ static void sound_like_builds_soundex_equality(Memory owner) {
 }
 
 static void java_style_string_match_builders_expand_like_patterns(Memory owner) {
-    check(Expr::contain(owner, "name", "tea") == Expr::like(owner, "name", "%tea%") &&
-              Expr::not_contain(owner, "name", "tea") == Expr::not_like(owner, "name", "%tea%") &&
-              Expr::begin_with(owner, "name", "tea") == Expr::like(owner, "name", "tea%") &&
-              Expr::not_begin_with(owner, "name", "tea") == Expr::not_like(owner, "name", "tea%") &&
-              Expr::end_with(owner, "name", "tea") == Expr::like(owner, "name", "%tea") &&
-              Expr::not_end_with(owner, "name", "tea") == Expr::not_like(owner, "name", "%tea"),
-          "all six original string-match ASTs and patterns");
+    auto pattern = [&](BinaryOp op, std::string_view expanded) {
+        return Expr::binary(
+            Expr::column(owner, "name"), op, Expr::like_pattern(owner, expanded, "tea"));
+    };
+    check(Expr::contain(owner, "name", "tea") == pattern(BinaryOp::Like, "%tea%") &&
+              Expr::not_contain(owner, "name", "tea") == pattern(BinaryOp::NotLike, "%tea%") &&
+              Expr::begin_with(owner, "name", "tea") == pattern(BinaryOp::Like, "tea%") &&
+              Expr::not_begin_with(owner, "name", "tea") == pattern(BinaryOp::NotLike, "tea%") &&
+              Expr::end_with(owner, "name", "tea") == pattern(BinaryOp::Like, "%tea") &&
+              Expr::not_end_with(owner, "name", "tea") == pattern(BinaryOp::NotLike, "%tea"),
+          "all six 5.0.6 string-match ASTs retain expanded and original patterns");
 }
 
 static void large_in_builders_use_large_binary_ops(Memory owner) {

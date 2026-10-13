@@ -1,6 +1,7 @@
 #pragma once
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/core/request.hpp>
+#include <teaql/runtime/facet_runtime.hpp>
 
 namespace teaql {
 // Structural C++20 counterparts of the source query/entity service traits.
@@ -44,17 +45,6 @@ concept TeaqlEntityDataService =
 template <TeaqlQueryDataService R>
 using TeaqlDataServiceError = DataServiceError<typename R::Error>;
 
-class TeaqlRuntime {
-public:
-    virtual ~TeaqlRuntime() = default;
-    virtual const UserContext& user_context() const = 0;
-    virtual AsyncOperation<Result<SmartList<CompactRow>, RuntimeError>>&
-    fetch_facet_smart_list(std::string_view entity,
-                           const PurposedSelectQuery&,
-                           std::span<const RelationAggregate>,
-                           std::span<const TraceNode> trace_context) const = 0;
-};
-
 // Hidden generated-support save contract remains distinct from AuditedSaveExt.
 template <class T, class C>
 concept AuditedSave = std::derived_from<C, TeaqlRuntime> && requires(T audited, const C& context) {
@@ -64,12 +54,4 @@ concept AuditedSave = std::derived_from<C, TeaqlRuntime> && requires(T audited, 
     } -> std::same_as<AsyncOperation<Result<GraphNode, typename T::Error>>&>;
 };
 
-Result<request::QuerySelection, RuntimeError>
-restrict_facet_to_outer_query(const TeaqlRuntime&,
-                              request::QuerySelection,
-                              const SelectQuery&,
-                              std::string_view relation_name);
-using FacetResults = std::pmr::map<String, SmartList<CompactRow>, std::less<>>;
-AsyncOperation<Result<FacetResults, RuntimeError>>&
-execute_facets(const TeaqlRuntime&, const SelectQuery&, const request::QueryOptions&);
 }

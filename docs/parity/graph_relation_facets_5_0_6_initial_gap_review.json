@@ -1,0 +1,7 @@
+{
+  "observations": 72,
+  "differences": 72,
+  "reason": "The source observer removed an inaccessible test-only mutation flag. C++ retained its corresponding output field in a multiline formatted statement; remaining output fields match.",
+  "all_other_fields_equal": true,
+  "comparison_normalization": "None. Remove the extra fixture field and reproduce the complete corpus again."
+}

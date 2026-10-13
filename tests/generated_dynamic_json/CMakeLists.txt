@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(cpp_dynamic_json LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(cpp_dynamic_json INTERFACE)
+target_include_directories(cpp_dynamic_json INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(cpp_dynamic_json INTERFACE cxx_std_20)
+target_link_libraries(cpp_dynamic_json INTERFACE teaql::provider_sqlite)

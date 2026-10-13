@@ -22,15 +22,15 @@ public:
     std::optional<R> poll(WakeSignal& wake) {
         if (!child_) {
             const auto& store = metadata_.get();
-            QueryRequest request(std::allocator_arg,
-                                 Allocator(resource_),
-                                 query_,
-                                 store.capture_query_debug(),
-                                 store.capture_execution_metadata());
-            for (const auto& node : query_.trace_chain) {
-                request.trace_chain.emplace_back(node);
+            auto checked = QueryRequest::from_query(
+                resource_, query_, store.capture_query_debug(), store.capture_execution_metadata());
+            if (!checked) {
+                return R::err(
+                    resource_,
+                    DataServiceError<Error>::runtime(
+                        resource_, RuntimeError::request_intent(resource_, checked.error())));
             }
-            request.comment = clone_in(resource_, query_.comment_text);
+            auto request = std::move(checked).value();
             auto& child = executor_.get().query_observed(
                 resource_, std::move(request), store.query_diagnostic_observer(resource_));
             if (child.memory_resource() != resource_) {

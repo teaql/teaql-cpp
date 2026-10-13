@@ -1,0 +1,330 @@
+[
+  {
+    "index": 2,
+    "input": {
+      "nested": false,
+      "collision": true,
+      "inverse_requested": false
+    },
+    "rust": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])",
+          "remaining": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])",
+          "remaining": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])",
+          "remaining": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])",
+          "remaining": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 3,
+    "input": {
+      "nested": false,
+      "collision": true,
+      "inverse_requested": true
+    },
+    "rust": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([])})])",
+          "remaining": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([])})])",
+          "remaining": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([])})])",
+          "remaining": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([])})])",
+          "remaining": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([])})])])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 6,
+    "input": {
+      "nested": true,
+      "collision": true,
+      "inverse_requested": false
+    },
+    "rust": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})]), \"remaining\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])})])",
+          "remaining": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})]), \"remaining\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])})])})]), \"remaining\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})]), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})]), \"remaining\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})])})])",
+          "remaining": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})]), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})]), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})]), \"remaining\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})])})])})]), \"remaining\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})]), \"remaining\": List([])})])",
+          "remaining": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})]), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})]), \"remaining\": List([])})])",
+          "remaining": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})]), \"remaining\": List([])})])])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 7,
+    "input": {
+      "nested": true,
+      "collision": true,
+      "inverse_requested": true
+    },
+    "rust": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([]), \"remaining\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])})])",
+          "remaining": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([]), \"remaining\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})]), \"owner\": U64(2), \"parent\": List([]), \"remaining\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})])})])",
+          "remaining": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})]), \"owner\": U64(2), \"parent\": List([]), \"remaining\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([]), \"remaining\": List([])})])",
+          "remaining": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2)})]), \"owner\": U64(2), \"parent\": List([]), \"remaining\": List([])})])",
+          "remaining": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})]), \"owner\": U64(1), \"parent\": List([]), \"remaining\": List([])})])])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1)})])])) }"
+        },
+        {
+          "entity": "Parent",
+          "filter": "Binary { left: Column(\"link\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  }
+]

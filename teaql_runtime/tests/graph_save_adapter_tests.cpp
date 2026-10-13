@@ -25,6 +25,7 @@ static void install(UserContext& user) {
 static adapter_fixture::Model& model(UserContext& user, mutation_fixture::State& state) {
     auto r = user.memory_resource();
     auto& entity = user.make<adapter_fixture::Model>(state);
+    entity.comment.emplace("Inspect native adapter save", r);
     entity.values.fields.emplace(String("id", r), Value(r, std::uint64_t(7)));
     entity.values.fields.emplace(String("version", r), Value(r, std::int64_t(1)));
     entity.values.fields.emplace(String("name", r), Value(r, "original allocated input payload"));
@@ -38,6 +39,8 @@ static void lazy_and_status_boundaries() {
     auto& executor = user->make_resource<mutation_fixture::Executor>(state);
     auto& service = EntityDataService<mutation_fixture::Executor>::for_executor(
         *user, "Other", *user, executor);
+    require(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+            "private fixture binds explicit mutation and readback intent");
     auto& no_op = Access::save_entity_internal(
         service, std::move(model(*user, state)), EntityStatus::Persisted);
     require(state.notes.empty(), "constructing a save future must not extract or query");
@@ -67,6 +70,8 @@ static void pending_close() {
     auto& executor = user->make_resource<mutation_fixture::Executor>(state);
     auto& service = EntityDataService<mutation_fixture::Executor>::for_executor(
         *user, "Order", *user, executor);
+    require(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+            "private fixture binds explicit mutation and readback intent");
     auto& work = Access::save_entity_graph_internal(service, std::move(model(*user, state)));
     require(!work.poll() && state.child_wake, "adapter preserves pending provider execution");
     auto ticket = work.wake_signal().ticket();
@@ -93,6 +98,8 @@ static void result_retention() {
     auto& executor = user->make_resource<mutation_fixture::Executor>(state);
     auto& service = EntityDataService<mutation_fixture::Executor>::for_executor(
         *user, "Order", *user, executor);
+    require(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+            "private fixture binds explicit mutation and readback intent");
     auto& entity = model(*user, state);
     entity.dirty.emplace(r);
     entity.dirty->emplace("name");

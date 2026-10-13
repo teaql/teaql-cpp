@@ -193,11 +193,11 @@ int main() {
             [failure](const TransactionScope<NativeProvider>& scope) -> AsyncOperation<Output>& {
                 auto owner = scope.context().memory_resource();
                 if (failure == Failure::Query) {
-                    QueryRequest query(std::allocator_arg,
-                                       Allocator(owner),
-                                       SelectQuery(std::allocator_arg, Allocator(owner), "Item"),
-                                       false,
-                                       false);
+                    SelectQuery description(std::allocator_arg, Allocator(owner), "Item");
+                    description.comment_text.emplace("inspect provider failure fixture", owner);
+                    description.purpose_text.emplace("verify transaction error propagation", owner);
+                    QueryRequest query(
+                        std::allocator_arg, Allocator(owner), description, false, false);
                     const auto& result = scope.query(std::move(query)).wait();
                     check(!result &&
                               result.error().to_string(owner) == "transaction error: query failed",
@@ -206,8 +206,10 @@ int main() {
                     InsertCommand command(std::allocator_arg, Allocator(owner), "Item");
                     const auto& result =
                         scope
-                            .mutate(MutationRequest(
-                                std::allocator_arg, Allocator(owner), std::move(command)))
+                            .mutate(MutationRequest(std::allocator_arg,
+                                                    Allocator(owner),
+                                                    std::move(command),
+                                                    "verify transaction provider failure"))
                             .wait();
                     check(!result && result.error().to_string(owner) ==
                                          "transaction error: mutation failed",

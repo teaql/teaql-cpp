@@ -1,0 +1,211 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "model": "tests/generator/inheritance_business_ids.xml",
+  "model_sha256": "b16651d1f4045c9335126721488959a00488a0e149e120dc6d2dad12c7e62f75",
+  "hand_edited": false,
+  "exit_code": 101,
+  "errors": [
+    {
+      "code": "E0425",
+      "message": "cannot find function, tuple struct or tuple variant `DocumentDocumentNumberBusinessIdSlot` in module `super::entity`",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/intermediate_record/checker.rs",
+          "line": 151
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/intermediate_record/entity.rs",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "code": "E0433",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/intermediate_record/entity.rs",
+          "line": 229
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/intermediate_record/entity.rs",
+          "line": 232
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/intermediate_record/entity.rs",
+          "line": 248
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find function, tuple struct or tuple variant `DocumentDocumentNumberBusinessIdSlot` in module `super::entity`",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/invoice/checker.rs",
+          "line": 151
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/invoice/entity.rs",
+          "line": 233
+        }
+      ]
+    },
+    {
+      "code": "E0433",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/invoice/entity.rs",
+          "line": 237
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/invoice/entity.rs",
+          "line": 240
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/invoice/entity.rs",
+          "line": 256
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find function, tuple struct or tuple variant `DocumentDocumentNumberBusinessIdSlot` in module `super::entity`",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/receipt/checker.rs",
+          "line": 151
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/receipt/entity.rs",
+          "line": 232
+        }
+      ]
+    },
+    {
+      "code": "E0433",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/receipt/entity.rs",
+          "line": 236
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/receipt/entity.rs",
+          "line": 239
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/receipt/entity.rs",
+          "line": 255
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find function, tuple struct or tuple variant `DocumentDocumentNumberBusinessIdSlot` in module `super::entity`",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/special_invoice/checker.rs",
+          "line": 151
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/special_invoice/entity.rs",
+          "line": 240
+        }
+      ]
+    },
+    {
+      "code": "E0433",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/special_invoice/entity.rs",
+          "line": 244
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/special_invoice/entity.rs",
+          "line": 247
+        }
+      ]
+    },
+    {
+      "code": "E0425",
+      "message": "cannot find type `DocumentNumber` in this scope",
+      "primary": [
+        {
+          "file": "tests/generator/parity/inheritance_business_ids_rust/lib/src/special_invoice/entity.rs",
+          "line": 263
+        }
+      ]
+    }
+  ],
+  "disposition": "Original generated descendants reference DocumentNumber and DocumentDocumentNumberBusinessIdSlot without defining/importing them. Preserve original files. C++ shared-type generation is integration evidence only; inherited Business-ID source parity remains unqualified."
+}

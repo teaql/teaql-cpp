@@ -106,11 +106,12 @@ static Json evaluate(UserContext& user, const Json& input) {
     auto name = text(field(input, "name"));
     auto flags = std::get<std::uint64_t>(field(input, "flags").data);
     SelectQuery query(std::allocator_arg, Allocator(owner), name);
-    query.comment(name);
+    query.comment(name).purpose("inspect executor default fixture");
     QueryRequest request(std::allocator_arg, Allocator(owner), query, flags & 1, flags & 2);
     InsertCommand insert(std::allocator_arg, Allocator(owner), name);
     insert.trace_chain.emplace_back(TraceKind::Comment, name, name, std::nullopt);
-    MutationRequest mutation(std::allocator_arg, Allocator(owner), insert);
+    MutationRequest mutation(
+        std::allocator_arg, Allocator(owner), insert, "inspect executor mutation default fixture");
     auto observer =
         std::make_obj_using_allocator<ExecutionObserver>(Allocator(owner), [&](ExecutionMetadata) {
             ++state.notifications;

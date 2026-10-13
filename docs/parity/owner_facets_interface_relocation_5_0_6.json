@@ -1,0 +1,7 @@
+{
+  "notice": "Existing TeaqlRuntime class and facet declarations move verbatim to a dependency-safe shared header. Public identifiers and function bodies unchanged.",
+  "from_header": "teaql_runtime/include/teaql/runtime/generated_support.hpp",
+  "to_header": "teaql_runtime/include/teaql/runtime/facet_runtime.hpp",
+  "class_sha256": "e2f0b0c799a47c6ba6fa90b7db4999321347bb4cc3d77817b7c65b47cf41035d",
+  "declarations_sha256": "02e98d202f06442e6f098f62cc0e5a09e5a09b23d5ec0a97cac41426abc713c3"
+}

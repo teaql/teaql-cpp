@@ -13,6 +13,30 @@ static void check(bool value, const char* message) {
     }
 }
 
+static void missing_root_intent_precedence() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& state = user_context->make<State>();
+    auto& executor = user_context->make_resource<Executor>(state);
+    auto& service =
+        EntityDataService<Executor>::for_executor(*user_context, "Order", *user_context, executor);
+    for (bool inherited_intent : {false, true}) {
+        if (inherited_intent) {
+            check(bool(Access::bind_mutation_intent(service, "Reusable parent reason")),
+                  "parent intent is valid before malformed plan execution");
+        }
+        GraphMutationPlan missing(std::allocator_arg, Allocator(r));
+        auto& result = Access::execute_graph_plan_internal(service, std::move(missing)).wait();
+        check(
+            !result &&
+                result.error().to_string(r) ==
+                    "REQUEST_COMMENT_REQUIRED: Mutation Request requires a non-blank comment; supply it at the request entry point" &&
+                state.notes.empty() && state.requests.empty() && state.queries.empty(),
+            "plan-owned intent validation precedes missing-root structure and all provider work");
+    }
+}
+
 static void metadata(UserContext& user) {
     auto r = user.memory_resource();
     auto& store = user.make<InMemoryMetadataStore>();
@@ -187,6 +211,7 @@ static void transaction_owned_sqlite_reread() {
 int main() {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        missing_root_intent_precedence();
         execution_and_retention();
         pending_read_and_failure();
         governance_before_write();

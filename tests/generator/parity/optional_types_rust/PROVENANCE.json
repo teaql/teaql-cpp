@@ -1,0 +1,22 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/optional_types.xml",
+  "model_sha256": "ff97b883767d4892fcc19e36c64dd2765a1fb932b36326724a5ba63619bedec6",
+  "hand_edited": false,
+  "files": {
+    "lib/Cargo.toml": "e16a47ef4009398907d482ea77c959f4523ff515dc81404b40f91aac72259db5",
+    "lib/src/e.rs": "18fa5afdeb8ee18b11bb6d4a0ad2d3cd33b0621087f14359d0c77a2ebf48d8af",
+    "lib/src/lib.rs": "93d5cae9add01d23207e911d02d96d601734ded72ace842d45e9dd094ccd9958",
+    "lib/src/q.rs": "330362ccf68a83cc5f42ff15cc7930783054c711355e9369f6eeaaf3c034753a",
+    "lib/src/reading/behavior.rs": "7f5369294ed9f3a6b1a99a3d30d6a8f9ae3ce1a1069257d9ab625ec2fc1a9433",
+    "lib/src/reading/checker.rs": "9254973086e16e2b5a46a16cbcea11cd932214dd6c0a2b208205e1d8479aaf24",
+    "lib/src/reading/entity.rs": "27de1857aea4f9d783d4390a07df0b1fb1198810ffd08bad5abafbd3bda61646",
+    "lib/src/reading/expression.rs": "411d5224f92ea602790f75aa75c41608082605f3190a5285ed48742646533868",
+    "lib/src/reading/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/reading/request.rs": "3b114984b3a73131234a47f59fc4563eb31a5ac1d04d2707bb55e46153562b8c",
+    "lib/src/request_support.rs": "853222ef9685dc05693a28d9822d9a402c07f0db1a86223398f2784620fa03a7",
+    "lib/src/runtime.rs": "b4aeb41ba0ff882d806aa5e6bd58a7a64f4d91fd923a127d04f9025275d0ded3",
+    "lib/src/sample_data.rs": "d47ec33c2f3404239af9d0d7e91dc20049bdd9f53fb3b2a1d37e680a4f028187"
+  }
+}

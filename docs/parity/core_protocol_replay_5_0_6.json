@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Ten complete historical core protocol input families replayed against actual source and compared with finalized native outputs; current full CTest remains on historical selections.",
+  "total_observations": 5070,
+  "matching_families": 9,
+  "matching_whole_family_observations": 4901,
+  "families": [
+    {
+      "family": "core_api",
+      "observations": 259,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "base_entity_api",
+      "observations": 1481,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "entity_registration_api",
+      "observations": 42,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "entity_debug",
+      "observations": 289,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "eval",
+      "observations": 1136,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "internal_id",
+      "observations": 171,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "model_debug",
+      "observations": 169,
+      "exit_code": 1,
+      "status": "failed"
+    },
+    {
+      "family": "mutation_debug",
+      "observations": 120,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "query_debug",
+      "observations": 120,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "business_id",
+      "observations": 1283,
+      "exit_code": 0,
+      "status": "passed"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Seven complete historical runtime model input families, lazy Context-owned mutation binding and real metadata diagnostics. Full capabilities and P7 remain open.",
+  "source_observations": 1213,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "native": {
+    "passed": 13,
+    "failed": 0,
+    "exit_code": 0,
+    "tests": [
+      {
+        "name": "entity_runtime_model_contracts",
+        "status": "run",
+        "seconds": 0.00765839
+      },
+      {
+        "name": "entity_runtime_model_rust_parity",
+        "status": "run",
+        "seconds": 1.04452
+      },
+      {
+        "name": "context_defaults_rust_parity",
+        "status": "run",
+        "seconds": 0.141229
+      },
+      {
+        "name": "reference_model_rust_parity",
+        "status": "run",
+        "seconds": 0.806472
+      },
+      {
+        "name": "ledger_move_only_contracts",
+        "status": "run",
+        "seconds": 0.020134
+      },
+      {
+        "name": "policy_model_rust_parity",
+        "status": "run",
+        "seconds": 1.01723
+      },
+      {
+        "name": "log_model_rust_parity",
+        "status": "run",
+        "seconds": 2.21047
+      },
+      {
+        "name": "entity_graph_plan_context_contracts",
+        "status": "run",
+        "seconds": 0.00935248
+      },
+      {
+        "name": "query_store_model_rust_parity",
+        "status": "run",
+        "seconds": 0.268809
+      },
+      {
+        "name": "entity_runtime_contracts",
+        "status": "run",
+        "seconds": 0.181649
+      },
+      {
+        "name": "context_model_rust_parity",
+        "status": "run",
+        "seconds": 0.713529
+      },
+      {
+        "name": "loaded_snapshot_contracts",
+        "status": "run",
+        "seconds": 0.0987425
+      },
+      {
+        "name": "dynamic_graph_save_contracts",
+        "status": "run",
+        "seconds": 0.0833619
+      }
+    ]
+  },
+  "sanitize": {
+    "passed": 3,
+    "failed": 0,
+    "exit_code": 0,
+    "leak_scan": false,
+    "tests": [
+      {
+        "name": "entity_runtime_model_contracts",
+        "status": "run",
+        "seconds": 0.0150811
+      },
+      {
+        "name": "entity_runtime_contracts",
+        "status": "run",
+        "seconds": 0.323634
+      },
+      {
+        "name": "loaded_snapshot_contracts",
+        "status": "run",
+        "seconds": 0.230767
+      }
+    ]
+  },
+  "modules_native": {
+    "passed": 1,
+    "failed": 0,
+    "exit_code": 0,
+    "canonical_bodies": 97,
+    "tests": [
+      {
+        "name": "module_entity_runtime_model_contracts",
+        "status": "run",
+        "seconds": 0.00402934
+      }
+    ]
+  },
+  "corpora": {
+    "entity_runtime_model": "79a3daf4370206e03aa841616e4e6ddce0995620b0d9643256450c7ac29fcacc",
+    "context_defaults": "677ee58615afebc8e6b8a5f5c01de3fc9d87dac1c48dddc9c68f5b34b57abfc7",
+    "reference_model": "8a82d05506443029223047ad9818331ef46226f4fb997e4c2768a0af8a297cf8",
+    "policy_model": "3eaa9d8c55a952bf056c00436fc7d1bf2ce30cefc7092f581eb9918d74d615d4",
+    "log_model": "e0e5323da520e20a37b5d0d729163b347e2cda0a8847f5a89c8ba4eeba230b2a",
+    "query_store_model": "8f99dd9d68321100c1537f5fb7fc5c8d378c2d3fb0c2488d44f442154a7cf45a",
+    "context_model": "c974b6753820a2dd8c8d5eb96655b46387eefaeb0ea166ea35f2f257497460a2"
+  }
+}

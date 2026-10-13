@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "scope": "Active workspace structure and fixed-source ownership, never semantic or unchanged-body acceptance",
+  "source_inventory": "docs/parity/v5_0_6/upstream_inventory.json",
+  "source_dispositions": "docs/parity/v5_0_6/source_dispositions.json",
+  "packages": {
+    "teaql_core": {
+      "rust_crate": "teaql-core"
+    },
+    "teaql_data_service": {
+      "rust_crate": "teaql-data-service"
+    },
+    "teaql_sql": {
+      "rust_crate": "teaql-sql"
+    },
+    "teaql_runtime": {
+      "rust_crate": "teaql-runtime"
+    },
+    "teaql_provider_sqlite": {
+      "rust_crate": "teaql-provider-sqlite"
+    },
+    "teaql_memory": {
+      "rust_crate": null,
+      "adaptation": "Explicit C++ Global/User Context ownership and allocation"
+    },
+    "teaql_async": {
+      "rust_crate": null,
+      "adaptation": "C++ asynchronous operation/wake/quiescence protocol"
+    }
+  },
+  "historical_move": {
+    "cpp_tag": "0.0.3",
+    "cpp_commit": "42e688ee59ea9a7671a0d0ea6a6549fd850e993f",
+    "rust_commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+    "ledgers": [
+      "docs/module_path_migration.json",
+      "docs/module_structure_migration.json",
+      "docs/retired_compatibility.json"
+    ]
+  }
+}

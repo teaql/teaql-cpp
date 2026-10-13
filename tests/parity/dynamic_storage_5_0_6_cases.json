@@ -1,0 +1,5106 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "source": [
+    "teaql-data-service/src/dynamic_fields.rs",
+    "teaql-core/src/dynamic_fields.rs",
+    "teaql-core/src/query.rs"
+  ],
+  "source_sha256": {
+    "teaql-data-service/src/dynamic_fields.rs": "19cee0f360b71be990451d88c64ec6f0ef34fd49b77edbd870703f1c58afde8f",
+    "teaql-core/src/dynamic_fields.rs": "76c010da3d5d59601c15c11a9fa0267ee300c4d18744eab103edcaac8d3afc75",
+    "teaql-core/src/query.rs": "02fd38d61f2505cb7cafe74c383ca03cccbc5aab633982900bd167b55f65194f"
+  },
+  "note": "Direct original pure stream-plan, owner-id/batch merge and privacy-safe write Debug calls with a fake store. No real storage I/O, runtime provider or SQLite qualification.",
+  "cases": [
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": " ",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "\u2003",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "\u0085",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": " profile ",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": " profile ",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "\u79d8\u5bc6",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "\u79d8\u5bc6",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_UNSELECTED_VALUE",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "name",
+            5
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_UNSELECTED_VALUE",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "name",
+            1
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+        "field": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "count",
+            5
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+        "field": "count"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND",
+        "field": "missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "name",
+            5
+          ],
+          [
+            "name",
+            5
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_DUPLICATE_CODE",
+        "field": "name"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "_readonly",
+            5
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_INVALID_CODE",
+        "field": "_readonly"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": [
+          [
+            "#name",
+            5
+          ]
+        ],
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_INVALID_CODE",
+        "field": "#name"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": null
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_STORAGE_IDENTITY_REQUIRED",
+        "field": "Item"
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 0
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 1
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 18446744073709551615
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": "payload"
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {},
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {}
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {}
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "null"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": null
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": null
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "i64",
+              "value": "-1"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": -1
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": -1
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "0"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 0
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 0
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "bool",
+              "value": true
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": true
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": true
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "text",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": "7"
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": "7"
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "f64",
+              "value": "7.0"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7.0
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7.0
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "json",
+              "value": {}
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": {}
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": {}
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_ID_REQUIRED",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_BATCH_OMITTED_OWNER",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_BATCH_OMITTED_OWNER",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          8,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_MISMATCH",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          8,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_MISMATCH",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          9
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "text",
+              "value": "payload"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_OWNER_MISMATCH",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {}
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_BATCH_OMITTED_OWNER",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_BATCH_OMITTED_OWNER",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {},
+          "8": {},
+          "9": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_UNREQUESTED_OWNER",
+          "field": "Item"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "null"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "name": null
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "name": null
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "name": {
+              "kind": "i64",
+              "value": "1"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+          "field": "name"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": {
+              "count": 0
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {
+              "count": 0
+            },
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": {},
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": null,
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {
+            "unknown": {
+              "kind": "text",
+              "value": "x"
+            }
+          },
+          "8": {}
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_NOT_FOUND",
+          "field": "unknown"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "plan",
+        "namespace": "trusted-profile",
+        "selection": null,
+        "store": {
+          "key": 1,
+          "identity": 7
+        },
+        "validate": [
+          {
+            "key": 1,
+            "identity": 7
+          },
+          {
+            "key": 2,
+            "identity": 7
+          },
+          {
+            "key": 1,
+            "identity": 8
+          },
+          {
+            "key": 1,
+            "identity": null
+          }
+        ],
+        "rows": [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "7"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "8"
+            }
+          }
+        ],
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "stored": {
+          "7": {},
+          "8": {
+            "name": {
+              "kind": "bool",
+              "value": false
+            }
+          }
+        }
+      },
+      "expected": {
+        "bound": true,
+        "final": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "ids": {
+          "ids": [
+            7,
+            7,
+            8
+          ]
+        },
+        "initial": [
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 7
+            }
+          },
+          {
+            "fields": null,
+            "native": {
+              "id": 8
+            }
+          }
+        ],
+        "merge": {
+          "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+          "field": "name"
+        },
+        "namespace": "trusted-profile",
+        "validations": [
+          null,
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          },
+          {
+            "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+            "field": "Item"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "mode": "write_debug",
+        "namespace": "SECRET-NAMESPACE",
+        "changes": {}
+      },
+      "expected": {
+        "debug": "DynamicFieldWrite { owner_type: \"Item\", changed_fields: [], .. }",
+        "pretty": "DynamicFieldWrite {\n    owner_type: \"Item\",\n    changed_fields: [],\n    ..\n}"
+      }
+    },
+    {
+      "input": {
+        "mode": "write_debug",
+        "namespace": "SECRET-NAMESPACE",
+        "changes": {
+          "name": null
+        }
+      },
+      "expected": {
+        "debug": "DynamicFieldWrite { owner_type: \"Item\", changed_fields: [\"name\"], .. }",
+        "pretty": "DynamicFieldWrite {\n    owner_type: \"Item\",\n    changed_fields: [\n        \"name\",\n    ],\n    ..\n}"
+      }
+    },
+    {
+      "input": {
+        "mode": "write_debug",
+        "namespace": "SECRET-NAMESPACE",
+        "changes": {
+          "name": {
+            "kind": "null"
+          }
+        }
+      },
+      "expected": {
+        "debug": "DynamicFieldWrite { owner_type: \"Item\", changed_fields: [\"name\"], .. }",
+        "pretty": "DynamicFieldWrite {\n    owner_type: \"Item\",\n    changed_fields: [\n        \"name\",\n    ],\n    ..\n}"
+      }
+    },
+    {
+      "input": {
+        "mode": "write_debug",
+        "namespace": "SECRET-NAMESPACE",
+        "changes": {
+          "name": {
+            "kind": "text",
+            "value": "SECRET-PAYLOAD"
+          }
+        }
+      },
+      "expected": {
+        "debug": "DynamicFieldWrite { owner_type: \"Item\", changed_fields: [\"name\"], .. }",
+        "pretty": "DynamicFieldWrite {\n    owner_type: \"Item\",\n    changed_fields: [\n        \"name\",\n    ],\n    ..\n}"
+      }
+    },
+    {
+      "input": {
+        "mode": "write_debug",
+        "namespace": "SECRET-NAMESPACE",
+        "changes": {
+          "name": {
+            "kind": "text",
+            "value": "SECRET-PAYLOAD"
+          },
+          "count": {
+            "kind": "i64",
+            "value": "999"
+          }
+        }
+      },
+      "expected": {
+        "debug": "DynamicFieldWrite { owner_type: \"Item\", changed_fields: [\"count\", \"name\"], .. }",
+        "pretty": "DynamicFieldWrite {\n    owner_type: \"Item\",\n    changed_fields: [\n        \"count\",\n        \"name\",\n    ],\n    ..\n}"
+      }
+    },
+    {
+      "input": {
+        "mode": "write_debug",
+        "namespace": "SECRET-NAMESPACE",
+        "changes": {
+          "unknown": {
+            "kind": "text",
+            "value": "\u79d8\u5bc6"
+          }
+        }
+      },
+      "expected": {
+        "debug": "DynamicFieldWrite { owner_type: \"Item\", changed_fields: [\"unknown\"], .. }",
+        "pretty": "DynamicFieldWrite {\n    owner_type: \"Item\",\n    changed_fields: [\n        \"unknown\",\n    ],\n    ..\n}"
+      }
+    }
+  ]
+}

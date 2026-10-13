@@ -1,0 +1,4828 @@
+{
+  "baseline": {
+    "repository": "https://github.com/teaql/teaql-rs.git",
+    "tag": "v5.0.6",
+    "version": "5.0.6",
+    "commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "policy": "Use this exact commit for design and behavior parity. Upgrade only by an explicit baseline change."
+  },
+  "producer": {
+    "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "model": "tests/generator/dynamic_json.xml",
+    "model_sha256": "926d116146ea28d5c612ab14a01304595f27aac14d2a8476291f98c7c797a97f",
+    "hand_edited": false,
+    "files": {
+      "lib/Cargo.toml": "afcd5a97d8297f3f41517c8829dea55defdea20544bf49b8486f48793137406e",
+      "lib/src/company/behavior.rs": "17d954f0c4200220c41d08c3dee2d858ca968aad75674382881de01998bbb8fb",
+      "lib/src/company/checker.rs": "b6a8493868745d1d468cad44ca7124cb5ee8fe5e3d08a14d96229626e000b872",
+      "lib/src/company/entity.rs": "1a0ac87eab7ec79b8b57121af7e04ccaa5dbc9444f3a90a2236a8030921d33bc",
+      "lib/src/company/expression.rs": "d7f9f48d32f5d70044440ee83b02f49bacf882a908137b4808b6ac07b04379c5",
+      "lib/src/company/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/company/request.rs": "cd3cd8392147172e8cd3234d5886bd45b54cda78fe5f9cf96b15f02f901d0993",
+      "lib/src/e.rs": "77f8a661233f743c8340442f28fd5a4bd98c18fa25389345b53b888b3009f78b",
+      "lib/src/lib.rs": "389f0066250da897b12e554cc4822e84343075edb5e61260de33ee8720abb297",
+      "lib/src/line/behavior.rs": "c2d4bd5656893edb1cabcc84ac22be10cdd31501e4a3fa9a6dbf82c40ca983cf",
+      "lib/src/line/checker.rs": "0dfd02c5092e211c56dc652eb893607415e87cdff202b8e306e98902a260a919",
+      "lib/src/line/entity.rs": "caf909fabb2d718c783d7d99d49543a5073525515c9a8eab8024147fae379ac5",
+      "lib/src/line/expression.rs": "38de06af9beb71b28d0a37996037d31d6a450f04d649269992e0fddfedcb0cfd",
+      "lib/src/line/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/line/request.rs": "7ea75abcd7278b653a01ef393459d5bbcb5e4467e656a733b82d700fe9578ae9",
+      "lib/src/order/behavior.rs": "96e1c114f9008b9439c653fab8d9c876975f05032f0b25d7a25241bccb1e43d7",
+      "lib/src/order/checker.rs": "e5837f533a7156488daae0b5b69ac9eda7d107706d496fdc88ddd34f7330bb22",
+      "lib/src/order/entity.rs": "86f3119db163c1817c3b0c9eaa653405a00431b0906b48226ea30ec5142c45be",
+      "lib/src/order/expression.rs": "b8d84a34216e65031ec238259b46f23b8cf8d1fa1337f7994668bd469f5e08c9",
+      "lib/src/order/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/order/request.rs": "5f1ff86ad020908b486dfa0a425661379eda9c569f06d097106aa957d5273507",
+      "lib/src/person/behavior.rs": "933e3536a311464810021f84e99e59a4e9b7710340dcdc0a491be535b6978e60",
+      "lib/src/person/checker.rs": "945a725fcd48ac6c77efed99b2e29dc4e88824be49031527de49bc8650692ee9",
+      "lib/src/person/entity.rs": "39ffb9eb9ebab6871867fd2cb73ae11d2e396500423abdda3eb02afc4a24e128",
+      "lib/src/person/expression.rs": "522eb3bc42cc3dde0731dd7f48026f72bc3edf732baada13a4e9eca7b6ca27c9",
+      "lib/src/person/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/person/request.rs": "4a9c067a846ef51294d20c36d216f00e3677dde3c0fb4c79640dded51e58a2b0",
+      "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+      "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+      "lib/src/platform/entity.rs": "692a3780a34ec19cdbf23b60c7dfa041157ceeb8796159c5a7fea826224ddcdf",
+      "lib/src/platform/expression.rs": "82c03e78724d197d2c0c4ca2987062a3c956dd25448a27c2fce3add428965d87",
+      "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/platform/request.rs": "cdc9d7c9ce62de4e5d7a92ab05441b3e8a6093e5d9bab0612175e767b59cc296",
+      "lib/src/product/behavior.rs": "e467ba14762f3dce7287ceefccff7ee0239ad5d9fef3ccb45894a9e59f525fef",
+      "lib/src/product/checker.rs": "972e0fce8e3add8fbc27dce4aad64b7cbb6b371c7d3d4c0c5555ddd1ad7bc82a",
+      "lib/src/product/entity.rs": "d54013c3d1402439b4f4f54240368deabf0763c33469dc5a2f792cdab70a9f9b",
+      "lib/src/product/expression.rs": "007c000aded0bb5cdd72f84f092704abc396bc720b1c467b6d0cc70cb95ccb2f",
+      "lib/src/product/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/product/request.rs": "51399407b28cb2528e5c9488a35f73839b2f284f206acd8a5e74c31d12973dce",
+      "lib/src/profile/behavior.rs": "482e3afb8a89e5e2d4ff75500599695b7fb87345d15a3263de5880d0281ca5d4",
+      "lib/src/profile/checker.rs": "ed5e1ca969436fa4f6cb776de15c52b2095ade1c1597b187f98bf0b450b29b1c",
+      "lib/src/profile/entity.rs": "d4b66a5024443a3aa0e0fbb50acb45740020ada4013a06b97b6ff7524176913e",
+      "lib/src/profile/expression.rs": "addf24597c3cbc76bf93a6da5fb9a64b35cbaa11538f663b312f414f57fb1259",
+      "lib/src/profile/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/profile/request.rs": "73e624bd4248d99e89d7d05cb5572505c58b3d8d2bbbf7504da75f59413c6104",
+      "lib/src/q.rs": "c26d1a64bc4b141a4f17ce25a6c290727b5b4a2a6acb479d9f02a39d2f895f62",
+      "lib/src/request_support.rs": "d7a0d7966bbabb3ff234c5aee596f1dc1098d6060e7611acbb651aa2b1255d1e",
+      "lib/src/runtime.rs": "2ec8634bffd0ba33046fec865feebb8796c9df087c93c40b3e3b1abc0ad361d5",
+      "lib/src/sample_data.rs": "9f9e5277af33c7e146b45c42c08ada052be8432edc88ef2abeb5458fa74accbb"
+    }
+  },
+  "source_sha256": "77f8a661233f743c8340442f28fd5a4bd98c18fa25389345b53b888b3009f78b",
+  "extra_sources": {
+    "tests/generator/parity/candidates_rust/lib/src/e.rs": "1e0b9af51882467ad37abdfafbcf7862bd1c7436d8d8eece097816b61006ff69",
+    "tests/generator/parity/inheritance_rust/lib/src/e.rs": "9f4c4694f475a8c6bd74c78cb1852203b5f92c17dd21bef966a25b44cd0055d2"
+  },
+  "cases": [
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "customer",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_customer()\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "product",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_product()\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "display_name",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "order_lines",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_order_lines()\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "unknown",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_unknown()\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.customer.display_name 时缺少预加载。请在查询中加入 \"select_name()\" 或完整嵌套加载 \"select_name(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": "select_name(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "customer",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Person.customer.display_name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer()<broken>.get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "product",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Person.customer.display_name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "display_name",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Person.customer.display_name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_display_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "order_lines",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Person.customer.display_name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "unknown",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Person.customer.display_name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.lines.product.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_lines().get_product().get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "customer",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Person.lines.product.name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_lines().get_product().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "product",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Person.lines.product.name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for product>.select_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for product>.select_name())",
+        "original_expr_with_broken_point": "E::person(id=7).get_lines().get_product()<broken>.get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "display_name",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Person.lines.product.name 时缺少预加载。请在查询中加入 \"select_display_name()\" 或完整嵌套加载 \"select_display_name(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": "select_display_name(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_lines().get_product().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "order_lines",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Person.lines.product.name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_lines().get_product().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "unknown",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Person.lines.product.name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_lines().get_product().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.customer.customer.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_customer().get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "customer",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Person.customer.customer.name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer()<broken>.get_customer()<broken>.get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "product",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Person.customer.customer.name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_customer().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "display_name",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Person.customer.customer.name 时缺少预加载。请在查询中加入 \"select_display_name()\" 或完整嵌套加载 \"select_display_name(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": "select_display_name(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_customer().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "order_lines",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Person.customer.customer.name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_customer().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "unknown",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Person.customer.customer.name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_customer().get_customer().get_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person. 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "customer",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Person. 时缺少预加载。请在查询中加入 \"select_customer()\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "product",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "product",
+        "human_message": "访问 Person. 时缺少预加载。请在查询中加入 \"select_product()\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "display_name",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Person. 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "order_lines",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Person. 时缺少预加载。请在查询中加入 \"select_order_lines()\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "unknown",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Person. 时缺少预加载。请在查询中加入 \"select_unknown()\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_name()\" 或完整嵌套加载 \"select_name(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": "select_name(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_order_lines().get_product().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "customer",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Person.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_order_lines().get_product().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "product",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Person.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for product>.select_display_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for product>.select_display_name())",
+        "original_expr_with_broken_point": "E::person(id=7).get_order_lines().get_product()<broken>.get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "display_name",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Person.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_order_lines().get_product().get_display_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "order_lines",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Person.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_order_lines()<broken>.get_product().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "unknown",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Person.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::person(id=7).get_order_lines().get_product().get_display_name()",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "name",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 OrderLine.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_name()<broken>",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "customer",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 OrderLine.name 时缺少预加载。请在查询中加入 \"select_customer()\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "product",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 OrderLine.name 时缺少预加载。请在查询中加入 \"select_product()\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "display_name",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 OrderLine.name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "order_lines",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 OrderLine.name 时缺少预加载。请在查询中加入 \"select_order_lines()\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "unknown",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 OrderLine.name 时缺少预加载。请在查询中加入 \"select_unknown()\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "name",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 OrderLine.customer.display_name 时缺少预加载。请在查询中加入 \"select_name()\" 或完整嵌套加载 \"select_name(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": "select_name(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "customer",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 OrderLine.customer.display_name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer()<broken>.get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "product",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 OrderLine.customer.display_name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "display_name",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 OrderLine.customer.display_name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_display_name()<broken>",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "order_lines",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 OrderLine.customer.display_name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "unknown",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 OrderLine.customer.display_name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "name",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 OrderLine.lines.product.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_lines().get_product().get_name()<broken>",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "customer",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 OrderLine.lines.product.name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_lines().get_product().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "product",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 OrderLine.lines.product.name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for product>.select_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for product>.select_name())",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_lines().get_product()<broken>.get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "display_name",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 OrderLine.lines.product.name 时缺少预加载。请在查询中加入 \"select_display_name()\" 或完整嵌套加载 \"select_display_name(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": "select_display_name(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_lines().get_product().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "order_lines",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 OrderLine.lines.product.name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_lines().get_product().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "unknown",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 OrderLine.lines.product.name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_lines().get_product().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "name",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 OrderLine.customer.customer.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_customer().get_name()<broken>",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "customer",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 OrderLine.customer.customer.name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer()<broken>.get_customer()<broken>.get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "product",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 OrderLine.customer.customer.name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_customer().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "display_name",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 OrderLine.customer.customer.name 时缺少预加载。请在查询中加入 \"select_display_name()\" 或完整嵌套加载 \"select_display_name(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": "select_display_name(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_customer().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "order_lines",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 OrderLine.customer.customer.name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_customer().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "unknown",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 OrderLine.customer.customer.name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_customer().get_customer().get_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "name",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "name",
+        "human_message": "访问 OrderLine. 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "customer",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "customer",
+        "human_message": "访问 OrderLine. 时缺少预加载。请在查询中加入 \"select_customer()\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "product",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "product",
+        "human_message": "访问 OrderLine. 时缺少预加载。请在查询中加入 \"select_product()\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "display_name",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 OrderLine. 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "order_lines",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 OrderLine. 时缺少预加载。请在查询中加入 \"select_order_lines()\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "unknown",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 OrderLine. 时缺少预加载。请在查询中加入 \"select_unknown()\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "name",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 OrderLine.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_name()\" 或完整嵌套加载 \"select_name(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": "select_name(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_order_lines().get_product().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "customer",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 OrderLine.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_order_lines().get_product().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "product",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 OrderLine.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for product>.select_display_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for product>.select_display_name())",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_order_lines().get_product()<broken>.get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "display_name",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 OrderLine.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_order_lines().get_product().get_display_name()<broken>",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "order_lines",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 OrderLine.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_order_lines()<broken>.get_product().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "OrderLine(id=18446744073709551615)",
+        "node": "unknown",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 OrderLine.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::order_line(id=18446744073709551615).get_order_lines().get_product().get_display_name()",
+        "root": "OrderLine(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "name",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Product.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_name()<broken>",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "customer",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Product.name 时缺少预加载。请在查询中加入 \"select_customer()\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "product",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Product.name 时缺少预加载。请在查询中加入 \"select_product()\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "display_name",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Product.name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "order_lines",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Product.name 时缺少预加载。请在查询中加入 \"select_order_lines()\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "unknown",
+        "path": "name"
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Product.name 时缺少预加载。请在查询中加入 \"select_unknown()\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "name",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Product.customer.display_name 时缺少预加载。请在查询中加入 \"select_name()\" 或完整嵌套加载 \"select_name(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": "select_name(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "customer",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Product.customer.display_name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer()<broken>.get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "product",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Product.customer.display_name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "display_name",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Product.customer.display_name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_display_name()<broken>",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "order_lines",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Product.customer.display_name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "unknown",
+        "path": "customer.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "display_name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Product.customer.display_name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for customer>.select_display_name())\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for customer>.select_display_name())",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "name",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Product.lines.product.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_lines().get_product().get_name()<broken>",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "customer",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Product.lines.product.name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_lines().get_product().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "product",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Product.lines.product.name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for product>.select_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for product>.select_name())",
+        "original_expr_with_broken_point": "E::product(id=0).get_lines().get_product()<broken>.get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "display_name",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Product.lines.product.name 时缺少预加载。请在查询中加入 \"select_display_name()\" 或完整嵌套加载 \"select_display_name(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": "select_display_name(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_lines().get_product().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "order_lines",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Product.lines.product.name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_lines().get_product().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "unknown",
+        "path": "lines.product.name"
+      },
+      "expected": {
+        "access_path": [
+          "lines",
+          "product",
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Product.lines.product.name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for lines>.select_product(<generated Q entry for product>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_lines().get_product().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "name",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Product.customer.customer.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_customer().get_name()<broken>",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "customer",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Product.customer.customer.name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer()<broken>.get_customer()<broken>.get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "product",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Product.customer.customer.name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_customer().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "display_name",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Product.customer.customer.name 时缺少预加载。请在查询中加入 \"select_display_name()\" 或完整嵌套加载 \"select_display_name(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": "select_display_name(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_customer().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "order_lines",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Product.customer.customer.name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_customer().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "unknown",
+        "path": "customer.customer.name"
+      },
+      "expected": {
+        "access_path": [
+          "customer",
+          "customer",
+          "name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Product.customer.customer.name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for customer>.select_customer(<generated Q entry for customer>.select_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_customer().get_customer().get_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "name",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "name",
+        "human_message": "访问 Product. 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "customer",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Product. 时缺少预加载。请在查询中加入 \"select_customer()\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "product",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "product",
+        "human_message": "访问 Product. 时缺少预加载。请在查询中加入 \"select_product()\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "display_name",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Product. 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "order_lines",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Product. 时缺少预加载。请在查询中加入 \"select_order_lines()\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "unknown",
+        "path": ""
+      },
+      "expected": {
+        "access_path": [
+          ""
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Product. 时缺少预加载。请在查询中加入 \"select_unknown()\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "name",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Product.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_name()\" 或完整嵌套加载 \"select_name(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": "select_name(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_order_lines().get_product().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "customer",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "customer",
+        "human_message": "访问 Product.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_customer()\" 或完整嵌套加载 \"select_customer(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "customer"
+        ],
+        "nested_fix": "select_customer(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_order_lines().get_product().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_customer()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "product",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "product",
+        "human_message": "访问 Product.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_product()\" 或完整嵌套加载 \"select_product(<generated Q entry for product>.select_display_name())\"",
+        "missing_preload": [
+          "product"
+        ],
+        "nested_fix": "select_product(<generated Q entry for product>.select_display_name())",
+        "original_expr_with_broken_point": "E::product(id=0).get_order_lines().get_product()<broken>.get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_product()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "display_name",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "display_name",
+        "human_message": "访问 Product.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_display_name()\"",
+        "missing_preload": [
+          "display_name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::product(id=0).get_order_lines().get_product().get_display_name()<broken>",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_display_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "order_lines",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "order_lines",
+        "human_message": "访问 Product.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_order_lines()\" 或完整嵌套加载 \"select_order_lines(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "order_lines"
+        ],
+        "nested_fix": "select_order_lines(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_order_lines()<broken>.get_product().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_order_lines()"
+      }
+    },
+    {
+      "input": {
+        "root": "Product(id=0)",
+        "node": "unknown",
+        "path": "order_lines.product.display_name"
+      },
+      "expected": {
+        "access_path": [
+          "order_lines",
+          "product",
+          "display_name"
+        ],
+        "break_point": "unknown",
+        "human_message": "访问 Product.order_lines.product.display_name 时缺少预加载。请在查询中加入 \"select_unknown()\" 或完整嵌套加载 \"select_unknown(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))\"",
+        "missing_preload": [
+          "unknown"
+        ],
+        "nested_fix": "select_unknown(<generated Q entry for order_lines>.select_product(<generated Q entry for product>.select_display_name()))",
+        "original_expr_with_broken_point": "E::product(id=0).get_order_lines().get_product().get_display_name()",
+        "root": "Product(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_unknown()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=0)",
+        "node": "name",
+        "path": "name",
+        "generated": "name",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_name()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=0)",
+        "node": "name",
+        "path": "name",
+        "generated": "fallback",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_name()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=0)",
+        "node": "orders",
+        "path": "orders",
+        "generated": "list",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_orders()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": "name",
+        "generated": "name",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "name",
+        "path": "name",
+        "generated": "fallback",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=7)",
+        "node": "orders",
+        "path": "orders",
+        "generated": "list",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_orders()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=4294967296)",
+        "node": "name",
+        "path": "name",
+        "generated": "name",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_name()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=4294967296)",
+        "node": "name",
+        "path": "name",
+        "generated": "fallback",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_name()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=4294967296)",
+        "node": "orders",
+        "path": "orders",
+        "generated": "list",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_orders()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=18446744073709551615)",
+        "node": "name",
+        "path": "name",
+        "generated": "name",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_name()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=18446744073709551615)",
+        "node": "name",
+        "path": "name",
+        "generated": "fallback",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_name()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "Person(id=18446744073709551615)",
+        "node": "orders",
+        "path": "orders",
+        "generated": "list",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_orders()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "name_eval",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_name()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_callback",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_name()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_default",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_name()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_name",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "platform"
+        ],
+        "break_point": "platform",
+        "human_message": "访问 Person.platform 时缺少预加载。请在查询中加入 \"select_platform()\"",
+        "missing_preload": [
+          "platform"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_platform()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_platform()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "loaded_platform_name",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_name()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_id",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "platform_id"
+        ],
+        "break_point": "platform_id",
+        "human_message": "访问 Person.platform_id 时缺少预加载。请在查询中加入 \"select_platform_id()\"",
+        "missing_preload": [
+          "platform_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_platform_id()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_platform_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "profile_note",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "profile"
+        ],
+        "break_point": "profile",
+        "human_message": "访问 Person.profile 时缺少预加载。请在查询中加入 \"select_profile()\"",
+        "missing_preload": [
+          "profile"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_profile()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_profile()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_first_code",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_orders()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_get_code",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_orders()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_eval",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_orders()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_unwrap",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=0).get_orders()<broken>",
+        "root": "Person(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_draft",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=0).get_status_id()<broken>",
+        "root": "Record(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_progress",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=0).get_status_id()<broken>",
+        "root": "Record(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_done",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=0).get_status_id()<broken>",
+        "root": "Record(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_status",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "status"
+        ],
+        "break_point": "status",
+        "human_message": "访问 Record.status 时缺少预加载。请在查询中加入 \"select_status()\"",
+        "missing_preload": [
+          "status"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=0).get_status()<broken>",
+        "root": "Record(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_status()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_phase",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "phase"
+        ],
+        "break_point": "phase",
+        "human_message": "访问 Record.phase 时缺少预加载。请在查询中加入 \"select_phase()\"",
+        "missing_preload": [
+          "phase"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=0).get_phase()<broken>",
+        "root": "Record(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_phase()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_name",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 ResearchAcademy.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=0).get_name()<broken>",
+        "root": "ResearchAcademy(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_campus",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "campus_code"
+        ],
+        "break_point": "campus_code",
+        "human_message": "访问 ResearchAcademy.campus_code 时缺少预加载。请在查询中加入 \"select_campus_code()\"",
+        "missing_preload": [
+          "campus_code"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=0).get_campus_code()<broken>",
+        "root": "ResearchAcademy(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_campus_code()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_budget",
+        "id": 0
+      },
+      "expected": {
+        "access_path": [
+          "budget"
+        ],
+        "break_point": "budget",
+        "human_message": "访问 ResearchAcademy.budget 时缺少预加载。请在查询中加入 \"select_budget()\"",
+        "missing_preload": [
+          "budget"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=0).get_budget()<broken>",
+        "root": "ResearchAcademy(id=0)",
+        "severity": "error",
+        "suggested_fix": "select_budget()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "name_eval",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_callback",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_default",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_name",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "platform"
+        ],
+        "break_point": "platform",
+        "human_message": "访问 Person.platform 时缺少预加载。请在查询中加入 \"select_platform()\"",
+        "missing_preload": [
+          "platform"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_platform()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_platform()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "loaded_platform_name",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_id",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "platform_id"
+        ],
+        "break_point": "platform_id",
+        "human_message": "访问 Person.platform_id 时缺少预加载。请在查询中加入 \"select_platform_id()\"",
+        "missing_preload": [
+          "platform_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_platform_id()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_platform_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "profile_note",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "profile"
+        ],
+        "break_point": "profile",
+        "human_message": "访问 Person.profile 时缺少预加载。请在查询中加入 \"select_profile()\"",
+        "missing_preload": [
+          "profile"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_profile()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_profile()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_first_code",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_orders()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_get_code",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_orders()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_eval",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_orders()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_unwrap",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=7).get_orders()<broken>",
+        "root": "Person(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_draft",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=7).get_status_id()<broken>",
+        "root": "Record(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_progress",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=7).get_status_id()<broken>",
+        "root": "Record(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_done",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=7).get_status_id()<broken>",
+        "root": "Record(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_status",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "status"
+        ],
+        "break_point": "status",
+        "human_message": "访问 Record.status 时缺少预加载。请在查询中加入 \"select_status()\"",
+        "missing_preload": [
+          "status"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=7).get_status()<broken>",
+        "root": "Record(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_status()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_phase",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "phase"
+        ],
+        "break_point": "phase",
+        "human_message": "访问 Record.phase 时缺少预加载。请在查询中加入 \"select_phase()\"",
+        "missing_preload": [
+          "phase"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=7).get_phase()<broken>",
+        "root": "Record(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_phase()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_name",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 ResearchAcademy.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=7).get_name()<broken>",
+        "root": "ResearchAcademy(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_campus",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "campus_code"
+        ],
+        "break_point": "campus_code",
+        "human_message": "访问 ResearchAcademy.campus_code 时缺少预加载。请在查询中加入 \"select_campus_code()\"",
+        "missing_preload": [
+          "campus_code"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=7).get_campus_code()<broken>",
+        "root": "ResearchAcademy(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_campus_code()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_budget",
+        "id": 7
+      },
+      "expected": {
+        "access_path": [
+          "budget"
+        ],
+        "break_point": "budget",
+        "human_message": "访问 ResearchAcademy.budget 时缺少预加载。请在查询中加入 \"select_budget()\"",
+        "missing_preload": [
+          "budget"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=7).get_budget()<broken>",
+        "root": "ResearchAcademy(id=7)",
+        "severity": "error",
+        "suggested_fix": "select_budget()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "name_eval",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_name()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_callback",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_name()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_default",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_name()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_name",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "platform"
+        ],
+        "break_point": "platform",
+        "human_message": "访问 Person.platform 时缺少预加载。请在查询中加入 \"select_platform()\"",
+        "missing_preload": [
+          "platform"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_platform()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_platform()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "loaded_platform_name",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_name()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_id",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "platform_id"
+        ],
+        "break_point": "platform_id",
+        "human_message": "访问 Person.platform_id 时缺少预加载。请在查询中加入 \"select_platform_id()\"",
+        "missing_preload": [
+          "platform_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_platform_id()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_platform_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "profile_note",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "profile"
+        ],
+        "break_point": "profile",
+        "human_message": "访问 Person.profile 时缺少预加载。请在查询中加入 \"select_profile()\"",
+        "missing_preload": [
+          "profile"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_profile()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_profile()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_first_code",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_orders()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_get_code",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_orders()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_eval",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_orders()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_unwrap",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=4294967296).get_orders()<broken>",
+        "root": "Person(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_draft",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=4294967296).get_status_id()<broken>",
+        "root": "Record(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_progress",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=4294967296).get_status_id()<broken>",
+        "root": "Record(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_done",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=4294967296).get_status_id()<broken>",
+        "root": "Record(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_status",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "status"
+        ],
+        "break_point": "status",
+        "human_message": "访问 Record.status 时缺少预加载。请在查询中加入 \"select_status()\"",
+        "missing_preload": [
+          "status"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=4294967296).get_status()<broken>",
+        "root": "Record(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_status()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_phase",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "phase"
+        ],
+        "break_point": "phase",
+        "human_message": "访问 Record.phase 时缺少预加载。请在查询中加入 \"select_phase()\"",
+        "missing_preload": [
+          "phase"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=4294967296).get_phase()<broken>",
+        "root": "Record(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_phase()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_name",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 ResearchAcademy.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=4294967296).get_name()<broken>",
+        "root": "ResearchAcademy(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_campus",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "campus_code"
+        ],
+        "break_point": "campus_code",
+        "human_message": "访问 ResearchAcademy.campus_code 时缺少预加载。请在查询中加入 \"select_campus_code()\"",
+        "missing_preload": [
+          "campus_code"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=4294967296).get_campus_code()<broken>",
+        "root": "ResearchAcademy(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_campus_code()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_budget",
+        "id": 4294967296
+      },
+      "expected": {
+        "access_path": [
+          "budget"
+        ],
+        "break_point": "budget",
+        "human_message": "访问 ResearchAcademy.budget 时缺少预加载。请在查询中加入 \"select_budget()\"",
+        "missing_preload": [
+          "budget"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=4294967296).get_budget()<broken>",
+        "root": "ResearchAcademy(id=4294967296)",
+        "severity": "error",
+        "suggested_fix": "select_budget()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "name_eval",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_name()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_callback",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_name()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "fallback_default",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_name()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_name",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "platform"
+        ],
+        "break_point": "platform",
+        "human_message": "访问 Person.platform 时缺少预加载。请在查询中加入 \"select_platform()\"",
+        "missing_preload": [
+          "platform"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_platform()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_platform()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "loaded_platform_name",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_name()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "platform_id",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "platform_id"
+        ],
+        "break_point": "platform_id",
+        "human_message": "访问 Person.platform_id 时缺少预加载。请在查询中加入 \"select_platform_id()\"",
+        "missing_preload": [
+          "platform_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_platform_id()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_platform_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "profile_note",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "profile"
+        ],
+        "break_point": "profile",
+        "human_message": "访问 Person.profile 时缺少预加载。请在查询中加入 \"select_profile()\"",
+        "missing_preload": [
+          "profile"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_profile()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_profile()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_first_code",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_orders()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_get_code",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_orders()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_eval",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_orders()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "orders_unwrap",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "orders"
+        ],
+        "break_point": "orders",
+        "human_message": "访问 Person.orders 时缺少预加载。请在查询中加入 \"select_orders()\"",
+        "missing_preload": [
+          "orders"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::person(id=18446744073709551615).get_orders()<broken>",
+        "root": "Person(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_orders()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_draft",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=18446744073709551615).get_status_id()<broken>",
+        "root": "Record(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_progress",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=18446744073709551615).get_status_id()<broken>",
+        "root": "Record(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_done",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "status_id"
+        ],
+        "break_point": "status_id",
+        "human_message": "访问 Record.status_id 时缺少预加载。请在查询中加入 \"select_status_id()\"",
+        "missing_preload": [
+          "status_id"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=18446744073709551615).get_status_id()<broken>",
+        "root": "Record(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_status_id()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_status",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "status"
+        ],
+        "break_point": "status",
+        "human_message": "访问 Record.status 时缺少预加载。请在查询中加入 \"select_status()\"",
+        "missing_preload": [
+          "status"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=18446744073709551615).get_status()<broken>",
+        "root": "Record(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_status()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "constant_phase",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "phase"
+        ],
+        "break_point": "phase",
+        "human_message": "访问 Record.phase 时缺少预加载。请在查询中加入 \"select_phase()\"",
+        "missing_preload": [
+          "phase"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::record(id=18446744073709551615).get_phase()<broken>",
+        "root": "Record(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_phase()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_name",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "name"
+        ],
+        "break_point": "name",
+        "human_message": "访问 ResearchAcademy.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+        "missing_preload": [
+          "name"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=18446744073709551615).get_name()<broken>",
+        "root": "ResearchAcademy(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_name()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_campus",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "campus_code"
+        ],
+        "break_point": "campus_code",
+        "human_message": "访问 ResearchAcademy.campus_code 时缺少预加载。请在查询中加入 \"select_campus_code()\"",
+        "missing_preload": [
+          "campus_code"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=18446744073709551615).get_campus_code()<broken>",
+        "root": "ResearchAcademy(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_campus_code()"
+      }
+    },
+    {
+      "input": {
+        "root": "unused",
+        "node": "unused",
+        "path": "unused",
+        "generated": "inherited_budget",
+        "id": 18446744073709551615
+      },
+      "expected": {
+        "access_path": [
+          "budget"
+        ],
+        "break_point": "budget",
+        "human_message": "访问 ResearchAcademy.budget 时缺少预加载。请在查询中加入 \"select_budget()\"",
+        "missing_preload": [
+          "budget"
+        ],
+        "nested_fix": null,
+        "original_expr_with_broken_point": "E::research_academy(id=18446744073709551615).get_budget()<broken>",
+        "root": "ResearchAcademy(id=18446744073709551615)",
+        "severity": "error",
+        "suggested_fix": "select_budget()"
+      }
+    }
+  ],
+  "producers": {
+    "tests/generator/parity/dynamic_json_rust": {
+      "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+      "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+      "model": "tests/generator/dynamic_json.xml",
+      "model_sha256": "926d116146ea28d5c612ab14a01304595f27aac14d2a8476291f98c7c797a97f",
+      "hand_edited": false,
+      "files": {
+        "lib/Cargo.toml": "afcd5a97d8297f3f41517c8829dea55defdea20544bf49b8486f48793137406e",
+        "lib/src/company/behavior.rs": "17d954f0c4200220c41d08c3dee2d858ca968aad75674382881de01998bbb8fb",
+        "lib/src/company/checker.rs": "b6a8493868745d1d468cad44ca7124cb5ee8fe5e3d08a14d96229626e000b872",
+        "lib/src/company/entity.rs": "1a0ac87eab7ec79b8b57121af7e04ccaa5dbc9444f3a90a2236a8030921d33bc",
+        "lib/src/company/expression.rs": "d7f9f48d32f5d70044440ee83b02f49bacf882a908137b4808b6ac07b04379c5",
+        "lib/src/company/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/company/request.rs": "cd3cd8392147172e8cd3234d5886bd45b54cda78fe5f9cf96b15f02f901d0993",
+        "lib/src/e.rs": "77f8a661233f743c8340442f28fd5a4bd98c18fa25389345b53b888b3009f78b",
+        "lib/src/lib.rs": "389f0066250da897b12e554cc4822e84343075edb5e61260de33ee8720abb297",
+        "lib/src/line/behavior.rs": "c2d4bd5656893edb1cabcc84ac22be10cdd31501e4a3fa9a6dbf82c40ca983cf",
+        "lib/src/line/checker.rs": "0dfd02c5092e211c56dc652eb893607415e87cdff202b8e306e98902a260a919",
+        "lib/src/line/entity.rs": "caf909fabb2d718c783d7d99d49543a5073525515c9a8eab8024147fae379ac5",
+        "lib/src/line/expression.rs": "38de06af9beb71b28d0a37996037d31d6a450f04d649269992e0fddfedcb0cfd",
+        "lib/src/line/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/line/request.rs": "7ea75abcd7278b653a01ef393459d5bbcb5e4467e656a733b82d700fe9578ae9",
+        "lib/src/order/behavior.rs": "96e1c114f9008b9439c653fab8d9c876975f05032f0b25d7a25241bccb1e43d7",
+        "lib/src/order/checker.rs": "e5837f533a7156488daae0b5b69ac9eda7d107706d496fdc88ddd34f7330bb22",
+        "lib/src/order/entity.rs": "86f3119db163c1817c3b0c9eaa653405a00431b0906b48226ea30ec5142c45be",
+        "lib/src/order/expression.rs": "b8d84a34216e65031ec238259b46f23b8cf8d1fa1337f7994668bd469f5e08c9",
+        "lib/src/order/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/order/request.rs": "5f1ff86ad020908b486dfa0a425661379eda9c569f06d097106aa957d5273507",
+        "lib/src/person/behavior.rs": "933e3536a311464810021f84e99e59a4e9b7710340dcdc0a491be535b6978e60",
+        "lib/src/person/checker.rs": "945a725fcd48ac6c77efed99b2e29dc4e88824be49031527de49bc8650692ee9",
+        "lib/src/person/entity.rs": "39ffb9eb9ebab6871867fd2cb73ae11d2e396500423abdda3eb02afc4a24e128",
+        "lib/src/person/expression.rs": "522eb3bc42cc3dde0731dd7f48026f72bc3edf732baada13a4e9eca7b6ca27c9",
+        "lib/src/person/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/person/request.rs": "4a9c067a846ef51294d20c36d216f00e3677dde3c0fb4c79640dded51e58a2b0",
+        "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+        "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+        "lib/src/platform/entity.rs": "692a3780a34ec19cdbf23b60c7dfa041157ceeb8796159c5a7fea826224ddcdf",
+        "lib/src/platform/expression.rs": "82c03e78724d197d2c0c4ca2987062a3c956dd25448a27c2fce3add428965d87",
+        "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/platform/request.rs": "cdc9d7c9ce62de4e5d7a92ab05441b3e8a6093e5d9bab0612175e767b59cc296",
+        "lib/src/product/behavior.rs": "e467ba14762f3dce7287ceefccff7ee0239ad5d9fef3ccb45894a9e59f525fef",
+        "lib/src/product/checker.rs": "972e0fce8e3add8fbc27dce4aad64b7cbb6b371c7d3d4c0c5555ddd1ad7bc82a",
+        "lib/src/product/entity.rs": "d54013c3d1402439b4f4f54240368deabf0763c33469dc5a2f792cdab70a9f9b",
+        "lib/src/product/expression.rs": "007c000aded0bb5cdd72f84f092704abc396bc720b1c467b6d0cc70cb95ccb2f",
+        "lib/src/product/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/product/request.rs": "51399407b28cb2528e5c9488a35f73839b2f284f206acd8a5e74c31d12973dce",
+        "lib/src/profile/behavior.rs": "482e3afb8a89e5e2d4ff75500599695b7fb87345d15a3263de5880d0281ca5d4",
+        "lib/src/profile/checker.rs": "ed5e1ca969436fa4f6cb776de15c52b2095ade1c1597b187f98bf0b450b29b1c",
+        "lib/src/profile/entity.rs": "d4b66a5024443a3aa0e0fbb50acb45740020ada4013a06b97b6ff7524176913e",
+        "lib/src/profile/expression.rs": "addf24597c3cbc76bf93a6da5fb9a64b35cbaa11538f663b312f414f57fb1259",
+        "lib/src/profile/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/profile/request.rs": "73e624bd4248d99e89d7d05cb5572505c58b3d8d2bbbf7504da75f59413c6104",
+        "lib/src/q.rs": "c26d1a64bc4b141a4f17ce25a6c290727b5b4a2a6acb479d9f02a39d2f895f62",
+        "lib/src/request_support.rs": "d7a0d7966bbabb3ff234c5aee596f1dc1098d6060e7611acbb651aa2b1255d1e",
+        "lib/src/runtime.rs": "2ec8634bffd0ba33046fec865feebb8796c9df087c93c40b3e3b1abc0ad361d5",
+        "lib/src/sample_data.rs": "9f9e5277af33c7e146b45c42c08ada052be8432edc88ef2abeb5458fa74accbb"
+      }
+    },
+    "tests/generator/parity/candidates_rust": {
+      "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+      "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+      "model": "tests/generator/candidates.xml",
+      "model_sha256": "5e506dd4bbaab7274f4f0edeb99a9e857815a5713639b18efef6593f4a63288f",
+      "hand_edited": false,
+      "files": {
+        "lib/Cargo.toml": "b61d21e3081f9f5bb45dfb0787e5f6d133949668b4862e5d30bc328219f6aae8",
+        "lib/src/e.rs": "1e0b9af51882467ad37abdfafbcf7862bd1c7436d8d8eece097816b61006ff69",
+        "lib/src/lib.rs": "bb0a96e7e26594697fe46226763e27d97323d1c562b9f0235291d23f58c8ea38",
+        "lib/src/order_status/behavior.rs": "c4f599269f23538fd6018d0ba0ed3956f2a365c94cb5dd9644c9a352a9e29241",
+        "lib/src/order_status/checker.rs": "e50535ed709b5bf24d5825507cdcdcee5c59bfd7fb68dce8fb7239ff37791fb4",
+        "lib/src/order_status/entity.rs": "d580928d64ad001c0e1db63b5c0a94e87b28c49b78025b8ecf635c668b1d5614",
+        "lib/src/order_status/expression.rs": "308e7ace12269e82d6f6f81dc6653182da87eddb992f2997220f020c094ad198",
+        "lib/src/order_status/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/order_status/request.rs": "33e948ee60d9420dbb2cdcf29f7e3b8c86e2b769906e7b26b76f8a0352ee8362",
+        "lib/src/person/behavior.rs": "933e3536a311464810021f84e99e59a4e9b7710340dcdc0a491be535b6978e60",
+        "lib/src/person/checker.rs": "f961c0ea1185b4242daf2b0b2e8df48fb142c9c10e77a21d343e5b8d692d773e",
+        "lib/src/person/entity.rs": "b1b61473a0c4da3fa9dd581f39dbe23a61ace22c61390d3bf4f03a92fd37a691",
+        "lib/src/person/expression.rs": "4b78c8436419dc15a3560ba025d63797e7cf413ba5cccdc63a8af918485b4aed",
+        "lib/src/person/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/person/request.rs": "d60c7eeae6cb4136b6c6434fc8787aeb51dbdf168e6bdacb7394a662725edcf7",
+        "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+        "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+        "lib/src/platform/entity.rs": "918c67bc5b4a1316218fe9d5993c2e2e0c29dc8e6ff2740e7c98ed2de0323b4c",
+        "lib/src/platform/expression.rs": "a2996f60974499370bf98d1c95388b4f616b040fdbcb8b038260924d91388b3d",
+        "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/platform/request.rs": "87ed8a178bb0981f26374837171a80d1d470b0189acc757bbf85d3707665d33a",
+        "lib/src/q.rs": "169e2a5b83f27fc1b676c76819b73e7714b79ff46e8dec47313b0b0aa4a78f93",
+        "lib/src/record/behavior.rs": "c9166039397b9230ea683620f32d6bf3f8fa54197ec722b5242fff315fcfbf21",
+        "lib/src/record/checker.rs": "1d1e4118c0739f2cfc34b97c12c31c9a0804464f1dcb56e38fc9c184e82d422d",
+        "lib/src/record/entity.rs": "42403acbf08a4743959c8ec5a045ff51d4c208b00ed67096842e6d400a54f785",
+        "lib/src/record/expression.rs": "813523f556952819dbeaca4c37e036910456e93e613fee9fb12cdc84496be56d",
+        "lib/src/record/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/record/request.rs": "013b21c8688fba98ac3faad795db96d427e620d75f92971945581a7bb4c19195",
+        "lib/src/request_support.rs": "eb5570e7c0e743298f9c523debb736b19d055adad1847230f8babeedae3e20a4",
+        "lib/src/runtime.rs": "2144eba3c58bbe4fc2edca0b9ff68683d6116c95e003195e75e25dce9c2b1193",
+        "lib/src/sample_data.rs": "0612cb025bea290d64b06b739c691fe4c1293e8d5e5d2e917ad3fa119ec8deee"
+      }
+    },
+    "tests/generator/parity/inheritance_rust": {
+      "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+      "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+      "model": "tests/generator/inheritance.xml",
+      "model_sha256": "dafa4a3ebd5ab8aa8e00debff4f8d6586561676b42f4f40cc3976824893460b9",
+      "hand_edited": false,
+      "files": {
+        "lib/Cargo.toml": "fcfcfb90b739f9642a07af19e01e45d6ee31dcfc806c83acfa97887405c8d67d",
+        "lib/src/academy/behavior.rs": "d043bb63246b472626e962c9ce9c09a29f2b6629a188ebdce7f654498f1ef8f3",
+        "lib/src/academy/checker.rs": "3082ed6549838dff5bcee3c6f9925f7250199da0fc6e4dedfb77033fe71a88a9",
+        "lib/src/academy/entity.rs": "e719ffec66132f2ad9a69eb3c0535b674a85fa8b021d1ffd2992f1a4e9950b69",
+        "lib/src/academy/expression.rs": "7f122dc5880380d64eaa58a0df9ea2804f5eda5afa0a1f3fdeed520bb5a5ff4b",
+        "lib/src/academy/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/academy/request.rs": "97cf61704c93d532eb1c5d9ed3565ab8b63e4280a5eba120e3d52dc3f5678de6",
+        "lib/src/e.rs": "9f4c4694f475a8c6bd74c78cb1852203b5f92c17dd21bef966a25b44cd0055d2",
+        "lib/src/lib.rs": "fee616e05c7658afd95504195b0383b56e76141a05e4bf891b730ae2c5f998ee",
+        "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+        "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+        "lib/src/platform/entity.rs": "cc5ed25c12e36ab3297b228fcfc3ebd868a5633b6c24677e42c0d5d53913088b",
+        "lib/src/platform/expression.rs": "705f68ff8922bfa7c4c4975a81b4318c1910ac10e8f2ae3a9f7c38b59148f039",
+        "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/platform/request.rs": "725f26497579c7fd77cf9fc0f0b8c3f1d4e0b7b575f653c734892996f7087911",
+        "lib/src/q.rs": "337a27531fa5861865b5c71adf4325ddf5e2b3dc159400f44e154f88b26595db",
+        "lib/src/request_support.rs": "c8ca16077ef303c01dcd32579b12f8f8cb22c9f0252a27a8b1b465a678a2c921",
+        "lib/src/research_academy/behavior.rs": "6c4777c0f7a6542fc97dbe68aec0b6a0e919177a49657a56826fe681c5165cfa",
+        "lib/src/research_academy/checker.rs": "2d58d4d9e3dcfd0c414b923ccf06ec769bc1373b222af11694dd27678d5a0068",
+        "lib/src/research_academy/entity.rs": "62abeb5b9f5a9ded5a9bd0960dee2df6b21dc38c2cc31ea2be2212378e8a648f",
+        "lib/src/research_academy/expression.rs": "3179129e043763b4a28922648cf31866cdca185fe67d4b279c0271fbe12a39ed",
+        "lib/src/research_academy/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/research_academy/request.rs": "ae3e1547029cb9d6c7a1a52cdf0749dcd76ca375a15f10365f3f03b3baec1d56",
+        "lib/src/runtime.rs": "4ae83899a7ab307b1c653dc57e1ea7b3193548beb5ff86de7cc67b0885533396",
+        "lib/src/sample_data.rs": "c56d150e26c41d55b10dd54837f04b00bd8e2377d637995ae88348a78d5d3622",
+        "lib/src/school/behavior.rs": "41c4faa5d2fc86da9b3d080a4a07b17cd5e74ac453ec1e7ca914b8c68c30db05",
+        "lib/src/school/checker.rs": "45676afe0f1b9290d9b62817998746704f7626492cb7a55c73a3c3e1a58c9052",
+        "lib/src/school/entity.rs": "93a19a3f5f93038307dc60f5ea950c237cd5b1a1dfdfec766cfeb7d6a07fba5c",
+        "lib/src/school/expression.rs": "3c58c3f28429cb5ca94536ce0bb35752b942efade5b8c56ade613702afed6ffb",
+        "lib/src/school/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+        "lib/src/school/request.rs": "7a9a40cc1a167f5b530683ea69945d6d025a3aa0711772c28274d68563de437b"
+      }
+    }
+  }
+}

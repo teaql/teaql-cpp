@@ -361,6 +361,9 @@ SelectQuery apply_runtime_metadata(SelectQuery query,
     for (const auto& p : options.raw_projections) {
         query.raw_projections.emplace_back(p.property_name, p.raw_sql_segment);
     }
+    query.facets.clear();
+    copy_items(query.facets, options.facets);
+    query.relation_aggregates = runtime_relation_aggregates(r, options);
     query.object_group_bys.clear();
     for (const auto& group : options.object_group_bys) {
         auto copy = QuerySelection(std::allocator_arg, a, group.query);

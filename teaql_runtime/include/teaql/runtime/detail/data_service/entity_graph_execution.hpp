@@ -4,80 +4,6 @@
 
 namespace teaql::detail {
 template <class E>
-class GraphCurrentRowOperation {
-    using R = Result<std::optional<CompactRow>, DataServiceError<typename E::Error>>;
-
-public:
-    using allocator_type = Allocator;
-
-    GraphCurrentRowOperation(std::allocator_arg_t,
-                             Allocator a,
-                             const EntityDataService<E>& service,
-                             std::string_view entity,
-                             std::string_view id_property,
-                             const Value& id,
-                             std::span<const TraceNode> trace)
-        : service_(std::allocator_arg, a, EntityDataServiceAccess::scoped(service, entity)),
-          query_(std::allocator_arg, a, entity) {
-        query_.filter(Expr::eq(a.resource(), id_property, id));
-        for (const auto& frame : trace) {
-            query_.trace_chain.emplace_back(frame);
-        }
-    }
-
-    std::optional<R> poll(WakeSignal& wake) {
-        auto r = service_.memory_resource();
-        if (!child_) {
-            child_ = &EntityDataServiceAccess::fetch_all(service_, query_);
-        }
-        forwarding_.attach(child_->wake_signal(), wake);
-        auto* result = child_->poll();
-        if (!result) {
-            return {};
-        }
-        if (!*result) {
-            return R::err(r, copy_or_take_error(*child_, *result));
-        }
-        std::optional<CompactRow> row;
-        if (!result->value().empty()) {
-            row.emplace(std::allocator_arg, Allocator(r), result->value().back());
-        }
-        return R::ok(r, std::move(row));
-    }
-
-    void finish_and_wait() noexcept {
-        forwarding_.reset();
-        child_ = nullptr;
-    }
-
-    void cancel_and_wait() noexcept {
-        forwarding_.reset();
-        if (child_) {
-            child_->cancel();
-            child_ = nullptr;
-        }
-    }
-
-private:
-    EntityDataService<E> service_;
-    SelectQuery query_;
-    AsyncOperation<RelationRowsResult<E>>* child_ = nullptr;
-    WakeSignal::Forward forwarding_;
-};
-
-template <class E>
-auto EntityDataServiceAccess::fetch_graph_current_row_internal(const EntityDataService<E>& service,
-                                                               std::string_view entity,
-                                                               std::string_view property,
-                                                               const Value& id,
-                                                               std::span<const TraceNode> trace)
-    -> AsyncOperation<Result<std::optional<CompactRow>, DataServiceError<typename E::Error>>>& {
-    using R = Result<std::optional<CompactRow>, DataServiceError<typename E::Error>>;
-    return make_operation<R, GraphCurrentRowOperation<E>>(
-        service.memory_resource(), service, entity, property, id, trace);
-}
-
-template <class E>
 class GraphExecutionOperation {
     using Error = DataServiceError<typename E::Error>;
     using R = Result<GraphNode, Error>;
@@ -94,6 +20,20 @@ public:
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
         const auto& context = EntityDataServiceAccess::context(service_);
+        if (!intent_bound_) {
+            const auto comment = plan_.planned_root && plan_.planned_root->comment
+                                     ? std::optional<std::string_view>(*plan_.planned_root->comment)
+                                     : std::nullopt;
+            auto bound = EntityDataServiceAccess::bind_mutation_intent(service_, comment);
+            if (!bound) {
+                return fail(std::move(bound).error());
+            }
+            auto privacy = EntityDataServiceAccess::bind_plan_privacy(service_, plan_);
+            if (!privacy) {
+                return fail(std::move(privacy).error());
+            }
+            intent_bound_ = true;
+        }
         if (!plan_.planned_root) {
             return fail(RuntimeError::graph(r, "graph mutation plan has no planned root"));
         }
@@ -259,6 +199,7 @@ private:
         return fail(RuntimeError::graph(r, message));
     }
 
+    bool intent_bound_ = false;
     EntityDataService<E> service_;
     GraphMutationPlan plan_;
     std::size_t batch_ = 0, item_ = 0;

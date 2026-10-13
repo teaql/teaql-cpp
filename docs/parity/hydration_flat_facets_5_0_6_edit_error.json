@@ -1,0 +1,4 @@
+{
+  "reason": "API overload insertion search did not account for a formatter line break. Python failed before any mutation. Subsequent redundant gates ran because set -e followed the Python command; this run does not prove the intended overload edit. The next edit uses set -e from the beginning and verifies both overload declarations.",
+  "mutation": false
+}

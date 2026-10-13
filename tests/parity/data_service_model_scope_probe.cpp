@@ -33,11 +33,12 @@ static Json evaluate(UserContext& user, const Json& input) {
     SelectQuery query(std::allocator_arg, Allocator(owner), "Device");
     query.comment(name);
     query.filter(Expr::eq(owner, "payload", payload));
-    QueryRequest request(std::allocator_arg, Allocator(owner), query, flags & 2, flags & 4);
+    auto* comment = std::get_if<String>(&field(input, "comment").data);
+    auto intent = QueryIntent::create(
+        owner, comment ? std::string_view(*comment) : name, "inspect data-service model fixture");
+    QueryRequest request(
+        std::allocator_arg, Allocator(owner), query, intent.value(), flags & 2, flags & 4);
     request.trace_chain = TraceChain(traces, owner);
-    if (auto* comment = std::get_if<String>(&field(input, "comment").data)) {
-        request.comment.emplace(*comment, owner);
-    }
     auto count = std::get<std::uint64_t>(field(input, "count").data);
     auto metadata = ExecutionMetadata::unrecorded_query(owner, count);
     Json::Object output(owner);
@@ -50,7 +51,7 @@ static Json evaluate(UserContext& user, const Json& input) {
         std::chrono::nanoseconds(number<std::int64_t>(field(input, "end"))));
     metadata.affected_rows = UINT64_MAX;
     metadata.trace_chain = TraceChain(traces, owner);
-    metadata.comment = detail::clone_in(owner, request.comment);
+    metadata.comment.emplace(request.comment(), owner);
     metadata.backend_request_id.emplace(name, owner);
     metadata.parameterized_query.emplace("SELECT ?", owner);
     metadata.params.emplace_back(payload);
@@ -82,15 +83,15 @@ static Json evaluate(UserContext& user, const Json& input) {
     RecoverCommand recover(std::allocator_arg, Allocator(owner), "Device", payload, -1);
     recover.trace_chain = TraceChain(traces, owner);
     Vector<MutationRequest> requests(owner);
-    requests.emplace_back(insert);
-    requests.emplace_back(update);
-    requests.emplace_back(deletion);
-    requests.emplace_back(recover);
+    requests.emplace_back(insert, "inspect data-service mutation fixture");
+    requests.emplace_back(update, "inspect data-service mutation fixture");
+    requests.emplace_back(deletion, "inspect data-service mutation fixture");
+    requests.emplace_back(recover, "inspect data-service mutation fixture");
     MutationRequest::Batch empty(owner);
-    requests.emplace_back(empty);
+    requests.emplace_back(empty, "inspect data-service mutation fixture");
     MutationRequest::Batch nested(owner);
-    nested.emplace_back(empty);
-    requests.emplace_back(nested);
+    nested.emplace_back(empty, "inspect data-service mutation fixture");
+    requests.emplace_back(nested, "inspect data-service mutation fixture");
     GuardedMutationRequest guarded(
         std::allocator_arg, Allocator(owner), requests[0], Expr::eq(owner, "owner", UINT64_C(7)));
     MutationResult mutation_result(std::allocator_arg, Allocator(owner), UINT64_MAX, metadata);
@@ -124,7 +125,7 @@ static Json evaluate(UserContext& user, const Json& input) {
     for (const auto& mutation : requests) {
         request_outputs.emplace_back(formatted_debug(owner, mutation));
         auto comment = mutation.comment();
-        comments.emplace_back(comment ? Json(owner, *comment) : Json(owner));
+        comments.emplace_back(comment);
         trace_outputs.emplace_back(formatted_debug(owner, TraceView{mutation.trace_chain()}));
     }
     for (unsigned i = 0; i < 7; ++i) {

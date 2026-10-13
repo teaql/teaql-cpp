@@ -1,0 +1,282 @@
+[
+  {
+    "index": 65,
+    "input": {
+      "probes": true,
+      "capture": false,
+      "compact": false,
+      "threshold": null,
+      "parents": 1,
+      "many": true,
+      "query": true,
+      "slice": "limit",
+      "pending": 0,
+      "polls": 10,
+      "fail_at": 0
+    },
+    "rust": {
+      "capabilities_calls": 1,
+      "drops": 1,
+      "queries": [
+        {
+          "entity": "Child",
+          "filter": {
+            "args": [
+              {
+                "args": [],
+                "kind": 0,
+                "name": "owner_id",
+                "op": 0,
+                "value": "Null"
+              },
+              {
+                "args": [],
+                "kind": 1,
+                "name": "",
+                "op": 0,
+                "value": "U64(0)"
+              }
+            ],
+            "kind": 3,
+            "name": "",
+            "op": 0,
+            "value": "Null"
+          },
+          "order": [
+            {
+              "direction": 1,
+              "field": "name"
+            },
+            {
+              "direction": 0,
+              "field": "child_id"
+            }
+          ],
+          "partition": null,
+          "projection": [
+            "name",
+            "owner_id",
+            "ref_id"
+          ],
+          "relations": []
+        }
+      ],
+      "rows": [
+        1
+      ],
+      "telemetry": {
+        "teaql.entity.type": "Root",
+        "teaql.operation.family": "relation_load",
+        "teaql.operation.name": "Root.nested.children",
+        "teaql.relation.configured_probe_threshold": 0,
+        "teaql.relation.name": "nested.children",
+        "teaql.relation.parent_count": 1,
+        "teaql.relation.per_parent_limit": 2,
+        "teaql.relation.probe_count": 1,
+        "teaql.relation.selected_plan": "BOUNDED_PROBES"
+      }
+    },
+    "cpp": {
+      "capabilities_calls": 1,
+      "drops": 1,
+      "queries": [
+        {
+          "entity": "Child",
+          "filter": {
+            "args": [
+              {
+                "args": [],
+                "kind": 0,
+                "name": "owner_id",
+                "op": 0,
+                "value": "Null"
+              },
+              {
+                "args": [],
+                "kind": 1,
+                "name": "",
+                "op": 0,
+                "value": "List([U64(0)])"
+              }
+            ],
+            "kind": 3,
+            "name": "",
+            "op": 8,
+            "value": "Null"
+          },
+          "order": [
+            {
+              "direction": 1,
+              "field": "name"
+            },
+            {
+              "direction": 0,
+              "field": "child_id"
+            }
+          ],
+          "partition": "owner_id",
+          "projection": [
+            "name",
+            "owner_id",
+            "ref_id"
+          ],
+          "relations": []
+        }
+      ],
+      "rows": [
+        1
+      ],
+      "telemetry": {
+        "teaql.entity.type": "Root",
+        "teaql.operation.family": "relation_load",
+        "teaql.operation.name": "Root.nested.children",
+        "teaql.relation.configured_probe_threshold": 0,
+        "teaql.relation.name": "nested.children",
+        "teaql.relation.parent_count": 1,
+        "teaql.relation.per_parent_limit": 2,
+        "teaql.relation.probe_count": 1,
+        "teaql.relation.selected_plan": "BOUNDED_PROBES"
+      }
+    }
+  },
+  {
+    "index": 81,
+    "input": {
+      "probes": true,
+      "capture": false,
+      "compact": true,
+      "threshold": null,
+      "parents": 1,
+      "many": true,
+      "query": true,
+      "slice": "limit",
+      "pending": 0,
+      "polls": 10,
+      "fail_at": 0
+    },
+    "rust": {
+      "capabilities_calls": 1,
+      "drops": 1,
+      "queries": [
+        {
+          "entity": "Child",
+          "filter": {
+            "args": [
+              {
+                "args": [],
+                "kind": 0,
+                "name": "owner_id",
+                "op": 0,
+                "value": "Null"
+              },
+              {
+                "args": [],
+                "kind": 1,
+                "name": "",
+                "op": 0,
+                "value": "U64(0)"
+              }
+            ],
+            "kind": 3,
+            "name": "",
+            "op": 0,
+            "value": "Null"
+          },
+          "order": [
+            {
+              "direction": 1,
+              "field": "name"
+            },
+            {
+              "direction": 0,
+              "field": "child_id"
+            }
+          ],
+          "partition": null,
+          "projection": [
+            "name",
+            "owner_id",
+            "ref_id"
+          ],
+          "relations": []
+        }
+      ],
+      "rows": [
+        1
+      ],
+      "telemetry": {
+        "teaql.entity.type": "Root",
+        "teaql.operation.family": "relation_load",
+        "teaql.operation.name": "Root.nested.children",
+        "teaql.relation.configured_probe_threshold": 0,
+        "teaql.relation.name": "nested.children",
+        "teaql.relation.parent_count": 1,
+        "teaql.relation.per_parent_limit": 2,
+        "teaql.relation.probe_count": 1,
+        "teaql.relation.selected_plan": "BOUNDED_PROBES"
+      }
+    },
+    "cpp": {
+      "capabilities_calls": 1,
+      "drops": 1,
+      "queries": [
+        {
+          "entity": "Child",
+          "filter": {
+            "args": [
+              {
+                "args": [],
+                "kind": 0,
+                "name": "owner_id",
+                "op": 0,
+                "value": "Null"
+              },
+              {
+                "args": [],
+                "kind": 1,
+                "name": "",
+                "op": 0,
+                "value": "List([U64(0)])"
+              }
+            ],
+            "kind": 3,
+            "name": "",
+            "op": 8,
+            "value": "Null"
+          },
+          "order": [
+            {
+              "direction": 1,
+              "field": "name"
+            },
+            {
+              "direction": 0,
+              "field": "child_id"
+            }
+          ],
+          "partition": "owner_id",
+          "projection": [
+            "name",
+            "owner_id",
+            "ref_id"
+          ],
+          "relations": []
+        }
+      ],
+      "rows": [
+        1
+      ],
+      "telemetry": {
+        "teaql.entity.type": "Root",
+        "teaql.operation.family": "relation_load",
+        "teaql.operation.name": "Root.nested.children",
+        "teaql.relation.configured_probe_threshold": 0,
+        "teaql.relation.name": "nested.children",
+        "teaql.relation.parent_count": 1,
+        "teaql.relation.per_parent_limit": 2,
+        "teaql.relation.probe_count": 1,
+        "teaql.relation.selected_plan": "BOUNDED_PROBES"
+      }
+    }
+  }
+]

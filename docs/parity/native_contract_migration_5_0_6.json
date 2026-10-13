@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Terminal selected integration migration: 17 formerly failing maintained contracts, two callback reentrancy contracts and two new actual-source comparison families. Full suite not rerun.",
+  "total": 21,
+  "passed": 21,
+  "failed": 0,
+  "exit_code": 0,
+  "tests": [
+    {
+      "id": 161,
+      "name": "original_runtime_validation_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 69,
+      "name": "ledger_move_only_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "id": 164,
+      "name": "original_runtime_aggregate_cache_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "id": 96,
+      "name": "recursive_graph_write_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 162,
+      "name": "original_runtime_events_relations_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 163,
+      "name": "original_runtime_typed_query_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 109,
+      "name": "entity_graph_plan_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 157,
+      "name": "original_runtime_entity_save_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 105,
+      "name": "runtime_mutation_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 100,
+      "name": "graph_save_adapter_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 267,
+      "name": "request_search_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "id": 160,
+      "name": "original_runtime_service_boundary_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 98,
+      "name": "graph_node_command_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "id": 271,
+      "name": "original_core_functional_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "id": 196,
+      "name": "runtime_graph_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "id": 107,
+      "name": "runtime_mutation_reentrant_event",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "id": 106,
+      "name": "runtime_mutation_reentrant_prepare",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "id": 318,
+      "name": "generated_candidates_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "id": 197,
+      "name": "scoped_comments_rust_parity",
+      "status": "passed",
+      "seconds": 0.15
+    },
+    {
+      "id": 112,
+      "name": "graph_plan_scopes_rust_parity",
+      "status": "passed",
+      "seconds": 0.38
+    },
+    {
+      "id": 165,
+      "name": "original_runtime_pagination_contracts",
+      "status": "passed",
+      "seconds": 1.2
+    }
+  ]
+}

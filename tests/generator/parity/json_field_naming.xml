@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root name="json-field-naming-service"
+      org="example"
+      data_service="sqlite"
+      json_field_naming="camelCase">
+  <platform name="Platform"/>
+  <user_profile
+      platform="platform()"
+      user_url="https://example.com/users/1"
+      api_client_url="https://api.example.com/client"/>
+</root>

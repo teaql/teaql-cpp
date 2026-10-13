@@ -1,0 +1,19 @@
+{
+  "status": "resolved_within_2032_loaded_row_reconstruction_matrix",
+  "evidence_kind": "source audit, not executed behavioral comparison",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "cpp": "teaql_runtime/src/data_service/relation_graph.cpp",
+  "rust": ".reference/teaql-rs/teaql-runtime/src/data_service/resolved.rs",
+  "cpp_sha256": "5a3a250f7e4f34b030a805764af0b90483d9ea90bbc4adada0c6a853c45b7cf1",
+  "observations": [
+    "C++ flatten takes the loaded relation but extracts only its data vector. Existing SmartList facets, summary, aggregations, count and load state do not reach the typed graph list decoder.",
+    "Rust resolved.rs separately installs nonempty to-one facets before null handling, and passes loaded SmartList metadata for to-many graph decoding.",
+    "The new metadata-preserving decoder and graph facet store provide prerequisites, but this separate loaded-row reconstruction path is unchanged by the flat query dispatch checkpoint."
+  ],
+  "next_action": "Add direct access to the complete original loaded-row graph reconstruction path, compare full graph/parent/metadata/error outputs, then update shared reconstruction before generated adapters.",
+  "notice": "Do not interpret the 2304 flat query dispatch observations as acceptance of loaded-row graph reconstruction.",
+  "source_audit_correction": "Rust flatten preserves only loaded-list facets when reconstructing relation SmartLists. It resets other outer metadata using SmartList::new; original claims of complete metadata retention were too broad.",
+  "behavioral_checkpoint": "docs/loaded_row_graph_5_0_6.md",
+  "qualification": "docs/loaded_row_graph_5_0_6.md",
+  "remaining": "Full historical, dynamic/JSON view/privacy/generated/model and decoder matrices remain open."
+}

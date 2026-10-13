@@ -2,7 +2,14 @@
 
 Scope: M1a of [the module plan](cpp_modules_plan.md), using Rust v5.0.5 at
 the exact commit in `upstream.lock.json`. This change organizes existing code;
-production named-module interfaces remain M1b work.
+production named-module interfaces remain M1b work at that historical checkpoint.
+
+The active runtime baseline is now 5.0.6. Current paths and source ownership use
+[workspace_paths_5_0_6.json](workspace_paths_5_0_6.json); the original move/body
+ledgers remain immutable 5.0.5 evidence. Default verify_module_paths.py checks
+current structure and source provenance, while --historical-checkpoint also
+replays the original verifier in a temporary read-only C++ 0.0.3 snapshot. Neither
+current path checks nor historical body hashes prove new-baseline semantics.
 
 The five in-scope Rust crates map to `teaql_core`, `teaql_data_service`,
 `teaql_sql`, `teaql_runtime` and `teaql_provider_sqlite`. The C++ arena/lifetime
@@ -15,7 +22,9 @@ This paragraph records the M1a checkpoint. After `0.0.2`, the extra compatibilit
 adapter was removed; see [the retirement review](sqlite_compatibility.md). The
 original move ledger and hashes remain intact. `verify_module_paths.py` checks
 the seven retired destinations against the explicit retirement ledger and still
-checks every retained canonical production body against the original checkpoint.
+checks every retained canonical production body against the original checkpoint
+when replayed in the fixed historical snapshot. It does not compare intentionally
+evolved 5.0.6 production bodies to that unchanged-body contract.
 
 Runtime context methods reside in `teaql_runtime/src/context`; data-service
 implementation helpers reside in `teaql_runtime/src/data_service`. Corresponding

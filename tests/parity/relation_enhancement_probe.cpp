@@ -51,6 +51,10 @@ static std::optional<AggregationCacheOptions> cache_in(const Json& j) {
 static SelectQuery query_in(Memory r, const Json& j) {
     auto q = query(r, j);
     q.entity = text(field(j, "entity"));
+    if (auto* purpose = optional(j, "purpose");
+        purpose && !std::holds_alternative<std::monostate>(purpose->data)) {
+        q.purpose_text.emplace(text(*purpose), r);
+    }
     q.aggregation_cache = cache_in(j);
     for (const auto& l : items(j, "relations")) {
         if (auto* child = optional(l, "query")) {
@@ -65,7 +69,27 @@ static SelectQuery query_in(Memory r, const Json& j) {
 
 static Json expr_out(Memory r, const Expr& e) {
     auto out = detail::model_json(r);
-    detail::model_put(out, "kind", unsigned(e.kind));
+    unsigned kind;
+    switch (e.kind) {
+    case Expr::Kind::Column:
+        kind = 0;
+        break;
+    case Expr::Kind::Value:
+        kind = 1;
+        break;
+    case Expr::Kind::Binary:
+        kind = 3;
+        break;
+    case Expr::Kind::And:
+        kind = 8;
+        break;
+    case Expr::Kind::Or:
+        kind = 9;
+        break;
+    default:
+        throw std::logic_error("Unsupported planning fixture expression");
+    }
+    detail::model_put(out, "kind", kind);
     detail::model_put(out, "op", unsigned(e.op));
     detail::model_put(out, "name", e.name);
     detail::model_put(out, "value", detail::debug_value(r, e.literal));

@@ -122,6 +122,7 @@ static int relation_callback(std::string_view mode) {
             (void)service.relation_loads();
         } else {
             SelectQuery query(std::allocator_arg, Allocator(user->memory_resource()), "Item");
+            query.comment("Inspect callback close protection");
             PurposedSelectQuery purposed(std::allocator_arg,
                                          Allocator(user->memory_resource()),
                                          query,

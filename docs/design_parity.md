@@ -1,4 +1,9 @@
-# Rust 5.0.5 core design parity contract
+# Rust 5.0.5 core design parity contract (historical qualification)
+
+The active alignment target is now Rust 5.0.6. This document retains historical
+5.0.5 contracts and evidence; it must not be read as 5.0.6 acceptance. See
+[the upgrade audit](baseline_5_0_6_upgrade.md) for changed and additional contracts.
+
 
 Preserve the pinned Rust version's core concepts, responsibilities, field semantics, execution order, and error behavior. Adapt ownership, allocation, and resource lifetimes for C++. SQLite-only scope does not justify deleting interfaces or merging layers. This contract replaces the initial direction that combined layers and reduced the core model.
 
@@ -14,7 +19,7 @@ that direction with object IDs, validity bitmaps, allocation limits, and string
 storage. These C++ ownership adaptations must preserve the core concepts and
 Value semantics below; design references are not new runtime dependencies.
 
-Baseline: `62940ae2b88e7acc32763853b8b4685a01c7e90a` in `upstream.lock.json`. The [source concept inventory](parity/upstream_concepts.md) and `parity/upstream_inventory.json` index declarations, committed source hashes, and test locations. They identify omissions; they do not prove structural or behavioral completion. The [module map](parity/cpp_module_map.md), generated from manually maintained `parity/cpp_modules.json`, records targets, stages, differences, and acceptance contracts. Its verifier assigns each of the 82 pinned source files to exactly one contract.
+Historical baseline: `62940ae2b88e7acc32763853b8b4685a01c7e90a` in [the archived 5.0.5 lock](parity/baselines/v5_0_5.lock.json). The active `upstream.lock.json` pins 5.0.6. The [source concept inventory](parity/upstream_concepts.md) and `parity/upstream_inventory.json` index historical declarations, committed source hashes, and test locations. They identify omissions; they do not prove structural or behavioral completion. The [module map](parity/cpp_module_map.md), generated from manually maintained `parity/cpp_modules.json`, records historical targets, stages, differences, and acceptance contracts. Its historical verifier assigns each of the 82 pinned source files to exactly one contract.
 
 All six in-scope stages are accepted at the final 2026-10-10 source snapshot.
 Native and ASan/UBSan pass 388/388; matched-engine MIPS/QEMU passes 387/387.

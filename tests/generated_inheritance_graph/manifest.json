@@ -1,0 +1,30 @@
+{
+  "scope": "cpp-lib-core",
+  "qualification_only": true,
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "823c3b039ee3bc0ced7578da21f49c75ac3bfa41e345a98a0fe5fd5349ff840c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+    "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "d5568fb154711ac878c9171454644a04d2678a637eb148379544da66801ce139"
+  },
+  "model": "tests/generator/inheritance_graph.xml",
+  "model_sha256": "de7017f24d4019fecaf4eca82322f343038dd14c67a2716936ebe773437d0277",
+  "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "ASSIST.md": "e8a6a025044e0371785da2f05585f14744308eef6b19e30b8a99f5a67fbcf5d2",
+    "CMakeLists.txt": "e8e4f9af862b4ecfbd2fed8e7820a223856c65f52eaa5d3b825317e3087ab875",
+    "include/cpp_inheritance_graph/checkers.hpp": "78c9b2f1e4a9cd99c28acd0f70240d8566ccff2495c46f819be1c21cda1ebff6",
+    "include/cpp_inheritance_graph/expressions.hpp": "938cb020bf55d8ed18bb0604310f51d32138ff9ca77e4f15b56231dc1dd61fb9",
+    "include/cpp_inheritance_graph/models.hpp": "362c4ccdecf95f6a6cf1cc6f58fe68444fbffda1330098859c4e2873272212fc",
+    "include/cpp_inheritance_graph/queries.hpp": "e6f1b1afdf7506f488a237eb7463bca878d7e9132cdc742ac5e2777cd65aab10",
+    "include/cpp_inheritance_graph/runtime.hpp": "71f498cc43750366f64f1b7d9720ff732a431705a598aee55b844f3040252082",
+    "include/cpp_inheritance_graph/sample_data.hpp": "eff19644550a0d725406760342cdbbbef6181105b395b33d4f2d3c35a0381b24",
+    "include/cpp_inheritance_graph/support.hpp": "ce404021d96561bebea0cdf9ffaa57c04ac1e2b4b9503edb4995fffebff5013d",
+    "include/cpp_inheritance_graph.hpp": "02cb987454b5eb0c611b4c23489a57bc5c85c18d60da1c4851599d53e1fb49d3"
+  }
+}

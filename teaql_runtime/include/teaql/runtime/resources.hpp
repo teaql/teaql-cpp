@@ -1,6 +1,7 @@
 #pragma once
 #include <teaql/runtime/context_error.hpp>
 #include <teaql/core/value.hpp>
+#include <teaql/core/eval.hpp>
 #include <teaql/memory/arena.hpp>
 #include <map>
 #include <typeindex>
@@ -21,7 +22,14 @@ public:
                  const Arena* parent,
                  GlobalContext& global,
                  MemoryLimits limits = {})
-        : Arena(size, upstream, parent, limits), global_(global) {}
+        : Arena(size, upstream, parent, limits), global_(global),
+          layout_owner_(parent
+                            ? const_cast<ContextArena*>(dynamic_cast<const ContextArena*>(parent))
+                            : this) {
+        if (!layout_owner_) {
+            throw std::invalid_argument("Runtime metadata requires an explicit application arena");
+        }
+    }
 
     ~ContextArena() override {
         close();
@@ -29,6 +37,18 @@ public:
 
     GlobalContext& global() const noexcept {
         return global_;
+    }
+
+    static ContextArena& from_memory(Memory resource) {
+        auto* arena = dynamic_cast<ContextArena*>(resource);
+        if (!arena) {
+            throw std::invalid_argument("Generated entities require an explicit runtime Context");
+        }
+        arena->check_thread();
+        if (arena->closed() || arena->closing()) {
+            throw std::logic_error("Generated entities require a live runtime Context");
+        }
+        return *arena;
     }
 
     // Borrowed only during one synchronous cross-domain graph copy; never TLS.
@@ -42,9 +62,61 @@ public:
         return state_;
     }
 
+    const ContextState* context_state() const noexcept override {
+        return state_;
+    }
+
+    SnapshotPool& loaded_snapshots() {
+        check_thread();
+        if (closed() || closing()) {
+            throw std::logic_error("Loaded-state access requires a live Context");
+        }
+        if (!snapshots_) {
+            auto& pool = make<SnapshotPool>();
+            snapshots_.emplace(std::allocator_arg, Allocator(this), pool);
+        }
+        return const_cast<SnapshotPool&>(snapshots_->get());
+    }
+
+    template <class T>
+    const FieldLayout& field_layout() {
+        check_thread();
+        if (closed() || closing()) {
+            throw std::logic_error("Type metadata access requires a live Context");
+        }
+        auto& owner = *layout_owner_;
+        owner.check_thread();
+        if (!owner.layouts_) {
+            owner.layouts_ = &owner.make_payload<Layouts>();
+        }
+        auto key = std::type_index(typeid(T));
+        if (auto found = owner.layouts_->types.find(key); found != owner.layouts_->types.end()) {
+            return found->second.get();
+        }
+        auto created = T::create_field_layout(&owner);
+        if (!created) {
+            throw std::invalid_argument(std::string(created.error()));
+        }
+        auto& layout = owner.make<FieldLayout>(std::move(created).value());
+        auto [position, inserted] = owner.layouts_->types.emplace(
+            key, ArenaBorrow<FieldLayout>(std::allocator_arg, Allocator(&owner), layout));
+        return position->second.get();
+    }
+
 private:
     GlobalContext& global_;
     ContextState* state_ = nullptr;
+
+    struct Layouts {
+        using allocator_type = Allocator;
+        std::pmr::map<std::type_index, ArenaBorrow<FieldLayout>> types;
+
+        Layouts(std::allocator_arg_t, Allocator a) : types(a.resource()) {}
+    };
+
+    ContextArena* layout_owner_;
+    Layouts* layouts_ = nullptr;
+    std::optional<ArenaBorrow<SnapshotPool>> snapshots_;
 
     void on_closing(std::source_location where) noexcept override {
         if (state_) {

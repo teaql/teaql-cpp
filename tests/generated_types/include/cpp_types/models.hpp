@@ -3,16 +3,33 @@
 #include "support.hpp"
 
 namespace cpp_types {
+namespace generated_detail {
+struct PersonSampleRecipe;
+struct DeviceSampleRecipe;
+struct OrderStatusSampleRecipe;
+struct CategorySampleRecipe;
+struct ChildSampleRecipe;
+struct InventorySampleRecipe;
+}
 struct Person;
+class PersonChecker;
 struct Device;
+class DeviceChecker;
 struct OrderStatus;
+class OrderStatusChecker;
 struct Category;
+class CategoryChecker;
 struct Child;
+class ChildChecker;
 struct Inventory;
+class InventoryChecker;
 
 struct Person : generated_detail::Model<Person> {
     using Base = generated_detail::Model<Person>;
+    friend class PersonChecker;
     static constexpr std::string_view ENTITY_NAME = "Person";
+    friend struct generated_detail::PersonSampleRecipe;
+    static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
 private:
     std::uint64_t id_;
@@ -40,36 +57,140 @@ public:
     Person(Person&&) noexcept;
     ~Person();
     static EntityDescriptor entity_descriptor(Memory);
+    static constexpr std::string_view FIELD_LAYOUT_REVISION =
+        "90157748987c0f22ce5ad59c19e3ad2830f684cf596c6b0b7a7d7325ef5e23ed";
+
+    static Result<FieldLayout, String> create_field_layout(Memory r) {
+        const std::array<FieldLayout::Index, 12> indexes{{
+            {"id", 0},
+            {"email", 1},
+            {"active", 2},
+            {"nickname", 3},
+            {"balance", 4},
+            {"height", 5},
+            {"ratio", 6},
+            {"age", 7},
+            {"birthday", 8},
+            {"updated_at", 9},
+            {"payload", 10},
+            {"version", 11},
+        }};
+        const std::array<FieldLayout::Mapping, 12> mappings{{
+            {"id", "id", "id"},
+            {"email", "email", "email"},
+            {"active", "active", "active"},
+            {"nickname", "nickname", "nickname"},
+            {"balance", "balance", "balance"},
+            {"height", "height", "height"},
+            {"ratio", "ratio", "ratio"},
+            {"age", "age", "age"},
+            {"birthday", "birthday", "birthday"},
+            {"updated_at", "updated_at", "updated_at"},
+            {"payload", "payload", "payload"},
+            {"version", "version", "version"},
+        }};
+        const std::array<std::string_view, 12> members{{
+            "id",
+            "email",
+            "active",
+            "nickname",
+            "balance",
+            "height",
+            "ratio",
+            "age",
+            "birthday",
+            "updated_at",
+            "payload",
+            "version",
+        }};
+        const std::array<std::string_view, 1> relations{{"device_list"}};
+        return FieldLayout::from_generated(
+            r, ENTITY_NAME, FIELD_LAYOUT_REVISION, indexes, mappings, relations, members);
+    }
+
+    static const FieldLayout& field_layout(Memory r) {
+        return detail::ContextArena::from_memory(r).field_layout<Person>();
+    }
+
     static Result<Person, EntityError> from_compact_row(Memory, CompactRow);
     MutationValues into_values() &&;
+    void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
     std::uint64_t id() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "id", id_);
+    }
+
+    std::uint64_t id_for_runtime() const {
         return id_;
     }
 
-    Person& update_id(const std::uint64_t& value) {
+    std::optional<Value> changedId() const {
+        return root.get(entity_key(), "id");
+    }
+
+    eval::EvalResult<std::uint64_t> evalId() const {
+        return detail::EntityRuntimeAccess::eval_field<std::uint64_t>(
+            memory_resource(), load_state, "id", [this] {
+                return detail::clone_in(memory_resource(), id());
+            });
+    }
+
+    Person& updateId(const std::uint64_t& value) {
         id_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "id", generated_detail::encode(memory_resource(), id_));
+        load_state
+            .mark_loaded("id",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const String& email() const {
-        return email_;
+    String email() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "email", email_);
     }
 
-    Person& update_email(std::string_view value) {
-        email_.assign(value);
-        root.set(entity_key(), "email", generated_detail::encode(memory_resource(), email_));
+    std::optional<Value> changedEmail() const {
+        return root.get(entity_key(), "email");
+    }
+
+    eval::EvalResult<String> evalEmail() const {
+        return detail::EntityRuntimeAccess::eval_field<String>(
+            memory_resource(), load_state, "email", [this] {
+                return detail::clone_in(memory_resource(), email());
+            });
+    }
+
+    Person& updateEmail(std::string_view value) {
+        detail::EntityRuntimeAccess::update_text(root, entity_key(), "email", email_, value);
+        load_state
+            .mark_loaded("email",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const bool& active() const {
-        return active_;
+    bool active() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "active", active_);
     }
 
-    Person& update_active(const bool& value) {
+    std::optional<Value> changedActive() const {
+        return root.get(entity_key(), "active");
+    }
+
+    eval::EvalResult<bool> evalActive() const {
+        return detail::EntityRuntimeAccess::eval_field<bool>(
+            memory_resource(), load_state, "active", [this] {
+                return detail::clone_in(memory_resource(), active());
+            });
+    }
+
+    Person& updateActive(const bool& value) {
         active_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "active", generated_detail::encode(memory_resource(), active_));
+        load_state
+            .mark_loaded("active",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -77,70 +198,176 @@ public:
         return nickname_;
     }
 
-    Person& update_nickname(const std::optional<String>& value) {
-        nickname_ = detail::clone_in(memory_resource(), value);
-        root.set(entity_key(), "nickname", generated_detail::encode(memory_resource(), nickname_));
+    std::optional<Value> changedNickname() const {
+        return root.get(entity_key(), "nickname");
+    }
+
+    eval::EvalResult<std::optional<String>> evalNickname() const {
+        return detail::EntityRuntimeAccess::eval_field<std::optional<String>>(
+            memory_resource(), load_state, "nickname", [this] {
+                return detail::clone_in(memory_resource(), nickname());
+            });
+    }
+
+    Person& updateNickname(const std::optional<String>& value) {
+        detail::EntityRuntimeAccess::update_text(root, entity_key(), "nickname", nickname_, value);
+        load_state
+            .mark_loaded("nickname",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const Decimal& balance() const {
-        return balance_;
+    Decimal balance() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "balance", balance_);
     }
 
-    Person& update_balance(const Decimal& value) {
+    std::optional<Value> changedBalance() const {
+        return root.get(entity_key(), "balance");
+    }
+
+    eval::EvalResult<Decimal> evalBalance() const {
+        return detail::EntityRuntimeAccess::eval_field<Decimal>(
+            memory_resource(), load_state, "balance", [this] {
+                return detail::clone_in(memory_resource(), balance());
+            });
+    }
+
+    Person& updateBalance(const Decimal& value) {
         balance_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "balance", generated_detail::encode(memory_resource(), balance_));
+        load_state
+            .mark_loaded("balance",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const double& height() const {
-        return height_;
+    double height() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "height", height_);
     }
 
-    Person& update_height(const double& value) {
+    std::optional<Value> changedHeight() const {
+        return root.get(entity_key(), "height");
+    }
+
+    eval::EvalResult<double> evalHeight() const {
+        return detail::EntityRuntimeAccess::eval_field<double>(
+            memory_resource(), load_state, "height", [this] {
+                return detail::clone_in(memory_resource(), height());
+            });
+    }
+
+    Person& updateHeight(const double& value) {
         height_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "height", generated_detail::encode(memory_resource(), height_));
+        load_state
+            .mark_loaded("height",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const float& ratio() const {
-        return ratio_;
+    float ratio() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "ratio", ratio_);
     }
 
-    Person& update_ratio(const float& value) {
+    std::optional<Value> changedRatio() const {
+        return root.get(entity_key(), "ratio");
+    }
+
+    eval::EvalResult<float> evalRatio() const {
+        return detail::EntityRuntimeAccess::eval_field<float>(
+            memory_resource(), load_state, "ratio", [this] {
+                return detail::clone_in(memory_resource(), ratio());
+            });
+    }
+
+    Person& updateRatio(const float& value) {
         ratio_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "ratio", generated_detail::encode(memory_resource(), ratio_));
+        load_state
+            .mark_loaded("ratio",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const std::int64_t& age() const {
-        return age_;
+    std::int64_t age() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "age", age_);
     }
 
-    Person& update_age(const std::int64_t& value) {
+    std::optional<Value> changedAge() const {
+        return root.get(entity_key(), "age");
+    }
+
+    eval::EvalResult<std::int64_t> evalAge() const {
+        return detail::EntityRuntimeAccess::eval_field<std::int64_t>(
+            memory_resource(), load_state, "age", [this] {
+                return detail::clone_in(memory_resource(), age());
+            });
+    }
+
+    Person& updateAge(const std::int64_t& value) {
         age_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "age", generated_detail::encode(memory_resource(), age_));
+        load_state
+            .mark_loaded("age",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const Date& birthday() const {
-        return birthday_;
+    Date birthday() const {
+        return detail::EntityRuntimeAccess::current_field(
+            root, entity_key(), "birthday", birthday_);
     }
 
-    Person& update_birthday(const Date& value) {
+    std::optional<Value> changedBirthday() const {
+        return root.get(entity_key(), "birthday");
+    }
+
+    eval::EvalResult<Date> evalBirthday() const {
+        return detail::EntityRuntimeAccess::eval_field<Date>(
+            memory_resource(), load_state, "birthday", [this] {
+                return detail::clone_in(memory_resource(), birthday());
+            });
+    }
+
+    Person& updateBirthday(const Date& value) {
         birthday_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "birthday", generated_detail::encode(memory_resource(), birthday_));
+        load_state
+            .mark_loaded("birthday",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const Timestamp& updated_at() const {
-        return updated_at_;
+    Timestamp updatedAt() const {
+        return detail::EntityRuntimeAccess::current_field(
+            root, entity_key(), "updated_at", updated_at_);
     }
 
-    Person& update_updated_at(const Timestamp& value) {
+    std::optional<Value> changedUpdatedAt() const {
+        return root.get(entity_key(), "updated_at");
+    }
+
+    eval::EvalResult<Timestamp> evalUpdatedAt() const {
+        return detail::EntityRuntimeAccess::eval_field<Timestamp>(
+            memory_resource(), load_state, "updated_at", [this] {
+                return detail::clone_in(memory_resource(), updatedAt());
+            });
+    }
+
+    Person& updateUpdatedAt(const Timestamp& value) {
         updated_at_ = detail::clone_in(memory_resource(), value);
         root.set(
             entity_key(), "updated_at", generated_detail::encode(memory_resource(), updated_at_));
+        load_state
+            .mark_loaded("updated_at",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -148,19 +375,49 @@ public:
         return payload_;
     }
 
-    Person& update_payload(const std::optional<Json>& value) {
+    std::optional<Value> changedPayload() const {
+        return root.get(entity_key(), "payload");
+    }
+
+    eval::EvalResult<std::optional<Json>> evalPayload() const {
+        return detail::EntityRuntimeAccess::eval_field<std::optional<Json>>(
+            memory_resource(), load_state, "payload", [this] {
+                return detail::clone_in(memory_resource(), payload());
+            });
+    }
+
+    Person& updatePayload(const std::optional<Json>& value) {
         payload_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "payload", generated_detail::encode(memory_resource(), payload_));
+        load_state
+            .mark_loaded("payload",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
     std::int64_t version() const {
-        return version_;
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "version", version_);
     }
 
-    Person& update_version(const std::int64_t& value) {
+    std::optional<Value> changedVersion() const {
+        return root.get(entity_key(), "version");
+    }
+
+    eval::EvalResult<std::int64_t> evalVersion() const {
+        return detail::EntityRuntimeAccess::eval_field<std::int64_t>(
+            memory_resource(), load_state, "version", [this] {
+                return detail::clone_in(memory_resource(), version());
+            });
+    }
+
+    Person& updateVersion(const std::int64_t& value) {
         version_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "version", generated_detail::encode(memory_resource(), version_));
+        load_state
+            .mark_loaded("version",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -168,18 +425,18 @@ public:
         return version_;
     }
 
-    const SmartList<Device>& device_list() const {
-        return device_list_;
-    }
-
-    SmartList<Device>& device_list() {
-        return device_list_;
-    }
+    const SmartList<Device>& deviceList() const;
+    SmartList<Device>& deviceList();
+    eval::EvalResult<EntityListBorrow<Device>> evalDeviceList() const;
+    RelationHandle<SmartList<Device>> deviceListHandle() const;
 };
 
 struct Device : generated_detail::Model<Device> {
     using Base = generated_detail::Model<Device>;
+    friend class DeviceChecker;
     static constexpr std::string_view ENTITY_NAME = "Device";
+    friend struct generated_detail::DeviceSampleRecipe;
+    static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
 private:
     std::uint64_t id_;
@@ -200,56 +457,170 @@ public:
     Device(Device&&) noexcept;
     ~Device();
     static EntityDescriptor entity_descriptor(Memory);
+    static constexpr std::string_view FIELD_LAYOUT_REVISION =
+        "b3540d93a1b1f304c878052a8b6b945ad3aef2d6eff963ccb99d35c57530fa84";
+
+    static Result<FieldLayout, String> create_field_layout(Memory r) {
+        const std::array<FieldLayout::Index, 5> indexes{{
+            {"id", 0},
+            {"code", 1},
+            {"active", 2},
+            {"owner", 3},
+            {"version", 4},
+        }};
+        const std::array<FieldLayout::Mapping, 5> mappings{{
+            {"id", "id", "id"},
+            {"code", "code", "code"},
+            {"active", "active", "active"},
+            {"owner", "owner_id", "owner"},
+            {"version", "version", "version"},
+        }};
+        const std::array<std::string_view, 5> members{{
+            "id",
+            "code",
+            "active",
+            "owner_id",
+            "version",
+        }};
+        const std::array<std::string_view, 1> relations{{"owner"}};
+        return FieldLayout::from_generated(
+            r, ENTITY_NAME, FIELD_LAYOUT_REVISION, indexes, mappings, relations, members);
+    }
+
+    static const FieldLayout& field_layout(Memory r) {
+        return detail::ContextArena::from_memory(r).field_layout<Device>();
+    }
+
     static Result<Device, EntityError> from_compact_row(Memory, CompactRow);
     MutationValues into_values() &&;
+    void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
     std::uint64_t id() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "id", id_);
+    }
+
+    std::uint64_t id_for_runtime() const {
         return id_;
     }
 
-    Device& update_id(const std::uint64_t& value) {
+    std::optional<Value> changedId() const {
+        return root.get(entity_key(), "id");
+    }
+
+    eval::EvalResult<std::uint64_t> evalId() const {
+        return detail::EntityRuntimeAccess::eval_field<std::uint64_t>(
+            memory_resource(), load_state, "id", [this] {
+                return detail::clone_in(memory_resource(), id());
+            });
+    }
+
+    Device& updateId(const std::uint64_t& value) {
         id_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "id", generated_detail::encode(memory_resource(), id_));
+        load_state
+            .mark_loaded("id",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const String& code() const {
-        return code_;
+    String code() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "code", code_);
     }
 
-    Device& update_code(std::string_view value) {
-        code_.assign(value);
-        root.set(entity_key(), "code", generated_detail::encode(memory_resource(), code_));
+    std::optional<Value> changedCode() const {
+        return root.get(entity_key(), "code");
+    }
+
+    eval::EvalResult<String> evalCode() const {
+        return detail::EntityRuntimeAccess::eval_field<String>(
+            memory_resource(), load_state, "code", [this] {
+                return detail::clone_in(memory_resource(), code());
+            });
+    }
+
+    Device& updateCode(std::string_view value) {
+        detail::EntityRuntimeAccess::update_text(root, entity_key(), "code", code_, value);
+        load_state
+            .mark_loaded("code",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const bool& active() const {
-        return active_;
+    bool active() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "active", active_);
     }
 
-    Device& update_active(const bool& value) {
+    std::optional<Value> changedActive() const {
+        return root.get(entity_key(), "active");
+    }
+
+    eval::EvalResult<bool> evalActive() const {
+        return detail::EntityRuntimeAccess::eval_field<bool>(
+            memory_resource(), load_state, "active", [this] {
+                return detail::clone_in(memory_resource(), active());
+            });
+    }
+
+    Device& updateActive(const bool& value) {
         active_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "active", generated_detail::encode(memory_resource(), active_));
+        load_state
+            .mark_loaded("active",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const std::uint64_t& owner_id() const {
-        return owner_id_;
+    std::uint64_t ownerId() const {
+        return detail::EntityRuntimeAccess::current_field(
+            root, entity_key(), "owner_id", owner_id_);
     }
 
-    Device& update_owner_id(const std::uint64_t& value) {
+    std::optional<Value> changedOwnerId() const {
+        return root.get(entity_key(), "owner_id");
+    }
+
+    eval::EvalResult<std::uint64_t> evalOwnerId() const {
+        return detail::EntityRuntimeAccess::eval_field<std::uint64_t>(
+            memory_resource(), load_state, "owner_id", [this] {
+                return detail::clone_in(memory_resource(), ownerId());
+            });
+    }
+
+    Device& updateOwnerId(const std::uint64_t& value) {
         owner_id_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "owner_id", generated_detail::encode(memory_resource(), owner_id_));
+        load_state
+            .mark_loaded("owner_id",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
     std::int64_t version() const {
-        return version_;
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "version", version_);
     }
 
-    Device& update_version(const std::int64_t& value) {
+    std::optional<Value> changedVersion() const {
+        return root.get(entity_key(), "version");
+    }
+
+    eval::EvalResult<std::int64_t> evalVersion() const {
+        return detail::EntityRuntimeAccess::eval_field<std::int64_t>(
+            memory_resource(), load_state, "version", [this] {
+                return detail::clone_in(memory_resource(), version());
+            });
+    }
+
+    Device& updateVersion(const std::int64_t& value) {
         version_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "version", generated_detail::encode(memory_resource(), version_));
+        load_state
+            .mark_loaded("version",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -257,16 +628,17 @@ public:
         return version_;
     }
 
-    const Person* owner() const {
-        return owner_.get();
-    }
-
-    Device& update_owner(const Person& value);
+    const Person* owner() const;
+    Device& updateOwner(const Person& value);
+    eval::EvalResult<EntityBorrow<Person>> evalOwner() const;
 };
 
 struct OrderStatus : generated_detail::Model<OrderStatus> {
     using Base = generated_detail::Model<OrderStatus>;
+    friend class OrderStatusChecker;
     static constexpr std::string_view ENTITY_NAME = "OrderStatus";
+    friend struct generated_detail::OrderStatusSampleRecipe;
+    static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
 private:
     std::uint64_t id_;
@@ -284,36 +656,113 @@ public:
     OrderStatus(OrderStatus&&) noexcept;
     ~OrderStatus();
     static EntityDescriptor entity_descriptor(Memory);
+    static constexpr std::string_view FIELD_LAYOUT_REVISION =
+        "7eec11d7e91e2c4ad16cdceae86bdd9d475dbeaf90775ac9d3a98b9a963ee2dc";
+
+    static Result<FieldLayout, String> create_field_layout(Memory r) {
+        const std::array<FieldLayout::Index, 3> indexes{{
+            {"id", 0},
+            {"name", 1},
+            {"version", 2},
+        }};
+        const std::array<FieldLayout::Mapping, 3> mappings{{
+            {"id", "id", "id"},
+            {"name", "name", "name"},
+            {"version", "version", "version"},
+        }};
+        const std::array<std::string_view, 3> members{{
+            "id",
+            "name",
+            "version",
+        }};
+        const std::array<std::string_view, 0> relations{{}};
+        return FieldLayout::from_generated(
+            r, ENTITY_NAME, FIELD_LAYOUT_REVISION, indexes, mappings, relations, members);
+    }
+
+    static const FieldLayout& field_layout(Memory r) {
+        return detail::ContextArena::from_memory(r).field_layout<OrderStatus>();
+    }
+
     static Result<OrderStatus, EntityError> from_compact_row(Memory, CompactRow);
     MutationValues into_values() &&;
+    void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
     std::uint64_t id() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "id", id_);
+    }
+
+    std::uint64_t id_for_runtime() const {
         return id_;
     }
 
-    OrderStatus& update_id(const std::uint64_t& value) {
+    std::optional<Value> changedId() const {
+        return root.get(entity_key(), "id");
+    }
+
+    eval::EvalResult<std::uint64_t> evalId() const {
+        return detail::EntityRuntimeAccess::eval_field<std::uint64_t>(
+            memory_resource(), load_state, "id", [this] {
+                return detail::clone_in(memory_resource(), id());
+            });
+    }
+
+    OrderStatus& updateId(const std::uint64_t& value) {
         id_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "id", generated_detail::encode(memory_resource(), id_));
+        load_state
+            .mark_loaded("id",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const String& name() const {
-        return name_;
+    String name() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "name", name_);
     }
 
-    OrderStatus& update_name(std::string_view value) {
-        name_.assign(value);
-        root.set(entity_key(), "name", generated_detail::encode(memory_resource(), name_));
+    std::optional<Value> changedName() const {
+        return root.get(entity_key(), "name");
+    }
+
+    eval::EvalResult<String> evalName() const {
+        return detail::EntityRuntimeAccess::eval_field<String>(
+            memory_resource(), load_state, "name", [this] {
+                return detail::clone_in(memory_resource(), name());
+            });
+    }
+
+    OrderStatus& updateName(std::string_view value) {
+        detail::EntityRuntimeAccess::update_text(root, entity_key(), "name", name_, value);
+        load_state
+            .mark_loaded("name",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
     std::int64_t version() const {
-        return version_;
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "version", version_);
     }
 
-    OrderStatus& update_version(const std::int64_t& value) {
+    std::optional<Value> changedVersion() const {
+        return root.get(entity_key(), "version");
+    }
+
+    eval::EvalResult<std::int64_t> evalVersion() const {
+        return detail::EntityRuntimeAccess::eval_field<std::int64_t>(
+            memory_resource(), load_state, "version", [this] {
+                return detail::clone_in(memory_resource(), version());
+            });
+    }
+
+    OrderStatus& updateVersion(const std::int64_t& value) {
         version_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "version", generated_detail::encode(memory_resource(), version_));
+        load_state
+            .mark_loaded("version",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -324,7 +773,10 @@ public:
 
 struct Category : generated_detail::Model<Category> {
     using Base = generated_detail::Model<Category>;
+    friend class CategoryChecker;
     static constexpr std::string_view ENTITY_NAME = "Category";
+    friend struct generated_detail::CategorySampleRecipe;
+    static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
 private:
     std::uint64_t id_;
@@ -342,36 +794,113 @@ public:
     Category(Category&&) noexcept;
     ~Category();
     static EntityDescriptor entity_descriptor(Memory);
+    static constexpr std::string_view FIELD_LAYOUT_REVISION =
+        "737431f6c8124a0b1a76a548fa723a88e7b586667751dc39f93d3a93eb9ae8e5";
+
+    static Result<FieldLayout, String> create_field_layout(Memory r) {
+        const std::array<FieldLayout::Index, 3> indexes{{
+            {"id", 0},
+            {"name", 1},
+            {"version", 2},
+        }};
+        const std::array<FieldLayout::Mapping, 3> mappings{{
+            {"id", "id", "id"},
+            {"name", "name", "name"},
+            {"version", "version", "version"},
+        }};
+        const std::array<std::string_view, 3> members{{
+            "id",
+            "name",
+            "version",
+        }};
+        const std::array<std::string_view, 0> relations{{}};
+        return FieldLayout::from_generated(
+            r, ENTITY_NAME, FIELD_LAYOUT_REVISION, indexes, mappings, relations, members);
+    }
+
+    static const FieldLayout& field_layout(Memory r) {
+        return detail::ContextArena::from_memory(r).field_layout<Category>();
+    }
+
     static Result<Category, EntityError> from_compact_row(Memory, CompactRow);
     MutationValues into_values() &&;
+    void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
     std::uint64_t id() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "id", id_);
+    }
+
+    std::uint64_t id_for_runtime() const {
         return id_;
     }
 
-    Category& update_id(const std::uint64_t& value) {
+    std::optional<Value> changedId() const {
+        return root.get(entity_key(), "id");
+    }
+
+    eval::EvalResult<std::uint64_t> evalId() const {
+        return detail::EntityRuntimeAccess::eval_field<std::uint64_t>(
+            memory_resource(), load_state, "id", [this] {
+                return detail::clone_in(memory_resource(), id());
+            });
+    }
+
+    Category& updateId(const std::uint64_t& value) {
         id_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "id", generated_detail::encode(memory_resource(), id_));
+        load_state
+            .mark_loaded("id",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const String& name() const {
-        return name_;
+    String name() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "name", name_);
     }
 
-    Category& update_name(std::string_view value) {
-        name_.assign(value);
-        root.set(entity_key(), "name", generated_detail::encode(memory_resource(), name_));
+    std::optional<Value> changedName() const {
+        return root.get(entity_key(), "name");
+    }
+
+    eval::EvalResult<String> evalName() const {
+        return detail::EntityRuntimeAccess::eval_field<String>(
+            memory_resource(), load_state, "name", [this] {
+                return detail::clone_in(memory_resource(), name());
+            });
+    }
+
+    Category& updateName(std::string_view value) {
+        detail::EntityRuntimeAccess::update_text(root, entity_key(), "name", name_, value);
+        load_state
+            .mark_loaded("name",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
     std::int64_t version() const {
-        return version_;
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "version", version_);
     }
 
-    Category& update_version(const std::int64_t& value) {
+    std::optional<Value> changedVersion() const {
+        return root.get(entity_key(), "version");
+    }
+
+    eval::EvalResult<std::int64_t> evalVersion() const {
+        return detail::EntityRuntimeAccess::eval_field<std::int64_t>(
+            memory_resource(), load_state, "version", [this] {
+                return detail::clone_in(memory_resource(), version());
+            });
+    }
+
+    Category& updateVersion(const std::int64_t& value) {
         version_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "version", generated_detail::encode(memory_resource(), version_));
+        load_state
+            .mark_loaded("version",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -382,7 +911,10 @@ public:
 
 struct Child : generated_detail::Model<Child> {
     using Base = generated_detail::Model<Child>;
+    friend class ChildChecker;
     static constexpr std::string_view ENTITY_NAME = "Child";
+    friend struct generated_detail::ChildSampleRecipe;
+    static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
 private:
     std::uint64_t id_;
@@ -400,36 +932,113 @@ public:
     Child(Child&&) noexcept;
     ~Child();
     static EntityDescriptor entity_descriptor(Memory);
+    static constexpr std::string_view FIELD_LAYOUT_REVISION =
+        "e87989d890c87abd97f62d655f75ddd720e535855dbca12557f9893a0b122a52";
+
+    static Result<FieldLayout, String> create_field_layout(Memory r) {
+        const std::array<FieldLayout::Index, 3> indexes{{
+            {"id", 0},
+            {"name", 1},
+            {"version", 2},
+        }};
+        const std::array<FieldLayout::Mapping, 3> mappings{{
+            {"id", "id", "id"},
+            {"name", "name", "name"},
+            {"version", "version", "version"},
+        }};
+        const std::array<std::string_view, 3> members{{
+            "id",
+            "name",
+            "version",
+        }};
+        const std::array<std::string_view, 0> relations{{}};
+        return FieldLayout::from_generated(
+            r, ENTITY_NAME, FIELD_LAYOUT_REVISION, indexes, mappings, relations, members);
+    }
+
+    static const FieldLayout& field_layout(Memory r) {
+        return detail::ContextArena::from_memory(r).field_layout<Child>();
+    }
+
     static Result<Child, EntityError> from_compact_row(Memory, CompactRow);
     MutationValues into_values() &&;
+    void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
     std::uint64_t id() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "id", id_);
+    }
+
+    std::uint64_t id_for_runtime() const {
         return id_;
     }
 
-    Child& update_id(const std::uint64_t& value) {
+    std::optional<Value> changedId() const {
+        return root.get(entity_key(), "id");
+    }
+
+    eval::EvalResult<std::uint64_t> evalId() const {
+        return detail::EntityRuntimeAccess::eval_field<std::uint64_t>(
+            memory_resource(), load_state, "id", [this] {
+                return detail::clone_in(memory_resource(), id());
+            });
+    }
+
+    Child& updateId(const std::uint64_t& value) {
         id_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "id", generated_detail::encode(memory_resource(), id_));
+        load_state
+            .mark_loaded("id",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const String& name() const {
-        return name_;
+    String name() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "name", name_);
     }
 
-    Child& update_name(std::string_view value) {
-        name_.assign(value);
-        root.set(entity_key(), "name", generated_detail::encode(memory_resource(), name_));
+    std::optional<Value> changedName() const {
+        return root.get(entity_key(), "name");
+    }
+
+    eval::EvalResult<String> evalName() const {
+        return detail::EntityRuntimeAccess::eval_field<String>(
+            memory_resource(), load_state, "name", [this] {
+                return detail::clone_in(memory_resource(), name());
+            });
+    }
+
+    Child& updateName(std::string_view value) {
+        detail::EntityRuntimeAccess::update_text(root, entity_key(), "name", name_, value);
+        load_state
+            .mark_loaded("name",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
     std::int64_t version() const {
-        return version_;
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "version", version_);
     }
 
-    Child& update_version(const std::int64_t& value) {
+    std::optional<Value> changedVersion() const {
+        return root.get(entity_key(), "version");
+    }
+
+    eval::EvalResult<std::int64_t> evalVersion() const {
+        return detail::EntityRuntimeAccess::eval_field<std::int64_t>(
+            memory_resource(), load_state, "version", [this] {
+                return detail::clone_in(memory_resource(), version());
+            });
+    }
+
+    Child& updateVersion(const std::int64_t& value) {
         version_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "version", generated_detail::encode(memory_resource(), version_));
+        load_state
+            .mark_loaded("version",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -440,7 +1049,10 @@ public:
 
 struct Inventory : generated_detail::Model<Inventory> {
     using Base = generated_detail::Model<Inventory>;
+    friend class InventoryChecker;
     static constexpr std::string_view ENTITY_NAME = "Inventory";
+    friend struct generated_detail::InventorySampleRecipe;
+    static constexpr std::array<std::string_view, 2> QUERY_IDENTITY_FIELDS{"id", "version"};
 
 private:
     std::uint64_t id_;
@@ -458,36 +1070,113 @@ public:
     Inventory(Inventory&&) noexcept;
     ~Inventory();
     static EntityDescriptor entity_descriptor(Memory);
+    static constexpr std::string_view FIELD_LAYOUT_REVISION =
+        "dfcbb1054c1826e7dc21fbf2f715423edd8af4390d0bc865ef5bdaf0aba8b72e";
+
+    static Result<FieldLayout, String> create_field_layout(Memory r) {
+        const std::array<FieldLayout::Index, 3> indexes{{
+            {"id", 0},
+            {"name", 1},
+            {"version", 2},
+        }};
+        const std::array<FieldLayout::Mapping, 3> mappings{{
+            {"id", "id", "id"},
+            {"name", "name", "name"},
+            {"version", "version", "version"},
+        }};
+        const std::array<std::string_view, 3> members{{
+            "id",
+            "name",
+            "version",
+        }};
+        const std::array<std::string_view, 0> relations{{}};
+        return FieldLayout::from_generated(
+            r, ENTITY_NAME, FIELD_LAYOUT_REVISION, indexes, mappings, relations, members);
+    }
+
+    static const FieldLayout& field_layout(Memory r) {
+        return detail::ContextArena::from_memory(r).field_layout<Inventory>();
+    }
+
     static Result<Inventory, EntityError> from_compact_row(Memory, CompactRow);
     MutationValues into_values() &&;
+    void attachRuntimeStateRecursive(const EntityRuntimeState&);
 
     std::uint64_t id() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "id", id_);
+    }
+
+    std::uint64_t id_for_runtime() const {
         return id_;
     }
 
-    Inventory& update_id(const std::uint64_t& value) {
+    std::optional<Value> changedId() const {
+        return root.get(entity_key(), "id");
+    }
+
+    eval::EvalResult<std::uint64_t> evalId() const {
+        return detail::EntityRuntimeAccess::eval_field<std::uint64_t>(
+            memory_resource(), load_state, "id", [this] {
+                return detail::clone_in(memory_resource(), id());
+            });
+    }
+
+    Inventory& updateId(const std::uint64_t& value) {
         id_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "id", generated_detail::encode(memory_resource(), id_));
+        load_state
+            .mark_loaded("id",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
-    const String& name() const {
-        return name_;
+    String name() const {
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "name", name_);
     }
 
-    Inventory& update_name(std::string_view value) {
-        name_.assign(value);
-        root.set(entity_key(), "name", generated_detail::encode(memory_resource(), name_));
+    std::optional<Value> changedName() const {
+        return root.get(entity_key(), "name");
+    }
+
+    eval::EvalResult<String> evalName() const {
+        return detail::EntityRuntimeAccess::eval_field<String>(
+            memory_resource(), load_state, "name", [this] {
+                return detail::clone_in(memory_resource(), name());
+            });
+    }
+
+    Inventory& updateName(std::string_view value) {
+        detail::EntityRuntimeAccess::update_text(root, entity_key(), "name", name_, value);
+        load_state
+            .mark_loaded("name",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
     std::int64_t version() const {
-        return version_;
+        return detail::EntityRuntimeAccess::current_field(root, entity_key(), "version", version_);
     }
 
-    Inventory& update_version(const std::int64_t& value) {
+    std::optional<Value> changedVersion() const {
+        return root.get(entity_key(), "version");
+    }
+
+    eval::EvalResult<std::int64_t> evalVersion() const {
+        return detail::EntityRuntimeAccess::eval_field<std::int64_t>(
+            memory_resource(), load_state, "version", [this] {
+                return detail::clone_in(memory_resource(), version());
+            });
+    }
+
+    Inventory& updateVersion(const std::int64_t& value) {
         version_ = detail::clone_in(memory_resource(), value);
         root.set(entity_key(), "version", generated_detail::encode(memory_resource(), version_));
+        load_state
+            .mark_loaded("version",
+                         &detail::ContextArena::from_memory(memory_resource()).loaded_snapshots())
+            .value();
         return *this;
     }
 
@@ -495,6 +1184,36 @@ public:
         return version_;
     }
 };
+
+inline const SmartList<Device>& Person::deviceList() const {
+    if (device_list_.is_loaded) {
+        return device_list_;
+    }
+    auto view = root.relation_list<Device>(ENTITY_NAME, id(), "device_list");
+    return view.value() ? *view.value() : device_list_;
+}
+
+inline SmartList<Device>& Person::deviceList() {
+    if (!device_list_.is_loaded) {
+        auto view = root.relation_list<Device>(ENTITY_NAME, id(), "device_list");
+        if (view.value()) {
+            device_list_ = detail::clone_in(memory_resource(), *view.value());
+        }
+    }
+    return device_list_;
+}
+
+inline RelationHandle<SmartList<Device>> Person::deviceListHandle() const {
+    return root.relation_list<Device>(ENTITY_NAME, id(), "device_list");
+}
+
+inline eval::EvalResult<EntityListBorrow<Device>> Person::evalDeviceList() const {
+    return GeneratedRelationAccess::list(*this, deviceList(), "device_list");
+}
+
+inline void Person::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
+    root.attach_runtime_state(target);
+}
 
 inline Person::Person(std::allocator_arg_t, Allocator a)
     : Base(std::allocator_arg, a),
@@ -533,17 +1252,18 @@ inline Person::~Person() = default;
 inline EntityDescriptor Person::entity_descriptor(Memory r) {
     EntityDescriptor d(std::allocator_arg, Allocator(r), ENTITY_NAME);
     d.table("person_data");
+    d.service("sqlite");
     {
-        auto& property = d.property("id", DataType::U64, "id").id();
+        auto& property = d.property("id", DataType::U64, "id").id().not_null();
         (void)property;
     }
     {
-        auto& property = d.property("email", DataType::Text, "email");
+        auto& property = d.property("email", DataType::Text, "email").not_null();
         property.with_max_length(100);
         (void)property;
     }
     {
-        auto& property = d.property("active", DataType::Bool, "active");
+        auto& property = d.property("active", DataType::Bool, "active").not_null();
         (void)property;
     }
     {
@@ -552,28 +1272,28 @@ inline EntityDescriptor Person::entity_descriptor(Memory r) {
         (void)property;
     }
     {
-        auto& property = d.property("balance", DataType::Decimal, "balance");
+        auto& property = d.property("balance", DataType::Decimal, "balance").not_null();
         property.with_numeric_precision(19).with_numeric_scale(7);
         (void)property;
     }
     {
-        auto& property = d.property("height", DataType::F64, "height");
+        auto& property = d.property("height", DataType::F64, "height").not_null();
         (void)property;
     }
     {
-        auto& property = d.property("ratio", DataType::F64, "ratio");
+        auto& property = d.property("ratio", DataType::F64, "ratio").not_null();
         (void)property;
     }
     {
-        auto& property = d.property("age", DataType::I64, "age");
+        auto& property = d.property("age", DataType::I64, "age").not_null();
         (void)property;
     }
     {
-        auto& property = d.property("birthday", DataType::Date, "birthday");
+        auto& property = d.property("birthday", DataType::Date, "birthday").not_null();
         (void)property;
     }
     {
-        auto& property = d.property("updated_at", DataType::Timestamp, "updated_at");
+        auto& property = d.property("updated_at", DataType::Timestamp, "updated_at").not_null();
         (void)property;
     }
     {
@@ -581,7 +1301,7 @@ inline EntityDescriptor Person::entity_descriptor(Memory r) {
         (void)property;
     }
     {
-        auto& property = d.property("version", DataType::I64, "version").version();
+        auto& property = d.property("version", DataType::I64, "version").version().not_null();
         (void)property;
     }
     {
@@ -590,111 +1310,151 @@ inline EntityDescriptor Person::entity_descriptor(Memory r) {
         relation.foreign_key = "owner_id";
         relation.many = true;
     }
+    d.mask_fields({});
     return d;
 }
 
 inline Result<Person, EntityError> Person::from_compact_row(Memory r, CompactRow row) {
     using Outcome = Result<Person, EntityError>;
     Person result(std::allocator_arg, Allocator(r));
-    auto id_value = generated_detail::decode<std::uint64_t>(r, row.get("id"), ENTITY_NAME, "id");
+    auto captured =
+        detail::EntityRuntimeAccess::capture_dynamic_values(result.dynamic, row, field_layout(r));
+    if (!captured) {
+        return Outcome::err(r, std::move(captured).error());
+    }
+    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    if (!id_lookup) {
+        return Outcome::err(r, std::move(id_lookup).error());
+    }
+    auto email_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "email", "email", false);
+    if (!email_lookup) {
+        return Outcome::err(r, std::move(email_lookup).error());
+    }
+    auto active_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "active", "active", false);
+    if (!active_lookup) {
+        return Outcome::err(r, std::move(active_lookup).error());
+    }
+    auto nickname_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "nickname", "nickname", false);
+    if (!nickname_lookup) {
+        return Outcome::err(r, std::move(nickname_lookup).error());
+    }
+    auto balance_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "balance", "balance", false);
+    if (!balance_lookup) {
+        return Outcome::err(r, std::move(balance_lookup).error());
+    }
+    auto height_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "height", "height", false);
+    if (!height_lookup) {
+        return Outcome::err(r, std::move(height_lookup).error());
+    }
+    auto ratio_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "ratio", "ratio", false);
+    if (!ratio_lookup) {
+        return Outcome::err(r, std::move(ratio_lookup).error());
+    }
+    auto age_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "age", "age", false);
+    if (!age_lookup) {
+        return Outcome::err(r, std::move(age_lookup).error());
+    }
+    auto birthday_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "birthday", "birthday", false);
+    if (!birthday_lookup) {
+        return Outcome::err(r, std::move(birthday_lookup).error());
+    }
+    auto updated_at_lookup = GeneratedRelationAccess::lookupField(
+        r, row, ENTITY_NAME, "updated_at", "updated_at", false);
+    if (!updated_at_lookup) {
+        return Outcome::err(r, std::move(updated_at_lookup).error());
+    }
+    auto payload_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "payload", "payload", false);
+    if (!payload_lookup) {
+        return Outcome::err(r, std::move(payload_lookup).error());
+    }
+    auto version_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    if (!version_lookup) {
+        return Outcome::err(r, std::move(version_lookup).error());
+    }
+    auto id_value =
+        generated_detail::decode<std::uint64_t>(r, id_lookup.value().value, ENTITY_NAME, "id");
     if (!id_value) {
         return Outcome::err(r, std::move(id_value).error());
     }
     result.id_ = std::move(id_value).value();
-    auto email_value = generated_detail::decode<String>(r, row.get("email"), ENTITY_NAME, "email");
+    auto email_value =
+        generated_detail::decode<String>(r, email_lookup.value().value, ENTITY_NAME, "email");
     if (!email_value) {
         return Outcome::err(r, std::move(email_value).error());
     }
     result.email_ = std::move(email_value).value();
-    auto active_value = generated_detail::decode<bool>(r, row.get("active"), ENTITY_NAME, "active");
+    auto active_value =
+        generated_detail::decode<bool>(r, active_lookup.value().value, ENTITY_NAME, "active");
     if (!active_value) {
         return Outcome::err(r, std::move(active_value).error());
     }
     result.active_ = std::move(active_value).value();
     auto nickname_value = generated_detail::decode<std::optional<String>>(
-        r, row.get("nickname"), ENTITY_NAME, "nickname");
+        r, nickname_lookup.value().value, ENTITY_NAME, "nickname");
     if (!nickname_value) {
         return Outcome::err(r, std::move(nickname_value).error());
     }
     result.nickname_ = std::move(nickname_value).value();
     auto balance_value =
-        generated_detail::decode<Decimal>(r, row.get("balance"), ENTITY_NAME, "balance");
+        generated_detail::decode<Decimal>(r, balance_lookup.value().value, ENTITY_NAME, "balance");
     if (!balance_value) {
         return Outcome::err(r, std::move(balance_value).error());
     }
     result.balance_ = std::move(balance_value).value();
     auto height_value =
-        generated_detail::decode<double>(r, row.get("height"), ENTITY_NAME, "height");
+        generated_detail::decode<double>(r, height_lookup.value().value, ENTITY_NAME, "height");
     if (!height_value) {
         return Outcome::err(r, std::move(height_value).error());
     }
     result.height_ = std::move(height_value).value();
-    auto ratio_value = generated_detail::decode<float>(r, row.get("ratio"), ENTITY_NAME, "ratio");
+    auto ratio_value =
+        generated_detail::decode<float>(r, ratio_lookup.value().value, ENTITY_NAME, "ratio");
     if (!ratio_value) {
         return Outcome::err(r, std::move(ratio_value).error());
     }
     result.ratio_ = std::move(ratio_value).value();
-    auto age_value = generated_detail::decode<std::int64_t>(r, row.get("age"), ENTITY_NAME, "age");
+    auto age_value =
+        generated_detail::decode<std::int64_t>(r, age_lookup.value().value, ENTITY_NAME, "age");
     if (!age_value) {
         return Outcome::err(r, std::move(age_value).error());
     }
     result.age_ = std::move(age_value).value();
     auto birthday_value =
-        generated_detail::decode<Date>(r, row.get("birthday"), ENTITY_NAME, "birthday");
+        generated_detail::decode<Date>(r, birthday_lookup.value().value, ENTITY_NAME, "birthday");
     if (!birthday_value) {
         return Outcome::err(r, std::move(birthday_value).error());
     }
     result.birthday_ = std::move(birthday_value).value();
-    auto updated_at_value =
-        generated_detail::decode<Timestamp>(r, row.get("updated_at"), ENTITY_NAME, "updated_at");
+    auto updated_at_value = generated_detail::decode<Timestamp>(
+        r, updated_at_lookup.value().value, ENTITY_NAME, "updated_at");
     if (!updated_at_value) {
         return Outcome::err(r, std::move(updated_at_value).error());
     }
     result.updated_at_ = std::move(updated_at_value).value();
     auto payload_value = generated_detail::decode<std::optional<Json>>(
-        r, row.get("payload"), ENTITY_NAME, "payload");
+        r, payload_lookup.value().value, ENTITY_NAME, "payload");
     if (!payload_value) {
         return Outcome::err(r, std::move(payload_value).error());
     }
     result.payload_ = std::move(payload_value).value();
-    auto version_value =
-        generated_detail::decode<std::int64_t>(r, row.get("version"), ENTITY_NAME, "version");
+    auto version_value = generated_detail::decode<std::int64_t>(
+        r, version_lookup.value().value, ENTITY_NAME, "version");
     if (!version_value) {
         return Outcome::err(r, std::move(version_value).error());
     }
     result.version_ = std::move(version_value).value();
-    if (auto* input = row.get("device_list"); input && !input->is_null()) {
-        auto* items = std::get_if<Value::List>(&input->data);
-        if (!items) {
-            return Outcome::err(r,
-                                EntityError(std::allocator_arg,
-                                            Allocator(r),
-                                            ENTITY_NAME,
-                                            "invalid relation list device_list"));
-        }
-        for (const auto& item : *items) {
-            auto* object = item.as_object();
-            if (!object) {
-                return Outcome::err(r,
-                                    EntityError(std::allocator_arg,
-                                                Allocator(r),
-                                                ENTITY_NAME,
-                                                "invalid relation item device_list"));
-            }
-            auto decoded =
-                Device::from_compact_row(r, CompactRow(std::allocator_arg, Allocator(r), *object));
-            if (!decoded) {
-                return Outcome::err(r, std::move(decoded).error());
-            }
-            result.device_list_.data.emplace_back(std::move(decoded).value());
-        }
-        result.device_list_.loaded();
-    }
-    Vector<std::string_view> loaded(r);
-    for (std::size_t i = 0; i < row.len(); ++i) {
-        loaded.push_back(row.keys()[i]);
-    }
-    result.load_state = eval::LoadState::partial(r, loaded);
+    result.load_state = row.indexed_load_state(
+        detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
     result.root.set_original_compact_row(ENTITY_NAME, row);
     return Outcome::ok(r, std::move(result));
 }
@@ -714,11 +1474,37 @@ inline MutationValues Person::into_values() && {
     values.fields.emplace(String("updated_at", r), generated_detail::encode(r, updated_at_));
     values.fields.emplace(String("payload", r), generated_detail::encode(r, payload_));
     values.fields.emplace(String("version", r), generated_detail::encode(r, version_));
+    detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);
     if (auto relation = std::move(device_list_).into_value()) {
         values.fields.emplace(String("device_list", r), std::move(*relation));
     }
     inject_runtime(values);
     return values;
+}
+
+inline const Person* Device::owner() const {
+    if (owner_) {
+        return owner_.get();
+    }
+    if (!is_loaded("owner")) {
+        return nullptr;
+    }
+    auto* view = root.resolve_relation_option<Person>(ENTITY_NAME, id(), "owner");
+    if (view) {
+        return *view ? &**view : nullptr;
+    }
+    return root.resolve_entity<Person>(ownerId());
+}
+
+inline eval::EvalResult<EntityBorrow<Person>> Device::evalOwner() const {
+    return GeneratedRelationAccess::object(memory_resource(), "owner", owner(), false);
+}
+
+inline void Device::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
+    root.attach_runtime_state(target);
+    if (owner_) {
+        owner_->attachRuntimeStateRecursive(target);
+    }
 }
 
 inline Device::Device(std::allocator_arg_t, Allocator a)
@@ -744,25 +1530,26 @@ inline Device::~Device() = default;
 inline EntityDescriptor Device::entity_descriptor(Memory r) {
     EntityDescriptor d(std::allocator_arg, Allocator(r), ENTITY_NAME);
     d.table("device_data");
+    d.service("sqlite");
     {
-        auto& property = d.property("id", DataType::U64, "id").id();
+        auto& property = d.property("id", DataType::U64, "id").id().not_null();
         (void)property;
     }
     {
-        auto& property = d.property("code", DataType::Text, "code");
+        auto& property = d.property("code", DataType::Text, "code").not_null();
         property.with_max_length(100);
         (void)property;
     }
     {
-        auto& property = d.property("active", DataType::Bool, "active");
+        auto& property = d.property("active", DataType::Bool, "active").not_null();
         (void)property;
     }
     {
-        auto& property = d.property("owner_id", DataType::U64, "owner");
+        auto& property = d.property("version", DataType::I64, "version").version().not_null();
         (void)property;
     }
     {
-        auto& property = d.property("version", DataType::I64, "version").version();
+        auto& property = d.property("owner_id", DataType::U64, "owner").not_null();
         (void)property;
     }
     {
@@ -771,59 +1558,88 @@ inline EntityDescriptor Device::entity_descriptor(Memory r) {
         relation.foreign_key = "id";
         relation.many = false;
     }
+    d.mask_fields({});
     return d;
 }
 
 inline Result<Device, EntityError> Device::from_compact_row(Memory r, CompactRow row) {
     using Outcome = Result<Device, EntityError>;
     Device result(std::allocator_arg, Allocator(r));
-    auto id_value = generated_detail::decode<std::uint64_t>(r, row.get("id"), ENTITY_NAME, "id");
+    auto captured =
+        detail::EntityRuntimeAccess::capture_dynamic_values(result.dynamic, row, field_layout(r));
+    if (!captured) {
+        return Outcome::err(r, std::move(captured).error());
+    }
+    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    if (!id_lookup) {
+        return Outcome::err(r, std::move(id_lookup).error());
+    }
+    auto code_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "code", "code", false);
+    if (!code_lookup) {
+        return Outcome::err(r, std::move(code_lookup).error());
+    }
+    auto active_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "active", "active", false);
+    if (!active_lookup) {
+        return Outcome::err(r, std::move(active_lookup).error());
+    }
+    auto owner_id_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "owner_id", "owner", true);
+    if (!owner_id_lookup) {
+        return Outcome::err(r, std::move(owner_id_lookup).error());
+    }
+    auto version_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    if (!version_lookup) {
+        return Outcome::err(r, std::move(version_lookup).error());
+    }
+    auto id_value =
+        generated_detail::decode<std::uint64_t>(r, id_lookup.value().value, ENTITY_NAME, "id");
     if (!id_value) {
         return Outcome::err(r, std::move(id_value).error());
     }
     result.id_ = std::move(id_value).value();
-    auto code_value = generated_detail::decode<String>(r, row.get("code"), ENTITY_NAME, "code");
+    auto code_value =
+        generated_detail::decode<String>(r, code_lookup.value().value, ENTITY_NAME, "code");
     if (!code_value) {
         return Outcome::err(r, std::move(code_value).error());
     }
     result.code_ = std::move(code_value).value();
-    auto active_value = generated_detail::decode<bool>(r, row.get("active"), ENTITY_NAME, "active");
+    auto active_value =
+        generated_detail::decode<bool>(r, active_lookup.value().value, ENTITY_NAME, "active");
     if (!active_value) {
         return Outcome::err(r, std::move(active_value).error());
     }
     result.active_ = std::move(active_value).value();
-    auto owner_id_value =
-        generated_detail::decode<std::uint64_t>(r, row.get("owner_id"), ENTITY_NAME, "owner_id");
+    auto owner_id_value = generated_detail::decode<std::uint64_t>(
+        r, owner_id_lookup.value().value, ENTITY_NAME, "owner_id");
     if (!owner_id_value) {
         return Outcome::err(r, std::move(owner_id_value).error());
     }
     result.owner_id_ = std::move(owner_id_value).value();
-    auto version_value =
-        generated_detail::decode<std::int64_t>(r, row.get("version"), ENTITY_NAME, "version");
+    auto version_value = generated_detail::decode<std::int64_t>(
+        r, version_lookup.value().value, ENTITY_NAME, "version");
     if (!version_value) {
         return Outcome::err(r, std::move(version_value).error());
     }
     result.version_ = std::move(version_value).value();
-    if (auto* input = row.get("owner"); input && !input->is_null()) {
-        auto* object = input->as_object();
-        if (!object) {
-            return Outcome::err(
-                r,
-                EntityError(
-                    std::allocator_arg, Allocator(r), ENTITY_NAME, "invalid relation owner"));
-        }
-        auto decoded =
-            Person::from_compact_row(r, CompactRow(std::allocator_arg, Allocator(r), *object));
-        if (!decoded) {
-            return Outcome::err(r, std::move(decoded).error());
-        }
-        result.owner_ = detail::make_box<Person>(r, std::move(decoded).value());
+    auto owner_decoded = GeneratedRelationAccess::decodeObject<Person>(r, row.get("owner"));
+    if (!owner_decoded) {
+        return Outcome::err(r, std::move(owner_decoded).error());
     }
-    Vector<std::string_view> loaded(r);
-    for (std::size_t i = 0; i < row.len(); ++i) {
-        loaded.push_back(row.keys()[i]);
+    if (owner_decoded.value()) {
+        result.owner_ = detail::make_box<Person>(r, std::move(*owner_decoded.value()));
     }
-    result.load_state = eval::LoadState::partial(r, loaded);
+    result.load_state = row.indexed_load_state(
+        detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
+    if (owner_id_lookup.value().alias_present) {
+        auto& pool = detail::ContextArena::from_memory(r).loaded_snapshots();
+        if (!owner_id_lookup.value().object_alias && !row.is_loaded_relation("owner")) {
+            result.load_state.mark_unloaded("owner", &pool).value();
+        }
+        result.load_state.mark_loaded("owner_id", &pool).value();
+    }
     result.root.set_original_compact_row(ENTITY_NAME, row);
     return Outcome::ok(r, std::move(result));
 }
@@ -836,6 +1652,7 @@ inline MutationValues Device::into_values() && {
     values.fields.emplace(String("active", r), generated_detail::encode(r, active_));
     values.fields.emplace(String("owner_id", r), generated_detail::encode(r, owner_id_));
     values.fields.emplace(String("version", r), generated_detail::encode(r, version_));
+    detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);
     if (owner_) {
         values.fields.emplace(String("owner", r),
                               Value(r, std::move(*owner_).into_values().fields));
@@ -844,10 +1661,14 @@ inline MutationValues Device::into_values() && {
     return values;
 }
 
-inline Device& Device::update_owner(const Person& value) {
+inline Device& Device::updateOwner(const Person& value) {
     owner_ = detail::make_box<Person>(memory_resource(), value);
-    update_owner_id(value.id());
+    updateOwnerId(value.id());
     return *this;
+}
+
+inline void OrderStatus::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
+    root.attach_runtime_state(target);
 }
 
 inline OrderStatus::OrderStatus(std::allocator_arg_t, Allocator a)
@@ -867,46 +1688,66 @@ inline OrderStatus::~OrderStatus() = default;
 inline EntityDescriptor OrderStatus::entity_descriptor(Memory r) {
     EntityDescriptor d(std::allocator_arg, Allocator(r), ENTITY_NAME);
     d.table("order_status_data");
+    d.service("sqlite");
     {
-        auto& property = d.property("id", DataType::U64, "id").id();
+        auto& property = d.property("id", DataType::U64, "id").id().not_null();
         (void)property;
     }
     {
-        auto& property = d.property("name", DataType::Text, "name");
+        auto& property = d.property("name", DataType::Text, "name").not_null();
         property.with_max_length(100);
         (void)property;
     }
     {
-        auto& property = d.property("version", DataType::I64, "version").version();
+        auto& property = d.property("version", DataType::I64, "version").version().not_null();
         (void)property;
     }
+    d.mask_fields({});
     return d;
 }
 
 inline Result<OrderStatus, EntityError> OrderStatus::from_compact_row(Memory r, CompactRow row) {
     using Outcome = Result<OrderStatus, EntityError>;
     OrderStatus result(std::allocator_arg, Allocator(r));
-    auto id_value = generated_detail::decode<std::uint64_t>(r, row.get("id"), ENTITY_NAME, "id");
+    auto captured =
+        detail::EntityRuntimeAccess::capture_dynamic_values(result.dynamic, row, field_layout(r));
+    if (!captured) {
+        return Outcome::err(r, std::move(captured).error());
+    }
+    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    if (!id_lookup) {
+        return Outcome::err(r, std::move(id_lookup).error());
+    }
+    auto name_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    if (!name_lookup) {
+        return Outcome::err(r, std::move(name_lookup).error());
+    }
+    auto version_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    if (!version_lookup) {
+        return Outcome::err(r, std::move(version_lookup).error());
+    }
+    auto id_value =
+        generated_detail::decode<std::uint64_t>(r, id_lookup.value().value, ENTITY_NAME, "id");
     if (!id_value) {
         return Outcome::err(r, std::move(id_value).error());
     }
     result.id_ = std::move(id_value).value();
-    auto name_value = generated_detail::decode<String>(r, row.get("name"), ENTITY_NAME, "name");
+    auto name_value =
+        generated_detail::decode<String>(r, name_lookup.value().value, ENTITY_NAME, "name");
     if (!name_value) {
         return Outcome::err(r, std::move(name_value).error());
     }
     result.name_ = std::move(name_value).value();
-    auto version_value =
-        generated_detail::decode<std::int64_t>(r, row.get("version"), ENTITY_NAME, "version");
+    auto version_value = generated_detail::decode<std::int64_t>(
+        r, version_lookup.value().value, ENTITY_NAME, "version");
     if (!version_value) {
         return Outcome::err(r, std::move(version_value).error());
     }
     result.version_ = std::move(version_value).value();
-    Vector<std::string_view> loaded(r);
-    for (std::size_t i = 0; i < row.len(); ++i) {
-        loaded.push_back(row.keys()[i]);
-    }
-    result.load_state = eval::LoadState::partial(r, loaded);
+    result.load_state = row.indexed_load_state(
+        detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
     result.root.set_original_compact_row(ENTITY_NAME, row);
     return Outcome::ok(r, std::move(result));
 }
@@ -917,8 +1758,13 @@ inline MutationValues OrderStatus::into_values() && {
     values.fields.emplace(String("id", r), generated_detail::encode(r, id_));
     values.fields.emplace(String("name", r), generated_detail::encode(r, name_));
     values.fields.emplace(String("version", r), generated_detail::encode(r, version_));
+    detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);
     inject_runtime(values);
     return values;
+}
+
+inline void Category::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
+    root.attach_runtime_state(target);
 }
 
 inline Category::Category(std::allocator_arg_t, Allocator a)
@@ -938,46 +1784,66 @@ inline Category::~Category() = default;
 inline EntityDescriptor Category::entity_descriptor(Memory r) {
     EntityDescriptor d(std::allocator_arg, Allocator(r), ENTITY_NAME);
     d.table("category_data");
+    d.service("sqlite");
     {
-        auto& property = d.property("id", DataType::U64, "id").id();
+        auto& property = d.property("id", DataType::U64, "id").id().not_null();
         (void)property;
     }
     {
-        auto& property = d.property("name", DataType::Text, "name");
+        auto& property = d.property("name", DataType::Text, "name").not_null();
         property.with_max_length(100);
         (void)property;
     }
     {
-        auto& property = d.property("version", DataType::I64, "version").version();
+        auto& property = d.property("version", DataType::I64, "version").version().not_null();
         (void)property;
     }
+    d.mask_fields({});
     return d;
 }
 
 inline Result<Category, EntityError> Category::from_compact_row(Memory r, CompactRow row) {
     using Outcome = Result<Category, EntityError>;
     Category result(std::allocator_arg, Allocator(r));
-    auto id_value = generated_detail::decode<std::uint64_t>(r, row.get("id"), ENTITY_NAME, "id");
+    auto captured =
+        detail::EntityRuntimeAccess::capture_dynamic_values(result.dynamic, row, field_layout(r));
+    if (!captured) {
+        return Outcome::err(r, std::move(captured).error());
+    }
+    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    if (!id_lookup) {
+        return Outcome::err(r, std::move(id_lookup).error());
+    }
+    auto name_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    if (!name_lookup) {
+        return Outcome::err(r, std::move(name_lookup).error());
+    }
+    auto version_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    if (!version_lookup) {
+        return Outcome::err(r, std::move(version_lookup).error());
+    }
+    auto id_value =
+        generated_detail::decode<std::uint64_t>(r, id_lookup.value().value, ENTITY_NAME, "id");
     if (!id_value) {
         return Outcome::err(r, std::move(id_value).error());
     }
     result.id_ = std::move(id_value).value();
-    auto name_value = generated_detail::decode<String>(r, row.get("name"), ENTITY_NAME, "name");
+    auto name_value =
+        generated_detail::decode<String>(r, name_lookup.value().value, ENTITY_NAME, "name");
     if (!name_value) {
         return Outcome::err(r, std::move(name_value).error());
     }
     result.name_ = std::move(name_value).value();
-    auto version_value =
-        generated_detail::decode<std::int64_t>(r, row.get("version"), ENTITY_NAME, "version");
+    auto version_value = generated_detail::decode<std::int64_t>(
+        r, version_lookup.value().value, ENTITY_NAME, "version");
     if (!version_value) {
         return Outcome::err(r, std::move(version_value).error());
     }
     result.version_ = std::move(version_value).value();
-    Vector<std::string_view> loaded(r);
-    for (std::size_t i = 0; i < row.len(); ++i) {
-        loaded.push_back(row.keys()[i]);
-    }
-    result.load_state = eval::LoadState::partial(r, loaded);
+    result.load_state = row.indexed_load_state(
+        detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
     result.root.set_original_compact_row(ENTITY_NAME, row);
     return Outcome::ok(r, std::move(result));
 }
@@ -988,8 +1854,13 @@ inline MutationValues Category::into_values() && {
     values.fields.emplace(String("id", r), generated_detail::encode(r, id_));
     values.fields.emplace(String("name", r), generated_detail::encode(r, name_));
     values.fields.emplace(String("version", r), generated_detail::encode(r, version_));
+    detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);
     inject_runtime(values);
     return values;
+}
+
+inline void Child::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
+    root.attach_runtime_state(target);
 }
 
 inline Child::Child(std::allocator_arg_t, Allocator a)
@@ -1009,46 +1880,66 @@ inline Child::~Child() = default;
 inline EntityDescriptor Child::entity_descriptor(Memory r) {
     EntityDescriptor d(std::allocator_arg, Allocator(r), ENTITY_NAME);
     d.table("child_data");
+    d.service("sqlite");
     {
-        auto& property = d.property("id", DataType::U64, "id").id();
+        auto& property = d.property("id", DataType::U64, "id").id().not_null();
         (void)property;
     }
     {
-        auto& property = d.property("name", DataType::Text, "name");
+        auto& property = d.property("name", DataType::Text, "name").not_null();
         property.with_max_length(100);
         (void)property;
     }
     {
-        auto& property = d.property("version", DataType::I64, "version").version();
+        auto& property = d.property("version", DataType::I64, "version").version().not_null();
         (void)property;
     }
+    d.mask_fields({});
     return d;
 }
 
 inline Result<Child, EntityError> Child::from_compact_row(Memory r, CompactRow row) {
     using Outcome = Result<Child, EntityError>;
     Child result(std::allocator_arg, Allocator(r));
-    auto id_value = generated_detail::decode<std::uint64_t>(r, row.get("id"), ENTITY_NAME, "id");
+    auto captured =
+        detail::EntityRuntimeAccess::capture_dynamic_values(result.dynamic, row, field_layout(r));
+    if (!captured) {
+        return Outcome::err(r, std::move(captured).error());
+    }
+    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    if (!id_lookup) {
+        return Outcome::err(r, std::move(id_lookup).error());
+    }
+    auto name_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    if (!name_lookup) {
+        return Outcome::err(r, std::move(name_lookup).error());
+    }
+    auto version_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    if (!version_lookup) {
+        return Outcome::err(r, std::move(version_lookup).error());
+    }
+    auto id_value =
+        generated_detail::decode<std::uint64_t>(r, id_lookup.value().value, ENTITY_NAME, "id");
     if (!id_value) {
         return Outcome::err(r, std::move(id_value).error());
     }
     result.id_ = std::move(id_value).value();
-    auto name_value = generated_detail::decode<String>(r, row.get("name"), ENTITY_NAME, "name");
+    auto name_value =
+        generated_detail::decode<String>(r, name_lookup.value().value, ENTITY_NAME, "name");
     if (!name_value) {
         return Outcome::err(r, std::move(name_value).error());
     }
     result.name_ = std::move(name_value).value();
-    auto version_value =
-        generated_detail::decode<std::int64_t>(r, row.get("version"), ENTITY_NAME, "version");
+    auto version_value = generated_detail::decode<std::int64_t>(
+        r, version_lookup.value().value, ENTITY_NAME, "version");
     if (!version_value) {
         return Outcome::err(r, std::move(version_value).error());
     }
     result.version_ = std::move(version_value).value();
-    Vector<std::string_view> loaded(r);
-    for (std::size_t i = 0; i < row.len(); ++i) {
-        loaded.push_back(row.keys()[i]);
-    }
-    result.load_state = eval::LoadState::partial(r, loaded);
+    result.load_state = row.indexed_load_state(
+        detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
     result.root.set_original_compact_row(ENTITY_NAME, row);
     return Outcome::ok(r, std::move(result));
 }
@@ -1059,8 +1950,13 @@ inline MutationValues Child::into_values() && {
     values.fields.emplace(String("id", r), generated_detail::encode(r, id_));
     values.fields.emplace(String("name", r), generated_detail::encode(r, name_));
     values.fields.emplace(String("version", r), generated_detail::encode(r, version_));
+    detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);
     inject_runtime(values);
     return values;
+}
+
+inline void Inventory::attachRuntimeStateRecursive(const EntityRuntimeState& target) {
+    root.attach_runtime_state(target);
 }
 
 inline Inventory::Inventory(std::allocator_arg_t, Allocator a)
@@ -1080,46 +1976,66 @@ inline Inventory::~Inventory() = default;
 inline EntityDescriptor Inventory::entity_descriptor(Memory r) {
     EntityDescriptor d(std::allocator_arg, Allocator(r), ENTITY_NAME);
     d.table("inventory_data");
+    d.service("sqlite");
     {
-        auto& property = d.property("id", DataType::U64, "id").id();
+        auto& property = d.property("id", DataType::U64, "id").id().not_null();
         (void)property;
     }
     {
-        auto& property = d.property("name", DataType::Text, "name");
+        auto& property = d.property("name", DataType::Text, "name").not_null();
         property.with_max_length(100);
         (void)property;
     }
     {
-        auto& property = d.property("version", DataType::I64, "version").version();
+        auto& property = d.property("version", DataType::I64, "version").version().not_null();
         (void)property;
     }
+    d.mask_fields({});
     return d;
 }
 
 inline Result<Inventory, EntityError> Inventory::from_compact_row(Memory r, CompactRow row) {
     using Outcome = Result<Inventory, EntityError>;
     Inventory result(std::allocator_arg, Allocator(r));
-    auto id_value = generated_detail::decode<std::uint64_t>(r, row.get("id"), ENTITY_NAME, "id");
+    auto captured =
+        detail::EntityRuntimeAccess::capture_dynamic_values(result.dynamic, row, field_layout(r));
+    if (!captured) {
+        return Outcome::err(r, std::move(captured).error());
+    }
+    auto id_lookup = GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "id", "id", false);
+    if (!id_lookup) {
+        return Outcome::err(r, std::move(id_lookup).error());
+    }
+    auto name_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "name", "name", false);
+    if (!name_lookup) {
+        return Outcome::err(r, std::move(name_lookup).error());
+    }
+    auto version_lookup =
+        GeneratedRelationAccess::lookupField(r, row, ENTITY_NAME, "version", "version", false);
+    if (!version_lookup) {
+        return Outcome::err(r, std::move(version_lookup).error());
+    }
+    auto id_value =
+        generated_detail::decode<std::uint64_t>(r, id_lookup.value().value, ENTITY_NAME, "id");
     if (!id_value) {
         return Outcome::err(r, std::move(id_value).error());
     }
     result.id_ = std::move(id_value).value();
-    auto name_value = generated_detail::decode<String>(r, row.get("name"), ENTITY_NAME, "name");
+    auto name_value =
+        generated_detail::decode<String>(r, name_lookup.value().value, ENTITY_NAME, "name");
     if (!name_value) {
         return Outcome::err(r, std::move(name_value).error());
     }
     result.name_ = std::move(name_value).value();
-    auto version_value =
-        generated_detail::decode<std::int64_t>(r, row.get("version"), ENTITY_NAME, "version");
+    auto version_value = generated_detail::decode<std::int64_t>(
+        r, version_lookup.value().value, ENTITY_NAME, "version");
     if (!version_value) {
         return Outcome::err(r, std::move(version_value).error());
     }
     result.version_ = std::move(version_value).value();
-    Vector<std::string_view> loaded(r);
-    for (std::size_t i = 0; i < row.len(); ++i) {
-        loaded.push_back(row.keys()[i]);
-    }
-    result.load_state = eval::LoadState::partial(r, loaded);
+    result.load_state = row.indexed_load_state(
+        detail::ContextArena::from_memory(r).loaded_snapshots(), field_layout(r));
     result.root.set_original_compact_row(ENTITY_NAME, row);
     return Outcome::ok(r, std::move(result));
 }
@@ -1130,6 +2046,7 @@ inline MutationValues Inventory::into_values() && {
     values.fields.emplace(String("id", r), generated_detail::encode(r, id_));
     values.fields.emplace(String("name", r), generated_detail::encode(r, name_));
     values.fields.emplace(String("version", r), generated_detail::encode(r, version_));
+    detail::EntityRuntimeAccess::retain_loaded_native_values(values, load_state);
     inject_runtime(values);
     return values;
 }

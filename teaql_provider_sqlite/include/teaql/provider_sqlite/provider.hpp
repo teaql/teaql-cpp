@@ -37,7 +37,8 @@ private:
 // same connection/cache; cloning cannot extend either lifetime.
 class SqliteMutationExecutor final : public StreamingSqlTransport<MutationExecutorError>,
                                      public SqlTransactionTransport<MutationExecutorError>,
-                                     public StreamQueryExecutor<MutationExecutorError> {
+                                     public StreamQueryExecutor<MutationExecutorError>,
+                                     public DynamicFieldStore {
 public:
     using allocator_type = Allocator;
     using Rows = Vector<CompactRow>;
@@ -52,6 +53,28 @@ public:
     }
 
     DataServiceCapabilities capabilities() const override;
+
+    const DynamicFieldStore* dynamic_field_store() const override {
+        return this;
+    }
+
+    bool is_transaction_bound() const override {
+        return false;
+    }
+
+    std::uintptr_t binding_key() const override;
+    std::optional<std::uint64_t> source_identity() const override;
+    DynamicStorageFuture<std::monostate>& ensure_schema(Memory) const override;
+    DynamicStorageFuture<DynamicStorageRows>& load_values(Memory,
+                                                          std::string_view,
+                                                          const DynamicFieldDefinitions&,
+                                                          std::span<const std::uint64_t>,
+                                                          const DynamicFieldSelection&,
+                                                          const QueryIntent&) const override;
+    Result<std::monostate, DynamicFieldError>
+        validate_writes(Memory, std::span<const DynamicFieldWrite>) const override;
+    DynamicStorageFuture<std::monostate>&
+    apply_writes(Memory, std::span<const DynamicFieldWrite>, const MutationIntent&) const override;
     // Synchronous entry points require an idle connection. Use pollable methods
     // when another stream holds its native cursor; they wait via owner-thread wakes.
     Result<std::uint64_t, MutationExecutorError> execute(Memory, const CompiledQuery&);
@@ -74,6 +97,8 @@ public:
     fetch_all_compact_sql(Memory, const CompiledQuery&) override;
     DataServiceOperationResult<Rows, MutationExecutorError>& fetch_repeated_compact_sql(
         Memory, const CompiledQuery&, std::size_t, std::span<const Value>) override;
+    Result<QueryStream<MutationExecutorError>*, DynamicFieldError> stream_sql_with_dynamic_fields(
+        Memory, CompiledQuery, std::size_t, DynamicFieldStreamPlan) override;
     QueryStream<MutationExecutorError>& stream_sql(Memory, CompiledQuery, std::size_t) override;
     QueryStream<MutationExecutorError>& query_stream(Memory, QueryRequest, std::size_t) override;
     void clear_query_caches();

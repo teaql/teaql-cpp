@@ -34,6 +34,8 @@ static void lazy_scope_and_borrows() {
     auto& repo = service(*c, mock);
     auto& query = c->make<SelectQuery>("Item");
     query.comment_text.emplace("business", r);
+    query.purpose_text.emplace("inspect items", r);
+    query.comment_text.emplace("business", r);
     c->set_user_identifier("before");
     auto& result = [&]() -> auto& {
         auto temporary = detail::clone_in(r, repo);
@@ -44,8 +46,9 @@ static void lazy_scope_and_borrows() {
     c->enable_select_sql_log();
     check(result.wait() && state.active.empty(),
           "nested scopes restore activation before returning");
-    check(state.request->comment == "[after] business" && query.comment_text == "business",
-          "comment resolution happens on first poll without modifying caller query");
+    check(state.request->comment() == "business" && state.request->purpose() == "inspect items" &&
+              query.comment_text == "business",
+          "Context execution preserves the request comment independently of the user identifier");
     check(state.operations.size() == 2 && state.operations[0].family == "query" &&
               state.operations[1].family == "provider",
           "independent query/provider operations created");
@@ -232,6 +235,8 @@ static void native_lifetime(bool cancel, bool close) {
         std::allocator_arg, Allocator(r), executor, detail::resource_arena(r));
     auto& repo = c->make<detail::ContextDataService<NativeExecutor>>(*c, borrow);
     auto& query = c->make<SelectQuery>("Item");
+    query.comment_text.emplace("business", r);
+    query.purpose_text.emplace("inspect items", r);
     auto& result = repo.fetch_smart_list(query);
     check(!result.poll() && state.active.empty(),
           "pending native query leaves no active telemetry scope");

@@ -13,6 +13,69 @@ static void check(bool value, const char* message) {
     }
 }
 
+struct PreparationObserver final : EntityDataServiceBehavior, InternalIdGenerator, Checker {
+    State& state;
+    mutable std::uint64_t next = 100;
+
+    explicit PreparationObserver(State& state) : state(state) {}
+
+    RuntimeHookResult before_insert(Memory r, const UserContext&, InsertCommand&) const override {
+        state.note("hook");
+        return RuntimeHookResult::ok(r, {});
+    }
+
+    Result<std::uint64_t, RuntimeError> generate_id(Memory r, std::string_view) const override {
+        state.note("id");
+        return Result<std::uint64_t, RuntimeError>::ok(r, next++);
+    }
+
+    std::string_view entity() const override {
+        return "Order";
+    }
+
+    void check_and_fix(const UserContext&,
+                       EntityValues&,
+                       const ObjectLocation&,
+                       CheckResults&) const override {
+        state.note("fix");
+    }
+};
+
+static void internal_preparation_before_intent() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    auto& state = user_context->make<State>();
+    auto& metadata = user_context->make<InMemoryMetadataStore>();
+    EntityDescriptor descriptor(std::allocator_arg, Allocator(r), "Order");
+    descriptor.property("id", DataType::U64).id();
+    descriptor.property("version", DataType::I64).version();
+    descriptor.property("name", DataType::Text);
+    metadata.register_entity(std::move(descriptor));
+    user_context->set_metadata(*user_context, metadata);
+    auto& observer = user_context->make_resource<PreparationObserver>(state);
+    auto& behaviors = user_context->make<InMemoryEntityDataServiceBehaviorRegistry>();
+    behaviors.register_behavior("Order", *user_context, observer);
+    user_context->set_entity_data_service_behavior_registry(*user_context, behaviors);
+    user_context->set_internal_id_generator(*user_context, observer);
+    auto& checkers = user_context->make<InMemoryCheckerRegistry>();
+    checkers.register_checker(*user_context, observer);
+    user_context->set_checker_registry(*user_context, checkers);
+    auto& executor = user_context->make_resource<Executor>(state);
+    auto& service =
+        EntityDataService<Executor>::for_executor(*user_context, "Order", *user_context, executor);
+    auto& command = user_context->make<InsertCommand>("Order");
+    command.value("name", "input");
+    auto& result = Access::insert_internal(service, command).wait();
+    check(!result && result.error().to_string(r).starts_with("REQUEST_COMMENT_REQUIRED") &&
+              state.notes.size() == 3 && state.notes[0] == "hook" && state.notes[1] == "id" &&
+              state.notes[2] == "fix" && observer.next == 101 && state.requests.empty() &&
+              state.events.empty(),
+          "internal preparation follows source callback order before physical intent rejection");
+    check(!command.values.fields.contains(std::string_view("id")),
+          "preparation and its generated ID do not mutate the caller's command snapshot");
+}
+
 static void adapters_and_audit() {
     GlobalContext global;
     auto user = global.make_user_context();
@@ -25,6 +88,22 @@ static void adapters_and_audit() {
     auto& cache = user->make_resource<Cache>(state);
     user->insert_resource(*user, static_cast<AggregationCacheBackend&>(cache));
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
+    check(bool(Access::bind_mutation_intent(
+              service, "Inspect native mutation lifecycle PRIVATE-SIBLING PRIVATE-TOKEN")),
+          "private fixture binds explicit mutation and readback intent");
+    auto& bindings = user->make<SqlLogContext>();
+    bindings.parameter_policies = {SqlParameterLogPolicy::Masked,
+                                   SqlParameterLogPolicy::Credential};
+    auto& operands = user->make<Vector<Value>>();
+    operands.emplace_back("PRIVATE-SIBLING");
+    operands.emplace_back("PRIVATE-TOKEN");
+    auto& privacy = user->make<SqlIntentRedactions>(
+        SqlIntentRedactions::from_bindings(r, bindings, operands, ""));
+    check(bool(Access::bind_mutation_privacy(service, privacy)),
+          "bind invocation operands independently of changed fields");
+    auto& lineage = user->make<TraceChain>();
+    lineage.emplace_back(TraceKind::AuditReason, "Order", "PRIVATE-SIBLING PRIVATE-TOKEN", 7);
+    service.with_trace_context(lineage);
     auto& cmd = user->make<UpdateCommand>("Order", std::uint64_t(7));
     cmd.value("name", "new").expected_version(3);
     cmd.old_values.emplace(r);
@@ -38,6 +117,19 @@ static void adapters_and_audit() {
     check(state.events[0].old_values &&
               state.events[0].new_values->at(String("other", r)).try_text() == "preserved",
           "complete old snapshots retained and merged");
+    check(state.events[0].diagnostic_redactions() != nullptr &&
+              state.requests[0].diagnostic_redactions() != nullptr,
+          "entity mutation dispatch preserves provenance in requests and delivered raw events");
+    {
+        auto safe = state.events[0].build_safe_event(r, {}, {});
+        check(safe.entity_id == 7 && !safe.trace_chain.empty() &&
+                  std::none_of(safe.trace_chain.begin(),
+                               safe.trace_chain.end(),
+                               [](const auto& node) {
+                                   return node.comment.find("PRIVATE-") != String::npos;
+                               }),
+              "real mutation event projection hides operands absent from the change set");
+    }
     auto& batch = user->make<BatchUpdateCommand>("Order");
     batch.batch_ids.emplace_back(std::uint64_t(7));
     batch.batch_expected_versions.emplace_back(4);
@@ -64,6 +156,8 @@ static void conflict_failure_and_cancel() {
     state.affected.push_back(0);
     auto& executor = user->make_resource<Executor>(state);
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
+    check(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+          "private fixture binds explicit mutation and readback intent");
     auto& cmd = user->make<UpdateCommand>("Order", std::uint64_t(7));
     cmd.expected_version(1);
     auto& result = Access::update_internal(service, cmd).wait();
@@ -104,6 +198,8 @@ static void sqlite_entry() {
         dialect, transport, metadata, state);
     using E = std::remove_reference_t<decltype(executor)>;
     auto& service = EntityDataService<E>::for_executor(*user, "Order", *user, executor);
+    check(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+          "private fixture binds explicit mutation and readback intent");
     auto& insert = user->make<InsertCommand>("Order");
     insert.value("id", std::uint64_t(7)).value("name", "first");
     auto& result = Access::insert_internal(service, insert).wait();
@@ -145,6 +241,8 @@ static void callback_expiry() {
     auto& state = user->make<State>();
     auto& executor = user->make_resource<Executor>(state);
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
+    check(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+          "private fixture binds explicit mutation and readback intent");
     auto registry = user->make_ref<InMemoryEntityDataServiceBehaviorRegistry>();
     user->set_entity_data_service_behavior_registry(*user, user->get(registry));
     user->destroy(registry);
@@ -205,6 +303,8 @@ int main(int argc, char** argv) {
             auto& executor = user->make_resource<Executor>(state);
             auto& service =
                 EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
+            check(bool(Access::bind_mutation_intent(service, "Inspect native mutation lifecycle")),
+                  "private fixture binds explicit mutation and readback intent");
             auto& command = user->make<InsertCommand>("Order");
             (void)service.prepare_insert_command(command);
         }
@@ -212,6 +312,7 @@ int main(int argc, char** argv) {
     }
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        internal_preparation_before_intent();
         adapters_and_audit();
         conflict_failure_and_cancel();
         sqlite_entry();

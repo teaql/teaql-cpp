@@ -1,4 +1,5 @@
 #include <teaql/core/query_debug.hpp>
+#include <teaql/core/request_debug.hpp>
 #include <teaql/core/detail/query_debug.hpp>
 
 namespace teaql {
@@ -107,6 +108,16 @@ void write_debug(DebugWriter& writer, const Expr& value) {
     case Expr::Kind::Value:
         writer.tuple("Value", [&](auto& out) {
             write_debug(out, value.literal);
+        });
+        return;
+    case Expr::Kind::LikePattern:
+        writer.structure("LikePattern", [&](auto& fields) {
+            fields.field("pattern", [&](auto& out) {
+                write_debug(out, *value.literal.try_text());
+            });
+            fields.field("original", [&](auto& out) {
+                write_debug(out, value.name);
+            });
         });
         return;
     case Expr::Kind::Function:
@@ -394,11 +405,20 @@ void write_debug(DebugWriter& writer, const SelectQuery& value) {
         fields.field("relations", [&](auto& out) {
             sequence_debug(out, value.relations);
         });
+        fields.field("facets", [&](auto& out) {
+            sequence_debug(out, value.facets);
+        });
+        fields.field("relation_aggregates", [&](auto& out) {
+            sequence_debug(out, value.relation_aggregates);
+        });
         fields.field("aggregation_cache", [&](auto& out) {
             optional_debug(out, value.aggregation_cache);
         });
         fields.field("comment", [&](auto& out) {
             optional_debug(out, value.comment_text);
+        });
+        fields.field("purpose", [&](auto& out) {
+            optional_debug(out, value.purpose_text);
         });
         fields.field("trace_chain", [&](auto& out) {
             sequence_debug(out, value.trace_chain);
@@ -411,6 +431,53 @@ void write_debug(DebugWriter& writer, const SelectQuery& value) {
         });
         fields.field("dynamic_properties", [&](auto& out) {
             sequence_debug(out, value.dynamic_properties);
+        });
+        fields.field("dynamic_property_definitions", [&](auto& out) {
+            if (value.dynamic_property_definitions) {
+                out.tuple("Some", [&](auto& inner) {
+                    inner.structure("DynamicPropertyDefinitions", [&](auto& definitions) {
+                        definitions.field("types", [&](auto& types) {
+                            types.sequence(
+                                value.dynamic_property_definitions->types(),
+                                [](auto& element, const auto& field) {
+                                    element.text(field.first);
+                                    element.raw(": ");
+                                    write_debug(element, field.second);
+                                },
+                                "{",
+                                "}");
+                        });
+                        definitions.field("hash", [&](auto& hash) {
+                            write_debug(hash, value.dynamic_property_definitions->schema_hash());
+                        });
+                    });
+                });
+            } else {
+                out.raw("None");
+            }
+        });
+        fields.field("dynamic_field_selection", [&](auto& out) {
+            if (value.dynamic_field_selection) {
+                out.tuple("Some", [&](auto& inner) {
+                    if (value.dynamic_field_selection->selects_all()) {
+                        inner.raw("All");
+                    } else {
+                        inner.tuple("Fields", [&](auto& selected) {
+                            selected.sequence(
+                                value.dynamic_field_selection->selected_fields(),
+                                [](auto& element, const auto& field) {
+                                    element.text(field.first);
+                                    element.raw(": ");
+                                    write_debug(element, field.second);
+                                },
+                                "{",
+                                "}");
+                        });
+                    }
+                });
+            } else {
+                out.raw("None");
+            }
         });
         fields.field("raw_projections", [&](auto& out) {
             sequence_debug(out, value.raw_projections);

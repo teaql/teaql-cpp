@@ -1,0 +1,103 @@
+{
+  "baseline": {
+    "repository": "https://github.com/teaql/teaql-rs.git",
+    "tag": "v5.0.6",
+    "version": "5.0.6",
+    "commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "policy": "Use this exact commit for design and behavior parity. Upgrade only by an explicit baseline change."
+  },
+  "producer": {
+    "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "model": "tests/generator/relations.xml",
+    "model_sha256": "685f031888af4c1b6263774f8e667ed796baca25829e40103d9f29d444c69b42",
+    "hand_edited": false,
+    "files": {
+      "lib/Cargo.toml": "abc5df8a05bd556a850bf7c839770e13025f14ef57b3638c779bc690346738fc",
+      "lib/src/device/behavior.rs": "5d95971c49734dd4f57d84212dc99e8fd55708df2e20a43539bcd405cf8b4598",
+      "lib/src/device/checker.rs": "3be8177ea9db47efe92c56a93a2e9acfe48d69940ff271123c71771c789a4f53",
+      "lib/src/device/entity.rs": "f18e7d9a95f5e9c4e58a42283d0538b134871e4075a1973e7d984fb36ccd768f",
+      "lib/src/device/expression.rs": "9d34acea15c3bcda950c95989294241b27ea05e2d3eab2ac0116699d1745a29e",
+      "lib/src/device/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/device/request.rs": "2baae453375bfae5dce690998a4f9e7b003182038afd5ed9b045946e18385112",
+      "lib/src/e.rs": "6f2ab730bbdf49a478511e0291762e891c8e4f20bdb9baaf2aafc1b3b6bbc3f2",
+      "lib/src/lib.rs": "26a91a84f447a67ea55b38d8b90f7efca7879eeec923dd272d6c79aab45f1e0b",
+      "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+      "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+      "lib/src/platform/entity.rs": "c097cf67979a2f15698fce88d6de8497892d41afa3d33a696a96c97b800507f3",
+      "lib/src/platform/expression.rs": "3c270c2819def8bb556a985d0934b98daec6d0d08836bdaa7e2c35f4e251184f",
+      "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/platform/request.rs": "346ffd896117c59d4cfd5fcd1df09b9b6f3dc0ed794af419c37bef7b596ded06",
+      "lib/src/profile/behavior.rs": "482e3afb8a89e5e2d4ff75500599695b7fb87345d15a3263de5880d0281ca5d4",
+      "lib/src/profile/checker.rs": "f47fc63b42f685ce8797ff1f7c055995eca7d5dab2c975ea4077e68aaa7be9b9",
+      "lib/src/profile/entity.rs": "1da68acd29ac1a3e30bacd00608bb623b44cc9bade749ee5fe1cc9e81adab384",
+      "lib/src/profile/expression.rs": "8690b1b060646df86d46e698d19512c2945192091a7b84c433988cb07efff2a2",
+      "lib/src/profile/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/profile/request.rs": "38b2a27a32991c8050f3095b361c45fcd1d78941dfc0501190eb550394ffbd0f",
+      "lib/src/q.rs": "18188d78ea66e610c3cbb278cfd92e0df28510a3a74feb0435c8d8e3c8e25005",
+      "lib/src/request_support.rs": "36696696710120426679212c36a1bae48af62e30b7e13fdd04d5829fb044f496",
+      "lib/src/runtime.rs": "4e49e62419e9de125b04cae72f0df9014a58b9c146ac0a6eb025dcb824a35b9b",
+      "lib/src/sample_data.rs": "8c1f4e8986a2585193eed42a300961cf7fb7271caa2deb5609adb22b8bfb8062",
+      "lib/src/school/behavior.rs": "41c4faa5d2fc86da9b3d080a4a07b17cd5e74ac453ec1e7ca914b8c68c30db05",
+      "lib/src/school/checker.rs": "c06aa1626ee6f3f0d7b884afa984bb2f9eca143eb7b85d0de61f7792c3a7e99c",
+      "lib/src/school/entity.rs": "07a903fe62466fb87bcde58da60b21151bfbf90177c743e154d9127e219a4a0d",
+      "lib/src/school/expression.rs": "ea938569c8a5cbfd999f927af1025f14799b876cabd0d134284f42c0a8ba4eaf",
+      "lib/src/school/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/school/request.rs": "709533107dda78523a53857f2ed972458e5e0ec5eeaa8040a77ff245fdda6cc3"
+    }
+  },
+  "inherited_producer": {
+    "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "model": "tests/generator/inheritance.xml",
+    "model_sha256": "dafa4a3ebd5ab8aa8e00debff4f8d6586561676b42f4f40cc3976824893460b9",
+    "hand_edited": false,
+    "files": {
+      "lib/Cargo.toml": "fcfcfb90b739f9642a07af19e01e45d6ee31dcfc806c83acfa97887405c8d67d",
+      "lib/src/academy/behavior.rs": "d043bb63246b472626e962c9ce9c09a29f2b6629a188ebdce7f654498f1ef8f3",
+      "lib/src/academy/checker.rs": "3082ed6549838dff5bcee3c6f9925f7250199da0fc6e4dedfb77033fe71a88a9",
+      "lib/src/academy/entity.rs": "e719ffec66132f2ad9a69eb3c0535b674a85fa8b021d1ffd2992f1a4e9950b69",
+      "lib/src/academy/expression.rs": "7f122dc5880380d64eaa58a0df9ea2804f5eda5afa0a1f3fdeed520bb5a5ff4b",
+      "lib/src/academy/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/academy/request.rs": "97cf61704c93d532eb1c5d9ed3565ab8b63e4280a5eba120e3d52dc3f5678de6",
+      "lib/src/e.rs": "9f4c4694f475a8c6bd74c78cb1852203b5f92c17dd21bef966a25b44cd0055d2",
+      "lib/src/lib.rs": "fee616e05c7658afd95504195b0383b56e76141a05e4bf891b730ae2c5f998ee",
+      "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+      "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+      "lib/src/platform/entity.rs": "cc5ed25c12e36ab3297b228fcfc3ebd868a5633b6c24677e42c0d5d53913088b",
+      "lib/src/platform/expression.rs": "705f68ff8922bfa7c4c4975a81b4318c1910ac10e8f2ae3a9f7c38b59148f039",
+      "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/platform/request.rs": "725f26497579c7fd77cf9fc0f0b8c3f1d4e0b7b575f653c734892996f7087911",
+      "lib/src/q.rs": "337a27531fa5861865b5c71adf4325ddf5e2b3dc159400f44e154f88b26595db",
+      "lib/src/request_support.rs": "c8ca16077ef303c01dcd32579b12f8f8cb22c9f0252a27a8b1b465a678a2c921",
+      "lib/src/research_academy/behavior.rs": "6c4777c0f7a6542fc97dbe68aec0b6a0e919177a49657a56826fe681c5165cfa",
+      "lib/src/research_academy/checker.rs": "2d58d4d9e3dcfd0c414b923ccf06ec769bc1373b222af11694dd27678d5a0068",
+      "lib/src/research_academy/entity.rs": "62abeb5b9f5a9ded5a9bd0960dee2df6b21dc38c2cc31ea2be2212378e8a648f",
+      "lib/src/research_academy/expression.rs": "3179129e043763b4a28922648cf31866cdca185fe67d4b279c0271fbe12a39ed",
+      "lib/src/research_academy/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/research_academy/request.rs": "ae3e1547029cb9d6c7a1a52cdf0749dcd76ca375a15f10365f3f03b3baec1d56",
+      "lib/src/runtime.rs": "4ae83899a7ab307b1c653dc57e1ea7b3193548beb5ff86de7cc67b0885533396",
+      "lib/src/sample_data.rs": "c56d150e26c41d55b10dd54837f04b00bd8e2377d637995ae88348a78d5d3622",
+      "lib/src/school/behavior.rs": "41c4faa5d2fc86da9b3d080a4a07b17cd5e74ac453ec1e7ca914b8c68c30db05",
+      "lib/src/school/checker.rs": "45676afe0f1b9290d9b62817998746704f7626492cb7a55c73a3c3e1a58c9052",
+      "lib/src/school/entity.rs": "93a19a3f5f93038307dc60f5ea950c237cd5b1a1dfdfec766cfeb7d6a07fba5c",
+      "lib/src/school/expression.rs": "3c58c3f28429cb5ca94536ce0bb35752b942efade5b8c56ade613702afed6ffb",
+      "lib/src/school/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/school/request.rs": "7a9a40cc1a167f5b530683ea69945d6d025a3aa0711772c28274d68563de437b"
+    }
+  },
+  "probe": "tests/parity/rust_field_layout/src/bin/generated_sample_execution_5_0_6.rs --source-failures",
+  "observed": {
+    "inherited_persisted_rows": {
+      "academy_data": 20,
+      "research_academy_data": 20,
+      "school_data": 20
+    },
+    "inherited_sample_error": null,
+    "relations_automatic_schema_error": "graph write error: Transport error: foreign key mismatch - \"platform_data\" referencing \"profile_data\""
+  },
+  "disposition": {
+    "relations_automatic_schema": "Unchanged source bootstrap fails; explicit-schema sample comparisons do not qualify automatic schema.",
+    "inherited_sample": "Unchanged source succeeds with 20 rows per business table. The initial C++ trial omitted ancestor sample fields through older shared naming helpers. C++ recipes now use the locked predefined-field adapter, and native audited save/readback passes. Full inherited sample row/trace/configuration qualification remains open."
+  }
+}

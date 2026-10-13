@@ -1,0 +1,100 @@
+use teaql_core::Expr;
+
+use crate::*;
+
+pub struct PurposedQuery<T> {
+    pub inner: T,
+    pub purpose: String,
+}
+
+impl<T> PurposedQuery<T> {
+    pub fn new(inner: T, purpose: impl Into<String>) -> Self {
+        let purpose = purpose.into();
+        assert!(!purpose.trim().is_empty(), "query purpose must not be empty");
+        Self { inner, purpose }
+    }
+}
+
+pub struct Q;
+
+impl Q {
+    pub fn platforms() -> PlatformRequest {
+        PlatformRequest::new()
+            .select_self()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn platforms_minimal() -> PlatformRequest {
+        PlatformRequest::new()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn platforms_with_children() -> PlatformRequest {
+        PlatformRequest::new()
+            .unlimited()
+            .select_self_fields()
+            .enhance_children_if_needed()
+    }
+
+
+
+    pub fn order_statuses() -> OrderStatusRequest {
+        OrderStatusRequest::new()
+            .select_self()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn order_statuses_minimal() -> OrderStatusRequest {
+        OrderStatusRequest::new()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn order_statuses_with_children() -> OrderStatusRequest {
+        OrderStatusRequest::new()
+            .unlimited()
+            .select_self_fields()
+            .enhance_children_if_needed()
+    }
+
+
+
+    pub fn records() -> RecordRequest {
+        RecordRequest::new()
+            .select_self()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn records_minimal() -> RecordRequest {
+        RecordRequest::new()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn records_with_children() -> RecordRequest {
+        RecordRequest::new()
+            .unlimited()
+            .select_self_fields()
+            .enhance_children_if_needed()
+    }
+
+
+
+    pub fn people() -> PersonRequest {
+        PersonRequest::new()
+            .select_self()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn people_minimal() -> PersonRequest {
+        PersonRequest::new()
+            .and_filter(Expr::gt("version", 0_i64))
+    }
+
+    pub fn people_with_children() -> PersonRequest {
+        PersonRequest::new()
+            .unlimited()
+            .select_self_fields()
+            .enhance_children_if_needed()
+    }
+
+
+}

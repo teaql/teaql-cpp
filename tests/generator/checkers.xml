@@ -1,0 +1,5 @@
+<root name="cpp_checker_fixture" org="teaql" data_service="sqlite">
+    <tenant name="string()" />
+    <note name="string()" tenant="tenant(contextRoot=true)"
+          created_at="createTime()" updated_at="updateTime()" />
+</root>

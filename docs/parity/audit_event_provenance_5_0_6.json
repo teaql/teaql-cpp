@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Applied audit identity/bootstrap/provenance and shared projection, real mutation dispatch plus explicit destination-copy/lifetime behavior. Full capabilities/P7 remain open.",
+  "historical_event_observations": 112,
+  "nonempty_projection_observations": 104,
+  "sanitizer_leak_scan": false,
+  "gates": {
+    "native": {
+      "passed": 12,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "audit_event_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "event_model_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "original_runtime_log_privacy_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "audit_event_owner_reentrant_close",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "audit_event_payload_reentrant_close",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "audit_event_result_reentrant_close",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "audit_event_context_reentrant_close",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "request_trace_scope_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "context_event_contracts",
+          "status": "passed",
+          "seconds": 0.01
+        },
+        {
+          "name": "entity_service_contracts",
+          "status": "passed",
+          "seconds": 0.01
+        },
+        {
+          "name": "original_runtime_file_log_privacy_contracts",
+          "status": "passed",
+          "seconds": 0.04
+        },
+        {
+          "name": "audit_event_projection_5_0_6_rust_parity",
+          "status": "passed",
+          "seconds": 0.1
+        }
+      ]
+    },
+    "native_dispatch": {
+      "passed": 5,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "runtime_mutation_reentrant_prepare",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "runtime_mutation_context_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "runtime_mutation_reentrant_event",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "audit_event_projection_5_0_6_rust_parity",
+          "status": "passed",
+          "seconds": 0.09
+        },
+        {
+          "name": "event_model_rust_parity",
+          "status": "passed",
+          "seconds": 1.19
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "event_model_contracts",
+          "status": "passed",
+          "seconds": 0.01
+        },
+        {
+          "name": "audit_event_contracts",
+          "status": "passed",
+          "seconds": 0.01
+        },
+        {
+          "name": "context_event_contracts",
+          "status": "passed",
+          "seconds": 0.03
+        },
+        {
+          "name": "entity_service_contracts",
+          "status": "passed",
+          "seconds": 0.06
+        }
+      ]
+    },
+    "sanitize_dispatch": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "runtime_mutation_context_contracts",
+          "status": "passed",
+          "seconds": 0.03
+        }
+      ]
+    },
+    "modules_native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_event_model_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        }
+      ]
+    }
+  }
+}

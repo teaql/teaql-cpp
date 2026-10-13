@@ -1,0 +1,18 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 2304,
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/json_graph_views_5_0_6.rs",
+  "driver_sha256": "0cd9f7522abebebd755c1a4b3cc0cc99fc10f231f5de96ae9d37a9831ec24e8b",
+  "corpus_sha256": "aa1226f01cfddbacbf958c4d3307a3a75d2dffad27c158bcdc0060826e52583b",
+  "scope": "Complete original JSON graph builder view/list/typed option/index and entity runtime view/copy/read/debug methods. Thin append-only bridges expose private methods without reconstructing their implementation. Original file prefixes and registry checksums preserved.",
+  "controls": "Nine installation/replacement/clear/list/plain/selected-ID/invalid-ID patterns; equal/different/max-u64 views, zero/nonzero IDs, JSON/ordinary index modes, table override and shared/independent ledgers. Full lookups and diagnostics.",
+  "source_behaviors": [
+    "Only JSON read graphs materialize the option identity index; ordinary relation options are unindexed.",
+    "Repeated selected valid identities at the same view/type mark the index ambiguous even if the same edge key is written again.",
+    "Replacing an edge with a different ID leaves original edge-key lookup behavior intact; the observer does not repair or normalize it.",
+    "Ordinary table entries take priority across every view.",
+    "JSON list storage retains list facets but does not populate the separate relation facet index; ordinary list storage does.",
+    "Fresh/shared/loaded view copies preserve the original coordinate and ledger separation rules."
+  ],
+  "remaining": "Actual JSON parsing, metadata capability validation and typed JSON graph decoder assembly; dynamic fields, SQL/privacy, generated APIs and complete configurations remain open."
+}

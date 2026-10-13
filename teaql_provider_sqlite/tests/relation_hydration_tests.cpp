@@ -2,6 +2,7 @@
 #include <teaql/provider_sqlite/provider.hpp>
 #include <teaql/provider_sqlite/dialect.hpp>
 #include <teaql/sql/executor.hpp>
+#include <teaql/runtime/data_service.hpp>
 #include <atomic>
 #include <iostream>
 #include <semaphore>
@@ -105,10 +106,13 @@ static void check_graph(const EntityRuntimeState& root, Memory r, bool compact) 
     check(a.state && b.state && a.state->resolve_entity<Model<2>>(20) == leaf &&
               b.state->resolve_entity<Model<2>>(20) == leaf,
           "relation model states resolve one shared target identity");
+    check(!root.has_relation_view("Child", 10, "product") &&
+              !root.has_relation_view("Child", 11, "product"),
+          "owners sharing a fetched target do not manufacture unfetched identity edges");
     check(a.row.memory_resource() == r && a.row.get("leaf_ref")->memory_resource() == r,
           "nested model data uses owning arena");
-    check(missing.row.contains_key("product") != compact,
-          "only ordinary flat path installs missing forward scalar marker");
+    check(!missing.row.contains_key("product"),
+          "unfetched forward detail stays in its graph edge rather than the scalar row");
     auto inverse = root.relation_option<Model<0>>("Child", 10, "parent");
     check(inverse.state() == (compact ? LoadedRelation::NotLoaded : LoadedRelation::Loaded),
           "ordinary and compact inverse rules remain separate");
@@ -148,7 +152,14 @@ static void sqlite_hydration(detail::RelationHydrationMode mode) {
         using E = std::remove_reference_t<decltype(executor)>;
         auto& repo = EntityDataService<E>::for_executor(*c, "Parent", *c, executor);
         auto& children = plans(*c);
+        auto root_intent =
+            std::move(QueryIntent::create(
+                          r, "load hydration fixture", "verify nested relation hydration"))
+                .value();
+        detail::EntityDataServiceAccess::bind_query_intent(repo, root_intent);
         auto query = repo.select();
+        query.comment_text.emplace(root_intent.comment(), r);
+        query.purpose_text.emplace(root_intent.purpose(), r);
         query.order_asc("id");
         auto& fetched = ServiceAccess::context_service(repo).fetch_all(query);
         check(bool(fetched.wait()), "fetch parent rows from SQLite");
@@ -175,8 +186,8 @@ static void sqlite_hydration(detail::RelationHydrationMode mode) {
                 : detail::hydrate_compact_flat_plans(repo, parents, children, root, graph, fetch);
         auto& result = work.wait();
         check(bool(result), "recursive hydration from actual SQLite rows");
-        check(traces.size() == (mode == detail::RelationHydrationMode::Embedded ? 4 : 2) &&
-                  traces.back().size() == 2 && traces.back()[0].comment == "Parent.children" &&
+        check(traces.size() == 2 && traces.back().size() == 2 &&
+                  traces.back()[0].comment == "Parent.children" &&
                   traces.back()[1].comment == "Child.product",
               "nested fetch carries relation lineage");
         if (mode == detail::RelationHydrationMode::Embedded) {
@@ -397,9 +408,8 @@ static void native_lifetime(detail::RelationHydrationMode mode, unsigned action)
     } else if (action == 1) {
         work.cancel();
         if (mode == detail::RelationHydrationMode::Embedded) {
-            auto& child = std::get<Value::List>(parents.front().get("children")->data).front();
-            check(std::get<Value::Object>(child.data).empty(),
-                  "cancel preserves source mem::take partial-state rule");
+            check(!parents.front().contains_key("children"),
+                  "5.0.6 cancellation leaves parent untouched until the child batch completes");
         }
     }
     c->close();
@@ -475,6 +485,171 @@ static void domain_contracts() {
     unrelated.cancel();
 }
 
+static void sqlite_owner_facets(detail::RelationHydrationMode mode) {
+    GlobalContext global;
+    Vector<CompactRow>* retained = nullptr;
+    EntityRuntimeState* retained_graph = nullptr;
+    {
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        user_context->disable_sql_log();
+        auto& connection = user_context->make_resource<SqliteConnection>();
+        auto& provider = user_context->make<SqliteMutationExecutor>(connection);
+        CompiledQuery sql(std::allocator_arg, Allocator(r));
+        for (auto text : {"CREATE TABLE children(id INTEGER PRIMARY KEY, owner INTEGER)",
+                          "CREATE TABLE tags(id INTEGER PRIMARY KEY, owner INTEGER)",
+                          "INSERT INTO children VALUES(10,1),(11,1),(20,2)",
+                          "INSERT INTO tags VALUES(100,10),(101,11),(200,20)"}) {
+            sql.sql = text;
+            check(bool(provider.execute(r, sql)), "create owner facet SQLite fixture");
+        }
+        auto& metadata = user_context->make<InMemoryMetadataStore>();
+        EntityDescriptor parent(std::allocator_arg, Allocator(r), "Parent");
+        parent.property("id", DataType::U64).is_id = true;
+        parent.property("link", DataType::U64);
+        auto& relation = parent.relation("children", "Child");
+        relation.local_key = "link";
+        relation.foreign_key = "owner";
+        relation.many = true;
+        EntityDescriptor child(std::allocator_arg, Allocator(r), "Child");
+        child.table("children");
+        child.property("id", DataType::U64).is_id = true;
+        child.property("owner", DataType::U64);
+        auto& tags = child.relation("tags", "Tag");
+        tags.local_key = "id";
+        tags.foreign_key = "owner";
+        tags.many = true;
+        EntityDescriptor tag(std::allocator_arg, Allocator(r), "Tag");
+        tag.table("tags");
+        tag.property("id", DataType::U64).is_id = true;
+        tag.property("owner", DataType::U64);
+        metadata.register_entity(std::move(parent));
+        metadata.register_entity(std::move(child));
+        metadata.register_entity(std::move(tag));
+        user_context->set_metadata(*user_context, metadata);
+        auto& decoders = user_context->make<InMemoryEntityGraphDecoderRegistry>();
+        decoders.register_entity<Model<1>>();
+        user_context->set_entity_graph_decoder_registry(decoders);
+        auto& dialect = user_context->make_resource<SqliteDialect>();
+        auto& state = user_context->make<SqlExecutorState>();
+        auto& executor = user_context->make<SqlDataServiceExecutor<MutationExecutorError>>(
+            dialect, provider, metadata, state);
+        using E = std::remove_reference_t<decltype(executor)>;
+        auto& service =
+            EntityDataService<E>::for_executor(*user_context, "Parent", *user_context, executor);
+        SelectQuery target(std::allocator_arg, Allocator(r), "Child");
+        target.comment("Read a limited child page")
+            .purpose("Verify owner facet membership")
+            .order_desc("id")
+            .limit(1);
+        SelectQuery facet(std::allocator_arg, Allocator(r), "Tag");
+        facet.comment("Read owner tag values");
+        target.facets.emplace_back("tagsFacet", "tags", facet, false);
+        RelationLoad load(std::allocator_arg, Allocator(r), "children", target);
+        auto plans = detail::build_relation_plans_from_loads(
+            *user_context, "Parent", std::span<const RelationLoad>(&load, 1));
+        check(bool(plans), "owner facet relation plan");
+        Vector<CompactRow> parents(r);
+        parents.emplace_back(row(r, {{"id", 1}, {"link", 1}}));
+        parents.emplace_back(row(r, {{"id", 2}, {"link", 2}}));
+        parents.emplace_back(row(r, {{"id", 3}}));
+        detail::EntityRelationFetch<E> fetch(
+            std::allocator_arg,
+            Allocator(r),
+            [&](const auto& child_service, SelectQuery query) -> auto& {
+                return detail::EntityDataServiceAccess::fetch_all(child_service, query);
+            });
+        auto& root = user_context->make<EntityRuntimeState>();
+        auto& graph = user_context->make<EntityGraphBuilder>();
+        auto& operation =
+            mode == detail::RelationHydrationMode::Embedded
+                ? detail::enhance_relation_plans(service, parents, plans.value(), fetch)
+            : mode == detail::RelationHydrationMode::Flat
+                ? detail::hydrate_flat_plans(service, parents, plans.value(), root, graph, fetch)
+                : detail::hydrate_compact_flat_plans(
+                      service, parents, plans.value(), root, graph, fetch);
+        auto& result = operation.wait();
+        if (!result) {
+            throw std::runtime_error(std::string(result.error().to_string(r)));
+        }
+        if (mode != detail::RelationHydrationMode::Embedded) {
+            check(bool(root.freeze_graph(std::move(graph))), "freeze SQLite owner facet graph");
+        }
+        for (std::size_t index = 0; index < parents.size(); ++index) {
+            auto* loaded = parents[index].loaded_relation("children");
+            auto* graph_list =
+                mode == detail::RelationHydrationMode::Embedded
+                    ? nullptr
+                    : root.resolve_relation_list<Model<1>>("Parent", index + 1, "children");
+            auto* facet_values =
+                mode == detail::RelationHydrationMode::Embedded
+                    ? (loaded && loaded->facets.contains("tagsFacet")
+                           ? &loaded->facets.find("tagsFacet")->second
+                           : nullptr)
+                    : root.relation_facet("Parent", index + 1, "children", "tagsFacet");
+            check(facet_values, "facets exist for every owner including missing keys");
+            if (graph_list) {
+                check(graph_list->is_loaded && graph_list->facets.contains("tagsFacet") &&
+                          graph_list->facets.at(String("tagsFacet", r)).data == facet_values->data,
+                      "typed relation list preserves query-only facet metadata");
+            }
+            const auto& values = facet_values->data;
+            check(values.size() == (index == 0   ? 2
+                                    : index == 1 ? 1
+                                                 : 0),
+                  "facet membership uses complete owner relation rather than materialized page");
+            check((graph_list ? graph_list->data.size() : loaded->data.size()) ==
+                      (index == 2 ? 0 : 1),
+                  "child page limit remains independent of facet membership");
+            for (const auto& value : values) {
+                auto id = *value.get("id")->try_u64();
+                check(index == 0 ? id == 100 || id == 101 : id == 200,
+                      "owner facet values never cross owners");
+            }
+        }
+        if (mode == detail::RelationHydrationMode::Embedded) {
+            retained = &global.make<Vector<CompactRow>>(parents);
+            Vector<CompactRow> reconstructed_rows(parents, r);
+            auto reconstructed =
+                detail::attach_flat_relation_graph(*user_context, "Parent", reconstructed_rows);
+            check(bool(reconstructed),
+                  "reconstruct SQLite embedded owner facets into the typed graph");
+            for (std::uint64_t id : {1, 2, 3}) {
+                auto* values =
+                    reconstructed.value().relation_facet("Parent", id, "children", "tagsFacet");
+                auto* list =
+                    reconstructed.value().resolve_relation_list<Model<1>>("Parent", id, "children");
+                check(values && list && list->facets.contains("tagsFacet") &&
+                          values->data.size() == (id == 1   ? 2
+                                                  : id == 2 ? 1
+                                                            : 0),
+                      "loaded-row reconstruction preserves complete SQLite owner facets");
+            }
+            retained_graph = &global.make<EntityRuntimeState>(reconstructed.value());
+        } else {
+            retained_graph = &global.make<EntityRuntimeState>(root);
+        }
+    }
+    if (retained_graph) {
+        auto* facet = retained_graph->relation_facet("Parent", 1, "children", "tagsFacet");
+        check(
+            facet && facet->memory_resource() == global.memory_resource() &&
+                facet->data.size() == 2,
+            "Global graph copy retains owner facets after actual database and UserContext destruction");
+        check(retained_graph->resolve_relation_list<Model<1>>("Parent", 1, "children")
+                      ->facets.size() == 1,
+              "Global graph copy also retains typed SmartList facets");
+    }
+    if (retained) {
+        check(
+            retained->front()
+                    .loaded_relation("children")
+                    ->facets.begin()
+                    ->second.memory_resource() == global.memory_resource(),
+            "explicit Global copies retain nested owner facets after database and UserContext destruction");
+    }
+}
+
 int main() {
     try {
         setenv("TEAQL_LOG_ENDPOINT", "off", 1);
@@ -483,6 +658,7 @@ int main() {
                           detail::RelationHydrationMode::Flat,
                           detail::RelationHydrationMode::CompactFlat}) {
             sqlite_hydration(mode);
+            sqlite_owner_facets(mode);
             for (unsigned action = 0; action < 3; ++action) {
                 native_lifetime(mode, action);
             }

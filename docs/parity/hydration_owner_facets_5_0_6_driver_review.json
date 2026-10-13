@@ -1,0 +1,9 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/hydration_owner_facets_5_0_6.rs",
+  "driver_sha256": "6654ba8da32ec983fdde3e25f5c1505ef88be8a1512057f47ef6068b1200475e",
+  "scope": "Complete original embedded query enhancement, relation_facets, shared execute_facets and prepared recording executor. Plain/faceted, include-all/restricted, sliced/unsliced, to-one/to-many and valid/typed-null/missing owner keys. Full parent/facet value maps and request filter Debug outputs. No physical SQL, flat graph, dynamic loading, asynchronous failure/cancel matrix acceptance.",
+  "cpp_construction": "Purpose field assignment matches the original fixture field assignment; no extra builder Purpose trace in the copied subquery.",
+  "initial_missing_dispatch": 24,
+  "after_dispatch_fixture_trace_differences": 12
+}

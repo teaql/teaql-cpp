@@ -350,7 +350,8 @@ node_command(UserContext& user, const EntityDataService<Executor>& service, cons
             auto result = Access::graph_update_command(
                 service, graph, desc, *property, value(r, field(input, "id")));
             if (result) {
-                MutationRequest request(std::allocator_arg, Allocator(r), result.value());
+                MutationRequest request(
+                    std::allocator_arg, Allocator(r), result.value(), "graph execution command");
                 detail::model_put(out, "command", request_out(r, request));
             } else {
                 detail::model_put(out, "error", result.error().to_string(r));

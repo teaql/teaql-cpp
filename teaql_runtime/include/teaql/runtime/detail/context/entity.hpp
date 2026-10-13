@@ -47,6 +47,29 @@ public:
                                    resource_type_name<E>());
     }
 
+    static Result<bool, EntityError> json_graph_capability(const UserContext& context,
+                                                           const EntityDescriptor& descriptor) {
+        context.ensure_open();
+        if (context.graph_decoders_) {
+            return context.graph_decoders_->json_capability(descriptor);
+        }
+        InMemoryEntityGraphDecoderRegistry empty(std::allocator_arg,
+                                                 Allocator(context.memory_resource()));
+        return empty.json_capability(descriptor);
+    }
+
+    static EntityGraphDecodeResult
+    decode_json_edge(const UserContext& context,
+                     std::string_view entity,
+                     InMemoryEntityGraphDecoderRegistry::JsonRows rows,
+                     const EntityRuntimeState& root,
+                     EntityGraphBuilder& graph,
+                     InMemoryEntityGraphDecoderRegistry::JsonEdgeRequest edge) {
+        return with_decoders(context, [&](const auto& registry) {
+            return registry.decode_json_edge(entity, std::move(rows), root, graph, edge);
+        });
+    }
+
     static bool has_entity_graph_decoder(const UserContext& context, std::string_view entity) {
         context.ensure_open();
         return context.graph_decoders_ && context.graph_decoders_->contains(entity);
@@ -90,6 +113,21 @@ public:
                                                                     std::string_view relation) {
         return with_decoders(context, [&](const auto& decoders) {
             return decoders.decode_compact_list(
+                entity, std::move(rows), root, graph, owner, id, relation);
+        });
+    }
+
+    static EntityGraphDecodeResult
+    decode_entity_graph_compact_smart_list(const UserContext& context,
+                                           std::string_view entity,
+                                           SmartList<CompactRow> rows,
+                                           const EntityRuntimeState& root,
+                                           EntityGraphBuilder& graph,
+                                           std::string_view owner,
+                                           std::uint64_t id,
+                                           std::string_view relation) {
+        return with_decoders(context, [&](const auto& decoders) {
+            return decoders.decode_compact_smart_list(
                 entity, std::move(rows), root, graph, owner, id, relation);
         });
     }

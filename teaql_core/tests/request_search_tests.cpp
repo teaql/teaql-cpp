@@ -164,7 +164,9 @@ static void operators_and_filters() {
         check(e.memory_resource() == r, "all operator constructors explicit domain");
     }
     check(rq::field_operator_expr(r, "name", rq::FieldOperator::Contain, values) ==
-              Expr::like(r, "name", "%hello%"),
+              Expr::binary(Expr::column(r, "name"),
+                           BinaryOp::Like,
+                           Expr::like_pattern(r, "%hello%", "hello")),
           "contains pattern");
     check(rq::field_operator_column_expr(r, "name", rq::FieldOperator::Contain, "other") ==
               Expr::compare_columns(r, "name", BinaryOp::Like, "other"),

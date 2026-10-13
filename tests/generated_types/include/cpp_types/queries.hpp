@@ -3,4032 +3,20880 @@
 #include "models.hpp"
 
 namespace cpp_types {
-template <bool Purposed = false>
+namespace generated_detail {
+struct PersonDynamicJsonRecipe;
+struct DeviceDynamicJsonRecipe;
+struct OrderStatusDynamicJsonRecipe;
+struct CategoryDynamicJsonRecipe;
+struct ChildDynamicJsonRecipe;
+struct InventoryDynamicJsonRecipe;
+
+struct PersonDynamicJsonRecipe {
+    using Model = Person;
+
+    static std::optional<std::string_view> self_field(std::string_view field) {
+        if (field == "id") {
+            return "id";
+        }
+        if (field == "email") {
+            return "email";
+        }
+        if (field == "active") {
+            return "active";
+        }
+        if (field == "nickname") {
+            return "nickname";
+        }
+        if (field == "balance") {
+            return "balance";
+        }
+        if (field == "height") {
+            return "height";
+        }
+        if (field == "ratio") {
+            return "ratio";
+        }
+        if (field == "age") {
+            return "age";
+        }
+        if (field == "birthday") {
+            return "birthday";
+        }
+        if (field == "updated_at") {
+            return "updated_at";
+        }
+        if (field == "payload") {
+            return "payload";
+        }
+        if (field == "version") {
+            return "version";
+        }
+        return std::nullopt;
+    }
+    template <class Query>
+    static void
+    apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value);
+};
+
+struct DeviceDynamicJsonRecipe {
+    using Model = Device;
+
+    static std::optional<std::string_view> self_field(std::string_view field) {
+        if (field == "id") {
+            return "id";
+        }
+        if (field == "code") {
+            return "code";
+        }
+        if (field == "active") {
+            return "active";
+        }
+        if (field == "version") {
+            return "version";
+        }
+        if (field == "owner" || field == "owner_id") {
+            return "owner_id";
+        }
+        return std::nullopt;
+    }
+    template <class Query>
+    static void
+    apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value);
+};
+
+struct OrderStatusDynamicJsonRecipe {
+    using Model = OrderStatus;
+
+    static std::optional<std::string_view> self_field(std::string_view field) {
+        if (field == "id") {
+            return "id";
+        }
+        if (field == "name") {
+            return "name";
+        }
+        if (field == "version") {
+            return "version";
+        }
+        return std::nullopt;
+    }
+    template <class Query>
+    static void
+    apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value);
+};
+
+struct CategoryDynamicJsonRecipe {
+    using Model = Category;
+
+    static std::optional<std::string_view> self_field(std::string_view field) {
+        if (field == "id") {
+            return "id";
+        }
+        if (field == "name") {
+            return "name";
+        }
+        if (field == "version") {
+            return "version";
+        }
+        return std::nullopt;
+    }
+    template <class Query>
+    static void
+    apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value);
+};
+
+struct ChildDynamicJsonRecipe {
+    using Model = Child;
+
+    static std::optional<std::string_view> self_field(std::string_view field) {
+        if (field == "id") {
+            return "id";
+        }
+        if (field == "name") {
+            return "name";
+        }
+        if (field == "version") {
+            return "version";
+        }
+        return std::nullopt;
+    }
+    template <class Query>
+    static void
+    apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value);
+};
+
+struct InventoryDynamicJsonRecipe {
+    using Model = Inventory;
+
+    static std::optional<std::string_view> self_field(std::string_view field) {
+        if (field == "id") {
+            return "id";
+        }
+        if (field == "name") {
+            return "name";
+        }
+        if (field == "version") {
+            return "version";
+        }
+        return std::nullopt;
+    }
+    template <class Query>
+    static void
+    apply_chain(Query& query, std::string_view head, std::string_view tail, const Json& value);
+};
+
+template <class Query>
+void PersonDynamicJsonRecipe::apply_chain(Query& query,
+                                          std::string_view head,
+                                          std::string_view tail,
+                                          const Json& value) {
+    (void)query;
+    (void)head;
+    (void)tail;
+    (void)value;
+    if (head == "device_list") {
+        apply_generated_dynamic_json_relation<DeviceDynamicJsonRecipe>(
+            query, "id", "owner_id", tail, value, head);
+        return;
+    }
+}
+
+template <class Query>
+void DeviceDynamicJsonRecipe::apply_chain(Query& query,
+                                          std::string_view head,
+                                          std::string_view tail,
+                                          const Json& value) {
+    (void)query;
+    (void)head;
+    (void)tail;
+    (void)value;
+    if (head == "owner") {
+        apply_generated_dynamic_json_relation<PersonDynamicJsonRecipe>(
+            query, "owner_id", "id", tail, value, head);
+        return;
+    }
+}
+
+template <class Query>
+void OrderStatusDynamicJsonRecipe::apply_chain(Query& query,
+                                               std::string_view head,
+                                               std::string_view tail,
+                                               const Json& value) {
+    (void)query;
+    (void)head;
+    (void)tail;
+    (void)value;
+}
+
+template <class Query>
+void CategoryDynamicJsonRecipe::apply_chain(Query& query,
+                                            std::string_view head,
+                                            std::string_view tail,
+                                            const Json& value) {
+    (void)query;
+    (void)head;
+    (void)tail;
+    (void)value;
+}
+
+template <class Query>
+void ChildDynamicJsonRecipe::apply_chain(Query& query,
+                                         std::string_view head,
+                                         std::string_view tail,
+                                         const Json& value) {
+    (void)query;
+    (void)head;
+    (void)tail;
+    (void)value;
+}
+
+template <class Query>
+void InventoryDynamicJsonRecipe::apply_chain(Query& query,
+                                             std::string_view head,
+                                             std::string_view tail,
+                                             const Json& value) {
+    (void)query;
+    (void)head;
+    (void)tail;
+    (void)value;
+}
+}
+template <bool Purposed = false, Entity Result = Person>
 class PersonRequest;
-template <bool Purposed = false>
+template <bool Purposed = false, Entity Result = Device>
 class DeviceRequest;
-template <bool Purposed = false>
+template <bool Purposed = false, Entity Result = OrderStatus>
 class OrderStatusRequest;
-template <bool Purposed = false>
+template <bool Purposed = false, Entity Result = Category>
 class CategoryRequest;
-template <bool Purposed = false>
+template <bool Purposed = false, Entity Result = Child>
 class ChildRequest;
-template <bool Purposed = false>
+template <bool Purposed = false, Entity Result = Inventory>
 class InventoryRequest;
 
-template <bool Purposed>
+template <bool Purposed, Entity Result>
 class PersonRequest {
+    template <bool, Entity>
+    friend class PersonRequest;
+    template <bool, Entity>
+    friend class DeviceRequest;
+    template <bool, Entity>
+    friend class OrderStatusRequest;
+    template <bool, Entity>
+    friend class CategoryRequest;
+    template <bool, Entity>
+    friend class ChildRequest;
+    template <bool, Entity>
+    friend class InventoryRequest;
+
 public:
-    using allocator_type = Allocator;
-    UserContext& owner;
-    SelectQuery selection;
-    String intent;
+    using Query = EntityQuery<Person, DataServiceExecutor, Purposed, Result>;
 
-    PersonRequest(std::allocator_arg_t, Allocator a, UserContext& user)
-        : owner(user), selection(std::allocator_arg, a, Person::ENTITY_NAME), intent(a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-        selection.project("id").project("version");
-    }
+private:
+    Query query_;
 
-    PersonRequest(std::allocator_arg_t,
-                  Allocator a,
-                  UserContext& user,
-                  const SelectQuery& q,
-                  std::string_view purpose)
-        : owner(user), selection(std::allocator_arg, a, q), intent(purpose, a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-    }
+public:
+    explicit PersonRequest(UserContext& user_context, bool minimal = false, bool live_rows = true)
+        requires(!Purposed)
+        : query_(user_context, minimal, live_rows) {}
+
+    explicit PersonRequest(Query value) : query_(std::move(value)) {}
 
     Memory memory_resource() const {
-        return selection.memory_resource();
+        return query_.memory_resource();
     }
 
     const SelectQuery& query() const {
-        return selection;
+        return query_.query();
     }
 
-    PersonRequest<true>& purpose(std::string_view text) {
-        return owner.make<PersonRequest<true>>(owner, selection, text);
+    const Query& runtimeQuery() const
+        requires(!Purposed)
+    {
+        return query_;
     }
 
-    PersonRequest& comment(std::string_view text) {
-        selection.comment(text);
+    request::QuerySelection selection() const
+        requires(!Purposed)
+    {
+        return query_.selection();
+    }
+
+    PersonRequest<true, Result> purpose(std::string_view text) const& {
+        return PersonRequest<true, Result>(query_.purpose(text));
+    }
+
+    PersonRequest<true, Result> purpose(std::string_view text) && {
+        return PersonRequest<true, Result>(std::move(query_).purpose(text));
+    }
+
+    template <Entity Return>
+    PersonRequest<Purposed, Return> returnType() const& {
+        return PersonRequest<Purposed, Return>(query_.template returnType<Return>());
+    }
+
+    template <Entity Return>
+    PersonRequest<Purposed, Return> returnType() && {
+        return PersonRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
+    }
+
+    PersonRequest& comment(std::string_view value) & {
+        query_.comment(value);
         return *this;
     }
 
-    PersonRequest& filter(Expr value) {
-        selection.filter(std::move(value));
+    PersonRequest&& comment(std::string_view value) && {
+        this->comment(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& filter(const Expr& value) & {
+        query_.filter(value);
         return *this;
     }
 
-    PersonRequest& and_filter(Expr value) {
-        selection.and_filter(std::move(value));
+    PersonRequest&& filter(const Expr& value) && {
+        this->filter(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectDynamicFields(const DynamicFieldSelection& value) & {
+        query_.selectDynamicFields(value);
         return *this;
     }
 
-    PersonRequest& or_filter(Expr value) {
-        selection.or_filter(std::move(value));
+    PersonRequest&& selectDynamicFields(const DynamicFieldSelection& value) && {
+        this->selectDynamicFields(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& matchTypes(std::span<const Value> value) & {
+        query_.matchTypes(value);
         return *this;
     }
 
-    PersonRequest& limit(std::uint64_t value) {
-        selection.limit(value);
+    PersonRequest&& matchTypes(std::span<const Value> value) && {
+        this->matchTypes(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& andFilter(const Expr& value) & {
+        query_.andFilter(value);
         return *this;
     }
 
-    PersonRequest& offset(std::uint64_t value) {
-        selection.offset(value);
+    PersonRequest&& andFilter(const Expr& value) && {
+        this->andFilter(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& orFilter(const Expr& value) & {
+        query_.orFilter(value);
         return *this;
     }
 
-    PersonRequest& hard_limit(std::uint64_t value) {
-        selection.hard_limit(value);
+    PersonRequest&& orFilter(const Expr& value) && {
+        this->orFilter(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& limit(std::uint64_t value) & {
+        query_.limit(value);
         return *this;
     }
 
-    PersonRequest& skip(std::uint64_t value) {
-        return offset(value);
+    PersonRequest&& limit(std::uint64_t value) && {
+        this->limit(value);
+        return std::move(*this);
     }
 
-    PersonRequest& search_with_text(std::string_view value) {
-        selection.search_with_text(value);
+    PersonRequest& offset(std::uint64_t value) & {
+        query_.offset(value);
         return *this;
     }
 
-    PersonRequest& select_self() {
-        selection.project("id");
-        selection.project("email");
-        selection.project("active");
-        selection.project("nickname");
-        selection.project("balance");
-        selection.project("height");
-        selection.project("ratio");
-        selection.project("age");
-        selection.project("birthday");
-        selection.project("updated_at");
-        selection.project("payload");
-        selection.project("version");
+    PersonRequest&& offset(std::uint64_t value) && {
+        this->offset(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& hardLimit(std::uint64_t value) & {
+        query_.hardLimit(value);
         return *this;
     }
 
-    PersonRequest& select_self_fields() {
-        return select_self();
+    PersonRequest&& hardLimit(std::uint64_t value) && {
+        this->hardLimit(value);
+        return std::move(*this);
     }
 
-    PurposedSelectQuery authorize(UserContext& user) const
+    PersonRequest& stream(std::size_t value) & {
+        query_.stream(value);
+        return *this;
+    }
+
+    PersonRequest&& stream(std::size_t value) && {
+        this->stream(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& unlimited() & {
+        query_.unlimited();
+        return *this;
+    }
+
+    PersonRequest&& unlimited() && {
+        this->unlimited();
+        return std::move(*this);
+    }
+
+    PersonRequest& withDeletedRows() & {
+        query_.withDeletedRows();
+        return *this;
+    }
+
+    PersonRequest&& withDeletedRows() && {
+        this->withDeletedRows();
+        return std::move(*this);
+    }
+
+    PersonRequest& deletedRowsOnly() & {
+        query_.deletedRowsOnly();
+        return *this;
+    }
+
+    PersonRequest&& deletedRowsOnly() && {
+        this->deletedRowsOnly();
+        return std::move(*this);
+    }
+
+    PersonRequest& appendSearchCriteria(const Expr& criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    PersonRequest&& appendSearchCriteria(const Expr& criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    PersonRequest& appendSearchCriteria(Ref<Expr> criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    PersonRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    PersonRequest&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) & {
+        query_.filterProperty(left, op, right);
+        return *this;
+    }
+
+    PersonRequest&&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) && {
+        this->filterProperty(left, op, right);
+        return std::move(*this);
+    }
+
+    PersonRequest& pageOffset(std::uint64_t offset, std::uint64_t size) & {
+        query_.pageOffset(offset, size);
+        return *this;
+    }
+
+    PersonRequest&& pageOffset(std::uint64_t offset, std::uint64_t size) && {
+        this->pageOffset(offset, size);
+        return std::move(*this);
+    }
+
+    PersonRequest& offset(std::uint64_t offset, std::uint64_t size) & {
+        query_.offset(offset, size);
+        return *this;
+    }
+
+    PersonRequest&& offset(std::uint64_t offset, std::uint64_t size) && {
+        this->offset(offset, size);
+        return std::move(*this);
+    }
+
+    PersonRequest& offsetOnly(std::uint64_t value) & {
+        query_.offsetOnly(value);
+        return *this;
+    }
+
+    PersonRequest&& offsetOnly(std::uint64_t value) && {
+        this->offsetOnly(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& offsetSize(std::uint64_t offset, std::uint64_t size) & {
+        query_.offsetSize(offset, size);
+        return *this;
+    }
+
+    PersonRequest&& offsetSize(std::uint64_t offset, std::uint64_t size) && {
+        this->offsetSize(offset, size);
+        return std::move(*this);
+    }
+
+    PersonRequest& top(std::uint64_t value) & {
+        query_.top(value);
+        return *this;
+    }
+
+    PersonRequest&& top(std::uint64_t value) && {
+        this->top(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& pageNumber(std::uint64_t number, std::uint64_t size) & {
+        query_.pageNumber(number, size);
+        return *this;
+    }
+
+    PersonRequest&& pageNumber(std::uint64_t number, std::uint64_t size) && {
+        this->pageNumber(number, size);
+        return std::move(*this);
+    }
+
+    PersonRequest& pageNumberDefault(std::uint64_t number) & {
+        query_.pageNumberDefault(number);
+        return *this;
+    }
+
+    PersonRequest&& pageNumberDefault(std::uint64_t number) && {
+        this->pageNumberDefault(number);
+        return std::move(*this);
+    }
+
+    PersonRequest& page(std::uint64_t number, std::uint64_t size) & {
+        query_.page(number, size);
+        return *this;
+    }
+
+    PersonRequest&& page(std::uint64_t number, std::uint64_t size) && {
+        this->page(number, size);
+        return std::move(*this);
+    }
+
+    PersonRequest& pageDefault(std::uint64_t number) & {
+        query_.pageDefault(number);
+        return *this;
+    }
+
+    PersonRequest&& pageDefault(std::uint64_t number) && {
+        this->pageDefault(number);
+        return std::move(*this);
+    }
+
+    PersonRequest& streamDefault() & {
+        query_.streamDefault();
+        return *this;
+    }
+
+    PersonRequest&& streamDefault() && {
+        this->streamDefault();
+        return std::move(*this);
+    }
+
+    PersonRequest& topNProbeParentThreshold(std::size_t threshold) & {
+        query_.topNProbeParentThreshold(threshold);
+        return *this;
+    }
+
+    PersonRequest&& topNProbeParentThreshold(std::size_t threshold) && {
+        this->topNProbeParentThreshold(threshold);
+        return std::move(*this);
+    }
+
+    PersonRequest& rawSql(std::string_view sql) & {
+        query_.rawSql(sql);
+        return *this;
+    }
+
+    PersonRequest&& rawSql(std::string_view sql) && {
+        this->rawSql(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& rawSqlFilter(std::string_view sql) & {
+        query_.rawSqlFilter(sql);
+        return *this;
+    }
+
+    PersonRequest&& rawSqlFilter(std::string_view sql) && {
+        this->rawSqlFilter(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& createPropertyAs(std::string_view field, std::string_view sql) & {
+        query_.createPropertyAs(field, sql);
+        return *this;
+    }
+
+    PersonRequest&& createPropertyAs(std::string_view field, std::string_view sql) && {
+        this->createPropertyAs(field, sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& unsafeRawSql(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSql(std::move(sql));
+        return *this;
+    }
+
+    PersonRequest&& unsafeRawSql(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSql(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSqlFilter(std::move(sql));
+        return *this;
+    }
+
+    PersonRequest&& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSqlFilter(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unsafeCreatePropertyAs(std::string_view field,
+                                          request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeCreatePropertyAs(field, std::move(sql));
+        return *this;
+    }
+
+    PersonRequest&& unsafeCreatePropertyAs(std::string_view field,
+                                           request::UnsafeRawSqlSegment sql) && {
+        this->unsafeCreatePropertyAs(field, std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& groupBy(std::string_view value) & {
+        query_.groupBy(value);
+        return *this;
+    }
+
+    PersonRequest&& groupBy(std::string_view value) && {
+        this->groupBy(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& countAs(std::string_view value) & {
+        query_.countAs(value);
+        return *this;
+    }
+
+    PersonRequest&& countAs(std::string_view value) && {
+        this->countAs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateCount(std::string_view value) & {
+        query_.aggregateCount(value);
+        return *this;
+    }
+
+    PersonRequest&& aggregateCount(std::string_view value) && {
+        this->aggregateCount(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& count() & {
+        query_.count();
+        return *this;
+    }
+
+    PersonRequest&& count() && {
+        this->count();
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateWithFunction(std::string_view field,
+                                         std::string_view alias,
+                                         AggregateFunction function) & {
+        query_.aggregateWithFunction(field, alias, function);
+        return *this;
+    }
+
+    PersonRequest&& aggregateWithFunction(std::string_view field,
+                                          std::string_view alias,
+                                          AggregateFunction function) && {
+        this->aggregateWithFunction(field, alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateCountField(std::string_view field, std::string_view alias) & {
+        query_.aggregateCountField(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateCountField(std::string_view field, std::string_view alias) && {
+        this->aggregateCountField(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateSum(std::string_view field, std::string_view alias) & {
+        query_.aggregateSum(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateSum(std::string_view field, std::string_view alias) && {
+        this->aggregateSum(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateAvg(std::string_view field, std::string_view alias) & {
+        query_.aggregateAvg(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateAvg(std::string_view field, std::string_view alias) && {
+        this->aggregateAvg(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateMin(std::string_view field, std::string_view alias) & {
+        query_.aggregateMin(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateMin(std::string_view field, std::string_view alias) && {
+        this->aggregateMin(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateMax(std::string_view field, std::string_view alias) & {
+        query_.aggregateMax(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateMax(std::string_view field, std::string_view alias) && {
+        this->aggregateMax(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateStddev(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddev(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateStddev(std::string_view field, std::string_view alias) && {
+        this->aggregateStddev(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateStddevPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddevPop(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateStddevPop(std::string_view field, std::string_view alias) && {
+        this->aggregateStddevPop(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateVarSamp(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarSamp(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateVarSamp(std::string_view field, std::string_view alias) && {
+        this->aggregateVarSamp(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateVarPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarPop(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateVarPop(std::string_view field, std::string_view alias) && {
+        this->aggregateVarPop(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateBitAnd(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitAnd(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateBitAnd(std::string_view field, std::string_view alias) && {
+        this->aggregateBitAnd(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateBitOr(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitOr(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateBitOr(std::string_view field, std::string_view alias) && {
+        this->aggregateBitOr(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& aggregateBitXor(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitXor(field, alias);
+        return *this;
+    }
+
+    PersonRequest&& aggregateBitXor(std::string_view field, std::string_view alias) && {
+        this->aggregateBitXor(field, alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& enableAggregationCache() & {
+        query_.enableAggregationCache();
+        return *this;
+    }
+
+    PersonRequest&& enableAggregationCache() && {
+        this->enableAggregationCache();
+        return std::move(*this);
+    }
+
+    PersonRequest& enableAggregationCacheFor(std::uint64_t duration) & {
+        query_.enableAggregationCacheFor(duration);
+        return *this;
+    }
+
+    PersonRequest&& enableAggregationCacheFor(std::uint64_t duration) && {
+        this->enableAggregationCacheFor(duration);
+        return std::move(*this);
+    }
+
+    PersonRequest& propagateAggregationCache(std::uint64_t duration) & {
+        query_.propagateAggregationCache(duration);
+        return *this;
+    }
+
+    PersonRequest&& propagateAggregationCache(std::uint64_t duration) && {
+        this->propagateAggregationCache(duration);
+        return std::move(*this);
+    }
+
+    PersonRequest& optimizePaginationWithIdSet() & {
+        query_.optimizePaginationWithIdSet();
+        return *this;
+    }
+
+    PersonRequest&& optimizePaginationWithIdSet() && {
+        this->optimizePaginationWithIdSet();
+        return std::move(*this);
+    }
+
+    PersonRequest& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                     std::uint64_t ttl,
+                                                     std::uint64_t max_ids) & {
+        query_.optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return *this;
+    }
+
+    PersonRequest&& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                      std::uint64_t ttl,
+                                                      std::uint64_t max_ids) && {
+        this->optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return std::move(*this);
+    }
+
+    PersonRequest& optimizeForContinuousPageFetch() & {
+        query_.optimizeForContinuousPageFetch();
+        return *this;
+    }
+
+    PersonRequest&& optimizeForContinuousPageFetch() && {
+        this->optimizeForContinuousPageFetch();
+        return std::move(*this);
+    }
+
+    PersonRequest& optimizeForContinuousPageFetchWith(std::string_view name, std::uint64_t ttl) & {
+        query_.optimizeForContinuousPageFetchWith(name, ttl);
+        return *this;
+    }
+
+    PersonRequest&& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                       std::uint64_t ttl) && {
+        this->optimizeForContinuousPageFetchWith(name, ttl);
+        return std::move(*this);
+    }
+
+    PersonRequest& filterWithJson(std::string_view value) & {
+        apply_generated_dynamic_json<generated_detail::PersonDynamicJsonRecipe>(query_, value);
+        return *this;
+    }
+
+    PersonRequest&& filterWithJson(std::string_view value) && {
+        this->filterWithJson(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& withTypeGroup() & {
+        query_.withTypeGroup();
+        return *this;
+    }
+
+    PersonRequest&& withTypeGroup() && {
+        this->withTypeGroup();
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    PersonRequest& enhanceChild(const ChildRequest& child) & {
+        query_.enhanceChild(child.query_);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    PersonRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& matchingAnyOf(const ChildRequest& child) & {
+        query_.matchingAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& matchingAnyOf(const ChildRequest& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& matchingAnyOf(const SelectQuery& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    PersonRequest&& matchingAnyOf(const SelectQuery& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& matchingAnyOf(const request::QuerySelection& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    PersonRequest&& matchingAnyOf(const request::QuerySelection& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest& matchAnyOf(const ChildRequest& child) & {
+        query_.matchAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    PersonRequest&& matchAnyOf(const ChildRequest& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& matchAnyOf(const SelectQuery& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    PersonRequest&& matchAnyOf(const SelectQuery& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& matchAnyOf(const request::QuerySelection& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    PersonRequest&& matchAnyOf(const request::QuerySelection& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& enhanceChildrenIfNeeded() &;
+
+    PersonRequest&& enhanceChildrenIfNeeded() && {
+        enhanceChildrenIfNeeded();
+        return std::move(*this);
+    }
+
+    PersonRequest& skip(std::uint64_t value) & {
+        query_.offset(value);
+        return *this;
+    }
+
+    PersonRequest&& skip(std::uint64_t value) && {
+        this->skip(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& searchWithText(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.search_with_text(value);
+        });
+        return *this;
+    }
+
+    PersonRequest&& searchWithText(std::string_view value) && {
+        this->searchWithText(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectSelf() & {
+        query_.select("id");
+        query_.select("email");
+        query_.select("active");
+        query_.select("nickname");
+        query_.select("balance");
+        query_.select("height");
+        query_.select("ratio");
+        query_.select("age");
+        query_.select("birthday");
+        query_.select("updated_at");
+        query_.select("payload");
+        query_.select("version");
+        return *this;
+    }
+
+    PersonRequest&& selectSelf() && {
+        this->selectSelf();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectSelfFields() & {
+        selectSelf();
+        return *this;
+    }
+
+    PersonRequest&& selectSelfFields() && {
+        this->selectSelfFields();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectSelfWithoutParent() & {
+        selectSelfFields();
+        return *this;
+    }
+
+    PersonRequest&& selectSelfWithoutParent() && {
+        this->selectSelfWithoutParent();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectAll() & {
+        selectSelf();
+        return *this;
+    }
+
+    PersonRequest&& selectAll() && {
+        this->selectAll();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectChildren() & {
+        selectAll();
+        selectDeviceList();
+        return *this;
+    }
+
+    PersonRequest&& selectChildren() && {
+        this->selectChildren();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectAny() & {
+        selectChildren();
+        return *this;
+    }
+
+    PersonRequest&& selectAny() && {
+        this->selectAny();
+        return std::move(*this);
+    }
+
+    auto& executeForList(UserContext& user_context) const
         requires Purposed
     {
-        if (&user != &owner) {
-            throw std::invalid_argument("Request execution cannot cross UserContexts");
-        }
-        auto comment =
-            selection.comment_text ? std::string_view(*selection.comment_text) : std::string_view{};
-        auto blank = [](std::string_view value) {
-            detail::trim(value);
-            return value.empty();
-        };
-        if (blank(intent) || blank(comment)) {
-            throw std::invalid_argument("Query execution requires nonblank purpose and comment");
-        }
-        return PurposedSelectQuery(
-            std::allocator_arg, Allocator(memory_resource()), selection, intent);
+        return query_.executeForList(user_context);
     }
 
-    auto& execute_for_list(UserContext& user) const
+    auto& executeForOne(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Person::ENTITY_NAME);
-        return require_value(repository).get().template fetch_enhanced_entities<Person>(query);
+        return query_.executeForOne(user_context);
     }
 
-    auto& execute_for_entity_list(UserContext& user) const
+    auto& executeForFirst(UserContext& user_context) const
         requires Purposed
     {
-        return execute_for_list(user);
+        return query_.executeForFirst(user_context);
     }
 
-    auto& execute(UserContext& user) const
+    auto& executeForCount(UserContext& user_context) const
         requires Purposed
     {
-        auto& request = owner.make<PersonRequest<true>>(owner, selection, intent);
-        request.limit(1);
-        auto& source = request.execute_for_list(user);
-        using Error = DataServiceError<DataServiceExecutor::Error>;
-        using State = generated_detail::SingleResult<Person, Error>;
-        return make_operation<typename State::Output, State>(memory_resource(), source);
+        return query_.executeForCount(user_context);
     }
 
-    auto& execute_for_entity(UserContext& user) const
+    auto& executeForExists(UserContext& user_context) const
         requires Purposed
     {
-        return execute(user);
+        return query_.executeForExists(user_context);
     }
 
-    auto& execute_for_rows(UserContext& user) const
+    auto& executeForStream(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Person::ENTITY_NAME);
-        return require_value(repository).get().fetch_smart_list(query);
+        return query_.executeForStream(user_context);
     }
 
-    Person& new_entity(UserContext& user) const
+    auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
         requires Purposed
     {
-        (void)authorize(user);
-        auto& value = user.make<Person>();
-        value.update_id(require_value(user.next_id(Person::ENTITY_NAME)));
-        value.mark_as_new();
-        return value;
+        return query_.executeForPage(user_context, offset, limit);
     }
 
-    PersonRequest& select_id() {
-        selection.project("id");
-        return *this;
+    auto& execute(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
     }
 
-    PersonRequest& order_by_id_asc() {
-        selection.order_asc("id");
-        return *this;
+    auto& executeForEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
     }
 
-    PersonRequest& order_by_id_desc() {
-        selection.order_desc("id");
-        return *this;
+    auto& executeForEntityList(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForList(user_context);
     }
 
-    PersonRequest& whose_id_is(const std::uint64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "id", value));
-        return *this;
+    auto& executeForRows(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForRows(user_context);
     }
 
-    PersonRequest& whose_id_is_not(const std::uint64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "id", value));
-        return *this;
+    Person& newEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.newEntity(user_context);
     }
 
-    PersonRequest& whose_id_greater_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "id", value));
-        return *this;
+    PersonRequest copyTo(UserContext& user_context) const {
+        return PersonRequest(query_.copyTo(user_context));
     }
 
-    PersonRequest& whose_id_greater_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "id", value));
-        return *this;
+    PersonRequest copyToGlobal(UserContext& user_context) const {
+        return PersonRequest(query_.copyToGlobal(user_context));
     }
 
-    PersonRequest& whose_id_less_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "id", value));
-        return *this;
+    PersonRequest rebindGlobal(UserContext& user_context) const {
+        return PersonRequest(query_.rebindGlobal(user_context));
     }
 
-    PersonRequest& whose_id_less_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "id", value));
+    PersonRequest& selectId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("id");
+        });
         return *this;
     }
 
-    PersonRequest& whose_id_between(const std::uint64_t& lower, const std::uint64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "id", lower, upper));
-        return *this;
+    PersonRequest&& selectId() && {
+        this->selectId();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_id_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, false));
+    PersonRequest& orderByIdAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("id");
+        });
         return *this;
     }
 
-    PersonRequest& whose_id_not_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, true));
-        return *this;
+    PersonRequest&& orderByIdAsc() && {
+        this->orderByIdAsc();
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_id() {
-        selection.group_by("id");
+    PersonRequest& orderByIdDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("id");
+        });
         return *this;
     }
 
-    PersonRequest& whose_id_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "id"));
-        return *this;
+    PersonRequest&& orderByIdDesc() && {
+        this->orderByIdDesc();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_id_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+    PersonRequest& orderByIdAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("id");
+        });
         return *this;
     }
 
-    PersonRequest& select_email() {
-        selection.project("email");
-        return *this;
+    PersonRequest&& orderByIdAscUsingGbk() && {
+        this->orderByIdAscUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_email_asc() {
-        selection.order_asc("email");
+    PersonRequest& orderByIdDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("id");
+        });
         return *this;
     }
 
-    PersonRequest& order_by_email_desc() {
-        selection.order_desc("email");
-        return *this;
+    PersonRequest&& orderByIdDescUsingGbk() && {
+        this->orderByIdDescUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_is(std::string_view value) {
-        selection.and_filter(Expr::eq(memory_resource(), "email", value));
+    PersonRequest& whoseIdIs(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& whose_email_is_not(std::string_view value) {
-        selection.and_filter(Expr::ne(memory_resource(), "email", value));
-        return *this;
+    PersonRequest&& whoseIdIs(const std::uint64_t& value) && {
+        this->whoseIdIs(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_greater_than(std::string_view value) {
-        selection.and_filter(Expr::gt(memory_resource(), "email", value));
+    PersonRequest& whoseIdIsNot(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& whose_email_greater_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::gte(memory_resource(), "email", value));
-        return *this;
+    PersonRequest&& whoseIdIsNot(const std::uint64_t& value) && {
+        this->whoseIdIsNot(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_less_than(std::string_view value) {
-        selection.and_filter(Expr::lt(memory_resource(), "email", value));
+    PersonRequest& whoseIdGreaterThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& whose_email_less_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::lte(memory_resource(), "email", value));
-        return *this;
+    PersonRequest&& whoseIdGreaterThan(const std::uint64_t& value) && {
+        this->whoseIdGreaterThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_between(std::string_view lower, std::string_view upper) {
-        selection.and_filter(Expr::between(memory_resource(), "email", lower, upper));
+    PersonRequest& whoseIdGreaterThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& whose_email_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "email", values, false));
-        return *this;
+    PersonRequest&& whoseIdGreaterThanOrEqualTo(const std::uint64_t& value) && {
+        this->whoseIdGreaterThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_not_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "email", values, true));
+    PersonRequest& whoseIdLessThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& group_by_email() {
-        selection.group_by("email");
-        return *this;
+    PersonRequest&& whoseIdLessThan(const std::uint64_t& value) && {
+        this->whoseIdLessThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& sum_email_as(std::string_view alias) {
-        selection.sum("email", alias);
+    PersonRequest& whoseIdLessThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& avg_email_as(std::string_view alias) {
-        selection.avg("email", alias);
-        return *this;
+    PersonRequest&& whoseIdLessThanOrEqualTo(const std::uint64_t& value) && {
+        this->whoseIdLessThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& min_email_as(std::string_view alias) {
-        selection.min("email", alias);
+    PersonRequest& whoseIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "id",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    PersonRequest& max_email_as(std::string_view alias) {
-        selection.max("email", alias);
-        return *this;
+    PersonRequest&& whoseIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) && {
+        this->whoseIdBetween(lower, upper);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_contains(std::string_view value) {
-        selection.and_filter(Expr::contain(memory_resource(), "email", value));
+    PersonRequest& whoseIdIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, false));
+        });
         return *this;
     }
 
-    PersonRequest& whose_email_starts_with(std::string_view value) {
-        selection.and_filter(Expr::begin_with(memory_resource(), "email", value));
-        return *this;
+    PersonRequest&& whoseIdIn(std::span<const std::uint64_t> inputs) && {
+        this->whoseIdIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_ends_with(std::string_view value) {
-        selection.and_filter(Expr::end_with(memory_resource(), "email", value));
+    PersonRequest& whoseIdNotIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, true));
+        });
         return *this;
     }
 
-    PersonRequest& whose_email_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "email"));
-        return *this;
+    PersonRequest&& whoseIdNotIn(std::span<const std::uint64_t> inputs) && {
+        this->whoseIdNotIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_email_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "email"));
+    PersonRequest& groupById() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+        });
         return *this;
     }
 
-    PersonRequest& select_active() {
-        selection.project("active");
-        return *this;
+    PersonRequest&& groupById() && {
+        this->groupById();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_active_asc() {
-        selection.order_asc("active");
+    PersonRequest& groupByIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.selectAs("id", alias);
+        });
         return *this;
     }
 
-    PersonRequest& order_by_active_desc() {
-        selection.order_desc("active");
-        return *this;
+    PersonRequest&& groupByIdAs(std::string_view alias) && {
+        this->groupByIdAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& who_are_active() {
-        selection.and_filter(Expr::eq(memory_resource(), "active", true));
+    PersonRequest& groupByIdWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.aggregateWithFunction("id", alias, function);
+        });
         return *this;
     }
 
-    PersonRequest& who_are_not_active() {
-        selection.and_filter(Expr::eq(memory_resource(), "active", false));
-        return *this;
+    PersonRequest&& groupByIdWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->groupByIdWithFunction(alias, function);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_active_is(const bool& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "active", value));
+    PersonRequest& countId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", "id_count");
+        });
         return *this;
     }
 
-    PersonRequest& whose_active_is_not(const bool& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "active", value));
-        return *this;
+    PersonRequest&& countId() && {
+        this->countId();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_active_greater_than(const bool& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "active", value));
+    PersonRequest& countIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", alias);
+        });
         return *this;
     }
 
-    PersonRequest& whose_active_greater_than_or_equal_to(const bool& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "active", value));
-        return *this;
+    PersonRequest&& countIdAs(std::string_view alias) && {
+        this->countIdAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_active_less_than(const bool& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "active", value));
+    PersonRequest& sumId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", "sum_id");
+        });
         return *this;
     }
 
-    PersonRequest& whose_active_less_than_or_equal_to(const bool& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "active", value));
-        return *this;
+    PersonRequest&& sumId() && {
+        this->sumId();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_active_between(const bool& lower, const bool& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "active", lower, upper));
+    PersonRequest& sumIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", alias);
+        });
         return *this;
     }
 
-    PersonRequest& whose_active_in(std::span<const bool> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "active", values, false));
-        return *this;
+    PersonRequest&& sumIdAs(std::string_view alias) && {
+        this->sumIdAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_active_not_in(std::span<const bool> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "active", values, true));
+    PersonRequest& avgId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", "avg_id");
+        });
         return *this;
     }
 
-    PersonRequest& group_by_active() {
-        selection.group_by("active");
-        return *this;
+    PersonRequest&& avgId() && {
+        this->avgId();
+        return std::move(*this);
     }
 
-    PersonRequest& sum_active_as(std::string_view alias) {
-        selection.sum("active", alias);
+    PersonRequest& avgIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", alias);
+        });
         return *this;
     }
 
-    PersonRequest& avg_active_as(std::string_view alias) {
-        selection.avg("active", alias);
-        return *this;
+    PersonRequest&& avgIdAs(std::string_view alias) && {
+        this->avgIdAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& min_active_as(std::string_view alias) {
-        selection.min("active", alias);
+    PersonRequest& minId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", "min_id");
+        });
         return *this;
     }
 
-    PersonRequest& max_active_as(std::string_view alias) {
-        selection.max("active", alias);
-        return *this;
+    PersonRequest&& minId() && {
+        this->minId();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_active_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "active"));
+    PersonRequest& minIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", alias);
+        });
         return *this;
     }
 
-    PersonRequest& whose_active_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "active"));
-        return *this;
+    PersonRequest&& minIdAs(std::string_view alias) && {
+        this->minIdAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& select_nickname() {
-        selection.project("nickname");
+    PersonRequest& maxId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", "max_id");
+        });
         return *this;
     }
 
-    PersonRequest& order_by_nickname_asc() {
-        selection.order_asc("nickname");
-        return *this;
+    PersonRequest&& maxId() && {
+        this->maxId();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_nickname_desc() {
-        selection.order_desc("nickname");
+    PersonRequest& maxIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", alias);
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_is(std::string_view value) {
-        selection.and_filter(Expr::eq(memory_resource(), "nickname", value));
-        return *this;
+    PersonRequest&& maxIdAs(std::string_view alias) && {
+        this->maxIdAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_nickname_is_not(std::string_view value) {
-        selection.and_filter(Expr::ne(memory_resource(), "nickname", value));
+    PersonRequest& whoseIdIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_greater_than(std::string_view value) {
-        selection.and_filter(Expr::gt(memory_resource(), "nickname", value));
-        return *this;
+    PersonRequest&& whoseIdIsUnknown() && {
+        this->whoseIdIsUnknown();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_nickname_greater_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::gte(memory_resource(), "nickname", value));
+    PersonRequest& whoseIdIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_less_than(std::string_view value) {
-        selection.and_filter(Expr::lt(memory_resource(), "nickname", value));
-        return *this;
+    PersonRequest&& whoseIdIsKnown() && {
+        this->whoseIdIsKnown();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_nickname_less_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::lte(memory_resource(), "nickname", value));
+    PersonRequest& whoseIdIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_between(std::string_view lower, std::string_view upper) {
-        selection.and_filter(Expr::between(memory_resource(), "nickname", lower, upper));
-        return *this;
+    PersonRequest&& whoseIdIsNull() && {
+        this->whoseIdIsNull();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_nickname_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "nickname", values, false));
+    PersonRequest& whoseIdIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_not_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "nickname", values, true));
-        return *this;
+    PersonRequest&& whoseIdIsNotNull() && {
+        this->whoseIdIsNotNull();
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_nickname() {
-        selection.group_by("nickname");
+    PersonRequest& whoseEmailIsString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "email", "string()"));
+        });
         return *this;
     }
 
-    PersonRequest& sum_nickname_as(std::string_view alias) {
-        selection.sum("nickname", alias);
-        return *this;
+    PersonRequest&& whoseEmailIsString() && {
+        this->whoseEmailIsString();
+        return std::move(*this);
     }
 
-    PersonRequest& avg_nickname_as(std::string_view alias) {
-        selection.avg("nickname", alias);
+    PersonRequest& whoseEmailIsNotString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "email", "string()"));
+        });
         return *this;
     }
 
-    PersonRequest& min_nickname_as(std::string_view alias) {
-        selection.min("nickname", alias);
-        return *this;
+    PersonRequest&& whoseEmailIsNotString() && {
+        this->whoseEmailIsNotString();
+        return std::move(*this);
     }
 
-    PersonRequest& max_nickname_as(std::string_view alias) {
-        selection.max("nickname", alias);
+    PersonRequest& selectEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_contains(std::string_view value) {
-        selection.and_filter(Expr::contain(memory_resource(), "nickname", value));
-        return *this;
+    PersonRequest&& selectEmail() && {
+        this->selectEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_nickname_starts_with(std::string_view value) {
-        selection.and_filter(Expr::begin_with(memory_resource(), "nickname", value));
+    PersonRequest& projectEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_ends_with(std::string_view value) {
-        selection.and_filter(Expr::end_with(memory_resource(), "nickname", value));
-        return *this;
+    PersonRequest&& projectEmail() && {
+        this->projectEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_nickname_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "nickname"));
+    PersonRequest& selectEmailRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("email", sql);
+        });
         return *this;
     }
 
-    PersonRequest& whose_nickname_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "nickname"));
-        return *this;
+    PersonRequest&& selectEmailRaw(std::string_view sql) && {
+        this->selectEmailRaw(sql);
+        return std::move(*this);
     }
 
-    PersonRequest& select_balance() {
-        selection.project("balance");
+    PersonRequest& selectEmailUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("email", std::move(sql));
+        });
         return *this;
     }
 
-    PersonRequest& order_by_balance_asc() {
-        selection.order_asc("balance");
-        return *this;
+    PersonRequest&& selectEmailUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectEmailUnsafeRaw(std::move(sql));
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_balance_desc() {
-        selection.order_desc("balance");
+    PersonRequest& unselectEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_balance_is(const Decimal& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "balance", value));
-        return *this;
+    PersonRequest&& unselectEmail() && {
+        this->unselectEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_balance_is_not(const Decimal& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "balance", value));
+    PersonRequest& orderByEmailAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_balance_greater_than(const Decimal& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "balance", value));
-        return *this;
+    PersonRequest&& orderByEmailAsc() && {
+        this->orderByEmailAsc();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_balance_greater_than_or_equal_to(const Decimal& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "balance", value));
+    PersonRequest& orderByEmailDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_balance_less_than(const Decimal& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "balance", value));
-        return *this;
+    PersonRequest&& orderByEmailDesc() && {
+        this->orderByEmailDesc();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_balance_less_than_or_equal_to(const Decimal& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "balance", value));
+    PersonRequest& orderByEmailAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_balance_between(const Decimal& lower, const Decimal& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "balance", lower, upper));
-        return *this;
+    PersonRequest&& orderByEmailAscUsingGbk() && {
+        this->orderByEmailAscUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_balance_in(std::span<const Decimal> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "balance", values, false));
+    PersonRequest& orderByEmailDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_balance_not_in(std::span<const Decimal> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "balance", values, true));
-        return *this;
+    PersonRequest&& orderByEmailDescUsingGbk() && {
+        this->orderByEmailDescUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_balance() {
-        selection.group_by("balance");
+    PersonRequest& whoseEmailIs(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "email", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& sum_balance_as(std::string_view alias) {
-        selection.sum("balance", alias);
-        return *this;
+    PersonRequest&& whoseEmailIs(std::string_view value) && {
+        this->whoseEmailIs(value);
+        return std::move(*this);
     }
 
-    PersonRequest& avg_balance_as(std::string_view alias) {
-        selection.avg("balance", alias);
+    PersonRequest& whoseEmailIsNot(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "email", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& min_balance_as(std::string_view alias) {
-        selection.min("balance", alias);
-        return *this;
+    PersonRequest&& whoseEmailIsNot(std::string_view value) && {
+        this->whoseEmailIsNot(value);
+        return std::move(*this);
     }
 
-    PersonRequest& max_balance_as(std::string_view alias) {
-        selection.max("balance", alias);
+    PersonRequest& whoseEmailGreaterThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "email", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& whose_balance_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "balance"));
-        return *this;
+    PersonRequest&& whoseEmailGreaterThan(std::string_view value) && {
+        this->whoseEmailGreaterThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_balance_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "balance"));
+    PersonRequest& whoseEmailGreaterThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "email", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& select_height() {
-        selection.project("height");
-        return *this;
+    PersonRequest&& whoseEmailGreaterThanOrEqualTo(std::string_view value) && {
+        this->whoseEmailGreaterThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_height_asc() {
-        selection.order_asc("height");
+    PersonRequest& whoseEmailLessThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "email", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& order_by_height_desc() {
-        selection.order_desc("height");
-        return *this;
+    PersonRequest&& whoseEmailLessThan(std::string_view value) && {
+        this->whoseEmailLessThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_height_is(const double& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "height", value));
+    PersonRequest& whoseEmailLessThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "email", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    PersonRequest& whose_height_is_not(const double& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "height", value));
-        return *this;
+    PersonRequest&& whoseEmailLessThanOrEqualTo(std::string_view value) && {
+        this->whoseEmailLessThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_height_greater_than(const double& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "height", value));
+    PersonRequest& whoseEmailBetween(std::string_view lower, std::string_view upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "email",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    PersonRequest& whose_height_greater_than_or_equal_to(const double& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "height", value));
-        return *this;
+    PersonRequest&& whoseEmailBetween(std::string_view lower, std::string_view upper) && {
+        this->whoseEmailBetween(lower, upper);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_height_less_than(const double& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "height", value));
+    PersonRequest& whoseEmailIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "email", values, false));
+        });
         return *this;
     }
 
-    PersonRequest& whose_height_less_than_or_equal_to(const double& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "height", value));
-        return *this;
+    PersonRequest&& whoseEmailIn(std::span<const String> inputs) && {
+        this->whoseEmailIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_height_between(const double& lower, const double& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "height", lower, upper));
+    PersonRequest& whoseEmailNotIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "email", values, true));
+        });
         return *this;
     }
 
-    PersonRequest& whose_height_in(std::span<const double> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "height", values, false));
-        return *this;
+    PersonRequest&& whoseEmailNotIn(std::span<const String> inputs) && {
+        this->whoseEmailNotIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_height_not_in(std::span<const double> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "height", values, true));
+    PersonRequest& groupByEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("email");
+        });
         return *this;
     }
 
-    PersonRequest& group_by_height() {
-        selection.group_by("height");
-        return *this;
+    PersonRequest&& groupByEmail() && {
+        this->groupByEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& sum_height_as(std::string_view alias) {
-        selection.sum("height", alias);
+    PersonRequest& groupByEmailAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("email");
+            query_.selectAs("email", alias);
+        });
         return *this;
     }
 
-    PersonRequest& avg_height_as(std::string_view alias) {
-        selection.avg("height", alias);
-        return *this;
+    PersonRequest&& groupByEmailAs(std::string_view alias) && {
+        this->groupByEmailAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& min_height_as(std::string_view alias) {
-        selection.min("height", alias);
+    PersonRequest& groupByEmailWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("email");
+            query_.aggregateWithFunction("email", alias, function);
+        });
         return *this;
     }
 
-    PersonRequest& max_height_as(std::string_view alias) {
-        selection.max("height", alias);
-        return *this;
+    PersonRequest&& groupByEmailWithFunction(std::string_view alias,
+                                             AggregateFunction function) && {
+        this->groupByEmailWithFunction(alias, function);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_height_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "height"));
+    PersonRequest& countEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("email", "email_count");
+        });
         return *this;
     }
 
-    PersonRequest& whose_height_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "height"));
-        return *this;
+    PersonRequest&& countEmail() && {
+        this->countEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& select_ratio() {
-        selection.project("ratio");
+    PersonRequest& countEmailAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("email", alias);
+        });
         return *this;
     }
 
-    PersonRequest& order_by_ratio_asc() {
-        selection.order_asc("ratio");
-        return *this;
+    PersonRequest&& countEmailAs(std::string_view alias) && {
+        this->countEmailAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_ratio_desc() {
-        selection.order_desc("ratio");
+    PersonRequest& sumEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("email", "sum_email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_ratio_is(const float& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "ratio", value));
-        return *this;
+    PersonRequest&& sumEmail() && {
+        this->sumEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_ratio_is_not(const float& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "ratio", value));
+    PersonRequest& sumEmailAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("email", alias);
+        });
         return *this;
     }
 
-    PersonRequest& whose_ratio_greater_than(const float& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "ratio", value));
-        return *this;
+    PersonRequest&& sumEmailAs(std::string_view alias) && {
+        this->sumEmailAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_ratio_greater_than_or_equal_to(const float& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "ratio", value));
+    PersonRequest& avgEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("email", "avg_email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_ratio_less_than(const float& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "ratio", value));
-        return *this;
+    PersonRequest&& avgEmail() && {
+        this->avgEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_ratio_less_than_or_equal_to(const float& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "ratio", value));
+    PersonRequest& avgEmailAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("email", alias);
+        });
         return *this;
     }
 
-    PersonRequest& whose_ratio_between(const float& lower, const float& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "ratio", lower, upper));
-        return *this;
+    PersonRequest&& avgEmailAs(std::string_view alias) && {
+        this->avgEmailAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_ratio_in(std::span<const float> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "ratio", values, false));
+    PersonRequest& minEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("email", "min_email");
+        });
         return *this;
     }
 
-    PersonRequest& whose_ratio_not_in(std::span<const float> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "ratio", values, true));
-        return *this;
+    PersonRequest&& minEmail() && {
+        this->minEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_ratio() {
-        selection.group_by("ratio");
+    PersonRequest& minEmailAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("email", alias);
+        });
         return *this;
     }
 
-    PersonRequest& sum_ratio_as(std::string_view alias) {
-        selection.sum("ratio", alias);
-        return *this;
+    PersonRequest&& minEmailAs(std::string_view alias) && {
+        this->minEmailAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& avg_ratio_as(std::string_view alias) {
-        selection.avg("ratio", alias);
+    PersonRequest& maxEmail() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("email", "max_email");
+        });
         return *this;
     }
 
-    PersonRequest& min_ratio_as(std::string_view alias) {
-        selection.min("ratio", alias);
-        return *this;
+    PersonRequest&& maxEmail() && {
+        this->maxEmail();
+        return std::move(*this);
     }
 
-    PersonRequest& max_ratio_as(std::string_view alias) {
-        selection.max("ratio", alias);
+    PersonRequest& maxEmailAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("email", alias);
+        });
         return *this;
     }
 
-    PersonRequest& whose_ratio_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "ratio"));
-        return *this;
+    PersonRequest&& maxEmailAs(std::string_view alias) && {
+        this->maxEmailAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_ratio_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "ratio"));
+    PersonRequest& whoseEmailContains(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::contain(memory_resource(), "email", value));
+        });
         return *this;
     }
 
-    PersonRequest& select_age() {
-        selection.project("age");
-        return *this;
+    PersonRequest&& whoseEmailContains(std::string_view value) && {
+        this->whoseEmailContains(value);
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_age_asc() {
-        selection.order_asc("age");
+    PersonRequest& whoseEmailStartsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::begin_with(memory_resource(), "email", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailStartsWith(std::string_view value) && {
+        this->whoseEmailStartsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_age_desc() {
-        selection.order_desc("age");
+    PersonRequest& whoseEmailEndsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::end_with(memory_resource(), "email", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailEndsWith(std::string_view value) && {
+        this->whoseEmailEndsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_is(const std::int64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "age", value));
+    PersonRequest& whoseEmailNotContains(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_contain(memory_resource(), "email", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailNotContains(std::string_view value) && {
+        this->whoseEmailNotContains(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_is_not(const std::int64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "age", value));
+    PersonRequest& whoseEmailNotStartsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_begin_with(memory_resource(), "email", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailNotStartsWith(std::string_view value) && {
+        this->whoseEmailNotStartsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_greater_than(const std::int64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "age", value));
+    PersonRequest& whoseEmailNotEndsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_end_with(memory_resource(), "email", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailNotEndsWith(std::string_view value) && {
+        this->whoseEmailNotEndsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_greater_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "age", value));
+    PersonRequest& whoseEmailSoundsLike(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::sound_like(memory_resource(), "email", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailSoundsLike(std::string_view value) && {
+        this->whoseEmailSoundsLike(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_less_than(const std::int64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "age", value));
+    PersonRequest& whoseEmailIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "email"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailIsUnknown() && {
+        this->whoseEmailIsUnknown();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_less_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "age", value));
+    PersonRequest& whoseEmailIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "email"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailIsKnown() && {
+        this->whoseEmailIsKnown();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_between(const std::int64_t& lower, const std::int64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "age", lower, upper));
+    PersonRequest& whoseEmailIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "email"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailIsNull() && {
+        this->whoseEmailIsNull();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "age", values, false));
+    PersonRequest& whoseEmailIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "email"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseEmailIsNotNull() && {
+        this->whoseEmailIsNotNull();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_not_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "age", values, true));
+    PersonRequest& whoseActiveIsTrue() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "active", "true"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIsTrue() && {
+        this->whoseActiveIsTrue();
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_age() {
-        selection.group_by("age");
+    PersonRequest& whoseActiveIsNotTrue() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "active", "true"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIsNotTrue() && {
+        this->whoseActiveIsNotTrue();
+        return std::move(*this);
     }
 
-    PersonRequest& sum_age_as(std::string_view alias) {
-        selection.sum("age", alias);
+    PersonRequest& selectActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& selectActive() && {
+        this->selectActive();
+        return std::move(*this);
     }
 
-    PersonRequest& avg_age_as(std::string_view alias) {
-        selection.avg("age", alias);
+    PersonRequest& projectActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& projectActive() && {
+        this->projectActive();
+        return std::move(*this);
     }
 
-    PersonRequest& min_age_as(std::string_view alias) {
-        selection.min("age", alias);
+    PersonRequest& selectActiveRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("active", sql);
+        });
         return *this;
+    }
+
+    PersonRequest&& selectActiveRaw(std::string_view sql) && {
+        this->selectActiveRaw(sql);
+        return std::move(*this);
     }
 
-    PersonRequest& max_age_as(std::string_view alias) {
-        selection.max("age", alias);
+    PersonRequest& selectActiveUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("active", std::move(sql));
+        });
         return *this;
+    }
+
+    PersonRequest&& selectActiveUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectActiveUnsafeRaw(std::move(sql));
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "age"));
+    PersonRequest& unselectActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& unselectActive() && {
+        this->unselectActive();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_age_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "age"));
+    PersonRequest& orderByActiveAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByActiveAsc() && {
+        this->orderByActiveAsc();
+        return std::move(*this);
     }
 
-    PersonRequest& select_birthday() {
-        selection.project("birthday");
+    PersonRequest& orderByActiveDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByActiveDesc() && {
+        this->orderByActiveDesc();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_birthday_asc() {
-        selection.order_asc("birthday");
+    PersonRequest& orderByActiveAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByActiveAscUsingGbk() && {
+        this->orderByActiveAscUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_birthday_desc() {
-        selection.order_desc("birthday");
+    PersonRequest& orderByActiveDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByActiveDescUsingGbk() && {
+        this->orderByActiveDescUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_is(const Date& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "birthday", value));
+    PersonRequest& whoAreActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "active", true));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoAreActive() && {
+        this->whoAreActive();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_is_not(const Date& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "birthday", value));
+    PersonRequest& whoAreNotActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "active", false));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoAreNotActive() && {
+        this->whoAreNotActive();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_greater_than(const Date& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "birthday", value));
+    PersonRequest& whoseActiveIs(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIs(const bool& value) && {
+        this->whoseActiveIs(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_greater_than_or_equal_to(const Date& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "birthday", value));
+    PersonRequest& whoseActiveIsNot(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIsNot(const bool& value) && {
+        this->whoseActiveIsNot(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_less_than(const Date& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "birthday", value));
+    PersonRequest& whoseActiveGreaterThan(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveGreaterThan(const bool& value) && {
+        this->whoseActiveGreaterThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_less_than_or_equal_to(const Date& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "birthday", value));
+    PersonRequest& whoseActiveGreaterThanOrEqualTo(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveGreaterThanOrEqualTo(const bool& value) && {
+        this->whoseActiveGreaterThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_between(const Date& lower, const Date& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "birthday", lower, upper));
+    PersonRequest& whoseActiveLessThan(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveLessThan(const bool& value) && {
+        this->whoseActiveLessThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_in(std::span<const Date> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "birthday", values, false));
+    PersonRequest& whoseActiveLessThanOrEqualTo(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveLessThanOrEqualTo(const bool& value) && {
+        this->whoseActiveLessThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_not_in(std::span<const Date> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "birthday", values, true));
+    PersonRequest& whoseActiveBetween(const bool& lower, const bool& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "active",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveBetween(const bool& lower, const bool& upper) && {
+        this->whoseActiveBetween(lower, upper);
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_birthday() {
-        selection.group_by("birthday");
+    PersonRequest& whoseActiveIn(std::span<const bool> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "active", values, false));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIn(std::span<const bool> inputs) && {
+        this->whoseActiveIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& sum_birthday_as(std::string_view alias) {
-        selection.sum("birthday", alias);
+    PersonRequest& whoseActiveNotIn(std::span<const bool> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "active", values, true));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveNotIn(std::span<const bool> inputs) && {
+        this->whoseActiveNotIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& avg_birthday_as(std::string_view alias) {
-        selection.avg("birthday", alias);
+    PersonRequest& groupByActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("active");
+        });
         return *this;
+    }
+
+    PersonRequest&& groupByActive() && {
+        this->groupByActive();
+        return std::move(*this);
     }
 
-    PersonRequest& min_birthday_as(std::string_view alias) {
-        selection.min("birthday", alias);
+    PersonRequest& groupByActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("active");
+            query_.selectAs("active", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& groupByActiveAs(std::string_view alias) && {
+        this->groupByActiveAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& max_birthday_as(std::string_view alias) {
-        selection.max("birthday", alias);
+    PersonRequest& groupByActiveWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("active");
+            query_.aggregateWithFunction("active", alias, function);
+        });
         return *this;
+    }
+
+    PersonRequest&& groupByActiveWithFunction(std::string_view alias,
+                                              AggregateFunction function) && {
+        this->groupByActiveWithFunction(alias, function);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "birthday"));
+    PersonRequest& countActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("active", "active_count");
+        });
         return *this;
+    }
+
+    PersonRequest&& countActive() && {
+        this->countActive();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_birthday_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "birthday"));
+    PersonRequest& countActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("active", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& countActiveAs(std::string_view alias) && {
+        this->countActiveAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& select_updated_at() {
-        selection.project("updated_at");
+    PersonRequest& sumActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("active", "sum_active");
+        });
         return *this;
+    }
+
+    PersonRequest&& sumActive() && {
+        this->sumActive();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_updated_at_asc() {
-        selection.order_asc("updated_at");
+    PersonRequest& sumActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("active", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& sumActiveAs(std::string_view alias) && {
+        this->sumActiveAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_updated_at_desc() {
-        selection.order_desc("updated_at");
+    PersonRequest& avgActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("active", "avg_active");
+        });
         return *this;
+    }
+
+    PersonRequest&& avgActive() && {
+        this->avgActive();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_is(const Timestamp& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "updated_at", value));
+    PersonRequest& avgActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("active", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& avgActiveAs(std::string_view alias) && {
+        this->avgActiveAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_is_not(const Timestamp& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "updated_at", value));
+    PersonRequest& minActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("active", "min_active");
+        });
         return *this;
+    }
+
+    PersonRequest&& minActive() && {
+        this->minActive();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_greater_than(const Timestamp& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "updated_at", value));
+    PersonRequest& minActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("active", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& minActiveAs(std::string_view alias) && {
+        this->minActiveAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_greater_than_or_equal_to(const Timestamp& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "updated_at", value));
+    PersonRequest& maxActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("active", "max_active");
+        });
         return *this;
+    }
+
+    PersonRequest&& maxActive() && {
+        this->maxActive();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_less_than(const Timestamp& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "updated_at", value));
+    PersonRequest& maxActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("active", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& maxActiveAs(std::string_view alias) && {
+        this->maxActiveAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_less_than_or_equal_to(const Timestamp& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "updated_at", value));
+    PersonRequest& whoseActiveIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIsUnknown() && {
+        this->whoseActiveIsUnknown();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_between(const Timestamp& lower, const Timestamp& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "updated_at", lower, upper));
+    PersonRequest& whoseActiveIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIsKnown() && {
+        this->whoseActiveIsKnown();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_in(std::span<const Timestamp> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "updated_at", values, false));
+    PersonRequest& whoseActiveIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIsNull() && {
+        this->whoseActiveIsNull();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_not_in(std::span<const Timestamp> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "updated_at", values, true));
+    PersonRequest& whoseActiveIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseActiveIsNotNull() && {
+        this->whoseActiveIsNotNull();
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_updated_at() {
-        selection.group_by("updated_at");
+    PersonRequest& whoseNicknameIsString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "nickname", "string()"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIsString() && {
+        this->whoseNicknameIsString();
+        return std::move(*this);
     }
 
-    PersonRequest& sum_updated_at_as(std::string_view alias) {
-        selection.sum("updated_at", alias);
+    PersonRequest& whoseNicknameIsNotString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "nickname", "string()"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIsNotString() && {
+        this->whoseNicknameIsNotString();
+        return std::move(*this);
     }
 
-    PersonRequest& avg_updated_at_as(std::string_view alias) {
-        selection.avg("updated_at", alias);
+    PersonRequest& selectNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& selectNickname() && {
+        this->selectNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& min_updated_at_as(std::string_view alias) {
-        selection.min("updated_at", alias);
+    PersonRequest& projectNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& projectNickname() && {
+        this->projectNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& max_updated_at_as(std::string_view alias) {
-        selection.max("updated_at", alias);
+    PersonRequest& selectNicknameRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("nickname", sql);
+        });
         return *this;
+    }
+
+    PersonRequest&& selectNicknameRaw(std::string_view sql) && {
+        this->selectNicknameRaw(sql);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "updated_at"));
+    PersonRequest& selectNicknameUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("nickname", std::move(sql));
+        });
         return *this;
+    }
+
+    PersonRequest&& selectNicknameUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectNicknameUnsafeRaw(std::move(sql));
+        return std::move(*this);
     }
 
-    PersonRequest& whose_updated_at_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "updated_at"));
+    PersonRequest& unselectNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& unselectNickname() && {
+        this->unselectNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& select_payload() {
-        selection.project("payload");
+    PersonRequest& orderByNicknameAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByNicknameAsc() && {
+        this->orderByNicknameAsc();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_payload_asc() {
-        selection.order_asc("payload");
+    PersonRequest& orderByNicknameDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByNicknameDesc() && {
+        this->orderByNicknameDesc();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_payload_desc() {
-        selection.order_desc("payload");
+    PersonRequest& orderByNicknameAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByNicknameAscUsingGbk() && {
+        this->orderByNicknameAscUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_is(const Json& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "payload", value));
+    PersonRequest& orderByNicknameDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& orderByNicknameDescUsingGbk() && {
+        this->orderByNicknameDescUsingGbk();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_is_not(const Json& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "payload", value));
+    PersonRequest& whoseNicknameIs(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "nickname", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIs(std::string_view value) && {
+        this->whoseNicknameIs(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_greater_than(const Json& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "payload", value));
+    PersonRequest& whoseNicknameIsNot(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "nickname", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIsNot(std::string_view value) && {
+        this->whoseNicknameIsNot(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_greater_than_or_equal_to(const Json& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "payload", value));
+    PersonRequest& whoseNicknameGreaterThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "nickname", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameGreaterThan(std::string_view value) && {
+        this->whoseNicknameGreaterThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_less_than(const Json& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "payload", value));
+    PersonRequest& whoseNicknameGreaterThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "nickname", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameGreaterThanOrEqualTo(std::string_view value) && {
+        this->whoseNicknameGreaterThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_less_than_or_equal_to(const Json& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "payload", value));
+    PersonRequest& whoseNicknameLessThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "nickname", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameLessThan(std::string_view value) && {
+        this->whoseNicknameLessThan(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_between(const Json& lower, const Json& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "payload", lower, upper));
+    PersonRequest& whoseNicknameLessThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "nickname", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameLessThanOrEqualTo(std::string_view value) && {
+        this->whoseNicknameLessThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_in(std::span<const Json> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "payload", values, false));
+    PersonRequest& whoseNicknameBetween(std::string_view lower, std::string_view upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "nickname",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameBetween(std::string_view lower, std::string_view upper) && {
+        this->whoseNicknameBetween(lower, upper);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_not_in(std::span<const Json> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "payload", values, true));
+    PersonRequest& whoseNicknameIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "nickname", values, false));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIn(std::span<const String> inputs) && {
+        this->whoseNicknameIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_payload() {
-        selection.group_by("payload");
+    PersonRequest& whoseNicknameNotIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "nickname", values, true));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameNotIn(std::span<const String> inputs) && {
+        this->whoseNicknameNotIn(inputs);
+        return std::move(*this);
     }
 
-    PersonRequest& sum_payload_as(std::string_view alias) {
-        selection.sum("payload", alias);
+    PersonRequest& groupByNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& groupByNickname() && {
+        this->groupByNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& avg_payload_as(std::string_view alias) {
-        selection.avg("payload", alias);
+    PersonRequest& groupByNicknameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("nickname");
+            query_.selectAs("nickname", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& groupByNicknameAs(std::string_view alias) && {
+        this->groupByNicknameAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& min_payload_as(std::string_view alias) {
-        selection.min("payload", alias);
+    PersonRequest& groupByNicknameWithFunction(std::string_view alias,
+                                               AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("nickname");
+            query_.aggregateWithFunction("nickname", alias, function);
+        });
         return *this;
+    }
+
+    PersonRequest&& groupByNicknameWithFunction(std::string_view alias,
+                                                AggregateFunction function) && {
+        this->groupByNicknameWithFunction(alias, function);
+        return std::move(*this);
     }
 
-    PersonRequest& max_payload_as(std::string_view alias) {
-        selection.max("payload", alias);
+    PersonRequest& countNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("nickname", "nickname_count");
+        });
         return *this;
+    }
+
+    PersonRequest&& countNickname() && {
+        this->countNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "payload"));
+    PersonRequest& countNicknameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("nickname", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& countNicknameAs(std::string_view alias) && {
+        this->countNicknameAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_payload_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "payload"));
+    PersonRequest& sumNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("nickname", "sum_nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& sumNickname() && {
+        this->sumNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& select_version() {
-        selection.project("version");
+    PersonRequest& sumNicknameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("nickname", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& sumNicknameAs(std::string_view alias) && {
+        this->sumNicknameAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_version_asc() {
-        selection.order_asc("version");
+    PersonRequest& avgNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("nickname", "avg_nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& avgNickname() && {
+        this->avgNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& order_by_version_desc() {
-        selection.order_desc("version");
+    PersonRequest& avgNicknameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("nickname", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& avgNicknameAs(std::string_view alias) && {
+        this->avgNicknameAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_is(const std::int64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "version", value));
+    PersonRequest& minNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("nickname", "min_nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& minNickname() && {
+        this->minNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_is_not(const std::int64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "version", value));
+    PersonRequest& minNicknameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("nickname", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& minNicknameAs(std::string_view alias) && {
+        this->minNicknameAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_greater_than(const std::int64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "version", value));
+    PersonRequest& maxNickname() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("nickname", "max_nickname");
+        });
         return *this;
+    }
+
+    PersonRequest&& maxNickname() && {
+        this->maxNickname();
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_greater_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "version", value));
+    PersonRequest& maxNicknameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("nickname", alias);
+        });
         return *this;
+    }
+
+    PersonRequest&& maxNicknameAs(std::string_view alias) && {
+        this->maxNicknameAs(alias);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_less_than(const std::int64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "version", value));
+    PersonRequest& whoseNicknameContains(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::contain(memory_resource(), "nickname", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameContains(std::string_view value) && {
+        this->whoseNicknameContains(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_less_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "version", value));
+    PersonRequest& whoseNicknameStartsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::begin_with(memory_resource(), "nickname", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameStartsWith(std::string_view value) && {
+        this->whoseNicknameStartsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_between(const std::int64_t& lower, const std::int64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "version", lower, upper));
+    PersonRequest& whoseNicknameEndsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::end_with(memory_resource(), "nickname", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameEndsWith(std::string_view value) && {
+        this->whoseNicknameEndsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, false));
+    PersonRequest& whoseNicknameNotContains(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_contain(memory_resource(), "nickname", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameNotContains(std::string_view value) && {
+        this->whoseNicknameNotContains(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_not_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, true));
+    PersonRequest& whoseNicknameNotStartsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_begin_with(memory_resource(), "nickname", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameNotStartsWith(std::string_view value) && {
+        this->whoseNicknameNotStartsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& group_by_version() {
-        selection.group_by("version");
+    PersonRequest& whoseNicknameNotEndsWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_end_with(memory_resource(), "nickname", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameNotEndsWith(std::string_view value) && {
+        this->whoseNicknameNotEndsWith(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "version"));
+    PersonRequest& whoseNicknameSoundsLike(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::sound_like(memory_resource(), "nickname", value));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameSoundsLike(std::string_view value) && {
+        this->whoseNicknameSoundsLike(value);
+        return std::move(*this);
     }
 
-    PersonRequest& whose_version_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+    PersonRequest& whoseNicknameIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "nickname"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIsUnknown() && {
+        this->whoseNicknameIsUnknown();
+        return std::move(*this);
     }
 
-    PersonRequest& select_device_list() {
-        selection.relation("device_list");
+    PersonRequest& whoseNicknameIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "nickname"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIsKnown() && {
+        this->whoseNicknameIsKnown();
+        return std::move(*this);
     }
 
-    template <bool P>
-    PersonRequest& select_device_list_with(const DeviceRequest<P>& child) {
-        selection.relation_query("device_list", child.query());
+    PersonRequest& whoseNicknameIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "nickname"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIsNull() && {
+        this->whoseNicknameIsNull();
+        return std::move(*this);
     }
 
-    template <bool P>
-    PersonRequest& with_device_list(const DeviceRequest<P>& child) {
-        auto r = memory_resource();
-        selection.and_filter(
-            Expr::in_subquery(r, "id", Device::entity_descriptor(r), child.query(), "owner_id"));
+    PersonRequest& whoseNicknameIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "nickname"));
+        });
         return *this;
+    }
+
+    PersonRequest&& whoseNicknameIsNotNull() && {
+        this->whoseNicknameIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIsNumber() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "balance", "number()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIsNumber() && {
+        this->whoseBalanceIsNumber();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIsNotNumber() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "balance", "number()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIsNotNumber() && {
+        this->whoseBalanceIsNotNumber();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBalance() && {
+        this->selectBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& projectBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& projectBalance() && {
+        this->projectBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBalanceRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("balance", sql);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBalanceRaw(std::string_view sql) && {
+        this->selectBalanceRaw(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBalanceUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("balance", std::move(sql));
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBalanceUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectBalanceUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unselectBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& unselectBalance() && {
+        this->unselectBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBalanceWithFunction(AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("balance", "balance", function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBalanceWithFunction(AggregateFunction function) && {
+        this->selectBalanceWithFunction(function);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBalanceAsWithFunction(std::string_view alias,
+                                               AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("balance", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBalanceAsWithFunction(std::string_view alias,
+                                                AggregateFunction function) && {
+        this->selectBalanceAsWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBalanceAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBalanceAsc() && {
+        this->orderByBalanceAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBalanceDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBalanceDesc() && {
+        this->orderByBalanceDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBalanceAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBalanceAscUsingGbk() && {
+        this->orderByBalanceAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBalanceDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBalanceDescUsingGbk() && {
+        this->orderByBalanceDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIs(const Decimal& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "balance", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIs(const Decimal& value) && {
+        this->whoseBalanceIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIsNot(const Decimal& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "balance", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIsNot(const Decimal& value) && {
+        this->whoseBalanceIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceGreaterThan(const Decimal& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "balance", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceGreaterThan(const Decimal& value) && {
+        this->whoseBalanceGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceGreaterThanOrEqualTo(const Decimal& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "balance", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceGreaterThanOrEqualTo(const Decimal& value) && {
+        this->whoseBalanceGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceLessThan(const Decimal& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "balance", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceLessThan(const Decimal& value) && {
+        this->whoseBalanceLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceLessThanOrEqualTo(const Decimal& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "balance", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceLessThanOrEqualTo(const Decimal& value) && {
+        this->whoseBalanceLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceBetween(const Decimal& lower, const Decimal& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "balance",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceBetween(const Decimal& lower, const Decimal& upper) && {
+        this->whoseBalanceBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIn(std::span<const Decimal> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "balance", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIn(std::span<const Decimal> inputs) && {
+        this->whoseBalanceIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceNotIn(std::span<const Decimal> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "balance", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceNotIn(std::span<const Decimal> inputs) && {
+        this->whoseBalanceNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByBalance() && {
+        this->groupByBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("balance");
+            query_.selectAs("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByBalanceAs(std::string_view alias) && {
+        this->groupByBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByBalanceWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("balance");
+            query_.aggregateWithFunction("balance", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByBalanceWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->groupByBalanceWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("balance", "balance_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countBalance() && {
+        this->countBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& countBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countBalanceAs(std::string_view alias) && {
+        this->countBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("balance", "sum_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumBalance() && {
+        this->sumBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumBalanceAs(std::string_view alias) && {
+        this->sumBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("balance", "avg_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgBalance() && {
+        this->avgBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgBalanceAs(std::string_view alias) && {
+        this->avgBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("balance", "min_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minBalance() && {
+        this->minBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& minBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minBalanceAs(std::string_view alias) && {
+        this->minBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("balance", "max_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxBalance() && {
+        this->maxBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxBalanceAs(std::string_view alias) && {
+        this->maxBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& standardDeviationBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("balance", "stdDev_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& standardDeviationBalance() && {
+        this->standardDeviationBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& standardDeviationBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& standardDeviationBalanceAs(std::string_view alias) && {
+        this->standardDeviationBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& squareRootOfPopulationStandardDeviationBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("balance", "stdDevPop_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& squareRootOfPopulationStandardDeviationBalance() && {
+        this->squareRootOfPopulationStandardDeviationBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& squareRootOfPopulationStandardDeviationBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& squareRootOfPopulationStandardDeviationBalanceAs(std::string_view alias) && {
+        this->squareRootOfPopulationStandardDeviationBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sampleVarianceBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("balance", "varSamp_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sampleVarianceBalance() && {
+        this->sampleVarianceBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& sampleVarianceBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sampleVarianceBalanceAs(std::string_view alias) && {
+        this->sampleVarianceBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& samplePopulationVarianceBalance() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("balance", "varPop_balance");
+        });
+        return *this;
+    }
+
+    PersonRequest&& samplePopulationVarianceBalance() && {
+        this->samplePopulationVarianceBalance();
+        return std::move(*this);
+    }
+
+    PersonRequest& samplePopulationVarianceBalanceAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("balance", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& samplePopulationVarianceBalanceAs(std::string_view alias) && {
+        this->samplePopulationVarianceBalanceAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "balance"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIsUnknown() && {
+        this->whoseBalanceIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "balance"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIsKnown() && {
+        this->whoseBalanceIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "balance"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIsNull() && {
+        this->whoseBalanceIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBalanceIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "balance"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBalanceIsNotNull() && {
+        this->whoseBalanceIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIsDouble() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "height", "double()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIsDouble() && {
+        this->whoseHeightIsDouble();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIsNotDouble() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "height", "double()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIsNotDouble() && {
+        this->whoseHeightIsNotDouble();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectHeight() && {
+        this->selectHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& projectHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& projectHeight() && {
+        this->projectHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectHeightRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("height", sql);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectHeightRaw(std::string_view sql) && {
+        this->selectHeightRaw(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectHeightUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("height", std::move(sql));
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectHeightUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectHeightUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unselectHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& unselectHeight() && {
+        this->unselectHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectHeightWithFunction(AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("height", "height", function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectHeightWithFunction(AggregateFunction function) && {
+        this->selectHeightWithFunction(function);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectHeightAsWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("height", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectHeightAsWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->selectHeightAsWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByHeightAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByHeightAsc() && {
+        this->orderByHeightAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByHeightDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByHeightDesc() && {
+        this->orderByHeightDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByHeightAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByHeightAscUsingGbk() && {
+        this->orderByHeightAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByHeightDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByHeightDescUsingGbk() && {
+        this->orderByHeightDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIs(const double& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "height", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIs(const double& value) && {
+        this->whoseHeightIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIsNot(const double& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "height", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIsNot(const double& value) && {
+        this->whoseHeightIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightGreaterThan(const double& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "height", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightGreaterThan(const double& value) && {
+        this->whoseHeightGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightGreaterThanOrEqualTo(const double& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "height", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightGreaterThanOrEqualTo(const double& value) && {
+        this->whoseHeightGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightLessThan(const double& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "height", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightLessThan(const double& value) && {
+        this->whoseHeightLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightLessThanOrEqualTo(const double& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "height", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightLessThanOrEqualTo(const double& value) && {
+        this->whoseHeightLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightBetween(const double& lower, const double& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "height",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightBetween(const double& lower, const double& upper) && {
+        this->whoseHeightBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIn(std::span<const double> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "height", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIn(std::span<const double> inputs) && {
+        this->whoseHeightIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightNotIn(std::span<const double> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "height", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightNotIn(std::span<const double> inputs) && {
+        this->whoseHeightNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByHeight() && {
+        this->groupByHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("height");
+            query_.selectAs("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByHeightAs(std::string_view alias) && {
+        this->groupByHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByHeightWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("height");
+            query_.aggregateWithFunction("height", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByHeightWithFunction(std::string_view alias,
+                                              AggregateFunction function) && {
+        this->groupByHeightWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("height", "height_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countHeight() && {
+        this->countHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& countHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countHeightAs(std::string_view alias) && {
+        this->countHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("height", "sum_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumHeight() && {
+        this->sumHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumHeightAs(std::string_view alias) && {
+        this->sumHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("height", "avg_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgHeight() && {
+        this->avgHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgHeightAs(std::string_view alias) && {
+        this->avgHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("height", "min_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minHeight() && {
+        this->minHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& minHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minHeightAs(std::string_view alias) && {
+        this->minHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("height", "max_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxHeight() && {
+        this->maxHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxHeightAs(std::string_view alias) && {
+        this->maxHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& standardDeviationHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("height", "stdDev_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& standardDeviationHeight() && {
+        this->standardDeviationHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& standardDeviationHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& standardDeviationHeightAs(std::string_view alias) && {
+        this->standardDeviationHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& squareRootOfPopulationStandardDeviationHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("height", "stdDevPop_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& squareRootOfPopulationStandardDeviationHeight() && {
+        this->squareRootOfPopulationStandardDeviationHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& squareRootOfPopulationStandardDeviationHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& squareRootOfPopulationStandardDeviationHeightAs(std::string_view alias) && {
+        this->squareRootOfPopulationStandardDeviationHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sampleVarianceHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("height", "varSamp_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sampleVarianceHeight() && {
+        this->sampleVarianceHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& sampleVarianceHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sampleVarianceHeightAs(std::string_view alias) && {
+        this->sampleVarianceHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& samplePopulationVarianceHeight() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("height", "varPop_height");
+        });
+        return *this;
+    }
+
+    PersonRequest&& samplePopulationVarianceHeight() && {
+        this->samplePopulationVarianceHeight();
+        return std::move(*this);
+    }
+
+    PersonRequest& samplePopulationVarianceHeightAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("height", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& samplePopulationVarianceHeightAs(std::string_view alias) && {
+        this->samplePopulationVarianceHeightAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "height"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIsUnknown() && {
+        this->whoseHeightIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "height"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIsKnown() && {
+        this->whoseHeightIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "height"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIsNull() && {
+        this->whoseHeightIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseHeightIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "height"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseHeightIsNotNull() && {
+        this->whoseHeightIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIsFloat() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "ratio", "float()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIsFloat() && {
+        this->whoseRatioIsFloat();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIsNotFloat() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "ratio", "float()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIsNotFloat() && {
+        this->whoseRatioIsNotFloat();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectRatio() && {
+        this->selectRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& projectRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& projectRatio() && {
+        this->projectRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectRatioRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("ratio", sql);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectRatioRaw(std::string_view sql) && {
+        this->selectRatioRaw(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectRatioUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("ratio", std::move(sql));
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectRatioUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectRatioUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unselectRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& unselectRatio() && {
+        this->unselectRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByRatioAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByRatioAsc() && {
+        this->orderByRatioAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByRatioDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByRatioDesc() && {
+        this->orderByRatioDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByRatioAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByRatioAscUsingGbk() && {
+        this->orderByRatioAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByRatioDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByRatioDescUsingGbk() && {
+        this->orderByRatioDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIs(const float& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "ratio", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIs(const float& value) && {
+        this->whoseRatioIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIsNot(const float& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "ratio", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIsNot(const float& value) && {
+        this->whoseRatioIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioGreaterThan(const float& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "ratio", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioGreaterThan(const float& value) && {
+        this->whoseRatioGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioGreaterThanOrEqualTo(const float& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "ratio", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioGreaterThanOrEqualTo(const float& value) && {
+        this->whoseRatioGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioLessThan(const float& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "ratio", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioLessThan(const float& value) && {
+        this->whoseRatioLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioLessThanOrEqualTo(const float& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "ratio", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioLessThanOrEqualTo(const float& value) && {
+        this->whoseRatioLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioBetween(const float& lower, const float& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "ratio",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioBetween(const float& lower, const float& upper) && {
+        this->whoseRatioBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIn(std::span<const float> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "ratio", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIn(std::span<const float> inputs) && {
+        this->whoseRatioIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioNotIn(std::span<const float> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "ratio", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioNotIn(std::span<const float> inputs) && {
+        this->whoseRatioNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByRatio() && {
+        this->groupByRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("ratio");
+            query_.selectAs("ratio", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByRatioAs(std::string_view alias) && {
+        this->groupByRatioAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByRatioWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("ratio");
+            query_.aggregateWithFunction("ratio", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByRatioWithFunction(std::string_view alias,
+                                             AggregateFunction function) && {
+        this->groupByRatioWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("ratio", "ratio_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countRatio() && {
+        this->countRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& countRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("ratio", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countRatioAs(std::string_view alias) && {
+        this->countRatioAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("ratio", "sum_ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumRatio() && {
+        this->sumRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("ratio", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumRatioAs(std::string_view alias) && {
+        this->sumRatioAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("ratio", "avg_ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgRatio() && {
+        this->avgRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("ratio", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgRatioAs(std::string_view alias) && {
+        this->avgRatioAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("ratio", "min_ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minRatio() && {
+        this->minRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& minRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("ratio", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minRatioAs(std::string_view alias) && {
+        this->minRatioAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxRatio() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("ratio", "max_ratio");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxRatio() && {
+        this->maxRatio();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxRatioAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("ratio", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxRatioAs(std::string_view alias) && {
+        this->maxRatioAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "ratio"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIsUnknown() && {
+        this->whoseRatioIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "ratio"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIsKnown() && {
+        this->whoseRatioIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "ratio"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIsNull() && {
+        this->whoseRatioIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseRatioIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "ratio"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseRatioIsNotNull() && {
+        this->whoseRatioIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIsInteger() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "age", "integer()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIsInteger() && {
+        this->whoseAgeIsInteger();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIsNotInteger() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "age", "integer()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIsNotInteger() && {
+        this->whoseAgeIsNotInteger();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectAge() && {
+        this->selectAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& projectAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& projectAge() && {
+        this->projectAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectAgeRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("age", sql);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectAgeRaw(std::string_view sql) && {
+        this->selectAgeRaw(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectAgeUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("age", std::move(sql));
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectAgeUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectAgeUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unselectAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& unselectAge() && {
+        this->unselectAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectAgeWithFunction(AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("age", "age", function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectAgeWithFunction(AggregateFunction function) && {
+        this->selectAgeWithFunction(function);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectAgeAsWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectWithFunction("age", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectAgeAsWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->selectAgeAsWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByAgeAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByAgeAsc() && {
+        this->orderByAgeAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByAgeDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByAgeDesc() && {
+        this->orderByAgeDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByAgeAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByAgeAscUsingGbk() && {
+        this->orderByAgeAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByAgeDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByAgeDescUsingGbk() && {
+        this->orderByAgeDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIs(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "age", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIs(const std::int64_t& value) && {
+        this->whoseAgeIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIsNot(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "age", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIsNot(const std::int64_t& value) && {
+        this->whoseAgeIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeGreaterThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "age", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeGreaterThan(const std::int64_t& value) && {
+        this->whoseAgeGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeGreaterThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "age", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeGreaterThanOrEqualTo(const std::int64_t& value) && {
+        this->whoseAgeGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeLessThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "age", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeLessThan(const std::int64_t& value) && {
+        this->whoseAgeLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeLessThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "age", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeLessThanOrEqualTo(const std::int64_t& value) && {
+        this->whoseAgeLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeBetween(const std::int64_t& lower, const std::int64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "age",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeBetween(const std::int64_t& lower, const std::int64_t& upper) && {
+        this->whoseAgeBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "age", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIn(std::span<const std::int64_t> inputs) && {
+        this->whoseAgeIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeNotIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "age", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeNotIn(std::span<const std::int64_t> inputs) && {
+        this->whoseAgeNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByAge() && {
+        this->groupByAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("age");
+            query_.selectAs("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByAgeAs(std::string_view alias) && {
+        this->groupByAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByAgeWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("age");
+            query_.aggregateWithFunction("age", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByAgeWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->groupByAgeWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("age", "age_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countAge() && {
+        this->countAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& countAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countAgeAs(std::string_view alias) && {
+        this->countAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("age", "sum_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumAge() && {
+        this->sumAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumAgeAs(std::string_view alias) && {
+        this->sumAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("age", "avg_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgAge() && {
+        this->avgAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgAgeAs(std::string_view alias) && {
+        this->avgAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("age", "min_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minAge() && {
+        this->minAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& minAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minAgeAs(std::string_view alias) && {
+        this->minAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("age", "max_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxAge() && {
+        this->maxAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxAgeAs(std::string_view alias) && {
+        this->maxAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& standardDeviationAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("age", "stdDev_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& standardDeviationAge() && {
+        this->standardDeviationAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& standardDeviationAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddev("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& standardDeviationAgeAs(std::string_view alias) && {
+        this->standardDeviationAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& squareRootOfPopulationStandardDeviationAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("age", "stdDevPop_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& squareRootOfPopulationStandardDeviationAge() && {
+        this->squareRootOfPopulationStandardDeviationAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& squareRootOfPopulationStandardDeviationAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateStddevPop("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& squareRootOfPopulationStandardDeviationAgeAs(std::string_view alias) && {
+        this->squareRootOfPopulationStandardDeviationAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sampleVarianceAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("age", "varSamp_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sampleVarianceAge() && {
+        this->sampleVarianceAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& sampleVarianceAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarSamp("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sampleVarianceAgeAs(std::string_view alias) && {
+        this->sampleVarianceAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& samplePopulationVarianceAge() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("age", "varPop_age");
+        });
+        return *this;
+    }
+
+    PersonRequest&& samplePopulationVarianceAge() && {
+        this->samplePopulationVarianceAge();
+        return std::move(*this);
+    }
+
+    PersonRequest& samplePopulationVarianceAgeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateVarPop("age", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& samplePopulationVarianceAgeAs(std::string_view alias) && {
+        this->samplePopulationVarianceAgeAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "age"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIsUnknown() && {
+        this->whoseAgeIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "age"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIsKnown() && {
+        this->whoseAgeIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "age"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIsNull() && {
+        this->whoseAgeIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseAgeIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "age"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseAgeIsNotNull() && {
+        this->whoseAgeIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIsDate() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "birthday", "date()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIsDate() && {
+        this->whoseBirthdayIsDate();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIsNotDate() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "birthday", "date()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIsNotDate() && {
+        this->whoseBirthdayIsNotDate();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBirthday() && {
+        this->selectBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& projectBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& projectBirthday() && {
+        this->projectBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBirthdayRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("birthday", sql);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBirthdayRaw(std::string_view sql) && {
+        this->selectBirthdayRaw(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectBirthdayUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("birthday", std::move(sql));
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectBirthdayUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectBirthdayUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unselectBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& unselectBirthday() && {
+        this->unselectBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBirthdayAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBirthdayAsc() && {
+        this->orderByBirthdayAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBirthdayDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBirthdayDesc() && {
+        this->orderByBirthdayDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBirthdayAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBirthdayAscUsingGbk() && {
+        this->orderByBirthdayAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByBirthdayDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByBirthdayDescUsingGbk() && {
+        this->orderByBirthdayDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIs(const Date& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "birthday", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIs(const Date& value) && {
+        this->whoseBirthdayIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIsNot(const Date& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "birthday", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIsNot(const Date& value) && {
+        this->whoseBirthdayIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayGreaterThan(const Date& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "birthday", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayGreaterThan(const Date& value) && {
+        this->whoseBirthdayGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayGreaterThanOrEqualTo(const Date& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "birthday", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayGreaterThanOrEqualTo(const Date& value) && {
+        this->whoseBirthdayGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayLessThan(const Date& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "birthday", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayLessThan(const Date& value) && {
+        this->whoseBirthdayLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayLessThanOrEqualTo(const Date& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "birthday", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayLessThanOrEqualTo(const Date& value) && {
+        this->whoseBirthdayLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayBetween(const Date& lower, const Date& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "birthday",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayBetween(const Date& lower, const Date& upper) && {
+        this->whoseBirthdayBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIn(std::span<const Date> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "birthday", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIn(std::span<const Date> inputs) && {
+        this->whoseBirthdayIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayNotIn(std::span<const Date> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "birthday", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayNotIn(std::span<const Date> inputs) && {
+        this->whoseBirthdayNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByBirthday() && {
+        this->groupByBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByBirthdayAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("birthday");
+            query_.selectAs("birthday", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByBirthdayAs(std::string_view alias) && {
+        this->groupByBirthdayAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByBirthdayWithFunction(std::string_view alias,
+                                               AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("birthday");
+            query_.aggregateWithFunction("birthday", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByBirthdayWithFunction(std::string_view alias,
+                                                AggregateFunction function) && {
+        this->groupByBirthdayWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("birthday", "birthday_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countBirthday() && {
+        this->countBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& countBirthdayAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("birthday", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countBirthdayAs(std::string_view alias) && {
+        this->countBirthdayAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("birthday", "sum_birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumBirthday() && {
+        this->sumBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumBirthdayAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("birthday", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumBirthdayAs(std::string_view alias) && {
+        this->sumBirthdayAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("birthday", "avg_birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgBirthday() && {
+        this->avgBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgBirthdayAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("birthday", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgBirthdayAs(std::string_view alias) && {
+        this->avgBirthdayAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("birthday", "min_birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minBirthday() && {
+        this->minBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& minBirthdayAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("birthday", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minBirthdayAs(std::string_view alias) && {
+        this->minBirthdayAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxBirthday() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("birthday", "max_birthday");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxBirthday() && {
+        this->maxBirthday();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxBirthdayAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("birthday", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxBirthdayAs(std::string_view alias) && {
+        this->maxBirthdayAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "birthday"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIsUnknown() && {
+        this->whoseBirthdayIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "birthday"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIsKnown() && {
+        this->whoseBirthdayIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "birthday"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIsNull() && {
+        this->whoseBirthdayIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseBirthdayIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "birthday"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseBirthdayIsNotNull() && {
+        this->whoseBirthdayIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIsDateTime() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "updated_at", "dateTime()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIsDateTime() && {
+        this->whoseUpdatedAtIsDateTime();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIsNotDateTime() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "updated_at", "dateTime()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIsNotDateTime() && {
+        this->whoseUpdatedAtIsNotDateTime();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectUpdatedAt() && {
+        this->selectUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& projectUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& projectUpdatedAt() && {
+        this->projectUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectUpdatedAtRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("updated_at", sql);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectUpdatedAtRaw(std::string_view sql) && {
+        this->selectUpdatedAtRaw(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectUpdatedAtUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("updated_at", std::move(sql));
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectUpdatedAtUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectUpdatedAtUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unselectUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& unselectUpdatedAt() && {
+        this->unselectUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByUpdatedAtAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByUpdatedAtAsc() && {
+        this->orderByUpdatedAtAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByUpdatedAtDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByUpdatedAtDesc() && {
+        this->orderByUpdatedAtDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByUpdatedAtAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByUpdatedAtAscUsingGbk() && {
+        this->orderByUpdatedAtAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByUpdatedAtDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByUpdatedAtDescUsingGbk() && {
+        this->orderByUpdatedAtDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIs(const Timestamp& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(),
+                                          "updated_at",
+                                          generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIs(const Timestamp& value) && {
+        this->whoseUpdatedAtIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIsNot(const Timestamp& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(),
+                                          "updated_at",
+                                          generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIsNot(const Timestamp& value) && {
+        this->whoseUpdatedAtIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtGreaterThan(const Timestamp& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(memory_resource(),
+                                          "updated_at",
+                                          generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtGreaterThan(const Timestamp& value) && {
+        this->whoseUpdatedAtGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtGreaterThanOrEqualTo(const Timestamp& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(memory_resource(),
+                                           "updated_at",
+                                           generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtGreaterThanOrEqualTo(const Timestamp& value) && {
+        this->whoseUpdatedAtGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtLessThan(const Timestamp& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(memory_resource(),
+                                          "updated_at",
+                                          generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtLessThan(const Timestamp& value) && {
+        this->whoseUpdatedAtLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtLessThanOrEqualTo(const Timestamp& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(memory_resource(),
+                                           "updated_at",
+                                           generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtLessThanOrEqualTo(const Timestamp& value) && {
+        this->whoseUpdatedAtLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtBetween(const Timestamp& lower, const Timestamp& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "updated_at",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtBetween(const Timestamp& lower, const Timestamp& upper) && {
+        this->whoseUpdatedAtBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIn(std::span<const Timestamp> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "updated_at", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIn(std::span<const Timestamp> inputs) && {
+        this->whoseUpdatedAtIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtNotIn(std::span<const Timestamp> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "updated_at", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtNotIn(std::span<const Timestamp> inputs) && {
+        this->whoseUpdatedAtNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByUpdatedAt() && {
+        this->groupByUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByUpdatedAtAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("updated_at");
+            query_.selectAs("updated_at", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByUpdatedAtAs(std::string_view alias) && {
+        this->groupByUpdatedAtAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByUpdatedAtWithFunction(std::string_view alias,
+                                                AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("updated_at");
+            query_.aggregateWithFunction("updated_at", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByUpdatedAtWithFunction(std::string_view alias,
+                                                 AggregateFunction function) && {
+        this->groupByUpdatedAtWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("updated_at", "updated_at_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countUpdatedAt() && {
+        this->countUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& countUpdatedAtAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("updated_at", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countUpdatedAtAs(std::string_view alias) && {
+        this->countUpdatedAtAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("updated_at", "sum_updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumUpdatedAt() && {
+        this->sumUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumUpdatedAtAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("updated_at", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumUpdatedAtAs(std::string_view alias) && {
+        this->sumUpdatedAtAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("updated_at", "avg_updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgUpdatedAt() && {
+        this->avgUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgUpdatedAtAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("updated_at", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgUpdatedAtAs(std::string_view alias) && {
+        this->avgUpdatedAtAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("updated_at", "min_updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minUpdatedAt() && {
+        this->minUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& minUpdatedAtAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("updated_at", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minUpdatedAtAs(std::string_view alias) && {
+        this->minUpdatedAtAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxUpdatedAt() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("updated_at", "max_updated_at");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxUpdatedAt() && {
+        this->maxUpdatedAt();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxUpdatedAtAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("updated_at", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxUpdatedAtAs(std::string_view alias) && {
+        this->maxUpdatedAtAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "updated_at"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIsUnknown() && {
+        this->whoseUpdatedAtIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "updated_at"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIsKnown() && {
+        this->whoseUpdatedAtIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "updated_at"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIsNull() && {
+        this->whoseUpdatedAtIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseUpdatedAtIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "updated_at"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseUpdatedAtIsNotNull() && {
+        this->whoseUpdatedAtIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIsJsonMe() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "payload", "jsonMe()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIsJsonMe() && {
+        this->whosePayloadIsJsonMe();
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIsNotJsonMe() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "payload", "jsonMe()"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIsNotJsonMe() && {
+        this->whosePayloadIsNotJsonMe();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectPayload() && {
+        this->selectPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& projectPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& projectPayload() && {
+        this->projectPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectPayloadRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("payload", sql);
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectPayloadRaw(std::string_view sql) && {
+        this->selectPayloadRaw(sql);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectPayloadUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("payload", std::move(sql));
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectPayloadUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectPayloadUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    PersonRequest& unselectPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& unselectPayload() && {
+        this->unselectPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByPayloadAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByPayloadAsc() && {
+        this->orderByPayloadAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByPayloadDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByPayloadDesc() && {
+        this->orderByPayloadDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByPayloadAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByPayloadAscUsingGbk() && {
+        this->orderByPayloadAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByPayloadDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByPayloadDescUsingGbk() && {
+        this->orderByPayloadDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIs(const Json& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "payload", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIs(const Json& value) && {
+        this->whosePayloadIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIsNot(const Json& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "payload", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIsNot(const Json& value) && {
+        this->whosePayloadIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadGreaterThan(const Json& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "payload", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadGreaterThan(const Json& value) && {
+        this->whosePayloadGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadGreaterThanOrEqualTo(const Json& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "payload", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadGreaterThanOrEqualTo(const Json& value) && {
+        this->whosePayloadGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadLessThan(const Json& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "payload", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadLessThan(const Json& value) && {
+        this->whosePayloadLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadLessThanOrEqualTo(const Json& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "payload", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadLessThanOrEqualTo(const Json& value) && {
+        this->whosePayloadLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadBetween(const Json& lower, const Json& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "payload",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadBetween(const Json& lower, const Json& upper) && {
+        this->whosePayloadBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIn(std::span<const Json> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "payload", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIn(std::span<const Json> inputs) && {
+        this->whosePayloadIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadNotIn(std::span<const Json> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "payload", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadNotIn(std::span<const Json> inputs) && {
+        this->whosePayloadNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByPayload() && {
+        this->groupByPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByPayloadAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("payload");
+            query_.selectAs("payload", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByPayloadAs(std::string_view alias) && {
+        this->groupByPayloadAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByPayloadWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("payload");
+            query_.aggregateWithFunction("payload", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByPayloadWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->groupByPayloadWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("payload", "payload_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countPayload() && {
+        this->countPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& countPayloadAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("payload", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countPayloadAs(std::string_view alias) && {
+        this->countPayloadAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("payload", "sum_payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumPayload() && {
+        this->sumPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumPayloadAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("payload", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumPayloadAs(std::string_view alias) && {
+        this->sumPayloadAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("payload", "avg_payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgPayload() && {
+        this->avgPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgPayloadAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("payload", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgPayloadAs(std::string_view alias) && {
+        this->avgPayloadAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("payload", "min_payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minPayload() && {
+        this->minPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& minPayloadAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("payload", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minPayloadAs(std::string_view alias) && {
+        this->minPayloadAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxPayload() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("payload", "max_payload");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxPayload() && {
+        this->maxPayload();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxPayloadAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("payload", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxPayloadAs(std::string_view alias) && {
+        this->maxPayloadAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "payload"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIsUnknown() && {
+        this->whosePayloadIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "payload"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIsKnown() && {
+        this->whosePayloadIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "payload"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIsNull() && {
+        this->whosePayloadIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whosePayloadIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "payload"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whosePayloadIsNotNull() && {
+        this->whosePayloadIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& selectVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectVersion() && {
+        this->selectVersion();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByVersionAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByVersionAsc() && {
+        this->orderByVersionAsc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByVersionDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByVersionDesc() && {
+        this->orderByVersionDesc();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByVersionAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByVersionAscUsingGbk() && {
+        this->orderByVersionAscUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& orderByVersionDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& orderByVersionDescUsingGbk() && {
+        this->orderByVersionDescUsingGbk();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionIs(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionIs(const std::int64_t& value) && {
+        this->whoseVersionIs(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionIsNot(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionIsNot(const std::int64_t& value) && {
+        this->whoseVersionIsNot(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionGreaterThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionGreaterThan(const std::int64_t& value) && {
+        this->whoseVersionGreaterThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionGreaterThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionGreaterThanOrEqualTo(const std::int64_t& value) && {
+        this->whoseVersionGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionLessThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionLessThan(const std::int64_t& value) && {
+        this->whoseVersionLessThan(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionLessThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionLessThanOrEqualTo(const std::int64_t& value) && {
+        this->whoseVersionLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionBetween(const std::int64_t& lower, const std::int64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "version",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionBetween(const std::int64_t& lower, const std::int64_t& upper) && {
+        this->whoseVersionBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, false));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionIn(std::span<const std::int64_t> inputs) && {
+        this->whoseVersionIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionNotIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, true));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionNotIn(std::span<const std::int64_t> inputs) && {
+        this->whoseVersionNotIn(inputs);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByVersion() && {
+        this->groupByVersion();
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.selectAs("version", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByVersionAs(std::string_view alias) && {
+        this->groupByVersionAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& groupByVersionWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.aggregateWithFunction("version", alias, function);
+        });
+        return *this;
+    }
+
+    PersonRequest&& groupByVersionWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->groupByVersionWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    PersonRequest& countVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", "version_count");
+        });
+        return *this;
+    }
+
+    PersonRequest&& countVersion() && {
+        this->countVersion();
+        return std::move(*this);
+    }
+
+    PersonRequest& countVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countVersionAs(std::string_view alias) && {
+        this->countVersionAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& sumVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", "sum_version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumVersion() && {
+        this->sumVersion();
+        return std::move(*this);
+    }
+
+    PersonRequest& sumVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& sumVersionAs(std::string_view alias) && {
+        this->sumVersionAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& avgVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", "avg_version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgVersion() && {
+        this->avgVersion();
+        return std::move(*this);
+    }
+
+    PersonRequest& avgVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& avgVersionAs(std::string_view alias) && {
+        this->avgVersionAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& minVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", "min_version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& minVersion() && {
+        this->minVersion();
+        return std::move(*this);
+    }
+
+    PersonRequest& minVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& minVersionAs(std::string_view alias) && {
+        this->minVersionAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& maxVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", "max_version");
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxVersion() && {
+        this->maxVersion();
+        return std::move(*this);
+    }
+
+    PersonRequest& maxVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", alias);
+        });
+        return *this;
+    }
+
+    PersonRequest&& maxVersionAs(std::string_view alias) && {
+        this->maxVersionAs(alias);
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionIsUnknown() && {
+        this->whoseVersionIsUnknown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionIsKnown() && {
+        this->whoseVersionIsKnown();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionIsNull() && {
+        this->whoseVersionIsNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& whoseVersionIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    PersonRequest&& whoseVersionIsNotNull() && {
+        this->whoseVersionIsNotNull();
+        return std::move(*this);
+    }
+
+    PersonRequest& haveDevices() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.filterRelation(
+                "id", "owner_id", query_.template relatedQuery<Device>(true), false, "device_list");
+        });
+        return *this;
+    }
+
+    PersonRequest&& haveDevices() && {
+        this->haveDevices();
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& withDeviceListMatching(const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.filterRelation("id", "owner_id", child.query_, false, "device_list");
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& withDeviceListMatching(const DeviceRequest<P, ChildResult>& child) && {
+        this->withDeviceListMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& haveNoDevices() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.filterRelation(
+                "id", "owner_id", query_.template relatedQuery<Device>(true), true, "device_list");
+        });
+        return *this;
+    }
+
+    PersonRequest&& haveNoDevices() && {
+        this->haveNoDevices();
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& withoutDeviceListMatching(const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.filterRelation("id", "owner_id", child.query_, true, "device_list");
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& withoutDeviceListMatching(const DeviceRequest<P, ChildResult>& child) && {
+        this->withoutDeviceListMatching(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& countDevices() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateRelation("device_list",
+                                     "count_devices",
+                                     query_.template relatedQuery<Device>().unlimited(),
+                                     true);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countDevices() && {
+        this->countDevices();
+        return std::move(*this);
+    }
+
+    PersonRequest& countDevicesAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateRelation(
+                "device_list", alias, query_.template relatedQuery<Device>().unlimited(), true);
+        });
+        return *this;
+    }
+
+    PersonRequest&& countDevicesAs(std::string_view alias) && {
+        this->countDevicesAs(alias);
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& countDevicesWith(std::string_view alias,
+                                    const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateRelation("device_list", alias, child.query_, true);
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& countDevicesWith(std::string_view alias,
+                                     const DeviceRequest<P, ChildResult>& child) && {
+        this->countDevicesWith(alias, child);
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& statsFromDevices(const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateRelation("device_list", "refinements", child.query_, false);
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& statsFromDevices(const DeviceRequest<P, ChildResult>& child) && {
+        this->statsFromDevices(child);
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& statsFromDevicesAs(std::string_view alias,
+                                      const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateRelation("device_list", alias, child.query_, false);
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& statsFromDevicesAs(std::string_view alias,
+                                       const DeviceRequest<P, ChildResult>& child) && {
+        this->statsFromDevicesAs(alias, child);
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& groupByDevicesWithDetails(const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateRelation("device_list", "refinements", child.query_, false);
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& groupByDevicesWithDetails(const DeviceRequest<P, ChildResult>& child) && {
+        this->groupByDevicesWithDetails(child);
+        return std::move(*this);
+    }
+
+    PersonRequest& selectDeviceList() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.relation("device_list");
+        });
+        return *this;
+    }
+
+    PersonRequest&& selectDeviceList() && {
+        this->selectDeviceList();
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& selectDeviceListWith(const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.relation_query("device_list", child.query());
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& selectDeviceListWith(const DeviceRequest<P, ChildResult>& child) && {
+        this->selectDeviceListWith(child);
+        return std::move(*this);
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest& withDeviceList(const DeviceRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            selection.and_filter(Expr::in_subquery(
+                r, "id", Device::entity_descriptor(r), child.query(), "owner_id"));
+        });
+        return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    PersonRequest&& withDeviceList(const DeviceRequest<P, ChildResult>& child) && {
+        this->withDeviceList(child);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseId(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("id", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseId(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseId(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseEmail(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("email", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseEmail(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseEmail(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createEmailCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("email", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseEmailBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "email", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseEmailBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseEmailBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseEmailBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "email", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseEmailBefore(const T& value) && {
+        this->whoseEmailBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseEmailAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "email", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseEmailAfter(const T& value) && {
+        this->whoseEmailAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseNickname(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("nickname", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseNickname(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseNickname(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createNicknameCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("nickname", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseNicknameBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "nickname", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseNicknameBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseNicknameBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseNicknameBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "nickname", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseNicknameBefore(const T& value) && {
+        this->whoseNicknameBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseNicknameAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "nickname", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseNicknameAfter(const T& value) && {
+        this->whoseNicknameAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseBalance(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("balance", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseBalance(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseBalance(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createBalanceCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("balance", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseBalanceBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "balance", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseBalanceBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseBalanceBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseBalanceBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseBalanceBefore(const T& value) && {
+        this->whoseBalanceBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseBalanceAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "balance", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseBalanceAfter(const T& value) && {
+        this->whoseBalanceAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseHeight(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("height", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseHeight(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseHeight(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createHeightCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("height", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseHeightBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "height", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseHeightBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseHeightBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseHeightBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseHeightBefore(const T& value) && {
+        this->whoseHeightBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseHeightAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "height", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseHeightAfter(const T& value) && {
+        this->whoseHeightAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseRatio(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("ratio", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseRatio(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseRatio(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createRatioCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("ratio", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseRatioBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "ratio", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseRatioBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseRatioBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseRatioBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseRatioBefore(const T& value) && {
+        this->whoseRatioBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseRatioAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "ratio", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseRatioAfter(const T& value) && {
+        this->whoseRatioAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseAge(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("age", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseAge(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseAge(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createAgeCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("age", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseAgeBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "age", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseAgeBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseAgeBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseAgeBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "age", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseAgeBefore(const T& value) && {
+        this->whoseAgeBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseAgeAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "age", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseAgeAfter(const T& value) && {
+        this->whoseAgeAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseBirthday(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("birthday", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseBirthday(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseBirthday(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createBirthdayCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("birthday", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseBirthdayBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "birthday", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseBirthdayBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseBirthdayBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseBirthdayBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "birthday", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseBirthdayBefore(const T& value) && {
+        this->whoseBirthdayBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseBirthdayAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "birthday", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseBirthdayAfter(const T& value) && {
+        this->whoseBirthdayAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whoseUpdatedAt(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("updated_at", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whoseUpdatedAt(request::FieldOperator op, Inputs&& inputs) && {
+        this->whoseUpdatedAt(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createUpdatedAtCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("updated_at", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseUpdatedAtBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "updated_at", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseUpdatedAtBetweenRange(const request::DateRange<T>& range) && {
+        this->whoseUpdatedAtBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseUpdatedAtBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseUpdatedAtBefore(const T& value) && {
+        this->whoseUpdatedAtBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whoseUpdatedAtAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "updated_at", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whoseUpdatedAtAfter(const T& value) && {
+        this->whoseUpdatedAtAfter(value);
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest& whosePayload(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("payload", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    PersonRequest&& whosePayload(request::FieldOperator op, Inputs&& inputs) && {
+        this->whosePayload(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createPayloadCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("payload", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whosePayloadBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "payload", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whosePayloadBetweenRange(const request::DateRange<T>& range) && {
+        this->whosePayloadBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whosePayloadBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whosePayloadBefore(const T& value) && {
+        this->whosePayloadBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest& whosePayloadAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "payload", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    PersonRequest&& whosePayloadAfter(const T& value) && {
+        this->whosePayloadAfter(value);
+        return std::move(*this);
     }
 };
 
-template <bool Purposed>
+template <bool Purposed, Entity Result>
 class DeviceRequest {
+    template <bool, Entity>
+    friend class PersonRequest;
+    template <bool, Entity>
+    friend class DeviceRequest;
+    template <bool, Entity>
+    friend class OrderStatusRequest;
+    template <bool, Entity>
+    friend class CategoryRequest;
+    template <bool, Entity>
+    friend class ChildRequest;
+    template <bool, Entity>
+    friend class InventoryRequest;
+
 public:
-    using allocator_type = Allocator;
-    UserContext& owner;
-    SelectQuery selection;
-    String intent;
+    using Query = EntityQuery<Device, DataServiceExecutor, Purposed, Result>;
 
-    DeviceRequest(std::allocator_arg_t, Allocator a, UserContext& user)
-        : owner(user), selection(std::allocator_arg, a, Device::ENTITY_NAME), intent(a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-        selection.project("id").project("version");
-    }
+private:
+    Query query_;
 
-    DeviceRequest(std::allocator_arg_t,
-                  Allocator a,
-                  UserContext& user,
-                  const SelectQuery& q,
-                  std::string_view purpose)
-        : owner(user), selection(std::allocator_arg, a, q), intent(purpose, a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-    }
+public:
+    explicit DeviceRequest(UserContext& user_context, bool minimal = false, bool live_rows = true)
+        requires(!Purposed)
+        : query_(user_context, minimal, live_rows) {}
+
+    explicit DeviceRequest(Query value) : query_(std::move(value)) {}
 
     Memory memory_resource() const {
-        return selection.memory_resource();
+        return query_.memory_resource();
     }
 
     const SelectQuery& query() const {
-        return selection;
+        return query_.query();
     }
 
-    DeviceRequest<true>& purpose(std::string_view text) {
-        return owner.make<DeviceRequest<true>>(owner, selection, text);
+    const Query& runtimeQuery() const
+        requires(!Purposed)
+    {
+        return query_;
     }
 
-    DeviceRequest& comment(std::string_view text) {
-        selection.comment(text);
+    request::QuerySelection selection() const
+        requires(!Purposed)
+    {
+        return query_.selection();
+    }
+
+    DeviceRequest<true, Result> purpose(std::string_view text) const& {
+        return DeviceRequest<true, Result>(query_.purpose(text));
+    }
+
+    DeviceRequest<true, Result> purpose(std::string_view text) && {
+        return DeviceRequest<true, Result>(std::move(query_).purpose(text));
+    }
+
+    template <Entity Return>
+    DeviceRequest<Purposed, Return> returnType() const& {
+        return DeviceRequest<Purposed, Return>(query_.template returnType<Return>());
+    }
+
+    template <Entity Return>
+    DeviceRequest<Purposed, Return> returnType() && {
+        return DeviceRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
+    }
+
+    DeviceRequest& comment(std::string_view value) & {
+        query_.comment(value);
         return *this;
     }
 
-    DeviceRequest& filter(Expr value) {
-        selection.filter(std::move(value));
+    DeviceRequest&& comment(std::string_view value) && {
+        this->comment(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& filter(const Expr& value) & {
+        query_.filter(value);
         return *this;
     }
 
-    DeviceRequest& and_filter(Expr value) {
-        selection.and_filter(std::move(value));
+    DeviceRequest&& filter(const Expr& value) && {
+        this->filter(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectDynamicFields(const DynamicFieldSelection& value) & {
+        query_.selectDynamicFields(value);
         return *this;
     }
 
-    DeviceRequest& or_filter(Expr value) {
-        selection.or_filter(std::move(value));
+    DeviceRequest&& selectDynamicFields(const DynamicFieldSelection& value) && {
+        this->selectDynamicFields(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& matchTypes(std::span<const Value> value) & {
+        query_.matchTypes(value);
         return *this;
     }
 
-    DeviceRequest& limit(std::uint64_t value) {
-        selection.limit(value);
+    DeviceRequest&& matchTypes(std::span<const Value> value) && {
+        this->matchTypes(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& andFilter(const Expr& value) & {
+        query_.andFilter(value);
         return *this;
     }
 
-    DeviceRequest& offset(std::uint64_t value) {
-        selection.offset(value);
+    DeviceRequest&& andFilter(const Expr& value) && {
+        this->andFilter(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& orFilter(const Expr& value) & {
+        query_.orFilter(value);
         return *this;
     }
 
-    DeviceRequest& hard_limit(std::uint64_t value) {
-        selection.hard_limit(value);
+    DeviceRequest&& orFilter(const Expr& value) && {
+        this->orFilter(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& limit(std::uint64_t value) & {
+        query_.limit(value);
         return *this;
     }
 
-    DeviceRequest& skip(std::uint64_t value) {
-        return offset(value);
+    DeviceRequest&& limit(std::uint64_t value) && {
+        this->limit(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& search_with_text(std::string_view value) {
-        selection.search_with_text(value);
+    DeviceRequest& offset(std::uint64_t value) & {
+        query_.offset(value);
         return *this;
     }
 
-    DeviceRequest& select_self() {
-        selection.project("id");
-        selection.project("code");
-        selection.project("active");
-        selection.project("owner_id");
-        selection.project("version");
+    DeviceRequest&& offset(std::uint64_t value) && {
+        this->offset(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& hardLimit(std::uint64_t value) & {
+        query_.hardLimit(value);
         return *this;
     }
 
-    DeviceRequest& select_self_fields() {
-        return select_self();
+    DeviceRequest&& hardLimit(std::uint64_t value) && {
+        this->hardLimit(value);
+        return std::move(*this);
     }
 
-    PurposedSelectQuery authorize(UserContext& user) const
+    DeviceRequest& stream(std::size_t value) & {
+        query_.stream(value);
+        return *this;
+    }
+
+    DeviceRequest&& stream(std::size_t value) && {
+        this->stream(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& unlimited() & {
+        query_.unlimited();
+        return *this;
+    }
+
+    DeviceRequest&& unlimited() && {
+        this->unlimited();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withDeletedRows() & {
+        query_.withDeletedRows();
+        return *this;
+    }
+
+    DeviceRequest&& withDeletedRows() && {
+        this->withDeletedRows();
+        return std::move(*this);
+    }
+
+    DeviceRequest& deletedRowsOnly() & {
+        query_.deletedRowsOnly();
+        return *this;
+    }
+
+    DeviceRequest&& deletedRowsOnly() && {
+        this->deletedRowsOnly();
+        return std::move(*this);
+    }
+
+    DeviceRequest& appendSearchCriteria(const Expr& criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    DeviceRequest&& appendSearchCriteria(const Expr& criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    DeviceRequest& appendSearchCriteria(Ref<Expr> criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    DeviceRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    DeviceRequest&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) & {
+        query_.filterProperty(left, op, right);
+        return *this;
+    }
+
+    DeviceRequest&&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) && {
+        this->filterProperty(left, op, right);
+        return std::move(*this);
+    }
+
+    DeviceRequest& pageOffset(std::uint64_t offset, std::uint64_t size) & {
+        query_.pageOffset(offset, size);
+        return *this;
+    }
+
+    DeviceRequest&& pageOffset(std::uint64_t offset, std::uint64_t size) && {
+        this->pageOffset(offset, size);
+        return std::move(*this);
+    }
+
+    DeviceRequest& offset(std::uint64_t offset, std::uint64_t size) & {
+        query_.offset(offset, size);
+        return *this;
+    }
+
+    DeviceRequest&& offset(std::uint64_t offset, std::uint64_t size) && {
+        this->offset(offset, size);
+        return std::move(*this);
+    }
+
+    DeviceRequest& offsetOnly(std::uint64_t value) & {
+        query_.offsetOnly(value);
+        return *this;
+    }
+
+    DeviceRequest&& offsetOnly(std::uint64_t value) && {
+        this->offsetOnly(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& offsetSize(std::uint64_t offset, std::uint64_t size) & {
+        query_.offsetSize(offset, size);
+        return *this;
+    }
+
+    DeviceRequest&& offsetSize(std::uint64_t offset, std::uint64_t size) && {
+        this->offsetSize(offset, size);
+        return std::move(*this);
+    }
+
+    DeviceRequest& top(std::uint64_t value) & {
+        query_.top(value);
+        return *this;
+    }
+
+    DeviceRequest&& top(std::uint64_t value) && {
+        this->top(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& pageNumber(std::uint64_t number, std::uint64_t size) & {
+        query_.pageNumber(number, size);
+        return *this;
+    }
+
+    DeviceRequest&& pageNumber(std::uint64_t number, std::uint64_t size) && {
+        this->pageNumber(number, size);
+        return std::move(*this);
+    }
+
+    DeviceRequest& pageNumberDefault(std::uint64_t number) & {
+        query_.pageNumberDefault(number);
+        return *this;
+    }
+
+    DeviceRequest&& pageNumberDefault(std::uint64_t number) && {
+        this->pageNumberDefault(number);
+        return std::move(*this);
+    }
+
+    DeviceRequest& page(std::uint64_t number, std::uint64_t size) & {
+        query_.page(number, size);
+        return *this;
+    }
+
+    DeviceRequest&& page(std::uint64_t number, std::uint64_t size) && {
+        this->page(number, size);
+        return std::move(*this);
+    }
+
+    DeviceRequest& pageDefault(std::uint64_t number) & {
+        query_.pageDefault(number);
+        return *this;
+    }
+
+    DeviceRequest&& pageDefault(std::uint64_t number) && {
+        this->pageDefault(number);
+        return std::move(*this);
+    }
+
+    DeviceRequest& streamDefault() & {
+        query_.streamDefault();
+        return *this;
+    }
+
+    DeviceRequest&& streamDefault() && {
+        this->streamDefault();
+        return std::move(*this);
+    }
+
+    DeviceRequest& topNProbeParentThreshold(std::size_t threshold) & {
+        query_.topNProbeParentThreshold(threshold);
+        return *this;
+    }
+
+    DeviceRequest&& topNProbeParentThreshold(std::size_t threshold) && {
+        this->topNProbeParentThreshold(threshold);
+        return std::move(*this);
+    }
+
+    DeviceRequest& rawSql(std::string_view sql) & {
+        query_.rawSql(sql);
+        return *this;
+    }
+
+    DeviceRequest&& rawSql(std::string_view sql) && {
+        this->rawSql(sql);
+        return std::move(*this);
+    }
+
+    DeviceRequest& rawSqlFilter(std::string_view sql) & {
+        query_.rawSqlFilter(sql);
+        return *this;
+    }
+
+    DeviceRequest&& rawSqlFilter(std::string_view sql) && {
+        this->rawSqlFilter(sql);
+        return std::move(*this);
+    }
+
+    DeviceRequest& createPropertyAs(std::string_view field, std::string_view sql) & {
+        query_.createPropertyAs(field, sql);
+        return *this;
+    }
+
+    DeviceRequest&& createPropertyAs(std::string_view field, std::string_view sql) && {
+        this->createPropertyAs(field, sql);
+        return std::move(*this);
+    }
+
+    DeviceRequest& unsafeRawSql(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSql(std::move(sql));
+        return *this;
+    }
+
+    DeviceRequest&& unsafeRawSql(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSql(std::move(sql));
+        return std::move(*this);
+    }
+
+    DeviceRequest& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSqlFilter(std::move(sql));
+        return *this;
+    }
+
+    DeviceRequest&& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSqlFilter(std::move(sql));
+        return std::move(*this);
+    }
+
+    DeviceRequest& unsafeCreatePropertyAs(std::string_view field,
+                                          request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeCreatePropertyAs(field, std::move(sql));
+        return *this;
+    }
+
+    DeviceRequest&& unsafeCreatePropertyAs(std::string_view field,
+                                           request::UnsafeRawSqlSegment sql) && {
+        this->unsafeCreatePropertyAs(field, std::move(sql));
+        return std::move(*this);
+    }
+
+    DeviceRequest& groupBy(std::string_view value) & {
+        query_.groupBy(value);
+        return *this;
+    }
+
+    DeviceRequest&& groupBy(std::string_view value) && {
+        this->groupBy(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& countAs(std::string_view value) & {
+        query_.countAs(value);
+        return *this;
+    }
+
+    DeviceRequest&& countAs(std::string_view value) && {
+        this->countAs(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateCount(std::string_view value) & {
+        query_.aggregateCount(value);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateCount(std::string_view value) && {
+        this->aggregateCount(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& count() & {
+        query_.count();
+        return *this;
+    }
+
+    DeviceRequest&& count() && {
+        this->count();
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateWithFunction(std::string_view field,
+                                         std::string_view alias,
+                                         AggregateFunction function) & {
+        query_.aggregateWithFunction(field, alias, function);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateWithFunction(std::string_view field,
+                                          std::string_view alias,
+                                          AggregateFunction function) && {
+        this->aggregateWithFunction(field, alias, function);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateCountField(std::string_view field, std::string_view alias) & {
+        query_.aggregateCountField(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateCountField(std::string_view field, std::string_view alias) && {
+        this->aggregateCountField(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateSum(std::string_view field, std::string_view alias) & {
+        query_.aggregateSum(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateSum(std::string_view field, std::string_view alias) && {
+        this->aggregateSum(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateAvg(std::string_view field, std::string_view alias) & {
+        query_.aggregateAvg(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateAvg(std::string_view field, std::string_view alias) && {
+        this->aggregateAvg(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateMin(std::string_view field, std::string_view alias) & {
+        query_.aggregateMin(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateMin(std::string_view field, std::string_view alias) && {
+        this->aggregateMin(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateMax(std::string_view field, std::string_view alias) & {
+        query_.aggregateMax(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateMax(std::string_view field, std::string_view alias) && {
+        this->aggregateMax(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateStddev(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddev(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateStddev(std::string_view field, std::string_view alias) && {
+        this->aggregateStddev(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateStddevPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddevPop(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateStddevPop(std::string_view field, std::string_view alias) && {
+        this->aggregateStddevPop(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateVarSamp(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarSamp(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateVarSamp(std::string_view field, std::string_view alias) && {
+        this->aggregateVarSamp(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateVarPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarPop(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateVarPop(std::string_view field, std::string_view alias) && {
+        this->aggregateVarPop(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateBitAnd(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitAnd(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateBitAnd(std::string_view field, std::string_view alias) && {
+        this->aggregateBitAnd(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateBitOr(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitOr(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateBitOr(std::string_view field, std::string_view alias) && {
+        this->aggregateBitOr(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& aggregateBitXor(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitXor(field, alias);
+        return *this;
+    }
+
+    DeviceRequest&& aggregateBitXor(std::string_view field, std::string_view alias) && {
+        this->aggregateBitXor(field, alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& enableAggregationCache() & {
+        query_.enableAggregationCache();
+        return *this;
+    }
+
+    DeviceRequest&& enableAggregationCache() && {
+        this->enableAggregationCache();
+        return std::move(*this);
+    }
+
+    DeviceRequest& enableAggregationCacheFor(std::uint64_t duration) & {
+        query_.enableAggregationCacheFor(duration);
+        return *this;
+    }
+
+    DeviceRequest&& enableAggregationCacheFor(std::uint64_t duration) && {
+        this->enableAggregationCacheFor(duration);
+        return std::move(*this);
+    }
+
+    DeviceRequest& propagateAggregationCache(std::uint64_t duration) & {
+        query_.propagateAggregationCache(duration);
+        return *this;
+    }
+
+    DeviceRequest&& propagateAggregationCache(std::uint64_t duration) && {
+        this->propagateAggregationCache(duration);
+        return std::move(*this);
+    }
+
+    DeviceRequest& optimizePaginationWithIdSet() & {
+        query_.optimizePaginationWithIdSet();
+        return *this;
+    }
+
+    DeviceRequest&& optimizePaginationWithIdSet() && {
+        this->optimizePaginationWithIdSet();
+        return std::move(*this);
+    }
+
+    DeviceRequest& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                     std::uint64_t ttl,
+                                                     std::uint64_t max_ids) & {
+        query_.optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return *this;
+    }
+
+    DeviceRequest&& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                      std::uint64_t ttl,
+                                                      std::uint64_t max_ids) && {
+        this->optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return std::move(*this);
+    }
+
+    DeviceRequest& optimizeForContinuousPageFetch() & {
+        query_.optimizeForContinuousPageFetch();
+        return *this;
+    }
+
+    DeviceRequest&& optimizeForContinuousPageFetch() && {
+        this->optimizeForContinuousPageFetch();
+        return std::move(*this);
+    }
+
+    DeviceRequest& optimizeForContinuousPageFetchWith(std::string_view name, std::uint64_t ttl) & {
+        query_.optimizeForContinuousPageFetchWith(name, ttl);
+        return *this;
+    }
+
+    DeviceRequest&& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                       std::uint64_t ttl) && {
+        this->optimizeForContinuousPageFetchWith(name, ttl);
+        return std::move(*this);
+    }
+
+    DeviceRequest& filterWithJson(std::string_view value) & {
+        apply_generated_dynamic_json<generated_detail::DeviceDynamicJsonRecipe>(query_, value);
+        return *this;
+    }
+
+    DeviceRequest&& filterWithJson(std::string_view value) && {
+        this->filterWithJson(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withTypeGroup() & {
+        query_.withTypeGroup();
+        return *this;
+    }
+
+    DeviceRequest&& withTypeGroup() && {
+        this->withTypeGroup();
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    DeviceRequest& enhanceChild(const ChildRequest& child) & {
+        query_.enhanceChild(child.query_);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    DeviceRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    DeviceRequest& matchingAnyOf(const ChildRequest& child) & {
+        query_.matchingAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    DeviceRequest&& matchingAnyOf(const ChildRequest& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    DeviceRequest& matchingAnyOf(const SelectQuery& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    DeviceRequest&& matchingAnyOf(const SelectQuery& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    DeviceRequest& matchingAnyOf(const request::QuerySelection& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    DeviceRequest&& matchingAnyOf(const request::QuerySelection& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    DeviceRequest& matchAnyOf(const ChildRequest& child) & {
+        query_.matchAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    DeviceRequest&& matchAnyOf(const ChildRequest& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    DeviceRequest& matchAnyOf(const SelectQuery& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    DeviceRequest&& matchAnyOf(const SelectQuery& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    DeviceRequest& matchAnyOf(const request::QuerySelection& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    DeviceRequest&& matchAnyOf(const request::QuerySelection& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    DeviceRequest& enhanceChildrenIfNeeded() &;
+
+    DeviceRequest&& enhanceChildrenIfNeeded() && {
+        enhanceChildrenIfNeeded();
+        return std::move(*this);
+    }
+
+    DeviceRequest& skip(std::uint64_t value) & {
+        query_.offset(value);
+        return *this;
+    }
+
+    DeviceRequest&& skip(std::uint64_t value) && {
+        this->skip(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& searchWithText(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.search_with_text(value);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& searchWithText(std::string_view value) && {
+        this->searchWithText(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectSelf() & {
+        query_.select("id");
+        query_.select("code");
+        query_.select("active");
+        query_.select("version");
+        query_.select("owner_id");
+        return *this;
+    }
+
+    DeviceRequest&& selectSelf() && {
+        this->selectSelf();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectSelfFields() & {
+        selectSelf();
+        return *this;
+    }
+
+    DeviceRequest&& selectSelfFields() && {
+        this->selectSelfFields();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectSelfWithoutParent() & {
+        selectSelfFields();
+        return *this;
+    }
+
+    DeviceRequest&& selectSelfWithoutParent() && {
+        this->selectSelfWithoutParent();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectAll() & {
+        selectSelf();
+        selectOwner();
+        return *this;
+    }
+
+    DeviceRequest&& selectAll() && {
+        this->selectAll();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectChildren() & {
+        selectAll();
+        return *this;
+    }
+
+    DeviceRequest&& selectChildren() && {
+        this->selectChildren();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectAny() & {
+        selectChildren();
+        return *this;
+    }
+
+    DeviceRequest&& selectAny() && {
+        this->selectAny();
+        return std::move(*this);
+    }
+
+    auto& executeForList(UserContext& user_context) const
         requires Purposed
     {
-        if (&user != &owner) {
-            throw std::invalid_argument("Request execution cannot cross UserContexts");
-        }
-        auto comment =
-            selection.comment_text ? std::string_view(*selection.comment_text) : std::string_view{};
-        auto blank = [](std::string_view value) {
-            detail::trim(value);
-            return value.empty();
-        };
-        if (blank(intent) || blank(comment)) {
-            throw std::invalid_argument("Query execution requires nonblank purpose and comment");
-        }
-        return PurposedSelectQuery(
-            std::allocator_arg, Allocator(memory_resource()), selection, intent);
+        return query_.executeForList(user_context);
     }
 
-    auto& execute_for_list(UserContext& user) const
+    auto& executeForOne(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Device::ENTITY_NAME);
-        return require_value(repository).get().template fetch_enhanced_entities<Device>(query);
+        return query_.executeForOne(user_context);
     }
 
-    auto& execute_for_entity_list(UserContext& user) const
+    auto& executeForFirst(UserContext& user_context) const
         requires Purposed
     {
-        return execute_for_list(user);
+        return query_.executeForFirst(user_context);
     }
 
-    auto& execute(UserContext& user) const
+    auto& executeForCount(UserContext& user_context) const
         requires Purposed
     {
-        auto& request = owner.make<DeviceRequest<true>>(owner, selection, intent);
-        request.limit(1);
-        auto& source = request.execute_for_list(user);
-        using Error = DataServiceError<DataServiceExecutor::Error>;
-        using State = generated_detail::SingleResult<Device, Error>;
-        return make_operation<typename State::Output, State>(memory_resource(), source);
+        return query_.executeForCount(user_context);
     }
 
-    auto& execute_for_entity(UserContext& user) const
+    auto& executeForExists(UserContext& user_context) const
         requires Purposed
     {
-        return execute(user);
+        return query_.executeForExists(user_context);
     }
 
-    auto& execute_for_rows(UserContext& user) const
+    auto& executeForStream(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Device::ENTITY_NAME);
-        return require_value(repository).get().fetch_smart_list(query);
+        return query_.executeForStream(user_context);
     }
 
-    Device& new_entity(UserContext& user) const
+    auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
         requires Purposed
     {
-        (void)authorize(user);
-        auto& value = user.make<Device>();
-        value.update_id(require_value(user.next_id(Device::ENTITY_NAME)));
-        value.mark_as_new();
-        return value;
+        return query_.executeForPage(user_context, offset, limit);
     }
 
-    DeviceRequest& select_id() {
-        selection.project("id");
+    auto& execute(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntityList(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForList(user_context);
+    }
+
+    auto& executeForRows(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForRows(user_context);
+    }
+
+    Device& newEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.newEntity(user_context);
+    }
+
+    DeviceRequest copyTo(UserContext& user_context) const {
+        return DeviceRequest(query_.copyTo(user_context));
+    }
+
+    DeviceRequest copyToGlobal(UserContext& user_context) const {
+        return DeviceRequest(query_.copyToGlobal(user_context));
+    }
+
+    DeviceRequest rebindGlobal(UserContext& user_context) const {
+        return DeviceRequest(query_.rebindGlobal(user_context));
+    }
+
+    DeviceRequest& selectId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& selectId() && {
+        this->selectId();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByIdAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByIdAsc() && {
+        this->orderByIdAsc();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByIdDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByIdDesc() && {
+        this->orderByIdDesc();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByIdAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByIdAscUsingGbk() && {
+        this->orderByIdAscUsingGbk();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByIdDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByIdDescUsingGbk() && {
+        this->orderByIdDescUsingGbk();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdIs(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdIs(const std::uint64_t& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdIsNot(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdIsNot(const std::uint64_t& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdGreaterThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdGreaterThan(const std::uint64_t& value) && {
+        this->withIdGreaterThan(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdGreaterThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdGreaterThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdLessThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdLessThan(const std::uint64_t& value) && {
+        this->withIdLessThan(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdLessThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdLessThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "id",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) && {
+        this->withIdBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, false));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdIn(inputs);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdNotIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, true));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdNotIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdNotIn(inputs);
+        return std::move(*this);
+    }
+
+    DeviceRequest& groupById() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& groupById() && {
+        this->groupById();
+        return std::move(*this);
+    }
+
+    DeviceRequest& groupByIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.selectAs("id", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& groupByIdAs(std::string_view alias) && {
+        this->groupByIdAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& groupByIdWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.aggregateWithFunction("id", alias, function);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& groupByIdWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->groupByIdWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    DeviceRequest& countId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", "id_count");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& countId() && {
+        this->countId();
+        return std::move(*this);
+    }
+
+    DeviceRequest& countIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& countIdAs(std::string_view alias) && {
+        this->countIdAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& sumId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", "sum_id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& sumId() && {
+        this->sumId();
+        return std::move(*this);
+    }
+
+    DeviceRequest& sumIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& sumIdAs(std::string_view alias) && {
+        this->sumIdAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& avgId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", "avg_id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& avgId() && {
+        this->avgId();
+        return std::move(*this);
+    }
+
+    DeviceRequest& avgIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& avgIdAs(std::string_view alias) && {
+        this->avgIdAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& minId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", "min_id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& minId() && {
+        this->minId();
+        return std::move(*this);
+    }
+
+    DeviceRequest& minIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& minIdAs(std::string_view alias) && {
+        this->minIdAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& maxId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", "max_id");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& maxId() && {
+        this->maxId();
+        return std::move(*this);
+    }
+
+    DeviceRequest& maxIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& maxIdAs(std::string_view alias) && {
+        this->maxIdAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdIsUnknown() && {
+        this->withIdIsUnknown();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdIsKnown() && {
+        this->withIdIsKnown();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdIsNull() && {
+        this->withIdIsNull();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withIdIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withIdIsNotNull() && {
+        this->withIdIsNotNull();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& selectCode() && {
+        this->selectCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& projectCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& projectCode() && {
+        this->projectCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectCodeRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("code", sql);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& selectCodeRaw(std::string_view sql) && {
+        this->selectCodeRaw(sql);
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectCodeUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("code", std::move(sql));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& selectCodeUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectCodeUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    DeviceRequest& unselectCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& unselectCode() && {
+        this->unselectCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByCodeAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByCodeAsc() && {
+        this->orderByCodeAsc();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByCodeDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByCodeDesc() && {
+        this->orderByCodeDesc();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByCodeAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByCodeAscUsingGbk() && {
+        this->orderByCodeAscUsingGbk();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByCodeDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByCodeDescUsingGbk() && {
+        this->orderByCodeDescUsingGbk();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeIs(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "code", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeIs(std::string_view value) && {
+        this->withCodeIs(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeIsNot(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "code", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeIsNot(std::string_view value) && {
+        this->withCodeIsNot(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeGreaterThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "code", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeGreaterThan(std::string_view value) && {
+        this->withCodeGreaterThan(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeGreaterThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "code", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeGreaterThanOrEqualTo(std::string_view value) && {
+        this->withCodeGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeLessThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "code", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeLessThan(std::string_view value) && {
+        this->withCodeLessThan(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeLessThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "code", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeLessThanOrEqualTo(std::string_view value) && {
+        this->withCodeLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeBetween(std::string_view lower, std::string_view upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "code",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeBetween(std::string_view lower, std::string_view upper) && {
+        this->withCodeBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "code", values, false));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeIn(std::span<const String> inputs) && {
+        this->withCodeIn(inputs);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeNotIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "code", values, true));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeNotIn(std::span<const String> inputs) && {
+        this->withCodeNotIn(inputs);
+        return std::move(*this);
+    }
+
+    DeviceRequest& groupByCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& groupByCode() && {
+        this->groupByCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& groupByCodeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("code");
+            query_.selectAs("code", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& groupByCodeAs(std::string_view alias) && {
+        this->groupByCodeAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& groupByCodeWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("code");
+            query_.aggregateWithFunction("code", alias, function);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& groupByCodeWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->groupByCodeWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    DeviceRequest& countCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("code", "code_count");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& countCode() && {
+        this->countCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& countCodeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("code", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& countCodeAs(std::string_view alias) && {
+        this->countCodeAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& sumCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("code", "sum_code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& sumCode() && {
+        this->sumCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& sumCodeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("code", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& sumCodeAs(std::string_view alias) && {
+        this->sumCodeAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& avgCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("code", "avg_code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& avgCode() && {
+        this->avgCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& avgCodeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("code", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& avgCodeAs(std::string_view alias) && {
+        this->avgCodeAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& minCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("code", "min_code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& minCode() && {
+        this->minCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& minCodeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("code", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& minCodeAs(std::string_view alias) && {
+        this->minCodeAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& maxCode() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("code", "max_code");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& maxCode() && {
+        this->maxCode();
+        return std::move(*this);
+    }
+
+    DeviceRequest& maxCodeAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("code", alias);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& maxCodeAs(std::string_view alias) && {
+        this->maxCodeAs(alias);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::contain(memory_resource(), "code", value));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeContaining(std::string_view value) && {
+        this->withCodeContaining(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::begin_with(memory_resource(), "code", value));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeStartingWith(std::string_view value) && {
+        this->withCodeStartingWith(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::end_with(memory_resource(), "code", value));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeEndingWith(std::string_view value) && {
+        this->withCodeEndingWith(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeNotContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_contain(memory_resource(), "code", value));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeNotContaining(std::string_view value) && {
+        this->withCodeNotContaining(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeNotStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_begin_with(memory_resource(), "code", value));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeNotStartingWith(std::string_view value) && {
+        this->withCodeNotStartingWith(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeNotEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_end_with(memory_resource(), "code", value));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeNotEndingWith(std::string_view value) && {
+        this->withCodeNotEndingWith(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeSoundingLike(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::sound_like(memory_resource(), "code", value));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeSoundingLike(std::string_view value) && {
+        this->withCodeSoundingLike(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "code"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeIsUnknown() && {
+        this->withCodeIsUnknown();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "code"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeIsKnown() && {
+        this->withCodeIsKnown();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "code"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeIsNull() && {
+        this->withCodeIsNull();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withCodeIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "code"));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withCodeIsNotNull() && {
+        this->withCodeIsNotNull();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("active");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& selectActive() && {
+        this->selectActive();
+        return std::move(*this);
+    }
+
+    DeviceRequest& projectActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("active");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& projectActive() && {
+        this->projectActive();
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectActiveRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("active", sql);
+        });
+        return *this;
+    }
+
+    DeviceRequest&& selectActiveRaw(std::string_view sql) && {
+        this->selectActiveRaw(sql);
+        return std::move(*this);
+    }
+
+    DeviceRequest& selectActiveUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("active", std::move(sql));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& selectActiveUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectActiveUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    DeviceRequest& unselectActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("active");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& unselectActive() && {
+        this->unselectActive();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByActiveAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("active");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByActiveAsc() && {
+        this->orderByActiveAsc();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByActiveDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("active");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByActiveDesc() && {
+        this->orderByActiveDesc();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByActiveAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("active");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByActiveAscUsingGbk() && {
+        this->orderByActiveAscUsingGbk();
+        return std::move(*this);
+    }
+
+    DeviceRequest& orderByActiveDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("active");
+        });
+        return *this;
+    }
+
+    DeviceRequest&& orderByActiveDescUsingGbk() && {
+        this->orderByActiveDescUsingGbk();
+        return std::move(*this);
+    }
+
+    DeviceRequest& whichAreActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "active", true));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& whichAreActive() && {
+        this->whichAreActive();
+        return std::move(*this);
+    }
+
+    DeviceRequest& whichAreNotActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "active", false));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& whichAreNotActive() && {
+        this->whichAreNotActive();
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveIs(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveIs(const bool& value) && {
+        this->withActiveIs(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveIsNot(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveIsNot(const bool& value) && {
+        this->withActiveIsNot(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveGreaterThan(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveGreaterThan(const bool& value) && {
+        this->withActiveGreaterThan(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveGreaterThanOrEqualTo(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveGreaterThanOrEqualTo(const bool& value) && {
+        this->withActiveGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveLessThan(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveLessThan(const bool& value) && {
+        this->withActiveLessThan(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveLessThanOrEqualTo(const bool& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "active", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withActiveLessThanOrEqualTo(const bool& value) && {
+        this->withActiveLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveBetween(const bool& lower, const bool& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "active",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveBetween(const bool& lower, const bool& upper) && {
+        this->withActiveBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveIn(std::span<const bool> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "active", values, false));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveIn(std::span<const bool> inputs) && {
+        this->withActiveIn(inputs);
+        return std::move(*this);
+    }
+
+    DeviceRequest& withActiveNotIn(std::span<const bool> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "active", values, true));
+        });
+        return *this;
+    }
+
+    DeviceRequest&& withActiveNotIn(std::span<const bool> inputs) && {
+        this->withActiveNotIn(inputs);
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_id_asc() {
-        selection.order_asc("id");
+    DeviceRequest& groupByActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("active");
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByActive() && {
+        this->groupByActive();
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_id_desc() {
-        selection.order_desc("id");
+    DeviceRequest& groupByActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("active");
+            query_.selectAs("active", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByActiveAs(std::string_view alias) && {
+        this->groupByActiveAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_is(const std::uint64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "id", value));
+    DeviceRequest& groupByActiveWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("active");
+            query_.aggregateWithFunction("active", alias, function);
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByActiveWithFunction(std::string_view alias,
+                                              AggregateFunction function) && {
+        this->groupByActiveWithFunction(alias, function);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_is_not(const std::uint64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "id", value));
+    DeviceRequest& countActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("active", "active_count");
+        });
         return *this;
+    }
+
+    DeviceRequest&& countActive() && {
+        this->countActive();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_greater_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "id", value));
+    DeviceRequest& countActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("active", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& countActiveAs(std::string_view alias) && {
+        this->countActiveAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_greater_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "id", value));
+    DeviceRequest& sumActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("active", "sum_active");
+        });
         return *this;
+    }
+
+    DeviceRequest&& sumActive() && {
+        this->sumActive();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_less_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "id", value));
+    DeviceRequest& sumActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("active", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& sumActiveAs(std::string_view alias) && {
+        this->sumActiveAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_less_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "id", value));
+    DeviceRequest& avgActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("active", "avg_active");
+        });
         return *this;
+    }
+
+    DeviceRequest&& avgActive() && {
+        this->avgActive();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_between(const std::uint64_t& lower, const std::uint64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "id", lower, upper));
+    DeviceRequest& avgActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("active", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& avgActiveAs(std::string_view alias) && {
+        this->avgActiveAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, false));
+    DeviceRequest& minActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("active", "min_active");
+        });
         return *this;
+    }
+
+    DeviceRequest&& minActive() && {
+        this->minActive();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_not_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, true));
+    DeviceRequest& minActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("active", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& minActiveAs(std::string_view alias) && {
+        this->minActiveAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& group_by_id() {
-        selection.group_by("id");
+    DeviceRequest& maxActive() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("active", "max_active");
+        });
         return *this;
+    }
+
+    DeviceRequest&& maxActive() && {
+        this->maxActive();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "id"));
+    DeviceRequest& maxActiveAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("active", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& maxActiveAs(std::string_view alias) && {
+        this->maxActiveAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_id_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+    DeviceRequest& withActiveIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withActiveIsUnknown() && {
+        this->withActiveIsUnknown();
+        return std::move(*this);
     }
 
-    DeviceRequest& select_code() {
-        selection.project("code");
+    DeviceRequest& withActiveIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withActiveIsKnown() && {
+        this->withActiveIsKnown();
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_code_asc() {
-        selection.order_asc("code");
+    DeviceRequest& withActiveIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withActiveIsNull() && {
+        this->withActiveIsNull();
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_code_desc() {
-        selection.order_desc("code");
+    DeviceRequest& withActiveIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "active"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withActiveIsNotNull() && {
+        this->withActiveIsNotNull();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_is(std::string_view value) {
-        selection.and_filter(Expr::eq(memory_resource(), "code", value));
+    DeviceRequest& selectOwnerId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("owner_id");
+        });
         return *this;
+    }
+
+    DeviceRequest&& selectOwnerId() && {
+        this->selectOwnerId();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_is_not(std::string_view value) {
-        selection.and_filter(Expr::ne(memory_resource(), "code", value));
+    DeviceRequest& projectOwnerId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("owner_id");
+        });
         return *this;
+    }
+
+    DeviceRequest&& projectOwnerId() && {
+        this->projectOwnerId();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_greater_than(std::string_view value) {
-        selection.and_filter(Expr::gt(memory_resource(), "code", value));
+    DeviceRequest& selectOwnerIdRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("owner_id", sql);
+        });
         return *this;
+    }
+
+    DeviceRequest&& selectOwnerIdRaw(std::string_view sql) && {
+        this->selectOwnerIdRaw(sql);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_greater_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::gte(memory_resource(), "code", value));
+    DeviceRequest& selectOwnerIdUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("owner_id", std::move(sql));
+        });
         return *this;
+    }
+
+    DeviceRequest&& selectOwnerIdUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectOwnerIdUnsafeRaw(std::move(sql));
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_less_than(std::string_view value) {
-        selection.and_filter(Expr::lt(memory_resource(), "code", value));
+    DeviceRequest& unselectOwner() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselectRelation("owner_id", "owner");
+        });
         return *this;
+    }
+
+    DeviceRequest&& unselectOwner() && {
+        this->unselectOwner();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_less_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::lte(memory_resource(), "code", value));
+    DeviceRequest& orderByOwnerIdAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("owner_id");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByOwnerIdAsc() && {
+        this->orderByOwnerIdAsc();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_between(std::string_view lower, std::string_view upper) {
-        selection.and_filter(Expr::between(memory_resource(), "code", lower, upper));
+    DeviceRequest& orderByOwnerIdDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("owner_id");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByOwnerIdDesc() && {
+        this->orderByOwnerIdDesc();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "code", values, false));
+    DeviceRequest& orderByOwnerIdAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("owner_id");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByOwnerIdAscUsingGbk() && {
+        this->orderByOwnerIdAscUsingGbk();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_not_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "code", values, true));
+    DeviceRequest& orderByOwnerIdDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("owner_id");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByOwnerIdDescUsingGbk() && {
+        this->orderByOwnerIdDescUsingGbk();
+        return std::move(*this);
     }
 
-    DeviceRequest& group_by_code() {
-        selection.group_by("code");
+    DeviceRequest& withOwnerIs(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "owner_id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerIs(const std::uint64_t& value) && {
+        this->withOwnerIs(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& sum_code_as(std::string_view alias) {
-        selection.sum("code", alias);
+    DeviceRequest& withOwnerIsNot(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "owner_id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerIsNot(const std::uint64_t& value) && {
+        this->withOwnerIsNot(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& avg_code_as(std::string_view alias) {
-        selection.avg("code", alias);
+    DeviceRequest& withOwnerGreaterThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "owner_id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerGreaterThan(const std::uint64_t& value) && {
+        this->withOwnerGreaterThan(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& min_code_as(std::string_view alias) {
-        selection.min("code", alias);
+    DeviceRequest& withOwnerGreaterThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "owner_id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerGreaterThanOrEqualTo(const std::uint64_t& value) && {
+        this->withOwnerGreaterThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& max_code_as(std::string_view alias) {
-        selection.max("code", alias);
+    DeviceRequest& withOwnerLessThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "owner_id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerLessThan(const std::uint64_t& value) && {
+        this->withOwnerLessThan(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_containing(std::string_view value) {
-        selection.and_filter(Expr::contain(memory_resource(), "code", value));
+    DeviceRequest& withOwnerLessThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "owner_id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerLessThanOrEqualTo(const std::uint64_t& value) && {
+        this->withOwnerLessThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_starting_with(std::string_view value) {
-        selection.and_filter(Expr::begin_with(memory_resource(), "code", value));
+    DeviceRequest& withOwnerBetween(const std::uint64_t& lower, const std::uint64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "owner_id",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerBetween(const std::uint64_t& lower, const std::uint64_t& upper) && {
+        this->withOwnerBetween(lower, upper);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_ending_with(std::string_view value) {
-        selection.and_filter(Expr::end_with(memory_resource(), "code", value));
+    DeviceRequest& withOwnerIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "owner_id", values, false));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerIn(std::span<const std::uint64_t> inputs) && {
+        this->withOwnerIn(inputs);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "code"));
+    DeviceRequest& withOwnerNotIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "owner_id", values, true));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerNotIn(std::span<const std::uint64_t> inputs) && {
+        this->withOwnerNotIn(inputs);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_code_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "code"));
+    DeviceRequest& groupByOwner() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("owner_id");
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByOwner() && {
+        this->groupByOwner();
+        return std::move(*this);
     }
 
-    DeviceRequest& select_active() {
-        selection.project("active");
+    DeviceRequest& groupByOwnerAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("owner_id");
+            query_.selectAs("owner_id", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByOwnerAs(std::string_view alias) && {
+        this->groupByOwnerAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_active_asc() {
-        selection.order_asc("active");
+    DeviceRequest& groupByOwnerWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("owner_id");
+            query_.aggregateWithFunction("owner_id", alias, function);
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByOwnerWithFunction(std::string_view alias,
+                                             AggregateFunction function) && {
+        this->groupByOwnerWithFunction(alias, function);
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_active_desc() {
-        selection.order_desc("active");
+    DeviceRequest& countOwner() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("owner_id", "owner_count");
+        });
         return *this;
+    }
+
+    DeviceRequest&& countOwner() && {
+        this->countOwner();
+        return std::move(*this);
     }
 
-    DeviceRequest& which_are_active() {
-        selection.and_filter(Expr::eq(memory_resource(), "active", true));
+    DeviceRequest& countOwnerAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("owner_id", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& countOwnerAs(std::string_view alias) && {
+        this->countOwnerAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& which_are_not_active() {
-        selection.and_filter(Expr::eq(memory_resource(), "active", false));
+    DeviceRequest& withOwnerIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "owner_id"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerIsUnknown() && {
+        this->withOwnerIsUnknown();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_is(const bool& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "active", value));
+    DeviceRequest& withOwnerIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "owner_id"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerIsKnown() && {
+        this->withOwnerIsKnown();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_is_not(const bool& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "active", value));
+    DeviceRequest& withOwnerIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "owner_id"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerIsNull() && {
+        this->withOwnerIsNull();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_greater_than(const bool& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "active", value));
+    DeviceRequest& withOwnerIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "owner_id"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withOwnerIsNotNull() && {
+        this->withOwnerIsNotNull();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_greater_than_or_equal_to(const bool& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "active", value));
+    DeviceRequest& selectVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& selectVersion() && {
+        this->selectVersion();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_less_than(const bool& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "active", value));
+    DeviceRequest& orderByVersionAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByVersionAsc() && {
+        this->orderByVersionAsc();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_less_than_or_equal_to(const bool& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "active", value));
+    DeviceRequest& orderByVersionDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByVersionDesc() && {
+        this->orderByVersionDesc();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_between(const bool& lower, const bool& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "active", lower, upper));
+    DeviceRequest& orderByVersionAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByVersionAscUsingGbk() && {
+        this->orderByVersionAscUsingGbk();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_in(std::span<const bool> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "active", values, false));
+    DeviceRequest& orderByVersionDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& orderByVersionDescUsingGbk() && {
+        this->orderByVersionDescUsingGbk();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_not_in(std::span<const bool> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "active", values, true));
+    DeviceRequest& withVersionIs(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionIs(const std::int64_t& value) && {
+        this->withVersionIs(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& group_by_active() {
-        selection.group_by("active");
+    DeviceRequest& withVersionIsNot(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionIsNot(const std::int64_t& value) && {
+        this->withVersionIsNot(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& sum_active_as(std::string_view alias) {
-        selection.sum("active", alias);
+    DeviceRequest& withVersionGreaterThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionGreaterThan(const std::int64_t& value) && {
+        this->withVersionGreaterThan(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& avg_active_as(std::string_view alias) {
-        selection.avg("active", alias);
+    DeviceRequest& withVersionGreaterThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionGreaterThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionGreaterThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& min_active_as(std::string_view alias) {
-        selection.min("active", alias);
+    DeviceRequest& withVersionLessThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionLessThan(const std::int64_t& value) && {
+        this->withVersionLessThan(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& max_active_as(std::string_view alias) {
-        selection.max("active", alias);
+    DeviceRequest& withVersionLessThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionLessThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionLessThanOrEqualTo(value);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "active"));
+    DeviceRequest& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "version",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) && {
+        this->withVersionBetween(lower, upper);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_active_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "active"));
+    DeviceRequest& withVersionIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, false));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionIn(inputs);
+        return std::move(*this);
     }
 
-    DeviceRequest& select_owner_id() {
-        selection.project("owner_id");
+    DeviceRequest& withVersionNotIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, true));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionNotIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionNotIn(inputs);
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_owner_id_asc() {
-        selection.order_asc("owner_id");
+    DeviceRequest& groupByVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByVersion() && {
+        this->groupByVersion();
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_owner_id_desc() {
-        selection.order_desc("owner_id");
+    DeviceRequest& groupByVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.selectAs("version", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByVersionAs(std::string_view alias) && {
+        this->groupByVersionAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_is(const std::uint64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "owner_id", value));
+    DeviceRequest& groupByVersionWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.aggregateWithFunction("version", alias, function);
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByVersionWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->groupByVersionWithFunction(alias, function);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_is_not(const std::uint64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "owner_id", value));
+    DeviceRequest& countVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", "version_count");
+        });
         return *this;
+    }
+
+    DeviceRequest&& countVersion() && {
+        this->countVersion();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_greater_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "owner_id", value));
+    DeviceRequest& countVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& countVersionAs(std::string_view alias) && {
+        this->countVersionAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_greater_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "owner_id", value));
+    DeviceRequest& sumVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", "sum_version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& sumVersion() && {
+        this->sumVersion();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_less_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "owner_id", value));
+    DeviceRequest& sumVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& sumVersionAs(std::string_view alias) && {
+        this->sumVersionAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_less_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "owner_id", value));
+    DeviceRequest& avgVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", "avg_version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& avgVersion() && {
+        this->avgVersion();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_between(const std::uint64_t& lower, const std::uint64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "owner_id", lower, upper));
+    DeviceRequest& avgVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& avgVersionAs(std::string_view alias) && {
+        this->avgVersionAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "owner_id", values, false));
+    DeviceRequest& minVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", "min_version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& minVersion() && {
+        this->minVersion();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_not_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "owner_id", values, true));
+    DeviceRequest& minVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& minVersionAs(std::string_view alias) && {
+        this->minVersionAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& group_by_owner_id() {
-        selection.group_by("owner_id");
+    DeviceRequest& maxVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", "max_version");
+        });
         return *this;
+    }
+
+    DeviceRequest&& maxVersion() && {
+        this->maxVersion();
+        return std::move(*this);
     }
 
-    DeviceRequest& sum_owner_id_as(std::string_view alias) {
-        selection.sum("owner_id", alias);
+    DeviceRequest& maxVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", alias);
+        });
         return *this;
+    }
+
+    DeviceRequest&& maxVersionAs(std::string_view alias) && {
+        this->maxVersionAs(alias);
+        return std::move(*this);
     }
 
-    DeviceRequest& avg_owner_id_as(std::string_view alias) {
-        selection.avg("owner_id", alias);
+    DeviceRequest& withVersionIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionIsUnknown() && {
+        this->withVersionIsUnknown();
+        return std::move(*this);
     }
 
-    DeviceRequest& min_owner_id_as(std::string_view alias) {
-        selection.min("owner_id", alias);
+    DeviceRequest& withVersionIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionIsKnown() && {
+        this->withVersionIsKnown();
+        return std::move(*this);
     }
 
-    DeviceRequest& max_owner_id_as(std::string_view alias) {
-        selection.max("owner_id", alias);
+    DeviceRequest& withVersionIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionIsNull() && {
+        this->withVersionIsNull();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "owner_id"));
+    DeviceRequest& withVersionIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& withVersionIsNotNull() && {
+        this->withVersionIsNotNull();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_owner_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "owner_id"));
+    DeviceRequest& selectOwner() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.relation("owner");
+        });
         return *this;
+    }
+
+    DeviceRequest&& selectOwner() && {
+        this->selectOwner();
+        return std::move(*this);
     }
 
-    DeviceRequest& select_version() {
-        selection.project("version");
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& selectOwnerWith(const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.relation_query("owner", child.query());
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& selectOwnerWith(const PersonRequest<P, ChildResult>& child) && {
+        this->selectOwnerWith(child);
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_version_asc() {
-        selection.order_asc("version");
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& withOwner(const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            selection.and_filter(Expr::in_subquery(
+                r, "owner_id", Person::entity_descriptor(r), child.query(), "id"));
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& withOwner(const PersonRequest<P, ChildResult>& child) && {
+        this->withOwner(child);
+        return std::move(*this);
     }
 
-    DeviceRequest& order_by_version_desc() {
-        selection.order_desc("version");
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& withOwnerMatching(const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.filterRelation("owner_id", "id", child.query_, false, "owner");
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& withOwnerMatching(const PersonRequest<P, ChildResult>& child) && {
+        this->withOwnerMatching(child);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_is(const std::int64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "version", value));
+    DeviceRequest& haveOwner() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "owner_id"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& haveOwner() && {
+        this->haveOwner();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_is_not(const std::int64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "version", value));
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& withoutOwnerMatching(const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.filterRelation("owner_id", "id", child.query_, true, "owner");
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& withoutOwnerMatching(const PersonRequest<P, ChildResult>& child) && {
+        this->withoutOwnerMatching(child);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_greater_than(const std::int64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "version", value));
+    DeviceRequest& haveNoOwner() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "owner_id"));
+        });
         return *this;
+    }
+
+    DeviceRequest&& haveNoOwner() && {
+        this->haveNoOwner();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_greater_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "version", value));
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& facetByOwnerAs(std::string_view facet_name,
+                                  const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.facetBy("owner", facet_name, child.query_);
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& facetByOwnerAs(std::string_view facet_name,
+                                   const PersonRequest<P, ChildResult>& child) && {
+        this->facetByOwnerAs(facet_name, child);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_less_than(const std::int64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "version", value));
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& facetByOwnerAsWithOptions(std::string_view facet_name,
+                                             const PersonRequest<P, ChildResult>& child,
+                                             bool include_all_facets) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.facetBy("owner", facet_name, child.query_, include_all_facets);
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& facetByOwnerAsWithOptions(std::string_view facet_name,
+                                              const PersonRequest<P, ChildResult>& child,
+                                              bool include_all_facets) && {
+        this->facetByOwnerAsWithOptions(facet_name, child, include_all_facets);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_less_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "version", value));
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& groupByOwnerWith(const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupByObject("owner", "owner_id", child.query_);
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& groupByOwnerWith(const PersonRequest<P, ChildResult>& child) && {
+        this->groupByOwnerWith(child);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_between(const std::int64_t& lower, const std::int64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "version", lower, upper));
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& groupByOwnerWithDetailsFrom(const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupByObject("owner", "owner_id", child.query_);
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& groupByOwnerWithDetailsFrom(const PersonRequest<P, ChildResult>& child) && {
+        this->groupByOwnerWithDetailsFrom(child);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, false));
+    DeviceRequest& groupByOwnerWithDetails() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupByObject(
+                "owner", "owner_id", query_.template relatedQuery<Person>().unlimited());
+        });
         return *this;
+    }
+
+    DeviceRequest&& groupByOwnerWithDetails() && {
+        this->groupByOwnerWithDetails();
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_not_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, true));
+    DeviceRequest& rollUpToOwner() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto child = query_.template relatedQuery<Person>().unlimited();
+            query_.filterRelation("owner_id", "id", child, false, "owner");
+            query_.groupByObject("owner", "owner_id", child);
+        });
         return *this;
+    }
+
+    DeviceRequest&& rollUpToOwner() && {
+        this->rollUpToOwner();
+        return std::move(*this);
     }
 
-    DeviceRequest& group_by_version() {
-        selection.group_by("version");
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest& rollUpToOwnerWith(const PersonRequest<P, ChildResult>& child) & {
+        query_.requireCompatible(child.query_);
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.filterRelation("owner_id", "id", child.query_, false, "owner");
+            query_.groupByObject("owner", "owner_id", child.query_);
+        });
         return *this;
+    }
+
+    template <bool P, Entity ChildResult>
+        requires(!P)
+    DeviceRequest&& rollUpToOwnerWith(const PersonRequest<P, ChildResult>& child) && {
+        this->rollUpToOwnerWith(child);
+        return std::move(*this);
     }
 
-    DeviceRequest& with_version_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "version"));
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    DeviceRequest& withId(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("id", op, std::forward<Inputs>(inputs));
         return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    DeviceRequest&& withId(request::FieldOperator op, Inputs&& inputs) && {
+        this->withId(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
     }
 
-    DeviceRequest& with_version_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    DeviceRequest& withCode(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("code", op, std::forward<Inputs>(inputs));
         return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    DeviceRequest&& withCode(request::FieldOperator op, Inputs&& inputs) && {
+        this->withCode(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createCodeCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("code", op, std::forward<Inputs>(inputs));
     }
 
-    DeviceRequest& select_owner() {
-        selection.relation("owner");
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    DeviceRequest& withCodeBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "code", range.start, range.end));
         return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    DeviceRequest&& withCodeBetweenRange(const request::DateRange<T>& range) && {
+        this->withCodeBetweenRange(range);
+        return std::move(*this);
     }
 
-    template <bool P>
-    DeviceRequest& select_owner_with(const PersonRequest<P>& child) {
-        selection.relation_query("owner", child.query());
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    DeviceRequest& withCodeBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "code", value));
         return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    DeviceRequest&& withCodeBefore(const T& value) && {
+        this->withCodeBefore(value);
+        return std::move(*this);
     }
 
-    template <bool P>
-    DeviceRequest& with_owner(const PersonRequest<P>& child) {
-        auto r = memory_resource();
-        selection.and_filter(
-            Expr::in_subquery(r, "owner_id", Person::entity_descriptor(r), child.query(), "id"));
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    DeviceRequest& withCodeAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "code", value));
         return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    DeviceRequest&& withCodeAfter(const T& value) && {
+        this->withCodeAfter(value);
+        return std::move(*this);
     }
 };
 
-template <bool Purposed>
+template <bool Purposed, Entity Result>
 class OrderStatusRequest {
+    template <bool, Entity>
+    friend class PersonRequest;
+    template <bool, Entity>
+    friend class DeviceRequest;
+    template <bool, Entity>
+    friend class OrderStatusRequest;
+    template <bool, Entity>
+    friend class CategoryRequest;
+    template <bool, Entity>
+    friend class ChildRequest;
+    template <bool, Entity>
+    friend class InventoryRequest;
+
 public:
-    using allocator_type = Allocator;
-    UserContext& owner;
-    SelectQuery selection;
-    String intent;
+    using Query = EntityQuery<OrderStatus, DataServiceExecutor, Purposed, Result>;
 
-    OrderStatusRequest(std::allocator_arg_t, Allocator a, UserContext& user)
-        : owner(user), selection(std::allocator_arg, a, OrderStatus::ENTITY_NAME),
-          intent(a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-        selection.project("id").project("version");
-    }
+private:
+    Query query_;
 
-    OrderStatusRequest(std::allocator_arg_t,
-                       Allocator a,
-                       UserContext& user,
-                       const SelectQuery& q,
-                       std::string_view purpose)
-        : owner(user), selection(std::allocator_arg, a, q), intent(purpose, a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-    }
+public:
+    explicit OrderStatusRequest(UserContext& user_context,
+                                bool minimal = false,
+                                bool live_rows = true)
+        requires(!Purposed)
+        : query_(user_context, minimal, live_rows) {}
+
+    explicit OrderStatusRequest(Query value) : query_(std::move(value)) {}
 
     Memory memory_resource() const {
-        return selection.memory_resource();
+        return query_.memory_resource();
     }
 
     const SelectQuery& query() const {
-        return selection;
+        return query_.query();
     }
 
-    OrderStatusRequest<true>& purpose(std::string_view text) {
-        return owner.make<OrderStatusRequest<true>>(owner, selection, text);
+    const Query& runtimeQuery() const
+        requires(!Purposed)
+    {
+        return query_;
     }
 
-    OrderStatusRequest& comment(std::string_view text) {
-        selection.comment(text);
+    request::QuerySelection selection() const
+        requires(!Purposed)
+    {
+        return query_.selection();
+    }
+
+    OrderStatusRequest<true, Result> purpose(std::string_view text) const& {
+        return OrderStatusRequest<true, Result>(query_.purpose(text));
+    }
+
+    OrderStatusRequest<true, Result> purpose(std::string_view text) && {
+        return OrderStatusRequest<true, Result>(std::move(query_).purpose(text));
+    }
+
+    template <Entity Return>
+    OrderStatusRequest<Purposed, Return> returnType() const& {
+        return OrderStatusRequest<Purposed, Return>(query_.template returnType<Return>());
+    }
+
+    template <Entity Return>
+    OrderStatusRequest<Purposed, Return> returnType() && {
+        return OrderStatusRequest<Purposed, Return>(
+            std::move(query_).template returnType<Return>());
+    }
+
+    OrderStatusRequest& comment(std::string_view value) & {
+        query_.comment(value);
         return *this;
     }
 
-    OrderStatusRequest& filter(Expr value) {
-        selection.filter(std::move(value));
+    OrderStatusRequest&& comment(std::string_view value) && {
+        this->comment(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& filter(const Expr& value) & {
+        query_.filter(value);
         return *this;
     }
 
-    OrderStatusRequest& and_filter(Expr value) {
-        selection.and_filter(std::move(value));
+    OrderStatusRequest&& filter(const Expr& value) && {
+        this->filter(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectDynamicFields(const DynamicFieldSelection& value) & {
+        query_.selectDynamicFields(value);
         return *this;
     }
 
-    OrderStatusRequest& or_filter(Expr value) {
-        selection.or_filter(std::move(value));
+    OrderStatusRequest&& selectDynamicFields(const DynamicFieldSelection& value) && {
+        this->selectDynamicFields(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& matchTypes(std::span<const Value> value) & {
+        query_.matchTypes(value);
         return *this;
     }
 
-    OrderStatusRequest& limit(std::uint64_t value) {
-        selection.limit(value);
+    OrderStatusRequest&& matchTypes(std::span<const Value> value) && {
+        this->matchTypes(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& andFilter(const Expr& value) & {
+        query_.andFilter(value);
         return *this;
     }
 
-    OrderStatusRequest& offset(std::uint64_t value) {
-        selection.offset(value);
+    OrderStatusRequest&& andFilter(const Expr& value) && {
+        this->andFilter(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orFilter(const Expr& value) & {
+        query_.orFilter(value);
         return *this;
     }
 
-    OrderStatusRequest& hard_limit(std::uint64_t value) {
-        selection.hard_limit(value);
+    OrderStatusRequest&& orFilter(const Expr& value) && {
+        this->orFilter(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& limit(std::uint64_t value) & {
+        query_.limit(value);
         return *this;
     }
 
-    OrderStatusRequest& skip(std::uint64_t value) {
-        return offset(value);
+    OrderStatusRequest&& limit(std::uint64_t value) && {
+        this->limit(value);
+        return std::move(*this);
     }
 
-    OrderStatusRequest& search_with_text(std::string_view value) {
-        selection.search_with_text(value);
+    OrderStatusRequest& offset(std::uint64_t value) & {
+        query_.offset(value);
         return *this;
     }
 
-    OrderStatusRequest& select_self() {
-        selection.project("id");
-        selection.project("name");
-        selection.project("version");
+    OrderStatusRequest&& offset(std::uint64_t value) && {
+        this->offset(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& hardLimit(std::uint64_t value) & {
+        query_.hardLimit(value);
         return *this;
     }
 
-    OrderStatusRequest& select_self_fields() {
-        return select_self();
+    OrderStatusRequest&& hardLimit(std::uint64_t value) && {
+        this->hardLimit(value);
+        return std::move(*this);
     }
 
-    PurposedSelectQuery authorize(UserContext& user) const
+    OrderStatusRequest& stream(std::size_t value) & {
+        query_.stream(value);
+        return *this;
+    }
+
+    OrderStatusRequest&& stream(std::size_t value) && {
+        this->stream(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& unlimited() & {
+        query_.unlimited();
+        return *this;
+    }
+
+    OrderStatusRequest&& unlimited() && {
+        this->unlimited();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withDeletedRows() & {
+        query_.withDeletedRows();
+        return *this;
+    }
+
+    OrderStatusRequest&& withDeletedRows() && {
+        this->withDeletedRows();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& deletedRowsOnly() & {
+        query_.deletedRowsOnly();
+        return *this;
+    }
+
+    OrderStatusRequest&& deletedRowsOnly() && {
+        this->deletedRowsOnly();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& appendSearchCriteria(const Expr& criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    OrderStatusRequest&& appendSearchCriteria(const Expr& criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& appendSearchCriteria(Ref<Expr> criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    OrderStatusRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) & {
+        query_.filterProperty(left, op, right);
+        return *this;
+    }
+
+    OrderStatusRequest&&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) && {
+        this->filterProperty(left, op, right);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& pageOffset(std::uint64_t offset, std::uint64_t size) & {
+        query_.pageOffset(offset, size);
+        return *this;
+    }
+
+    OrderStatusRequest&& pageOffset(std::uint64_t offset, std::uint64_t size) && {
+        this->pageOffset(offset, size);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& offset(std::uint64_t offset, std::uint64_t size) & {
+        query_.offset(offset, size);
+        return *this;
+    }
+
+    OrderStatusRequest&& offset(std::uint64_t offset, std::uint64_t size) && {
+        this->offset(offset, size);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& offsetOnly(std::uint64_t value) & {
+        query_.offsetOnly(value);
+        return *this;
+    }
+
+    OrderStatusRequest&& offsetOnly(std::uint64_t value) && {
+        this->offsetOnly(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& offsetSize(std::uint64_t offset, std::uint64_t size) & {
+        query_.offsetSize(offset, size);
+        return *this;
+    }
+
+    OrderStatusRequest&& offsetSize(std::uint64_t offset, std::uint64_t size) && {
+        this->offsetSize(offset, size);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& top(std::uint64_t value) & {
+        query_.top(value);
+        return *this;
+    }
+
+    OrderStatusRequest&& top(std::uint64_t value) && {
+        this->top(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& pageNumber(std::uint64_t number, std::uint64_t size) & {
+        query_.pageNumber(number, size);
+        return *this;
+    }
+
+    OrderStatusRequest&& pageNumber(std::uint64_t number, std::uint64_t size) && {
+        this->pageNumber(number, size);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& pageNumberDefault(std::uint64_t number) & {
+        query_.pageNumberDefault(number);
+        return *this;
+    }
+
+    OrderStatusRequest&& pageNumberDefault(std::uint64_t number) && {
+        this->pageNumberDefault(number);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& page(std::uint64_t number, std::uint64_t size) & {
+        query_.page(number, size);
+        return *this;
+    }
+
+    OrderStatusRequest&& page(std::uint64_t number, std::uint64_t size) && {
+        this->page(number, size);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& pageDefault(std::uint64_t number) & {
+        query_.pageDefault(number);
+        return *this;
+    }
+
+    OrderStatusRequest&& pageDefault(std::uint64_t number) && {
+        this->pageDefault(number);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& streamDefault() & {
+        query_.streamDefault();
+        return *this;
+    }
+
+    OrderStatusRequest&& streamDefault() && {
+        this->streamDefault();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& topNProbeParentThreshold(std::size_t threshold) & {
+        query_.topNProbeParentThreshold(threshold);
+        return *this;
+    }
+
+    OrderStatusRequest&& topNProbeParentThreshold(std::size_t threshold) && {
+        this->topNProbeParentThreshold(threshold);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& rawSql(std::string_view sql) & {
+        query_.rawSql(sql);
+        return *this;
+    }
+
+    OrderStatusRequest&& rawSql(std::string_view sql) && {
+        this->rawSql(sql);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& rawSqlFilter(std::string_view sql) & {
+        query_.rawSqlFilter(sql);
+        return *this;
+    }
+
+    OrderStatusRequest&& rawSqlFilter(std::string_view sql) && {
+        this->rawSqlFilter(sql);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& createPropertyAs(std::string_view field, std::string_view sql) & {
+        query_.createPropertyAs(field, sql);
+        return *this;
+    }
+
+    OrderStatusRequest&& createPropertyAs(std::string_view field, std::string_view sql) && {
+        this->createPropertyAs(field, sql);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& unsafeRawSql(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSql(std::move(sql));
+        return *this;
+    }
+
+    OrderStatusRequest&& unsafeRawSql(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSql(std::move(sql));
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSqlFilter(std::move(sql));
+        return *this;
+    }
+
+    OrderStatusRequest&& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSqlFilter(std::move(sql));
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& unsafeCreatePropertyAs(std::string_view field,
+                                               request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeCreatePropertyAs(field, std::move(sql));
+        return *this;
+    }
+
+    OrderStatusRequest&& unsafeCreatePropertyAs(std::string_view field,
+                                                request::UnsafeRawSqlSegment sql) && {
+        this->unsafeCreatePropertyAs(field, std::move(sql));
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupBy(std::string_view value) & {
+        query_.groupBy(value);
+        return *this;
+    }
+
+    OrderStatusRequest&& groupBy(std::string_view value) && {
+        this->groupBy(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countAs(std::string_view value) & {
+        query_.countAs(value);
+        return *this;
+    }
+
+    OrderStatusRequest&& countAs(std::string_view value) && {
+        this->countAs(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateCount(std::string_view value) & {
+        query_.aggregateCount(value);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateCount(std::string_view value) && {
+        this->aggregateCount(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& count() & {
+        query_.count();
+        return *this;
+    }
+
+    OrderStatusRequest&& count() && {
+        this->count();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateWithFunction(std::string_view field,
+                                              std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.aggregateWithFunction(field, alias, function);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateWithFunction(std::string_view field,
+                                               std::string_view alias,
+                                               AggregateFunction function) && {
+        this->aggregateWithFunction(field, alias, function);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateCountField(std::string_view field, std::string_view alias) & {
+        query_.aggregateCountField(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateCountField(std::string_view field, std::string_view alias) && {
+        this->aggregateCountField(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateSum(std::string_view field, std::string_view alias) & {
+        query_.aggregateSum(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateSum(std::string_view field, std::string_view alias) && {
+        this->aggregateSum(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateAvg(std::string_view field, std::string_view alias) & {
+        query_.aggregateAvg(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateAvg(std::string_view field, std::string_view alias) && {
+        this->aggregateAvg(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateMin(std::string_view field, std::string_view alias) & {
+        query_.aggregateMin(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateMin(std::string_view field, std::string_view alias) && {
+        this->aggregateMin(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateMax(std::string_view field, std::string_view alias) & {
+        query_.aggregateMax(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateMax(std::string_view field, std::string_view alias) && {
+        this->aggregateMax(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateStddev(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddev(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateStddev(std::string_view field, std::string_view alias) && {
+        this->aggregateStddev(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateStddevPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddevPop(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateStddevPop(std::string_view field, std::string_view alias) && {
+        this->aggregateStddevPop(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateVarSamp(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarSamp(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateVarSamp(std::string_view field, std::string_view alias) && {
+        this->aggregateVarSamp(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateVarPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarPop(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateVarPop(std::string_view field, std::string_view alias) && {
+        this->aggregateVarPop(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateBitAnd(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitAnd(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateBitAnd(std::string_view field, std::string_view alias) && {
+        this->aggregateBitAnd(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateBitOr(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitOr(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateBitOr(std::string_view field, std::string_view alias) && {
+        this->aggregateBitOr(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& aggregateBitXor(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitXor(field, alias);
+        return *this;
+    }
+
+    OrderStatusRequest&& aggregateBitXor(std::string_view field, std::string_view alias) && {
+        this->aggregateBitXor(field, alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& enableAggregationCache() & {
+        query_.enableAggregationCache();
+        return *this;
+    }
+
+    OrderStatusRequest&& enableAggregationCache() && {
+        this->enableAggregationCache();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& enableAggregationCacheFor(std::uint64_t duration) & {
+        query_.enableAggregationCacheFor(duration);
+        return *this;
+    }
+
+    OrderStatusRequest&& enableAggregationCacheFor(std::uint64_t duration) && {
+        this->enableAggregationCacheFor(duration);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& propagateAggregationCache(std::uint64_t duration) & {
+        query_.propagateAggregationCache(duration);
+        return *this;
+    }
+
+    OrderStatusRequest&& propagateAggregationCache(std::uint64_t duration) && {
+        this->propagateAggregationCache(duration);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& optimizePaginationWithIdSet() & {
+        query_.optimizePaginationWithIdSet();
+        return *this;
+    }
+
+    OrderStatusRequest&& optimizePaginationWithIdSet() && {
+        this->optimizePaginationWithIdSet();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                          std::uint64_t ttl,
+                                                          std::uint64_t max_ids) & {
+        query_.optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return *this;
+    }
+
+    OrderStatusRequest&& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                           std::uint64_t ttl,
+                                                           std::uint64_t max_ids) && {
+        this->optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& optimizeForContinuousPageFetch() & {
+        query_.optimizeForContinuousPageFetch();
+        return *this;
+    }
+
+    OrderStatusRequest&& optimizeForContinuousPageFetch() && {
+        this->optimizeForContinuousPageFetch();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                           std::uint64_t ttl) & {
+        query_.optimizeForContinuousPageFetchWith(name, ttl);
+        return *this;
+    }
+
+    OrderStatusRequest&& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                            std::uint64_t ttl) && {
+        this->optimizeForContinuousPageFetchWith(name, ttl);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& filterWithJson(std::string_view value) & {
+        apply_generated_dynamic_json<generated_detail::OrderStatusDynamicJsonRecipe>(query_, value);
+        return *this;
+    }
+
+    OrderStatusRequest&& filterWithJson(std::string_view value) && {
+        this->filterWithJson(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withTypeGroup() & {
+        query_.withTypeGroup();
+        return *this;
+    }
+
+    OrderStatusRequest&& withTypeGroup() && {
+        this->withTypeGroup();
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    OrderStatusRequest& enhanceChild(const ChildRequest& child) & {
+        query_.enhanceChild(child.query_);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    OrderStatusRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& matchingAnyOf(const ChildRequest& child) & {
+        query_.matchingAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& matchingAnyOf(const ChildRequest& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& matchingAnyOf(const SelectQuery& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    OrderStatusRequest&& matchingAnyOf(const SelectQuery& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& matchingAnyOf(const request::QuerySelection& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    OrderStatusRequest&& matchingAnyOf(const request::QuerySelection& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest& matchAnyOf(const ChildRequest& child) & {
+        query_.matchAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    OrderStatusRequest&& matchAnyOf(const ChildRequest& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& matchAnyOf(const SelectQuery& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    OrderStatusRequest&& matchAnyOf(const SelectQuery& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& matchAnyOf(const request::QuerySelection& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    OrderStatusRequest&& matchAnyOf(const request::QuerySelection& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& enhanceChildrenIfNeeded() &;
+
+    OrderStatusRequest&& enhanceChildrenIfNeeded() && {
+        enhanceChildrenIfNeeded();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& skip(std::uint64_t value) & {
+        query_.offset(value);
+        return *this;
+    }
+
+    OrderStatusRequest&& skip(std::uint64_t value) && {
+        this->skip(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& searchWithText(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.search_with_text(value);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& searchWithText(std::string_view value) && {
+        this->searchWithText(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectSelf() & {
+        query_.select("id");
+        query_.select("name");
+        query_.select("version");
+        return *this;
+    }
+
+    OrderStatusRequest&& selectSelf() && {
+        this->selectSelf();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectSelfFields() & {
+        selectSelf();
+        return *this;
+    }
+
+    OrderStatusRequest&& selectSelfFields() && {
+        this->selectSelfFields();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectSelfWithoutParent() & {
+        selectSelfFields();
+        return *this;
+    }
+
+    OrderStatusRequest&& selectSelfWithoutParent() && {
+        this->selectSelfWithoutParent();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectAll() & {
+        selectSelf();
+        return *this;
+    }
+
+    OrderStatusRequest&& selectAll() && {
+        this->selectAll();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectChildren() & {
+        selectAll();
+        return *this;
+    }
+
+    OrderStatusRequest&& selectChildren() && {
+        this->selectChildren();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectAny() & {
+        selectChildren();
+        return *this;
+    }
+
+    OrderStatusRequest&& selectAny() && {
+        this->selectAny();
+        return std::move(*this);
+    }
+
+    auto& executeForList(UserContext& user_context) const
         requires Purposed
     {
-        if (&user != &owner) {
-            throw std::invalid_argument("Request execution cannot cross UserContexts");
-        }
-        auto comment =
-            selection.comment_text ? std::string_view(*selection.comment_text) : std::string_view{};
-        auto blank = [](std::string_view value) {
-            detail::trim(value);
-            return value.empty();
-        };
-        if (blank(intent) || blank(comment)) {
-            throw std::invalid_argument("Query execution requires nonblank purpose and comment");
-        }
-        return PurposedSelectQuery(
-            std::allocator_arg, Allocator(memory_resource()), selection, intent);
+        return query_.executeForList(user_context);
     }
 
-    auto& execute_for_list(UserContext& user) const
+    auto& executeForOne(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(OrderStatus::ENTITY_NAME);
-        return require_value(repository).get().template fetch_enhanced_entities<OrderStatus>(query);
+        return query_.executeForOne(user_context);
     }
 
-    auto& execute_for_entity_list(UserContext& user) const
+    auto& executeForFirst(UserContext& user_context) const
         requires Purposed
     {
-        return execute_for_list(user);
+        return query_.executeForFirst(user_context);
     }
 
-    auto& execute(UserContext& user) const
+    auto& executeForCount(UserContext& user_context) const
         requires Purposed
     {
-        auto& request = owner.make<OrderStatusRequest<true>>(owner, selection, intent);
-        request.limit(1);
-        auto& source = request.execute_for_list(user);
-        using Error = DataServiceError<DataServiceExecutor::Error>;
-        using State = generated_detail::SingleResult<OrderStatus, Error>;
-        return make_operation<typename State::Output, State>(memory_resource(), source);
+        return query_.executeForCount(user_context);
     }
 
-    auto& execute_for_entity(UserContext& user) const
+    auto& executeForExists(UserContext& user_context) const
         requires Purposed
     {
-        return execute(user);
+        return query_.executeForExists(user_context);
     }
 
-    auto& execute_for_rows(UserContext& user) const
+    auto& executeForStream(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(OrderStatus::ENTITY_NAME);
-        return require_value(repository).get().fetch_smart_list(query);
+        return query_.executeForStream(user_context);
     }
 
-    OrderStatus& new_entity(UserContext& user) const
+    auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
         requires Purposed
     {
-        (void)authorize(user);
-        auto& value = user.make<OrderStatus>();
-        value.update_id(require_value(user.next_id(OrderStatus::ENTITY_NAME)));
-        value.mark_as_new();
-        return value;
+        return query_.executeForPage(user_context, offset, limit);
     }
 
-    OrderStatusRequest& select_id() {
-        selection.project("id");
+    auto& execute(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntityList(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForList(user_context);
+    }
+
+    auto& executeForRows(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForRows(user_context);
+    }
+
+    OrderStatus& newEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.newEntity(user_context);
+    }
+
+    OrderStatusRequest copyTo(UserContext& user_context) const {
+        return OrderStatusRequest(query_.copyTo(user_context));
+    }
+
+    OrderStatusRequest copyToGlobal(UserContext& user_context) const {
+        return OrderStatusRequest(query_.copyToGlobal(user_context));
+    }
+
+    OrderStatusRequest rebindGlobal(UserContext& user_context) const {
+        return OrderStatusRequest(query_.rebindGlobal(user_context));
+    }
+
+    OrderStatusRequest& selectId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& order_by_id_asc() {
-        selection.order_asc("id");
+    OrderStatusRequest&& selectId() && {
+        this->selectId();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByIdAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& order_by_id_desc() {
-        selection.order_desc("id");
+    OrderStatusRequest&& orderByIdAsc() && {
+        this->orderByIdAsc();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByIdDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_is(const std::uint64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "id", value));
+    OrderStatusRequest&& orderByIdDesc() && {
+        this->orderByIdDesc();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByIdAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_is_not(const std::uint64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "id", value));
+    OrderStatusRequest&& orderByIdAscUsingGbk() && {
+        this->orderByIdAscUsingGbk();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByIdDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_greater_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "id", value));
+    OrderStatusRequest&& orderByIdDescUsingGbk() && {
+        this->orderByIdDescUsingGbk();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdIs(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_greater_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "id", value));
+    OrderStatusRequest&& withIdIs(const std::uint64_t& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdIsNot(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_less_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "id", value));
+    OrderStatusRequest&& withIdIsNot(const std::uint64_t& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdGreaterThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_less_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "id", value));
+    OrderStatusRequest&& withIdGreaterThan(const std::uint64_t& value) && {
+        this->withIdGreaterThan(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdGreaterThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_between(const std::uint64_t& lower, const std::uint64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "id", lower, upper));
+    OrderStatusRequest&& withIdGreaterThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdLessThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, false));
+    OrderStatusRequest&& withIdLessThan(const std::uint64_t& value) && {
+        this->withIdLessThan(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdLessThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_not_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, true));
+    OrderStatusRequest&& withIdLessThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "id",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& group_by_id() {
-        selection.group_by("id");
+    OrderStatusRequest&& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) && {
+        this->withIdBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, false));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "id"));
+    OrderStatusRequest&& withIdIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdIn(inputs);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdNotIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, true));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_id_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+    OrderStatusRequest&& withIdNotIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdNotIn(inputs);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupById() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& select_name() {
-        selection.project("name");
+    OrderStatusRequest&& groupById() && {
+        this->groupById();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.selectAs("id", alias);
+        });
         return *this;
     }
 
-    OrderStatusRequest& order_by_name_asc() {
-        selection.order_asc("name");
+    OrderStatusRequest&& groupByIdAs(std::string_view alias) && {
+        this->groupByIdAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByIdWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.aggregateWithFunction("id", alias, function);
+        });
         return *this;
     }
 
-    OrderStatusRequest& order_by_name_desc() {
-        selection.order_desc("name");
+    OrderStatusRequest&& groupByIdWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->groupByIdWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", "id_count");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_is(std::string_view value) {
-        selection.and_filter(Expr::eq(memory_resource(), "name", value));
+    OrderStatusRequest&& countId() && {
+        this->countId();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", alias);
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_is_not(std::string_view value) {
-        selection.and_filter(Expr::ne(memory_resource(), "name", value));
+    OrderStatusRequest&& countIdAs(std::string_view alias) && {
+        this->countIdAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& sumId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", "sum_id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_greater_than(std::string_view value) {
-        selection.and_filter(Expr::gt(memory_resource(), "name", value));
+    OrderStatusRequest&& sumId() && {
+        this->sumId();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& sumIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", alias);
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_greater_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::gte(memory_resource(), "name", value));
+    OrderStatusRequest&& sumIdAs(std::string_view alias) && {
+        this->sumIdAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& avgId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", "avg_id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_less_than(std::string_view value) {
-        selection.and_filter(Expr::lt(memory_resource(), "name", value));
+    OrderStatusRequest&& avgId() && {
+        this->avgId();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& avgIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", alias);
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_less_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::lte(memory_resource(), "name", value));
+    OrderStatusRequest&& avgIdAs(std::string_view alias) && {
+        this->avgIdAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& minId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", "min_id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_between(std::string_view lower, std::string_view upper) {
-        selection.and_filter(Expr::between(memory_resource(), "name", lower, upper));
+    OrderStatusRequest&& minId() && {
+        this->minId();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& minIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", alias);
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, false));
+    OrderStatusRequest&& minIdAs(std::string_view alias) && {
+        this->minIdAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& maxId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", "max_id");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_not_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, true));
+    OrderStatusRequest&& maxId() && {
+        this->maxId();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& maxIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", alias);
+        });
         return *this;
     }
 
-    OrderStatusRequest& group_by_name() {
-        selection.group_by("name");
+    OrderStatusRequest&& maxIdAs(std::string_view alias) && {
+        this->maxIdAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    OrderStatusRequest& sum_name_as(std::string_view alias) {
-        selection.sum("name", alias);
+    OrderStatusRequest&& withIdIsUnknown() && {
+        this->withIdIsUnknown();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    OrderStatusRequest& avg_name_as(std::string_view alias) {
-        selection.avg("name", alias);
+    OrderStatusRequest&& withIdIsKnown() && {
+        this->withIdIsKnown();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    OrderStatusRequest& min_name_as(std::string_view alias) {
-        selection.min("name", alias);
+    OrderStatusRequest&& withIdIsNull() && {
+        this->withIdIsNull();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withIdIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    OrderStatusRequest& max_name_as(std::string_view alias) {
-        selection.max("name", alias);
+    OrderStatusRequest&& withIdIsNotNull() && {
+        this->withIdIsNotNull();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIsString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_containing(std::string_view value) {
-        selection.and_filter(Expr::contain(memory_resource(), "name", value));
+    OrderStatusRequest&& withNameIsString() && {
+        this->withNameIsString();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIsNotString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_starting_with(std::string_view value) {
-        selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+    OrderStatusRequest&& withNameIsNotString() && {
+        this->withNameIsNotString();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("name");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_ending_with(std::string_view value) {
-        selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+    OrderStatusRequest&& selectName() && {
+        this->selectName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& projectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("name");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "name"));
+    OrderStatusRequest&& projectName() && {
+        this->projectName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectNameRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("name", sql);
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_name_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+    OrderStatusRequest&& selectNameRaw(std::string_view sql) && {
+        this->selectNameRaw(sql);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("name", std::move(sql));
+        });
         return *this;
     }
 
-    OrderStatusRequest& select_version() {
-        selection.project("version");
+    OrderStatusRequest&& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectNameUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& unselectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("name");
+        });
         return *this;
     }
 
-    OrderStatusRequest& order_by_version_asc() {
-        selection.order_asc("version");
+    OrderStatusRequest&& unselectName() && {
+        this->unselectName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByNameAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("name");
+        });
         return *this;
     }
 
-    OrderStatusRequest& order_by_version_desc() {
-        selection.order_desc("version");
+    OrderStatusRequest&& orderByNameAsc() && {
+        this->orderByNameAsc();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByNameDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("name");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_is(const std::int64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "version", value));
+    OrderStatusRequest&& orderByNameDesc() && {
+        this->orderByNameDesc();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByNameAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("name");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_is_not(const std::int64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "version", value));
+    OrderStatusRequest&& orderByNameAscUsingGbk() && {
+        this->orderByNameAscUsingGbk();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByNameDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("name");
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_greater_than(const std::int64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "version", value));
+    OrderStatusRequest&& orderByNameDescUsingGbk() && {
+        this->orderByNameDescUsingGbk();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIs(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_greater_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "version", value));
+    OrderStatusRequest&& withNameIs(std::string_view value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIsNot(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_less_than(const std::int64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "version", value));
+    OrderStatusRequest&& withNameIsNot(std::string_view value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameGreaterThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_less_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "version", value));
+    OrderStatusRequest&& withNameGreaterThan(std::string_view value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameGreaterThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_between(const std::int64_t& lower, const std::int64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "version", lower, upper));
+    OrderStatusRequest&& withNameGreaterThanOrEqualTo(std::string_view value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameLessThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, false));
+    OrderStatusRequest&& withNameLessThan(std::string_view value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameLessThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_not_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, true));
+    OrderStatusRequest&& withNameLessThanOrEqualTo(std::string_view value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameBetween(std::string_view lower, std::string_view upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "name",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    OrderStatusRequest& group_by_version() {
-        selection.group_by("version");
+    OrderStatusRequest&& withNameBetween(std::string_view lower, std::string_view upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, false));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "version"));
+    OrderStatusRequest&& withNameIn(std::span<const String> inputs) && {
+        this->withNameIn(inputs);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameNotIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, true));
+        });
         return *this;
     }
 
-    OrderStatusRequest& with_version_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+    OrderStatusRequest&& withNameNotIn(std::span<const String> inputs) && {
+        this->withNameNotIn(inputs);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+        });
         return *this;
+    }
+
+    OrderStatusRequest&& groupByName() && {
+        this->groupByName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.selectAs("name", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByNameAs(std::string_view alias) && {
+        this->groupByNameAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByNameWithFunction(std::string_view alias,
+                                                AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.aggregateWithFunction("name", alias, function);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByNameWithFunction(std::string_view alias,
+                                                 AggregateFunction function) && {
+        this->groupByNameWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", "name_count");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& countName() && {
+        this->countName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& countNameAs(std::string_view alias) && {
+        this->countNameAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& sumName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", "sum_name");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& sumName() && {
+        this->sumName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& sumNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& sumNameAs(std::string_view alias) && {
+        this->sumNameAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& avgName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", "avg_name");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& avgName() && {
+        this->avgName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& avgNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& avgNameAs(std::string_view alias) && {
+        this->avgNameAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& minName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", "min_name");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& minName() && {
+        this->minName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& minNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& minNameAs(std::string_view alias) && {
+        this->minNameAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& maxName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", "max_name");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& maxName() && {
+        this->maxName();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& maxNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& maxNameAs(std::string_view alias) && {
+        this->maxNameAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameContaining(std::string_view value) && {
+        this->withNameContaining(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameStartingWith(std::string_view value) && {
+        this->withNameStartingWith(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameEndingWith(std::string_view value) && {
+        this->withNameEndingWith(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameNotContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameNotContaining(std::string_view value) && {
+        this->withNameNotContaining(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameNotStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameNotStartingWith(std::string_view value) && {
+        this->withNameNotStartingWith(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameNotEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameNotEndingWith(std::string_view value) && {
+        this->withNameNotEndingWith(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameSoundingLike(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::sound_like(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameSoundingLike(std::string_view value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameIsUnknown() && {
+        this->withNameIsUnknown();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameIsKnown() && {
+        this->withNameIsKnown();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameIsNull() && {
+        this->withNameIsNull();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withNameIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withNameIsNotNull() && {
+        this->withNameIsNotNull();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& selectVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& selectVersion() && {
+        this->selectVersion();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByVersionAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& orderByVersionAsc() && {
+        this->orderByVersionAsc();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByVersionDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& orderByVersionDesc() && {
+        this->orderByVersionDesc();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByVersionAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& orderByVersionAscUsingGbk() && {
+        this->orderByVersionAscUsingGbk();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& orderByVersionDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& orderByVersionDescUsingGbk() && {
+        this->orderByVersionDescUsingGbk();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionIs(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionIs(const std::int64_t& value) && {
+        this->withVersionIs(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionIsNot(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionIsNot(const std::int64_t& value) && {
+        this->withVersionIsNot(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionGreaterThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionGreaterThan(const std::int64_t& value) && {
+        this->withVersionGreaterThan(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionGreaterThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionGreaterThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionLessThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionLessThan(const std::int64_t& value) && {
+        this->withVersionLessThan(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionLessThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionLessThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "version",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionBetween(const std::int64_t& lower,
+                                            const std::int64_t& upper) && {
+        this->withVersionBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, false));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionIn(inputs);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionNotIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, true));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionNotIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionNotIn(inputs);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByVersion() && {
+        this->groupByVersion();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.selectAs("version", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByVersionAs(std::string_view alias) && {
+        this->groupByVersionAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& groupByVersionWithFunction(std::string_view alias,
+                                                   AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.aggregateWithFunction("version", alias, function);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& groupByVersionWithFunction(std::string_view alias,
+                                                    AggregateFunction function) && {
+        this->groupByVersionWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", "version_count");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& countVersion() && {
+        this->countVersion();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& countVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& countVersionAs(std::string_view alias) && {
+        this->countVersionAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& sumVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", "sum_version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& sumVersion() && {
+        this->sumVersion();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& sumVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& sumVersionAs(std::string_view alias) && {
+        this->sumVersionAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& avgVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", "avg_version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& avgVersion() && {
+        this->avgVersion();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& avgVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& avgVersionAs(std::string_view alias) && {
+        this->avgVersionAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& minVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", "min_version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& minVersion() && {
+        this->minVersion();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& minVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& minVersionAs(std::string_view alias) && {
+        this->minVersionAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& maxVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", "max_version");
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& maxVersion() && {
+        this->maxVersion();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& maxVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", alias);
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& maxVersionAs(std::string_view alias) && {
+        this->maxVersionAs(alias);
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionIsUnknown() && {
+        this->withVersionIsUnknown();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionIsKnown() && {
+        this->withVersionIsKnown();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionIsNull() && {
+        this->withVersionIsNull();
+        return std::move(*this);
+    }
+
+    OrderStatusRequest& withVersionIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    OrderStatusRequest&& withVersionIsNotNull() && {
+        this->withVersionIsNotNull();
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withId(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("id", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withId(request::FieldOperator op, Inputs&& inputs) && {
+        this->withId(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest& withName(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("name", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    OrderStatusRequest&& withName(request::FieldOperator op, Inputs&& inputs) && {
+        this->withName(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createNameCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("name", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    OrderStatusRequest& withNameBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    OrderStatusRequest&& withNameBetweenRange(const request::DateRange<T>& range) && {
+        this->withNameBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    OrderStatusRequest& withNameBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    OrderStatusRequest&& withNameBefore(const T& value) && {
+        this->withNameBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    OrderStatusRequest& withNameAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    OrderStatusRequest&& withNameAfter(const T& value) && {
+        this->withNameAfter(value);
+        return std::move(*this);
     }
 };
 
-template <bool Purposed>
+template <bool Purposed, Entity Result>
 class CategoryRequest {
+    template <bool, Entity>
+    friend class PersonRequest;
+    template <bool, Entity>
+    friend class DeviceRequest;
+    template <bool, Entity>
+    friend class OrderStatusRequest;
+    template <bool, Entity>
+    friend class CategoryRequest;
+    template <bool, Entity>
+    friend class ChildRequest;
+    template <bool, Entity>
+    friend class InventoryRequest;
+
 public:
-    using allocator_type = Allocator;
-    UserContext& owner;
-    SelectQuery selection;
-    String intent;
+    using Query = EntityQuery<Category, DataServiceExecutor, Purposed, Result>;
 
-    CategoryRequest(std::allocator_arg_t, Allocator a, UserContext& user)
-        : owner(user), selection(std::allocator_arg, a, Category::ENTITY_NAME),
-          intent(a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-        selection.project("id").project("version");
-    }
+private:
+    Query query_;
 
-    CategoryRequest(std::allocator_arg_t,
-                    Allocator a,
-                    UserContext& user,
-                    const SelectQuery& q,
-                    std::string_view purpose)
-        : owner(user), selection(std::allocator_arg, a, q), intent(purpose, a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-    }
+public:
+    explicit CategoryRequest(UserContext& user_context, bool minimal = false, bool live_rows = true)
+        requires(!Purposed)
+        : query_(user_context, minimal, live_rows) {}
+
+    explicit CategoryRequest(Query value) : query_(std::move(value)) {}
 
     Memory memory_resource() const {
-        return selection.memory_resource();
+        return query_.memory_resource();
     }
 
     const SelectQuery& query() const {
-        return selection;
+        return query_.query();
     }
 
-    CategoryRequest<true>& purpose(std::string_view text) {
-        return owner.make<CategoryRequest<true>>(owner, selection, text);
+    const Query& runtimeQuery() const
+        requires(!Purposed)
+    {
+        return query_;
     }
 
-    CategoryRequest& comment(std::string_view text) {
-        selection.comment(text);
+    request::QuerySelection selection() const
+        requires(!Purposed)
+    {
+        return query_.selection();
+    }
+
+    CategoryRequest<true, Result> purpose(std::string_view text) const& {
+        return CategoryRequest<true, Result>(query_.purpose(text));
+    }
+
+    CategoryRequest<true, Result> purpose(std::string_view text) && {
+        return CategoryRequest<true, Result>(std::move(query_).purpose(text));
+    }
+
+    template <Entity Return>
+    CategoryRequest<Purposed, Return> returnType() const& {
+        return CategoryRequest<Purposed, Return>(query_.template returnType<Return>());
+    }
+
+    template <Entity Return>
+    CategoryRequest<Purposed, Return> returnType() && {
+        return CategoryRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
+    }
+
+    CategoryRequest& comment(std::string_view value) & {
+        query_.comment(value);
         return *this;
     }
 
-    CategoryRequest& filter(Expr value) {
-        selection.filter(std::move(value));
+    CategoryRequest&& comment(std::string_view value) && {
+        this->comment(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& filter(const Expr& value) & {
+        query_.filter(value);
         return *this;
     }
 
-    CategoryRequest& and_filter(Expr value) {
-        selection.and_filter(std::move(value));
+    CategoryRequest&& filter(const Expr& value) && {
+        this->filter(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectDynamicFields(const DynamicFieldSelection& value) & {
+        query_.selectDynamicFields(value);
         return *this;
     }
 
-    CategoryRequest& or_filter(Expr value) {
-        selection.or_filter(std::move(value));
+    CategoryRequest&& selectDynamicFields(const DynamicFieldSelection& value) && {
+        this->selectDynamicFields(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& matchTypes(std::span<const Value> value) & {
+        query_.matchTypes(value);
         return *this;
     }
 
-    CategoryRequest& limit(std::uint64_t value) {
-        selection.limit(value);
+    CategoryRequest&& matchTypes(std::span<const Value> value) && {
+        this->matchTypes(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& andFilter(const Expr& value) & {
+        query_.andFilter(value);
         return *this;
     }
 
-    CategoryRequest& offset(std::uint64_t value) {
-        selection.offset(value);
+    CategoryRequest&& andFilter(const Expr& value) && {
+        this->andFilter(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& orFilter(const Expr& value) & {
+        query_.orFilter(value);
         return *this;
     }
 
-    CategoryRequest& hard_limit(std::uint64_t value) {
-        selection.hard_limit(value);
+    CategoryRequest&& orFilter(const Expr& value) && {
+        this->orFilter(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& limit(std::uint64_t value) & {
+        query_.limit(value);
         return *this;
     }
 
-    CategoryRequest& skip(std::uint64_t value) {
-        return offset(value);
+    CategoryRequest&& limit(std::uint64_t value) && {
+        this->limit(value);
+        return std::move(*this);
     }
 
-    CategoryRequest& search_with_text(std::string_view value) {
-        selection.search_with_text(value);
+    CategoryRequest& offset(std::uint64_t value) & {
+        query_.offset(value);
         return *this;
     }
 
-    CategoryRequest& select_self() {
-        selection.project("id");
-        selection.project("name");
-        selection.project("version");
+    CategoryRequest&& offset(std::uint64_t value) && {
+        this->offset(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& hardLimit(std::uint64_t value) & {
+        query_.hardLimit(value);
         return *this;
     }
 
-    CategoryRequest& select_self_fields() {
-        return select_self();
+    CategoryRequest&& hardLimit(std::uint64_t value) && {
+        this->hardLimit(value);
+        return std::move(*this);
     }
 
-    PurposedSelectQuery authorize(UserContext& user) const
+    CategoryRequest& stream(std::size_t value) & {
+        query_.stream(value);
+        return *this;
+    }
+
+    CategoryRequest&& stream(std::size_t value) && {
+        this->stream(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& unlimited() & {
+        query_.unlimited();
+        return *this;
+    }
+
+    CategoryRequest&& unlimited() && {
+        this->unlimited();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withDeletedRows() & {
+        query_.withDeletedRows();
+        return *this;
+    }
+
+    CategoryRequest&& withDeletedRows() && {
+        this->withDeletedRows();
+        return std::move(*this);
+    }
+
+    CategoryRequest& deletedRowsOnly() & {
+        query_.deletedRowsOnly();
+        return *this;
+    }
+
+    CategoryRequest&& deletedRowsOnly() && {
+        this->deletedRowsOnly();
+        return std::move(*this);
+    }
+
+    CategoryRequest& appendSearchCriteria(const Expr& criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    CategoryRequest&& appendSearchCriteria(const Expr& criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    CategoryRequest& appendSearchCriteria(Ref<Expr> criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    CategoryRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    CategoryRequest&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) & {
+        query_.filterProperty(left, op, right);
+        return *this;
+    }
+
+    CategoryRequest&&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) && {
+        this->filterProperty(left, op, right);
+        return std::move(*this);
+    }
+
+    CategoryRequest& pageOffset(std::uint64_t offset, std::uint64_t size) & {
+        query_.pageOffset(offset, size);
+        return *this;
+    }
+
+    CategoryRequest&& pageOffset(std::uint64_t offset, std::uint64_t size) && {
+        this->pageOffset(offset, size);
+        return std::move(*this);
+    }
+
+    CategoryRequest& offset(std::uint64_t offset, std::uint64_t size) & {
+        query_.offset(offset, size);
+        return *this;
+    }
+
+    CategoryRequest&& offset(std::uint64_t offset, std::uint64_t size) && {
+        this->offset(offset, size);
+        return std::move(*this);
+    }
+
+    CategoryRequest& offsetOnly(std::uint64_t value) & {
+        query_.offsetOnly(value);
+        return *this;
+    }
+
+    CategoryRequest&& offsetOnly(std::uint64_t value) && {
+        this->offsetOnly(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& offsetSize(std::uint64_t offset, std::uint64_t size) & {
+        query_.offsetSize(offset, size);
+        return *this;
+    }
+
+    CategoryRequest&& offsetSize(std::uint64_t offset, std::uint64_t size) && {
+        this->offsetSize(offset, size);
+        return std::move(*this);
+    }
+
+    CategoryRequest& top(std::uint64_t value) & {
+        query_.top(value);
+        return *this;
+    }
+
+    CategoryRequest&& top(std::uint64_t value) && {
+        this->top(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& pageNumber(std::uint64_t number, std::uint64_t size) & {
+        query_.pageNumber(number, size);
+        return *this;
+    }
+
+    CategoryRequest&& pageNumber(std::uint64_t number, std::uint64_t size) && {
+        this->pageNumber(number, size);
+        return std::move(*this);
+    }
+
+    CategoryRequest& pageNumberDefault(std::uint64_t number) & {
+        query_.pageNumberDefault(number);
+        return *this;
+    }
+
+    CategoryRequest&& pageNumberDefault(std::uint64_t number) && {
+        this->pageNumberDefault(number);
+        return std::move(*this);
+    }
+
+    CategoryRequest& page(std::uint64_t number, std::uint64_t size) & {
+        query_.page(number, size);
+        return *this;
+    }
+
+    CategoryRequest&& page(std::uint64_t number, std::uint64_t size) && {
+        this->page(number, size);
+        return std::move(*this);
+    }
+
+    CategoryRequest& pageDefault(std::uint64_t number) & {
+        query_.pageDefault(number);
+        return *this;
+    }
+
+    CategoryRequest&& pageDefault(std::uint64_t number) && {
+        this->pageDefault(number);
+        return std::move(*this);
+    }
+
+    CategoryRequest& streamDefault() & {
+        query_.streamDefault();
+        return *this;
+    }
+
+    CategoryRequest&& streamDefault() && {
+        this->streamDefault();
+        return std::move(*this);
+    }
+
+    CategoryRequest& topNProbeParentThreshold(std::size_t threshold) & {
+        query_.topNProbeParentThreshold(threshold);
+        return *this;
+    }
+
+    CategoryRequest&& topNProbeParentThreshold(std::size_t threshold) && {
+        this->topNProbeParentThreshold(threshold);
+        return std::move(*this);
+    }
+
+    CategoryRequest& rawSql(std::string_view sql) & {
+        query_.rawSql(sql);
+        return *this;
+    }
+
+    CategoryRequest&& rawSql(std::string_view sql) && {
+        this->rawSql(sql);
+        return std::move(*this);
+    }
+
+    CategoryRequest& rawSqlFilter(std::string_view sql) & {
+        query_.rawSqlFilter(sql);
+        return *this;
+    }
+
+    CategoryRequest&& rawSqlFilter(std::string_view sql) && {
+        this->rawSqlFilter(sql);
+        return std::move(*this);
+    }
+
+    CategoryRequest& createPropertyAs(std::string_view field, std::string_view sql) & {
+        query_.createPropertyAs(field, sql);
+        return *this;
+    }
+
+    CategoryRequest&& createPropertyAs(std::string_view field, std::string_view sql) && {
+        this->createPropertyAs(field, sql);
+        return std::move(*this);
+    }
+
+    CategoryRequest& unsafeRawSql(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSql(std::move(sql));
+        return *this;
+    }
+
+    CategoryRequest&& unsafeRawSql(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSql(std::move(sql));
+        return std::move(*this);
+    }
+
+    CategoryRequest& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSqlFilter(std::move(sql));
+        return *this;
+    }
+
+    CategoryRequest&& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSqlFilter(std::move(sql));
+        return std::move(*this);
+    }
+
+    CategoryRequest& unsafeCreatePropertyAs(std::string_view field,
+                                            request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeCreatePropertyAs(field, std::move(sql));
+        return *this;
+    }
+
+    CategoryRequest&& unsafeCreatePropertyAs(std::string_view field,
+                                             request::UnsafeRawSqlSegment sql) && {
+        this->unsafeCreatePropertyAs(field, std::move(sql));
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupBy(std::string_view value) & {
+        query_.groupBy(value);
+        return *this;
+    }
+
+    CategoryRequest&& groupBy(std::string_view value) && {
+        this->groupBy(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& countAs(std::string_view value) & {
+        query_.countAs(value);
+        return *this;
+    }
+
+    CategoryRequest&& countAs(std::string_view value) && {
+        this->countAs(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateCount(std::string_view value) & {
+        query_.aggregateCount(value);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateCount(std::string_view value) && {
+        this->aggregateCount(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& count() & {
+        query_.count();
+        return *this;
+    }
+
+    CategoryRequest&& count() && {
+        this->count();
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateWithFunction(std::string_view field,
+                                           std::string_view alias,
+                                           AggregateFunction function) & {
+        query_.aggregateWithFunction(field, alias, function);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateWithFunction(std::string_view field,
+                                            std::string_view alias,
+                                            AggregateFunction function) && {
+        this->aggregateWithFunction(field, alias, function);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateCountField(std::string_view field, std::string_view alias) & {
+        query_.aggregateCountField(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateCountField(std::string_view field, std::string_view alias) && {
+        this->aggregateCountField(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateSum(std::string_view field, std::string_view alias) & {
+        query_.aggregateSum(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateSum(std::string_view field, std::string_view alias) && {
+        this->aggregateSum(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateAvg(std::string_view field, std::string_view alias) & {
+        query_.aggregateAvg(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateAvg(std::string_view field, std::string_view alias) && {
+        this->aggregateAvg(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateMin(std::string_view field, std::string_view alias) & {
+        query_.aggregateMin(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateMin(std::string_view field, std::string_view alias) && {
+        this->aggregateMin(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateMax(std::string_view field, std::string_view alias) & {
+        query_.aggregateMax(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateMax(std::string_view field, std::string_view alias) && {
+        this->aggregateMax(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateStddev(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddev(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateStddev(std::string_view field, std::string_view alias) && {
+        this->aggregateStddev(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateStddevPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddevPop(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateStddevPop(std::string_view field, std::string_view alias) && {
+        this->aggregateStddevPop(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateVarSamp(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarSamp(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateVarSamp(std::string_view field, std::string_view alias) && {
+        this->aggregateVarSamp(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateVarPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarPop(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateVarPop(std::string_view field, std::string_view alias) && {
+        this->aggregateVarPop(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateBitAnd(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitAnd(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateBitAnd(std::string_view field, std::string_view alias) && {
+        this->aggregateBitAnd(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateBitOr(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitOr(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateBitOr(std::string_view field, std::string_view alias) && {
+        this->aggregateBitOr(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& aggregateBitXor(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitXor(field, alias);
+        return *this;
+    }
+
+    CategoryRequest&& aggregateBitXor(std::string_view field, std::string_view alias) && {
+        this->aggregateBitXor(field, alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& enableAggregationCache() & {
+        query_.enableAggregationCache();
+        return *this;
+    }
+
+    CategoryRequest&& enableAggregationCache() && {
+        this->enableAggregationCache();
+        return std::move(*this);
+    }
+
+    CategoryRequest& enableAggregationCacheFor(std::uint64_t duration) & {
+        query_.enableAggregationCacheFor(duration);
+        return *this;
+    }
+
+    CategoryRequest&& enableAggregationCacheFor(std::uint64_t duration) && {
+        this->enableAggregationCacheFor(duration);
+        return std::move(*this);
+    }
+
+    CategoryRequest& propagateAggregationCache(std::uint64_t duration) & {
+        query_.propagateAggregationCache(duration);
+        return *this;
+    }
+
+    CategoryRequest&& propagateAggregationCache(std::uint64_t duration) && {
+        this->propagateAggregationCache(duration);
+        return std::move(*this);
+    }
+
+    CategoryRequest& optimizePaginationWithIdSet() & {
+        query_.optimizePaginationWithIdSet();
+        return *this;
+    }
+
+    CategoryRequest&& optimizePaginationWithIdSet() && {
+        this->optimizePaginationWithIdSet();
+        return std::move(*this);
+    }
+
+    CategoryRequest& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                       std::uint64_t ttl,
+                                                       std::uint64_t max_ids) & {
+        query_.optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return *this;
+    }
+
+    CategoryRequest&& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                        std::uint64_t ttl,
+                                                        std::uint64_t max_ids) && {
+        this->optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return std::move(*this);
+    }
+
+    CategoryRequest& optimizeForContinuousPageFetch() & {
+        query_.optimizeForContinuousPageFetch();
+        return *this;
+    }
+
+    CategoryRequest&& optimizeForContinuousPageFetch() && {
+        this->optimizeForContinuousPageFetch();
+        return std::move(*this);
+    }
+
+    CategoryRequest& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                        std::uint64_t ttl) & {
+        query_.optimizeForContinuousPageFetchWith(name, ttl);
+        return *this;
+    }
+
+    CategoryRequest&& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                         std::uint64_t ttl) && {
+        this->optimizeForContinuousPageFetchWith(name, ttl);
+        return std::move(*this);
+    }
+
+    CategoryRequest& filterWithJson(std::string_view value) & {
+        apply_generated_dynamic_json<generated_detail::CategoryDynamicJsonRecipe>(query_, value);
+        return *this;
+    }
+
+    CategoryRequest&& filterWithJson(std::string_view value) && {
+        this->filterWithJson(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withTypeGroup() & {
+        query_.withTypeGroup();
+        return *this;
+    }
+
+    CategoryRequest&& withTypeGroup() && {
+        this->withTypeGroup();
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    CategoryRequest& enhanceChild(const ChildRequest& child) & {
+        query_.enhanceChild(child.query_);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    CategoryRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    CategoryRequest& matchingAnyOf(const ChildRequest& child) & {
+        query_.matchingAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    CategoryRequest&& matchingAnyOf(const ChildRequest& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    CategoryRequest& matchingAnyOf(const SelectQuery& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    CategoryRequest&& matchingAnyOf(const SelectQuery& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    CategoryRequest& matchingAnyOf(const request::QuerySelection& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    CategoryRequest&& matchingAnyOf(const request::QuerySelection& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    CategoryRequest& matchAnyOf(const ChildRequest& child) & {
+        query_.matchAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    CategoryRequest&& matchAnyOf(const ChildRequest& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    CategoryRequest& matchAnyOf(const SelectQuery& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    CategoryRequest&& matchAnyOf(const SelectQuery& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    CategoryRequest& matchAnyOf(const request::QuerySelection& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    CategoryRequest&& matchAnyOf(const request::QuerySelection& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    CategoryRequest& enhanceChildrenIfNeeded() &;
+
+    CategoryRequest&& enhanceChildrenIfNeeded() && {
+        enhanceChildrenIfNeeded();
+        return std::move(*this);
+    }
+
+    CategoryRequest& skip(std::uint64_t value) & {
+        query_.offset(value);
+        return *this;
+    }
+
+    CategoryRequest&& skip(std::uint64_t value) && {
+        this->skip(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& searchWithText(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.search_with_text(value);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& searchWithText(std::string_view value) && {
+        this->searchWithText(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectSelf() & {
+        query_.select("id");
+        query_.select("name");
+        query_.select("version");
+        return *this;
+    }
+
+    CategoryRequest&& selectSelf() && {
+        this->selectSelf();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectSelfFields() & {
+        selectSelf();
+        return *this;
+    }
+
+    CategoryRequest&& selectSelfFields() && {
+        this->selectSelfFields();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectSelfWithoutParent() & {
+        selectSelfFields();
+        return *this;
+    }
+
+    CategoryRequest&& selectSelfWithoutParent() && {
+        this->selectSelfWithoutParent();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectAll() & {
+        selectSelf();
+        return *this;
+    }
+
+    CategoryRequest&& selectAll() && {
+        this->selectAll();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectChildren() & {
+        selectAll();
+        return *this;
+    }
+
+    CategoryRequest&& selectChildren() && {
+        this->selectChildren();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectAny() & {
+        selectChildren();
+        return *this;
+    }
+
+    CategoryRequest&& selectAny() && {
+        this->selectAny();
+        return std::move(*this);
+    }
+
+    auto& executeForList(UserContext& user_context) const
         requires Purposed
     {
-        if (&user != &owner) {
-            throw std::invalid_argument("Request execution cannot cross UserContexts");
-        }
-        auto comment =
-            selection.comment_text ? std::string_view(*selection.comment_text) : std::string_view{};
-        auto blank = [](std::string_view value) {
-            detail::trim(value);
-            return value.empty();
-        };
-        if (blank(intent) || blank(comment)) {
-            throw std::invalid_argument("Query execution requires nonblank purpose and comment");
-        }
-        return PurposedSelectQuery(
-            std::allocator_arg, Allocator(memory_resource()), selection, intent);
+        return query_.executeForList(user_context);
     }
 
-    auto& execute_for_list(UserContext& user) const
+    auto& executeForOne(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Category::ENTITY_NAME);
-        return require_value(repository).get().template fetch_enhanced_entities<Category>(query);
+        return query_.executeForOne(user_context);
     }
 
-    auto& execute_for_entity_list(UserContext& user) const
+    auto& executeForFirst(UserContext& user_context) const
         requires Purposed
     {
-        return execute_for_list(user);
+        return query_.executeForFirst(user_context);
     }
 
-    auto& execute(UserContext& user) const
+    auto& executeForCount(UserContext& user_context) const
         requires Purposed
     {
-        auto& request = owner.make<CategoryRequest<true>>(owner, selection, intent);
-        request.limit(1);
-        auto& source = request.execute_for_list(user);
-        using Error = DataServiceError<DataServiceExecutor::Error>;
-        using State = generated_detail::SingleResult<Category, Error>;
-        return make_operation<typename State::Output, State>(memory_resource(), source);
+        return query_.executeForCount(user_context);
     }
 
-    auto& execute_for_entity(UserContext& user) const
+    auto& executeForExists(UserContext& user_context) const
         requires Purposed
     {
-        return execute(user);
+        return query_.executeForExists(user_context);
     }
 
-    auto& execute_for_rows(UserContext& user) const
+    auto& executeForStream(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Category::ENTITY_NAME);
-        return require_value(repository).get().fetch_smart_list(query);
+        return query_.executeForStream(user_context);
     }
 
-    Category& new_entity(UserContext& user) const
+    auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
         requires Purposed
     {
-        (void)authorize(user);
-        auto& value = user.make<Category>();
-        value.update_id(require_value(user.next_id(Category::ENTITY_NAME)));
-        value.mark_as_new();
-        return value;
+        return query_.executeForPage(user_context, offset, limit);
     }
 
-    CategoryRequest& select_id() {
-        selection.project("id");
+    auto& execute(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntityList(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForList(user_context);
+    }
+
+    auto& executeForRows(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForRows(user_context);
+    }
+
+    Category& newEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.newEntity(user_context);
+    }
+
+    CategoryRequest copyTo(UserContext& user_context) const {
+        return CategoryRequest(query_.copyTo(user_context));
+    }
+
+    CategoryRequest copyToGlobal(UserContext& user_context) const {
+        return CategoryRequest(query_.copyToGlobal(user_context));
+    }
+
+    CategoryRequest rebindGlobal(UserContext& user_context) const {
+        return CategoryRequest(query_.rebindGlobal(user_context));
+    }
+
+    CategoryRequest& selectId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("id");
+        });
         return *this;
     }
 
-    CategoryRequest& order_by_id_asc() {
-        selection.order_asc("id");
+    CategoryRequest&& selectId() && {
+        this->selectId();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByIdAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("id");
+        });
         return *this;
     }
 
-    CategoryRequest& order_by_id_desc() {
-        selection.order_desc("id");
+    CategoryRequest&& orderByIdAsc() && {
+        this->orderByIdAsc();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByIdDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("id");
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_is(const std::uint64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "id", value));
+    CategoryRequest&& orderByIdDesc() && {
+        this->orderByIdDesc();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByIdAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("id");
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_is_not(const std::uint64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "id", value));
+    CategoryRequest&& orderByIdAscUsingGbk() && {
+        this->orderByIdAscUsingGbk();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByIdDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("id");
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_greater_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "id", value));
+    CategoryRequest&& orderByIdDescUsingGbk() && {
+        this->orderByIdDescUsingGbk();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdIs(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_greater_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "id", value));
+    CategoryRequest&& withIdIs(const std::uint64_t& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdIsNot(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_less_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "id", value));
+    CategoryRequest&& withIdIsNot(const std::uint64_t& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdGreaterThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_less_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "id", value));
+    CategoryRequest&& withIdGreaterThan(const std::uint64_t& value) && {
+        this->withIdGreaterThan(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdGreaterThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_between(const std::uint64_t& lower, const std::uint64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "id", lower, upper));
+    CategoryRequest&& withIdGreaterThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdLessThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, false));
+    CategoryRequest&& withIdLessThan(const std::uint64_t& value) && {
+        this->withIdLessThan(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdLessThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_not_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, true));
+    CategoryRequest&& withIdLessThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "id",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    CategoryRequest& group_by_id() {
-        selection.group_by("id");
+    CategoryRequest&& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) && {
+        this->withIdBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, false));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "id"));
+    CategoryRequest&& withIdIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdIn(inputs);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdNotIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, true));
+        });
         return *this;
     }
 
-    CategoryRequest& with_id_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+    CategoryRequest&& withIdNotIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdNotIn(inputs);
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupById() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+        });
         return *this;
     }
 
-    CategoryRequest& select_name() {
-        selection.project("name");
+    CategoryRequest&& groupById() && {
+        this->groupById();
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.selectAs("id", alias);
+        });
         return *this;
     }
 
-    CategoryRequest& order_by_name_asc() {
-        selection.order_asc("name");
+    CategoryRequest&& groupByIdAs(std::string_view alias) && {
+        this->groupByIdAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByIdWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.aggregateWithFunction("id", alias, function);
+        });
         return *this;
     }
 
-    CategoryRequest& order_by_name_desc() {
-        selection.order_desc("name");
+    CategoryRequest&& groupByIdWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->groupByIdWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    CategoryRequest& countId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", "id_count");
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_is(std::string_view value) {
-        selection.and_filter(Expr::eq(memory_resource(), "name", value));
+    CategoryRequest&& countId() && {
+        this->countId();
+        return std::move(*this);
+    }
+
+    CategoryRequest& countIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", alias);
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_is_not(std::string_view value) {
-        selection.and_filter(Expr::ne(memory_resource(), "name", value));
+    CategoryRequest&& countIdAs(std::string_view alias) && {
+        this->countIdAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& sumId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", "sum_id");
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_greater_than(std::string_view value) {
-        selection.and_filter(Expr::gt(memory_resource(), "name", value));
+    CategoryRequest&& sumId() && {
+        this->sumId();
+        return std::move(*this);
+    }
+
+    CategoryRequest& sumIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", alias);
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_greater_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::gte(memory_resource(), "name", value));
+    CategoryRequest&& sumIdAs(std::string_view alias) && {
+        this->sumIdAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& avgId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", "avg_id");
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_less_than(std::string_view value) {
-        selection.and_filter(Expr::lt(memory_resource(), "name", value));
+    CategoryRequest&& avgId() && {
+        this->avgId();
+        return std::move(*this);
+    }
+
+    CategoryRequest& avgIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", alias);
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_less_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::lte(memory_resource(), "name", value));
+    CategoryRequest&& avgIdAs(std::string_view alias) && {
+        this->avgIdAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& minId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", "min_id");
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_between(std::string_view lower, std::string_view upper) {
-        selection.and_filter(Expr::between(memory_resource(), "name", lower, upper));
+    CategoryRequest&& minId() && {
+        this->minId();
+        return std::move(*this);
+    }
+
+    CategoryRequest& minIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", alias);
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, false));
+    CategoryRequest&& minIdAs(std::string_view alias) && {
+        this->minIdAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& maxId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", "max_id");
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_not_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, true));
+    CategoryRequest&& maxId() && {
+        this->maxId();
+        return std::move(*this);
+    }
+
+    CategoryRequest& maxIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", alias);
+        });
         return *this;
     }
 
-    CategoryRequest& group_by_name() {
-        selection.group_by("name");
+    CategoryRequest&& maxIdAs(std::string_view alias) && {
+        this->maxIdAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    CategoryRequest& sum_name_as(std::string_view alias) {
-        selection.sum("name", alias);
+    CategoryRequest&& withIdIsUnknown() && {
+        this->withIdIsUnknown();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    CategoryRequest& avg_name_as(std::string_view alias) {
-        selection.avg("name", alias);
+    CategoryRequest&& withIdIsKnown() && {
+        this->withIdIsKnown();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    CategoryRequest& min_name_as(std::string_view alias) {
-        selection.min("name", alias);
+    CategoryRequest&& withIdIsNull() && {
+        this->withIdIsNull();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withIdIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    CategoryRequest& max_name_as(std::string_view alias) {
-        selection.max("name", alias);
+    CategoryRequest&& withIdIsNotNull() && {
+        this->withIdIsNotNull();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIsString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_containing(std::string_view value) {
-        selection.and_filter(Expr::contain(memory_resource(), "name", value));
+    CategoryRequest&& withNameIsString() && {
+        this->withNameIsString();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIsNotString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_starting_with(std::string_view value) {
-        selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+    CategoryRequest&& withNameIsNotString() && {
+        this->withNameIsNotString();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("name");
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_ending_with(std::string_view value) {
-        selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+    CategoryRequest&& selectName() && {
+        this->selectName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& projectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("name");
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "name"));
+    CategoryRequest&& projectName() && {
+        this->projectName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectNameRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("name", sql);
+        });
         return *this;
     }
 
-    CategoryRequest& with_name_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+    CategoryRequest&& selectNameRaw(std::string_view sql) && {
+        this->selectNameRaw(sql);
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("name", std::move(sql));
+        });
         return *this;
     }
 
-    CategoryRequest& select_version() {
-        selection.project("version");
+    CategoryRequest&& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectNameUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    CategoryRequest& unselectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("name");
+        });
         return *this;
     }
 
-    CategoryRequest& order_by_version_asc() {
-        selection.order_asc("version");
+    CategoryRequest&& unselectName() && {
+        this->unselectName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByNameAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("name");
+        });
         return *this;
     }
 
-    CategoryRequest& order_by_version_desc() {
-        selection.order_desc("version");
+    CategoryRequest&& orderByNameAsc() && {
+        this->orderByNameAsc();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByNameDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("name");
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_is(const std::int64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "version", value));
+    CategoryRequest&& orderByNameDesc() && {
+        this->orderByNameDesc();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByNameAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("name");
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_is_not(const std::int64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "version", value));
+    CategoryRequest&& orderByNameAscUsingGbk() && {
+        this->orderByNameAscUsingGbk();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByNameDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("name");
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_greater_than(const std::int64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "version", value));
+    CategoryRequest&& orderByNameDescUsingGbk() && {
+        this->orderByNameDescUsingGbk();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIs(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_greater_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "version", value));
+    CategoryRequest&& withNameIs(std::string_view value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIsNot(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_less_than(const std::int64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "version", value));
+    CategoryRequest&& withNameIsNot(std::string_view value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameGreaterThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_less_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "version", value));
+    CategoryRequest&& withNameGreaterThan(std::string_view value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameGreaterThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_between(const std::int64_t& lower, const std::int64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "version", lower, upper));
+    CategoryRequest&& withNameGreaterThanOrEqualTo(std::string_view value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameLessThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, false));
+    CategoryRequest&& withNameLessThan(std::string_view value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameLessThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_not_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, true));
+    CategoryRequest&& withNameLessThanOrEqualTo(std::string_view value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameBetween(std::string_view lower, std::string_view upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "name",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    CategoryRequest& group_by_version() {
-        selection.group_by("version");
+    CategoryRequest&& withNameBetween(std::string_view lower, std::string_view upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, false));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "version"));
+    CategoryRequest&& withNameIn(std::span<const String> inputs) && {
+        this->withNameIn(inputs);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameNotIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, true));
+        });
         return *this;
     }
 
-    CategoryRequest& with_version_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+    CategoryRequest&& withNameNotIn(std::span<const String> inputs) && {
+        this->withNameNotIn(inputs);
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+        });
         return *this;
+    }
+
+    CategoryRequest&& groupByName() && {
+        this->groupByName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.selectAs("name", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& groupByNameAs(std::string_view alias) && {
+        this->groupByNameAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByNameWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.aggregateWithFunction("name", alias, function);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& groupByNameWithFunction(std::string_view alias,
+                                              AggregateFunction function) && {
+        this->groupByNameWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    CategoryRequest& countName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", "name_count");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& countName() && {
+        this->countName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& countNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& countNameAs(std::string_view alias) && {
+        this->countNameAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& sumName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", "sum_name");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& sumName() && {
+        this->sumName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& sumNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& sumNameAs(std::string_view alias) && {
+        this->sumNameAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& avgName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", "avg_name");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& avgName() && {
+        this->avgName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& avgNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& avgNameAs(std::string_view alias) && {
+        this->avgNameAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& minName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", "min_name");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& minName() && {
+        this->minName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& minNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& minNameAs(std::string_view alias) && {
+        this->minNameAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& maxName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", "max_name");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& maxName() && {
+        this->maxName();
+        return std::move(*this);
+    }
+
+    CategoryRequest& maxNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& maxNameAs(std::string_view alias) && {
+        this->maxNameAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameContaining(std::string_view value) && {
+        this->withNameContaining(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameStartingWith(std::string_view value) && {
+        this->withNameStartingWith(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameEndingWith(std::string_view value) && {
+        this->withNameEndingWith(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameNotContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameNotContaining(std::string_view value) && {
+        this->withNameNotContaining(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameNotStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameNotStartingWith(std::string_view value) && {
+        this->withNameNotStartingWith(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameNotEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameNotEndingWith(std::string_view value) && {
+        this->withNameNotEndingWith(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameSoundingLike(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::sound_like(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameSoundingLike(std::string_view value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameIsUnknown() && {
+        this->withNameIsUnknown();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameIsKnown() && {
+        this->withNameIsKnown();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameIsNull() && {
+        this->withNameIsNull();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withNameIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withNameIsNotNull() && {
+        this->withNameIsNotNull();
+        return std::move(*this);
+    }
+
+    CategoryRequest& selectVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& selectVersion() && {
+        this->selectVersion();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByVersionAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& orderByVersionAsc() && {
+        this->orderByVersionAsc();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByVersionDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& orderByVersionDesc() && {
+        this->orderByVersionDesc();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByVersionAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& orderByVersionAscUsingGbk() && {
+        this->orderByVersionAscUsingGbk();
+        return std::move(*this);
+    }
+
+    CategoryRequest& orderByVersionDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& orderByVersionDescUsingGbk() && {
+        this->orderByVersionDescUsingGbk();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionIs(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionIs(const std::int64_t& value) && {
+        this->withVersionIs(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionIsNot(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionIsNot(const std::int64_t& value) && {
+        this->withVersionIsNot(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionGreaterThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionGreaterThan(const std::int64_t& value) && {
+        this->withVersionGreaterThan(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionGreaterThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionGreaterThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionLessThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionLessThan(const std::int64_t& value) && {
+        this->withVersionLessThan(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionLessThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionLessThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "version",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) && {
+        this->withVersionBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, false));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionIn(inputs);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionNotIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, true));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionNotIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionNotIn(inputs);
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& groupByVersion() && {
+        this->groupByVersion();
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.selectAs("version", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& groupByVersionAs(std::string_view alias) && {
+        this->groupByVersionAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& groupByVersionWithFunction(std::string_view alias,
+                                                AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.aggregateWithFunction("version", alias, function);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& groupByVersionWithFunction(std::string_view alias,
+                                                 AggregateFunction function) && {
+        this->groupByVersionWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    CategoryRequest& countVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", "version_count");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& countVersion() && {
+        this->countVersion();
+        return std::move(*this);
+    }
+
+    CategoryRequest& countVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& countVersionAs(std::string_view alias) && {
+        this->countVersionAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& sumVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", "sum_version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& sumVersion() && {
+        this->sumVersion();
+        return std::move(*this);
+    }
+
+    CategoryRequest& sumVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& sumVersionAs(std::string_view alias) && {
+        this->sumVersionAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& avgVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", "avg_version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& avgVersion() && {
+        this->avgVersion();
+        return std::move(*this);
+    }
+
+    CategoryRequest& avgVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& avgVersionAs(std::string_view alias) && {
+        this->avgVersionAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& minVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", "min_version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& minVersion() && {
+        this->minVersion();
+        return std::move(*this);
+    }
+
+    CategoryRequest& minVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& minVersionAs(std::string_view alias) && {
+        this->minVersionAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& maxVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", "max_version");
+        });
+        return *this;
+    }
+
+    CategoryRequest&& maxVersion() && {
+        this->maxVersion();
+        return std::move(*this);
+    }
+
+    CategoryRequest& maxVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", alias);
+        });
+        return *this;
+    }
+
+    CategoryRequest&& maxVersionAs(std::string_view alias) && {
+        this->maxVersionAs(alias);
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionIsUnknown() && {
+        this->withVersionIsUnknown();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionIsKnown() && {
+        this->withVersionIsKnown();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionIsNull() && {
+        this->withVersionIsNull();
+        return std::move(*this);
+    }
+
+    CategoryRequest& withVersionIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    CategoryRequest&& withVersionIsNotNull() && {
+        this->withVersionIsNotNull();
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    CategoryRequest& withId(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("id", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    CategoryRequest&& withId(request::FieldOperator op, Inputs&& inputs) && {
+        this->withId(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    CategoryRequest& withName(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("name", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    CategoryRequest&& withName(request::FieldOperator op, Inputs&& inputs) && {
+        this->withName(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createNameCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("name", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    CategoryRequest& withNameBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    CategoryRequest&& withNameBetweenRange(const request::DateRange<T>& range) && {
+        this->withNameBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    CategoryRequest& withNameBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    CategoryRequest&& withNameBefore(const T& value) && {
+        this->withNameBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    CategoryRequest& withNameAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    CategoryRequest&& withNameAfter(const T& value) && {
+        this->withNameAfter(value);
+        return std::move(*this);
     }
 };
 
-template <bool Purposed>
+template <bool Purposed, Entity Result>
 class ChildRequest {
+    template <bool, Entity>
+    friend class PersonRequest;
+    template <bool, Entity>
+    friend class DeviceRequest;
+    template <bool, Entity>
+    friend class OrderStatusRequest;
+    template <bool, Entity>
+    friend class CategoryRequest;
+    template <bool, Entity>
+    friend class ChildRequest;
+    template <bool, Entity>
+    friend class InventoryRequest;
+
 public:
-    using allocator_type = Allocator;
-    UserContext& owner;
-    SelectQuery selection;
-    String intent;
+    using Query = EntityQuery<Child, DataServiceExecutor, Purposed, Result>;
 
-    ChildRequest(std::allocator_arg_t, Allocator a, UserContext& user)
-        : owner(user), selection(std::allocator_arg, a, Child::ENTITY_NAME), intent(a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-        selection.project("id").project("version");
-    }
+private:
+    Query query_;
 
-    ChildRequest(std::allocator_arg_t,
-                 Allocator a,
-                 UserContext& user,
-                 const SelectQuery& q,
-                 std::string_view purpose)
-        : owner(user), selection(std::allocator_arg, a, q), intent(purpose, a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-    }
+public:
+    explicit ChildRequest(UserContext& user_context, bool minimal = false, bool live_rows = true)
+        requires(!Purposed)
+        : query_(user_context, minimal, live_rows) {}
+
+    explicit ChildRequest(Query value) : query_(std::move(value)) {}
 
     Memory memory_resource() const {
-        return selection.memory_resource();
+        return query_.memory_resource();
     }
 
     const SelectQuery& query() const {
-        return selection;
+        return query_.query();
     }
 
-    ChildRequest<true>& purpose(std::string_view text) {
-        return owner.make<ChildRequest<true>>(owner, selection, text);
+    const Query& runtimeQuery() const
+        requires(!Purposed)
+    {
+        return query_;
     }
 
-    ChildRequest& comment(std::string_view text) {
-        selection.comment(text);
+    request::QuerySelection selection() const
+        requires(!Purposed)
+    {
+        return query_.selection();
+    }
+
+    ChildRequest<true, Result> purpose(std::string_view text) const& {
+        return ChildRequest<true, Result>(query_.purpose(text));
+    }
+
+    ChildRequest<true, Result> purpose(std::string_view text) && {
+        return ChildRequest<true, Result>(std::move(query_).purpose(text));
+    }
+
+    template <Entity Return>
+    ChildRequest<Purposed, Return> returnType() const& {
+        return ChildRequest<Purposed, Return>(query_.template returnType<Return>());
+    }
+
+    template <Entity Return>
+    ChildRequest<Purposed, Return> returnType() && {
+        return ChildRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
+    }
+
+    ChildRequest& comment(std::string_view value) & {
+        query_.comment(value);
         return *this;
     }
 
-    ChildRequest& filter(Expr value) {
-        selection.filter(std::move(value));
+    ChildRequest&& comment(std::string_view value) && {
+        this->comment(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& filter(const Expr& value) & {
+        query_.filter(value);
         return *this;
     }
 
-    ChildRequest& and_filter(Expr value) {
-        selection.and_filter(std::move(value));
+    ChildRequest&& filter(const Expr& value) && {
+        this->filter(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& selectDynamicFields(const DynamicFieldSelection& value) & {
+        query_.selectDynamicFields(value);
         return *this;
     }
 
-    ChildRequest& or_filter(Expr value) {
-        selection.or_filter(std::move(value));
+    ChildRequest&& selectDynamicFields(const DynamicFieldSelection& value) && {
+        this->selectDynamicFields(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& matchTypes(std::span<const Value> value) & {
+        query_.matchTypes(value);
         return *this;
     }
 
-    ChildRequest& limit(std::uint64_t value) {
-        selection.limit(value);
+    ChildRequest&& matchTypes(std::span<const Value> value) && {
+        this->matchTypes(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& andFilter(const Expr& value) & {
+        query_.andFilter(value);
         return *this;
     }
 
-    ChildRequest& offset(std::uint64_t value) {
-        selection.offset(value);
+    ChildRequest&& andFilter(const Expr& value) && {
+        this->andFilter(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& orFilter(const Expr& value) & {
+        query_.orFilter(value);
         return *this;
     }
 
-    ChildRequest& hard_limit(std::uint64_t value) {
-        selection.hard_limit(value);
+    ChildRequest&& orFilter(const Expr& value) && {
+        this->orFilter(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& limit(std::uint64_t value) & {
+        query_.limit(value);
         return *this;
     }
 
-    ChildRequest& skip(std::uint64_t value) {
-        return offset(value);
+    ChildRequest&& limit(std::uint64_t value) && {
+        this->limit(value);
+        return std::move(*this);
     }
 
-    ChildRequest& search_with_text(std::string_view value) {
-        selection.search_with_text(value);
+    ChildRequest& offset(std::uint64_t value) & {
+        query_.offset(value);
         return *this;
     }
 
-    ChildRequest& select_self() {
-        selection.project("id");
-        selection.project("name");
-        selection.project("version");
+    ChildRequest&& offset(std::uint64_t value) && {
+        this->offset(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& hardLimit(std::uint64_t value) & {
+        query_.hardLimit(value);
         return *this;
     }
 
-    ChildRequest& select_self_fields() {
-        return select_self();
+    ChildRequest&& hardLimit(std::uint64_t value) && {
+        this->hardLimit(value);
+        return std::move(*this);
     }
 
-    PurposedSelectQuery authorize(UserContext& user) const
+    ChildRequest& stream(std::size_t value) & {
+        query_.stream(value);
+        return *this;
+    }
+
+    ChildRequest&& stream(std::size_t value) && {
+        this->stream(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& unlimited() & {
+        query_.unlimited();
+        return *this;
+    }
+
+    ChildRequest&& unlimited() && {
+        this->unlimited();
+        return std::move(*this);
+    }
+
+    ChildRequest& withDeletedRows() & {
+        query_.withDeletedRows();
+        return *this;
+    }
+
+    ChildRequest&& withDeletedRows() && {
+        this->withDeletedRows();
+        return std::move(*this);
+    }
+
+    ChildRequest& deletedRowsOnly() & {
+        query_.deletedRowsOnly();
+        return *this;
+    }
+
+    ChildRequest&& deletedRowsOnly() && {
+        this->deletedRowsOnly();
+        return std::move(*this);
+    }
+
+    ChildRequest& appendSearchCriteria(const Expr& criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    ChildRequest&& appendSearchCriteria(const Expr& criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    ChildRequest& appendSearchCriteria(Ref<Expr> criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    ChildRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    ChildRequest&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) & {
+        query_.filterProperty(left, op, right);
+        return *this;
+    }
+
+    ChildRequest&&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) && {
+        this->filterProperty(left, op, right);
+        return std::move(*this);
+    }
+
+    ChildRequest& pageOffset(std::uint64_t offset, std::uint64_t size) & {
+        query_.pageOffset(offset, size);
+        return *this;
+    }
+
+    ChildRequest&& pageOffset(std::uint64_t offset, std::uint64_t size) && {
+        this->pageOffset(offset, size);
+        return std::move(*this);
+    }
+
+    ChildRequest& offset(std::uint64_t offset, std::uint64_t size) & {
+        query_.offset(offset, size);
+        return *this;
+    }
+
+    ChildRequest&& offset(std::uint64_t offset, std::uint64_t size) && {
+        this->offset(offset, size);
+        return std::move(*this);
+    }
+
+    ChildRequest& offsetOnly(std::uint64_t value) & {
+        query_.offsetOnly(value);
+        return *this;
+    }
+
+    ChildRequest&& offsetOnly(std::uint64_t value) && {
+        this->offsetOnly(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& offsetSize(std::uint64_t offset, std::uint64_t size) & {
+        query_.offsetSize(offset, size);
+        return *this;
+    }
+
+    ChildRequest&& offsetSize(std::uint64_t offset, std::uint64_t size) && {
+        this->offsetSize(offset, size);
+        return std::move(*this);
+    }
+
+    ChildRequest& top(std::uint64_t value) & {
+        query_.top(value);
+        return *this;
+    }
+
+    ChildRequest&& top(std::uint64_t value) && {
+        this->top(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& pageNumber(std::uint64_t number, std::uint64_t size) & {
+        query_.pageNumber(number, size);
+        return *this;
+    }
+
+    ChildRequest&& pageNumber(std::uint64_t number, std::uint64_t size) && {
+        this->pageNumber(number, size);
+        return std::move(*this);
+    }
+
+    ChildRequest& pageNumberDefault(std::uint64_t number) & {
+        query_.pageNumberDefault(number);
+        return *this;
+    }
+
+    ChildRequest&& pageNumberDefault(std::uint64_t number) && {
+        this->pageNumberDefault(number);
+        return std::move(*this);
+    }
+
+    ChildRequest& page(std::uint64_t number, std::uint64_t size) & {
+        query_.page(number, size);
+        return *this;
+    }
+
+    ChildRequest&& page(std::uint64_t number, std::uint64_t size) && {
+        this->page(number, size);
+        return std::move(*this);
+    }
+
+    ChildRequest& pageDefault(std::uint64_t number) & {
+        query_.pageDefault(number);
+        return *this;
+    }
+
+    ChildRequest&& pageDefault(std::uint64_t number) && {
+        this->pageDefault(number);
+        return std::move(*this);
+    }
+
+    ChildRequest& streamDefault() & {
+        query_.streamDefault();
+        return *this;
+    }
+
+    ChildRequest&& streamDefault() && {
+        this->streamDefault();
+        return std::move(*this);
+    }
+
+    ChildRequest& topNProbeParentThreshold(std::size_t threshold) & {
+        query_.topNProbeParentThreshold(threshold);
+        return *this;
+    }
+
+    ChildRequest&& topNProbeParentThreshold(std::size_t threshold) && {
+        this->topNProbeParentThreshold(threshold);
+        return std::move(*this);
+    }
+
+    ChildRequest& rawSql(std::string_view sql) & {
+        query_.rawSql(sql);
+        return *this;
+    }
+
+    ChildRequest&& rawSql(std::string_view sql) && {
+        this->rawSql(sql);
+        return std::move(*this);
+    }
+
+    ChildRequest& rawSqlFilter(std::string_view sql) & {
+        query_.rawSqlFilter(sql);
+        return *this;
+    }
+
+    ChildRequest&& rawSqlFilter(std::string_view sql) && {
+        this->rawSqlFilter(sql);
+        return std::move(*this);
+    }
+
+    ChildRequest& createPropertyAs(std::string_view field, std::string_view sql) & {
+        query_.createPropertyAs(field, sql);
+        return *this;
+    }
+
+    ChildRequest&& createPropertyAs(std::string_view field, std::string_view sql) && {
+        this->createPropertyAs(field, sql);
+        return std::move(*this);
+    }
+
+    ChildRequest& unsafeRawSql(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSql(std::move(sql));
+        return *this;
+    }
+
+    ChildRequest&& unsafeRawSql(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSql(std::move(sql));
+        return std::move(*this);
+    }
+
+    ChildRequest& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSqlFilter(std::move(sql));
+        return *this;
+    }
+
+    ChildRequest&& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSqlFilter(std::move(sql));
+        return std::move(*this);
+    }
+
+    ChildRequest& unsafeCreatePropertyAs(std::string_view field,
+                                         request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeCreatePropertyAs(field, std::move(sql));
+        return *this;
+    }
+
+    ChildRequest&& unsafeCreatePropertyAs(std::string_view field,
+                                          request::UnsafeRawSqlSegment sql) && {
+        this->unsafeCreatePropertyAs(field, std::move(sql));
+        return std::move(*this);
+    }
+
+    ChildRequest& groupBy(std::string_view value) & {
+        query_.groupBy(value);
+        return *this;
+    }
+
+    ChildRequest&& groupBy(std::string_view value) && {
+        this->groupBy(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& countAs(std::string_view value) & {
+        query_.countAs(value);
+        return *this;
+    }
+
+    ChildRequest&& countAs(std::string_view value) && {
+        this->countAs(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateCount(std::string_view value) & {
+        query_.aggregateCount(value);
+        return *this;
+    }
+
+    ChildRequest&& aggregateCount(std::string_view value) && {
+        this->aggregateCount(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& count() & {
+        query_.count();
+        return *this;
+    }
+
+    ChildRequest&& count() && {
+        this->count();
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateWithFunction(std::string_view field,
+                                        std::string_view alias,
+                                        AggregateFunction function) & {
+        query_.aggregateWithFunction(field, alias, function);
+        return *this;
+    }
+
+    ChildRequest&& aggregateWithFunction(std::string_view field,
+                                         std::string_view alias,
+                                         AggregateFunction function) && {
+        this->aggregateWithFunction(field, alias, function);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateCountField(std::string_view field, std::string_view alias) & {
+        query_.aggregateCountField(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateCountField(std::string_view field, std::string_view alias) && {
+        this->aggregateCountField(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateSum(std::string_view field, std::string_view alias) & {
+        query_.aggregateSum(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateSum(std::string_view field, std::string_view alias) && {
+        this->aggregateSum(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateAvg(std::string_view field, std::string_view alias) & {
+        query_.aggregateAvg(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateAvg(std::string_view field, std::string_view alias) && {
+        this->aggregateAvg(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateMin(std::string_view field, std::string_view alias) & {
+        query_.aggregateMin(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateMin(std::string_view field, std::string_view alias) && {
+        this->aggregateMin(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateMax(std::string_view field, std::string_view alias) & {
+        query_.aggregateMax(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateMax(std::string_view field, std::string_view alias) && {
+        this->aggregateMax(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateStddev(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddev(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateStddev(std::string_view field, std::string_view alias) && {
+        this->aggregateStddev(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateStddevPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddevPop(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateStddevPop(std::string_view field, std::string_view alias) && {
+        this->aggregateStddevPop(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateVarSamp(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarSamp(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateVarSamp(std::string_view field, std::string_view alias) && {
+        this->aggregateVarSamp(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateVarPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarPop(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateVarPop(std::string_view field, std::string_view alias) && {
+        this->aggregateVarPop(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateBitAnd(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitAnd(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateBitAnd(std::string_view field, std::string_view alias) && {
+        this->aggregateBitAnd(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateBitOr(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitOr(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateBitOr(std::string_view field, std::string_view alias) && {
+        this->aggregateBitOr(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& aggregateBitXor(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitXor(field, alias);
+        return *this;
+    }
+
+    ChildRequest&& aggregateBitXor(std::string_view field, std::string_view alias) && {
+        this->aggregateBitXor(field, alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& enableAggregationCache() & {
+        query_.enableAggregationCache();
+        return *this;
+    }
+
+    ChildRequest&& enableAggregationCache() && {
+        this->enableAggregationCache();
+        return std::move(*this);
+    }
+
+    ChildRequest& enableAggregationCacheFor(std::uint64_t duration) & {
+        query_.enableAggregationCacheFor(duration);
+        return *this;
+    }
+
+    ChildRequest&& enableAggregationCacheFor(std::uint64_t duration) && {
+        this->enableAggregationCacheFor(duration);
+        return std::move(*this);
+    }
+
+    ChildRequest& propagateAggregationCache(std::uint64_t duration) & {
+        query_.propagateAggregationCache(duration);
+        return *this;
+    }
+
+    ChildRequest&& propagateAggregationCache(std::uint64_t duration) && {
+        this->propagateAggregationCache(duration);
+        return std::move(*this);
+    }
+
+    ChildRequest& optimizePaginationWithIdSet() & {
+        query_.optimizePaginationWithIdSet();
+        return *this;
+    }
+
+    ChildRequest&& optimizePaginationWithIdSet() && {
+        this->optimizePaginationWithIdSet();
+        return std::move(*this);
+    }
+
+    ChildRequest& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                    std::uint64_t ttl,
+                                                    std::uint64_t max_ids) & {
+        query_.optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return *this;
+    }
+
+    ChildRequest&& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                     std::uint64_t ttl,
+                                                     std::uint64_t max_ids) && {
+        this->optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return std::move(*this);
+    }
+
+    ChildRequest& optimizeForContinuousPageFetch() & {
+        query_.optimizeForContinuousPageFetch();
+        return *this;
+    }
+
+    ChildRequest&& optimizeForContinuousPageFetch() && {
+        this->optimizeForContinuousPageFetch();
+        return std::move(*this);
+    }
+
+    ChildRequest& optimizeForContinuousPageFetchWith(std::string_view name, std::uint64_t ttl) & {
+        query_.optimizeForContinuousPageFetchWith(name, ttl);
+        return *this;
+    }
+
+    ChildRequest&& optimizeForContinuousPageFetchWith(std::string_view name, std::uint64_t ttl) && {
+        this->optimizeForContinuousPageFetchWith(name, ttl);
+        return std::move(*this);
+    }
+
+    ChildRequest& filterWithJson(std::string_view value) & {
+        apply_generated_dynamic_json<generated_detail::ChildDynamicJsonRecipe>(query_, value);
+        return *this;
+    }
+
+    ChildRequest&& filterWithJson(std::string_view value) && {
+        this->filterWithJson(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withTypeGroup() & {
+        query_.withTypeGroup();
+        return *this;
+    }
+
+    ChildRequest&& withTypeGroup() && {
+        this->withTypeGroup();
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    ChildRequest& enhanceChild(const ChildRequest& child) & {
+        query_.enhanceChild(child.query_);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    ChildRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    ChildRequest& matchingAnyOf(const ChildRequest& child) & {
+        query_.matchingAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    ChildRequest&& matchingAnyOf(const ChildRequest& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    ChildRequest& matchingAnyOf(const SelectQuery& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    ChildRequest&& matchingAnyOf(const SelectQuery& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    ChildRequest& matchingAnyOf(const request::QuerySelection& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    ChildRequest&& matchingAnyOf(const request::QuerySelection& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    ChildRequest& matchAnyOf(const ChildRequest& child) & {
+        query_.matchAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    ChildRequest&& matchAnyOf(const ChildRequest& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    ChildRequest& matchAnyOf(const SelectQuery& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    ChildRequest&& matchAnyOf(const SelectQuery& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    ChildRequest& matchAnyOf(const request::QuerySelection& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    ChildRequest&& matchAnyOf(const request::QuerySelection& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    ChildRequest& enhanceChildrenIfNeeded() &;
+
+    ChildRequest&& enhanceChildrenIfNeeded() && {
+        enhanceChildrenIfNeeded();
+        return std::move(*this);
+    }
+
+    ChildRequest& skip(std::uint64_t value) & {
+        query_.offset(value);
+        return *this;
+    }
+
+    ChildRequest&& skip(std::uint64_t value) && {
+        this->skip(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& searchWithText(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.search_with_text(value);
+        });
+        return *this;
+    }
+
+    ChildRequest&& searchWithText(std::string_view value) && {
+        this->searchWithText(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& selectSelf() & {
+        query_.select("id");
+        query_.select("name");
+        query_.select("version");
+        return *this;
+    }
+
+    ChildRequest&& selectSelf() && {
+        this->selectSelf();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectSelfFields() & {
+        selectSelf();
+        return *this;
+    }
+
+    ChildRequest&& selectSelfFields() && {
+        this->selectSelfFields();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectSelfWithoutParent() & {
+        selectSelfFields();
+        return *this;
+    }
+
+    ChildRequest&& selectSelfWithoutParent() && {
+        this->selectSelfWithoutParent();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectAll() & {
+        selectSelf();
+        return *this;
+    }
+
+    ChildRequest&& selectAll() && {
+        this->selectAll();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectChildren() & {
+        selectAll();
+        return *this;
+    }
+
+    ChildRequest&& selectChildren() && {
+        this->selectChildren();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectAny() & {
+        selectChildren();
+        return *this;
+    }
+
+    ChildRequest&& selectAny() && {
+        this->selectAny();
+        return std::move(*this);
+    }
+
+    auto& executeForList(UserContext& user_context) const
         requires Purposed
     {
-        if (&user != &owner) {
-            throw std::invalid_argument("Request execution cannot cross UserContexts");
-        }
-        auto comment =
-            selection.comment_text ? std::string_view(*selection.comment_text) : std::string_view{};
-        auto blank = [](std::string_view value) {
-            detail::trim(value);
-            return value.empty();
-        };
-        if (blank(intent) || blank(comment)) {
-            throw std::invalid_argument("Query execution requires nonblank purpose and comment");
-        }
-        return PurposedSelectQuery(
-            std::allocator_arg, Allocator(memory_resource()), selection, intent);
+        return query_.executeForList(user_context);
     }
 
-    auto& execute_for_list(UserContext& user) const
+    auto& executeForOne(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Child::ENTITY_NAME);
-        return require_value(repository).get().template fetch_enhanced_entities<Child>(query);
+        return query_.executeForOne(user_context);
     }
 
-    auto& execute_for_entity_list(UserContext& user) const
+    auto& executeForFirst(UserContext& user_context) const
         requires Purposed
     {
-        return execute_for_list(user);
+        return query_.executeForFirst(user_context);
     }
 
-    auto& execute(UserContext& user) const
+    auto& executeForCount(UserContext& user_context) const
         requires Purposed
     {
-        auto& request = owner.make<ChildRequest<true>>(owner, selection, intent);
-        request.limit(1);
-        auto& source = request.execute_for_list(user);
-        using Error = DataServiceError<DataServiceExecutor::Error>;
-        using State = generated_detail::SingleResult<Child, Error>;
-        return make_operation<typename State::Output, State>(memory_resource(), source);
+        return query_.executeForCount(user_context);
     }
 
-    auto& execute_for_entity(UserContext& user) const
+    auto& executeForExists(UserContext& user_context) const
         requires Purposed
     {
-        return execute(user);
+        return query_.executeForExists(user_context);
     }
 
-    auto& execute_for_rows(UserContext& user) const
+    auto& executeForStream(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Child::ENTITY_NAME);
-        return require_value(repository).get().fetch_smart_list(query);
+        return query_.executeForStream(user_context);
     }
 
-    Child& new_entity(UserContext& user) const
+    auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
         requires Purposed
     {
-        (void)authorize(user);
-        auto& value = user.make<Child>();
-        value.update_id(require_value(user.next_id(Child::ENTITY_NAME)));
-        value.mark_as_new();
-        return value;
+        return query_.executeForPage(user_context, offset, limit);
     }
 
-    ChildRequest& select_id() {
-        selection.project("id");
+    auto& execute(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntityList(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForList(user_context);
+    }
+
+    auto& executeForRows(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForRows(user_context);
+    }
+
+    Child& newEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.newEntity(user_context);
+    }
+
+    ChildRequest copyTo(UserContext& user_context) const {
+        return ChildRequest(query_.copyTo(user_context));
+    }
+
+    ChildRequest copyToGlobal(UserContext& user_context) const {
+        return ChildRequest(query_.copyToGlobal(user_context));
+    }
+
+    ChildRequest rebindGlobal(UserContext& user_context) const {
+        return ChildRequest(query_.rebindGlobal(user_context));
+    }
+
+    ChildRequest& selectId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("id");
+        });
         return *this;
     }
 
-    ChildRequest& order_by_id_asc() {
-        selection.order_asc("id");
+    ChildRequest&& selectId() && {
+        this->selectId();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByIdAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("id");
+        });
         return *this;
     }
 
-    ChildRequest& order_by_id_desc() {
-        selection.order_desc("id");
+    ChildRequest&& orderByIdAsc() && {
+        this->orderByIdAsc();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByIdDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("id");
+        });
         return *this;
     }
 
-    ChildRequest& with_id_is(const std::uint64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "id", value));
+    ChildRequest&& orderByIdDesc() && {
+        this->orderByIdDesc();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByIdAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("id");
+        });
         return *this;
     }
 
-    ChildRequest& with_id_is_not(const std::uint64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "id", value));
+    ChildRequest&& orderByIdAscUsingGbk() && {
+        this->orderByIdAscUsingGbk();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByIdDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("id");
+        });
         return *this;
     }
 
-    ChildRequest& with_id_greater_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "id", value));
+    ChildRequest&& orderByIdDescUsingGbk() && {
+        this->orderByIdDescUsingGbk();
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdIs(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_greater_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "id", value));
+    ChildRequest&& withIdIs(const std::uint64_t& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdIsNot(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_less_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "id", value));
+    ChildRequest&& withIdIsNot(const std::uint64_t& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdGreaterThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_less_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "id", value));
+    ChildRequest&& withIdGreaterThan(const std::uint64_t& value) && {
+        this->withIdGreaterThan(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdGreaterThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_between(const std::uint64_t& lower, const std::uint64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "id", lower, upper));
+    ChildRequest&& withIdGreaterThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdLessThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, false));
+    ChildRequest&& withIdLessThan(const std::uint64_t& value) && {
+        this->withIdLessThan(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdLessThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_not_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, true));
+    ChildRequest&& withIdLessThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "id",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    ChildRequest& group_by_id() {
-        selection.group_by("id");
+    ChildRequest&& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) && {
+        this->withIdBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, false));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "id"));
+    ChildRequest&& withIdIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdIn(inputs);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdNotIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, true));
+        });
         return *this;
     }
 
-    ChildRequest& with_id_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+    ChildRequest&& withIdNotIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdNotIn(inputs);
+        return std::move(*this);
+    }
+
+    ChildRequest& groupById() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+        });
         return *this;
     }
 
-    ChildRequest& select_name() {
-        selection.project("name");
+    ChildRequest&& groupById() && {
+        this->groupById();
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.selectAs("id", alias);
+        });
         return *this;
     }
 
-    ChildRequest& order_by_name_asc() {
-        selection.order_asc("name");
+    ChildRequest&& groupByIdAs(std::string_view alias) && {
+        this->groupByIdAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByIdWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.aggregateWithFunction("id", alias, function);
+        });
         return *this;
     }
 
-    ChildRequest& order_by_name_desc() {
-        selection.order_desc("name");
+    ChildRequest&& groupByIdWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->groupByIdWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    ChildRequest& countId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", "id_count");
+        });
         return *this;
     }
 
-    ChildRequest& with_name_is(std::string_view value) {
-        selection.and_filter(Expr::eq(memory_resource(), "name", value));
+    ChildRequest&& countId() && {
+        this->countId();
+        return std::move(*this);
+    }
+
+    ChildRequest& countIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", alias);
+        });
         return *this;
     }
 
-    ChildRequest& with_name_is_not(std::string_view value) {
-        selection.and_filter(Expr::ne(memory_resource(), "name", value));
+    ChildRequest&& countIdAs(std::string_view alias) && {
+        this->countIdAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& sumId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", "sum_id");
+        });
         return *this;
     }
 
-    ChildRequest& with_name_greater_than(std::string_view value) {
-        selection.and_filter(Expr::gt(memory_resource(), "name", value));
+    ChildRequest&& sumId() && {
+        this->sumId();
+        return std::move(*this);
+    }
+
+    ChildRequest& sumIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", alias);
+        });
         return *this;
     }
 
-    ChildRequest& with_name_greater_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::gte(memory_resource(), "name", value));
+    ChildRequest&& sumIdAs(std::string_view alias) && {
+        this->sumIdAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& avgId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", "avg_id");
+        });
         return *this;
     }
 
-    ChildRequest& with_name_less_than(std::string_view value) {
-        selection.and_filter(Expr::lt(memory_resource(), "name", value));
+    ChildRequest&& avgId() && {
+        this->avgId();
+        return std::move(*this);
+    }
+
+    ChildRequest& avgIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", alias);
+        });
         return *this;
     }
 
-    ChildRequest& with_name_less_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::lte(memory_resource(), "name", value));
+    ChildRequest&& avgIdAs(std::string_view alias) && {
+        this->avgIdAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& minId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", "min_id");
+        });
         return *this;
     }
 
-    ChildRequest& with_name_between(std::string_view lower, std::string_view upper) {
-        selection.and_filter(Expr::between(memory_resource(), "name", lower, upper));
+    ChildRequest&& minId() && {
+        this->minId();
+        return std::move(*this);
+    }
+
+    ChildRequest& minIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", alias);
+        });
         return *this;
     }
 
-    ChildRequest& with_name_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, false));
+    ChildRequest&& minIdAs(std::string_view alias) && {
+        this->minIdAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& maxId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", "max_id");
+        });
         return *this;
     }
 
-    ChildRequest& with_name_not_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, true));
+    ChildRequest&& maxId() && {
+        this->maxId();
+        return std::move(*this);
+    }
+
+    ChildRequest& maxIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", alias);
+        });
         return *this;
     }
 
-    ChildRequest& group_by_name() {
-        selection.group_by("name");
+    ChildRequest&& maxIdAs(std::string_view alias) && {
+        this->maxIdAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    ChildRequest& sum_name_as(std::string_view alias) {
-        selection.sum("name", alias);
+    ChildRequest&& withIdIsUnknown() && {
+        this->withIdIsUnknown();
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    ChildRequest& avg_name_as(std::string_view alias) {
-        selection.avg("name", alias);
+    ChildRequest&& withIdIsKnown() && {
+        this->withIdIsKnown();
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    ChildRequest& min_name_as(std::string_view alias) {
-        selection.min("name", alias);
+    ChildRequest&& withIdIsNull() && {
+        this->withIdIsNull();
+        return std::move(*this);
+    }
+
+    ChildRequest& withIdIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    ChildRequest& max_name_as(std::string_view alias) {
-        selection.max("name", alias);
+    ChildRequest&& withIdIsNotNull() && {
+        this->withIdIsNotNull();
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIsString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    ChildRequest& with_name_containing(std::string_view value) {
-        selection.and_filter(Expr::contain(memory_resource(), "name", value));
+    ChildRequest&& withNameIsString() && {
+        this->withNameIsString();
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIsNotString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    ChildRequest& with_name_starting_with(std::string_view value) {
-        selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+    ChildRequest&& withNameIsNotString() && {
+        this->withNameIsNotString();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("name");
+        });
         return *this;
     }
 
-    ChildRequest& with_name_ending_with(std::string_view value) {
-        selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+    ChildRequest&& selectName() && {
+        this->selectName();
+        return std::move(*this);
+    }
+
+    ChildRequest& projectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("name");
+        });
         return *this;
     }
 
-    ChildRequest& with_name_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "name"));
+    ChildRequest&& projectName() && {
+        this->projectName();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectNameRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("name", sql);
+        });
         return *this;
     }
 
-    ChildRequest& with_name_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+    ChildRequest&& selectNameRaw(std::string_view sql) && {
+        this->selectNameRaw(sql);
+        return std::move(*this);
+    }
+
+    ChildRequest& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("name", std::move(sql));
+        });
         return *this;
     }
 
-    ChildRequest& select_version() {
-        selection.project("version");
+    ChildRequest&& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectNameUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    ChildRequest& unselectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("name");
+        });
         return *this;
     }
 
-    ChildRequest& order_by_version_asc() {
-        selection.order_asc("version");
+    ChildRequest&& unselectName() && {
+        this->unselectName();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByNameAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("name");
+        });
         return *this;
     }
 
-    ChildRequest& order_by_version_desc() {
-        selection.order_desc("version");
+    ChildRequest&& orderByNameAsc() && {
+        this->orderByNameAsc();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByNameDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("name");
+        });
         return *this;
     }
 
-    ChildRequest& with_version_is(const std::int64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "version", value));
+    ChildRequest&& orderByNameDesc() && {
+        this->orderByNameDesc();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByNameAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("name");
+        });
         return *this;
     }
 
-    ChildRequest& with_version_is_not(const std::int64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "version", value));
+    ChildRequest&& orderByNameAscUsingGbk() && {
+        this->orderByNameAscUsingGbk();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByNameDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("name");
+        });
         return *this;
     }
 
-    ChildRequest& with_version_greater_than(const std::int64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "version", value));
+    ChildRequest&& orderByNameDescUsingGbk() && {
+        this->orderByNameDescUsingGbk();
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIs(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_greater_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "version", value));
+    ChildRequest&& withNameIs(std::string_view value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIsNot(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_less_than(const std::int64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "version", value));
+    ChildRequest&& withNameIsNot(std::string_view value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameGreaterThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_less_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "version", value));
+    ChildRequest&& withNameGreaterThan(std::string_view value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameGreaterThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_between(const std::int64_t& lower, const std::int64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "version", lower, upper));
+    ChildRequest&& withNameGreaterThanOrEqualTo(std::string_view value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameLessThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, false));
+    ChildRequest&& withNameLessThan(std::string_view value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameLessThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_not_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, true));
+    ChildRequest&& withNameLessThanOrEqualTo(std::string_view value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameBetween(std::string_view lower, std::string_view upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "name",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    ChildRequest& group_by_version() {
-        selection.group_by("version");
+    ChildRequest&& withNameBetween(std::string_view lower, std::string_view upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, false));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "version"));
+    ChildRequest&& withNameIn(std::span<const String> inputs) && {
+        this->withNameIn(inputs);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameNotIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, true));
+        });
         return *this;
     }
 
-    ChildRequest& with_version_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+    ChildRequest&& withNameNotIn(std::span<const String> inputs) && {
+        this->withNameNotIn(inputs);
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+        });
         return *this;
+    }
+
+    ChildRequest&& groupByName() && {
+        this->groupByName();
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.selectAs("name", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& groupByNameAs(std::string_view alias) && {
+        this->groupByNameAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByNameWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.aggregateWithFunction("name", alias, function);
+        });
+        return *this;
+    }
+
+    ChildRequest&& groupByNameWithFunction(std::string_view alias, AggregateFunction function) && {
+        this->groupByNameWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    ChildRequest& countName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", "name_count");
+        });
+        return *this;
+    }
+
+    ChildRequest&& countName() && {
+        this->countName();
+        return std::move(*this);
+    }
+
+    ChildRequest& countNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& countNameAs(std::string_view alias) && {
+        this->countNameAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& sumName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", "sum_name");
+        });
+        return *this;
+    }
+
+    ChildRequest&& sumName() && {
+        this->sumName();
+        return std::move(*this);
+    }
+
+    ChildRequest& sumNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& sumNameAs(std::string_view alias) && {
+        this->sumNameAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& avgName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", "avg_name");
+        });
+        return *this;
+    }
+
+    ChildRequest&& avgName() && {
+        this->avgName();
+        return std::move(*this);
+    }
+
+    ChildRequest& avgNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& avgNameAs(std::string_view alias) && {
+        this->avgNameAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& minName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", "min_name");
+        });
+        return *this;
+    }
+
+    ChildRequest&& minName() && {
+        this->minName();
+        return std::move(*this);
+    }
+
+    ChildRequest& minNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& minNameAs(std::string_view alias) && {
+        this->minNameAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& maxName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", "max_name");
+        });
+        return *this;
+    }
+
+    ChildRequest&& maxName() && {
+        this->maxName();
+        return std::move(*this);
+    }
+
+    ChildRequest& maxNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& maxNameAs(std::string_view alias) && {
+        this->maxNameAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameContaining(std::string_view value) && {
+        this->withNameContaining(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameStartingWith(std::string_view value) && {
+        this->withNameStartingWith(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameEndingWith(std::string_view value) && {
+        this->withNameEndingWith(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameNotContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameNotContaining(std::string_view value) && {
+        this->withNameNotContaining(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameNotStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameNotStartingWith(std::string_view value) && {
+        this->withNameNotStartingWith(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameNotEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameNotEndingWith(std::string_view value) && {
+        this->withNameNotEndingWith(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameSoundingLike(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::sound_like(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameSoundingLike(std::string_view value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameIsUnknown() && {
+        this->withNameIsUnknown();
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameIsKnown() && {
+        this->withNameIsKnown();
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameIsNull() && {
+        this->withNameIsNull();
+        return std::move(*this);
+    }
+
+    ChildRequest& withNameIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withNameIsNotNull() && {
+        this->withNameIsNotNull();
+        return std::move(*this);
+    }
+
+    ChildRequest& selectVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& selectVersion() && {
+        this->selectVersion();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByVersionAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& orderByVersionAsc() && {
+        this->orderByVersionAsc();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByVersionDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& orderByVersionDesc() && {
+        this->orderByVersionDesc();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByVersionAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& orderByVersionAscUsingGbk() && {
+        this->orderByVersionAscUsingGbk();
+        return std::move(*this);
+    }
+
+    ChildRequest& orderByVersionDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& orderByVersionDescUsingGbk() && {
+        this->orderByVersionDescUsingGbk();
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionIs(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionIs(const std::int64_t& value) && {
+        this->withVersionIs(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionIsNot(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionIsNot(const std::int64_t& value) && {
+        this->withVersionIsNot(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionGreaterThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionGreaterThan(const std::int64_t& value) && {
+        this->withVersionGreaterThan(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionGreaterThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionGreaterThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionLessThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionLessThan(const std::int64_t& value) && {
+        this->withVersionLessThan(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionLessThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionLessThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "version",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) && {
+        this->withVersionBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, false));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionIn(inputs);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionNotIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, true));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionNotIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionNotIn(inputs);
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& groupByVersion() && {
+        this->groupByVersion();
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.selectAs("version", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& groupByVersionAs(std::string_view alias) && {
+        this->groupByVersionAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& groupByVersionWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.aggregateWithFunction("version", alias, function);
+        });
+        return *this;
+    }
+
+    ChildRequest&& groupByVersionWithFunction(std::string_view alias,
+                                              AggregateFunction function) && {
+        this->groupByVersionWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    ChildRequest& countVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", "version_count");
+        });
+        return *this;
+    }
+
+    ChildRequest&& countVersion() && {
+        this->countVersion();
+        return std::move(*this);
+    }
+
+    ChildRequest& countVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& countVersionAs(std::string_view alias) && {
+        this->countVersionAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& sumVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", "sum_version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& sumVersion() && {
+        this->sumVersion();
+        return std::move(*this);
+    }
+
+    ChildRequest& sumVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& sumVersionAs(std::string_view alias) && {
+        this->sumVersionAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& avgVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", "avg_version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& avgVersion() && {
+        this->avgVersion();
+        return std::move(*this);
+    }
+
+    ChildRequest& avgVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& avgVersionAs(std::string_view alias) && {
+        this->avgVersionAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& minVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", "min_version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& minVersion() && {
+        this->minVersion();
+        return std::move(*this);
+    }
+
+    ChildRequest& minVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& minVersionAs(std::string_view alias) && {
+        this->minVersionAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& maxVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", "max_version");
+        });
+        return *this;
+    }
+
+    ChildRequest&& maxVersion() && {
+        this->maxVersion();
+        return std::move(*this);
+    }
+
+    ChildRequest& maxVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", alias);
+        });
+        return *this;
+    }
+
+    ChildRequest&& maxVersionAs(std::string_view alias) && {
+        this->maxVersionAs(alias);
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionIsUnknown() && {
+        this->withVersionIsUnknown();
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionIsKnown() && {
+        this->withVersionIsKnown();
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionIsNull() && {
+        this->withVersionIsNull();
+        return std::move(*this);
+    }
+
+    ChildRequest& withVersionIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    ChildRequest&& withVersionIsNotNull() && {
+        this->withVersionIsNotNull();
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ChildRequest& withId(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("id", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ChildRequest&& withId(request::FieldOperator op, Inputs&& inputs) && {
+        this->withId(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ChildRequest& withName(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("name", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    ChildRequest&& withName(request::FieldOperator op, Inputs&& inputs) && {
+        this->withName(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createNameCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("name", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    ChildRequest& withNameBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    ChildRequest&& withNameBetweenRange(const request::DateRange<T>& range) && {
+        this->withNameBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    ChildRequest& withNameBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    ChildRequest&& withNameBefore(const T& value) && {
+        this->withNameBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    ChildRequest& withNameAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    ChildRequest&& withNameAfter(const T& value) && {
+        this->withNameAfter(value);
+        return std::move(*this);
     }
 };
 
-template <bool Purposed>
+template <bool Purposed, Entity Result>
 class InventoryRequest {
+    template <bool, Entity>
+    friend class PersonRequest;
+    template <bool, Entity>
+    friend class DeviceRequest;
+    template <bool, Entity>
+    friend class OrderStatusRequest;
+    template <bool, Entity>
+    friend class CategoryRequest;
+    template <bool, Entity>
+    friend class ChildRequest;
+    template <bool, Entity>
+    friend class InventoryRequest;
+
 public:
-    using allocator_type = Allocator;
-    UserContext& owner;
-    SelectQuery selection;
-    String intent;
+    using Query = EntityQuery<Inventory, DataServiceExecutor, Purposed, Result>;
 
-    InventoryRequest(std::allocator_arg_t, Allocator a, UserContext& user)
-        : owner(user), selection(std::allocator_arg, a, Inventory::ENTITY_NAME),
-          intent(a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-        selection.project("id").project("version");
-    }
+private:
+    Query query_;
 
-    InventoryRequest(std::allocator_arg_t,
-                     Allocator a,
-                     UserContext& user,
-                     const SelectQuery& q,
-                     std::string_view purpose)
-        : owner(user), selection(std::allocator_arg, a, q), intent(purpose, a.resource()) {
-        if (a.resource() != user.memory_resource()) {
-            throw std::invalid_argument("Request must belong to its UserContext");
-        }
-    }
+public:
+    explicit InventoryRequest(UserContext& user_context,
+                              bool minimal = false,
+                              bool live_rows = true)
+        requires(!Purposed)
+        : query_(user_context, minimal, live_rows) {}
+
+    explicit InventoryRequest(Query value) : query_(std::move(value)) {}
 
     Memory memory_resource() const {
-        return selection.memory_resource();
+        return query_.memory_resource();
     }
 
     const SelectQuery& query() const {
-        return selection;
+        return query_.query();
     }
 
-    InventoryRequest<true>& purpose(std::string_view text) {
-        return owner.make<InventoryRequest<true>>(owner, selection, text);
+    const Query& runtimeQuery() const
+        requires(!Purposed)
+    {
+        return query_;
     }
 
-    InventoryRequest& comment(std::string_view text) {
-        selection.comment(text);
+    request::QuerySelection selection() const
+        requires(!Purposed)
+    {
+        return query_.selection();
+    }
+
+    InventoryRequest<true, Result> purpose(std::string_view text) const& {
+        return InventoryRequest<true, Result>(query_.purpose(text));
+    }
+
+    InventoryRequest<true, Result> purpose(std::string_view text) && {
+        return InventoryRequest<true, Result>(std::move(query_).purpose(text));
+    }
+
+    template <Entity Return>
+    InventoryRequest<Purposed, Return> returnType() const& {
+        return InventoryRequest<Purposed, Return>(query_.template returnType<Return>());
+    }
+
+    template <Entity Return>
+    InventoryRequest<Purposed, Return> returnType() && {
+        return InventoryRequest<Purposed, Return>(std::move(query_).template returnType<Return>());
+    }
+
+    InventoryRequest& comment(std::string_view value) & {
+        query_.comment(value);
         return *this;
     }
 
-    InventoryRequest& filter(Expr value) {
-        selection.filter(std::move(value));
+    InventoryRequest&& comment(std::string_view value) && {
+        this->comment(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& filter(const Expr& value) & {
+        query_.filter(value);
         return *this;
     }
 
-    InventoryRequest& and_filter(Expr value) {
-        selection.and_filter(std::move(value));
+    InventoryRequest&& filter(const Expr& value) && {
+        this->filter(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectDynamicFields(const DynamicFieldSelection& value) & {
+        query_.selectDynamicFields(value);
         return *this;
     }
 
-    InventoryRequest& or_filter(Expr value) {
-        selection.or_filter(std::move(value));
+    InventoryRequest&& selectDynamicFields(const DynamicFieldSelection& value) && {
+        this->selectDynamicFields(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& matchTypes(std::span<const Value> value) & {
+        query_.matchTypes(value);
         return *this;
     }
 
-    InventoryRequest& limit(std::uint64_t value) {
-        selection.limit(value);
+    InventoryRequest&& matchTypes(std::span<const Value> value) && {
+        this->matchTypes(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& andFilter(const Expr& value) & {
+        query_.andFilter(value);
         return *this;
     }
 
-    InventoryRequest& offset(std::uint64_t value) {
-        selection.offset(value);
+    InventoryRequest&& andFilter(const Expr& value) && {
+        this->andFilter(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& orFilter(const Expr& value) & {
+        query_.orFilter(value);
         return *this;
     }
 
-    InventoryRequest& hard_limit(std::uint64_t value) {
-        selection.hard_limit(value);
+    InventoryRequest&& orFilter(const Expr& value) && {
+        this->orFilter(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& limit(std::uint64_t value) & {
+        query_.limit(value);
         return *this;
     }
 
-    InventoryRequest& skip(std::uint64_t value) {
-        return offset(value);
+    InventoryRequest&& limit(std::uint64_t value) && {
+        this->limit(value);
+        return std::move(*this);
     }
 
-    InventoryRequest& search_with_text(std::string_view value) {
-        selection.search_with_text(value);
+    InventoryRequest& offset(std::uint64_t value) & {
+        query_.offset(value);
         return *this;
     }
 
-    InventoryRequest& select_self() {
-        selection.project("id");
-        selection.project("name");
-        selection.project("version");
+    InventoryRequest&& offset(std::uint64_t value) && {
+        this->offset(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& hardLimit(std::uint64_t value) & {
+        query_.hardLimit(value);
         return *this;
     }
 
-    InventoryRequest& select_self_fields() {
-        return select_self();
+    InventoryRequest&& hardLimit(std::uint64_t value) && {
+        this->hardLimit(value);
+        return std::move(*this);
     }
 
-    PurposedSelectQuery authorize(UserContext& user) const
+    InventoryRequest& stream(std::size_t value) & {
+        query_.stream(value);
+        return *this;
+    }
+
+    InventoryRequest&& stream(std::size_t value) && {
+        this->stream(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& unlimited() & {
+        query_.unlimited();
+        return *this;
+    }
+
+    InventoryRequest&& unlimited() && {
+        this->unlimited();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withDeletedRows() & {
+        query_.withDeletedRows();
+        return *this;
+    }
+
+    InventoryRequest&& withDeletedRows() && {
+        this->withDeletedRows();
+        return std::move(*this);
+    }
+
+    InventoryRequest& deletedRowsOnly() & {
+        query_.deletedRowsOnly();
+        return *this;
+    }
+
+    InventoryRequest&& deletedRowsOnly() && {
+        this->deletedRowsOnly();
+        return std::move(*this);
+    }
+
+    InventoryRequest& appendSearchCriteria(const Expr& criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    InventoryRequest&& appendSearchCriteria(const Expr& criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    InventoryRequest& appendSearchCriteria(Ref<Expr> criteria) & {
+        query_.appendSearchCriteria(criteria);
+        return *this;
+    }
+
+    InventoryRequest&& appendSearchCriteria(Ref<Expr> criteria) && {
+        this->appendSearchCriteria(criteria);
+        return std::move(*this);
+    }
+
+    InventoryRequest&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) & {
+        query_.filterProperty(left, op, right);
+        return *this;
+    }
+
+    InventoryRequest&&
+    filterProperty(std::string_view left, request::FieldOperator op, std::string_view right) && {
+        this->filterProperty(left, op, right);
+        return std::move(*this);
+    }
+
+    InventoryRequest& pageOffset(std::uint64_t offset, std::uint64_t size) & {
+        query_.pageOffset(offset, size);
+        return *this;
+    }
+
+    InventoryRequest&& pageOffset(std::uint64_t offset, std::uint64_t size) && {
+        this->pageOffset(offset, size);
+        return std::move(*this);
+    }
+
+    InventoryRequest& offset(std::uint64_t offset, std::uint64_t size) & {
+        query_.offset(offset, size);
+        return *this;
+    }
+
+    InventoryRequest&& offset(std::uint64_t offset, std::uint64_t size) && {
+        this->offset(offset, size);
+        return std::move(*this);
+    }
+
+    InventoryRequest& offsetOnly(std::uint64_t value) & {
+        query_.offsetOnly(value);
+        return *this;
+    }
+
+    InventoryRequest&& offsetOnly(std::uint64_t value) && {
+        this->offsetOnly(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& offsetSize(std::uint64_t offset, std::uint64_t size) & {
+        query_.offsetSize(offset, size);
+        return *this;
+    }
+
+    InventoryRequest&& offsetSize(std::uint64_t offset, std::uint64_t size) && {
+        this->offsetSize(offset, size);
+        return std::move(*this);
+    }
+
+    InventoryRequest& top(std::uint64_t value) & {
+        query_.top(value);
+        return *this;
+    }
+
+    InventoryRequest&& top(std::uint64_t value) && {
+        this->top(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& pageNumber(std::uint64_t number, std::uint64_t size) & {
+        query_.pageNumber(number, size);
+        return *this;
+    }
+
+    InventoryRequest&& pageNumber(std::uint64_t number, std::uint64_t size) && {
+        this->pageNumber(number, size);
+        return std::move(*this);
+    }
+
+    InventoryRequest& pageNumberDefault(std::uint64_t number) & {
+        query_.pageNumberDefault(number);
+        return *this;
+    }
+
+    InventoryRequest&& pageNumberDefault(std::uint64_t number) && {
+        this->pageNumberDefault(number);
+        return std::move(*this);
+    }
+
+    InventoryRequest& page(std::uint64_t number, std::uint64_t size) & {
+        query_.page(number, size);
+        return *this;
+    }
+
+    InventoryRequest&& page(std::uint64_t number, std::uint64_t size) && {
+        this->page(number, size);
+        return std::move(*this);
+    }
+
+    InventoryRequest& pageDefault(std::uint64_t number) & {
+        query_.pageDefault(number);
+        return *this;
+    }
+
+    InventoryRequest&& pageDefault(std::uint64_t number) && {
+        this->pageDefault(number);
+        return std::move(*this);
+    }
+
+    InventoryRequest& streamDefault() & {
+        query_.streamDefault();
+        return *this;
+    }
+
+    InventoryRequest&& streamDefault() && {
+        this->streamDefault();
+        return std::move(*this);
+    }
+
+    InventoryRequest& topNProbeParentThreshold(std::size_t threshold) & {
+        query_.topNProbeParentThreshold(threshold);
+        return *this;
+    }
+
+    InventoryRequest&& topNProbeParentThreshold(std::size_t threshold) && {
+        this->topNProbeParentThreshold(threshold);
+        return std::move(*this);
+    }
+
+    InventoryRequest& rawSql(std::string_view sql) & {
+        query_.rawSql(sql);
+        return *this;
+    }
+
+    InventoryRequest&& rawSql(std::string_view sql) && {
+        this->rawSql(sql);
+        return std::move(*this);
+    }
+
+    InventoryRequest& rawSqlFilter(std::string_view sql) & {
+        query_.rawSqlFilter(sql);
+        return *this;
+    }
+
+    InventoryRequest&& rawSqlFilter(std::string_view sql) && {
+        this->rawSqlFilter(sql);
+        return std::move(*this);
+    }
+
+    InventoryRequest& createPropertyAs(std::string_view field, std::string_view sql) & {
+        query_.createPropertyAs(field, sql);
+        return *this;
+    }
+
+    InventoryRequest&& createPropertyAs(std::string_view field, std::string_view sql) && {
+        this->createPropertyAs(field, sql);
+        return std::move(*this);
+    }
+
+    InventoryRequest& unsafeRawSql(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSql(std::move(sql));
+        return *this;
+    }
+
+    InventoryRequest&& unsafeRawSql(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSql(std::move(sql));
+        return std::move(*this);
+    }
+
+    InventoryRequest& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeRawSqlFilter(std::move(sql));
+        return *this;
+    }
+
+    InventoryRequest&& unsafeRawSqlFilter(request::UnsafeRawSqlSegment sql) && {
+        this->unsafeRawSqlFilter(std::move(sql));
+        return std::move(*this);
+    }
+
+    InventoryRequest& unsafeCreatePropertyAs(std::string_view field,
+                                             request::UnsafeRawSqlSegment sql) & {
+        query_.unsafeCreatePropertyAs(field, std::move(sql));
+        return *this;
+    }
+
+    InventoryRequest&& unsafeCreatePropertyAs(std::string_view field,
+                                              request::UnsafeRawSqlSegment sql) && {
+        this->unsafeCreatePropertyAs(field, std::move(sql));
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupBy(std::string_view value) & {
+        query_.groupBy(value);
+        return *this;
+    }
+
+    InventoryRequest&& groupBy(std::string_view value) && {
+        this->groupBy(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& countAs(std::string_view value) & {
+        query_.countAs(value);
+        return *this;
+    }
+
+    InventoryRequest&& countAs(std::string_view value) && {
+        this->countAs(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateCount(std::string_view value) & {
+        query_.aggregateCount(value);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateCount(std::string_view value) && {
+        this->aggregateCount(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& count() & {
+        query_.count();
+        return *this;
+    }
+
+    InventoryRequest&& count() && {
+        this->count();
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateWithFunction(std::string_view field,
+                                            std::string_view alias,
+                                            AggregateFunction function) & {
+        query_.aggregateWithFunction(field, alias, function);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateWithFunction(std::string_view field,
+                                             std::string_view alias,
+                                             AggregateFunction function) && {
+        this->aggregateWithFunction(field, alias, function);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateCountField(std::string_view field, std::string_view alias) & {
+        query_.aggregateCountField(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateCountField(std::string_view field, std::string_view alias) && {
+        this->aggregateCountField(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateSum(std::string_view field, std::string_view alias) & {
+        query_.aggregateSum(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateSum(std::string_view field, std::string_view alias) && {
+        this->aggregateSum(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateAvg(std::string_view field, std::string_view alias) & {
+        query_.aggregateAvg(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateAvg(std::string_view field, std::string_view alias) && {
+        this->aggregateAvg(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateMin(std::string_view field, std::string_view alias) & {
+        query_.aggregateMin(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateMin(std::string_view field, std::string_view alias) && {
+        this->aggregateMin(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateMax(std::string_view field, std::string_view alias) & {
+        query_.aggregateMax(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateMax(std::string_view field, std::string_view alias) && {
+        this->aggregateMax(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateStddev(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddev(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateStddev(std::string_view field, std::string_view alias) && {
+        this->aggregateStddev(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateStddevPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateStddevPop(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateStddevPop(std::string_view field, std::string_view alias) && {
+        this->aggregateStddevPop(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateVarSamp(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarSamp(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateVarSamp(std::string_view field, std::string_view alias) && {
+        this->aggregateVarSamp(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateVarPop(std::string_view field, std::string_view alias) & {
+        query_.aggregateVarPop(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateVarPop(std::string_view field, std::string_view alias) && {
+        this->aggregateVarPop(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateBitAnd(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitAnd(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateBitAnd(std::string_view field, std::string_view alias) && {
+        this->aggregateBitAnd(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateBitOr(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitOr(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateBitOr(std::string_view field, std::string_view alias) && {
+        this->aggregateBitOr(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& aggregateBitXor(std::string_view field, std::string_view alias) & {
+        query_.aggregateBitXor(field, alias);
+        return *this;
+    }
+
+    InventoryRequest&& aggregateBitXor(std::string_view field, std::string_view alias) && {
+        this->aggregateBitXor(field, alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& enableAggregationCache() & {
+        query_.enableAggregationCache();
+        return *this;
+    }
+
+    InventoryRequest&& enableAggregationCache() && {
+        this->enableAggregationCache();
+        return std::move(*this);
+    }
+
+    InventoryRequest& enableAggregationCacheFor(std::uint64_t duration) & {
+        query_.enableAggregationCacheFor(duration);
+        return *this;
+    }
+
+    InventoryRequest&& enableAggregationCacheFor(std::uint64_t duration) && {
+        this->enableAggregationCacheFor(duration);
+        return std::move(*this);
+    }
+
+    InventoryRequest& propagateAggregationCache(std::uint64_t duration) & {
+        query_.propagateAggregationCache(duration);
+        return *this;
+    }
+
+    InventoryRequest&& propagateAggregationCache(std::uint64_t duration) && {
+        this->propagateAggregationCache(duration);
+        return std::move(*this);
+    }
+
+    InventoryRequest& optimizePaginationWithIdSet() & {
+        query_.optimizePaginationWithIdSet();
+        return *this;
+    }
+
+    InventoryRequest&& optimizePaginationWithIdSet() && {
+        this->optimizePaginationWithIdSet();
+        return std::move(*this);
+    }
+
+    InventoryRequest& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                        std::uint64_t ttl,
+                                                        std::uint64_t max_ids) & {
+        query_.optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return *this;
+    }
+
+    InventoryRequest&& optimizePaginationWithIdSetConfig(std::string_view name,
+                                                         std::uint64_t ttl,
+                                                         std::uint64_t max_ids) && {
+        this->optimizePaginationWithIdSetConfig(name, ttl, max_ids);
+        return std::move(*this);
+    }
+
+    InventoryRequest& optimizeForContinuousPageFetch() & {
+        query_.optimizeForContinuousPageFetch();
+        return *this;
+    }
+
+    InventoryRequest&& optimizeForContinuousPageFetch() && {
+        this->optimizeForContinuousPageFetch();
+        return std::move(*this);
+    }
+
+    InventoryRequest& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                         std::uint64_t ttl) & {
+        query_.optimizeForContinuousPageFetchWith(name, ttl);
+        return *this;
+    }
+
+    InventoryRequest&& optimizeForContinuousPageFetchWith(std::string_view name,
+                                                          std::uint64_t ttl) && {
+        this->optimizeForContinuousPageFetchWith(name, ttl);
+        return std::move(*this);
+    }
+
+    InventoryRequest& filterWithJson(std::string_view value) & {
+        apply_generated_dynamic_json<generated_detail::InventoryDynamicJsonRecipe>(query_, value);
+        return *this;
+    }
+
+    InventoryRequest&& filterWithJson(std::string_view value) && {
+        this->filterWithJson(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withTypeGroup() & {
+        query_.withTypeGroup();
+        return *this;
+    }
+
+    InventoryRequest&& withTypeGroup() && {
+        this->withTypeGroup();
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    InventoryRequest& enhanceChild(const ChildRequest& child) & {
+        query_.enhanceChild(child.query_);
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.query_.selection(); }
+    InventoryRequest&& enhanceChild(const ChildRequest& child) && {
+        this->enhanceChild(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    InventoryRequest& matchingAnyOf(const ChildRequest& child) & {
+        query_.matchingAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    InventoryRequest&& matchingAnyOf(const ChildRequest& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    InventoryRequest& matchingAnyOf(const SelectQuery& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    InventoryRequest&& matchingAnyOf(const SelectQuery& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    InventoryRequest& matchingAnyOf(const request::QuerySelection& child) & {
+        query_.matchingAnyOf(child);
+        return *this;
+    }
+
+    InventoryRequest&& matchingAnyOf(const request::QuerySelection& child) && {
+        this->matchingAnyOf(child);
+        return std::move(*this);
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    InventoryRequest& matchAnyOf(const ChildRequest& child) & {
+        query_.matchAnyOf(child.runtimeQuery());
+        return *this;
+    }
+
+    template <class ChildRequest>
+        requires requires(const ChildRequest& child) { child.runtimeQuery().selection(); }
+    InventoryRequest&& matchAnyOf(const ChildRequest& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    InventoryRequest& matchAnyOf(const SelectQuery& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    InventoryRequest&& matchAnyOf(const SelectQuery& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    InventoryRequest& matchAnyOf(const request::QuerySelection& child) & {
+        query_.matchAnyOf(child);
+        return *this;
+    }
+
+    InventoryRequest&& matchAnyOf(const request::QuerySelection& child) && {
+        this->matchAnyOf(child);
+        return std::move(*this);
+    }
+
+    InventoryRequest& enhanceChildrenIfNeeded() &;
+
+    InventoryRequest&& enhanceChildrenIfNeeded() && {
+        enhanceChildrenIfNeeded();
+        return std::move(*this);
+    }
+
+    InventoryRequest& skip(std::uint64_t value) & {
+        query_.offset(value);
+        return *this;
+    }
+
+    InventoryRequest&& skip(std::uint64_t value) && {
+        this->skip(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& searchWithText(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.search_with_text(value);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& searchWithText(std::string_view value) && {
+        this->searchWithText(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectSelf() & {
+        query_.select("id");
+        query_.select("name");
+        query_.select("version");
+        return *this;
+    }
+
+    InventoryRequest&& selectSelf() && {
+        this->selectSelf();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectSelfFields() & {
+        selectSelf();
+        return *this;
+    }
+
+    InventoryRequest&& selectSelfFields() && {
+        this->selectSelfFields();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectSelfWithoutParent() & {
+        selectSelfFields();
+        return *this;
+    }
+
+    InventoryRequest&& selectSelfWithoutParent() && {
+        this->selectSelfWithoutParent();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectAll() & {
+        selectSelf();
+        return *this;
+    }
+
+    InventoryRequest&& selectAll() && {
+        this->selectAll();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectChildren() & {
+        selectAll();
+        return *this;
+    }
+
+    InventoryRequest&& selectChildren() && {
+        this->selectChildren();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectAny() & {
+        selectChildren();
+        return *this;
+    }
+
+    InventoryRequest&& selectAny() && {
+        this->selectAny();
+        return std::move(*this);
+    }
+
+    auto& executeForList(UserContext& user_context) const
         requires Purposed
     {
-        if (&user != &owner) {
-            throw std::invalid_argument("Request execution cannot cross UserContexts");
-        }
-        auto comment =
-            selection.comment_text ? std::string_view(*selection.comment_text) : std::string_view{};
-        auto blank = [](std::string_view value) {
-            detail::trim(value);
-            return value.empty();
-        };
-        if (blank(intent) || blank(comment)) {
-            throw std::invalid_argument("Query execution requires nonblank purpose and comment");
-        }
-        return PurposedSelectQuery(
-            std::allocator_arg, Allocator(memory_resource()), selection, intent);
+        return query_.executeForList(user_context);
     }
 
-    auto& execute_for_list(UserContext& user) const
+    auto& executeForOne(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Inventory::ENTITY_NAME);
-        return require_value(repository).get().template fetch_enhanced_entities<Inventory>(query);
+        return query_.executeForOne(user_context);
     }
 
-    auto& execute_for_entity_list(UserContext& user) const
+    auto& executeForFirst(UserContext& user_context) const
         requires Purposed
     {
-        return execute_for_list(user);
+        return query_.executeForFirst(user_context);
     }
 
-    auto& execute(UserContext& user) const
+    auto& executeForCount(UserContext& user_context) const
         requires Purposed
     {
-        auto& request = owner.make<InventoryRequest<true>>(owner, selection, intent);
-        request.limit(1);
-        auto& source = request.execute_for_list(user);
-        using Error = DataServiceError<DataServiceExecutor::Error>;
-        using State = generated_detail::SingleResult<Inventory, Error>;
-        return make_operation<typename State::Output, State>(memory_resource(), source);
+        return query_.executeForCount(user_context);
     }
 
-    auto& execute_for_entity(UserContext& user) const
+    auto& executeForExists(UserContext& user_context) const
         requires Purposed
     {
-        return execute(user);
+        return query_.executeForExists(user_context);
     }
 
-    auto& execute_for_rows(UserContext& user) const
+    auto& executeForStream(UserContext& user_context) const
         requires Purposed
     {
-        auto query = authorize(user);
-        auto repository = user.entity_data_service<DataServiceExecutor>(Inventory::ENTITY_NAME);
-        return require_value(repository).get().fetch_smart_list(query);
+        return query_.executeForStream(user_context);
     }
 
-    Inventory& new_entity(UserContext& user) const
+    auto& executeForPage(UserContext& user_context, std::uint64_t offset, std::uint64_t limit) const
         requires Purposed
     {
-        (void)authorize(user);
-        auto& value = user.make<Inventory>();
-        value.update_id(require_value(user.next_id(Inventory::ENTITY_NAME)));
-        value.mark_as_new();
-        return value;
+        return query_.executeForPage(user_context, offset, limit);
     }
 
-    InventoryRequest& select_id() {
-        selection.project("id");
+    auto& execute(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForOne(user_context);
+    }
+
+    auto& executeForEntityList(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForList(user_context);
+    }
+
+    auto& executeForRows(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.executeForRows(user_context);
+    }
+
+    Inventory& newEntity(UserContext& user_context) const
+        requires Purposed
+    {
+        return query_.newEntity(user_context);
+    }
+
+    InventoryRequest copyTo(UserContext& user_context) const {
+        return InventoryRequest(query_.copyTo(user_context));
+    }
+
+    InventoryRequest copyToGlobal(UserContext& user_context) const {
+        return InventoryRequest(query_.copyToGlobal(user_context));
+    }
+
+    InventoryRequest rebindGlobal(UserContext& user_context) const {
+        return InventoryRequest(query_.rebindGlobal(user_context));
+    }
+
+    InventoryRequest& selectId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("id");
+        });
         return *this;
     }
 
-    InventoryRequest& order_by_id_asc() {
-        selection.order_asc("id");
+    InventoryRequest&& selectId() && {
+        this->selectId();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByIdAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("id");
+        });
         return *this;
     }
 
-    InventoryRequest& order_by_id_desc() {
-        selection.order_desc("id");
+    InventoryRequest&& orderByIdAsc() && {
+        this->orderByIdAsc();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByIdDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("id");
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_is(const std::uint64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "id", value));
+    InventoryRequest&& orderByIdDesc() && {
+        this->orderByIdDesc();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByIdAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("id");
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_is_not(const std::uint64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "id", value));
+    InventoryRequest&& orderByIdAscUsingGbk() && {
+        this->orderByIdAscUsingGbk();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByIdDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("id");
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_greater_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "id", value));
+    InventoryRequest&& orderByIdDescUsingGbk() && {
+        this->orderByIdDescUsingGbk();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdIs(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_greater_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "id", value));
+    InventoryRequest&& withIdIs(const std::uint64_t& value) && {
+        this->withIdIs(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdIsNot(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_less_than(const std::uint64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "id", value));
+    InventoryRequest&& withIdIsNot(const std::uint64_t& value) && {
+        this->withIdIsNot(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdGreaterThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_less_than_or_equal_to(const std::uint64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "id", value));
+    InventoryRequest&& withIdGreaterThan(const std::uint64_t& value) && {
+        this->withIdGreaterThan(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdGreaterThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_between(const std::uint64_t& lower, const std::uint64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "id", lower, upper));
+    InventoryRequest&& withIdGreaterThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdLessThan(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, false));
+    InventoryRequest&& withIdLessThan(const std::uint64_t& value) && {
+        this->withIdLessThan(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdLessThanOrEqualTo(const std::uint64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "id", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_not_in(std::span<const std::uint64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "id", values, true));
+    InventoryRequest&& withIdLessThanOrEqualTo(const std::uint64_t& value) && {
+        this->withIdLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "id",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    InventoryRequest& group_by_id() {
-        selection.group_by("id");
+    InventoryRequest&& withIdBetween(const std::uint64_t& lower, const std::uint64_t& upper) && {
+        this->withIdBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, false));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "id"));
+    InventoryRequest&& withIdIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdIn(inputs);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdNotIn(std::span<const std::uint64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "id", values, true));
+        });
         return *this;
     }
 
-    InventoryRequest& with_id_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+    InventoryRequest&& withIdNotIn(std::span<const std::uint64_t> inputs) && {
+        this->withIdNotIn(inputs);
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupById() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+        });
         return *this;
     }
 
-    InventoryRequest& select_name() {
-        selection.project("name");
+    InventoryRequest&& groupById() && {
+        this->groupById();
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.selectAs("id", alias);
+        });
         return *this;
     }
 
-    InventoryRequest& order_by_name_asc() {
-        selection.order_asc("name");
+    InventoryRequest&& groupByIdAs(std::string_view alias) && {
+        this->groupByIdAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByIdWithFunction(std::string_view alias, AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("id");
+            query_.aggregateWithFunction("id", alias, function);
+        });
         return *this;
     }
 
-    InventoryRequest& order_by_name_desc() {
-        selection.order_desc("name");
+    InventoryRequest&& groupByIdWithFunction(std::string_view alias,
+                                             AggregateFunction function) && {
+        this->groupByIdWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    InventoryRequest& countId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", "id_count");
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_is(std::string_view value) {
-        selection.and_filter(Expr::eq(memory_resource(), "name", value));
+    InventoryRequest&& countId() && {
+        this->countId();
+        return std::move(*this);
+    }
+
+    InventoryRequest& countIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("id", alias);
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_is_not(std::string_view value) {
-        selection.and_filter(Expr::ne(memory_resource(), "name", value));
+    InventoryRequest&& countIdAs(std::string_view alias) && {
+        this->countIdAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& sumId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", "sum_id");
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_greater_than(std::string_view value) {
-        selection.and_filter(Expr::gt(memory_resource(), "name", value));
+    InventoryRequest&& sumId() && {
+        this->sumId();
+        return std::move(*this);
+    }
+
+    InventoryRequest& sumIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("id", alias);
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_greater_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::gte(memory_resource(), "name", value));
+    InventoryRequest&& sumIdAs(std::string_view alias) && {
+        this->sumIdAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& avgId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", "avg_id");
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_less_than(std::string_view value) {
-        selection.and_filter(Expr::lt(memory_resource(), "name", value));
+    InventoryRequest&& avgId() && {
+        this->avgId();
+        return std::move(*this);
+    }
+
+    InventoryRequest& avgIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("id", alias);
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_less_than_or_equal_to(std::string_view value) {
-        selection.and_filter(Expr::lte(memory_resource(), "name", value));
+    InventoryRequest&& avgIdAs(std::string_view alias) && {
+        this->avgIdAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& minId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", "min_id");
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_between(std::string_view lower, std::string_view upper) {
-        selection.and_filter(Expr::between(memory_resource(), "name", lower, upper));
+    InventoryRequest&& minId() && {
+        this->minId();
+        return std::move(*this);
+    }
+
+    InventoryRequest& minIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("id", alias);
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, false));
+    InventoryRequest&& minIdAs(std::string_view alias) && {
+        this->minIdAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& maxId() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", "max_id");
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_not_in(std::span<const String> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "name", values, true));
+    InventoryRequest&& maxId() && {
+        this->maxId();
+        return std::move(*this);
+    }
+
+    InventoryRequest& maxIdAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("id", alias);
+        });
         return *this;
     }
 
-    InventoryRequest& group_by_name() {
-        selection.group_by("name");
+    InventoryRequest&& maxIdAs(std::string_view alias) && {
+        this->maxIdAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    InventoryRequest& sum_name_as(std::string_view alias) {
-        selection.sum("name", alias);
+    InventoryRequest&& withIdIsUnknown() && {
+        this->withIdIsUnknown();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    InventoryRequest& avg_name_as(std::string_view alias) {
-        selection.avg("name", alias);
+    InventoryRequest&& withIdIsKnown() && {
+        this->withIdIsKnown();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    InventoryRequest& min_name_as(std::string_view alias) {
-        selection.min("name", alias);
+    InventoryRequest&& withIdIsNull() && {
+        this->withIdIsNull();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withIdIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "id"));
+        });
         return *this;
     }
 
-    InventoryRequest& max_name_as(std::string_view alias) {
-        selection.max("name", alias);
+    InventoryRequest&& withIdIsNotNull() && {
+        this->withIdIsNotNull();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIsString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_containing(std::string_view value) {
-        selection.and_filter(Expr::contain(memory_resource(), "name", value));
+    InventoryRequest&& withNameIsString() && {
+        this->withNameIsString();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIsNotString() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(memory_resource(), "name", "string()"));
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_starting_with(std::string_view value) {
-        selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+    InventoryRequest&& withNameIsNotString() && {
+        this->withNameIsNotString();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("name");
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_ending_with(std::string_view value) {
-        selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+    InventoryRequest&& selectName() && {
+        this->selectName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& projectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.select("name");
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "name"));
+    InventoryRequest&& projectName() && {
+        this->projectName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectNameRaw(std::string_view sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectRaw("name", sql);
+        });
         return *this;
     }
 
-    InventoryRequest& with_name_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+    InventoryRequest&& selectNameRaw(std::string_view sql) && {
+        this->selectNameRaw(sql);
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.selectUnsafeRaw("name", std::move(sql));
+        });
         return *this;
     }
 
-    InventoryRequest& select_version() {
-        selection.project("version");
+    InventoryRequest&& selectNameUnsafeRaw(request::UnsafeRawSqlSegment sql) && {
+        this->selectNameUnsafeRaw(std::move(sql));
+        return std::move(*this);
+    }
+
+    InventoryRequest& unselectName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.unselect("name");
+        });
         return *this;
     }
 
-    InventoryRequest& order_by_version_asc() {
-        selection.order_asc("version");
+    InventoryRequest&& unselectName() && {
+        this->unselectName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByNameAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("name");
+        });
         return *this;
     }
 
-    InventoryRequest& order_by_version_desc() {
-        selection.order_desc("version");
+    InventoryRequest&& orderByNameAsc() && {
+        this->orderByNameAsc();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByNameDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("name");
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_is(const std::int64_t& value) {
-        selection.and_filter(Expr::eq(memory_resource(), "version", value));
+    InventoryRequest&& orderByNameDesc() && {
+        this->orderByNameDesc();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByNameAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("name");
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_is_not(const std::int64_t& value) {
-        selection.and_filter(Expr::ne(memory_resource(), "version", value));
+    InventoryRequest&& orderByNameAscUsingGbk() && {
+        this->orderByNameAscUsingGbk();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByNameDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("name");
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_greater_than(const std::int64_t& value) {
-        selection.and_filter(Expr::gt(memory_resource(), "version", value));
+    InventoryRequest&& orderByNameDescUsingGbk() && {
+        this->orderByNameDescUsingGbk();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIs(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_greater_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::gte(memory_resource(), "version", value));
+    InventoryRequest&& withNameIs(std::string_view value) && {
+        this->withNameIs(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIsNot(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_less_than(const std::int64_t& value) {
-        selection.and_filter(Expr::lt(memory_resource(), "version", value));
+    InventoryRequest&& withNameIsNot(std::string_view value) && {
+        this->withNameIsNot(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameGreaterThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_less_than_or_equal_to(const std::int64_t& value) {
-        selection.and_filter(Expr::lte(memory_resource(), "version", value));
+    InventoryRequest&& withNameGreaterThan(std::string_view value) && {
+        this->withNameGreaterThan(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameGreaterThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_between(const std::int64_t& lower, const std::int64_t& upper) {
-        selection.and_filter(Expr::between(memory_resource(), "version", lower, upper));
+    InventoryRequest&& withNameGreaterThanOrEqualTo(std::string_view value) && {
+        this->withNameGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameLessThan(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, false));
+    InventoryRequest&& withNameLessThan(std::string_view value) && {
+        this->withNameLessThan(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameLessThanOrEqualTo(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "name", generated_detail::encode(memory_resource(), value)));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_not_in(std::span<const std::int64_t> inputs) {
-        auto r = memory_resource();
-        Vector<Value> values(r);
-        for (const auto& value : inputs) {
-            values.emplace_back(value);
-        }
-        selection.and_filter(Expr::in_list(r, "version", values, true));
+    InventoryRequest&& withNameLessThanOrEqualTo(std::string_view value) && {
+        this->withNameLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameBetween(std::string_view lower, std::string_view upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "name",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
         return *this;
     }
 
-    InventoryRequest& group_by_version() {
-        selection.group_by("version");
+    InventoryRequest&& withNameBetween(std::string_view lower, std::string_view upper) && {
+        this->withNameBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, false));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_is_null() {
-        selection.and_filter(Expr::is_null(memory_resource(), "version"));
+    InventoryRequest&& withNameIn(std::span<const String> inputs) && {
+        this->withNameIn(inputs);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameNotIn(std::span<const String> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "name", values, true));
+        });
         return *this;
     }
 
-    InventoryRequest& with_version_is_not_null() {
-        selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+    InventoryRequest&& withNameNotIn(std::span<const String> inputs) && {
+        this->withNameNotIn(inputs);
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+        });
         return *this;
+    }
+
+    InventoryRequest&& groupByName() && {
+        this->groupByName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.selectAs("name", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& groupByNameAs(std::string_view alias) && {
+        this->groupByNameAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByNameWithFunction(std::string_view alias,
+                                              AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("name");
+            query_.aggregateWithFunction("name", alias, function);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& groupByNameWithFunction(std::string_view alias,
+                                               AggregateFunction function) && {
+        this->groupByNameWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    InventoryRequest& countName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", "name_count");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& countName() && {
+        this->countName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& countNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("name", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& countNameAs(std::string_view alias) && {
+        this->countNameAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& sumName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", "sum_name");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& sumName() && {
+        this->sumName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& sumNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("name", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& sumNameAs(std::string_view alias) && {
+        this->sumNameAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& avgName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", "avg_name");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& avgName() && {
+        this->avgName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& avgNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("name", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& avgNameAs(std::string_view alias) && {
+        this->avgNameAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& minName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", "min_name");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& minName() && {
+        this->minName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& minNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("name", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& minNameAs(std::string_view alias) && {
+        this->minNameAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& maxName() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", "max_name");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& maxName() && {
+        this->maxName();
+        return std::move(*this);
+    }
+
+    InventoryRequest& maxNameAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("name", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& maxNameAs(std::string_view alias) && {
+        this->maxNameAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameContaining(std::string_view value) && {
+        this->withNameContaining(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameStartingWith(std::string_view value) && {
+        this->withNameStartingWith(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameEndingWith(std::string_view value) && {
+        this->withNameEndingWith(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameNotContaining(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_contain(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameNotContaining(std::string_view value) && {
+        this->withNameNotContaining(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameNotStartingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_begin_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameNotStartingWith(std::string_view value) && {
+        this->withNameNotStartingWith(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameNotEndingWith(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::not_end_with(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameNotEndingWith(std::string_view value) && {
+        this->withNameNotEndingWith(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameSoundingLike(std::string_view value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::sound_like(memory_resource(), "name", value));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameSoundingLike(std::string_view value) && {
+        this->withNameSoundingLike(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameIsUnknown() && {
+        this->withNameIsUnknown();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameIsKnown() && {
+        this->withNameIsKnown();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameIsNull() && {
+        this->withNameIsNull();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withNameIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "name"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withNameIsNotNull() && {
+        this->withNameIsNotNull();
+        return std::move(*this);
+    }
+
+    InventoryRequest& selectVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.project("version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& selectVersion() && {
+        this->selectVersion();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByVersionAsc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_asc("version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& orderByVersionAsc() && {
+        this->orderByVersionAsc();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByVersionDesc() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_desc("version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& orderByVersionDesc() && {
+        this->orderByVersionDesc();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByVersionAscUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_asc("version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& orderByVersionAscUsingGbk() && {
+        this->orderByVersionAscUsingGbk();
+        return std::move(*this);
+    }
+
+    InventoryRequest& orderByVersionDescUsingGbk() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.order_gbk_desc("version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& orderByVersionDescUsingGbk() && {
+        this->orderByVersionDescUsingGbk();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionIs(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::eq(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionIs(const std::int64_t& value) && {
+        this->withVersionIs(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionIsNot(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::ne(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionIsNot(const std::int64_t& value) && {
+        this->withVersionIsNot(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionGreaterThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionGreaterThan(const std::int64_t& value) && {
+        this->withVersionGreaterThan(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionGreaterThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::gte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionGreaterThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionGreaterThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionLessThan(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lt(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionLessThan(const std::int64_t& value) && {
+        this->withVersionLessThan(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionLessThanOrEqualTo(const std::int64_t& value) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::lte(
+                memory_resource(), "version", generated_detail::encode(memory_resource(), value)));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionLessThanOrEqualTo(const std::int64_t& value) && {
+        this->withVersionLessThanOrEqualTo(value);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::between(memory_resource(),
+                                               "version",
+                                               generated_detail::encode(memory_resource(), lower),
+                                               generated_detail::encode(memory_resource(), upper)));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionBetween(const std::int64_t& lower, const std::int64_t& upper) && {
+        this->withVersionBetween(lower, upper);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, false));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionIn(inputs);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionNotIn(std::span<const std::int64_t> inputs) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            auto r = memory_resource();
+            Vector<Value> values(r);
+            for (const auto& value : inputs) {
+                values.emplace_back(generated_detail::encode(r, value));
+            }
+            selection.and_filter(Expr::in_list(r, "version", values, true));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionNotIn(std::span<const std::int64_t> inputs) && {
+        this->withVersionNotIn(inputs);
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& groupByVersion() && {
+        this->groupByVersion();
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.selectAs("version", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& groupByVersionAs(std::string_view alias) && {
+        this->groupByVersionAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& groupByVersionWithFunction(std::string_view alias,
+                                                 AggregateFunction function) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.groupBy("version");
+            query_.aggregateWithFunction("version", alias, function);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& groupByVersionWithFunction(std::string_view alias,
+                                                  AggregateFunction function) && {
+        this->groupByVersionWithFunction(alias, function);
+        return std::move(*this);
+    }
+
+    InventoryRequest& countVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", "version_count");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& countVersion() && {
+        this->countVersion();
+        return std::move(*this);
+    }
+
+    InventoryRequest& countVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateCountField("version", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& countVersionAs(std::string_view alias) && {
+        this->countVersionAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& sumVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", "sum_version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& sumVersion() && {
+        this->sumVersion();
+        return std::move(*this);
+    }
+
+    InventoryRequest& sumVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateSum("version", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& sumVersionAs(std::string_view alias) && {
+        this->sumVersionAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& avgVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", "avg_version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& avgVersion() && {
+        this->avgVersion();
+        return std::move(*this);
+    }
+
+    InventoryRequest& avgVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateAvg("version", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& avgVersionAs(std::string_view alias) && {
+        this->avgVersionAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& minVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", "min_version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& minVersion() && {
+        this->minVersion();
+        return std::move(*this);
+    }
+
+    InventoryRequest& minVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMin("version", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& minVersionAs(std::string_view alias) && {
+        this->minVersionAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& maxVersion() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", "max_version");
+        });
+        return *this;
+    }
+
+    InventoryRequest&& maxVersion() && {
+        this->maxVersion();
+        return std::move(*this);
+    }
+
+    InventoryRequest& maxVersionAs(std::string_view alias) & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            query_.aggregateMax("version", alias);
+        });
+        return *this;
+    }
+
+    InventoryRequest&& maxVersionAs(std::string_view alias) && {
+        this->maxVersionAs(alias);
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionIsUnknown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionIsUnknown() && {
+        this->withVersionIsUnknown();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionIsKnown() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionIsKnown() && {
+        this->withVersionIsKnown();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionIsNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionIsNull() && {
+        this->withVersionIsNull();
+        return std::move(*this);
+    }
+
+    InventoryRequest& withVersionIsNotNull() & {
+        query_.mutate_selection([&](SelectQuery& selection) {
+            selection.and_filter(Expr::is_not_null(memory_resource(), "version"));
+        });
+        return *this;
+    }
+
+    InventoryRequest&& withVersionIsNotNull() && {
+        this->withVersionIsNotNull();
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    InventoryRequest& withId(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("id", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    InventoryRequest&& withId(request::FieldOperator op, Inputs&& inputs) && {
+        this->withId(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createIdCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("id", op, std::forward<Inputs>(inputs));
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    InventoryRequest& withName(request::FieldOperator op, Inputs&& inputs) & {
+        query_.filterField("name", op, std::forward<Inputs>(inputs));
+        return *this;
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    InventoryRequest&& withName(request::FieldOperator op, Inputs&& inputs) && {
+        this->withName(op, std::forward<Inputs>(inputs));
+        return std::move(*this);
+    }
+
+    template <std::ranges::input_range Inputs>
+        requires std::constructible_from<Value, Memory, std::ranges::range_reference_t<Inputs>>
+    Ref<Expr> createNameCriteria(request::FieldOperator op, Inputs&& inputs) const {
+        return query_.createFieldCriteria("name", op, std::forward<Inputs>(inputs));
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    InventoryRequest& withNameBetweenRange(const request::DateRange<T>& range) & {
+        query_.andFilter(Expr::between(memory_resource(), "name", range.start, range.end));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    InventoryRequest&& withNameBetweenRange(const request::DateRange<T>& range) && {
+        this->withNameBetweenRange(range);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    InventoryRequest& withNameBefore(const T& value) & {
+        query_.andFilter(Expr::lt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    InventoryRequest&& withNameBefore(const T& value) && {
+        this->withNameBefore(value);
+        return std::move(*this);
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    InventoryRequest& withNameAfter(const T& value) & {
+        query_.andFilter(Expr::gt(memory_resource(), "name", value));
+        return *this;
+    }
+
+    template <class T>
+        requires std::constructible_from<Value, Memory, const T&>
+    InventoryRequest&& withNameAfter(const T& value) && {
+        this->withNameAfter(value);
+        return std::move(*this);
     }
 };
 
-struct Q {
-    static PersonRequest<false>& people_minimal(UserContext& user) {
-        return user.make<PersonRequest<false>>(user).and_filter(
-            Expr::gt(user.memory_resource(), "version", std::int64_t(0)));
+template <bool Purposed, Entity Result>
+PersonRequest<Purposed, Result>& PersonRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
+    return *this;
+}
+
+template <bool Purposed, Entity Result>
+DeviceRequest<Purposed, Result>& DeviceRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
+    return *this;
+}
+
+template <bool Purposed, Entity Result>
+OrderStatusRequest<Purposed, Result>&
+OrderStatusRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
+    return *this;
+}
+
+template <bool Purposed, Entity Result>
+CategoryRequest<Purposed, Result>& CategoryRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
+    return *this;
+}
+
+template <bool Purposed, Entity Result>
+ChildRequest<Purposed, Result>& ChildRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
+    return *this;
+}
+
+template <bool Purposed, Entity Result>
+InventoryRequest<Purposed, Result>&
+InventoryRequest<Purposed, Result>::enhanceChildrenIfNeeded() & {
+    return *this;
+}
+
+class query_factory {
+    ContextBinding binding_;
+
+public:
+    explicit query_factory(UserContext& user_context) : binding_(user_context) {}
+
+    PersonRequest<false> peopleMinimal() const {
+        return PersonRequest<false>(binding_.get(), true);
     }
 
-    static PersonRequest<false>& people(UserContext& user) {
-        return people_minimal(user).select_self();
+    PersonRequest<false> people() const {
+        return PersonRequest<false>(binding_.get());
     }
 
-    static DeviceRequest<false>& devices_minimal(UserContext& user) {
-        return user.make<DeviceRequest<false>>(user).and_filter(
-            Expr::gt(user.memory_resource(), "version", std::int64_t(0)));
+    PersonRequest<false> peopleWithChildren() const {
+        return PersonRequest<false>(binding_.get(), true, false)
+            .unlimited()
+            .selectSelfFields()
+            .enhanceChildrenIfNeeded();
     }
 
-    static DeviceRequest<false>& devices(UserContext& user) {
-        return devices_minimal(user).select_self();
+    DeviceRequest<false> devicesMinimal() const {
+        return DeviceRequest<false>(binding_.get(), true);
     }
 
-    static OrderStatusRequest<false>& order_statuses_minimal(UserContext& user) {
-        return user.make<OrderStatusRequest<false>>(user).and_filter(
-            Expr::gt(user.memory_resource(), "version", std::int64_t(0)));
+    DeviceRequest<false> devices() const {
+        return DeviceRequest<false>(binding_.get());
     }
 
-    static OrderStatusRequest<false>& order_statuses(UserContext& user) {
-        return order_statuses_minimal(user).select_self();
+    DeviceRequest<false> devicesWithChildren() const {
+        return DeviceRequest<false>(binding_.get(), true, false)
+            .unlimited()
+            .selectSelfFields()
+            .enhanceChildrenIfNeeded();
     }
 
-    static CategoryRequest<false>& categories_minimal(UserContext& user) {
-        return user.make<CategoryRequest<false>>(user).and_filter(
-            Expr::gt(user.memory_resource(), "version", std::int64_t(0)));
+    OrderStatusRequest<false> orderStatusesMinimal() const {
+        return OrderStatusRequest<false>(binding_.get(), true);
     }
 
-    static CategoryRequest<false>& categories(UserContext& user) {
-        return categories_minimal(user).select_self();
+    OrderStatusRequest<false> orderStatuses() const {
+        return OrderStatusRequest<false>(binding_.get());
     }
 
-    static ChildRequest<false>& children_minimal(UserContext& user) {
-        return user.make<ChildRequest<false>>(user).and_filter(
-            Expr::gt(user.memory_resource(), "version", std::int64_t(0)));
+    OrderStatusRequest<false> orderStatusesWithChildren() const {
+        return OrderStatusRequest<false>(binding_.get(), true, false)
+            .unlimited()
+            .selectSelfFields()
+            .enhanceChildrenIfNeeded();
     }
 
-    static ChildRequest<false>& children(UserContext& user) {
-        return children_minimal(user).select_self();
+    CategoryRequest<false> categoriesMinimal() const {
+        return CategoryRequest<false>(binding_.get(), true);
     }
 
-    static InventoryRequest<false>& inventory_minimal(UserContext& user) {
-        return user.make<InventoryRequest<false>>(user).and_filter(
-            Expr::gt(user.memory_resource(), "version", std::int64_t(0)));
+    CategoryRequest<false> categories() const {
+        return CategoryRequest<false>(binding_.get());
     }
 
-    static InventoryRequest<false>& inventory(UserContext& user) {
-        return inventory_minimal(user).select_self();
+    CategoryRequest<false> categoriesWithChildren() const {
+        return CategoryRequest<false>(binding_.get(), true, false)
+            .unlimited()
+            .selectSelfFields()
+            .enhanceChildrenIfNeeded();
+    }
+
+    ChildRequest<false> childrenMinimal() const {
+        return ChildRequest<false>(binding_.get(), true);
+    }
+
+    ChildRequest<false> children() const {
+        return ChildRequest<false>(binding_.get());
+    }
+
+    ChildRequest<false> childrenWithChildren() const {
+        return ChildRequest<false>(binding_.get(), true, false)
+            .unlimited()
+            .selectSelfFields()
+            .enhanceChildrenIfNeeded();
+    }
+
+    InventoryRequest<false> inventoryMinimal() const {
+        return InventoryRequest<false>(binding_.get(), true);
+    }
+
+    InventoryRequest<false> inventory() const {
+        return InventoryRequest<false>(binding_.get());
+    }
+
+    InventoryRequest<false> inventoryWithChildren() const {
+        return InventoryRequest<false>(binding_.get(), true, false)
+            .unlimited()
+            .selectSelfFields()
+            .enhanceChildrenIfNeeded();
     }
 };
 }

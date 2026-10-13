@@ -1,10 +1,27 @@
 #pragma once
 #include <teaql/data_service/types.hpp>
+#include <teaql/data_service/dynamic_fields.hpp>
 #include <teaql/data_service/sql_log_debug.hpp>
 #include <teaql/core/mutation_debug.hpp>
 #include <teaql/core/system_time_debug.hpp>
 
 namespace teaql {
+inline void write_debug(DebugWriter& writer, const DynamicFieldWrite& write) {
+    writer.structure(
+        "DynamicFieldWrite",
+        [&](auto& fields) {
+            fields.field("owner_type", [&](auto& out) {
+                out.text(write.definitions.get().owner_type());
+            });
+            fields.field("changed_fields", [&](auto& out) {
+                out.sequence(write.changes, [](auto& inner, const auto& field) {
+                    inner.text(field.first);
+                });
+            });
+        },
+        true);
+}
+
 inline void write_debug(DebugWriter&, const ExecutionMetadata&);
 inline void write_debug(DebugWriter&, const MutationRequest&);
 
@@ -45,10 +62,24 @@ inline void write_debug(DebugWriter& writer, const QueryRequest& value) {
     writer.structure("QueryRequest", [&](auto& fields) {
         detail::data_service_debug_field(fields, "query", value.query);
         detail::data_service_debug_field(fields, "trace_chain", value.trace_chain);
-        detail::data_service_debug_field(fields, "comment", value.comment);
+        detail::data_service_debug_field(fields, "intent", value.intent);
         detail::data_service_debug_field(fields, "capture_debug_query", value.capture_debug_query);
         detail::data_service_debug_field(
             fields, "capture_execution_metadata", value.capture_execution_metadata);
+    });
+}
+
+inline void write_debug(DebugWriter& writer, const MutationCommand& value) {
+    constexpr std::string_view names[]{"Insert", "Update", "Delete", "Recover", "Batch"};
+    if (value.data.valueless_by_exception()) {
+        throw std::invalid_argument("Valueless mutation command diagnostic");
+    }
+    writer.tuple(names[value.data.index()], [&](auto& out) {
+        std::visit(
+            [&](const auto& payload) {
+                detail::mutation_debug_element(out, payload);
+            },
+            value.data);
     });
 }
 
@@ -57,12 +88,26 @@ inline void write_debug(DebugWriter& writer, const MutationRequest& value) {
     if (value.data.valueless_by_exception()) {
         throw std::invalid_argument("Valueless mutation diagnostic");
     }
-    writer.tuple(names[value.data.index()], [&](auto& out) {
-        std::visit(
-            [&](const auto& payload) {
-                detail::mutation_debug_element(out, payload);
-            },
-            value.data);
+    writer.structure("MutationRequest", [&](auto& fields) {
+        fields.field("command", [&](auto& out) {
+            out.tuple(names[value.data.index()], [&](auto& payload_writer) {
+                std::visit(
+                    [&](const auto& payload) {
+                        detail::mutation_debug_element(payload_writer, payload);
+                    },
+                    value.data);
+            });
+        });
+        detail::data_service_debug_field(fields, "intent", value.intent());
+        fields.field("diagnostic_redactions", [&](auto& out) {
+            if (auto* value_redactions = value.diagnostic_redactions()) {
+                out.tuple("Some", [&](auto& inner) {
+                    write_debug(inner, *value_redactions);
+                });
+            } else {
+                out.raw("None");
+            }
+        });
     });
 }
 

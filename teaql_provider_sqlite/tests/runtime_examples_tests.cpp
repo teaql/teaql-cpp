@@ -55,7 +55,7 @@ static void ownership_and_provenance(const Json& reference) {
                     .at(String(graph ? "relations" : "schema", reference.memory_resource()));
             example::require(
                 Json(r, observed) == expected,
-                "operation/purpose/audit provenance matches the unchanged Rust example flow");
+                "operation/purpose/audit provenance matches the 5.0.6 explicit-intent example flow");
         }
         user.reset();
         auto target = global.memory_resource();
@@ -96,6 +96,7 @@ static void graph_failure_rolls_back_all_nodes() {
                        .wait();
     example::require(!result, "a conflicting explicitly-new child fails graph save");
     auto query = repository.select();
+    query.comment("Inspect complete graph rollback");
     query.filter(Expr::eq(r, "id", std::uint64_t(2)));
     PurposedSelectQuery purpose(
         std::allocator_arg, Allocator(r), query, "Check complete graph rollback");
@@ -104,6 +105,7 @@ static void graph_failure_rolls_back_all_nodes() {
         "failed child write rolls back the previously inserted root");
     auto lines = user->entity_data_service<example::Executor>("OrderLine");
     auto line_query = example::value(lines).get().select();
+    line_query.comment("Inspect child graph rollback");
     line_query.filter(Expr::eq(r, "id", std::uint64_t(20)));
     PurposedSelectQuery line_purpose(
         std::allocator_arg, Allocator(r), line_query, "Check child graph rollback");
@@ -113,6 +115,7 @@ static void graph_failure_rolls_back_all_nodes() {
                 .len() == 0,
         "failed graph save rolls back the earlier sibling write");
     auto existing = repository.select();
+    existing.comment("Inspect the existing graph after rollback");
     SelectQuery products(std::allocator_arg, Allocator(r), "OrderLine");
     products.relation("product");
     existing.filter(Expr::eq(r, "id", std::uint64_t(1))).relation_query("lines", products);

@@ -1,0 +1,65 @@
+package com.skynet.codegenerator.cpp;
+
+import com.fasterxml.jackson.databind.*;
+import com.skynet.codegenerator.meta.*;
+import com.skynet.codegenerator.naming.FieldDescriptorNaming;
+import java.io.*;
+import java.util.*;
+
+public final class InheritanceMetadataProbe {
+    private static final ObjectMapper JSON = new ObjectMapper();
+
+    private static Object observe(JsonNode input) {
+        Domain domain = new Domain();
+        domain.setName(input.path("domain").asText("inheritance_input"));
+        List<ObjectDescriptor> entities = new ArrayList<>();
+        for (JsonNode definition : input.get("entities")) {
+            ObjectDescriptor entity = new ObjectDescriptor();
+            entity.setName(definition.get("name").asText());
+            entity.setDomain(domain);
+            if (definition.has("parent")) {
+                entity.setAttributes(Attributes.PARENT, definition.get("parent").asText());
+            }
+            for (JsonNode property : definition.get("fields")) {
+                FieldDescriptor field = new FieldDescriptor();
+                field.setName(property.get("name").isNull() ? null : property.get("name").asText());
+                field.setType(property.path("type").asText("String"));
+                if (property.has("entity_type")) {
+                    field.setEntityType(property.get("entity_type").asText());
+                }
+                field.setObjectDescriptor(entity);
+                entity.getFields().add(field);
+            }
+            entities.add(entity);
+        }
+        domain.setObjectDescriptors(entities);
+        ObjectDescriptor entity = domain.findObjectDescriptor(input.get("target").asText());
+        try {
+            List<FieldDescriptor> fields = FIELD_EXPRESSION;
+            List<Object> observed = new ArrayList<>();
+            for (int index = 0; index < fields.size(); ++index) {
+                FieldDescriptor field = fields.get(index);
+                Map<String, Object> value = new LinkedHashMap<>();
+                value.put("index", index);
+                value.put("name", FieldDescriptorNaming.canonicalPropertyName(field));
+                value.put("type", field.getType());
+                value.put("entity_type", field.getEntityType());
+                value.put("owner", field.getObjectDescriptor().getName());
+                observed.add(value);
+            }
+            return Map.of("fields", observed, "revision", REVISION_EXPRESSION);
+        } catch (Throwable error) {
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("error", error.getClass().getSimpleName());
+            result.put("message", error.getMessage());
+            return result;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        for (String line; (line = reader.readLine()) != null;) {
+            System.out.println("TEAQL_CASE:" + JSON.writeValueAsString(observe(JSON.readTree(line))));
+        }
+    }
+}

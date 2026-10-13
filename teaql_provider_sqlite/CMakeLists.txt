@@ -7,6 +7,7 @@ add_library(teaql_provider_sqlite
     src/bindings.cpp
     src/decoding.cpp
     src/provider.cpp
+    src/dynamic_fields.cpp
     src/driver_error.cpp
     src/native_diagnostics.cpp
     src/simple_error.cpp

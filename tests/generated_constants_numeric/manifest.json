@@ -1,0 +1,30 @@
+{
+  "scope": "cpp-lib-core",
+  "qualification_only": true,
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "823c3b039ee3bc0ced7578da21f49c75ac3bfa41e345a98a0fe5fd5349ff840c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+    "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "d5568fb154711ac878c9171454644a04d2678a637eb148379544da66801ce139"
+  },
+  "model": "tests/generator/constants_numeric.xml",
+  "model_sha256": "7c2547234890553b7f21b4359af2e050fe78b1e3de658e31ae7e605db5a3ecd3",
+  "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "ASSIST.md": "c7002935efe6b90ad6612e4c5df708087b556d4245dbfab0f25b0a2759ef3b79",
+    "CMakeLists.txt": "caf792b5132d518ffb93af332001b24848cbad7bc7c0c3d8ec29d9a49e808422",
+    "include/cpp_constants_numeric/checkers.hpp": "dd99f9d0bb584b078b8c5bfee49a0564ddfa072ae902c04be6e151705364d354",
+    "include/cpp_constants_numeric/expressions.hpp": "10ffe1c6e039cd2a7afd22546f8e3d105b182372c3376260a9512ead0ba98f1b",
+    "include/cpp_constants_numeric/models.hpp": "7903920f8353a3f5ed7e4c79a05ef71a5154d754cab38a1267fcffd0ded52278",
+    "include/cpp_constants_numeric/queries.hpp": "eb18d34ee85632f91cdfcb873c22f2db320a57746cc94de1a2ed0dc6d5e18073",
+    "include/cpp_constants_numeric/runtime.hpp": "b0e9b4baffed7e1dd41a93be88e4c4b879eb746eca6b9de2b636b5d7b4d97e56",
+    "include/cpp_constants_numeric/sample_data.hpp": "2c4b9c5455b0af8ee740eeaf1ff403a088931945199fa5debccf7164a6eb57bf",
+    "include/cpp_constants_numeric/support.hpp": "b907c396667e9b9838375fde10ee70115d2d960943cef4a0c9425e74ec8b1e6c",
+    "include/cpp_constants_numeric.hpp": "0fbf012c7046889e7020fedd1634462292890f16ac9b82b328822bb7c2235c62"
+  }
+}

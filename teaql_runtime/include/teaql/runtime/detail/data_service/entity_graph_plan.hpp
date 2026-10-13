@@ -1,5 +1,5 @@
 #pragma once
-#include <teaql/runtime/detail/data_service/entity_query.hpp>
+#include <teaql/runtime/detail/data_service/graph_current_row.hpp>
 
 namespace teaql::detail {
 inline bool graph_unassigned(const Value* value) {
@@ -23,14 +23,17 @@ inline const Value* graph_field(const GraphNode& node, std::string_view name) {
 inline std::optional<std::uint64_t> graph_trace_id(const GraphNode& node) {
     auto* value = node.id();
     if (value) {
-        if (auto id = std::get_if<std::uint64_t>(&value->data)) {
-            return *id;
-        }
-        if (auto id = std::get_if<std::int64_t>(&value->data)) {
-            return std::uint64_t(*id);
+        if (auto id = value->try_u64(); id && *id > 0) {
+            return id;
         }
     }
     return {};
+}
+
+inline bool graph_has_comment(const GraphNode& node) {
+    auto text = node.comment ? std::string_view(*node.comment) : std::string_view{};
+    trim(text);
+    return !text.empty();
 }
 
 inline void
@@ -96,6 +99,12 @@ public:
         if (!started_) {
             started_ = true;
             auto& root = *plan_.planned_root;
+            auto bound = EntityDataServiceAccess::bind_mutation_intent(
+                service_,
+                root.comment ? std::optional<std::string_view>(*root.comment) : std::nullopt);
+            if (!bound) {
+                return failed(std::move(bound).error());
+            }
             if (root.entity != service_.entity()) {
                 String message("entity data service ", r);
                 message += service_.entity();
@@ -111,6 +120,16 @@ public:
             if (frame.phase == GraphPlanningFrame::Phase::Start) {
                 if (node.operation == GraphOperation::Reference ||
                     node.operation == GraphOperation::Remove) {
+                    if (node.operation == GraphOperation::Remove && graph_has_comment(node)) {
+                        TraceNode trace(std::allocator_arg,
+                                        Allocator(r),
+                                        TraceKind::AuditReason,
+                                        node.entity,
+                                        *node.comment,
+                                        graph_trace_id(node));
+                        frame.token = &resource_arena(r).template make_payload<TraceScopeToken>(
+                            frame.token, trace, plan_.next_item_index);
+                    }
                     plan_.push(node.entity,
                                node.operation == GraphOperation::Reference
                                    ? GraphMutationKind::Reference
@@ -127,7 +146,7 @@ public:
                     return failed(std::move(descriptor).error());
                 }
                 frame.descriptor.emplace(std::allocator_arg, Allocator(r), descriptor.value());
-                if (node.comment) {
+                if (graph_has_comment(node)) {
                     TraceNode trace(std::allocator_arg,
                                     Allocator(r),
                                     TraceKind::AuditReason,
@@ -150,14 +169,12 @@ public:
                     (frame.parent_is_create && node.operation == GraphOperation::Upsert);
                 frame.phase = GraphPlanningFrame::Phase::Finalize;
                 if (!frame.force_create && property && !graph_unassigned(id)) {
-                    auto scoped = EntityDataServiceAccess::scoped(service_, node.entity);
-                    SelectQuery query(std::allocator_arg, Allocator(r), node.entity);
-                    query.filter(Expr::eq(r, property->name, *id));
+                    TraceChain trace(r);
                     if (auto scope = frame.active_scope()) {
-                        auto trace = scope->to_trace_chain(r);
-                        query.trace_chain.swap(trace);
+                        trace = scope->to_trace_chain(r);
                     }
-                    child_ = &EntityDataServiceAccess::fetch_all(scoped, query);
+                    child_ = &EntityDataServiceAccess::fetch_graph_current_row_internal(
+                        service_, node.entity, property->name, *id, trace);
                 }
             }
             if (frame.phase == GraphPlanningFrame::Phase::Finalize) {
@@ -172,7 +189,7 @@ public:
                     if (!*result) {
                         return R::err(r, copy_or_take_error(*completed, *result));
                     }
-                    frame.update = !result->value().empty();
+                    frame.update = result->value().has_value();
                 }
                 // Validate the metadata owner again after a suspended query.
                 (void)context.entity(node.entity);
@@ -208,7 +225,7 @@ public:
                         });
                     }
                 }
-                if (node.comment) {
+                if (graph_has_comment(node)) {
                     TraceNode trace(std::allocator_arg,
                                     Allocator(r),
                                     TraceKind::AuditReason,
@@ -292,7 +309,7 @@ private:
     EntityDataService<E> service_;
     GraphMutationPlan plan_;
     Vector<GraphPlanningFrame*> frames_;
-    AsyncOperation<RelationRowsResult<E>>* child_ = nullptr;
+    AsyncOperation<Result<std::optional<CompactRow>, Error>>* child_ = nullptr;
     WakeSignal::Forward forwarding_;
     bool started_ = false;
 };

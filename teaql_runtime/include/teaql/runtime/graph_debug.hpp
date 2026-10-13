@@ -1,6 +1,7 @@
 #pragma once
 #include <teaql/runtime/graph.hpp>
 #include <teaql/core/mutation_debug.hpp>
+#include <teaql/core/dynamic_fields_debug.hpp>
 #include <array>
 
 namespace teaql {
@@ -141,6 +142,9 @@ inline void write_debug(DebugWriter& writer, const GraphNode& value) {
         });
         fields.field("original_values", [&](auto& out) {
             detail::graph_debug_element(out, value.original_values);
+        });
+        fields.field("dynamic_fields", [&](auto& out) {
+            detail::graph_debug_element<DynamicFieldValues>(out, value.dynamic_fields.get());
         });
     });
 }

@@ -530,6 +530,14 @@ String debug_audit_event(Memory r, const RawAuditEvent& e) {
     out += optional_debug(r, e.mutation_governance, [&](const auto& g) {
         return governance_debug(r, g);
     });
+    out += ", diagnostic_redactions: ";
+    if (const auto* provenance = e.diagnostic_redactions()) {
+        out += "Some(";
+        out += provenance->debug(r);
+        out += ")";
+    } else {
+        out += "None";
+    }
     out += " }";
     return out;
 }

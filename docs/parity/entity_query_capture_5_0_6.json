@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "native": {
+    "passed": 3,
+    "failed": 0,
+    "exit_code": 0,
+    "tests": [
+      {
+        "name": "entity_query_rust_parity",
+        "status": "passed"
+      },
+      {
+        "name": "entity_query_capture_rust_parity",
+        "status": "passed"
+      },
+      {
+        "name": "runtime_entity_query_contracts",
+        "status": "passed"
+      }
+    ]
+  },
+  "counts": {
+    "cases": 768,
+    "provider_calls": 488,
+    "captured_requests": 244,
+    "cases_rejected_before_provider": 512,
+    "list": {
+      "cases": 192,
+      "provider_calls": 128,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    },
+    "owned": {
+      "cases": 192,
+      "provider_calls": 120,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    },
+    "rows": {
+      "cases": 192,
+      "provider_calls": 120,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    },
+    "aggregates": {
+      "cases": 192,
+      "provider_calls": 120,
+      "successful_outcomes": 64,
+      "error_outcomes": 320
+    }
+  },
+  "format_check_exit_code": 0,
+  "notice": "Source fixtures exercise actual public methods. Rejected stimuli are counted separately from provider work. Production operation lifetime/module checks are retained in the preceding typed query checkpoint; only the C++ observer gains explicit fixture options. Full model/configuration and profile boundaries remain open."
+}

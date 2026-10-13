@@ -1,0 +1,22 @@
+<root name="predicate-naming" org="doublechaintech" version="1.0.0" data_service="sqlite">
+    <platform name="Predicate Naming" />
+    <person
+        _cat="human"
+        name="string()"
+        email="string()"
+        active="true"
+        platform="platform()"
+        _name="Person"
+        _module="Naming"
+        _module_key="naming"
+    />
+    <device
+        name="string()"
+        code="string()"
+        active="true"
+        platform="platform()"
+        _name="Device"
+        _module="Naming"
+        _module_key="naming"
+    />
+</root>

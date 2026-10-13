@@ -8,16 +8,20 @@ using namespace original_runtime_queue;
 
 template <class T, class E>
 static auto& basic(const EntityDataService<E>& service, const SelectQuery& query) {
+    auto annotated = query.clone(service.memory_resource());
+    annotated.comment("Inspect native typed queries").purpose("Verify native typed queries");
     using Output = Result<SmartList<T>, DataServiceError<typename E::Error>>;
     return make_operation<Output, detail::EntityBasicListOperation<E, T>>(
-        service.memory_resource(), service, query);
+        service.memory_resource(), service, annotated);
 }
 
 template <class T, class E>
 static auto& enhanced(const EntityDataService<E>& service, const SelectQuery& query) {
+    auto annotated = query.clone(service.memory_resource());
+    annotated.comment("Inspect native typed queries").purpose("Verify native typed queries");
     using Output = Result<SmartList<T>, DataServiceError<typename E::Error>>;
     return make_operation<Output, detail::EnhancedEntitiesOperation<E, T>>(
-        service.memory_resource(), service, query, std::span<const RelationAggregate>{});
+        service.memory_resource(), service, annotated, std::span<const RelationAggregate>{});
 }
 
 static void relation_enhancement_wraps_inverse_many_relation_as_list() {

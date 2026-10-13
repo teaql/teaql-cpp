@@ -1,0 +1,15 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "reference_head": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "reference_clean": true,
+  "build_exit_code": 0,
+  "build_command": "CARGO_TARGET_DIR=/tmp/teaql_cpp_field_layout_rust_506 RUSTFLAGS='-C linker=/usr/bin/cc' cargo build --offline --locked --manifest-path tests/parity/rust_field_layout/Cargo.toml --bin graph_relation_facets_5_0_6",
+  "driver_sha256": "16e5b48e9f0c462b81be58b13fd85a95f75864e7e300f85458730576399422f0",
+  "cargo_lock_sha256": "006af0d3c7bc7a89119ff2756a91049631735e50ed812ee42ba8d7c78061b40d",
+  "binary_sha256": "b2130aec07a9507f2e3eaacfe5425a8d970add2caddda44671240688993df984",
+  "source_files": {
+    "teaql-runtime/src/entity_runtime.rs": "1f2fb5566d622389afa8bfe5e760c294838175c4267711029514ce9e73401a1f",
+    "teaql-core/src/list.rs": "41e9033d182ba4984a0e7799df2bad28ce186a0a3c62fd433a9d76f94ff9db6e"
+  },
+  "notice": "Public unchanged source methods; no appended graph/facet wrapper or reconstructed Rust algorithm. Native read-only/frozen graph coordinate scope; JSON view qualification remains separate."
+}

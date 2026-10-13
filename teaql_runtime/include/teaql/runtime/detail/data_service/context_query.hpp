@@ -151,14 +151,6 @@ public:
     std::optional<R> poll(WakeSignal& wake) {
         auto r = query_.memory_resource();
         if (!child_) {
-            // Source fetch_all owns and resolves its comment when first polled;
-            // the list/entity compatibility entry points retain the input comment.
-            if constexpr (!List) {
-                query_.comment_text = service_.resolve_final_comment(
-                    query_.trace_chain,
-                    query_.comment_text ? std::optional<std::string_view>(*query_.comment_text)
-                                        : std::nullopt);
-            }
             auto base = service_.data_service();
             auto& work = [&]() -> AsyncOperation<R>& {
                 if constexpr (!List) {

@@ -94,6 +94,10 @@ public:
         return c;
     }
 
+    const DynamicFieldStore* dynamic_field_store() const override {
+        return transport.dynamic_field_store();
+    }
+
     SqlIntentRedactions query_log_intent(Memory r, const SelectQuery& query) const override {
         this->require_active();
         // Pure diagnostic values can be explicitly copied to another domain.

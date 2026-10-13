@@ -1,11 +1,15 @@
 #pragma once
 #include <teaql/core/business_id.hpp>
+#include <teaql/core/request_intent.hpp>
 #include <teaql/core/business_id_debug.hpp>
 #include <teaql/core/chrono_value.hpp>
 #include <teaql/core/debug.hpp>
 #include <teaql/core/decimal_debug.hpp>
 #include <teaql/core/decimal_format.hpp>
 #include <teaql/core/dynamic_search.hpp>
+#include <teaql/core/dynamic_properties.hpp>
+#include <teaql/core/dynamic_fields.hpp>
+#include <teaql/core/dynamic_fields_debug.hpp>
 #include <teaql/core/dynamic_search_debug.hpp>
 #include <teaql/core/entity.hpp>
 #include <teaql/core/entity_debug.hpp>
@@ -14,6 +18,7 @@
 #include <teaql/core/eval.hpp>
 #include <teaql/core/expr.hpp>
 #include <teaql/core/list.hpp>
+#include <teaql/core/load_state.hpp>
 #include <teaql/core/meta.hpp>
 #include <teaql/core/meta_debug.hpp>
 #include <teaql/core/mutation.hpp>
@@ -33,6 +38,24 @@
 
 // Match the Rust crate boundary without merging its graph builder with runtime.
 namespace teaql::core {
+using ::teaql::RequestKind;
+using ::teaql::RequestIntentError;
+using ::teaql::QueryIntent;
+using ::teaql::MutationIntent;
+using ::teaql::FieldLayout;
+using ::teaql::RelationShapeCache;
+using ::teaql::LoadedSnapshot;
+using ::teaql::SnapshotPool;
+using ::teaql::DynamicPropertyDefinitions;
+using ::teaql::DynamicFieldError;
+using ::teaql::DynamicFieldSelection;
+using ::teaql::DynamicFieldDefinitions;
+using ::teaql::DynamicFieldState;
+using ::teaql::DynamicFieldMutation;
+using ::teaql::DynamicFieldValue;
+using ::teaql::DynamicFieldMergeShapes;
+using ::teaql::DynamicFieldValues;
+
 using ::teaql::value_from_utc;
 using ::teaql::DebugAlignment;
 using ::teaql::DebugNumbers;
@@ -48,6 +71,7 @@ using ::teaql::BaseEntityData;
 using ::teaql::Entity;
 using ::teaql::EntityDescriptorStore;
 using ::teaql::EntityError;
+using ::teaql::EntityJsonTraversal;
 using ::teaql::IdentifiableEntity;
 using ::teaql::TeaqlBoxedRelations;
 using ::teaql::TeaqlEntity;
@@ -74,6 +98,7 @@ using ::teaql::Aggregate;
 using ::teaql::AggregateFunction;
 using ::teaql::AggregationCacheOptions;
 using ::teaql::CompactRow;
+using ::teaql::CompactRowLayout;
 using ::teaql::ContinuousPageFetchOptions;
 using ::teaql::IdSetPaginationOptions;
 using ::teaql::NamedExpr;
@@ -133,4 +158,34 @@ using ::teaql::BusinessIdValue;
 using ::teaql::BusinessIdAllocator;
 using ::teaql::BusinessIdProfile;
 using ::teaql::BusinessIdSlot;
+}
+
+namespace teaql::dynamic_properties {
+using ::teaql::DynamicPropertyDefinitions;
+}
+
+namespace teaql::core::dynamic_properties {
+using ::teaql::DynamicPropertyDefinitions;
+}
+
+namespace teaql::dynamic_fields {
+using ::teaql::DynamicFieldError;
+using ::teaql::DynamicFieldSelection;
+using ::teaql::DynamicFieldDefinitions;
+using ::teaql::DynamicFieldState;
+using ::teaql::DynamicFieldMutation;
+using ::teaql::DynamicFieldValue;
+using ::teaql::DynamicFieldMergeShapes;
+using ::teaql::DynamicFieldValues;
+}
+
+namespace teaql::core::dynamic_fields {
+using ::teaql::DynamicFieldError;
+using ::teaql::DynamicFieldSelection;
+using ::teaql::DynamicFieldDefinitions;
+using ::teaql::DynamicFieldState;
+using ::teaql::DynamicFieldMutation;
+using ::teaql::DynamicFieldValue;
+using ::teaql::DynamicFieldMergeShapes;
+using ::teaql::DynamicFieldValues;
 }

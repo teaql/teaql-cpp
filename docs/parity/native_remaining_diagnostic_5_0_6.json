@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Selected remaining native contracts before this migration; initial full-suite record remains separate.",
+  "total": 20,
+  "passed": 0,
+  "failed": 20,
+  "exit_code": 8,
+  "tests": [
+    {
+      "id": 164,
+      "name": "original_runtime_pagination_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 224,
+      "name": "provider_sqlite_id_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 96,
+      "name": "recursive_graph_write_context_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 163,
+      "name": "original_runtime_aggregate_cache_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 161,
+      "name": "original_runtime_events_relations_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 162,
+      "name": "original_runtime_typed_query_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 109,
+      "name": "entity_graph_plan_context_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 87,
+      "name": "audited_auto_save_context_contracts",
+      "status": "failed",
+      "seconds": 0.01,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 156,
+      "name": "original_runtime_entity_save_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 105,
+      "name": "runtime_mutation_context_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 160,
+      "name": "original_runtime_validation_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 159,
+      "name": "original_runtime_service_boundary_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 177,
+      "name": "relation_execution_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 100,
+      "name": "graph_save_adapter_context_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 265,
+      "name": "request_search_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 98,
+      "name": "graph_node_command_context_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 269,
+      "name": "original_core_functional_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 195,
+      "name": "runtime_graph_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 316,
+      "name": "generated_candidates_contracts",
+      "status": "failed",
+      "seconds": 0.0,
+      "terminal": "***Failed"
+    },
+    {
+      "id": 69,
+      "name": "ledger_move_only_contracts",
+      "status": "failed",
+      "seconds": 0.08,
+      "terminal": "Subprocess aborted***Exception:"
+    }
+  ]
+}

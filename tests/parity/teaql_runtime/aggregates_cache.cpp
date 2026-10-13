@@ -75,10 +75,12 @@ static void entity_data_service_collects_dynamic_properties_for_aggregate_output
     auto bound = f.user->entity_data_service<StubExecutor>("OrderAggregate");
     check(bool(bound), "original dynamic entity service binding");
     using Output = Result<SmartList<OrderAggregateDynamic>, DataServiceError<StubError>>;
+    auto query = bound.value().get().select();
+    query.comment("Inspect native dynamic aggregate").purpose("Verify dynamic metric hydration");
     auto& work =
         make_operation<Output,
                        detail::EntityBasicListOperation<StubExecutor, OrderAggregateDynamic>>(
-            f.owner, bound.value().get(), bound.value().get().select());
+            f.owner, bound.value().get(), query);
     const auto& result = work.wait();
     check(result && result.value().data.size() == 1 && result.value().data[0].id == 1,
           "original aggregate model row count and ID");
@@ -131,6 +133,7 @@ static void aggregate_batch(Fixture& f, QueueExecutor& executor, bool storage = 
 
 static SelectQuery parent_query(Fixture& f) {
     SelectQuery result(std::allocator_arg, Allocator(f.owner), "Order");
+    result.comment("Inspect native relation aggregate").purpose("Verify relation hydration");
     result.project("id").project("version").project("name");
     return result;
 }
@@ -190,6 +193,7 @@ static void entity_data_service_maps_relation_aggregate_storage_key_to_property_
 
 static SelectQuery count_query(Fixture& f) {
     SelectQuery result(std::allocator_arg, Allocator(f.owner), "Order");
+    result.comment("Inspect native aggregate cache").purpose("Verify aggregate cache");
     result.count("count").enable_aggregation_cache_for(60'000);
     return result;
 }
@@ -231,7 +235,10 @@ static void aggregation_cache_is_namespaced_and_invalidated_after_write() {
     const auto& cached = Access::fetch_all(repo, query).wait();
     InsertCommand insert(std::allocator_arg, Allocator(f.owner), "Order");
     insert.value("id", std::uint64_t(9)).value("version", std::int64_t(1)).value("name", "new");
-    check(bool(Access::insert_internal(repo, insert).wait()),
+    auto mutation_repo = detail::clone_in(f.owner, repo);
+    check(bool(Access::bind_mutation_intent(mutation_repo, "Inspect native cache invalidation")),
+          "mutation entry binds intent without changing the count request purpose");
+    check(bool(Access::insert_internal(mutation_repo, insert).wait()),
           "original cache-invalidating insert succeeds");
     const auto& refreshed = Access::fetch_all(repo, query).wait();
     check(first && cached && refreshed && first.value() == cached.value() &&

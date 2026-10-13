@@ -15,7 +15,7 @@ static void check(bool ok, const char* message) {
     }
 }
 
-static void sql(SqliteConnection& connection, const char* text) {
+static void execute_fixture_sql(SqliteConnection& connection, const char* text) {
     check(sqlite3_exec(connection.native_handle(), text, nullptr, nullptr, nullptr) == SQLITE_OK,
           "native fixture SQL");
 }
@@ -41,12 +41,16 @@ static void lifetimes_and_transactions() {
     check(canonical_id_space_entity(r, "XMLThing") == "x_m_l_thing" &&
               canonical_id_space_entity(r, "中文ID") == "中文_i_d",
           "normalization retains source acronym and Unicode behavior");
-    auto& transaction = provider.begin_sql(r).wait().value().get();
+    check(bool(provider.begin_transaction(r)), "synchronous ID-space transaction starts");
     check(generator.next_id(r, "OrderLine").value() == 103,
           "ID generator shares provider transaction");
-    transaction.rollback_sql(r).wait();
+    check(bool(provider.rollback_transaction(r)), "synchronous ID allocation rolls back");
     check(generator.next_id(r, "OrderLine").value() == 103,
           "rolled-back ID allocation is reusable, source semantics");
+    auto& leased = provider.begin_sql(r).wait().value().get();
+    check(!generator.next_id(r, "OrderLine"),
+          "parent ID generator cannot bypass an asynchronously leased transaction");
+    check(bool(leased.rollback_sql(r).wait()), "leased transaction releases its connection");
     auto& error = global.make<MutationExecutorError>(
         generator.ensure_floor(r, "OrderLine", UINT64_MAX).error());
     user.reset();
@@ -76,17 +80,18 @@ static void strict_storage_and_failures() {
     auto user = global.make_user_context();
     auto r = user->memory_resource();
     generator.ensure_table(r);
-    sql(connection, "INSERT INTO teaql_id_space VALUES('record',-2)");
+    execute_fixture_sql(connection, "INSERT INTO teaql_id_space VALUES('record',-2)");
     check(!generator.next_id(r, "Record") && generator.next_id(r, "Record").value() == 0,
           "negative generated ID fails after persisted update; zero remains valid");
-    sql(connection, "UPDATE teaql_id_space SET current_level=9223372036854775807");
+    execute_fixture_sql(connection, "UPDATE teaql_id_space SET current_level=9223372036854775807");
     check(generator.next_id(r, "Record").error().kind() == MutationExecutorError::Kind::Bind,
           "signed SQLite ID overflow is typed");
-    sql(connection, "UPDATE teaql_id_space SET current_level='bad'");
+    execute_fixture_sql(connection, "UPDATE teaql_id_space SET current_level='bad'");
     check(generator.next_id(r, "Record").error().detail() ==
               "Invalid column type Text at index: 0, name: current_level",
           "ID reads do not use permissive text-to-number conversion");
-    sql(connection,
+    execute_fixture_sql(
+        connection,
         "DELETE FROM teaql_id_space; CREATE TRIGGER ignore_id BEFORE INSERT ON teaql_id_space BEGIN SELECT RAISE(IGNORE); END");
     check(generator.next_id(r, "Record")
                   .error()

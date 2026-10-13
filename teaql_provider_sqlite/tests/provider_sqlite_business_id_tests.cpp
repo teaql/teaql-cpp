@@ -108,7 +108,26 @@ static void native_failures_and_save_isolation() {
     check(error.code == BusinessIdErrorCode::Allocation &&
               !sqlite3_get_autocommit(connection.native_handle()),
           "commit failure preserves native error and active transaction");
+    {
+        auto nested = allocator.allocate(sr, plan(sr));
+        check(!nested && nested.error().message.find(
+                             "cannot start a transaction within a transaction") != String::npos,
+              "failed synchronous commit does not acquire an asynchronous connection lease");
+    }
+    auto& recover = scope->make<CompiledQuery>();
+    recover.sql = "ROLLBACK";
+    check(bool(provider.execute(sr, recover)) && sqlite3_get_autocommit(connection.native_handle()),
+          "caller can explicitly recover a failed allocation commit through the provider");
+    auto& unrelated = provider.begin_sql(r).wait().value().get();
     scope.reset();
+    check(!sqlite3_get_autocommit(connection.native_handle()),
+          "old allocation cleanup cannot roll back a later leased transaction");
+    check(bool(unrelated.rollback_sql(r).wait()), "later transaction remains usable");
+    auto abandoned = global.make_user_context();
+    auto ar = abandoned->memory_resource();
+    check(!allocator.allocate(ar, plan(ar)) && !sqlite3_get_autocommit(connection.native_handle()),
+          "a second failed commit remains available for Context cleanup");
+    abandoned.reset();
     check(sqlite3_get_autocommit(connection.native_handle()),
           "failed allocation commit rolls back before Context memory reclamation");
     auto local = global.make_user_context();

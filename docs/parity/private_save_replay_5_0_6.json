@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Nine complete historical private save input families using appended access bridges over original bytes and original registry versions. Full capabilities/configuration matrices and dynamic readback payload qualification remain open.",
+  "source_observations": 11040,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 17,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "ledger_execution_context_contracts",
+          "status": "run",
+          "seconds": 0.00657895
+        },
+        {
+          "name": "ledger_execution_rust_parity",
+          "status": "run",
+          "seconds": 0.303294
+        },
+        {
+          "name": "entity_graph_execution_context_contracts",
+          "status": "run",
+          "seconds": 0.00563565
+        },
+        {
+          "name": "recursive_graph_write_context_contracts",
+          "status": "run",
+          "seconds": 0.00848899
+        },
+        {
+          "name": "recursive_graph_write_rust_parity",
+          "status": "run",
+          "seconds": 0.52105
+        },
+        {
+          "name": "graph_node_command_context_contracts",
+          "status": "run",
+          "seconds": 0.0035705
+        },
+        {
+          "name": "graph_node_command_rust_parity",
+          "status": "run",
+          "seconds": 1.05117
+        },
+        {
+          "name": "graph_save_adapter_context_contracts",
+          "status": "run",
+          "seconds": 0.00467269
+        },
+        {
+          "name": "graph_save_adapter_rust_parity",
+          "status": "run",
+          "seconds": 0.679213
+        },
+        {
+          "name": "ledger_plan_context_contracts",
+          "status": "run",
+          "seconds": 0.00191326
+        },
+        {
+          "name": "ledger_plan_rust_parity",
+          "status": "run",
+          "seconds": 0.550539
+        },
+        {
+          "name": "graph_execution_rust_parity",
+          "status": "run",
+          "seconds": 0.308022
+        },
+        {
+          "name": "policy_plan_rust_parity",
+          "status": "run",
+          "seconds": 0.781931
+        },
+        {
+          "name": "save_preparation_context_contracts",
+          "status": "run",
+          "seconds": 0.00293684
+        },
+        {
+          "name": "save_preparation_rust_parity",
+          "status": "run",
+          "seconds": 1.40442
+        },
+        {
+          "name": "graph_fix_context_contracts",
+          "status": "run",
+          "seconds": 0.00214205
+        },
+        {
+          "name": "graph_fix_rust_parity",
+          "status": "run",
+          "seconds": 0.221745
+        }
+      ]
+    },
+    "modules": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_entity_graph_execution_context_contracts",
+          "status": "run",
+          "seconds": 0.00420951
+        }
+      ],
+      "canonical_bodies": 98
+    }
+  },
+  "source_provenance_sha256": "7ba6c57a92aadc74b65d4ce8d9d325ec264cf44d769465aa1900e870d277726d",
+  "corpora": {
+    "graph_fix": "e6053731327e943772c5dee31c422e67505faa4e8ecef3c74011f48f14bf8064",
+    "save_preparation": "6bcdfa50ee153727a803df8b2270493de3ea90e9295ac71061077057514aeb43",
+    "ledger_plan": "7b049610d2a2af09d0556a5517afa50c934ef7d906c7d6bdded4c61641133f3b",
+    "policy_plan": "4d171322ef4c8fd65f6f325f00d98cacfdad435e25149b0011ddae624f44a067",
+    "graph_execution": "b68f8a5824f4fbac859f697c5806e77e8be6575fa6b19ed06cd6f572538591eb",
+    "graph_node_command": "f1e66ac22d7292b74ef6b2ebfc0215113887d67fefa258743788eb0e996ffe86",
+    "graph_save_adapter": "b2da36ada739e44aa24c267d5dfbd1c148890af8062c34973111695cb0340522",
+    "recursive_graph_write": "c6aa1a9aee170ce16b084f9f3c053f9c7e850d81fd05e16d048ed6bcf95e4195",
+    "ledger_execution": "95d711553fd13b6fb5f2c4195cc6ba2834f2e9204c06d0512f311abf302ba752"
+  },
+  "cpp_checkpoint_hashes": {
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_execution.hpp": "ff5c97324eb469b1baafb3a7e32b7c01afa24380c9ca9d17edd50aef357c98ea",
+    "teaql_provider_sqlite/tests/entity_graph_execution_tests.cpp": "730c53ef3aa84fa8bf665cf6508bd1954325af92f18a5c4ce39ce91936a20cfa"
+  }
+}

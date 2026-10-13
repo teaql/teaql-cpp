@@ -1,0 +1,46 @@
+[package]
+name = "teaql_cpp_field_layout_oracle"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+# Test-only direct use of the unchanged example derive; already locked transitively.
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+serde_json = "=1.0.150"
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }
+rusqlite = { version = "=0.40.2", features = ["bundled", "column_decltype", "functions"] }
+
+school_management_service_core = { package = "school-management-service-core", path = "../../../.reference/teaql-rs/examples/shared-load-state/fixtures/narrow/lib" }
+cpp_business_ids_core = { package = "cpp-business-ids-core", path = "../../generator/parity/business_ids_rust/lib" }
+cpp_types_core = { package = "cpp_types_entity_oracle", path = "../rust_types_entities" }
+cpp_relations_core = { package = "cpp-relations-core", path = "../../generator/parity/relations_rust/lib" }
+cpp_checker_fixture_core = { package = "cpp-checker-fixture-core", path = "../../generator/parity/checkers_rust/lib" }
+cpp_inheritance_core = { package = "cpp-inheritance-core", path = "../../generator/parity/inheritance_rust/lib" }
+cpp_inheritance_graph_core = { package = "cpp-inheritance-graph-core", path = "../../generator/parity/inheritance_graph_rust/lib" }
+cpp_inheritance_variants_core = { package = "cpp-inheritance-variants-core", path = "../../generator/parity/inheritance_variants_rust/lib" }
+cpp_candidates_core = { package = "cpp-candidates-core", path = "../../generator/parity/candidates_rust/lib" }
+cpp_dynamic_json_core = { package = "cpp-dynamic-json-core", path = "../../generator/parity/dynamic_json_rust/lib" }
+cpp_sample_temporal_core = { package = "cpp-sample-temporal-core", path = "../../generator/parity/sample_fields_temporal_rust/lib" }
+cpp_sample_runtime_core = { package = "cpp-sample-runtime-core", path = "../../generator/parity/sample_fields_runtime_rust/lib" }
+chrono = "=0.4.44"
+async-trait = "=0.1.92"
+# Already locked runtime dependencies; test-only authenticated malformed stimuli.
+aes-gcm = "=0.10.3"
+hkdf = "=0.12.4"
+base64 = "=0.22.1"
+sha2 = "=0.10.9"
+
+[workspace]
+
+[patch.crates-io]
+teaql-core = { path = "../../../.reference/teaql-rs/teaql-core" }
+teaql-runtime = { path = "../../../.reference/teaql-rs/teaql-runtime" }
+teaql-macros = { path = "../../../.reference/teaql-rs/teaql-macros" }
+teaql-sql = { path = "../../../.reference/teaql-rs/teaql-sql" }
+teaql-data-service = { path = "../../../.reference/teaql-rs/teaql-data-service" }
+teaql-provider-sqlite = { path = "../../../.reference/teaql-rs/teaql-provider-sqlite" }

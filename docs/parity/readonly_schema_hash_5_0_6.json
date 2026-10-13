@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Exact cached readonly u64 hash and complete uninitialized schema/query/row/layout diagnostics; shared hasher reuse. Full capabilities/cache/configuration parity remain open.",
+  "source_observations": 69,
+  "native": {
+    "passed": 5,
+    "failed": 0,
+    "exit_code": 0,
+    "tests": [
+      {
+        "name": "core_shape_presentation_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "dynamic_carrier_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "model_debug_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "query_keys_contracts",
+        "status": "passed",
+        "seconds": 0.0
+      },
+      {
+        "name": "readonly_schema_hash_5_0_6_rust_parity",
+        "status": "passed",
+        "seconds": 0.11
+      }
+    ]
+  },
+  "modules_native": {
+    "passed": 1,
+    "failed": 0,
+    "exit_code": 0,
+    "tests": [
+      "module_model_debug_contracts"
+    ]
+  },
+  "mips_scope": "Standalone 32-bit public accessor/shared-helper smoke only; native Rust expected values, no Rust MIPS/full-runtime/physical-device qualification.",
+  "mips_smoke_exit_code": 0
+}

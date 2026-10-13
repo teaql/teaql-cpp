@@ -4,17 +4,47 @@
 
 static MutationRequest mutation(Memory r, const Json& j, std::string_view fallback) {
     auto mode = text(field(j, "mode"));
+    auto reason = text(field(j, "comment"));
     auto name = optional(j, "entity") ? text(field(j, "entity")) : fallback;
+    auto request = [&](auto&& command) {
+        MutationRequest result(
+            std::allocator_arg, Allocator(r), std::forward<decltype(command)>(command), reason);
+        if (auto* values = optional(j, "trusted_redactions")) {
+            auto& redactions = detail::async_arena(r).make<SqlIntentRedactions>();
+            for (const auto& input : std::get<Json::Array>(values->data)) {
+                redactions.capture_target_id(value(r, input));
+            }
+            result.with_diagnostic_redactions(&redactions);
+        }
+        return result;
+    };
     if (mode == "batch") {
         MutationRequest::Batch batch(r);
         for (const auto& child : items(j, "children")) {
             batch.emplace_back(mutation(r, child, fallback));
         }
-        return MutationRequest(std::allocator_arg, Allocator(r), std::move(batch));
+        return request(std::move(batch));
     }
     auto decorate = [&](auto& c) {
         if (auto p = optional(j, "trace")) {
             c.audit_as(text(*p));
+        }
+        for (const auto& node : items(j, "trace_nodes")) {
+            auto* id = optional(node, "id");
+            c.trace_chain.emplace_back(static_cast<TraceKind>(integer(field(node, "kind"))),
+                                       text(field(node, "entity")),
+                                       text(field(node, "comment")),
+                                       id && !std::holds_alternative<std::monostate>(id->data)
+                                           ? std::optional<std::uint64_t>(integer(*id))
+                                           : std::nullopt);
+        }
+        if constexpr (std::same_as<std::remove_cvref_t<decltype(c)>, UpdateCommand>) {
+            if (auto* old = optional(j, "old_values")) {
+                c.old_values.emplace(r);
+                for (const auto& [key, input] : std::get<Json::Object>(old->data)) {
+                    c.old_values->fields.emplace(String(key, r), value(r, input));
+                }
+            }
         }
     };
     auto fields = [&](MutationValues& v) {
@@ -32,25 +62,25 @@ static MutationRequest mutation(Memory r, const Json& j, std::string_view fallba
         InsertCommand c(std::allocator_arg, Allocator(r), name);
         fields(c.values);
         decorate(c);
-        return MutationRequest(std::allocator_arg, Allocator(r), std::move(c));
+        return request(std::move(c));
     }
     if (mode == "update") {
         UpdateCommand c(std::allocator_arg, Allocator(r), name, value(r, field(j, "id")));
         fields(c.values);
         c.expected_version_value = version();
         decorate(c);
-        return MutationRequest(std::allocator_arg, Allocator(r), std::move(c));
+        return request(std::move(c));
     }
     if (mode == "delete") {
         DeleteCommand c(std::allocator_arg, Allocator(r), name, value(r, field(j, "id")));
         c.soft_delete = std::get<bool>(field(j, "soft").data);
         c.expected_version_value = version();
         decorate(c);
-        return MutationRequest(std::allocator_arg, Allocator(r), std::move(c));
+        return request(std::move(c));
     }
     RecoverCommand c(std::allocator_arg, Allocator(r), name, value(r, field(j, "id")), *version());
     decorate(c);
-    return MutationRequest(std::allocator_arg, Allocator(r), std::move(c));
+    return request(std::move(c));
 }
 
 static Json values_json(Memory r, std::span<const Value> v) {
@@ -77,6 +107,16 @@ static Json metadata_json(Memory r, const ExecutionMetadata& m) {
     detail::model_put(out, "debug", m.debug_query ? Json(r, *m.debug_query) : Json(r));
     detail::model_put(out, "params", values_json(r, m.params));
     detail::model_put(out, "trace", m.trace_chain.size());
+    Json::Array trace_nodes(r);
+    for (const auto& node : m.trace_chain) {
+        auto item = detail::model_json(r);
+        detail::model_put(item, "kind", unsigned(node.kind));
+        detail::model_put(item, "entity", node.entity_type);
+        detail::model_put(item, "id", node.entity_id ? Json(r, *node.entity_id) : Json(r));
+        detail::model_put(item, "comment", node.comment);
+        trace_nodes.emplace_back(std::move(item));
+    }
+    detail::model_put(out, "trace_nodes", trace_nodes);
     detail::model_put(out, "generated", m.sql_log.generated_sql);
     Json::Array policies(r), statements(r);
     for (auto p : m.sql_log.parameter_policies) {

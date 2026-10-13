@@ -49,6 +49,10 @@ static Json evaluate(UserContext& c, const Json& j) {
     auto& mock = c.make<Mock>(state);
     auto& repo = service(c, mock);
     auto& query = c.make<SelectQuery>("Item");
+    if (auto* purpose = optional(j, "purpose");
+        purpose && !std::holds_alternative<std::monostate>(purpose->data)) {
+        query.purpose_text.emplace(text(*purpose), r);
+    }
     if (auto* comment = optional(j, "comment");
         comment && !std::holds_alternative<std::monostate>(comment->data)) {
         query.comment_text.emplace(text(*comment), r);
@@ -126,7 +130,7 @@ static Json evaluate(UserContext& c, const Json& j) {
     if (state.request) {
         request = detail::model_json(r);
         auto& q = *state.request;
-        detail::model_put(request, "comment", q.comment ? Json(r, *q.comment) : Json(r));
+        detail::model_put(request, "comment", q.comment());
         detail::model_put(request, "trace", q.trace_chain.size());
         detail::model_put(request, "capture", q.capture_execution_metadata);
         detail::model_put(request, "debug", q.capture_debug_query);

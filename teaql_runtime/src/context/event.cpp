@@ -1,4 +1,5 @@
 #include <teaql/runtime/detail/governance_scope.hpp>
+#include <teaql/runtime/detail/commit_audit.hpp>
 #include <teaql/runtime/event.hpp>
 #include <teaql/runtime/log_manager.hpp>
 #include <teaql/runtime/telemetry.hpp>
@@ -43,6 +44,21 @@ Result<std::monostate, RuntimeError> UserContext::send_event(const RawAuditEvent
                                       version ? version->try_i64() : std::nullopt,
                                       millis < 0 ? 0 : static_cast<std::uint64_t>(millis));
     }
+    if (detail::enqueue_audit(*this, event)) {
+        return R::ok(r, {});
+    }
+    return deliver_audit_event(event);
+}
+
+Result<std::monostate, RuntimeError>
+UserContext::deliver_audit_event(const RawAuditEvent& event) const {
+    ensure_open();
+    auto r = memory_resource();
+    Arena::Quiescence active;
+    active.attach(detail::resource_arena(r), nullptr, [](void*) noexcept {
+        std::terminate();
+    });
+    using R = Result<std::monostate, RuntimeError>;
     String name(event.entity, r);
     name += ".event";
     RuntimeOperation operation(std::allocator_arg, Allocator(r), "audit", name);

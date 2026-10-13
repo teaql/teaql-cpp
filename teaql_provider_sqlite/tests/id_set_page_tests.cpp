@@ -142,6 +142,7 @@ static void build_and_recheck() {
     auto& service = repo(*user);
     auto& executor = Access::context_service(service).executor.get();
     auto& query = user->make<SelectQuery>("Item");
+    query.comment("Inspect ID-set page fixtures").purpose("Verify pagination and cache lifetimes");
     query.project("label").page(1, 1).optimize_pagination_with_id_set_config("fixture", 600, 3);
     executor.pending = true;
     auto& first = detail::prepare_id_set_page(service, query);
@@ -178,6 +179,7 @@ static void failures_and_close() {
     auto& service = repo(*user);
     auto& executor = Access::context_service(service).executor.get();
     auto& query = user->make<SelectQuery>("Item");
+    query.comment("Inspect ID-set page fixtures").purpose("Verify pagination and cache lifetimes");
     query.page(0, 1).optimize_pagination_with_id_set_config("limit", 600, 2);
     check(detail::prepare_id_set_page(service, query).wait() &&
               user->id_set_plan() == "ID_SET_FALLBACK_LIMIT_EXCEEDED" && user->id_set_count() == 3,
@@ -203,6 +205,8 @@ static void failures_and_close() {
     auto next = global.make_user_context();
     auto& later_repo = repo(*next);
     auto& later_query = next->make<SelectQuery>("Item");
+    later_query.comment("Inspect ID-set page fixtures")
+        .purpose("Verify pagination and cache lifetimes");
     later_query.page(0, 1).optimize_pagination_with_id_set_config("limit", 600, 3);
     check(bool(detail::prepare_id_set_page(later_repo, later_query).wait()),
           "shutdown leaves no stranded build guard");
@@ -239,6 +243,8 @@ static void global_store_isolation() {
         user->set_id_set_store(global, store);
         auto& service = repo(*user);
         auto& query = user->make<SelectQuery>("Item");
+        query.comment("Inspect ID-set page fixtures")
+            .purpose("Verify pagination and cache lifetimes");
         query.page(0, 1).optimize_pagination_with_id_set_config("retained", 600, 3);
         auto& result = detail::prepare_id_set_page(service, query).wait();
         auto& executor = Access::context_service(service).executor.get();
@@ -276,6 +282,7 @@ static void sqlite_page_execution() {
     using E = std::remove_reference_t<decltype(executor)>;
     auto& service = EntityDataService<E>::for_executor(*user, "Item", *user, executor);
     auto& query = user->make<SelectQuery>("Item");
+    query.comment("Inspect ID-set page fixtures").purpose("Verify pagination and cache lifetimes");
     query.projects({"id", "label"})
         .order_desc("label")
         .page(1, 1)

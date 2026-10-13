@@ -205,7 +205,6 @@ public:
         original.fields.swap(values.fields);
         auto loaded = detail::take_checker_fields(original, "_loaded_fields");
         auto dirty = detail::take_checker_fields(original, "_dirty_fields");
-        auto changes = original.into_mutation_values(r);
         auto decoded =
             T::from_compact_row(r, CompactRow(std::allocator_arg, Allocator(r), original.fields));
         if (!decoded) {
@@ -223,6 +222,7 @@ public:
             entity.set_checker_loaded_fields(std::move(*loaded));
         }
         if (dirty) {
+            auto changes = original.into_mutation_values(r);
             entity.set_checker_dirty_fields(std::move(*dirty), changes);
         }
         auto before = detail::clone_in(r, entity);

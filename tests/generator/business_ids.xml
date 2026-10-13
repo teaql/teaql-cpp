@@ -1,0 +1,7 @@
+<root name="cpp_business_ids" org="teaql" data_service="sqlite">
+    <tenant name="string()" />
+    <receipt name="string()" tenant="tenant(contextRoot=true)"
+             receipt_number="businessId(prefix=RCP namespace=receipts)" />
+    <ticket name="string()" tenant="tenant(contextRoot=true)"
+            ticket_number="business_id(prefix=TKT namespace=tickets profile=daily-sequence preserve_digits=8)" />
+</root>

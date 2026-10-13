@@ -1,0 +1,656 @@
+{
+  "schema": 1,
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Original resolved mask membership, model/storage identity, table/service and explicit audit limit; not runtime privacy acceptance",
+  "source_hashes": {
+    "model/src/main/java/com/skynet/codegenerator/meta/ObjectDescriptor.java": "5490f3465f4bdebf36b080cc4560e9852fa8e0befe770a5fe27b4a1f3d1f59a6",
+    "model/src/main/java/com/skynet/codegenerator/naming/ObjectDescriptorNaming.java": "c05e9a0a751d6c60b497ed8f8de7fd07d22b2f0dd5ba792c8d0c10857e775348",
+    "model/src/main/java/com/skynet/codegenerator/naming/FieldDescriptorNaming.java": "00cc1b2a36257dfd3fd9ddf5a2f4013dda3c09595275458662a65ba3c36079fb",
+    "generator/src/main/resources/generator/rust-lib-core/entity/struct.rs.stg": "d415acb15c9b5bdd4f6bb54408ad6522e568b686fa430283ed867d54cc714ff5"
+  },
+  "cases": [
+    {
+      "case": "inheritance_0",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "82f1b779ab355cdbb857e83cd5ca2a219a8884c969dccdd701586ee7b2fdc64f",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        }
+      ]
+    },
+    {
+      "case": "inheritance_1",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"name\" _audit_value_max_len=\"18\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "670ea5c72ab97b03bea62b36365673dbfca23538b51718cc7682b51371610bd4",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name"
+          ],
+          "mask_storage_keys": [
+            "name"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name"
+          ],
+          "mask_storage_keys": [
+            "name"
+          ],
+          "audit_limit": "18"
+        }
+      ]
+    },
+    {
+      "case": "inheritance_2",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"later_secret\" _audit_value_max_len=\"19\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "d94bdf15e119bb817fcb51d14cb131f06626ee3fd028202df3b38e24272eff65",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": "19"
+        }
+      ]
+    },
+    {
+      "case": "inheritance_3",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"Secret Value,laterSecret\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"child-secret\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "acca0cd815632ea895f0de085ce4acdf8ab9ac9d8ee3aede363761500dcd3e8f",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "secret_value",
+            "child_secret"
+          ],
+          "mask_storage_keys": [
+            "secret_value",
+            "child_secret"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "secret_value",
+            "later_secret",
+            "child_secret"
+          ],
+          "mask_storage_keys": [
+            "secret_value",
+            "later_secret",
+            "child_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "secret_value"
+          ],
+          "mask_storage_keys": [
+            "secret_value"
+          ],
+          "audit_limit": null
+        }
+      ]
+    },
+    {
+      "case": "inheritance_4",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"NAME,secretValue\" _audit_value_max_len=\"21\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"LATER_SECRET\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "30aab974c2b2b8850e417d9e40c82af9f84f71944be4dd05faab93efc06073d0",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "secret_value",
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "secret_value",
+            "later_secret"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "secret_value",
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "secret_value",
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "secret_value"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "secret_value"
+          ],
+          "audit_limit": "21"
+        }
+      ]
+    },
+    {
+      "case": "inheritance_5",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"platform\" _audit_value_max_len=\"22\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"platform_id\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "a3b46b7bd54402ef3ec3901108dbb341c97725c1a55db0cf0eee324acccd5fca",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "platform"
+          ],
+          "mask_storage_keys": [
+            "platform_id"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "platform",
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "platform_id",
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "platform"
+          ],
+          "mask_storage_keys": [
+            "platform_id"
+          ],
+          "audit_limit": "22"
+        }
+      ]
+    },
+    {
+      "case": "inheritance_6",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"id,version\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"version\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "4bd215b17f7a735aed9d9e5c42eb168768f4868f664620f2aa0095f491dfbbe8",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "id",
+            "version"
+          ],
+          "mask_storage_keys": [
+            "id",
+            "version"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "id",
+            "version",
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "id",
+            "version",
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "id",
+            "version"
+          ],
+          "mask_storage_keys": [
+            "id",
+            "version"
+          ],
+          "audit_limit": null
+        }
+      ]
+    },
+    {
+      "case": "inheritance_7",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"name,name,secret_value\" _audit_value_max_len=\"24\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"unknown\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "8cbcc251afae0b5b0f18d4de5314253e93f934ee703c8c5b789874a28c7549de",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "secret_value"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "secret_value"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "secret_value",
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "secret_value",
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "secret_value"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "secret_value"
+          ],
+          "audit_limit": "24"
+        }
+      ]
+    },
+    {
+      "case": "inheritance_8",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"missing\" _audit_value_max_len=\"25\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"name\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "e1aed1b5da303ac3b9ed141ac2d18c268a17e5beea131a41d44bb2fb7ad142f4",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name"
+          ],
+          "mask_storage_keys": [
+            "name"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "name",
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "name",
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": "25"
+        }
+      ]
+    },
+    {
+      "case": "inheritance_9",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"__secret--value__\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"Child Secret\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "44fea3be4bfdcd5079609e610b888aa1ee34762e1b70c15ac980c7c029d3cf7e",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "secret_value",
+            "child_secret"
+          ],
+          "mask_storage_keys": [
+            "secret_value",
+            "child_secret"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "secret_value",
+            "later_secret",
+            "child_secret"
+          ],
+          "mask_storage_keys": [
+            "secret_value",
+            "later_secret",
+            "child_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "secret_value"
+          ],
+          "mask_storage_keys": [
+            "secret_value"
+          ],
+          "audit_limit": null
+        }
+      ]
+    },
+    {
+      "case": "inheritance_10",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"child_secret\" _audit_value_max_len=\"27\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "a28d3f50a84adf0bb746a9aa74b95c40e745111dfad1f01ef815749751261705",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "later_secret"
+          ],
+          "mask_storage_keys": [
+            "later_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": "27"
+        }
+      ]
+    },
+    {
+      "case": "inheritance_11",
+      "model": "<root name=\"privacy_fixture\" data_service=\"sqlite\"><platform name=\"string()\"/><record platform=\"platform(contextRoot=true)\" name=\"string()\" secret_value=\"string()\" _audit_mask_fields=\"platform,name\" _audit_value_max_len=\"28\"/><child _parent=\"record\" later_secret=\"string()\" child_secret=\"string()\" _audit_mask_fields=\"laterSecret,child_secret\"/><grandchild _parent=\"child\" _audit_mask_fields=\"LATER_SECRET\" _audit_value_max_len=\"53\"/></root>",
+      "model_sha256": "16f174a4bfdac9c035a662c64ab47e2dc54c815b410a89841f5b728ec18da4c7",
+      "source": [
+        {
+          "entity": "Child",
+          "table": "child_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "platform",
+            "name",
+            "later_secret",
+            "child_secret"
+          ],
+          "mask_storage_keys": [
+            "platform_id",
+            "name",
+            "later_secret",
+            "child_secret"
+          ],
+          "audit_limit": null
+        },
+        {
+          "entity": "Grandchild",
+          "table": "grandchild_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "platform",
+            "name",
+            "later_secret",
+            "child_secret"
+          ],
+          "mask_storage_keys": [
+            "platform_id",
+            "name",
+            "later_secret",
+            "child_secret"
+          ],
+          "audit_limit": "53"
+        },
+        {
+          "entity": "Platform",
+          "table": "platform_data",
+          "service": "sqlite",
+          "mask_model_keys": [],
+          "mask_storage_keys": [],
+          "audit_limit": null
+        },
+        {
+          "entity": "Record",
+          "table": "record_data",
+          "service": "sqlite",
+          "mask_model_keys": [
+            "platform",
+            "name"
+          ],
+          "mask_storage_keys": [
+            "platform_id",
+            "name"
+          ],
+          "audit_limit": "28"
+        }
+      ]
+    }
+  ]
+}

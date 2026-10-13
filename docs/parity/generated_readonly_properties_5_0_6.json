@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "scope": "Generated readonly underscore-key protocol and explicit retention/lifecycle, plus separately replayed historical collection inputs. Complete capabilities/full CTest remain open.",
+  "rust_observations": 243,
+  "collection_observations": 1692,
+  "java_generator_tests": 30,
+  "reproduced_workspaces": 18,
+  "reproduced_files": 216,
+  "sanitizer_leak_scan": false,
+  "gates": {
+    "native": {
+      "passed": 7,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "smart_list_api_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "compact_row_api_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "generated_readonly_property_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        },
+        {
+          "name": "generated_dynamic_field_contracts",
+          "status": "passed",
+          "seconds": 0.02
+        },
+        {
+          "name": "generated_readonly_properties_rust_parity",
+          "status": "passed",
+          "seconds": 0.44
+        },
+        {
+          "name": "compact_row_api_rust_parity",
+          "status": "passed",
+          "seconds": 18.52
+        },
+        {
+          "name": "smart_list_api_rust_parity",
+          "status": "passed",
+          "seconds": 26.05
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "generated_readonly_property_contracts",
+          "status": "passed",
+          "seconds": 0.02
+        }
+      ]
+    },
+    "modules_native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_generated_readonly_property_contracts",
+          "status": "passed",
+          "seconds": 0.0
+        }
+      ]
+    }
+  }
+}

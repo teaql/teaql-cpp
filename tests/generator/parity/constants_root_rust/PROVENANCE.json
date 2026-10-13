@@ -1,0 +1,22 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/constants_root.xml",
+  "model_sha256": "94a7b247a78fdd7cac2e4a3d726fa60a3a2640fac858b45f16fb16f089bf87ec",
+  "hand_edited": false,
+  "files": {
+    "lib/Cargo.toml": "48cdcbe7b79d35fd2f2c718b5bd5db7b340ece31089b0e6a53ef896670316733",
+    "lib/src/category/behavior.rs": "515d17a01fb121a84bc9789309041c31743ff9cfb20ec160cb2ef73b30cc4e4f",
+    "lib/src/category/checker.rs": "2c2bce82262b26c8bb6a239da51beb6d401bb45f73210b94bae747700b0008a9",
+    "lib/src/category/entity.rs": "90b82d1f9eec07269b4d333b209c84bba409910e9a330b4f2766c8cd2010a2e1",
+    "lib/src/category/expression.rs": "96f546960a80a396388547453af635f5f9a2a160e7fbaefc147c925e67c4d9e5",
+    "lib/src/category/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/category/request.rs": "3fb4bbc95fab4855984143e5a88771df0f22b0496a8621164c7d686f135cab69",
+    "lib/src/e.rs": "1ccf8c6d46eb2dcdc6a3c6dbe363205623a433fa67dc02bd4c5db65eb04892df",
+    "lib/src/lib.rs": "a93856356fbbad8416b9012ccb966161ac6f6bf783d87e0c5dbfdc1699ee7f9b",
+    "lib/src/q.rs": "6ccc62396e8fdfa4d7e5d36c7545df7d5ac4f1ed574f80a8d6b3e7c6e824b9eb",
+    "lib/src/request_support.rs": "4f9f82da92d933ded90e9db384e085a96c2fb340d18be4ccc4dc09aa8ea2b055",
+    "lib/src/runtime.rs": "0ddd55a48bd5f61aa05ac479e979e46dc398efe09ede668e6dbee310baeef2fd",
+    "lib/src/sample_data.rs": "3877369353e7f392d4336df9a292613ea9eea37ce7b0b0b72ee3018e8183ebff"
+  }
+}

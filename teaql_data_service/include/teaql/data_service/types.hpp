@@ -1,6 +1,7 @@
 #pragma once
 #include <teaql/core/mutation.hpp>
 #include <teaql/core/system_time.hpp>
+#include <teaql/core/request_intent.hpp>
 #include <teaql/data_service/sql_log.hpp>
 #include <chrono>
 
@@ -17,37 +18,127 @@ struct QueryRequest {
     using allocator_type = Allocator;
     SelectQuery query;
     TraceChain trace_chain;
-    std::optional<String> comment;
+    QueryIntent intent;
     bool capture_debug_query;
     bool capture_execution_metadata;
 
     QueryRequest(
         std::allocator_arg_t, Allocator a, const SelectQuery& query, bool debug, bool metadata)
-        : query(std::allocator_arg, a, query), trace_chain(a.resource()),
+        : QueryRequest(
+              std::allocator_arg, a, query, validated(a.resource(), query), debug, metadata) {}
+
+    QueryRequest(std::allocator_arg_t,
+                 Allocator a,
+                 const SelectQuery& query,
+                 const QueryIntent& intent,
+                 bool debug = false,
+                 bool metadata = true)
+        : query(std::allocator_arg, a, (intent.require_valid(), query)),
+          trace_chain(query.trace_chain, a.resource()), intent(std::allocator_arg, a, intent),
           capture_debug_query(debug), capture_execution_metadata(metadata) {}
 
     QueryRequest(std::allocator_arg_t, Allocator a, const QueryRequest& other)
         : query(std::allocator_arg, a, other.query), trace_chain(other.trace_chain, a.resource()),
-          comment(detail::clone_in(a.resource(), other.comment)),
+          intent(std::allocator_arg, a, other.intent),
           capture_debug_query(other.capture_debug_query),
           capture_execution_metadata(other.capture_execution_metadata) {}
 
     QueryRequest(std::allocator_arg_t, Allocator a, QueryRequest&& other)
-        : QueryRequest(detail::move_to(a.resource(), std::move(other))) {}
+        : QueryRequest(
+              (other.require_valid_intent(), detail::move_to(a.resource(), std::move(other)))) {}
 
     QueryRequest(const QueryRequest&) = delete;
+
     QueryRequest(QueryRequest&&) noexcept = default;
 
     QueryRequest& operator=(QueryRequest&& other) {
+        other.require_valid_intent();
         return detail::assign_scoped(*this, std::move(other));
     }
 
     Memory memory_resource() const {
         return query.memory_resource();
     }
+
+    static Result<QueryRequest, RequestIntentError> from_query(Memory resource,
+                                                               const SelectQuery& query,
+                                                               bool debug = false,
+                                                               bool metadata = true) {
+        using Result = teaql::Result<QueryRequest, RequestIntentError>;
+        auto intent = QueryIntent::from_optional(
+            resource,
+            query.comment_text ? std::optional<std::string_view>(*query.comment_text)
+                               : std::nullopt,
+            query.purpose_text ? std::optional<std::string_view>(*query.purpose_text)
+                               : std::nullopt);
+        if (!intent) {
+            return Result::err(resource, std::move(intent).error());
+        }
+        return Result::ok(
+            resource,
+            QueryRequest(
+                std::allocator_arg, Allocator(resource), query, intent.value(), debug, metadata));
+    }
+
+    void require_valid_intent() const {
+        intent.require_valid();
+    }
+
+    std::string_view comment() const noexcept {
+        return intent.comment();
+    }
+
+    std::string_view purpose() const noexcept {
+        return intent.purpose();
+    }
+
+    TraceChain execution_trace_chain() const {
+        auto r = memory_resource();
+        std::string_view root = query.entity;
+        for (const auto& node : trace_chain) {
+            if (node.kind != TraceKind::Operation && node.kind != TraceKind::Request &&
+                node.kind != TraceKind::Comment && node.kind != TraceKind::Purpose &&
+                node.kind != TraceKind::AuditReason) {
+                continue;
+            }
+            auto name = std::string_view(node.entity_type);
+            detail::trim(name);
+            if (!name.empty()) {
+                root = node.entity_type;
+                break;
+            }
+        }
+        TraceChain result(r);
+        result.emplace_back(TraceKind::Comment, root, comment());
+        result.emplace_back(TraceKind::Purpose, root, purpose());
+        for (const auto& node : trace_chain) {
+            if (node.kind != TraceKind::Comment && node.kind != TraceKind::Purpose) {
+                result.emplace_back(node);
+            }
+        }
+        return result;
+    }
+
+private:
+    static QueryIntent validated(Memory resource, const SelectQuery& query) {
+        auto request = QueryIntent::from_optional(
+            resource,
+            query.comment_text ? std::optional<std::string_view>(*query.comment_text)
+                               : std::nullopt,
+            query.purpose_text ? std::optional<std::string_view>(*query.purpose_text)
+                               : std::nullopt);
+        if (!request) {
+            throw std::invalid_argument(std::string(request.error().to_string(resource)));
+        }
+        return std::move(request).value();
+    }
 };
 
-struct MutationRequest {
+struct MutationRequest;
+
+// Intent-free command construction is separate from an executable request envelope.
+class MutationCommand {
+public:
     using allocator_type = Allocator;
     using Batch = Vector<MutationRequest>;
     using Storage =
@@ -60,9 +151,85 @@ struct MutationRequest {
                  std::same_as<std::remove_cvref_t<T>, DeleteCommand> ||
                  std::same_as<std::remove_cvref_t<T>, RecoverCommand> ||
                  std::same_as<std::remove_cvref_t<T>, Batch>)
-    MutationRequest(std::allocator_arg_t, Allocator a, T&& value)
-        : data(std::make_obj_using_allocator<std::remove_cvref_t<T>>(a, std::forward<T>(value))),
-          resource_(a.resource()) {}
+    MutationCommand(std::allocator_arg_t, Allocator, T&&);
+    MutationCommand(std::allocator_arg_t, Allocator, const MutationCommand&);
+    MutationCommand(std::allocator_arg_t, Allocator, MutationCommand&&);
+    MutationCommand(const MutationCommand&) = delete;
+    MutationCommand(MutationCommand&&) noexcept = default;
+    MutationCommand& operator=(MutationCommand&&);
+
+    Memory memory_resource() const noexcept {
+        return resource_;
+    }
+
+    Result<MutationRequest, RequestIntentError> request(Memory, std::string_view) const&;
+    Result<MutationRequest, RequestIntentError> request(Memory, std::string_view) &&;
+
+private:
+    Memory resource_;
+};
+
+struct MutationRequest {
+    using allocator_type = Allocator;
+    using Batch = MutationCommand::Batch;
+    using Storage = MutationCommand::Storage;
+    Storage data;
+
+    template <class T>
+        requires(std::same_as<std::remove_cvref_t<T>, InsertCommand> ||
+                 std::same_as<std::remove_cvref_t<T>, UpdateCommand> ||
+                 std::same_as<std::remove_cvref_t<T>, DeleteCommand> ||
+                 std::same_as<std::remove_cvref_t<T>, RecoverCommand> ||
+                 std::same_as<std::remove_cvref_t<T>, Batch>)
+    MutationRequest(std::allocator_arg_t, Allocator a, T&& value, const MutationIntent& intent)
+        : data((intent.require_valid(),
+                std::make_obj_using_allocator<std::remove_cvref_t<T>>(a, std::forward<T>(value)))),
+          resource_(a.resource()), intent_(std::allocator_arg, a, intent) {}
+
+    MutationRequest(std::allocator_arg_t,
+                    Allocator a,
+                    const MutationCommand& command,
+                    const MutationIntent& intent)
+        : data((intent.require_valid(),
+                std::visit(
+                    [&](const auto& value) -> Storage {
+                        return std::make_obj_using_allocator<std::decay_t<decltype(value)>>(a,
+                                                                                            value);
+                    },
+                    command.data))),
+          resource_(a.resource()), intent_(std::allocator_arg, a, intent) {}
+
+    MutationRequest(std::allocator_arg_t,
+                    Allocator a,
+                    MutationCommand&& command,
+                    const MutationIntent& intent)
+        : data((intent.require_valid(),
+                std::visit(
+                    [&](auto& value) -> Storage {
+                        return std::make_obj_using_allocator<std::decay_t<decltype(value)>>(
+                            a, std::move(value));
+                    },
+                    command.data))),
+          resource_(a.resource()), intent_(std::allocator_arg, a, intent) {}
+
+    template <class T>
+    MutationRequest(std::allocator_arg_t, Allocator a, T&& value, std::string_view comment)
+        : MutationRequest(
+              std::allocator_arg, a, std::forward<T>(value), validated(a.resource(), comment)) {}
+
+    template <class T>
+    static Result<MutationRequest, RequestIntentError>
+    create(Memory resource, T&& command, std::string_view comment) {
+        using R = Result<MutationRequest, RequestIntentError>;
+        auto intent = MutationIntent::create(resource, comment);
+        if (!intent) {
+            return R::err(resource, std::move(intent).error());
+        }
+        return R::ok(
+            resource,
+            MutationRequest(
+                std::allocator_arg, Allocator(resource), std::forward<T>(command), intent.value()));
+    }
 
     MutationRequest(std::allocator_arg_t, Allocator a, const MutationRequest& other)
         : data(std::visit(
@@ -70,15 +237,19 @@ struct MutationRequest {
                   return std::make_obj_using_allocator<std::decay_t<decltype(value)>>(a, value);
               },
               other.data)),
-          resource_(a.resource()) {}
+          resource_(a.resource()), intent_(std::allocator_arg, a, other.intent_),
+          diagnostic_redactions_(detail::clone_in(a.resource(), other.diagnostic_redactions_)) {}
 
     MutationRequest(std::allocator_arg_t, Allocator a, MutationRequest&& other)
-        : MutationRequest(detail::move_to(a.resource(), std::move(other))) {}
+        : MutationRequest(
+              (other.require_valid_intent(), detail::move_to(a.resource(), std::move(other)))) {}
 
     MutationRequest(const MutationRequest&) = delete;
+
     MutationRequest(MutationRequest&&) noexcept = default;
 
     MutationRequest& operator=(MutationRequest&& other) {
+        other.require_valid_intent();
         return detail::assign_scoped(*this, std::move(other));
     }
 
@@ -94,12 +265,90 @@ struct MutationRequest {
             data);
     }
 
-    std::optional<std::string_view> comment() const {
-        auto chain = trace_chain();
-        if (chain.empty()) {
-            return {};
+    void require_valid_intent() const {
+        intent_.require_valid();
+        auto* children = std::get_if<Batch>(&data);
+        if (!children || children->empty()) {
+            return;
         }
-        return chain.back().comment;
+        Vector<const MutationRequest*> pending(resource_);
+        for (const auto& child : *children) {
+            pending.push_back(&child);
+        }
+        while (!pending.empty()) {
+            auto* current = pending.back();
+            pending.pop_back();
+            current->intent_.require_valid();
+            if (auto* children = std::get_if<Batch>(&current->data)) {
+                for (const auto& child : *children) {
+                    pending.push_back(&child);
+                }
+            }
+        }
+    }
+
+    const MutationIntent& intent() const noexcept {
+        return intent_;
+    }
+
+    std::string_view comment() const noexcept {
+        return intent_.comment();
+    }
+
+    MutationRequest& with_diagnostic_redactions(const SqlIntentRedactions* values) & {
+        if (values == diagnostic_redactions()) {
+            return *this;
+        }
+        if (values) {
+            diagnostic_redactions_.emplace(std::allocator_arg, Allocator(resource_), *values);
+        } else {
+            diagnostic_redactions_.reset();
+        }
+        return *this;
+    }
+
+    const SqlIntentRedactions* diagnostic_redactions() const noexcept {
+        return diagnostic_redactions_ ? &*diagnostic_redactions_ : nullptr;
+    }
+
+    TraceChain execution_trace_chain() const {
+        TraceChain result(trace_chain().begin(), trace_chain().end(), resource_);
+        if (std::holds_alternative<Batch>(data)) {
+            return result;
+        }
+        auto root = std::find_if(result.begin(), result.end(), [](const TraceNode& node) {
+            return node.kind == TraceKind::AuditReason;
+        });
+        if (root != result.end()) {
+            root->comment = comment();
+            return result;
+        }
+        std::visit(
+            [&](const auto& command) {
+                using T = std::decay_t<decltype(command)>;
+                if constexpr (!std::same_as<T, Batch>) {
+                    std::optional<std::uint64_t> id;
+                    if constexpr (std::same_as<T, InsertCommand>) {
+                        auto found = command.values.fields.find("id");
+                        if (found != command.values.fields.end()) {
+                            id = found->second.try_u64();
+                        }
+                    } else {
+                        id = command.id.try_u64();
+                    }
+                    if (id && *id == 0) {
+                        id.reset();
+                    }
+                    TraceChain canonical(resource_);
+                    canonical.emplace_back(TraceKind::AuditReason, command.entity, comment(), id);
+                    for (const auto& node : result) {
+                        canonical.emplace_back(node);
+                    }
+                    result.swap(canonical);
+                }
+            },
+            data);
+        return result;
     }
 
     Memory memory_resource() const {
@@ -107,8 +356,55 @@ struct MutationRequest {
     }
 
 private:
+    static MutationIntent validated(Memory resource, std::string_view comment) {
+        auto intent = MutationIntent::create(resource, comment);
+        if (!intent) {
+            throw std::invalid_argument(std::string(intent.error().to_string(resource)));
+        }
+        return std::move(intent).value();
+    }
+
     Memory resource_;
+    MutationIntent intent_;
+    std::optional<SqlIntentRedactions> diagnostic_redactions_;
 };
+
+template <class T>
+    requires(std::same_as<std::remove_cvref_t<T>, InsertCommand> ||
+             std::same_as<std::remove_cvref_t<T>, UpdateCommand> ||
+             std::same_as<std::remove_cvref_t<T>, DeleteCommand> ||
+             std::same_as<std::remove_cvref_t<T>, RecoverCommand> ||
+             std::same_as<std::remove_cvref_t<T>, MutationCommand::Batch>)
+MutationCommand::MutationCommand(std::allocator_arg_t, Allocator a, T&& value)
+    : data(std::make_obj_using_allocator<std::remove_cvref_t<T>>(a, std::forward<T>(value))),
+      resource_(a.resource()) {}
+
+inline MutationCommand::MutationCommand(std::allocator_arg_t,
+                                        Allocator a,
+                                        const MutationCommand& other)
+    : data(std::visit(
+          [&](const auto& value) -> Storage {
+              return std::make_obj_using_allocator<std::decay_t<decltype(value)>>(a, value);
+          },
+          other.data)),
+      resource_(a.resource()) {}
+
+inline MutationCommand::MutationCommand(std::allocator_arg_t, Allocator a, MutationCommand&& other)
+    : MutationCommand(detail::move_to(a.resource(), std::move(other))) {}
+
+inline MutationCommand& MutationCommand::operator=(MutationCommand&& other) {
+    return detail::assign_scoped(*this, std::move(other));
+}
+
+inline Result<MutationRequest, RequestIntentError>
+MutationCommand::request(Memory r, std::string_view comment) const& {
+    return MutationRequest::create(r, *this, comment);
+}
+
+inline Result<MutationRequest, RequestIntentError>
+MutationCommand::request(Memory r, std::string_view comment) && {
+    return MutationRequest::create(r, std::move(*this), comment);
+}
 
 struct GuardedMutationRequest {
     // The eventual executor must apply guard in the mutation statement itself.

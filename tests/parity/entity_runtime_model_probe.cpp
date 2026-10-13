@@ -170,10 +170,10 @@ static Json evaluate(UserContext& user, const Json& input) {
         put("source_none", original.error_source() == nullptr);
     } else if (mode == "state") {
         auto original = state(user, input);
-        auto copy = detail::clone_in(owner, original);
-        auto fresh = EntityRuntimeState::fresh_with_shared_graph(owner, original);
         put("debug", formatted_debug(owner, original));
+        auto copy = detail::clone_in(owner, original);
         put("clone", formatted_debug(owner, copy));
+        auto fresh = EntityRuntimeState::fresh_with_shared_graph(owner, original);
         put("fresh", formatted_debug(owner, fresh));
         put("equal_clone", original == copy);
         put("equal_fresh", original == fresh);
@@ -185,12 +185,12 @@ static Json evaluate(UserContext& user, const Json& input) {
         if (!frozen) {
             throw std::logic_error("Original fixture graph must publish");
         }
-        auto copy = detail::clone_in(owner, original);
         auto domain = text(field(input, "owner"));
         auto id = number<std::uint64_t>(field(input, "owner_id"));
         auto list = original.relation_list<String>(domain, id, "items");
         auto option = original.relation_option<String>(domain, id, "optional");
         put("state", formatted_debug(owner, original));
+        auto copy = detail::clone_in(owner, original);
         put("clone_state", formatted_debug(owner, copy));
         put("state_equal", original == copy);
         put("list", formatted_debug(owner, list));

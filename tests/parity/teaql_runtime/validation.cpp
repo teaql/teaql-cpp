@@ -130,6 +130,8 @@ static void checker_registry_validates_and_fixes_insert_commands() {
     install_checker<OrderChecker>(*f.user);
     f.generator(77);
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native validation")),
+          "private native entry supplies explicit mutation intent");
     auto command = service.insert_command();
     command.value("name", "valid");
     auto prepared = service.prepare_insert_command(command);
@@ -189,6 +191,8 @@ static auto& execute_ledger(PlainFixture& f,
                             const Locations& locations) {
     auto& service =
         EntityDataService<StubExecutor>::for_executor(*f.user, entity, *f.user, executor);
+    check(bool(Access::bind_mutation_intent(service, "Inspect native ledger validation")),
+          "private ledger fixture binds its explicit mutation intent");
     return Access::execute_ledger_plan_internal(service, root, locations);
 }
 
@@ -211,6 +215,7 @@ static void nested_sparse_ledger_insert_plan_rejects_required_field_at_child_pat
     f.metadata(std::move(descriptor));
     auto& executor = f.user->make<StubExecutor>();
     EntityRuntimeState root(std::allocator_arg, Allocator(f.owner));
+    root.set_comment("Inspect native ledger validation");
     auto child = key(f.owner, "OrderLine", 9);
     root.mark_as_new(child);
     root.set(child, "order_id", Value(f.owner, std::uint64_t(7)));
@@ -237,6 +242,7 @@ static void ledger_update_of_existing_versioned_row_requires_loaded_original_ver
     row.emplace("version", Value(f.owner, std::int64_t(3)));
     executor.rows.emplace_back(row);
     EntityRuntimeState root(std::allocator_arg, Allocator(f.owner));
+    root.set_comment("Inspect native ledger validation");
     root.set(key(f.owner, "School", 1), "name", Value(f.owner, "New School"));
     Locations locations(f.owner);
     const auto& error = ledger_error(execute_ledger(f, "School", executor, root, locations).wait());
@@ -252,6 +258,7 @@ static void generated_attachment_version_conflict_rejects_ledger_plan_before_sql
     f.metadata(school(f.owner, "name", true));
     auto& executor = f.user->make<StubExecutor>();
     EntityRuntimeState root(std::allocator_arg, Allocator(f.owner));
+    root.set_comment("Inspect native ledger validation");
     EntityRuntimeState stale(std::allocator_arg, Allocator(f.owner));
     auto entity = key(f.owner, "School", 1);
     root.set_original_version(entity, 2);
@@ -278,6 +285,7 @@ static void ledger_delete_of_existing_versioned_row_requires_loaded_original_ver
     f.metadata(school(f.owner, "", true));
     auto& executor = f.user->make<StubExecutor>();
     EntityRuntimeState root(std::allocator_arg, Allocator(f.owner));
+    root.set_comment("Inspect native ledger validation");
     root.mark_as_delete(key(f.owner, "School", 1));
     Locations locations(f.owner);
     const auto& error = ledger_error(execute_ledger(f, "School", executor, root, locations).wait());
@@ -410,6 +418,8 @@ static void typed_checker_validates_and_fixes_derived_entities_without_record_ac
     install_typed_checker<Order, TypedOrderChecker>(*f.user);
     f.generator(79);
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native validation")),
+          "private native entry supplies explicit mutation intent");
     auto command = service.insert_command();
     command.value("name", "fix");
     auto prepared = service.prepare_insert_command(command);
@@ -510,6 +520,8 @@ static void user_context_language_switch_translates_checker_errors() {
     f.generator(77);
     f.user->with_language(Language::Chinese);
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native validation")),
+          "private native entry supplies explicit mutation intent");
     auto result = service.prepare_insert_command(service.insert_command());
     check(!result && result.error().kind() == RuntimeError::Kind::Check,
           "original translated missing-name error");

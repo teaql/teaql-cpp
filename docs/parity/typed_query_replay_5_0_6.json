@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Five complete historical typed query/stream/enhancement/decoder/ID-set families. Full generated/model/configuration and profile-specific boundaries remain open.",
+  "source_observations": 943,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 10,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "enhanced_entities_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "entity_stream_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "id_set_page_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "entity_decoder_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "entity_query_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "entity_stream_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "id_set_page_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "enhanced_entities_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "entity_decoder_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "runtime_entity_query_contracts",
+          "status": "passed"
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "entity_stream_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "runtime_entity_query_contracts",
+          "status": "passed"
+        }
+      ]
+    },
+    "modules_native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_runtime_entity_query_contracts",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 107,
+  "full_capabilities": "All 17 remain partial.",
+  "formatting": {
+    "handwritten_files": 993,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "module_paths_exit_code": 0
+}

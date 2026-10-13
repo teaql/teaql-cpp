@@ -227,8 +227,11 @@ struct Body {
             case 0: {
                 if (!query) {
                     SelectQuery q(std::allocator_arg, Allocator(r), "Order");
-                    query = &scope.query(
-                        QueryRequest(std::allocator_arg, Allocator(r), q, false, false));
+                    auto request = QueryRequest::from_query(r, q, false, false);
+                    if (!request) {
+                        return fail(RuntimeError::request_intent(r, request.error()));
+                    }
+                    query = &scope.query(std::move(request).value());
                 }
                 forwarding.attach(query->wake_signal(), wake);
                 auto* result = query->poll();
@@ -257,8 +260,11 @@ struct Body {
                         }
                         command = std::move(prepared).value();
                     }
-                    mutation = &scope.mutate(
-                        MutationRequest(std::allocator_arg, Allocator(r), std::move(command)));
+                    auto request = MutationRequest::create(r, std::move(command), "");
+                    if (!request) {
+                        return fail(RuntimeError::request_intent(r, request.error()));
+                    }
+                    mutation = &scope.mutate(std::move(request).value());
                 }
                 forwarding.attach(mutation->wake_signal(), wake);
                 auto* result = mutation->poll();

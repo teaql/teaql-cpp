@@ -1,0 +1,30 @@
+{
+  "scope": "cpp-lib-core",
+  "qualification_only": false,
+  "generator_base_commit": "77b301e9b29a4928aabebdbe2ccc6d03d618f247",
+  "generator_reference_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "generator_implementation_sha256": {
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "823c3b039ee3bc0ced7578da21f49c75ac3bfa41e345a98a0fe5fd5349ff840c",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "49dd29d76b7fea04fd1eee1e01ac109dce6cae1b7f2a6c154ef5b21f97768844",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
+    "model/src/main/resources/models/infra/system-types.xml": "4847e5bafeeb930abb7de78a81650ac02dac207ae07cfcbfc7c50cd0cebec964",
+    "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "d5568fb154711ac878c9171454644a04d2678a637eb148379544da66801ce139"
+  },
+  "model": "tests/generator/dynamic_json.xml",
+  "model_sha256": "926d116146ea28d5c612ab14a01304595f27aac14d2a8476291f98c7c797a97f",
+  "runtime_rust_baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "formatter": "18.1.8",
+  "files": {
+    "AGENTS.md": "f4fb39d771a79023e97bddc3b157cb672bdbc8ae30ec411e79b5bd91af0bb367",
+    "ASSIST.md": "d3b0390f75cd86eb0e0c0f23d6eacb9a5a7b519cdb22821de130c5af2cdb5457",
+    "CMakeLists.txt": "47a5c6bddab7fbe341a815b621dee4930ffc2e3a270dde38d51b53c1b85a4395",
+    "include/cpp_dynamic_json/checkers.hpp": "c61010e02a1937ad8cdf5723e1e973af47fa9e7e1a656516dd488b9b46ea3927",
+    "include/cpp_dynamic_json/expressions.hpp": "b4a5ef7c30f6430a2456cd80070d5529b9422ca17d0b6be8dba0b5bdcdfefeef",
+    "include/cpp_dynamic_json/models.hpp": "2c15b29ed086ed1e6b940a3c6f03ab1ecd0f7a0119813784cacd4387d32f1342",
+    "include/cpp_dynamic_json/queries.hpp": "f081493faad6bb7f46bb6e081fa22e62be0761fddaa530904fe9acc19a7de44e",
+    "include/cpp_dynamic_json/runtime.hpp": "ce6563c1c81b7458074651fbccd21967a4ada286c765f11f1a8ca2aa86ca66a9",
+    "include/cpp_dynamic_json/sample_data.hpp": "1e93d8b85017d20c8efb708d5f03ebed20f62c0053d9e3a27397d192180a18f7",
+    "include/cpp_dynamic_json/support.hpp": "e5aa31b195043ac0254e9f911ccb663221e9daf3601b75e8e2ea95708c9e4518",
+    "include/cpp_dynamic_json.hpp": "7f75e7b06ba32b6a62f8eee19dd01a9239fb0842206144d7e9e5a3f43b8e9739"
+  }
+}

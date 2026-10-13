@@ -3,6 +3,7 @@
 #include <teaql/runtime/context_error.hpp>
 #include <teaql/sql/types.hpp>
 #include <teaql/core/entity.hpp>
+#include <teaql/core/request_intent.hpp>
 
 namespace teaql {
 struct RuntimeMissingRelation {
@@ -82,8 +83,13 @@ public:
         Schema,
         Transaction,
         MissingRelation,
-        OptimisticLockConflict
+        OptimisticLockConflict,
+        RequestIntent,
+        DynamicField,
+        AuditAfterCommit
     };
+
+    static RuntimeError audit_after_commit(Memory, const RuntimeError&);
 
     static RuntimeError missing_entity(Memory r, std::string_view message) {
         return RuntimeError(r, Kind::MissingEntity, String(message, r));
@@ -103,6 +109,14 @@ public:
 
     static RuntimeError graph(Memory r, std::string_view message) {
         return RuntimeError(r, Kind::Graph, String(message, r));
+    }
+
+    static RuntimeError request_intent(Memory r, const RequestIntentError& error) {
+        return RuntimeError(r, Kind::RequestIntent, detail::clone_in(r, error));
+    }
+
+    static RuntimeError dynamic_field(Memory r, const DynamicFieldError& error) {
+        return RuntimeError(r, Kind::DynamicField, detail::clone_in(r, error));
     }
 
     static RuntimeError id_generation(Memory r, std::string_view message) {
@@ -153,7 +167,12 @@ public:
         : resource_(a.resource()), kind_(other.kind_),
           data_(std::visit(
               [&](const auto& value) -> Storage {
-                  return detail::clone_in(a.resource(), value);
+                  if constexpr (std::same_as<std::remove_cvref_t<decltype(value)>,
+                                             detail::ScopedBox<RuntimeError>>) {
+                      return detail::make_box<RuntimeError>(a.resource(), *value);
+                  } else {
+                      return detail::clone_in(a.resource(), value);
+                  }
               },
               other.data_)) {}
 
@@ -187,6 +206,18 @@ public:
         return std::get<RuntimeMissingRelation>(data_);
     }
 
+    const RequestIntentError& request_intent_error() const {
+        return std::get<RequestIntentError>(data_);
+    }
+
+    const RuntimeError& audit_after_commit_error() const {
+        return *std::get<detail::ScopedBox<RuntimeError>>(data_);
+    }
+
+    const DynamicFieldError& dynamic_field_error() const {
+        return std::get<DynamicFieldError>(data_);
+    }
+
     const RuntimeOptimisticLockConflict& optimistic_lock_conflict_error() const {
         return std::get<RuntimeOptimisticLockConflict>(data_);
     }
@@ -207,7 +238,10 @@ private:
                                  SqlCompileError,
                                  CheckResults,
                                  RuntimeMissingRelation,
-                                 RuntimeOptimisticLockConflict>;
+                                 RuntimeOptimisticLockConflict,
+                                 RequestIntentError,
+                                 DynamicFieldError,
+                                 detail::ScopedBox<RuntimeError>>;
 
     template <class T>
     RuntimeError(Memory r, Kind kind, T&& value)

@@ -7,7 +7,7 @@ using Installed = std::pmr::set<std::pair<String, std::uint64_t>>;
 
 EntityGraphDecodeResult flatten(const UserContext& context,
                                 std::string_view entity,
-                                Record& record,
+                                CompactRow& record,
                                 const EntityRuntimeState& root,
                                 EntityGraphBuilder& graph,
                                 Installed& installed) {
@@ -18,23 +18,42 @@ EntityGraphDecodeResult flatten(const UserContext& context,
             relations.emplace_back(relation);
         }
     }
+    RelationShapeCache shapes(std::allocator_arg, Allocator(r));
     for (const auto& relation : relations) {
         if (!ContextEntityAccess::has_entity_graph_decoder(context, relation.target_entity)) {
             continue;
         }
-        auto node = record.extract(relation.name);
-        if (node.empty()) {
+        auto loaded = record.take_loaded_relation(relation.name);
+        auto node = record.remove(relation.name);
+        if (!node) {
             continue;
         }
-        Value value(std::move(node.mapped()));
+        Value value(std::move(*node));
         const bool null = std::holds_alternative<std::monostate>(value.data) ||
                           std::holds_alternative<TypedNull>(value.data);
+        if (!relation.many && loaded && !loaded->facets.empty()) {
+            const auto* value = record.get("id");
+            auto owner = value ? value->try_u64() : std::nullopt;
+            if (!owner) {
+                return EntityGraphDecodeResult::err(
+                    r,
+                    EntityError(std::allocator_arg,
+                                Allocator(r),
+                                entity,
+                                "Facet owner is missing its u64 id"));
+            }
+            graph.install_relation_facets(entity, *owner, relation.name, loaded->facets);
+        }
         if (!relation.many && null) {
-            record.emplace(relation.name, std::move(value));
+            record.insert(relation.name, value);
             continue;
         }
-        Vector<Record> children(r);
-        if (auto* object = std::get_if<Value::Object>(&value.data)) {
+        EntityGraphBuilder::RelationFacets facets(r);
+        Vector<CompactRow> children(r);
+        if (loaded) {
+            facets.swap(loaded->facets);
+            children = std::move(loaded->data);
+        } else if (auto* object = std::get_if<Value::Object>(&value.data)) {
             children.emplace_back(std::move(*object));
         } else if (auto* list = std::get_if<Value::List>(&value.data)) {
             for (auto& item : *list) {
@@ -43,7 +62,7 @@ EntityGraphDecodeResult flatten(const UserContext& context,
                 }
             }
         } else if (!null) {
-            record.emplace(relation.name, std::move(value));
+            record.insert(relation.name, value);
             continue;
         }
         for (auto& child : children) {
@@ -52,9 +71,14 @@ EntityGraphDecodeResult flatten(const UserContext& context,
                 return result;
             }
         }
+        if (!relation.many && relation.local_key != "id" && !children.empty()) {
+            if (const auto* key = children.front().get(relation.foreign_key)) {
+                record.insert(relation.local_key, *key);
+            }
+        }
         if (relation.many || relation.local_key == "id") {
-            auto found = record.find("id");
-            auto owner = found == record.end() ? std::nullopt : found->second.try_u64();
+            auto* found = record.get("id");
+            auto owner = found ? found->try_u64() : std::nullopt;
             if (!owner) {
                 return EntityGraphDecodeResult::err(
                     r,
@@ -67,33 +91,61 @@ EntityGraphDecodeResult flatten(const UserContext& context,
             for (const auto& child : children) {
                 rows.emplace_back(child);
             }
+            SmartList<CompactRow> list(std::allocator_arg, Allocator(r), std::move(rows));
+            list.facets.swap(facets);
+            auto result = relation.many
+                              ? ContextEntityAccess::decode_entity_graph_compact_smart_list(
+                                    context,
+                                    relation.target_entity,
+                                    std::move(list),
+                                    root,
+                                    graph,
+                                    entity,
+                                    *owner,
+                                    relation.name)
+                              : ContextEntityAccess::decode_entity_graph_compact_option(
+                                    context,
+                                    relation.target_entity,
+                                    std::move(list.data),
+                                    root,
+                                    graph,
+                                    entity,
+                                    *owner,
+                                    relation.name);
+            if (!result) {
+                return result;
+            }
+            continue;
+        }
+        if (children.size() == 1 && children.front().len() == 1 &&
+            children.front().contains_key(relation.foreign_key)) {
+            const auto* value = record.get("id");
+            auto owner = value ? value->try_u64() : std::nullopt;
+            if (!owner) {
+                return EntityGraphDecodeResult::err(
+                    r,
+                    EntityError(std::allocator_arg,
+                                Allocator(r),
+                                entity,
+                                "forward relation owner is missing its u64 id"));
+            }
             auto result =
-                relation.many
-                    ? ContextEntityAccess::decode_entity_graph_compact_list(context,
-                                                                            relation.target_entity,
-                                                                            std::move(rows),
-                                                                            root,
-                                                                            graph,
-                                                                            entity,
-                                                                            *owner,
-                                                                            relation.name)
-                    : ContextEntityAccess::decode_entity_graph_compact_option(
-                          context,
-                          relation.target_entity,
-                          std::move(rows),
-                          root,
-                          graph,
-                          entity,
-                          *owner,
-                          relation.name);
+                ContextEntityAccess::decode_entity_graph_compact_option(context,
+                                                                        relation.target_entity,
+                                                                        std::move(children),
+                                                                        root,
+                                                                        graph,
+                                                                        entity,
+                                                                        *owner,
+                                                                        relation.name);
             if (!result) {
                 return result;
             }
             continue;
         }
         for (const auto& child : children) {
-            auto found = child.find("id");
-            auto id = found == child.end() ? std::nullopt : found->second.try_u64();
+            auto* found = child.get("id");
+            auto id = found ? found->try_u64() : std::nullopt;
             if (!id) {
                 return EntityGraphDecodeResult::err(
                     r,
@@ -114,6 +166,7 @@ EntityGraphDecodeResult flatten(const UserContext& context,
                 }
             }
         }
+        record.mark_relation_loaded(relation.name, shapes);
     }
     return EntityGraphDecodeResult::ok(r, {});
 }
@@ -129,12 +182,10 @@ Result<EntityRuntimeState, EntityError> attach_flat_relation_graph(const UserCon
     EntityGraphBuilder graph(std::allocator_arg, Allocator(r));
     Installed installed(r);
     for (auto& row : rows) {
-        auto record = row.into_map(r);
-        auto result = flatten(context, entity, record, root, graph, installed);
+        auto result = flatten(context, entity, row, root, graph, installed);
         if (!result) {
             return R::err(r, std::move(result).error());
         }
-        row = CompactRow(std::allocator_arg, Allocator(r), record);
     }
     if (!root.freeze_graph(std::move(graph))) {
         return R::err(

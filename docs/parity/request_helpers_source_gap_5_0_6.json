@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "total": 872,
+  "failed": 15,
+  "first_input": {
+    "kind": "facets",
+    "value": {
+      "kind": "null"
+    }
+  },
+  "first_expected": {
+    "list": "SmartList { data: [Null], total_count: Some(17), aggregations: {}, summary: {}, facets: {\"replace\": SmartList { data: [CompactRow { columns: CompactRowLayout { names: [\"count\"], relation_names: [], dynamic_properties: None, primary: OnceLock(<uninit>), other_types: Mutex { data: {}, poisoned: false, .. } }, values: [I64(1)], loaded_relations: None }], total_count: Some(9), aggregations: {}, summary: {}, facets: {}, is_loaded: true }, \"\u96ea\": SmartList { data: [], total_count: None, aggregations: {}, summary: {}, facets: {}, is_loaded: false }}, is_loaded: true }"
+  },
+  "first_actual": {
+    "list": "SmartList { data: [Null], total_count: Some(17), aggregations: {}, summary: {}, facets: {\"replace\": SmartList { data: [CompactRow { columns: [\"count\"], values: [I64(1)] }], total_count: Some(9), aggregations: {}, summary: {}, facets: {}, is_loaded: true }, \"\u96ea\": SmartList { data: [], total_count: None, aggregations: {}, summary: {}, facets: {}, is_loaded: false }}, is_loaded: true }"
+  },
+  "cases": [
+    {
+      "index": 857,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 858,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 859,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 860,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 861,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 862,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 863,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 864,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 865,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 866,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 867,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 868,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 869,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 870,
+      "paths": [
+        "/list"
+      ]
+    },
+    {
+      "index": 871,
+      "paths": [
+        "/list"
+      ]
+    }
+  ]
+}

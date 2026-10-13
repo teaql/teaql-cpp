@@ -246,8 +246,9 @@ static Json evaluate(UserContext& user, const Json& j) {
     auto q = query(r, field(j, "query"));
     q.entity =
         optional(j, "query_entity") ? text(field(j, "query_entity")) : std::string_view(e.name);
-    QueryRequest req(std::allocator_arg, Allocator(r), q, true, flag(j, "metadata", true));
-    req.comment.emplace("request comment", r);
+    auto intent = QueryIntent::create(r, "request comment", "inspect SQL stream fixture");
+    QueryRequest req(
+        std::allocator_arg, Allocator(r), q, intent.value(), true, flag(j, "metadata", true));
     auto& events = user.make<Json::Array>();
     auto observer = ExecutionObserver(std::allocator_arg, Allocator(r), [&](ExecutionMetadata m) {
         auto out = metadata(r, m);

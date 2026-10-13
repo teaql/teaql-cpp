@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 2304,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "initial_missing_dispatch_differences": 1728,
+  "profiles": {
+    "native": {
+      "passed": 8,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "relation_hydration_contracts",
+        "hydration_flat_facets_rust_parity",
+        "hydration_flat_facets_context_close",
+        "graph_relation_facets_rust_parity",
+        "graph_relation_facets_context_contracts",
+        "hydration_owner_facets_async_rust_parity",
+        "hydration_owner_facets_async_context_close",
+        "entity_decoder_contracts"
+      ]
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "relation_hydration_contracts",
+        "hydration_flat_facets_rust_parity",
+        "hydration_flat_facets_context_close"
+      ]
+    },
+    "modules_native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_relation_hydration_contracts",
+        "module_hydration_flat_facets_context_close",
+        "module_hydration_flat_facets_rust_parity"
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 115,
+  "catalog_exports": 1477,
+  "module_paths_exit_code": 0,
+  "formatting": {
+    "handwritten_files": 1001,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_runtime/include/teaql/runtime/entity_graph_decoder.hpp": "5cca97a0332543b3b1dbc244086caed7e627b1aaed10da290169473549a78964",
+    "teaql_runtime/src/entity_graph_decoder.cpp": "0a31740f9cf51e2720f9ea59b706aafeb77ec08973fc19b1a6596d54f9f8cdb9",
+    "teaql_runtime/include/teaql/runtime/detail/context/entity.hpp": "51f15de446ade608399d1061a340f35d3f1a153e5c159c8bf0506c23c84310f9",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/relation_installation.hpp": "0086258d3065345b3f077a311ade543473b1c80f865ed03904a14fa8124688ca",
+    "teaql_runtime/src/data_service/relation_installation.cpp": "dd26a8d1b3759d40e8590fc84043b9cc84550f1b4f2159b9329323112c205b52",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/relation_hydration.hpp": "3e0f5a1510565b7dd2b9108309b6568bfca2fb0bcf45ac97d688d7dec0fbb653",
+    "teaql_provider_sqlite/tests/relation_hydration_tests.cpp": "a87ea28d732ebebccba0e1fabcb5ee34e64dd0ee7215f0bbbfa4a4327ab499e0",
+    "tests/parity/hydration_flat_facets_probe.cpp": "bfd3a7c57bd6f74c9d01e8983b0d23a92e86f06ba9c6b59d6b05fde988ba9a2e"
+  },
+  "binaries_sha256": {
+    "build_native_current/teaql_hydration_flat_facets_probe": "68ec221d667d230219ad90298b4eb74340fc1a7c452507163affebeb0ca6216c",
+    "build_sanitize_current/teaql_hydration_flat_facets_probe": "fe29e9804ea722f20fab557be60fb1516dea582c73fcef8b0abc7131f371e48b",
+    "build_modules_native/modules/teaql_module_hydration_flat_facets_probe": "d7f32f807ff4a406effe2781fd09bae0ec92a8a9791d1f37738602c982a47ed4"
+  },
+  "compatibility": "Original six-argument installation function signatures remain available; additional overloads carry facets. Original pointer types compile in identical native/import-only consumers.",
+  "notice": "Scoped flat/compact-flat owner facets, partial graph/error/cancel behavior and native SQLite/Global/Context-close integration. Not complete historical hydration, nested/dynamic/JSON view/physical original SQL/privacy/generated/full decoder/model parity."
+}

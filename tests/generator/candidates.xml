@@ -1,0 +1,14 @@
+<root name="cpp_candidates" org="teaql" data_service="sqlite">
+    <platform name="string()" />
+    <order_status id="id()" platform="platform(contextRoot=true)" name="string()" code="string()"
+                  _constant="true" _identifier="code">
+        <_value id="11" name="Draft order" code="DRAFT" />
+        <_value id="22" name="In progress order" code="IN_PROGRESS" />
+        <_value id="auto" name="Completed order" code="DONE" />
+    </order_status>
+    <record platform="platform(contextRoot=true)" name="string()"
+            status="order_status()" phase="Draft|InProgress|done"
+            tag="string(optional=true candidates=red,blue,null)" />
+    <person _cat="human" platform="platform(contextRoot=true)" name="string()"
+            status="order_status()" phase="Draft|InProgress|done" />
+</root>

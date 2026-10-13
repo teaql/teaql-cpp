@@ -1,0 +1,131 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Terminal first scoped checks after authoritative readback correction. Sparse native fixtures and inspection of already-scrubbed SQL provenance need correction; no success is inferred from these gates.",
+  "profiles": {
+    "native": {
+      "passed": 10,
+      "failed": 4,
+      "exit_code": 8,
+      "tests": [
+        {
+          "name": "ledger_move_only_contracts",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "ledger_move_only_rust_parity",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "audited_save_rust_parity",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "audited_save_context_contracts",
+          "failed": true,
+          "messages": [
+            null
+          ]
+        },
+        {
+          "name": "graph_saver_context_contracts",
+          "failed": true,
+          "messages": [
+            null
+          ]
+        },
+        {
+          "name": "ledger_execution_context_contracts",
+          "failed": true,
+          "messages": [
+            null
+          ]
+        },
+        {
+          "name": "recursive_graph_write_context_contracts",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "entity_graph_plan_context_contracts",
+          "failed": true,
+          "messages": [
+            null
+          ]
+        },
+        {
+          "name": "graph_plan_scopes_rust_parity",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "entity_graph_plan_rust_parity",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "mutation_policy_rust_parity",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "checker_rust_parity",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "graph_repository_rust_parity",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "runtime_graph_rust_parity",
+          "failed": false,
+          "messages": []
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 1,
+      "failed": 2,
+      "exit_code": 8,
+      "tests": [
+        {
+          "name": "ledger_move_only_contracts",
+          "failed": false,
+          "messages": []
+        },
+        {
+          "name": "audited_save_context_contracts",
+          "failed": true,
+          "messages": [
+            null
+          ]
+        },
+        {
+          "name": "entity_graph_plan_context_contracts",
+          "failed": true,
+          "messages": [
+            null
+          ]
+        }
+      ]
+    },
+    "modules": {
+      "passed": 0,
+      "failed": 1,
+      "exit_code": 8,
+      "tests": [
+        {
+          "name": "module_entity_graph_plan_context_contracts",
+          "failed": true,
+          "messages": [
+            null
+          ]
+        }
+      ]
+    }
+  }
+}

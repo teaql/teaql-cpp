@@ -40,6 +40,34 @@ Expr Expr::column(Memory r, std::string_view name) {
     return result;
 }
 
+Expr Expr::like_pattern(Memory r, std::string_view pattern, std::string_view original) {
+    Expr result(r, Kind::LikePattern);
+    result.literal = Value(r, pattern);
+    result.name = original;
+    return result;
+}
+
+std::optional<std::pair<std::string_view, std::string_view>> Expr::lowered_like_operand() const {
+    if (kind != Kind::Binary || (op != BinaryOp::Like && op != BinaryOp::NotLike) ||
+        args.size() != 2 || args[1].kind != Kind::LikePattern) {
+        return std::nullopt;
+    }
+    const auto& right = args[1];
+    auto pattern = right.literal.try_text();
+    if (!pattern) {
+        return std::nullopt;
+    }
+    std::string_view original = right.name;
+    bool contain = pattern->size() == original.size() + 2 && pattern->starts_with('%') &&
+                   pattern->ends_with('%') && pattern->substr(1, original.size()) == original;
+    bool prefix = pattern->size() == original.size() + 1 && pattern->ends_with('%') &&
+                  pattern->substr(0, original.size()) == original;
+    bool suffix = pattern->size() == original.size() + 1 && pattern->starts_with('%') &&
+                  pattern->substr(1) == original;
+    return contain || prefix || suffix ? std::optional{std::pair{*pattern, original}}
+                                       : std::nullopt;
+}
+
 Expr Expr::function(Memory r, ExprFunction fn, std::span<const Expr> parts) {
     Expr result(r, Kind::Function);
     result.function_kind = fn;
@@ -90,7 +118,7 @@ Expr string_match(Memory r,
     }
     return Expr::binary(Expr::column(r, field),
                         negative ? BinaryOp::NotLike : BinaryOp::Like,
-                        Expr::value(r, pattern));
+                        Expr::like_pattern(r, pattern, text));
 }
 
 Expr logical(Memory r, Expr::Kind kind, std::span<const Expr> parts) {
@@ -231,6 +259,8 @@ bool Expr::operator==(const Expr& other) const {
         return name == other.name;
     case Kind::Value:
         return literal == other.literal;
+    case Kind::LikePattern:
+        return literal == other.literal && name == other.name;
     case Kind::Function:
         return function_kind == other.function_kind && args == other.args;
     case Kind::Binary:
@@ -301,11 +331,11 @@ Expr Expr::bit_xor_expr(const Expr& expr) {
 }
 
 Expr Expr::like(Memory r, std::string_view field, std::string_view text) {
-    return string_match(r, field, text, false, false, false);
+    return binary(column(r, field), BinaryOp::Like, value(r, text));
 }
 
 Expr Expr::not_like(Memory r, std::string_view field, std::string_view text) {
-    return string_match(r, field, text, false, false, true);
+    return binary(column(r, field), BinaryOp::NotLike, value(r, text));
 }
 
 Expr Expr::contain(Memory r, std::string_view field, std::string_view text) {

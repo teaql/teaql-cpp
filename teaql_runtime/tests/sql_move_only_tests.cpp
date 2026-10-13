@@ -263,6 +263,7 @@ static void actual_sql_adapters() {
     {
         auto request = [&] {
             SelectQuery query(std::allocator_arg, Allocator(owner), "Record");
+            query.comment("exercise move-only SQL query").purpose("retain native error ownership");
             return QueryRequest(std::allocator_arg, Allocator(owner), query, false, true);
         };
         const auto& query = executor.query(owner, request()).wait();
@@ -272,11 +273,13 @@ static void actual_sql_adapters() {
         insert.value("id", std::uint64_t(1))
             .value("version", std::int64_t(1))
             .value("name", "first");
-        const auto& mutation =
-            executor
-                .mutate(owner,
-                        MutationRequest(std::allocator_arg, Allocator(owner), std::move(insert)))
-                .wait();
+        const auto& mutation = executor
+                                   .mutate(owner,
+                                           MutationRequest(std::allocator_arg,
+                                                           Allocator(owner),
+                                                           std::move(insert),
+                                                           "exercise move-only native write"))
+                                   .wait();
         check(!mutation && mutation.error().transport_error().message == "native execute",
               "actual observed mutation adapter preserves the typed native error");
         const auto& begin = executor.begin(owner).wait();

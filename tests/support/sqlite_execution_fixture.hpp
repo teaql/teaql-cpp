@@ -191,5 +191,6 @@ static EntityDescriptor& model(GlobalContext& global) {
 static MutationRequest update(Memory r, std::string_view name = "new") {
     UpdateCommand c(std::allocator_arg, Allocator(r), "Record", std::uint64_t(7));
     c.value("name", name).audit_as("update reason");
-    return MutationRequest(std::allocator_arg, Allocator(r), std::move(c));
+    return MutationRequest(
+        std::allocator_arg, Allocator(r), std::move(c), "Update the fixture record");
 }

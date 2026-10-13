@@ -1,0 +1,20 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Source audit follow-up, not an execution failure or completed qualification.",
+  "items": [
+    {
+      "contract": "Embedded relation facets",
+      "rust": "enhance_plan computes relation_facets per owner and stores them in loaded SmartList; see relation.rs around the facet branch after attachment.",
+      "required": "Add actual original and C++ faceted relation stimuli and verify the full enclosing runtime path before deciding the implementation change.",
+      "status": "resolved_within_embedded_48_source_matrix",
+      "cpp_before": "RelationHydrationNode currently covers fetch/dynamic/descendants/install; this audit did not find the corresponding per-owner facet dispatch in that node.",
+      "evidence": "docs/hydration_owner_facets_5_0_6.md",
+      "remaining": "Flat/compact graph facets, dynamic readback and asynchronous error/cancel matrices remain open."
+    },
+    {
+      "contract": "Historical full hydration family",
+      "required": "Replay all 356 historical attach/install/embedded/flat/compact cases with source-adapted observer interfaces and preserve asynchronous install and decoder semantics.",
+      "status": "unqualified"
+    }
+  ]
+}

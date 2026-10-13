@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Complete seven historical public graph/governance input families and shared authoritative readback correction. Full capabilities, private helper/configuration matrices and P7 stay open.",
+  "source_observations": 3659,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 16,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "ledger_move_only_contracts",
+          "status": "run",
+          "seconds": 0.00965643
+        },
+        {
+          "name": "ledger_move_only_rust_parity",
+          "status": "run",
+          "seconds": 0.628454
+        },
+        {
+          "name": "audited_save_rust_parity",
+          "status": "run",
+          "seconds": 0.636578
+        },
+        {
+          "name": "audited_save_context_contracts",
+          "status": "run",
+          "seconds": 0.00632397
+        },
+        {
+          "name": "graph_saver_context_contracts",
+          "status": "run",
+          "seconds": 0.00968321
+        },
+        {
+          "name": "ledger_execution_context_contracts",
+          "status": "run",
+          "seconds": 0.0069478
+        },
+        {
+          "name": "recursive_graph_write_context_contracts",
+          "status": "run",
+          "seconds": 0.00799784
+        },
+        {
+          "name": "entity_graph_plan_context_contracts",
+          "status": "run",
+          "seconds": 0.00550218
+        },
+        {
+          "name": "graph_plan_scopes_rust_parity",
+          "status": "run",
+          "seconds": 0.227
+        },
+        {
+          "name": "entity_graph_plan_rust_parity",
+          "status": "run",
+          "seconds": 0.520639
+        },
+        {
+          "name": "mutation_policy_context_contracts",
+          "status": "run",
+          "seconds": 0.00233635
+        },
+        {
+          "name": "mutation_policy_rust_parity",
+          "status": "run",
+          "seconds": 0.25778
+        },
+        {
+          "name": "checker_context_contracts",
+          "status": "run",
+          "seconds": 0.00272681
+        },
+        {
+          "name": "checker_rust_parity",
+          "status": "run",
+          "seconds": 0.402025
+        },
+        {
+          "name": "graph_repository_rust_parity",
+          "status": "run",
+          "seconds": 0.426965
+        },
+        {
+          "name": "runtime_graph_rust_parity",
+          "status": "run",
+          "seconds": 3.20452
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 5,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "ledger_move_only_contracts",
+          "status": "run",
+          "seconds": 0.0626441
+        },
+        {
+          "name": "audited_save_context_contracts",
+          "status": "run",
+          "seconds": 0.0497948
+        },
+        {
+          "name": "graph_saver_context_contracts",
+          "status": "run",
+          "seconds": 0.0750084
+        },
+        {
+          "name": "ledger_execution_context_contracts",
+          "status": "run",
+          "seconds": 0.0573747
+        },
+        {
+          "name": "entity_graph_plan_context_contracts",
+          "status": "run",
+          "seconds": 0.0445156
+        }
+      ],
+      "leak_scan": false
+    },
+    "modules": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_entity_graph_plan_context_contracts",
+          "status": "run",
+          "seconds": 0.00616525
+        }
+      ],
+      "canonical_bodies": 97
+    }
+  },
+  "corpora": {
+    "checker": "2419cac3fcf53f256d21d38b50eb73a39680d5f123f4154c349210841f62f76a",
+    "mutation_policy": "ecedbc83b2b666ca2b95ab0c7ee065693e8ba43a99213f3271705669bf419d11",
+    "entity_graph_plan": "151790ad18d336b85e2417540331dd521204d6c042cd7557fb2eab38b50ac292",
+    "ledger_move_only": "f4641d5d9a254c8d8a2bb971be3dc4580ef3926db2939c1f49b270a2adf3f062",
+    "graph_repository": "efe539af0b158ad80790ca9e179889d3c240a10767160ade22829ecf57c3f023",
+    "runtime_graph": "c09cc88ef7a77fa319d70dff8e0ff0ec85bbdfde62594cc49c784d59b1087fea",
+    "audited_save": "2a1cdee6d2bd84cfcfe5a66078d08a564f040660a0204c6407092ba6808c9510"
+  },
+  "cpp_checkpoint_hashes": {
+    "teaql_runtime/include/teaql/runtime/detail/data_service/graph_current_row.hpp": "d50f9ec8a223e89970a40ad5e3c7f74ce2c555dc0bb2fc1ac4527a6a3dbccdd4",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_plan.hpp": "7bb7831ea13832da2ed49615287dee8342a059f5fbc34b41306c67a363938aab",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_graph_execution.hpp": "6394ca9e5cad95cc9060872c0e129e39015243fbe884c51ffee612fb94f80f97",
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_service.hpp": "83049a36b7f9a55fa9edd6cbf20d5b28206edc24639582fd2d3a2ca38377aa90",
+    "teaql_provider_sqlite/tests/entity_graph_plan_tests.cpp": "a58b6702bef00c0c0ea6fe2d7bd8bfdad7e180908d3d89f2f141886cd8ef716c",
+    "teaql_provider_sqlite/tests/audited_save_tests.cpp": "2fdc374ad7d37a4539f5b062a7956c98aac7dc92a1b751f83de0cf56c9dca1f9",
+    "teaql_provider_sqlite/tests/graph_saver_tests.cpp": "4b2ba89dbd90e3485c6ccde9a2f9dfeb50b1c720cceb05658b1deef1a5967c64",
+    "teaql_provider_sqlite/tests/ledger_execution_tests.cpp": "9149d057bae7c9ccfd48ae0c74afb5f500d68be03ddddbcc41078d699a35e782"
+  }
+}

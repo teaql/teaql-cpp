@@ -16,6 +16,8 @@ static void retained_typed_aggregate() {
         resource, R"({"projection":["label"],"rows":2,"failure":false,"fail_model":null})"));
     auto& service = aggregate_service(*user, input);
     auto& query = user->make<SelectQuery>("Parent");
+    query.comment("Inspect typed aggregate retention")
+        .purpose("Verify aggregate ownership and decoding");
     query.project("label").page(0, 1).optimize_pagination_with_id_set_config("fixture", 600, 2);
     detail::ContextPaginationAccess::observe_id_set(*user, "RETAINED-OBSERVATION", 37);
     auto& work =

@@ -173,6 +173,12 @@ public:
         return closed_;
     }
 
+    // Runtime Contexts supply application-owned diagnostics; generic arenas
+    // retain their ordinary owner-lifetime contract without a runtime dependency.
+    virtual const detail::ContextState* context_state() const noexcept {
+        return nullptr;
+    }
+
     bool closing() const noexcept {
         return closing_;
     }

@@ -8,6 +8,12 @@ export import teaql_async;
 
 export namespace teaql {
 using ::teaql::DataServiceCapabilities;
+using ::teaql::DynamicFieldStore;
+using ::teaql::DynamicFieldStreamPlan;
+using ::teaql::DynamicFieldWrite;
+using ::teaql::DynamicStorageRows;
+using ::teaql::DynamicStorageFuture;
+
 using ::teaql::DataServiceExecutor;
 using ::teaql::DataServiceOperation;
 using ::teaql::DataServiceOperationResult;
@@ -19,6 +25,7 @@ using ::teaql::GuardedMutationExecutor;
 using ::teaql::GuardedMutationRequest;
 using ::teaql::IdGeneratorExecutor;
 using ::teaql::MutationExecutor;
+using ::teaql::MutationCommand;
 using ::teaql::MutationRequest;
 using ::teaql::MutationResult;
 using ::teaql::QueryExecutor;
@@ -51,6 +58,12 @@ using ::teaql::detail::write_sql_log_optional;
 
 export namespace teaql::data_service {
 using ::teaql::data_service::DataServiceCapabilities;
+using ::teaql::data_service::DynamicFieldStore;
+using ::teaql::data_service::DynamicFieldStreamPlan;
+using ::teaql::data_service::DynamicFieldWrite;
+using ::teaql::data_service::DynamicStorageRows;
+using ::teaql::data_service::DynamicStorageFuture;
+
 using ::teaql::data_service::DataServiceExecutor;
 using ::teaql::data_service::DataServiceOperation;
 using ::teaql::data_service::ExecutionMetadata;
@@ -59,6 +72,7 @@ using ::teaql::data_service::GuardedMutationExecutor;
 using ::teaql::data_service::GuardedMutationRequest;
 using ::teaql::data_service::IdGeneratorExecutor;
 using ::teaql::data_service::MutationExecutor;
+using ::teaql::data_service::MutationCommand;
 using ::teaql::data_service::MutationRequest;
 using ::teaql::data_service::MutationResult;
 using ::teaql::data_service::QueryExecutor;
@@ -80,4 +94,20 @@ using ::teaql::data_service::Transaction;
 using ::teaql::data_service::TransactionExecutor;
 using ::teaql::data_service::is_credential_log_name;
 using ::teaql::data_service::write_debug;
+}
+
+export namespace teaql::dynamic_fields {
+using ::teaql::dynamic_fields::DynamicFieldStore;
+using ::teaql::dynamic_fields::DynamicFieldStreamPlan;
+using ::teaql::dynamic_fields::DynamicFieldWrite;
+using ::teaql::dynamic_fields::DynamicStorageRows;
+using ::teaql::dynamic_fields::DynamicStorageFuture;
+}
+
+export namespace teaql::data_service::dynamic_fields {
+using ::teaql::data_service::dynamic_fields::DynamicFieldStore;
+using ::teaql::data_service::dynamic_fields::DynamicFieldStreamPlan;
+using ::teaql::data_service::dynamic_fields::DynamicFieldWrite;
+using ::teaql::data_service::dynamic_fields::DynamicStorageRows;
+using ::teaql::data_service::dynamic_fields::DynamicStorageFuture;
 }

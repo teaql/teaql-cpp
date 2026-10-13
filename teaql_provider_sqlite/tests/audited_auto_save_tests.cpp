@@ -137,10 +137,13 @@ static void sqlite_commit_and_reconstruction() {
     auto& retained = global.make<audited_fixture::Model>(result.value());
     // The ordinary extension must support an Entity that has no ledger API.
     static_assert(!LedgerEntity<save_fixture::Model>);
+    store.register_entity(save_fixture::Model::entity_descriptor(r));
     auto& state = user->make<mutation_fixture::State>();
     state.allow_reads = true;
     state.rows.emplace_back();
     state.rows.back().emplace(String("id", r), Value(r, std::uint64_t(1)));
+    state.rows.back().emplace(String("version", r), Value(r, std::int64_t(1)));
+    state.rows.back().emplace(String("name", r), Value(r, "authoritative non-ledger"));
     auto& controls = user->make<saver_fixture::Controls>();
     auto fake = user->make_resource_ref<saver_fixture::Ambient>(state, controls);
     user->register_executor(fake);
@@ -148,8 +151,11 @@ static void sqlite_commit_and_reconstruction() {
     plain.fresh = true;
     plain.values.fields.emplace(String("id", r), Value(r, std::uint64_t(1)));
     auto& normal = user->make<Audited<save_fixture::Model>>(std::move(plain), "plain reason");
-    check(bool(AuditedSaveExt<save_fixture::Model>::save(std::move(normal), *user).wait()),
-          "plain extension preserves the non-ledger Entity abstraction");
+    auto& plain_result = AuditedSaveExt<save_fixture::Model>::save(std::move(normal), *user).wait();
+    if (!plain_result) {
+        throw std::runtime_error(std::string(plain_result.error().to_string(r)));
+    }
+    check(bool(plain_result), "plain extension preserves the non-ledger Entity abstraction");
     user.reset();
     check(retained.values.fields.at(String("name", global.memory_resource())).try_text() ==
                   "committed" &&

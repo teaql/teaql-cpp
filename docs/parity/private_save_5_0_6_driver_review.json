@@ -1,0 +1,50 @@
+[
+  {
+    "family": "graph_fix",
+    "historical_driver": "tests/parity/graph_fix_oracle.rs",
+    "historical_sha256": "6b3e71b8243f350e165e369a349c95b4a5486c977387da163eca751852560dc7",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/graph_fix_5_0_6.rs",
+    "active_sha256": "3c9979e44b9354ffe3ddfd527225c0b5be9ad0995e5dc97f7a24d36c1df00fcf",
+    "adaptation": "fixture import only"
+  },
+  {
+    "family": "save_preparation",
+    "historical_driver": "tests/parity/save_preparation_oracle.rs",
+    "historical_sha256": "b6afb40f211774935b93d152ee46b1479cac5dc744c34bfa2e837584a4a3e54e",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/save_preparation_5_0_6.rs",
+    "active_sha256": "d86a7c66b5300f72bf200e5959578e3b37210c46bbd8d24dfc8f4baa309c630a",
+    "adaptation": "fixture import only"
+  },
+  {
+    "family": "ledger_plan",
+    "historical_driver": "tests/parity/ledger_plan_oracle.rs",
+    "historical_sha256": "fc7efca59d03655e230f558a0eac870f55a9f417fabed2bcec61c8ab175cc704",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/ledger_plan_5_0_6.rs",
+    "active_sha256": "10846d0aef5e2ada50f2f1344ca3d32e61d6153cb71063d21aa4445e344983b7",
+    "adaptation": "fixture import only"
+  },
+  {
+    "family": "policy_plan",
+    "historical_driver": "tests/parity/policy_plan_oracle.rs",
+    "historical_sha256": "a260d2efe872f228b7383b26e7deef5d10753c8806b8410013b8ded3d09e538a",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/policy_plan_5_0_6.rs",
+    "active_sha256": "eadab4ef6b3d365dff16735a80ce62d2c7bb26a53dbfd43c7fbadba1f9b3e78e",
+    "adaptation": "fixture import only"
+  },
+  {
+    "family": "graph_execution",
+    "historical_driver": "tests/parity/graph_execution_oracle.rs",
+    "historical_sha256": "8f554d4c623a0b1f4b4e5393ee621941658ad19c16fc58fb6e6c4bd65eb04414",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/graph_execution_5_0_6.rs",
+    "active_sha256": "63453fecdb2cbfc12a1c773aed18bd09b59d1aa2967ce4a2d57aa51d81cf0250",
+    "adaptation": "fixture import and actual MutationCommand payload observation only"
+  },
+  {
+    "family": "ledger_execution",
+    "historical_driver": "tests/parity/ledger_execution_oracle.rs",
+    "historical_sha256": "71a0f3ddbb794f7dfde22b6d4cecfa7893ce94a5900415838e6d979b5937aaa7",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/ledger_execution_5_0_6.rs",
+    "active_sha256": "c17736bd4f1dc03892e8c6fef43da10653412ea80b399955e8b4e221c6b1ff31",
+    "adaptation": "fixture import and actual MutationCommand payload observation only"
+  }
+]

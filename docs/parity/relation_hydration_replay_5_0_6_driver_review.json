@@ -1,0 +1,39 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Complete original attach/install/enhance/flat/compact methods via direct bridge. Actual Context, EntityDataService, prepared compact query execution, QueryExecutor and graph decoder registry. Historical child-fetch shortcut not retained in the new observer.",
+  "historical_inputs": "All 356 original inputs remain in order, with absent intent unchanged. Separate 356 explicit child comment/purpose variants plus six duplicate membership/ID consumption controls.",
+  "corpora": {
+    "relation_hydration": {
+      "observations": 356,
+      "provider_calls": 0,
+      "outcomes": {
+        "success": 87,
+        "REQUEST_COMMENT_REQUIRED: Query Request requires a non-blank comment; supply it at the request entry point": 231,
+        "Parent: loaded reverse relation owner is missing its u64 id": 5,
+        "Child: model decode failed": 1,
+        "Child: entity has no compact identity graph list decoder in RuntimeModule": 2,
+        "cancelled": 30
+      },
+      "sha256": "6feb83dd6caac750e767656cb766fd4d0f4aa5ccfa0b8b0cc5bc7af5e236bb05"
+    },
+    "relation_hydration_intent": {
+      "observations": 362,
+      "provider_calls": 348,
+      "outcomes": {
+        "success": 246,
+        "Parent: loaded reverse relation owner is missing its u64 id": 9,
+        "Child: model decode failed": 3,
+        "Parent: model decode failed": 1,
+        "Child: entity has no compact identity graph list decoder in RuntimeModule": 5,
+        "Parent: entity has no compact identity graph option decoder in RuntimeModule": 2,
+        "cancelled": 54,
+        "fetch failed": 42
+      },
+      "sha256": "64b3dfa9f207f52af89e2af8ad32baeba086992e8cdf6ec0d0b6b289827e361e"
+    }
+  },
+  "initial_explicit_differences": 1,
+  "initial_gap": "Two owners sharing a non-ID forward key: C++ consumed the first bucket, overwrote inverse provenance differently and created an unfetched identity edge for the second owner. Original retains reusable non-ID membership; ID buckets remain single-use.",
+  "observer_scope": "Full parent/graph/list/option/ledger projections, requests/filters/comment/purpose, executor capability/drop counts, telemetry event ordering and cancellation. Telemetry success projects only cardinality when present; no full attribute/privacy or physical SQL qualification.",
+  "remaining": "Dynamic fields/JSON views, full facets/decoder configurations, original SQL/privacy and complete generated/model matrices remain open."
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/runtime/detail/data_service/ledger_execution.hpp>
+#include <teaql/runtime/detail/commit_audit.hpp>
 
 namespace teaql::detail {
 using GraphSaveResult = Result<GraphNode, RuntimeError>;
@@ -57,6 +58,16 @@ public:
         auto r = service_.memory_resource();
         if (!read_) {
             if (!ledger_) {
+                auto bound = EntityDataServiceAccess::bind_mutation_intent(
+                    service_,
+                    node_.comment ? std::optional<std::string_view>(*node_.comment) : std::nullopt);
+                if (!bound) {
+                    return R::err(r, Error::runtime(r, std::move(bound).error()));
+                }
+                auto privacy = EntityDataServiceAccess::bind_ledger_privacy(service_, root_);
+                if (!privacy) {
+                    return R::err(r, Error::runtime(r, std::move(privacy).error()));
+                }
                 auto locations = ledger_object_locations(r, node_);
                 ledger_ = &EntityDataServiceAccess::execute_ledger_plan_internal(
                     service_, root_, locations);
@@ -68,6 +79,12 @@ public:
             }
             if (!*result) {
                 return R::err(r, copy_or_take_error(*ledger_, *result));
+            }
+            if (auto* readbacks = result->value().dynamic_readbacks.get()) {
+                if (auto fields = readbacks->rows.find(root_key_);
+                    fields != readbacks->rows.end()) {
+                    node_.dynamic_fields = make_box<DynamicFieldValues>(r, fields->second);
+                }
             }
             if (auto generated = result->value().find(root_key_);
                 generated != result->value().end()) {
@@ -83,7 +100,7 @@ public:
                 return fail(message);
             }
             read_ = &EntityDataServiceAccess::fetch_graph_current_row_internal(
-                service_, node_.entity, id_property_, id->second, {});
+                service_, node_.entity, id_property_, id->second, root_.get_trace_chain(root_key_));
         }
         forwarding_.attach(read_->wake_signal(), wake);
         auto* result = read_->poll();
@@ -132,7 +149,7 @@ private:
     EntityRuntimeState root_;
     EntityKey root_key_;
     String id_property_;
-    AsyncOperation<Result<LedgerGeneratedIds, Error>>* ledger_ = nullptr;
+    AsyncOperation<Result<LedgerExecutionOutcome, Error>>* ledger_ = nullptr;
     AsyncOperation<Result<std::optional<CompactRow>, Error>>* read_ = nullptr;
     WakeSignal::Forward forwarding_;
 };
@@ -163,6 +180,18 @@ public:
     std::optional<GraphSaveResult> poll(WakeSignal& wake) {
         auto r = context_.memory_resource();
         if (phase_ == Phase::Prepare) {
+            if (root_ && root_->has_pending_dynamic_mutations()) {
+                auto provider = context_.dynamic_graph_provider();
+                if (!provider) {
+                    return fail(std::move(provider).error());
+                }
+            }
+            if (root_) {
+                auto captured = capture_ledger_trace_scopes(*root_, node_);
+                if (!captured) {
+                    return fail(std::move(captured).error());
+                }
+            }
             if (!executor_) {
                 auto executor = ContextEntityAccess::require_executor<E>(context_);
                 if (!executor) {
@@ -257,11 +286,16 @@ public:
             // Retain the unwrapped child if wrapper allocation throws; cancel
             // and join it before releasing the acquired native transaction.
             execution_ = &with_mutation_governance(context_, *governance_, *execution_);
+            audits_ = make_box<PendingAuditBatch>(r, context_);
             phase_ = Phase::Execute;
         }
         if (phase_ == Phase::Execute) {
             forwarding_.attach(execution_->wake_signal(), wake);
-            auto* result = execution_->poll();
+            const Execution* result;
+            {
+                AuditActivation active(context_, *audits_);
+                result = execution_->poll();
+            }
             if (!result) {
                 return {};
             }
@@ -289,12 +323,17 @@ public:
         if (root_) {
             root_->clear_committed();
         }
+        auto delivered = deliver_committed_audits(context_, std::move(audits_->events));
+        if (!delivered) {
+            return fail(std::move(delivered).error());
+        }
         return GraphSaveResult::ok(r, std::move(*saved_));
     }
 
     void finish_and_wait() noexcept {
         forwarding_.reset();
         release_transaction();
+        audits_.reset();
     }
 
     void cancel_and_wait() noexcept {
@@ -312,6 +351,7 @@ public:
             terminal_->cancel();
         }
         release_transaction();
+        audits_.reset();
     }
 
 private:
@@ -335,6 +375,7 @@ private:
     std::optional<GraphMutationPlan> plan_;
     std::optional<MutationGovernanceSnapshot> governance_;
     std::optional<GraphNode> saved_;
+    ScopedBox<PendingAuditBatch> audits_;
     const Error* error_ = nullptr;
     AsyncOperation<Result<GraphMutationPlan, Error>>* planning_ = nullptr;
     AsyncOperation<Result<TransactionHandle<ProviderError>, ProviderError>>* begin_ = nullptr;

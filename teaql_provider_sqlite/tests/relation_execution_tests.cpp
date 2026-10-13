@@ -61,9 +61,15 @@ static void sqlite_relation_queries(bool capture) {
             parents.emplace_back(record);
         }
         parents.emplace_back();
+        for (bool typed : {false, true}) {
+            Record record(r);
+            record.emplace(String("id", r), typed ? Value(r, TypedNull{DataType::U64}) : Value(r));
+            parents.emplace_back(record);
+        }
         auto& seen = c->make<Vector<SelectQuery>>();
         detail::RelationFetch<E> fetch(
             std::allocator_arg, Allocator(r), [&](SelectQuery query) -> auto& {
+                query.comment("Inspect native relation execution").purpose("Verify relation rows");
                 seen.emplace_back(query);
                 return service.fetch_all(query);
             });
@@ -85,6 +91,59 @@ static void sqlite_relation_queries(bool capture) {
                   "partition survives batch route and is cleared for one-parent probes");
         }
         retained = &g.make<Vector<CompactRow>>(result.wait().value());
+        SelectQuery grouped(std::allocator_arg, Allocator(r), "Child");
+        grouped.project("owner_id")
+            .project("score")
+            .group_by("owner_id")
+            .group_by("score")
+            .count("total")
+            .order_desc("score")
+            .offset(1)
+            .limit(2);
+        plan.query.emplace(std::move(grouped));
+        for (auto id : {1, 2}) {
+            Record record(r);
+            record.emplace(String("id", r), Value(r, std::uint64_t(id)));
+            parents.emplace_back(record);
+        }
+        seen.clear();
+        auto& grouped_result = detail::fetch_relation_rows(service, plan, parents, true, fetch);
+        const auto& grouped_rows = grouped_result.wait();
+        if (!grouped_rows) {
+            throw std::runtime_error(std::string(grouped_rows.error().to_string(r)));
+        }
+        check(grouped_rows.value().size() == 3,
+              "SQLite grouped relation pagination uses group identity per parent");
+        for (const auto& row : grouped_rows.value()) {
+            auto owner = *row.get("owner_id")->try_u64();
+            auto score = *row.get("score")->try_i64();
+            auto total = *row.get("total")->try_u64();
+            check((owner == 1 && score == 8 && total == 2) ||
+                      (owner == 2 && (score == 7 || score == 6) && total == 1),
+                  "grouped relation values preserve aggregate counts and offset/limit");
+        }
+        check(seen.size() == (capture ? 2 : 1),
+              "grouped queries retain capture-dependent batching");
+        for (const auto& query : seen) {
+            check(query.order_by.size() == 2 && query.order_by[0].field == "score" &&
+                      query.order_by[1].field == "owner_id",
+                  "grouped child queries append missing group fields without an entity ID");
+        }
+        SelectQuery singleton(std::allocator_arg, Allocator(r), "Child");
+        singleton.project("child_id").order_desc("score").offset(1).limit(1);
+        plan.query.emplace(std::move(singleton));
+        parents.clear();
+        Record parent(r);
+        parent.emplace(String("id", r), Value(r, std::uint64_t{1}));
+        parents.emplace_back(parent);
+        seen.clear();
+        auto& single_result = detail::fetch_relation_rows(service, plan, parents, true, fetch);
+        check(single_result.wait() && single_result.wait().value().size() == 1 &&
+                  *single_result.wait().value()[0].get("child_id")->try_u64() == 12 &&
+                  seen.size() == 1 && !seen.front().partition_field &&
+                  seen.front().predicate->kind == Expr::Kind::Binary &&
+                  seen.front().predicate->op == BinaryOp::Eq,
+              "one parent uses a scalar bounded probe instead of a batched window partition");
     }
     check(retained->size() == 2 && retained->front().memory_resource() == g.memory_resource(),
           "relation result can be explicitly retained after User destruction");
@@ -160,6 +219,16 @@ static void empty_cancel_and_domains() {
     auto& empty = detail::fetch_relation_rows(service, plan, {}, false, fetch);
     check(empty.wait() && empty.wait().value().empty() && calls == 0 && e.calls == 0,
           "empty identity set performs no capability lookup or fetch");
+    auto& null_parents = c->make<Vector<CompactRow>>();
+    null_parents.emplace_back();
+    for (bool typed : {false, true}) {
+        Record record(r);
+        record.emplace(String("id", r), typed ? Value(r, TypedNull{DataType::U64}) : Value(r));
+        null_parents.emplace_back(record);
+    }
+    auto& null_rows = detail::fetch_relation_rows(service, plan, null_parents, false, fetch);
+    check(null_rows.wait() && null_rows.wait().value().empty() && calls == 0 && e.calls == 0,
+          "missing and null relation keys perform no capability lookup or provider fetch");
     auto& parents = c->make<Vector<CompactRow>>();
     Record record(r);
     record.emplace(String("id", r), Value(r, std::uint64_t(1)));

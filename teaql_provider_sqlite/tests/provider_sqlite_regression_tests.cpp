@@ -38,9 +38,11 @@ static Executor& setup(UserContext& user) {
 
 static const Vector<CompactRow>& fetch(const EntityDataService<Executor>& service,
                                        const SelectQuery& query) {
+    auto request = query.clone(service.memory_resource());
+    request.comment("Inspect the provider regression rows");
     PurposedSelectQuery purpose(std::allocator_arg,
                                 Allocator(service.memory_resource()),
-                                query,
+                                request,
                                 "Inspect the regression database");
     auto& result = service.fetch_all(purpose).wait();
     check(bool(result), "runtime query succeeds");
@@ -53,6 +55,8 @@ static void mutations_privacy_and_retention() {
     auto r = user->memory_resource();
     auto& executor = setup(*user);
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
+    check(bool(Access::bind_mutation_intent(service, "Create sensitive-order with secret-value")),
+          "private provider fixture has explicit mutation intent");
     auto& insert = user->make<InsertCommand>("Order");
     insert.value("id", std::uint64_t(1))
         .value("version", std::int64_t(1))
@@ -125,6 +129,8 @@ static void bindings_and_transactions() {
     auto& executor = setup(*user);
     user->disable_sql_log();
     auto& service = EntityDataService<Executor>::for_executor(*user, "Order", *user, executor);
+    check(bool(Access::bind_mutation_intent(service, "Inspect injection and structured bindings")),
+          "private binding fixture has explicit mutation intent");
     constexpr std::string_view literal = "x'); DROP TABLE orders; --";
     auto& insert = user->make<InsertCommand>("Order");
     insert.value("id", std::uint64_t(2)).value("name", literal).audit_as("Insert literal text");
@@ -135,20 +141,34 @@ static void bindings_and_transactions() {
     auto& tx = executor.begin(r).wait().value().get();
     auto& third = user->make<InsertCommand>("Order");
     third.value("id", std::uint64_t(3)).value("name", TypedNull{DataType::Text});
-    check(bool(tx.mutate(r, MutationRequest(std::allocator_arg, Allocator(r), third)).wait()),
+    check(bool(tx.mutate(r,
+                         MutationRequest(std::allocator_arg,
+                                         Allocator(r),
+                                         third,
+                                         "insert typed NULL transaction fixture"))
+                   .wait()),
           "transaction accepts typed NULL");
-    auto& failed = tx.mutate(r, MutationRequest(std::allocator_arg, Allocator(r), insert)).wait();
+    auto& failed = tx.mutate(r,
+                             MutationRequest(std::allocator_arg,
+                                             Allocator(r),
+                                             insert,
+                                             "reject duplicate transaction fixture"))
+                       .wait();
     check(!failed, "duplicate write fails inside a production transaction");
     check(bool(tx.rollback(r).wait()), "explicit transaction rollback");
     auto& third_query = user->make<SelectQuery>("Order");
     third_query.filter(Expr::eq(r, "id", std::uint64_t(3)));
     check(fetch(service, third_query).empty(), "rollback removes the earlier successful write");
     auto& committed = executor.begin(r).wait().value().get();
-    check(
-        bool(
-            committed.mutate(r, MutationRequest(std::allocator_arg, Allocator(r), third)).wait()) &&
-            bool(committed.commit(r).wait()),
-        "production transaction commits");
+    check(bool(committed
+                   .mutate(r,
+                           MutationRequest(std::allocator_arg,
+                                           Allocator(r),
+                                           third,
+                                           "insert typed NULL transaction fixture"))
+                   .wait()) &&
+              bool(committed.commit(r).wait()),
+          "production transaction commits");
     check(fetch(service, third_query)[0].get("name")->is_null(), "typed NULL round trip");
     check(user->sql_logs().empty(), "disabled runtime logging remains disabled");
     user->enable_all_sql_log();
@@ -184,8 +204,13 @@ static void bindings_and_transactions() {
           "privacy leaves both structured execution inputs unchanged");
     auto& overflow = user->make<InsertCommand>("Order");
     overflow.value("id", UINT64_MAX);
-    auto& rejected =
-        executor.mutate(r, MutationRequest(std::allocator_arg, Allocator(r), overflow)).wait();
+    auto& rejected = executor
+                         .mutate(r,
+                                 MutationRequest(std::allocator_arg,
+                                                 Allocator(r),
+                                                 overflow,
+                                                 "reject unsigned SQLite binding overflow"))
+                         .wait();
     check(!rejected && rejected.error().kind() == Executor::Error::Kind::Transport &&
               rejected.error().transport_error().kind() == MutationExecutorError::Kind::Bind,
           "unsigned SQLite overflow remains a typed binding error");

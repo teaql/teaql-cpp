@@ -9,6 +9,10 @@ Vector<Value> collect_select_params(Memory,
                                     const EntityDescriptor&,
                                     const SelectQuery&,
                                     bool large_in_uses_array_param);
+SqlBindings collect_select_bindings(Memory,
+                                    const EntityDescriptor&,
+                                    const SelectQuery&,
+                                    bool large_in_uses_array_param);
 const Value::List* partition_probe_values(const SelectQuery&);
 std::optional<SelectQuery> scalar_partition_probe_query(Memory, const SelectQuery&, const Value&);
 
@@ -25,7 +29,9 @@ struct CachedSelectPlan {
                      SelectQuery key,
                      const CompiledQuery& compiled)
         : descriptor(std::allocator_arg, a, descriptor), key(std::allocator_arg, a, std::move(key)),
-          sql(compiled.sql, a.resource()), log(std::allocator_arg, a, compiled.log_context) {}
+          sql(compiled.sql, a.resource()), log(std::allocator_arg, a, compiled.log_context) {
+        log.intent_redactions = SqlIntentRedactions(a.resource());
+    }
 };
 
 // Explicit Context-owned caches; never a singleton or ambient process cache.

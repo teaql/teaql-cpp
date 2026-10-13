@@ -1,0 +1,10 @@
+<root name="cpp_inheritance_business_ids" org="teaql" data_service="sqlite">
+    <tenant name="string()" />
+    <document tenant="tenant(contextRoot=true)" name="string()" active="true"
+              note="string()?" document_number="businessId(prefix=DOC namespace=documents)"
+              created_at="createTime()" updated_at="updateTime()" />
+    <intermediate_record _parent="document" />
+    <invoice _parent="intermediate_record" amount="number()" />
+    <receipt _parent="document" name="string()" status="string()" />
+    <special_invoice _parent="invoice" reference="string()" />
+</root>

@@ -11,6 +11,39 @@
 namespace teaql {
 using FieldSet = std::pmr::set<String, std::less<>>;
 
+// A presentation path guard; entity ledgers and identity registries are untouched.
+class EntityJsonTraversal {
+public:
+    using allocator_type = Allocator;
+
+    EntityJsonTraversal(std::allocator_arg_t, Allocator a) : path_(a.resource()) {}
+
+    EntityJsonTraversal(const EntityJsonTraversal&) = delete;
+    EntityJsonTraversal& operator=(const EntityJsonTraversal&) = delete;
+
+    bool enter(std::string_view entity, std::uintptr_t address) {
+        const bool expand =
+            path_.size() < 128 && std::ranges::none_of(path_, [&](const auto& entry) {
+                return entry.first == entity && entry.second == address;
+            });
+        path_.emplace_back(String(entity, memory_resource()), address);
+        return expand;
+    }
+
+    void leave() {
+        if (!path_.empty()) {
+            path_.pop_back();
+        }
+    }
+
+    Memory memory_resource() const noexcept {
+        return path_.get_allocator().resource();
+    }
+
+private:
+    Vector<std::pair<String, std::uintptr_t>> path_;
+};
+
 // Type-erased context borrow: equivalent to &dyn Any, never owns or copies context.
 class AnyRef {
 public:
@@ -98,6 +131,69 @@ class Audited;
 template <class Derived>
 class EntityDefaults {
 public:
+    std::optional<DataType> dynamic_property_type(std::string_view key) const {
+        const auto& model = static_cast<const Derived&>(*this);
+        auto state = model.loaded_state_snapshot();
+        const auto* definitions = state ? state->get().dynamic_property_definitions() : nullptr;
+        return definitions ? definitions->data_type(key) : std::nullopt;
+    }
+
+    static constexpr bool supports_dynamic_property_load() {
+        return false;
+    }
+
+    const Value* dynamic_property(std::string_view) const {
+        return nullptr;
+    }
+
+    bool has_dynamic_property(std::string_view) const {
+        return false;
+    }
+
+    const DynamicFieldValues* dynamic_field_values() const {
+        return nullptr;
+    }
+
+    bool has_pending_dynamic_mutations() const {
+        return false;
+    }
+
+    static constexpr bool supports_dynamic_field_load() {
+        return false;
+    }
+
+    std::optional<Json> borrowed_json(Memory, EntityJsonTraversal&) const {
+        return std::nullopt;
+    }
+
+    Record into_json_values() && {
+        return std::move(derived()).into_values().fields;
+    }
+
+    Result<std::monostate, DynamicFieldError> update_dynamic_field(std::string_view code,
+                                                                   const Value&) {
+        auto r = derived().memory_resource();
+        return Result<std::monostate, DynamicFieldError>::err(
+            r, DynamicFieldError(r, "DYNAMIC_FIELD_CARRIER_MISSING", code));
+    }
+
+    Result<std::monostate, DynamicFieldError> delete_dynamic_field(std::string_view code) {
+        auto r = derived().memory_resource();
+        return Result<std::monostate, DynamicFieldError>::err(
+            r, DynamicFieldError(r, "DYNAMIC_FIELD_CARRIER_MISSING", code));
+    }
+
+    Result<std::monostate, EntityError> install_loaded_dynamic_fields(const DynamicFieldValues&,
+                                                                      LoadedSnapshot::Borrow) {
+        auto r = derived().memory_resource();
+        return Result<std::monostate, EntityError>::err(
+            r,
+            EntityError(std::allocator_arg,
+                        Allocator(r),
+                        Derived::ENTITY_NAME,
+                        "entity lacks the runtime-owned indexed dynamic-field carrier"));
+    }
+
     static void register_into(EntityDescriptorStore& store) {
         store.register_descriptor(Derived::entity_descriptor(store.memory_resource()));
     }
@@ -113,6 +209,10 @@ public:
 
     bool is_field_loaded(std::string_view) const {
         return true;
+    }
+
+    std::optional<LoadedSnapshot::Borrow> loaded_state_snapshot() const {
+        return {};
     }
 
     void set_checker_loaded_fields(FieldSet) {}
@@ -153,9 +253,32 @@ public:
     }
 
     Json into_json(Memory destination) && {
-        auto values = std::move(derived()).into_values();
-        return Value(values.fields.get_allocator().resource(), values.fields)
-            .to_json_value(destination);
+        EntityJsonTraversal traversal(std::allocator_arg, Allocator(destination));
+        if (auto json = std::as_const(derived()).borrowed_json(destination, traversal)) {
+            return std::move(*json);
+        }
+        Record extensions(destination);
+        if (const auto* fields = derived().dynamic_field_values()) {
+            for (const auto& [code, value] : fields->values()) {
+                String name("#", destination);
+                name += code;
+                extensions.emplace(std::move(name), Value(destination, value));
+            }
+        }
+        auto values = std::move(derived()).into_json_values();
+        for (std::string_view name :
+             {"_comment", "_dirty_fields", "_original_values", "_is_new", "_is_deleted"}) {
+            auto found = values.find(name);
+            if (found != values.end()) {
+                values.erase(found);
+            }
+        }
+        auto json = Value(values.get_allocator().resource(), values).to_json_value(destination);
+        auto& object = std::get<Json::Object>(json.data);
+        for (const auto& [name, value] : extensions) {
+            object.insert_or_assign(String(name, destination), value.to_json_value(destination));
+        }
+        return json;
     }
 
 private:

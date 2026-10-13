@@ -9,6 +9,9 @@ bool expr_matches(const Expr& a, const Expr& b) {
     if (a.kind == Expr::Kind::Column) {
         return a.name == b.name;
     }
+    if (a.kind == Expr::Kind::LikePattern) {
+        return true;
+    }
     if (a.kind == Expr::Kind::Value) {
         auto* x = a.literal.as_list();
         auto* y = b.literal.as_list();
@@ -39,6 +42,11 @@ bool optional_matches(const std::optional<Expr>& a, const std::optional<Expr>& b
 
 void normalize(Expr& expr) {
     auto r = expr.memory_resource();
+    if (expr.kind == Expr::Kind::LikePattern) {
+        expr.name.clear();
+        expr.literal = Value(r, "");
+        return;
+    }
     if (expr.kind == Expr::Kind::Value) {
         if (auto* values = std::get_if<Value::List>(&expr.literal.data)) {
             for (auto& v : *values) {
@@ -57,36 +65,38 @@ void normalize(Expr& expr) {
     }
 }
 
-void collect_expr(Memory r, const Expr& expr, Vector<Value>& params, bool array) {
+void collect_expr(Memory r, const Expr& expr, SqlBindings& params, bool array) {
     using K = Expr::Kind;
     if (expr.kind == K::Column) {
         return;
     }
-    if (expr.kind == K::Value) {
-        params.emplace_back(expr.literal);
+    if (expr.kind == K::Value || expr.kind == K::LikePattern) {
+        params.push(expr.literal);
         return;
     }
     if (expr.kind == K::SubQuery) {
         collect_expr(r, expr.args.at(0), params, array);
-        auto nested =
-            collect_select_params(r, expr.subquery_data->entity, expr.subquery_data->query, array);
-        for (auto& v : nested) {
-            params.emplace_back(std::move(v));
-        }
+        auto nested = collect_select_bindings(
+            r, expr.subquery_data->entity, expr.subquery_data->query, array);
+        params.append_bindings(nested);
         return;
     }
     if (expr.kind == K::Binary) {
         collect_expr(r, expr.args.at(0), params, array);
+        if (auto operand = expr.lowered_like_operand()) {
+            params.push_like_pattern(operand->first, operand->second);
+            return;
+        }
         const auto& right = expr.args.at(1);
         auto* list = right.kind == K::Value ? right.literal.as_list() : nullptr;
         bool in = expr.op == BinaryOp::In || expr.op == BinaryOp::NotIn ||
                   expr.op == BinaryOp::InLarge || expr.op == BinaryOp::NotInLarge;
         if (list && in) {
             if (array && (expr.op == BinaryOp::InLarge || expr.op == BinaryOp::NotInLarge)) {
-                params.emplace_back(right.literal);
+                params.push(right.literal);
             } else {
                 for (const auto& v : *list) {
-                    params.emplace_back(v);
+                    params.push(v);
                 }
             }
         } else {
@@ -117,6 +127,12 @@ const Expr* partition_predicate(const Expr& expr, std::string_view field) {
 }
 
 bool select_plan_matches(const SelectQuery& a, const SelectQuery& b) {
+    if (bool(a.dynamic_property_definitions) != bool(b.dynamic_property_definitions) ||
+        (a.dynamic_property_definitions &&
+         *a.dynamic_property_definitions != *b.dynamic_property_definitions)) {
+        return false;
+    }
+
     if (a.hard_limit_value != b.hard_limit_value || a.entity != b.entity ||
         a.projection != b.projection || a.expr_projection.size() != b.expr_projection.size() ||
         a.search_text.has_value() != b.search_text.has_value() ||
@@ -175,11 +191,11 @@ SelectQuery select_plan_key(Memory r, const SelectQuery& query) {
     return key;
 }
 
-Vector<Value> collect_select_params(Memory r,
+SqlBindings collect_select_bindings(Memory r,
                                     const EntityDescriptor& entity,
                                     const SelectQuery& query,
                                     bool array) {
-    Vector<Value> params(r);
+    SqlBindings params(r);
     if (query.raw_sql_text) {
         return params;
     }
@@ -203,7 +219,7 @@ Vector<Value> collect_select_params(Memory r,
         pattern += '%';
         for (const auto& p : entity.properties) {
             if (p.data_type == DataType::Text || p.data_type == DataType::LargeText) {
-                params.emplace_back(pattern);
+                params.push(Value(r, pattern));
             }
         }
     }
@@ -219,6 +235,14 @@ Vector<Value> collect_select_params(Memory r,
         }
     }
     return params;
+}
+
+Vector<Value> collect_select_params(Memory r,
+                                    const EntityDescriptor& entity,
+                                    const SelectQuery& query,
+                                    bool array) {
+    auto bindings = collect_select_bindings(r, entity, query, array);
+    return std::move(bindings).into_values();
 }
 
 const Value::List* partition_probe_values(const SelectQuery& query) {
@@ -282,10 +306,11 @@ CompiledQuery SqlExecutorState::compile_select_cached(Memory r,
     for (const auto& plan : plans_) {
         if (plan->descriptor == entity && select_plan_matches(plan->key, query)) {
             CompiledQuery out(std::allocator_arg, Allocator(r));
-            out.log_context = clone_in(r, plan->log);
+            auto bindings =
+                collect_select_bindings(r, entity, query, dialect.large_in_uses_array_param());
+            out.log_context = bindings.rebind_log_context(r, plan->log);
             out.sql = plan->sql;
-            out.params =
-                collect_select_params(r, entity, query, dialect.large_in_uses_array_param());
+            out.params = std::move(bindings).into_values();
             out.comment = clone_in(r, query.comment_text);
             return out;
         }

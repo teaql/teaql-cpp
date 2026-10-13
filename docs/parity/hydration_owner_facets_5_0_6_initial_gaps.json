@@ -1,0 +1,2114 @@
+[
+  {
+    "index": 24,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": false,
+      "many": false,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(1)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(2)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 25,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": false,
+      "many": false,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 26,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": false,
+      "many": false,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 27,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": false,
+      "many": true,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(1)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(2)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 28,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": false,
+      "many": true,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 29,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": false,
+      "many": true,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 30,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": true,
+      "many": false,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(1)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(2)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 31,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": true,
+      "many": false,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 32,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": true,
+      "many": false,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 33,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": true,
+      "many": true,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(1)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Binary { left: Column(\"owner\"), op: Eq, right: Value(U64(2)) }), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 34,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": true,
+      "many": true,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 35,
+    "input": {
+      "facets": true,
+      "include_all": false,
+      "sliced": true,
+      "many": true,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": "SubQuery { left: Column(\"owner\"), op: In, entity: EntityDescriptor { name: \"Child\", table_name: \"child_data\", data_service: None, properties: [PropertyDescriptor { name: \"id\", data_type: U64, nullable: true, column_name: \"id\", is_id: true, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"owner\", data_type: U64, nullable: true, column_name: \"owner\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"link\", data_type: U64, nullable: true, column_name: \"link\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }, PropertyDescriptor { name: \"label\", data_type: Text, nullable: true, column_name: \"label\", is_id: false, is_version: false, max_length: None, numeric_precision: None, numeric_scale: None }], relations: [RelationDescriptor { name: \"link\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"remaining\", target_entity: \"Leaf\", local_key: \"link\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"parent\", target_entity: \"Parent\", local_key: \"owner\", foreign_key: \"link\", many: true, attach: true, delete_missing: true }, RelationDescriptor { name: \"tags\", target_entity: \"Leaf\", local_key: \"id\", foreign_key: \"owner\", many: true, attach: true, delete_missing: true }], audit_mask_fields: [], audit_mask_fields_declared: false, audit_value_max_len: None }, query: SelectQuery { hard_limit: 10000, entity: \"Child\", projection: [\"id\"], expr_projection: [], search_with_text: None, filter: Some(Value(Bool(false))), having: None, order_by: [], slice: None, partition_by: None, top_n_probe_parent_threshold: None, aggregates: [], group_by: [], relations: [], facets: [], relation_aggregates: [], aggregation_cache: None, comment: Some(\"Inspect sibling relation keys\"), purpose: Some(\"Verify independent hydration\"), trace_chain: [TraceNode { kind: Relation, entity_type: \"link\", entity_id: None, comment: \"Parent.link\" }, TraceNode { kind: Comment, entity_type: \"Child\", entity_id: None, comment: \"Inspect sibling relation keys\" }], raw_sql: None, raw_sql_search_criteria: [], dynamic_properties: [], dynamic_property_definitions: None, dynamic_field_selection: None, raw_projections: [], object_group_bys: [], child_enhancements: [], stream_config: None, continuous_page_fetch: None, id_set_pagination: None } }"
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 36,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": false,
+      "many": false,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 37,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": false,
+      "many": false,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 38,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": false,
+      "many": false,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 39,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": false,
+      "many": true,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 40,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": false,
+      "many": true,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 41,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": false,
+      "many": true,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 42,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": true,
+      "many": false,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 43,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": true,
+      "many": false,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 44,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": true,
+      "many": false,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "Null"
+        },
+        {
+          "id": "U64(2)",
+          "link": "Null"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 45,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": true,
+      "many": true,
+      "keys": 0
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([Object({\"id\": U64(10), \"label\": Text(\"child1\"), \"link\": U64(1), \"owner\": U64(1), \"parent\": List([Object({\"id\": U64(1)})])})])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([Object({\"id\": U64(20), \"label\": Text(\"child2\"), \"link\": U64(2), \"owner\": U64(2), \"parent\": List([Object({\"id\": U64(2)})])})])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"owner\"), op: In, right: Value(List([U64(1), U64(2)])) }"
+        }
+      ]
+    }
+  },
+  {
+    "index": 46,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": true,
+      "many": true,
+      "keys": 1
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  },
+  {
+    "index": 47,
+    "input": {
+      "facets": true,
+      "include_all": true,
+      "sliced": true,
+      "many": true,
+      "keys": 2
+    },
+    "rust": {
+      "error": null,
+      "facets": [
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        },
+        {
+          "tagsFacet": [
+            {
+              "id": "U64(10)",
+              "label": "Text(\"child1\")",
+              "link": "U64(1)",
+              "owner": "U64(1)"
+            },
+            {
+              "id": "U64(20)",
+              "label": "Text(\"child2\")",
+              "link": "U64(2)",
+              "owner": "U64(2)"
+            }
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": [
+        {
+          "entity": "Leaf",
+          "filter": null
+        },
+        {
+          "entity": "Leaf",
+          "filter": null
+        }
+      ]
+    },
+    "cpp": {
+      "error": null,
+      "facets": [
+        null,
+        null
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "link": "List([])"
+        },
+        {
+          "id": "U64(2)",
+          "link": "List([])"
+        }
+      ],
+      "requests": []
+    }
+  }
+]

@@ -4,14 +4,14 @@ static void commit_rollback_and_cache() {
     Fixture f;
     auto user = f.global.make_user_context();
     auto r = user->memory_resource();
-    f.executor.query(r, request(r)).wait();
+    f.executor.query(r, fixture_query_request(r)).wait();
     auto plans = f.cache.cached_plans();
     auto& begin = f.executor.begin(r);
     check(f.controls.begins == 0, "begin is lazy");
     auto& tx = begin.wait().value().get();
     auto& concrete = dynamic_cast<SqlDataServiceTransaction<String>&>(tx);
     check(&concrete.state == &f.cache, "transaction borrows the executor's explicit shared cache");
-    check(saved_name(tx.query(r, request(r)).wait().value()) == "old" &&
+    check(saved_name(tx.query(r, fixture_query_request(r)).wait().value()) == "old" &&
               f.cache.cached_plans() == plans,
           "transaction query reuses parent plan");
     const auto& result = tx.mutate(r, update(r, "committed")).wait().value();
@@ -28,16 +28,16 @@ static void commit_rollback_and_cache() {
           "terminal invocation consumes both interfaces before its lazy native effect");
     rejected(
         [&] {
-            tx.query(r, request(r));
+            tx.query(r, fixture_query_request(r));
         },
         "consumed transaction rejects new query");
     check(bool(terminal.wait()), "commit result maps success");
-    check(saved_name(f.executor.query(r, request(r)).wait().value()) == "committed",
+    check(saved_name(f.executor.query(r, fixture_query_request(r)).wait().value()) == "committed",
           "commit persists SQLite changes");
     auto& rollback_tx = f.executor.begin(r).wait().value().get();
     rollback_tx.mutate(r, update(r, "rolled back")).wait();
     check(bool(rollback_tx.rollback(r).wait()), "rollback result maps success");
-    check(saved_name(f.executor.query(r, request(r)).wait().value()) == "committed" &&
+    check(saved_name(f.executor.query(r, fixture_query_request(r)).wait().value()) == "committed" &&
               f.controls.commits == 1 && f.controls.rollbacks == 1,
           "rollback undoes only its transaction");
     check(!tx.capabilities().transaction && tx.capabilities().batch_mutation,
@@ -55,7 +55,7 @@ static void pending_and_guard() {
     auto user = f.global.make_user_context();
     auto r = user->memory_resource();
     auto& tx = f.executor.begin(r).wait().value().get();
-    auto& pending = tx.query(r, request(r));
+    auto& pending = tx.query(r, fixture_query_request(r));
     rejected(
         [&] {
             tx.commit(r);
@@ -88,7 +88,7 @@ static void pending_and_guard() {
     auto other = f.global.make_user_context();
     rejected(
         [&] {
-            tx.query(other->memory_resource(), request(other->memory_resource()));
+            tx.query(other->memory_resource(), fixture_query_request(other->memory_resource()));
         },
         "transaction cannot allocate work in another Context");
     rejected(
@@ -104,6 +104,8 @@ static void query_route_and_close() {
     auto user = f.global.make_user_context();
     auto r = user->memory_resource();
     auto& q = user->make<SelectQuery>("Record");
+    q.comment("Exercise transaction query routing");
+    q.purpose("Check partition execution and diagnostics");
     auto& values = user->make<Vector<Value>>();
     values.emplace_back(std::uint64_t(2));
     values.emplace_back(std::uint64_t(3));
@@ -129,9 +131,11 @@ static void query_route_and_close() {
           "context closes nested work, then diagnoses, then releases native transaction");
     f.transport.pause_read = false;
     auto next = f.global.make_user_context();
-    check(saved_name(f.executor.query(next->memory_resource(), request(next->memory_resource()))
-                         .wait()
-                         .value()) == "old",
+    check(saved_name(
+              f.executor
+                  .query(next->memory_resource(), fixture_query_request(next->memory_resource()))
+                  .wait()
+                  .value()) == "old",
           "abandoned native transaction rolls back before Context memory is reclaimed");
 }
 

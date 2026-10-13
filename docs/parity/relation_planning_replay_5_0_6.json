@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 112,
+  "planning_errors": 17,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native_before_ownership_fix": {
+      "passed": 8,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "generated_relation_analysis_context_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "generated_relation_analysis_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "relation_model_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "relation_execution_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "relation_hydration_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "relation_enhancement_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "entity_service_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "entity_service_rust_parity",
+          "status": "passed"
+        }
+      ]
+    },
+    "native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "relation_execution_contracts",
+          "status": "passed"
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "relation_execution_contracts",
+          "status": "passed"
+        }
+      ]
+    },
+    "modules_native": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_relation_execution_contracts",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "formatting": {
+    "handwritten_files": 993,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "canonical_consumer_bodies": 107,
+  "sanitizer_leak_scan": false,
+  "notice": "Planning corpus does not qualify relation execution, facets or grouped top-N. Initial compile and sanitizer fixture failures remain recorded; all final profile processes terminate successfully."
+}

@@ -168,8 +168,10 @@ struct Fixture {
     Executor& executor = global.make<Executor>(dialect, provider, schema, cache);
 };
 
-static QueryRequest request(Memory r, bool metadata = true) {
+static QueryRequest fixture_query_request(Memory r, bool metadata = true) {
     SelectQuery q(std::allocator_arg, Allocator(r), "Record");
+    q.comment("Exercise SQL transaction query");
+    q.purpose("Check transaction snapshots and lifecycle");
     q.filter(Expr::eq(r, "id", std::uint64_t(7)));
     return QueryRequest(std::allocator_arg, Allocator(r), q, false, metadata);
 }

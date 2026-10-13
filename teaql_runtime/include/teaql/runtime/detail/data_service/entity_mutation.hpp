@@ -180,7 +180,7 @@ public:
             auto event = RawAuditEvent::created(r, command_.entity, command_.values.fields);
             TraceChain trace(lineage_, r);
             event.trace_chain.swap(trace);
-            auto sent = context.send_event(event);
+            auto sent = send_event(event);
             if (!sent) {
                 return fail(std::move(sent).error());
             }
@@ -195,7 +195,7 @@ public:
                                        old_,
                                        fields,
                                        lineage_);
-            auto sent = context.send_event(event);
+            auto sent = send_event(event);
             if (!sent) {
                 return fail(std::move(sent).error());
             }
@@ -204,7 +204,7 @@ public:
                 r, command_.entity, command_.id, command_.expected_version_value, {});
             TraceChain trace(lineage_, r);
             event.trace_chain.swap(trace);
-            auto sent = context.send_event(event);
+            auto sent = send_event(event);
             if (!sent) {
                 return fail(std::move(sent).error());
             }
@@ -212,7 +212,7 @@ public:
             // Source recover does not attach the command lineage to its event.
             auto event = RawAuditEvent::recovered_with_old_values(
                 r, command_.entity, command_.id, command_.expected_version, {});
-            auto sent = context.send_event(event);
+            auto sent = send_event(event);
             if (!sent) {
                 return fail(std::move(sent).error());
             }
@@ -245,7 +245,7 @@ public:
                                              trace);
                     }
                 }();
-                auto sent = context.send_event(event);
+                auto sent = send_event(event);
                 if (!sent) {
                     return fail(std::move(sent).error());
                 }
@@ -268,6 +268,12 @@ public:
     }
 
 private:
+    Result<std::monostate, RuntimeError> send_event(RawAuditEvent& event) const {
+        event.with_diagnostic_redactions(
+            EntityDataServiceAccess::context_service(service_).mutation_privacy());
+        return EntityDataServiceAccess::context(service_).send_event(event);
+    }
+
     RawAuditEvent updated_event(const MutationValues& input,
                                 const Value& id,
                                 std::optional<std::int64_t> version,

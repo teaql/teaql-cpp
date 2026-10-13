@@ -1,0 +1,7820 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "note": "Actual unchanged original ScopedCommentNode::to_trace_chain and TraceScopeToken::recover_trace_chain. Full retained node kind/entity/ID/comment values; Unicode whitespace, non-whitespace marks, ordering and untrimmed text. No normalization.",
+  "cases": [
+    {
+      "input": [],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "root",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\t"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\t",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\t",
+        "root",
+        "\t"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\n"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\n",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\n",
+        "root",
+        "\n"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u000b"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u000b",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u000b",
+        "root",
+        "\u000b"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\f"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\f",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\f",
+        "root",
+        "\f"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\r"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\r",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\r",
+        "root",
+        "\r"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        " "
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        " ",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        " ",
+        "root",
+        " "
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u0085"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u0085",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u0085",
+        "root",
+        "\u0085"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u00a0"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u00a0",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u00a0",
+        "root",
+        "\u00a0"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u1680"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u1680",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u1680",
+        "root",
+        "\u1680"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2000"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2000",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2000",
+        "root",
+        "\u2000"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2001"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2001",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2001",
+        "root",
+        "\u2001"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2002"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2002",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2002",
+        "root",
+        "\u2002"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2003"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2003",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2003",
+        "root",
+        "\u2003"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2004"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2004",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2004",
+        "root",
+        "\u2004"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2005"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2005",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2005",
+        "root",
+        "\u2005"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2006"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2006",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2006",
+        "root",
+        "\u2006"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2007"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2007",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2007",
+        "root",
+        "\u2007"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2008"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2008",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2008",
+        "root",
+        "\u2008"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2009"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2009",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2009",
+        "root",
+        "\u2009"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u200a"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u200a",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u200a",
+        "root",
+        "\u200a"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2028"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2028",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2028",
+        "root",
+        "\u2028"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2029"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u2029",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u2029",
+        "root",
+        "\u2029"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u202f"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u202f",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u202f",
+        "root",
+        "\u202f"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u205f"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u205f",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u205f",
+        "root",
+        "\u205f"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u3000"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u3000",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u3000",
+        "root",
+        "\u3000"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        " \t\n\u3000"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        " \t\n\u3000",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        " \t\n\u3000",
+        "root",
+        " \t\n\u3000"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u200b"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u200b",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u200b",
+        "root",
+        "\u200b"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\ufeff"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\ufeff",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\ufeff",
+        "root",
+        "\ufeff"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        " a "
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": " a ",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": " a ",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "root",
+        " a ",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        " a ",
+        "root",
+        " a "
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": " a ",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": " a ",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u3000a\u00a0"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u3000a\u00a0",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u3000a\u00a0",
+        "root",
+        "\u3000a\u00a0"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\ud83d\udc69\u200d\ud83d\udcbb"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\ud83d\udc69\u200d\ud83d\udcbb",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\ud83d\udc69\u200d\ud83d\udcbb",
+        "root",
+        "\ud83d\udc69\u200d\ud83d\udcbb"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u4e2d\u6587"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\u4e2d\u6587",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\u4e2d\u6587",
+        "root",
+        "\u4e2d\u6587"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\"\\\n"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\"\\\n",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\"\\\n",
+        "root",
+        "\"\\\n"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\t",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\t",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\t",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\t",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\n",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\n",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\n",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\n",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u000b",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u000b",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u000b",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u000b",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\f",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\f",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\f",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\f",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\r",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\r",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\r",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\r",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        " ",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        " ",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        " ",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        " ",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u0085",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u0085",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u0085",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u0085",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u00a0",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u00a0",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u00a0",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u00a0",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u1680",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u1680",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u1680",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u1680",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2000",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2000",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2000",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2000",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2001",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2001",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2001",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2001",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2002",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2002",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2002",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2002",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2003",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2003",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2003",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2003",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2004",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2004",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2004",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2004",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2005",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2005",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2005",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2005",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2006",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2006",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2006",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2006",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2007",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2007",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2007",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2007",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2008",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2008",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2008",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2008",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2009",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2009",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2009",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2009",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u200a",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u200a",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u200a",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u200a",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2028",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2028",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2028",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2028",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2029",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u2029",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2029",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u2029",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u202f",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u202f",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u202f",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u202f",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u205f",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u205f",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u205f",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u205f",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u3000",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u3000",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u3000",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u3000",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        " \t\n\u3000",
+        ""
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "",
+        " \t\n\u3000",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        " \t\n\u3000",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        " \t\n\u3000",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u200b",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u200b",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u200b",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u200b",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u200b",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\ufeff",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\ufeff",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\ufeff",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\ufeff",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ufeff",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        " a ",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        " a ",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        " a ",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        " a ",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": " a ",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u3000a\u00a0",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u3000a\u00a0",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u3000a\u00a0",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u3000a\u00a0",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u3000a\u00a0",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\ud83d\udc69\u200d\ud83d\udcbb",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\ud83d\udc69\u200d\ud83d\udcbb",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\ud83d\udc69\u200d\ud83d\udcbb",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\ud83d\udc69\u200d\ud83d\udcbb",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\ud83d\udc69\u200d\ud83d\udcbb",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u4e2d\u6587",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u4e2d\u6587",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u4e2d\u6587",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\u4e2d\u6587",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\u4e2d\u6587",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\"\\\n",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\"\\\n",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\"\\\n",
+        ""
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "parent",
+        "\"\\\n",
+        "child"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "parent",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "\"\\\n",
+            "entity": "Entity1",
+            "id": null,
+            "kind": "Request"
+          },
+          {
+            "comment": "child",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "\t",
+        "\n",
+        "\u000b",
+        "\f",
+        "\r",
+        " ",
+        "\u0085",
+        "\u00a0",
+        "\u1680",
+        "\u2000",
+        "\u2001",
+        "\u2002",
+        "\u2003",
+        "\u2004",
+        "\u2005",
+        "\u2006",
+        "\u2007",
+        "\u2008",
+        "\u2009",
+        "\u200a",
+        "\u2028",
+        "\u2029",
+        "\u202f",
+        "\u205f",
+        "\u3000"
+      ],
+      "expected": {
+        "persistent": [],
+        "stack": []
+      }
+    },
+    {
+      "input": [
+        "root",
+        "\t",
+        "tail",
+        "root",
+        "\n",
+        "tail",
+        "root",
+        "\u000b",
+        "tail",
+        "root",
+        "\f",
+        "tail",
+        "root",
+        "\r",
+        "tail",
+        "root",
+        " ",
+        "tail",
+        "root",
+        "\u0085",
+        "tail",
+        "root",
+        "\u00a0",
+        "tail",
+        "root",
+        "\u1680",
+        "tail",
+        "root",
+        "\u2000",
+        "tail",
+        "root",
+        "\u2001",
+        "tail",
+        "root",
+        "\u2002",
+        "tail",
+        "root",
+        "\u2003",
+        "tail",
+        "root",
+        "\u2004",
+        "tail",
+        "root",
+        "\u2005",
+        "tail",
+        "root",
+        "\u2006",
+        "tail",
+        "root",
+        "\u2007",
+        "tail",
+        "root",
+        "\u2008",
+        "tail",
+        "root",
+        "\u2009",
+        "tail",
+        "root",
+        "\u200a",
+        "tail",
+        "root",
+        "\u2028",
+        "tail",
+        "root",
+        "\u2029",
+        "tail",
+        "root",
+        "\u202f",
+        "tail",
+        "root",
+        "\u205f",
+        "tail",
+        "root",
+        "\u3000",
+        "tail"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity3",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity5",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity6",
+            "id": 6,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity8",
+            "id": 8,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity9",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity11",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity12",
+            "id": 12,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity14",
+            "id": 14,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity15",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity17",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity18",
+            "id": 18,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity20",
+            "id": 20,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity21",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity23",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity24",
+            "id": 24,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity26",
+            "id": 26,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity27",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity29",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity30",
+            "id": 30,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity32",
+            "id": 32,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity33",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity35",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity36",
+            "id": 36,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity38",
+            "id": 38,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity39",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity41",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity42",
+            "id": 42,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity44",
+            "id": 44,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity45",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity47",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity48",
+            "id": 48,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity50",
+            "id": 50,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity51",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity53",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity54",
+            "id": 54,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity56",
+            "id": 56,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity57",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity59",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity60",
+            "id": 60,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity62",
+            "id": 62,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity63",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity65",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity66",
+            "id": 66,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity68",
+            "id": 68,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity69",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity71",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity72",
+            "id": 72,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity74",
+            "id": 74,
+            "kind": "Relation"
+          }
+        ],
+        "stack": [
+          {
+            "comment": "root",
+            "entity": "Entity0",
+            "id": 0,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity3",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity5",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity6",
+            "id": 6,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity8",
+            "id": 8,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity9",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity11",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity12",
+            "id": 12,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity14",
+            "id": 14,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity15",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity17",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity18",
+            "id": 18,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity20",
+            "id": 20,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity21",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity23",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity24",
+            "id": 24,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity26",
+            "id": 26,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity27",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity29",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity30",
+            "id": 30,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity32",
+            "id": 32,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity33",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity35",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity36",
+            "id": 36,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity38",
+            "id": 38,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity39",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity41",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity42",
+            "id": 42,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity44",
+            "id": 44,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity45",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity47",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity48",
+            "id": 48,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity50",
+            "id": 50,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity51",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity53",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity54",
+            "id": 54,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity56",
+            "id": 56,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity57",
+            "id": null,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity59",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity60",
+            "id": 60,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity62",
+            "id": 62,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity63",
+            "id": null,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity65",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity66",
+            "id": 66,
+            "kind": "Entity"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity68",
+            "id": 68,
+            "kind": "Sql"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity69",
+            "id": null,
+            "kind": "Comment"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity71",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": "root",
+            "entity": "Entity72",
+            "id": 72,
+            "kind": "Operation"
+          },
+          {
+            "comment": "tail",
+            "entity": "Entity74",
+            "id": 74,
+            "kind": "Relation"
+          }
+        ]
+      }
+    },
+    {
+      "input": [
+        "",
+        "\u3000",
+        " level 2 ",
+        "",
+        "\u3000",
+        " level 5 ",
+        "",
+        "\u3000",
+        " level 8 ",
+        "",
+        "\u3000",
+        " level 11 ",
+        "",
+        "\u3000",
+        " level 14 ",
+        "",
+        "\u3000",
+        " level 17 ",
+        "",
+        "\u3000",
+        " level 20 ",
+        "",
+        "\u3000",
+        " level 23 ",
+        "",
+        "\u3000",
+        " level 26 ",
+        "",
+        "\u3000",
+        " level 29 ",
+        "",
+        "\u3000",
+        " level 32 ",
+        "",
+        "\u3000",
+        " level 35 ",
+        "",
+        "\u3000",
+        " level 38 ",
+        "",
+        "\u3000",
+        " level 41 ",
+        "",
+        "\u3000",
+        " level 44 ",
+        "",
+        "\u3000",
+        " level 47 ",
+        "",
+        "\u3000",
+        " level 50 ",
+        "",
+        "\u3000",
+        " level 53 ",
+        "",
+        "\u3000",
+        " level 56 ",
+        "",
+        "\u3000",
+        " level 59 ",
+        "",
+        "\u3000",
+        " level 62 ",
+        "",
+        "\u3000",
+        " level 65 ",
+        "",
+        "\u3000",
+        " level 68 ",
+        "",
+        "\u3000",
+        " level 71 ",
+        "",
+        "\u3000",
+        " level 74 ",
+        "",
+        "\u3000",
+        " level 77 ",
+        "",
+        "\u3000",
+        " level 80 ",
+        "",
+        "\u3000",
+        " level 83 ",
+        "",
+        "\u3000",
+        " level 86 ",
+        "",
+        "\u3000",
+        " level 89 ",
+        "",
+        "\u3000",
+        " level 92 ",
+        "",
+        "\u3000",
+        " level 95 ",
+        "",
+        "\u3000",
+        " level 98 ",
+        "",
+        "\u3000",
+        " level 101 ",
+        "",
+        "\u3000",
+        " level 104 ",
+        "",
+        "\u3000",
+        " level 107 ",
+        "",
+        "\u3000",
+        " level 110 ",
+        "",
+        "\u3000",
+        " level 113 ",
+        "",
+        "\u3000",
+        " level 116 ",
+        "",
+        "\u3000",
+        " level 119 ",
+        "",
+        "\u3000",
+        " level 122 ",
+        "",
+        "\u3000",
+        " level 125 ",
+        "",
+        "\u3000"
+      ],
+      "expected": {
+        "persistent": [
+          {
+            "comment": " level 2 ",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 5 ",
+            "entity": "Entity5",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 8 ",
+            "entity": "Entity8",
+            "id": 8,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 11 ",
+            "entity": "Entity11",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 14 ",
+            "entity": "Entity14",
+            "id": 14,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 17 ",
+            "entity": "Entity17",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 20 ",
+            "entity": "Entity20",
+            "id": 20,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 23 ",
+            "entity": "Entity23",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 26 ",
+            "entity": "Entity26",
+            "id": 26,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 29 ",
+            "entity": "Entity29",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 32 ",
+            "entity": "Entity32",
+            "id": 32,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 35 ",
+            "entity": "Entity35",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 38 ",
+            "entity": "Entity38",
+            "id": 38,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 41 ",
+            "entity": "Entity41",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 44 ",
+            "entity": "Entity44",
+            "id": 44,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 47 ",
+            "entity": "Entity47",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 50 ",
+            "entity": "Entity50",
+            "id": 50,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 53 ",
+            "entity": "Entity53",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 56 ",
+            "entity": "Entity56",
+            "id": 56,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 59 ",
+            "entity": "Entity59",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 62 ",
+            "entity": "Entity62",
+            "id": 62,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 65 ",
+            "entity": "Entity65",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 68 ",
+            "entity": "Entity68",
+            "id": 68,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 71 ",
+            "entity": "Entity71",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 74 ",
+            "entity": "Entity74",
+            "id": 74,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 77 ",
+            "entity": "Entity77",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 80 ",
+            "entity": "Entity80",
+            "id": 80,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 83 ",
+            "entity": "Entity83",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 86 ",
+            "entity": "Entity86",
+            "id": 86,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 89 ",
+            "entity": "Entity89",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 92 ",
+            "entity": "Entity92",
+            "id": 92,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 95 ",
+            "entity": "Entity95",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 98 ",
+            "entity": "Entity98",
+            "id": 98,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 101 ",
+            "entity": "Entity101",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 104 ",
+            "entity": "Entity104",
+            "id": 104,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 107 ",
+            "entity": "Entity107",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 110 ",
+            "entity": "Entity110",
+            "id": 110,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 113 ",
+            "entity": "Entity113",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 116 ",
+            "entity": "Entity116",
+            "id": 116,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 119 ",
+            "entity": "Entity119",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 122 ",
+            "entity": "Entity122",
+            "id": 122,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 125 ",
+            "entity": "Entity125",
+            "id": null,
+            "kind": "AuditReason"
+          }
+        ],
+        "stack": [
+          {
+            "comment": " level 2 ",
+            "entity": "Entity2",
+            "id": 2,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 5 ",
+            "entity": "Entity5",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 8 ",
+            "entity": "Entity8",
+            "id": 8,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 11 ",
+            "entity": "Entity11",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 14 ",
+            "entity": "Entity14",
+            "id": 14,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 17 ",
+            "entity": "Entity17",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 20 ",
+            "entity": "Entity20",
+            "id": 20,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 23 ",
+            "entity": "Entity23",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 26 ",
+            "entity": "Entity26",
+            "id": 26,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 29 ",
+            "entity": "Entity29",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 32 ",
+            "entity": "Entity32",
+            "id": 32,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 35 ",
+            "entity": "Entity35",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 38 ",
+            "entity": "Entity38",
+            "id": 38,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 41 ",
+            "entity": "Entity41",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 44 ",
+            "entity": "Entity44",
+            "id": 44,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 47 ",
+            "entity": "Entity47",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 50 ",
+            "entity": "Entity50",
+            "id": 50,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 53 ",
+            "entity": "Entity53",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 56 ",
+            "entity": "Entity56",
+            "id": 56,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 59 ",
+            "entity": "Entity59",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 62 ",
+            "entity": "Entity62",
+            "id": 62,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 65 ",
+            "entity": "Entity65",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 68 ",
+            "entity": "Entity68",
+            "id": 68,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 71 ",
+            "entity": "Entity71",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 74 ",
+            "entity": "Entity74",
+            "id": 74,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 77 ",
+            "entity": "Entity77",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 80 ",
+            "entity": "Entity80",
+            "id": 80,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 83 ",
+            "entity": "Entity83",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 86 ",
+            "entity": "Entity86",
+            "id": 86,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 89 ",
+            "entity": "Entity89",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 92 ",
+            "entity": "Entity92",
+            "id": 92,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 95 ",
+            "entity": "Entity95",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 98 ",
+            "entity": "Entity98",
+            "id": 98,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 101 ",
+            "entity": "Entity101",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 104 ",
+            "entity": "Entity104",
+            "id": 104,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 107 ",
+            "entity": "Entity107",
+            "id": null,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 110 ",
+            "entity": "Entity110",
+            "id": 110,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 113 ",
+            "entity": "Entity113",
+            "id": null,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 116 ",
+            "entity": "Entity116",
+            "id": 116,
+            "kind": "AuditReason"
+          },
+          {
+            "comment": " level 119 ",
+            "entity": "Entity119",
+            "id": null,
+            "kind": "Relation"
+          },
+          {
+            "comment": " level 122 ",
+            "entity": "Entity122",
+            "id": 122,
+            "kind": "Sql"
+          },
+          {
+            "comment": " level 125 ",
+            "entity": "Entity125",
+            "id": null,
+            "kind": "AuditReason"
+          }
+        ]
+      }
+    }
+  ]
+}

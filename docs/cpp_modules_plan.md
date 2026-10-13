@@ -1,7 +1,7 @@
 # C++20 modules assessment and migration plan
 
 Checkpoint: C++ `0.0.1`, commit
-`04fe05bc07c899e089bcbfd7550b5449639fad91`. Rust v5.0.5 remains pinned at
+`04fe05bc07c899e089bcbfd7550b5449639fad91`. That historical assessment used Rust v5.0.5 at
 `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
 
 This plan concerns standard C++20 named modules, rather than namespaces,
@@ -15,6 +15,23 @@ migration is accepted; see [final release evidence](../measurements/modules/2026
 Seven named interfaces publish the canonical global declarations and link the
 existing implementation. Module-owned type/ABI changes are outside this completed
 compatibility-preserving migration.
+
+## Active baseline and historical move proof
+
+Rust 5.0.6 now governs runtime parity and source ownership. The original M1a/M4
+move and retirement ledgers retain their 5.0.5 commits and production hashes.
+Use the active [workspace contract](workspace_paths_5_0_6.json) with
+verify_module_paths.py for package/target/module names, canonical paths, retired
+adapters and complete 124-source inventory/disposition coverage. It verifies the
+fixed upstream and regenerates the source inventory for comparison, without
+promoting pending dispositions to acceptance.
+
+For the unchanged-function move proof, use --historical-checkpoint. The verifier
+archives fixed C++ 0.0.3 to a temporary directory and executes that checkpoint's
+original verifier against its own original runtime lock. Current historical
+ledger bytes must match the committed snapshot. This checks 769 retained moves,
+309 unchanged canonical production files, one relocation and seven retirements.
+It does not rewrite historical hashes or freeze evolving current implementations.
 
 ## Toolchain upgrade authorization
 

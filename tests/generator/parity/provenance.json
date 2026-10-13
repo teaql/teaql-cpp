@@ -1,0 +1,55 @@
+{
+  "note": "Unmodified model inputs copied from locked source. Their presence is not successful C++ generation or semantic acceptance.",
+  "fixtures": [
+    {
+      "fixture": "shared_load_state.xml",
+      "source_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+      "source": "examples/shared-load-state/fixtures/narrow/model-under-test.xml",
+      "sha256": "0664ef5b32b1126100676782ec5c6c2d56e9e491920bfdfacadb4790a66b9ca9",
+      "capabilities": [
+        "G03",
+        "G05",
+        "G15",
+        "G16"
+      ],
+      "status": "reference_input_not_qualified"
+    },
+    {
+      "fixture": "complete_query.xml",
+      "source_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+      "source": "generator/src/test/resources/models/complete_query_fixture.xml",
+      "sha256": "daead80d97bc39f53bfd2379c28cfe101ce81ebffa76ec509fb6a5746fc1fecb",
+      "capabilities": [
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10"
+      ],
+      "status": "reference_input_not_qualified"
+    },
+    {
+      "fixture": "predicate_naming.xml",
+      "source_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+      "source": "generator/src/test/resources/models/predicate_naming.xml",
+      "sha256": "ec3c753563be139f2cfed3d776ac0425869b68c0caa25cbe18a6eef388a99b5d",
+      "capabilities": [
+        "G05",
+        "G07"
+      ],
+      "status": "reference_input_not_qualified"
+    },
+    {
+      "fixture": "json_field_naming.xml",
+      "source_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+      "source": "generator/src/test/resources/models/json-field-naming.xml",
+      "sha256": "a751f88b9f01bd597765cfdbbe95a3eb0c625f1b074bf3759deb6dd887128798",
+      "capabilities": [
+        "G10",
+        "G14",
+        "G16"
+      ],
+      "status": "reference_input_not_qualified"
+    }
+  ]
+}

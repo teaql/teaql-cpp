@@ -74,8 +74,7 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
         }
         detail::model_put(snapshot, "request_trace", trace(r, request.trace_chain));
         detail::model_put(snapshot, "query_trace", trace(r, query.trace_chain));
-        detail::model_put(
-            snapshot, "comment", request.comment ? Json(r, *request.comment) : Json(r));
+        detail::model_put(snapshot, "comment", request.comment());
         detail::model_put(
             snapshot, "query_comment", query.comment_text ? Json(r, *query.comment_text) : Json(r));
         detail::model_put(snapshot, "capture", request.capture_execution_metadata);
@@ -108,6 +107,13 @@ static Json evaluate(UserContext& context, const Json& input) {
     context.set_user_identifier("fixture");
     if (!flag(input, "capture")) {
         context.disable_sql_log();
+    }
+    const auto& options = std::get<Json::Object>(input.data);
+    if (options.contains("select_capture")) {
+        context.set_sql_log_options(SqlLogOptions{
+            .select = flag(input, "select_capture"),
+            .mutation = flag(input, "mutation_capture"),
+        });
     }
     auto& metadata = context.make<InMemoryMetadataStore>();
     EntityDescriptor descriptor(std::allocator_arg, Allocator(r), "Item");

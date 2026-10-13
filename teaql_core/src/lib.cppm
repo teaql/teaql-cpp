@@ -38,6 +38,7 @@ using ::teaql::BusinessIdSlot;
 using ::teaql::BusinessIdValue;
 using ::teaql::ColumnLayout;
 using ::teaql::CompactRow;
+using ::teaql::CompactRowLayout;
 using ::teaql::ContinuousPageFetchOptions;
 using ::teaql::CoreEntityGraphBuilder;
 using ::teaql::DEFAULT_BUSINESS_ID_DIGITS;
@@ -60,9 +61,29 @@ using ::teaql::DefaultDebugElement;
 using ::teaql::DeleteCommand;
 using ::teaql::Entity;
 using ::teaql::EntityDefaults;
+using ::teaql::FieldLayout;
+using ::teaql::RequestKind;
+using ::teaql::RequestIntentError;
+using ::teaql::QueryIntent;
+using ::teaql::MutationIntent;
+
+using ::teaql::RelationShapeCache;
+using ::teaql::LoadedSnapshot;
+using ::teaql::SnapshotPool;
+using ::teaql::DynamicPropertyDefinitions;
+using ::teaql::DynamicFieldError;
+using ::teaql::DynamicFieldSelection;
+using ::teaql::DynamicFieldDefinitions;
+using ::teaql::DynamicFieldState;
+using ::teaql::DynamicFieldMutation;
+using ::teaql::DynamicFieldValue;
+using ::teaql::DynamicFieldMergeShapes;
+using ::teaql::DynamicFieldValues;
+
 using ::teaql::EntityDescriptor;
 using ::teaql::EntityDescriptorStore;
 using ::teaql::EntityError;
+using ::teaql::EntityJsonTraversal;
 using ::teaql::EntityGraph;
 using ::teaql::EntityGraphNode;
 using ::teaql::EntityGraphOperation;
@@ -222,6 +243,7 @@ using ::teaql::core::BatchInsertCommand;
 using ::teaql::core::BatchUpdateCommand;
 using ::teaql::core::BinaryOp;
 using ::teaql::core::CompactRow;
+using ::teaql::core::CompactRowLayout;
 using ::teaql::core::ContinuousPageFetchOptions;
 using ::teaql::core::DataType;
 using ::teaql::core::DebugAlignment;
@@ -232,9 +254,29 @@ using ::teaql::core::Decimal;
 using ::teaql::core::DecimalInlineString;
 using ::teaql::core::DeleteCommand;
 using ::teaql::core::Entity;
+using ::teaql::core::FieldLayout;
+using ::teaql::core::RequestKind;
+using ::teaql::core::RequestIntentError;
+using ::teaql::core::QueryIntent;
+using ::teaql::core::MutationIntent;
+
+using ::teaql::core::RelationShapeCache;
+using ::teaql::core::LoadedSnapshot;
+using ::teaql::core::SnapshotPool;
+using ::teaql::core::DynamicPropertyDefinitions;
+using ::teaql::core::DynamicFieldError;
+using ::teaql::core::DynamicFieldSelection;
+using ::teaql::core::DynamicFieldDefinitions;
+using ::teaql::core::DynamicFieldState;
+using ::teaql::core::DynamicFieldMutation;
+using ::teaql::core::DynamicFieldValue;
+using ::teaql::core::DynamicFieldMergeShapes;
+using ::teaql::core::DynamicFieldValues;
+
 using ::teaql::core::EntityDescriptor;
 using ::teaql::core::EntityDescriptorStore;
 using ::teaql::core::EntityError;
+using ::teaql::core::EntityJsonTraversal;
 using ::teaql::core::EntityGraph;
 using ::teaql::core::EntityGraphBuilder;
 using ::teaql::core::EntityGraphNode;
@@ -379,4 +421,34 @@ namespace dynamic_search = ::teaql::dynamic_search;
 namespace eval = ::teaql::eval;
 namespace request = ::teaql::request;
 namespace serde_utils = ::teaql::serde_utils;
+}
+
+export namespace teaql::dynamic_properties {
+using ::teaql::dynamic_properties::DynamicPropertyDefinitions;
+}
+
+export namespace teaql::core::dynamic_properties {
+using ::teaql::core::dynamic_properties::DynamicPropertyDefinitions;
+}
+
+export namespace teaql::dynamic_fields {
+using ::teaql::dynamic_fields::DynamicFieldError;
+using ::teaql::dynamic_fields::DynamicFieldSelection;
+using ::teaql::dynamic_fields::DynamicFieldDefinitions;
+using ::teaql::dynamic_fields::DynamicFieldState;
+using ::teaql::dynamic_fields::DynamicFieldMutation;
+using ::teaql::dynamic_fields::DynamicFieldValue;
+using ::teaql::dynamic_fields::DynamicFieldMergeShapes;
+using ::teaql::dynamic_fields::DynamicFieldValues;
+}
+
+export namespace teaql::core::dynamic_fields {
+using ::teaql::core::dynamic_fields::DynamicFieldError;
+using ::teaql::core::dynamic_fields::DynamicFieldSelection;
+using ::teaql::core::dynamic_fields::DynamicFieldDefinitions;
+using ::teaql::core::dynamic_fields::DynamicFieldState;
+using ::teaql::core::dynamic_fields::DynamicFieldMutation;
+using ::teaql::core::dynamic_fields::DynamicFieldValue;
+using ::teaql::core::dynamic_fields::DynamicFieldMergeShapes;
+using ::teaql::core::dynamic_fields::DynamicFieldValues;
 }

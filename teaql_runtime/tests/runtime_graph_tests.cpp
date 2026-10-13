@@ -143,8 +143,8 @@ static void trace_and_conversion() {
         b(std::allocator_arg, Allocator(r), &a, empty),
         c(std::allocator_arg, Allocator(r), &b, spaces);
     auto chain = c.to_trace_chain(r);
-    check(chain.size() == 2 && chain[0].comment == "first" && chain[1].comment == "  ",
-          "skip only empty comments; whitespace is meaningful");
+    check(chain.size() == 1 && chain[0] == first,
+          "stack trace scopes omit whitespace-only comments as in 5.0.6");
     check(graph_mutation_kind_for_update(true) == GraphMutationKind::Update &&
               graph_mutation_kind_for_update(false) == GraphMutationKind::Create,
           "mutation kind selection");
@@ -167,7 +167,9 @@ static void trace_and_conversion() {
     auto& p = user->make<TraceScopeToken>(nullptr, first, 0);
     auto& q = user->make<TraceScopeToken>(&p, empty, 1);
     auto& t = user->make<TraceScopeToken>(&q, spaces, 2);
-    check(t.recover_trace_chain(r) == chain, "persistent and stack trace ordering match");
+    auto persistent = t.recover_trace_chain(r);
+    check(persistent.size() == 1 && persistent.front() == first,
+          "persistent trace scopes omit whitespace-only comments as in 5.0.6");
 }
 
 int main() {

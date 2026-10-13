@@ -32,7 +32,8 @@ static GraphNode input(Memory r) {
     GraphNode node(std::allocator_arg, Allocator(r), "Order");
     node.with_operation(GraphOperation::Create)
         .value("id", std::uint64_t(7))
-        .value("name", "planned");
+        .value("name", "planned")
+        .with_comment("Save order fixture");
     return node;
 }
 
@@ -48,6 +49,8 @@ static void cancellation_and_late_lookup() {
         state.read_pending = stage == 2;
         state.rows.emplace_back();
         state.rows.back().emplace(String("id", r), Value(r, std::uint64_t(7)));
+        state.rows.back().emplace(String("version", r), Value(r, std::int64_t(3)));
+        state.rows.back().emplace(String("name", r), Value(r, "database"));
         auto& controls = user->make<Controls>();
         controls.pending_begin = stage == 0;
         controls.pending_terminal = stage == 3;
@@ -98,6 +101,7 @@ static void ledger_completion_and_errors() {
         state.allow_reads = true;
         state.rows.emplace_back();
         state.rows.back().emplace(String("id", r), Value(r, std::uint64_t(7)));
+        state.rows.back().emplace(String("version", r), Value(r, std::int64_t(3)));
         state.rows.back().emplace(String("name", r), Value(r, "database"));
         auto& controls = user->make<Controls>();
         controls.fail_commit = fail_commit;
@@ -167,8 +171,18 @@ static void sqlite_transactional_save_and_cancel() {
           "ledger saver commits guarded update and clears only the committed ledger");
     // Explicit transaction cancellation must release SQLite before User close.
     auto& transaction = user->get(executor).begin(r).wait().value().get();
-    sql.sql = "INSERT INTO orders VALUES(8,1,'cancelled')";
-    check(bool(transport.execute(r, sql)), "uncommitted cancellation fixture write");
+    InsertCommand cancelled(std::allocator_arg, Allocator(r), "Order");
+    cancelled.values.fields.emplace(String("id", r), Value(r, std::uint64_t(8)));
+    cancelled.values.fields.emplace(String("version", r), Value(r, std::int64_t(1)));
+    cancelled.values.fields.emplace(String("name", r), Value(r, "cancelled"));
+    check(bool(transaction
+                   .mutate(r,
+                           MutationRequest(std::allocator_arg,
+                                           Allocator(r),
+                                           std::move(cancelled),
+                                           "verify transaction cancellation"))
+                   .wait()),
+          "uncommitted cancellation fixture write uses the transaction capability");
     transaction.cancel();
     transaction.cancel();
     sql.sql = "SELECT id FROM orders ORDER BY id";

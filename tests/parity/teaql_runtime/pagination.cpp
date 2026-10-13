@@ -62,9 +62,11 @@ struct IdSetQueueExecutor final : QueryExecutor<StubError>, MutationExecutor<Stu
 
 template <class E>
 static auto& enhanced(const EntityDataService<E>& service, const SelectQuery& query) {
+    auto annotated = query.clone(service.memory_resource());
+    annotated.comment("Inspect native pagination").purpose("Verify native pagination");
     using Output = Result<SmartList<Order>, DataServiceError<StubError>>;
     return make_operation<Output, detail::EnhancedEntitiesOperation<E, Order>>(
-        service.memory_resource(), service, query, std::span<const RelationAggregate>{});
+        service.memory_resource(), service, annotated, std::span<const RelationAggregate>{});
 }
 
 static SelectQuery query(Memory owner,
@@ -75,6 +77,7 @@ static SelectQuery query(Memory owner,
                          std::uint64_t limit = 1,
                          std::string_view order = "id") {
     SelectQuery result(std::allocator_arg, Allocator(owner), "Order");
+    result.comment("Inspect native ID-set page").purpose("Verify ID-set paging");
     result.project("id")
         .project("version")
         .project("name")
@@ -130,6 +133,7 @@ static void continuous_page_fetch_uses_id_seek_for_the_next_page() {
     auto bound = f.user->entity_data_service<QueueExecutor>("Order");
     check(bool(bound), "original continuous capture binding");
     SelectQuery first(std::allocator_arg, Allocator(f.owner), "Order");
+    first.comment("Inspect continuous page").purpose("Verify continuous paging");
     first.order_desc("id").page(0, 10).optimize_for_continuous_page_fetch_with("recent-orders", 60);
     check(bool(Access::fetch_all(bound.value().get(), first).wait()),
           "original first continuous page succeeds");
@@ -137,6 +141,7 @@ static void continuous_page_fetch_uses_id_seek_for_the_next_page() {
     check(first_plan && *first_plan == "OFFSET_FALLBACK:FIRST_PAGE",
           "original first-page offset fallback");
     SelectQuery second(std::allocator_arg, Allocator(f.owner), "Order");
+    second.comment("Inspect continuous page").purpose("Verify continuous paging");
     second.order_desc("id").page(10, 10).optimize_for_continuous_page_fetch_with("recent-orders",
                                                                                  60);
     check(bool(Access::fetch_all(bound.value().get(), second).wait()),

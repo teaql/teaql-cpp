@@ -1,0 +1,21 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "The historical transaction fixture supplies no intent for raw query/mutation requests. Versioned observers preserve that absence and use actual fallible 5.0.6 constructors, allowing typed validation errors to propagate through the original transaction callback.",
+  "errors": [
+    {
+      "code": "E0560",
+      "message": "struct `teaql_data_service::QueryRequest` has no field named `comment`",
+      "location": "src/bin/transaction_scope_5_0_6.rs:105:96"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Update` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/transaction_scope_5_0_6.rs:106:50"
+    },
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Update` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/transaction_scope_5_0_6.rs:114:47"
+    }
+  ]
+}

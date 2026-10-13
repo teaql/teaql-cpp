@@ -17,6 +17,7 @@ inline constexpr std::string_view UNSAFE_RAW_ENTITY_REFERENCES_ACKNOWLEDGEMENT =
 
 // Rust Duration's full nonnegative seconds/nanoseconds domain, including MIPS.
 struct ReferenceLifetime {
+    bool operator==(const ReferenceLifetime&) const = default;
     std::uint64_t seconds = 0;
     std::uint32_t nanoseconds = 0;
 

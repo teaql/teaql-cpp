@@ -1,0 +1,7 @@
+<root name="cpp_constants_catalog" org="teaql" data_service="sqlite">
+    <category id="id()" name="string()" code="string()" _constant="true" _identifier="code">
+        <_value id="1" name="First category" code="FIRST" />
+        <_value id="22" name="Second category" code="SECOND" />
+    </category>
+    <platform name="string()" />
+</root>

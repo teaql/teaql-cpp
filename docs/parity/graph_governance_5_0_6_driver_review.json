@@ -1,0 +1,58 @@
+[
+  {
+    "family": "checker",
+    "historical_driver": "tests/parity/rust_values/src/bin/checker_oracle.rs",
+    "historical_sha256": "0fd5ad6bb68eda4539ecd2551dffd66d6086a8e0f75d709411791d86839006b5",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/checker_5_0_6.rs",
+    "active_sha256": "0c46a1fb0d106aedcb8f959bf45b22051109f6a8414df716872759415f67aa32",
+    "adaptation": "fixture imports only"
+  },
+  {
+    "family": "mutation_policy",
+    "historical_driver": "tests/parity/rust_values/src/bin/mutation_policy_oracle.rs",
+    "historical_sha256": "f1a047620f6b6c5c13e4954d5293845dd956ae86e12438c69e0b5a624f4daf2e",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/mutation_policy_5_0_6.rs",
+    "active_sha256": "f1a047620f6b6c5c13e4954d5293845dd956ae86e12438c69e0b5a624f4daf2e",
+    "adaptation": "byte identical"
+  },
+  {
+    "family": "entity_graph_plan",
+    "historical_driver": "tests/parity/rust_values/src/bin/entity_graph_plan_oracle.rs",
+    "historical_sha256": "13373364473c0df7a6a75eec3b4623c41c3cc6b1621b4db5cdcb41ffdab19f16",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/entity_graph_plan_5_0_6.rs",
+    "active_sha256": "0da8c9f889b11bf8655c029909c5894ba4239d7617b615513e1f605dc730dd0e",
+    "adaptation": "comments and fixture imports only"
+  },
+  {
+    "family": "ledger_move_only",
+    "historical_driver": "tests/parity/rust_values/src/bin/ledger_move_only_oracle.rs",
+    "historical_sha256": "1f76a94cd71db73090d2ce5f9527daef0b34c54d742c465403f14a5c4125656f",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/ledger_move_only_5_0_6.rs",
+    "active_sha256": "71481c384e5fc2f57e905b57c35f3315a439ac879aa36fc26b320bbc575daeca",
+    "adaptation": "MutationRequest command envelope observer; fixture imports only"
+  },
+  {
+    "family": "graph_repository",
+    "historical_driver": "tests/parity/rust_values/src/bin/graph_repository_oracle.rs",
+    "historical_sha256": "23c4e1a3bd411733857a0d4110fabac294ed9094cd7f05b129474dc8d0b6083c",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/graph_repository_5_0_6.rs",
+    "active_sha256": "895aa29a78462243d73e627f4683204fafc32b16e80cf21b3d7edee44a0a61c0",
+    "adaptation": "fixture imports only"
+  },
+  {
+    "family": "runtime_graph",
+    "historical_driver": "tests/parity/rust_values/src/bin/runtime_graph_oracle.rs",
+    "historical_sha256": "2dcb65c4b7b5ca6e5e193954a6f4b3c4f686c45efc159d3c396a2c6e51ed847f",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/runtime_graph_5_0_6.rs",
+    "active_sha256": "2dcb65c4b7b5ca6e5e193954a6f4b3c4f686c45efc159d3c396a2c6e51ed847f",
+    "adaptation": "byte identical"
+  },
+  {
+    "family": "audited_save",
+    "historical_driver": "tests/parity/rust_values/src/bin/audited_save_oracle.rs",
+    "historical_sha256": "47d35b1665c7f03fcbe576b49cca7c18313688ec3616de1b57572b3ab72f3aab",
+    "active_driver": "tests/parity/rust_field_layout/src/bin/audited_save_5_0_6.rs",
+    "active_sha256": "4c99ab75735807e620937e37de1b5226c2481e95839d663883a17987c8d064fd",
+    "adaptation": "MutationRequest command envelope observer; fixture imports only"
+  }
+]

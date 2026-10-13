@@ -211,6 +211,7 @@ struct Fixture {
     detail::GraphSaverFor<Ambient>& saver = user->make<detail::GraphSaverFor<Ambient>>();
 
     explicit Fixture(bool events = false) {
+        root.set_comment("Inspect native ledger save");
         user->disable_sql_log();
         auto& metadata = user->make<InMemoryMetadataStore>();
         EntityDescriptor descriptor(std::allocator_arg, Allocator(owner), "Task");
@@ -226,7 +227,10 @@ struct Fixture {
         }
         state.reset_row();
         root.set_original_version(key, 1);
-        node.value("id", std::int64_t(1)).value("version", std::int64_t(1)).value("name", "before");
+        node.value("id", std::int64_t(1))
+            .value("version", std::int64_t(1))
+            .value("name", "before")
+            .with_comment("Inspect native ledger save");
     }
 };
 
@@ -294,7 +298,8 @@ static void cancelled_new_root_cannot_return_a_fictitious_persisted_entity() {
     f.node = GraphNode(std::allocator_arg, Allocator(f.owner), "Task");
     f.node.value("id", std::int64_t(7))
         .value("version", std::int64_t(0))
-        .value("name", "cancelled");
+        .value("name", "cancelled")
+        .with_comment("Inspect cancelled native root");
     const auto& result = f.saver.save_ledger_dyn(*f.user, std::move(f.node), f.root).wait();
     check(!result && result.error().to_string(f.owner).find("cancelled new root") != String::npos &&
               !f.state.called("transaction-mutate") && !f.state.called("commit"),
@@ -334,6 +339,7 @@ static void scalar_change_keeps_snapshot_but_relation_changes_invalidate_it() {
     EntityKey child(
         std::allocator_arg, Allocator(owner), "OrderLine", Value(owner, std::int64_t(2)));
     auto& root = user->make<EntityRuntimeState>();
+    root.set_comment("Inspect native ledger validation");
     root.set(order, "total_amount", Value(owner, std::int64_t(100)));
     check(detail::can_preserve_loaded_relations(root, order, descriptor),
           "original scalar-only snapshot can be reused");

@@ -1,0 +1,8 @@
+{
+  "source": "tests/generator/parity/candidates_rust/lib/src/runtime.rs",
+  "source_sha256": "2144eba3c58bbe4fc2edca0b9ff68683d6116c95e003195e75e25dce9c2b1193",
+  "extracted_sha256": "a4a3b679f330534e59ee171e5ed104bbb4357d5bd95f8e3a75476f0691538b95",
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "note": "Exact private generated function extracted without edits for a narrow classifier oracle; not a public bootstrap integration oracle."
+}

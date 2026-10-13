@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Nine complete historical API input families replayed against actual source and compared with finalized complete native outputs; active CTest still selects historical corpora for these families.",
+  "total_observations": 4007,
+  "matching_families": 8,
+  "families": [
+    {
+      "family": "datatype_debug",
+      "observations": 10,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "entity_defaults_api",
+      "observations": 102,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "safe_expression_api",
+      "observations": 448,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "value_owned_api",
+      "observations": 171,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "value_api",
+      "observations": 115,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "meta_api",
+      "observations": 344,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "mutation_model_api",
+      "observations": 1688,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "sql_model_api",
+      "observations": 40,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "family": "query_api",
+      "observations": 1089,
+      "exit_code": 1,
+      "status": "failed"
+    }
+  ]
+}

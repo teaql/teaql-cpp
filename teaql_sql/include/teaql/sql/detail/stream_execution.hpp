@@ -395,6 +395,67 @@ public:
                              SqlExecutorState& cache)
         : dialect_(dialect), transport_(transport), schema_(schema), cache_(cache) {}
 
+    Result<QueryStream<SqlExecutorError<E>>*, DynamicFieldError>
+    query_stream_with_dynamic_fields(Memory r,
+                                     QueryRequest request,
+                                     std::size_t size,
+                                     DynamicFieldStreamPlan plan,
+                                     std::optional<ExecutionObserver> observer) override {
+        using Output = Result<QueryStream<SqlExecutorError<E>>*, DynamicFieldError>;
+        request.require_valid_intent();
+        if (plan.definitions().owner_type() != request.query.entity) {
+            return Output::err(
+                r, DynamicFieldError(r, "DYNAMIC_FIELD_OWNER_MISMATCH", request.query.entity));
+        }
+        if (!request.query.dynamic_field_selection ||
+            *request.query.dynamic_field_selection != plan.selection()) {
+            return Output::err(r,
+                               DynamicFieldError(r,
+                                                 "DYNAMIC_FIELD_STREAM_SELECTION_MISMATCH",
+                                                 request.query.entity));
+        }
+        std::optional<CompiledQuery> compiled;
+        try {
+            auto* entity = cache_.entity_descriptor(schema_, request.query.entity);
+            if (!entity) {
+                throw SqlCompileError(std::allocator_arg,
+                                      Allocator(r),
+                                      SqlCompileError::Code::UnknownEntity,
+                                      request.query.entity);
+            }
+            compiled.emplace(cache_.compile_select_cached(r, dialect_, *entity, request.query));
+        } catch (const SqlCompileError& error) {
+            return Output::ok(r, &sql_error_stream<E>(r, clone_in(r, error)));
+        }
+        std::optional<ExecutionMetadata> metadata;
+        if (observer && request.capture_execution_metadata) {
+            metadata.emplace(query_diagnostic_metadata(r, dialect_, *compiled, request));
+        }
+        auto source = transport_.stream_sql_with_dynamic_fields(
+            r, std::move(*compiled), size, std::move(plan));
+        if (!source) {
+            return Output::err(r, std::move(source).error());
+        }
+        if (!source.value() || source.value()->memory_resource() != r) {
+            if (source.value()) {
+                source.value()->cancel();
+            }
+            throw std::invalid_argument("Dynamic SQL stream must belong to its UserContext");
+        }
+        QueryStream<SqlExecutorError<E>>* mapped;
+        try {
+            mapped = &make_stream<Result<StreamChunk, SqlExecutorError<E>>, MappedSqlStream<E>>(
+                r, *source.value());
+        } catch (...) {
+            source.value()->cancel();
+            throw;
+        }
+        if (metadata) {
+            mapped = &diagnostic_stream(r, *mapped, std::move(*metadata), std::move(*observer));
+        }
+        return Output::ok(r, mapped);
+    }
+
     QueryStream<SqlExecutorError<E>>&
     query_stream(Memory r, QueryRequest request, std::size_t size) override {
         return native_sql_stream<E>(

@@ -1,0 +1,5335 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "note": "Actual operation-owned Rust transaction futures, held connection lease and released waiter; cancellation drops Rust future, C++ cancels operation; Rust transaction drop maps to actual C++ transaction UserContext destruction. Full states/results/rows, no normalization. Wake measures release notification independently from C++ cancellation notification.",
+  "cases": [
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "commit",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "rollback",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": []
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 0
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 0,
+        "end": "drop",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "tx"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "tx"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "commit",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "rollback",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 1,
+        "end": "drop",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "tx"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "tx"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "commit",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "rollback",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "read",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "read",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "read",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "read",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "rows": [
+            [
+              1,
+              "before"
+            ],
+            [
+              2,
+              "before"
+            ],
+            [
+              3,
+              "before"
+            ]
+          ]
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "write",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "write",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "write",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "write",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "outside"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "affected": 1
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "cancel",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "cancel",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "cancel",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "cancel",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": true,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": null,
+        "woke": false
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "begin",
+        "write": false,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "begin",
+        "write": false,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 0,
+        "inside": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "begin",
+        "write": true,
+        "polls": 1
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    },
+    {
+      "input": {
+        "count": 3,
+        "end": "drop",
+        "parent": "begin",
+        "write": true,
+        "polls": 3
+      },
+      "expected": {
+        "after": [
+          [
+            1,
+            "before"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "autocommit": true,
+        "cancelled": false,
+        "changed": 1,
+        "inside": [
+          [
+            1,
+            "tx"
+          ],
+          [
+            2,
+            "before"
+          ],
+          [
+            3,
+            "before"
+          ]
+        ],
+        "pending": [
+          true,
+          true,
+          true
+        ],
+        "result": {
+          "began": true
+        },
+        "woke": true
+      }
+    }
+  ]
+}

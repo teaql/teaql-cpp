@@ -1,5 +1,6 @@
 #include <teaql/runtime/relation.hpp>
 #include <teaql/runtime/detail/context/entity.hpp>
+#include <teaql/core/request.hpp>
 #include <teaql/core/detail/number_text.hpp>
 #include <algorithm>
 #include <charconv>
@@ -153,7 +154,7 @@ unique_relation_values(Memory r, std::span<const CompactRow> rows, std::string_v
     Vector<Entry> sorted(r);
     sorted.reserve(rows.size());
     for (const auto& row : rows) {
-        if (auto* value = row.get(field)) {
+        if (auto* value = row.get(field); value && !value->is_null()) {
             if (auto* id = std::get_if<std::uint64_t>(&value->data)) {
                 sorted.push_back({Key(*id), value, sorted.size()});
             } else if (auto* id = std::get_if<std::int64_t>(&value->data); id && *id >= 0) {
@@ -185,15 +186,27 @@ SelectQuery query_for_relation_plan(const UserContext& context,
     auto query = plan.query ? detail::clone_in(r, *plan.query)
                             : SelectQuery(std::allocator_arg, Allocator(r), plan.target_entity);
     query.entity = plan.target_entity;
-    if (compact) {
-        query.relations.clear();
-    }
+    // The hydration planner owns every descendant in both execution modes.
+    query.relations.clear();
+    query.facets.clear();
+    (void)compact;
     ensure_projection(query, plan.foreign_key);
     for (const auto& child : plan.children) {
         ensure_projection(query, child.local_key);
     }
     if (query.slice) {
-        if (auto* entity = context.entity(plan.target_entity)) {
+        if (!query.group_by_fields.empty() || !query.aggregates.empty()) {
+            // Group identity determines stable aggregate pagination.
+            for (const auto& field : query.group_by_fields) {
+                auto found = std::find_if(
+                    query.order_by.begin(), query.order_by.end(), [&](const auto& order) {
+                        return !order.expr && order.field == field;
+                    });
+                if (found == query.order_by.end()) {
+                    query.order_asc(field);
+                }
+            }
+        } else if (auto* entity = context.entity(plan.target_entity)) {
             if (auto* id = entity->id_property()) {
                 auto found = std::find_if(
                     query.order_by.begin(), query.order_by.end(), [&](const auto& order) {

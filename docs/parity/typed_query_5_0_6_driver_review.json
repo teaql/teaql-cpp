@@ -1,0 +1,42 @@
+[
+  {
+    "family": "entity_query",
+    "historical_driver": "tests/parity/rust_values/src/bin/entity_query_oracle.rs",
+    "historical_sha256": "d47004546002df389d2db231e697a5b52fc759039932bb67294050599c456d94",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/entity_query_5_0_6.rs",
+    "active_sha256": "16c19d92e27ced431888697fa4f2668482cf04718a7620250b8bc0fccda07d9f",
+    "adaptation": "validated request comment accessor"
+  },
+  {
+    "family": "entity_stream",
+    "historical_driver": "tests/parity/rust_values/src/bin/entity_stream_oracle.rs",
+    "historical_sha256": "f866dba7f1d6872a1264cc804157c49d1fecd671574960b2fc364afcf567679f",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/entity_stream_5_0_6.rs",
+    "active_sha256": "d122a77a1e0b6ab185448a15d60261a367dbede641fa87160d3d7b7ee74a100d",
+    "adaptation": "validated request comment accessor"
+  },
+  {
+    "family": "enhanced_entities",
+    "historical_driver": "tests/parity/rust_values/src/bin/enhanced_entities_oracle.rs",
+    "historical_sha256": "585e6516d76f3d237c1fdcf26b09829b2367ecf268053f3546f13fa4c6909714",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/enhanced_entities_5_0_6.rs",
+    "active_sha256": "585e6516d76f3d237c1fdcf26b09829b2367ecf268053f3546f13fa4c6909714",
+    "adaptation": "byte-identical observer"
+  },
+  {
+    "family": "entity_decoder",
+    "historical_driver": "tests/parity/rust_values/src/bin/entity_decoder_oracle.rs",
+    "historical_sha256": "c1e5c2767b671654285e7f5c2fb1a61418d34b2abcb7eb68d39a22654e28f5cb",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/entity_decoder_5_0_6.rs",
+    "active_sha256": "35d7f6ecf548bc55cb08c649e7473f99f5b69c8239f374db1c0c0f289a4cff69",
+    "adaptation": "fixture import path"
+  },
+  {
+    "family": "id_set_page",
+    "historical_driver": "tests/parity/id_set_page_oracle.rs",
+    "historical_sha256": "836e4f9772f4759651c261f937a4e31aa6012023862f36960bf3df507184883c",
+    "active_driver": "tests/parity/rust_private_save_5_0_6/src/bin/id_set_page_5_0_6.rs",
+    "active_sha256": "836e4f9772f4759651c261f937a4e31aa6012023862f36960bf3df507184883c",
+    "adaptation": "byte-identical observer"
+  }
+]

@@ -1,0 +1,3436 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Initial full run after ordinary generated bootstrap; before later root-fixture, time-corpus and ledger-read repairs",
+  "total": 489,
+  "passed": 292,
+  "failed": 197,
+  "exit_code": 8,
+  "note": "Ledger execution fixture was unresponsive and was terminated with SIGTERM after over 30 minutes; failure retained. All generated API compiler contracts passed. This is diagnostic evidence, not qualification.",
+  "tests": [
+    {
+      "ordinal": 1,
+      "id": 443,
+      "name": "smart_list_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.84
+    },
+    {
+      "ordinal": 2,
+      "id": 447,
+      "name": "compact_row_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.61
+    },
+    {
+      "ordinal": 3,
+      "id": 399,
+      "name": "core_aux_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.44
+    },
+    {
+      "ordinal": 4,
+      "id": 170,
+      "name": "provider_sqlite_unicode_contracts",
+      "status": "passed",
+      "seconds": 11.7
+    },
+    {
+      "ordinal": 5,
+      "id": 254,
+      "name": "system_time_error_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.54
+    },
+    {
+      "ordinal": 6,
+      "id": 421,
+      "name": "request_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.49
+    },
+    {
+      "ordinal": 7,
+      "id": 479,
+      "name": "generated_sample_fields_rust_parity",
+      "status": "passed",
+      "seconds": 23.23
+    },
+    {
+      "ordinal": 8,
+      "id": 58,
+      "name": "entity_reference_rust_parity",
+      "status": "failed",
+      "seconds": 0.12
+    },
+    {
+      "ordinal": 9,
+      "id": 150,
+      "name": "original_runtime_business_permutation_contracts",
+      "status": "passed",
+      "seconds": 28.72
+    },
+    {
+      "ordinal": 10,
+      "id": 397,
+      "name": "decimal_extended_rust_parity",
+      "status": "failed",
+      "seconds": 0.84
+    },
+    {
+      "ordinal": 11,
+      "id": 477,
+      "name": "generated_sample_failures_rust_parity",
+      "status": "passed",
+      "seconds": 8.37
+    },
+    {
+      "ordinal": 12,
+      "id": 353,
+      "name": "entity_runtime_rust_parity",
+      "status": "failed",
+      "seconds": 0.33
+    },
+    {
+      "ordinal": 13,
+      "id": 325,
+      "name": "generated_inheritance_graph_rust_parity",
+      "status": "failed",
+      "seconds": 0.61
+    },
+    {
+      "ordinal": 14,
+      "id": 126,
+      "name": "i18n_debug_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.27
+    },
+    {
+      "ordinal": 15,
+      "id": 354,
+      "name": "runtime_graph_rust_parity",
+      "status": "failed",
+      "seconds": 0.33
+    },
+    {
+      "ordinal": 16,
+      "id": 376,
+      "name": "sqlite_native_diagnostics_rust_parity",
+      "status": "failed",
+      "seconds": 0.34
+    },
+    {
+      "ordinal": 17,
+      "id": 193,
+      "name": "runtime_graph_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.31
+    },
+    {
+      "ordinal": 18,
+      "id": 342,
+      "name": "id_set_build_rust_parity",
+      "status": "failed",
+      "seconds": 0.26
+    },
+    {
+      "ordinal": 19,
+      "id": 85,
+      "name": "transaction_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.25
+    },
+    {
+      "ordinal": 20,
+      "id": 451,
+      "name": "query_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 21,
+      "id": 425,
+      "name": "query_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.34
+    },
+    {
+      "ordinal": 22,
+      "id": 395,
+      "name": "sql_model_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.27
+    },
+    {
+      "ordinal": 23,
+      "id": 394,
+      "name": "data_service_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.26
+    },
+    {
+      "ordinal": 24,
+      "id": 37,
+      "name": "generated_aggregation_cache_rust_parity",
+      "status": "passed",
+      "seconds": 3.03
+    },
+    {
+      "ordinal": 25,
+      "id": 456,
+      "name": "generated_support_rust_parity",
+      "status": "failed",
+      "seconds": 0.3
+    },
+    {
+      "ordinal": 26,
+      "id": 324,
+      "name": "generated_inheritance_save_rust_parity",
+      "status": "failed",
+      "seconds": 0.27
+    },
+    {
+      "ordinal": 27,
+      "id": 427,
+      "name": "meta_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.23
+    },
+    {
+      "ordinal": 28,
+      "id": 42,
+      "name": "generated_relation_analysis_rust_parity",
+      "status": "passed",
+      "seconds": 24.86
+    },
+    {
+      "ordinal": 29,
+      "id": 373,
+      "name": "sqlite_decoding_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 30,
+      "id": 117,
+      "name": "save_preparation_rust_parity",
+      "status": "failed",
+      "seconds": 0.26
+    },
+    {
+      "ordinal": 31,
+      "id": 87,
+      "name": "audited_auto_save_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 32,
+      "id": 405,
+      "name": "decimal_wire_format_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 33,
+      "id": 59,
+      "name": "reference_crypto_nist_contracts",
+      "status": "passed",
+      "seconds": 2.03
+    },
+    {
+      "ordinal": 34,
+      "id": 478,
+      "name": "generated_sample_save_async_contracts",
+      "status": "passed",
+      "seconds": 2.89
+    },
+    {
+      "ordinal": 35,
+      "id": 83,
+      "name": "log_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 36,
+      "id": 341,
+      "name": "query_keys_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 37,
+      "id": 107,
+      "name": "runtime_mutation_rust_parity",
+      "status": "failed",
+      "seconds": 0.25
+    },
+    {
+      "ordinal": 38,
+      "id": 73,
+      "name": "event_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.25
+    },
+    {
+      "ordinal": 39,
+      "id": 61,
+      "name": "inmemory_rust_parity",
+      "status": "failed",
+      "seconds": 0.29
+    },
+    {
+      "ordinal": 40,
+      "id": 402,
+      "name": "decimal_numeric_rust_parity",
+      "status": "failed",
+      "seconds": 0.28
+    },
+    {
+      "ordinal": 41,
+      "id": 256,
+      "name": "data_service_model_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 42,
+      "id": 329,
+      "name": "generated_inherited_stream_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 43,
+      "id": 417,
+      "name": "core_graph_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.25
+    },
+    {
+      "ordinal": 44,
+      "id": 98,
+      "name": "graph_node_command_rust_parity",
+      "status": "failed",
+      "seconds": 0.27
+    },
+    {
+      "ordinal": 45,
+      "id": 77,
+      "name": "relation_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 46,
+      "id": 54,
+      "name": "round_trip_reference_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 47,
+      "id": 91,
+      "name": "graph_saver_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 48,
+      "id": 146,
+      "name": "original_runtime_incremental_ledger_contracts",
+      "status": "passed",
+      "seconds": 1.6
+    },
+    {
+      "ordinal": 49,
+      "id": 323,
+      "name": "generated_return_type_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 50,
+      "id": 404,
+      "name": "decimal_foundation_rust_parity",
+      "status": "failed",
+      "seconds": 0.26
+    },
+    {
+      "ordinal": 51,
+      "id": 388,
+      "name": "sql_mutation_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 52,
+      "id": 96,
+      "name": "recursive_graph_write_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 53,
+      "id": 50,
+      "name": "document_round_trip_5_0_6_rust_parity",
+      "status": "passed",
+      "seconds": 17.74
+    },
+    {
+      "ordinal": 54,
+      "id": 415,
+      "name": "presentation_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.25
+    },
+    {
+      "ordinal": 55,
+      "id": 474,
+      "name": "generated_runtime_assembly_rust_parity",
+      "status": "passed",
+      "seconds": 1.14
+    },
+    {
+      "ordinal": 56,
+      "id": 345,
+      "name": "relation_hydration_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 57,
+      "id": 305,
+      "name": "dynamic_carrier_rust_parity",
+      "status": "passed",
+      "seconds": 0.93
+    },
+    {
+      "ordinal": 58,
+      "id": 365,
+      "name": "runtime_business_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 59,
+      "id": 40,
+      "name": "generated_facets_rust_parity",
+      "status": "passed",
+      "seconds": 6.17
+    },
+    {
+      "ordinal": 60,
+      "id": 313,
+      "name": "generated_bootstrap_rust_parity",
+      "status": "passed",
+      "seconds": 2.96
+    },
+    {
+      "ordinal": 61,
+      "id": 381,
+      "name": "sql_transaction_rust_parity",
+      "status": "failed",
+      "seconds": 0.23
+    },
+    {
+      "ordinal": 62,
+      "id": 360,
+      "name": "runtime_log_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 63,
+      "id": 423,
+      "name": "mutation_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 64,
+      "id": 75,
+      "name": "check_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.23
+    },
+    {
+      "ordinal": 65,
+      "id": 112,
+      "name": "policy_plan_rust_parity",
+      "status": "failed",
+      "seconds": 0.26
+    },
+    {
+      "ordinal": 66,
+      "id": 163,
+      "name": "original_runtime_pagination_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 67,
+      "id": 433,
+      "name": "eval_rust_parity",
+      "status": "failed",
+      "seconds": 0.23
+    },
+    {
+      "ordinal": 68,
+      "id": 327,
+      "name": "generated_inheritance_variants_rust_parity",
+      "status": "failed",
+      "seconds": 0.23
+    },
+    {
+      "ordinal": 69,
+      "id": 382,
+      "name": "sql_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.27
+    },
+    {
+      "ordinal": 70,
+      "id": 390,
+      "name": "sql_dialect_rust_parity",
+      "status": "failed",
+      "seconds": 0.26
+    },
+    {
+      "ordinal": 71,
+      "id": 310,
+      "name": "generated_optional_fields_rust_parity",
+      "status": "passed",
+      "seconds": 6.2
+    },
+    {
+      "ordinal": 72,
+      "id": 100,
+      "name": "graph_save_adapter_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 73,
+      "id": 369,
+      "name": "sqlite_provider_business_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 74,
+      "id": 337,
+      "name": "provider_sqlite_schema_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 75,
+      "id": 401,
+      "name": "decimal_parsing_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 76,
+      "id": 93,
+      "name": "ledger_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 77,
+      "id": 358,
+      "name": "log_manager_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 78,
+      "id": 375,
+      "name": "sqlite_error_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 79,
+      "id": 372,
+      "name": "sqlite_provider_transport_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 80,
+      "id": 88,
+      "name": "audited_save_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 81,
+      "id": 218,
+      "name": "runtime_error_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.25
+    },
+    {
+      "ordinal": 82,
+      "id": 330,
+      "name": "generated_checker_flow_rust_parity",
+      "status": "passed",
+      "seconds": 6.62
+    },
+    {
+      "ordinal": 83,
+      "id": 6,
+      "name": "entity_runtime_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 84,
+      "id": 111,
+      "name": "entity_graph_plan_rust_parity",
+      "status": "failed",
+      "seconds": 0.23
+    },
+    {
+      "ordinal": 85,
+      "id": 370,
+      "name": "sqlite_provider_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 86,
+      "id": 355,
+      "name": "context_event_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 87,
+      "id": 71,
+      "name": "policy_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 88,
+      "id": 69,
+      "name": "ledger_move_only_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 89,
+      "id": 351,
+      "name": "enhanced_entities_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 90,
+      "id": 102,
+      "name": "ledger_plan_rust_parity",
+      "status": "failed",
+      "seconds": 0.26
+    },
+    {
+      "ordinal": 91,
+      "id": 333,
+      "name": "generated_business_ids_rust_parity",
+      "status": "passed",
+      "seconds": 3.76
+    },
+    {
+      "ordinal": 92,
+      "id": 357,
+      "name": "context_logging_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 93,
+      "id": 103,
+      "name": "graph_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 94,
+      "id": 361,
+      "name": "audit_event_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 95,
+      "id": 434,
+      "name": "mutation_model_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 96,
+      "id": 236,
+      "name": "sql_execution_5_0_6_rust_parity",
+      "status": "passed",
+      "seconds": 3.6
+    },
+    {
+      "ordinal": 97,
+      "id": 387,
+      "name": "sql_schema_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 98,
+      "id": 380,
+      "name": "sql_stream_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 99,
+      "id": 396,
+      "name": "decimal_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 100,
+      "id": 127,
+      "name": "i18n_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 101,
+      "id": 364,
+      "name": "business_service_rust_parity",
+      "status": "failed",
+      "seconds": 0.24
+    },
+    {
+      "ordinal": 102,
+      "id": 124,
+      "name": "checker_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 103,
+      "id": 34,
+      "name": "reference_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 104,
+      "id": 400,
+      "name": "decimal_scale_rust_parity",
+      "status": "failed",
+      "seconds": 0.23
+    },
+    {
+      "ordinal": 105,
+      "id": 442,
+      "name": "model_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 106,
+      "id": 457,
+      "name": "purposed_query_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 107,
+      "id": 221,
+      "name": "context_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 108,
+      "id": 393,
+      "name": "system_time_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 109,
+      "id": 371,
+      "name": "sqlite_provider_transaction_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 110,
+      "id": 366,
+      "name": "runtime_registry_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 111,
+      "id": 344,
+      "name": "relation_enhancement_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 112,
+      "id": 359,
+      "name": "log_formatter_rust_parity",
+      "status": "failed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 113,
+      "id": 191,
+      "name": "graph_repository_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 114,
+      "id": 340,
+      "name": "relation_execution_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 115,
+      "id": 368,
+      "name": "runtime_context_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 116,
+      "id": 331,
+      "name": "generated_checker_commit_rust_parity",
+      "status": "passed",
+      "seconds": 3.74
+    },
+    {
+      "ordinal": 117,
+      "id": 253,
+      "name": "system_time_arithmetic_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 118,
+      "id": 392,
+      "name": "sql_log_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 119,
+      "id": 454,
+      "name": "safe_expression_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 120,
+      "id": 322,
+      "name": "generated_inheritance_sqlite_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 121,
+      "id": 367,
+      "name": "runtime_check_rust_parity",
+      "status": "failed",
+      "seconds": 0.21
+    },
+    {
+      "ordinal": 122,
+      "id": 374,
+      "name": "sqlite_bindings_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 123,
+      "id": 153,
+      "name": "original_provider_query_contracts",
+      "status": "passed",
+      "seconds": 0.45
+    },
+    {
+      "ordinal": 124,
+      "id": 475,
+      "name": "generated_sample_execution_contracts",
+      "status": "passed",
+      "seconds": 1.52
+    },
+    {
+      "ordinal": 125,
+      "id": 430,
+      "name": "value_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.14
+    },
+    {
+      "ordinal": 126,
+      "id": 35,
+      "name": "generated_execution_rust_parity",
+      "status": "passed",
+      "seconds": 6.86
+    },
+    {
+      "ordinal": 127,
+      "id": 334,
+      "name": "intent_trace_rust_parity",
+      "status": "passed",
+      "seconds": 2.7
+    },
+    {
+      "ordinal": 128,
+      "id": 62,
+      "name": "context_locking_contracts",
+      "status": "passed",
+      "seconds": 0.41
+    },
+    {
+      "ordinal": 129,
+      "id": 115,
+      "name": "mutation_policy_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 130,
+      "id": 276,
+      "name": "entity_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 131,
+      "id": 63,
+      "name": "context_locking_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 132,
+      "id": 197,
+      "name": "telemetry_model_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 133,
+      "id": 356,
+      "name": "telemetry_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 134,
+      "id": 312,
+      "name": "generated_constant_variants_rust_parity",
+      "status": "passed",
+      "seconds": 2.67
+    },
+    {
+      "ordinal": 135,
+      "id": 419,
+      "name": "request_helpers_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 136,
+      "id": 391,
+      "name": "sql_types_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 137,
+      "id": 43,
+      "name": "generated_aggregation_rust_parity",
+      "status": "passed",
+      "seconds": 2.77
+    },
+    {
+      "ordinal": 138,
+      "id": 274,
+      "name": "base_entity_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 139,
+      "id": 119,
+      "name": "graph_fix_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 140,
+      "id": 278,
+      "name": "entity_defaults_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 141,
+      "id": 461,
+      "name": "context_reference_contracts",
+      "status": "passed",
+      "seconds": 0.35
+    },
+    {
+      "ordinal": 142,
+      "id": 214,
+      "name": "registry_debug_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 143,
+      "id": 346,
+      "name": "entity_service_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 144,
+      "id": 350,
+      "name": "id_set_page_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 145,
+      "id": 4,
+      "name": "runtime_layer_boundaries",
+      "status": "passed",
+      "seconds": 0.5
+    },
+    {
+      "ordinal": 146,
+      "id": 308,
+      "name": "checker_provenance_rust_parity",
+      "status": "passed",
+      "seconds": 0.53
+    },
+    {
+      "ordinal": 147,
+      "id": 459,
+      "name": "data_store_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 148,
+      "id": 248,
+      "name": "executor_defaults_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 149,
+      "id": 406,
+      "name": "business_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 150,
+      "id": 343,
+      "name": "query_store_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 151,
+      "id": 436,
+      "name": "core_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 152,
+      "id": 319,
+      "name": "generated_inheritance_query_rust_parity",
+      "status": "passed",
+      "seconds": 1.57
+    },
+    {
+      "ordinal": 153,
+      "id": 386,
+      "name": "sql_transport_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 154,
+      "id": 352,
+      "name": "entity_decoder_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 155,
+      "id": 363,
+      "name": "internal_id_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 156,
+      "id": 408,
+      "name": "search_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 157,
+      "id": 1,
+      "name": "workspace_paths_5_0_6_contracts",
+      "status": "passed",
+      "seconds": 1.46
+    },
+    {
+      "ordinal": 158,
+      "id": 413,
+      "name": "value_owned_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 159,
+      "id": 347,
+      "name": "entity_query_rust_parity",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 160,
+      "id": 174,
+      "name": "query_store_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 161,
+      "id": 261,
+      "name": "core_aux_debug_contracts",
+      "status": "passed",
+      "seconds": 0.22
+    },
+    {
+      "ordinal": 162,
+      "id": 306,
+      "name": "dynamic_fields_rust_parity",
+      "status": "passed",
+      "seconds": 0.28
+    },
+    {
+      "ordinal": 163,
+      "id": 384,
+      "name": "sql_executor_error_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 164,
+      "id": 407,
+      "name": "presentation_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 165,
+      "id": 403,
+      "name": "decimal_pointer_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.2
+    },
+    {
+      "ordinal": 166,
+      "id": 409,
+      "name": "value_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 167,
+      "id": 446,
+      "name": "core_shape_presentation_rust_parity",
+      "status": "passed",
+      "seconds": 0.35
+    },
+    {
+      "ordinal": 168,
+      "id": 290,
+      "name": "dynamic_relation_rust_parity",
+      "status": "passed",
+      "seconds": 0.69
+    },
+    {
+      "ordinal": 169,
+      "id": 298,
+      "name": "dynamic_governance_rust_parity",
+      "status": "passed",
+      "seconds": 0.12
+    },
+    {
+      "ordinal": 170,
+      "id": 229,
+      "name": "provider_sqlite_driver_error_contracts",
+      "status": "passed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 171,
+      "id": 362,
+      "name": "schema_runtime_rust_parity",
+      "status": "failed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 172,
+      "id": 152,
+      "name": "original_provider_schema_contracts",
+      "status": "passed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 173,
+      "id": 410,
+      "name": "format_rust_parity",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 174,
+      "id": 338,
+      "name": "runtime_base_rust_parity",
+      "status": "failed",
+      "seconds": 0.13
+    },
+    {
+      "ordinal": 175,
+      "id": 398,
+      "name": "decimal_inline_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 176,
+      "id": 379,
+      "name": "sqlite_from_sql_raw_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 177,
+      "id": 243,
+      "name": "sql_dialect_in_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 178,
+      "id": 314,
+      "name": "generated_candidates_rust_parity",
+      "status": "passed",
+      "seconds": 3.87
+    },
+    {
+      "ordinal": 179,
+      "id": 481,
+      "name": "generated_expression_values_rust_parity",
+      "status": "passed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 180,
+      "id": 378,
+      "name": "sqlite_from_sql_error_rust_parity",
+      "status": "failed",
+      "seconds": 0.13
+    },
+    {
+      "ordinal": 181,
+      "id": 30,
+      "name": "runtime_id_model_rust_parity",
+      "status": "failed",
+      "seconds": 0.14
+    },
+    {
+      "ordinal": 182,
+      "id": 307,
+      "name": "original_snapshot_rust_parity",
+      "status": "passed",
+      "seconds": 0.1
+    },
+    {
+      "ordinal": 183,
+      "id": 377,
+      "name": "sqlite_simple_error_rust_parity",
+      "status": "failed",
+      "seconds": 0.13
+    },
+    {
+      "ordinal": 184,
+      "id": 309,
+      "name": "generated_entity_helpers_rust_parity",
+      "status": "passed",
+      "seconds": 1.54
+    },
+    {
+      "ordinal": 185,
+      "id": 383,
+      "name": "sql_executor_kind_rust_parity",
+      "status": "failed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 186,
+      "id": 429,
+      "name": "timestamp_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 187,
+      "id": 44,
+      "name": "general_query_rust_parity",
+      "status": "passed",
+      "seconds": 0.69
+    },
+    {
+      "ordinal": 188,
+      "id": 281,
+      "name": "field_layout_rust_parity",
+      "status": "passed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 189,
+      "id": 489,
+      "name": "runtime_examples_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 190,
+      "id": 389,
+      "name": "sql_dialect_hooks_rust_parity",
+      "status": "failed",
+      "seconds": 0.19
+    },
+    {
+      "ordinal": 191,
+      "id": 466,
+      "name": "generated_dynamic_carrier_rust_parity",
+      "status": "passed",
+      "seconds": 0.14
+    },
+    {
+      "ordinal": 192,
+      "id": 291,
+      "name": "dynamic_query_rust_parity",
+      "status": "passed",
+      "seconds": 0.54
+    },
+    {
+      "ordinal": 193,
+      "id": 145,
+      "name": "original_runtime_file_log_privacy_contracts",
+      "status": "passed",
+      "seconds": 0.1
+    },
+    {
+      "ordinal": 194,
+      "id": 32,
+      "name": "context_defaults_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 195,
+      "id": 242,
+      "name": "sql_dialect_helpers_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 196,
+      "id": 460,
+      "name": "context_memory_contracts",
+      "status": "passed",
+      "seconds": 0.1
+    },
+    {
+      "ordinal": 197,
+      "id": 64,
+      "name": "runtime_examples_context_contracts",
+      "status": "failed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 198,
+      "id": 156,
+      "name": "original_runtime_round_trip_reference_contracts",
+      "status": "passed",
+      "seconds": 0.1
+    },
+    {
+      "ordinal": 199,
+      "id": 187,
+      "name": "typed_aggregate_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 200,
+      "id": 272,
+      "name": "entity_registration_api_rust_parity",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 201,
+      "id": 304,
+      "name": "dynamic_ledger_rust_parity",
+      "status": "passed",
+      "seconds": 0.36
+    },
+    {
+      "ordinal": 202,
+      "id": 348,
+      "name": "entity_query_boundary_rust_parity",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 203,
+      "id": 67,
+      "name": "transaction_move_only_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 204,
+      "id": 81,
+      "name": "unified_buffer_clone_rust_parity",
+      "status": "failed",
+      "seconds": 0.17
+    },
+    {
+      "ordinal": 205,
+      "id": 280,
+      "name": "chrono_value_rust_parity",
+      "status": "failed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 206,
+      "id": 317,
+      "name": "generated_inheritance_rust_parity",
+      "status": "passed",
+      "seconds": 0.18
+    },
+    {
+      "ordinal": 207,
+      "id": 47,
+      "name": "generated_dynamic_json_rust_parity",
+      "status": "passed",
+      "seconds": 1.67
+    },
+    {
+      "ordinal": 208,
+      "id": 440,
+      "name": "datatype_debug_rust_parity",
+      "status": "failed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 209,
+      "id": 258,
+      "name": "sql_projection_scope_rust_parity",
+      "status": "failed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 210,
+      "id": 165,
+      "name": "original_runtime_context_tail_contracts",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "ordinal": 211,
+      "id": 223,
+      "name": "provider_sqlite_id_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 212,
+      "id": 270,
+      "name": "original_core_dynamic_search_warning_privacy",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "ordinal": 213,
+      "id": 167,
+      "name": "original_runtime_optimistic_conflict_output_contracts",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "ordinal": 214,
+      "id": 262,
+      "name": "business_id_contracts",
+      "status": "passed",
+      "seconds": 0.05
+    },
+    {
+      "ordinal": 215,
+      "id": 228,
+      "name": "provider_sqlite_error_contracts",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "ordinal": 216,
+      "id": 311,
+      "name": "generated_constant_scalar_contracts",
+      "status": "passed",
+      "seconds": 0.09
+    },
+    {
+      "ordinal": 217,
+      "id": 480,
+      "name": "generated_sample_state_rust_parity",
+      "status": "passed",
+      "seconds": 0.33
+    },
+    {
+      "ordinal": 218,
+      "id": 302,
+      "name": "sqlite_dynamic_storage_rust_parity",
+      "status": "passed",
+      "seconds": 0.34
+    },
+    {
+      "ordinal": 219,
+      "id": 222,
+      "name": "provider_sqlite_business_id_contracts",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "ordinal": 220,
+      "id": 414,
+      "name": "presentation_api_contracts",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "ordinal": 221,
+      "id": 293,
+      "name": "dynamic_provider_rust_parity",
+      "status": "passed",
+      "seconds": 0.12
+    },
+    {
+      "ordinal": 222,
+      "id": 209,
+      "name": "bootstrap_classifier_rust_parity",
+      "status": "passed",
+      "seconds": 0.08
+    },
+    {
+      "ordinal": 223,
+      "id": 299,
+      "name": "dynamic_graph_debug_rust_parity",
+      "status": "passed",
+      "seconds": 0.1
+    },
+    {
+      "ordinal": 224,
+      "id": 148,
+      "name": "original_runtime_masking_contracts",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "ordinal": 225,
+      "id": 487,
+      "name": "example_sqlite_relations_graph",
+      "status": "failed",
+      "seconds": 0.03
+    },
+    {
+      "ordinal": 226,
+      "id": 288,
+      "name": "commit_audit_error_rust_parity",
+      "status": "passed",
+      "seconds": 0.1
+    },
+    {
+      "ordinal": 227,
+      "id": 183,
+      "name": "runtime_generic_completion_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 228,
+      "id": 245,
+      "name": "sql_model_api_contracts",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "ordinal": 229,
+      "id": 181,
+      "name": "enhanced_entities_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 230,
+      "id": 55,
+      "name": "entity_reference_context_contracts",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "ordinal": 231,
+      "id": 2,
+      "name": "workspace_path_negative_controls",
+      "status": "passed",
+      "seconds": 0.11
+    },
+    {
+      "ordinal": 232,
+      "id": 303,
+      "name": "dynamic_storage_rust_parity",
+      "status": "passed",
+      "seconds": 0.11
+    },
+    {
+      "ordinal": 233,
+      "id": 180,
+      "name": "entity_service_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 234,
+      "id": 230,
+      "name": "provider_sqlite_simple_error_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 235,
+      "id": 128,
+      "name": "provider_sqlite_schema_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 236,
+      "id": 151,
+      "name": "original_provider_storage_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 237,
+      "id": 296,
+      "name": "dynamic_graph_save_contracts",
+      "status": "passed",
+      "seconds": 0.07
+    },
+    {
+      "ordinal": 238,
+      "id": 482,
+      "name": "generated_expression_diagnostics_rust_parity",
+      "status": "passed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 239,
+      "id": 95,
+      "name": "recursive_graph_write_context_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 240,
+      "id": 463,
+      "name": "sqlite_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 241,
+      "id": 68,
+      "name": "ledger_move_only_contracts",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 242,
+      "id": 486,
+      "name": "example_sqlite_schema_crud",
+      "status": "failed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 243,
+      "id": 154,
+      "name": "original_provider_transaction_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 244,
+      "id": 199,
+      "name": "log_manager_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 245,
+      "id": 129,
+      "name": "original_sql_mutation_execution_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 246,
+      "id": 182,
+      "name": "runtime_move_only_query_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 247,
+      "id": 86,
+      "name": "audited_auto_save_context_contracts",
+      "status": "failed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 248,
+      "id": 162,
+      "name": "original_runtime_aggregate_cache_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 249,
+      "id": 185,
+      "name": "id_set_page_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 250,
+      "id": 220,
+      "name": "context_model_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 251,
+      "id": 416,
+      "name": "core_graph_api_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 252,
+      "id": 332,
+      "name": "generated_relations_rust_parity",
+      "status": "passed",
+      "seconds": 0.15
+    },
+    {
+      "ordinal": 253,
+      "id": 94,
+      "name": "entity_graph_execution_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 254,
+      "id": 211,
+      "name": "business_service_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 255,
+      "id": 422,
+      "name": "mutation_debug_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 256,
+      "id": 328,
+      "name": "generated_inheritance_variants_contracts",
+      "status": "failed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 257,
+      "id": 160,
+      "name": "original_runtime_events_relations_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 258,
+      "id": 472,
+      "name": "runtime_query_binding_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 259,
+      "id": 108,
+      "name": "entity_graph_plan_context_contracts",
+      "status": "failed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 260,
+      "id": 161,
+      "name": "original_runtime_typed_query_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 261,
+      "id": 155,
+      "name": "original_runtime_entity_save_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 262,
+      "id": 131,
+      "name": "original_sql_binding_policy_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 263,
+      "id": 104,
+      "name": "runtime_mutation_context_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 264,
+      "id": 210,
+      "name": "internal_id_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 265,
+      "id": 435,
+      "name": "mutation_model_api_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 266,
+      "id": 171,
+      "name": "query_keys_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 267,
+      "id": 60,
+      "name": "inmemory_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 268,
+      "id": 159,
+      "name": "original_runtime_validation_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 269,
+      "id": 201,
+      "name": "runtime_log_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 270,
+      "id": 125,
+      "name": "i18n_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 271,
+      "id": 215,
+      "name": "runtime_check_error_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 272,
+      "id": 164,
+      "name": "original_runtime_memory_service_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 273,
+      "id": 176,
+      "name": "relation_execution_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 274,
+      "id": 158,
+      "name": "original_runtime_service_boundary_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 275,
+      "id": 132,
+      "name": "original_sql_executor_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 276,
+      "id": 289,
+      "name": "dynamic_relation_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 277,
+      "id": 169,
+      "name": "original_provider_guarded_mutation_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 278,
+      "id": 231,
+      "name": "provider_sqlite_boxed_error_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 279,
+      "id": 99,
+      "name": "graph_save_adapter_context_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 280,
+      "id": 133,
+      "name": "original_sql_compiler_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 281,
+      "id": 269,
+      "name": "original_core_dynamic_search_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 282,
+      "id": 198,
+      "name": "context_logging_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 283,
+      "id": 140,
+      "name": "original_runtime_checker_locale_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 284,
+      "id": 188,
+      "name": "entity_decoder_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 285,
+      "id": 458,
+      "name": "data_store_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 286,
+      "id": 264,
+      "name": "request_search_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 287,
+      "id": 326,
+      "name": "generated_inheritance_graph_contracts",
+      "status": "failed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 288,
+      "id": 36,
+      "name": "generated_aggregation_cache_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 289,
+      "id": 5,
+      "name": "entity_runtime_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 290,
+      "id": 175,
+      "name": "query_store_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 291,
+      "id": 168,
+      "name": "original_provider_dynamic_search_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 292,
+      "id": 336,
+      "name": "entity_expression_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 293,
+      "id": 237,
+      "name": "sql_query_executor_contracts",
+      "status": "passed",
+      "seconds": 0.12
+    },
+    {
+      "ordinal": 294,
+      "id": 437,
+      "name": "core_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 295,
+      "id": 411,
+      "name": "value_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 296,
+      "id": 240,
+      "name": "sql_mutation_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 297,
+      "id": 282,
+      "name": "loaded_snapshot_rust_parity",
+      "status": "passed",
+      "seconds": 1.05
+    },
+    {
+      "ordinal": 298,
+      "id": 321,
+      "name": "generated_return_type_contracts",
+      "status": "failed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 299,
+      "id": 196,
+      "name": "telemetry_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 300,
+      "id": 139,
+      "name": "original_runtime_inmemory_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 301,
+      "id": 266,
+      "name": "original_core_composition_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 302,
+      "id": 202,
+      "name": "audit_event_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 303,
+      "id": 138,
+      "name": "original_runtime_cache_relation_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 304,
+      "id": 116,
+      "name": "save_preparation_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 305,
+      "id": 144,
+      "name": "original_runtime_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 306,
+      "id": 263,
+      "name": "presentation_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 307,
+      "id": 97,
+      "name": "graph_node_command_context_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 308,
+      "id": 225,
+      "name": "provider_sqlite_decoding_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 309,
+      "id": 268,
+      "name": "original_core_functional_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 310,
+      "id": 76,
+      "name": "relation_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 311,
+      "id": 212,
+      "name": "runtime_business_id_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 312,
+      "id": 186,
+      "name": "typed_aggregate_context_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 313,
+      "id": 444,
+      "name": "smart_list_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 314,
+      "id": 244,
+      "name": "sql_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 315,
+      "id": 70,
+      "name": "policy_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 316,
+      "id": 200,
+      "name": "log_formatter_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 317,
+      "id": 250,
+      "name": "data_service_model_contracts",
+      "status": "passed",
+      "seconds": 0.12
+    },
+    {
+      "ordinal": 318,
+      "id": 82,
+      "name": "log_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 319,
+      "id": 72,
+      "name": "event_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 320,
+      "id": 426,
+      "name": "meta_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 321,
+      "id": 147,
+      "name": "original_runtime_flat_identity_graph_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 322,
+      "id": 194,
+      "name": "runtime_graph_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 323,
+      "id": 142,
+      "name": "original_runtime_policy_graph_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 324,
+      "id": 192,
+      "name": "runtime_graph_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 325,
+      "id": 267,
+      "name": "original_core_entity_mapping_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 326,
+      "id": 33,
+      "name": "reference_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 327,
+      "id": 226,
+      "name": "provider_sqlite_binding_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 328,
+      "id": 172,
+      "name": "id_set_build_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 329,
+      "id": 213,
+      "name": "runtime_registry_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 330,
+      "id": 265,
+      "name": "original_core_value_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 331,
+      "id": 141,
+      "name": "original_runtime_log_telemetry_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 332,
+      "id": 157,
+      "name": "original_runtime_registration_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 333,
+      "id": 143,
+      "name": "original_runtime_log_privacy_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 334,
+      "id": 118,
+      "name": "graph_fix_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 335,
+      "id": 74,
+      "name": "check_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 336,
+      "id": 137,
+      "name": "original_runtime_entity_status_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 337,
+      "id": 38,
+      "name": "generated_facets_async_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 338,
+      "id": 469,
+      "name": "generated_optional_types_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 339,
+      "id": 135,
+      "name": "original_sql_diagnostic_stream_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 340,
+      "id": 216,
+      "name": "error_generic_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 341,
+      "id": 31,
+      "name": "context_defaults_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 342,
+      "id": 227,
+      "name": "provider_sqlite_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 343,
+      "id": 29,
+      "name": "runtime_id_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 344,
+      "id": 238,
+      "name": "sql_transport_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 345,
+      "id": 412,
+      "name": "value_owned_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 346,
+      "id": 241,
+      "name": "sql_dialect_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 347,
+      "id": 252,
+      "name": "system_time_arithmetic_scope_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 348,
+      "id": 120,
+      "name": "checker_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 349,
+      "id": 246,
+      "name": "async_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 350,
+      "id": 217,
+      "name": "sql_move_only_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 351,
+      "id": 101,
+      "name": "ledger_plan_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 352,
+      "id": 80,
+      "name": "unified_buffer_clone_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 353,
+      "id": 166,
+      "name": "original_runtime_graph_reference_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 354,
+      "id": 219,
+      "name": "runtime_context_resource_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 355,
+      "id": 189,
+      "name": "entity_runtime_contracts",
+      "status": "passed",
+      "seconds": 0.13
+    },
+    {
+      "ordinal": 356,
+      "id": 239,
+      "name": "provider_sqlite_dialect_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 357,
+      "id": 428,
+      "name": "timestamp_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 358,
+      "id": 173,
+      "name": "query_store_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 359,
+      "id": 432,
+      "name": "eval_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 360,
+      "id": 130,
+      "name": "original_sql_query_execution_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 361,
+      "id": 78,
+      "name": "runtime_foreign_query_cleanup",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 362,
+      "id": 259,
+      "name": "decimal_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 363,
+      "id": 275,
+      "name": "entity_debug_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 364,
+      "id": 149,
+      "name": "original_runtime_business_clock_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 365,
+      "id": 10,
+      "name": "runtime_callback_scope_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 366,
+      "id": 318,
+      "name": "generated_inheritance_contracts",
+      "status": "failed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 367,
+      "id": 79,
+      "name": "runtime_foreign_mutation_cleanup",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 368,
+      "id": 232,
+      "name": "provider_sqlite_from_sql_error_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 369,
+      "id": 105,
+      "name": "runtime_mutation_reentrant_prepare",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 370,
+      "id": 3,
+      "name": "runtime_public_namespace_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 371,
+      "id": 279,
+      "name": "chrono_value_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 372,
+      "id": 123,
+      "name": "checker_typed_direct_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 373,
+      "id": 22,
+      "name": "context_dispatch_exception_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 374,
+      "id": 297,
+      "name": "dynamic_preflight_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 375,
+      "id": 18,
+      "name": "context_provider_borrow_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 376,
+      "id": 7,
+      "name": "business_clock_scope_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 377,
+      "id": 109,
+      "name": "internal_id_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 378,
+      "id": 106,
+      "name": "runtime_mutation_reentrant_event",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 379,
+      "id": 273,
+      "name": "base_entity_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 380,
+      "id": 271,
+      "name": "entity_registration_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 381,
+      "id": 438,
+      "name": "core_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 382,
+      "id": 114,
+      "name": "mutation_policy_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 383,
+      "id": 110,
+      "name": "internal_id_reentrant_floor",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 384,
+      "id": 462,
+      "name": "context_early_global_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 385,
+      "id": 11,
+      "name": "runtime_callback_registry_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 386,
+      "id": 431,
+      "name": "core_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 387,
+      "id": 439,
+      "name": "datatype_debug_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 388,
+      "id": 485,
+      "name": "example_context_lifetime",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 389,
+      "id": 260,
+      "name": "decimal_inline_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 390,
+      "id": 53,
+      "name": "round_trip_reference_reentrant_output",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 391,
+      "id": 17,
+      "name": "runtime_callback_business_allocator_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 392,
+      "id": 9,
+      "name": "business_clock_reentrant_date",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 393,
+      "id": 204,
+      "name": "audit_event_owner_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 394,
+      "id": 205,
+      "name": "audit_event_payload_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 395,
+      "id": 136,
+      "name": "original_sql_log_rendering_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 396,
+      "id": 121,
+      "name": "checker_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 397,
+      "id": 52,
+      "name": "round_trip_reference_reentrant_owner",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 398,
+      "id": 285,
+      "name": "dynamic_carrier_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 399,
+      "id": 122,
+      "name": "checker_registration_reentrant_close",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 400,
+      "id": 8,
+      "name": "business_clock_reentrant_time",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 401,
+      "id": 251,
+      "name": "system_time_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 402,
+      "id": 12,
+      "name": "runtime_callback_relation_loads_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 403,
+      "id": 56,
+      "name": "entity_reference_reentrant_owner",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 404,
+      "id": 206,
+      "name": "audit_event_result_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 405,
+      "id": 203,
+      "name": "audit_event_context_reentrant_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 406,
+      "id": 23,
+      "name": "context_dispatch_shutdown_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 407,
+      "id": 24,
+      "name": "context_dispatch_entity_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 408,
+      "id": 13,
+      "name": "runtime_callback_select_behavior_close",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 409,
+      "id": 257,
+      "name": "sql_projection_scope_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 410,
+      "id": 14,
+      "name": "runtime_callback_select_policy_close",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 411,
+      "id": 16,
+      "name": "runtime_callback_business_key_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 412,
+      "id": 287,
+      "name": "commit_audit_transaction_contracts",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "ordinal": 413,
+      "id": 21,
+      "name": "context_dispatch_lifecycle_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 414,
+      "id": 15,
+      "name": "runtime_callback_business_slot_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 415,
+      "id": 25,
+      "name": "context_dispatch_all_entities_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 416,
+      "id": 20,
+      "name": "context_provider_reentrant_schema",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 417,
+      "id": 57,
+      "name": "entity_reference_reentrant_output",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 418,
+      "id": 39,
+      "name": "generated_facets_context_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 419,
+      "id": 284,
+      "name": "dynamic_fields_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 420,
+      "id": 19,
+      "name": "context_provider_reentrant_registry",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 421,
+      "id": 28,
+      "name": "context_dispatch_telemetry_start_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 422,
+      "id": 134,
+      "name": "original_sql_default_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 423,
+      "id": 51,
+      "name": "round_trip_reference_context_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 424,
+      "id": 335,
+      "name": "field_layout_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 425,
+      "id": 224,
+      "name": "provider_sqlite_transport_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 426,
+      "id": 46,
+      "name": "generated_execution_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 427,
+      "id": 465,
+      "name": "generated_dynamic_field_contracts",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "ordinal": 428,
+      "id": 84,
+      "name": "transaction_scope_context_contracts",
+      "status": "passed",
+      "seconds": 0.05
+    },
+    {
+      "ordinal": 429,
+      "id": 301,
+      "name": "sqlite_dynamic_storage_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 430,
+      "id": 26,
+      "name": "context_dispatch_checker_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 431,
+      "id": 445,
+      "name": "core_shape_presentation_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 432,
+      "id": 234,
+      "name": "sql_transaction_execution_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 433,
+      "id": 27,
+      "name": "context_dispatch_telemetry_noop_close",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 434,
+      "id": 283,
+      "name": "loaded_snapshot_contracts",
+      "status": "passed",
+      "seconds": 0.11
+    },
+    {
+      "ordinal": 435,
+      "id": 292,
+      "name": "dynamic_query_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 436,
+      "id": 286,
+      "name": "commit_audit_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 437,
+      "id": 316,
+      "name": "generated_bootstrap_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 438,
+      "id": 177,
+      "name": "relation_hydration_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 439,
+      "id": 195,
+      "name": "context_event_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 440,
+      "id": 488,
+      "name": "example_generated_query_expression",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "ordinal": 441,
+      "id": 448,
+      "name": "compact_row_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 442,
+      "id": 294,
+      "name": "dynamic_provider_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 443,
+      "id": 471,
+      "name": "runtime_entity_query_contracts",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "ordinal": 444,
+      "id": 90,
+      "name": "graph_saver_context_contracts",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "ordinal": 445,
+      "id": 178,
+      "name": "relation_enhancement_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 446,
+      "id": 48,
+      "name": "generated_dynamic_json_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 447,
+      "id": 41,
+      "name": "generated_relation_analysis_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 448,
+      "id": 233,
+      "name": "sql_stream_execution_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 449,
+      "id": 89,
+      "name": "audited_save_context_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 450,
+      "id": 179,
+      "name": "context_query_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 451,
+      "id": 320,
+      "name": "generated_inheritance_query_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 452,
+      "id": 184,
+      "name": "entity_stream_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 453,
+      "id": 65,
+      "name": "transaction_move_only_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 454,
+      "id": 113,
+      "name": "mutation_policy_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 455,
+      "id": 49,
+      "name": "document_round_trip_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 456,
+      "id": 424,
+      "name": "query_debug_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 457,
+      "id": 470,
+      "name": "generated_business_id_contracts",
+      "status": "failed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 458,
+      "id": 464,
+      "name": "generated_api_contracts",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "ordinal": 459,
+      "id": 255,
+      "name": "data_service_scope_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 460,
+      "id": 208,
+      "name": "generated_bootstrap_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 461,
+      "id": 449,
+      "name": "core_collection_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 462,
+      "id": 473,
+      "name": "generated_sample_data_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 463,
+      "id": 455,
+      "name": "generated_support_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 464,
+      "id": 467,
+      "name": "generated_checker_contracts",
+      "status": "failed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 465,
+      "id": 441,
+      "name": "model_debug_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 466,
+      "id": 300,
+      "name": "dynamic_storage_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 467,
+      "id": 420,
+      "name": "request_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 468,
+      "id": 450,
+      "name": "query_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 469,
+      "id": 235,
+      "name": "sql_mutation_execution_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "ordinal": 470,
+      "id": 207,
+      "name": "schema_runtime_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 471,
+      "id": 45,
+      "name": "general_query_context_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 472,
+      "id": 295,
+      "name": "dynamic_ledger_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 473,
+      "id": 418,
+      "name": "request_helpers_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 474,
+      "id": 277,
+      "name": "entity_owned_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 475,
+      "id": 452,
+      "name": "query_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 476,
+      "id": 66,
+      "name": "transaction_provider_error_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 477,
+      "id": 247,
+      "name": "executor_spi_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 478,
+      "id": 190,
+      "name": "request_trace_scope_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 479,
+      "id": 315,
+      "name": "generated_candidates_contracts",
+      "status": "failed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 480,
+      "id": 453,
+      "name": "safe_expression_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 481,
+      "id": 249,
+      "name": "data_service_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 482,
+      "id": 483,
+      "name": "runtime_entity_expression_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 483,
+      "id": 468,
+      "name": "generated_relation_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "ordinal": 484,
+      "id": 349,
+      "name": "entity_stream_rust_parity",
+      "status": "failed",
+      "seconds": 0.12
+    },
+    {
+      "ordinal": 485,
+      "id": 339,
+      "name": "context_query_rust_parity",
+      "status": "failed",
+      "seconds": 0.13
+    },
+    {
+      "ordinal": 486,
+      "id": 385,
+      "name": "sql_query_rust_parity",
+      "status": "failed",
+      "seconds": 0.16
+    },
+    {
+      "ordinal": 487,
+      "id": 476,
+      "name": "generated_sample_execution_rust_parity",
+      "status": "passed",
+      "seconds": 324.2
+    },
+    {
+      "ordinal": 488,
+      "id": 484,
+      "name": "generated_api_type_errors",
+      "status": "passed",
+      "seconds": 1850.72
+    },
+    {
+      "ordinal": 489,
+      "id": 92,
+      "name": "ledger_execution_context_contracts",
+      "status": "failed",
+      "seconds": 1926.15
+    }
+  ]
+}

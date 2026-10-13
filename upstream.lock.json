@@ -1,7 +1,7 @@
 {
   "repository": "https://github.com/teaql/teaql-rs.git",
-  "tag": "v5.0.5",
-  "version": "5.0.5",
-  "commit": "62940ae2b88e7acc32763853b8b4685a01c7e90a",
+  "tag": "v5.0.6",
+  "version": "5.0.6",
+  "commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
   "policy": "Use this exact commit for design and behavior parity. Upgrade only by an explicit baseline change."
 }

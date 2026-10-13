@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 48,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "initial_missing_facet_differences": 24,
+  "fixture_trace_differences": 12,
+  "profiles": {
+    "native": {
+      "passed": 8,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "generated_facets_async_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "generated_facets_context_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "generated_facets_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "generated_relation_analysis_context_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "generated_relation_analysis_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "relation_hydration_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "hydration_owner_facets_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "hydration_sibling_keys_rust_parity",
+          "status": "passed"
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "relation_hydration_contracts",
+          "status": "passed"
+        },
+        {
+          "name": "hydration_owner_facets_rust_parity",
+          "status": "passed"
+        }
+      ]
+    },
+    "modules_native": {
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_hydration_sibling_keys_rust_parity",
+          "status": "passed"
+        },
+        {
+          "name": "module_hydration_owner_facets_rust_parity",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 112,
+  "catalog_exports": 1477,
+  "formatting": {
+    "handwritten_files": 998,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "module_paths_exit_code": 0,
+  "notice": "Embedded per-owner facet qualification plus native SQLite/lifetime integration. Not flat graph/dynamic/asynchronous error-cancel/source-SQL/full model configuration parity; all complete capabilities remain partial."
+}

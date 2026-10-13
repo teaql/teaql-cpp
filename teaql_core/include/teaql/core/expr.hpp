@@ -32,6 +32,7 @@ struct Expr {
     enum class Kind {
         Column,
         Value,
+        LikePattern,
         Function,
         Binary,
         SubQuery,
@@ -67,6 +68,8 @@ struct Expr {
 
     static constexpr std::size_t LARGE_IN_THRESHOLD = 20;
     static Expr column(Memory, std::string_view);
+    static Expr like_pattern(Memory, std::string_view pattern, std::string_view original);
+    std::optional<std::pair<std::string_view, std::string_view>> lowered_like_operand() const;
 
     template <class T>
     static Expr value(Memory r, T&& v) {

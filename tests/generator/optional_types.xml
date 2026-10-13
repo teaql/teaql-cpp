@@ -1,0 +1,5 @@
+<root name="cpp_optional_types" org="teaql" data_service="sqlite">
+    <reading text="string()?" active="bool()?" balance="number()?"
+             height="double()?" ratio="float()?" count="integer()?"
+             day="date()?" recorded_at="dateTime()?" payload="jsonMe()" />
+</root>

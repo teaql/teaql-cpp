@@ -1,5 +1,7 @@
 #pragma once
 #include <teaql/runtime/detail/data_service/id_set_page.hpp>
+#include <teaql/runtime/detail/data_service/dynamic_loading.hpp>
+#include <teaql/runtime/detail/read_hydration.hpp>
 
 namespace teaql::detail {
 template <class E, Entity T>
@@ -29,11 +31,26 @@ public:
         auto r = service_.memory_resource();
         for (;;) {
             if (phase_ == Phase::Prepare) {
+                if (query_.dynamic_field_selection) {
+                    auto root_intent = EntityDataServiceAccess::request_intent(service_, query_);
+                    if (!root_intent) {
+                        return runtime(std::move(root_intent).error());
+                    }
+                    EntityDataServiceAccess::bind_query_intent(service_, root_intent.value());
+                    if (!EntityDataServiceAccess::has_intent(service_)) {
+                        service_ = EntityDataServiceAccess::query_scoped(service_);
+                    }
+                }
                 auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
                 if (!prepared) {
                     return runtime(std::move(prepared).error());
                 }
                 query_ = std::move(prepared).value();
+                auto intent = EntityDataServiceAccess::request_intent(service_, query_);
+                if (!intent) {
+                    return runtime(std::move(intent).error());
+                }
+                EntityDataServiceAccess::bind_query_intent(service_, intent.value());
                 ensure_identity_projection(context(), query_);
                 const auto& cs = EntityDataServiceAccess::context_service(service_);
                 if (!EntityDataServiceAccess::has_intent(service_) &&
@@ -106,7 +123,8 @@ public:
                 rows_ = Vector<CompactRow>(result->value(), r);
                 if (direct_) {
                     root_ = &context().template make<EntityRuntimeState>();
-                    return decode();
+                    phase_ = Phase::Decode;
+                    continue;
                 }
                 traced_ = &context().template make<EntityDataService<E>>(
                     EntityDataServiceAccess::scoped(service_, query_.entity));
@@ -155,7 +173,8 @@ public:
                                     compact_ ? T::ENTITY_NAME : std::string_view(query_.entity),
                                     "identity graph was already frozen"));
                 }
-                return decode();
+                phase_ = Phase::Decode;
+                continue;
             }
             if (phase_ == Phase::Embedded) {
                 forwarding_.attach(hydration_->wake_signal(), wake);
@@ -173,6 +192,43 @@ public:
                     return entity(std::move(root).error());
                 }
                 root_ = &context().template make<EntityRuntimeState>(std::move(root).value());
+                phase_ = Phase::Decode;
+                continue;
+            }
+            if (phase_ == Phase::Decode) {
+                if (query_.dynamic_field_selection && !rows_.empty()) {
+                    if (!T::supports_dynamic_field_load()) {
+                        return entity(EntityError(
+                            std::allocator_arg,
+                            Allocator(r),
+                            T::ENTITY_NAME,
+                            "dynamic fields require a runtime-owned indexed entity carrier"));
+                    }
+                    if (!dynamic_work_) {
+                        auto intent = EntityDataServiceAccess::request_intent(service_, query_);
+                        if (!intent) {
+                            return runtime(std::move(intent).error());
+                        }
+                        dynamic_work_ =
+                            &make_operation<typename DynamicRowsOperation<Error>::Output,
+                                            DynamicRowsOperation<Error>>(
+                                r,
+                                context(),
+                                std::span<CompactRow>(rows_),
+                                T::ENTITY_NAME,
+                                *query_.dynamic_field_selection,
+                                intent.value());
+                    }
+                    forwarding_.attach(dynamic_work_->wake_signal(), wake);
+                    auto* result = dynamic_work_->poll();
+                    if (!result) {
+                        return {};
+                    }
+                    forwarding_.reset();
+                    if (!*result) {
+                        return R::err(r, copy_or_take_error(*dynamic_work_, *result));
+                    }
+                }
                 return decode();
             }
         }
@@ -183,6 +239,7 @@ public:
         page_ = nullptr;
         row_work_ = nullptr;
         hydration_ = nullptr;
+        dynamic_work_ = nullptr;
     }
 
     void cancel_and_wait() noexcept {
@@ -196,11 +253,14 @@ public:
         if (hydration_) {
             hydration_->cancel();
         }
+        if (dynamic_work_) {
+            dynamic_work_->cancel();
+        }
         finish_and_wait();
     }
 
 private:
-    enum class Phase { Prepare, Page, Fetch, QueryPlans, BehaviorPlans, Embedded };
+    enum class Phase { Prepare, Page, Fetch, QueryPlans, BehaviorPlans, Embedded, Decode };
 
     const UserContext& context() const {
         return EntityDataServiceAccess::context(service_);
@@ -220,8 +280,11 @@ private:
         auto r = service_.memory_resource();
         SmartList<T> list(std::allocator_arg, Allocator(r));
         list.data.reserve(rows_.size());
+        CompactRow::share_layouts(rows_);
+        ReadHydrationShapes shapes(r);
         for (const auto& row : rows_) {
-            auto value = T::from_compact_row_with_context(r, clone_in(r, row), AnyRef(*root_));
+            auto value =
+                decode_compact_row_with_read_metadata<T>(r, clone_in(r, row), *root_, shapes);
             if (!value) {
                 return entity(std::move(value).error());
             }
@@ -245,6 +308,7 @@ private:
     AsyncOperation<P>* page_ = nullptr;
     AsyncOperation<RelationRowsResult<E>>* row_work_ = nullptr;
     AsyncOperation<H>* hydration_ = nullptr;
+    AsyncOperation<typename DynamicRowsOperation<Error>::Output>* dynamic_work_ = nullptr;
     WakeSignal::Forward forwarding_;
     Phase phase_ = Phase::Prepare;
     bool direct_ = false, compact_ = false;

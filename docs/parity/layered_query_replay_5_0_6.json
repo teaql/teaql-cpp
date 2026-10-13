@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "historical_observations": 724,
+  "explicit_purpose_observations": 2172,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "native": {
+    "passed": 5,
+    "failed": 0,
+    "exit_code": 0,
+    "tests": [
+      {
+        "name": "context_query_contracts",
+        "status": "passed"
+      },
+      {
+        "name": "runtime_base_rust_parity",
+        "status": "passed"
+      },
+      {
+        "name": "runtime_base_intent_rust_parity",
+        "status": "passed"
+      },
+      {
+        "name": "context_query_rust_parity",
+        "status": "passed"
+      },
+      {
+        "name": "context_query_intent_rust_parity",
+        "status": "passed"
+      }
+    ]
+  },
+  "formatting": {
+    "handwritten_files": 993,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "counts": {
+    "runtime_base": {
+      "cases": 256,
+      "provider_calls": 0,
+      "successes": 0,
+      "cancelled": 0,
+      "errors": {
+        "QUERY_PURPOSE_REQUIRED: Query Request requires a non-blank purpose; supply it at the request entry point": 256
+      },
+      "metadata_log_callbacks": 0
+    },
+    "runtime_base_intent": {
+      "cases": 768,
+      "provider_calls": 512,
+      "successes": 192,
+      "cancelled": 0,
+      "errors": {
+        "QUERY_PURPOSE_REQUIRED: Query Request requires a non-blank purpose; supply it at the request entry point": 256,
+        "fetch failed": 256,
+        "Item: handwritten model decode failed": 64
+      },
+      "metadata_log_callbacks": 320
+    },
+    "context_query": {
+      "cases": 468,
+      "provider_calls": 0,
+      "successes": 0,
+      "cancelled": 48,
+      "errors": {
+        "QUERY_PURPOSE_REQUIRED: Query Request requires a non-blank purpose; supply it at the request entry point": 356,
+        "REQUEST_COMMENT_REQUIRED: Query Request requires a non-blank comment; supply it at the request entry point": 64
+      },
+      "metadata_log_callbacks": 0
+    },
+    "context_query_intent": {
+      "cases": 1404,
+      "provider_calls": 712,
+      "successes": 416,
+      "cancelled": 344,
+      "errors": {
+        "QUERY_PURPOSE_REQUIRED: Query Request requires a non-blank purpose; supply it at the request entry point": 356,
+        "fetch failed": 64,
+        "Item: handwritten model decode failed": 32,
+        "REQUEST_COMMENT_REQUIRED: Query Request requires a non-blank comment; supply it at the request entry point": 192
+      },
+      "metadata_log_callbacks": 856
+    }
+  },
+  "notice": "Original base/context method fragments are byte-verified and compiled against existing field/SPI observers; no C++ runtime/generator change. Call-count metadata spy and original provider type-name projections are retained. Complete SQL/audit/configuration and relation matrices remain open."
+}

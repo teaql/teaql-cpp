@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "profile": "native",
+  "scope": "Applied raw LIKE provenance correction; all 25 migrated actual-source comparator families plus query model/API, trace and log privacy contracts. Complete capabilities/full-suite acceptance remain open.",
+  "total": 30,
+  "passed": 30,
+  "failed": 0,
+  "exit_code": 0,
+  "source_observations": 12282,
+  "tests": [
+    {
+      "name": "entity_registration_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "name": "base_entity_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.25
+    },
+    {
+      "name": "entity_debug_rust_parity",
+      "status": "passed",
+      "seconds": 0.32
+    },
+    {
+      "name": "entity_defaults_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.25
+    },
+    {
+      "name": "check_model_rust_parity",
+      "status": "passed",
+      "seconds": 0.91
+    },
+    {
+      "name": "internal_id_rust_parity",
+      "status": "passed",
+      "seconds": 0.16
+    },
+    {
+      "name": "sql_executor_error_rust_parity",
+      "status": "passed",
+      "seconds": 0.15
+    },
+    {
+      "name": "sql_types_rust_parity",
+      "status": "passed",
+      "seconds": 0.28
+    },
+    {
+      "name": "relation_model_rust_parity",
+      "status": "passed",
+      "seconds": 1.34
+    },
+    {
+      "name": "sql_log_rust_parity",
+      "status": "passed",
+      "seconds": 0.39
+    },
+    {
+      "name": "business_id_rust_parity",
+      "status": "passed",
+      "seconds": 0.22
+    },
+    {
+      "name": "value_owned_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.19
+    },
+    {
+      "name": "mutation_debug_rust_parity",
+      "status": "passed",
+      "seconds": 0.94
+    },
+    {
+      "name": "runtime_graph_model_rust_parity",
+      "status": "passed",
+      "seconds": 2.77
+    },
+    {
+      "name": "sql_model_api_rust_parity",
+      "status": "passed",
+      "seconds": 2.53
+    },
+    {
+      "name": "value_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.36
+    },
+    {
+      "name": "meta_api_rust_parity",
+      "status": "passed",
+      "seconds": 1.87
+    },
+    {
+      "name": "eval_rust_parity",
+      "status": "passed",
+      "seconds": 0.89
+    },
+    {
+      "name": "mutation_model_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.57
+    },
+    {
+      "name": "datatype_debug_rust_parity",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "name": "core_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.23
+    },
+    {
+      "name": "query_debug_rust_parity",
+      "status": "passed",
+      "seconds": 2.92
+    },
+    {
+      "name": "original_runtime_file_log_privacy_contracts",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "name": "original_runtime_log_privacy_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "name": "query_api_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "name": "query_model_contracts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "name": "request_trace_scope_contracts",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "name": "safe_expression_api_rust_parity",
+      "status": "passed",
+      "seconds": 0.38
+    },
+    {
+      "name": "query_api_rust_parity",
+      "status": "passed",
+      "seconds": 2.65
+    },
+    {
+      "name": "request_api_rust_parity",
+      "status": "passed",
+      "seconds": 7.57
+    }
+  ]
+}

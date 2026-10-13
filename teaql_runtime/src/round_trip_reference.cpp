@@ -120,6 +120,16 @@ struct Wipe {
 };
 }
 
+detail::ReferenceSecret
+ContextBoundReferenceRuntime::document_derived_key(Memory r, const ReferenceKey& key) const {
+    return derive(r, key, "document-snapshot-encryption", service_, environment_);
+}
+
+detail::CryptoKey ContextBoundReferenceRuntime::document_actor_fingerprint(
+    Memory r, const ReferenceKey& key, const TrustedReferencePrincipal& principal) const {
+    return fingerprint(r, key, service_, environment_, principal);
+}
+
 ContextBoundReferenceRuntime::ContextBoundReferenceRuntime(
     std::allocator_arg_t,
     Allocator a,

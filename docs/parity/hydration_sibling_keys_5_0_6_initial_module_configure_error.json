@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "reason": "An import-only probe uses an external corpus comparator and intentionally has zero command cases. Guard the case loop against a negative last index; existing ordinary contracts are unchanged.",
+  "log": "CMake Error at modules/CMakeLists.txt:197 (string):\n  string sub-command JSON expected an index less than 0 got '0'.\n\n\nCMake Error at modules/CMakeLists.txt:198 (string):\n  string sub-command JSON expected an index less than 0 got '0'.\n\n\nCMake Error at modules/CMakeLists.txt:213 (string):\n  string sub-command JSON expected an index less than 0 got '0'.\n\n\nCMake Error at modules/CMakeLists.txt:197 (string):\n  string sub-command JSON expected an array index, got: '-1'.\n\n\nCMake Error at modules/CMakeLists.txt:198 (string):\n  string sub-command JSON expected an array index, got: '-1'.\n\n\nCMake Error at modules/CMakeLists.txt:213 (string):\n  string sub-command JSON expected an array index, got: '-1'.\n\n\n-- Configuring incomplete, errors occurred!\n"
+}

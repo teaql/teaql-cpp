@@ -60,6 +60,8 @@ static void user_context_event_sink_receives_data_service_mutation_events() {
     auto& safe_sink = f.user->make_resource<RecordingSafeEventSink>(safe_events);
     f.user->with_event_sink(*f.user, sink).with_custom_event_sink(*f.user, safe_sink);
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native events relations")),
+          "private native entry supplies explicit mutation intent");
     auto created = service.insert_command();
     created.value("name", "created");
     check(bool(Access::insert_internal(service, created).wait()),
@@ -238,6 +240,7 @@ static auto& enhance(const EntityDataService<E>& service,
         std::allocator_arg,
         Allocator(service.memory_resource()),
         [](const EntityDataService<E>& child, SelectQuery query) -> auto& {
+            query.comment("Inspect native relation hydration").purpose("Verify relation hydration");
             return Access::fetch_all(child, query);
         });
     return detail::enhance_relation_plans(service, rows, plans, fetch);
@@ -266,6 +269,8 @@ static void entity_data_service_enhances_parent_rows_with_relations() {
     f.user->with_runtime_telemetry(*f.user, telemetry);
     auto rows = parents(f.owner, {11, 12, 13});
     auto& service = f.service();
+    check(bool(Access::bind_mutation_intent(service, "Inspect native events relations")),
+          "private native entry supplies explicit mutation intent");
     auto plans = service.relation_plans();
     check(bool(plans), "original relation plans resolve");
     check(bool(enhance(service, rows, plans.value()).wait()), "actual relation hydration succeeds");

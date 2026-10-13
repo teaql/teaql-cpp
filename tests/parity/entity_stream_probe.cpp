@@ -115,9 +115,7 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String>, StreamQueryExecut
                           "query_comment",
                           query.comment_text ? Json(resource, *query.comment_text)
                                              : Json(resource));
-        detail::model_put(snapshot,
-                          "comment",
-                          request.comment ? Json(resource, *request.comment) : Json(resource));
+        detail::model_put(snapshot, "comment", Json(resource, request.comment()));
         detail::model_put(snapshot, "capture", request.capture_execution_metadata);
         detail::model_put(snapshot, "debug", request.capture_debug_query);
         detail::model_put(snapshot, "size", std::uint64_t(size));

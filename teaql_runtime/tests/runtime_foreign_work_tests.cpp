@@ -85,10 +85,15 @@ int main(int argc, char** argv) {
     bool rejected = false;
     try {
         if (argc == 2 && std::string_view(argv[1]) == "mutation") {
+            service.with_mutation_intent(
+                MutationIntent::create(user->memory_resource(), "Inspect foreign mutation cleanup")
+                    .value());
             auto& command = user->make<InsertCommand>("Item");
             (void)service.insert(command).poll();
         } else {
             auto& query = user->make<SelectQuery>("Item");
+            query.comment("Inspect foreign query cleanup")
+                .purpose("Reject a foreign operation domain");
             (void)service.fetch_all(query).poll();
         }
     } catch (const std::invalid_argument&) {

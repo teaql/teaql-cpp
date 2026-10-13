@@ -36,6 +36,7 @@ def exports(crate):
     return names
 
 
+failures = []
 for crate in ("core", "data-service", "sql", "runtime"):
     header_name = crate.replace('-', '_')
     header = (ROOT / f"teaql_{header_name}/include/teaql/{header_name}.hpp").read_text()
@@ -53,7 +54,7 @@ for crate in ("core", "data-service", "sql", "runtime"):
         bound.add(name)
     missing = expected - bound - EXCLUDED
     if missing:
-        raise RuntimeError(f"Missing {crate} root exports: {sorted(missing)}")
+        failures.append(f"Missing {crate} root exports: {sorted(missing)}")
     if crate == 'core':
         # pub mod is an API boundary too, including declarations after test bodies.
         source = (REFERENCE / 'teaql-core/src/lib.rs').read_text()
@@ -61,7 +62,7 @@ for crate in ("core", "data-service", "sql", "runtime"):
         for module in modules:
             if not re.search(rf'^namespace {module}\s*=\s*::teaql::|'
                              rf'^namespace teaql::core::{module}\s*\{{', header, re.M):
-                raise RuntimeError(f'Missing core public module namespace: {module}')
+                failures.append(f'Missing core public module namespace: {module}')
         print(f'Verified core: {len(modules)} public module namespaces; member behavior remains separate')
     if crate == 'runtime':
         source = (REFERENCE / 'teaql-runtime/src/lib.rs').read_text()
@@ -70,7 +71,8 @@ for crate in ("core", "data-service", "sql", "runtime"):
             match = re.search(rf'^namespace teaql::runtime::{module}\s*\{{([^}}]*)\}}',
                               header, re.M | re.S)
             if not match:
-                raise RuntimeError(f'Missing runtime public module namespace: {module}')
+                failures.append(f'Missing runtime public module namespace: {module}')
+                continue
             module_source = (REFERENCE / f'teaql-runtime/src/{module}.rs').read_text()
             public = set(re.findall(r'^pub (?:async )?(?:trait|struct|enum|type|fn) (\w+)',
                                     module_source, re.M))
@@ -79,7 +81,12 @@ for crate in ("core", "data-service", "sql", "runtime"):
                 public.update(re.findall(r'\w+', body))
             bindings = set(re.findall(r'^using ::teaql::(\w+);', match[1], re.M))
             if missing := public - bindings:
-                raise RuntimeError(f'Missing runtime {module} members: {sorted(missing)}')
-        print(f'Verified runtime: {len(modules)} public module namespaces and complete member bindings; behavior remains separate')
-    print(f"Verified {crate}: {len(expected - EXCLUDED)} root reexport names; "
-          "template/member/default/serialization/privacy acceptance remains separate")
+                failures.append(f'Missing runtime {module} members: {sorted(missing)}')
+        if not any('runtime' in failure for failure in failures):
+            print(f'Verified runtime: {len(modules)} public module namespaces and complete member bindings; behavior remains separate')
+    if not any(f'Missing {crate} ' in failure for failure in failures):
+        print(f"Verified {crate}: {len(expected - EXCLUDED)} root reexport names; "
+              "template/member/default/serialization/privacy acceptance remains separate")
+
+if failures:
+    raise SystemExit('\n'.join(failures))

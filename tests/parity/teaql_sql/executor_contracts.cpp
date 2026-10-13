@@ -184,7 +184,10 @@ struct Fixture {
     }
 
     QueryRequest request(const SelectQuery& query, bool debug = false, bool metadata = true) {
-        return QueryRequest(std::allocator_arg, Allocator(owner), query, debug, metadata);
+        auto intent = QueryIntent::create(
+            owner, "exercise SQL executor fixture", "verify cache and partition contracts");
+        return QueryRequest(
+            std::allocator_arg, Allocator(owner), query, intent.value(), debug, metadata);
     }
 
     const QueryResult& run(const SelectQuery& query, bool debug = false, bool metadata = true) {
@@ -235,9 +238,12 @@ static void batch_metadata_keeps_each_statement_and_its_numbered_bindings() {
     for (auto value : {"first", "second"}) {
         InsertCommand command(std::allocator_arg, Allocator(f.owner), "Order");
         command.value("name", value);
-        batch.emplace_back(std::move(command));
+        batch.emplace_back(std::move(command), "ported batch child");
     }
-    auto request = MutationRequest(std::allocator_arg, Allocator(f.owner), std::move(batch));
+    auto request = MutationRequest(std::allocator_arg,
+                                   Allocator(f.owner),
+                                   std::move(batch),
+                                   "ported mutation execution fixture");
     const auto& result = f.executor.mutate(f.owner, std::move(request)).wait();
     check(result && result.value().metadata.statements.size() == 2,
           "original two batch statements");
@@ -275,11 +281,13 @@ static void sql_executor_never_eagerly_expands_private_values_even_when_diagnost
           "original requested diagnostics never expand private query bindings");
     InsertCommand command(std::allocator_arg, Allocator(f.owner), "Order");
     command.value("name", "PRIVATE-BINDING-CANARY");
-    const auto& inserted =
-        f.executor
-            .mutate(f.owner,
-                    MutationRequest(std::allocator_arg, Allocator(f.owner), std::move(command)))
-            .wait();
+    const auto& inserted = f.executor
+                               .mutate(f.owner,
+                                       MutationRequest(std::allocator_arg,
+                                                       Allocator(f.owner),
+                                                       std::move(command),
+                                                       "ported mutation execution fixture"))
+                               .wait();
     check(inserted && !inserted.value().metadata.debug_query &&
               inserted.value().metadata.params.size() == 1 &&
               inserted.value().metadata.params[0] == Value(f.owner, "PRIVATE-BINDING-CANARY"),

@@ -90,7 +90,7 @@ public:
             probes_ = relation_top_n_execution_plan(capabilities, plan_, ids_.size()) ==
                       RelationTopNExecutionPlan::BoundedProbes;
             const bool provider_batch =
-                capabilities.small_parent_relation_probes &&
+                ids_.size() >= 2 && capabilities.small_parent_relation_probes &&
                 (!plan_.query || !plan_.query->top_n_probe_parent_threshold_value);
             if (provider_batch && !service_.metadata.capture_execution_metadata()) {
                 probes_ = false;

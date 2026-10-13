@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(cpp_business_ids LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(cpp_business_ids INTERFACE)
+target_include_directories(cpp_business_ids INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(cpp_business_ids INTERFACE cxx_std_20)
+target_link_libraries(cpp_business_ids INTERFACE teaql::provider_sqlite)

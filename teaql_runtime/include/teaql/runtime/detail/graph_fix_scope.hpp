@@ -80,7 +80,15 @@ public:
     std::optional<T> poll(WakeSignal& wake) {
         if (!state_) {
             // Source async save samples time when first polled, not at construction.
-            state_ = &context_.make<GraphFixState>(fixed_time_ ? *fixed_time_ : Timestamp::now());
+            auto* active = GraphFixActivation::current(context_);
+            if (!fixed_time_ && active && active->memory_resource() == resource_) {
+                // Nested adapters belong to the same save operation. Preserve
+                // its clock and evidence instead of replacing them with an empty scope.
+                state_ = active;
+            } else {
+                state_ =
+                    &context_.make<GraphFixState>(fixed_time_ ? *fixed_time_ : Timestamp::now());
+            }
         }
         const T* result;
         {

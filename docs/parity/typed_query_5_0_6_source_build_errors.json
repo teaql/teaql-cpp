@@ -1,0 +1,26 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "The complete historical enhanced-entity observer includes real SQLite integration and requires direct test-only imports of already locked SQLite/SQL crates. No production dependency or original behavior is replaced.",
+  "errors": [
+    {
+      "code": "E0433",
+      "message": "cannot find module or crate `rusqlite` in this scope",
+      "location": "src/bin/enhanced_entities_5_0_6.rs:235:18"
+    },
+    {
+      "code": "E0433",
+      "message": "cannot find module or crate `teaql_sql` in this scope",
+      "location": "src/bin/enhanced_entities_5_0_6.rs:244:24"
+    },
+    {
+      "code": "E0433",
+      "message": "cannot find module or crate `teaql_provider_sqlite` in this scope",
+      "location": "src/bin/enhanced_entities_5_0_6.rs:246:13"
+    },
+    {
+      "code": "E0433",
+      "message": "cannot find module or crate `teaql_provider_sqlite` in this scope",
+      "location": "src/bin/enhanced_entities_5_0_6.rs:245:13"
+    }
+  ]
+}

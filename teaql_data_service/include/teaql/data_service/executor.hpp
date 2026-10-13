@@ -1,5 +1,6 @@
 #pragma once
 #include <teaql/data_service/types.hpp>
+#include <teaql/data_service/dynamic_fields.hpp>
 #include <teaql/async/operation.hpp>
 #include <teaql/async/pending.hpp>
 #include <teaql/async/stream.hpp>
@@ -25,6 +26,10 @@ public:
 template <class E>
 class QueryExecutor : public virtual DataServiceExecutor<E> {
 public:
+    virtual const DynamicFieldStore* dynamic_field_store() const {
+        return nullptr;
+    }
+
     // Pure diagnostic fallback. No I/O and no SQL log emission.
     virtual SqlIntentRedactions query_log_intent(Memory r, const SelectQuery& query) const {
         return SqlIntentRedactions::from_unclassified_query(r, query);
@@ -41,6 +46,16 @@ public:
 template <class E>
 class StreamQueryExecutor : public virtual DataServiceExecutor<E> {
 public:
+    virtual Result<QueryStream<E>*, DynamicFieldError>
+    query_stream_with_dynamic_fields(Memory r,
+                                     QueryRequest,
+                                     std::size_t,
+                                     DynamicFieldStreamPlan,
+                                     std::optional<ExecutionObserver>) {
+        return Result<QueryStream<E>*, DynamicFieldError>::err(
+            r, DynamicFieldError(r, "DYNAMIC_FIELD_STREAM_UNSUPPORTED", "stream"));
+    }
+
     virtual QueryStream<E>& query_stream(Memory, QueryRequest, std::size_t chunk_size) = 0;
 
     virtual QueryStream<E>& query_stream_observed(Memory r,

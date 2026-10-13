@@ -16,7 +16,9 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_CXX_FLAGS_DEBUG": "-g1",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "TEAQL_ENABLE_MODULES": "OFF"
+        "TEAQL_ENABLE_MODULES": "OFF",
+        "SQLite3_INCLUDE_DIR": "${sourceDir}/.tools/toolchains/sqlite-3.53.2/include",
+        "SQLite3_LIBRARY": "${sourceDir}/.tools/toolchains/sqlite-3.53.2/lib_native/libsqlite3.a"
       }
     },
     {
@@ -142,7 +144,25 @@
         "teaql_module_sqlite_relations_graph",
         "teaql_sqlite_schema_crud",
         "teaql_sqlite_relations_graph",
-        "teaql_generated_query_expression"
+        "teaql_generated_query_expression",
+        "teaql_module_general_query_tests",
+        "teaql_module_entity_graph_plan_tests",
+        "teaql_module_provider_sqlite_id_tests",
+        "teaql_module_generated_readonly_property_tests",
+        "teaql_module_model_debug_tests",
+        "teaql_module_entity_runtime_model_tests",
+        "teaql_module_entity_graph_execution_tests",
+        "teaql_module_entity_query_tests",
+        "teaql_module_relation_planning_extensions_probe",
+        "teaql_module_relation_enhancement_tests",
+        "teaql_module_hydration_sibling_keys_probe",
+        "teaql_module_hydration_owner_facets_probe",
+        "teaql_module_hydration_owner_facets_async_probe",
+        "teaql_module_graph_relation_facets_probe",
+        "teaql_module_hydration_flat_facets_probe",
+        "teaql_module_loaded_row_graph_probe",
+        "teaql_module_relation_hydration_replay_probe",
+        "teaql_module_json_graph_views_probe"
       ]
     },
     {

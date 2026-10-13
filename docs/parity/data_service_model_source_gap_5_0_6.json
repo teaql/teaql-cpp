@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "total": 40,
+  "source_intent_errors": 27,
+  "source_model_diagnostics": 13,
+  "first_input": {
+    "flags": 0,
+    "text": "",
+    "comment": null,
+    "count": 0,
+    "start": "0",
+    "end": "-1",
+    "value": {
+      "kind": "null"
+    }
+  },
+  "first_expected": {
+    "intent_error": {
+      "code": "REQUEST_COMMENT_REQUIRED",
+      "field": "comment",
+      "message": "REQUEST_COMMENT_REQUIRED: Query Request requires a non-blank comment; supply it at the request entry point"
+    }
+  },
+  "native_result": "SIGABRT on first invalid intent due to fixture calling intent.value() without checking Result",
+  "note": "The source observer mechanically adapts new request/command constructors and uses the maintained C++ fixture intent labels. Missing caller intent remains an original error, not a fallback. Native fixture error handling and downstream formatting remain pending after full CTest terminal state.",
+  "source_error_case_indexes": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9,
+    10,
+    12,
+    13,
+    15,
+    16,
+    18,
+    19,
+    21,
+    22,
+    24,
+    25,
+    27,
+    28,
+    30,
+    31,
+    33,
+    34,
+    36,
+    37,
+    39
+  ]
+}

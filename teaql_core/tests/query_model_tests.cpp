@@ -165,15 +165,30 @@ static void expression_contracts() {
               "function node shape");
     }
     check(Expr::count_all(r).args.empty(), "count-all has zero arguments");
-    check(Expr::contain(r, "name", "tea") == Expr::like(r, "name", "%tea%"), "contains pattern");
-    check(Expr::not_contain(r, "name", "tea") == Expr::not_like(r, "name", "%tea%"),
-          "negative contains pattern");
-    check(Expr::begin_with(r, "name", "tea") == Expr::like(r, "name", "tea%"), "prefix pattern");
-    check(Expr::not_begin_with(r, "name", "tea") == Expr::not_like(r, "name", "tea%"),
-          "negative prefix pattern");
-    check(Expr::end_with(r, "name", "tea") == Expr::like(r, "name", "%tea"), "suffix pattern");
-    check(Expr::not_end_with(r, "name", "tea") == Expr::not_like(r, "name", "%tea"),
-          "negative suffix pattern");
+    using TextFactory = Expr (*)(Memory, std::string_view, std::string_view);
+    const std::array<TextFactory, 6> text_factories{Expr::contain,
+                                                    Expr::not_contain,
+                                                    Expr::begin_with,
+                                                    Expr::not_begin_with,
+                                                    Expr::end_with,
+                                                    Expr::not_end_with};
+    const std::array<std::string_view, 6> patterns{
+        "%tea%", "%tea%", "tea%", "tea%", "%tea", "%tea"};
+    for (std::size_t index = 0; index < text_factories.size(); ++index) {
+        auto expression = text_factories[index](r, "name", "tea");
+        auto operation = index % 2 ? BinaryOp::NotLike : BinaryOp::Like;
+        auto expected = Expr::binary(
+            Expr::column(r, "name"), operation, Expr::like_pattern(r, patterns[index], "tea"));
+        check(expression == expected && expression.args[1].name == "tea",
+              "typed text predicates preserve the 5.0.6 original-operand node");
+        auto raw = operation == BinaryOp::Like ? Expr::like(r, "name", patterns[index])
+                                               : Expr::not_like(r, "name", patterns[index]);
+        check(raw.kind == Expr::Kind::Binary && raw.op == operation && raw.args.size() == 2 &&
+                  raw.args[1].kind == Expr::Kind::Value &&
+                  raw.args[1].literal.try_text() == patterns[index] && !raw.lowered_like_operand(),
+              "raw LIKE preserves literal bytes without typed lowering provenance");
+        check(!(expression == raw), "typed lowering provenance is distinct from a raw LIKE value");
+    }
     auto sound = Expr::sound_like(r, "name", "Robert");
     check(sound.op == BinaryOp::Eq && sound.args[0].function_kind == ExprFunction::Soundex &&
               sound.args[1].function_kind == ExprFunction::Soundex,

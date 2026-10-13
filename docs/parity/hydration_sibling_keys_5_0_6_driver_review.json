@@ -1,0 +1,8 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/hydration_sibling_keys_5_0_6.rs",
+  "driver_sha256": "c47deb980099f6af34d90244e5d80b4c2ac37421de345fb01ed2b5e3e3959e10",
+  "scope": "Original complete enhance_query_relations_internal via append-only direct bridge. Actual prepared child fetches reach recording executor; nested batches, key aliasing and explicit inverse requests vary. Complete parent value/request filter snapshots; no real SQL, dynamic field selection, loaded-facet, flat graph or full hydration-family qualification.",
+  "cases": 8,
+  "executor_requests": 40
+}

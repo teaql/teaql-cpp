@@ -1,0 +1,18 @@
+[
+  {
+    "family": "relation_execution",
+    "historical_driver": "tests/parity/rust_values/src/bin/relation_execution_oracle.rs",
+    "historical_sha256": "52e2a27c0a65805348b0aa5cfe530b90008c15f1ecf8c6354d5ceea49cfe49ae",
+    "driver": "tests/parity/rust_private_save_5_0_6/src/bin/relation_execution_5_0_6.rs",
+    "driver_sha256": "e8ef8356ff08f1860da71772d28e8689691ae6b237c14c9569bf467f57faa0e1",
+    "scope": "Original native relation-fetch branch compiled verbatim against child-fetch SPI; dynamic selection is explicitly asserted absent. No SQL/provider/request pipeline qualification."
+  },
+  {
+    "family": "relation_enhancement",
+    "historical_driver": "tests/parity/rust_values/src/bin/relation_enhancement_oracle.rs",
+    "historical_sha256": "eb24b052ce19e86747db07f684c92f17b7bd0496ae0c01232bec6def87de04f2",
+    "driver": "tests/parity/rust_private_save_5_0_6/src/bin/relation_enhancement_5_0_6.rs",
+    "driver_sha256": "c96b8f5304b8c45413b8ceb1274e32eaf37f2a591eaf2577256c1695b94518ad",
+    "scope": "Original enhancement methods compiled verbatim against child-fetch SPI. Original aggregate key capture added to driver. Request intent delegates to complete original EntityDataService via bridge. Dynamic loader fixture panics if used; legacy selectors carry no dynamic selection. No physical provider/SQL/privacy qualification."
+  }
+]

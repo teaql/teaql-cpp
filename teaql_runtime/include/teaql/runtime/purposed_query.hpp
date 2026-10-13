@@ -45,7 +45,7 @@ public:
         if (trimmed.empty()) {
             throw std::invalid_argument("query purpose must not be empty");
         }
-        query_.trace_chain.emplace_back(TraceKind::Purpose, query_.entity, purpose);
+        query_.purpose(purpose);
     }
 
     PurposedSelectQuery(std::allocator_arg_t, Allocator a, const PurposedSelectQuery& other)
@@ -59,6 +59,11 @@ public:
 
     const SelectQuery& as_query() const {
         return query_;
+    }
+
+    PurposedSelectQuery& limit(std::uint64_t value) {
+        query_.limit(value);
+        return *this;
     }
 
     SelectQuery into_query() && {

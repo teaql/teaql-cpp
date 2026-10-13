@@ -8,13 +8,13 @@ static QueryRequest input(Fixture& f, bool capture) {
     SelectQuery query(std::allocator_arg, Allocator(f.resource), "Customer");
     query.filter(Expr::eq(f.resource, "name", "Riverside"))
         .limit(10)
-        .comment("bounded diagnostic query");
+        .comment("bounded diagnostic query")
+        .purpose("ported query execution fixture");
     auto compiled = f.dialect.compile_select(f.resource, f.entity, query);
     check(compiled.params[0].try_text() == "Riverside" &&
               compiled.log_context.parameter_policies[0] == SqlParameterLogPolicy::Masked,
           "original precompiled input and field provenance");
     QueryRequest request(std::allocator_arg, Allocator(f.resource), query, false, capture);
-    request.comment = detail::clone_in(f.resource, query.comment_text);
     request.capture_debug_query = false;
     request.capture_execution_metadata = capture;
     return request;

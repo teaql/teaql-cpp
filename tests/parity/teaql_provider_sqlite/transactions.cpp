@@ -41,8 +41,10 @@ struct RawBody {
                 insert.value("id", std::uint64_t(id))
                     .value("version", std::int64_t(1))
                     .value("name", name);
-                child = &scope.mutate(
-                    MutationRequest(std::allocator_arg, Allocator(owner), std::move(insert)));
+                child = &scope.mutate(MutationRequest(std::allocator_arg,
+                                                      Allocator(owner),
+                                                      std::move(insert),
+                                                      "insert transaction scope fixture"));
             }
             forwarding.attach(child->wake_signal(), wake);
             auto* result = child->poll();

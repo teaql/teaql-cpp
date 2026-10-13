@@ -1,0 +1,39 @@
+{
+  "status": "documented_source_behavior_not_complete_query_repair",
+  "baseline": {
+    "repository": "https://github.com/teaql/teaql-rs.git",
+    "tag": "v5.0.6",
+    "version": "5.0.6",
+    "commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "policy": "Use this exact commit for design and behavior parity. Upgrade only by an explicit baseline change."
+  },
+  "producer": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "input": {
+    "root": "unused",
+    "node": "unused",
+    "path": "unused",
+    "generated": "loaded_platform_name",
+    "id": 7
+  },
+  "source_observation": {
+    "access_path": [
+      "name"
+    ],
+    "break_point": "name",
+    "human_message": "访问 Person.name 时缺少预加载。请在查询中加入 \"select_name()\"",
+    "missing_preload": [
+      "name"
+    ],
+    "nested_fix": null,
+    "original_expr_with_broken_point": "E::person(id=7).get_name()<broken>",
+    "root": "Person(id=7)",
+    "severity": "error",
+    "suggested_fix": "select_name()"
+  },
+  "source": {
+    "path": ".reference/teaql-rs/teaql-core/src/eval.rs",
+    "sha256": "1b88d5c2f55c87c3d00035a4e39fc6e09823bf6094351b4813c7495d40ee77f7",
+    "contract": "EvalResult::and_then retains missing-path information only; successful relationship traversal is absent from a later child-field failure."
+  },
+  "cpp_disposition": "Preserve original diagnostic root/path; adapt language spelling and nested With syntax. Assist explains the child-request repair scope. Do not claim automatic complete repair."
+}

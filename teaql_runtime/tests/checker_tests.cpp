@@ -1,5 +1,7 @@
 #include "../../tests/support/checker_fixture.hpp"
 #include <teaql/runtime/module.hpp>
+#include <teaql/runtime/generated_checker.hpp>
+#include <teaql/runtime/detail/graph_fix_scope.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <thread>
@@ -25,6 +27,82 @@ static void rejected(F&& action, const char* message) {
 
 static void set(EntityValues& values, std::string_view name, Value value) {
     values.fields.insert_or_assign(String(name, values.memory_resource()), std::move(value));
+}
+
+static void generated_rule_mechanics() {
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto r = user_context->memory_resource();
+    ObjectLocation location(std::allocator_arg, Allocator(r));
+    CheckResults results(r);
+    GeneratedCheckerLogic::requiredText("\xc2\xa0\xe3\x80\x80", "name", location, results);
+    GeneratedCheckerLogic::minStringLength(
+        "\xc3\xa9\xf0\x9f\x90\xbe", "name", 3, location, results);
+    GeneratedCheckerLogic::maxStringLength(
+        "\xc3\xa9\xf0\x9f\x90\xbe", "name", 1, location, results);
+    check(results.size() == 3 && results[0].rule == CheckRule::Required &&
+              results[1].rule == CheckRule::MinStringLength &&
+              results[2].rule == CheckRule::MaxStringLength,
+          "logic helpers use Rust Unicode whitespace and scalar length rules");
+    results.clear();
+    std::uint64_t assigned = 0;
+    auto set_root = [&](std::uint64_t id) {
+        assigned = id;
+    };
+    GeneratedFieldChecks::context_root(*user_context,
+                                       CheckObjectStatus::Create,
+                                       "Note",
+                                       "tenant",
+                                       "Tenant",
+                                       0,
+                                       set_root,
+                                       location,
+                                       results);
+    check(results.size() == 1 && results.front().rule == CheckRule::ContextRootMissing &&
+              assigned == 0,
+          "missing trusted Context root rejects before assigning a value");
+    results.clear();
+    user_context->with_active_root("Tenant", 42);
+    auto& state = user_context->make<detail::GraphFixState>(Timestamp(1234));
+    {
+        detail::GraphFixActivation active(*user_context, state);
+        GeneratedFieldChecks::context_root(*user_context,
+                                           CheckObjectStatus::Create,
+                                           "Note",
+                                           "tenant",
+                                           "Tenant",
+                                           0,
+                                           set_root,
+                                           location,
+                                           results);
+        Timestamp created(0), updated(0);
+        GeneratedFieldChecks::clock(*user_context,
+                                    CheckObjectStatus::Create,
+                                    false,
+                                    "Note",
+                                    "created",
+                                    [&](Timestamp time) {
+                                        created = time;
+                                    });
+        GeneratedFieldChecks::clock(
+            *user_context, CheckObjectStatus::Create, true, "Note", "updated", [&](Timestamp time) {
+                updated = time;
+            });
+        check(assigned == 42 && created == Timestamp(1234) && updated == Timestamp(1234) &&
+                  state.evidence.size() == 3 && results.empty(),
+              "Context and clock fixes share the operation time and record exact evidence");
+        GeneratedFieldChecks::context_root(*user_context,
+                                           CheckObjectStatus::Update,
+                                           "Note",
+                                           "tenant",
+                                           "Tenant",
+                                           7,
+                                           set_root,
+                                           location,
+                                           results);
+        check(results.back().rule == CheckRule::ContextRootMismatch && state.evidence.size() == 3,
+              "root mismatches do not manufacture successful fix evidence");
+    }
 }
 
 static void checked_registration_and_retention() {
@@ -323,6 +401,7 @@ int main(int argc, char** argv) {
     }
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
     try {
+        generated_rule_mechanics();
         checked_registration_and_retention();
         typed_copies_and_sparse_values();
         cleanup_and_metadata_expiry();

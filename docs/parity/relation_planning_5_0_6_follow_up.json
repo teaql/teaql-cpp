@@ -1,0 +1,20 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Initial source gaps are preserved as before-correction observations. Both are now resolved within the documented planning matrix; full capability acceptance remains open.",
+  "gaps": [
+    {
+      "contract": "Facet ownership",
+      "rust": "query_for_plan, query_for_compact_plan and base_relation_query clear copied facets before nested planning.",
+      "status": "resolved_within_1152_source_matrix",
+      "cpp_before": "query_for_relation_plan clears relations but currently retains facets.",
+      "evidence": "docs/relation_planning_extensions_5_0_6.md"
+    },
+    {
+      "contract": "Grouped top-N stable order",
+      "rust": "ensure_stable_top_n_order uses missing group fields for grouped/aggregate queries and never adds an ungrouped source entity id.",
+      "status": "resolved_within_1152_source_matrix",
+      "cpp_before": "query_for_relation_plan currently appends entity id for any sliced query.",
+      "evidence": "docs/relation_planning_extensions_5_0_6.md"
+    }
+  ]
+}

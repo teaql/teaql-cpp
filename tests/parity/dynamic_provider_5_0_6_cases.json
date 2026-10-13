@@ -1,0 +1,2862 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "version": "5.0.6",
+  "source": [
+    "teaql-runtime/src/dynamic_fields.rs",
+    "teaql-data-service/src/dynamic_fields.rs"
+  ],
+  "source_sha256": {
+    "teaql-runtime/src/dynamic_fields.rs": "fa62cfa06a0d1c2dfa0fbc88c9d73931692fcc72abf0b99731b0518e974432cd",
+    "teaql-data-service/src/dynamic_fields.rs": "19cee0f360b71be990451d88c64ec6f0ef34fd49b77edbd870703f1c58afde8f"
+  },
+  "note": "Direct original database/fixture provider calls with real SQLite storage and a registered SQL executor. Private batch conversion/audit helper and graph-save orchestration are separate native/source-reviewed checks.",
+  "cases": [
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": " ",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "\u2003",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "\u0085",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NAMESPACE_REQUIRED",
+        "field": "namespace"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": " profile ",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": " profile "
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "\u79d8\u5bc6",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "\u79d8\u5bc6"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": false,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_EXECUTOR_MISSING",
+          "field": "Item"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_EXECUTOR_MISSING",
+          "field": "Item"
+        },
+        "schema": {
+          "error": "DYNAMIC_FIELD_EXECUTOR_MISSING",
+          "field": "schema"
+        },
+        "stream": {
+          "error": "DYNAMIC_FIELD_EXECUTOR_MISSING",
+          "field": "Item"
+        },
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": true,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_DUPLICATE_OWNER",
+        "field": "Item"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Other",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_DEFINITIONS_MISSING",
+          "field": "Other"
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_DEFINITIONS_MISSING",
+          "field": "Other"
+        },
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_DEFINITIONS_MISSING",
+          "field": ""
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_DEFINITIONS_MISSING",
+          "field": ""
+        },
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {}
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          0
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "0": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          8,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          18446744073709551615
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "18446744073709551615": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+          "field": "title"
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+          "field": "title"
+        },
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_NOT_FOUND",
+          "field": "missing"
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_NOT_FOUND",
+          "field": "missing"
+        },
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "#title",
+            5
+          ]
+        ],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_INVALID_CODE",
+        "field": "#title"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "_title",
+            5
+          ]
+        ],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_INVALID_CODE",
+        "field": "_title"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "title",
+            5
+          ],
+          [
+            "title",
+            5
+          ]
+        ],
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_DUPLICATE_CODE",
+        "field": "title"
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": true,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+          "field": "Item"
+        },
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "unbound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+          "field": "Item"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "wrong_profile"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_STORAGE_PROVENANCE_MISMATCH",
+          "field": "Item"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "wrong_schema"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_DEFINITION_MISMATCH",
+          "field": "Item"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {}
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "0": {
+            "title": {
+              "kind": "text",
+              "value": "zero"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "i64",
+              "value": "1"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "missing": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "database",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "changes": 1,
+          "id": 7,
+          "namespace": "profile"
+        },
+        "load": {
+          "bound": true,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": null,
+        "supports_graph": true
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": " ",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "\u2003",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "\u0085",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": " profile ",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "\u79d8\u5bc6",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": false,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": true,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_DUPLICATE_OWNER",
+        "field": "Item"
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Other",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_DEFINITIONS_MISSING",
+          "field": "Other"
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Other"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_DEFINITIONS_MISSING",
+          "field": ""
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": ""
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {}
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          0
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "0": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            }
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          8,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          18446744073709551615
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "18446744073709551615": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "title",
+            5
+          ]
+        ],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "count",
+            1
+          ]
+        ],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "title",
+            1
+          ]
+        ],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+          "field": "title"
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "missing",
+            5
+          ]
+        ],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "error": "DYNAMIC_FIELD_NOT_FOUND",
+          "field": "missing"
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "#title",
+            5
+          ]
+        ],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_INVALID_CODE",
+        "field": "#title"
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "_title",
+            5
+          ]
+        ],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_INVALID_CODE",
+        "field": "_title"
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": [
+          [
+            "title",
+            5
+          ],
+          [
+            "title",
+            5
+          ]
+        ],
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_DUPLICATE_CODE",
+        "field": "title"
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": true,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "unbound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "wrong_profile"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "text",
+              "value": "private"
+            },
+            "count": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "wrong_schema"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": null,
+              "title": "private"
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {},
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {}
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "0": {
+            "title": {
+              "kind": "text",
+              "value": "zero"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {},
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "i64",
+              "value": "1"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_TYPE_MISMATCH",
+        "field": "title"
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "title": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "title": null
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "missing": {
+              "kind": "null"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "error": "DYNAMIC_FIELD_NOT_FOUND",
+        "field": "missing"
+      }
+    },
+    {
+      "input": {
+        "mode": "fixture",
+        "namespace": "profile",
+        "registered": true,
+        "duplicate": false,
+        "owner": "Item",
+        "ids": [
+          7,
+          7,
+          8
+        ],
+        "selection": null,
+        "stored": {
+          "7": {
+            "count": {
+              "kind": "i64",
+              "value": "0"
+            }
+          }
+        },
+        "foreign": false,
+        "binding": "bound"
+      },
+      "expected": {
+        "graph": {
+          "error": "DYNAMIC_FIELD_TRANSACTION_BINDING_REQUIRED",
+          "field": "save"
+        },
+        "load": {
+          "bound": false,
+          "rows": {
+            "7": {
+              "count": 0
+            },
+            "8": {}
+          }
+        },
+        "schema": null,
+        "stream": {
+          "error": "DYNAMIC_FIELD_STREAM_UNSUPPORTED",
+          "field": "Item"
+        },
+        "supports_graph": false
+      }
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 # Public API and behavioral completion audit
 
-Baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
+Historical corpus baseline: Rust v5.0.5 at `62940ae2b88e7acc32763853b8b4685a01c7e90a`.
+
+The active alignment baseline is now v5.0.6. These retained observations are not
+relabelled as new-baseline evidence. See [the upgrade audit](../../docs/baseline_5_0_6_upgrade.md)
+for replay and source-disposition qualification work.
 
 ## Cross-platform probe launch contract
 
@@ -396,3 +400,247 @@ python3 tests/parity/compare_context_model.py \
   --cpp build-root-integration/teaql_context_model_probe \
   --rust build/rust-original-roundtrip/debug/context_model_oracle
 ```
+
+## Rust 5.0.6 generated Checker helpers and entity comments
+
+`checker_provenance_5_0_6_cases.json` records 220 direct calls to the retained
+generated SchoolCheckerLogic helpers and 54 original runtime entity-comment
+composition sequences. Diagnostics compare full wire objects in three field-name
+profiles. Entity annotations remain separate from the receiving root reason.
+The Rust dependency on the retained generated crate is development-only; all of
+its TEAQL dependencies resolve to the clean frozen 5.0.6 worktree.
+
+```sh
+source scripts/toolchains/activate.sh
+CARGO_TARGET_DIR=/tmp/teaql_cpp_field_layout_rust_506 cargo build \
+  --manifest-path tests/parity/rust_field_layout/Cargo.toml --locked --offline
+cmake --build --preset native --target teaql_loaded_snapshot_probe
+python3 tests/parity/generate_checker_helpers.py \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/teaql_cpp_field_layout_oracle \
+  --cpp build_native_current/teaql_loaded_snapshot_probe
+ctest --preset native -R '^checker_provenance_rust_parity$'
+```
+
+The corpus records source hashes and the exact active commit. It establishes
+this helper/composition subset, not complete Checker, trace, privacy or save parity.
+
+## Rust 5.0.6 generated relation evaluation
+
+`generated_relations_5_0_6_cases.json` records 128 direct retained School/Platform
+model calls. It compares named availability, zero/nonzero foreign keys, identity
+cache fallback, missing/present/empty/wrong-type forward views and missing/empty/
+nonempty lists. Complete NotLoaded paths and handle states remain unnormalized.
+C++ uses matching entity/relation names in the compact relations.xml fixture.
+Optional forward and reverse to-one native cases are separate from this corpus.
+
+```sh
+source scripts/toolchains/activate.sh
+CARGO_TARGET_DIR=/tmp/teaql_cpp_field_layout_rust_506 cargo build \
+  --manifest-path tests/parity/rust_field_layout/Cargo.toml --locked --offline
+cmake --build --preset native --target teaql_loaded_snapshot_probe teaql_generated_relation_tests
+python3 tests/parity/generate_generated_relations.py \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/teaql_cpp_field_layout_oracle \
+  --cpp build_native_current/teaql_loaded_snapshot_probe
+ctest --preset native -R '^(generated_relation_contracts|generated_relations_rust_parity)$'
+```
+
+See [the relation contract](../../docs/generated_relations_5_0_6.md) for the checked
+borrow adaptation, preserved legacy getters and remaining qualification scope.
+
+## Rust 5.0.6 generated Business IDs
+
+`business_ids_5_0_6_cases.json.gz` contains 1,044 direct producer-generated wrapper
+and Checker inputs, including raw source diagnostics in three naming profiles.
+The one declared missing-resource type-name adaptation is checked independently.
+The 25 original generated Rust files and provenance are reproduced with the frozen
+producer; the source reference is never patched to match C++.
+
+```sh
+source scripts/toolchains/activate.sh
+python3 scripts/generate_business_id_reference.py --check
+CARGO_TARGET_DIR=/tmp/teaql_cpp_field_layout_rust_506 cargo build \
+  --manifest-path tests/parity/rust_field_layout/Cargo.toml --locked --offline
+cmake --build --preset native --target teaql_loaded_snapshot_probe teaql_generated_business_id_tests
+python3 tests/parity/generate_business_ids.py \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/teaql_cpp_field_layout_oracle \
+  --cpp build_native_current/teaql_loaded_snapshot_probe
+python3 tests/parity/compare_business_ids.py \
+  --cpp build_native_current/teaql_loaded_snapshot_probe \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/teaql_cpp_field_layout_oracle
+```
+
+See [the Business-ID contract](../../docs/generated_business_ids_5_0_6.md) for the
+typed API, existing service delegation, real SQLite coverage and remaining scope.
+
+## Rust 5.0.6 request intent, query envelopes and trace tokens
+
+`intent_trace_5_0_6_cases.json` contains 4,571 direct public source calls without
+normalization: 486 intent diagnostics, 147 token recoveries, 2,048 QueryRequest and 1,890 mutation command/request
+constructions/canonical traces through both public creation routes. Request intent remains independent of query
+fields, stale frames and capture flags. Private scope capture, identity enrichment
+and runtime dispatch/policy boundaries have separate evidence.
+
+```sh
+source scripts/toolchains/activate.sh
+CARGO_TARGET_DIR=/tmp/teaql_cpp_field_layout_rust_506 cargo build \
+  --manifest-path tests/parity/rust_field_layout/Cargo.toml --locked --offline
+cmake --build --preset native --target teaql_loaded_snapshot_probe teaql_request_trace_scope_tests
+python3 tests/parity/generate_intent_trace.py \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/teaql_cpp_field_layout_oracle \
+  --cpp build_native_current/teaql_loaded_snapshot_probe
+CARGO_TARGET_DIR=/tmp/teaql_cpp_scope_source_tests cargo test \
+  --manifest-path .reference/teaql-rs/Cargo.toml -p teaql-runtime \
+  rebinding_preserves_shared_immutable_ancestors_and_cleanup --locked --offline
+```
+
+See [the intent/scope contract](../../docs/request_intent_trace_5_0_6.md) for Context
+copies, allocation ordering and the remaining request/privacy/provenance migration.
+
+## Rust 5.0.6 SQL mutation execution
+
+sql_execution_5_0_6_cases.json.gz contains 2,216 direct original executor observations
+with explicit request intent, complete trace nodes, ordinary/transaction/guarded
+outcomes, readback statement grouping and inherited/future-sibling privacy.
+Historical 5.0.5 corpora retain their own provenance. No output normalization is
+used. The Rust wrapper depends directly on the frozen teaql-sql crate only as a
+comparison tool; it adds no C++ runtime dependency.
+
+```sh
+source scripts/toolchains/activate.sh
+CARGO_TARGET_DIR=/tmp/teaql_cpp_field_layout_rust_506 cargo build \
+  --manifest-path tests/parity/rust_field_layout/Cargo.toml \
+  --bin sql_execution_5_0_6 --locked --offline
+cmake --build --preset native --target teaql_sql_execution_probe
+python3 tests/parity/generate_sql_execution_5_0_6.py \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/sql_execution_5_0_6 \
+  --cpp build_native_current/teaql_sql_execution_probe
+python3 tests/parity/compare_sql_execution_5_0_6.py \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/sql_execution_5_0_6 \
+  --cpp build_native_current/teaql_sql_execution_probe
+ctest --preset native -R '^sql_execution_5_0_6_rust_parity$' --output-on-failure
+```
+
+
+## Rust 5.0.6 durable dynamic field core
+
+dynamic_fields_5_0_6_cases.json records 296 observations of unchanged public
+DynamicFieldDefinitions/Selection/Values APIs, including exact variant validation,
+loaded NULL versus absence, assign/delete, compatible merge and initial/final
+batch/union shape sharing. The separate observer is dynamic_fields_5_0_6 in the
+locked rust_field_layout crate. Reproduction and the C++ Context adaptations are
+in [the core contract](../../docs/dynamic_fields_5_0_6.md).
+
+```sh
+python3 tests/parity/compare_dynamic_fields.py \
+  --cpp build_native_current/teaql_dynamic_fields_probe \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/dynamic_fields_5_0_6
+```
+
+These observations do not cover runtime storage services, dynamic mutation
+ledgers, SQLite persistence, JSON/stream hydration or generated API qualification.
+
+
+## Rust 5.0.6 dynamic loaded state and read rows
+
+dynamic_carrier_5_0_6_cases.json records 176 direct original LoadedSnapshot and
+CompactRow observations, including fixed/overflow preservation, owner rejection,
+readonly schema propagation, durable/relation sidecars, checked enhancement merge,
+held view isolation and clearing/taking payloads. The observer binary is
+`dynamic_carrier_5_0_6` in the same locked Rust crate. Detailed reproduction and
+C++ Context adaptations are in [the core contract](../../docs/dynamic_fields_5_0_6.md).
+
+```sh
+python3 tests/parity/compare_dynamic_carrier.py \
+  --cpp build_native_current/teaql_dynamic_carrier_probe \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/dynamic_carrier_5_0_6
+```
+
+The corpus does not qualify typed runtime carriers, dynamic mutation/original
+ledgers, SQLite persistence, governed storage authority or generated adapters.
+
+
+## Rust 5.0.6 dynamic runtime state and ledger
+
+dynamic_ledger_5_0_6_cases.json records 147 direct public EntityRuntimeState and
+EntityChangeSet observations: loading/mutation failures, NULL/delete, cloned
+view isolation, shared ledgers, change-set frames, composition, root reason and
+state equality. Its separate observer is dynamic_ledger_5_0_6 in the locked Rust
+crate. Private originals/provenance maps and full Debug layouts are not observed
+through this wrapper; their separate native/source-review evidence is described
+in [the contract](../../docs/dynamic_ledger_5_0_6.md).
+
+```sh
+python3 tests/parity/compare_dynamic_ledger.py \
+  --cpp build_native_current/teaql_dynamic_ledger_probe \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/dynamic_ledger_5_0_6
+```
+
+This is state/ownership evidence, not generated typed-carrier, storage/provider,
+SQLite transaction, dynamic audit or protected-I/O configuration qualification.
+
+
+## Rust 5.0.6 dynamic storage SPI plans
+
+dynamic_storage_5_0_6_cases.json records 49 unchanged pure stream-plan, owner/batch
+validation and privacy-safe write Debug observations. It uses a fake store with
+comparison identities and no I/O; this is not actual SQLite or executor-clone
+qualification. The separate oracle is dynamic_storage_5_0_6 in the locked Rust
+crate. Scope and reproduction are in [the SPI contract](../../docs/dynamic_storage_spi_5_0_6.md).
+
+```sh
+python3 tests/parity/compare_dynamic_storage.py \
+  --cpp build_native_current/teaql_dynamic_storage_probe \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/dynamic_storage_5_0_6
+```
+
+
+## Rust 5.0.6 real SQLite dynamic storage
+
+sqlite_dynamic_storage_5_0_6_cases.json records 123 original real SQLite store
+observations: full typed codecs, NULL/Delete, namespace/owner/type validation,
+transaction reads, queued ambient reads, commit/rollback, 400-ID batching and
+corrupt storage. The dedicated sqlite_dynamic_storage_5_0_6 observer uses the
+frozen provider crate and existing locked rusqlite as development dependencies.
+This is not a fake-store or copied-codec observation.
+
+```sh
+python3 tests/parity/compare_sqlite_dynamic_storage.py \
+  --cpp build_native_current/teaql_sqlite_dynamic_storage_probe \
+  --rust /tmp/teaql_cpp_field_layout_rust_506/debug/sqlite_dynamic_storage_5_0_6
+```
+
+See [the store contract](../../docs/sqlite_dynamic_storage_5_0_6.md) for ownership
+adaptations and native cleanup/isolation evidence. Generated graph save, actual
+Context provider preparation, dynamic audit/readback, shared statement caching
+and cursor enhancement remain separately unqualified.
+
+
+Context dynamic provider checkpoint adds the database/immutable fixture provider
+SPI and UserContext resources, trusted stream/write preparation, consuming batch
+conversion and source-shaped private audit values. The 72 direct frozen-source
+observations use real SQLite storage and a registered SQL executor. Scope and
+reproduction are recorded in
+[the provider contract](../../docs/dynamic_provider_5_0_6.md).
+Actual query/graph hydration, transaction write/readback/audit integration and
+thin generated adapters remain open; the ledger pre-I/O guard stays in place.
+G16 and full 5.0.6 acceptance remain unqualified.
+
+
+Dynamic query checkpoint adds scoped query selection, typed root/enhanced loading,
+metadata-preserving decoding and real SQLite enhancement inside the cursor lease.
+The 250 direct original/C++ cases match values, load bits, sharing and failure
+contracts; see [the dynamic query contract](../../docs/dynamic_query_hydration_5_0_6.md).
+The handwritten carrier fixture does not establish generated School parity.
+Relation/child fetching and embedded traversal, graph write/readback/audit,
+complete hooks/trace/config/diagnostics and thin generated adapters remain open.
+The ledger pre-I/O guard and all pending qualification labels are retained.
+
+
+Dynamic relation checkpoint adds Context-driven relation/child loading, checked
+child overlays, whole-batch embedded traversal and fetch-time attachment keys.
+The separate 138-case original/C++ corpus preserves errors and original metadata
+retention behavior; see [the relation contract](../../docs/dynamic_relation_hydration_5_0_6.md).
+Typed compact-flat graph hydration has native evidence. Source direct embedded
+dynamic-only map retention, facets, complete typed/generated configurations,
+graph write/readback/audit and full hook/trace/config/diagnostics remain open.
+Historical 5.0.5 records are unchanged; G16 and complete 5.0.6 parity stay pending.

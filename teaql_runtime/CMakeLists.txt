@@ -7,8 +7,10 @@ add_library(teaql_runtime
     src/data_service/relation_installation.cpp
     src/data_service/relation.cpp
     src/data_service/mod.cpp
+    src/data_service/mutation_privacy.cpp
     src/entity_graph_decoder.cpp
     src/context/entity.cpp
+    src/dynamic_fields.cpp
     src/entity_runtime.cpp
     src/graph.cpp
     src/context/graph.cpp
@@ -19,9 +21,11 @@ add_library(teaql_runtime
     src/log_formatter.cpp
     src/logging.cpp
     src/entity_key.cpp
+    src/commit_audit.cpp
     src/event.cpp
     src/audit_privacy.cpp
     src/schema.cpp
+    src/generated_bootstrap.cpp
     src/id.cpp
     src/business_clock.cpp
     src/business_service.cpp
@@ -32,9 +36,13 @@ add_library(teaql_runtime
     src/data_store.cpp
     src/context/data_store.cpp
     src/generated_support.cpp
+    src/generated_dynamic_fields.cpp
     src/round_trip_reference_types.cpp
     src/round_trip_reference.cpp
+    src/document_round_trip.cpp
+    src/document_snapshot_codec.cpp
     src/context/round_trip_reference.cpp
+    src/context/document_round_trip.cpp
     src/reference_crypto.cpp
     src/entity_reference.cpp
     src/context/entity_reference.cpp

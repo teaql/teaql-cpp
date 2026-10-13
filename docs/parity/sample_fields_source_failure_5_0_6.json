@@ -1,0 +1,51 @@
+{
+  "producer": {
+    "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+    "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+    "model": "tests/generator/sample_fields.xml",
+    "model_sha256": "1a2638fb33b272cbfaad379b8d087af4b4fc2ee5d5bd4f208b3103780930ac0a",
+    "hand_edited": false,
+    "files": {
+      "lib/Cargo.toml": "6b5614ce1bec41cb3a3fcf028ee7b77197be9ab2effe860610c43c239ae22a26",
+      "lib/src/e.rs": "bb6740a8665901368f8d9a2f478a565cc6a9669e5828e6b78ef2cf6d68048547",
+      "lib/src/lib.rs": "3337f762e94d3dc24086dd022bf0a82b43db3471dda7f114ee6b38c49ba7bb83",
+      "lib/src/platform/behavior.rs": "33504f41ce179be8dcb01a52ef885e2894ee18a1f060a659c215ee41fbe43df4",
+      "lib/src/platform/checker.rs": "5eda65b47872a0fdce840c53fcf5bd64bfa0f8c8313a5820f52780980fdd4526",
+      "lib/src/platform/entity.rs": "5339de09c0bd71aff31839d8353a2870f349f109244565af2d6672a8067d04eb",
+      "lib/src/platform/expression.rs": "c0564e1a4ec45f050d9cdf1af71db44f50de96f1b67e02a5c7cc6efc2ae83c27",
+      "lib/src/platform/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/platform/request.rs": "ce05817025095d4711cdab093c729ca00ccddbda0f2580415c5dc9b52c9c779d",
+      "lib/src/q.rs": "7df9c3e209f6e63ff1ef318bc67cbfa326a6a0a250398ea04eb60d75578d94c9",
+      "lib/src/request_support.rs": "c189829f5c7b503f4f86717ab4b8ad89db4765db4f7feb7aa3ee0b8368c6a541",
+      "lib/src/runtime.rs": "ae9c397d4155708abbf76fc7da24522258ec3f1e9f6759f0e43805cf93ce74d2",
+      "lib/src/sample_data.rs": "9156cbaf87c0aafbb5bb61b3ec8ac75911746779435750f5e1477d507d64961d",
+      "lib/src/sample_link/behavior.rs": "ce9c9e71640441c7f936163138d5cab17c82abd3b9276f0c0416dfa75febc5c5",
+      "lib/src/sample_link/checker.rs": "59ecee0c28d5a8b9d249e4f1a9495ec7faf3e495a130ec3284aaf8e852e12fa1",
+      "lib/src/sample_link/entity.rs": "0f3f38390a92b44fb54f3aa922ec7222049726982a2453561fca5445f320105c",
+      "lib/src/sample_link/expression.rs": "a09dc19e3dae4cbf77d1df2775cecbbbe68e4dd87e809491bed36ec2e3d3a4d3",
+      "lib/src/sample_link/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/sample_link/request.rs": "1a831d32e756208ea3855666d37e948024c445a3a1c0da5617a55c8f0a266bec",
+      "lib/src/sample_record/behavior.rs": "24a49f2045a5998de33b4c7e677e34e73b30e0fdf51eff00a31543fe4694d3c2",
+      "lib/src/sample_record/checker.rs": "55ad49d80ef466e38fe27106276593e4b1176a678dfc36c16553bd23cf4f5581",
+      "lib/src/sample_record/entity.rs": "f43753956743fc5131ff877d8e6b4946ac14017ea354db8fd561ef6174b8ef97",
+      "lib/src/sample_record/expression.rs": "ec520b7a2af74822eb9800827cceb98cdd69ca34f66e72968bccab1116c0cf98",
+      "lib/src/sample_record/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+      "lib/src/sample_record/request.rs": "f34804dc4cd543635b06dd4246d62a804c4d3a307608b740a1a35b919b046527"
+    }
+  },
+  "hand_edited": false,
+  "exit_code": 101,
+  "errors": [
+    {
+      "code": null,
+      "message": "expected one of `,`, `.`, `?`, or an operator, found `\":\"fixture`",
+      "primary": [
+        {
+          "file": "tests/generator/parity/sample_fields_rust/lib/src/sample_data.rs",
+          "line": 319
+        }
+      ]
+    }
+  ],
+  "disposition": "The complete unchanged producer emits an unescaped quoted JSON literal in sample_data.rs and cannot compile. Keep this original configuration and rejection. Ordinary jsonMe sample input compiles but fails typed checking and has separate paired runtime evidence. Temporal/scalar success uses its explicitly separate model, without claiming successful complete JSON-literal source parity."
+}

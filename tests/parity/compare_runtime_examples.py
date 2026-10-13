@@ -5,7 +5,7 @@ from pathlib import Path
 import subprocess
 from compare_values import observe, same
 
-def main():
+def main(corpus_name="runtime_examples_cases.json", provenance_name="runtime_examples_provenance.json"):
     parser = argparse.ArgumentParser()
     parser.add_argument("--schema-crud", required=True)
     parser.add_argument("--relations-graph", required=True)
@@ -13,7 +13,7 @@ def main():
     parser.add_argument("--cpp-emulator", default="",
                         help="CMake emulator command and arguments, separated by semicolons")
     args = parser.parse_args()
-    corpus = json.loads(Path(__file__).with_name("runtime_examples_cases.json").read_text())
+    corpus = json.loads(Path(__file__).with_name(corpus_name).read_text())
     root = Path(__file__).resolve().parents[2]
     lock = json.loads((root / "upstream.lock.json").read_text())
     if corpus["baseline"] != lock["commit"]:
@@ -23,7 +23,7 @@ def main():
         subprocess.run(["python3", str(root / "scripts/verify_upstream.py")], check=True)
         if not same(expected, observe(args.rust, [case["input"] for case in corpus["cases"]])):
             raise RuntimeError("Recorded examples differ from live original Rust calls")
-        provenance = json.loads(Path(__file__).with_name("runtime_examples_provenance.json").read_text())
+        provenance = json.loads(Path(__file__).with_name(provenance_name).read_text())
         if provenance["baseline"] != lock["commit"]:
             raise RuntimeError("SQL provenance belongs to a different baseline")
         live = observe(args.rust, [dict(case["input"], logs=True) for case in corpus["cases"]])

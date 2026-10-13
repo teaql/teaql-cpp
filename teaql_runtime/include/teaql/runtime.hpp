@@ -5,9 +5,16 @@
 #include <teaql/runtime/context_model_debug.hpp>
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/runtime/data_store.hpp>
+#include <teaql/runtime/dynamic_fields.hpp>
 #include <teaql/runtime/entity_graph_decoder.hpp>
 #include <teaql/runtime/entity_reference.hpp>
 #include <teaql/runtime/entity_runtime.hpp>
+#include <teaql/runtime/detail/read_hydration.hpp>
+#include <teaql/runtime/entity_query.hpp>
+#include <teaql/runtime/generated_dynamic_json.hpp>
+#include <teaql/runtime/generated_sample_data.hpp>
+#include <teaql/runtime/generated_service_executor.hpp>
+#include <teaql/runtime/entity_expression.hpp>
 #include <teaql/runtime/entity_runtime_debug.hpp>
 #include <teaql/runtime/graph_debug.hpp>
 #include <teaql/runtime/entity_save.hpp>
@@ -17,6 +24,11 @@
 #include <teaql/runtime/event.hpp>
 #include <teaql/runtime/event_debug.hpp>
 #include <teaql/runtime/generated_support.hpp>
+#include <teaql/runtime/generated_bootstrap.hpp>
+#include <teaql/runtime/generated_dynamic_fields.hpp>
+#include <teaql/runtime/generated_readonly_properties.hpp>
+#include <teaql/runtime/generated_checker.hpp>
+#include <teaql/runtime/generated_business_id.hpp>
 #include <teaql/runtime/i18n.hpp>
 #include <teaql/runtime/i18n_debug.hpp>
 #include <teaql/runtime/id.hpp>
@@ -32,6 +44,7 @@
 #include <teaql/runtime/mutation_policy.hpp>
 #include <teaql/runtime/mutation_policy_debug.hpp>
 #include <teaql/runtime/round_trip_reference.hpp>
+#include <teaql/runtime/document_round_trip.hpp>
 #include <teaql/runtime/reference_model_debug.hpp>
 #include <teaql/runtime/relation_model_debug.hpp>
 #include <teaql/runtime/registry_debug.hpp>
@@ -40,6 +53,40 @@
 #include <teaql/runtime/transaction.hpp>
 
 namespace teaql::runtime {
+using ::teaql::GeneratedDynamicJsonFormatError;
+using ::teaql::GeneratedServiceRuntimeExecutor;
+using ::teaql::apply_generated_dynamic_json;
+using ::teaql::apply_generated_dynamic_json_field;
+using ::teaql::apply_generated_dynamic_json_relation;
+using ::teaql::DocumentMutationKind;
+using ::teaql::DocumentRelationCompleteness;
+using ::teaql::DocumentEntitySnapshot;
+using ::teaql::DocumentRelationSnapshot;
+using ::teaql::DocumentSnapshot;
+using ::teaql::ContextualDocument;
+using ::teaql::SubmittedContextualDocument;
+using ::teaql::DocumentOpenRequest;
+using ::teaql::DocumentAcceptRequest;
+using ::teaql::AcceptedContextualDocument;
+using ::teaql::VerifiedDocumentSnapshot;
+using ::teaql::DocumentRoundTripError;
+using ::teaql::ContextBoundDocumentService;
+using ::teaql::DocumentResult;
+using ::teaql::DocumentMutationKinds;
+using ::teaql::DocumentFieldNames;
+
+using ::teaql::DatabaseDynamicFieldsProvider;
+using ::teaql::DynamicFieldBatch;
+using ::teaql::DynamicFieldsProvider;
+using ::teaql::InMemoryDynamicFieldsProvider;
+using ::teaql::decode_compact_rows_with_read_metadata;
+using ::teaql::GeneratedCheckerLogic;
+using ::teaql::GeneratedFieldChecks;
+using ::teaql::GeneratedDynamicFields;
+using ::teaql::GeneratedReadonlyProperties;
+using ::teaql::GeneratedRelationAccess;
+using ::teaql::GeneratedBusinessId;
+using ::teaql::GeneratedBusinessIdAccess;
 using ::teaql::BUSINESS_ID_V1_ALPHABET;
 using ::teaql::BUSINESS_ID_V1_WIDTH;
 using ::teaql::BusinessClock;
@@ -64,6 +111,9 @@ using ::teaql::FixEvidence;
 using ::teaql::FixEvidenceSource;
 using ::teaql::GeneratedSchemaBootstrap;
 using ::teaql::GeneratedSchemaBootstrapFuture;
+using ::teaql::generated_bootstrap_retryable_conflict;
+using ::teaql::run_generated_schema_bootstrap;
+using ::teaql::run_generated_bootstrap_model;
 using ::teaql::IdSetStore;
 using ::teaql::InMemoryContinuousPageCursorStore;
 using ::teaql::InMemoryDataStore;
@@ -94,6 +144,7 @@ using ::teaql::UNSAFE_RAW_ENTITY_REFERENCES_ACKNOWLEDGEMENT;
 using ::teaql::UNSAFE_RAW_ENTITY_REFERENCES_ENVIRONMENT;
 using ::teaql::ChangeSetStack;
 using ::teaql::EntityChangeSet;
+using ::teaql::DynamicFieldChanges;
 using ::teaql::EntityGraphBuilder;
 using ::teaql::EntityKey;
 using ::teaql::EntityRuntimeState;
@@ -227,6 +278,8 @@ using ::teaql::TeaqlRuntime;
 using ::teaql::AuditedSave;
 using ::teaql::PurposedQuery;
 using ::teaql::PurposedSelectQuery;
+using ::teaql::EntityQuery;
+using ::teaql::TypedEntityQueryStream;
 using ::teaql::execute_facets;
 using ::teaql::restrict_facet_to_outer_query;
 }
@@ -265,4 +318,11 @@ using ::teaql::LogFormatterFactory;
 using ::teaql::LogLevel;
 using ::teaql::LogConfig;
 using ::teaql::LogManager;
+}
+
+namespace teaql::runtime::dynamic_fields {
+using ::teaql::DatabaseDynamicFieldsProvider;
+using ::teaql::DynamicFieldBatch;
+using ::teaql::DynamicFieldsProvider;
+using ::teaql::InMemoryDynamicFieldsProvider;
 }

@@ -1,4 +1,5 @@
 #include <teaql/core/query.hpp>
+#include <teaql/core/request.hpp>
 #include <teaql/core/detail/text.hpp>
 #include <charconv>
 
@@ -178,7 +179,8 @@ IdSetPaginationOptions::IdSetPaginationOptions(std::allocator_arg_t,
 SelectQuery::SelectQuery(std::allocator_arg_t, Allocator a, std::string_view name)
     : entity(name, a.resource()), projection(a.resource()), expr_projection(a.resource()),
       order_by(a.resource()), aggregates(a.resource()), group_by_fields(a.resource()),
-      relations(a.resource()), trace_chain(a.resource()), raw_sql_search_criteria(a.resource()),
+      relations(a.resource()), facets(a.resource()), relation_aggregates(a.resource()),
+      trace_chain(a.resource()), raw_sql_search_criteria(a.resource()),
       dynamic_properties(a.resource()), raw_projections(a.resource()),
       object_group_bys(a.resource()), child_enhancements(a.resource()) {}
 
@@ -195,17 +197,28 @@ SelectQuery::SelectQuery(std::allocator_arg_t, Allocator a, const SelectQuery& o
     copy_items(aggregates, other.aggregates);
     copy_items(group_by_fields, other.group_by_fields);
     copy_items(relations, other.relations);
+    copy_items(facets, other.facets);
+    copy_items(relation_aggregates, other.relation_aggregates);
     copy_items(trace_chain, other.trace_chain);
     copy_items(raw_sql_search_criteria, other.raw_sql_search_criteria);
     copy_items(dynamic_properties, other.dynamic_properties);
     copy_items(raw_projections, other.raw_projections);
     copy_items(object_group_bys, other.object_group_bys);
     copy_items(child_enhancements, other.child_enhancements);
+    if (other.dynamic_property_definitions) {
+        dynamic_property_definitions = detail::make_box<DynamicPropertyDefinitions>(
+            a.resource(), *other.dynamic_property_definitions);
+    }
+    if (other.dynamic_field_selection) {
+        dynamic_field_selection =
+            detail::make_box<DynamicFieldSelection>(a.resource(), *other.dynamic_field_selection);
+    }
     clone_optional(search_text, a.resource(), other.search_text);
     clone_optional(predicate, a.resource(), other.predicate);
     clone_optional(having_predicate, a.resource(), other.having_predicate);
     clone_optional(partition_field, a.resource(), other.partition_field);
     clone_optional(comment_text, a.resource(), other.comment_text);
+    clone_optional(purpose_text, a.resource(), other.purpose_text);
     clone_optional(raw_sql_text, a.resource(), other.raw_sql_text);
     clone_optional(continuous_page_fetch, a.resource(), other.continuous_page_fetch);
     clone_optional(id_set_pagination, a.resource(), other.id_set_pagination);
@@ -221,7 +234,42 @@ SelectQuery& SelectQuery::operator=(SelectQuery&& other) {
 }
 
 SelectQuery::~SelectQuery() = default;
-bool SelectQuery::operator==(const SelectQuery&) const = default;
+
+bool SelectQuery::operator==(const SelectQuery& other) const {
+    if (bool(dynamic_property_definitions) != bool(other.dynamic_property_definitions) ||
+        (dynamic_property_definitions &&
+         *dynamic_property_definitions != *other.dynamic_property_definitions)) {
+        return false;
+    }
+    if (bool(dynamic_field_selection) != bool(other.dynamic_field_selection) ||
+        (dynamic_field_selection && *dynamic_field_selection != *other.dynamic_field_selection)) {
+        return false;
+    }
+    return hard_limit_value == other.hard_limit_value && entity == other.entity &&
+           projection == other.projection && expr_projection == other.expr_projection &&
+           search_text == other.search_text && predicate == other.predicate &&
+           having_predicate == other.having_predicate && order_by == other.order_by &&
+           slice == other.slice && partition_field == other.partition_field &&
+           top_n_probe_parent_threshold_value == other.top_n_probe_parent_threshold_value &&
+           aggregates == other.aggregates && group_by_fields == other.group_by_fields &&
+           relations == other.relations && facets == other.facets &&
+           relation_aggregates == other.relation_aggregates &&
+           aggregation_cache == other.aggregation_cache && comment_text == other.comment_text &&
+           purpose_text == other.purpose_text && trace_chain == other.trace_chain &&
+           raw_sql_text == other.raw_sql_text &&
+           raw_sql_search_criteria == other.raw_sql_search_criteria &&
+           dynamic_properties == other.dynamic_properties &&
+           raw_projections == other.raw_projections && object_group_bys == other.object_group_bys &&
+           child_enhancements == other.child_enhancements && stream_config == other.stream_config &&
+           continuous_page_fetch == other.continuous_page_fetch &&
+           id_set_pagination == other.id_set_pagination;
+}
+
+SelectQuery& SelectQuery::select_dynamic_fields(const DynamicFieldSelection& selection) {
+    auto replacement = detail::make_box<DynamicFieldSelection>(memory_resource(), selection);
+    dynamic_field_selection = std::move(replacement);
+    return *this;
+}
 
 SelectQuery SelectQuery::clone(Memory r) const {
     return SelectQuery(std::allocator_arg, Allocator(r), *this);
@@ -330,6 +378,7 @@ SelectQuery& SelectQuery::comment(std::string_view text) {
 
 SelectQuery& SelectQuery::purpose(std::string_view text) {
     trace_chain.emplace_back(TraceKind::Purpose, entity, text);
+    set_text(purpose_text, memory_resource(), text);
     return *this;
 }
 

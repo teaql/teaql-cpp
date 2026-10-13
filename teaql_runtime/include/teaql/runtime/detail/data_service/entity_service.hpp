@@ -3,6 +3,14 @@
 #include <teaql/runtime/relation.hpp>
 #include <teaql/runtime/purposed_query.hpp>
 #include <teaql/runtime/entity_status.hpp>
+#include <teaql/runtime/detail/ledger_execution_outcome.hpp>
+
+namespace teaql::detail {
+Result<SqlIntentRedactions, RuntimeError> graph_plan_privacy(const UserContext&,
+                                                             const GraphMutationPlan&);
+Result<SqlIntentRedactions, RuntimeError> entity_ledger_privacy(const UserContext&,
+                                                                const EntityRuntimeState&);
+}
 
 namespace teaql {
 namespace core {
@@ -19,6 +27,9 @@ void record_query_metadata(const UserContext&, SqlIntentRedactions*, const Execu
 // A stream is Context-owned. Copying this handle does not extend that lifetime.
 template <class Error>
 using EntityQueryStream = ResourceBorrow<QueryStream<DataServiceError<Error>>>;
+
+template <Entity T, class Error>
+using TypedEntityQueryStream = ResourceBorrow<AsyncStream<Result<T, DataServiceError<Error>>>>;
 
 template <class E>
 class EntityDataService {
@@ -40,6 +51,7 @@ public:
         : entity_(other.entity_, a.resource()),
           data_service_(std::allocator_arg, a, other.data_service_),
           trace_context_(other.trace_context_, a.resource()),
+          query_intent_(detail::clone_in(a.resource(), other.query_intent_)),
           query_log_intent_(other.query_log_intent_) {}
 
     EntityDataService(const EntityDataService&) = delete;
@@ -140,6 +152,13 @@ public:
     DataServiceOperationResult<SmartList<T>, DataServiceError<Error>>&
     fetch_enhanced_entities(const PurposedSelectQuery&) const;
     template <Entity T>
+    DataServiceOperationResult<std::optional<T>, DataServiceError<Error>>&
+    fetch_entity(const PurposedSelectQuery&) const;
+    template <Entity T>
+    DataServiceOperationResult<TypedEntityQueryStream<T, Error>, DataServiceError<Error>>&
+    fetch_entity_stream(const PurposedSelectQuery&) const
+        requires std::derived_from<E, StreamQueryExecutor<Error>>;
+    template <Entity T>
     DataServiceOperationResult<SmartList<T>, DataServiceError<Error>>&
     fetch_enhanced_entities_with_relation_aggregates(const PurposedSelectQuery&,
                                                      std::span<const RelationAggregate>) const;
@@ -233,6 +252,7 @@ private:
     String entity_;
     detail::ContextDataService<E> data_service_;
     TraceChain trace_context_;
+    std::optional<QueryIntent> query_intent_;
     // Present only on a private query tree, never on UserContext or a wire query.
     SqlIntentRedactions* query_log_intent_ = nullptr;
 
@@ -247,14 +267,52 @@ private:
         return context().entity_data_service_behavior(entity_);
     }
 
+    EntityDataService& with_query_intent(const QueryIntent& intent) & {
+        intent.require_valid();
+        query_intent_.emplace(std::allocator_arg, Allocator(memory_resource()), intent);
+        return *this;
+    }
+
+    Result<QueryIntent, RuntimeError> request_intent_for(const SelectQuery& query) const {
+        auto r = memory_resource();
+        using R = Result<QueryIntent, RuntimeError>;
+        if (query_intent_) {
+            return R::ok(r, detail::clone_in(r, *query_intent_));
+        }
+        auto intent = QueryIntent::from_optional(
+            r,
+            query.comment_text ? std::optional<std::string_view>(*query.comment_text)
+                               : std::nullopt,
+            query.purpose_text ? std::optional<std::string_view>(*query.purpose_text)
+                               : std::nullopt);
+        if (!intent) {
+            return R::err(r, RuntimeError::request_intent(r, intent.error()));
+        }
+        return R::ok(r, std::move(intent).value());
+    }
+
     Result<SelectQuery, RuntimeError> prepare_select_query(const SelectQuery& query) const {
-        return detail::prepare_select_query(context(), trace_context_, query);
+        auto r = memory_resource();
+        auto intent = request_intent_for(query);
+        if (!intent) {
+            return Result<SelectQuery, RuntimeError>::err(r, std::move(intent).error());
+        }
+        auto copied = detail::clone_in(r, query);
+        copied.comment_text.emplace(intent.value().comment(), r);
+        copied.purpose_text.emplace(intent.value().purpose(), r);
+        return detail::prepare_select_query(context(), trace_context_, copied);
     }
 
     EntityDataService scoped_data_service(std::string_view entity) const {
         auto r = memory_resource();
         EntityDataService scoped(
             std::allocator_arg, Allocator(r), context(), entity, data_service_.executor);
+        if (auto* mutation = data_service_.mutation_intent()) {
+            scoped.data_service_.with_mutation_intent(*mutation, data_service_.mutation_privacy());
+        }
+        if (query_intent_) {
+            scoped.with_query_intent(*query_intent_);
+        }
         if (query_log_intent_) {
             scoped.query_log_intent_ =
                 &context().template make<SqlIntentRedactions>(*query_log_intent_);
@@ -374,8 +432,7 @@ struct EntityDataServiceAccess {
     static auto execute_ledger_plan_internal(const EntityDataService<E>&,
                                              const EntityRuntimeState&,
                                              const std::pmr::map<EntityKey, ObjectLocation>&)
-        -> AsyncOperation<
-            Result<std::pmr::map<EntityKey, Value>, DataServiceError<typename E::Error>>>&;
+        -> AsyncOperation<Result<LedgerExecutionOutcome, DataServiceError<typename E::Error>>>&;
     template <class E>
     static Result<Vector<EntityKey>, RuntimeError>
     order_new_ledger_keys(const EntityDataService<E>&,
@@ -446,6 +503,11 @@ struct EntityDataServiceAccess {
     }
 
     template <class E>
+    static const DynamicFieldStore* dynamic_field_store(const EntityDataService<E>& service) {
+        return service.data_service_.executor.get().dynamic_field_store();
+    }
+
+    template <class E>
     static void extend_intent(const EntityDataService<E>& service,
                               const SqlIntentRedactions& value) {
         if (service.query_log_intent_) {
@@ -462,6 +524,68 @@ struct EntityDataServiceAccess {
                                                         const SelectQuery&,
                                                         std::span<const RelationAggregate>)
         -> AsyncOperation<Result<SmartList<T>, DataServiceError<typename E::Error>>>&;
+
+    template <class E>
+    static void bind_query_intent(EntityDataService<E>& service, const QueryIntent& intent) {
+        service.with_query_intent(intent);
+    }
+
+    template <class E>
+    static RuntimeHookResult bind_mutation_intent(EntityDataService<E>& service,
+                                                  std::optional<std::string_view> comment) {
+        auto r = service.memory_resource();
+        auto mutation = MutationIntent::from_optional(r, comment);
+        if (!mutation) {
+            return RuntimeHookResult::err(r, RuntimeError::request_intent(r, mutation.error()));
+        }
+        auto intent = QueryIntent::create(
+            r, mutation.value().comment(), "runtime: load state for an audited graph mutation");
+        service.with_query_intent(intent.value());
+        service.data_service_.with_mutation_intent(mutation.value(),
+                                                   service.data_service_.mutation_privacy());
+        return RuntimeHookResult::ok(r, {});
+    }
+
+    template <class E>
+    static RuntimeHookResult bind_mutation_privacy(EntityDataService<E>& service,
+                                                   const SqlIntentRedactions& redactions) {
+        auto r = service.memory_resource();
+        auto* intent = service.data_service_.mutation_intent();
+        if (!intent) {
+            RequestIntentError error(
+                std::allocator_arg, Allocator(r), RequestKind::Mutation, "comment");
+            return RuntimeHookResult::err(r, RuntimeError::request_intent(r, error));
+        }
+        auto& retained = service.context().template make<SqlIntentRedactions>(redactions);
+        service.data_service_.with_mutation_intent(*intent, &retained);
+        service.query_log_intent_ = &retained;
+        return RuntimeHookResult::ok(r, {});
+    }
+
+    template <class E>
+    static RuntimeHookResult bind_plan_privacy(EntityDataService<E>& service,
+                                               const GraphMutationPlan& plan) {
+        auto collected = graph_plan_privacy(service.context(), plan);
+        if (!collected) {
+            return RuntimeHookResult::err(service.memory_resource(), std::move(collected).error());
+        }
+        return bind_mutation_privacy(service, collected.value());
+    }
+
+    template <class E>
+    static RuntimeHookResult bind_ledger_privacy(EntityDataService<E>& service,
+                                                 const EntityRuntimeState& root) {
+        auto collected = entity_ledger_privacy(service.context(), root);
+        if (!collected) {
+            return RuntimeHookResult::err(service.memory_resource(), std::move(collected).error());
+        }
+        return bind_mutation_privacy(service, collected.value());
+    }
+
+    template <class E>
+    static auto request_intent(const EntityDataService<E>& service, const SelectQuery& query) {
+        return service.request_intent_for(query);
+    }
 
     template <class E>
     static auto prepare_select(const EntityDataService<E>& service, const SelectQuery& query) {
@@ -494,6 +618,14 @@ struct EntityDataServiceAccess {
                    ? std::optional<SqlIntentRedactions>(
                          clone_in(service.memory_resource(), *service.query_log_intent_))
                    : std::nullopt;
+    }
+
+    template <class E>
+    static void capture_readback_target(EntityDataService<E>& scoped, const Value& id) {
+        if (!scoped.query_log_intent_) {
+            scoped.query_log_intent_ = &scoped.context().template make<SqlIntentRedactions>();
+        }
+        scoped.query_log_intent_->capture_target_id(id);
     }
 
     template <class E>

@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "scope": "Five complete historical mutation/transaction saver input families, explicit missing intent preservation and source internal preparation order. Complete generated/configuration and explicit raw transaction intent matrices remain open.",
+  "source_observations": 4710,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 12,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "transaction_move_only_contracts",
+          "status": "run",
+          "seconds": 0.00185581
+        },
+        {
+          "name": "transaction_move_only_rust_parity",
+          "status": "run",
+          "seconds": 0.0460941
+        },
+        {
+          "name": "transaction_scope_context_contracts",
+          "status": "run",
+          "seconds": 0.0248765
+        },
+        {
+          "name": "transaction_scope_rust_parity",
+          "status": "run",
+          "seconds": 2.29899
+        },
+        {
+          "name": "audited_auto_save_context_contracts",
+          "status": "run",
+          "seconds": 0.00734599
+        },
+        {
+          "name": "audited_auto_save_rust_parity",
+          "status": "run",
+          "seconds": 1.58686
+        },
+        {
+          "name": "graph_saver_context_contracts",
+          "status": "run",
+          "seconds": 0.0123133
+        },
+        {
+          "name": "graph_saver_rust_parity",
+          "status": "run",
+          "seconds": 0.732352
+        },
+        {
+          "name": "runtime_mutation_context_contracts",
+          "status": "run",
+          "seconds": 0.00571954
+        },
+        {
+          "name": "runtime_mutation_reentrant_prepare",
+          "status": "run",
+          "seconds": 0.00188171
+        },
+        {
+          "name": "runtime_mutation_reentrant_event",
+          "status": "run",
+          "seconds": 0.00176441
+        },
+        {
+          "name": "runtime_mutation_rust_parity",
+          "status": "run",
+          "seconds": 0.843332
+        }
+      ]
+    },
+    "sanitize": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "transaction_scope_context_contracts",
+          "status": "run",
+          "seconds": 0.115623
+        },
+        {
+          "name": "audited_auto_save_context_contracts",
+          "status": "run",
+          "seconds": 0.0506943
+        },
+        {
+          "name": "graph_saver_context_contracts",
+          "status": "run",
+          "seconds": 0.0672066
+        },
+        {
+          "name": "runtime_mutation_context_contracts",
+          "status": "run",
+          "seconds": 0.0391839
+        }
+      ],
+      "leak_scan": false
+    },
+    "modules": {
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        {
+          "name": "module_runtime_mutation_context_contracts",
+          "status": "run",
+          "seconds": 0.00495306
+        }
+      ],
+      "canonical_bodies": 98
+    }
+  },
+  "corpora": {
+    "runtime_mutation": "1feda8a93af0c9e2ac2a72b089c57c28023f05e66c71176f632df5a36153c5ad",
+    "graph_saver": "bdd1d6333a3facdb4b41821e6f5815e9dafb3364873f6e4b9f7f52dfb4df9df2",
+    "audited_auto_save": "2c5a7a60718c492e068d28c6b4aab2ed7e298fff10f3bcaeda6f28068bfb7207",
+    "transaction_scope": "6b8e77f043fa690e6103f45ecaea4e5c32dc31edf1f490be76e66c7222e1c061",
+    "transaction_move_only": "3858ce25de85c031ab6dee17ba70c79345de7731530da5da921512fd3f0644b1"
+  },
+  "source_provenance_sha256": "cf9b2097331e9034d6a0b9f0e07c8fbdbf56eee04f1c8051675766e075a5b7f6",
+  "cpp_checkpoint_hashes": {
+    "teaql_runtime/include/teaql/runtime/detail/data_service/entity_mutation.hpp": "1add83821fd20aa38cc763e5efaad9765f0c175669e149cedb0d6c40e63eebed",
+    "teaql_provider_sqlite/tests/runtime_mutation_tests.cpp": "ac8714c5cdea1f88932b54269b386dfb9e9393b8cbaba7f7bf466abb554e8ba5",
+    "teaql_provider_sqlite/tests/audited_auto_save_tests.cpp": "72ad58e2c9e099ba2805dd25e01346db1ef1ca689458fad4650b453cdb4b88f2",
+    "tests/parity/transaction_scope_probe.cpp": "d96261a7f3c8c574b011d38d8a026730d59e908ad8753042077b14561b8bdda0"
+  }
+}

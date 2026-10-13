@@ -42,6 +42,7 @@ static void ledger_pipeline_and_retention() {
     state.allow_reads = true;
     state.rows.emplace_back();
     state.rows.back().emplace(String("id", r), Value(r, std::uint64_t(7)));
+    state.rows.back().emplace(String("version", r), Value(r, std::int64_t(3)));
     state.rows.back().emplace(String("name", r), Value(r, "database"));
     auto& checker = user->make_resource<audited_fixture::Checker>(state, "fill");
     auto& registry = user->make<InMemoryCheckerRegistry>();

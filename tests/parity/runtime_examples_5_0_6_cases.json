@@ -1,0 +1,61 @@
+{
+  "baseline": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "note": "Unchanged locked Rust example models and original business operations; the driver supplies required query comments at caller entry. This does not claim the unchanged stock example binaries accept missing request intent.",
+  "source_hashes": {
+    ".reference/teaql-rs/examples/src/lib.rs": "f299e3f045a6bf38c7be2fcb22ac89f9c33af4c9204cc38c780cefafb9f9c9cd",
+    ".reference/teaql-rs/examples/src/bin/sqlite_schema_crud.rs": "0a7a0d3f82c69649ba4389229f0ee17106a21fcb853cca319d4a617dfdbdd23e",
+    ".reference/teaql-rs/examples/src/bin/sqlite_relations_graph.rs": "cbf7b1005fb578e28554e7b48824aedbf510a08d1b64db389311ee654c6408df",
+    "tests/parity/rust_field_layout/src/bin/runtime_examples_5_0_6.rs": "f347fb7216263524f92c11ea5dbda1fbb13156043b65cc7cfc40ac7395eaaca4"
+  },
+  "cases": [
+    {
+      "input": {
+        "mode": "schema"
+      },
+      "expected": [
+        {
+          "id": 1,
+          "lines": [],
+          "lines_loaded": false,
+          "name": "submitted",
+          "version": -3
+        }
+      ]
+    },
+    {
+      "input": {
+        "mode": "relations"
+      },
+      "expected": [
+        {
+          "id": 1,
+          "lines": [
+            {
+              "id": 10,
+              "name": "first-line",
+              "order_id": 1,
+              "product": {
+                "id": 100,
+                "name": "keyboard"
+              },
+              "product_id": 100
+            },
+            {
+              "id": 11,
+              "name": "second-line",
+              "order_id": 1,
+              "product": {
+                "id": 101,
+                "name": "mouse"
+              },
+              "product_id": 101
+            }
+          ],
+          "lines_loaded": true,
+          "name": "graph-order",
+          "version": 1
+        }
+      ]
+    }
+  ]
+}

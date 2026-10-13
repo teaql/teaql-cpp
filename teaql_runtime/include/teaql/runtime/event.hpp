@@ -3,6 +3,7 @@
 #include <teaql/runtime/mutation_governance.hpp>
 #include <teaql/runtime/error.hpp>
 #include <teaql/runtime/resources.hpp>
+#include <teaql/data_service/sql_log.hpp>
 #include <span>
 
 namespace teaql {
@@ -133,8 +134,10 @@ struct SafeAuditEvent {
     using allocator_type = Allocator;
     RawAuditEventKind kind;
     String entity;
+    std::optional<std::uint64_t> entity_id;
     Vector<SafeAuditField> fields;
     TraceChain trace_chain;
+    std::optional<BootstrapAuditIdentity> bootstrap_audit;
     std::optional<MutationGovernanceSnapshot> mutation_governance;
 
     SafeAuditEvent(std::allocator_arg_t,
@@ -145,8 +148,9 @@ struct SafeAuditEvent {
           trace_chain(a.resource()) {}
 
     SafeAuditEvent(std::allocator_arg_t, Allocator a, const SafeAuditEvent& other)
-        : kind(other.kind), entity(other.entity, a.resource()), fields(other.fields, a.resource()),
-          trace_chain(other.trace_chain, a.resource()),
+        : kind(other.kind), entity(other.entity, a.resource()), entity_id(other.entity_id),
+          fields(other.fields, a.resource()), trace_chain(other.trace_chain, a.resource()),
+          bootstrap_audit(detail::clone_in(a.resource(), other.bootstrap_audit)),
           mutation_governance(detail::clone_in(a.resource(), other.mutation_governance)) {}
 
     SafeAuditEvent(std::allocator_arg_t, Allocator a, SafeAuditEvent&& other)
@@ -192,7 +196,8 @@ struct RawAuditEvent {
           new_values(detail::clone_in(a.resource(), other.new_values)),
           changes(other.changes, a.resource()), trace_chain(other.trace_chain, a.resource()),
           bootstrap_audit(detail::clone_in(a.resource(), other.bootstrap_audit)),
-          mutation_governance(detail::clone_in(a.resource(), other.mutation_governance)) {}
+          mutation_governance(detail::clone_in(a.resource(), other.mutation_governance)),
+          diagnostic_redactions_(detail::clone_in(a.resource(), other.diagnostic_redactions_)) {}
 
     RawAuditEvent(std::allocator_arg_t, Allocator a, RawAuditEvent&& other)
         : RawAuditEvent(detail::move_to(a.resource(), std::move(other))) {}
@@ -209,6 +214,24 @@ struct RawAuditEvent {
     }
 
     bool operator==(const RawAuditEvent&) const = default;
+
+    const SqlIntentRedactions* diagnostic_redactions() const {
+        return diagnostic_redactions_ ? &*diagnostic_redactions_ : nullptr;
+    }
+
+    // Trusted invocation provenance is copied into this event's explicit scope.
+    void with_diagnostic_redactions(const SqlIntentRedactions* source) {
+        if (source == diagnostic_redactions()) {
+            return;
+        }
+        if (source) {
+            auto copy = detail::clone_in(memory_resource(), *source);
+            diagnostic_redactions_ = std::move(copy);
+        } else {
+            diagnostic_redactions_.reset();
+        }
+    }
+
     static RawAuditEvent created(Memory, std::string_view, const Record&);
     static RawAuditEvent updated(Memory, std::string_view, const Record&);
     static RawAuditEvent updated_with_old_values(Memory,
@@ -234,6 +257,9 @@ struct RawAuditEvent {
         data_seeded(Memory, std::string_view, std::string_view, std::size_t, std::size_t);
     SafeAuditEvent
         build_safe_event(Memory, std::span<const String>, std::optional<std::size_t>) const;
+
+private:
+    std::optional<SqlIntentRedactions> diagnostic_redactions_;
 };
 
 std::pair<String, bool> limit_audit_value(Memory, std::string_view, std::size_t);

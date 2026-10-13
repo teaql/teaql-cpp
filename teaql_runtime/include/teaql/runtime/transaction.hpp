@@ -1,6 +1,7 @@
 #pragma once
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/memory/once_function.hpp>
+#include <teaql/runtime/detail/commit_audit.hpp>
 
 namespace teaql {
 namespace detail {
@@ -313,23 +314,28 @@ public:
     template <class F>
     ScopeExecution(std::allocator_arg_t, Allocator a, TransactionScope<E>& scope, F&& callback)
         : scope_(std::allocator_arg, a, scope, resource_arena(a.resource())),
-          callback_(std::allocator_arg, a, std::forward<F>(callback)) {}
+          callback_(std::allocator_arg, a, std::forward<F>(callback)),
+          audits_(std::allocator_arg, a, scope.context()) {}
 
     std::optional<R> poll(WakeSignal& wake) {
         auto& scope = scope_.get();
         auto r = scope.context().memory_resource();
         if (!terminal_) {
-            if (!child_) {
-                auto& child = callback_(scope);
-                if (child.memory_resource() != r) {
-                    child.cancel();
-                    throw std::invalid_argument(
-                        "Transaction callback result must belong to its UserContext");
+            const R* result;
+            {
+                AuditActivation active(scope.context(), audits_);
+                if (!child_) {
+                    auto& child = callback_(scope);
+                    if (child.memory_resource() != r) {
+                        child.cancel();
+                        throw std::invalid_argument(
+                            "Transaction callback result must belong to its UserContext");
+                    }
+                    child_ = &child;
                 }
-                child_ = &child;
+                forwarding_.attach(child_->wake_signal(), wake);
+                result = child_->poll();
             }
-            forwarding_.attach(child_->wake_signal(), wake);
-            auto* result = child_->poll();
             if (!result) {
                 return {};
             }
@@ -369,12 +375,17 @@ public:
             return R::err(r, clone_in(r, *error_));
         }
         TransactionScopeAccess::committed(scope);
+        auto delivered = deliver_committed_audits(scope.context(), std::move(audits_.events));
+        if (!delivered) {
+            return R::err(r, std::move(delivered).error());
+        }
         return R::ok(r, std::move(*saved_));
     }
 
     void finish_and_wait() noexcept {
         forwarding_.reset();
         TransactionScopeAccess::abandon(scope_.get());
+        audits_.events.clear();
     }
 
     void cancel_and_wait() noexcept {
@@ -386,11 +397,13 @@ public:
             terminal_->cancel();
         }
         TransactionScopeAccess::abandon(scope_.get());
+        audits_.events.clear();
     }
 
 private:
     ResourceBorrow<TransactionScope<E>> scope_;
     Callback callback_;
+    PendingAuditBatch audits_;
     AsyncOperation<R>* child_ = nullptr;
     AsyncOperation<Result<std::monostate, Error>>* terminal_ = nullptr;
     std::optional<T> saved_;

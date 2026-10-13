@@ -227,9 +227,9 @@ static void topn_005_007_window_and_probes_preserve_results_and_predicates() {
         .limit(3)
         .partition_by("order_id");
     auto execute = [&](SelectQuery query) -> const Vector<CompactRow>& {
+        query.comment("TOPN plan equivalence").purpose("compare partition execution plans");
         QueryRequest request(
             std::allocator_arg, Allocator(f.resource), std::move(query), false, false);
-        request.comment.emplace("TOPN plan equivalence", f.resource);
         const auto& result = f.executor.query(f.resource, std::move(request)).wait();
         check(bool(result), "original actual query executor TOPN path succeeds");
         return result.value().rows;

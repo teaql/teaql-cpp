@@ -45,21 +45,7 @@ void write_debug(DebugWriter& writer, const RelationHandle<T>& value) {
     });
 }
 
-inline void write_debug(DebugWriter& writer, const EntityChangeSet& value) {
-    writer.structure("EntityChangeSet", [&](auto& fields) {
-        fields.field("changes", [&](auto& out) {
-            out.sequence(
-                value.changes(),
-                [](auto& inner, const auto& entry) {
-                    write_debug(inner, entry.first);
-                    inner.raw(": ");
-                    write_debug(inner, entry.second);
-                },
-                "{",
-                "}");
-        });
-    });
-}
+void write_debug(DebugWriter&, const EntityChangeSet&);
 
 inline void write_debug(DebugWriter& writer, const LedgerCompositionError& value) {
     switch (value.kind) {
@@ -68,6 +54,13 @@ inline void write_debug(DebugWriter& writer, const LedgerCompositionError& value
         return;
     case LedgerCompositionError::Kind::MissingSourceState:
         writer.raw("MissingSourceState");
+        return;
+    case LedgerCompositionError::Kind::ConflictingDynamicDefinitions:
+        writer.structure("ConflictingDynamicDefinitions", [&](auto& fields) {
+            fields.field("entity", [&](auto& out) {
+                out.text(value.entity);
+            });
+        });
         return;
     case LedgerCompositionError::Kind::ConflictingOriginalVersion:
         writer.structure("ConflictingOriginalVersion", [&](auto& fields) {

@@ -13,7 +13,7 @@ The runtime remains C++20 with SQLite as the sole database dependency.
 | CMake | 4.4.4 | Configuration, module scanning coordination and CTest |
 | Ninja | 1.13.2 | Build execution and dynamic module dependencies |
 | OpenWrt ath79/nand | 25.12.5, GCC 14.3.0, musl | MIPS74K cross compilation |
-| SQLite MIPS archive | 3.53.2, rebuilt using GCC 14.3 | Existing matched-engine provider source |
+| SQLite native/MIPS archives | 3.53.2, rebuilt using native Clang 23 / MIPS GCC 14.3 | One locked amalgamation and separate architecture archives |
 | clang-format | 18.1.8 | Independently pinned project formatting tool |
 
 The selection and archive hashes are in `toolchains.lock.json`. Downloads and
@@ -109,7 +109,7 @@ WNDR4300 execution remains deferred.
 
 SQLite source and its target archive are installed by setup. Its version matches
 the existing supported target source, while the archive is regenerated with the
-new cross compiler. The native provider continues using system SQLite. Runtime,
+new cross compiler. The native/sanitize/module presets now use the host archive built from the same locked SQLite 3.53.2 source. System SQLite 3.37.2 lacked SQL error offsets and produced weaker diagnostics than the fixed Rust engine; it is not the current development-profile dependency. Runtime,
 SQL transport/executor and concrete SQLite provider remain independent layers.
 
 ## Modules qualification
@@ -132,3 +132,5 @@ layers and has 427 nonempty object dependency records. Pre/post builds report no
 work after regenerating direct layer metadata. Final sanitizer leak scanning is
 disabled; physical-device execution remains deferred. Historical 0.0.1 parity
 results remain separate from this new-toolchain checkpoint.
+
+Native SQLite setup uses `python3 scripts/toolchains/setup_native_sqlite.py` (also invoked by normal setup). `--check` verifies the source hash and archive provenance. The native archive lives under `lib_native`, separate from the unchanged MIPS `lib` archive. Native presets pin both header and library paths; reconfigure existing native/sanitize/module builds after updating the profile. No new download or runtime dependency is introduced.

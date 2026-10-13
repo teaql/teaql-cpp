@@ -6,6 +6,7 @@ namespace isolated_teaql_memory_teaql {
 using ::teaql::AllocationStats;
 using ::teaql::Allocator;
 using ::teaql::Arena;
+using ::teaql::ArenaBorrow;
 using ::teaql::BytesRef;
 using ::teaql::ContextBox;
 using ::teaql::ContextFunction;

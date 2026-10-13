@@ -1,0 +1,258 @@
+[
+  {
+    "index": 220,
+    "input": {
+      "mode": "flat",
+      "parents": [
+        {
+          "id": {
+            "kind": "u64",
+            "value": "1"
+          },
+          "ref": {
+            "kind": "u64",
+            "value": "10"
+          }
+        },
+        {
+          "id": {
+            "kind": "u64",
+            "value": "2"
+          },
+          "ref": {
+            "kind": "u64",
+            "value": "10"
+          }
+        },
+        {
+          "id": {
+            "kind": "u64",
+            "value": "3"
+          },
+          "ref": {
+            "kind": "u64",
+            "value": "11"
+          }
+        }
+      ],
+      "plans": [
+        {
+          "name": "children",
+          "target": "Child",
+          "local": "ref",
+          "foreign": "id",
+          "many": false,
+          "query": {
+            "entity": "Child",
+            "comment": "Inspect historical relation hydration",
+            "purpose": "Qualify complete original query and graph execution"
+          }
+        }
+      ],
+      "responses": [
+        [
+          {
+            "id": {
+              "kind": "u64",
+              "value": "10"
+            }
+          },
+          {
+            "id": {
+              "kind": "u64",
+              "value": "20"
+            }
+          }
+        ]
+      ],
+      "metadata": [
+        {
+          "entity": "Child",
+          "name": "back",
+          "target": "Parent",
+          "local": "id",
+          "foreign": "ref",
+          "many": false
+        }
+      ],
+      "register": [
+        "Parent",
+        "Child",
+        "Leaf"
+      ],
+      "pending": 0,
+      "polls": 20,
+      "fail_at": 0,
+      "probes": false
+    },
+    "rust": {
+      "calls": [
+        {
+          "comment": "Inspect historical relation hydration",
+          "depth": 0,
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"id\"), op: In, right: Value(List([U64(10), U64(11)])) }",
+          "purpose": "Qualify complete original query and graph execution",
+          "relations": [],
+          "trace": [
+            {
+              "comment": "root request",
+              "entity": "Parent"
+            },
+            {
+              "comment": "Parent.children",
+              "entity": "children"
+            }
+          ]
+        }
+      ],
+      "capabilities": 1,
+      "depth": 0,
+      "drops": 1,
+      "entities": [
+        {
+          "id": 10,
+          "kind": 1,
+          "row": {
+            "id": "U64(10)"
+          }
+        }
+      ],
+      "entity_count": 1,
+      "events": [],
+      "ledger": [
+        0,
+        1,
+        2
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "ref": "U64(10)"
+        },
+        {
+          "id": "U64(2)",
+          "ref": "U64(10)"
+        },
+        {
+          "id": "U64(3)",
+          "ref": "U64(11)"
+        }
+      ],
+      "relation_count": 2,
+      "relations": [
+        {
+          "id": 10,
+          "kind": 0,
+          "mode": "option",
+          "name": "back",
+          "owner": "Child",
+          "rows": {
+            "id": "U64(2)",
+            "ref": "U64(10)"
+          }
+        },
+        {
+          "id": 3,
+          "kind": 1,
+          "mode": "option",
+          "name": "children",
+          "owner": "Parent",
+          "rows": {
+            "id": "U64(11)"
+          }
+        }
+      ]
+    },
+    "cpp": {
+      "calls": [
+        {
+          "comment": "Inspect historical relation hydration",
+          "depth": 0,
+          "entity": "Child",
+          "filter": "Binary { left: Column(\"id\"), op: In, right: Value(List([U64(10), U64(11)])) }",
+          "purpose": "Qualify complete original query and graph execution",
+          "relations": [],
+          "trace": [
+            {
+              "comment": "root request",
+              "entity": "Parent"
+            },
+            {
+              "comment": "Parent.children",
+              "entity": "children"
+            }
+          ]
+        }
+      ],
+      "capabilities": 1,
+      "depth": 0,
+      "drops": 1,
+      "entities": [
+        {
+          "id": 10,
+          "kind": 1,
+          "row": {
+            "id": "U64(10)"
+          }
+        }
+      ],
+      "entity_count": 1,
+      "events": [],
+      "ledger": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "parents": [
+        {
+          "id": "U64(1)",
+          "ref": "U64(10)"
+        },
+        {
+          "id": "U64(2)",
+          "ref": "U64(10)"
+        },
+        {
+          "id": "U64(3)",
+          "ref": "U64(11)"
+        }
+      ],
+      "relation_count": 3,
+      "relations": [
+        {
+          "id": 10,
+          "kind": 0,
+          "mode": "option",
+          "name": "back",
+          "owner": "Child",
+          "rows": {
+            "id": "U64(1)",
+            "ref": "U64(10)"
+          }
+        },
+        {
+          "id": 2,
+          "kind": 1,
+          "mode": "option",
+          "name": "children",
+          "owner": "Parent",
+          "rows": {
+            "id": "U64(10)"
+          }
+        },
+        {
+          "id": 3,
+          "kind": 1,
+          "mode": "option",
+          "name": "children",
+          "owner": "Parent",
+          "rows": {
+            "id": "U64(11)"
+          }
+        }
+      ]
+    }
+  }
+]

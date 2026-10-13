@@ -22,6 +22,40 @@ ExecutionMetadata mutation_metadata(Memory,
                                     const MutationRequest&,
                                     DataServiceOperation);
 
+// Immutable Context-owned batch ancestry; pointers never extend a Context lifetime.
+struct BatchIntentScope {
+    using allocator_type = Allocator;
+    const BatchIntentScope* parent;
+    MutationIntent intent;
+
+    BatchIntentScope(std::allocator_arg_t,
+                     Allocator a,
+                     const BatchIntentScope* parent,
+                     const MutationIntent& intent)
+        : parent(parent), intent(std::allocator_arg, a, intent) {}
+};
+
+TraceChain mutation_statement_trace(Memory, const MutationRequest&, const BatchIntentScope*);
+SqlIntentRedactions
+batch_mutation_redactions(Memory, const MutationRequest&, const SchemaProvider&);
+
+struct MutationExecutionScope {
+    using allocator_type = Allocator;
+    MutationIntent root_intent;
+    const BatchIntentScope* batch = nullptr;
+    const SqlIntentRedactions* redactions;
+
+    MutationExecutionScope(std::allocator_arg_t,
+                           Allocator a,
+                           const MutationIntent& intent,
+                           const SqlIntentRedactions& redactions)
+        : root_intent(std::allocator_arg, a, intent), redactions(&redactions) {}
+
+    MutationExecutionScope(std::allocator_arg_t, Allocator a, const MutationExecutionScope& other)
+        : root_intent(std::allocator_arg, a, other.root_intent), batch(other.batch),
+          redactions(other.redactions) {}
+};
+
 template <class E>
 class ObservedSqlTransport;
 
@@ -40,11 +74,11 @@ public:
     std::optional<Output> poll(WakeSignal& wake) {
         try {
             if (!pending_) {
-                if (owner_.observer) {
-                    if constexpr (std::same_as<T, std::uint64_t>) {
-                        owner_.intent = SqlIntentRedactions::from_bindings(
-                            resource_, query_.log_context, query_.params, query_.sql);
-                    }
+                if constexpr (std::same_as<T, std::uint64_t>) {
+                    owner_.intent = SqlIntentRedactions::from_bindings(
+                        resource_, query_.log_context, query_.params, query_.sql);
+                }
+                if (owner_.observer || !std::same_as<T, std::uint64_t>) {
                     diagnostic_.emplace(std::allocator_arg,
                                         Allocator(resource_),
                                         owner_.metadata(query_,
@@ -83,8 +117,11 @@ public:
                         metadata->affected_rows = value;
                     } else {
                         metadata->result_count = value.size();
+                        owner_.successful_readbacks.emplace_back(*metadata);
                     }
-                    (*owner_.observer)(std::move(*metadata));
+                    if (owner_.observer) {
+                        (*owner_.observer)(std::move(*metadata));
+                    }
                 }
             }
             return Output::ok(resource_, std::move(value));
@@ -137,26 +174,49 @@ public:
     DataServiceOperation operation;
     std::optional<ExecutionObserver> observer;
     SqlIntentRedactions intent;
+    TraceChain statement_trace;
+    String root_comment;
+    const SqlIntentRedactions* inherited_redactions;
+    Vector<ExecutionMetadata> successful_readbacks;
 
     ObservedSqlTransport(std::allocator_arg_t,
                          Allocator a,
                          SqlTransport<E>& inner,
                          const SqlDialect& dialect,
                          const MutationRequest& request,
-                         std::optional<ExecutionObserver> observer)
+                         std::optional<ExecutionObserver> observer,
+                         const MutationExecutionScope& scope)
         : inner(inner), backend(mutation_backend_name(dialect), a.resource()), request(request),
           operation(mutation_operation(request)),
-          observer(move_in(a.resource(), std::move(observer))), intent(a.resource()) {}
+          observer(move_in(a.resource(), std::move(observer))), intent(a.resource()),
+          statement_trace(mutation_statement_trace(a.resource(), request, scope.batch)),
+          root_comment(scope.root_intent.comment(), a.resource()),
+          inherited_redactions(scope.redactions), successful_readbacks(a.resource()) {}
 
     ExecutionMetadata metadata(const CompiledQuery& query, DataServiceOperation op) const {
         auto r = intent.memory_resource();
         auto m = mutation_metadata(r, backend, query, request, op);
+        m.trace_chain = clone_in(r, statement_trace);
+        m.comment.emplace(root_comment, r);
         if (op == DataServiceOperation::Query) {
+            TraceChain trace(r);
+            auto root = statement_trace.empty()
+                            ? std::string_view("unknown")
+                            : std::string_view(statement_trace.front().entity_type);
+            trace.emplace_back(TraceKind::Comment, root, root_comment);
+            trace.emplace_back(TraceKind::Purpose, root, "verify the persisted mutation result");
+            for (const auto& node : statement_trace) {
+                if (node.kind != TraceKind::Comment && node.kind != TraceKind::Purpose) {
+                    trace.emplace_back(node);
+                }
+            }
+            m.trace_chain.swap(trace);
             m.sql_log.intent_redactions = clone_in(r, intent);
         }
         if (auto* id = mutation_target_id(request)) {
             m.sql_log.intent_redactions.capture_target_id(*id);
         }
+        m.sql_log.intent_redactions.extend(*inherited_redactions);
         return m;
     }
 
@@ -189,11 +249,12 @@ public:
                           MutationRequest request,
                           bool readback,
                           std::optional<ExecutionObserver> observer,
-                          std::optional<Expr> guard = {})
+                          std::optional<Expr> guard,
+                          const MutationExecutionScope& scope)
         : resource_(a.resource()), dialect_(dialect), transport_(transport), schema_(schema),
           cache_(cache), request_(std::allocator_arg, a, std::move(request)), readback_(readback),
           observer_(move_in(a.resource(), std::move(observer))),
-          guard_(move_in(a.resource(), std::move(guard))) {}
+          guard_(move_in(a.resource(), std::move(guard))), scope_(std::allocator_arg, a, scope) {}
 
     std::optional<Output> poll(WakeSignal& wake) {
         try {
@@ -266,6 +327,15 @@ public:
             if (guard_) {
                 metadata_->backend = mutation_backend_name(dialect_);
             }
+            if (!observed_->successful_readbacks.empty()) {
+                auto write = clone_in(resource_, *metadata_);
+                metadata_->statements.clear();
+                metadata_->statements.emplace_back(std::move(write));
+                for (const auto& readback : observed_->successful_readbacks) {
+                    metadata_->statements.emplace_back(readback);
+                }
+                observed_->successful_readbacks.clear();
+            }
             MutationResult result(std::allocator_arg,
                                   Allocator(resource_),
                                   *metadata_->affected_rows,
@@ -320,6 +390,11 @@ private:
             metadata_.emplace(
                 std::allocator_arg, Allocator(resource_), DataServiceOperation::Batch, now, now);
             metadata_->affected_rows = 0;
+            metadata_->comment.emplace(scope_.root_intent.comment(), resource_);
+            if (!scope_.batch || scope_.batch->intent.comment() != request_.comment()) {
+                scope_.batch = &async_arena(resource_).template make<BatchIntentScope>(
+                    scope_.batch, request_.intent());
+            }
             return;
         }
         if (guard_ && std::holds_alternative<InsertCommand>(request_.data)) {
@@ -340,12 +415,12 @@ private:
         // compiling the statement; ordinary leaves compile before capture.
         if (guard_) {
             observed_ = &async_arena(resource_).template make<ObservedSqlTransport<E>>(
-                transport_, dialect_, request_, observer_);
+                transport_, dialect_, request_, observer_, scope_);
         }
         compiled_.emplace(compile_mutation(resource_, dialect_, *entity_, request_, guard_));
         if (!observed_) {
             observed_ = &async_arena(resource_).template make<ObservedSqlTransport<E>>(
-                transport_, dialect_, request_, observer_);
+                transport_, dialect_, request_, observer_, scope_);
         }
         metadata_.emplace(guard_ ? mutation_metadata(resource_,
                                                      std::string_view{},
@@ -353,6 +428,11 @@ private:
                                                      request_,
                                                      mutation_operation(request_))
                                  : observed_->metadata(*compiled_, mutation_operation(request_)));
+        if (guard_) {
+            metadata_->trace_chain = clone_in(resource_, observed_->statement_trace);
+            metadata_->comment.emplace(scope_.root_intent.comment(), resource_);
+            metadata_->sql_log.intent_redactions.extend(*scope_.redactions);
+        }
         write_ = &observed_->execute_sql(resource_, *compiled_);
     }
 
@@ -367,7 +447,9 @@ private:
                     cache_,
                     clone_in(resource_, batch[index_]),
                     readback_,
-                    observer_);
+                    observer_,
+                    std::optional<Expr>{},
+                    scope_);
             }
             forwarding_.attach(child_->wake_signal(), wake);
             auto* result = child_->poll();
@@ -416,6 +498,7 @@ private:
     bool readback_, initialized_ = false;
     std::optional<ExecutionObserver> observer_;
     std::optional<Expr> guard_;
+    MutationExecutionScope scope_;
     const EntityDescriptor* entity_ = nullptr;
     ObservedSqlTransport<E>* observed_ = nullptr;
     std::optional<CompiledQuery> compiled_;
@@ -451,7 +534,13 @@ public:
     std::optional<Output> poll(WakeSignal& wake) {
         try {
             if (!pending_) {
+                request_.require_valid_intent();
                 journal_ = &async_arena(resource_).template make<FailureJournal>(observer_);
+                auto redactions = batch_mutation_redactions(resource_, request_, schema_);
+                auto& retained = async_arena(resource_).template make<SqlIntentRedactions>(
+                    std::move(redactions));
+                MutationExecutionScope scope(
+                    std::allocator_arg, Allocator(resource_), request_.intent(), retained);
                 pending_ = &make_operation<Output, MutationTreeOperation<E>>(resource_,
                                                                              dialect_,
                                                                              transport_,
@@ -460,7 +549,8 @@ public:
                                                                              std::move(request_),
                                                                              readback_,
                                                                              journal_->recorder(),
-                                                                             std::move(guard_));
+                                                                             std::move(guard_),
+                                                                             scope);
             }
             forwarding_.attach(pending_->wake_signal(), wake);
             auto* result = pending_->poll();

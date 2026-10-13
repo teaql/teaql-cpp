@@ -1,0 +1,21 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 2032,
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/loaded_row_graph_5_0_6.rs",
+  "driver_sha256": "6cdefb1c30a6eb9a7acff5f110a293df9ecc150475eb65fd40837da188d528cd",
+  "corpus_sha256": "69204e51320d0c4a83d65e50993806a3d72d09e7ec864a274bf4111729d910c9",
+  "scope": "Complete original attach_flat_relation_graph and recursive flatten_relation_graph via append-only direct bridge; actual original Context registry and read metadata conversion. No mocked/reconstructed Rust algorithm. Executor methods panic on any I/O access.",
+  "controls": "Cardinality, forward/reverse keys, seven plain payload shapes, absent/populated/empty loaded cache, facets, nested loaded rows, decoder presence, valid/missing/invalid owner IDs; added sibling identity views and child decode/ID errors.",
+  "outcomes": {
+    "success": 1594,
+    "Parent: Facet owner is missing its u64 id": 96,
+    "Parent: forward relation owner is missing its u64 id": 8,
+    "Parent: loaded reverse relation owner is missing its u64 id": 328,
+    "Child: model decode failed": 4,
+    "Child: loaded relation is missing its u64 id": 2
+  },
+  "initial_differences": 856,
+  "observations": "Complete final rows, source-shaped relation markers, remaining loaded caches, typed lists/options, table/edge projections, full recursive facet metadata and errors. An attach failure does not return the private partial graph; no invented partial-graph projection.",
+  "metadata_contract": "Original flatten preserves only the outer loaded-list facets, reconstructing relation total_count/summary/aggregations/load state from SmartList::new. Facet SmartLists themselves retain all their metadata. The earlier source audit incorrectly described complete SmartList retention; corrected with actual source observations.",
+  "remaining": "Dynamic/JSON view coordinates, all original historical hydration configurations, protected SQL/privacy and generated facet model surfaces remain open."
+}

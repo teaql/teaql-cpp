@@ -3,6 +3,7 @@
 #include <teaql/provider_sqlite/provider.hpp>
 #include <teaql/provider_sqlite/dialect.hpp>
 #include <teaql/sql/executor.hpp>
+#include <algorithm>
 #include <iostream>
 using namespace teaql;
 
@@ -75,6 +76,8 @@ struct NativeBody {
         }
         if (!read) {
             SelectQuery query(std::allocator_arg, Allocator(r), "Order");
+            query.comment("Inspect move-only transaction save")
+                .purpose("Verify uncommitted ledger row");
             read = &scope.query(QueryRequest(std::allocator_arg, Allocator(r), query, true, true));
         }
         forwarding.attach(read->wake_signal(), wake);
@@ -98,8 +101,10 @@ struct NativeBody {
             UpdateCommand command(std::allocator_arg, Allocator(r), "Order", std::uint64_t(7));
             command.values.fields.emplace(String("name", r), Value(r, "raw"));
             command.expected_version(4);
-            write = &scope.mutate(
-                MutationRequest(std::allocator_arg, Allocator(r), std::move(command)));
+            write = &scope.mutate(MutationRequest(std::allocator_arg,
+                                                  Allocator(r),
+                                                  std::move(command),
+                                                  "raw update inside transaction scope"));
         }
         forwarding.attach(write->wake_signal(), wake);
         auto* result = write->poll();
@@ -111,8 +116,19 @@ struct NativeBody {
         }
         check(result->value().affected_rows == 1,
               "scope provider-neutral mutation uses the active connection");
-        check(scope.context().sql_logs().size() == 2,
-              "successful SQL mutation returns metadata without duplicate observer notification");
+        auto logs = scope.context().sql_logs();
+        check(
+            logs.size() == 3 &&
+                std::ranges::count_if(logs,
+                                      [](const auto& log) {
+                                          return log.operation == SqlLogOperation::Select;
+                                      }) == 2 &&
+                std::ranges::count_if(logs,
+                                      [](const auto& log) {
+                                          return log.operation == SqlLogOperation::Update;
+                                      }) == 1 &&
+                result->value().persisted_snapshot,
+            "mutation plus authoritative readback add two distinct logs without duplicate notification");
         return Output::ok(r, std::move(*entity));
     }
 

@@ -1,0 +1,11 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Historical graph observer attempted to inspect a prepared UpdateCommand through the old MutationRequest enum. Versioned observer now inspects the actual command; no synthetic intent or execution is introduced.",
+  "errors": [
+    {
+      "code": "E0599",
+      "message": "no associated function or constant named `Update` found for struct `teaql_data_service::MutationRequest` in the current scope",
+      "location": "src/bin/graph_execution_5_0_6.rs:77:195"
+    }
+  ]
+}

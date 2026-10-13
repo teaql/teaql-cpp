@@ -595,6 +595,7 @@ String SqlDialect::compile_expr(Memory r,
     case K::Column:
         return column_sql(r, entity, expr.name);
     case K::Value:
+    case K::LikePattern:
         params.push(expr.literal);
         return placeholder(r, params.size());
     case K::Function:
@@ -612,7 +613,14 @@ String SqlDialect::compile_expr(Memory r,
             expr.op == BinaryOp::NotInLarge) {
             return compile_in(r, entity, expr.args.at(0), expr.op, expr.args.at(1), params);
         }
-        auto left = arg(0), right = arg(1);
+        auto left = arg(0);
+        auto right = [&] {
+            if (auto operand = expr.lowered_like_operand()) {
+                params.push_like_pattern(operand->first, operand->second);
+                return placeholder(r, params.size());
+            }
+            return arg(1);
+        }();
         constexpr std::string_view ops[] = {"=", "!=", ">", ">=", "<", "<=", "LIKE", "NOT LIKE"};
         String out("(", r);
         out += left;

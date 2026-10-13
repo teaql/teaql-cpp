@@ -1,0 +1,397 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "notice": "Initial complete actual original/native typed query replay before correcting the direct compact SmartList route.",
+  "families": [
+    {
+      "family": "entity_query",
+      "count": 165,
+      "failed": 4,
+      "failures": [
+        {
+          "index": 129,
+          "input": {
+            "capture": false,
+            "cache": false,
+            "backend": false,
+            "aggregate": false,
+            "failure": false,
+            "mode": "list",
+            "continuous": true,
+            "purpose": "Read items",
+            "comment": "business",
+            "limit": null,
+            "calls": 3
+          },
+          "differences": [
+            {
+              "path": "/requests/0/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/0/request_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/1/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/1/request_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/2/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/2/request_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 132,
+          "input": {
+            "capture": false,
+            "cache": false,
+            "backend": false,
+            "aggregate": true,
+            "failure": false,
+            "mode": "list",
+            "continuous": true,
+            "purpose": "Read items",
+            "comment": "business",
+            "limit": null,
+            "calls": 3
+          },
+          "differences": [
+            {
+              "path": "/requests/0/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/0/request_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/1/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/1/request_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/2/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/2/request_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 135,
+          "input": {
+            "capture": true,
+            "cache": false,
+            "backend": false,
+            "aggregate": false,
+            "failure": false,
+            "mode": "list",
+            "continuous": true,
+            "purpose": "Read items",
+            "comment": "business",
+            "limit": null,
+            "calls": 3
+          },
+          "differences": [
+            {
+              "path": "/requests/0/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/1/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/2/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 138,
+          "input": {
+            "capture": true,
+            "cache": false,
+            "backend": false,
+            "aggregate": true,
+            "failure": false,
+            "mode": "list",
+            "continuous": true,
+            "purpose": "Read items",
+            "comment": "business",
+            "limit": null,
+            "calls": 3
+          },
+          "differences": [
+            {
+              "path": "/requests/0/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/1/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            },
+            {
+              "path": "/requests/2/query_trace",
+              "rust": [],
+              "cpp": [
+                {
+                  "comment": "business",
+                  "entity": "Item",
+                  "kind": 6
+                },
+                {
+                  "comment": "Read items",
+                  "entity": "Item",
+                  "kind": 7
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family": "entity_stream",
+      "count": 193,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "enhanced_entities",
+      "count": 154,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "entity_decoder",
+      "count": 198,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "family": "id_set_page",
+      "count": 233,
+      "failed": 0,
+      "failures": []
+    }
+  ]
+}

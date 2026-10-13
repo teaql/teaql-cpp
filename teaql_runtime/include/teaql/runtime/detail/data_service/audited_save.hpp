@@ -97,7 +97,13 @@ public:
                     return fail(RuntimeError::graph(r, message));
                 }
             }
-            auto node = graph_node_from_entity(context_, std::move(entity));
+            if (root_ && root_->has_pending_dynamic_mutations()) {
+                auto provider = context_.dynamic_graph_provider();
+                if (!provider) {
+                    return fail(std::move(provider).error());
+                }
+            }
+            auto node = extract_graph_node_from_entity(context_, std::move(entity));
             if (!node) {
                 return fail(std::move(node).error());
             }
@@ -136,7 +142,12 @@ public:
                 if (!merge) {
                     return fail(std::move(merge).error());
                 }
-                bool dirty = !root_->current_change_set().changes().empty() ||
+                auto pending = preflight_pending_dynamic_entities(context_, *root_, *node_);
+                if (!pending) {
+                    return fail(std::move(pending).error());
+                }
+                bool dirty = root_->has_pending_dynamic_mutations() ||
+                             !root_->current_change_set().changes().empty() ||
                              !root_->deleted_keys().empty() || !root_->new_keys().empty();
                 if (dirty) {
                     auto descriptor = context_.require_entity(node_->entity);
@@ -155,6 +166,21 @@ public:
                     id_property_ = id->name;
                     service_ = &context_.template make<EntityDataService<E>>(
                         context_, node_->entity, executor_);
+                    auto captured = capture_ledger_trace_scopes(*root_, *node_);
+                    if (!captured) {
+                        return fail(std::move(captured).error());
+                    }
+                    auto bound = EntityDataServiceAccess::bind_mutation_intent(
+                        *service_,
+                        node_->comment ? std::optional<std::string_view>(*node_->comment)
+                                       : std::nullopt);
+                    if (!bound) {
+                        return fail(std::move(bound).error());
+                    }
+                    auto privacy = EntityDataServiceAccess::bind_ledger_privacy(*service_, *root_);
+                    if (!privacy) {
+                        return fail(std::move(privacy).error());
+                    }
                     auto locations = ledger_object_locations(r, *node_);
                     auto policy = ledger_policy_plan(context_, *node_, *root_);
                     auto governance = context_.review_mutation_plan(policy);
@@ -192,6 +218,12 @@ public:
             if (!*result) {
                 return fail(save_runtime_error(r, result->error()));
             }
+            if (auto* readbacks = result->value().dynamic_readbacks.get()) {
+                if (auto fields = readbacks->rows.find(*root_key_);
+                    fields != readbacks->rows.end()) {
+                    node_->dynamic_fields = make_box<DynamicFieldValues>(r, fields->second);
+                }
+            }
             if (auto generated = result->value().find(*root_key_);
                 generated != result->value().end()) {
                 node_->values.fields.insert_or_assign(String(id_property_, r),
@@ -207,7 +239,11 @@ public:
             }
             // This reread is outside the source ledger governance scope.
             read_ = &EntityDataServiceAccess::fetch_graph_current_row_internal(
-                *service_, node_->entity, id_property_, id->second, {});
+                *service_,
+                node_->entity,
+                id_property_,
+                id->second,
+                root_->get_trace_chain(*root_key_));
             phase_ = Phase::Read;
         }
         if (phase_ == Phase::Read) {
@@ -269,6 +305,11 @@ private:
         if (!entity) {
             return fail(RuntimeError::graph(r, entity.error().to_string(r)));
         }
+        auto installed =
+            install_saved_dynamic_fields(r, entity.value(), node_->dynamic_fields.get());
+        if (!installed) {
+            return fail(std::move(installed).error());
+        }
         std::optional<EntityRuntimeState> none;
         const auto& pending = ledger ? root_ : none;
         AuditedLedgerResult<T> result(
@@ -285,7 +326,7 @@ private:
     String id_property_;
     bool preserve_ = false;
     EntityDataService<E>* service_ = nullptr;
-    AsyncOperation<Result<LedgerGeneratedIds, Error>>* ledger_ = nullptr;
+    AsyncOperation<Result<LedgerExecutionOutcome, Error>>* ledger_ = nullptr;
     AsyncOperation<Result<std::optional<CompactRow>, Error>>* read_ = nullptr;
     AsyncOperation<Result<GraphNode, Error>>* graph_ = nullptr;
     Phase phase_ = Phase::Start;

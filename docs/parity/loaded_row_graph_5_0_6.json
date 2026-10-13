@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "source_observations": 2032,
+  "source_success": 1594,
+  "source_errors": 438,
+  "initial_differences": 856,
+  "source_and_cpp_exit_code": 0,
+  "reproduction_exit_code": 0,
+  "profiles": {
+    "native": {
+      "passed": 10,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "relation_hydration_contracts",
+        "loaded_row_graph_rust_parity",
+        "loaded_row_graph_context_contracts",
+        "hydration_flat_facets_rust_parity",
+        "hydration_flat_facets_context_close",
+        "entity_decoder_contracts",
+        "generated_facets_context_contracts",
+        "generated_relation_analysis_context_contracts",
+        "enhanced_entities_contracts",
+        "runtime_entity_query_contracts"
+      ]
+    },
+    "sanitize": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "relation_hydration_contracts",
+        "loaded_row_graph_rust_parity",
+        "loaded_row_graph_context_contracts"
+      ]
+    },
+    "modules_native": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0,
+      "tests": [
+        "module_relation_hydration_contracts",
+        "module_loaded_row_graph_context_contracts",
+        "module_loaded_row_graph_rust_parity"
+      ]
+    }
+  },
+  "sanitizer_leak_scan": false,
+  "canonical_consumer_bodies": 116,
+  "catalog_exports": 1477,
+  "module_paths_exit_code": 0,
+  "formatting": {
+    "handwritten_files": 1002,
+    "format_exit_code": 0,
+    "check_exit_code": 0
+  },
+  "source_files_sha256": {
+    "teaql_runtime/src/data_service/relation_graph.cpp": "38fe2f5288b18fb9920a003a7b2c37c039d7e609025159fbdf8aff7f524c43fd",
+    "tests/parity/loaded_row_graph_probe.cpp": "e052e3b42e741d1988e569719b31caa1ce4c0621da1fce101934cf00466defe5",
+    "teaql_provider_sqlite/tests/relation_hydration_tests.cpp": "0dd788b3b8174293db0ac3a8affd19f0994afd4d605f12ecdc20ba6efb85b5a1",
+    "tests/parity/rust_private_save_5_0_6/src/bin/loaded_row_graph_5_0_6.rs": "6cdefb1c30a6eb9a7acff5f110a293df9ecc150475eb65fd40837da188d528cd"
+  },
+  "notice": "Loaded-row reconstruction scope, including nested facets, projection/markers/errors and native SQLite/Global/User close. Outer non-facet metadata resets match actual source. Full historical/dynamic/JSON/privacy/generated/configuration and complete capabilities remain open."
+}

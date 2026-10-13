@@ -16,13 +16,17 @@ class SqlBindings {
 public:
     using allocator_type = Allocator;
 
-    explicit SqlBindings(Memory r) : values_(r), policies_(r) {}
+    explicit SqlBindings(Memory r) : values_(r), policies_(r), originals_(r) {}
 
     SqlBindings(std::allocator_arg_t, Allocator a) : SqlBindings(a.resource()) {}
 
     SqlBindings(std::allocator_arg_t, Allocator a, const SqlBindings& other)
         : values_(other.values_, a.resource()), policies_(other.policies_, a.resource()),
-          scope_(other.scope_), untrusted_sql_(other.untrusted_sql_) {}
+          originals_(a.resource()), scope_(other.scope_), untrusted_sql_(other.untrusted_sql_) {
+        for (const auto& [index, value] : other.originals_) {
+            originals_.emplace_back(index, Value(a.resource(), value));
+        }
+    }
 
     SqlBindings(std::allocator_arg_t, Allocator a, SqlBindings&& other)
         : SqlBindings(detail::move_to(a.resource(), std::move(other))) {}
@@ -54,10 +58,33 @@ public:
         untrusted_sql_ = true;
     }
 
+    void push_like_pattern(std::string_view pattern, std::string_view original) {
+        originals_.emplace_back(values_.size(), Value(memory_resource(), original));
+        try {
+            push(Value(memory_resource(), pattern));
+        } catch (...) {
+            originals_.pop_back();
+            throw;
+        }
+    }
+
+    SqlLogContext rebind_log_context(Memory, const SqlLogContext&) const;
+
+    void append_bindings(const SqlBindings& other) {
+        auto offset = size();
+        for (const auto& value : other.values_) {
+            push(value);
+        }
+        for (const auto& [index, value] : other.originals_) {
+            originals_.emplace_back(offset + index, Value(memory_resource(), value));
+        }
+    }
+
     SqlLogContext log_context(Memory, DatabaseKind) const;
 
     Vector<Value> into_values() && {
         policies_.clear();
+        originals_.clear();
         return std::move(values_);
     }
 
@@ -92,6 +119,7 @@ private:
     void append(Value&&, SqlParameterLogPolicy);
     Vector<Value> values_;
     Vector<SqlParameterLogPolicy> policies_;
+    Vector<std::pair<std::size_t, Value>> originals_;
     std::optional<SqlParameterLogPolicy> scope_;
     bool untrusted_sql_ = false;
 };

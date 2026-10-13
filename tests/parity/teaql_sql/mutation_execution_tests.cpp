@@ -13,15 +13,24 @@ mutation(Memory r, Operation operation, std::uint64_t id, std::int64_t recover_v
     if (operation == Operation::Update) {
         UpdateCommand command(std::allocator_arg, Allocator(r), "Customer", id);
         command.expected_version(1).value("name", "Riverside");
-        return MutationRequest(std::allocator_arg, Allocator(r), std::move(command));
+        return MutationRequest(std::allocator_arg,
+                               Allocator(r),
+                               std::move(command),
+                               "original mutation execution fixture");
     }
     if (operation == Operation::Delete) {
         DeleteCommand command(std::allocator_arg, Allocator(r), "Customer", id);
         command.expected_version(1);
-        return MutationRequest(std::allocator_arg, Allocator(r), std::move(command));
+        return MutationRequest(std::allocator_arg,
+                               Allocator(r),
+                               std::move(command),
+                               "original mutation execution fixture");
     }
     RecoverCommand command(std::allocator_arg, Allocator(r), "Customer", id, recover_version);
-    return MutationRequest(std::allocator_arg, Allocator(r), std::move(command));
+    return MutationRequest(std::allocator_arg,
+                           Allocator(r),
+                           std::move(command),
+                           "original mutation execution fixture");
 }
 
 static void assert_write(const ExecutionMetadata& metadata,
@@ -68,9 +77,9 @@ static void mutation_target_id_provenance() {
                           write.params.end() &&
                       std::ranges::any_of(write.trace_chain,
                                           [](const TraceNode& node) {
-                                              return node.comment.find("1001") != String::npos;
+                                              return node.entity_id == 1001;
                                           }),
-                  "target remains plain in execution parameters and trace");
+                  "target remains plain in execution parameters and structured trace identity");
             Vector<String> secrets(f.resource);
             write.sql_log.intent_redactions.extend_secrets(false, secrets);
             check(std::ranges::find(secrets, String("1001", f.resource)) != secrets.end(),
@@ -205,9 +214,11 @@ static void successful_batch_and_later_compile_failure() {
         MutationRequest::Batch children(f.resource);
         children.emplace_back(insert(f.resource, 1));
         InsertCommand missing(std::allocator_arg, Allocator(f.resource), "Missing");
-        children.emplace_back(std::move(missing));
-        auto request =
-            MutationRequest(std::allocator_arg, Allocator(f.resource), std::move(children));
+        children.emplace_back(std::move(missing), "ported missing mutation");
+        auto request = MutationRequest(std::allocator_arg,
+                                       Allocator(f.resource),
+                                       std::move(children),
+                                       "ported mutation execution fixture");
         const auto& result =
             f.executor.mutate_observed(f.resource, std::move(request), f.observer).wait();
         check(!result && result.error().kind() == Error::Kind::Compile && f.entries.size() == 1 &&
@@ -269,8 +280,11 @@ static void nested_batch_failure() {
     inner.emplace_back(insert(f.resource, 2));
     inner.emplace_back(insert(f.resource, 3));
     outer.emplace_back(insert(f.resource, 1));
-    outer.emplace_back(std::move(inner));
-    auto request = MutationRequest(std::allocator_arg, Allocator(f.resource), std::move(outer));
+    outer.emplace_back(std::move(inner), "ported nested batch");
+    auto request = MutationRequest(std::allocator_arg,
+                                   Allocator(f.resource),
+                                   std::move(outer),
+                                   "ported mutation execution fixture");
     const auto& result =
         f.executor.mutate_observed(f.resource, std::move(request), f.observer).wait();
     check(!result && f.entries.size() == 2, "nested batch does not duplicate prior leaf");

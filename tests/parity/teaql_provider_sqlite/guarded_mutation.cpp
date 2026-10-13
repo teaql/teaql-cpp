@@ -26,11 +26,13 @@ static void tenant_guard_is_atomic_for_update_delete_and_recover() {
         fixture.seed(entity, insert);
     }
     auto guarded = [&](auto& executor, auto command, std::int64_t tenant, std::uint64_t affected) {
-        GuardedMutationRequest request(
-            std::allocator_arg,
-            Allocator(r),
-            MutationRequest(std::allocator_arg, Allocator(r), std::move(command)),
-            Expr::eq(r, "tenant_id", tenant));
+        GuardedMutationRequest request(std::allocator_arg,
+                                       Allocator(r),
+                                       MutationRequest(std::allocator_arg,
+                                                       Allocator(r),
+                                                       std::move(command),
+                                                       "original mutation execution fixture"),
+                                       Expr::eq(r, "tenant_id", tenant));
         const auto& result = executor.mutate_guarded(r, std::move(request)).wait();
         check(result && result.value().affected_rows == affected,
               "guarded affected-row result matches the original tenant test");
@@ -129,7 +131,8 @@ static void tenant_changes_at_the_write_boundary() {
     GuardedMutationRequest guarded(
         std::allocator_arg,
         Allocator(r),
-        MutationRequest(std::allocator_arg, Allocator(r), std::move(update)),
+        MutationRequest(
+            std::allocator_arg, Allocator(r), std::move(update), "reject concurrent tenant change"),
         Expr::eq(r, "tenant_id", std::int64_t(1)));
     const auto& result = executor.mutate_guarded(r, std::move(guarded)).wait();
     check(result && transport.changed && result.value().affected_rows == 0 &&

@@ -1,0 +1,10 @@
+{
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "driver": "tests/parity/rust_private_save_5_0_6/src/bin/relation_planning_extensions_5_0_6.rs",
+  "driver_sha256": "71d9f0794a179025006d7e73c5d6e8af6c0ab6fdef8306f55615e43b91c9ef90",
+  "scope": "Actual full original normal/compact/base methods; no method-body extraction or mock planner. Original executor rejects all provider/capability I/O. Inputs vary slice, groups (including duplicates), aggregate flag, existing field/expression orders, facets, descriptor ID and missing/NULL/valid parents. Snapshot covers selected fields, aggregate descriptors, ownership counts, slice/partition/filter presence and ordered field/expression tags. It does not prove full filter serialization or SQL execution parity.",
+  "source_invariants": "All helper outputs clear facets/relations and retain groups; normal and compact snapshots match. Caller retains input facet/relation ownership.",
+  "initial_differences": 777,
+  "facet_differences": 576,
+  "order_differences": 402
+}

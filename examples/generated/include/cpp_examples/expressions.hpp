@@ -10,326 +10,231 @@ class OrderListExpression;
 class OrderLineExpression;
 class OrderLineListExpression;
 
-class ProductExpression : public generated_detail::Expression<const Product*> {
+class ProductExpression : public RuntimeExpression<EntityBorrow<Product>> {
 public:
-    using Base = generated_detail::Expression<const Product*>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<Product>>;
 
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const Product* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    explicit ProductExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<Product> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<String> get_name() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("name", [r](const Product* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("name")) {
-                return Output::not_loaded(r, "name", "name");
-            }
-            return Output::value(r, detail::clone_in(r, value->name()));
+    RuntimeExpression<String> getName() const {
+        return this->andThen("name", [](EntityBorrow<Product> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalName());
         });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const Product* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<Product> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
         });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    OrderLineListExpression get_order_line_list() const;
+    OrderLineListExpression getOrderLineList() const;
 };
 
-class ProductListExpression : public generated_detail::RelationListExpression<Product> {
+class ProductListExpression : public RuntimeExpression<EntityListBorrow<Product>> {
 public:
-    using Base = generated_detail::RelationListExpression<Product>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityListBorrow<Product>>;
+
+    explicit ProductListExpression(Base value) : Base(value) {}
 
     ProductExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next = std::move(current).and_then("get", [r, index](const SmartList<Product>* list) {
-            auto* value = list->get(index);
-            return value ? eval::EvalResult<const Product*>::value(r, value)
-                         : eval::EvalResult<const Product*>::null(r);
+        auto next = this->andThen("get", [index](EntityListBorrow<Product> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<Product>>;
+            return value ? entity_expression(*value) : Output::null(r);
         });
-        return ProductExpression(std::allocator_arg, Allocator(r), std::move(next));
+        return ProductExpression(next);
     }
 
     ProductExpression first() const {
         return get(0);
     }
+
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<Product> source) {
+            return source.get().len();
+        });
+    }
 };
 
-class OrderExpression : public generated_detail::Expression<const Order*> {
+class OrderExpression : public RuntimeExpression<EntityBorrow<Order>> {
 public:
-    using Base = generated_detail::Expression<const Order*>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<Order>>;
 
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const Order* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    explicit OrderExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<Order> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<String> get_name() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("name", [r](const Order* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("name")) {
-                return Output::not_loaded(r, "name", "name");
-            }
-            return Output::value(r, detail::clone_in(r, value->name()));
+    RuntimeExpression<String> getName() const {
+        return this->andThen("name", [](EntityBorrow<Order> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalName());
         });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const Order* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<Order> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
         });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    OrderLineListExpression get_lines() const;
+    OrderLineListExpression getLines() const;
 };
 
-class OrderListExpression : public generated_detail::RelationListExpression<Order> {
+class OrderListExpression : public RuntimeExpression<EntityListBorrow<Order>> {
 public:
-    using Base = generated_detail::RelationListExpression<Order>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityListBorrow<Order>>;
+
+    explicit OrderListExpression(Base value) : Base(value) {}
 
     OrderExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next = std::move(current).and_then("get", [r, index](const SmartList<Order>* list) {
-            auto* value = list->get(index);
-            return value ? eval::EvalResult<const Order*>::value(r, value)
-                         : eval::EvalResult<const Order*>::null(r);
+        auto next = this->andThen("get", [index](EntityListBorrow<Order> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<Order>>;
+            return value ? entity_expression(*value) : Output::null(r);
         });
-        return OrderExpression(std::allocator_arg, Allocator(r), std::move(next));
+        return OrderExpression(next);
     }
 
     OrderExpression first() const {
         return get(0);
     }
+
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<Order> source) {
+            return source.get().len();
+        });
+    }
 };
 
-class OrderLineExpression : public generated_detail::Expression<const OrderLine*> {
+class OrderLineExpression : public RuntimeExpression<EntityBorrow<OrderLine>> {
 public:
-    using Base = generated_detail::Expression<const OrderLine*>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityBorrow<OrderLine>>;
 
-    generated_detail::Expression<std::uint64_t> get_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("id", [r](const OrderLine* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("id")) {
-                return Output::not_loaded(r, "id", "id");
-            }
-            return Output::value(r, detail::clone_in(r, value->id()));
+    explicit OrderLineExpression(Base value) : Base(value) {}
+
+    RuntimeExpression<std::uint64_t> getId() const {
+        return this->andThen("id", [](EntityBorrow<OrderLine> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<String> get_name() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("name", [r](const OrderLine* value) {
-            using Output = eval::EvalResult<String>;
-            if (!value->is_loaded("name")) {
-                return Output::not_loaded(r, "name", "name");
-            }
-            return Output::value(r, detail::clone_in(r, value->name()));
+    RuntimeExpression<String> getName() const {
+        return this->andThen("name", [](EntityBorrow<OrderLine> source) {
+            return RuntimeExpression<String>::from_result(source.get().evalName());
         });
-        return generated_detail::Expression<String>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::uint64_t> get_order_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("order_id", [r](const OrderLine* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("order_id")) {
-                return Output::not_loaded(r, "order_id", "order_id");
-            }
-            return Output::value(r, detail::clone_in(r, value->order_id()));
+    RuntimeExpression<std::uint64_t> getOrderId() const {
+        return this->andThen("order_id", [](EntityBorrow<OrderLine> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalOrderId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::uint64_t> get_product_id() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("product_id", [r](const OrderLine* value) {
-            using Output = eval::EvalResult<std::uint64_t>;
-            if (!value->is_loaded("product_id")) {
-                return Output::not_loaded(r, "product_id", "product_id");
-            }
-            return Output::value(r, detail::clone_in(r, value->product_id()));
+    RuntimeExpression<std::uint64_t> getProductId() const {
+        return this->andThen("product_id", [](EntityBorrow<OrderLine> source) {
+            return RuntimeExpression<std::uint64_t>::from_result(source.get().evalProductId());
         });
-        return generated_detail::Expression<std::uint64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    generated_detail::Expression<std::int64_t> get_version() const {
-        auto r = memory_resource();
-        auto current = detail::clone_in(r, result);
-        auto next = std::move(current).and_then("version", [r](const OrderLine* value) {
-            using Output = eval::EvalResult<std::int64_t>;
-            if (!value->is_loaded("version")) {
-                return Output::not_loaded(r, "version", "version");
-            }
-            return Output::value(r, detail::clone_in(r, value->version()));
+    RuntimeExpression<std::int64_t> getVersion() const {
+        return this->andThen("version", [](EntityBorrow<OrderLine> source) {
+            return RuntimeExpression<std::int64_t>::from_result(source.get().evalVersion());
         });
-        return generated_detail::Expression<std::int64_t>(
-            std::allocator_arg, Allocator(r), std::move(next));
     }
 
-    OrderExpression get_order() const;
-    ProductExpression get_product() const;
+    OrderExpression getOrder() const;
+    ProductExpression getProduct() const;
 };
 
-class OrderLineListExpression : public generated_detail::RelationListExpression<OrderLine> {
+class OrderLineListExpression : public RuntimeExpression<EntityListBorrow<OrderLine>> {
 public:
-    using Base = generated_detail::RelationListExpression<OrderLine>;
-    using Base::Base;
+    using Base = RuntimeExpression<EntityListBorrow<OrderLine>>;
+
+    explicit OrderLineListExpression(Base value) : Base(value) {}
 
     OrderLineExpression get(std::size_t index) const {
-        auto r = this->memory_resource();
-        auto current = detail::clone_in(r, this->result);
-        auto next =
-            std::move(current).and_then("get", [r, index](const SmartList<OrderLine>* list) {
-                auto* value = list->get(index);
-                return value ? eval::EvalResult<const OrderLine*>::value(r, value)
-                             : eval::EvalResult<const OrderLine*>::null(r);
-            });
-        return OrderLineExpression(std::allocator_arg, Allocator(r), std::move(next));
+        auto next = this->andThen("get", [index](EntityListBorrow<OrderLine> source) {
+            auto r = source.memory_resource();
+            auto* value = source.get().get(index);
+            using Output = RuntimeExpression<EntityBorrow<OrderLine>>;
+            return value ? entity_expression(*value) : Output::null(r);
+        });
+        return OrderLineExpression(next);
     }
 
     OrderLineExpression first() const {
         return get(0);
     }
+
+    RuntimeExpression<std::size_t> size() const {
+        return this->map([](EntityListBorrow<OrderLine> source) {
+            return source.get().len();
+        });
+    }
 };
 
-inline OrderLineListExpression ProductExpression::get_order_line_list() const {
-    auto r = memory_resource();
-    auto current = detail::clone_in(r, result);
-    auto next = std::move(current).and_then("order_line_list", [r](const Product* value) {
-        using Output = eval::EvalResult<const SmartList<OrderLine>*>;
-        if (!value->is_loaded("order_line_list")) {
-            return Output::not_loaded(r, "order_line_list", "order_line_list");
-        }
-        if (!value->order_line_list().is_loaded) {
-            return Output::not_loaded(r, "order_line_list", "order_line_list");
-        }
-        return Output::value(r, &value->order_line_list());
+inline OrderLineListExpression ProductExpression::getOrderLineList() const {
+    auto next = this->andThen("order_line_list", [](EntityBorrow<Product> source) {
+        return RuntimeExpression<EntityListBorrow<OrderLine>>::from_result(
+            source.get().evalOrderLineList());
     });
-    return OrderLineListExpression(std::allocator_arg, Allocator(r), std::move(next));
+    return OrderLineListExpression(next);
 }
 
-inline OrderLineListExpression OrderExpression::get_lines() const {
-    auto r = memory_resource();
-    auto current = detail::clone_in(r, result);
-    auto next = std::move(current).and_then("lines", [r](const Order* value) {
-        using Output = eval::EvalResult<const SmartList<OrderLine>*>;
-        if (!value->is_loaded("lines")) {
-            return Output::not_loaded(r, "lines", "lines");
-        }
-        if (!value->lines().is_loaded) {
-            return Output::not_loaded(r, "lines", "lines");
-        }
-        return Output::value(r, &value->lines());
+inline OrderLineListExpression OrderExpression::getLines() const {
+    auto next = this->andThen("lines", [](EntityBorrow<Order> source) {
+        return RuntimeExpression<EntityListBorrow<OrderLine>>::from_result(
+            source.get().evalLines());
     });
-    return OrderLineListExpression(std::allocator_arg, Allocator(r), std::move(next));
+    return OrderLineListExpression(next);
 }
 
-inline OrderExpression OrderLineExpression::get_order() const {
-    auto r = memory_resource();
-    auto current = detail::clone_in(r, result);
-    auto next = std::move(current).and_then("order", [r](const OrderLine* value) {
-        using Output = eval::EvalResult<const Order*>;
-        if (!value->is_loaded("order")) {
-            return Output::not_loaded(r, "order", "order");
-        }
-        auto* child = value->order();
-        return child ? Output::value(r, child) : Output::null(r);
+inline OrderExpression OrderLineExpression::getOrder() const {
+    auto next = this->andThen("order", [](EntityBorrow<OrderLine> source) {
+        return RuntimeExpression<EntityBorrow<Order>>::from_result(source.get().evalOrder());
     });
-    return OrderExpression(std::allocator_arg, Allocator(r), std::move(next));
+    return OrderExpression(next);
 }
 
-inline ProductExpression OrderLineExpression::get_product() const {
-    auto r = memory_resource();
-    auto current = detail::clone_in(r, result);
-    auto next = std::move(current).and_then("product", [r](const OrderLine* value) {
-        using Output = eval::EvalResult<const Product*>;
-        if (!value->is_loaded("product")) {
-            return Output::not_loaded(r, "product", "product");
-        }
-        auto* child = value->product();
-        return child ? Output::value(r, child) : Output::null(r);
+inline ProductExpression OrderLineExpression::getProduct() const {
+    auto next = this->andThen("product", [](EntityBorrow<OrderLine> source) {
+        return RuntimeExpression<EntityBorrow<Product>>::from_result(source.get().evalProduct());
     });
-    return ProductExpression(std::allocator_arg, Allocator(r), std::move(next));
+    return ProductExpression(next);
 }
 
 struct E {
     static ProductExpression product(const Product& value) {
-        auto r = value.memory_resource();
-        return ProductExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const Product*>::value(r, &value));
+        return ProductExpression(entity_expression(value));
     }
+
+    static ProductExpression product(Product&&) = delete;
+    static ProductExpression product(const Product&&) = delete;
 
     static OrderExpression order(const Order& value) {
-        auto r = value.memory_resource();
-        return OrderExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const Order*>::value(r, &value));
+        return OrderExpression(entity_expression(value));
     }
 
-    static OrderLineExpression order_line(const OrderLine& value) {
-        auto r = value.memory_resource();
-        return OrderLineExpression(
-            std::allocator_arg, Allocator(r), eval::EvalResult<const OrderLine*>::value(r, &value));
+    static OrderExpression order(Order&&) = delete;
+    static OrderExpression order(const Order&&) = delete;
+
+    static OrderLineExpression orderLine(const OrderLine& value) {
+        return OrderLineExpression(entity_expression(value));
     }
+
+    static OrderLineExpression orderLine(OrderLine&&) = delete;
+    static OrderLineExpression orderLine(const OrderLine&&) = delete;
 };
 }

@@ -1,0 +1,28 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "model": "tests/generator/checkers.xml",
+  "model_sha256": "df80f899ac8d78e41a3357ae193745923ce0e9d9e9d98c049dbff8724657f8ee",
+  "hand_edited": false,
+  "files": {
+    "lib/Cargo.toml": "f69bdfb3648702e84f4dee0b7a3b7f9f57f6bc1e916c326df05815cb5c552b8d",
+    "lib/src/e.rs": "29b41ba82dd7271ab0d9e527d8c82a7f65af8c71c12d0b83c7a889666b778bcf",
+    "lib/src/lib.rs": "28eb3121485b3005f428e523282cbf347c5de14855027c3d8600723de8b87eb7",
+    "lib/src/note/behavior.rs": "85ab51d169b81456d5c70f6db4c58a3f071b3c2ec8a7d865f855c71b61d8a478",
+    "lib/src/note/checker.rs": "8c02d2a7e8945ff289549f0a45e6f1e376ca64f2f1d9b0c6d7e39b6616545e80",
+    "lib/src/note/entity.rs": "cb47a487debe93b676da192efdb17fb8d7bba7be310688453f3e3e812138c0cc",
+    "lib/src/note/expression.rs": "6d6295931763473b5c3d244f29833297ad945a9140518476ebaf458b6abf355b",
+    "lib/src/note/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/note/request.rs": "eb7874547ff032bdaa9f2e1cf94c1de4babf7b9d191aa57275fb6c85032b608a",
+    "lib/src/q.rs": "93fdf45512775e31b3ac52fb78470ab4207f16381771d0363c3aa97a2b251ffe",
+    "lib/src/request_support.rs": "7b4e973a86c76d7e8048c103b6676935c45cf4ec6125fbc5c2f05300d3e5ac84",
+    "lib/src/runtime.rs": "795b0abb3b8c722c66a638da6a556c33a9eb6734ccc52ce0b0720c1b5e6dacf7",
+    "lib/src/sample_data.rs": "3fd5c9bbb7aa976acea12d35782b74b7bd04f090432bb2b5ffc4340b02f55f15",
+    "lib/src/tenant/behavior.rs": "adce6aacbb905b10543b94863a14be531feb88b7e78109d5d7b73e5f87932229",
+    "lib/src/tenant/checker.rs": "0236ac44b822bf853270333bb85b521e48483a4184c1d65ef72af038760966a1",
+    "lib/src/tenant/entity.rs": "8c1e50cc0355e13e4ba43e359462617c4ea1f8294fd0d94e17a4bf041bdb1bef",
+    "lib/src/tenant/expression.rs": "b0cb8a0be51db87089ca2a2c38cbaf93d704a34ffe1fee88787593d221d4bded",
+    "lib/src/tenant/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/tenant/request.rs": "ff06d390e667bb109808b2e523e8cfbe9fb156c0dc02c97bdccb6c4568129d34"
+  }
+}
