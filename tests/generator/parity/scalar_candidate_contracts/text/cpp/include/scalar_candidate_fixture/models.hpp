@@ -423,7 +423,8 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<Record>("record_list", load_state.is_loaded("record_list"));
+    projection.reverse_many<Record>(
+        "record_list", load_state.is_loaded("record_list"), &record_list_);
     return projection.finish(dynamic_field_values());
 }
 

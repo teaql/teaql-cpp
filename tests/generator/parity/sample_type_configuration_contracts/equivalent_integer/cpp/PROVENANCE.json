@@ -53,7 +53,7 @@
     "assist/sample_item/update.md": "5735db69188775f8a07082091c7781b0aff982df07766364503fe3e8d8947f57",
     "include/cpp_sample_types_equivalent_integer/checkers.hpp": "9fe47d6afc346d7111a59dde74ea05992a3c431e79ef0df1ec3cd8315b35529c",
     "include/cpp_sample_types_equivalent_integer/expressions.hpp": "2992f5bc9e4e7046473d6a43fdfa7f5f779858b59475960ad5c65b7cee517b4d",
-    "include/cpp_sample_types_equivalent_integer/models.hpp": "873d101ee30b2b4cd213fb4f5571eed20fdc454f30e297549d122137ae706ffc",
+    "include/cpp_sample_types_equivalent_integer/models.hpp": "96faa3db032f33c77d478211f2abf56f6b41ed5e199539d025573d5a6292a0bf",
     "include/cpp_sample_types_equivalent_integer/queries.hpp": "47d6cd71c6ae7b05c4127c1e07174b7a2efa114e643da5f2eb7d51e084302064",
     "include/cpp_sample_types_equivalent_integer/runtime.hpp": "83400137b80ec8eb1c44b32b42189f2c15b160485955a8ff598c0126ad709fd5",
     "include/cpp_sample_types_equivalent_integer/sample_data.hpp": "f257a6e1875425ffa826567978fda8d3da1a1d2b9987a394968903c4529e41a9",
@@ -63,7 +63,7 @@
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "273714eec6d91763330c694ce44cb7a52c7dfe410135509fa438fcaf1ed53a7e",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistSupport.java": "c87e78f7e0f41368b1743a846e74343bb9fbd88b94492b305999c9d295c76e8a",

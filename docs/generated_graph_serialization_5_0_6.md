@@ -138,3 +138,5 @@ retained SDK families still require bounded regeneration with the changed
 producer and their compiler/Java/semantic gates. The relation/helper naming
 collision remains unresolved. Complete-source review, capability/phase exits
 and P0–P7 completion are not inferred from a successful focused receipt.
+
+Terminal focused result: [installed receipt](parity/generated_graph_serialization_installed_5_0_6.json.gz) is complete. All 23 original tests, 74 Java tests, native3/module3/scoped-sanitize3, main and dedicated SDK reproduction, canonical consumers and unchanged-input/no-work checks pass. This result does not promote the complete source or close the wider SDK migration.

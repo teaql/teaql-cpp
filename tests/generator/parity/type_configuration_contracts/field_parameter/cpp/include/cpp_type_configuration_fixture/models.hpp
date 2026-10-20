@@ -711,7 +711,8 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<Priority>("priority_list", load_state.is_loaded("priority_list"));
+    projection.reverse_many<Priority>(
+        "priority_list", load_state.is_loaded("priority_list"), &priority_list_);
     return projection.finish(dynamic_field_values());
 }
 

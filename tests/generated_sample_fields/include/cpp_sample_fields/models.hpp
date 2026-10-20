@@ -1218,8 +1218,8 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<SampleRecord>("sample_record_list",
-                                          load_state.is_loaded("sample_record_list"));
+    projection.reverse_many<SampleRecord>(
+        "sample_record_list", load_state.is_loaded("sample_record_list"), &sample_record_list_);
     return projection.finish(dynamic_field_values());
 }
 
@@ -1579,8 +1579,10 @@ inline std::optional<Json> SampleRecord::borrowed_json(Memory r,
                                  platform_ ? &*platform_ : nullptr,
                                  load_state.is_loaded("platform"),
                                  generated_detail::encode(r, platform_id_));
-    projection.reverse_many<SampleLink>("first_links", load_state.is_loaded("first_links"));
-    projection.reverse_many<SampleLink>("second_links", load_state.is_loaded("second_links"));
+    projection.reverse_many<SampleLink>(
+        "first_links", load_state.is_loaded("first_links"), &first_links_);
+    projection.reverse_many<SampleLink>(
+        "second_links", load_state.is_loaded("second_links"), &second_links_);
     return projection.finish(dynamic_field_values());
 }
 

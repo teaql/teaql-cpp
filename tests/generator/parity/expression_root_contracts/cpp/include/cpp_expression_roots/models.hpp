@@ -1298,12 +1298,15 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<Class>("class_list", load_state.is_loaded("class_list"));
-    projection.reverse_many<Operator>("operator_list", load_state.is_loaded("operator_list"));
-    projection.reverse_many<Template>("template_list", load_state.is_loaded("template_list"));
-    projection.reverse_many<Namespace>("namespace_list", load_state.is_loaded("namespace_list"));
-    projection.reverse_many<PlainRecord>("plain_record_list",
-                                         load_state.is_loaded("plain_record_list"));
+    projection.reverse_many<Class>("class_list", load_state.is_loaded("class_list"), &class_list_);
+    projection.reverse_many<Operator>(
+        "operator_list", load_state.is_loaded("operator_list"), &operator_list_);
+    projection.reverse_many<Template>(
+        "template_list", load_state.is_loaded("template_list"), &template_list_);
+    projection.reverse_many<Namespace>(
+        "namespace_list", load_state.is_loaded("namespace_list"), &namespace_list_);
+    projection.reverse_many<PlainRecord>(
+        "plain_record_list", load_state.is_loaded("plain_record_list"), &plain_record_list_);
     return projection.finish(dynamic_field_values());
 }
 

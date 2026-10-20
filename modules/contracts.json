@@ -2735,6 +2735,19 @@
       ]
     },
     {
+      "package": "teaql_runtime",
+      "stem": "state_cache_cost_tests",
+      "cases": [
+        {
+          "name": "state_cache_cost_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
       "package": "teaql_core",
       "stem": "dynamic_carrier_tests",
       "cases": [

@@ -799,9 +799,12 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<School>("school_list", load_state.is_loaded("school_list"));
-    projection.reverse_one<Profile>("profile", load_state.is_loaded("profile"));
-    projection.reverse_many<Device>("device_list", load_state.is_loaded("device_list"));
+    projection.reverse_many<School>(
+        "school_list", load_state.is_loaded("school_list"), &school_list_);
+    projection.reverse_one<Profile>(
+        "profile", load_state.is_loaded("profile"), profile_ ? &*profile_ : nullptr);
+    projection.reverse_many<Device>(
+        "device_list", load_state.is_loaded("device_list"), &device_list_);
     return projection.finish(dynamic_field_values());
 }
 

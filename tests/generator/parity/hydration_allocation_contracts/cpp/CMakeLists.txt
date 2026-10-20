@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 4.4)
+project(cpp_hydration_allocation LANGUAGES CXX)
+find_package(teaql_cpp CONFIG REQUIRED)
+add_library(cpp_hydration_allocation INTERFACE)
+target_include_directories(cpp_hydration_allocation INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(cpp_hydration_allocation INTERFACE cxx_std_20)
+target_link_libraries(cpp_hydration_allocation INTERFACE teaql::provider_sqlite)

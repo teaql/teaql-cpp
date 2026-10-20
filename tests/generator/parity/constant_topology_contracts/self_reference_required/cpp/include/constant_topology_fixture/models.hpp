@@ -737,8 +737,10 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<Category>("category_list", load_state.is_loaded("category_list"));
-    projection.reverse_many<Status>("status_list", load_state.is_loaded("status_list"));
+    projection.reverse_many<Category>(
+        "category_list", load_state.is_loaded("category_list"), &category_list_);
+    projection.reverse_many<Status>(
+        "status_list", load_state.is_loaded("status_list"), &status_list_);
     return projection.finish(dynamic_field_values());
 }
 
@@ -996,8 +998,10 @@ inline std::optional<Json> Category::borrowed_json(Memory r, EntityJsonTraversal
                                  parent_ ? &*parent_ : nullptr,
                                  load_state.is_loaded("parent"),
                                  generated_detail::encode(r, parent_id_));
-    projection.reverse_many<Category>("category_list", load_state.is_loaded("category_list"));
-    projection.reverse_many<Status>("status_list", load_state.is_loaded("status_list"));
+    projection.reverse_many<Category>(
+        "category_list", load_state.is_loaded("category_list"), &category_list_);
+    projection.reverse_many<Status>(
+        "status_list", load_state.is_loaded("status_list"), &status_list_);
     return projection.finish(dynamic_field_values());
 }
 

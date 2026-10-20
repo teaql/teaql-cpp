@@ -1,0 +1,23 @@
+{
+  "generator_commit": "45e1572c4956ca963410d8ea436ead3c8857087a",
+  "runtime_commit": "fe82a18982415f1746df9a2cf7c42f5e9abdc6d3",
+  "hand_edited": false,
+  "model": "tests/generator/parity/hydration_allocation_contracts/model.xml",
+  "model_sha256": "0edf2df0f4f643e79b11d0548d717e1d0fe878eb50f25a1fc315c285600803ea",
+  "files": {
+    "OBSERVATION.json": "fa56b32ef2ba8a9f5b4158315051004d693fdf83dda2520b557aea865e6ae37f",
+    "lib/Cargo.toml": "6ad753d3737d9c05b63a4354553de6e31992b6fae9b0e95255c2079c9af82241",
+    "lib/src/e.rs": "f7708a9a71a5512486d3112f574a4116944a55f7b35997da0832e248ba034387",
+    "lib/src/hydration_probe/behavior.rs": "7e5742be469a4435f321a2463f1550e7b439acc518640edb50ef45288cccdad0",
+    "lib/src/hydration_probe/checker.rs": "4f078c17bd024d7e80b4d3e63bf0f5b9aee2122d1cd43ee55cbe9cbe96a041db",
+    "lib/src/hydration_probe/entity.rs": "aa2e62a63c2cc6dc72d7b86da83d8a1281bcf8637eaf18bbdb3a9029d45ec993",
+    "lib/src/hydration_probe/expression.rs": "184f2a52a6e7ad7082b980dd3d81871e2f9de10aaca547d1a8c260b559064e04",
+    "lib/src/hydration_probe/mod.rs": "2ec0f868bea19295ab6b4af4bd8e7e538c9d46aa88c4948383712752cc821ac7",
+    "lib/src/hydration_probe/request.rs": "6d700a17b65d9d8237a0e9f0a8b16291af8561f3fb8a6fe30f19bc7d8e52227a",
+    "lib/src/lib.rs": "20aafd0200521dc43b19803fc3e517127a9c3e0c7c334df81ff77602821a5141",
+    "lib/src/q.rs": "e72cc3f6079f1457ed277169cab97ffde2ee00c418fea6fd36fa48be048cbb40",
+    "lib/src/request_support.rs": "5578defb7b09e382b20d678a9c5c3d2af1a3b9ccf4db6fc92a4c8cb8a435d348",
+    "lib/src/runtime.rs": "1f2b06489bc18d5f46833848336988e476eb5950e252c5770bf7bfc30bc495b5",
+    "lib/src/sample_data.rs": "1ff2083d62a2e2713b9e7d7bf349a2edcf994071cbb803e65b5c1e6466f31ead"
+  }
+}

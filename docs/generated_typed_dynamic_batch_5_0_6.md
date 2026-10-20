@@ -92,3 +92,7 @@ remain open. Its thirteen-test count describes the preceding checkpoint.
 Source totals remain **92 accepted / 30 pending / 2 excluded_external** and
 capabilities remain **11 qualified / 6 partial**. No fresh MIPS or
 physical-device execution is claimed.
+
+## Complete-source projection follow-up
+
+The [complete dynamic-query review](dynamic_field_query_source_review_5_0_6.md) strengthens the earlier SQL-only observation: a test-only recording SQL executor now requires exactly one incoming request with `id/version/name` in that order, for both ordinary and enhanced typed paths, then delegates to the real executor. The closure gate passes original23/native3/module3. The earlier focused receipt remains unchanged and describes its earlier assertion scope.

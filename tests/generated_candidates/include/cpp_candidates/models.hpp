@@ -1082,10 +1082,12 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<OrderStatus>("order_status_list",
-                                         load_state.is_loaded("order_status_list"));
-    projection.reverse_many<Record>("record_list", load_state.is_loaded("record_list"));
-    projection.reverse_many<Person>("person_list", load_state.is_loaded("person_list"));
+    projection.reverse_many<OrderStatus>(
+        "order_status_list", load_state.is_loaded("order_status_list"), &order_status_list_);
+    projection.reverse_many<Record>(
+        "record_list", load_state.is_loaded("record_list"), &record_list_);
+    projection.reverse_many<Person>(
+        "person_list", load_state.is_loaded("person_list"), &person_list_);
     return projection.finish(dynamic_field_values());
 }
 
@@ -1333,8 +1335,10 @@ inline std::optional<Json> OrderStatus::borrowed_json(Memory r,
                                  platform_ ? &*platform_ : nullptr,
                                  load_state.is_loaded("platform"),
                                  generated_detail::encode(r, platform_id_));
-    projection.reverse_many<Record>("record_list", load_state.is_loaded("record_list"));
-    projection.reverse_many<Person>("person_list", load_state.is_loaded("person_list"));
+    projection.reverse_many<Record>(
+        "record_list", load_state.is_loaded("record_list"), &record_list_);
+    projection.reverse_many<Person>(
+        "person_list", load_state.is_loaded("person_list"), &person_list_);
     return projection.finish(dynamic_field_values());
 }
 

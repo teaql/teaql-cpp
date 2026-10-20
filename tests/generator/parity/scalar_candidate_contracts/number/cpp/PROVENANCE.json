@@ -8,7 +8,7 @@
   "model_sha256": "7707b5a98cf9f9db23659c0916ed25e16677420acdb11ba828396f7ddc273408",
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "273714eec6d91763330c694ce44cb7a52c7dfe410135509fa438fcaf1ed53a7e",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppFieldLayoutMetadata.java": "eacbf2fc53f99c648e27d4506a2ed6ceae9b0be2a625ec0a47cc07449d37c257",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppBusinessIdMetadata.java": "c064dc6036fb0a581b7739d14aaf33fe84420eba31799df5ed98aec52e55652f",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppJsonInputMetadata.java": "0a84df2e8f3c8f4aad0ca44634ae7d7fa6162ab16212f03abc250261f10071ef",
@@ -54,7 +54,7 @@
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
     "include/scalar_candidate_fixture/checkers.hpp": "8a2742bfd5fcb22532add4436a691c430f5fc3ca318b069fa7ad4cbf14e83509",
     "include/scalar_candidate_fixture/expressions.hpp": "360249adab9f2053cb49aca91b2e44c2cf6053fd745622145841a9bd891e7699",
-    "include/scalar_candidate_fixture/models.hpp": "3e47b477ac1f378581a5170c75626b9868b0ee75e883ca42edba1c82373abd79",
+    "include/scalar_candidate_fixture/models.hpp": "125217c39eb041624ae600f90ee81d6e1f55a7aad7569abe4992472bcd14139d",
     "include/scalar_candidate_fixture/queries.hpp": "e3fba1f712ad78a4b075af6423b2e1292ea5bfadaf9a20d9e3e314229408a96c",
     "include/scalar_candidate_fixture/runtime.hpp": "5100032e4aff0a47fd4f34945bd1c17ad0eef5591579aff54fcd816ecfeb8a72",
     "include/scalar_candidate_fixture/sample_data.hpp": "57caa6b7c5142ade5553ad6ec7e0e64c449085612765dd99e4a5d8a5dace826c",

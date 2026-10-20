@@ -949,9 +949,10 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<Owner>("owner_list", load_state.is_loaded("owner_list"));
-    projection.reverse_many<Entry>("entry_list", load_state.is_loaded("entry_list"));
-    projection.reverse_many<Profile>("profile_list", load_state.is_loaded("profile_list"));
+    projection.reverse_many<Owner>("owner_list", load_state.is_loaded("owner_list"), &owner_list_);
+    projection.reverse_many<Entry>("entry_list", load_state.is_loaded("entry_list"), &entry_list_);
+    projection.reverse_many<Profile>(
+        "profile_list", load_state.is_loaded("profile_list"), &profile_list_);
     return projection.finish(dynamic_field_values());
 }
 
@@ -1207,9 +1208,11 @@ inline std::optional<Json> Owner::borrowed_json(Memory r, EntityJsonTraversal& t
                                  platform_ ? &*platform_ : nullptr,
                                  load_state.is_loaded("platform"),
                                  generated_detail::encode(r, platform_id_));
-    projection.reverse_many<Entry>("class", load_state.is_loaded("class"));
-    projection.reverse_many<Entry>("template", load_state.is_loaded("template"));
-    projection.reverse_one<Profile>("operator", load_state.is_loaded("operator"));
+    projection.reverse_many<Entry>("class", load_state.is_loaded("class"), &model_class_);
+    projection.reverse_many<Entry>("template", load_state.is_loaded("template"), &model_template_);
+    projection.reverse_one<Profile>("operator",
+                                    load_state.is_loaded("operator"),
+                                    model_operator_ ? &*model_operator_ : nullptr);
     return projection.finish(dynamic_field_values());
 }
 

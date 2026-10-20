@@ -403,6 +403,7 @@
         "teaql_module_generated_i18n_tests",
         "teaql_module_field_layout_tests",
         "teaql_module_loaded_snapshot_tests",
+        "teaql_module_state_cache_cost_tests",
         "teaql_module_dynamic_carrier_tests",
         "teaql_module_compact_row_api_tests",
         "teaql_module_field_layout_probe",

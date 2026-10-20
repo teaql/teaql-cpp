@@ -7706,6 +7706,27 @@
           "document": "docs/generated_graph_read_metadata_5_0_6.md",
           "terminal": "docs/parity/generated_graph_read_installed_5_0_6.json.gz",
           "scope": "Original2/native1/module1, SDK and canonical/no-work/input guards. Actual generated graph decoder metadata through every source entry; handwritten no-carrier defaults explicitly separate. Whole dynamic source and phase exits remain pending."
+        },
+        {
+          "kind": "focused_generated_graph_serialization",
+          "document": "docs/generated_graph_serialization_5_0_6.md",
+          "terminal": "docs/parity/generated_graph_serialization_installed_5_0_6.json.gz",
+          "scope": "Original23/Java74/native3/module3/scoped-sanitize3; five generated graph cases and retained callers. Runtime-first embedded reverse projection with zero-copy measurement. Whole-source review, wider SDK migration, naming conflict and phase exits remain pending."
+        },
+        {
+          "kind": "complete_dynamic_query_test_source",
+          "document": "docs/dynamic_field_query_source_review_5_0_6.md",
+          "terminal": "docs/parity/dynamic_query_source_closure_installed_5_0_6.json.gz",
+          "acceptance": "docs/parity/dynamic_query_source_acceptance_5_0_6.json.gz",
+          "scope": "Complete23-test source accepted: original23/native3/module3 after exact ordered executor projection observation. 79-SDK update/reproduction and native14/module11 integration include55 positive/141 negative compiler contracts. Explicit model/ownership adaptations and one handwritten default are reviewed. Source93/29/2; capability11/6 and phase verdicts unchanged.",
+          "post_acceptance_replay": "docs/parity/dynamic_query_source_closure_replay_5_0_6.json.gz"
+        },
+        {
+          "kind": "complete_state_cache_cost_source",
+          "document": "docs/state_cache_cost_source_review_5_0_6.md",
+          "terminal": "docs/parity/state_cache_cost_installed_5_0_6.json.gz",
+          "acceptance": "docs/parity/state_cache_cost_acceptance_5_0_6.json.gz",
+          "scope": "Complete retained-cache source accepted: original1/native2/module2, exact21 samples per frontend, real copy-and-intern, zero arena/heap allocation with positive controls, geometry/lifetime regressions and canonical/no-work/input guards. No timing equivalence; helper/hydration/phase exits remain pending. Source94/28/2, capabilities11/6 unchanged."
         }
       ],
       "open_questions": [
@@ -8446,7 +8467,14 @@
         "docs/parity/ledger_entity_guard_repair_5_0_6.json.gz",
         "docs/resolved_dynamic_rows_5_0_6.md",
         "docs/parity/resolved_dynamic_rows_source_5_0_6.json.gz",
-        "docs/parity/resolved_dynamic_rows_installed_5_0_6.json.gz"
+        "docs/parity/resolved_dynamic_rows_installed_5_0_6.json.gz",
+        {
+          "kind": "complete_state_cache_cost_source",
+          "document": "docs/state_cache_cost_source_review_5_0_6.md",
+          "terminal": "docs/parity/state_cache_cost_installed_5_0_6.json.gz",
+          "acceptance": "docs/parity/state_cache_cost_acceptance_5_0_6.json.gz",
+          "scope": "Complete retained-cache source accepted: original1/native2/module2, exact21 samples per frontend, real copy-and-intern, zero arena/heap allocation with positive controls, geometry/lifetime regressions and canonical/no-work/input guards. No timing equivalence; helper/hydration/phase exits remain pending. Source94/28/2, capabilities11/6 unchanged."
+        }
       ],
       "open_questions": [
         "LS10 scalar member-alias and complete shared_load_state.rs nineteen-test responsibilities are qualified by runtime130/generated260, original19 and twelve full typed batches/40404 rows per frontend, cold metadata/owner-thread/actual-deletion controls. Native6/module6/SAN3 supplement unchanged native44/module32/compiler193/Java80/78-SDK reproduction evidence. Whole G15 stays partial: the direct quoted-FK12 retains5 complete source/native differences identical across previous/current C++ SDKs. Preserve those values/errors and the pending identifier policy; accepting the unquoted source-test file does not accept these additional inputs.",

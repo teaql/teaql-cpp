@@ -457,7 +457,7 @@ inline std::optional<Json> Tenant::borrowed_json(Memory r, EntityJsonTraversal& 
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<Note>("note_list", load_state.is_loaded("note_list"));
+    projection.reverse_many<Note>("note_list", load_state.is_loaded("note_list"), &note_list_);
     return projection.finish(dynamic_field_values());
 }
 

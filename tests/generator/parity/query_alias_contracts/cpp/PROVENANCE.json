@@ -44,7 +44,7 @@
     "assist/runtime/tool_api.md": "7db1f1dd08a99a939082df4e52f1c05f9cad80f02abd9468d49b1d49ed52719c",
     "include/cpp_query_aliases/checkers.hpp": "3e1c18c621961ca92253b63fa57e578fceb25a9597114da18baf780e8d224a04",
     "include/cpp_query_aliases/expressions.hpp": "08d95c144ddc3a70cd4329fe1658cdb2c326045997e02dc38297ddae8f439a19",
-    "include/cpp_query_aliases/models.hpp": "5557a6610747adda3b5f6e4fcb5dacfab5888d05be8e57bd6049a1813c7be57d",
+    "include/cpp_query_aliases/models.hpp": "3180e10bea0bce4bb2aa09301dc82782f05b213e029bc26d4c0d2d589fe867b0",
     "include/cpp_query_aliases/queries.hpp": "8f631a822e902789a3473835484ad1f9c3b51f0829f389363a8a834efbf3459f",
     "include/cpp_query_aliases/runtime.hpp": "04ab7b730c746a21eda769a980973b6e03dc04b245c4a11f49cd3b93af41e4af",
     "include/cpp_query_aliases/sample_data.hpp": "cbc327b34c3ade28d447322e6dfc6dd9e5157c5ed2cc11bd6ea1e97097c5616e",
@@ -54,7 +54,7 @@
   },
   "formatter": "18.1.8",
   "generator_implementation_sha256": {
-    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "273714eec6d91763330c694ce44cb7a52c7dfe410135509fa438fcaf1ed53a7e",
+    "generator/src/main/java/com/skynet/codegenerator/cpp/CppCoreGenerator.java": "dcdddde6f9b3806e7ef96a720789c1f4e9f74725c3a6bf2edc4d8c8dd5911af2",
     "generator/src/main/resources/generator/cpp_lib_core/support.hpp.template": "4182c269f7617e57a2a387f4a5782101c99eb8e92f60e47682f7172cfad4cb78",
     "generator/src/main/java/com/skynet/codegenerator/workspace/JavaWorkspaceI18nSampleGenerator.java": "539cd8f6014fd3137da0efe9777c93390961dc3fb2c2c206eadd59e314f22c91",
     "generator/src/main/java/com/skynet/codegenerator/cpp/CppAssistWorkflows.java": "32f2ae13f2e65a2e4dfe256928356dae28c15ae7153d84ea9453482546791a03",

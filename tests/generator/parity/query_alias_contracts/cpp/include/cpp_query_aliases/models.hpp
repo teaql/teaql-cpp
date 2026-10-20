@@ -626,9 +626,11 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         true);
     projection.dynamic(dynamic);
     projection.reverse_many<Record>("record_list_as_platform",
-                                    load_state.is_loaded("record_list_as_platform"));
+                                    load_state.is_loaded("record_list_as_platform"),
+                                    &record_list_as_platform_);
     projection.reverse_many<Record>("record_list_as_namespace",
-                                    load_state.is_loaded("record_list_as_namespace"));
+                                    load_state.is_loaded("record_list_as_namespace"),
+                                    &record_list_as_namespace_);
     return projection.finish(dynamic_field_values());
 }
 

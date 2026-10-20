@@ -701,6 +701,25 @@ static void generated_root_dynamic_boundary(unsigned mode) {
     sqlite3_trace_v2(connection->native_handle(), 0, nullptr, nullptr);
 }
 
+struct ProjectionRecordingExecutor final : Executor {
+    using allocator_type = Allocator;
+    Vector<String> observed_projection;
+    std::size_t observed_queries = 0;
+
+    ProjectionRecordingExecutor(std::allocator_arg_t, Allocator a, const Executor& executor)
+        : Executor(std::allocator_arg, a, executor), observed_projection(a.resource()) {}
+
+    DataServiceOperationResult<QueryResult, SqlExecutorError<MutationExecutorError>>&
+    query_observed(Memory r,
+                   QueryRequest request,
+                   std::optional<ExecutionObserver> observer) override {
+        ++observed_queries;
+        observed_projection.assign(request.query.projection.begin(),
+                                   request.query.projection.end());
+        return Executor::query_observed(r, std::move(request), std::move(observer));
+    }
+};
+
 static void generated_typed_dynamic_batch(bool duplicate) {
     using Product = cpp_examples::Product;
     GlobalContext global;
@@ -711,6 +730,8 @@ static void generated_typed_dynamic_batch(bool duplicate) {
         auto r = user_context->memory_resource();
         SqliteConnection* connection = nullptr;
         auto& executor = dynamic_hydration_fixture::setup(*user_context, &connection, false);
+        auto& recording = user_context->make<ProjectionRecordingExecutor>(executor);
+        user_context->insert_resource(*user_context, recording);
         auto& metadata = dynamic_cast<InMemoryMetadataStore&>(
             const_cast<SchemaProvider&>(executor.schema_provider));
         metadata.register_entity(Product::entity_descriptor(r));
@@ -766,13 +787,18 @@ static void generated_typed_dynamic_batch(bool duplicate) {
                                     Allocator(r),
                                     query,
                                     "verify shared selection with private payloads");
-        auto service = user_context->entity_data_service<Executor>("Product");
+        auto service = user_context->entity_data_service<ProjectionRecordingExecutor>("Product");
         check(bool(service), "typed dynamic service resolves");
         auto result =
             duplicate ? completed(service.value().get().fetch_entities<Product>(request))
                       : completed(service.value().get().fetch_enhanced_entities<Product>(request));
         check(bool(result) && result.value().data.size() == (duplicate ? 4u : 3u),
               "typed query retains all rows including duplicate owners");
+        check(recording.observed_queries == 1 && recording.observed_projection.size() == 3 &&
+                  recording.observed_projection[0] == "id" &&
+                  recording.observed_projection[1] == "version" &&
+                  recording.observed_projection[2] == "name",
+              "executor receives exactly the original ordered native projection");
         auto& rows = result.value().data;
         check(
             provider.calls == 1 && provider.last_ids.size() == (duplicate ? 4u : 3u) &&

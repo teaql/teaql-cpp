@@ -1481,8 +1481,10 @@ inline std::optional<Json> Platform::borrowed_json(Memory r, EntityJsonTraversal
         load_state.is_loaded("version"),
         true);
     projection.dynamic(dynamic);
-    projection.reverse_many<Specialist>("specialist_list", load_state.is_loaded("specialist_list"));
-    projection.reverse_many<School>("school_list", load_state.is_loaded("school_list"));
+    projection.reverse_many<Specialist>(
+        "specialist_list", load_state.is_loaded("specialist_list"), &specialist_list_);
+    projection.reverse_many<School>(
+        "school_list", load_state.is_loaded("school_list"), &school_list_);
     return projection.finish(dynamic_field_values());
 }
 
@@ -1693,7 +1695,8 @@ inline std::optional<Json> Specialist::borrowed_json(Memory r,
                                  platform_ ? &*platform_ : nullptr,
                                  load_state.is_loaded("platform"),
                                  generated_detail::encode(r, platform_id_));
-    projection.reverse_many<School>("school_list", load_state.is_loaded("school_list"));
+    projection.reverse_many<School>(
+        "school_list", load_state.is_loaded("school_list"), &school_list_);
     return projection.finish(dynamic_field_values());
 }
 
@@ -1995,7 +1998,8 @@ inline std::optional<Json> School::borrowed_json(Memory r, EntityJsonTraversal& 
                                    advisor_ ? &*advisor_ : nullptr,
                                    load_state.is_loaded("advisor"),
                                    generated_detail::encode(r, advisor_id_));
-    projection.reverse_many<Enrollment>("enrollment_list", load_state.is_loaded("enrollment_list"));
+    projection.reverse_many<Enrollment>(
+        "enrollment_list", load_state.is_loaded("enrollment_list"), &enrollment_list_);
     return projection.finish(dynamic_field_values());
 }
 
