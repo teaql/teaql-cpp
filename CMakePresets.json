@@ -626,7 +626,8 @@
         "teaql_module_resolved_select_preparation_probe",
         "teaql_module_resolved_mutation_preparation_probe",
         "teaql_module_runtime_mutation_probe",
-        "teaql_module_resolved_dynamic_rows_probe"
+        "teaql_module_resolved_dynamic_rows_probe",
+        "teaql_module_entity_stream_probe"
       ]
     },
     {

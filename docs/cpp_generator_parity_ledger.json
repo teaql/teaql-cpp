@@ -4969,7 +4969,7 @@
         "teaql_runtime/include/teaql/runtime/entity_graph_decoder.hpp",
         "teaql_runtime/src/data_service/relation_graph.cpp"
       ],
-      "status": "partial",
+      "status": "qualified",
       "cpp_api_mapping": [
         "Runtime EntityQuery separates source and result models; generated returnType delegates list/one/stream decoding while source metadata and creation remain unchanged. Application Graph error wrapping is centralized and keeps the C++ service-error carrier.",
         "Context-bound EntityQuery executeForCount/executeForExists/executeForFirst/executeForPage implement source scalar conversion and count/list ordering over independent services.",
@@ -5260,11 +5260,26 @@
           "path": "docs/parity/resolved_query_schema_before_5_0_6.json.gz",
           "review": "docs/resolved_query_schema_5_0_6.md",
           "scope": "RQS01: restore readonly query-result schema attachment and logging-disabled cache-hit classification before requalifying G09. The complete Rust 5.0.6 runtime and both C++ frontends reproduce 288 differing inputs out of 2304 per frontend. Preserve the earlier EX01-EX14 and cursor acceptance as historical checkpoints; repair and supplemental regression/lifetime evidence remain pending."
+        },
+        {
+          "kind": "resolved_query_schema_nonstream_repair",
+          "path": "docs/parity/resolved_query_schema_installed_5_0_6.json.gz",
+          "review": "docs/resolved_query_schema_5_0_6.md",
+          "supplemental_source": "docs/parity/resolved_query_typed_schema_source_5_0_6.json.gz",
+          "sanitizer": "docs/parity/resolved_query_schema_sanitize_5_0_6.json.gz",
+          "scope": "Prepared compact/owned/cache returns attach readonly schemas after raw cache storage; logging-disabled aggregation scopes preserve cache-hit classification. Ordinary typed lists use prepared compact execution and shared metadata decoding with a fresh Context-owned runtime state. Source/native/imported2304+192, native45/module18, canonical/no-work and scoped ASan/UBSan4 pass. Intermediate gate-registration failure is retained; the missing module capture test is explicitly registered. No generator or base/context/provider contract changes. Streamed readonly schemas, dynamic-aware/enhanced compositions, complete resolved.rs and P0-P7 remain open; G09 is not requalified."
+        },
+        {
+          "kind": "readonly_stream_schema_supplemental_requalification",
+          "path": "docs/parity/resolved_query_schema_verdict_requalified_5_0_6.json.gz",
+          "review": "docs/resolved_stream_schema_5_0_6.md",
+          "terminal": "docs/parity/resolved_stream_schema_installed_5_0_6.json.gz",
+          "sanitizer": "docs/parity/resolved_stream_schema_sanitize_5_0_6.json.gz",
+          "previous_question": "RQS01: restore readonly query-result schema attachment and logging-disabled cache-hit classification before requalifying G09. The complete Rust 5.0.6 runtime and both C++ frontends reproduce 288 differing inputs out of 2304 per frontend. Preserve the earlier EX01-EX14 and cursor acceptance as historical checkpoints; repair and supplemental regression/lifetime evidence remain pending. Nonstream continuation now passes source/native/imported2304+192, native45/module18 and scoped SAN4; source review identifies missing readonly-schema propagation in EntityStreamItems. Preserve RQS01 until stream counterexample/repair/lifetime and supplemental acceptance are complete.",
+          "disposition": "RQS01 resolved within existing EX01-EX14: retain prior nonstream2304+192/native45/module18 and unchanged compiler/Java checkpoints; current readonly stream769/native10/module8, canonical/no-work and scoped SAN4 pass. Query schema uses an existing registered Context object through ArenaBorrow, preserving lazy success/error/empty chunks and exact-once close across actual deletion, checked stale handles and explicit Global row copies. Production delta since the nonstream checkpoint is exactly entity_stream.hpp; all generator inputs remain unchanged. Earlier fixture-order and inline-unregistered-schema failures remain separate. G09 restores its preceding qualified scope; complete resolved.rs, model/storage/governance integration, all other capability verdicts and P0-P7 remain independent."
         }
       ],
-      "open_questions": [
-        "RQS01: restore readonly query-result schema attachment and logging-disabled cache-hit classification before requalifying G09. The complete Rust 5.0.6 runtime and both C++ frontends reproduce 288 differing inputs out of 2304 per frontend. Preserve the earlier EX01-EX14 and cursor acceptance as historical checkpoints; repair and supplemental regression/lifetime evidence remain pending."
-      ],
+      "open_questions": [],
       "qualification_contract": "docs/execution_acceptance_5_0_6.md",
       "cross_capability_requirements": [
         "G08 relationship aggregates, roll-up/facet algorithms, cache and the retained quoted-Line disposition",
@@ -7578,7 +7593,14 @@
         "docs/parity/resolved_mutation_privacy_assertions_5_0_6.json.gz",
         "docs/resolved_dynamic_rows_5_0_6.md",
         "docs/parity/resolved_dynamic_rows_source_5_0_6.json.gz",
-        "docs/parity/resolved_dynamic_rows_installed_5_0_6.json.gz"
+        "docs/parity/resolved_dynamic_rows_installed_5_0_6.json.gz",
+        {
+          "kind": "resolved_ordinary_dynamic_selection_repair",
+          "path": "docs/resolved_dynamic_typed_5_0_6.md",
+          "terminal": "docs/parity/resolved_dynamic_typed_move_installed_5_0_6.json.gz",
+          "sanitizer": "docs/parity/resolved_dynamic_typed_move_sanitize_5_0_6.json.gz",
+          "scope": "Actual complete source reproduces124/288 differences in ordinary typed queries:72 cache events,72 requests,90 classifications and16 outcomes with overlap. Incoming selection scopes diagnostics, behavior precedes Policy exactly once, final selection controls dynamic decode, and compact owned fetch bypasses cache even for empty rows. Shared typed state removes duplicate private decode logic, preserving all public classes/layers. Source/native/imported288,576 provider requests,1152 callbacks,zero cache events; native10/module10/canonical/no-work and scoped SAN4 pass, including eight actual Context deletion/cancel/resume paths and existing generated positive integration. New source carrier is intentionally unsupported; supported indexed loading, enhanced compositions, metadata/storage/governance and full phase exits remain separately tracked. No source/capability promotion. A final ownership refinement moves the existing private query snapshot into the shared state rather than making another deep copy, while retaining the const-query constructor. Fresh actual source/native/module10/10 and focused SAN4 requalify this final implementation; pre-move passing receipts retain their checkpoint scopes."
+        }
       ],
       "open_questions": [
         "SQ01: complete the remaining source/model matrix across every capability and wider ordinary/generated-ledger caller configurations. The bounded nonempty borrowed-root adapter now passes its complete source/runtime/ownership, Java,196 compiler and78-SDK artifact gates in generated_runtime_state_bridge_5_0_6.md; shared ordinary carrier dispatch is separately qualified in runtime_state_bridge_5_0_6.md. Neither slice accepts complete entity_save.rs or every generated caller. G08 quoted-column and G12 invalid naming dispositions still await the user; wider G15 quoted-FK5 remains unaccepted.",

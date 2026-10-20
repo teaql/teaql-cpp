@@ -1365,9 +1365,20 @@
         "docs/parity/resolved_mutation_privacy_assertions_5_0_6.json.gz",
         "docs/resolved_dynamic_rows_5_0_6.md",
         "docs/parity/resolved_dynamic_rows_source_5_0_6.json.gz",
-        "docs/parity/resolved_dynamic_rows_installed_5_0_6.json.gz"
+        "docs/parity/resolved_dynamic_rows_installed_5_0_6.json.gz",
+        "docs/resolved_query_schema_5_0_6.md",
+        "docs/parity/resolved_query_schema_installed_5_0_6.json.gz",
+        "docs/parity/resolved_query_schema_sanitize_5_0_6.json.gz",
+        "docs/resolved_stream_schema_5_0_6.md",
+        "docs/parity/resolved_stream_schema_installed_5_0_6.json.gz",
+        "docs/parity/resolved_query_schema_verdict_requalified_5_0_6.json.gz",
+        "docs/resolved_dynamic_typed_5_0_6.md",
+        "docs/parity/resolved_dynamic_typed_installed_5_0_6.json.gz",
+        "docs/parity/resolved_dynamic_typed_sanitize_5_0_6.json.gz",
+        "docs/parity/resolved_dynamic_typed_move_installed_5_0_6.json.gz",
+        "docs/parity/resolved_dynamic_typed_move_sanitize_5_0_6.json.gz"
       ],
-      "acceptance_scope": "Pending complete resolved.rs review; actual loaded-graph3568 and enhanced aggregate320 are bounded execution/provenance witnesses. Retained expectations, Context ownership domains and full capability/P0-P7 requirements remain separate."
+      "acceptance_scope": "Pending complete resolved.rs review. Earlier row/cache2304,typed192 and stream769 retain their checkpoint scopes. Ordinary dynamic typed selection now matches288 actual-source/native/imported results: initial selection controls scope, final post-Behavior/Policy selection controls decode, and compact owned reads bypass aggregation cache. Native10/module10/canonical/no-work and SAN4 preserve supported generated integration and eight pending cleanup/resume controls. Supported indexed caller compositions, full enhanced/model/storage/governance responsibilities and P0-P7 remain separate; no source promotion. Final snapshot-move ownership refinement retains source/native/module10/10 and SAN4; no extra deep query copy or ownership domain is introduced."
     },
     {
       "source": "teaql-runtime/src/data_service/types.rs",

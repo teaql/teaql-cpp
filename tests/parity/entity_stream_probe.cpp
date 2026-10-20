@@ -1,5 +1,6 @@
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/core/detail/model_json.hpp>
+#include <array>
 #include <iostream>
 
 using namespace teaql;
@@ -31,9 +32,13 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String>, StreamQueryExecut
     std::int64_t error_at;
     bool last_first;
     unsigned closes = 0, pending = 0;
+    bool schema_probe = false, empty = false;
+    String result_kind;
+    unsigned* external_closes = nullptr;
 
     Mock(std::allocator_arg_t, Allocator a, std::int64_t error_at, bool last_first)
-        : resource(a.resource()), requests(resource), error_at(error_at), last_first(last_first) {}
+        : resource(a.resource()), requests(resource), error_at(error_at), last_first(last_first),
+          result_kind(a.resource()) {}
 
     Memory memory_resource() const {
         return resource;
@@ -70,8 +75,27 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String>, StreamQueryExecut
             }
             StreamChunk chunk(
                 std::allocator_arg, Allocator(resource), current, current == 2 || owner.last_first);
-            chunk.rows.emplace_back();
-            chunk.rows.back().insert("id", Value(resource, std::uint64_t(current + 1)));
+            if (!owner.schema_probe || !owner.empty) {
+                for (unsigned row = 0; row < (owner.schema_probe ? 2u : 1u); ++row) {
+                    Record values(resource);
+                    values.emplace(String("id", resource),
+                                   Value(resource, std::uint64_t(current + 1 + row)));
+                    if (owner.schema_probe) {
+                        Value value(resource);
+                        if (owner.result_kind == "u64") {
+                            value = Value(resource, std::uint64_t(7));
+                        } else if (owner.result_kind == "text") {
+                            value = Value(resource, "result");
+                        } else if (owner.result_kind == "typed_null") {
+                            value = Value(resource, TypedNull{DataType::U64});
+                        } else if (owner.result_kind != "null") {
+                            throw std::logic_error("Unknown stream fixture result kind");
+                        }
+                        values.emplace(String("_result", resource), std::move(value));
+                    }
+                    chunk.rows.emplace_back(values);
+                }
+            }
             return std::optional<Item>(Item::ok(resource, std::move(chunk)));
         }
 
@@ -87,6 +111,9 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String>, StreamQueryExecut
             if (!closed) {
                 closed = true;
                 ++owner.closes;
+                if (owner.external_closes) {
+                    ++*owner.external_closes;
+                }
             }
         }
     };
@@ -164,6 +191,13 @@ static Json evaluate(UserContext& context, const Json& input) {
                               ? std::get<std::int64_t>(error_value)
                               : std::int64_t(std::get<std::uint64_t>(error_value));
     auto& executor = context.make<Mock>(error_at, flag(input, "last_first"));
+    const auto& input_fields = std::get<Json::Object>(input.data);
+    const bool schema_probe = input_fields.contains("schema_probe") && flag(input, "schema_probe");
+    executor.schema_probe = schema_probe;
+    if (schema_probe) {
+        executor.empty = flag(input, "empty");
+        executor.result_kind = std::get<String>(field(input, "result_kind").data);
+    }
     auto& repo = EntityDataService<Mock>::for_executor(context, "Item", context, executor);
     auto query = repo.select();
     query.enable_aggregation_cache().comment("business");
@@ -192,6 +226,14 @@ static Json evaluate(UserContext& context, const Json& input) {
     } else if (shape == "continuous") {
         query.order_asc("id").optimize_for_continuous_page_fetch();
     }
+    if (schema_probe && std::get<String>(field(input, "schema_kind").data) != "none") {
+        const std::array definitions{DynamicPropertyDefinitions::Field{
+            "_result",
+            std::get<String>(field(input, "schema_kind").data) == "text" ? DataType::Text
+                                                                         : DataType::U64}};
+        auto result = DynamicPropertyDefinitions::from_fields(r, definitions);
+        query.with_dynamic_property_definitions(result.value());
+    }
     auto output = detail::model_json(r);
     Json::Array items(r);
     std::optional<PurposedSelectQuery> purpose;
@@ -209,16 +251,50 @@ static Json evaluate(UserContext& context, const Json& input) {
             detail::model_put(output, "start_error", result.error().to_string(r));
         } else {
             auto& stream = result.value().get();
-            while (auto* next = stream.wait_next()) {
-                auto item = detail::model_json(r);
-                if (!*next) {
-                    detail::model_put(item, "error", next->error().to_string(r));
-                } else {
-                    detail::model_put(item, "index", std::uint64_t(next->value().chunk_index));
-                    detail::model_put(item, "last", next->value().is_last);
-                    detail::model_put(item, "id", *next->value().rows[0].get("id")->try_u64());
+            auto consumption =
+                schema_probe ? std::string_view(std::get<String>(field(input, "consume").data))
+                             : "all";
+            if (consumption == "none") {
+                stream.cancel();
+            } else if (consumption == "pending") {
+                if (stream.poll_next().kind !=
+                    StreamPoll<Result<StreamChunk, DataServiceError<String>>>::Kind::Pending) {
+                    throw std::runtime_error("Expected initial pending stream");
                 }
-                items.emplace_back(std::move(item));
+                stream.cancel();
+            } else {
+                while (auto* next = stream.wait_next()) {
+                    auto item = detail::model_json(r);
+                    if (!*next) {
+                        detail::model_put(item, "error", next->error().to_string(r));
+                    } else {
+                        detail::model_put(item, "index", std::uint64_t(next->value().chunk_index));
+                        detail::model_put(item, "last", next->value().is_last);
+                        const auto& rows = next->value().rows;
+                        detail::model_put(item,
+                                          "id",
+                                          rows.empty() ? Json(r)
+                                                       : Json(r, *rows[0].get("id")->try_u64()));
+                        if (schema_probe) {
+                            Json::Array schemas(r);
+                            for (const auto& row : rows) {
+                                auto schema = detail::model_json(r);
+                                CompactRow plain(std::allocator_arg, Allocator(r), row.copy_map(r));
+                                detail::model_put(schema, "equals_plain", row == plain);
+                                auto valid = row.validate_dynamic_properties();
+                                detail::model_put(
+                                    schema, "validation", valid ? Json(r) : Json(r, valid.error()));
+                                schemas.emplace_back(std::move(schema));
+                            }
+                            detail::model_put(item, "schema", schemas);
+                        }
+                    }
+                    items.emplace_back(std::move(item));
+                    if (consumption == "one") {
+                        stream.cancel();
+                        break;
+                    }
+                }
             }
         }
     }
@@ -229,7 +305,105 @@ static Json evaluate(UserContext& context, const Json& input) {
     return output;
 }
 
-int main() {
+static void schema_lifetimes() {
+    auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
+    for (unsigned mode = 0; mode < 6; ++mode) {
+        GlobalContext global;
+        unsigned closes = 0;
+        std::optional<EntityQueryStream<String>> handle;
+        Ref<CompactRow> retained;
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        user_context->disable_sql_log();
+        auto& executor = user_context->make<Mock>(mode == 4 ? 1 : mode == 5 ? 0 : -1, false);
+        executor.schema_probe = true;
+        executor.result_kind = "text";
+        executor.external_closes = &closes;
+        auto& repo =
+            EntityDataService<Mock>::for_executor(*user_context, "Item", *user_context, executor);
+        {
+            auto query = repo.select();
+            const std::array fields{DynamicPropertyDefinitions::Field{"_result", DataType::U64}};
+            auto definitions = DynamicPropertyDefinitions::from_fields(r, fields);
+            query.with_dynamic_property_definitions(definitions.value())
+                .comment("Open readonly stream");
+            PurposedSelectQuery request(
+                std::allocator_arg, Allocator(r), query, "Verify delayed schema ownership");
+            const auto& result = repo.fetch_stream(request).wait();
+            if (!result) {
+                throw std::runtime_error("Schema lifetime stream did not open");
+            }
+            handle.emplace(std::allocator_arg, Allocator(r), result.value());
+        }
+        // The request and definitions are gone before the first delayed poll.
+        auto& stream = handle->get();
+        if (mode == 1) {
+            using Kind = StreamPoll<Result<StreamChunk, DataServiceError<String>>>::Kind;
+            if (stream.poll_next().kind != Kind::Pending) {
+                throw std::runtime_error("Expected initial pending cursor");
+            }
+        } else if (mode >= 2) {
+            const auto* item = stream.wait_next();
+            if (!item || bool(*item) != (mode != 5)) {
+                throw std::runtime_error("Schema stream changed provider error behavior");
+            }
+            if (mode != 5) {
+                const auto& rows = item->value().rows;
+                if (rows.size() != 2 || rows[0].validate_dynamic_properties() ||
+                    rows[1].validate_dynamic_properties()) {
+                    throw std::runtime_error("Delayed stream lost readonly schema");
+                }
+                retained = user_context->make_global<CompactRow>(rows.front());
+            }
+            if (mode == 3) {
+                stream.cancel();
+            } else if (mode == 4) {
+                unsigned errors = 0, successful = 1;
+                while (const auto* next = stream.wait_next()) {
+                    if (!*next) {
+                        ++errors;
+                    } else {
+                        ++successful;
+                        if (next->value().rows.front().validate_dynamic_properties()) {
+                            throw std::runtime_error("A later chunk lost its schema");
+                        }
+                    }
+                }
+                if (errors != 1 || successful != 2) {
+                    throw std::runtime_error("Stream must continue after a provider item error");
+                }
+            }
+        }
+        user_context.reset();
+        if (closes != 1) {
+            throw std::runtime_error("Schema stream must close exactly once before reclamation");
+        }
+        bool rejected = false;
+        try {
+            (void)handle->get();
+        } catch (const ReferenceError& error) {
+            rejected = error.kind() == ReferenceError::Kind::Closed;
+        }
+        if (!rejected) {
+            throw std::runtime_error("An ordinary stream handle must not extend Context lifetime");
+        }
+        if (mode >= 2 && mode < 5) {
+            auto next_user_context = global.make_user_context();
+            if (next_user_context->get(next_user_context->rebind_global(retained))
+                    .validate_dynamic_properties()) {
+                throw std::runtime_error("Explicit Global stream-row copy lost readonly schema");
+            }
+        }
+    }
+    std::pmr::set_default_resource(previous);
+    std::cout << "Stream schema lifetime contracts passed\n";
+}
+
+int main(int argc, char** argv) {
+    if (argc == 2 && std::string_view(argv[1]) == "--schema-self-test") {
+        schema_lifetimes();
+        return 0;
+    }
     GlobalContext global;
     std::string line;
     while (std::getline(std::cin, line)) {

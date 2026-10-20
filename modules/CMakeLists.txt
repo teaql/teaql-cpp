@@ -2077,3 +2077,37 @@ if(TARGET teaql_module_entity_query_probe)
         --cpp $<TARGET_FILE:teaql_module_entity_query_probe>)
     set_tests_properties(module_resolved_query_schema_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
 endif()
+
+if(TARGET teaql_module_entity_query_probe)
+    add_test(NAME module_resolved_query_typed_schema_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_query_typed_schema_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_entity_query_probe>)
+    set_tests_properties(module_resolved_query_typed_schema_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_test(NAME module_resolved_query_schema_context_contracts COMMAND teaql_module_entity_query_probe --schema-self-test)
+endif()
+
+if(TARGET teaql_module_entity_query_probe)
+    add_test(NAME module_entity_query_capture_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_entity_query_capture_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_entity_query_probe>)
+    set_tests_properties(module_entity_query_capture_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+endif()
+
+if(TARGET teaql_module_entity_stream_probe)
+    add_test(NAME module_entity_stream_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_entity_stream_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_entity_stream_probe>)
+    add_test(NAME module_resolved_stream_schema_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_stream_schema_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_entity_stream_probe>)
+    set_tests_properties(module_entity_stream_rust_parity module_resolved_stream_schema_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_test(NAME module_resolved_stream_schema_context_contracts COMMAND teaql_module_entity_stream_probe --schema-self-test)
+endif()
+
+if(TARGET teaql_module_entity_query_probe)
+    add_test(NAME module_resolved_dynamic_typed_rust_parity COMMAND ${Python3_EXECUTABLE}
+        ${PROJECT_SOURCE_DIR}/tests/parity/compare_resolved_dynamic_typed_5_0_6.py
+        --cpp $<TARGET_FILE:teaql_module_entity_query_probe>)
+    set_tests_properties(module_resolved_dynamic_typed_rust_parity PROPERTIES ENVIRONMENT "TEAQL_LOG_ENDPOINT=off")
+    add_test(NAME module_resolved_dynamic_typed_context_contracts COMMAND teaql_module_entity_query_probe --dynamic-self-test)
+endif()

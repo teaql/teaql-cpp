@@ -110,6 +110,7 @@ private:
                         EntityDataServiceAccess::extend_intent(service_, intent);
                     }
                     cache_outcome_ = "hit";
+                    attach_property_definitions(*rows);
                     return R::ok(r, std::move(*rows));
                 }
                 auto kind = resource_type_name<E>();
@@ -177,7 +178,15 @@ private:
             cache_->get().put(key_, rows);
             cache_outcome_ = "miss";
         }
+        attach_property_definitions(rows);
         return R::ok(r, std::move(rows));
+    }
+
+    void attach_property_definitions(std::span<CompactRow> rows) const {
+        if (query_.dynamic_property_definitions) {
+            CompactRow::attach_dynamic_property_definitions(rows,
+                                                            *query_.dynamic_property_definitions);
+        }
     }
 
     void finish_cache(std::string_view outcome) {
@@ -241,6 +250,12 @@ public:
         auto r = service_.memory_resource();
         while (true) {
             if (phase_ == Phase::Prepare) {
+                if (aggregate_entry_ && !prepared_) {
+                    if (auto error = scope_query()) {
+                        return R::err(
+                            r, DataServiceError<typename E::Error>::runtime(r, std::move(*error)));
+                    }
+                }
                 if (!prepared_) {
                     auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
                     if (!prepared) {
@@ -265,6 +280,14 @@ public:
                     query_.relation_aggregates.clear();
                     aggregate_entry_ = true;
                 }
+                if (prepared_ || aggregate_entry_ || query_.continuous_page_fetch ||
+                    !query_.object_group_bys.empty() || !query_.child_enhancements.empty() ||
+                    !query_.relations.empty()) {
+                    if (auto error = scope_query()) {
+                        return R::err(
+                            r, DataServiceError<typename E::Error>::runtime(r, std::move(*error)));
+                    }
+                }
                 auto intent = EntityDataServiceAccess::request_intent(service_, query_);
                 if (!intent) {
                     return R::err(
@@ -278,25 +301,6 @@ public:
                     return R::err(r,
                                   DataServiceError<typename E::Error>::runtime(
                                       r, RuntimeError::graph(r, error.what())));
-                }
-                if ((prepared_ || aggregate_entry_ || query_.continuous_page_fetch ||
-                     !query_.object_group_bys.empty() || !query_.child_enhancements.empty() ||
-                     !query_.relations.empty()) &&
-                    EntityDataServiceAccess::context_service(service_)
-                        .metadata.capture_execution_metadata()) {
-                    if (!EntityDataServiceAccess::has_intent(service_)) {
-                        auto source = query_.clone(r);
-                        for (const auto& aggregate : aggregates_) {
-                            source.child_enhancements.emplace_back(aggregate.query);
-                        }
-                        auto scoped = EntityDataServiceAccess::query_scoped(service_, source);
-                        if (!scoped) {
-                            return R::err(r,
-                                          DataServiceError<typename E::Error>::runtime(
-                                              r, std::move(scoped).error()));
-                        }
-                        service_ = std::move(scoped).value();
-                    }
                 }
                 phase_ = Phase::Cursor;
                 prepare_cursor();
@@ -512,6 +516,25 @@ public:
     }
 
 private:
+    std::optional<RuntimeError> scope_query() {
+        if (EntityDataServiceAccess::has_request_intent(service_)) {
+            return {};
+        }
+        auto source = query_.clone(service_.memory_resource());
+        if (EntityDataServiceAccess::context_service(service_)
+                .metadata.capture_execution_metadata()) {
+            for (const auto& aggregate : aggregates_) {
+                source.child_enhancements.emplace_back(aggregate.query);
+            }
+        }
+        auto scoped = EntityDataServiceAccess::query_scoped(service_, source);
+        if (!scoped) {
+            return std::move(scoped).error();
+        }
+        service_ = std::move(scoped).value();
+        return {};
+    }
+
     enum class Phase {
         Prepare,
         Cursor,
@@ -658,35 +681,21 @@ public:
 
     std::optional<R> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
-        if constexpr (!std::same_as<T, CompactRow>) {
-            if (query_.dynamic_field_selection) {
-                if (!child_) {
-                    child_ =
-                        &make_operation<R, DynamicEntityListOperation<E, T>>(r, service_, query_);
-                }
-                forwarding_.attach(child_->wake_signal(), wake);
-                if (auto* result = child_->poll()) {
-                    return copy_or_take_completed(*child_, *result);
-                }
-                return {};
-            }
-        }
         if (!child_) {
-            auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
-            if (!prepared) {
-                return R::err(
-                    r,
-                    DataServiceError<typename E::Error>::runtime(r, std::move(prepared).error()));
-            }
-            query_ = std::move(prepared).value();
-            if constexpr (std::same_as<T, CompactRow>) {
+            if constexpr (!std::same_as<T, CompactRow>) {
+                child_ = &make_operation<R, DynamicEntityListOperation<E, T>>(
+                    r, service_, std::move(query_));
+            } else {
+                auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
+                if (!prepared) {
+                    return R::err(r,
+                                  DataServiceError<typename E::Error>::runtime(
+                                      r, std::move(prepared).error()));
+                }
+                query_ = std::move(prepared).value();
                 auto& rows = make_operation<RelationRowsResult<E>, PreparedEntityQueryOperation<E>>(
                     r, service_, query_, true, true);
                 child_ = &make_operation<R, EntityRowListOperation<E>>(r, rows);
-            } else {
-                const auto& cs = EntityDataServiceAccess::context_service(service_);
-                ensure_identity_projection(EntityDataServiceAccess::context(service_), query_);
-                child_ = &cs.template fetch_entities<T>(query_);
             }
         }
         forwarding_.attach(child_->wake_signal(), wake);

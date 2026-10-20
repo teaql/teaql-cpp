@@ -10,12 +10,18 @@ class EntityStreamItems {
 public:
     using allocator_type = Allocator;
 
-    EntityStreamItems(std::allocator_arg_t, Allocator a, QueryStream<Error>& source)
+    EntityStreamItems(std::allocator_arg_t,
+                      Allocator a,
+                      QueryStream<Error>& source,
+                      const DynamicPropertyDefinitions* definitions)
         : resource_(a.resource()),
           source_(std::allocator_arg, a, source, resource_arena(source.memory_resource())) {
         if (source.memory_resource() != resource_) {
             source.cancel();
             throw std::invalid_argument("Entity stream must belong to its UserContext");
+        }
+        if (definitions) {
+            definitions_.emplace(std::allocator_arg, a, *definitions);
         }
     }
 
@@ -37,7 +43,11 @@ public:
                           DataServiceError<Error>::executor(
                               resource_, copy_or_take_error(source, *next.item))));
         }
-        return std::optional<Item>(Item::ok(resource_, clone_in(resource_, next.item->value())));
+        auto chunk = clone_in(resource_, next.item->value());
+        if (definitions_) {
+            CompactRow::attach_dynamic_property_definitions(chunk.rows, definitions_->get());
+        }
+        return std::optional<Item>(Item::ok(resource_, std::move(chunk)));
     }
 
     void finish_and_wait() noexcept {
@@ -52,6 +62,7 @@ public:
 private:
     Memory resource_;
     ResourceBorrow<QueryStream<Error>> source_;
+    std::optional<ArenaBorrow<DynamicPropertyDefinitions>> definitions_;
     WakeSignal::Forward forwarding_;
 };
 
@@ -161,7 +172,7 @@ public:
         // Transfer cancellation only after publishing the returned handle.
         auto& stream =
             make_stream<Result<StreamChunk, DataServiceError<Error>>, EntityStreamItems<Error>>(
-                r, source);
+                r, source, query_.dynamic_property_definitions.get());
         mapped_ = &stream;
         return R::ok(
             r,

@@ -4990,6 +4990,13 @@
       "source": "tests/parity/resolved_dynamic_rows_probe.cpp",
       "import_module": "teaql_runtime",
       "cases": []
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "entity_stream_probe",
+      "source": "tests/parity/entity_stream_probe.cpp",
+      "import_module": "teaql_runtime",
+      "cases": []
     }
   ],
   "fixtures": [

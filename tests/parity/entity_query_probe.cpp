@@ -1,6 +1,7 @@
 #include <teaql/runtime/data_service.hpp>
 #include <teaql/core/detail/model_json.hpp>
 #include <teaql/core/detail/query_debug.hpp>
+#include "../support/entity_decoder_fixture.hpp"
 #include <array>
 #include <iostream>
 
@@ -46,6 +47,84 @@ static std::span<const CompactRow> result_rows(const Vector<CompactRow>& rows) {
 static std::span<const CompactRow> result_rows(const SmartList<CompactRow>& rows) {
     return rows.data;
 }
+
+static Vector<CompactRow> result_rows(const SmartList<decoder_fixture::Item<>>& list) {
+    Vector<CompactRow> rows(list.data.get_allocator().resource());
+    for (const auto& item : list.data) {
+        rows.emplace_back(item.row);
+    }
+    return rows;
+}
+
+static void
+dynamic_selection(const UserContext& user_context, SelectQuery& query, std::string_view action) {
+    if (action == "add") {
+        auto& selection = user_context.make<DynamicFieldSelection>(
+            DynamicFieldSelection::all(user_context.memory_resource()));
+        query.dynamic_field_selection = detail::ScopedBox<DynamicFieldSelection>(&selection);
+    } else if (action == "remove") {
+        query.dynamic_field_selection.reset();
+    } else if (action != "keep") {
+        throw std::logic_error("selection fixture action");
+    }
+}
+
+struct SelectionCalls {
+    using allocator_type = Allocator;
+    Json::Array calls;
+
+    SelectionCalls(std::allocator_arg_t, Allocator a) : calls(a.resource()) {}
+};
+
+static RuntimeHookResult select_dynamic_fields(const UserContext& user_context,
+                                               SelectQuery& query,
+                                               SelectionCalls& calls,
+                                               std::string_view stage,
+                                               std::string_view action) {
+    auto r = user_context.memory_resource();
+    const bool before = bool(query.dynamic_field_selection);
+    dynamic_selection(user_context, query, action);
+    auto event = detail::model_json(r);
+    detail::model_put(event, "stage", stage);
+    detail::model_put(event, "before", before);
+    detail::model_put(event, "after", bool(query.dynamic_field_selection));
+    calls.calls.emplace_back(std::move(event));
+    return RuntimeHookResult::ok(r, {});
+}
+
+struct SelectionBehavior final : EntityDataServiceBehavior {
+    using allocator_type = Allocator;
+    SelectionCalls& calls;
+    String action;
+
+    SelectionBehavior(std::allocator_arg_t,
+                      Allocator a,
+                      SelectionCalls& calls,
+                      std::string_view action)
+        : calls(calls), action(action, a.resource()) {}
+
+    RuntimeHookResult
+    before_select(Memory, const UserContext& user_context, SelectQuery& query) const override {
+        return select_dynamic_fields(user_context, query, calls, "behavior", action);
+    }
+};
+
+struct SelectionPolicy final : RequestPolicy {
+    using allocator_type = Allocator;
+    SelectionCalls& calls;
+    String action;
+
+    SelectionPolicy(std::allocator_arg_t,
+                    Allocator a,
+                    SelectionCalls& calls,
+                    std::string_view action)
+        : calls(calls), action(action, a.resource()) {}
+
+    RuntimeHookResult
+    enforce_select(Memory, const UserContext& user_context, SelectQuery& query) const override {
+        return select_dynamic_fields(user_context, query, calls, "policy", action);
+    }
+};
 
 struct RecordingCache final : AggregationCacheBackend {
     using allocator_type = Allocator;
@@ -94,17 +173,33 @@ template <class T>
 struct Ready {
     using allocator_type = Allocator;
     T result;
+    bool pending;
+    unsigned* cancellations;
 
-    Ready(std::allocator_arg_t, Allocator a, T result)
-        : result(detail::move_in(a.resource(), std::move(result))) {}
+    Ready(std::allocator_arg_t,
+          Allocator a,
+          T result,
+          bool pending = false,
+          unsigned* cancellations = nullptr)
+        : result(detail::move_in(a.resource(), std::move(result))), pending(pending),
+          cancellations(cancellations) {}
 
-    std::optional<T> poll(WakeSignal&) {
+    std::optional<T> poll(WakeSignal& wake) {
+        if (pending) {
+            pending = false;
+            wake.notify();
+            return {};
+        }
         return std::move(result);
     }
 
     void finish_and_wait() noexcept {}
 
-    void cancel_and_wait() noexcept {}
+    void cancel_and_wait() noexcept {
+        if (cancellations) {
+            ++*cancellations;
+        }
+    }
 };
 
 struct Mock : QueryExecutor<String>, MutationExecutor<String> {
@@ -114,6 +209,8 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
     mutable Json::Array classifications;
     bool fail;
     bool schema_probe = false, empty = false;
+    bool delayed = false;
+    unsigned* cancellations = nullptr;
     String result_kind;
 
     Mock(std::allocator_arg_t, Allocator a, bool fail)
@@ -191,7 +288,8 @@ struct Mock : QueryExecutor<String>, MutationExecutor<String> {
         if (!schema_probe || !empty) {
             result.rows.emplace_back(values);
         }
-        return make_operation<R, Ready<R>>(target, R::ok(target, std::move(result)));
+        return make_operation<R, Ready<R>>(
+            target, R::ok(target, std::move(result)), delayed, cancellations);
     }
 
     DataServiceOperationResult<MutationResult, String>& mutate(Memory, MutationRequest) override {
@@ -235,8 +333,24 @@ static Json evaluate(UserContext& context, const Json& input) {
         executor.empty = flag(input, "empty");
         executor.result_kind = std::get<String>(field(input, "result_kind").data);
     }
+    const bool dynamic_probe = options.contains("dynamic_probe") && flag(input, "dynamic_probe");
+    SelectionCalls* selection_calls = nullptr;
+    if (dynamic_probe) {
+        selection_calls = &context.make<SelectionCalls>();
+        auto& behavior = context.make<SelectionBehavior>(
+            *selection_calls, std::get<String>(field(input, "selection_behavior").data));
+        auto& registry = context.make<InMemoryEntityDataServiceBehaviorRegistry>();
+        registry.register_behavior("Item", context, behavior);
+        context.set_entity_data_service_behavior_registry(context, registry);
+        auto& policy = context.make<SelectionPolicy>(
+            *selection_calls, std::get<String>(field(input, "selection_policy").data));
+        context.set_request_policy(context, policy);
+    }
     auto& repo = EntityDataService<Mock>::for_executor(context, "Item", context, executor);
     auto query = repo.select();
+    if (dynamic_probe && flag(input, "initial_dynamic")) {
+        dynamic_selection(context, query, "add");
+    }
     if (flag(input, "cache")) {
         query.enable_aggregation_cache();
     }
@@ -298,7 +412,12 @@ static Json evaluate(UserContext& context, const Json& input) {
             }
         };
         try {
-            if (mode == "list") {
+            if (mode == "typed") {
+                collect(repo.fetch_entities<decoder_fixture::Item<>>(*wrapped).wait(),
+                        [](const auto& v) {
+                            return v.data.size();
+                        });
+            } else if (mode == "list") {
                 collect(repo.fetch_smart_list(*wrapped).wait(), [](const auto& v) {
                     return v.data.size();
                 });
@@ -326,12 +445,158 @@ static Json evaluate(UserContext& context, const Json& input) {
         detail::model_put(output, "cache_events", recording->events);
         detail::model_put(output, "classifications", executor.classifications);
     }
+    if (dynamic_probe) {
+        detail::model_put(output, "selection_calls", selection_calls->calls);
+    }
     auto plan = context.continuous_page_plan();
     detail::model_put(output, "continuous", plan ? Json(r, *plan) : Json(r));
     return output;
 }
 
-int main() {
+static void schema_lifetimes() {
+    auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
+    {
+        GlobalContext global;
+        std::array<Ref<CompactRow>, 4> retained;
+        auto user_context = global.make_user_context();
+        auto r = user_context->memory_resource();
+        user_context->disable_sql_log();
+        auto& executor = user_context->make<Mock>(false);
+        executor.schema_probe = true;
+        executor.result_kind = "text";
+        auto& cache = user_context->make<InMemoryAggregationCache>("lifetime");
+        user_context->insert_resource(*user_context, cache);
+        auto& repo =
+            EntityDataService<Mock>::for_executor(*user_context, "Item", *user_context, executor);
+        for (unsigned mode = 0; mode < retained.size(); ++mode) {
+            Ref<CompactRow> row;
+            {
+                auto query = repo.select();
+                const std::array fields{
+                    DynamicPropertyDefinitions::Field{"_result", DataType::U64}};
+                auto definitions = DynamicPropertyDefinitions::from_fields(r, fields);
+                query.with_dynamic_property_definitions(definitions.value());
+                query.comment("Inspect schema lifetime").enable_aggregation_cache();
+                PurposedSelectQuery wrapped(
+                    std::allocator_arg, Allocator(r), query, "Retain explicit readonly schema");
+                // Exercise a miss and a hit on cache-capable entries.
+                for (unsigned call = 0; call < 2; ++call) {
+                    if (mode == 0 || mode == 1) {
+                        const auto& result =
+                            mode == 0 ? repo.fetch_all(wrapped).wait()
+                                      : repo.fetch_all_owned(detail::clone_in(r, wrapped)).wait();
+                        if (!result || result.value().size() != 1) {
+                            throw std::runtime_error("Schema fixture must return one row");
+                        }
+                        row = user_context->make_ref<CompactRow>(result.value().front());
+                    } else {
+                        const auto& result =
+                            mode == 2 ? repo.fetch_smart_list(wrapped).wait()
+                                      : repo.fetch_smart_list_with_relation_aggregates(wrapped, {})
+                                            .wait();
+                        if (!result || result.value().data.size() != 1) {
+                            throw std::runtime_error("Schema fixture must return one list row");
+                        }
+                        row = user_context->make_ref<CompactRow>(result.value().data.front());
+                    }
+                }
+                const auto& typed = repo.fetch_entities<decoder_fixture::Item<>>(wrapped).wait();
+                if (!typed || typed.value().data.size() != 1 || !typed.value().data.front().state ||
+                    typed.value().data.front().row.validate_dynamic_properties()) {
+                    throw std::runtime_error(
+                        "Typed decoder must preserve runtime state and schema");
+                }
+            }
+            if (user_context->get(row).validate_dynamic_properties()) {
+                throw std::runtime_error("Schema must survive its temporary query");
+            }
+            retained[mode] = user_context->make_global<CompactRow>(user_context->get(row));
+        }
+        user_context.reset();
+        auto next_user_context = global.make_user_context();
+        for (const auto& row : retained) {
+            if (next_user_context->get(next_user_context->rebind_global(row))
+                    .validate_dynamic_properties()) {
+                throw std::runtime_error("Explicit Global copy must retain its schema");
+            }
+        }
+    }
+    std::pmr::set_default_resource(previous);
+    std::cout << "Query schema lifetime contracts passed\n";
+}
+
+static void dynamic_lifetimes() {
+    auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
+    for (bool selected : {false, true}) {
+        for (unsigned mode = 0; mode < 4; ++mode) {
+            GlobalContext global;
+            unsigned cancellations = 0;
+            auto user_context = global.make_user_context();
+            auto r = user_context->memory_resource();
+            user_context->disable_sql_log();
+            auto& calls = user_context->make<SelectionCalls>();
+            auto& behavior = user_context->make<SelectionBehavior>(calls, "keep");
+            auto& registry = user_context->make<InMemoryEntityDataServiceBehaviorRegistry>();
+            registry.register_behavior("Item", *user_context, behavior);
+            user_context->set_entity_data_service_behavior_registry(*user_context, registry);
+            auto& policy = user_context->make<SelectionPolicy>(calls, selected ? "remove" : "add");
+            user_context->set_request_policy(*user_context, policy);
+            auto& executor = user_context->make<Mock>(false);
+            executor.delayed = true;
+            executor.cancellations = &cancellations;
+            auto& repo = EntityDataService<Mock>::for_executor(
+                *user_context, "Item", *user_context, executor);
+            {
+                auto query = repo.select();
+                if (selected) {
+                    dynamic_selection(*user_context, query, "add");
+                }
+                query.comment("Load a prepared dynamic selection");
+                PurposedSelectQuery request(std::allocator_arg,
+                                            Allocator(r),
+                                            query,
+                                            "Verify suspended typed query cleanup");
+                auto& work = repo.fetch_entities<decoder_fixture::Item<>>(request);
+                if (mode != 0) {
+                    if (work.poll() || calls.calls.size() != 2 || executor.requests.size() != 1) {
+                        throw std::runtime_error("Typed query must prepare once before waiting");
+                    }
+                    if (mode == 2) {
+                        work.cancel();
+                    } else if (mode == 3) {
+                        const auto* result = work.poll();
+                        if (!result || bool(*result) != selected || calls.calls.size() != 2) {
+                            throw std::runtime_error(
+                                "Typed decode must use the prepared selection");
+                        }
+                        if (selected && (result->value().data.size() != 1 ||
+                                         !result->value().data.front().state)) {
+                            throw std::runtime_error("Typed decode lost its fresh runtime state");
+                        }
+                    }
+                }
+            }
+            user_context.reset();
+            const unsigned expected = mode == 1 || mode == 2 ? 1 : 0;
+            if (cancellations != expected) {
+                throw std::runtime_error(
+                    "Typed provider must be cancelled once before arena reclamation");
+            }
+        }
+    }
+    std::pmr::set_default_resource(previous);
+    std::cout << "Dynamic typed lifetime contracts passed\n";
+}
+
+int main(int argc, char** argv) {
+    if (argc == 2 && std::string_view(argv[1]) == "--dynamic-self-test") {
+        dynamic_lifetimes();
+        return 0;
+    }
+    if (argc == 2 && std::string_view(argv[1]) == "--schema-self-test") {
+        schema_lifetimes();
+        return 0;
+    }
     GlobalContext global;
     std::string line;
     while (std::getline(std::cin, line)) {

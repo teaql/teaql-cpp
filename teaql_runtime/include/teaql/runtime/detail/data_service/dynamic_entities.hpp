@@ -3,7 +3,7 @@
 #include <teaql/runtime/detail/read_hydration.hpp>
 
 namespace teaql::detail {
-// Allocated only when a typed root query requests persistent extensions.
+// One typed decode path; preparation decides whether persistent extensions are selected.
 template <class E, Entity T>
 class DynamicEntityListOperation {
 public:
@@ -18,18 +18,25 @@ public:
         : service_(std::allocator_arg, a, service), query_(std::allocator_arg, a, query),
           rows_(a.resource()) {}
 
+    DynamicEntityListOperation(std::allocator_arg_t,
+                               Allocator a,
+                               const EntityDataService<E>& service,
+                               SelectQuery&& query)
+        : service_(std::allocator_arg, a, service), query_(std::allocator_arg, a, std::move(query)),
+          rows_(a.resource()) {}
+
     std::optional<Output> poll(WakeSignal& wake) {
         auto r = service_.memory_resource();
         const auto& user_context = EntityDataServiceAccess::context(service_);
         if (!fetched_) {
             if (!native_) {
-                auto root_intent = EntityDataServiceAccess::request_intent(service_, query_);
-                if (!root_intent) {
-                    return runtime(std::move(root_intent).error());
-                }
-                EntityDataServiceAccess::bind_query_intent(service_, root_intent.value());
-                if (!EntityDataServiceAccess::has_intent(service_)) {
-                    service_ = EntityDataServiceAccess::query_scoped(service_);
+                if (query_.dynamic_field_selection &&
+                    !EntityDataServiceAccess::has_request_intent(service_)) {
+                    auto scoped = EntityDataServiceAccess::query_scoped(service_, query_);
+                    if (!scoped) {
+                        return runtime(std::move(scoped).error());
+                    }
+                    service_ = std::move(scoped).value();
                 }
                 auto prepared = EntityDataServiceAccess::prepare_select(service_, query_);
                 if (!prepared) {
@@ -43,7 +50,7 @@ public:
                 EntityDataServiceAccess::bind_query_intent(service_, intent.value());
                 ensure_identity_projection(user_context, query_);
                 native_ = &make_operation<RelationRowsResult<E>, PreparedEntityQueryOperation<E>>(
-                    r, service_, query_, true);
+                    r, service_, query_, true, true);
             }
             forward_.attach(native_->wake_signal(), wake);
             auto* result = native_->poll();
