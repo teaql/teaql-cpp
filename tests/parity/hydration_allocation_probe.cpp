@@ -12,6 +12,88 @@ static void check(bool condition, const char* message) {
     }
 }
 
+struct Plain {
+    std::uint64_t id;
+    std::int64_t version;
+    String name;
+    std::optional<String> note;
+};
+
+static Plain decode_plain(Memory resource, const CompactRow& row) {
+    const auto* id = row.get("id");
+    const auto* version = row.get("version");
+    const auto* name = row.get("name");
+    const auto* note = row.get("note");
+    check(id && std::holds_alternative<std::uint64_t>(id->data), "bad ID");
+    check(version && std::holds_alternative<std::int64_t>(version->data), "bad version");
+    check(name && std::holds_alternative<String>(name->data), "bad name");
+    std::optional<String> decoded_note;
+    if (note && !std::holds_alternative<std::monostate>(note->data)) {
+        check(std::holds_alternative<String>(note->data), "bad note");
+        decoded_note.emplace(std::get<String>(note->data), resource);
+    }
+    return {std::get<std::uint64_t>(id->data),
+            std::get<std::int64_t>(version->data),
+            String(std::get<String>(name->data), resource),
+            std::move(decoded_note)};
+}
+
+static void plain_helper_contracts() {
+    std::pmr::set_default_resource(std::pmr::null_memory_resource());
+    GlobalContext global;
+    auto user_context = global.make_user_context();
+    auto resource = user_context->memory_resource();
+    auto row = [&](Value id, Value version, Value name, std::optional<Value> note) {
+        Record fields(resource);
+        fields.emplace(String("id", resource), std::move(id));
+        fields.emplace(String("version", resource), std::move(version));
+        fields.emplace(String("name", resource), std::move(name));
+        if (note) {
+            fields.emplace(String("note", resource), std::move(*note));
+        }
+        return CompactRow(std::allocator_arg, Allocator(resource), std::move(fields));
+    };
+    for (unsigned variant = 0; variant < 4; ++variant) {
+        std::optional<Value> note;
+        if (variant == 1) {
+            note.emplace(resource, nullptr);
+        } else if (variant == 2) {
+            note.emplace(resource, "");
+        } else if (variant == 3) {
+            note.emplace(resource, "A long note that does not fit in small-string storage");
+        }
+        auto input = row(Value(resource, std::uint64_t{7}),
+                         Value(resource, std::int64_t{3}),
+                         Value(resource, "sample name"),
+                         std::move(note));
+        auto decoded = decode_plain(resource, input);
+        check(decoded.id == 7 && decoded.version == 3 && decoded.name == "sample name",
+              "plain values");
+        check(decoded.note.has_value() == (variant >= 2), "NULL and empty Text differ");
+        if (decoded.note) {
+            check(*decoded.note == *input.get("note")->try_text() &&
+                      decoded.note->get_allocator().resource() == resource,
+                  "note copied to destination");
+        }
+    }
+    unsigned rejected = 0;
+    for (unsigned variant = 0; variant < 4; ++variant) {
+        auto input =
+            row(variant == 0 ? Value(resource, std::int64_t{7}) : Value(resource, std::uint64_t{7}),
+                variant == 1 ? Value(resource, std::uint64_t{3}) : Value(resource, std::int64_t{3}),
+                variant == 2 ? Value(resource, std::int64_t{1}) : Value(resource, "sample name"),
+                variant == 3 ? std::optional<Value>(std::in_place, resource, std::int64_t{1})
+                             : std::nullopt);
+        try {
+            (void)decode_plain(resource, input);
+        } catch (const std::runtime_error&) {
+            ++rejected;
+        }
+    }
+    check(rejected == 4, "exact source variant rejection");
+    std::cout << "PLAIN_HYDRATION_HELPER=4 accepted/4 rejected\n";
+}
+
 static Vector<CompactRow> rows(Memory r, const ColumnLayout& layout, std::size_t count, bool full) {
     Vector<CompactRow> result(r);
     result.reserve(count);
@@ -136,24 +218,12 @@ static void sample(bool full) {
                   "graph snapshots share warmed identity");
         }
 
-        struct Plain {
-            std::uint64_t id;
-            std::int64_t version;
-            String name;
-            std::optional<String> note;
-        };
-
         inputs = rows(r, layout, size, full);
         auto plain = measured("plain_hydration", full, size, [&] {
             Vector<Plain> result(r);
             result.reserve(size);
             for (const auto& row : inputs) {
-                const auto* note = row.get("note");
-                check(!note || note->is_null(), "plain nullable note input");
-                result.push_back({*row.get("id")->try_u64(),
-                                  *row.get("version")->try_i64(),
-                                  String(*row.get("name")->try_text(), r),
-                                  std::nullopt});
+                result.push_back(decode_plain(r, row));
             }
             return result;
         });
@@ -233,6 +303,7 @@ int main() {
                   counts.heap_bytes >= 256,
               "allocation positive controls");
     }
+    plain_helper_contracts();
     move_contract();
     sample(false);
     sample(true);

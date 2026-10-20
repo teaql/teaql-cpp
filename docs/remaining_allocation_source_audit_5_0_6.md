@@ -587,3 +587,68 @@ compile/link commands and unchanged runtime/generated/helper/library hashes.
 It remains outside active build inputs. Installation and canonical module replay
 must occur after the currently queued controller terminates, preserving that
 controller's immutable input snapshot and earlier scope.
+
+## Regenerated SDK integration: native profile completed
+
+The active `generated_hydration_sdk_integration_5_0_6.json.gz` receipt now contains
+a terminal successful native profile: all 26 selected CTest entries pass,
+including 55 positive and 141 negative generated API compiler contracts. The
+native no-work build and executable-hash checks also pass. The controller has
+advanced to the imported-module profile; its overall `complete` field remains
+false until that profile and final source/reference guards finish. The queued
+candidate installer remains dependent on that complete result. This checkpoint
+does not promote a source disposition or establish P0-P7 completion.
+
+## Regenerated SDK integration completed
+
+The [integration receipt](parity/generated_hydration_sdk_integration_5_0_6.json.gz)
+is now terminal and complete: native26 and imported-module20 pass, including
+55 positive/141 negative compiler contracts. Canonical imported consumer bodies,
+no-work rebuilds, executable hashes and final source/reference input checks pass.
+The queued installer has started the separate counter/trace/core candidate epoch.
+These new edits are not covered by the preceding integration result; their own
+receipt must finish before they count as installed verification. Whole hydration
+source acceptance and the remaining core module registrations are still open.
+
+## Installed-candidate discovery recovery
+
+The installer applied its changes and passed formatting/checks, then stopped
+before compilation because CTest's discovery output omitted `command` for newly
+registered, not-yet-built executables. The failure is retained in
+`post_hydration_candidate_installation_5_0_6.json.gz`; it is not a failed runtime
+assertion and must not be relabeled as success.
+
+A separate continuation,
+`post_hydration_candidate_verification_5_0_6.json.gz`, first checks the installed
+source/reference hashes against that receipt. It resolves the three new binary
+targets explicitly when discovery omits their command and preserves discovered
+commands for existing tests. It resumes the same native10/module10/sanitizer1
+selection and final guards without reinstalling or modifying source. Its running
+state is not yet verification evidence.
+
+## Installed candidates verified; completion fixtures installed next
+
+`post_hydration_candidate_verification_5_0_6.json.gz` is complete with native10,
+module10 and sanitizer1 passing, plus canonical/no-work/final-input checks.
+The next candidate integration installs the complete Plain hydration helper,
+three missing core root module registrations, the graph-readback source fixture,
+and six typed/raw LIKE comparisons in the existing test-only memory service
+fixture. Its separate receipt is
+`source_completion_candidate_integration_5_0_6.json.gz`. The intended selection
+is native7/module7 and includes both full 24-row hydration matrices with the
+original ceilings. This new receipt is still running and is not acceptance.
+
+## Completion-fixture output capture recovery
+
+The completion candidate's native7 CTest selection passed, but the controller
+then failed while checking the final hydration marker in JUnit output. Successful
+test-output retention was too small for the full matrix; this is a collection
+failure, not a passing complete integration receipt. The original receipt remains
+failed and preserves the successful CTest summary.
+
+`source_completion_candidate_verification_5_0_6.json.gz` resumes without source
+changes, first checking the installed input/reference hashes. It raises CTest's
+successful-output retention limit to 1 MiB and saves each full JUnit document
+before inspecting required markers and 24 measurement rows. The native selection
+is recollected, followed by the unchanged module selection and final guards.
+Do not promote source acceptance until this continuation finishes successfully.

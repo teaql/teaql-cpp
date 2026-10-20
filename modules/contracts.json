@@ -5025,6 +5025,102 @@
           ]
         }
       ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "allocation_counter_tests",
+      "source": "teaql_runtime/tests/allocation_counter_tests.cpp",
+      "cases": [
+        {
+          "name": "allocation_counter_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "trace_chain_requests_probe",
+      "source": "tests/parity/trace_chain_requests_probe.cpp",
+      "cases": [
+        {
+          "name": "trace_chain_requests_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "hydration_allocation_probe",
+      "source": "tests/parity/hydration_allocation_probe.cpp",
+      "cases": [
+        {
+          "name": "hydration_allocation_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "original_core_mapping_tests",
+      "source": "tests/parity/teaql_core/entity_mapping.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "original_core_entity_mapping_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "original_core_composition_tests",
+      "source": "tests/parity/teaql_core/composition_contracts.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "original_core_composition_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_core",
+      "stem": "presentation_api_tests",
+      "source": "teaql_core/tests/presentation_api_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "presentation_api_contracts",
+          "arguments": [],
+          "environment": []
+        }
+      ]
+    },
+    {
+      "package": "teaql_runtime",
+      "stem": "graph_readback_tests",
+      "source": "teaql_runtime/tests/graph_readback_tests.cpp",
+      "import_module": "teaql_runtime",
+      "cases": [
+        {
+          "name": "graph_readback_source_contracts",
+          "arguments": [],
+          "environment": [
+            "TEAQL_LOG_ENDPOINT=off"
+          ]
+        }
+      ]
     }
   ],
   "fixtures": [

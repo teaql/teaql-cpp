@@ -152,17 +152,35 @@ static void sound_like_builds_soundex_equality(Memory owner) {
 }
 
 static void java_style_string_match_builders_expand_like_patterns(Memory owner) {
-    auto pattern = [&](BinaryOp op, std::string_view expanded) {
-        return Expr::binary(
-            Expr::column(owner, "name"), op, Expr::like_pattern(owner, expanded, "tea"));
-    };
-    check(Expr::contain(owner, "name", "tea") == pattern(BinaryOp::Like, "%tea%") &&
-              Expr::not_contain(owner, "name", "tea") == pattern(BinaryOp::NotLike, "%tea%") &&
-              Expr::begin_with(owner, "name", "tea") == pattern(BinaryOp::Like, "tea%") &&
-              Expr::not_begin_with(owner, "name", "tea") == pattern(BinaryOp::NotLike, "tea%") &&
-              Expr::end_with(owner, "name", "tea") == pattern(BinaryOp::Like, "%tea") &&
-              Expr::not_end_with(owner, "name", "tea") == pattern(BinaryOp::NotLike, "%tea"),
-          "all six 5.0.6 string-match ASTs retain expanded and original patterns");
+    for (std::string_view original : {"tea", "%tea_\\%"}) {
+        auto pattern = [&](BinaryOp op, bool prefix, bool suffix) {
+            String expanded(owner);
+            if (prefix) {
+                expanded += '%';
+            }
+            expanded += original;
+            if (suffix) {
+                expanded += '%';
+            }
+            return Expr::binary(
+                Expr::column(owner, "name"), op, Expr::like_pattern(owner, expanded, original));
+        };
+        check(Expr::contain(owner, "name", original) == pattern(BinaryOp::Like, true, true) &&
+                  Expr::not_contain(owner, "name", original) ==
+                      pattern(BinaryOp::NotLike, true, true) &&
+                  Expr::begin_with(owner, "name", original) ==
+                      pattern(BinaryOp::Like, false, true) &&
+                  Expr::not_begin_with(owner, "name", original) ==
+                      pattern(BinaryOp::NotLike, false, true) &&
+                  Expr::end_with(owner, "name", original) == pattern(BinaryOp::Like, true, false) &&
+                  Expr::not_end_with(owner, "name", original) ==
+                      pattern(BinaryOp::NotLike, true, false),
+              "all twelve source string-match ASTs preserve original and expanded bytes");
+    }
+    check(Expr::like(owner, "name", "%tea%") == Expr::binary(Expr::column(owner, "name"),
+                                                             BinaryOp::Like,
+                                                             Expr::value(owner, "%tea%")),
+          "raw LIKE retains a Value operand rather than LikePattern provenance");
 }
 
 static void large_in_builders_use_large_binary_ops(Memory owner) {

@@ -98,3 +98,24 @@ integration record still has 15 outstanding recorded failures after its selected
 follow-ups. G01-G17 and P0-P7 remain incomplete; root registration migration does
 not close those capabilities. No sanitizer, MIPS/QEMU, physical-device or full
 runtime-suite run is claimed here.
+
+## Complete original library execution checkpoint
+
+The [complete original library receipt](parity/runtime_library_original_5_0_6.json.gz)
+runs the unchanged runtime library unit-test executable through the retained
+reference-runtime view with offline, locked dependency resolution and one test
+thread. Terminal outcome: **272 passed, 0 failed, 1 ignored, 0 filtered out**.
+The receipt contains the complete output and reference-view provenance.
+
+The ignored test is `log_privacy::tests::file_log_child`, marked by the original
+source as a subprocess fixture for `file_log_gate_runs_in_isolated_processes`.
+It is not counted as an independently executed passing test. The complete run
+includes tests from private child modules as well as runtime-root tests; 272
+must not be described as the number of root contracts or matched C++ tests.
+
+This supersedes neither the focused source reviews nor their C++ evidence.
+It provides the current original-side library execution result for subsequent
+reviews. Native/imported consumer correspondence, helper completeness and source
+acceptance remain separate. Integration-test executables and external provider
+tests are outside this `--lib` invocation; no source or capability disposition is
+promoted by this checkpoint.

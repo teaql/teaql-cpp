@@ -207,6 +207,40 @@ static void memory_data_service_supports_mutations_and_optimistic_locking() {
     field_is(rows.value().back(), "version", Value(f.owner, std::int64_t(4)));
 }
 
+static void typed_like_matches_raw_patterns() {
+    MemoryFixture f;
+    f.rows({{1, 1, "teaql"}});
+    auto all = f.service.fetch_all(f.query());
+    check(all && all.value().size() == 1, "LIKE source row");
+    const auto& row = all.value().front();
+    auto verify = [&](Expr typed, Expr raw, bool expected) {
+        auto typed_query = f.query();
+        typed_query.filter(detail::clone_in(f.owner, typed));
+        auto raw_query = f.query();
+        raw_query.filter(detail::clone_in(f.owner, raw));
+        auto typed_rows = f.service.fetch_all(typed_query);
+        auto raw_rows = f.service.fetch_all(raw_query);
+        check(typed_rows && raw_rows, "test-only service accepts both LIKE operands");
+        check(typed_rows.value().size() == raw_rows.value().size() &&
+                  typed_rows.value().size() == (expected ? 1u : 0u),
+              "test-only service typed/raw LIKE equality");
+        check(ExprEvaluator::eval(f.owner, typed, row) == expected &&
+                  ExprEvaluator::eval(f.owner, raw, row) == expected,
+              "published evaluator typed/raw LIKE equality");
+    };
+    verify(Expr::contain(f.owner, "name", "ea"), Expr::like(f.owner, "name", "%ea%"), true);
+    verify(
+        Expr::not_contain(f.owner, "name", "ea"), Expr::not_like(f.owner, "name", "%ea%"), false);
+    verify(Expr::begin_with(f.owner, "name", "tea"), Expr::like(f.owner, "name", "tea%"), true);
+    verify(Expr::not_begin_with(f.owner, "name", "tea"),
+           Expr::not_like(f.owner, "name", "tea%"),
+           false);
+    verify(Expr::end_with(f.owner, "name", "ql"), Expr::like(f.owner, "name", "%ql"), true);
+    verify(
+        Expr::not_end_with(f.owner, "name", "ql"), Expr::not_like(f.owner, "name", "%ql"), false);
+    std::cout << "Six typed/raw LIKE pairs pass in both C++ evaluators\n";
+}
+
 int main(int argc, char** argv) {
     auto* previous = std::pmr::set_default_resource(std::pmr::null_memory_resource());
 
@@ -224,6 +258,7 @@ int main(int argc, char** argv) {
             memory_data_service_supports_mutations_and_optimistic_locking();
             return 0;
         }
+        typed_like_matches_raw_patterns();
         memory_data_service_fetches_smart_list_entities_with_query_features();
         memory_data_service_runs_relation_aggregates();
         memory_data_service_runs_aggregates();

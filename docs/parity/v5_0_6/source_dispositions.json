@@ -184,9 +184,24 @@
       "source_change": "changed",
       "cpp_target": "teaql_core/include/teaql/core.hpp; tests/parity/core",
       "previous_status": "accepted",
-      "status": "pending_review",
-      "responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete984-line root facade, all26 embedded tests/helpers and trailing eval module. Six public namespaces/69 reexports retain distinct core/runtime graph names and every imported model responsibility. Handwritten mappings and composition/presentation fixtures use explicit User allocation and default-PMR-disabled destination copies; actual source User deletion verifies independent nested Global ownership. No fixture replaces runtime saving, SQL or a model generator. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete current root facade, eight public namespaces and 78 named root reexports plus hidden JSON binding adaptation; all 26 embedded test responsibilities across four unchanged canonical fixtures, including all twelve LIKE builder checks and raw-LIKE provenance. Original core69 and native/module root fixture selections pass. The existing append_float overload set is made visible to module callers without changing implementation.",
+      "evidence": [
+        "docs/core_root_source_audit_5_0_6.md",
+        "docs/hydration_trace_core_source_closure_5_0_6.md",
+        "docs/parity/hydration_trace_core_source_closure_5_0_6.json.gz",
+        "docs/parity/source_completion_module_exports_verification_5_0_6.json.gz",
+        "docs/parity/post_hydration_candidate_verification_5_0_6.json.gz",
+        "docs/parity/core_root_original_5_0_6.json.gz",
+        "docs/parity/trace_chain_requests_original_5_0_6.json.gz",
+        "docs/parity/runtime_library_original_5_0_6.json.gz",
+        "docs/parity/hydration_allocation_original_exploration_5_0_6.json.gz",
+        "docs/parity/plain_hydration_helper_original_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Complete pinned source responsibility is accepted after full body/helper/input/assertion or public/default/trait/protocol/ownership review, current native371/371 with418 nonempty compiled dependency records and no-work before/after, and the corresponding fresh sanitizer/MIPS consumer selections. Complete984-line root facade, all26 embedded tests/helpers and trailing eval module. Six public namespaces/69 reexports retain distinct core/runtime graph names and every imported model responsibility. Handwritten mappings and composition/presentation fixtures use explicit User allocation and default-PMR-disabled destination copies; actual source User deletion verifies independent nested Global ownership. No fixture replaces runtime saving, SQL or a model generator. This accepts this source group, not full Context/service/graph/privacy/runtime-root or stages4\u20136. Physical-router execution is deferred by the user.",
+      "current_review": "docs/core_root_source_audit_5_0_6.md",
+      "current_review_sha256": "938cbfb16d6ab9290f11ceb20f979712c685aad22e31c831744d11591a136ae2",
+      "acceptance_scope": "Only the complete named source under its linked responsibility review and explicit C++ Context/measurement adaptations. Does not qualify other pending sources, any remaining capability, external providers, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-core/src/list.rs",
@@ -1268,11 +1283,26 @@
       "source": "teaql-runtime/src/data_service/graph_readback_tests.rs",
       "sha256": "ac0ec1fdb9f7a37c0d3ddb36a02a5e88c35845c7ae2818153d563e9b77183176",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "teaql_runtime/tests/graph_readback_tests.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete two-test source and controlled executor/observer helpers: four logging/outcome combinations preserve masked target intent, plain ID bindings and parent privacy/reason isolation; four mapped-column shapes distinguish complete loaded NULL from missing ID/version/logical note with exact field diagnostics. Real readback operation supplies provenance, mutation is forbidden. Both original tests and installed native/module matrices pass.",
+      "evidence": [
+        "docs/graph_readback_source_audit_5_0_6.md",
+        "docs/hydration_trace_core_source_closure_5_0_6.md",
+        "docs/parity/hydration_trace_core_source_closure_5_0_6.json.gz",
+        "docs/parity/source_completion_module_exports_verification_5_0_6.json.gz",
+        "docs/parity/post_hydration_candidate_verification_5_0_6.json.gz",
+        "docs/parity/core_root_original_5_0_6.json.gz",
+        "docs/parity/trace_chain_requests_original_5_0_6.json.gz",
+        "docs/parity/runtime_library_original_5_0_6.json.gz",
+        "docs/parity/hydration_allocation_original_exploration_5_0_6.json.gz",
+        "docs/parity/plain_hydration_helper_original_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/graph_readback_source_audit_5_0_6.md",
+      "current_review_sha256": "750f34a8bf3d6a1ee09365d76e86f17d7736434d337a076770751151f74fd270",
+      "acceptance_scope": "Only the complete named source under its linked responsibility review and explicit C++ Context/measurement adaptations. Does not qualify other pending sources, any remaining capability, external providers, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-runtime/src/data_service/helpers.rs",
@@ -2013,11 +2043,26 @@
       "source": "teaql-runtime/tests/hydration_allocations.rs",
       "sha256": "3289c7d63c5f1a30f9d3f71222b1c19b481192ad6956a24f307612f18a8afdc5",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "tests/parity/hydration_allocation_probe.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 196-line source contract: generated indexed carrier and shared warm shape, strict Plain helper branches, four paths/two projections/three sizes, exact decoded values/load states, private row comments and first/last graph snapshot identity. Original and installed native/module 24-row grids pass unchanged typed3n+1/context2n+1/graph3n+32 ceilings, with arena and heap separately checked. Positive controls and explicit move/retention tests pass.",
+      "evidence": [
+        "docs/hydration_source_review_5_0_6.md",
+        "docs/hydration_trace_core_source_closure_5_0_6.md",
+        "docs/parity/hydration_trace_core_source_closure_5_0_6.json.gz",
+        "docs/parity/source_completion_module_exports_verification_5_0_6.json.gz",
+        "docs/parity/post_hydration_candidate_verification_5_0_6.json.gz",
+        "docs/parity/core_root_original_5_0_6.json.gz",
+        "docs/parity/trace_chain_requests_original_5_0_6.json.gz",
+        "docs/parity/runtime_library_original_5_0_6.json.gz",
+        "docs/parity/hydration_allocation_original_exploration_5_0_6.json.gz",
+        "docs/parity/plain_hydration_helper_original_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/hydration_source_review_5_0_6.md",
+      "current_review_sha256": "5aec6f03e746867bf95df532aefdcab697123c1547ff9bca139485dc2f11bf1f",
+      "acceptance_scope": "Only the complete named source under its linked responsibility review and explicit C++ Context/measurement adaptations. Does not qualify other pending sources, any remaining capability, external providers, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-runtime/tests/json_runtime_state.rs",
@@ -2098,11 +2143,26 @@
       "source": "teaql-runtime/tests/support/allocation_counter.rs",
       "sha256": "fe49553d56aeefa73a9e7376a87214bd302256fa5bab0b7114562e5353ce0fde",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "tests/support/generated_allocation_counter.hpp; teaql_runtime/tests/allocation_counter_tests.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 47-line test instrumentation responsibility under documented C++ arena/heap boundaries: thread-local scalar counters, enable/reset/request-size accounting, real concurrent Context controls, deallocation exclusion and observable consumer results. Original consumers, installed native/module consumers and focused ASan/UBSan concurrency pass. Raw C malloc/realloc interception and cross-language time/byte equality are not claimed.",
+      "evidence": [
+        "docs/allocation_counter_source_review_5_0_6.md",
+        "docs/hydration_trace_core_source_closure_5_0_6.md",
+        "docs/parity/hydration_trace_core_source_closure_5_0_6.json.gz",
+        "docs/parity/source_completion_module_exports_verification_5_0_6.json.gz",
+        "docs/parity/post_hydration_candidate_verification_5_0_6.json.gz",
+        "docs/parity/core_root_original_5_0_6.json.gz",
+        "docs/parity/trace_chain_requests_original_5_0_6.json.gz",
+        "docs/parity/runtime_library_original_5_0_6.json.gz",
+        "docs/parity/hydration_allocation_original_exploration_5_0_6.json.gz",
+        "docs/parity/plain_hydration_helper_original_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/allocation_counter_source_review_5_0_6.md",
+      "current_review_sha256": "53264ccf5c24150d281830ae6bfb00199bc2b8393987ae0dc8a27ab95ae18873",
+      "acceptance_scope": "Only the complete named source under its linked responsibility review and explicit C++ Context/measurement adaptations. Does not qualify other pending sources, any remaining capability, external providers, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-runtime/tests/test_incremental_ledger.rs",
@@ -2128,11 +2188,26 @@
       "source": "teaql-runtime/tests/trace_chain_requests.rs",
       "sha256": "bd96e93a88724cdcace1145a878cf28433d697c9a522afec33d7bdbd13371e46",
       "source_change": "new",
-      "cpp_target": "teaql_runtime",
+      "cpp_target": "tests/parity/trace_chain_requests_probe.cpp",
       "previous_status": null,
-      "status": "pending_review",
-      "responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
-      "evidence": []
+      "status": "accepted",
+      "responsibility": "Complete 307-line source and all seven tests: four invalid-comment forms with logging variants, real pre-policy/pre-I/O validation, exact six-item planner lineage including deletion, blank inheritance, allocated IDs and same-number/different-type identity, actual generated shared-ledger comments and child composition. Original7 and current native/module direct counterparts pass; no test-authored expected lineage is fed into the planner.",
+      "evidence": [
+        "docs/trace_chain_requests_source_audit_5_0_6.md",
+        "docs/hydration_trace_core_source_closure_5_0_6.md",
+        "docs/parity/hydration_trace_core_source_closure_5_0_6.json.gz",
+        "docs/parity/source_completion_module_exports_verification_5_0_6.json.gz",
+        "docs/parity/post_hydration_candidate_verification_5_0_6.json.gz",
+        "docs/parity/core_root_original_5_0_6.json.gz",
+        "docs/parity/trace_chain_requests_original_5_0_6.json.gz",
+        "docs/parity/runtime_library_original_5_0_6.json.gz",
+        "docs/parity/hydration_allocation_original_exploration_5_0_6.json.gz",
+        "docs/parity/plain_hydration_helper_original_5_0_6.json.gz"
+      ],
+      "previous_active_responsibility": "Review new 5.0.6 declarations, defaults, protocols, ownership and source tests; map to independent package responsibility.",
+      "current_review": "docs/trace_chain_requests_source_audit_5_0_6.md",
+      "current_review_sha256": "4ef32b6b7b54675e9bed6dc72550b9411f012473be14793e05498b4d9a7390c5",
+      "acceptance_scope": "Only the complete named source under its linked responsibility review and explicit C++ Context/measurement adaptations. Does not qualify other pending sources, any remaining capability, external providers, physical-router execution or P0-P7 completion."
     },
     {
       "source": "teaql-sql/src/binding_tests.rs",

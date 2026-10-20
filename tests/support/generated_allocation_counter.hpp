@@ -13,8 +13,8 @@ struct Counts {
     std::size_t heap_bytes = 0;
 };
 
-static Counts counts;
-static bool measuring = false;
+static thread_local Counts counts;
+static thread_local bool measuring = false;
 
 static void count_heap(std::size_t bytes) {
     if (measuring) {

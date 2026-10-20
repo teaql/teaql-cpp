@@ -629,7 +629,14 @@
         "teaql_module_runtime_mutation_probe",
         "teaql_module_resolved_dynamic_rows_probe",
         "teaql_module_entity_stream_probe",
-        "teaql_module_runtime_query_future_probe"
+        "teaql_module_runtime_query_future_probe",
+        "teaql_module_allocation_counter_tests",
+        "teaql_module_trace_chain_requests_probe",
+        "teaql_module_hydration_allocation_probe",
+        "teaql_module_original_core_mapping_tests",
+        "teaql_module_original_core_composition_tests",
+        "teaql_module_presentation_api_tests",
+        "teaql_module_graph_readback_tests"
       ]
     },
     {

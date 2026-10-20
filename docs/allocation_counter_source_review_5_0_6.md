@@ -1,6 +1,6 @@
 # Allocation counter source review: Rust 5.0.6
 
-Status: pending installation and canonical consumer verification. This review
+Status: accepted for the complete test helper responsibility under the documented measurement boundaries. This review
 does not promote a source or capability. The reference is
 `teaql-runtime/tests/support/allocation_counter.rs`, all 47 lines, at runtime
 commit `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`, SHA-256
@@ -11,7 +11,7 @@ commit `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`, SHA-256
 | Original responsibility | C++ counterpart and boundary |
 | --- | --- |
 | CountingAllocator delegates to System | Test-executable replacements of ordinary/array/aligned new delegate to malloc or posix_memalign. Production allocator policy is unchanged. |
-| Thread-local enabled/calls/bytes state | The staged helper uses thread-local Counts and enable flag. Only scalar instrumentation state is thread-local; no Context data or ownership is stored there. The installed helper is still shared and must be replaced after the current frozen-input integration epoch. |
+| Thread-local enabled/calls/bytes state | The installed helper uses thread-local Counts and enable flag. Only scalar instrumentation state is thread-local; no Context data or ownership is stored there. Its native and canonical imported isolation contracts pass. |
 | Count only while enabled | Global new replacements and wrapped Arena allocation entry both check the measurement flag. The two layers have distinct counters and must never be added together as independent object counts. |
 | Count allocation and zero-initialized allocation at requested size | C++ new and value-initialized new share the allocation-function boundary. Zero-size new records zero requested bytes while allocating at least one physical byte. Ordinary and aligned arrays delegate once to their corresponding scalar allocation function. |
 | Count realloc at its new requested size | C++ containers normally obtain replacement storage through their allocator and then release old storage. These requests are observed by the appropriate allocation entry; there is no claim to intercept arbitrary C realloc. Raw malloc/calloc/realloc calls are outside the C++ helper boundary. Current allocation probes exclude provider/database work and use Context/standard allocation paths. |
@@ -52,3 +52,24 @@ experiments do not replace those source-consumer checks.
 4. Update the source disposition only with the complete terminal evidence.
    Neither these experiments nor the helper's acceptance would prove full
    hydration-source acceptance, all of G15, or P0-P7 completion.
+
+## Installed verification checkpoint
+
+The [continuation receipt](parity/post_hydration_candidate_verification_5_0_6.json.gz)
+is complete: native10, module10 and the focused sanitizer concurrency test pass.
+It includes the installed readonly, retained-cache and hydration consumers,
+canonical module preservation, no-work rebuilds and unchanged source/reference
+checks. The earlier installer discovery failure remains separately retained.
+The helper is now installed; the numbered qualification steps above describe
+the original work sequence, not an outstanding installation request. Final
+source-disposition reconciliation is still pending.
+
+## Final source acceptance
+
+The complete source responsibility reviewed here is accepted under the
+[current closure evidence](hydration_trace_core_source_closure_5_0_6.md).
+Original and installed native/imported gates are terminal and successful; the
+relevant focused concurrency sanitizer evidence is retained with its own scope.
+Earlier pending/isolated-candidate statements describe historical checkpoints.
+This accepts only the named source, not the enclosing runtime, provider, generator
+capability or P0-P7 goal.

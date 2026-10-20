@@ -1,7 +1,7 @@
 # Trace-chain request source audit: Rust 5.0.6
 
-This is a preparation audit, not source acceptance. The source disposition stays
-pending and no capability is promoted. The locked runtime commit is
+Status: accepted for all seven source contracts after original, native and
+canonical module verification. No broader capability is promoted. The locked runtime commit is
 `fe82a18982415f1746df9a2cf7c42f5e9abdc6d3`.
 
 Reviewed source: `teaql-runtime/tests/trace_chain_requests.rs`, all 307 lines,
@@ -99,3 +99,30 @@ The candidate remains outside captured repository build inputs during the active
 SDK integration epoch. It still needs repository installation, canonical imported
 execution and a final source review before disposition promotion. A single
 isolated native run is not the complete source gate.
+
+## Installed counterpart verification
+
+The candidate is now installed as
+`tests/parity/trace_chain_requests_probe.cpp`. The completed
+[installed verification receipt](parity/post_hydration_candidate_verification_5_0_6.json.gz)
+includes its native and canonical imported execution within native10/module10.
+The same selection checks request-trace scope, generated readonly properties,
+loaded-view movement, entity runtime and allocation consumers. Canonical source
+bodies, no-work rebuilds, binary hashes and final captured inputs/references are
+checked. The original installer discovery failure remains in its own receipt.
+
+The earlier statement that this candidate remained outside repository inputs
+describes that earlier checkpoint. Installation and imported execution are now
+complete; ledger reconciliation awaits the current completion-fixture epoch so
+its captured JSON inputs are not changed during validation. This file still does
+not establish all runtime graph/trace behavior or complete P0-P7 acceptance.
+
+## Final source acceptance
+
+The complete source responsibility reviewed here is accepted under the
+[current closure evidence](hydration_trace_core_source_closure_5_0_6.md).
+Original and installed native/imported gates are terminal and successful; the
+relevant focused concurrency sanitizer evidence is retained with its own scope.
+Earlier pending/isolated-candidate statements describe historical checkpoints.
+This accepts only the named source, not the enclosing runtime, provider, generator
+capability or P0-P7 goal.

@@ -4,6 +4,7 @@ module;
 #include <teaql/core/detail/hmac_sha256.hpp>
 #include <teaql/core/detail/aes_gcm.hpp>
 #include <teaql/core/detail/query_debug.hpp>
+#include <teaql/core/detail/number_text.hpp>
 #include <teaql/core/system_time.hpp>
 #include <teaql/core/system_time_debug.hpp>
 export module teaql_core;
@@ -176,6 +177,7 @@ using ::teaql::detail::ListGetMapper;
 using ::teaql::detail::ListValue;
 using ::teaql::detail::ModelReader;
 using ::teaql::detail::OptionalValue;
+using ::teaql::detail::append_float;
 using ::teaql::detail::consume_record;
 using ::teaql::detail::debug_float32;
 using ::teaql::detail::debug_optional_integer;
